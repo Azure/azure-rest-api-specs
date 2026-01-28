@@ -29098,8 +29098,10 @@
       "properties": {
         "password": {
           "type": "string",
+          "format": "password",
           "description": "DockerCredential user password",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "userName": {
           "type": "string",
@@ -29332,21 +29334,25 @@
       "properties": {
         "primaryKey": {
           "type": "string",
+          "format": "password",
           "description": "The primary key.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
+          "format": "password",
           "description": "The secondary key.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -29383,8 +29389,10 @@
       "properties": {
         "accessToken": {
           "type": "string",
+          "format": "password",
           "description": "Access token for endpoint authentication.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "expiryTimeUtc": {
           "type": "integer",
@@ -44633,7 +44641,9 @@
       "type": "object",
       "properties": {
         "password": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         },
         "securityToken": {
           "type": "string",

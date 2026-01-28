@@ -218,8 +218,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}"].delete
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}"].delete
-  - code: XMSSecretInResponse
-    reason: Pre-existing API behavior, secrets are returned in response for backward compatibility.
   - code: ResourceNameRestriction
     reason: Pre-existing API behavior, adding restriction would be a breaking change. Discussed with ARM reviewer.
   - code: PostResponseCodes

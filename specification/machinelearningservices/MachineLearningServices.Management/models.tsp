@@ -5627,6 +5627,7 @@ model EndpointAuthKeys {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @secret
   primaryKey?: string | null;
 
   /**
@@ -5634,6 +5635,7 @@ model EndpointAuthKeys {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @secret
   secondaryKey?: string | null;
 }
 
@@ -7530,6 +7532,7 @@ model EndpointAuthToken {
    * Access token for endpoint authentication.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @secret
   accessToken?: string | null;
 
   /**
@@ -13396,6 +13399,7 @@ model DockerCredential extends DataReferenceCredential {
    * DockerCredential user password
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @secret
   password?: string | null;
 
   /**
@@ -16570,7 +16574,7 @@ model UsernamePasswordAuthTypeWorkspaceConnectionProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 model WorkspaceConnectionUsernamePassword {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   password?: string;
 
   /**
