@@ -8,7 +8,6 @@ import "./VirtualMachineScaleSet.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Compute;
 
@@ -44,6 +43,11 @@ model VMScaleSetLifecycleHookEventListResult
 
 @armResourceOperations
 interface VirtualMachineScaleSetLifeCycleHookEvents {
+  /**
+   * Gets a VMScaleSet lifecycle hook event.
+   */
+  get is ComputeResourceRead<VMScaleSetLifecycleHookEvent>;
+
   /**
    * The operation to update an VMScaleSet lifecycle hook event.
    */

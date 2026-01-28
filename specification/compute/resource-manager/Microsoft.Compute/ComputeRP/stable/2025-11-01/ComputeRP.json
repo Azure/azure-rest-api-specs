@@ -6654,12 +6654,68 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List virtual machine scale set lifecycle hook events.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents/{lifecycleHookEventName}": {
+      "get": {
+        "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Get",
+        "tags": [
+          "VirtualMachineScaleSetLifeCycleHookEvents"
+        ],
+        "description": "Gets a VMScaleSet lifecycle hook event.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lifecycleHookEventName",
+            "in": "path",
+            "description": "The name of the VMScaleSetLifecycleHookEvent",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a VirtualMachineScaleSetLifecycleHookEvent.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Get.json"
+          }
+        }
+      },
       "patch": {
         "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Update",
         "tags": [
@@ -6712,6 +6768,11 @@
             "schema": {
               "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update a VirtualMachineScaleSetLifecycleHookEvent.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Update.json"
           }
         }
       }
