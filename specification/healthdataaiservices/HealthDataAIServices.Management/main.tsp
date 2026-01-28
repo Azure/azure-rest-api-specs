@@ -48,7 +48,7 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
   @added(Versions.v2026_02_01_preview)
   @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
-  sku?: Azure.ResourceManager.Sku;
+  sku?: Azure.ResourceManager.CommonTypes.Sku;
 }
 
 /** Patch request body for DeidService */
@@ -63,7 +63,7 @@ model DeidUpdate {
 
   /** The SKU (Stock Keeping Unit) assigned to this resource. */
   @added(Versions.v2026_02_01_preview)
-  sku?: Azure.ResourceManager.Sku;
+  sku?: Azure.ResourceManager.CommonTypes.Sku;
 }
 
 model DeidPropertiesUpdate
