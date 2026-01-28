@@ -10,6 +10,7 @@ using Microsoft.Edge;
 
 // CSharp
 @@clientName(Site, "EdgeSite", "csharp");
+@@clientName(Sites, "ResourceGroupEdgeSite", "csharp");
 @@clientName(SiteProperties, "EdgeSiteProperties", "csharp");
 @@clientName(Azure.ResourceManager.ResourceProvisioningState,
   "EdgeSiteProvisioningState",
@@ -18,3 +19,5 @@ using Microsoft.Edge;
 @@clientName(SiteUpdate, "EdgeSitePatch", "csharp");
 @@clientName(SiteUpdateProperties, "EdgeSitePatchProperties", "csharp");
 @@clientName(SiteAddressProperties, "EdgeSiteAddressProperties", "csharp");
+@@clientName(SitesByServiceGroup, "ServiceGroupEdgeSite", "csharp");
+@@clientName(SitesBySubscription, "SubscriptionEdgeSite", "csharp");

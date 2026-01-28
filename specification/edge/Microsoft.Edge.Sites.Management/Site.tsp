@@ -25,7 +25,9 @@ model Site is ProxyResource<SiteProperties> {
 
 alias SiteOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ResourceInstanceParameters<Extension.ResourceGroup>,
-  KeysOf<Site>
+  KeysOf<Site>,
+  ErrorResponse,
+  "ResourceGroupEdgeSite"
 >;
 
 @armResourceOperations
@@ -39,7 +41,9 @@ interface Sites {
 
 alias SiteBySubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ResourceInstanceParameters<Extension.Subscription>,
-  KeysOf<Site>
+  KeysOf<Site>,
+  ErrorResponse,
+  "SubscriptionEdgeSite"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -75,7 +79,8 @@ alias SiteByServiceGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...Extension.ExtensionProviderNamespace<Site>;
     ...KeysOf<Site>;
-  }
+  },
+  "ServiceGroupEdgeSite"
 >;
 
 @armResourceOperations(#{ omitTags: true })
