@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "subscriptionId": "ca3329af-5726-4096-ae4e-dd3365b1a93f",
+    "resourceGroupName": "storageRg",
+    "api-version": "2025-08-01-preview",
+    "parameters": {
+      "requests": [
+        {
+          "id": "storage1",
+          "method": "DELETE",
+          "url": "/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/sa1?api-version=2021-06-01",
+          "headers": {
+            "x-ms-client-request-id": "95e92f72-785d-4525-9703-4f12a207001b"
+          }
+        },
+        {
+          "id": "storage2",
+          "method": "DELETE",
+          "url": "/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/sa2?api-version=2021-06-01"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/providers/Microsoft.Resources/locations/westcentralus/batchOperationStatuses/6868a2ed",
+        "name": "6868a2ed",
+        "status": "Succeeded",
+        "startTime": "2022-09-20T12:00:01Z",
+        "endTime": "2022-09-20T12:00:03Z",
+        "percentComplete": 100,
+        "result": {
+          "responses": [
+            {
+              "id": "storage1",
+              "httpStatusCode": 204,
+              "status": "Succeeded"
+            },
+            {
+              "id": "storage2",
+              "httpStatusCode": 400,
+              "status": "Failed",
+              "headers": {
+                "x-ms-request-id": "27cf190c-0492-4072-9b3b-33616e8e9773"
+              },
+              "body": {
+                "error": {
+                  "code": "StorageAccountInUse",
+                  "message": "The storage account 'sa2' is in use and cannot be deleted."
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/providers/Microsoft.Resources/locations/westcentralus/batchOperationStatuses/6868a2ed?api-version=2022-10-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ca3329af-5726-4096-ae4e-dd3365b1a93f/providers/Microsoft.Resources/locations/westcentralus/batchOperationStatuses/6868a2ed?api-version=2022-10-01"
+      }
+    }
+  }
+}

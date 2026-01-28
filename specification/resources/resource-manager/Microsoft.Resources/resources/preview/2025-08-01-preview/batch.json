@@ -1,0 +1,315 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ResourceManagementClient",
+    "version": "2025-08-01-preview",
+    "description": "Provides operations for working with resources and resource groups."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/batch": {
+      "post": {
+        "tags": [
+          "Batch"
+        ],
+        "operationId": "Batch_InvokeAtSubscriptionScope",
+        "summary": "Invokes a batch of individual Azure Resource Manager requests at a subscription scope.",
+        "description": "The batch API can be used to invoke multiple Azure Resource Manager requests at once. Batches are processed asynchronously and allow for more efficient handling of many concurrent requests.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchRequests"
+            },
+            "description": "Specifications for all of the requests that will be invoked as part of the batch."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The batch was accepted and has begun processing.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              }
+            }
+          },
+          "200": {
+            "description": "OK - Returns response details for all requests in the batch.",
+            "schema": {
+              "$ref": "#/definitions/BatchResponseStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "result.responses",
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Invoke a batch of requests at subscription scope": {
+            "$ref": "./examples/PostBatchSubscriptionScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/batch": {
+      "post": {
+        "tags": [
+          "Batch"
+        ],
+        "operationId": "Batch_InvokeAtResourceGroupScope",
+        "summary": "Invokes a batch of individual Azure Resource Manager requests at a resource group scope.",
+        "description": "The batch API can be used to invoke multiple Azure Resource Manager requests at once. Batches are processed asynchronously and allow for more efficient handling of many concurrent requests.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchRequests"
+            },
+            "description": "Specifications for all of the requests that will be invoked as part of the batch."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The batch was accepted and has begun processing.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              }
+            }
+          },
+          "200": {
+            "description": "OK - Returns response details for all requests in the batch.",
+            "schema": {
+              "$ref": "#/definitions/BatchResponseStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "result.responses",
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Invoke a batch of requests at resource group scope": {
+            "$ref": "./examples/PostBatchResourceGroupScope.json"
+          },
+          "Invoke a batch of delete requests at resource group scope": {
+            "$ref": "./examples/PostBatchDeleteResourceGroupScope.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BatchRequests": {
+      "type": "object",
+      "properties": {
+        "requests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchRequest"
+          },
+          "description": "The requests that will be invoked."
+        }
+      },
+      "description": "Specifications for all of the requests that will be invoked as part of the batch.",
+      "required": [
+        "requests"
+      ]
+    },
+    "BatchRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier for the request. Must be unique within a batch."
+        },
+        "method": {
+          "type": "string",
+          "description": "The HTTP method associated with the request.",
+          "enum": [
+            "GET",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "POST"
+          ],
+          "x-ms-enum": {
+            "name": "HttpMethod",
+            "modelAsString": true
+          }
+        },
+        "url": {
+          "type": "string",
+          "description": "The request's absolute path."
+        },
+        "headers": {
+          "type": "object",
+          "description": "Headers that are specific to the request."
+        },
+        "body": {
+          "type": "object",
+          "description": "The body of the request. Not allowed for requests with an method of GET or DELETE."
+        }
+      },
+      "description": "The specification for one request that will be part of a larger batch.",
+      "required": [
+        "id",
+        "method",
+        "url"
+      ]
+    },
+    "BatchResponseStatus": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "description": "The final result of the batch operation.",
+          "$ref": "#/definitions/BatchResponses",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "If present, a GET on this URL will return the next page of results.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+        }
+      ],
+      "description": "The result of the batch operation and each request within it."
+    },
+    "BatchResponses": {
+      "type": "object",
+      "properties": {
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BatchResponse"
+          },
+          "description": "Responses for all requests contained in the batch."
+        }
+      }
+    },
+    "BatchResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identifier of the request that generated the response.",
+          "readOnly": true
+        },
+        "httpStatusCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The HTTP status code of the response.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the batch request. The request is complete when the status is set to Succeeded, Failed, or Canceled.",
+          "readOnly": true
+        },
+        "headers": {
+          "type": "object",
+          "description": "Headers that are specific to this response.",
+          "readOnly": true
+        },
+        "body": {
+          "type": "object",
+          "description": "The body of the response.",
+          "readOnly": true
+        }
+      },
+      "description": "The response received for one request in the batch."
+    },
+    "CloudError": {
+      "type": "object",
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
+    }
+  },
+  "parameters": {}
+}
