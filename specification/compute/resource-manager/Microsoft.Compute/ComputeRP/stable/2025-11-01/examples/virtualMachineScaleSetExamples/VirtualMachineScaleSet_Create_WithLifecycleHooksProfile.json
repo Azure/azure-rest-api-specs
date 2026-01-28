@@ -13,23 +13,23 @@
       "location": "westus",
       "properties": {
         "lifecycleHooksProfile": {
-            "lifecycleHooks": [
-                {
-                    "type": "UpgradeAutoOSRollingBatchStarting",
-                    "waitDuration": "PT20M"
-                }
-            ]
+          "lifecycleHooks": [
+            {
+              "type": "UpgradeAutoOSRollingBatchStarting",
+              "waitDuration": "PT20M"
+            }
+          ]
         },
         "upgradePolicy": {
-            "mode": "Manual",
-            "rollingUpgradePolicy": {
-                "maxBatchInstancePercent": 50
-            },
-            "automaticOSUpgradePolicy": {
-                "enableAutomaticOSUpgrade": true,
-                "useRollingUpgradePolicy": true,
-                "disableAutomaticRollback": false
-            }
+          "mode": "Manual",
+          "rollingUpgradePolicy": {
+            "maxBatchInstancePercent": 50
+          },
+          "automaticOSUpgradePolicy": {
+            "enableAutomaticOSUpgrade": true,
+            "useRollingUpgradePolicy": true,
+            "disableAutomaticRollback": false
+          }
         },
         "virtualMachineProfile": {
           "storageProfile": {
@@ -117,49 +117,49 @@
             },
             "networkProfile": {
               "networkInterfaceConfigurations": [
-                  {
-                    "name": "{vmss-name}",
-                    "properties": {
-                      "dnsSettings": {
-                        "dnsServers": []
-                      },
-                      "primary": true,
-                      "enableIPForwarding": true,
-                      "ipConfigurations": [
-                        {
-                          "name": "{vmss-name}",
-                          "properties": {
-                            "subnet": {
-                              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
-                            },
-                            "privateIPAddressVersion": "IPv4"
-                          }
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                          },
+                          "privateIPAddressVersion": "IPv4"
                         }
-                      ],
-                      "enableAcceleratedNetworking": false
-                    }
+                      }
+                    ],
+                    "enableAcceleratedNetworking": false
                   }
-                ]
-              }
-            },
-            "lifecycleHooksProfile": {
-              "lifecycleHooks": [
-                  {
-                      "type": "UpgradeAutoOSRollingBatchStarting",
-                      "waitDuration": "PT20M"
-                  }
+                }
               ]
-            },
-            "upgradePolicy": {
-              "mode": "Manual",
-              "rollingUpgradePolicy": {
-                  "maxBatchInstancePercent": 50
-              },
-              "automaticOSUpgradePolicy": {
-                  "enableAutomaticOSUpgrade": true,
-                  "useRollingUpgradePolicy": true,
-                  "disableAutomaticRollback": false
+            }
+          },
+          "lifecycleHooksProfile": {
+            "lifecycleHooks": [
+              {
+                "type": "UpgradeAutoOSRollingBatchStarting",
+                "waitDuration": "PT20M"
               }
+            ]
+          },
+          "upgradePolicy": {
+            "mode": "Manual",
+            "rollingUpgradePolicy": {
+              "maxBatchInstancePercent": 50
+            },
+            "automaticOSUpgradePolicy": {
+              "enableAutomaticOSUpgrade": true,
+              "useRollingUpgradePolicy": true,
+              "disableAutomaticRollback": false
+            }
           },
           "provisioningState": "Updating"
         },
@@ -233,23 +233,23 @@
             }
           },
           "lifecycleHooksProfile": {
-              "lifecycleHooks": [
-                  {
-                      "type": "UpgradeAutoOSRollingBatchStarting",
-                      "waitDuration": "PT20M"
-                  }
-              ]
-            },
-            "upgradePolicy": {
-              "mode": "Manual",
-              "rollingUpgradePolicy": {
-                  "maxBatchInstancePercent": 50
-              },
-              "automaticOSUpgradePolicy": {
-                  "enableAutomaticOSUpgrade": true,
-                  "useRollingUpgradePolicy": true,
-                  "disableAutomaticRollback": false
+            "lifecycleHooks": [
+              {
+                "type": "UpgradeAutoOSRollingBatchStarting",
+                "waitDuration": "PT20M"
               }
+            ]
+          },
+          "upgradePolicy": {
+            "mode": "Manual",
+            "rollingUpgradePolicy": {
+              "maxBatchInstancePercent": 50
+            },
+            "automaticOSUpgradePolicy": {
+              "enableAutomaticOSUpgrade": true,
+              "useRollingUpgradePolicy": true,
+              "disableAutomaticRollback": false
+            }
           },
           "provisioningState": "Creating"
         },
