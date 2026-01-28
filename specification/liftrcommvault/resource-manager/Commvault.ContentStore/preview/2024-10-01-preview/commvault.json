@@ -1258,69 +1258,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/restore": {
-      "post": {
-        "operationId": "ProtectionGroups_Restore",
-        "tags": [
-          "ProtectionGroups"
-        ],
-        "description": "Restore resource for a protected items in given protection group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "cloudAccountName",
-            "in": "path",
-            "description": "Name of the Cloud Account resource",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
-          },
-          {
-            "name": "protectionGroupName",
-            "in": "path",
-            "description": "Name of the ProtectionGroup resource",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "The body type of the operation request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RestoreProtectionItemRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/RestoreProtectionItemResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Commvault.ContentStore/cloudAccounts/{cloudAccountName}/protectionGroups/{protectionGroupName}/stopBackup": {
       "post": {
         "operationId": "ProtectionGroups_StopBackup",
