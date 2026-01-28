@@ -1,0 +1,47 @@
+parameters:
+  "service-dir":
+    default: "sdk/resources"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/Microsoft.Resources/regionalmove/{version-status}/{version}/regionalMove.json"
+    examples-dir: "{project-root}/examples"
+    use-read-only-status-schema: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.Resources.RegionalMove"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-regionalmove"
+    namespace: "azure.mgmt.resource.regionalmove"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources-regionalmove"
+    namespace: "com.azure.resourcemanager.resources.regionalmove"
+    service-name: "Regional Move Service"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcesregionalmove"
+    service-dir: "sdk/resourcesregionalmove"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resourcesregionalmove"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/armregionalmove"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armregionalmove"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
