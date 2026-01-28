@@ -63,10 +63,10 @@ model EvaluatorDefinition {
   type: EvaluatorDefinitionType;
 
   @doc("The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required.")
-  init_parameters?: unknown;
+  init_parameters?: Record<unknown>;
 
   @doc("The JSON schema (Draft 2020-12) for the evaluator's input data. This includes parameters like type, properties, required.")
-  data_schema?: unknown;
+  data_schema?: Record<unknown>;
 
   @doc("List of output metrics produced by this evaluator")
   metrics?: Record<EvaluatorMetric>;

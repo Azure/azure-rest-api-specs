@@ -10359,6 +10359,8 @@
                 "description": "A description of what the function does, used by the model to choose when and how to call the function."
               },
               "parameters": {
+                "type": "object",
+                "additionalProperties": {},
                 "description": "The parameters the functions accepts, described as a JSON Schema object."
               }
             },
@@ -13415,9 +13417,13 @@
             "description": "The type of evaluator definition"
           },
           "init_parameters": {
+            "type": "object",
+            "additionalProperties": {},
             "description": "The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required."
           },
           "data_schema": {
+            "type": "object",
+            "additionalProperties": {},
             "description": "The JSON schema (Draft 2020-12) for the evaluator's input data. This includes parameters like type, properties, required."
           },
           "metrics": {
@@ -32470,6 +32476,8 @@
                   "description": "A description of what the function does, used by the model to choose when and how to call the function."
                 },
                 "parameters": {
+                  "type": "object",
+                  "additionalProperties": {},
                   "description": "The parameters the functions accepts, described as a JSON Schema object."
                 }
               },
@@ -33762,9 +33770,13 @@
             "description": "A human-readable description of the input."
           },
           "default_value": {
+            "type": "object",
+            "additionalProperties": {},
             "description": "The default value for the input if no run-time value is provided."
           },
           "schema": {
+            "type": "object",
+            "additionalProperties": {},
             "description": "The JSON schema for the structured input (optional)."
           },
           "required": {
@@ -33793,6 +33805,8 @@
             "description": "A description of the output to emit. Used by the model to determine when to emit the output."
           },
           "schema": {
+            "type": "object",
+            "additionalProperties": {},
             "description": "The JSON schema for the structured output."
           },
           "strict": {
@@ -33817,6 +33831,8 @@
             ]
           },
           "output": {
+            "type": "object",
+            "additionalProperties": {},
             "description": "The structured output captured during the response."
           }
         },
