@@ -1,0 +1,39 @@
+{
+  "title": "AvsStorageContainers_Get",
+  "operationId": "AvsStorageContainers_Get",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "storageContainerName": "container-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "space": {
+            "totalUsed": 1073741824,
+            "unique": 268435456,
+            "snapshots": 53687091236870912,
+            "shared": 268435456
+          },
+          "resourceName": "container-01",
+          "provisionedLimit": 10737418240,
+          "datastore": "AVS-Datastore-01",
+          "mounted": true
+        },
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/avsStorageContainers/container-01",
+        "type": "PureStorage.Block/storagePools/avsStorageContainers",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-16T07:25:56.721Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-16T07:25:56.721Z"
+        }
+      }
+    }
+  }
+}

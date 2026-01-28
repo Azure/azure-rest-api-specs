@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "migrationMode": "Offline",
+    "migrationName": "examplemigration",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examplemigration",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampletarget/migrations/examplemigration",
+        "location": "East US",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "PerformingPreRequisiteSteps",
+              "dbDetails": {}
+            },
+            "state": "InProgress"
+          },
+          "dbsToMigrate": [
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "migrationMode": "Offline",
+          "migrationOption": "ValidateAndMigrate",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.12345Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "sourceDbServerResourceId": "examplesource:5432@exampleadministratorlogin",
+          "sourceType": "OnPremises",
+          "sslMode": "Prefer",
+          "targetDbServerMetadata": {
+            "location": "East US",
+            "sku": {
+              "name": "Standard_D4ds_v4",
+              "tier": "GeneralPurpose"
+            },
+            "storageMb": 131072,
+            "version": "17"
+          },
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "triggerCutover": "True"
+        }
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Migrations_Cancel",
+  "title": "Cancel an active migration."
+}

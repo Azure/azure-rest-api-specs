@@ -858,20 +858,6 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.EntityRecognitionSkillLanguage,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(Search.EntityRecognitionSkillLanguage,
-  "com.azure.search.documents.indexes",
-  "java"
-);
-@@clientNamespace(Search.SentimentSkillLanguage,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(Search.SentimentSkillLanguage,
-  "com.azure.search.documents.indexes",
-  "java"
-);
 @@clientNamespace(Search.PIIDetectionSkillMaskingMode,
   "Azure.Search.Documents.Indexes"
 );
@@ -2230,18 +2216,6 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.EntityRecognitionSkill,
-  "Azure.Search.Documents.Indexes"
-);
-@@clientNamespace(Search.EntityRecognitionSkill,
-  "com.azure.search.documents.indexes",
-  "java"
-);
-@@clientNamespace(Search.SentimentSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SentimentSkill,
-  "com.azure.search.documents.indexes",
-  "java"
-);
 @@clientNamespace(Search.SentimentSkillV3, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SentimentSkillV3,
   "com.azure.search.documents.indexes",
@@ -2888,14 +2862,10 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(ShaperSkill.`@odata.type`, "odatatype", "javascript");
 @@clientName(MergeSkill.`@odata.type`, "odataType");
 @@clientName(MergeSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(SentimentSkill.`@odata.type`, "odataType");
-@@clientName(SentimentSkill.`@odata.type`, "odatatype", "javascript");
 @@clientName(SentimentSkillV3.`@odata.type`, "odataType");
 @@clientName(SentimentSkillV3.`@odata.type`, "odatatype", "javascript");
 @@clientName(EntityLinkingSkill.`@odata.type`, "odataType");
 @@clientName(EntityLinkingSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(EntityRecognitionSkill.`@odata.type`, "odataType");
-@@clientName(EntityRecognitionSkill.`@odata.type`, "odatatype", "javascript");
 @@clientName(EntityRecognitionSkillV3.`@odata.type`, "odataType");
 @@clientName(EntityRecognitionSkillV3.`@odata.type`, "odatatype", "javascript");
 @@clientName(PIIDetectionSkill.`@odata.type`, "odataType");

@@ -49,3 +49,14 @@ using Neon.Postgres;
 @@clientName(Versions.v1_preview, "V20241222Preview", "javascript");
 @@clientName(Versions.v2_preview, "V20250301Preview", "javascript");
 @@clientName(Versions.v3_preview, "V20250623Preview", "javascript");
+@@clientName(PreflightCheckParameters, "PreflightCheckContent", "csharp");
+@@clientName(Computes.list, "GetComputes", "csharp");
+@@clientName(NeonRoles.delete, "DeleteNeonRole", "csharp");
+@@clientName(NeonRoles.list, "GetNeonRoles", "csharp");
+@@clientName(Endpoints.delete, "DeleteNeonEndpoint", "csharp");
+@@clientName(Endpoints.list, "GetEndpoints", "csharp");
+@@clientName(NeonDatabases.list, "GetNeonDatabases", "csharp");
+@@clientName(Organizations.getPostgresVersions,
+  "GetPostgresVersionsOrganization",
+  "csharp"
+);

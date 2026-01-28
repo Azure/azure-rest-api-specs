@@ -8,6 +8,7 @@ import "../common/models-storage.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 using Quantum.Workspace;
 
@@ -20,7 +21,7 @@ alias BlobDetailsParam = {
 namespace Quantum.Workspace.Services {
   @autoRoute
   interface Storage {
-    /** Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output. */
+    /** Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. Starting with version 2026-01-15-preview, when used for a container the container is also created if it does not already exist. The SAS URL can be used to upload job input and/or download job output. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "There is no standard operation that fits this scenario"
     @segment("storage/sasUri")
     getSasUri is PostOperation<BlobDetailsParam, SasUriResponse>;
