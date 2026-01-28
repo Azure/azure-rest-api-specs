@@ -54,22 +54,29 @@ using Microsoft.Batch;
 
 @@clientName(CachingType, "BatchDiskCachingType", "csharp");
 @@clientName(Application, "BatchApplication", "csharp");
+@@alternateType(Application.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@clientName(ApplicationPackage, "BatchApplicationPackage", "csharp");
+@@alternateType(ApplicationPackage.etag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
 @@clientName(ApplicationPackageProperties.lastActivationTime,
   "LastActivatedOn",
   "csharp"
 );
+@@alternateType(ApplicationPackageProperties.storageUrl, url, "csharp");
 @@clientName(PublicNetworkAccessType, "BatchPublicNetworkAccess", "csharp");
 @@clientName(BatchAccountProperties.dedicatedCoreQuotaPerVMFamilyEnforced,
   "IsDedicatedCoreQuotaPerVmFamilyEnforced",
   "csharp"
 );
-@@alternateType(Pool.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+@@clientName(BatchAccountProperties.dedicatedCoreQuotaPerVMFamily,
+  "DedicatedCoreQuotaPerVmFamily",
   "csharp"
 );
-@@alternateType(Pool.etag, Azure.Core.eTag, "csharp");
 @@clientName(DetectorResponse, "BatchAccountDetector", "csharp");
+@@alternateType(DetectorResponse.etag, Azure.Core.EtagProperty.etag, "csharp");
+@@usage(DetectorResponse, Usage.input, "csharp");
 @@clientName(OutboundEnvironmentEndpoint,
   "BatchAccountOutboundEnvironmentEndpoint",
   "csharp"
@@ -77,6 +84,11 @@ using Microsoft.Batch;
 @@clientName(EndpointDependency, "BatchAccountEndpointDependency", "csharp");
 @@clientName(EndpointDetail, "BatchEndpointDetail", "csharp");
 @@clientName(Pool, "BatchAccountPool", "csharp");
+@@alternateType(Pool.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Pool.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@clientName(PoolProperties.lastModified, "LastModifiedOn", "csharp");
 @@clientName(PoolProperties.provisioningStateTransitionTime,
   "provisioningStateTransitOn",
@@ -84,6 +96,10 @@ using Microsoft.Batch;
 );
 @@clientName(PoolAllocationMode, "BatchAccountPoolAllocationMode", "csharp");
 @@clientName(AutoScaleRun, "BatchAccountPoolAutoScaleRun", "csharp");
+@@alternateType(AutoScaleRun.error,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
+  "csharp"
+);
 @@clientName(ResizeOperationStatus, "BatchResizeOperationStatus", "csharp");
 @@clientName(ComputeNodeDeallocationOption,
   "BatchNodeDeallocationOption",
@@ -91,17 +107,23 @@ using Microsoft.Batch;
 );
 @@clientName(Certificate, "BatchAccountCertificate", "csharp");
 @@alternateType(Certificate.etag, Azure.Core.EtagProperty.etag, "csharp");
+@@usage(Certificate, Usage.input, "csharp");
 @@clientName(CertificateFormat, "BatchAccountCertificateFormat", "csharp");
 @@alternateType(CertificateProvisioningState,
   BatchAccountCertificateProvisioningState,
   "csharp"
 );
+@@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
 @@clientName(CertificateProperties.provisioningStateTransitionTime,
   "provisioningStateTransitOn",
   "csharp"
 );
 @@clientName(CertificateProperties.previousProvisioningStateTransitionTime,
   "previousProvisioningStateTransitOn",
+  "csharp"
+);
+@@alternateType(CertificateProperties.deleteCertificateError,
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
   "csharp"
 );
 @@clientName(CertificateStoreLocation,
@@ -332,7 +354,6 @@ using Microsoft.Batch;
 );
 @@clientName(AccountKeyType, "BatchAccountKeyType", "csharp");
 @@clientName(BatchAccountRegenerateKeyParameters.keyName, "KeyType", "csharp");
-@@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
 @@clientName(CertificateCreateOrUpdateProperties.thumbprint,
   "ThumbprintString",
   "csharp"
@@ -415,6 +436,10 @@ using Microsoft.Batch;
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
 @@clientName(PrivateLinkResource, "BatchPrivateLinkResource", "csharp");
 @@alternateType(PrivateLinkResource.etag,
   Azure.Core.EtagProperty.etag,
@@ -455,7 +480,10 @@ using Microsoft.Batch;
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(BatchAccount, BatchAccountData, "csharp");
-@@alternateType(AutoScaleRun.error, ResponseError, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BatchAccountData.properties,
+  "csharp"
+);
 
 // added to solve the problem that the c# resource class can inherit the `resource data` class
 namespace Microsoft.Batch {
@@ -625,16 +653,5 @@ namespace Microsoft.Batch {
      * The user requested that the certificate be deleted, but there are pools that still have references to the certificate, or it is still installed on one or more compute nodes. (The latter can occur if the certificate has been removed from the pool, but the node has not yet restarted. Nodes refresh their certificates only when they restart.) You may use the cancel certificate delete operation to cancel the delete, or the delete certificate operation to retry the delete.
      */
     Failed: "Failed",
-  }
-
-  /**
-   * An error that occurred when autoscaling a pool.
-   */
-  model ResponseError {
-    ...AutoScaleRunError;
-
-    /** The error target. */
-    @visibility(Lifecycle.Read)
-    target?: string;
   }
 }
