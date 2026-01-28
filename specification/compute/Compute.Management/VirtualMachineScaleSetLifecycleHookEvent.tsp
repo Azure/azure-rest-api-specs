@@ -15,12 +15,13 @@ namespace Microsoft.Compute;
  * Defines a VMScaleSet lifecycle hook event.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
 @parentResource(VirtualMachineScaleSet)
 model VMScaleSetLifecycleHookEvent
   is ProxyResource<VMScaleSetLifecycleHookEventProperties> {
   ...ResourceNameParameter<
     Resource = VMScaleSetLifecycleHookEvent,
-    KeyName = "lifecycleHookEventName",
+    KeyName = "lifecycleHookEvent",
     SegmentName = "lifecycleHookEvents",
     NamePattern = ""
   >;
@@ -38,7 +39,7 @@ model VMScaleSetLifecycleHookEventListResult
   "The list of VMScaleSet lifecycle hook events."
 );
 @@doc(VMScaleSetLifecycleHookEventListResult.nextLink,
-  "The uri to fetch the next page of VMScaleSet lifecycle hook events. Call ListNext() with this to fetch the next page of VMScaleSet lifecycle hook events."
+  "The uri to fetch the next page of virtual machine scale set lifecycle hook events. Call ListNext() with this to fetch the next page of VMScaleSet lifecycle hook events."
 );
 
 @armResourceOperations

@@ -6655,7 +6655,7 @@
           }
         },
         "x-ms-examples": {
-          "List virtual machine scale set lifecycle hook events.": {
+          "Gets a list of all lifecycle hook events in a VMScaleSet.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_List.json"
           }
         },
@@ -6664,7 +6664,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents/{lifecycleHookEventName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents/{lifecycleHookEvent}": {
       "get": {
         "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Get",
         "tags": [
@@ -6689,7 +6689,7 @@
             "type": "string"
           },
           {
-            "name": "lifecycleHookEventName",
+            "name": "lifecycleHookEvent",
             "in": "path",
             "description": "The name of the VMScaleSetLifecycleHookEvent",
             "required": true,
@@ -6740,7 +6740,7 @@
             "type": "string"
           },
           {
-            "name": "lifecycleHookEventName",
+            "name": "lifecycleHookEvent",
             "in": "path",
             "description": "The name of the VMScaleSetLifecycleHookEvent",
             "required": true,
@@ -6771,7 +6771,7 @@
           }
         },
         "x-ms-examples": {
-          "Update a VirtualMachineScaleSetLifecycleHookEvent.": {
+          "The operation to update the VirtualMachineScaleSetLifecycleHookEvent.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSetLifeCycleHookEvent_Update.json"
           }
         }
@@ -14979,13 +14979,13 @@
         },
         "defaultAction": {
           "$ref": "#/definitions/LifecycleHookAction",
-          "description": "Specifies the default action for the lifecycle hook. This action will be applied on the the target resources if the customer does not take any action for the target resource before waitUntil."
+          "description": "Specifies the action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil."
         }
       }
     },
     "LifecycleHookAction": {
       "type": "string",
-      "description": "The action that will be taken on a target resource in a lifecycle hook event.",
+      "description": "The action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil.",
       "enum": [
         "Approve"
       ],
@@ -18794,7 +18794,7 @@
         "nextLink": {
           "type": "string",
           "format": "uri",
-          "description": "The uri to fetch the next page of VMScaleSet lifecycle hook events. Call ListNext() with this to fetch the next page of VMScaleSet lifecycle hook events."
+          "description": "The uri to fetch the next page of virtual machine scale set lifecycle hook events. Call ListNext() with this to fetch the next page of VMScaleSet lifecycle hook events."
         }
       },
       "required": [
@@ -18811,7 +18811,7 @@
         },
         "waitUntil": {
           "type": "string",
-          "description": "Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the DefaultAction for the event."
+          "description": "Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the defaultAction for the event."
         },
         "maxWaitUntil": {
           "type": "string",
@@ -18823,7 +18823,7 @@
         },
         "defaultAction": {
           "$ref": "#/definitions/LifecycleHookAction",
-          "description": "Specify the action that will be applied on the a target resource in the VMScaleSet lifecycle hook event, if the platform does not get a response from the customer for the target resource before waitUntil."
+          "description": "Specify the action that will be applied on the a target resource in the VMScaleSet lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil."
         },
         "targetResources": {
           "type": "array",
@@ -18874,11 +18874,11 @@
     },
     "VMScaleSetLifecycleHookEventTargetResource": {
       "type": "object",
-      "description": "Define a single target resource in a lifecycle hook event. Currently, the resource can either be a VMSS or a VMSS VM.",
+      "description": "Define a single target ARM resource in a lifecycle hook event. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.",
       "properties": {
         "resource": {
           "$ref": "#/definitions/ApiEntityReference",
-          "description": "Specifies the target ARM resource. Currently, can be a VMSS resource or an individual VM resource in a VMSS."
+          "description": "Specifies the target ARM resource. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet."
         },
         "actionState": {
           "$ref": "#/definitions/LifecycleHookActionState",

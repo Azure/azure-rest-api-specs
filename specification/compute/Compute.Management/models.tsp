@@ -1148,7 +1148,7 @@ union HighSpeedInterconnectPlacement {
 }
 
 /**
- * The action that will be taken on a target resource in a lifecycle hook event.
+ * The action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil.
  */
 @added(Versions.v2025_11_01)
 union LifecycleHookAction {
@@ -1174,7 +1174,7 @@ model LifecycleHook {
   waitDuration?: duration;
 
   /**
-   * Specifies the default action for the lifecycle hook. This action will be applied on the the target resources if the customer does not take any action for the target resource before waitUntil.
+   * Specifies the action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil.
    */
   defaultAction?: LifecycleHookAction;
 }
@@ -1220,12 +1220,12 @@ union VMScaleSetLifecycleHookEventState {
 }
 
 /**
- * Define a single target resource in a lifecycle hook event. Currently, the resource can either be a VMSS or a VMSS VM.
+ * Define a single target ARM resource in a lifecycle hook event. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.
  */
 @added(Versions.v2025_11_01)
 model VMScaleSetLifecycleHookEventTargetResource {
   /**
-   * Specifies the target ARM resource. Currently, can be a VMSS resource or an individual VM resource in a VMSS.
+   * Specifies the target ARM resource. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.
    */
   resource?: ApiEntityReference;
 
@@ -1254,7 +1254,7 @@ model VMScaleSetLifecycleHookEventProperties {
   type?: string;
 
   /**
-   * Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the DefaultAction for the event.
+   * Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the defaultAction for the event.
    */
   waitUntil?: string;
 
@@ -1269,7 +1269,7 @@ model VMScaleSetLifecycleHookEventProperties {
   timeCreated?: string;
 
   /**
-   * Specify the action that will be applied on the a target resource in the VMScaleSet lifecycle hook event, if the platform does not get a response from the customer for the target resource before waitUntil.
+   * Specify the action that will be applied on the a target resource in the VMScaleSet lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil.
    */
   defaultAction?: LifecycleHookAction;
 
