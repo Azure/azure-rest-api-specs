@@ -1,0 +1,220 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "version": "2025-03-01",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/microsoft.Network/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of operations for a resource provider": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Availability": {
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "type": "string"
+        },
+        "retention": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "internalName": {
+          "type": "string"
+        }
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "blobDuration": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayDescription": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "aggregationType": {
+          "type": "string"
+        },
+        "availabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          }
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean"
+        },
+        "fillGapWithZero": {
+          "type": "boolean"
+        },
+        "metricFilterPattern": {
+          "type": "string"
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "isInternal": {
+          "type": "boolean"
+        },
+        "sourceMdmAccount": {
+          "type": "string"
+        },
+        "sourceMdmNamespace": {
+          "type": "string"
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "display": {
+          "type": "object",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft Network."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of the operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
+            }
+          }
+        },
+        "origin": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "OperationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "type": "object",
+          "properties": {
+            "metricSpecifications": {
+              "type": "array",
+              "description": "Operation service specification.",
+              "items": {
+                "$ref": "#/definitions/MetricSpecification"
+              }
+            },
+            "logSpecifications": {
+              "type": "array",
+              "description": "Operation log specification.",
+              "items": {
+                "$ref": "#/definitions/LogSpecification"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

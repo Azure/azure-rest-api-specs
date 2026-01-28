@@ -1,0 +1,4729 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-03-01",
+    "description": "APIs to manage web application firewall rules."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableRequestHeaders": {
+      "get": {
+        "operationId": "ApplicationGateways_ListAvailableRequestHeaders",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableRequestHeadersResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Available Request Headers": {
+            "$ref": "./examples/ApplicationGatewayAvailableRequestHeadersGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableResponseHeaders": {
+      "get": {
+        "operationId": "ApplicationGateways_ListAvailableResponseHeaders",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableResponseHeadersResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Available Response Headers": {
+            "$ref": "./examples/ApplicationGatewayAvailableResponseHeadersGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableServerVariables": {
+      "get": {
+        "operationId": "ApplicationGateways_ListAvailableServerVariables",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableServerVariablesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Available Server Variables": {
+            "$ref": "./examples/ApplicationGatewayAvailableServerVariablesGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default": {
+      "get": {
+        "operationId": "ApplicationGateways_ListAvailableSslOptions",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableSslOptions"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Available Ssl Options": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies": {
+      "get": {
+        "operationId": "ApplicationGateways_ListAvailableSslPredefinedPolicies",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableSslPredefinedPolicies"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Available Ssl Predefined Policies": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPoliciesGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}": {
+      "get": {
+        "operationId": "ApplicationGateways_GetSslPredefinedPolicy",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [
+          {
+            "name": "predefinedPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewaySslPredefinedPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Available Ssl Predefined Policy by name": {
+            "$ref": "./examples/ApplicationGatewayAvailableSslOptionsPredefinedPolicyGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayAvailableWafRuleSets": {
+      "get": {
+        "operationId": "ApplicationGateways_ListAvailableWafRuleSets",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayAvailableWafRuleSetsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Available Waf Rule Sets": {
+            "$ref": "./examples/ApplicationGatewayAvailableWafRuleSetsGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies": {
+      "get": {
+        "operationId": "WebApplicationFirewallPolicies_ListAll",
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all WAF policies in a subscription": {
+            "$ref": "./examples/WafListAllPolicies.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationGateways": {
+      "get": {
+        "operationId": "ApplicationGateways_ListAll",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all application gateways in a subscription": {
+            "$ref": "./examples/ApplicationGatewayListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests": {
+      "get": {
+        "operationId": "ApplicationGatewayWafDynamicManifests_Get",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestResultList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets WAF manifests": {
+            "$ref": "./examples/GetApplicationGatewayWafDynamicManifests.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests/dafault": {
+      "get": {
+        "operationId": "ApplicationGatewayWafDynamicManifestsDefault_Get",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets WAF default manifest": {
+            "$ref": "./examples/GetApplicationGatewayWafDynamicManifestsDefault.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies": {
+      "get": {
+        "operationId": "WebApplicationFirewallPolicies_List",
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all WAF policies in a resource group": {
+            "$ref": "./examples/WafListPolicies.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/{policyName}": {
+      "get": {
+        "operationId": "WebApplicationFirewallPolicies_Get",
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "parameters": [
+          {
+            "name": "policyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 128
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a WAF policy within a resource group": {
+            "$ref": "./examples/WafPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebApplicationFirewallPolicies_CreateOrUpdate",
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "parameters": [
+          {
+            "name": "policyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 128
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a WAF policy within a resource group": {
+            "$ref": "./examples/WafPolicyCreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebApplicationFirewallPolicies_Delete",
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "parameters": [
+          {
+            "name": "policyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 128
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a WAF policy within a resource group": {
+            "$ref": "./examples/WafPolicyDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways": {
+      "get": {
+        "operationId": "ApplicationGateways_List",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all application gateways in a resource group": {
+            "$ref": "./examples/ApplicationGatewayList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}": {
+      "get": {
+        "operationId": "ApplicationGateways_Get",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ApplicationGateway": {
+            "$ref": "./examples/ApplicationGatewayGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApplicationGateways_CreateOrUpdate",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ApplicationGateways_UpdateTags",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Application Gateway tags": {
+            "$ref": "./examples/ApplicationGatewayUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ApplicationGateways_Delete",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ApplicationGateway": {
+            "$ref": "./examples/ApplicationGatewayDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth": {
+      "post": {
+        "operationId": "ApplicationGateways_BackendHealth",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayBackendHealth"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Backend Health": {
+            "$ref": "./examples/ApplicationGatewayBackendHealthGet.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand": {
+      "post": {
+        "operationId": "ApplicationGateways_BackendHealthOnDemand",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "probeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayOnDemandProbe"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayBackendHealthOnDemand"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Test Backend Health": {
+            "$ref": "./examples/ApplicationGatewayBackendHealthTest.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "ApplicationGatewayPrivateEndpointConnections_List",
+        "tags": [
+          "ApplicationGatewayPrivateEndpointConnections"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all private endpoint connections on application gateway": {
+            "$ref": "./examples/ApplicationGatewayPrivateEndpointConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateEndpointConnections/{connectionName}": {
+      "get": {
+        "operationId": "ApplicationGatewayPrivateEndpointConnections_Get",
+        "tags": [
+          "ApplicationGatewayPrivateEndpointConnections"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Application Gateway Private Endpoint Connection": {
+            "$ref": "./examples/ApplicationGatewayPrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApplicationGatewayPrivateEndpointConnections_Update",
+        "tags": [
+          "ApplicationGatewayPrivateEndpointConnections"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Application Gateway Private Endpoint Connection": {
+            "$ref": "./examples/ApplicationGatewayPrivateEndpointConnectionUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ApplicationGatewayPrivateEndpointConnections_Delete",
+        "tags": [
+          "ApplicationGatewayPrivateEndpointConnections"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Application Gateway Private Endpoint Connection": {
+            "$ref": "./examples/ApplicationGatewayPrivateEndpointConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/privateLinkResources": {
+      "get": {
+        "operationId": "ApplicationGatewayPrivateLinkResources_List",
+        "tags": [
+          "ApplicationGatewayPrivateLinkResources"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ApplicationGatewayPrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all private link resources on application gateway": {
+            "$ref": "./examples/ApplicationGatewayPrivateLinkResourceList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/start": {
+      "post": {
+        "operationId": "ApplicationGateways_Start",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayStart.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/applicationGateways/{applicationGatewayName}/stop": {
+      "post": {
+        "operationId": "ApplicationGateways_Stop",
+        "tags": [
+          "ApplicationGateways"
+        ],
+        "parameters": [
+          {
+            "name": "applicationGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop Application Gateway": {
+            "$ref": "./examples/ApplicationGatewayStop.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationGateway": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApplicationGatewayAuthenticationCertificate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayAuthenticationCertificatePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayAuthenticationCertificatePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayAutoscaleConfiguration": {
+      "type": "object",
+      "properties": {
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 2,
+          "exclusiveMinimum": false
+        }
+      },
+      "required": [
+        "minCapacity"
+      ]
+    },
+    "ApplicationGatewayAvailableRequestHeadersResult": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ApplicationGatewayAvailableResponseHeadersResult": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ApplicationGatewayAvailableServerVariablesResult": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "ApplicationGatewayAvailableSslOptions": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayAvailableSslOptionsPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApplicationGatewayAvailableSslOptionsPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "predefinedPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "defaultPolicy": {
+          "type": "string",
+          "enum": [
+            "AppGwSslPolicy20150501",
+            "AppGwSslPolicy20170401",
+            "AppGwSslPolicy20170401S",
+            "AppGwSslPolicy20220101",
+            "AppGwSslPolicy20220101S"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySslPolicyName",
+            "modelAsString": true
+          }
+        },
+        "availableCipherSuites": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
+              "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
+              "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+              "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+              "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
+              "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
+              "TLS_DHE_RSA_WITH_AES_256_CBC_SHA",
+              "TLS_DHE_RSA_WITH_AES_128_CBC_SHA",
+              "TLS_RSA_WITH_AES_256_GCM_SHA384",
+              "TLS_RSA_WITH_AES_128_GCM_SHA256",
+              "TLS_RSA_WITH_AES_256_CBC_SHA256",
+              "TLS_RSA_WITH_AES_128_CBC_SHA256",
+              "TLS_RSA_WITH_AES_256_CBC_SHA",
+              "TLS_RSA_WITH_AES_128_CBC_SHA",
+              "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+              "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+              "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384",
+              "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256",
+              "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+              "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+              "TLS_DHE_DSS_WITH_AES_256_CBC_SHA256",
+              "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
+              "TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
+              "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
+              "TLS_RSA_WITH_3DES_EDE_CBC_SHA",
+              "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
+              "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+              "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationGatewaySslCipherSuite",
+              "modelAsString": true
+            }
+          }
+        },
+        "availableProtocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TLSv1_0",
+              "TLSv1_1",
+              "TLSv1_2",
+              "TLSv1_3"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationGatewaySslProtocol",
+              "modelAsString": true
+            }
+          }
+        }
+      }
+    },
+    "ApplicationGatewayAvailableSslPredefinedPolicies": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewaySslPredefinedPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ApplicationGatewayAvailableWafRuleSetsResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleSet"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayBackendAddress": {
+      "type": "object",
+      "properties": {
+        "fqdn": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationGatewayBackendAddressPool": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayBackendAddressPoolPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayBackendAddressPoolPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "backendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
+          },
+          "readOnly": true
+        },
+        "backendAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddress"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayBackendHealth": {
+      "type": "object",
+      "properties": {
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHealthPool"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayBackendHealthHttpSettings": {
+      "type": "object",
+      "properties": {
+        "backendHttpSettings": {
+          "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings"
+        },
+        "servers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHealthServer"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayBackendHealthOnDemand": {
+      "type": "object",
+      "properties": {
+        "backendAddressPool": {
+          "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+        },
+        "backendHealthHttpSettings": {
+          "$ref": "#/definitions/ApplicationGatewayBackendHealthHttpSettings"
+        }
+      }
+    },
+    "ApplicationGatewayBackendHealthPool": {
+      "type": "object",
+      "properties": {
+        "backendAddressPool": {
+          "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+        },
+        "backendHttpSettingsCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHealthHttpSettings"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayBackendHealthServer": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "ipConfiguration": {
+          "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
+        },
+        "health": {
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Up",
+            "Down",
+            "Partial",
+            "Draining"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayBackendHealthServerHealth",
+            "modelAsString": true
+          }
+        },
+        "healthProbeLog": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationGatewayBackendHttpSettings": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayBackendHttpSettingsPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayBackendHttpSettingsPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https",
+            "Tcp",
+            "Tls"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "cookieBasedAffinity": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayCookieBasedAffinity",
+            "modelAsString": true
+          }
+        },
+        "requestTimeout": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "probe": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "authenticationCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "connectionDraining": {
+          "$ref": "#/definitions/ApplicationGatewayConnectionDraining"
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "pickHostNameFromBackendAddress": {
+          "type": "boolean"
+        },
+        "affinityCookieName": {
+          "type": "string"
+        },
+        "probeEnabled": {
+          "type": "boolean"
+        },
+        "path": {
+          "type": "string"
+        },
+        "dedicatedBackendConnection": {
+          "type": "boolean"
+        },
+        "validateCertChainAndExpiry": {
+          "type": "boolean",
+          "default": true
+        },
+        "validateSNI": {
+          "type": "boolean",
+          "default": true
+        },
+        "sniName": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayBackendSettings": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayBackendSettingsPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayBackendSettingsPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https",
+            "Tcp",
+            "Tls"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "probe": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "pickHostNameFromBackendAddress": {
+          "type": "boolean"
+        },
+        "enableL4ClientIpPreservation": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayClientAuthConfiguration": {
+      "type": "object",
+      "properties": {
+        "verifyClientCertIssuerDN": {
+          "type": "boolean"
+        },
+        "verifyClientRevocation": {
+          "type": "string",
+          "enum": [
+            "None",
+            "OCSP"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayClientRevocationOptions",
+            "modelAsString": true
+          }
+        },
+        "verifyClientAuthMode": {
+          "type": "string",
+          "enum": [
+            "Strict",
+            "Passthrough"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayClientAuthVerificationModes",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ApplicationGatewayConnectionDraining": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "drainTimeoutInSec": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "exclusiveMinimum": false,
+          "maximum": 3600,
+          "exclusiveMaximum": false
+        }
+      },
+      "required": [
+        "drainTimeoutInSec",
+        "enabled"
+      ]
+    },
+    "ApplicationGatewayCustomError": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "enum": [
+            "HttpStatus400",
+            "HttpStatus403",
+            "HttpStatus404",
+            "HttpStatus405",
+            "HttpStatus408",
+            "HttpStatus500",
+            "HttpStatus502",
+            "HttpStatus503",
+            "HttpStatus504"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayCustomErrorStatusCode",
+            "modelAsString": true
+          }
+        },
+        "customErrorPageUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationGatewayEntraJWTValidationConfig": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayEntraJWTValidationConfigPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayEntraJWTValidationConfigPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "unAuthorizedRequestAction": {
+          "type": "string",
+          "enum": [
+            "Deny",
+            "Allow"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayUnAuthorizedRequestAction",
+            "modelAsString": true
+          }
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "audiences": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayFirewallDisabledRuleGroup": {
+      "type": "object",
+      "properties": {
+        "ruleGroupName": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32",
+            "x-nullable": false
+          }
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ]
+    },
+    "ApplicationGatewayFirewallExclusion": {
+      "type": "object",
+      "properties": {
+        "matchVariable": {
+          "type": "string"
+        },
+        "selectorMatchOperator": {
+          "type": "string"
+        },
+        "selector": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "matchVariable",
+        "selector",
+        "selectorMatchOperator"
+      ]
+    },
+    "ApplicationGatewayFirewallManifestRuleSet": {
+      "type": "object",
+      "properties": {
+        "ruleSetType": {
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Preview",
+            "GA",
+            "Supported",
+            "Deprecated"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayRuleSetStatusOptions",
+            "modelAsString": true
+          }
+        },
+        "tiers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Standard",
+              "WAF",
+              "Standard_v2",
+              "WAF_v2"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationGatewayTierTypes",
+              "modelAsString": true
+            }
+          }
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "applicationGateway.json#/definitions/ApplicationGatewayFirewallRuleGroup"
+          }
+        }
+      },
+      "required": [
+        "ruleGroups",
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "ApplicationGatewayFirewallRule": {
+      "type": "object",
+      "properties": {
+        "ruleId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ruleIdString": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayWafRuleStateTypes",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "None",
+            "AnomalyScoring",
+            "Allow",
+            "Block",
+            "Log"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayWafRuleActionTypes",
+            "modelAsString": true
+          }
+        },
+        "sensitivity": {
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayWafRuleSensitivityTypes",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ruleId"
+      ]
+    },
+    "ApplicationGatewayFirewallRuleGroup": {
+      "type": "object",
+      "properties": {
+        "ruleGroupName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRule"
+          }
+        }
+      },
+      "required": [
+        "ruleGroupName",
+        "rules"
+      ]
+    },
+    "ApplicationGatewayFirewallRuleSet": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayFirewallRuleSetPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApplicationGatewayFirewallRuleSetPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "ruleSetType": {
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "type": "string"
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallRuleGroup"
+          }
+        },
+        "tiers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Standard",
+              "WAF",
+              "Standard_v2",
+              "WAF_v2"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationGatewayTierTypes",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "required": [
+        "ruleGroups",
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "ApplicationGatewayForContainersReferenceDefinition": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ServiceNetworking/trafficControllers"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ApplicationGatewayFrontendIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayFrontendIPConfigurationPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayFrontendIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string"
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "./network.json#/definitions/IPAllocationMethod"
+        },
+        "subnet": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "publicIPAddress": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "privateLinkConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayFrontendPort": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayFrontendPortPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayFrontendPortPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayGlobalConfiguration": {
+      "type": "object",
+      "properties": {
+        "enableRequestBuffering": {
+          "type": "boolean"
+        },
+        "enableResponseBuffering": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ApplicationGatewayHeaderConfiguration": {
+      "type": "object",
+      "properties": {
+        "headerName": {
+          "type": "string"
+        },
+        "headerValueMatcher": {
+          "$ref": "#/definitions/HeaderValueMatcher",
+          "type": "object"
+        },
+        "headerValue": {
+          "type": "string"
+        }
+      }
+    },
+    "ApplicationGatewayHttpListener": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayHttpListenerPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayHttpListenerPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "frontendPort": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https",
+            "Tcp",
+            "Tls"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "hostName": {
+          "type": "string"
+        },
+        "sslCertificate": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "sslProfile": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "requireServerNameIndication": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "customErrorConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayCustomError"
+          }
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "hostNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayIPConfigurationPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "subnet": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ApplicationGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ApplicationGatewayListener": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayListenerPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayListenerPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "frontendPort": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https",
+            "Tcp",
+            "Tls"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "sslCertificate": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "sslProfile": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "hostNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayLoadDistributionPolicy": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayLoadDistributionPolicyPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayLoadDistributionPolicyPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "loadDistributionTargets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayLoadDistributionTarget"
+          }
+        },
+        "loadDistributionAlgorithm": {
+          "type": "string",
+          "enum": [
+            "RoundRobin",
+            "LeastConnections",
+            "IpHash"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayLoadDistributionAlgorithm",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayLoadDistributionTarget": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayLoadDistributionTargetPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayLoadDistributionTargetPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "weightPerServer": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "exclusiveMinimum": false,
+          "maximum": 100,
+          "exclusiveMaximum": false
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      }
+    },
+    "ApplicationGatewayOnDemandProbe": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https",
+            "Tcp",
+            "Tls"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pickHostNameFromBackendHttpSettings": {
+          "type": "boolean"
+        },
+        "enableProbeProxyProtocolHeader": {
+          "type": "boolean"
+        },
+        "match": {
+          "$ref": "#/definitions/ApplicationGatewayProbeHealthResponseMatch"
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "backendHttpSettings": {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      }
+    },
+    "ApplicationGatewayPathRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPathRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayPathRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "backendHttpSettings": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "redirectConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "rewriteRuleSet": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "loadDistributionPolicy": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      }
+    },
+    "ApplicationGatewayPrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayPrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ApplicationGatewayPrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "./privateEndpoint.json#/definitions/PrivateEndpoint",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "./privateLinkService.json#/definitions/PrivateLinkServiceConnectionState"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "linkIdentifier": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayPrivateLinkConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPrivateLinkConfigurationProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayPrivateLinkConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateLinkIpConfiguration"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayPrivateLinkIpConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPrivateLinkIpConfigurationProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayPrivateLinkIpConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string"
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "./network.json#/definitions/IPAllocationMethod"
+        },
+        "subnet": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "primary": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayPrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayPrivateLinkResourceProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayPrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ApplicationGatewayPrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayProbe": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayProbePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayProbeHealthResponseMatch": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "string"
+        },
+        "statusCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayProbePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "enum": [
+            "Http",
+            "Https",
+            "Tcp",
+            "Tls"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayProtocol",
+            "modelAsString": true
+          }
+        },
+        "host": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "unhealthyThreshold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pickHostNameFromBackendHttpSettings": {
+          "type": "boolean"
+        },
+        "pickHostNameFromBackendSettings": {
+          "type": "boolean"
+        },
+        "minServers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "match": {
+          "$ref": "#/definitions/ApplicationGatewayProbeHealthResponseMatch"
+        },
+        "enableProbeProxyProtocolHeader": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 65535
+        }
+      }
+    },
+    "ApplicationGatewayPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ApplicationGatewaySku"
+        },
+        "sslPolicy": {
+          "$ref": "#/definitions/ApplicationGatewaySslPolicy"
+        },
+        "operationalState": {
+          "type": "string",
+          "enum": [
+            "Stopped",
+            "Starting",
+            "Running",
+            "Stopping"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayOperationalState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "gatewayIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayIPConfiguration"
+          }
+        },
+        "authenticationCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayAuthenticationCertificate"
+          }
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayTrustedRootCertificate"
+          }
+        },
+        "trustedClientCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayTrustedClientCertificate"
+          }
+        },
+        "sslCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewaySslCertificate"
+          }
+        },
+        "frontendIPConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFrontendIPConfiguration"
+          }
+        },
+        "frontendPorts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFrontendPort"
+          }
+        },
+        "probes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayProbe"
+          }
+        },
+        "backendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendAddressPool"
+          }
+        },
+        "backendHttpSettingsCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings"
+          }
+        },
+        "backendSettingsCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBackendSettings"
+          }
+        },
+        "httpListeners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayHttpListener"
+          }
+        },
+        "listeners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayListener"
+          }
+        },
+        "sslProfiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewaySslProfile"
+          }
+        },
+        "urlPathMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayUrlPathMap"
+          }
+        },
+        "requestRoutingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRequestRoutingRule"
+          }
+        },
+        "routingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRoutingRule"
+          }
+        },
+        "rewriteRuleSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRewriteRuleSet"
+          }
+        },
+        "redirectConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRedirectConfiguration"
+          }
+        },
+        "webApplicationFirewallConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayWebApplicationFirewallConfiguration"
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "enableHttp2": {
+          "type": "boolean"
+        },
+        "enableFips": {
+          "type": "boolean"
+        },
+        "autoscaleConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayAutoscaleConfiguration"
+        },
+        "privateLinkConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateLinkConfiguration"
+          }
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "customErrorConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayCustomError"
+          }
+        },
+        "forceFirewallPolicyAssociation": {
+          "type": "boolean"
+        },
+        "loadDistributionPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayLoadDistributionPolicy"
+          }
+        },
+        "entraJWTValidationConfigs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayEntraJWTValidationConfig"
+          }
+        },
+        "globalConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayGlobalConfiguration"
+        },
+        "defaultPredefinedSslPolicy": {
+          "type": "string",
+          "enum": [
+            "AppGwSslPolicy20150501",
+            "AppGwSslPolicy20170401",
+            "AppGwSslPolicy20170401S",
+            "AppGwSslPolicy20220101",
+            "AppGwSslPolicy20220101S"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySslPolicyName",
+            "modelAsString": true
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayRedirectConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayRedirectConfigurationPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayRedirectConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "redirectType": {
+          "type": "string",
+          "enum": [
+            "Permanent",
+            "Found",
+            "SeeOther",
+            "Temporary"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayRedirectType",
+            "modelAsString": true
+          }
+        },
+        "targetListener": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "targetUrl": {
+          "type": "string"
+        },
+        "includePath": {
+          "type": "boolean"
+        },
+        "includeQueryString": {
+          "type": "boolean"
+        },
+        "requestRoutingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "urlPathMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "pathRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "ApplicationGatewayRequestRoutingRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayRequestRoutingRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayRequestRoutingRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "enum": [
+            "Basic",
+            "PathBasedRouting"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayRequestRoutingRuleType",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "exclusiveMinimum": false,
+          "maximum": 20000,
+          "exclusiveMaximum": false
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "backendHttpSettings": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "httpListener": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "urlPathMap": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "rewriteRuleSet": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "redirectConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "loadDistributionPolicy": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "entraJWTValidationConfig": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayRewriteRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "ruleSequence": {
+          "type": "integer"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRewriteRuleCondition"
+          }
+        },
+        "actionSet": {
+          "$ref": "#/definitions/ApplicationGatewayRewriteRuleActionSet",
+          "type": "object"
+        }
+      }
+    },
+    "ApplicationGatewayRewriteRuleActionSet": {
+      "type": "object",
+      "properties": {
+        "requestHeaderConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration"
+          }
+        },
+        "responseHeaderConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration"
+          }
+        },
+        "urlConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayUrlConfiguration"
+        }
+      }
+    },
+    "ApplicationGatewayRewriteRuleCondition": {
+      "type": "object",
+      "properties": {
+        "variable": {
+          "type": "string"
+        },
+        "pattern": {
+          "type": "string"
+        },
+        "ignoreCase": {
+          "type": "boolean"
+        },
+        "negate": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ApplicationGatewayRewriteRuleSet": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayRewriteRuleSetPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayRewriteRuleSetPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "rewriteRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayRewriteRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayRoutingRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayRoutingRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayRoutingRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "ruleType": {
+          "type": "string",
+          "enum": [
+            "Basic",
+            "PathBasedRouting"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayRequestRoutingRuleType",
+            "modelAsString": true
+          }
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "exclusiveMinimum": false,
+          "maximum": 20000,
+          "exclusiveMaximum": false
+        },
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "backendSettings": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "listener": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "priority"
+      ]
+    },
+    "ApplicationGatewaySku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Standard_Small",
+            "Standard_Medium",
+            "Standard_Large",
+            "WAF_Medium",
+            "WAF_Large",
+            "Standard_v2",
+            "WAF_v2",
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "enum": [
+            "Standard",
+            "WAF",
+            "Standard_v2",
+            "WAF_v2",
+            "Basic"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayTier",
+            "modelAsString": true
+          }
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "family": {
+          "type": "string",
+          "enum": [
+            "Generation_1",
+            "Generation_2"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySkuFamily",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ApplicationGatewaySslCertificate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewaySslCertificatePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewaySslCertificatePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "publicCertData": {
+          "type": "string",
+          "readOnly": true
+        },
+        "keyVaultSecretId": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewaySslPolicy": {
+      "type": "object",
+      "properties": {
+        "disabledSslProtocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TLSv1_0",
+              "TLSv1_1",
+              "TLSv1_2",
+              "TLSv1_3"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationGatewaySslProtocol",
+              "modelAsString": true
+            }
+          }
+        },
+        "policyType": {
+          "type": "string",
+          "enum": [
+            "Predefined",
+            "Custom",
+            "CustomV2"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySslPolicyType",
+            "modelAsString": true
+          }
+        },
+        "policyName": {
+          "type": "string",
+          "enum": [
+            "AppGwSslPolicy20150501",
+            "AppGwSslPolicy20170401",
+            "AppGwSslPolicy20170401S",
+            "AppGwSslPolicy20220101",
+            "AppGwSslPolicy20220101S"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySslPolicyName",
+            "modelAsString": true
+          }
+        },
+        "cipherSuites": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
+              "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
+              "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+              "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+              "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
+              "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
+              "TLS_DHE_RSA_WITH_AES_256_CBC_SHA",
+              "TLS_DHE_RSA_WITH_AES_128_CBC_SHA",
+              "TLS_RSA_WITH_AES_256_GCM_SHA384",
+              "TLS_RSA_WITH_AES_128_GCM_SHA256",
+              "TLS_RSA_WITH_AES_256_CBC_SHA256",
+              "TLS_RSA_WITH_AES_128_CBC_SHA256",
+              "TLS_RSA_WITH_AES_256_CBC_SHA",
+              "TLS_RSA_WITH_AES_128_CBC_SHA",
+              "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+              "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+              "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384",
+              "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256",
+              "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+              "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+              "TLS_DHE_DSS_WITH_AES_256_CBC_SHA256",
+              "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
+              "TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
+              "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
+              "TLS_RSA_WITH_3DES_EDE_CBC_SHA",
+              "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
+              "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+              "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationGatewaySslCipherSuite",
+              "modelAsString": true
+            }
+          }
+        },
+        "minProtocolVersion": {
+          "type": "string",
+          "enum": [
+            "TLSv1_0",
+            "TLSv1_1",
+            "TLSv1_2",
+            "TLSv1_3"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySslProtocol",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ApplicationGatewaySslPredefinedPolicy": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewaySslPredefinedPolicyPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewaySslPredefinedPolicyPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "cipherSuites": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384",
+              "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
+              "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+              "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+              "TLS_DHE_RSA_WITH_AES_256_GCM_SHA384",
+              "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256",
+              "TLS_DHE_RSA_WITH_AES_256_CBC_SHA",
+              "TLS_DHE_RSA_WITH_AES_128_CBC_SHA",
+              "TLS_RSA_WITH_AES_256_GCM_SHA384",
+              "TLS_RSA_WITH_AES_128_GCM_SHA256",
+              "TLS_RSA_WITH_AES_256_CBC_SHA256",
+              "TLS_RSA_WITH_AES_128_CBC_SHA256",
+              "TLS_RSA_WITH_AES_256_CBC_SHA",
+              "TLS_RSA_WITH_AES_128_CBC_SHA",
+              "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+              "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+              "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384",
+              "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256",
+              "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA",
+              "TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA",
+              "TLS_DHE_DSS_WITH_AES_256_CBC_SHA256",
+              "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
+              "TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
+              "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
+              "TLS_RSA_WITH_3DES_EDE_CBC_SHA",
+              "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
+              "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+              "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationGatewaySslCipherSuite",
+              "modelAsString": true
+            }
+          }
+        },
+        "minProtocolVersion": {
+          "type": "string",
+          "enum": [
+            "TLSv1_0",
+            "TLSv1_1",
+            "TLSv1_2",
+            "TLSv1_3"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewaySslProtocol",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ApplicationGatewaySslProfile": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewaySslProfilePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewaySslProfilePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "trustedClientCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        },
+        "sslPolicy": {
+          "$ref": "#/definitions/ApplicationGatewaySslPolicy"
+        },
+        "clientAuthConfiguration": {
+          "$ref": "#/definitions/ApplicationGatewayClientAuthConfiguration"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayTrustedClientCertificate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayTrustedClientCertificatePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayTrustedClientCertificatePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "validatedCertData": {
+          "type": "string",
+          "readOnly": true
+        },
+        "clientCertIssuerDN": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayTrustedRootCertificate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayTrustedRootCertificatePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayTrustedRootCertificatePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "keyVaultSecretId": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayUrlConfiguration": {
+      "type": "object",
+      "properties": {
+        "modifiedPath": {
+          "type": "string"
+        },
+        "modifiedQueryString": {
+          "type": "string"
+        },
+        "reroute": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ApplicationGatewayUrlPathMap": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayUrlPathMapPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ApplicationGatewayUrlPathMapPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "defaultBackendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "defaultBackendHttpSettings": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "defaultRewriteRuleSet": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "defaultRedirectConfiguration": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "defaultLoadDistributionPolicy": {
+          "$ref": "./network.json#/definitions/SubResource"
+        },
+        "pathRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayPathRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationGatewayWafDynamicManifestPropertiesResult": {
+      "type": "object",
+      "properties": {
+        "defaultRuleSet": {
+          "$ref": "#/definitions/DefaultRuleSetPropertyFormat",
+          "x-ms-client-flatten": true
+        },
+        "availableRuleSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallManifestRuleSet"
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ApplicationGatewayWafDynamicManifestResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestPropertiesResult",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ApplicationGatewayWafDynamicManifestResultList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayWafDynamicManifestResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ApplicationGatewayWebApplicationFirewallConfiguration": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "firewallMode": {
+          "type": "string",
+          "enum": [
+            "Detection",
+            "Prevention"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayFirewallMode",
+            "modelAsString": true
+          }
+        },
+        "ruleSetType": {
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "type": "string"
+        },
+        "disabledRuleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallDisabledRuleGroup"
+          }
+        },
+        "requestBodyCheck": {
+          "type": "boolean"
+        },
+        "maxRequestBodySize": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 8,
+          "exclusiveMinimum": false,
+          "maximum": 128,
+          "exclusiveMaximum": false
+        },
+        "maxRequestBodySizeInKb": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 8,
+          "exclusiveMinimum": false,
+          "maximum": 128,
+          "exclusiveMaximum": false
+        },
+        "fileUploadLimitInMb": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayFirewallExclusion"
+          }
+        }
+      },
+      "required": [
+        "enabled",
+        "firewallMode",
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "DefaultRuleSetPropertyFormat": {
+      "type": "object",
+      "properties": {
+        "ruleSetType": {
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "ExceptionEntry": {
+      "type": "object",
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestURI",
+            "RemoteAddr",
+            "RequestHeader"
+          ],
+          "x-ms-enum": {
+            "name": "ExceptionEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "valueMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith",
+            "IPMatch"
+          ],
+          "x-ms-enum": {
+            "name": "ExceptionEntryValueMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith"
+          ],
+          "x-ms-enum": {
+            "name": "ExceptionEntrySelectorMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string"
+        },
+        "exceptionManagedRuleSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExclusionManagedRuleSet"
+          }
+        }
+      },
+      "required": [
+        "matchVariable",
+        "valueMatchOperator"
+      ]
+    },
+    "ExclusionManagedRule": {
+      "type": "object",
+      "properties": {
+        "ruleId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ruleId"
+      ]
+    },
+    "ExclusionManagedRuleGroup": {
+      "type": "object",
+      "properties": {
+        "ruleGroupName": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExclusionManagedRule"
+          }
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ]
+    },
+    "ExclusionManagedRuleSet": {
+      "type": "object",
+      "properties": {
+        "ruleSetType": {
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "type": "string"
+        },
+        "ruleGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExclusionManagedRuleGroup"
+          }
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "GroupByUserSession": {
+      "type": "object",
+      "properties": {
+        "groupByVariables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupByVariable"
+          }
+        }
+      },
+      "required": [
+        "groupByVariables"
+      ]
+    },
+    "GroupByVariable": {
+      "type": "object",
+      "properties": {
+        "variableName": {
+          "type": "string",
+          "enum": [
+            "ClientAddr",
+            "GeoLocation",
+            "None",
+            "ClientAddrXFFHeader",
+            "GeoLocationXFFHeader"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayFirewallUserSessionVariable",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "variableName"
+      ]
+    },
+    "HeaderValueMatcher": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string"
+        },
+        "ignoreCase": {
+          "type": "boolean"
+        },
+        "negate": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ManagedRuleGroupOverride": {
+      "type": "object",
+      "properties": {
+        "ruleGroupName": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleOverride"
+          }
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ]
+    },
+    "ManagedRuleOverride": {
+      "type": "object",
+      "properties": {
+        "ruleId": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedRuleEnabledState",
+            "modelAsString": true
+          }
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "AnomalyScoring",
+            "Allow",
+            "Block",
+            "Log",
+            "JSChallenge"
+          ],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true
+          }
+        },
+        "sensitivity": {
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "SensitivityType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "ruleId"
+      ]
+    },
+    "ManagedRuleSet": {
+      "type": "object",
+      "properties": {
+        "ruleSetType": {
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "type": "string"
+        },
+        "ruleGroupOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupOverride"
+          }
+        },
+        "computedDisabledRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSetRuleGroup"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ]
+    },
+    "ManagedRuleSetRuleGroup": {
+      "type": "object",
+      "properties": {
+        "ruleGroupName": {
+          "type": "string"
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "ruleGroupName"
+      ]
+    },
+    "ManagedRulesDefinition": {
+      "type": "object",
+      "properties": {
+        "exceptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExceptionEntry"
+          }
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OwaspCrsExclusionEntry"
+          }
+        },
+        "managedRuleSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSet"
+          }
+        }
+      },
+      "required": [
+        "managedRuleSets"
+      ]
+    },
+    "MatchCondition": {
+      "type": "object",
+      "properties": {
+        "matchVariables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchVariable"
+          }
+        },
+        "operator": {
+          "type": "string",
+          "enum": [
+            "IPMatch",
+            "Equal",
+            "Contains",
+            "LessThan",
+            "GreaterThan",
+            "LessThanOrEqual",
+            "GreaterThanOrEqual",
+            "BeginsWith",
+            "EndsWith",
+            "Regex",
+            "GeoMatch",
+            "Any"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallOperator",
+            "modelAsString": true
+          }
+        },
+        "negationConditon": {
+          "type": "boolean"
+        },
+        "matchValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Uppercase",
+              "Lowercase",
+              "Trim",
+              "UrlDecode",
+              "UrlEncode",
+              "RemoveNulls",
+              "HtmlEntityDecode"
+            ],
+            "x-ms-enum": {
+              "name": "WebApplicationFirewallTransform",
+              "modelAsString": true
+            }
+          }
+        }
+      },
+      "required": [
+        "matchValues",
+        "matchVariables",
+        "operator"
+      ]
+    },
+    "MatchVariable": {
+      "type": "object",
+      "properties": {
+        "variableName": {
+          "type": "string",
+          "enum": [
+            "RemoteAddr",
+            "RequestMethod",
+            "QueryString",
+            "PostArgs",
+            "RequestUri",
+            "RequestHeaders",
+            "RequestBody",
+            "RequestCookies"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "variableName"
+      ]
+    },
+    "OwaspCrsExclusionEntry": {
+      "type": "object",
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestHeaderNames",
+            "RequestCookieNames",
+            "RequestArgNames",
+            "RequestHeaderKeys",
+            "RequestHeaderValues",
+            "RequestCookieKeys",
+            "RequestCookieValues",
+            "RequestArgKeys",
+            "RequestArgValues"
+          ],
+          "x-ms-enum": {
+            "name": "OwaspCrsExclusionEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith",
+            "EqualsAny"
+          ],
+          "x-ms-enum": {
+            "name": "OwaspCrsExclusionEntrySelectorMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string"
+        },
+        "exclusionManagedRuleSets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExclusionManagedRuleSet"
+          }
+        }
+      },
+      "required": [
+        "matchVariable",
+        "selector",
+        "selectorMatchOperator"
+      ]
+    },
+    "PolicySettings": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallEnabledState",
+            "modelAsString": true
+          }
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Prevention",
+            "Detection"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallMode",
+            "modelAsString": true
+          }
+        },
+        "requestBodyCheck": {
+          "type": "boolean"
+        },
+        "requestBodyInspectLimitInKB": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "requestBodyEnforcement": {
+          "type": "boolean",
+          "default": true
+        },
+        "maxRequestBodySizeInKb": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 8,
+          "exclusiveMinimum": false
+        },
+        "fileUploadEnforcement": {
+          "type": "boolean",
+          "default": true
+        },
+        "fileUploadLimitInMb": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false
+        },
+        "customBlockResponseStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "customBlockResponseBody": {
+          "type": "string",
+          "maxLength": 32768,
+          "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$"
+        },
+        "logScrubbing": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "type": "string",
+              "description": "State of the log scrubbing config. Default value is Enabled.",
+              "enum": [
+                "Disabled",
+                "Enabled"
+              ],
+              "x-ms-enum": {
+                "name": "WebApplicationFirewallScrubbingState",
+                "modelAsString": true
+              }
+            },
+            "scrubbingRules": {
+              "type": "array",
+              "description": "The rules that are applied to the logs for scrubbing.",
+              "items": {
+                "$ref": "#/definitions/WebApplicationFirewallScrubbingRules"
+              },
+              "x-ms-identifiers": []
+            }
+          }
+        },
+        "jsChallengeCookieExpirationInMins": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5,
+          "maximum": 1440
+        }
+      }
+    },
+    "WebApplicationFirewallCustomRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallState",
+            "modelAsString": true
+          }
+        },
+        "rateLimitDuration": {
+          "type": "string",
+          "enum": [
+            "OneMin",
+            "FiveMins"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayFirewallRateLimitDuration",
+            "modelAsString": true
+          }
+        },
+        "rateLimitThreshold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ruleType": {
+          "type": "string",
+          "enum": [
+            "MatchRule",
+            "RateLimitRule",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallRuleType",
+            "modelAsString": true
+          }
+        },
+        "matchConditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MatchCondition"
+          }
+        },
+        "groupByUserSession": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupByUserSession"
+          }
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "Allow",
+            "Block",
+            "Log",
+            "JSChallenge"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallAction",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "action",
+        "matchConditions",
+        "priority",
+        "ruleType"
+      ]
+    },
+    "WebApplicationFirewallPolicy": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebApplicationFirewallPolicyPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "WebApplicationFirewallPolicyListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/WebApplicationFirewallPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "WebApplicationFirewallPolicyPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "policySettings": {
+          "$ref": "#/definitions/PolicySettings"
+        },
+        "customRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationFirewallCustomRule"
+          }
+        },
+        "applicationGateways": {
+          "type": "array",
+          "items": {
+            "$ref": "./applicationGateway.json#/definitions/ApplicationGateway"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "resourceState": {
+          "type": "string",
+          "title": "Resource status of the policy.",
+          "enum": [
+            "Creating",
+            "Enabling",
+            "Enabled",
+            "Disabling",
+            "Disabled",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallPolicyResourceState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
+        "managedRules": {
+          "$ref": "#/definitions/ManagedRulesDefinition"
+        },
+        "httpListeners": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "pathBasedRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "applicationGatewayForContainers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayForContainersReferenceDefinition"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "managedRules"
+      ]
+    },
+    "WebApplicationFirewallScrubbingRules": {
+      "type": "object",
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestHeaderNames",
+            "RequestCookieNames",
+            "RequestArgNames",
+            "RequestPostArgNames",
+            "RequestJSONArgNames",
+            "RequestIPAddress"
+          ],
+          "x-ms-enum": {
+            "name": "ScrubbingRuleEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "EqualsAny"
+          ],
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": " scrubbingRuleEntryState",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator"
+      ]
+    }
+  },
+  "parameters": {}
+}
