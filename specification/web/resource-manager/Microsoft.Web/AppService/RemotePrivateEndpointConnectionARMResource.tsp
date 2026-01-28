@@ -170,7 +170,8 @@ interface StaticSites {
   @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is StaticSiteOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
-    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
+    Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
