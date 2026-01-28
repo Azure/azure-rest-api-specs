@@ -27,11 +27,12 @@ model AgentPoolUpgradeProfile
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AgentPoolUpgradeProfiles {
   /**
    * Gets the upgrade profile for an agent pool.
    */
+  @tag("AgentPools")
   getUpgradeProfile is ArmResourceRead<AgentPoolUpgradeProfile>;
 }
 

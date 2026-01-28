@@ -27,11 +27,12 @@ model ManagedClusterUpgradeProfile
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ManagedClusterUpgradeProfiles {
   /**
    * Gets the upgrade profile of a managed cluster.
    */
+  @tag("ManagedClusters")
   getUpgradeProfile is ArmResourceRead<ManagedClusterUpgradeProfile>;
 }
 

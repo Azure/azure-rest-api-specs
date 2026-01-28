@@ -20,11 +20,12 @@ model MeshRevisionProfile is ProxyResource<MeshRevisionProfileProperties> {
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MeshRevisionProfiles {
   /**
    * Contains extra metadata on the revision, including supported revisions, cluster compatibility and available upgrades
    */
+  @tag("ManagedClusters")
   @summary("Gets a mesh revision profile for a specified mesh in the specified location.")
   getMeshRevisionProfile is ArmResourceRead<
     MeshRevisionProfile,
@@ -34,6 +35,7 @@ interface MeshRevisionProfiles {
   /**
    * Contains extra metadata on each revision, including supported revisions, cluster compatibility and available upgrades
    */
+  @tag("ManagedClusters")
   @summary("Lists mesh revision profiles for all meshes in the specified location.")
   listMeshRevisionProfiles is ArmResourceListByParent<
     MeshRevisionProfile,

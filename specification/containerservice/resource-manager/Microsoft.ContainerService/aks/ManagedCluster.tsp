@@ -47,16 +47,18 @@ model ManagedCluster
   kind?: string;
 }
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ManagedClusters {
   /**
    * Gets a managed cluster.
    */
+  @tag("ManagedClusters")
   get is ArmResourceRead<ManagedCluster>;
 
   /**
    * Creates or updates a managed cluster.
    */
+  @tag("ManagedClusters")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedCluster,
     Parameters = {
@@ -79,6 +81,7 @@ interface ManagedClusters {
   /**
    * Updates tags on a managed cluster.
    */
+  @tag("ManagedClusters")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchAsync<
     ManagedCluster,
@@ -95,6 +98,7 @@ interface ManagedClusters {
   /**
    * Deletes a managed cluster.
    */
+  @tag("ManagedClusters")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedCluster,
     Parameters = {
@@ -117,17 +121,20 @@ interface ManagedClusters {
   /**
    * Lists managed clusters in the specified subscription and resource group.
    */
+  @tag("ManagedClusters")
   listByResourceGroup is ArmResourceListByParent<ManagedCluster>;
 
   /**
    * Gets a list of managed clusters in the specified subscription.
    */
+  @tag("ManagedClusters")
   list is ArmListBySubscription<ManagedCluster>;
 
   /**
    * **WARNING**: This API will be deprecated. Instead use [ListClusterUserCredentials](https://docs.microsoft.com/rest/api/aks/managedclusters/listclusterusercredentials) or [ListClusterAdminCredentials](https://docs.microsoft.com/rest/api/aks/managedclusters/listclusteradmincredentials) .
    */
   #deprecated "This API will be deprecated. Instead use [ListClusterUserCredentials](https://docs.microsoft.com/rest/api/aks/managedclusters/listclusterusercredentials) or [ListClusterAdminCredentials](https://docs.microsoft.com/rest/api/aks/managedclusters/listclusteradmincredentials) ."
+  @tag("ManagedClusters")
   @action("listCredential")
   @summary("Gets an access profile of a managed cluster.")
   getAccessProfile is ArmResourceActionSync<
@@ -147,6 +154,7 @@ interface ManagedClusters {
   /**
    * Lists the admin credentials of a managed cluster.
    */
+  @tag("ManagedClusters")
   @action("listClusterAdminCredential")
   listClusterAdminCredentials is ArmResourceActionSync<
     ManagedCluster,
@@ -165,6 +173,7 @@ interface ManagedClusters {
   /**
    * Lists the user credentials of a managed cluster.
    */
+  @tag("ManagedClusters")
   @action("listClusterUserCredential")
   listClusterUserCredentials is ArmResourceActionSync<
     ManagedCluster,
@@ -189,6 +198,7 @@ interface ManagedClusters {
   /**
    * Lists the cluster monitoring user credentials of a managed cluster.
    */
+  @tag("ManagedClusters")
   @action("listClusterMonitoringUserCredential")
   listClusterMonitoringUserCredentials is ArmResourceActionSync<
     ManagedCluster,
@@ -207,6 +217,7 @@ interface ManagedClusters {
   /**
    * This action cannot be performed on a cluster that is not using a service principal
    */
+  @tag("ManagedClusters")
   @summary("Reset the Service Principal Profile of a managed cluster.")
   resetServicePrincipalProfile is ArmResourceActionAsync<
     ManagedCluster,
@@ -221,6 +232,7 @@ interface ManagedClusters {
    */
   #deprecated "This API will be deprecated. Please see [AKS-managed Azure Active Directory integration](https://aka.ms/aks-managed-aad) to update your cluster with AKS-managed Azure AD."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ManagedClusters")
   @summary("Reset the AAD Profile of a managed cluster.")
   resetAADProfile is ArmResourceActionAsync<
     ManagedCluster,
@@ -234,6 +246,7 @@ interface ManagedClusters {
    * See [Certificate rotation](https://docs.microsoft.com/azure/aks/certificate-rotation) for more details about rotating managed cluster certificates.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ManagedClusters")
   @summary("Rotates the certificates of a managed cluster.")
   rotateClusterCertificates is ArmResourceActionAsync<
     ManagedCluster,
@@ -247,6 +260,7 @@ interface ManagedClusters {
    * Aborts the currently running operation on the managed cluster. The Managed Cluster will be moved to a Canceling state and eventually to a Canceled state when cancellation finishes. If the operation completes before cancellation can take place, a 409 error code is returned.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ManagedClusters")
   @action("abort")
   @summary("Aborts last operation running on managed cluster.")
   abortLatestOperation is ArmResourceActionAsync<
@@ -261,6 +275,7 @@ interface ManagedClusters {
    * Rotates the service account signing keys of a managed cluster.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ManagedClusters")
   rotateServiceAccountSigningKeys is ArmResourceActionAsync<
     ManagedCluster,
     void,
@@ -273,6 +288,7 @@ interface ManagedClusters {
    * This can only be performed on Azure Virtual Machine Scale set backed clusters. Stopping a cluster stops the control plane and agent nodes entirely, while maintaining all object and cluster state. A cluster does not accrue charges while it is stopped. See [stopping a cluster](https://docs.microsoft.com/azure/aks/start-stop-cluster) for more details about stopping a cluster.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ManagedClusters")
   @summary("Stops a Managed Cluster")
   stop is ArmResourceActionAsync<
     ManagedCluster,
@@ -286,6 +302,7 @@ interface ManagedClusters {
    * See [starting a cluster](https://docs.microsoft.com/azure/aks/start-stop-cluster) for more details about starting a cluster.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ManagedClusters")
   @summary("Starts a previously stopped Managed Cluster")
   start is ArmResourceActionAsync<
     ManagedCluster,
@@ -298,6 +315,7 @@ interface ManagedClusters {
   /**
    * AKS will create a pod to run the command. This is primarily useful for private clusters. For more information see [AKS Run Command](https://docs.microsoft.com/azure/aks/private-clusters#aks-run-command-preview).
    */
+  @tag("ManagedClusters")
   @summary("Submits a command to run against the Managed Cluster.")
   runCommand is ArmResourceActionAsync<
     ManagedCluster,
@@ -308,6 +326,7 @@ interface ManagedClusters {
   /**
    * Gets the results of a command which has been run on the Managed Cluster.
    */
+  @tag("ManagedClusters")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/commandResults/{commandId}")
   getCommandResult is ManagedClusterOps.ActionSync<
@@ -326,6 +345,7 @@ interface ManagedClusters {
   /**
    * Gets a list of egress endpoints (network endpoints of all outbound dependencies) in the specified managed cluster. The operation returns properties of each egress endpoint.
    */
+  @tag("ManagedClusters")
   @list
   @get
   @action("outboundNetworkDependenciesEndpoints")
@@ -339,6 +359,7 @@ interface ManagedClusters {
   /**
    * Rebalance nodes across specific load balancers.
    */
+  @tag("ManagedClusters")
   @added(Versions.v2025_10_02_preview)
   rebalanceLoadBalancers is ArmResourceActionAsyncBase<
     ManagedCluster,
@@ -351,6 +372,7 @@ interface ManagedClusters {
   /**
    * See [supported Kubernetes versions](https://docs.microsoft.com/azure/aks/supported-kubernetes-versions) for more details about the version lifecycle.
    */
+  @tag("AgentPools")
   @get
   @action("availableAgentPoolVersions")
   @summary("Gets a list of supported Kubernetes versions for the specified agent pool.")
@@ -363,6 +385,7 @@ interface ManagedClusters {
   /**
    * To learn more about private clusters, see: https://docs.microsoft.com/azure/aks/private-clusters
    */
+  @tag("privateLinkResources")
   @get
   @action("privateLinkResources")
   @summary("Gets a list of private link resources in the specified managed cluster.")
@@ -375,6 +398,7 @@ interface ManagedClusters {
   /**
    * Gets the private link service ID for the specified managed cluster.
    */
+  @tag("resolvePrivateLinkServiceId")
   @action("resolvePrivateLinkServiceId")
   post is ArmResourceActionSync<
     ManagedCluster,
@@ -385,6 +409,7 @@ interface ManagedClusters {
   /**
    * Gets a list of operations in the specified managedCluster
    */
+  @tag("ManagedClusters")
   @list
   @get
   @action("operations")
@@ -398,6 +423,7 @@ interface ManagedClusters {
   /**
    * Get the status of a specific operation in the specified managed cluster.
    */
+  @tag("ManagedClusters")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ContainerService/managedClusters/{resourceName}/operations/{operationId}")
   @added(Versions.v2025_10_02_preview)

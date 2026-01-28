@@ -26,16 +26,18 @@ model TrustedAccessRoleBinding
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface TrustedAccessRoleBindings {
   /**
    * Get a trusted access role binding.
    */
+  @tag("TrustedAccess")
   get is ArmResourceRead<TrustedAccessRoleBinding>;
 
   /**
    * Create or update a trusted access role binding
    */
+  @tag("TrustedAccess")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     TrustedAccessRoleBinding,
     LroHeaders = ArmLroLocationHeader<FinalResult = TrustedAccessRoleBinding> &
@@ -45,11 +47,13 @@ interface TrustedAccessRoleBindings {
   /**
    * Delete a trusted access role binding.
    */
+  @tag("TrustedAccess")
   delete is ArmResourceDeleteWithoutOkAsync<TrustedAccessRoleBinding>;
 
   /**
    * List trusted access role bindings.
    */
+  @tag("TrustedAccess")
   list is ArmResourceListByParent<TrustedAccessRoleBinding>;
 }
 

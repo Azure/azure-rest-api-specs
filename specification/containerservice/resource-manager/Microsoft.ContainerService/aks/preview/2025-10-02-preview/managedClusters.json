@@ -46,7 +46,10 @@
       "name": "ManagedClusters"
     },
     {
-      "name": "ManagedClusterUpgradeProfiles"
+      "name": "privateLinkResources"
+    },
+    {
+      "name": "resolvePrivateLinkServiceId"
     },
     {
       "name": "GuardrailsAvailableVersions"
@@ -55,19 +58,10 @@
       "name": "SafeguardsAvailableVersions"
     },
     {
-      "name": "MeshRevisionProfiles"
-    },
-    {
-      "name": "MeshUpgradeProfiles"
-    },
-    {
       "name": "MaintenanceConfigurations"
     },
     {
       "name": "ManagedNamespaces"
-    },
-    {
-      "name": "AgentPoolUpgradeProfiles"
     },
     {
       "name": "Machines"
@@ -82,7 +76,7 @@
       "name": "ManagedClusterSnapshots"
     },
     {
-      "name": "TrustedAccessRoleBindings"
+      "name": "TrustedAccess"
     },
     {
       "name": "LoadBalancers"
@@ -227,6 +221,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/kubernetesVersions": {
       "get": {
         "operationId": "ManagedClusters_ListKubernetesVersions",
+        "tags": [
+          "ManagedClusters"
+        ],
         "summary": "Gets a list of supported Kubernetes versions in the specified subscription.",
         "description": "Contains extra metadata on the version, including supported patch versions, capabilities, available upgrades, and details on preview status of the version",
         "parameters": [
@@ -265,7 +262,7 @@
       "get": {
         "operationId": "ManagedClusters_ListMeshRevisionProfiles",
         "tags": [
-          "MeshRevisionProfiles"
+          "ManagedClusters"
         ],
         "summary": "Lists mesh revision profiles for all meshes in the specified location.",
         "description": "Contains extra metadata on each revision, including supported revisions, cluster compatibility and available upgrades",
@@ -308,7 +305,7 @@
       "get": {
         "operationId": "ManagedClusters_GetMeshRevisionProfile",
         "tags": [
-          "MeshRevisionProfiles"
+          "ManagedClusters"
         ],
         "summary": "Gets a mesh revision profile for a specified mesh in the specified location.",
         "description": "Contains extra metadata on the revision, including supported revisions, cluster compatibility and available upgrades",
@@ -487,6 +484,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/locations/{location}/trustedAccessRoles": {
       "get": {
         "operationId": "TrustedAccessRoles_List",
+        "tags": [
+          "TrustedAccess"
+        ],
         "description": "List supported trusted access roles.",
         "parameters": [
           {
@@ -2143,7 +2143,7 @@
       "get": {
         "operationId": "AgentPools_GetUpgradeProfile",
         "tags": [
-          "AgentPoolUpgradeProfiles"
+          "AgentPools"
         ],
         "description": "Gets the upgrade profile for an agent pool.",
         "parameters": [
@@ -2202,7 +2202,7 @@
       "get": {
         "operationId": "AgentPools_GetAvailableAgentPoolVersions",
         "tags": [
-          "ManagedClusters"
+          "AgentPools"
         ],
         "summary": "Gets a list of supported Kubernetes versions for the specified agent pool.",
         "description": "See [supported Kubernetes versions](https://docs.microsoft.com/azure/aks/supported-kubernetes-versions) for more details about the version lifecycle.",
@@ -4235,7 +4235,7 @@
       "get": {
         "operationId": "ManagedClusters_ListMeshUpgradeProfiles",
         "tags": [
-          "MeshUpgradeProfiles"
+          "ManagedClusters"
         ],
         "description": "Lists available upgrades for all service meshes in a specific cluster.",
         "parameters": [
@@ -4287,7 +4287,7 @@
       "get": {
         "operationId": "ManagedClusters_GetMeshUpgradeProfile",
         "tags": [
-          "MeshUpgradeProfiles"
+          "ManagedClusters"
         ],
         "description": "Gets available upgrades for a service mesh in a cluster.",
         "parameters": [
@@ -4699,7 +4699,7 @@
       "get": {
         "operationId": "PrivateLinkResources_List",
         "tags": [
-          "ManagedClusters"
+          "privateLinkResources"
         ],
         "summary": "Gets a list of private link resources in the specified managed cluster.",
         "description": "To learn more about private clusters, see: https://docs.microsoft.com/azure/aks/private-clusters",
@@ -4973,7 +4973,7 @@
       "post": {
         "operationId": "ResolvePrivateLinkServiceId_POST",
         "tags": [
-          "ManagedClusters"
+          "resolvePrivateLinkServiceId"
         ],
         "description": "Gets the private link service ID for the specified managed cluster.",
         "parameters": [
@@ -5368,7 +5368,7 @@
       "get": {
         "operationId": "TrustedAccessRoleBindings_List",
         "tags": [
-          "TrustedAccessRoleBindings"
+          "TrustedAccess"
         ],
         "description": "List trusted access role bindings.",
         "parameters": [
@@ -5420,7 +5420,7 @@
       "get": {
         "operationId": "TrustedAccessRoleBindings_Get",
         "tags": [
-          "TrustedAccessRoleBindings"
+          "TrustedAccess"
         ],
         "description": "Get a trusted access role binding.",
         "parameters": [
@@ -5477,7 +5477,7 @@
       "put": {
         "operationId": "TrustedAccessRoleBindings_CreateOrUpdate",
         "tags": [
-          "TrustedAccessRoleBindings"
+          "TrustedAccess"
         ],
         "description": "Create or update a trusted access role binding",
         "parameters": [
@@ -5565,7 +5565,7 @@
       "delete": {
         "operationId": "TrustedAccessRoleBindings_Delete",
         "tags": [
-          "TrustedAccessRoleBindings"
+          "TrustedAccess"
         ],
         "description": "Delete a trusted access role binding.",
         "parameters": [
@@ -5639,7 +5639,7 @@
       "get": {
         "operationId": "ManagedClusters_GetUpgradeProfile",
         "tags": [
-          "ManagedClusterUpgradeProfiles"
+          "ManagedClusters"
         ],
         "description": "Gets the upgrade profile of a managed cluster.",
         "parameters": [
@@ -13670,7 +13670,7 @@
           {
             "name": "ReadOnly",
             "value": "ReadOnly",
-            "description": "Only */read RBAC permissions allowed on the managed node resource group"
+            "description": "Only \\*\\/read RBAC permissions allowed on the managed node resource group"
           }
         ]
       }

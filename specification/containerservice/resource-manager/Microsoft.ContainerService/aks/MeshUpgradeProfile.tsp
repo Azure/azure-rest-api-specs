@@ -23,16 +23,18 @@ model MeshUpgradeProfile
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MeshUpgradeProfiles {
   /**
    * Gets available upgrades for a service mesh in a cluster.
    */
+  @tag("ManagedClusters")
   getMeshUpgradeProfile is ArmResourceRead<MeshUpgradeProfile>;
 
   /**
    * Lists available upgrades for all service meshes in a specific cluster.
    */
+  @tag("ManagedClusters")
   listMeshUpgradeProfiles is ArmResourceListByParent<
     MeshUpgradeProfile,
     Response = ArmResponse<MeshUpgradeProfileList>

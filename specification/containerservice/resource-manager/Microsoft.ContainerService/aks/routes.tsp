@@ -18,6 +18,7 @@ interface ManagedClustersOperationGroup {
    * Contains extra metadata on the version, including supported patch versions, capabilities, available upgrades, and details on preview status of the version
    */
   @summary("Gets a list of supported Kubernetes versions in the specified subscription.")
+  @tag("ManagedClusters")
   @autoRoute
   @get
   @action("kubernetesVersions")
@@ -33,6 +34,7 @@ interface TrustedAccessRolesOperationGroup {
   /**
    * List supported trusted access roles.
    */
+  @tag("TrustedAccess")
   @autoRoute
   @get
   @action("trustedAccessRoles")
