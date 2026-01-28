@@ -16,8 +16,7 @@ namespace Microsoft.DBforPostgreSQL;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(IncludeMetadata)
 model BaseProxyResource<IncludeMetadata extends valueof boolean = false>
-  extends CommonTypes.ProxyResource {}
-
+  extends Foundations.ProxyResource {}
 /**
  * Impact on some metric if this recommended action is applied.
  */
