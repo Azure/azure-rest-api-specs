@@ -1,9 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -116,4 +119,68 @@ model PlacementScore {
    * Whether the desired quota is available.
    */
   isQuotaAvailable?: boolean;
+}
+
+/**
+ * Lists available Capacity Blocks for a subscription.
+ */
+@added(Versions.v2025_06_05_preview)
+model CapacityBlocks is Azure.Core.Page<CapacityBlock>;
+
+/**
+ * Capacity block.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_06_05_preview)
+model CapacityBlock extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * Contains additional properties of a capacity block
+   */
+  properties?: CapacityBlockProperties;
+}
+
+/**
+ * Contains additional properties of a capacity block
+ */
+@added(Versions.v2025_06_05_preview)
+model CapacityBlockProperties {
+  /**
+   * Logical Zone of the Capacity Block
+   */
+  @visibility(Lifecycle.Read)
+  zone?: int32;
+
+  /**
+   * Location of the Capacity Block.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  /**
+   * SKU of the Capacity Block.
+   */
+  sku?: Azure.ResourceManager.CommonTypes.Sku;
+
+  /**
+   * Schedule profile of the Capacity Block.
+   */
+  scheduleProfile?: ScheduleProfile;
+}
+
+/**
+ * Schedule of Capacity Block Reservation.
+ */
+@added(Versions.v2025_06_05_preview)
+model ScheduleProfile {
+  /**
+   * Start DateTime of Capacity Block reservation.
+   */
+  @visibility(Lifecycle.Read)
+  start?: utcDateTime;
+
+  /**
+   * End DateTime of Capacity Block Reservation.
+   */
+  @visibility(Lifecycle.Read)
+  end?: utcDateTime;
 }

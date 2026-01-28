@@ -24,11 +24,11 @@ To see additional help and options, run:
 
 These are the global settings for the AzureComputeRecommenderClient API.
 
-``` yaml !$(python) || !$(track2)
+```yaml !$(python) || !$(track2)
 title: ComputeRecommenderResourceProviderClient
 ```
 
-``` yaml
+```yaml
 description: The Compute Recommender Resource Provider Client
 openapi-type: arm
 tag: package-2025-06-05
@@ -51,7 +51,16 @@ suppressions:
 
 These settings apply only when `--tag=package-package-2025-06-05` is specified on the command line
 
-``` yaml $(tag) == 'package-2025-06-05'
+```yaml $(tag) == 'package-2025-06-05'
 input-file:
-- stable/2025-06-05/RecommenderRP.json
+  - stable/2025-06-05/RecommenderRP.json
+```
+
+### Tag: package-2025-06-05-preview
+
+These settings apply only when `--tag=package-package-2025-06-05-preview` is specified on the command line
+
+```yaml $(tag) == 'package-2025-06-05-preview'
+input-file:
+  - preview/2025-06-05-preview/RecommenderRP.json
 ```
