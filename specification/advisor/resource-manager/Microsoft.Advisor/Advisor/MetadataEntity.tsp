@@ -29,7 +29,7 @@ interface MetadataEntities {
     MetadataEntity,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
     Error = ArmDefaultErrorResponse,
-    Response = ArmResponse<MetadataEntity>
+    Response = ArmResponse<MetadataEntity> | ArmNotFoundResponseWithBody
   >;
 
   /**
