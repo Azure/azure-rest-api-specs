@@ -6,9 +6,7 @@ import "./models.tsp";
 import "@typespec/versioning";
 import "./main.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;
@@ -30,52 +28,37 @@ alias SiteOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @armResourceOperations
 interface Sites {
-  get is SiteOps.Read<Site>;
-  createOrUpdate is SiteOps.CreateOrUpdateAsync<Site>;
-  update is SiteOps.CustomPatchSync<Site, SiteUpdate>;
-  delete is SiteOps.DeleteSync<Site>;
-  listByResourceGroup is SiteOps.List<Site>;
+  get is Extension.Read<Extension.ResourceGroup, Site>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<
+    Extension.ResourceGroup,
+    Site
+  >;
+  update is Extension.CustomPatchSync<
+    Extension.ResourceGroup,
+    Site,
+    SiteUpdate
+  >;
+  delete is Extension.DeleteSync<Extension.ResourceGroup, Site>;
+  /** List a Site */
+  listByResourceGroup is Extension.ListByTarget<Extension.ResourceGroup, Site>;
 }
-
-alias SiteBySubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  ResourceInstanceParameters<Extension.Subscription>,
-  KeysOf<Site>
->;
 
 @armResourceOperations(#{ omitTags: true })
 interface SitesBySubscription {
   /** List Site resources by subscription ID */
-  list is SiteBySubscriptionOps.List<Site>;
-  get is SiteBySubscriptionOps.Read<Site>;
-  createOrUpdate is SiteBySubscriptionOps.CreateOrUpdateAsync<Site>;
-  update is SiteBySubscriptionOps.CustomPatchSync<Site, SiteUpdate>;
-  delete is SiteBySubscriptionOps.DeleteSync<Site>;
+  list is Extension.ListByTarget<Extension.Subscription, Site>;
+  get is Extension.Read<Extension.Subscription, Site>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<Extension.Subscription, Site>;
+  update is Extension.CustomPatchSync<Extension.Subscription, Site, SiteUpdate>;
+  delete is Extension.DeleteSync<Extension.Subscription, Site>;
 }
 
-alias SiteByServiceGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Management";
-
-    /**
-     * The name of the service group
-     */
-    @segment("serviceGroups")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
-    @key
-    @path
-    servicegroupName: string;
-  },
-  Extension.ExtensionProviderNamespace<Site>,
-  {
-    ...Extension.ExtensionProviderNamespace<Site>;
-    ...KeysOf<Site>;
-  }
+alias ServiceGroup = Extension.ExternalResource<
+  "Microsoft.Management",
+  "serviceGroups",
+  "servicegroupName",
+  NamePattern = "^[a-zA-Z0-9\\-_().]{1,90}$",
+  ParentType = "Tenant"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -83,21 +66,21 @@ interface SitesByServiceGroup {
   @doc("list Site at SG scope")
   @added(Versions.v2025_03_01_preview)
   @list
-  listByServiceGroup is SiteByServiceGroupOps.List<Site>;
+  listByServiceGroup is Extension.ListByTarget<ServiceGroup, Site>;
 
   @doc("Get Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  get is SiteByServiceGroupOps.Read<Site>;
+  get is Extension.Read<ServiceGroup, Site>;
 
   @doc("create or update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  createOrUpdate is SiteByServiceGroupOps.CreateOrUpdateAsync<Site>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<ServiceGroup, Site>;
 
   @doc("update Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  update is SiteByServiceGroupOps.CustomPatchSync<Site, SiteUpdate>;
+  update is Extension.CustomPatchSync<ServiceGroup, Site, SiteUpdate>;
 
   @doc("delete Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  delete is SiteByServiceGroupOps.DeleteSync<Site>;
+  delete is Extension.DeleteSync<ServiceGroup, Site>;
 }
