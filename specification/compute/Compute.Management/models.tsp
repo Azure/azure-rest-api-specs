@@ -1169,7 +1169,7 @@ model LifecycleHook {
   type?: string;
 
   /**
-   * Specifies the time duration an LCH event (that is sent to the customer) waits for a response from the customer. It should be in ISO 8601 format.
+   * Specifies the time duration a virtual machine scale set lifecycle hook event sent to the customer waits for a response from the customer. It should be in ISO 8601 format.
    */
   waitDuration?: duration;
 
@@ -1192,7 +1192,7 @@ model LifecycleHooksProfile {
 }
 
 /**
- * Approval status of a target resource in a VMScaleSet lifecycle hook event.
+ * Approval status of a target resource in a virtual machine scale set lifecycle hook event.
  */
 @added(Versions.v2025_11_01)
 union LifecycleHookActionState {
@@ -1206,7 +1206,7 @@ union LifecycleHookActionState {
 }
 
 /**
- * The states that a VMScaleSet lifecycle hook event can be in. This is not settable by the customer. It is set only by the VMSS platform.
+ * The states that a virtual machine scale set lifecycle hook event can be in. This is not settable by the customer. It is set only by the platform.
  */
 @added(Versions.v2025_11_01)
 union VMScaleSetLifecycleHookEventState {
@@ -1220,7 +1220,7 @@ union VMScaleSetLifecycleHookEventState {
 }
 
 /**
- * Define a single target ARM resource in a lifecycle hook event. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.
+ * Define a single target ARM resource in a virtual machine scale set lifecycle hook event. Currently, this can be a virtual machine scale set resource or an individual virtual machine resource within a VMScaleSet.
  */
 @added(Versions.v2025_11_01)
 model VMScaleSetLifecycleHookEventTargetResource {
@@ -1242,13 +1242,13 @@ model VMScaleSetLifecycleHookEventTargetResource {
 }
 
 /**
- * Defines the VMScaleSet lifecycle hook event properties.
+ * Defines the virtual machine scale set lifecycle hook event properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @added(Versions.v2025_11_01)
 model VMScaleSetLifecycleHookEventProperties {
   /**
-   * Defines the type or scenario for sending a lifecycle hook notification to the customer.
+   * Defines the type or scenario for sending a virtual machine scale set lifecycle hook event to the customer.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
   type?: string;
@@ -1259,22 +1259,22 @@ model VMScaleSetLifecycleHookEventProperties {
   waitUntil?: string;
 
   /**
-   * Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this time.
+   * Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the lifecycle hook event. The customer will not be allowed to delay the event to a timestamp beyond this.
    */
   maxWaitUntil?: string;
 
   /**
-   * The UTC timestamp in ISO 8601 format at which the platform creates the VMScaleSet lifecycle hook event entity.
+   * The UTC timestamp in ISO 8601 format at which the platform creates the virtual machine scale set lifecycle hook event entity.
    */
   timeCreated?: string;
 
   /**
-   * Specify the action that will be applied on the a target resource in the VMScaleSet lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil.
+   * Specify the action that will be applied on the a target resource in the virtual machine scale set lifecycle hook event if the platform does not get a response from the customer for the target resource before waitUntil.
    */
   defaultAction?: LifecycleHookAction;
 
   /**
-   * List of resources which are getting processed in the lifecycle hook event.
+   * List of target resources which are getting processed in the virtual machine scale set lifecycle hook event.
    */
   @identifiers(#["resource"])
   targetResources?: VMScaleSetLifecycleHookEventTargetResource[];
@@ -1286,7 +1286,7 @@ model VMScaleSetLifecycleHookEventProperties {
   additionalContext?: Record<string>;
 
   /**
-   * Specifies the state of the lifecycle hook event.
+   * Specifies the state of the virtual machine scale set lifecycle hook event.
    */
   state?: VMScaleSetLifecycleHookEventState;
 }

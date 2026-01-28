@@ -12,7 +12,7 @@ using TypeSpec.Http;
 namespace Microsoft.Compute;
 
 /**
- * Defines a VMScaleSet lifecycle hook event.
+ * Defines a virtual machine scale set lifecycle hook event.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
@@ -28,7 +28,7 @@ model VMScaleSetLifecycleHookEvent
 }
 
 /**
- * The List VMScaleSet lifecycle hook events operation response.
+ * The List virtual machine scale set lifecycle hook events operation response.
  */
 model VMScaleSetLifecycleHookEventListResult
   is Azure.Core.Page<VMScaleSetLifecycleHookEvent>;
@@ -36,21 +36,21 @@ model VMScaleSetLifecycleHookEventListResult
 @@identifiers(VMScaleSetLifecycleHookEventListResult.value, #["name", "id"]);
 
 @@doc(VMScaleSetLifecycleHookEventListResult.value,
-  "The list of VMScaleSet lifecycle hook events."
+  "The list of virtual machine scale set lifecycle hook events created for a virtual machine scale set resource."
 );
 @@doc(VMScaleSetLifecycleHookEventListResult.nextLink,
-  "The uri to fetch the next page of virtual machine scale set lifecycle hook events. Call ListNext() with this to fetch the next page of VMScaleSet lifecycle hook events."
+  "The uri to fetch the next page of virtual machine scale set lifecycle hook events. Call ListNext() with this to fetch the next page of virtual machine scale set lifecycle hook events."
 );
 
 @armResourceOperations
 interface VirtualMachineScaleSetLifeCycleHookEvents {
   /**
-   * Gets a VMScaleSet lifecycle hook event.
+   * Gets a virtual machine scale set lifecycle hook event.
    */
   get is ComputeResourceRead<VMScaleSetLifecycleHookEvent>;
 
   /**
-   * The operation to update an VMScaleSet lifecycle hook event.
+   * The operation to update a virtual machine scale set lifecycle hook event.
    */
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchSync<
@@ -60,7 +60,7 @@ interface VirtualMachineScaleSetLifeCycleHookEvents {
   >;
 
   /**
-   * Gets a list of all lifecycle hook in a VMScaleSet.
+   * Gets a list of virtual machine scale set lifecycle hook events created for a virtual machine scale set resource.
    */
   list is ComputeResourceListByParent<
     VMScaleSetLifecycleHookEvent,
@@ -69,8 +69,8 @@ interface VirtualMachineScaleSetLifeCycleHookEvents {
 }
 
 @@doc(VMScaleSetLifecycleHookEvent.properties,
-  "Defines the VMScaleSet lifecycle hook event properties."
+  "Defines the virtual machine scale set lifecycle hook event properties."
 );
 @@doc(VirtualMachineScaleSetLifeCycleHookEvents.update::parameters.properties,
-  "Parameters supplied to the Update VMScaleSet lifecycle hook event."
+  "Parameters supplied to the Update virtual machine scale set lifecycle hook event operation."
 );
