@@ -30,12 +30,13 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-nginx"
     flavor: "azure"
     experimental-extensible-enums: true
+    compatibility-lro: true
     package-details:
       name: "@azure/arm-nginx"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/nginx"
     emitter-output-dir: "{output-dir}/{service-dir}/armnginx"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnginx"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnginx/v3"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
