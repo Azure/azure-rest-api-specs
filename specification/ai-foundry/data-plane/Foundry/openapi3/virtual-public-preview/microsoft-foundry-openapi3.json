@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Microsoft Foundry",
-    "version": "v1"
+    "version": "virtual-public-preview"
   },
   "tags": [
     {
@@ -3059,6 +3059,339 @@
             }
           },
           "description": "Evaluation rule resource"
+        }
+      }
+    },
+    "/evaluations/runs": {
+      "get": {
+        "operationId": "Evaluations_list",
+        "description": "List evaluation runs",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEvaluation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluations/runs/{name}": {
+      "get": {
+        "operationId": "Evaluations_get",
+        "description": "Get an evaluation run by name.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Identifier of the evaluation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evaluation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Evaluations_delete",
+        "description": "Delete an evaluation run by name",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Identifier of the evaluation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluations/runs/{name}:cancel": {
+      "post": {
+        "operationId": "Evaluations_cancel",
+        "description": "Cancel an evaluation run by name",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Identifier of the evaluation.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluations/runs:run": {
+      "post": {
+        "operationId": "Evaluations_create",
+        "description": "Creates an evaluation run.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Evaluation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Evaluation"
+              }
+            }
+          },
+          "description": "Evaluation to be run"
+        }
+      }
+    },
+    "/evaluations/runs:runAgent": {
+      "post": {
+        "operationId": "Evaluations_createAgentEvaluation",
+        "description": "Creates an agent evaluation run.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentEvaluation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentEvaluationRequest"
+              }
+            }
+          },
+          "description": "Agent evaluation to be run"
         }
       }
     },
@@ -7392,6 +7725,14 @@
                         ],
                         "nullable": true
                       },
+                      "agent": {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/AgentReference"
+                          }
+                        ],
+                        "description": "(Deprecated) Use agent_reference instead.\nThe agent to use for generating the response."
+                      },
                       "agent_reference": {
                         "allOf": [
                           {
@@ -7576,6 +7917,14 @@
                           }
                         ],
                         "nullable": true
+                      },
+                      "agent": {
+                        "allOf": [
+                          {
+                            "$ref": "#/components/schemas/AgentReference"
+                          }
+                        ],
+                        "description": "(Deprecated) Use agent_reference instead.\nThe agent to use for generating the response."
                       },
                       "agent_reference": {
                         "allOf": [
@@ -8998,6 +9347,198 @@
           ]
         }
       },
+      "AgentEvaluation": {
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the agent evaluation run."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the agent evaluation. Options: Running, Completed, Failed."
+          },
+          "error": {
+            "type": "string",
+            "description": "The reason of the request failure for the long running process, if applicable."
+          },
+          "result": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgentEvaluationResult"
+            },
+            "description": "The agent evaluation result."
+          }
+        },
+        "description": "Evaluation response for agent evaluation run."
+      },
+      "AgentEvaluationRedactionConfiguration": {
+        "type": "object",
+        "properties": {
+          "redactScoreProperties": {
+            "type": "boolean",
+            "description": "Redact score properties. If not specified, the default is to redact in production."
+          }
+        },
+        "description": "The redaction configuration will allow the user to control what is redacted."
+      },
+      "AgentEvaluationRequest": {
+        "type": "object",
+        "required": [
+          "runId",
+          "evaluators",
+          "appInsightsConnectionString"
+        ],
+        "properties": {
+          "runId": {
+            "type": "string",
+            "description": "Identifier of the agent run."
+          },
+          "threadId": {
+            "type": "string",
+            "description": "Identifier of the agent thread. This field is mandatory currently, but it will be optional in the future."
+          },
+          "evaluators": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/EvaluatorConfiguration"
+            },
+            "description": "Evaluators to be used for the evaluation."
+          },
+          "samplingConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEvaluationSamplingConfiguration"
+              }
+            ],
+            "description": "Sampling configuration for the evaluation."
+          },
+          "redactionConfiguration": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEvaluationRedactionConfiguration"
+              }
+            ],
+            "description": "Redaction configuration for the evaluation."
+          },
+          "appInsightsConnectionString": {
+            "type": "string",
+            "description": "Pass the AppInsights connection string to the agent evaluation for the evaluation results and the errors logs."
+          }
+        },
+        "description": "Evaluation request for agent run."
+      },
+      "AgentEvaluationResult": {
+        "type": "object",
+        "required": [
+          "evaluator",
+          "evaluatorId",
+          "score",
+          "status",
+          "runId"
+        ],
+        "properties": {
+          "evaluator": {
+            "type": "string",
+            "description": "Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion."
+          },
+          "evaluatorId": {
+            "type": "string",
+            "description": "Identifier of the evaluator."
+          },
+          "score": {
+            "type": "number",
+            "format": "float",
+            "description": "Score of the given evaluator. No restriction on range."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the evaluator result. Options: Running, Completed, Failed, NotApplicable."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Reasoning for the evaluation result."
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the evaluator that was used to evaluate the agent's completion."
+          },
+          "threadId": {
+            "type": "string",
+            "description": "The unique identifier of the thread."
+          },
+          "runId": {
+            "type": "string",
+            "description": "The unique identifier of the run."
+          },
+          "error": {
+            "type": "string",
+            "description": "A string explaining why there was an error, if applicable."
+          },
+          "additionalDetails": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Additional properties relevant to the evaluator. These will differ between evaluators."
+          }
+        },
+        "description": "Result for the agent evaluation evaluator run."
+      },
+      "AgentEvaluationSamplingConfiguration": {
+        "type": "object",
+        "required": [
+          "name",
+          "samplingPercent",
+          "maxRequestRate"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the sampling strategy."
+          },
+          "samplingPercent": {
+            "type": "number",
+            "format": "float",
+            "description": "Percentage of sampling per hour (0-100)."
+          },
+          "maxRequestRate": {
+            "type": "number",
+            "format": "float",
+            "description": "Maximum request rate per hour (0 to 1000)."
+          }
+        },
+        "description": "Definition for sampling strategy."
+      },
+      "AgentId": {
+        "type": "object",
+        "required": [
+          "type",
+          "name",
+          "version"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent_id"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "The name of the agent."
+          },
+          "version": {
+            "type": "string",
+            "description": "The version identifier of the agent."
+          }
+        }
+      },
       "AgentKind": {
         "anyOf": [
           {
@@ -9299,6 +9840,32 @@
       "AssetId": {
         "type": "string",
         "description": "Identifier of a saved asset."
+      },
+      "AssistantMessage": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "assistant"
+            ],
+            "description": "Indicates this is an assistant message."
+          },
+          "content": {
+            "type": "string",
+            "description": "Response content generated by the assistant."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Message"
+          }
+        ],
+        "description": "A message generated by the assistant in response to previous messages."
       },
       "AttackStrategy": {
         "anyOf": [
@@ -10990,6 +11557,23 @@
         },
         "title": "CreateEvalRunRequest"
       },
+      "CreatedBy": {
+        "type": "object",
+        "properties": {
+          "agent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentId"
+              }
+            ],
+            "description": "The agent that created the item."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The response on which the item is created."
+          }
+        }
+      },
       "CredentialType": {
         "anyOf": [
           {
@@ -11456,6 +12040,32 @@
             ]
           }
         ]
+      },
+      "DeveloperMessage": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "developer"
+            ],
+            "description": "Indicates this is a developer message."
+          },
+          "content": {
+            "type": "string",
+            "description": "Content provided by a developer to guide model behavior in an evaluation context."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Message"
+          }
+        ],
+        "description": "A message authored by a developer to guide the model during evaluation."
       },
       "EntraIDCredentials": {
         "type": "object",
@@ -12127,6 +12737,72 @@
         },
         "description": "Summary statistics of a metric in an evaluation run."
       },
+      "Evaluation": {
+        "type": "object",
+        "required": [
+          "id",
+          "data",
+          "evaluators"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the evaluation.",
+            "readOnly": true
+          },
+          "data": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/InputData"
+              }
+            ],
+            "description": "Data for evaluation."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the evaluation. It is set by service and is read-only.",
+            "readOnly": true
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Evaluation's tags. Unlike properties, tags are fully mutable."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed."
+          },
+          "evaluators": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/EvaluatorConfiguration"
+            },
+            "description": "Evaluators to be used for the evaluation."
+          },
+          "target": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationTarget"
+              }
+            ],
+            "description": "Specifies the type and configuration of the entity used for this evaluation."
+          }
+        },
+        "description": "Evaluation Definition"
+      },
       "EvaluationComparisonInsightRequest": {
         "type": "object",
         "required": [
@@ -12456,6 +13132,43 @@
         ],
         "description": "Evaluation task for the schedule."
       },
+      "EvaluationTarget": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvaluationTargetType"
+              }
+            ],
+            "description": "Discriminator that defines the type of the evaluation target."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "modelResponseGeneration": "#/components/schemas/modelResponseGenerationTarget"
+          }
+        },
+        "description": "Abstract base model for defining evaluation targets."
+      },
+      "EvaluationTargetType": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "modelResponseGeneration"
+            ]
+          },
+          {
+            "type": "string"
+          }
+        ],
+        "description": "Allowed types of evaluation targets."
+      },
       "EvaluationTaxonomy": {
         "type": "object",
         "required": [
@@ -12661,6 +13374,31 @@
           }
         ],
         "description": "The category of the evaluator"
+      },
+      "EvaluatorConfiguration": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Identifier of the evaluator."
+          },
+          "initParams": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Initialization parameters of the evaluator."
+          },
+          "dataMapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Data parameters of the evaluator."
+          }
+        },
+        "description": "Evaluator Configuration"
       },
       "EvaluatorDefinition": {
         "type": "object",
@@ -13310,6 +14048,50 @@
         },
         "description": "Index resource Definition"
       },
+      "InputData": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of the data"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "dataset": "#/components/schemas/InputDataset"
+          }
+        },
+        "description": "Abstract data class."
+      },
+      "InputDataset": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "dataset"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "Evaluation input data"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/InputData"
+          }
+        ],
+        "description": "Dataset as source for evaluation."
+      },
       "Insight": {
         "type": "object",
         "required": [
@@ -13916,6 +14698,51 @@
         ],
         "description": "A tool for integrating memories into the agent."
       },
+      "MemorySearchTool": {
+        "type": "object",
+        "required": [
+          "type",
+          "memory_store_name",
+          "scope"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "memory_search"
+            ],
+            "description": "The type of the tool. Always `memory_search_preview`."
+          },
+          "memory_store_name": {
+            "type": "string",
+            "description": "The name of the memory store to use."
+          },
+          "scope": {
+            "type": "string",
+            "description": "The namespace used to group and isolate memories, such as a user ID.\nLimits which memories can be retrieved or updated.\nUse special variable `{{$userId}}` to scope memories to the current signed-in user."
+          },
+          "search_options": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/MemorySearchOptions"
+              }
+            ],
+            "description": "Options for searching the memory store."
+          },
+          "update_delay": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Time to wait before updating memories after inactivity (seconds). Default 300.",
+            "default": 300
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A tool for integrating memories into the agent."
+      },
       "MemorySearchToolCallItemParam": {
         "type": "object",
         "required": [
@@ -14394,6 +15221,41 @@
             "MemoryStores=v1"
           ]
         }
+      },
+      "Message": {
+        "type": "object",
+        "required": [
+          "role"
+        ],
+        "properties": {
+          "role": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "system",
+                  "assistant",
+                  "developer",
+                  "user"
+                ]
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "The role of the message author. Known values: 'system', 'assistant', 'developer', 'user'."
+          }
+        },
+        "discriminator": {
+          "propertyName": "role",
+          "mapping": {
+            "system": "#/components/schemas/SystemMessage",
+            "developer": "#/components/schemas/DeveloperMessage",
+            "user": "#/components/schemas/UserMessage",
+            "assistant": "#/components/schemas/AssistantMessage"
+          }
+        },
+        "description": "Abstract base model representing a single message in a conversation."
       },
       "MicrosoftFabricPreviewTool": {
         "type": "object",
@@ -24042,6 +24904,17 @@
           "type": {
             "$ref": "#/components/schemas/OpenAI.ItemResourceType"
           },
+          "created_by": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatedBy"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "The information about the creator of the item"
+          },
           "agent_reference": {
             "allOf": [
               {
@@ -27327,6 +28200,14 @@
               }
             ],
             "nullable": true
+          },
+          "agent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentId"
+              }
+            ],
+            "description": "(Deprecated) Use agent_reference instead.\nThe agent used for this response"
           },
           "agent_reference": {
             "type": "object",
@@ -30675,6 +31556,7 @@
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
+            "memory_search": "#/components/schemas/MemorySearchTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
@@ -31023,7 +31905,8 @@
               "azure_function",
               "bing_grounding",
               "capture_structured_outputs",
-              "openapi"
+              "openapi",
+              "memory_search"
             ]
           }
         ]
@@ -31786,6 +32669,27 @@
           }
         },
         "description": "Paged collection of Deployment items"
+      },
+      "PagedEvaluation": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Evaluation"
+            },
+            "description": "The Evaluation items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Evaluation items"
       },
       "PagedEvaluationRule": {
         "type": "object",
@@ -32922,6 +33826,32 @@
           }
         ]
       },
+      "SystemMessage": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "system"
+            ],
+            "description": "Indicates this is a system message."
+          },
+          "content": {
+            "type": "string",
+            "description": "Plain text instructions provided by the system to steer model behavior."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Message"
+          }
+        ],
+        "description": "A message authored by the system to guide model behavior."
+      },
       "Target": {
         "type": "object",
         "required": [
@@ -33358,6 +34288,32 @@
           }
         }
       },
+      "UserMessage": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user"
+            ],
+            "description": "Indicates this is a user message."
+          },
+          "content": {
+            "type": "string",
+            "description": "Input content or question provided by the end user."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Message"
+          }
+        ],
+        "description": "A message authored by the end user as input to the model."
+      },
       "UserProfileMemoryItem": {
         "type": "object",
         "required": [
@@ -33511,6 +34467,46 @@
       "integer": {
         "type": "integer",
         "format": "int64"
+      },
+      "modelResponseGenerationTarget": {
+        "type": "object",
+        "required": [
+          "type",
+          "baseMessages",
+          "modelDeploymentName",
+          "modelParams"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "modelResponseGeneration"
+            ],
+            "description": "The type of evaluation target. Always 'modelResponseGeneration'."
+          },
+          "baseMessages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            },
+            "description": "A list of messages comprising the conversation so far."
+          },
+          "modelDeploymentName": {
+            "type": "string",
+            "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
+          },
+          "modelParams": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Optional parameters passed to the model for evaluation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvaluationTarget"
+          }
+        ],
+        "description": "Evaluation target for generating responses using a given model and dataset."
       }
     },
     "securitySchemes": {
