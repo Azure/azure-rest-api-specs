@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -10,14 +11,15 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 // FIXME: ComputeResource has no properties property
 /**
  * Machine Learning compute object wrapped into ARM resource envelope.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/legacy-hierarchy-building-conflict" "Required for SDK backward compatibility"
 @parentResource(Workspace)
 model ComputeResource is Azure.ResourceManager.ProxyResource<Compute> {
   ...ResourceNameParameter<
@@ -30,22 +32,22 @@ model ComputeResource is Azure.ResourceManager.ProxyResource<Compute> {
   /**
    * Specifies the location of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   location?: string;
 
   /**
    * Contains resource tags defined as key/value pairs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   tags?: Record<string> | null;
 
   /**
    * The sku of the workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   sku?: Azure.ResourceManager.Foundations.Sku | null;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -61,7 +63,7 @@ interface ComputeResources {
   /**
    * Creates or updates compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation. If your intent is to create a new compute, do a GET first to verify that it does not exist yet.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "LRO final state pattern matches existing API behavior"
   @Azure.Core.useFinalStateVia("location")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ComputeResource,
@@ -72,7 +74,7 @@ interface ComputeResources {
   /**
    * Updates properties of a compute. This call will overwrite a compute if it exists. This is a nonrecoverable operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "LRO final state pattern matches existing API behavior"
   @Azure.Core.useFinalStateVia("location")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -85,7 +87,7 @@ interface ComputeResources {
   /**
    * Deletes specified Machine Learning compute.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   delete is ArmResourceDeleteWithoutOkAsync<
     ComputeResource,
     Parameters = {
@@ -115,7 +117,9 @@ interface ComputeResources {
 
   /**
    * Updates the custom services list. The list of custom services provided shall be overwritten
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   @action("customServices")
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
@@ -146,7 +150,9 @@ interface ComputeResources {
 
   /**
    * Update Data Mounts of a Machine Learning compute.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   @summary("Update Data Mounts of a Machine Learning compute.")
   updateDataMounts is ArmResourceActionSync<
     ComputeResource,
@@ -188,7 +194,9 @@ interface ComputeResources {
 
   /**
    * Updates the idle shutdown setting of a compute instance.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,
@@ -199,8 +207,10 @@ interface ComputeResources {
 
   /**
    * Returns supported virtual machine sizes for resize
+   * Preview-only operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
+  @removed(Versions.v2025_12_01)
   @operationId("Compute_getAllowedResizeSizes")
   @action("getAllowedVmSizesForResize")
   getAllowedResizeSizes is ArmResourceActionSync<
@@ -211,7 +221,9 @@ interface ComputeResources {
 
   /**
    * Updates the size of a Compute Instance.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   resize is ArmResourceActionAsyncBase<
     ComputeResource,
     ResizeSchema,
