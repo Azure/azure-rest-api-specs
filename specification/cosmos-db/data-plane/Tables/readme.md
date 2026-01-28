@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2019-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-02'
 input-file:
-- preview/2019-02-02/table.json
+- stable/2019-02-02/table.json
 ```
 
 ---
@@ -234,7 +234,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/2019-02-02/table.json
+  - $(this-folder)/stable/2019-02-02/table.json
 
 ```
 
