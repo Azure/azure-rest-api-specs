@@ -91,8 +91,8 @@ using Microsoft.Batch;
 );
 @@clientName(Certificate, "BatchAccountCertificate", "csharp");
 @@clientName(CertificateFormat, "BatchAccountCertificateFormat", "csharp");
-@@clientName(CertificateProvisioningState,
-  "BatchAccountCertificateProvisioningState",
+@@alternateType(CertificateProvisioningState,
+  BatchAccountCertificateProvisioningState,
   "csharp"
 );
 @@clientName(CertificateProperties.provisioningStateTransitionTime,
@@ -108,10 +108,6 @@ using Microsoft.Batch;
   "csharp"
 );
 @@clientName(CertificateVisibility, "BatchCertificateVisibility", "csharp");
-@@clientName(PoolProvisioningState,
-  "BatchAccountPoolProvisioningState",
-  "csharp"
-);
 @@clientName(DeploymentConfiguration, "BatchDeploymentConfiguration", "csharp");
 @@clientName(DeploymentConfiguration.virtualMachineConfiguration,
   "vmConfiguration",
@@ -133,6 +129,7 @@ using Microsoft.Batch;
 @@clientName(ContainerRegistry.identityReference, "Identity", "csharp");
 @@clientName(NetworkProfile, "BatchNetworkProfile", "csharp");
 @@clientName(EndpointAccessProfile, "BatchEndpointAccessProfile", "csharp");
+@@clientName(EndpointAccessProfile.ipRules, "IPRules", "csharp");
 @@clientName(EndpointAccessDefaultAction,
   "BatchEndpointAccessDefaultAction",
   "csharp"
@@ -165,6 +162,8 @@ using Microsoft.Batch;
   "BatchFileShareConfiguration",
   "csharp"
 );
+@@clientName(AzureFileShareConfiguration.azureFileUrl, "FileUri", "csharp");
+@@alternateType(AzureFileShareConfiguration.azureFileUrl, url, "csharp");
 @@alternateType(ComputeNodeIdentityReference.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -197,6 +196,7 @@ using Microsoft.Batch;
 );
 @@alternateType(KeyVaultReference.url, url, "csharp");
 @@clientName(AuthenticationMode, "BatchAuthenticationMode", "csharp");
+@@clientName(AuthenticationMode.AAD, "Aad", "csharp");
 @@clientName(EncryptionProperties,
   "BatchAccountEncryptionConfiguration",
   "csharp"
@@ -259,8 +259,8 @@ using Microsoft.Batch;
   "BatchContainerWorkingDirectory",
   "csharp"
 );
-@@clientName(DiffDiskPlacement, "BatchDiffDiskPlacement", "csharp");
 @@clientName(DiskEncryptionTarget, "BatchDiskEncryptionTarget", "csharp");
+@@clientName(DiskEncryptionTarget.OsDisk, "OSDisk", "csharp");
 @@clientName(InboundEndpointProtocol, "BatchInboundEndpointProtocol", "csharp");
 @@clientName(InboundEndpointProtocol.TCP, "Tcp", "csharp");
 @@clientName(InboundEndpointProtocol.UDP, "Udp", "csharp");
@@ -269,7 +269,6 @@ using Microsoft.Batch;
   "BatchIPAddressProvisioningType",
   "csharp"
 );
-// @@clientName(IPRuleAction, "BatchIPRuleAction", "csharp");
 @@alternateType(IPRuleAction, BatchIPRuleAction, "csharp");
 @@clientName(NetworkConfiguration, "BatchNetworkConfiguration", "csharp");
 @@clientName(NetworkConfiguration.dynamicVnetAssignmentScope,
@@ -316,7 +315,6 @@ using Microsoft.Batch;
 @@alternateType(ImageReference.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(CertificateCreateOrUpdateProperties.data, unknown, "csharp");
 @@alternateType(KeyVaultProperties.keyIdentifier, url, "csharp");
-@@clientName(AzureFileShareConfiguration.azureFileUrl, "url", "csharp");
 @@clientName(MountConfiguration.azureBlobFileSystemConfiguration,
   "BlobFileSystemConfiguration",
   "csharp"
@@ -353,6 +351,11 @@ using Microsoft.Batch;
 @@clientName(StorageAccountType.StandardSSD_LRS, "StandardSsdLrs", "csharp");
 @@clientName(StorageAccountType, "BatchStorageAccountType", "csharp");
 @@alternateType(ProvisioningState, BatchProvisioningState, "csharp");
+@@alternateType(PoolProvisioningState,
+  BatchAccountPoolProvisioningState,
+  "csharp"
+);
+@@alternateType(DiffDiskPlacement, BatchDiffDiskPlacement, "csharp");
 @@alternateType(PrivateEndpointConnectionProvisioningState,
   BatchPrivateEndpointConnectionProvisioningState,
   "csharp"
@@ -407,6 +410,14 @@ using Microsoft.Batch;
   "BatchAccountCreateOrUpdateContent",
   "csharp"
 );
+@@alternateType(BatchAccountCreateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(BatchAccountCreateParameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@clientName(CertificateCreateOrUpdateParameters,
   "BatchAccountCertificateCreateOrUpdateContent",
   "csharp"
@@ -416,7 +427,7 @@ using Microsoft.Batch;
   "csharp"
 );
 @@clientName(BatchAccount, "BatchAccountRenamed", "csharp");
-@@alternateType(BatchAccountCreateParameters.identity,
+@@alternateType(BatchAccountUpdateParameters.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -429,6 +440,7 @@ using Microsoft.Batch;
   "csharp"
 );
 @@alternateType(BatchAccount, BatchAccountData, "csharp");
+@@alternateType(AutoScaleRun.error, ResponseError, "csharp");
 
 // added to solve the problem that the c# resource class can inherit the `resource data` class
 namespace Microsoft.Batch {
@@ -547,5 +559,64 @@ namespace Microsoft.Batch {
      * Allow access for the matched client IP address.
      */
     Allow: "Allow",
+  }
+
+  /**
+   * The location where the OS disk should be placed.
+   */
+  union BatchDiffDiskPlacement {
+    string,
+
+    /**
+     * The OS disk will be placed on the cache disk of the VM.
+     */
+    CacheDisk: "CacheDisk",
+  }
+
+  /**
+   * The current state of the pool.
+   */
+  union BatchAccountPoolProvisioningState {
+    string,
+
+    /**
+     * The pool is available to run tasks subject to the availability of compute nodes.
+     */
+    Succeeded: "Succeeded",
+
+    /**
+     * The user has requested that the pool be deleted, but the delete operation has not yet completed.
+     */
+    Deleting: "Deleting",
+  }
+
+  union BatchAccountCertificateProvisioningState {
+    string,
+
+    /**
+     * The certificate is available for use in pools.
+     */
+    Succeeded: "Succeeded",
+
+    /**
+     * The user has requested that the certificate be deleted, but the delete operation has not yet completed. You may not reference the certificate when creating or updating pools.
+     */
+    Deleting: "Deleting",
+
+    /**
+     * The user requested that the certificate be deleted, but there are pools that still have references to the certificate, or it is still installed on one or more compute nodes. (The latter can occur if the certificate has been removed from the pool, but the node has not yet restarted. Nodes refresh their certificates only when they restart.) You may use the cancel certificate delete operation to cancel the delete, or the delete certificate operation to retry the delete.
+     */
+    Failed: "Failed",
+  }
+
+  /**
+   * An error that occurred when autoscaling a pool.
+   */
+  model ResponseError {
+    ...AutoScaleRunError;
+
+    /** The error target. */
+    @visibility(Lifecycle.Read)
+    target?: string;
   }
 }
