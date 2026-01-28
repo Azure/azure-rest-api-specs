@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "RG01",
+    "vmScaleSetName": "VMSS01",
+    "lifeCycleHookEventName": "2e2e3046-f85f-4966-8fd2-5fd7bf6ea717",
+    "api-version": "2025-11-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "2167b012-c9f9-4b04-83b2-0ff304e7d51d",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/lifecycleHookEvents/2e2e3046-f85f-4966-8fd2-5fd7bf6ea717",
+        "properties": {
+          "type": "UpgradeAutoOSRollingBatchStarting",
+          "waitUntil": "2025-05-08T09:17:55.6844555+00:00",
+          "maxWaitUntil": "2025-05-08T12:17:55.6844555+00:00",
+          "timeCreated": "2025-05-08T06:17:55.6844555+00:00",
+          "defaultAction": "Approve",
+          "targetResources": [
+            {
+              "resource": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/virtualMachines/0"
+              },
+              "actionState": "Approved"
+            },
+            {
+              "resource": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/virtualMachines/1"
+              },
+              "actionState": "Approved"
+            }
+          ],
+          "state": "Completed"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Get",
+  "title": "Get a virtual machine scale set lifecycle hook event."
+}
