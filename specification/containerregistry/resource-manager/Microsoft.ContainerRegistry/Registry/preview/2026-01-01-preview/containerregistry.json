@@ -1340,14 +1340,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}/resync": {
       "post": {
+        "operationId": "ConnectedRegistries_Resync",
         "tags": [
           "ConnectedRegistries"
         ],
         "description": "Resync the connected registry instance.",
-        "operationId": "ConnectedRegistries_Resync",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1381,16 +1378,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ConnectedRegistry"
-            }
-          },
-          "204": {
-            "description": "The connected registry does not exist, or the resync request resulted in no action. The request was processed successfully and no response body is returned."
+            "description": "Azure operation completed successfully."
           },
           "default": {
-            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "description": "An unexpected error response.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
