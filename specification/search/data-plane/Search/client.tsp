@@ -362,6 +362,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(WebKnowledgeSource, Usage.input);
 @@access(RemoteSharePointKnowledgeSource, Access.public);
 @@usage(RemoteSharePointKnowledgeSource, Usage.input);
+@@usage(SearchRequest, Usage.input | Usage.output, "java");
 
 @@access(SearchClient.Documents.searchGet, Access.internal);
 @@access(SearchClient.Documents.searchPost, Access.internal);
