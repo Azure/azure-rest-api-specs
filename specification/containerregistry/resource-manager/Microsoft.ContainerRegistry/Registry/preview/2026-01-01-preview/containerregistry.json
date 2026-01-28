@@ -1378,7 +1378,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully."
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectedRegistry"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -5895,7 +5898,7 @@
         },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
-          "description": "The identity of the cache rule."
+          "description": "The identity of the import pipeline."
         }
       },
       "allOf": [

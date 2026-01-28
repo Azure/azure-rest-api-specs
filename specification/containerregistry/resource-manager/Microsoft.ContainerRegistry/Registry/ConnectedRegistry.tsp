@@ -96,9 +96,7 @@ interface ConnectedRegistries {
   resync is ArmResourceActionSync<
     ConnectedRegistry,
     void,
-    {
-      @body body: void;
-    }
+    Response = ArmResponse<ConnectedRegistry>
   >;
 }
 
