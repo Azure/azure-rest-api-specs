@@ -1197,7 +1197,7 @@ model NginxDeploymentWafPolicyAnalysisCreateRequest {
   content?: bytes;
 
   /**
-   * The file path of the policy
+   * The absolute file path of the policy as in the virtual machine
    */
   filepath?: string;
 }
@@ -1220,7 +1220,7 @@ model NginxDeploymentWafPolicyAnalysisData {
 @added(Versions.v2025_11_01)
 model NginxDeploymentWafPolicyAnalysisResponse {
   /**
-   * The status of the analysis
+   * The status of the analysis. The possible values can be arbitrary
    */
   status?: string;
 
