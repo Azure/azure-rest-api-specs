@@ -18,4 +18,4 @@ using Microsoft.Resources.DeploymentStacks;
 // Java SDK: Mitigate breaks from TypeSpec migration
 @@alternateType(DeploymentStackProperties.template, unknown, "java");
 @@alternateType(DeploymentStackProperties.outputs, unknown, "java");
-@@alternateType(DeploymentParameter.value, unknown, "java");
+@@alternateType(DeploymentStackTemplateDefinition.template, unknown, "java");
