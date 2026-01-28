@@ -59,7 +59,7 @@ input-file:
   - Microsoft.Insights/stable/2024-02-01/metrics_API.json
   - Microsoft.Insights/preview/2023-01-01-preview/activityLogAlerts_API.json
   - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
-  - Microsoft.Insights/preview/2025-01-01-preview/scheduledQueryRule_API.json
+  - Microsoft.Insights/stable/2026-03-01/scheduledQueryRule_API.json
   - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
   - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
   - Microsoft.Insights/stable/2021-10-01/actionGroups_NetworkSecurityPerimeter_API.json
@@ -76,6 +76,16 @@ suppressions:
     where:
      - $.definitions["Azure.Core.uuid"].format
 
+```
+
+### Tag: package-2026-03-01
+
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01'
+input-file:
+  - Microsoft.Insights/preview/2024-10-01-preview/actionGroups_API.json
+  - Microsoft.Insights/stable/2026-03-01/scheduledQueryRule_API.json
 ```
 
 ### Tag: package-2025-01-01-preview
