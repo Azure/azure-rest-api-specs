@@ -48,7 +48,7 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
   @added(Versions.v2026_02_01_preview)
   @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
-  sku?: Sku;
+  sku?: Azure.ResourceManager.Sku;
 }
 
 /** Patch request body for DeidService */
@@ -63,7 +63,7 @@ model DeidUpdate {
 
   /** The SKU (Stock Keeping Unit) assigned to this resource. */
   @added(Versions.v2026_02_01_preview)
-  sku?: SkuUpdate;
+  sku?: Azure.ResourceManager.Sku;
 }
 
 model DeidPropertiesUpdate
@@ -72,11 +72,6 @@ model DeidPropertiesUpdate
 #suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
 model ManagedServiceIdentityUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.Foundations.ManagedIdentityProperties>>;
-
-#suppress "deprecated" "Workaround for Typespec bug https://github.com/Azure/typespec-azure/issues/383"
-@added(Versions.v2026_02_01_preview)
-@doc("The SKU (Stock Keeping Unit) update model for PATCH operations.")
-model SkuUpdate is OptionalProperties<UpdateableProperties<Sku>>;
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
 @Azure.Core.lroStatus
@@ -107,35 +102,6 @@ enum PublicNetworkAccess {
 
   @doc("The public network access is disabled")
   Disabled,
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-enum" "Suppress the warning for using enum keyword."
-@added(Versions.v2026_02_01_preview)
-@doc("The tier of the SKU.")
-union SkuTier {
-  string,
-
-  @doc("Free tier.")
-  Free: "Free",
-
-  @doc("Basic tier.")
-  Basic: "Basic",
-
-  @doc("Standard tier.")
-  Standard: "Standard",
-}
-
-@added(Versions.v2026_02_01_preview)
-@doc("The SKU (Stock Keeping Unit) assigned to this resource.")
-model Sku {
-  @doc("The name of the SKU.")
-  name: string;
-
-  @doc("The tier of the SKU.")
-  tier?: SkuTier;
-
-  @doc("The capacity of the SKU.")
-  capacity?: int32;
 }
 
 @doc("Details of the HealthDataAIServices DeidService.")
