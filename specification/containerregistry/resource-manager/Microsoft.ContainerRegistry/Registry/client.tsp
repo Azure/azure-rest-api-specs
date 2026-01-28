@@ -20,7 +20,7 @@ using Microsoft.ContainerRegistry;
 
 @@alternateType(RegistryNameCheckRequest.type,
   "Microsoft.ContainerRegistry/registries",
-  "java"
+  "java,go"
 );
 
 @@usage(Webhook, Usage.input | Usage.output, "java");
