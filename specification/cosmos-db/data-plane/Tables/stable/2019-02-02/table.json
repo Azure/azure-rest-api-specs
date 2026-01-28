@@ -113,7 +113,7 @@
             "minimum": 0
           },
           {
-            "name": "format",
+            "name": "$format",
             "in": "query",
             "description": "Specifies the metadata format for the response.",
             "required": false,
@@ -165,7 +165,7 @@
               "return-content"
             ],
             "x-ms-enum": {
-              "name": "EchoFormat",
+              "name": "ResponseFormat",
               "modelAsString": true,
               "values": [
                 {
@@ -212,27 +212,7 @@
               },
               "Preference-Applied": {
                 "type": "string",
-                "description": "Whether the content echo was requested and applied.",
-                "enum": [
-                  "return-no-content",
-                  "return-content"
-                ],
-                "x-ms-enum": {
-                  "name": "EchoFormat",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "NoEcho",
-                      "value": "return-no-content",
-                      "description": "Do not echo the created content."
-                    },
-                    {
-                      "name": "Echo",
-                      "value": "return-content",
-                      "description": "Echo the created content."
-                    }
-                  ]
-                }
+                "description": "Whether the content echo was requested and applied."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -264,27 +244,7 @@
               },
               "Preference-Applied": {
                 "type": "string",
-                "description": "Whether the content echo was requested and applied.",
-                "enum": [
-                  "return-no-content",
-                  "return-content"
-                ],
-                "x-ms-enum": {
-                  "name": "EchoFormat",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "NoEcho",
-                      "value": "return-no-content",
-                      "description": "Do not echo the created content."
-                    },
-                    {
-                      "name": "Echo",
-                      "value": "return-content",
-                      "description": "Echo the created content."
-                    }
-                  ]
-                }
+                "description": "Whether the content echo was requested and applied."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -327,6 +287,15 @@
         ],
         "parameters": [
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "DataServiceVersion",
             "in": "header",
             "description": "DataServiceVersion header",
@@ -365,7 +334,7 @@
             "minimum": 0
           },
           {
-            "name": "format",
+            "name": "$format",
             "in": "query",
             "description": "Specifies the metadata format for the response.",
             "required": false,
@@ -398,14 +367,14 @@
             }
           },
           {
-            "name": "select",
+            "name": "$select",
             "in": "query",
             "description": "Select expression using OData notation. Limits the columns on each record to just those requested.",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filter",
+            "name": "$filter",
             "in": "query",
             "description": "OData filter expression.",
             "required": false,
@@ -424,15 +393,6 @@
             "description": "The row key of the entity.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -493,6 +453,15 @@
         ],
         "parameters": [
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "DataServiceVersion",
             "in": "header",
             "description": "DataServiceVersion header",
@@ -551,15 +520,6 @@
             "description": "The row key of the entity.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "entityProperties",
@@ -626,6 +586,15 @@
         ],
         "parameters": [
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "DataServiceVersion",
             "in": "header",
             "description": "DataServiceVersion header",
@@ -684,15 +653,6 @@
             "description": "The row key of the entity.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "entityProperties",
@@ -756,6 +716,15 @@
         ],
         "parameters": [
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "DataServiceVersion",
             "in": "header",
             "description": "DataServiceVersion header",
@@ -814,15 +783,6 @@
             "description": "The row key of the entity.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -875,6 +835,15 @@
         ],
         "parameters": [
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "DataServiceVersion",
             "in": "header",
             "description": "DataServiceVersion header",
@@ -904,7 +873,7 @@
             "type": "string"
           },
           {
-            "name": "format",
+            "name": "$format",
             "in": "query",
             "description": "Specifies the metadata format for the response.",
             "required": false,
@@ -937,7 +906,7 @@
             }
           },
           {
-            "name": "top",
+            "name": "$top",
             "in": "query",
             "description": "Specifies the maximum number of records to return.",
             "required": false,
@@ -945,14 +914,14 @@
             "format": "int32"
           },
           {
-            "name": "select",
+            "name": "$select",
             "in": "query",
             "description": "Select expression using OData notation. Limits the columns on each record to just those requested.",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filter",
+            "name": "$filter",
             "in": "query",
             "description": "OData filter expression.",
             "required": false,
@@ -974,15 +943,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "nextPartitionKey"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -1126,6 +1086,15 @@
         ],
         "parameters": [
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "DataServiceVersion",
             "in": "header",
             "description": "DataServiceVersion header",
@@ -1148,7 +1117,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "format",
+            "name": "$format",
             "in": "query",
             "description": "Specifies the metadata format for the response.",
             "required": false,
@@ -1181,7 +1150,7 @@
             }
           },
           {
-            "name": "top",
+            "name": "$top",
             "in": "query",
             "description": "Specifies the maximum number of records to return.",
             "required": false,
@@ -1189,27 +1158,18 @@
             "format": "int32"
           },
           {
-            "name": "select",
+            "name": "$select",
             "in": "query",
             "description": "Select expression using OData notation. Limits the columns on each record to just those requested.",
             "required": false,
             "type": "string"
           },
           {
-            "name": "filter",
+            "name": "$filter",
             "in": "query",
             "description": "OData filter expression.",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
           },
           {
             "name": "NextTableName",
@@ -1218,15 +1178,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "nextTableName"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -1287,6 +1238,15 @@
         ],
         "parameters": [
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "DataServiceVersion",
             "in": "header",
             "description": "DataServiceVersion header",
@@ -1309,7 +1269,7 @@
             "x-ms-client-name": "apiVersion"
           },
           {
-            "name": "format",
+            "name": "$format",
             "in": "query",
             "description": "Specifies the metadata format for the response.",
             "required": false,
@@ -1342,15 +1302,6 @@
             }
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
             "name": "Prefer",
             "in": "header",
             "description": "Specifies whether the response should include the created table in the\npayload. Possible values are return-no-content and return-content.",
@@ -1361,7 +1312,7 @@
               "return-content"
             ],
             "x-ms-enum": {
-              "name": "EchoFormat",
+              "name": "ResponseFormat",
               "modelAsString": true,
               "values": [
                 {
@@ -1392,7 +1343,7 @@
           "201": {
             "description": "Create table successful response with content",
             "schema": {
-              "$ref": "#/definitions/TableProperties"
+              "$ref": "#/definitions/TableResponse"
             },
             "headers": {
               "Date": {
@@ -1402,27 +1353,7 @@
               },
               "Preference-Applied": {
                 "type": "string",
-                "description": "Whether the content echo was requested and applied.",
-                "enum": [
-                  "return-no-content",
-                  "return-content"
-                ],
-                "x-ms-enum": {
-                  "name": "EchoFormat",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "NoEcho",
-                      "value": "return-no-content",
-                      "description": "Do not echo the created content."
-                    },
-                    {
-                      "name": "Echo",
-                      "value": "return-content",
-                      "description": "Echo the created content."
-                    }
-                  ]
-                }
+                "description": "Whether the content echo was requested and applied."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -1450,27 +1381,7 @@
               },
               "Preference-Applied": {
                 "type": "string",
-                "description": "Whether the content echo was requested and applied.",
-                "enum": [
-                  "return-no-content",
-                  "return-content"
-                ],
-                "x-ms-enum": {
-                  "name": "EchoFormat",
-                  "modelAsString": true,
-                  "values": [
-                    {
-                      "name": "NoEcho",
-                      "value": "return-no-content",
-                      "description": "Do not echo the created content."
-                    },
-                    {
-                      "name": "Echo",
-                      "value": "return-content",
-                      "description": "Echo the created content."
-                    }
-                  ]
-                }
+                "description": "Whether the content echo was requested and applied."
               },
               "x-ms-client-request-id": {
                 "type": "string",
@@ -1512,33 +1423,12 @@
         ],
         "parameters": [
           {
-            "name": "DataServiceVersion",
-            "in": "header",
-            "description": "DataServiceVersion header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "3.0"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "dataServiceVersion"
-          },
-          {
             "name": "x-ms-version",
             "in": "header",
             "description": "The API version.",
             "required": true,
             "type": "string",
             "x-ms-client-name": "apiVersion"
-          },
-          {
-            "name": "table",
-            "in": "path",
-            "description": "The name of the table.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "x-ms-client-request-id",
@@ -1548,6 +1438,13 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "table",
+            "in": "path",
+            "description": "The name of the table.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1783,6 +1680,15 @@
         ],
         "parameters": [
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "DataServiceVersion",
             "in": "header",
             "description": "DataServiceVersion header",
@@ -1833,15 +1739,6 @@
             "description": "The row key of the entity.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "entityProperties",
@@ -1910,6 +1807,15 @@
         ],
         "parameters": [
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "DataServiceVersion",
             "in": "header",
             "description": "DataServiceVersion header",
@@ -1960,15 +1866,6 @@
             "description": "The row key of the entity.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "entityProperties",
@@ -2349,7 +2246,7 @@
       "description": "Create table successful response with content",
       "properties": {
         "tableProperties": {
-          "$ref": "#/definitions/TableProperties",
+          "$ref": "#/definitions/TableResponse",
           "description": "The created table properties."
         }
       },
@@ -2360,30 +2257,6 @@
     "CreateTableResponse": {
       "type": "object",
       "description": "Create table response with no content"
-    },
-    "EchoFormat": {
-      "type": "string",
-      "description": "Specifies whether the response should echo the created content.",
-      "enum": [
-        "return-no-content",
-        "return-content"
-      ],
-      "x-ms-enum": {
-        "name": "EchoFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NoEcho",
-            "value": "return-no-content",
-            "description": "Do not echo the created content."
-          },
-          {
-            "name": "Echo",
-            "value": "return-content",
-            "description": "Echo the created content."
-          }
-        ]
-      }
     },
     "GeoReplication": {
       "type": "object",
@@ -2573,6 +2446,30 @@
         "enabled"
       ]
     },
+    "ResponseFormat": {
+      "type": "string",
+      "description": "Specifies whether the response should echo the created content.",
+      "enum": [
+        "return-no-content",
+        "return-content"
+      ],
+      "x-ms-enum": {
+        "name": "ResponseFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoEcho",
+            "value": "return-no-content",
+            "description": "Do not echo the created content."
+          },
+          {
+            "name": "Echo",
+            "value": "return-content",
+            "description": "Echo the created content."
+          }
+        ]
+      }
+    },
     "RetentionPolicy": {
       "type": "object",
       "description": "The retention policy.",
@@ -2701,17 +2598,6 @@
           "x-ms-mutability": [
             "read"
           ]
-        },
-        "odata.metadata": {
-          "type": "string",
-          "description": "The metadata response of the table.",
-          "xml": {
-            "name": "odataMetadata"
-          },
-          "x-ms-client-name": "metadata",
-          "x-ms-mutability": [
-            "read"
-          ]
         }
       }
     },
@@ -2730,6 +2616,64 @@
       },
       "xml": {
         "name": "TableProperties"
+      }
+    },
+    "TableResponse": {
+      "type": "object",
+      "description": "The table properties as returned in an echo response.",
+      "properties": {
+        "TableName": {
+          "type": "string",
+          "description": "The name of the table.",
+          "xml": {
+            "name": "tableName"
+          },
+          "x-ms-client-name": "tableName"
+        },
+        "odata.type": {
+          "type": "string",
+          "description": "The odata type of the table.",
+          "xml": {
+            "name": "odataType"
+          },
+          "x-ms-client-name": "type",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "odata.id": {
+          "type": "string",
+          "description": "The id of the table.",
+          "xml": {
+            "name": "odataId"
+          },
+          "x-ms-client-name": "id",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "odata.editLink": {
+          "type": "string",
+          "description": "The edit link of the table.",
+          "xml": {
+            "name": "odataEditLink"
+          },
+          "x-ms-client-name": "editLink",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "odata.metadata": {
+          "type": "string",
+          "description": "The metadata response of the table.",
+          "xml": {
+            "name": "odataMetadata"
+          },
+          "x-ms-client-name": "metadata",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
       }
     },
     "TableServiceProperties": {

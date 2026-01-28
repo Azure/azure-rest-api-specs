@@ -25,7 +25,7 @@ union MetadataFormat {
 }
 
 /** Specifies whether the response should echo the created content. */
-union EchoFormat {
+union ResponseFormat {
   string,
 
   /** Do not echo the created content. */
@@ -68,28 +68,28 @@ alias TimeoutParameter = {
 alias FormatParameter = {
   @doc("Specifies the metadata format for the response.")
   @query
-  format?: MetadataFormat;
+  $format?: MetadataFormat;
 };
 
 /** The top parameter */
 alias TopParameter = {
   @doc("Specifies the maximum number of records to return.")
   @query
-  top?: int32;
+  $top?: int32;
 };
 
 /** The select parameter */
 alias SelectParameter = {
   @doc("Select expression using OData notation. Limits the columns on each record to just those requested.")
   @query
-  select?: string;
+  $select?: string;
 };
 
 /** The filter parameter */
 alias FilterParameter = {
   @doc("OData filter expression.")
   @query
-  filter?: string;
+  $filter?: string;
 };
 
 /** Client request ID header */
@@ -178,15 +178,6 @@ model TableProperties {
   @clientName("editLink")
   @access(Access.internal)
   odataEditLink?: string;
-
-  /**
-   * The metadata response of the table.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Query)
-  @encodedName("application/json", "odata.metadata")
-  @clientName("metadata")
-  @access(Access.internal)
-  odataMetadata?: string;
 }
 
 /**
@@ -420,6 +411,20 @@ model TablesError {
 
 /// Conditional responses
 
+/** The table properties as returned in an echo response. */
+model TableResponse {
+  ...TableProperties;
+
+  /**
+   * The metadata response of the table.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Query)
+  @encodedName("application/json", "odata.metadata")
+  @clientName("metadata")
+  @access(Access.internal)
+  odataMetadata?: string;
+}
+
 /** Create table successful response with content */
 model CreateTableEchoResponse {
   /** 201 Created. Includes echo response */
@@ -431,7 +436,7 @@ model CreateTableEchoResponse {
 
   /** Whether the content echo was requested and applied. */
   @header("Preference-Applied")
-  contentEcho?: EchoFormat;
+  contentEcho?: string;
 
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
@@ -440,7 +445,7 @@ model CreateTableEchoResponse {
 
   /** The created table properties. */
   @body
-  tableProperties: TableProperties;
+  tableProperties: TableResponse;
 }
 
 /** Create table response with no content */
@@ -450,7 +455,7 @@ model CreateTableResponse {
 
   /** Whether the content echo was requested and applied. */
   @header("Preference-Applied")
-  contentEcho?: EchoFormat;
+  contentEcho?: string;
 
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
@@ -469,7 +474,7 @@ model InsertEntityEchoResponse {
 
   /** Whether the content echo was requested and applied. */
   @header("Preference-Applied")
-  contentEcho?: EchoFormat;
+  contentEcho?: string;
 
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;
@@ -490,7 +495,7 @@ model InsertEntityResponse {
 
   /** Whether the content echo was requested and applied. */
   @header("Preference-Applied")
-  contentEcho?: EchoFormat;
+  contentEcho?: string;
 
   ...ApiVersionHeader;
   ...RequestIdResponseHeader;

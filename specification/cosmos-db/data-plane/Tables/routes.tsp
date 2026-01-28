@@ -35,18 +35,19 @@ namespace Data.Tables {
     TParams extends TypeSpec.Reflection.Model,
     TResponse extends TypeSpec.Reflection.Model
   >(
-    /** Content-Type header */
-    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-    @header("Content-Type")
-    contentType: "application/json;odata=nometadata",
+    ...ClientRequestIdHeader,
 
     /** DataServiceVersion header */
     @header("DataServiceVersion")
     dataServiceVersion: "3.0",
 
+    /** Content-Type header */
+    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+    @header("Content-Type")
+    contentType: "application/json;odata=nometadata",
+
     ...ApiVersionHeader,
     ...TParams,
-    ...ClientRequestIdHeader,
   ): (TResponse & {
     /** Content-Type header */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
@@ -127,7 +128,6 @@ namespace Data.Tables {
         ...TopParameter;
         ...SelectParameter;
         ...FilterParameter;
-        ...TimeoutParameter;
 
         /**
          * A table query continuation token from a previous call.
@@ -202,24 +202,26 @@ namespace Data.Tables {
       @header("Content-Type")
       contentType: "application/json;odata=nometadata",
 
+      ...ClientRequestIdHeader,
+
       /** DataServiceVersion header */
       @header("DataServiceVersion")
       dataServiceVersion: "3.0",
 
       ...ApiVersionHeader,
+
+      /** The table properties to create. */
+      @body
+      tableProperties: TableProperties,
+
       ...FormatParameter,
-      ...ClientRequestIdHeader,
 
       /**
        * Specifies whether the response should include the created table in the
        * payload. Possible values are return-no-content and return-content.
        */
       @header("Prefer")
-      echoTable?: EchoFormat,
-
-      /** The table properties to create. */
-      @body
-      tableProperties: TableProperties,
+      echoTable?: ResponseFormat,
     ): CreateTableEchoResponse | CreateTableResponse | TablesError;
 
     /**
@@ -228,14 +230,17 @@ namespace Data.Tables {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
     @delete
     @route("/Tables('{table}')")
-    op delete is TablesJsonOperation<
-      {
-        ...TablePathParameter;
-      },
-      {
-        @statusCode statusCode: 204;
-      }
-    >;
+    op delete(
+      ...ApiVersionHeader,
+      ...ClientRequestIdHeader,
+      ...TablePathParameter,
+    ): {
+      @statusCode statusCode: 204;
+      ...ApiVersionHeader;
+      ...RequestIdResponseHeader;
+      ...ClientRequestIdHeader;
+      ...DateResponseHeader;
+    } | TablesError;
 
     /**
      * Insert entity in a table.
@@ -263,7 +268,7 @@ namespace Data.Tables {
        * payload. Possible values are return-no-content and return-content.
        */
       @header("Prefer")
-      echoEntity?: EchoFormat,
+      echoEntity?: ResponseFormat,
 
       /** The entity properties to insert. */
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Union types are not supported"
