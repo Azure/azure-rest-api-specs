@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "searchServiceName": "myserverlessservice",
+    "resourceGroupName": "rg1",
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "subid",
+    "service": {
+      "location": "westus",
+      "tags": {
+        "app-name": "My e-commerce app"
+      },
+      "sku": {
+        "name": "serverless"
+      },
+      "properties": {
+        "hostingMode": "default"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/myserverlessservice",
+        "name": "myserverlessservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "serverless"
+        },
+        "properties": {
+          "endpoint": "https://myserverlessservice.search.windows.net/",
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "networkRuleSet": {
+            "ipRules": [],
+            "bypass": "None"
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": [],
+          "encryptionWithCmk": {
+            "enforcement": "Unspecified",
+            "encryptionComplianceStatus": "Compliant"
+          },
+          "disableLocalAuth": false,
+          "authOptions": {
+            "aadOrApiKey": {
+              "aadAuthFailureMode": "http401WithBearerChallenge"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Search/searchServices/myserverlessservice",
+        "name": "myserverlessservice",
+        "location": "westus",
+        "type": "Microsoft.Search/searchServices",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "sku": {
+          "name": "serverless"
+        },
+        "properties": {
+          "endpoint": "https://myserverlessservice.search.windows.net/",
+          "status": "provisioning",
+          "statusDetails": "",
+          "hostingMode": "default",
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "enabled",
+          "networkRuleSet": {
+            "ipRules": [],
+            "bypass": "None"
+          },
+          "privateEndpointConnections": [],
+          "sharedPrivateLinkResources": [],
+          "encryptionWithCmk": {
+            "enforcement": "Unspecified",
+            "encryptionComplianceStatus": "Compliant"
+          },
+          "disableLocalAuth": false,
+          "authOptions": {
+            "aadOrApiKey": {
+              "aadAuthFailureMode": "http401WithBearerChallenge"
+            }
+          }
+        }
+      }
+    }
+  }
+}
