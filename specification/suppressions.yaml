@@ -103,6 +103,7 @@
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-rust.*
   paths:
     - ai/HealthInsights/HealthInsights.OpenAPI/tspconfig.yaml
     - ai/ModelInference/tspconfig.yaml
@@ -113,6 +114,7 @@
   sub-rules:
     - options.@azure-tools/typespec-java.namespace
     - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-rust.*
     - options.@azure-tools/typespec-ts.package-details.name
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.emitter-output-dir
@@ -126,6 +128,7 @@
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-rust.*
   paths:
     - app/data-plane/DynamicSessions/tspconfig.yaml
 
@@ -161,6 +164,7 @@
   sub-rules:
     - options.@azure-tools/typespec-java.namespace
     - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-rust.*
   paths:
     - cognitiveservices/AnomalyDetector/tspconfig.yaml
 
@@ -179,6 +183,7 @@
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-rust.*
   paths:
     - cognitiveservices/Language.AnalyzeConversations-authoring/tspconfig.yaml
     - cognitiveservices/Language.AnalyzeDocuments/tspconfig.yaml
@@ -195,6 +200,7 @@
   sub-rules:
     - options.@azure-tools/typespec-java.namespace
     - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-rust.*
     - options.@azure-tools/typespec-ts.package-details.name
     - options.@azure-tools/typespec-ts.package-dir
     - options.@azure-tools/typespec-ts.emitter-output-dir
@@ -281,6 +287,7 @@
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-rust.*
   paths:
     - keyvault/Security.KeyVault.BackupRestore/tspconfig.yaml
     - keyvault/Security.KeyVault.RBAC/tspconfig.yaml
@@ -346,6 +353,7 @@
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
+    - options.@azure-tools/typespec-rust.*
   paths:
     - marketplacecatalog/data-plane/Products/tspconfig.yaml
 
@@ -411,6 +419,7 @@
   sub-rules:
     - options.@azure-tools/typespec-java.namespace
     - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-rust.*
   paths:
     - riskiq/Easm/tspconfig.yaml
 
@@ -457,6 +466,7 @@
   sub-rules:
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-rust.*
     - options.@azure-tools/typespec-ts.*
   paths:
     - voiceservices/VoiceServices.Provisioning/tspconfig.yaml
@@ -518,3 +528,11 @@
     - trustedsigning/data-plane/TrustedSigning/tspconfig.yaml
     - voiceservices/VoiceServices.Provisioning/tspconfig.yaml
     - webpubsub/data-plane/WebPubSub/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until Rust needs to generate SDK
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-rust.*
+  paths:
+    - storage/Microsoft.BlobStorage/tspconfig.yaml
