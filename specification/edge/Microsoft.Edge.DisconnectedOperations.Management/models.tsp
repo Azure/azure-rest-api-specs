@@ -172,6 +172,11 @@ union BenefitPlanStatus {
 model BenefitPlans {
   @doc("Azure Hybrid Windows Server Benefit plan")
   azureHybridWindowsServerBenefit?: BenefitPlanStatus;
+
+  @doc("Number of Windows Server VMs to license under the Azure Hybrid Benefit plan")
+  @added(Microsoft.Edge.Versions.v2026_03_01)
+  @minValue(1)
+  windowsServerVmCount?: int32;
 }
 
 @doc("The disconnected operation properties")
