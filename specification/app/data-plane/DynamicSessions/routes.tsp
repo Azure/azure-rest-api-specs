@@ -163,3 +163,12 @@ interface SessionPoolMetadata {
   @get
   get is Foundations.Operation<{}, SessionPoolMetadataResponse>;
 }
+
+@route("/.management")
+@added(Versions.v2025_10_02_preview)
+interface SessionPoolManagement {
+  /** Stop a session in a session pool. */
+  @route("/stopSession")
+  @post
+  stopSession is RpcOperation<SessionIdentifier, OkResponse & Body<string>>;
+}

@@ -52,6 +52,49 @@
   },
   "tags": [],
   "paths": {
+    "/.management/stopSession": {
+      "post": {
+        "operationId": "SessionPoolManagement_StopSession",
+        "description": "Stop a session in a session pool.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionPoolManagement_StopSession": {
+            "$ref": "./examples/SessionPoolManagement_StopSession.json"
+          }
+        }
+      }
+    },
     "/executions": {
       "post": {
         "operationId": "CodeExecution_Execute",
