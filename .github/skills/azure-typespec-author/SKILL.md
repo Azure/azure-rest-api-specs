@@ -42,7 +42,7 @@ Only after a grounded plan is produced:
 
 ### Step 4 — Validate
 
-- Run `azure-sdk-mcp/azsdk_run_typespec_validation` to run validation
+- Run `azure-sdk-mcp/azsdk_run_typespec_validation` tool to run validation
 - If validation fails, fix forward with minimal changes
 
 ### Step 5 — Summarize

@@ -109,44 +109,6 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
 
 ---
 
-### Case: Add New Stable Version
-
-**Context from Analysis**: Latest version is [version] ([preview/stable])
-
-**Additional Questions to Ask**:
-
-```
-1. What is the new stable version you want to add?
-   Format: YYYY-MM-DD
-   Example: 2025-03-01
-
-2. Is this promoting an existing preview version to stable?
-   □ Yes - Which preview version? [show available preview versions]
-   □ No - This is a new stable version
-
-```
-
-**Validation**:
-
-- Version format: YYYY-MM-DD (no -preview suffix)
-- Date is not in the past
-- If promoting from preview, source version must exist
-
-**Information Collected**:
-
-```json
-{
-  "case": "add-new-stable-version",
-  "namespace": "[from analysis]",
-  "projectPath": "[from analysis]",
-  "currentLatestVersion": "[from analysis]",
-  "newVersion": "[user input]",
-  "sourcePreviewVersion": "[if applicable]"
-}
-```
-
----
-
 ### Case: Add New Resource Type
 
 **Context from Analysis**:
@@ -177,7 +139,8 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
 **Validation**:
 
 - Resource name is PascalCase
-- If nested, parent resource exists
+- confirm it's top-level resource or child resource
+- if it is child resource, provide parent resource
 
 **Information Collected**:
 

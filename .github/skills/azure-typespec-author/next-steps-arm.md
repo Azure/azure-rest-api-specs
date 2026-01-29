@@ -70,27 +70,3 @@ Type your request, or "done" if no additional changes needed:
 ```
 
 ---
-
-### Case: Add New Stable Version
-
-**Completed**: Added stable version [version] to Versions enum
-
-**Follow-up Question**:
-
-```
-✅ Stable version [version] has been added successfully.
-
-⚠️ Important: Stable versions do NOT allow breaking changes.
-All additions must maintain backward compatibility.
-
-What would you like to add to this stable version? For example:
-- "Add optional email property to Employee" (backward-compatible)
-- "Add new exportData action to Employee" (non-breaking)
-- "Add EmploymentType enum"
-- "Promote all preview features to stable"
-- "List preview features that can be promoted"
-
-Type your request, or "done" if no additional changes needed:
-```
-
----
