@@ -4,7 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-// TCGC usage decorators for output-only types
 @@usage(ContainerRegistry.TokenGrantType, Usage.output);
 @@usage(ContainerRegistry.AcrErrors, Usage.output);
 
