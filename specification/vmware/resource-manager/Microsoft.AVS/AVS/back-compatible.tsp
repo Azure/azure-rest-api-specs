@@ -14,100 +14,52 @@ using Azure.ClientGenerator.Core;
 
 using Microsoft.AVS;
 
-@@clientLocation(WorkloadNetworkVmGroups.list, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkVmGroups.get, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkVmGroups.create, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkVmGroups.update, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkVmGroups.delete, WorkloadNetworks, "!csharp");
+@@clientLocation(WorkloadNetworkVmGroups.list, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkVmGroups.get, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkVmGroups.create, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkVmGroups.update, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkVmGroups.delete, WorkloadNetworks);
 
-@@clientLocation(WorkloadNetworkVirtualMachines.list,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkVirtualMachines.get,
-  WorkloadNetworks,
-  "!csharp"
-);
+@@clientLocation(WorkloadNetworkVirtualMachines.list, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkVirtualMachines.get, WorkloadNetworks);
 
-@@clientLocation(WorkloadNetworkSegments.list, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkSegments.get, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkSegments.create, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkSegments.update, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkSegments.deleteSegment,
-  WorkloadNetworks,
-  "!csharp"
-);
+@@clientLocation(WorkloadNetworkSegments.list, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkSegments.get, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkSegments.create, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkSegments.update, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkSegments.deleteSegment, WorkloadNetworks);
 
-@@clientLocation(WorkloadNetworkPublicIps.list, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkPublicIps.get, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkPublicIps.create, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkPublicIps.delete, WorkloadNetworks, "!csharp");
+@@clientLocation(WorkloadNetworkPublicIps.list, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkPublicIps.get, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkPublicIps.create, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkPublicIps.delete, WorkloadNetworks);
 
-@@clientLocation(WorkloadNetworkPortMirroringProfiles.list,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkPortMirroringProfiles.get,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkPortMirroringProfiles.create,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkPortMirroringProfiles.update,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkPortMirroringProfiles.delete,
-  WorkloadNetworks,
-  "!csharp"
-);
+@@clientLocation(WorkloadNetworkPortMirroringProfiles.list, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkPortMirroringProfiles.get, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkPortMirroringProfiles.create, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkPortMirroringProfiles.update, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkPortMirroringProfiles.delete, WorkloadNetworks);
 
-@@clientLocation(WorkloadNetworkGateways.list, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkGateways.get, WorkloadNetworks, "!csharp");
+@@clientLocation(WorkloadNetworkGateways.list, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkGateways.get, WorkloadNetworks);
 
-@@clientLocation(WorkloadNetworkDnsZones.list, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkDnsZones.get, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkDnsZones.create, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkDnsZones.update, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkDnsZones.delete, WorkloadNetworks, "!csharp");
+@@clientLocation(WorkloadNetworkDnsZones.list, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDnsZones.get, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDnsZones.create, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDnsZones.update, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDnsZones.delete, WorkloadNetworks);
 
-@@clientLocation(WorkloadNetworkDnsServices.list, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkDnsServices.get, WorkloadNetworks, "!csharp");
-@@clientLocation(WorkloadNetworkDnsServices.create,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkDnsServices.update,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkDnsServices.delete,
-  WorkloadNetworks,
-  "!csharp"
-);
+@@clientLocation(WorkloadNetworkDnsServices.list, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDnsServices.get, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDnsServices.create, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDnsServices.update, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDnsServices.delete, WorkloadNetworks);
 
-@@clientLocation(WorkloadNetworkDhcpConfigurations.list,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkDhcpConfigurations.get,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkDhcpConfigurations.create,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkDhcpConfigurations.update,
-  WorkloadNetworks,
-  "!csharp"
-);
-@@clientLocation(WorkloadNetworkDhcpConfigurations.delete,
-  WorkloadNetworks,
-  "!csharp"
-);
+@@clientLocation(WorkloadNetworkDhcpConfigurations.list, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDhcpConfigurations.get, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDhcpConfigurations.create, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDhcpConfigurations.update, WorkloadNetworks);
+@@clientLocation(WorkloadNetworkDhcpConfigurations.delete, WorkloadNetworks);
 
 @@clientName(WorkloadNetworkVmGroups.list, "ListVMGroups");
 @@clientName(WorkloadNetworkVmGroups.get, "GetVMGroup");
@@ -163,72 +115,95 @@ using Microsoft.AVS;
 @@clientName(WorkloadNetworkDhcpConfigurations.delete, "DeleteDhcp");
 
 // Flatten properties for backward compatibility
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudLink.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Cluster.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Datastore.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExpressRouteAuthorization.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalReachConnection.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(HcxEnterpriseSite.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(IscsiPath.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateCloud.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProvisionedNetwork.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PureStoragePolicy.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptCmdlet.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptExecution.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ScriptPackage.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachine.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsService.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkDnsZone.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkGateway.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPortMirroring.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetwork.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkPublicIP.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkSegment.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVMGroup.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkloadNetworkVirtualMachine.properties,
   "autorest"
 );

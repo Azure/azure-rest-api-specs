@@ -31,9 +31,11 @@ export async function runChecks(
     // and overriding openapi-type with it.
     const openApiSubType = openApiType;
 
-    // If the tags array is empty run the loop once but with a null tag
-    const coalescedTags = tags.changedTags?.size ? [...tags.changedTags] : [null];
-    for (const tag of coalescedTags) {
+    if (tags.changedTags.size === 0) {
+      throw new Error(`No changed tags found for readme ${readme}`);
+    }
+
+    for (const tag of tags.changedTags) {
       console.log(`::group::Autorest for type: ${openApiType} readme: ${readme} tag: ${tag}`);
 
       const autorestArgs = [
@@ -67,7 +69,7 @@ export async function runChecks(
           autorestCommand,
           rootPath: path,
           readme: tags.readme,
-          tag: tag ? tag : "",
+          tag: tag,
           openApiType,
           error: null,
           ...executionResult,
@@ -81,9 +83,9 @@ export async function runChecks(
           autorestCommand,
           rootPath: path,
           readme: tags.readme,
-          tag: tag ? tag : "",
+          tag: tag,
           openApiType,
-          error,
+          error: error,
           stdout: error.stdout || "",
           stderr: error.stderr || "",
         } as AutorestRunResult;

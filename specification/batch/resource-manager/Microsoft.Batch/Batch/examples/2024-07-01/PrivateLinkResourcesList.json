@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2024-07-01",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "batchAccount",
+            "type": "Microsoft.Batch/batchAccounts/privateLinkResources",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/privateLinkResources/batchAccount",
+            "properties": {
+              "groupId": "batchAccount",
+              "requiredMembers": [
+                "batchAccount"
+              ],
+              "requiredZoneNames": [
+                "privatelink.japaneast.batch.azure.com"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResource_ListByBatchAccount",
+  "title": "ListPrivateLinkResource"
+}

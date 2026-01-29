@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "CreateTenantSettingsRequest": {
+      "properties": {
+        "defaultManagementGroup": "/providers/Microsoft.Management/managementGroups/DefaultGroup",
+        "requireAuthorizationForGroupCreation": true
+      }
+    },
+    "api-version": "2023-04-01",
+    "groupId": "root"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "root",
+        "type": "Microsoft.Management/managementGroups/settings",
+        "id": "/providers/Microsoft.Management/managementGroups/root/settings/default",
+        "properties": {
+          "defaultManagementGroup": "/providers/Microsoft.Management/managementGroups/DefaultGroup",
+          "requireAuthorizationForGroupCreation": true,
+          "tenantId": "20000000-0000-0000-0000-000000000000"
+        }
+      }
+    }
+  },
+  "operationId": "HierarchySettings_CreateOrUpdate",
+  "title": "GetGroupSettings"
+}

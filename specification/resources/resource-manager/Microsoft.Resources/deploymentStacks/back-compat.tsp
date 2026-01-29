@@ -7,7 +7,10 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Resources.DeploymentStacks;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compat with old swagger"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeploymentStack.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeploymentStack.properties,
+  "!java, !javascript"
+);
 
 @@clientName(DeploymentStacksAtResourceGroup.createOrUpdate::parameters.resource,
   "deploymentStack"

@@ -37,9 +37,6 @@
 - tool: TypeSpecRequirement
   path: ./preview/2025-08-01-preview/*.json
   reason: Brownfield service not ready to migrate
-- tool: TypeSpecRequirement
-  path: ./preview/2025-11-01-preview/*.json
-  reason: Brownfield service not ready to migrate
 # Stable API versions
 - tool: TypeSpecRequirement
   path: ./stable/2019-05-06/*.json
@@ -56,3 +53,14 @@
 - tool: TypeSpecRequirement
   path: ./stable/2025-09-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: TypeSpecValidation
+  paths:
+    # Specify the path to the tspconfig.yaml file where suppression should apply
+    - ./tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    - options.@azure-tools/typespec-go.emitter-output-dir
+    - options.@azure-tools/typespec-go.module
+    - options.@azure-tools/typespec-go.containing-module
+  reason: the go emitter is not ready for Azure Search Data Plane service

@@ -23,6 +23,7 @@ model ForwardingRule
     SegmentName = "forwardingRules",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Legacy.EntityTagProperty;
 }
 

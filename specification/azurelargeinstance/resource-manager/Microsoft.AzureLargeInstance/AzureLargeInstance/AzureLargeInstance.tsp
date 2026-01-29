@@ -25,7 +25,6 @@ model AzureLargeInstance is TrackedResource<AzureLargeInstanceProperties> {
 }
 
 @armResourceOperations
-@clientName("AzureLargeInstance")
 interface AzureLargeInstances {
   @doc("""
     Gets an Azure Large Instance for the specified subscription, resource group,

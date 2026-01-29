@@ -22,6 +22,25 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-migrationdiscoverysap"
+    service-dir: "sdk/migrationdiscoverysap"
+    namespace: "com.azure.resourcemanager.migrationdiscoverysap"
+    service-name: "Migration Discovery Sap"
+    flavor: "azure"
+    rename-model:
+      SAPInstanceTagsUpdate: SapInstanceTagsUpdate
+      SAPDiscoverySiteTagsUpdate: SapDiscoverySiteTagsUpdate
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/migrationdiscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmigrationdiscovery"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmigrationdiscovery"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

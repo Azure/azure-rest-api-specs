@@ -552,6 +552,22 @@ model HardwareProfile {
   @doc("The amount of memory available for the Dev Box.")
   @visibility(Lifecycle.Read)
   memoryGB?: int32;
+
+  /** The CPU architecture type of the dev box. */
+  @added(APIVersions.v2026_01_01_preview)
+  @visibility(Lifecycle.Read)
+  architecture?: ArchitectureType;
+}
+
+/** Architecture Types. */
+union ArchitectureType {
+  string,
+
+  /** x64 architecture */
+  x64: "x64",
+
+  /** ARM64 architecture */
+  Arm64: "Arm64",
 }
 
 @doc("Storage settings for the Dev Box's disks.")

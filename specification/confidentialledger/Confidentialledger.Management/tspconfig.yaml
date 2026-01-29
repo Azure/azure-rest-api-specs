@@ -12,20 +12,19 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-confidentialledger"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-confidentialledger"
     namespace: "azure.mgmt.confidentialledger"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-confidentialledger"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-confidentialledger"
     namespace: "com.azure.resourcemanager.confidentialledger"
     service-name: "ConfidentialLedger" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/confidentialledger
-    package-dir: "arm-confidentialledger"
-    is-modular-library: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-confidentialledger"
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:

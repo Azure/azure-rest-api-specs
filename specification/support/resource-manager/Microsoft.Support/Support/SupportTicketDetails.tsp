@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -119,7 +120,19 @@ interface SupportTickets {
     CheckNameAvailabilityInput,
     ArmResponse<CheckNameAvailabilityOutput>
   >;
+
+  /**
+   * This operation fetches ARM resource id of support resource type.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LookUpResourceId_Post")
+  @added(Versions.v2025_06_01_preview)
+  lookUpResourceId is ArmProviderActionSync<
+    Request = LookUpResourceIdRequest,
+    Response = LookUpResourceIdResponse
+  >;
 }
+
 @armResourceOperations
 interface SupportTicketsNoSubscriptionOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -205,6 +218,9 @@ interface SupportTicketsNoSubscription {
   "UpdateSupportTicket object."
 );
 @@doc(SupportTickets.checkNameAvailability::parameters.body, "Input to check.");
+@@doc(SupportTickets.lookUpResourceId::parameters.body,
+  "Look up resource id request body"
+);
 @@doc(SupportTicketsNoSubscription.create::parameters.resource,
   "Support ticket request payload."
 );

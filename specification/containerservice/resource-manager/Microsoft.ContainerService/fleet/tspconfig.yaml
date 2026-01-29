@@ -19,11 +19,14 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-python":
     service-dir: "sdk/containerservice"
-    package-dir: "azure-mgmt-containerservicefleet"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerservicefleet"
     namespace: "azure.mgmt.containerservicefleet"
     generate-test: true
     generate-sample: true
     flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Containerservicefleet"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservicefleet"
     namespace: "com.azure.resourcemanager.containerservicefleet"
