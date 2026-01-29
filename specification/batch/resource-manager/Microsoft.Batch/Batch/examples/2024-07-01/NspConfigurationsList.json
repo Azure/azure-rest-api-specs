@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2024-07-01",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "00000000-0000-0000-0000-000000000000.sampleassociation",
+            "type": "Microsoft.Batch/batchAccounts/networkSecurityPerimeterConfigurations",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/networkSecurityPerimeterConfigurations/00000000-0000-0000-0000-000000000000.sampleassociation",
+            "properties": {
+              "networkSecurityPerimeter": {
+                "id": "/subscriptions/perimeterSubscriptionId/resourceGroups/perimeterResourceGroupName/providers/Microsoft.Network/networkSecurityPerimeters/perimeterName",
+                "location": "perimeterLocation",
+                "perimeterGuid": "00000000-0000-0000-0000-000000000000"
+              },
+              "profile": {
+                "name": "profileName",
+                "accessRules": [
+                  {
+                    "name": "accessRule1",
+                    "properties": {
+                      "addressPrefixes": [
+                        "10.11.0.0/16",
+                        "10.10.1.0/24"
+                      ],
+                      "direction": "Inbound",
+                      "emailAddresses": [],
+                      "fullyQualifiedDomainNames": [],
+                      "networkSecurityPerimeters": [],
+                      "phoneNumbers": [],
+                      "subscriptions": []
+                    }
+                  },
+                  {
+                    "name": "accessRule2",
+                    "properties": {
+                      "addressPrefixes": [],
+                      "direction": "Outbound",
+                      "emailAddresses": [],
+                      "fullyQualifiedDomainNames": [
+                        "paasrp1.contoso.org",
+                        "paasrp2.contoso.org"
+                      ],
+                      "networkSecurityPerimeters": [],
+                      "phoneNumbers": [],
+                      "subscriptions": []
+                    }
+                  }
+                ],
+                "accessRulesVersion": 1
+              },
+              "provisioningIssues": [],
+              "provisioningState": "Succeeded",
+              "resourceAssociation": {
+                "name": "sampleassociation",
+                "accessMode": "Learning"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeter_ListConfigurations",
+  "title": "ListNspConfigurations"
+}

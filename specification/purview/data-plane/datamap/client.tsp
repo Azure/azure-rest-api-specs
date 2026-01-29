@@ -24,6 +24,12 @@ namespace Customizations;
 @@clientName(SuggestOptions, "SuggestConfig", "csharp");
 @@clientName(AutoCompleteOptions, "AutoCompleteConfig", "csharp");
 
+@@clientName(Entity.get, "GetEntity", "csharp");
+@@clientName(Glossary.get, "GetGlossary", "csharp");
+@@clientName(Lineage.get, "GetLineage", "csharp");
+@@clientName(Relationship.get, "GetRelationship", "csharp");
+@@clientName(TypeDefinition.get, "GetTypeDefinition", "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
 interface Entity {

@@ -29,7 +29,7 @@ union ListSortOrder {
 }
 
 alias AgentsListOptions = {
-  @doc("A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.")
+  @doc("A limit on the number of objects to be returned on one page. Limit can range between 1 and 100, and the default is 20.")
   @query
   limit?: int32 = 20;
 

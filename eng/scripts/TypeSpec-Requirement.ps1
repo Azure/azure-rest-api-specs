@@ -49,6 +49,18 @@ function Get-ValidatedSuppression {
   return $suppression
 }
 
+function LogWarningForFile($file, $warningString) {
+  if (Test-SupportsDevOpsLogging) {
+    Write-Host ("##vso[task.logissue type=warning;sourcepath=$file;linenumber=1;columnnumber=1;]$warningString" -replace "`n", "%0D%0A")
+  }
+  elseif (Test-SupportsGitHubLogging) {
+    Write-Host ("::warning file=$file,line=1,col=1::$warningString" -replace "`n", "%0D%0A")
+  }
+  else {
+    Write-Host "[Warning in file $file] $warningString" -ForegroundColor Yellow
+  }
+}
+
 $repoPath = Resolve-Path "$PSScriptRoot/../.."
 $pathsWithErrors = @()
 
@@ -169,8 +181,8 @@ else {
     if ($responseStatus -eq 200) {
       LogInfo "  Branch 'main' contains path '$servicePath/stable', so spec already exists and is not required to use TypeSpec"
 
-      $notice = "Your service description will soon be required to convert from OpenAPI to TypeSpec. See https://aka.ms/azsdk/typespec."
-      LogNoticeForFile $file $notice
+      $warning = "WARNING: This PR uses OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec."
+      LogWarningForFile $file $warning
 
       if ($env:GITHUB_OUTPUT) {
         # Set output to be used later in /.github/workflows/TypeSpec-Requirement.yaml

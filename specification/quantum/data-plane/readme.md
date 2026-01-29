@@ -26,7 +26,7 @@ These are the global settings for the quantum.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2025-12-01-preview
+tag: package-2026-01-15-preview
 suppressions:
   - code: OperationId
     where:
@@ -57,6 +57,15 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}"].put.operationId
     reason:
       A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action). 
+```
+
+### Tag: package-2026-01-15-preview
+
+These settings apply only when `--tag=package-2026-01-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-15-preview'
+input-file:
+  - Microsoft.Quantum/preview/2026-01-15-preview/quantum.json
 ```
 
 ### Tag: package-2025-12-01-preview

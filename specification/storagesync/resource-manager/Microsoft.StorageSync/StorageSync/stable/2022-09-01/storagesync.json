@@ -704,8 +704,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/StorageSyncService"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -979,8 +978,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1119,7 +1117,8 @@
             "in": "path",
             "description": "GUID identifying the on-premises server.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -1180,7 +1179,8 @@
             "in": "path",
             "description": "GUID identifying the on-premises server.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "parameters",
@@ -1282,7 +1282,8 @@
             "in": "path",
             "description": "GUID identifying the on-premises server.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "parameters",
@@ -1384,7 +1385,8 @@
             "in": "path",
             "description": "GUID identifying the on-premises server.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "responses": {
@@ -1473,7 +1475,8 @@
             "in": "path",
             "description": "GUID identifying the on-premises server.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "parameters",
@@ -2131,8 +2134,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/CloudEndpoint"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }

@@ -10,7 +10,7 @@ go:
 
 ``` yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/hybridkubernetes/armhybridkubernetes
+module-name: sdk/resourcemanager/hybridkubernetes/armhybridkubernetes/v2
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true

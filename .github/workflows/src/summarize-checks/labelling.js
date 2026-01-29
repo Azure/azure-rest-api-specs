@@ -742,7 +742,7 @@ function getBlockedOnRpaas(
 ) {
   return (
     (ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent) ||
-    ciRpaasRPNotInPrivateRepoLabelShouldBePresent
+    (ciRpaasRPNotInPrivateRepoLabelShouldBePresent && !rpaasExceptionLabelShouldBePresent)
   );
 }
 
@@ -870,7 +870,7 @@ const rulesPri0NotReadyForArmReview = [
   {
     precedence: 0,
     allPrerequisiteLabels: ["NotReadyForARMReview", "CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyRequiredLabels: ["RPaaSException"],
     troubleshootingGuide: notReadyForArmReviewReason("CI-RpaaSRPNotInPrivateRepo"),
   },
   {
@@ -907,7 +907,7 @@ const rulesPri0ArmRpaas = [
   {
     precedence: 0,
     anyPrerequisiteLabels: ["CI-RpaaSRPNotInPrivateRepo"],
-    anyRequiredLabels: ["ARMSignedOff"],
+    anyRequiredLabels: ["RPaaSException"],
     troubleshootingGuide:
       "This PR has <code>CI-RpaaSRPNotInPrivateRepo</code> label. " +
       "This means it is introducing a new RP (Resource Provider) namespace to the <code>main</code> branch " +
@@ -989,23 +989,6 @@ const rulesPri1Suppressions = [
     troubleshootingGuide:
       `The suppressions added to the AutoRest config files (README.mds) require review. ${diagramTsg(1, true)}, ` +
       `or to step 3, depending on the kind of suppression you did.`,
-  },
-];
-
-/** @type {RequiredLabelRule[]} */
-const rulesPri1ArcReview = [
-  {
-    precedence: 1,
-    anyPrerequisiteLabels: ["ArcReview"],
-    anyRequiredLabels: ["ArcSignedOff"],
-    troubleshootingGuide:
-      "This PR is labelled with <code>ArcReview</code>. " +
-      "For this PR to be merged, it must pass an ARC review and be labelled <code>ArcSignedOff</code>.<br/>" +
-      "Email the ARC board to request review per " +
-      `${href(
-        "this Contact section",
-        "https://msazure.visualstudio.com/One/_wiki/wikis/One.wiki/377428/Consistency-in-ARM-Modeling?anchor=contact",
-      )}.`,
   },
 ];
 
@@ -1155,7 +1138,6 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0ArmRev)
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
-  .concat(rulesPri1ArcReview)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers);
