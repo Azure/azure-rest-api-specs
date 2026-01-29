@@ -67,7 +67,6 @@ interface PersistentStorages {
   delete is ArmResourceDeleteWithoutOkAsync<
     PersistentStorage,
     Response =
-      | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse
       | ArmDeletedNoContentResponse
       | ErrorResponse
