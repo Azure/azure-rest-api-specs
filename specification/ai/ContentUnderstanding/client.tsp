@@ -118,7 +118,7 @@ op analyzeBinaryCustomSignature(
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Conflicts with @typespec/http/content-type-string"
   @doc("Request content type.")
   @header
-  contentType: string = "application/octet-stream",
+  contentType?: string = "application/octet-stream",
 
   @doc("The location where the data may be processed. Defaults to global.")
   @query
