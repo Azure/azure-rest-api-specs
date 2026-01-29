@@ -133,6 +133,16 @@ using Microsoft.SqlVirtualMachine;
   "SqlServerConfigurationsManagementSettings",
   "csharp"
 );
+// @@clientName(Operation, "SqlVmInfo", "csharp");
+@@clientName(OperationDisplay, "SqlVmOperationDisplay", "csharp");
+@@clientName(OperationOrigin, "SqlVmOperationOrigin", "csharp");
+@@clientName(OsType, "SqlVmOsType", "csharp");
+@@clientName(TroubleshootingScenario, "SqlVmTroubleshootingScenario", "csharp");
+@@clientName(TroubleshootingStatus, "SqlVmTroubleshootingStatus", "csharp");
+@@clientName(VirtualMachineIdentity, "SqlVmIdentity", "csharp");
+@@clientName(VmIdentityType, "SqlVmVmIdentityType", "csharp");
+@@clientName(AdditionalOsPatch, "SqlVmAdditionalOsPatch", "csharp");
+@@clientName(AdditionalVmPatch, "SqlVmAdditionalVmPatch", "csharp");
 @@clientName(MultiSubnetIpConfiguration,
   "MultiSubnetIPConfiguration",
   "csharp"
@@ -172,6 +182,16 @@ using Microsoft.SqlVirtualMachine;
 @@clientName(WsfcDomainProfile.ouPath, "OrganizationalUnitPath", "csharp");
 @@clientName(SqlVirtualMachineGroups.listBySqlVmGroup,
   "GetSqlVmsBySqlVmGroup",
+  "csharp"
+);
+@@clientName(SqlVirtualMachine.name, "sqlVmName", "csharp");
+@@clientName(SqlVirtualMachines.update::parameters.properties,
+  "patch",
+  "csharp"
+);
+@@clientName(SqlVirtualMachineGroup.name, "sqlVmGroupName", "csharp");
+@@clientName(SqlVirtualMachineGroups.update::parameters.properties,
+  "patch",
   "csharp"
 );
 @@alternateType(LoadBalancerConfiguration.sqlVirtualMachineInstances,
