@@ -36,6 +36,127 @@ namespace Customizations;
 // Change the WmtsCapabilitiesXmlResponse body type from bytes to string for JavaScript
 @@alternateType(WmtsCapabilitiesXmlResponse.body, string, "javascript");
 
+// === Python SDK external type mappings ===
+// Use shapely library for GeoJSON geometry types
+@@alternateType(Geometry,
+  {
+    identity: "shapely.geometry.base.BaseGeometry",
+    package: "shapely",
+    minVersion: "2.0.0",
+  },
+  "python"
+);
+
+@@alternateType(Point,
+  {
+    identity: "shapely.Point",
+    package: "shapely",
+    minVersion: "2.0.0",
+  },
+  "python"
+);
+
+@@alternateType(Polygon,
+  {
+    identity: "shapely.Polygon",
+    package: "shapely",
+    minVersion: "2.0.0",
+  },
+  "python"
+);
+
+@@alternateType(MultiPolygon,
+  {
+    identity: "shapely.MultiPolygon",
+    package: "shapely",
+    minVersion: "2.0.0",
+  },
+  "python"
+);
+
+@@alternateType(LineString,
+  {
+    identity: "shapely.LineString",
+    package: "shapely",
+    minVersion: "2.0.0",
+  },
+  "python"
+);
+
+@@alternateType(MultiLineString,
+  {
+    identity: "shapely.MultiLineString",
+    package: "shapely",
+    minVersion: "2.0.0",
+  },
+  "python"
+);
+
+@@alternateType(MultiPoint,
+  {
+    identity: "shapely.MultiPoint",
+    package: "shapely",
+    minVersion: "2.0.0",
+  },
+  "python"
+);
+
+@@alternateType(GeometryCollection,
+  {
+    identity: "shapely.GeometryCollection",
+    package: "shapely",
+    minVersion: "2.0.0",
+  },
+  "python"
+);
+
+// Use geojson library for GeoJSON Feature types
+@@alternateType(Feature,
+  {
+    identity: "geojson.Feature",
+    package: "geojson",
+    minVersion: "3.1.0",
+  },
+  "python"
+);
+
+@@alternateType(FeatureCollection,
+  {
+    identity: "geojson.FeatureCollection",
+    package: "geojson",
+    minVersion: "3.1.0",
+  },
+  "python"
+);
+
+// Use pystac library for STAC types
+@@alternateType(StacCollection,
+  {
+    identity: "pystac.Collection",
+    package: "pystac",
+    minVersion: "1.13.0",
+  },
+  "python"
+);
+
+@@alternateType(StacItem,
+  {
+    identity: "pystac.Item",
+    package: "pystac",
+    minVersion: "1.13.0",
+  },
+  "python"
+);
+
+@@alternateType(StacItemCollection,
+  {
+    identity: "pystac.ItemCollection",
+    package: "pystac",
+    minVersion: "1.13.0",
+  },
+  "python"
+);
+
 // Address naming convention violations for C# SDK
 @@clientName(TilerMosaicSearchRegistrationResponse,
   "TilerMosaicSearchRegistrationResult",
