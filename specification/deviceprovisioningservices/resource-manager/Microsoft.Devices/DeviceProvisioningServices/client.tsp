@@ -247,12 +247,6 @@ op IotDpsResourceDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@markAsPageable(GroupIdInformations.listPrivateLinkResources, "csharp");
 
-// Codegen issue https://github.com/Azure/azure-sdk-for-net/pull/55244
-@@clientName(PrivateEndpointConnections.listPrivateEndpointConnections,
-  "GetAll",
-  "csharp"
-);
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
