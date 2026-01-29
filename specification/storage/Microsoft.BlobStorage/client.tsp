@@ -105,3 +105,10 @@ namespace Customizations;
   "python"
 );
 @@clientName(BlobServiceProperties, "StorageServiceProperties", "python");
+@@clientName(Storage.Blob.Blob.setProperties, "setHttpHeaders", "python");
+@@clientName(Storage.Blob.PageBlob.setSequenceNumber,
+  "updateSequenceNumber",
+  "python"
+);
+@@clientName(Storage.Blob.Service.findBlobsByTags, "filterBlobs", "python");
+@@clientName(Storage.Blob.Container.findBlobsByTags, "filterBlobs", "python");
