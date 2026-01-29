@@ -56,16 +56,15 @@ namespace Customizations;
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
-
-@@access(Storage.Blob.Service.getUserDelegationKey, Access.internal);
-@@access(Storage.Blob.Container.listBlobHierarchySegment, Access.internal);
-@@access(Storage.Blob.Container.rename, Access.internal);
-@@access(Storage.Blob.Container.restore, Access.internal);
-@@access(Storage.Blob.Blob.abortCopyFromUrl, Access.internal);
-@@access(Storage.Blob.Blob.copyFromUrl, Access.internal);
-@@access(Storage.Blob.Blob.setExpiry, Access.internal);
-@@access(Storage.Blob.Blob.startCopyFromUrl, Access.internal);
-@@access(Storage.Blob.BlockBlob.query, Access.internal);
-@@access(Storage.Blob.BlockBlob.stageBlockFromUrl, Access.internal);
-@@access(Storage.Blob.PageBlob.copyIncremental, Access.internal);
-@@access(Storage.Blob.PageBlob.getPageRangesDiff, Access.internal);
+@@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
+@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
+@@scope(Storage.Blob.Container.rename, "!rust");
+@@scope(Storage.Blob.Container.restore, "!rust");
+@@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
+@@scope(Storage.Blob.Blob.copyFromUrl, "!rust");
+@@scope(Storage.Blob.Blob.setExpiry, "!rust");
+@@scope(Storage.Blob.Blob.startCopyFromUrl, "!rust");
+@@scope(Storage.Blob.BlockBlob.query, "!rust");
+@@scope(Storage.Blob.BlockBlob.stageBlockFromUrl, "!rust");
+@@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
+@@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
