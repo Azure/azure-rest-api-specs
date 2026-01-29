@@ -58,16 +58,7 @@ interface PersistentStorages {
    * Create or update a persistent storage.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    PersistentStorage,
-    Response = ArmResourceCreatedResponse<
-      PersistentStorage,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = PersistentStorage>
-    > | ErrorResponse
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<PersistentStorage>;
 
   /**
    * Delete a persistent storage.
