@@ -2083,7 +2083,7 @@
           "type": "array",
           "description": "Information about connection monitors.",
           "items": {
-            "$ref": "./common.json#/definitions/ConnectionMonitorResult"
+            "$ref": "#/definitions/ConnectionMonitorResult"
           }
         },
         "nextLink": {
@@ -2164,6 +2164,54 @@
           "description": "Optional notes to be associated with the connection monitor."
         }
       }
+    },
+    "ConnectionMonitorResult": {
+      "type": "object",
+      "description": "Information about the connection monitor.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectionMonitorResultProperties",
+          "description": "Properties of the connection monitor result.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/TrackedResourcewithOptionalLocation"
+        }
+      ]
+    },
+    "ConnectionMonitorResultProperties": {
+      "type": "object",
+      "description": "Describes the properties of a connection monitor.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the connection monitor.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the connection monitor was started.",
+          "readOnly": true
+        },
+        "monitoringStatus": {
+          "type": "string",
+          "description": "The monitoring status of the connection monitor.",
+          "readOnly": true
+        },
+        "connectionMonitorType": {
+          "$ref": "./common.json#/definitions/ConnectionMonitorType",
+          "description": "Type of connection monitor.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionMonitorParameters"
+        }
+      ]
     },
     "ConnectionMonitorSource": {
       "type": "object",
@@ -2571,6 +2619,31 @@
         }
       }
     },
+    "FlowLog": {
+      "type": "object",
+      "description": "A flow log resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FlowLogPropertiesFormat",
+          "description": "Properties of the flow log.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
+          "description": "FlowLog resource Managed Identity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
     "FlowLogFormatParameters": {
       "type": "object",
       "description": "Parameters that define the flow log format.",
@@ -2612,6 +2685,27 @@
       "required": [
         "targetResourceId",
         "properties"
+      ]
+    },
+    "FlowLogListResult": {
+      "type": "object",
+      "description": "The response of a FlowLog list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FlowLog items on this page",
+          "items": {
+            "$ref": "#/definitions/FlowLog"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "FlowLogProperties": {
@@ -3307,11 +3401,27 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "./common.json#/definitions/PacketCaptureResultProperties",
+          "$ref": "#/definitions/PacketCaptureResultProperties",
           "description": "Properties of the packet capture result.",
           "x-ms-client-flatten": true
         }
       }
+    },
+    "PacketCaptureResultProperties": {
+      "type": "object",
+      "description": "The properties of a packet capture session.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the packet capture session.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PacketCaptureParameters"
+        }
+      ]
     },
     "PacketCaptureSettings": {
       "type": "object",

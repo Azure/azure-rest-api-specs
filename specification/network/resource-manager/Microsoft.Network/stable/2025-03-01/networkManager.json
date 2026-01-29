@@ -2684,6 +2684,26 @@
         }
       }
     },
+    "ActiveConnectivityConfiguration": {
+      "type": "object",
+      "description": "Active connectivity configuration.",
+      "properties": {
+        "commitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Deployment time string."
+        },
+        "region": {
+          "type": "string",
+          "description": "Deployment region."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveConnectivityConfiguration"
+        }
+      ]
+    },
     "ActiveConnectivityConfigurationsListResult": {
       "type": "object",
       "description": "Result of the request to list active connectivity configurations. It contains a list of active connectivity configurations and a skiptoken to get the next set of results.",
@@ -2692,7 +2712,7 @@
           "type": "array",
           "description": "Gets a page of active connectivity configurations.",
           "items": {
-            "$ref": "./common.json#/definitions/ActiveConnectivityConfiguration"
+            "$ref": "#/definitions/ActiveConnectivityConfiguration"
           }
         },
         "skipToken": {
@@ -2700,6 +2720,40 @@
           "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
         }
       }
+    },
+    "ActiveDefaultSecurityAdminRule": {
+      "type": "object",
+      "description": "Network default admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DefaultAdminPropertiesFormat",
+          "description": "Indicates the properties of the default security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "ActiveSecurityAdminRule": {
+      "type": "object",
+      "description": "Network admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminPropertiesFormat",
+          "description": "Indicates the properties of the security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
     },
     "ActiveSecurityAdminRulesListResult": {
       "type": "object",
@@ -2811,6 +2865,65 @@
         "direction"
       ]
     },
+    "AdminRule": {
+      "type": "object",
+      "description": "Network admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminPropertiesFormat",
+          "description": "Indicates the properties of the security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "AdminRuleCollection": {
+      "type": "object",
+      "description": "Defines the admin rule collection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager admin rule collection.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "AdminRuleCollectionListResult": {
+      "type": "object",
+      "description": "The response of a AdminRuleCollection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AdminRuleCollection items on this page",
+          "items": {
+            "$ref": "#/definitions/AdminRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AdminRuleCollectionPropertiesFormat": {
       "type": "object",
       "description": "Defines the admin rule collection properties.",
@@ -2842,6 +2955,30 @@
       },
       "required": [
         "appliesToGroups"
+      ]
+    },
+    "BaseAdminRule": {
+      "type": "object",
+      "description": "Network base admin rule.",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "./common.json#/definitions/AdminRuleKind",
+          "description": "Whether the rule is custom or default."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
       ]
     },
     "ConfigurationGroup": {
@@ -3072,6 +3209,23 @@
         }
       }
     },
+    "DefaultAdminRule": {
+      "type": "object",
+      "description": "Network default admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DefaultAdminPropertiesFormat",
+          "description": "Indicates the properties of the security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
     "EffectiveBaseSecurityAdminRule": {
       "type": "object",
       "description": "Network base admin rule.",
@@ -3136,6 +3290,40 @@
           }
         }
       }
+    },
+    "EffectiveDefaultSecurityAdminRule": {
+      "type": "object",
+      "description": "Network default admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DefaultAdminPropertiesFormat",
+          "description": "Indicates the properties of the default security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "EffectiveSecurityAdminRule": {
+      "type": "object",
+      "description": "Network admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminPropertiesFormat",
+          "description": "Indicates the properties of the security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
     },
     "Hub": {
       "type": "object",
@@ -3639,6 +3827,69 @@
         }
       }
     },
+    "RoutingRule": {
+      "type": "object",
+      "description": "Network routing rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingRulePropertiesFormat",
+          "description": "Indicates the properties of the routing rule",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "RoutingRuleCollection": {
+      "type": "object",
+      "description": "Defines the routing rule collection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager routing rule collection.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "RoutingRuleCollectionListResult": {
+      "type": "object",
+      "description": "The response of a RoutingRuleCollection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoutingRuleCollection items on this page",
+          "items": {
+            "$ref": "#/definitions/RoutingRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "RoutingRuleCollectionPropertiesFormat": {
       "type": "object",
       "description": "Defines the routing rule collection properties.",
@@ -3674,6 +3925,27 @@
       },
       "required": [
         "appliesTo"
+      ]
+    },
+    "RoutingRuleListResult": {
+      "type": "object",
+      "description": "The response of a RoutingRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoutingRule items on this page",
+          "items": {
+            "$ref": "#/definitions/RoutingRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "RoutingRuleNextHop": {
@@ -3962,6 +4234,69 @@
         "networkGroupId"
       ]
     },
+    "SecurityUserRule": {
+      "type": "object",
+      "description": "Network security user rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityUserRulePropertiesFormat",
+          "description": "Indicates the properties of the security user rule",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityUserRuleCollection": {
+      "type": "object",
+      "description": "Defines the security user rule collection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityUserRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager security user rule collection.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityUserRuleCollectionListResult": {
+      "type": "object",
+      "description": "The response of a SecurityUserRuleCollection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SecurityUserRuleCollection items on this page",
+          "items": {
+            "$ref": "#/definitions/SecurityUserRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "SecurityUserRuleCollectionPropertiesFormat": {
       "type": "object",
       "description": "Defines the security user rule collection properties.",
@@ -3993,6 +4328,27 @@
       },
       "required": [
         "appliesToGroups"
+      ]
+    },
+    "SecurityUserRuleListResult": {
+      "type": "object",
+      "description": "The response of a SecurityUserRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SecurityUserRule items on this page",
+          "items": {
+            "$ref": "#/definitions/SecurityUserRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "SecurityUserRulePropertiesFormat": {
@@ -4059,6 +4415,48 @@
       "required": [
         "protocol",
         "direction"
+      ]
+    },
+    "StaticMember": {
+      "type": "object",
+      "description": "StaticMember Item.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticMemberProperties",
+          "description": "The Static Member properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "StaticMemberListResult": {
+      "type": "object",
+      "description": "The response of a StaticMember list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StaticMember items on this page",
+          "items": {
+            "$ref": "#/definitions/StaticMember"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "StaticMemberProperties": {

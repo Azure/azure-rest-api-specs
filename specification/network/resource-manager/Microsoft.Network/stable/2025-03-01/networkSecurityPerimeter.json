@@ -449,6 +449,43 @@
         }
       }
     },
+    "NspAccessRule": {
+      "type": "object",
+      "description": "The NSP access rule resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NspAccessRuleProperties",
+          "description": "Properties of the NSP access rule.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/CommonProxyResource"
+        }
+      ]
+    },
+    "NspAccessRuleListResult": {
+      "type": "object",
+      "description": "The response of a NspAccessRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NspAccessRule items on this page",
+          "items": {
+            "$ref": "#/definitions/NspAccessRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "NspAccessRuleProperties": {
       "type": "object",
       "description": "Properties of NSP access rule.",
@@ -516,6 +553,22 @@
         }
       }
     },
+    "NspAssociation": {
+      "type": "object",
+      "description": "The NSP resource association resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NspAssociationProperties",
+          "description": "Properties of the NSP resource association.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/CommonProxyResource"
+        }
+      ]
+    },
     "NspAssociationProperties": {
       "type": "object",
       "properties": {
@@ -542,6 +595,43 @@
           "readOnly": true
         }
       }
+    },
+    "NspLink": {
+      "type": "object",
+      "description": "The network security perimeter link resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NspLinkProperties",
+          "description": "Properties of the network security perimeter link resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/CommonProxyResource"
+        }
+      ]
+    },
+    "NspLinkListResult": {
+      "type": "object",
+      "description": "The response of a NspLink list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NspLink items on this page",
+          "items": {
+            "$ref": "#/definitions/NspLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "NspLinkProperties": {
       "type": "object",
@@ -623,6 +713,43 @@
         }
       }
     },
+    "NspLinkReference": {
+      "type": "object",
+      "description": "The network security perimeter linkReference resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NspLinkReferenceProperties",
+          "description": "Properties of the network security perimeter linkReference resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/CommonProxyResource"
+        }
+      ]
+    },
+    "NspLinkReferenceListResult": {
+      "type": "object",
+      "description": "The response of a NspLinkReference list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NspLinkReference items on this page",
+          "items": {
+            "$ref": "#/definitions/NspLinkReference"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "NspLinkReferenceProperties": {
       "type": "object",
       "description": "Properties of NSP LinkReference resource.",
@@ -699,6 +826,43 @@
         }
       }
     },
+    "NspLoggingConfiguration": {
+      "type": "object",
+      "description": "The NSP logging configuration",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NspLoggingConfigurationProperties",
+          "description": "Properties of the NSP logging configuration.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/CommonProxyResource"
+        }
+      ]
+    },
+    "NspLoggingConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a NspLoggingConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NspLoggingConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/NspLoggingConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "NspLoggingConfigurationProperties": {
       "type": "object",
       "description": "The NSP logging configuration properties.",
@@ -715,6 +879,43 @@
           "description": "The version of the NSP logging configuration."
         }
       }
+    },
+    "NspProfile": {
+      "type": "object",
+      "description": "The network security perimeter profile resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NspProfileProperties",
+          "description": "Properties of the network security perimeter profile",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/CommonProxyResource"
+        }
+      ]
+    },
+    "NspProfileListResult": {
+      "type": "object",
+      "description": "The response of a NspProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NspProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/NspProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "NspProfileProperties": {
       "type": "object",

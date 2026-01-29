@@ -525,6 +525,27 @@
         }
       }
     },
+    "BackendAddressPool": {
+      "type": "object",
+      "description": "Pool of backend IP addresses.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackendAddressPoolPropertiesFormat",
+          "description": "Properties of load balancer backend address pool.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
     "BackendAddressPoolPropertiesFormat": {
       "type": "object",
       "description": "Properties of the backend address pool.",
@@ -603,6 +624,34 @@
           "description": "Backend address synchronous mode for the backend pool"
         }
       }
+    },
+    "FrontendIPConfiguration": {
+      "type": "object",
+      "description": "Frontend IP address of the load balancer.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FrontendIPConfigurationPropertiesFormat",
+          "description": "Properties of the load balancer probe.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "description": "A list of availability zones denoting the IP allocated for the resource needs to come from.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
     },
     "FrontendIPConfigurationPropertiesFormat": {
       "type": "object",
@@ -699,6 +748,36 @@
         }
       }
     },
+    "InboundNatPool": {
+      "type": "object",
+      "description": "Inbound NAT pool of the load balancer.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InboundNatPoolPropertiesFormat",
+          "description": "Properties of load balancer inbound nat pool.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
     "InboundNatPoolPropertiesFormat": {
       "type": "object",
       "description": "Properties of Inbound NAT pool.",
@@ -750,6 +829,48 @@
         "frontendPortRangeStart",
         "frontendPortRangeEnd",
         "backendPort"
+      ]
+    },
+    "InboundNatRule": {
+      "type": "object",
+      "description": "Inbound NAT rule of the load balancer.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InboundNatRulePropertiesFormat",
+          "description": "Properties of load balancer inbound NAT rule.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "InboundNatRuleListResult": {
+      "type": "object",
+      "description": "The response of a InboundNatRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The InboundNatRule items on this page",
+          "items": {
+            "$ref": "#/definitions/InboundNatRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "InboundNatRulePortMapping": {
@@ -998,49 +1119,49 @@
           "type": "array",
           "description": "Object representing the frontend IPs to be used for the load balancer.",
           "items": {
-            "$ref": "./common.json#/definitions/FrontendIPConfiguration"
+            "$ref": "#/definitions/FrontendIPConfiguration"
           }
         },
         "backendAddressPools": {
           "type": "array",
           "description": "Collection of backend address pools used by a load balancer.",
           "items": {
-            "$ref": "./common.json#/definitions/BackendAddressPool"
+            "$ref": "#/definitions/BackendAddressPool"
           }
         },
         "loadBalancingRules": {
           "type": "array",
           "description": "Object collection representing the load balancing rules Gets the provisioning.",
           "items": {
-            "$ref": "./common.json#/definitions/LoadBalancingRule"
+            "$ref": "#/definitions/LoadBalancingRule"
           }
         },
         "probes": {
           "type": "array",
           "description": "Collection of probe objects used in the load balancer.",
           "items": {
-            "$ref": "./common.json#/definitions/Probe"
+            "$ref": "#/definitions/Probe"
           }
         },
         "inboundNatRules": {
           "type": "array",
           "description": "Collection of inbound NAT Rules used by a load balancer. Defining inbound NAT rules on your load balancer is mutually exclusive with defining an inbound NAT pool. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an Inbound NAT pool. They have to reference individual inbound NAT rules.",
           "items": {
-            "$ref": "./common.json#/definitions/InboundNatRule"
+            "$ref": "#/definitions/InboundNatRule"
           }
         },
         "inboundNatPools": {
           "type": "array",
           "description": "Defines an external port range for inbound NAT to a single backend port on NICs associated with a load balancer. Inbound NAT rules are created automatically for each NIC associated with the Load Balancer using an external port from this range. Defining an Inbound NAT pool on your Load Balancer is mutually exclusive with defining inbound NAT rules. Inbound NAT pools are referenced from virtual machine scale sets. NICs that are associated with individual virtual machines cannot reference an inbound NAT pool. They have to reference individual inbound NAT rules.",
           "items": {
-            "$ref": "./common.json#/definitions/InboundNatPool"
+            "$ref": "#/definitions/InboundNatPool"
           }
         },
         "outboundRules": {
           "type": "array",
           "description": "The outbound rules.",
           "items": {
-            "$ref": "./common.json#/definitions/OutboundRule"
+            "$ref": "#/definitions/OutboundRule"
           }
         },
         "resourceGuid": {
@@ -1110,6 +1231,27 @@
           "description": "A reference to public IP address resource."
         }
       }
+    },
+    "LoadBalancingRule": {
+      "type": "object",
+      "description": "A load balancing rule for a load balancer.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LoadBalancingRulePropertiesFormat",
+          "description": "Properties of load balancer load balancing rule.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
     },
     "LoadBalancingRulePropertiesFormat": {
       "type": "object",
@@ -1230,6 +1372,27 @@
         }
       }
     },
+    "OutboundRule": {
+      "type": "object",
+      "description": "Outbound rule of the load balancer.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OutboundRulePropertiesFormat",
+          "description": "Properties of load balancer outbound rule.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
     "OutboundRulePropertiesFormat": {
       "type": "object",
       "description": "Outbound rule of the load balancer.",
@@ -1273,6 +1436,27 @@
         "frontendIPConfigurations",
         "backendAddressPool",
         "protocol"
+      ]
+    },
+    "Probe": {
+      "type": "object",
+      "description": "A load balancer probe.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProbePropertiesFormat",
+          "description": "Properties of load balancer probe.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
       ]
     },
     "ProbePropertiesFormat": {

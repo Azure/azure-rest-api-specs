@@ -848,7 +848,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/ExpressRouteLink"
+              "$ref": "#/definitions/ExpressRouteLink"
             }
           },
           "default": {
@@ -1482,7 +1482,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/ExpressRouteCrossConnectionPeering"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
             }
           },
           "default": {
@@ -1534,7 +1534,7 @@
             "description": "Parameters supplied to the create or update ExpressRouteCrossConnection peering operation.",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/ExpressRouteCrossConnectionPeering"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
             }
           }
         ],
@@ -1542,13 +1542,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/ExpressRouteCrossConnectionPeering"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
             }
           },
           "201": {
             "description": "Resource 'ExpressRouteCrossConnectionPeering' create operation succeeded",
             "schema": {
-              "$ref": "./common.json#/definitions/ExpressRouteCrossConnectionPeering"
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1576,7 +1576,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./common.json#/definitions/ExpressRouteCrossConnectionPeering"
+          "final-state-schema": "#/definitions/ExpressRouteCrossConnectionPeering"
         },
         "x-ms-long-running-operation": true
       },
@@ -2806,7 +2806,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/RouteFilterRule"
+              "$ref": "#/definitions/RouteFilterRule"
             }
           },
           "default": {
@@ -2858,7 +2858,7 @@
             "description": "Parameters supplied to the create or update route filter rule operation.",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/RouteFilterRule"
+              "$ref": "#/definitions/RouteFilterRule"
             }
           }
         ],
@@ -2866,13 +2866,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/RouteFilterRule"
+              "$ref": "#/definitions/RouteFilterRule"
             }
           },
           "201": {
             "description": "Resource 'RouteFilterRule' create operation succeeded",
             "schema": {
-              "$ref": "./common.json#/definitions/RouteFilterRule"
+              "$ref": "#/definitions/RouteFilterRule"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2900,7 +2900,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./common.json#/definitions/RouteFilterRule"
+          "final-state-schema": "#/definitions/RouteFilterRule"
         },
         "x-ms-long-running-operation": true
       },
@@ -3978,6 +3978,31 @@
         "value"
       ]
     },
+    "ExpressRouteCrossConnectionPeering": {
+      "type": "object",
+      "description": "Peering in an ExpressRoute Cross Connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringProperties",
+          "description": "Properties of the express route cross connection peering.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
     "ExpressRouteCrossConnectionPeeringProperties": {
       "type": "object",
       "description": "Properties of express route cross connection peering.",
@@ -4106,7 +4131,7 @@
           "type": "array",
           "description": "The list of peerings.",
           "items": {
-            "$ref": "./common.json#/definitions/ExpressRouteCrossConnectionPeering"
+            "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
           }
         }
       }
@@ -4133,6 +4158,32 @@
           "description": "Current state of the BGP session, and the number of prefixes that have been received from a neighbor or peer group."
         }
       }
+    },
+    "ExpressRouteLink": {
+      "type": "object",
+      "title": "ExpressRouteLink",
+      "description": "ExpressRouteLink child resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteLinkPropertiesFormat",
+          "description": "ExpressRouteLink properties.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of child port resource that is unique among child port resources of the parent."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
     },
     "ExpressRouteLinkMacSecConfig": {
       "type": "object",
@@ -4326,7 +4377,7 @@
           "title": "ExpressRouteLink Sub-Resources",
           "description": "The set of physical links of the ExpressRoutePort resource.",
           "items": {
-            "$ref": "./common.json#/definitions/ExpressRouteLink"
+            "$ref": "#/definitions/ExpressRouteLink"
           }
         },
         "circuits": {
@@ -4608,6 +4659,70 @@
         }
       }
     },
+    "PatchRouteFilter": {
+      "type": "object",
+      "description": "Route Filter Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RouteFilterPropertiesFormat",
+          "description": "Properties of the route filter.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "PatchRouteFilterRule": {
+      "type": "object",
+      "description": "Route Filter Rule Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RouteFilterRulePropertiesFormat",
+          "description": "Properties of the route filter rule.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
     "PeerExpressRouteCircuitConnection": {
       "type": "object",
       "description": "Peer Express Route Circuit Connection in an ExpressRouteCircuitPeering resource.",
@@ -4736,7 +4851,7 @@
           "type": "array",
           "description": "Collection of RouteFilterRules contained within a route filter.",
           "items": {
-            "$ref": "./common.json#/definitions/RouteFilterRule"
+            "$ref": "#/definitions/RouteFilterRule"
           }
         },
         "peerings": {
@@ -4761,6 +4876,35 @@
           "readOnly": true
         }
       }
+    },
+    "RouteFilterRule": {
+      "type": "object",
+      "description": "Route Filter Rule Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RouteFilterRulePropertiesFormat",
+          "description": "Properties of the route filter rule.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
     },
     "RouteFilterRulePropertiesFormat": {
       "type": "object",

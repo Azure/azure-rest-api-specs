@@ -8543,8 +8543,8 @@ model PrivateEndpointProperties {
  * PrivateLinkServiceConnection resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceConnection extends SubResource {
   /**
    * Properties of the private link service connection.
@@ -8805,8 +8805,8 @@ model PrivateLinkServiceProperties {
  * The private link service ip configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServiceIpConfiguration extends SubResource {
   /**
    * Properties of the private link service ip configuration.
@@ -9284,8 +9284,8 @@ model ServiceEndpointPolicyDefinitionPropertiesFormat {
  * IP configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IPConfiguration extends SubResource {
   /**
    * Properties of the IP configuration.
@@ -9588,8 +9588,10 @@ model NatGatewayPropertiesFormat {
 /**
  * IP configuration profile child resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model IPConfigurationProfile extends SubResource {
   /**
    * Properties of the IP configuration profile.
@@ -9637,8 +9639,8 @@ model IPConfigurationProfilePropertiesFormat {
  * ResourceNavigationLink resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ResourceNavigationLink extends SubResource {
   /**
    * Resource navigation link properties format.
@@ -9696,8 +9698,8 @@ model ResourceNavigationLinkFormat {
  * ServiceAssociationLink resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ServiceAssociationLink extends SubResource {
   /**
    * Resource navigation link properties format.
@@ -9759,8 +9761,8 @@ model ServiceAssociationLinkPropertiesFormat {
  * Details the service to which the subnet is delegated.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model Delegation extends SubResource {
   /**
    * Properties of the subnet.
@@ -12347,7 +12349,9 @@ model AzureFirewallPropertiesFormat {
 /**
  * Application rule collection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallApplicationRuleCollection extends SubResource {
   /**
    * Properties of the azure firewall application rule collection.
@@ -12369,6 +12373,8 @@ model AzureFirewallApplicationRuleCollection extends SubResource {
 /**
  * Properties of the application rule collection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallApplicationRuleCollectionPropertiesFormat {
   /**
    * Priority of the application rule collection resource.
@@ -12472,7 +12478,9 @@ model AzureFirewallApplicationRuleProtocol {
 /**
  * NAT rule collection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallNatRuleCollection extends SubResource {
   /**
    * Properties of the azure firewall NAT rule collection.
@@ -12494,6 +12502,8 @@ model AzureFirewallNatRuleCollection extends SubResource {
 /**
  * Properties of the NAT rule collection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallNatRuleCollectionProperties {
   /**
    * Priority of the NAT rule collection resource.
@@ -12592,7 +12602,9 @@ model AzureFirewallNatRule {
 /**
  * Network rule collection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallNetworkRuleCollection extends SubResource {
   /**
    * Properties of the azure firewall network rule collection.
@@ -12614,6 +12626,8 @@ model AzureFirewallNetworkRuleCollection extends SubResource {
 /**
  * Properties of the network rule collection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallNetworkRuleCollectionPropertiesFormat {
   /**
    * Priority of the network rule collection resource.
@@ -12694,7 +12708,9 @@ model AzureFirewallNetworkRule {
 /**
  * IP configuration of an Azure Firewall.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallIPConfiguration extends SubResource {
   /**
    * Properties of the azure firewall IP configuration.
@@ -12839,6 +12855,8 @@ model AzureFirewallSku {
 /**
  * Azure Firewall Autoscale Configuration parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallAutoscaleConfiguration {
   /**
    * The minimum number of capacity units for this azure firewall. Use null to reset the value to the service default.
@@ -12858,7 +12876,9 @@ model AzureFirewallAutoscaleConfiguration {
 /**
  * List of SNAT IP Prefixes learnt by firewall to not SNAT
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model IPPrefixesList {
   /**
    * IP Prefix value.
@@ -12869,6 +12889,8 @@ model IPPrefixesList {
 /**
  * Azure Firewall Packet Capture Parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPacketCaptureParameters {
   /**
    * Duration of packet capture in seconds. If the field is not provided, the default value is 60.
@@ -12920,6 +12942,8 @@ model FirewallPacketCaptureParameters {
 /**
  * Properties of the AzureFirewallRCAction.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallPacketCaptureFlags {
   /**
    * Flags to capture
@@ -12930,6 +12954,8 @@ model AzureFirewallPacketCaptureFlags {
 /**
  * Group of src/dest ips and ports to be captured.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallPacketCaptureRule {
   /**
    * List of source IP addresses/subnets to be captured.
@@ -12950,6 +12976,8 @@ model AzureFirewallPacketCaptureRule {
 /**
  * Response of an Azure Firewall Packet Capture Operation.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallPacketCaptureResponse {
   /**
    * The response code of the performed packet capture operation
@@ -12965,9 +12993,11 @@ model AzureFirewallPacketCaptureResponse {
 /**
  * Azure Firewall FQDN Tag Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model AzureFirewallFqdnTag extends Resource {
   /**
    * Properties of the azure firewall FQDN tag.
@@ -13094,8 +13124,8 @@ model BastionHostPropertiesFormat {
  * IP configuration of an Bastion Host.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model BastionHostIPConfiguration extends SubResource {
   /**
    * Represents the ip configuration associated with the resource.
@@ -13229,11 +13259,11 @@ model BastionShareableLink {
  * Describes a Virtual Machine.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model VM extends Resource {}
 
 /**
@@ -13537,8 +13567,8 @@ model DdosCustomPolicyPropertiesFormat {
  * A DDoS detection rule resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model DdosDetectionRule extends SubResource {
   /**
    * The name of the DDoS detection rule.
@@ -13793,8 +13823,8 @@ model QosDefinition {
  * Endpoint service.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model EndpointServiceResult extends SubResource {
   /**
    * Name of the endpoint service.
@@ -14588,7 +14618,9 @@ model ExpressRouteCircuitReference {
 /**
  * Peering in an ExpressRoute Cross Connection resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model ExpressRouteCrossConnectionPeering extends SubResource {
   /**
    * Properties of the express route cross connection peering.
@@ -14869,7 +14901,9 @@ model ExpressRoutePortPropertiesFormat {
 /**
  * ExpressRouteLink child resource definition.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRouteLink")
 model ExpressRouteLink extends SubResource {
   /**
@@ -16494,7 +16528,9 @@ model ProbePropertiesFormat {
 /**
  * Inbound NAT pool of the load balancer.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model InboundNatPool extends SubResource {
   /**
    * Properties of load balancer inbound nat pool.
@@ -17230,6 +17266,8 @@ model ActiveConnectivityConfigurationsListResult {
  * Active connectivity configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ActiveConnectivityConfiguration
   extends EffectiveConnectivityConfiguration {
   /**
@@ -18305,8 +18343,8 @@ model NetworkProfilePropertiesFormat {
  * Container network interface child resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ContainerNetworkInterface extends SubResource {
   /**
    * Container network interface properties.
@@ -18365,8 +18403,8 @@ model ContainerNetworkInterfacePropertiesFormat {
  * Container network interface configuration child resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model ContainerNetworkInterfaceConfiguration extends SubResource {
   /**
    * Container network interface configuration properties.
@@ -18418,9 +18456,9 @@ model ContainerNetworkInterfaceConfigurationPropertiesFormat {
  * Reference to container resource in remote resource provider.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model Container extends SubResource {}
 
 /**
@@ -20307,6 +20345,8 @@ model PacketCaptureResult {
  * The properties of a packet capture session.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model PacketCaptureResultProperties extends PacketCaptureParameters {
   /**
    * The provisioning state of the packet capture session.
@@ -21800,6 +21840,8 @@ model ConnectionMonitorWorkspaceSettings {
  * Describes the properties of a connection monitor.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorResultProperties extends ConnectionMonitorParameters {
   /**
    * The provisioning state of the connection monitor.
@@ -21898,6 +21940,8 @@ model OperationDisplay {
   description?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
 model OperationListResult is Azure.Core.Page<Operation>;
 
 /**
@@ -22115,8 +22159,8 @@ model AvailablePrivateEndpointType {
  * Private dns zone group resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateDnsZoneGroup extends SubResource {
   /**
    * Name of the resource that is unique within a resource group. This name can be used to access the resource.
@@ -22230,6 +22274,8 @@ model RecordSet {
 /**
  * Response for the ListPrivateDnsZoneGroups API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateDnsZoneGroupListResult is Azure.Core.Page<PrivateDnsZoneGroup>;
 
 /**
@@ -22461,7 +22507,9 @@ model RouteFilterPropertiesFormat {
 /**
  * Route Filter Rule Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model RouteFilterRule extends SubResource {
   /**
    * Properties of the route filter rule.
@@ -23104,10 +23152,10 @@ model NetworkIntentPolicyConfiguration {
  * Network Intent Policy resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model NetworkIntentPolicy extends Resource {
   /**
    * A unique read-only string that changes whenever the resource is updated.
@@ -23699,6 +23747,10 @@ model IpsecPolicy {
 /**
  * Radius Server Settings.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model RadiusServer {
   /**
    * The address of this radius server.
@@ -24119,6 +24171,10 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
 /**
  * A reference to VirtualNetworkGateway or LocalNetworkGateway resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkConnectionGatewayReference {
   /**
    * The ID of VirtualNetworkGateway or LocalNetworkGateway resource.
@@ -24129,6 +24185,8 @@ model VirtualNetworkConnectionGatewayReference {
 /**
  * VirtualNetworkGatewayConnection properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model TunnelConnectionHealth {
   /**
    * Tunnel name.
@@ -24181,6 +24239,10 @@ model GatewayCustomBgpIpAddressIpConfiguration {
 /**
  * An traffic selector policy for a virtual network gateway connection.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model TrafficSelectorPolicy {
   /**
    * A collection of local address spaces in CIDR format.
@@ -24380,6 +24442,10 @@ model GatewayRoute {
 /**
  * Gateway Resiliency Information
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayResiliencyInformation {
   /**
    * Current Resiliency Score for the gateway
@@ -24422,6 +24488,10 @@ model GatewayResiliencyInformation {
 /**
  * Gateway Resiliency based Recommendations
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ResiliencyRecommendationComponents {
   /**
    * Name of the Resiliency based Recommendation Component
@@ -24448,6 +24518,10 @@ model ResiliencyRecommendationComponents {
 /**
  * Resiliency Recommendation details
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayResiliencyRecommendation {
   /**
    * Recommendation Title
@@ -24483,6 +24557,10 @@ model GatewayResiliencyRecommendation {
 /**
  * Gateway Route Sets Information
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayRouteSetsInformation {
   /**
    * Timestamp denoting the last time when the route sets were computed for the gateway
@@ -24514,6 +24592,8 @@ model GatewayRouteSetsInformation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayRouteSet {
   /**
    * Route Set name
@@ -24533,6 +24613,8 @@ model GatewayRouteSet {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model RouteSourceDetails {
   /**
    * Express Route Circuit identifier
@@ -24717,6 +24799,8 @@ model ExpressRouteFailoverTestDetails {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ExpressRouteFailoverCircuitResourceDetails {
   /**
    * NRP Resource URI of the circuit
@@ -24735,6 +24819,8 @@ model ExpressRouteFailoverCircuitResourceDetails {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ExpressRouteFailoverConnectionResourceDetails {
   /**
    * NRP Resource URI of the connection
@@ -24760,6 +24846,8 @@ model ExpressRouteFailoverConnectionResourceDetails {
 /**
  * ExpressRoute failover single test details
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ExpressRouteFailoverSingleTestDetails {
   /**
    * Peering location of the test
@@ -24805,6 +24893,8 @@ model ExpressRouteFailoverSingleTestDetails {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ExpressRouteFailoverRedundantRoute {
   /**
    * A list of all the peering locations for the redundant routes
@@ -24818,6 +24908,8 @@ model ExpressRouteFailoverRedundantRoute {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model FailoverConnectionDetails {
   /**
    * Name of the failover connection
@@ -24838,6 +24930,10 @@ model FailoverConnectionDetails {
 /**
  * Start packet capture parameters on virtual network gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ExpressRouteFailoverStopApiParameters {
   /**
    * Peering location of the test
@@ -25103,7 +25199,9 @@ model CertificateAuthentication {
 /**
  * Response for GetConnectionSharedKey API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ConnectionSharedKey extends SubResource {
   /**
    * The virtual network connection shared key value.
@@ -25234,6 +25332,8 @@ model P2SVpnConnectionRequest {
 /**
  * Result of the request to list all nat rules to a virtual network gateway. It contains a list of Nat rules and a URL nextLink to get the next set of results.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ListVirtualNetworkGatewayNatRulesResult
   is Azure.Core.Page<VirtualNetworkGatewayNatRule>;
 
@@ -25374,8 +25474,8 @@ model VirtualWanProperties {
  * Result of the request to list VirtualWANs. It contains a list of VirtualWANs and a URL nextLink to get the next set of results.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ListVirtualWANsResult is Azure.Core.Page<VirtualWAN>;
 
 /**
@@ -25867,8 +25967,10 @@ model P2SVpnGatewayProperties {
 /**
  * P2SConnectionConfiguration Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model P2SConnectionConfiguration extends SubResource {
   /**
    * Properties of the P2S connection configuration.
@@ -26297,8 +26399,8 @@ model VirtualHubRoute {
  * VirtualHubRouteTableV2 Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VirtualHubRouteTableV2 extends SubResource {
   /**
    * Properties of the virtual hub route table v2.
@@ -26524,8 +26626,8 @@ model ListRouteMapsResult is Azure.Core.Page<RouteMap>;
  * HubVirtualNetworkConnection Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model HubVirtualNetworkConnection extends SubResource {
   /**
    * Properties of the hub virtual network connection.
@@ -26646,8 +26748,8 @@ model VpnGatewayProperties {
  * VpnConnection Resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnConnection extends SubResource {
   /**
    * Properties of the VPN connection.
@@ -27079,7 +27181,9 @@ model ListVpnGatewayNatRulesResult is Azure.Core.Page<VpnGatewayNatRule>;
 /**
  * Result of the request to list P2SVpnGateways. It contains a list of P2SVpnGateways and a URL nextLink to get the next set of results.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ListP2SVpnGatewaysResult is Azure.Core.Page<P2SVpnGateway>;
 
 /**
@@ -27249,8 +27353,8 @@ model ExpressRouteGatewayPropertiesAutoScaleConfigurationBounds {
  * ExpressRouteConnection resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model ExpressRouteConnection extends SubResource {
   /**
    * Properties of the express route connection.
@@ -27353,8 +27457,8 @@ model ExpressRouteConnectionList {
  * NetworkVirtualApplianceConnection resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model NetworkVirtualApplianceConnection extends SubResource {
   /**
    * Properties of the express route connection.
@@ -28666,6 +28770,8 @@ model AzureAsyncOperationResult {
 /**
  * Network admin rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ActiveSecurityAdminRule extends ActiveBaseSecurityAdminRule {
   /**
    * Indicates the properties of the security admin rule
@@ -28749,6 +28855,8 @@ model AdminPropertiesFormat {
 /**
  * Network default admin rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model ActiveDefaultSecurityAdminRule extends ActiveBaseSecurityAdminRule {
   /**
    * Indicates the properties of the default security admin rule
@@ -28844,6 +28952,8 @@ model DefaultAdminPropertiesFormat {
 /**
  * Network admin rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model EffectiveSecurityAdminRule extends EffectiveBaseSecurityAdminRule {
   /**
    * Indicates the properties of the security admin rule
@@ -28859,6 +28969,8 @@ model EffectiveSecurityAdminRule extends EffectiveBaseSecurityAdminRule {
 /**
  * Network default admin rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model EffectiveDefaultSecurityAdminRule extends EffectiveBaseSecurityAdminRule {
   /**
    * Indicates the properties of the default security admin rule
@@ -28874,7 +28986,9 @@ model EffectiveDefaultSecurityAdminRule extends EffectiveBaseSecurityAdminRule {
 /**
  * Network admin rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model AdminRule extends BaseAdminRule {
   /**
    * Indicates the properties of the security admin rule
@@ -28890,7 +29004,9 @@ model AdminRule extends BaseAdminRule {
 /**
  * Network default admin rule.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkManager)
 model DefaultAdminRule extends BaseAdminRule {
   /**
    * Indicates the properties of the security admin rule
@@ -28907,6 +29023,8 @@ model DefaultAdminRule extends BaseAdminRule {
  * Connection state snapshot.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionStateSnapshot {
   /**
@@ -28972,6 +29090,8 @@ model ConnectionStateSnapshot {
  * List of connection states snapshots.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
 model ConnectionMonitorQueryResult {
   /**
@@ -28989,7 +29109,9 @@ model ConnectionMonitorQueryResult {
 /**
  * Route Filter Rule Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model PatchRouteFilterRule extends SubResource {
   /**
    * Properties of the route filter rule.
@@ -29012,7 +29134,9 @@ model PatchRouteFilterRule extends SubResource {
 /**
  * Route Filter Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 model PatchRouteFilter extends SubResource {
   /**
    * Properties of the route filter.

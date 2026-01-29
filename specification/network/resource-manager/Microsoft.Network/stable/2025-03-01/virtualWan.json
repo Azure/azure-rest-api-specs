@@ -1240,6 +1240,27 @@
         "value"
       ]
     },
+    "ListP2SVpnGatewaysResult": {
+      "type": "object",
+      "description": "Result of the request to list P2SVpnGateways. It contains a list of P2SVpnGateways and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The P2SVpnGateway items on this page",
+          "items": {
+            "$ref": "#/definitions/P2SVpnGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ListRouteMapsResult": {
       "type": "object",
       "description": "List of RouteMaps and a URL nextLink to get the next set of results.",
@@ -1416,7 +1437,7 @@
           "type": "array",
           "description": "The VpnSiteLink items on this page",
           "items": {
-            "$ref": "./common.json#/definitions/VpnSiteLink"
+            "$ref": "#/definitions/VpnSiteLink"
           }
         },
         "nextLink": {
@@ -1542,6 +1563,31 @@
         }
       }
     },
+    "P2SConnectionConfiguration": {
+      "type": "object",
+      "description": "P2SConnectionConfiguration Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/P2SConnectionConfigurationProperties",
+          "description": "Properties of the P2S connection configuration.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
     "P2SConnectionConfigurationProperties": {
       "type": "object",
       "description": "Parameters for P2SConnectionConfiguration.",
@@ -1569,7 +1615,7 @@
           "type": "array",
           "description": "List of previous Configuration Policy Groups that this P2SConnectionConfiguration was attached to.",
           "items": {
-            "$ref": "./common.json#/definitions/VpnServerConfigurationPolicyGroup"
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
           },
           "readOnly": true
         },
@@ -1653,7 +1699,7 @@
           "type": "array",
           "description": "List of all p2s connection configurations of the gateway.",
           "items": {
-            "$ref": "./common.json#/definitions/P2SConnectionConfiguration"
+            "$ref": "#/definitions/P2SConnectionConfiguration"
           }
         },
         "provisioningState": {
@@ -2615,7 +2661,7 @@
           "type": "array",
           "description": "The Traffic Selector Policies to be considered by this connection.",
           "items": {
-            "$ref": "./common.json#/definitions/TrafficSelectorPolicy"
+            "$ref": "./networkGateway.json#/definitions/TrafficSelectorPolicy"
           }
         },
         "enableRateLimiting": {
@@ -2639,7 +2685,7 @@
           "type": "array",
           "description": "List of all vpn site link connections to the gateway.",
           "items": {
-            "$ref": "./common.json#/definitions/VpnSiteLinkConnection"
+            "$ref": "#/definitions/VpnSiteLinkConnection"
           }
         },
         "routingConfiguration": {
@@ -2966,6 +3012,27 @@
         }
       ]
     },
+    "VpnServerConfigurationPolicyGroup": {
+      "type": "object",
+      "description": "VpnServerConfigurationPolicyGroup Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnServerConfigurationPolicyGroupProperties",
+          "description": "Properties of the VpnServerConfigurationPolicyGroup.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
     "VpnServerConfigurationPolicyGroupMember": {
       "type": "object",
       "description": "VpnServerConfiguration PolicyGroup member",
@@ -3091,7 +3158,7 @@
           "type": "array",
           "description": "Multiple Radius Server configuration for VpnServerConfiguration.",
           "items": {
-            "$ref": "./common.json#/definitions/RadiusServer"
+            "$ref": "./networkGateway.json#/definitions/RadiusServer"
           }
         },
         "aadAuthenticationParameters": {
@@ -3115,7 +3182,7 @@
           "type": "array",
           "description": "List of all VpnServerConfigurationPolicyGroups.",
           "items": {
-            "$ref": "./common.json#/definitions/VpnServerConfigurationPolicyGroup"
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
           }
         },
         "etag": {
@@ -3156,6 +3223,48 @@
       "allOf": [
         {
           "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
+    "VpnSiteLink": {
+      "type": "object",
+      "description": "VpnSiteLink Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnSiteLinkProperties",
+          "description": "Properties of the VPN site link.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "VpnSiteLinkConnection": {
+      "type": "object",
+      "description": "VpnSiteLinkConnection Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnSiteLinkConnectionProperties",
+          "description": "Properties of the VPN site link connection.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
         }
       ]
     },
@@ -3333,7 +3442,7 @@
           "type": "array",
           "description": "List of all vpn site links.",
           "items": {
-            "$ref": "./common.json#/definitions/VpnSiteLink"
+            "$ref": "#/definitions/VpnSiteLink"
           }
         },
         "o365Policy": {

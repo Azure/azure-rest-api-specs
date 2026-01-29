@@ -1098,7 +1098,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "./common.json#/definitions/ExpressRouteFailoverSingleTestDetails"
+                "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
               }
             }
           },
@@ -1235,7 +1235,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/GatewayResiliencyInformation"
+              "$ref": "#/definitions/GatewayResiliencyInformation"
             }
           },
           "202": {
@@ -1266,7 +1266,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./common.json#/definitions/GatewayResiliencyInformation"
+          "final-state-schema": "#/definitions/GatewayResiliencyInformation"
         },
         "x-ms-long-running-operation": true
       }
@@ -1307,7 +1307,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/GatewayRouteSetsInformation"
+              "$ref": "#/definitions/GatewayRouteSetsInformation"
             }
           },
           "202": {
@@ -1338,7 +1338,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./common.json#/definitions/GatewayRouteSetsInformation"
+          "final-state-schema": "#/definitions/GatewayRouteSetsInformation"
         },
         "x-ms-long-running-operation": true
       }
@@ -2104,7 +2104,7 @@
             "description": "Virtual network gateway stop simulation parameters supplied to stop failover simulation on gateway.",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/ExpressRouteFailoverStopApiParameters"
+              "$ref": "#/definitions/ExpressRouteFailoverStopApiParameters"
             }
           }
         ],
@@ -2622,6 +2622,151 @@
         "keyLength"
       ]
     },
+    "ConnectionSharedKey": {
+      "type": "object",
+      "description": "Response for GetConnectionSharedKey API service call.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The virtual network connection shared key value."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ExpressRouteFailoverCircuitResourceDetails": {
+      "type": "object",
+      "properties": {
+        "nrpResourceUri": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "NRP Resource URI of the circuit"
+        },
+        "name": {
+          "type": "string",
+          "description": "Circuit Name"
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "Connection name associated with the circuit"
+        }
+      }
+    },
+    "ExpressRouteFailoverConnectionResourceDetails": {
+      "type": "object",
+      "properties": {
+        "nrpResourceUri": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "NRP Resource URI of the connection"
+        },
+        "name": {
+          "type": "string",
+          "description": "Connection Name"
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/FailoverConnectionStatus",
+          "description": "The current status of the connection"
+        },
+        "lastUpdatedTime": {
+          "type": "string",
+          "description": "Time when the connection was last updated"
+        }
+      }
+    },
+    "ExpressRouteFailoverRedundantRoute": {
+      "type": "object",
+      "properties": {
+        "peeringLocations": {
+          "type": "array",
+          "description": "A list of all the peering locations for the redundant routes",
+          "items": {
+            "type": "string"
+          }
+        },
+        "routes": {
+          "type": "array",
+          "description": "A list of all the redundant routes in the peering locations",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExpressRouteFailoverSingleTestDetails": {
+      "type": "object",
+      "description": "ExpressRoute failover single test details",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "Peering location of the test"
+        },
+        "status": {
+          "$ref": "./common.json#/definitions/FailoverTestStatusForSingleTest",
+          "description": "The current status of the test"
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "description": "Time when the test was started"
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "description": "Time when the test was completed"
+        },
+        "redundantRoutes": {
+          "type": "array",
+          "description": "List of routes received from this peering as well as some other peering location",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteFailoverRedundantRoute"
+          }
+        },
+        "nonRedundantRoutes": {
+          "type": "array",
+          "description": "List of al the routes that were received only from this peering location",
+          "items": {
+            "type": "string"
+          }
+        },
+        "wasSimulationSuccessful": {
+          "type": "boolean",
+          "description": "Whether the failover simulation was successful or not"
+        },
+        "failoverConnectionDetails": {
+          "type": "array",
+          "description": "List of all the failover connections for this peering location",
+          "items": {
+            "$ref": "#/definitions/FailoverConnectionDetails"
+          }
+        }
+      }
+    },
+    "ExpressRouteFailoverStopApiParameters": {
+      "type": "object",
+      "description": "Start packet capture parameters on virtual network gateway.",
+      "properties": {
+        "peeringLocation": {
+          "type": "string",
+          "description": "Peering location of the test"
+        },
+        "wasSimulationSuccessful": {
+          "type": "boolean",
+          "description": "Whether the failover simulation was successful or not"
+        },
+        "details": {
+          "type": "array",
+          "description": "List of all the failover connections for this peering location",
+          "items": {
+            "$ref": "#/definitions/FailoverConnectionDetails"
+          }
+        }
+      }
+    },
     "ExpressRouteFailoverTestDetails": {
       "type": "object",
       "description": "ExpressRoute failover test details",
@@ -2634,7 +2779,7 @@
           "type": "array",
           "description": "All circuits in the peering location",
           "items": {
-            "$ref": "./common.json#/definitions/ExpressRouteFailoverCircuitResourceDetails"
+            "$ref": "#/definitions/ExpressRouteFailoverCircuitResourceDetails"
           }
         },
         "status": {
@@ -2653,7 +2798,7 @@
           "type": "array",
           "description": "All connections to the circuits in the peering location",
           "items": {
-            "$ref": "./common.json#/definitions/ExpressRouteFailoverConnectionResourceDetails"
+            "$ref": "#/definitions/ExpressRouteFailoverConnectionResourceDetails"
           }
         },
         "testGuid": {
@@ -2670,6 +2815,23 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "FailoverConnectionDetails": {
+      "type": "object",
+      "properties": {
+        "failoverConnectionName": {
+          "type": "string",
+          "description": "Name of the failover connection"
+        },
+        "failoverLocation": {
+          "type": "string",
+          "description": "Location of the failover connection"
+        },
+        "isVerified": {
+          "type": "boolean",
+          "description": "Whether the customer was able to establish connectivity through this failover connection or not"
         }
       }
     },
@@ -2690,6 +2852,75 @@
         "ipConfigurationId",
         "customBgpIpAddress"
       ]
+    },
+    "GatewayResiliencyInformation": {
+      "type": "object",
+      "description": "Gateway Resiliency Information",
+      "properties": {
+        "overallScore": {
+          "type": "string",
+          "description": "Current Resiliency Score for the gateway"
+        },
+        "scoreChange": {
+          "type": "string",
+          "description": "Update in the Resiliency Score for the gateway from the last computed score"
+        },
+        "minScoreFromRecommendations": {
+          "type": "string",
+          "description": "Minimum increase expected in the score if the at least one of the recommendations is applied for the gateway"
+        },
+        "maxScoreFromRecommendations": {
+          "type": "string",
+          "description": "Maximum increase expected in the score if all of the recommendations are applied for the gateway"
+        },
+        "lastComputedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp denoting the last time when the resiliency score was computed for the gateway"
+        },
+        "nextEligibleComputeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp denoting the next eligible time to re-compute the resiliency score for the gateway"
+        },
+        "components": {
+          "type": "array",
+          "description": "List of Resiliency based Recommendation Components for the gateway",
+          "items": {
+            "$ref": "#/definitions/ResiliencyRecommendationComponents"
+          }
+        }
+      }
+    },
+    "GatewayResiliencyRecommendation": {
+      "type": "object",
+      "description": "Resiliency Recommendation details",
+      "properties": {
+        "recommendationTitle": {
+          "type": "string",
+          "description": "Recommendation Title"
+        },
+        "recommendationId": {
+          "type": "string",
+          "description": "Recommendation Id"
+        },
+        "severity": {
+          "type": "string",
+          "description": "Impact associated with the recommendation"
+        },
+        "recommendationText": {
+          "type": "string",
+          "description": "Recommendation details"
+        },
+        "callToActionText": {
+          "type": "string",
+          "description": "Acton items to apply the recommendation"
+        },
+        "callToActionLink": {
+          "type": "string",
+          "description": "Link to the public documentation for the associated recommendation"
+        }
+      }
     },
     "GatewayRoute": {
       "type": "object",
@@ -2742,6 +2973,66 @@
           "description": "List of gateway routes.",
           "items": {
             "$ref": "#/definitions/GatewayRoute"
+          }
+        }
+      }
+    },
+    "GatewayRouteSet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Route Set name"
+        },
+        "locations": {
+          "type": "array",
+          "description": "List of different locations from where the routes are learned",
+          "items": {
+            "type": "string"
+          }
+        },
+        "details": {
+          "type": "object",
+          "description": "List of different Route Sources",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/RouteSourceDetails"
+            },
+            "type": "array"
+          }
+        }
+      }
+    },
+    "GatewayRouteSetsInformation": {
+      "type": "object",
+      "description": "Gateway Route Sets Information",
+      "properties": {
+        "lastComputedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp denoting the last time when the route sets were computed for the gateway"
+        },
+        "nextEligibleComputeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp denoting the next eligible time to re-compute the route sets for the gateway"
+        },
+        "routeSetVersion": {
+          "type": "string",
+          "description": "Version for the route set"
+        },
+        "routeSets": {
+          "type": "array",
+          "description": "List of Gateway Route Sets",
+          "items": {
+            "$ref": "#/definitions/GatewayRouteSet"
+          }
+        },
+        "circuitsMetadataMap": {
+          "type": "object",
+          "description": "Dictionary containing map of the circuit id and circuit details",
+          "additionalProperties": {
+            "$ref": "#/definitions/CircuitMetadataMap"
           }
         }
       }
@@ -2829,6 +3120,72 @@
         "pfsGroup"
       ]
     },
+    "ListVirtualNetworkGatewayNatRulesResult": {
+      "type": "object",
+      "description": "Result of the request to list all nat rules to a virtual network gateway. It contains a list of Nat rules and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualNetworkGatewayNatRule items on this page",
+          "items": {
+            "$ref": "./common.json#/definitions/VirtualNetworkGatewayNatRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LocalNetworkGateway": {
+      "type": "object",
+      "description": "A common class for general resource information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LocalNetworkGatewayPropertiesFormat",
+          "description": "Properties of the local network gateway.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "LocalNetworkGatewayListResult": {
+      "type": "object",
+      "description": "The response of a LocalNetworkGateway list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LocalNetworkGateway items on this page",
+          "items": {
+            "$ref": "#/definitions/LocalNetworkGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "LocalNetworkGatewayPropertiesFormat": {
       "type": "object",
       "description": "LocalNetworkGateway properties.",
@@ -2876,6 +3233,142 @@
           "x-ms-secret": true
         }
       }
+    },
+    "RadiusServer": {
+      "type": "object",
+      "description": "Radius Server Settings.",
+      "properties": {
+        "radiusServerAddress": {
+          "type": "string",
+          "description": "The address of this radius server."
+        },
+        "radiusServerScore": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The initial score assigned to this radius server."
+        },
+        "radiusServerSecret": {
+          "type": "string",
+          "format": "password",
+          "description": "The secret used for this radius server. We will no longer return radiusServerSecret in VirtualNetworkGateway Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGateway ListRadiusSecrets API to fetch radius server secrets.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "radiusServerAddress"
+      ]
+    },
+    "ResiliencyRecommendationComponents": {
+      "type": "object",
+      "description": "Gateway Resiliency based Recommendations",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Resiliency based Recommendation Component"
+        },
+        "currentScore": {
+          "type": "string",
+          "description": "Current Score of the gateway"
+        },
+        "maxScore": {
+          "type": "string",
+          "description": "Max score that the gateway can achieve if the specified recommendation is applied"
+        },
+        "recommendations": {
+          "type": "array",
+          "description": "List of Gateway Resiliency based Recommendations",
+          "items": {
+            "$ref": "#/definitions/GatewayResiliencyRecommendation"
+          }
+        }
+      }
+    },
+    "RouteSourceDetails": {
+      "type": "object",
+      "properties": {
+        "circuit": {
+          "type": "string",
+          "description": "Express Route Circuit identifier"
+        },
+        "pri": {
+          "type": "string",
+          "description": "Flag to indicate if the route learned from the primary device is active or passive"
+        },
+        "sec": {
+          "type": "string",
+          "description": "Flag to indicate if the route learned from the secondary device is active or passive"
+        }
+      }
+    },
+    "TrafficSelectorPolicy": {
+      "type": "object",
+      "description": "An traffic selector policy for a virtual network gateway connection.",
+      "properties": {
+        "localAddressRanges": {
+          "type": "array",
+          "description": "A collection of local address spaces in CIDR format.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remoteAddressRanges": {
+          "type": "array",
+          "description": "A collection of remote address spaces in CIDR format.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "localAddressRanges",
+        "remoteAddressRanges"
+      ]
+    },
+    "TunnelConnectionHealth": {
+      "type": "object",
+      "description": "VirtualNetworkGatewayConnection properties.",
+      "properties": {
+        "tunnel": {
+          "type": "string",
+          "description": "Tunnel name.",
+          "readOnly": true
+        },
+        "connectionStatus": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionStatus",
+          "description": "Virtual Network Gateway connection status.",
+          "readOnly": true
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Ingress Bytes Transferred in this connection.",
+          "readOnly": true
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The Egress Bytes Transferred in this connection.",
+          "readOnly": true
+        },
+        "lastConnectionEstablishedUtcTime": {
+          "type": "string",
+          "description": "The time at which connection was established in Utc format.",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworkConnectionGatewayReference": {
+      "type": "object",
+      "description": "A reference to VirtualNetworkGateway or LocalNetworkGateway resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of VirtualNetworkGateway or LocalNetworkGateway resource."
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "VirtualNetworkGateway": {
       "type": "object",
@@ -2926,7 +3419,7 @@
           "description": "The reference to virtual network gateway resource."
         },
         "localNetworkGateway2": {
-          "$ref": "./common.json#/definitions/LocalNetworkGateway",
+          "$ref": "#/definitions/LocalNetworkGateway",
           "description": "The reference to local network gateway resource."
         },
         "ingressNatRules": {
@@ -2987,7 +3480,7 @@
           "type": "array",
           "description": "Collection of all tunnels' connection health status.",
           "items": {
-            "$ref": "./common.json#/definitions/TunnelConnectionHealth"
+            "$ref": "#/definitions/TunnelConnectionHealth"
           },
           "readOnly": true
         },
@@ -3038,7 +3531,7 @@
           "type": "array",
           "description": "The Traffic Selector Policies to be considered by this connection.",
           "items": {
-            "$ref": "./common.json#/definitions/TrafficSelectorPolicy"
+            "$ref": "#/definitions/TrafficSelectorPolicy"
           }
         },
         "resourceGuid": {
@@ -3363,7 +3856,7 @@
           "type": "array",
           "description": "The radiusServers property for multiple radius server configuration.",
           "items": {
-            "$ref": "./common.json#/definitions/RadiusServer"
+            "$ref": "#/definitions/RadiusServer"
           }
         },
         "aadTenant": {

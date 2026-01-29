@@ -7658,7 +7658,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/PrivateDnsZoneGroupListResult"
+              "$ref": "#/definitions/PrivateDnsZoneGroupListResult"
             }
           },
           "default": {
@@ -11538,7 +11538,7 @@
           "type": "array",
           "description": "A list of ip configurations of the container network interface configuration.",
           "items": {
-            "$ref": "./common.json#/definitions/IPConfigurationProfile"
+            "$ref": "#/definitions/IPConfigurationProfile"
           }
         },
         "containerNetworkInterfaces": {
@@ -12469,6 +12469,36 @@
         }
       ]
     },
+    "IPConfigurationProfile": {
+      "type": "object",
+      "description": "IP configuration profile child resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IPConfigurationProfilePropertiesFormat",
+          "description": "Properties of the IP configuration profile.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource. This name can be used to access the resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "Sub Resource type.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
     "IPConfigurationProfilePropertiesFormat": {
       "type": "object",
       "description": "IP configuration profile properties.",
@@ -13337,14 +13367,14 @@
           "type": "array",
           "description": "The reference to LoadBalancerBackendAddressPool resource.",
           "items": {
-            "$ref": "./common.json#/definitions/BackendAddressPool"
+            "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
           }
         },
         "loadBalancerInboundNatRules": {
           "type": "array",
           "description": "A list of references of LoadBalancerInboundNatRules.",
           "items": {
-            "$ref": "./common.json#/definitions/InboundNatRule"
+            "$ref": "./loadBalancer.json#/definitions/InboundNatRule"
           }
         },
         "privateIPAddress": {
@@ -13773,7 +13803,7 @@
           "type": "array",
           "description": "A collection of references to flow log resources.",
           "items": {
-            "$ref": "./common.json#/definitions/FlowLog"
+            "$ref": "./networkWatcher.json#/definitions/FlowLog"
           },
           "readOnly": true
         },
@@ -14422,6 +14452,27 @@
         }
       ]
     },
+    "PrivateDnsZoneGroupListResult": {
+      "type": "object",
+      "description": "Response for the ListPrivateDnsZoneGroups API service call.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateDnsZoneGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateDnsZoneGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PrivateDnsZoneGroupPropertiesFormat": {
       "type": "object",
       "description": "Properties of the private dns zone group.",
@@ -14905,7 +14956,7 @@
           "type": "array",
           "description": "An array of references to the load balancer IP configurations.",
           "items": {
-            "$ref": "./common.json#/definitions/FrontendIPConfiguration"
+            "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration"
           }
         },
         "ipConfigurations": {
@@ -16530,7 +16581,7 @@
           "type": "array",
           "description": "Array of IP configuration profiles which reference this subnet.",
           "items": {
-            "$ref": "./common.json#/definitions/IPConfigurationProfile"
+            "$ref": "#/definitions/IPConfigurationProfile"
           },
           "readOnly": true
         },
@@ -17378,7 +17429,7 @@
           "type": "array",
           "description": "A collection of references to flow log resources.",
           "items": {
-            "$ref": "./common.json#/definitions/FlowLog"
+            "$ref": "./networkWatcher.json#/definitions/FlowLog"
           },
           "readOnly": true
         },
