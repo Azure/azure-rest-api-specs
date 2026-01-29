@@ -1,0 +1,83 @@
+{
+  "operationId": "ContainerAppsBuilds_Get",
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "buildName": "testBuild",
+    "containerAppName": "testCapp",
+    "resourceGroupName": "rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "ContainerAppsBuilds_Get_0",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testBuild",
+        "type": "Microsoft.App/containerApps/builds",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.App/containerApps/testCapp/builds/testBuild",
+        "properties": {
+          "buildStatus": "InProgress",
+          "configuration": {
+            "baseOs": "DebianBullseye",
+            "environmentVariables": [
+              {
+                "name": "foo1",
+                "value": "bar1"
+              },
+              {
+                "name": "foo2",
+                "value": "bar2"
+              }
+            ],
+            "platform": "dotnetcore",
+            "platformVersion": "7.0",
+            "preBuildSteps": [
+              {
+                "description": "First pre build step.",
+                "httpGet": {
+                  "fileName": "output.txt",
+                  "headers": [
+                    "foo",
+                    "bar"
+                  ],
+                  "url": "https://microsoft.com"
+                },
+                "scripts": [
+                  "echo 'hello'",
+                  "echo 'world'"
+                ]
+              },
+              {
+                "description": "Second pre build step.",
+                "httpGet": {
+                  "fileName": "output.txt",
+                  "headers": [
+                    "foo"
+                  ],
+                  "url": "https://microsoft.com"
+                },
+                "scripts": [
+                  "echo 'hello'",
+                  "echo 'again'"
+                ]
+              }
+            ]
+          },
+          "destinationContainerRegistry": {
+            "image": "test.azurecr.io/repo:tag",
+            "server": "test.azurecr.io"
+          },
+          "logStreamEndpoint": "https://foo.azurecontainerapps.dev/logstream",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2022-10-11T11:05:51.4940669Z",
+          "createdBy": "sample@microsoft.com",
+          "createdByType": "User",
+          "lastModifiedAt": "2022-10-11T11:05:51.4940669Z",
+          "lastModifiedBy": "sample@microsoft.com",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  }
+}

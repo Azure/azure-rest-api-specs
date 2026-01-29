@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "containerAppName": "testcontainerApp0",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "testcontainerApp0-pjxhsye",
+            "type": "Microsoft.App/containerApps/revisions",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0/revisions/testcontainerApp0-pjxhsye",
+            "properties": {
+              "active": true,
+              "createdTime": "2021-05-24T21:24:22+00:00",
+              "fqdn": "testcontainerApp0-pjxhsye.politehill-ab123456.eastus.azurecontainerapps.io",
+              "lastActiveTime": "2021-05-24T21:24:22+00:00",
+              "replicas": 1,
+              "template": {
+                "containers": [
+                  {
+                    "name": "testcontainerApp0",
+                    "image": "repo/testcontainerApp0:v2",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "scale": {
+                  "maxReplicas": 5,
+                  "minReplicas": 1,
+                  "rules": [
+                    {
+                      "name": "httpscalingrule",
+                      "http": {
+                        "metadata": {
+                          "concurrentRequests": "50"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "trafficWeight": 80
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerAppsRevisions_ListRevisions",
+  "title": "List Container App's revisions"
+}

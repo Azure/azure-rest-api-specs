@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "jobExecutionName": "jobExecution1",
+    "jobName": "testcontainerAppsJob0",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "jobExecution1",
+        "properties": {
+          "endTime": "2023-02-13T20:47:30+00:00",
+          "message": "Job has reached the specified backoff limit",
+          "reason": "BackoffLimitExceeded",
+          "startTime": "2023-02-13T20:37:30+00:00",
+          "status": "Running",
+          "template": {
+            "containers": [
+              {
+                "name": "testcontainerappsjob0",
+                "image": "repo/testcontainerappsjob0:v4",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                }
+              }
+            ],
+            "initContainers": [
+              {
+                "name": "testinitcontainerAppsJob0",
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainerappsjob0:v4",
+                "resources": {
+                  "cpu": 0.5,
+                  "memory": "1Gi"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "JobExecution",
+  "title": "Get a single Job Execution"
+}

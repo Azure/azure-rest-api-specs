@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "configName": "default",
+    "environmentName": "managedEnv",
+    "maintenanceConfigurationEnvelope": {
+      "properties": {
+        "scheduledEntries": [
+          {
+            "durationHours": 9,
+            "startHourUtc": 12,
+            "weekDay": "Sunday"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.App/ManagedEnvironments/maintenanceConfigurations",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
+        "properties": {
+          "scheduledEntries": [
+            {
+              "durationHours": 9,
+              "startHourUtc": 12,
+              "weekDay": "Sunday"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.App/ManagedEnvironments/maintenanceConfigurations",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
+        "properties": {
+          "scheduledEntries": [
+            {
+              "durationHours": 9,
+              "startHourUtc": 12,
+              "weekDay": "Sunday"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "MaintenanceConfigurations_CreateOrUpdate",
+  "title": "ManagedEnvironmentMaintenanceConfigurationsCreateOrUpdate"
+}

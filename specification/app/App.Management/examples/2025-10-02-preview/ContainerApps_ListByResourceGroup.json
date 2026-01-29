@@ -1,0 +1,213 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "testcontainerApp0",
+            "type": "Microsoft.App/containerApps",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+            "location": "East US",
+            "properties": {
+              "configuration": {
+                "dapr": {
+                  "appHealth": {
+                    "path": "/health",
+                    "enabled": true,
+                    "probeIntervalSeconds": 3,
+                    "probeTimeoutMilliseconds": 1000,
+                    "threshold": 3
+                  },
+                  "appPort": 3000,
+                  "appProtocol": "http",
+                  "enableApiLogging": true,
+                  "enabled": true,
+                  "httpMaxRequestSize": 10,
+                  "httpReadBufferSize": 30,
+                  "logLevel": "debug",
+                  "maxConcurrency": 10
+                },
+                "ingress": {
+                  "customDomains": [
+                    {
+                      "name": "www.my-name.com",
+                      "bindingType": "SniEnabled",
+                      "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-name-dot-com"
+                    },
+                    {
+                      "name": "www.my--other-name.com",
+                      "bindingType": "SniEnabled",
+                      "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
+                    }
+                  ],
+                  "external": true,
+                  "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+                  "ipSecurityRestrictions": [
+                    {
+                      "name": "Allow work IP A subnet",
+                      "description": "Allowing all IP's within the subnet below to access containerapp",
+                      "action": "Allow",
+                      "ipAddressRange": "192.168.1.1/32"
+                    },
+                    {
+                      "name": "Allow work IP B subnet",
+                      "description": "Allowing all IP's within the subnet below to access containerapp",
+                      "action": "Allow",
+                      "ipAddressRange": "192.168.1.1/8"
+                    }
+                  ],
+                  "stickySessions": {
+                    "affinity": "sticky"
+                  },
+                  "targetPort": 3000,
+                  "targetPortHttpScheme": "http",
+                  "traffic": [
+                    {
+                      "revisionName": "testcontainerApp0-ab1234",
+                      "weight": 80
+                    },
+                    {
+                      "label": "staging",
+                      "revisionName": "testcontainerApp0-ab4321",
+                      "weight": 20
+                    }
+                  ],
+                  "transport": "auto"
+                },
+                "maxInactiveRevisions": 10,
+                "revisionTransitionThreshold": 100,
+                "runtime": {
+                  "dotnet": {
+                    "autoConfigureDataProtection": true
+                  },
+                  "java": {
+                    "enableMetrics": true,
+                    "javaAgent": {
+                      "enabled": true,
+                      "logging": {
+                        "loggerSettings": [
+                          {
+                            "level": "debug",
+                            "logger": "org.springframework.boot"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "eventStreamEndpoint": "testEndpoint",
+              "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
+              "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+              "provisioningState": "Succeeded",
+              "runningStatus": "Running",
+              "template": {
+                "containers": [
+                  {
+                    "name": "testcontainerApp0",
+                    "image": "repo/testcontainerApp0:v4",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "initContainers": [
+                  {
+                    "name": "testinitcontainerApp0",
+                    "image": "repo/testcontainerApp0:v4",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "scale": {
+                  "cooldownPeriod": 350,
+                  "maxReplicas": 5,
+                  "minReplicas": 1,
+                  "pollingInterval": 35,
+                  "rules": [
+                    {
+                      "name": "httpscalingrule",
+                      "http": {
+                        "metadata": {
+                          "concurrentRequests": "50"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "workloadProfileName": "My-GP-01"
+            }
+          },
+          {
+            "name": "testcontainerApp1",
+            "type": "Microsoft.App/containerApps",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp1",
+            "location": "East US",
+            "properties": {
+              "configuration": {
+                "ingress": {
+                  "external": true,
+                  "fqdn": "testcontainerApp1.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+                  "targetPort": 3000,
+                  "targetPortHttpScheme": "http",
+                  "transport": "auto"
+                },
+                "maxInactiveRevisions": 10,
+                "revisionTransitionThreshold": 100
+              },
+              "deploymentErrors": "Code: ContainerAppImagePullProvisionError, Message: Error pulling the container image. Please check the image name or any registry credentials to access if required.",
+              "eventStreamEndpoint": "testEndpoint",
+              "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
+              "latestRevisionFqdn": "testcontainerApp1-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+              "provisioningState": "Failed",
+              "template": {
+                "containers": [
+                  {
+                    "name": "testcontainerApp1",
+                    "image": "repo/testcontainerApp1:v4",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "initContainers": [
+                  {
+                    "name": "testcontainerApp1",
+                    "image": "repo/testcontainerApp1:v4",
+                    "resources": {
+                      "cpu": 0.2,
+                      "memory": "100Mi"
+                    }
+                  }
+                ],
+                "scale": {
+                  "cooldownPeriod": 350,
+                  "maxReplicas": 5,
+                  "minReplicas": 1,
+                  "pollingInterval": 35
+                }
+              },
+              "workloadProfileName": "Consumption"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerApps_ListByResourceGroup",
+  "title": "List Container Apps by resource group"
+}

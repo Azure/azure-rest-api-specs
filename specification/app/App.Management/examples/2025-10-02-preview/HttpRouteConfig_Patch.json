@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "environmentName": "testcontainerenv",
+    "httpRouteConfigEnvelope": {
+      "properties": {
+        "customDomains": [
+          {
+            "name": "example.com",
+            "bindingType": "SniEnabled",
+            "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-1"
+          }
+        ],
+        "rules": [
+          {
+            "description": "random-description",
+            "routes": [
+              {
+                "action": {
+                  "prefixRewrite": "/v1/api"
+                },
+                "match": {
+                  "path": "/v1",
+                  "caseSensitive": true
+                }
+              }
+            ],
+            "targets": [
+              {
+                "containerApp": "capp-1",
+                "revision": "rev-1",
+                "weight": 100
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "httpRouteName": "httproutefriendlyname",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.App/managedEnvironments/httpRouteConfigs",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/httpRouteConfigs/route-1",
+        "properties": {
+          "customDomains": [
+            {
+              "name": "example.com",
+              "bindingType": "SniEnabled",
+              "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-1"
+            }
+          ],
+          "fqdn": "app1.example.com",
+          "provisioningState": "InProgress",
+          "rules": [
+            {
+              "description": "random-description",
+              "routes": [
+                {
+                  "action": {
+                    "prefixRewrite": "/v1/api"
+                  },
+                  "match": {
+                    "path": "/v1",
+                    "caseSensitive": true
+                  }
+                }
+              ],
+              "targets": [
+                {
+                  "containerApp": "capp-1",
+                  "revision": "rev-1",
+                  "weight": 100
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "HttpRouteConfig_Update",
+  "title": "Patch Managed Http Route"
+}

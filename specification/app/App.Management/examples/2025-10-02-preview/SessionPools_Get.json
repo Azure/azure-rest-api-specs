@@ -1,0 +1,113 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "resourceGroupName": "rg",
+    "sessionPoolName": "testsessionpool",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testsessionpool",
+        "type": "Microsoft.App/sessionPools",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/sessionPools/testsessionpool",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "bce8c037-3d10-44a4-a970-25f799611fc6",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "location": "East US",
+        "properties": {
+          "containerType": "CustomContainer",
+          "customContainerTemplate": {
+            "containers": [
+              {
+                "name": "testinitcontainer",
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainer:v4",
+                "resources": {
+                  "cpu": 0.25,
+                  "memory": "0.5Gi"
+                }
+              }
+            ],
+            "ingress": {
+              "targetPort": 80
+            },
+            "registryCredentials": {
+              "identity": "/subscriptions/7a497526-bb8d-4816-9795-db1418a1f977/resourcegroups/test/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testSP",
+              "server": "test.azurecr.io"
+            }
+          },
+          "dynamicPoolConfiguration": {
+            "lifecycleConfiguration": {
+              "cooldownPeriodInSeconds": 600,
+              "lifecycleType": "Timed"
+            }
+          },
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "managedIdentitySettings": [
+            {
+              "identity": "system",
+              "lifecycle": "Main"
+            }
+          ],
+          "nodeCount": 1,
+          "poolManagementEndpoint": "https://testsessionpool.agreeableriver-3d30edf1.eastus.azurecontainerapps.io",
+          "poolManagementType": "Dynamic",
+          "provisioningState": "Succeeded",
+          "scaleConfiguration": {
+            "maxConcurrentSessions": 500,
+            "readySessionInstances": 100
+          },
+          "sessionNetworkConfiguration": {
+            "status": "EgressEnabled"
+          },
+          "templateUpdateStatus": {
+            "activeTemplate": {
+              "containers": [
+                {
+                  "name": "testinitcontainer",
+                  "args": [
+                    "-c",
+                    "while true; do echo hello; sleep 10;done"
+                  ],
+                  "command": [
+                    "/bin/sh"
+                  ],
+                  "image": "repo/testcontainer:v4",
+                  "resources": {
+                    "cpu": 0.25,
+                    "memory": "0.5Gi"
+                  }
+                }
+              ],
+              "createdTime": "2025-10-02T00:00:00.000000Z",
+              "ingress": {
+                "targetPort": 80
+              },
+              "status": {
+                "allocatedCount": 0,
+                "crashCount": 0,
+                "expectedCount": 100,
+                "imagePullFailCount": 0,
+                "pendingCount": 0,
+                "readyCount": 100
+              },
+              "details": "Running"
+            }
+          }
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerAppsSessionPools_Get",
+  "title": "Get Session Pool"
+}
