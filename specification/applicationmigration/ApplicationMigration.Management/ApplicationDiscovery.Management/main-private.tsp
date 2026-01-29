@@ -13,11 +13,11 @@ import "./routes.tsp";
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
-/** Microsoft.ApplicationMigration Resource Provider management API. */
+/** Private.ApplicationMigration Resource Provider management API. */
 @armProviderNamespace
-@service(#{ title: "Microsoft.ApplicationMigration management service" })
-@versioned(Microsoft.ApplicationMigration.Versions)
-namespace Microsoft.ApplicationMigration;
+@service(#{ title: "Private.ApplicationMigration management service" })
+@versioned(PrivateApplicationMigration.Versions)
+namespace PrivateApplicationMigration;
 
 /** The available API versions. */
 enum Versions {
@@ -31,3 +31,8 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+// Re-export interfaces from Microsoft.ApplicationMigration namespace in private namespace
+interface DiscoveryHubs extends Microsoft.ApplicationMigration.DiscoveryHubs {}
+interface Applications extends Microsoft.ApplicationMigration.Applications {}
+interface Members extends Microsoft.ApplicationMigration.Members {}
