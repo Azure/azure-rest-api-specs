@@ -24,3 +24,5 @@ model AlertsClientOptions {
 @@clientName(TimeRange.`1d`, "ONE_D", "python");
 @@clientName(TimeRange.`7d`, "SEVEN_D", "python");
 @@clientName(TimeRange.`30d`, "THIRTY_D", "python");
+
+@@clientName(Microsoft.AlertsManagement.NotificationResult.statusURL, "statusUrl", "java");
