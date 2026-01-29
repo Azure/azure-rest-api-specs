@@ -84,4 +84,6 @@ interface PersistentStorages {
 
 @@doc(PersistentStorage.name, "Persistent storage name.");
 @@doc(PersistentStorage.properties, "Properties of a persistent storage.");
-@@doc(PersistentStorages.createOrUpdate::parameters.resource, "");
+@@doc(PersistentStorages.createOrUpdate::parameters.resource,
+  "The resource of persistent storage and its properties"
+);
