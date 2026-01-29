@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
@@ -25,6 +26,8 @@ model ResiliencyReview
 }
 
 @armResourceOperations
+@added(Versions.v2025_05_01_preview)
+@removed(Versions.v2026_02_01)
 interface ResiliencyReviews {
   /**
    * Get existing Azure Advisor resiliency review by id.
@@ -41,6 +44,8 @@ interface ResiliencyReviews {
    * Get list of Azure Advisor resiliency reviews.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_05_01_preview)
+  @removed(Versions.v2026_02_01)
   @summary("Get list of resiliency reviews.")
   @operationId("resiliencyReviews_List")
   list is ArmResourceListByParent<

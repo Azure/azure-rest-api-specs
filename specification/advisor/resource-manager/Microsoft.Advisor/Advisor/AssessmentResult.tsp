@@ -4,6 +4,7 @@ import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
@@ -21,6 +22,8 @@ model AssessmentResult
 }
 
 @armResourceOperations
+@added(Versions.v2025_05_01_preview)
+@removed(Versions.v2026_02_01)
 interface AssessmentResults {
   /**
    * Get an existing Azure Advisor assessment.

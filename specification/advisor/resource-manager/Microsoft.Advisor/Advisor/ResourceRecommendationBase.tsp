@@ -4,6 +4,7 @@ import "./models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
@@ -38,6 +39,8 @@ interface ResourceRecommendationBases {
    * Update the tracked properties of a Recommendation.
    */
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_05_01_preview)
+  @removed(Versions.v2026_02_01)
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     ResourceRecommendationBase,
@@ -55,7 +58,7 @@ interface ResourceRecommendationBases {
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {
       /**
-       * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup'
+       * The filter to apply to the recommendations.<br>Filter can be applied to properties ['ResourceId', 'ResourceGroup', 'RecommendationTypeGuid', '[Category](#category)', '[State](#state)'] with operators ['eq', 'and', 'or'].<br>Example:<br>- $filter=Category eq 'Cost' and ResourceGroup eq 'MyResourceGroup' and State eq 'New'. Please note that State is available as a filter from API Version 2026-02-01.
        */
       @query("$filter")
       $filter?: string;

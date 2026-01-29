@@ -1,0 +1,118 @@
+{
+  "parameters": {
+    "resourceUri": "providers/microsoft.management/serviceGroups/serviceGroupXYZ",
+    "$top": 10,
+    "api-version": "2026-02-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/providers/microsoft.management/serviceGroup/serviceGroupXYZ/providers/Microsoft.Advisor/recommendations?api-version=2026-02-01&$top=10&$skiptoken=skiptoken",
+        "value": [
+          {
+            "id": "/providers/microsoft.management/serviceGroup/serviceGroupXYZ/providers/Microsoft.Advisor/recommendations/2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b87",
+            "name": "2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b87",
+            "type": "Microsoft.Advisor/recommendations",
+            "properties": {
+              "category": "HighAvailability",
+              "impact": "Medium",
+              "impactedField": "Microsoft.Management/serviceGroup",
+              "impactedValue": "serviceGroupXYZ",
+              "lastUpdated": "2025-04-24T22:24:43.3216408Z",
+              "risk": "Warning",
+              "shortDescription": {
+                "problem": "To ensure high availability add one or more virtual machines to this availability set",
+                "solution": "To ensure high availability add one or more virtual machines to this availability set"
+              },
+              "resourceMetadata": {
+                "resourceId": "/providers/microsoft.management/serviceGroup/serviceGroupXYZ",
+                "action": {
+                  "additionalProperties": {
+                    "actionType": "Document",
+                    "link": "https://link3",
+                    "caption": "Enable Soft Delete to protect blob data",
+                    "description": "Enable Soft Delete to protect blob data"
+                  },
+                  "metadata": {
+                    "id": "/providers/microsoft.management/serviceGroup/serviceGroupXYZ"
+                  }
+                },
+                "singular": "Availability set",
+                "plural": "Availability sets"
+              },
+              "actions": [
+                {
+                  "additionalProperties": {
+                    "actionType": "Document",
+                    "link": "https://link1",
+                    "caption": "Enable Soft Delete to protect blob data",
+                    "description": "Enable Soft Delete to protect blob data"
+                  },
+                  "metadata": {
+                    "id": "/providers/microsoft.management/serviceGroup/serviceGroupXYZ"
+                  }
+                }
+              ],
+              "description": "After enabling Soft Delete, deleted data transitions to a soft deleted state instead of being permanently deleted. When data is overwritten, a soft deleted snapshot is generated to save the state of the overwritten data. You can configure the amount of time soft deleted data is recoverable before it permanently expires.",
+              "label": "Enable Soft Delete",
+              "learnMoreLink": "https://link2",
+              "potentialBenefits": "Save and recover your data when blobs or blob snapshots are accidentally overwritten or deleted"
+            }
+          },
+          {
+            "id": "/providers/microsoft.management/serviceGroup/serviceGroupXYZ/providers/Microsoft.Advisor/recommendations/2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b45",
+            "name": "2e7c72b2d7987ec224a1ebae03398b0fbdaa9a5a6a762e6fcf1c806599744b45",
+            "type": "Microsoft.Advisor/recommendations",
+            "properties": {
+              "category": "HighAvailability",
+              "impact": "Medium",
+              "impactedField": "Microsoft.Management/serviceGroup",
+              "impactedValue": "serviceGroupXYZ",
+              "lastUpdated": "2025-04-24T22:24:43.3216408Z",
+              "risk": "Warning",
+              "shortDescription": {
+                "problem": "To ensure high availability add one or more virtual machines to this availability set",
+                "solution": "To ensure high availability add one or more virtual machines to this availability set"
+              },
+              "resourceMetadata": {
+                "resourceId": "/providers/microsoft.management/serviceGroup/serviceGroupXYZ",
+                "action": {
+                  "additionalProperties": {
+                    "actionType": "Document",
+                    "link": "https://link3",
+                    "caption": "Enable Soft Delete to protect blob data",
+                    "description": "Enable Soft Delete to protect blob data"
+                  },
+                  "metadata": {
+                    "id": "/providers/microsoft.management/serviceGroup/serviceGroupXYZ"
+                  }
+                },
+                "singular": "Availability set",
+                "plural": "Availability sets"
+              },
+              "actions": [
+                {
+                  "additionalProperties": {
+                    "actionType": "Document",
+                    "link": "https://link1",
+                    "caption": "Enable Soft Delete to protect blob data",
+                    "description": "Enable Soft Delete to protect blob data"
+                  },
+                  "metadata": {
+                    "id": "/providers/microsoft.management/serviceGroup/serviceGroupXYZ"
+                  }
+                }
+              ],
+              "description": "After enabling Soft Delete, deleted data transitions to a soft deleted state instead of being permanently deleted. When data is overwritten, a soft deleted snapshot is generated to save the state of the overwritten data. You can configure the amount of time soft deleted data is recoverable before it permanently expires.",
+              "label": "Enable Soft Delete",
+              "learnMoreLink": "https://link2",
+              "potentialBenefits": "Save and recover your data when blobs or blob snapshots are accidentally overwritten or deleted"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Recommendations_ListByTenant",
+  "title": "ListRecommendationsServiceGroupResourceUri"
+}
