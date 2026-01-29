@@ -849,9 +849,11 @@ union JobType {
   Pipeline: "Pipeline",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Spark: "Spark",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   FineTuning: "FineTuning",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   Distillation: "Distillation",
