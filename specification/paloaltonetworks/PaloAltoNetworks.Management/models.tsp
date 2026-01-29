@@ -258,6 +258,17 @@ union BillingCycle {
 }
 
 /**
+ * Firewall SKU type
+ */
+union FirewallSkuType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  STANDARD: "STANDARD",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  PREMIUM: "PREMIUM",
+}
+
+/**
  * Marketplace Subscription Status
  */
 union MarketplaceSubscriptionStatus {
@@ -1226,6 +1237,11 @@ model FirewallDeploymentProperties {
    * panEtag info
    */
   panEtag?: string;
+
+  /**
+   * Firewall SKU type
+   */
+  firewallSku: FirewallSkuType;
 
   /**
    * Network settings

@@ -47,9 +47,9 @@ namespace PaloAltoNetworks.Cloudngfw;
  */
 enum Versions {
   /**
-   * The 2025-10-08 API version.
+   * The 2026-01-26-preview API version.
    */
-  v2025_10_08: "2025-10-08",
+  v2026_01_26_preview: "2026-01-26-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
