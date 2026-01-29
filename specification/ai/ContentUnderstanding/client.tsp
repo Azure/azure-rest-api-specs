@@ -134,7 +134,9 @@ op analyzeBinaryCustomSignature(
   apiVersion: string,
 ): AnalyzeResult;
 
-@@override(ContentUnderstandingClient.analyzeBinary, analyzeBinaryCustomSignature);
+@@override(ContentUnderstandingClient.analyzeBinary,
+  analyzeBinaryCustomSignature
+);
 
 // Custom parameter order for analyze: put main input data before optional processing parameters.
 // stringEncoding is required - each SDK will set the appropriate default via language-specific customization.
