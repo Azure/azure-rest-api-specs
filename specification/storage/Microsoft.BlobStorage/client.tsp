@@ -42,6 +42,8 @@ namespace Customizations;
   "expiry"
 );
 
+@@alternateType(AccessPolicy.start, string, "javascript");
+@@alternateType(AccessPolicy.expiry, string, "javascript");
 @@clientName(AccessPolicy.start, "startsOn", "javascript");
 @@clientName(AccessPolicy.expiry, "expiresOn", "javascript");
 @@clientName(AccessPolicy.permission, "permissions", "javascript");
@@ -63,6 +65,7 @@ namespace Customizations;
   "blobAnalyticsLogging",
   "javascript"
 );
+@@clientName(Logging.delete, "deleteProperty", "javascript");
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "javascript");
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
 @@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
