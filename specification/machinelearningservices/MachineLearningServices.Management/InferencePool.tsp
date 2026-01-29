@@ -19,6 +19,7 @@ namespace Microsoft.MachineLearningServices;
  * InferencePool is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(Workspace)
 model InferencePool
   is Azure.ResourceManager.TrackedResource<InferencePoolProperties, false> {
@@ -43,6 +44,7 @@ model InferencePool
  * InferencePools interface is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface InferencePools {
   /**

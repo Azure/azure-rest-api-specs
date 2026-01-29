@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "$skipToken": "skiptoken",
+    "api-version": "2026-01-15-preview",
+    "environmentName": "testContainer",
+    "registryName": "testregistry",
+    "resourceGroupName": "testrg123",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/registries/registries123/environments?api-version=2025-07-01-preview&$skip=2",
+        "value": [
+          {
+            "name": "testEnvironment",
+            "type": "Microsoft.MachineLearningServices/registries/environments",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/registries/testregistry/environments/testEnvironment",
+            "properties": {
+              "description": "string",
+              "tags": {
+                "tag1": "value1",
+                "tag2": "value2"
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-12-01T12:00:00.000Z",
+              "createdBy": "John Smith",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-12-01T12:00:00.000Z",
+              "lastModifiedBy": "John Smith",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RegistryEnvironmentContainers_List",
+  "title": "List Registry Environment Container."
+}

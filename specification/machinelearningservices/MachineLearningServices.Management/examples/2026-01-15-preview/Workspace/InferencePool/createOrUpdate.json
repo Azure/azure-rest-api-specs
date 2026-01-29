@@ -1,0 +1,105 @@
+{
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "body": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "kind": "string",
+      "location": "string",
+      "properties": {
+        "description": "string",
+        "properties": [
+          {
+            "key": "string",
+            "value": "string"
+          }
+        ],
+        "scaleUnitConfiguration": {
+          "disablePublicEgress": false,
+          "registries": [
+            "string",
+            "registryName1"
+          ]
+        }
+      },
+      "sku": {
+        "name": "string",
+        "capacity": 1,
+        "family": "string",
+        "size": "string",
+        "tier": "Free"
+      },
+      "tags": {}
+    },
+    "inferencePoolName": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "description": "string",
+          "properties": [
+            {
+              "key": "string",
+              "value": "string"
+            }
+          ],
+          "provisioningState": "Canceled"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:21",
+          "createdBy": "string",
+          "createdByType": "ManagedIdentity",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:21",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "ManagedIdentity"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "description": "string",
+          "properties": [
+            {
+              "key": "string",
+              "value": "string"
+            }
+          ],
+          "provisioningState": "Canceled"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:21",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:21",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "InferencePools_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Inference Pool."
+}

@@ -109,6 +109,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
    * Test machine learning workspaces connections under the specified workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @summary("Test machine learning workspaces connections under the specified workspace.")
   @action("testconnection")
   testConnection is ArmResourceActionAsyncBase<
@@ -123,6 +124,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
    * Get available models under the Azure OpenAI connection.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @summary("Get available models under the Azure OpenAI connection.")
   @list
   @get

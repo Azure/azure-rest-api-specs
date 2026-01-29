@@ -1,0 +1,153 @@
+{
+  "parameters": {
+    "name": "string",
+    "api-version": "2026-01-15-preview",
+    "body": {
+      "identity": {
+        "type": "SystemAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "kind": "string",
+      "location": "string",
+      "properties": {
+        "authMode": "Key",
+        "contentSafety": {
+          "contentSafetyLevel": "Blocking",
+          "contentSafetyStatus": "Enabled"
+        },
+        "modelSettings": {
+          "modelId": "string"
+        }
+      },
+      "sku": {
+        "name": "string",
+        "capacity": 1,
+        "family": "string",
+        "size": "string",
+        "tier": "Standard"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "authMode": "Key",
+          "contentSafety": {
+            "contentSafetyLevel": "Deferred",
+            "contentSafetyStatus": "Disabled"
+          },
+          "endpointState": "Deleting",
+          "inferenceEndpoint": {
+            "headers": {
+              "string": "string"
+            },
+            "uri": "https://www.contoso.com/example"
+          },
+          "marketplaceSubscriptionId": "string",
+          "modelSettings": {
+            "modelId": "string"
+          },
+          "provisioningState": "Updating"
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Free"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:14",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:14",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned,UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "authMode": "Key",
+          "contentSafety": {
+            "contentSafetyLevel": "Deferred",
+            "contentSafetyStatus": "Disabled"
+          },
+          "endpointState": "Deleting",
+          "inferenceEndpoint": {
+            "headers": {
+              "string": "string"
+            },
+            "uri": "https://www.contoso.com/example"
+          },
+          "marketplaceSubscriptionId": "string",
+          "modelSettings": {
+            "modelId": "string"
+          },
+          "provisioningState": "Failed"
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:14",
+          "createdBy": "string",
+          "createdByType": "ManagedIdentity",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:14",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Key"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ServerlessEndpoints_CreateOrUpdate",
+  "title": "CreateOrUpdate Workspace Serverless Endpoint."
+}

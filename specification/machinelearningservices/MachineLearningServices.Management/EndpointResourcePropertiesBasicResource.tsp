@@ -50,6 +50,7 @@ alias EndpointResourceListParameters = {
  * EndpointResourcePropertiesBasicResource is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(Workspace)
 model EndpointResourcePropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<EndpointResourceProperties, false> {
@@ -66,6 +67,7 @@ model EndpointResourcePropertiesBasicResource
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Resource does not support delete operation"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface EndpointResourcePropertiesBasicResources {
   /**
