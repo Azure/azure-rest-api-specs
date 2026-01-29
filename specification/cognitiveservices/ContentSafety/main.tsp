@@ -38,4 +38,10 @@ namespace ContentSafety;
 enum Versions {
   v2023_10_01: "2023-10-01",
   v2024_09_01: "2024-09-01",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_09_15_Preview: "2024-09-15-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  v2024_09_30_Preview: "2024-09-30-preview",
 }
