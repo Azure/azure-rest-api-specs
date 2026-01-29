@@ -2,20 +2,22 @@
   "swagger": "2.0",
   "info": {
     "title": "MicrosoftKubernetesConfigurationClient",
-    "x-ms-code-generation-settings": {
-      "name": "MicrosoftKubernetesConfigurationClient"
-    },
+    "version": "2024-11-01-preview",
     "description": "Azure Arc K8s Clusters API reference for Private Link's Scopes management.",
-    "version": "2024-11-01-preview"
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -28,19 +30,33 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "KubernetesConfigurationPrivateLinkScopes"
+    },
+    {
+      "name": "PrivateLinkResources"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes": {
       "get": {
-        "description": "Gets a list of all Azure Arc PrivateLinkScopes within a subscription.",
         "operationId": "PrivateLinkScopes_List",
+        "tags": [
+          "KubernetesConfigurationPrivateLinkScopes"
+        ],
+        "description": "Gets a list of all Azure Arc PrivateLinkScopes within a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -51,15 +67,15 @@
         ],
         "responses": {
           "200": {
-            "description": "A list containing 0 or more Azure Arc PrivateLinkScope definitions.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScopeListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -75,30 +91,33 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes": {
       "get": {
-        "description": "Gets a list of Azure Arc PrivateLinkScopes within a resource group.",
         "operationId": "PrivateLinkScopes_ListByResourceGroup",
+        "tags": [
+          "KubernetesConfigurationPrivateLinkScopes"
+        ],
+        "description": "Gets a list of Azure Arc PrivateLinkScopes within a resource group.",
         "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "A list containing 0 or more Azure Arc PrivateLinkScope definitions.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScopeListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -113,50 +132,13 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/{scopeName}": {
-      "delete": {
-        "description": "Deletes a Azure Arc PrivateLinkScope.",
-        "operationId": "PrivateLinkScopes_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateLinkScopeName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful request when deleting an Azure Arc PrivateLinkScope."
-          },
-          "204": {
-            "description": "The specified PrivateLinkScope does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkScopesDelete": {
-            "$ref": "./examples/PrivateLinkScopesDelete.json"
-          }
-        }
-      },
       "get": {
-        "description": "Returns a Azure Arc PrivateLinkScope.",
         "operationId": "PrivateLinkScopes_Get",
+        "tags": [
+          "KubernetesConfigurationPrivateLinkScopes"
+        ],
+        "description": "Returns a Azure Arc PrivateLinkScope.",
         "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
@@ -164,20 +146,27 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrivateLinkScopeName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure Arc PrivateLinkScope definition.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScope"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -188,12 +177,12 @@
         }
       },
       "put": {
-        "description": "Creates (or updates) a Azure Arc PrivateLinkScope. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
         "operationId": "PrivateLinkScopes_CreateOrUpdate",
+        "tags": [
+          "KubernetesConfigurationPrivateLinkScopes"
+        ],
+        "description": "Creates (or updates) a Azure Arc PrivateLinkScope. Note: You cannot specify a different value for InstrumentationKey nor AppId in the Put operation.",
         "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
@@ -201,12 +190,19 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrivateLinkScopeName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "parameters",
-            "description": "Properties that need to be specified to create or update a Azure Arc for Servers and Clusters PrivateLinkScope.",
             "in": "body",
+            "description": "Properties that need to be specified to create or update a Azure Arc for Servers and Clusters PrivateLinkScope.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScope"
@@ -215,21 +211,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request when creating or updating a Azure Arc PrivateLinkScope. The updated PrivateLinkScope is returned.",
+            "description": "Resource 'KubernetesConfigurationPrivateLinkScope' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScope"
             }
           },
           "201": {
-            "description": "Successful request when creating or updating a Azure Arc PrivateLinkScope. The updated PrivateLinkScope was created and is returned.",
+            "description": "Resource 'KubernetesConfigurationPrivateLinkScope' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScope"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -243,12 +239,12 @@
         }
       },
       "patch": {
-        "description": "Updates an existing PrivateLinkScope's tags. To update other fields use the CreateOrUpdate method.",
         "operationId": "PrivateLinkScopes_UpdateTags",
+        "tags": [
+          "KubernetesConfigurationPrivateLinkScopes"
+        ],
+        "description": "Updates an existing PrivateLinkScope's tags. To update other fields use the CreateOrUpdate method.",
         "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
@@ -256,12 +252,19 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/PrivateLinkScopeName"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "PrivateLinkScopeTags",
-            "description": "Updated tag information to set into the PrivateLinkScope instance.",
             "in": "body",
+            "description": "Updated tag information to set into the PrivateLinkScope instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/TagsResource"
@@ -270,15 +273,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Updating the Azure Arc PrivateLinkScope's tags was successful. PrivateLinkScope tags are updated and returned with the rest of the PrivateLinkScope's object properties.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScope"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -287,16 +290,17 @@
             "$ref": "./examples/PrivateLinkScopesUpdateTagsOnly.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/{scopeName}/privateLinkResources": {
-      "get": {
+      },
+      "delete": {
+        "operationId": "PrivateLinkScopes_Delete",
         "tags": [
-          "PrivateLinkResources"
+          "KubernetesConfigurationPrivateLinkScopes"
         ],
-        "description": "Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.",
-        "operationId": "PrivateLinkResources_ListByPrivateLinkScope",
+        "description": "Deletes a Azure Arc PrivateLinkScope.",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -304,23 +308,287 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateLinkScopeName"
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved private link resources.",
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkScopesDelete": {
+            "$ref": "./examples/PrivateLinkScopesDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/{scopeName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_ListByPrivateLinkScope",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets all private endpoint connections on a private link scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets list of private endpoint connections on a private link scope.": {
+            "$ref": "./examples/PrivateEndpointConnectionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The private endpoint connection properties.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/{scopeName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByPrivateLinkScope",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -333,12 +601,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/{scopeName}/privateLinkResources/{groupName}": {
       "get": {
+        "operationId": "PrivateLinkResources_Get",
         "tags": [
           "PrivateLinkResources"
         ],
         "description": "Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.",
-        "operationId": "PrivateLinkResources_Get",
         "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -346,26 +617,31 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "scopeName",
+            "in": "path",
+            "description": "The name of the Azure Arc PrivateLinkScope resource.",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/PrivateLinkScopeName"
-          },
-          {
-            "$ref": "#/parameters/GroupNameParameter"
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the private link resource.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved a specified private link resource.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResource"
+              "$ref": "#/definitions/PrivateLinkResource"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -375,319 +651,220 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/{scopeName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Gets a private endpoint connection.",
-        "operationId": "PrivateEndpointConnections_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateLinkScopeName"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved a specified private endpoint connection.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionGet.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Approve or reject a private endpoint connection with a given name.",
-        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateLinkScopeName"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
-            },
-            "description": "The private endpoint connection properties."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully approved or rejected private endpoint connection.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Approve or reject a private endpoint connection with a given name.": {
-            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Deletes a private endpoint connection with a given name.",
-        "operationId": "PrivateEndpointConnections_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateLinkScopeName"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/parameters/PrivateEndpointConnectionName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully deleted private endpoint connection."
-          },
-          "204": {
-            "description": "Private endpoint connection does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Deletes a private endpoint connection with a given name.": {
-            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KubernetesConfiguration/privateLinkScopes/{scopeName}/privateEndpointConnections": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Gets all private endpoint connections on a private link scope.",
-        "operationId": "PrivateEndpointConnections_ListByPrivateLinkScope",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/PrivateLinkScopeName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved private endpoint connections.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets list of private endpoint connections on a private link scope.": {
-            "$ref": "./examples/PrivateEndpointConnectionList.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "TagsResource": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance."
-    },
     "KubernetesConfigurationPrivateLinkScope": {
       "type": "object",
+      "description": "An Azure Arc PrivateLinkScope definition.",
       "properties": {
         "properties": {
-          "description": "Properties that define a Azure Arc PrivateLinkScope resource.",
-          "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScopeProperties"
+          "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScopeProperties",
+          "description": "Properties that define a Azure Arc PrivateLinkScope resource."
         }
       },
       "allOf": [
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
-      ],
-      "description": "An Azure Arc PrivateLinkScope definition."
-    },
-    "KubernetesConfigurationPrivateLinkScopeProperties": {
-      "type": "object",
-      "description": "Properties that define a Azure Arc PrivateLinkScope resource.",
-      "required": [
-        "clusterResourceId"
-      ],
-      "properties": {
-        "publicNetworkAccess": {
-          "description": "Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints.",
-          "$ref": "#/definitions/PublicNetworkAccessType"
-        },
-        "provisioningState": {
-          "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
-          "type": "string",
-          "readOnly": true,
-          "$ref": "../../../common/2022-03-01/definitions.json#/definitions/ProvisioningStateDefinition"
-        },
-        "clusterResourceId": {
-          "type": "string",
-          "description": "Managed Cluster ARM ID for the private link scope  (Required)"
-        },
-        "privateLinkScopeId": {
-          "readOnly": true,
-          "description": "The Guid id of the private link scope.",
-          "type": "string"
-        },
-        "privateEndpointConnections": {
-          "readOnly": true,
-          "description": "The collection of associated Private Endpoint Connections.",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
-          }
-        }
-      }
+      ]
     },
     "KubernetesConfigurationPrivateLinkScopeListResult": {
       "type": "object",
-      "description": "Describes the list of Azure Arc PrivateLinkScope resources.",
-      "required": [
-        "value"
-      ],
+      "description": "The response of a KubernetesConfigurationPrivateLinkScope list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Azure Arc PrivateLinkScope definitions.",
+          "description": "The KubernetesConfigurationPrivateLinkScope items on this page",
           "items": {
             "$ref": "#/definitions/KubernetesConfigurationPrivateLinkScope"
           }
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI to get the next set of Azure Arc PrivateLinkScope definitions if too many PrivateLinkScopes where returned in the result set."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
-    "PublicNetworkAccessType": {
+    "KubernetesConfigurationPrivateLinkScopeProperties": {
+      "type": "object",
+      "description": "Properties that define a Azure Arc PrivateLinkScope resource.",
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Indicates whether machines associated with the private link scope can also use public Azure Arc service endpoints.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Allows Azure Arc agents to communicate with Azure Arc services over both public (internet) and private endpoints."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Current state of this PrivateLinkScope: whether or not is has been provisioned within the resource group it is defined. Users cannot change this value but are able to read from it. Values will include Provisioning ,Succeeded, Canceled and Failed.",
+          "readOnly": true
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "description": "Managed Cluster ARM ID for the private link scope  (Required)"
+        },
+        "privateLinkScopeId": {
+          "type": "string",
+          "description": "The Guid id of the private link scope.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "The collection of associated Private Endpoint Connections.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "clusterResourceId"
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisioningState": {
       "type": "string",
-      "description": "The network access policy to determine if Azure Arc agents can use public Azure Arc service endpoints. Defaults to disabled (access to Azure Arc services only via private link).",
-      "default": "Disabled",
+      "description": "The provisioning state of the resource.",
       "enum": [
-        "Enabled",
-        "Disabled"
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
       ],
       "x-ms-enum": {
-        "name": "PublicNetworkAccessType",
+        "name": "ProvisioningState",
         "modelAsString": true,
         "values": [
           {
-            "value": "Enabled",
-            "description": "Allows Azure Arc agents to communicate with Azure Arc services over both public (internet) and private endpoints."
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
           },
           {
-            "value": "Disabled",
-            "description": "Does not allow Azure Arc agents to communicate with Azure Arc services over public (internet) endpoints. The agents must use the private link."
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
           }
         ]
       }
+    },
+    "TagsResource": {
+      "type": "object",
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags on a PrivateLinkScope instance.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
-  "parameters": {
-    "PrivateLinkScopeName": {
-      "name": "scopeName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Azure Arc PrivateLinkScope resource.",
-      "x-ms-parameter-location": "method"
-    },
-    "GroupNameParameter": {
-      "name": "groupName",
-      "in": "path",
-      "description": "The name of the private link resource.",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string"
-    }
-  }
+  "parameters": {}
 }
