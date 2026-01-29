@@ -1,0 +1,49 @@
+name: Sync Review Date to Projects
+
+# This workflow runs daily to sync Review Date information from issue descriptions
+# to the corresponding field in GitHub Projects V2 (Azure org, project 196)
+#
+# It processes open issues with the "API Review Scoping" label and:
+# - Scans issue body and comments for lines in the format: "Review Date: MM/DD/YYYY HH:MM AM/PM PT"
+# - Uses the last review date found (to handle rescheduled meetings)
+# - Updates the 'Review Date' custom field
+# - Links any PR mentioned in the format "PR: https://github.com/Azure/azure-rest-api-specs/pull/XXXXX"
+
+on:
+  # Run daily at 6:00 AM UTC
+  schedule:
+    - cron: "0 6 * * *"
+
+  # Allow manual triggering for testing
+  workflow_dispatch:
+
+permissions:
+  # Read access to issues to fetch issue descriptions
+  issues: read
+  # Write access to project to update custom fields (via GITHUB_TOKEN with org scope)
+  contents: read
+
+jobs:
+  sync-review-date:
+    name: Sync Review Date to Projects
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github
+
+      - name: Sync Review Date
+        id: sync-review-date
+        uses: actions/github-script@v8
+        with:
+          # Use a token with project write access
+          # The default GITHUB_TOKEN may not have access to organization projects
+          # Ensure a PAT with 'project' and 'read:org' scopes is available as a secret
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { default: syncReviewDate } =
+              await import('${{ github.workspace }}/.github/workflows/src/sync-review-date.js');
+            await syncReviewDate({ github, context, core });
