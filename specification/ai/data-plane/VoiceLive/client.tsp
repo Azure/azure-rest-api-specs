@@ -98,6 +98,8 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "python");
 
 @@access(VoiceLive.ToolChoice, Access.public, "python");
+
+@@clientName(VoiceLive.Scene, "SceneParams", "csharp");
 @@access(VoiceLive.Voice, Access.public, "python");
 
 @@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "python");
