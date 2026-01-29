@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -9,9 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * InferenceEndpoint is a preview-only resource.
+ */
+@removed(Versions.v2025_12_01)
 @parentResource(Workspace)
 model InferenceEndpoint
   is Azure.ResourceManager.TrackedResource<InferenceEndpointProperties, false> {
@@ -32,6 +38,10 @@ model InferenceEndpoint
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
+/**
+ * InferenceEndpointOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface InferenceEndpointOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -65,6 +75,10 @@ interface InferenceEndpointOps
       }
     > {}
 
+/**
+ * InferenceEndpoints is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface InferenceEndpoints {
   /**

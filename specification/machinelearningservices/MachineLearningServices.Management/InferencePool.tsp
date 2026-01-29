@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -10,9 +11,14 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * InferencePool is a preview-only resource.
+ */
+@removed(Versions.v2025_12_01)
 @parentResource(Workspace)
 model InferencePool
   is Azure.ResourceManager.TrackedResource<InferencePoolProperties, false> {
@@ -33,6 +39,10 @@ model InferencePool
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
+/**
+ * InferencePools interface is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface InferencePools {
   /**

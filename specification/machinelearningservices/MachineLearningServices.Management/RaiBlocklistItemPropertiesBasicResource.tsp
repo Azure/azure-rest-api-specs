@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./RaiBlocklistPropertiesBasicResource.tsp";
 
@@ -9,9 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * RaiBlocklistItemPropertiesBasicResource is a preview-only resource.
+ */
+@removed(Versions.v2025_12_01)
 @parentResource(RaiBlocklistPropertiesBasicResource)
 model RaiBlocklistItemPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiBlocklistItemProperties, false> {
@@ -23,6 +29,10 @@ model RaiBlocklistItemPropertiesBasicResource
   >;
 }
 
+/**
+ * RaiBlocklistItemPropertiesBasicResources interface is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface RaiBlocklistItemPropertiesBasicResources {
   /**
@@ -38,7 +48,12 @@ interface RaiBlocklistItemPropertiesBasicResources {
   create is ArmResourceCreateOrReplaceAsync<
     RaiBlocklistItemPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiBlocklistItemPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -51,7 +66,12 @@ interface RaiBlocklistItemPropertiesBasicResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiBlocklistItemPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -62,7 +82,12 @@ interface RaiBlocklistItemPropertiesBasicResources {
   list is ArmResourceListByParent<
     RaiBlocklistItemPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiBlocklistItemPropertiesBasicResourceArmPaginatedResult>
   >;

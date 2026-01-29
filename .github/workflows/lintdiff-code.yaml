@@ -62,20 +62,12 @@ jobs:
         id: run-lintdiff
         run: |
           set -x
-
-          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
-
-          npm exec --no -- lint-diff \
-            --before before \
-            --after after \
-            --changed-files-path changed-files.txt \
-            --base-branch ${{ github.event.pull_request.base.ref }} \
-            --compare-sha ${{ github.event.pull_request.head.sha }} \
-            --out-file "$GITHUB_STEP_SUMMARY"
+          chmod +x ./repro.sh
+          ./repro.sh
         env:
           # Some LintDiff runs are memory intensive and require more than the
           # default.
-          NODE_OPTIONS: "--max-old-space-size=16384"
+          NODE_OPTIONS: "--max-old-space-size=32768"
 
       # Used by other workflows like set-status
       - name: Set job-summary artifact

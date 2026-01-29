@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./WorkspaceConnectionPropertiesV2BasicResource.tsp";
 
@@ -9,9 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * RaiBlocklistPropertiesBasicResource is a preview-only resource.
+ */
+@removed(Versions.v2025_12_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiBlocklistPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiBlocklistProperties, false> {
@@ -23,6 +29,10 @@ model RaiBlocklistPropertiesBasicResource
   >;
 }
 
+/**
+ * RaiBlocklistPropertiesBasicResources interface is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface RaiBlocklistPropertiesBasicResources {
   /**
@@ -38,7 +48,12 @@ interface RaiBlocklistPropertiesBasicResources {
   create is ArmResourceCreateOrReplaceAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiBlocklistPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -51,7 +66,12 @@ interface RaiBlocklistPropertiesBasicResources {
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -62,14 +82,21 @@ interface RaiBlocklistPropertiesBasicResources {
   list is ArmResourceListByParent<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiBlocklistPropertiesBasicResourceArmPaginatedResult>
   >;
 
   /**
    * Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")
   @action("addRaiBlocklistItems")
   addBulk is ArmResourceActionAsync<
@@ -78,6 +105,7 @@ interface RaiBlocklistPropertiesBasicResources {
     {
       @body
       @identifiers(#[])
+      @removed(Versions.v2025_12_01)
       _?: RaiBlocklistItemPropertiesBasicResource[];
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &

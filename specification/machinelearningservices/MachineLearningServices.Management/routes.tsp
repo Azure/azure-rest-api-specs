@@ -2,6 +2,7 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
@@ -10,6 +11,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
@@ -71,8 +73,12 @@ interface QuotasOperationGroup {
   >;
 }
 
+/**
+ * PTUQuotaOperationGroup is preview-only.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2025_12_01)
 interface PTUQuotaOperationGroup {
   /**
    * List available MaaS PTU quota.
