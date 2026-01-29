@@ -7,3 +7,5 @@ using Azure.ClientGenerator.Core;
   "KubernetesConfigurationExtensionsMgmtClient",
   "python"
 );
+
+@@clientName(AKSIdentityType, "AksIdentityType", "java);
