@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PaloAltoNetworks.Cloudngfw",
-    "version": "2025-10-08",
+    "version": "2026-01-26-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -6432,6 +6432,10 @@
           "type": "string",
           "description": "panEtag info"
         },
+        "firewallSku": {
+          "$ref": "#/definitions/FirewallSkuType",
+          "description": "Firewall SKU type"
+        },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "Network settings"
@@ -6483,6 +6487,7 @@
         }
       },
       "required": [
+        "firewallSku",
         "networkProfile",
         "dnsSettings",
         "planData",
@@ -6610,6 +6615,28 @@
           "$ref": "#/definitions/MarketplaceDetails",
           "description": "Marketplace details"
         }
+      }
+    },
+    "FirewallSkuType": {
+      "type": "string",
+      "description": "Firewall SKU type",
+      "enum": [
+        "STANDARD",
+        "PREMIUM"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallSkuType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "STANDARD",
+            "value": "STANDARD"
+          },
+          {
+            "name": "PREMIUM",
+            "value": "PREMIUM"
+          }
+        ]
       }
     },
     "FirewallStatusProperty": {
