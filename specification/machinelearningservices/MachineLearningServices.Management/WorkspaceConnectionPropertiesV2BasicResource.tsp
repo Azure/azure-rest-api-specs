@@ -107,7 +107,6 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
 
   /**
    * Test machine learning workspaces connections under the specified workspace.
-   * Preview-only operation.
    */
   @removed(Versions.v2025_12_01)
   @summary("Test machine learning workspaces connections under the specified workspace.")
@@ -122,7 +121,6 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
 
   /**
    * Get available models under the Azure OpenAI connection.
-   * Preview-only operation.
    */
   @removed(Versions.v2025_12_01)
   @summary("Get available models under the Azure OpenAI connection.")

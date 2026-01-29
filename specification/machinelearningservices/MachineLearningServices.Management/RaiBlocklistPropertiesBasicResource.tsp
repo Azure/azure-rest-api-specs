@@ -94,7 +94,6 @@ interface RaiBlocklistPropertiesBasicResources {
 
   /**
    * Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.
-   * Preview-only operation.
    */
   @removed(Versions.v2025_12_01)
   @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")

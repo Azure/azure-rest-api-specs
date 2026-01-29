@@ -850,8 +850,10 @@ union JobType {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   Spark: "Spark",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  @removed(Versions.v2025_12_01)
   FineTuning: "FineTuning",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  @removed(Versions.v2025_12_01)
   Distillation: "Distillation",
 }
 
@@ -5135,8 +5137,9 @@ model EnvironmentVersionProperties extends AssetBase {
   image?: string;
 
   /**
-   * Environment image details
+   * Environment image details.
    */
+  @removed(Versions.v2025_12_01)
   imageDetails?: ImageDetails;
 
   /**
@@ -5186,6 +5189,7 @@ model BuildContext {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+@removed(Versions.v2025_12_01)
 model ImageDetails {
   /**
    * Indicates if image exists
@@ -7107,6 +7111,7 @@ model JobBaseProperties extends ResourceBase {
    * Parent job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @removed(Versions.v2025_12_01)
   parentJobName?: string | null;
 
   /**
@@ -7661,6 +7666,7 @@ model ContentSafety {
   /**
    * Specifies the current safety level for content safety.
    */
+  @removed(Versions.v2025_12_01)
   contentSafetyLevel?: ContentSafetyLevel = ContentSafetyLevel.Blocking;
 
   /**
@@ -8080,7 +8086,6 @@ model OperationDisplay {
 model WorkspaceProperties {
   /**
    * The URI of agents endpoint associated with this workspace.
-   * Preview-only property.
    */
   @removed(Versions.v2025_12_01)
   @visibility(Lifecycle.Read)
@@ -8093,7 +8098,6 @@ model WorkspaceProperties {
 
   /**
    * The flag to indicate whether we will do role assignment for the workspace MSI on resource group level.
-   * Preview-only property.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
@@ -8107,9 +8111,6 @@ model WorkspaceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   associatedWorkspaces?: string[];
 
-  /**
-   * Preview-only property.
-   */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   containerRegistries?: string[];
@@ -8137,14 +8138,12 @@ model WorkspaceProperties {
 
   /**
    * Flag to tell if simplified CMK should be enabled for this workspace.
-   * Preview-only property.
    */
   @removed(Versions.v2025_12_01)
   enableSimplifiedCmk?: boolean;
 
   /**
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace.
-   * Preview-only property.
    */
   @removed(Versions.v2025_12_01)
   enableSoftwareBillOfMaterials?: boolean;
@@ -8152,9 +8151,6 @@ model WorkspaceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   encryption?: EncryptionProperty;
 
-  /**
-   * Preview-only property.
-   */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   existingWorkspaces?: string[];
@@ -8184,7 +8180,6 @@ model WorkspaceProperties {
 
   /**
    * The list of IPv4  addresses that are allowed to access the workspace.
-   * Preview-only property.
    */
   @removed(Versions.v2025_12_01)
   ipAllowlist?: string[];
@@ -8194,9 +8189,6 @@ model WorkspaceProperties {
    */
   keyVault?: string;
 
-  /**
-   * Preview-only property.
-   */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
@@ -8214,7 +8206,6 @@ model WorkspaceProperties {
 
   /**
    * A set of rules governing the network accessibility of the workspace.
-   * Preview-only property.
    */
   @removed(Versions.v2025_12_01)
   networkAcls?: NetworkAcls;
@@ -8283,7 +8274,6 @@ model WorkspaceProperties {
 
   /**
    * Retention time in days after workspace get soft deleted.
-   * Preview-only property.
    */
   @removed(Versions.v2025_12_01)
   softDeleteRetentionInDays?: int32;
@@ -8293,9 +8283,6 @@ model WorkspaceProperties {
    */
   storageAccount?: string;
 
-  /**
-   * Preview-only property.
-   */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
   storageAccounts?: string[];
@@ -9397,7 +9384,6 @@ model EndpointResourceProperties {
 
   /**
    * Deployments info.
-   * Preview-only property.
    */
   @removed(Versions.v2025_12_01)
   deployments?: EndpointDeploymentResourcePropertiesBasicResource[];
@@ -10298,6 +10284,7 @@ model ComputeInstanceProperties {
    * Specifies settings for autologger.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @removed(Versions.v2025_12_01)
   autologgerSettings?: ComputeInstanceAutologgerSettings | null;
 
   /**
@@ -10365,6 +10352,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  @removed(Versions.v2025_12_01)
   @summary("Enable Auto OS Patching.")
   enableOSPatching?: boolean | null = false;
 
@@ -10372,6 +10360,7 @@ model ComputeInstanceProperties {
    * Enable root access. Possible values are: true, false.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @removed(Versions.v2025_12_01)
   @summary("Enable root access.")
   enableRootAccess?: boolean | null = true;
 
@@ -10387,6 +10376,7 @@ model ComputeInstanceProperties {
    * Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @removed(Versions.v2025_12_01)
   @summary("Release quota if compute instance stopped.")
   releaseQuotaOnStop?: boolean | null = false;
 
@@ -10465,6 +10455,7 @@ model ComputeInstanceProperties {
 /**
  * Specifies settings for autologger.
  */
+@removed(Versions.v2025_12_01)
 model ComputeInstanceAutologgerSettings {
   /**
    * Indicates whether mlflow autologger is enabled for notebooks.
@@ -11993,6 +11984,7 @@ model AzureOpenAiHyperParameters {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+@removed(Versions.v2025_12_01)
 @discriminator("modelProvider")
 model FineTuningVertical {
   /**
@@ -13176,6 +13168,7 @@ model FeatureImportanceSettings {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+@removed(Versions.v2025_12_01)
 @discriminator("dataGenerationType")
 model DataGenerationVertical {
   /**
@@ -13330,6 +13323,7 @@ model DefaultScaleSettings extends OnlineScaleSettings {
 /**
  * Distillation Job definition.
  */
+@removed(Versions.v2025_12_01)
 model DistillationJob extends JobBaseProperties {
   /**
    * [Required]
@@ -13368,6 +13362,7 @@ model DistillationJob extends JobBaseProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+@removed(Versions.v2025_12_01)
 model FinetuningDetails {
   /**
    * Finetuning Hyperparameters
@@ -13504,6 +13499,7 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
 /**
  * FineTuning Job definition.
  */
+@removed(Versions.v2025_12_01)
 model FineTuningJob extends JobBaseProperties {
   /**
    * [Required]

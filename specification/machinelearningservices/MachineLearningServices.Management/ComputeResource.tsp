@@ -116,8 +116,7 @@ interface ComputeResources {
   >;
 
   /**
-   * Updates the custom services list. The list of custom services provided shall be overwritten
-   * Preview-only operation.
+   * Updates the custom services list. The list of custom services provided shall be overwritten.
    */
   @removed(Versions.v2025_12_01)
   @action("customServices")
@@ -150,7 +149,6 @@ interface ComputeResources {
 
   /**
    * Update Data Mounts of a Machine Learning compute.
-   * Preview-only operation.
    */
   @removed(Versions.v2025_12_01)
   @summary("Update Data Mounts of a Machine Learning compute.")
@@ -194,7 +192,6 @@ interface ComputeResources {
 
   /**
    * Updates the idle shutdown setting of a compute instance.
-   * Preview-only operation.
    */
   @removed(Versions.v2025_12_01)
   updateIdleShutdownSetting is ArmResourceActionSync<
@@ -206,8 +203,7 @@ interface ComputeResources {
   >;
 
   /**
-   * Returns supported virtual machine sizes for resize
-   * Preview-only operation.
+   * Returns supported virtual machine sizes for resize.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @removed(Versions.v2025_12_01)
@@ -221,7 +217,6 @@ interface ComputeResources {
 
   /**
    * Updates the size of a Compute Instance.
-   * Preview-only operation.
    */
   @removed(Versions.v2025_12_01)
   resize is ArmResourceActionAsyncBase<

@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 /**
- * Azure OpenAI Content Filters resource. Preview-only.
+ * Azure OpenAI Content Filters resource.
  */
 @removed(Versions.v2025_12_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)

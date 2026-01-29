@@ -236,7 +236,6 @@ interface Workspaces {
 
   /**
    * Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.
-   * Preview-only operation.
    */
   @removed(Versions.v2025_12_01)
   @action("listConnectionModels")
@@ -249,7 +248,6 @@ interface Workspaces {
 
   /**
    * Get all the deployments under the workspace scope.
-   * Preview-only operation.
    */
   @removed(Versions.v2025_12_01)
   @summary("Get all the deployments under the workspace scope")

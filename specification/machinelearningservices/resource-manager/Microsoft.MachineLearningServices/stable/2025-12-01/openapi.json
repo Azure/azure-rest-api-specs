@@ -17495,46 +17495,6 @@
       ],
       "x-ms-discriminator-value": "AzureFile"
     },
-    "AzureOpenAiFineTuning": {
-      "type": "object",
-      "properties": {
-        "hyperParameters": {
-          "$ref": "#/definitions/AzureOpenAiHyperParameters",
-          "description": "HyperParameters for fine tuning Azure Open AI model.",
-          "x-nullable": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningVertical"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureOpenAI"
-    },
-    "AzureOpenAiHyperParameters": {
-      "type": "object",
-      "description": "Azure Open AI hyperparameters for fine tuning.",
-      "properties": {
-        "batchSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of examples in each batch. A larger batch size means that model parameters are updated less frequently, but with lower variance.",
-          "x-nullable": true
-        },
-        "learningRateMultiplier": {
-          "type": "number",
-          "format": "double",
-          "description": "Scaling factor for the learning rate. A smaller learning rate may be useful to avoid over fitting.",
-          "x-nullable": true
-        },
-        "nEpochs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset.",
-          "x-nullable": true
-        }
-      }
-    },
     "BanditPolicy": {
       "type": "object",
       "description": "Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation",
@@ -19370,16 +19330,6 @@
         }
       }
     },
-    "ComputeInstanceAutologgerSettings": {
-      "type": "object",
-      "description": "Specifies settings for autologger.",
-      "properties": {
-        "mlflowAutologger": {
-          "$ref": "#/definitions/MlflowAutologger",
-          "description": "Indicates whether mlflow autologger is enabled for notebooks."
-        }
-      }
-    },
     "ComputeInstanceConnectivityEndpoints": {
       "type": "object",
       "description": "Defines all connectivity endpoints and properties for an ComputeInstance.",
@@ -19621,11 +19571,6 @@
             ]
           }
         },
-        "autologgerSettings": {
-          "$ref": "#/definitions/ComputeInstanceAutologgerSettings",
-          "description": "Specifies settings for autologger.",
-          "x-nullable": true
-        },
         "sshSettings": {
           "$ref": "#/definitions/ComputeInstanceSshSettings",
           "description": "Specifies policy and settings for SSH access.",
@@ -19704,32 +19649,11 @@
           },
           "x-nullable": true
         },
-        "enableOSPatching": {
-          "type": "boolean",
-          "title": "Enable Auto OS Patching.",
-          "description": "Enable Auto OS Patching. Possible values are: true, false.",
-          "default": false,
-          "x-nullable": true
-        },
-        "enableRootAccess": {
-          "type": "boolean",
-          "title": "Enable root access.",
-          "description": "Enable root access. Possible values are: true, false.",
-          "default": true,
-          "x-nullable": true
-        },
         "enableSSO": {
           "type": "boolean",
           "title": "Enable SSO (single sign on).",
           "description": "Enable SSO (single sign on). Possible values are: true, false.",
           "default": true,
-          "x-nullable": true
-        },
-        "releaseQuotaOnStop": {
-          "type": "boolean",
-          "title": "Release quota if compute instance stopped.",
-          "description": "Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.",
-          "default": false,
           "x-nullable": true
         },
         "personalComputeInstanceSettings": {
@@ -21111,29 +21035,6 @@
     "ContentSafety": {
       "type": "object",
       "properties": {
-        "contentSafetyLevel": {
-          "type": "string",
-          "description": "Specifies the current safety level for content safety.",
-          "default": "Blocking",
-          "enum": [
-            "Blocking",
-            "Deferred"
-          ],
-          "x-ms-enum": {
-            "name": "ContentSafetyLevel",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Blocking",
-                "value": "Blocking"
-              },
-              {
-                "name": "Deferred",
-                "value": "Deferred"
-              }
-            ]
-          }
-        },
         "contentSafetyStatus": {
           "$ref": "#/definitions/ContentSafetyStatus",
           "description": "[Required] Specifies the status of content safety."
@@ -21347,26 +21248,6 @@
       "required": [
         "metric"
       ]
-    },
-    "CustomModelFineTuning": {
-      "type": "object",
-      "properties": {
-        "hyperParameters": {
-          "type": "object",
-          "description": "HyperParameters for fine tuning custom model.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/FineTuningVertical"
-        }
-      ],
-      "x-ms-discriminator-value": "Custom"
     },
     "CustomModelJobInput": {
       "type": "object",
@@ -21943,116 +21824,6 @@
         }
       ],
       "x-ms-discriminator-value": "DataFactory"
-    },
-    "DataGenerationTaskType": {
-      "type": "string",
-      "description": "Enum to determine the type of Data Generation Task.",
-      "enum": [
-        "Conversation",
-        "Math",
-        "Nli",
-        "NluQa",
-        "Summarization"
-      ],
-      "x-ms-enum": {
-        "name": "DataGenerationTaskType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Conversation",
-            "value": "Conversation",
-            "description": "Generate conversational data (multi/single turn)"
-          },
-          {
-            "name": "Math",
-            "value": "Math",
-            "description": "Generate Math data for numerical responses"
-          },
-          {
-            "name": "Nli",
-            "value": "Nli",
-            "description": "Generate Natural Language Inference data"
-          },
-          {
-            "name": "NluQa",
-            "value": "NluQa",
-            "description": "Generate Natural Language Understanding data for Question Answering data"
-          },
-          {
-            "name": "Summarization",
-            "value": "Summarization",
-            "description": "Generate Key Summary for an Article"
-          }
-        ]
-      }
-    },
-    "DataGenerationType": {
-      "type": "string",
-      "description": "Enum to determine the type of Data Generation.",
-      "enum": [
-        "LabelGeneration",
-        "DataGeneration"
-      ],
-      "x-ms-enum": {
-        "name": "DataGenerationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LabelGeneration",
-            "value": "LabelGeneration",
-            "description": "Label Generation by Teacher Model Inferencing"
-          },
-          {
-            "name": "DataGeneration",
-            "value": "DataGeneration",
-            "description": "Synthetic Data Generation"
-          }
-        ]
-      }
-    },
-    "DataGenerationVertical": {
-      "type": "object",
-      "properties": {
-        "dataGenerationTaskType": {
-          "$ref": "#/definitions/DataGenerationTaskType",
-          "description": "[Required] DataGeneration Task type.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "dataGenerationType": {
-          "$ref": "#/definitions/DataGenerationType",
-          "description": "[Required] Enum to determine the type of Data Generation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "promptSettings": {
-          "$ref": "#/definitions/PromptSettings",
-          "description": "Prompt Settings.",
-          "x-nullable": true
-        },
-        "teacherModelEndpoint": {
-          "$ref": "#/definitions/TeacherModelEndpoint",
-          "description": "[Required] Teacher Model Endpoint Details.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "teacherModelSettings": {
-          "$ref": "#/definitions/TeacherModelSettings",
-          "x-nullable": true
-        }
-      },
-      "discriminator": "dataGenerationType",
-      "required": [
-        "dataGenerationTaskType",
-        "dataGenerationType",
-        "teacherModelEndpoint"
-      ]
     },
     "DataLakeAnalytics": {
       "type": "object",
@@ -22875,60 +22646,6 @@
         }
       }
     },
-    "DistillationJob": {
-      "type": "object",
-      "description": "Distillation Job definition.",
-      "properties": {
-        "dataGenerationDetails": {
-          "$ref": "#/definitions/DataGenerationVertical",
-          "description": "[Required]"
-        },
-        "finetuningDetails": {
-          "$ref": "#/definitions/FinetuningDetails",
-          "description": "[Required]"
-        },
-        "outputs": {
-          "type": "object",
-          "description": "[Required]",
-          "additionalProperties": {
-            "$ref": "#/definitions/JobOutput",
-            "x-nullable": true
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "queueSettings": {
-          "$ref": "#/definitions/QueueSettings",
-          "description": "Queue settings for the job",
-          "x-nullable": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "resources": {
-          "$ref": "#/definitions/JobResources",
-          "description": "Instance types and other resources for the job",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "dataGenerationDetails",
-        "finetuningDetails",
-        "outputs"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobBaseProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Distillation"
-    },
     "DistributionConfiguration": {
       "type": "object",
       "description": "Base definition for job distribution configuration.",
@@ -23709,10 +23426,6 @@
             "read",
             "create"
           ]
-        },
-        "imageDetails": {
-          "$ref": "#/definitions/ImageDetails",
-          "description": "Environment image details"
         },
         "inferenceConfig": {
           "$ref": "#/definitions/InferenceContainerProperties",
@@ -24567,183 +24280,6 @@
           "x-nullable": true
         }
       }
-    },
-    "FineTuningJob": {
-      "type": "object",
-      "description": "FineTuning Job definition.",
-      "properties": {
-        "fineTuningDetails": {
-          "$ref": "#/definitions/FineTuningVertical",
-          "description": "[Required]"
-        },
-        "outputs": {
-          "type": "object",
-          "description": "[Required]",
-          "additionalProperties": {
-            "$ref": "#/definitions/JobOutput",
-            "x-nullable": true
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "queueSettings": {
-          "$ref": "#/definitions/QueueSettings",
-          "description": "Queue settings for the job",
-          "x-nullable": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "resources": {
-          "$ref": "#/definitions/JobResources",
-          "description": "Instance types and other resources for the job",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "fineTuningDetails",
-        "outputs"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/JobBaseProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "FineTuning"
-    },
-    "FineTuningTaskType": {
-      "type": "string",
-      "enum": [
-        "ChatCompletion",
-        "TextCompletion",
-        "TextClassification",
-        "QuestionAnswering",
-        "TextSummarization",
-        "TokenClassification",
-        "TextTranslation",
-        "ImageClassification",
-        "ImageInstanceSegmentation",
-        "ImageObjectDetection",
-        "VideoMultiObjectTracking"
-      ],
-      "x-ms-enum": {
-        "name": "FineTuningTaskType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ChatCompletion",
-            "value": "ChatCompletion"
-          },
-          {
-            "name": "TextCompletion",
-            "value": "TextCompletion"
-          },
-          {
-            "name": "TextClassification",
-            "value": "TextClassification"
-          },
-          {
-            "name": "QuestionAnswering",
-            "value": "QuestionAnswering"
-          },
-          {
-            "name": "TextSummarization",
-            "value": "TextSummarization"
-          },
-          {
-            "name": "TokenClassification",
-            "value": "TokenClassification"
-          },
-          {
-            "name": "TextTranslation",
-            "value": "TextTranslation"
-          },
-          {
-            "name": "ImageClassification",
-            "value": "ImageClassification"
-          },
-          {
-            "name": "ImageInstanceSegmentation",
-            "value": "ImageInstanceSegmentation"
-          },
-          {
-            "name": "ImageObjectDetection",
-            "value": "ImageObjectDetection"
-          },
-          {
-            "name": "VideoMultiObjectTracking",
-            "value": "VideoMultiObjectTracking"
-          }
-        ]
-      }
-    },
-    "FineTuningVertical": {
-      "type": "object",
-      "properties": {
-        "model": {
-          "$ref": "#/definitions/JobInput",
-          "description": "[Required] Input model for fine tuning."
-        },
-        "modelProvider": {
-          "$ref": "#/definitions/ModelProvider",
-          "description": "[Required] Enum to determine the type of fine tuning.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "taskType": {
-          "$ref": "#/definitions/FineTuningTaskType",
-          "description": "[Required] Fine tuning task type.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "trainingData": {
-          "$ref": "#/definitions/JobInput",
-          "description": "[Required] Training data for fine tuning."
-        },
-        "validationData": {
-          "$ref": "#/definitions/JobInput",
-          "description": "Validation data for fine tuning.",
-          "x-nullable": true
-        }
-      },
-      "discriminator": "modelProvider",
-      "required": [
-        "model",
-        "modelProvider",
-        "taskType",
-        "trainingData"
-      ]
-    },
-    "FinetuningDetails": {
-      "type": "object",
-      "properties": {
-        "hyperParameters": {
-          "type": "object",
-          "description": "Finetuning Hyperparameters",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        },
-        "studentModel": {
-          "$ref": "#/definitions/JobInput",
-          "description": "[Required] Student model for fine tuning."
-        }
-      },
-      "required": [
-        "studentModel"
-      ]
     },
     "FirewallSku": {
       "type": "string",
@@ -25711,50 +25247,6 @@
         }
       ],
       "x-ms-discriminator-value": "ImageClassificationMultilabel"
-    },
-    "ImageDetails": {
-      "type": "object",
-      "properties": {
-        "exists": {
-          "type": "boolean",
-          "description": "Indicates if image exists"
-        },
-        "image": {
-          "$ref": "#/definitions/ImageInfo",
-          "description": "Container image details",
-          "x-nullable": true
-        },
-        "vulnerabilityFindings": {
-          "$ref": "#/definitions/VulnerabilityFindings",
-          "description": "Vulnerability findings details",
-          "x-nullable": true
-        }
-      }
-    },
-    "ImageInfo": {
-      "type": "object",
-      "properties": {
-        "digest": {
-          "type": "string",
-          "description": "Image digest",
-          "x-nullable": true
-        },
-        "hostname": {
-          "type": "string",
-          "description": "Container registry host name",
-          "x-nullable": true
-        },
-        "repository": {
-          "type": "string",
-          "description": "Repository name",
-          "x-nullable": true
-        },
-        "tag": {
-          "type": "string",
-          "description": "Image tag",
-          "x-nullable": true
-        }
-      }
     },
     "ImageInstanceSegmentation": {
       "type": "object",
@@ -26889,11 +26381,6 @@
             "create"
           ]
         },
-        "parentJobName": {
-          "type": "string",
-          "description": "Parent job name.",
-          "x-nullable": true
-        },
         "services": {
           "type": "object",
           "description": "List of JobEndpoints.\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
@@ -27164,22 +26651,6 @@
         }
       ]
     },
-    "JobResources": {
-      "type": "object",
-      "properties": {
-        "instanceTypes": {
-          "type": "array",
-          "description": "List of instance types to choose from.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
-    },
     "JobScheduleAction": {
       "type": "object",
       "properties": {
@@ -27367,9 +26838,7 @@
         "Command",
         "Sweep",
         "Pipeline",
-        "Spark",
-        "FineTuning",
-        "Distillation"
+        "Spark"
       ],
       "x-ms-enum": {
         "name": "JobType",
@@ -27394,14 +26863,6 @@
           {
             "name": "Spark",
             "value": "Spark"
-          },
-          {
-            "name": "FineTuning",
-            "value": "FineTuning"
-          },
-          {
-            "name": "Distillation",
-            "value": "Distillation"
           }
         ]
       }
@@ -27555,27 +27016,6 @@
           }
         }
       }
-    },
-    "LabelGeneration": {
-      "type": "object",
-      "properties": {
-        "trainingData": {
-          "$ref": "#/definitions/JobInput",
-          "description": "Training data for fine tuning.",
-          "x-nullable": true
-        },
-        "validationData": {
-          "$ref": "#/definitions/JobInput",
-          "description": "Validation data for fine tuning.",
-          "x-nullable": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataGenerationVertical"
-        }
-      ],
-      "x-ms-discriminator-value": "LabelGeneration"
     },
     "LakeHouseArtifact": {
       "type": "object",
@@ -28570,28 +28010,6 @@
       ],
       "x-ms-discriminator-value": "MedianStopping"
     },
-    "MlflowAutologger": {
-      "type": "string",
-      "description": "Indicates whether mlflow autologger is enabled for notebooks.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "MlflowAutologger",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled"
-          }
-        ]
-      }
-    },
     "ModelContainer": {
       "type": "object",
       "description": "Azure Resource Manager resource envelope.",
@@ -28645,30 +28063,6 @@
       "required": [
         "value"
       ]
-    },
-    "ModelProvider": {
-      "type": "string",
-      "description": "Enum to determine the type of fine tuning.",
-      "enum": [
-        "AzureOpenAI",
-        "Custom"
-      ],
-      "x-ms-enum": {
-        "name": "ModelProvider",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureOpenAI",
-            "value": "AzureOpenAI",
-            "description": "Fine tuning using Azure Open AI model."
-          },
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Fine tuning using custom model."
-          }
-        ]
-      }
     },
     "ModelSettings": {
       "type": "object",
@@ -30658,31 +30052,6 @@
       ],
       "x-ms-discriminator-value": "PAT"
     },
-    "PackageDetails": {
-      "type": "object",
-      "properties": {
-        "installPath": {
-          "type": "string",
-          "description": "Install path.",
-          "x-nullable": true
-        },
-        "installedVersion": {
-          "type": "string",
-          "description": "Installed version.",
-          "x-nullable": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Package or dependency name.",
-          "x-nullable": true
-        },
-        "patchedVersion": {
-          "type": "string",
-          "description": "Patched version.",
-          "x-nullable": true
-        }
-      }
-    },
     "PaginatedComputeResourcesList": {
       "type": "object",
       "description": "Paginated list of Machine Learning compute objects wrapped in ARM resource envelope.",
@@ -31458,21 +30827,6 @@
           "format": "duration",
           "description": "The probe timeout in ISO 8601 format.",
           "default": "PT2S"
-        }
-      }
-    },
-    "PromptSettings": {
-      "type": "object",
-      "properties": {
-        "enableChainOfDensity": {
-          "type": "boolean"
-        },
-        "enableChainOfThought": {
-          "type": "boolean"
-        },
-        "maxLenSummary": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },
@@ -34929,47 +34283,6 @@
         ]
       }
     },
-    "TeacherModelEndpoint": {
-      "type": "object",
-      "properties": {
-        "endpointName": {
-          "type": "string",
-          "x-nullable": true
-        }
-      }
-    },
-    "TeacherModelEndpointRequestSettings": {
-      "type": "object",
-      "properties": {
-        "minEndpointSuccessRatio": {
-          "type": "number",
-          "format": "double"
-        },
-        "requestBatchSize": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
-    },
-    "TeacherModelSettings": {
-      "type": "object",
-      "properties": {
-        "teacherModelEndpointRequestSettings": {
-          "$ref": "#/definitions/TeacherModelEndpointRequestSettings",
-          "description": "Teacher Model Request Settings.",
-          "x-nullable": true
-        },
-        "teacherModelInferenceParameters": {
-          "type": "object",
-          "description": "Teacher Model Inference Settings.",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          }
-        }
-      }
-    },
     "TensorFlow": {
       "type": "object",
       "description": "TensorFlow distribution configuration.",
@@ -36269,173 +35582,6 @@
           "description": "Indicate whether volume is nocopy",
           "x-nullable": true
         }
-      }
-    },
-    "VulnerabilityDetails": {
-      "type": "object",
-      "properties": {
-        "cve": {
-          "type": "string",
-          "description": "CVE id.",
-          "x-nullable": true
-        },
-        "cveUrl": {
-          "type": "string",
-          "description": "CVE url.",
-          "x-nullable": true
-        },
-        "dueDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "DueDate for vulnerability. Provider data or PublishDate + 30 days.",
-          "x-nullable": true
-        },
-        "id": {
-          "type": "string",
-          "description": "Vulnerability ID.",
-          "x-nullable": true,
-          "readOnly": true
-        },
-        "packageDetails": {
-          "type": "array",
-          "description": "Dependency details.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/PackageDetails"
-          }
-        },
-        "patchable": {
-          "type": "boolean",
-          "description": "Indicates if there is a known patch for vulnerability."
-        },
-        "providerId": {
-          "type": "string",
-          "description": "Vulnerability ID from provider.",
-          "x-nullable": true
-        },
-        "publishDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Vulnerability publish date.",
-          "x-nullable": true
-        },
-        "risk": {
-          "$ref": "#/definitions/VulnerabilityRisk",
-          "description": "Vulnerability Risk value."
-        },
-        "solution": {
-          "type": "string",
-          "description": "Vulnerability description.",
-          "x-nullable": true
-        },
-        "title": {
-          "type": "string",
-          "description": "Vulnerability name.",
-          "x-nullable": true
-        },
-        "vendorId": {
-          "type": "string",
-          "description": "Vendor vulnerability ID (USN, GH Advisory, etc).",
-          "x-nullable": true
-        },
-        "vendorUrl": {
-          "type": "string",
-          "description": "Vendor vulnerability url.",
-          "x-nullable": true
-        }
-      }
-    },
-    "VulnerabilityFindings": {
-      "type": "object",
-      "properties": {
-        "assetId": {
-          "type": "string",
-          "description": "AssetId (Image digest).",
-          "x-nullable": true
-        },
-        "criticalFindingsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of critical findings.",
-          "readOnly": true
-        },
-        "data": {
-          "type": "array",
-          "description": "List of vulnerability findings.",
-          "x-nullable": true,
-          "items": {
-            "$ref": "#/definitions/VulnerabilityDetails"
-          }
-        },
-        "generatedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Time the report was generated."
-        },
-        "highFindingsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of high findings.",
-          "readOnly": true
-        },
-        "lastScanDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Scan result date.",
-          "x-nullable": true
-        },
-        "scanner": {
-          "type": "string",
-          "description": "Vulnerability scanner name.",
-          "x-nullable": true
-        },
-        "source": {
-          "type": "string",
-          "description": "Data source (internal).",
-          "x-nullable": true
-        },
-        "totalFindingsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total findings count.",
-          "readOnly": true
-        }
-      }
-    },
-    "VulnerabilityRisk": {
-      "type": "string",
-      "enum": [
-        "UNKNOWN",
-        "CRITICAL",
-        "HIGH",
-        "MEDIUM",
-        "LOW"
-      ],
-      "x-ms-enum": {
-        "name": "VulnerabilityRisk",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UNKNOWN",
-            "value": "UNKNOWN"
-          },
-          {
-            "name": "CRITICAL",
-            "value": "CRITICAL"
-          },
-          {
-            "name": "HIGH",
-            "value": "HIGH"
-          },
-          {
-            "name": "MEDIUM",
-            "value": "MEDIUM"
-          },
-          {
-            "name": "LOW",
-            "value": "LOW"
-          }
-        ]
       }
     },
     "Webhook": {
