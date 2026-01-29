@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "accountName": "myCognitiveAccount",
+    "safetyProviderName": "mySafetyProvider",
+    "safetyProvider": {
+      "properties": {
+        "providerId": "00000000-0000-0000-0000-000000000000",
+        "providerName": "safetyProviderName",
+        "mode": "sync",
+        "url": "https://example-safety-provider.contoso.com/webhook",
+        "secretName": "safety-provider-secret",
+        "managedIdentity": "f3b9c2e7-4aad-4b1f-9d9c-9e9b1e9b1f9b",
+        "keyVaultUri": "https://contoso-vault.vault.azure.net/"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/raiExternalSafetyProviders/mySafetyProvider",
+        "name": "mySafetyProvider",
+        "properties": {
+          "providerId": "00000000-0000-0000-0000-000000000000",
+          "providerName": "safetyProviderName",
+          "mode": "sync",
+          "url": "https://example-safety-provider.contoso.com/webhook",
+          "secretName": "safety-provider-secret",
+          "managedIdentity": "f3b9c2e7-4aad-4b1f-9d9c-9e9b1e9b1f9b",
+          "keyVaultUri": "https://contoso-vault.vault.azure.net/"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/raiExternalSafetyProviders/mySafetyProvider",
+        "name": "mySafetyProvider",
+        "properties": {
+          "providerId": "00000000-0000-0000-0000-000000000000",
+          "providerName": "safetyProviderName",
+          "mode": "sync",
+          "url": "https://example-safety-provider.contoso.com/webhook",
+          "secretName": "safety-provider-secret",
+          "managedIdentity": "f3b9c2e7-4aad-4b1f-9d9c-9e9b1e9b1f9b",
+          "keyVaultUri": "https://contoso-vault.vault.azure.net/"
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "The request is invalid."
+        }
+      }
+    }
+  }
+}

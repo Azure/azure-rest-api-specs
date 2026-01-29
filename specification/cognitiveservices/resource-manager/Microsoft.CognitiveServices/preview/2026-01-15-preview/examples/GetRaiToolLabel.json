@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "raiToolConnectionName": "ToolLabelName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "raiToolLabelName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiIfcToolLabels/raiIfcToolLabelName",
+        "properties": {
+          "toolConnectionName": "SampleToolLabel",
+          "accountScope": {
+            "labelValues": {
+              "dataDirection": "egress",
+              "confidentiality": "low"
+            }
+          },
+          "projectScopes": [
+            {
+              "project": "ProjectA",
+              "labelValues": {
+                "dataDirection": "egress",
+                "confidentiality": "low"
+              }
+            },
+            {
+              "project": "ProjectB",
+              "labelValues": {
+                "dataDirection": "egress",
+                "confidentiality": "high"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

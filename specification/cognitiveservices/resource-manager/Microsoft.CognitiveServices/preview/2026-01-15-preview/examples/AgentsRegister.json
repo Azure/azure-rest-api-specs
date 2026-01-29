@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "parameters": {
+      "agentId": "agent-id",
+      "agentEntityId": "00000000-1111-2222-3333-444444444444",
+      "name": "agent-name",
+      "description": "description of the agent being registered",
+      "projectResourceId": "project-resource-id",
+      "sourceType": "Microsoft.ApiManagement/service",
+      "properties": {
+        "type": "string",
+        "backendUrl": "https://example.com",
+        "agentId": "agent-id",
+        "managementPortalUrl": "https://portal.example.com",
+        "protocol": "a2a",
+        "protocols": {
+          "a2a": {
+            "cardUrl": "https://card.example.com"
+          }
+        },
+        "basePath": "some/path",
+        "contentJsonPath": "another/path/to/content"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "platform": "Unset",
+        "kind": "Interactive",
+        "agentEntityId": "agent-id",
+        "name": "agent-name",
+        "description": "description of the agent being registered",
+        "agentId": "agent-id",
+        "agentEndpoint": "https://example.com",
+        "managementPortalUrl": "https://portal.example.com",
+        "projectResourceId": "project-resource-id",
+        "source": "Microsoft.ApiManagement/service",
+        "sourceDetails": {
+          "type": "Microsoft.ApiManagement/service",
+          "properties": {
+            "type": "Foundry",
+            "subscriptionId": "00000000-1111-2222-3333-444444444444",
+            "resourceGroup": "myResourceGroup",
+            "resourceName": "myResource"
+          }
+        },
+        "location": "eastus",
+        "published": true,
+        "deployed": true,
+        "state": "Running",
+        "status": "Active",
+        "capabilities": {
+          "actions": {
+            "commands": [
+              "Start",
+              "Stop"
+            ],
+            "metadata": {
+              "resourceUri": "some/resource/uri"
+            }
+          },
+          "management": {
+            "commands": [
+              "ViewTraces"
+            ]
+          },
+          "observability": {
+            "tracing": {
+              "applicationInsightsResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroup/providers/Microsoft.Insights/components/myAppInsights"
+            }
+          }
+        },
+        "linkedAssets": "",
+        "tags": ""
+      }
+    }
+  }
+}

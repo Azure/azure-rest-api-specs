@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "accountName": "my-cognitive-account",
+    "computeName": "testcompute",
+    "api-version": "2026-01-15-preview",
+    "computeResourcePatch": {
+      "tags": {
+        "environment": "production"
+      },
+      "properties": {
+        "description": "Updated description for foundry compute cluster"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-account/computes/testcompute",
+        "name": "testcompute",
+        "type": "Microsoft.CognitiveServices/accounts/computes",
+        "location": "eastus",
+        "tags": {
+          "environment": "production"
+        },
+        "properties": {
+          "description": "Updated description for foundry compute cluster",
+          "computeLocation": "eastus",
+          "provisioningState": "Succeeded",
+          "createdOn": "2024-01-01T00:00:00.000Z",
+          "modifiedOn": "2024-01-02T00:00:00.000Z",
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachineScaleSets/testcompute"
+        }
+      }
+    }
+  }
+}
