@@ -486,6 +486,56 @@ union ManagedHsmSkuFamily {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   C: "C",
 }
+/**
+ * The Certificate Management mode, instructs Azure Key Vault how to manage certificate lifecycle actions including auto rotation and distribution.
+ */
+@added(KeyVault.Versions.v2026_03_01_preview)
+union CertificateManagementMode {
+  string,
+
+  /** No platform certificate management enforcement */
+  Unmanaged: "Unmanaged",
+
+  /** Lock downloads of any certs when the user agent is anything else than AKV VM Extension 4.0+ or when that certificate is not configured for auto-renewal. */
+  ManagedV1: "ManagedV1",
+}
+
+/**
+ * This specifies whether token binding is disabled, enabled or enforced.
+ */
+@added(KeyVault.Versions.`2026-03-01-preview`)
+union TokenBindingMode {
+  string,
+
+  /** Token  binding is not enabled for the vault.  Bounded tokens will be rejects. */
+  NotSupported: "NotSupported",
+
+  /** Token binding is enabled for the vault. Bounded tokens and bearer tokens will be accepted. */
+  Enabled: "Enabled",
+
+  /** Token binding is enforced for the vault. Only bounded tokens will be accepted.  Bearer tokens will be rejected. */
+  Enforced: "Enforced",
+}
+
+/**
+ * Must be one of the following values "NoValidation", "Unattested", "AttestedTrustedLaunch", "AttestedConfidential". Strength of the token binding increases with each value in that order.
+ */
+@added(KeyVault.Versions.`2026-03-01-preview`)
+union TokenBindingStrength {
+  string,
+
+  /** This is default when token binding is not enabled. */
+  NoValidation: "NoValidation",
+
+  /** No attestation proof is required for the bounded token. */
+  Unattested: "Unattested",
+
+  /** Bounded Entra token must originate from a trusted launch VM with attestation proof from the attestation authority like Microsoft Azure Attestation. */
+  AttestedTrustedLaunch: "AttestedTrustedLaunch",
+
+  /** Bounded Entra token must originate from a confidential VM with attestation proof from the attestation authority like Microsoft Azure Attestation. */
+  AttestedConfidential: "AttestedConfidential",
+}
 
 /**
  * The type of action.
@@ -1058,7 +1108,15 @@ model VaultProperties {
   /**
    * Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC.
    */
-  enableRbacAuthorization?: boolean = false;
+  @removed(KeyVault.Versions.`2026-02-01`)
+  @renamedFrom(KeyVault.Versions.`2026-02-01`, "enableRbacAuthorization")
+  enableRbacAuthorizationOld?: boolean = false;
+
+  /**
+   * Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be  ignored. When false, the key vault will use the access policies specified in vault properties, and any policy stored on Azure Resource Manager will be ignored. If null or not specified, the vault is created with the default value of false. Note that management actions are always authorized with RBAC.
+   */
+  @added(KeyVault.Versions.`2026-02-01`)
+  enableRbacAuthorization?: boolean = true;
 
   /**
    * The vault's create mode to indicate whether the vault need to be recovered or not.
@@ -1093,6 +1151,18 @@ model VaultProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   publicNetworkAccess?: string = "enabled";
+
+  /**
+   * Configuration for Token Binding for Entra tokens
+   */
+  @added(KeyVault.Versions.`2026-03-01-preview`)
+  tokenBindingParameters?: TokenBindingParameters;
+
+  /**
+   * The Certificate Management mode, instructs Azure Key Vault how to manage certificate lifecycle actions including auto rotation and distribution.
+   */
+  @added(KeyVault.Versions.`2026-03-01-preview`)
+  certificateManagementMode?: string;
 }
 
 /**
@@ -1158,6 +1228,22 @@ model Permissions {
    * Permissions to storage accounts
    */
   storage?: StoragePermissions[];
+}
+
+/**
+ * Configuration for Token Binding for Entra tokens
+ */
+@added(KeyVault.Versions.`2026-03-01-preview`)
+model TokenBindingParameters {
+  /**
+   * This specifies whether token binding is disabled, enabled or enforced.
+   */
+  mode?: TokenBindingMode;
+
+  /**
+   * Must be one of the following values "NoValidation", "Unattested", "AttestedTrustedLaunch", "AttestedConfidential". Strength of the token binding increases with each value in that order.
+   */
+  minimumTokenBindingStrength?: TokenBindingStrength;
 }
 
 /**
@@ -1399,6 +1485,18 @@ model VaultPatchProperties {
    * Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules.
    */
   publicNetworkAccess?: string;
+
+  /**
+   * Configuration for Token Binding for Entra tokens
+   */
+  @added(KeyVault.Versions.`2026-03-01-preview`)
+  tokenBindingParameters?: TokenBindingParameters;
+
+  /**
+   * The Certificate Management mode, instructs Azure Key Vault how to manage certificate lifecycle actions including auto rotation and distribution.
+   */
+  @added(KeyVault.Versions.`2026-03-01-preview`)
+  certificateManagementMode?: string;
 }
 
 /**
