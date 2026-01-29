@@ -26,3 +26,5 @@ model AlertsClientOptions {
 @@clientName(TimeRange.`30d`, "THIRTY_D", "python");
 
 @@clientName(AlertsManagementErrorResponse, "ErrorResponseForAlertsManagement", "go");
+
+@@clientName(Microsoft.AlertsManagement.NotificationResult.statusURL, "statusUrl", "java");
