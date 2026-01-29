@@ -27,4 +27,22 @@ model AlertsClientOptions {
 
 @@clientName(AlertsManagementErrorResponse, "ErrorResponseForAlertsManagement", "go");
 
-@@clientName(Microsoft.AlertsManagement.NotificationResult.statusURL, "statusUrl", "java");
+@@clientName(Microsoft.AlertsManagement.NotificationResult.statusURL,
+  "statusUrl",
+  "java"
+);
+
+@@clientName(Microsoft.AlertsManagement.AlertsMetaData,
+  "AlertsMetadata",
+  "java"
+);
+@@clientName(Microsoft.AlertsManagement.AlertsMetaDataProperties,
+  "AlertsMetadataProperties",
+  "java"
+);
+@@clientName(Microsoft.AlertsManagement.Essentials.lastModifiedUserName,
+  "lastModifiedUsername",
+  "java"
+);
+
+@@clientName(Microsoft.AlertsManagement, "AlertsManagementClient", "java");
