@@ -44,12 +44,5 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-01-preview1'
 input-file:
   - preview/2025-05-01-preview/sreagent.json
-directive:
-  - suppress: AvoidAdditionalProperties
-    from: sreagent.json
-    reason: A dictionary allow passing through various key-value pairs
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    from: sreagent.json
-    reason: A dictionary allow passing through various key-value pairs
 
 ```
