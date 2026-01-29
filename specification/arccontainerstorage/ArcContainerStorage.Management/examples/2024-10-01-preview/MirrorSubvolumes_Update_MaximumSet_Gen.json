@@ -1,0 +1,84 @@
+{
+  "title": "MirrorSubvolumes_Update_MaximumSet",
+  "operationId": "MirrorSubvolumes_Update",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "resourceUri": "subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.Kubernetes/connectedClusters/cluster",
+    "edgeVolumeName": "myedgevolume",
+    "mirrorSubvolumeName": "mirrorsubvol1",
+    "properties": {
+      "properties": {
+        "path": "/mirrorsubvolume1",
+        "authentication": {
+          "authType": "WORKLOAD_IDENTITY"
+        },
+        "account": {
+          "accountType": "blob",
+          "containerName": "container2",
+          "accountEndpoint": "https://anothersa.blob.core.windows.net",
+          "indexTagsMode": "UseIndexTags"
+        },
+        "blobFiltering": {
+          "blobNamePrefix": "data/metrics"
+        },
+        "authSys": {
+          "uid": 2024705690,
+          "gid": 4190039252
+        },
+        "schedule": {
+          "frequency": "@hourly",
+          "oneshot": "0ca47ee0-cb21-4317-9b89-fbd292411774"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "path": "/mirrorsubvolume1",
+          "authentication": {
+            "authType": "WORKLOAD_IDENTITY"
+          },
+          "account": {
+            "accountType": "blob",
+            "containerName": "container2",
+            "accountEndpoint": "https://anothersa.blob.core.windows.net",
+            "indexTagsMode": "UseIndexTags"
+          },
+          "blobFiltering": {
+            "blobNamePrefix": "data/metrics"
+          },
+          "authSys": {
+            "uid": 2024705690,
+            "gid": 4190039252
+          },
+          "schedule": {
+            "frequency": "@hourly",
+            "oneshot": "0ca47ee0-cb21-4317-9b89-fbd292411774"
+          },
+          "provisioningState": "Succeeded",
+          "status": {
+            "state": "unknown"
+          }
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.Kubernetes/connectedClusters/cluster/providers/Microsoft.ArcContainerStorage/edgevolumes/myedgevolume/mirrorsubvolumes/mirrorsubvol1",
+        "name": "mirrorsubvol1",
+        "type": "Microsoft.ArcContainerStorage/edgevolumes/mirrorsubvolumes",
+        "systemData": {
+          "createdBy": "pnmtlcihvxxnruqqtcbbzokd",
+          "createdByType": "User",
+          "createdAt": "2025-07-16T20:21:00.749Z",
+          "lastModifiedBy": "kllnlkyjbwz",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-16T20:21:00.749Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

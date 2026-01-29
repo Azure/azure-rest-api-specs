@@ -95,6 +95,9 @@
     },
     {
       "name": "ValidatedSolutionRecipes"
+    },
+    {
+      "name": "ClusterJobs"
     }
   ],
   "paths": {
@@ -3038,6 +3041,270 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs": {
+      "get": {
+        "operationId": "ClusterJobs_List",
+        "tags": [
+          "ClusterJobs"
+        ],
+        "description": "List ClusterJob resources by Clusters",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_List": {
+            "$ref": "./examples/ClusterJobs_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/jobs/{jobsName}": {
+      "get": {
+        "operationId": "ClusterJobs_Get",
+        "tags": [
+          "ClusterJobs"
+        ],
+        "description": "Get a ClusterJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of ClusterJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_Get_ConfigureArcGatewayJob": {
+            "$ref": "./examples/ClusterJobs_Get_ConfigureArcGatewayJob.json"
+          },
+          "ClusterJobs_Get_GpuCreatePartitionJob": {
+            "$ref": "./examples/ClusterJobs_Get_GpuCreatePartitionJob.json"
+          },
+          "ClusterJobs_Get_GpuSwitchModeJob": {
+            "$ref": "./examples/ClusterJobs_Get_GpuSwitchModeJob.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ClusterJobs_CreateOrUpdate",
+        "tags": [
+          "ClusterJobs"
+        ],
+        "description": "Create a ClusterJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of ClusterJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ClusterJob' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            }
+          },
+          "201": {
+            "description": "Resource 'ClusterJob' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ClusterJob"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_CreateOrUpdate_ConfigureArcGatewayJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureArcGateway.json"
+          },
+          "ClusterJobs_CreateOrUpdate_GpuCreatePartitionJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuCreatePartition.json"
+          },
+          "ClusterJobs_CreateOrUpdate_GpuSwitchModeJob": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_GpuSwitchMode.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ClusterJobs_Delete",
+        "tags": [
+          "ClusterJobs"
+        ],
+        "description": "Delete a ClusterJob",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of ClusterJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ClusterJobs_Delete": {
+            "$ref": "./examples/ClusterJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/offers": {
       "get": {
         "operationId": "Offers_ListByCluster",
@@ -4081,6 +4348,140 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default/checkHealth": {
+      "post": {
+        "operationId": "UpdateSummariesOperationGroup_CheckHealth",
+        "tags": [
+          "UpdateSummariesOperationGroup"
+        ],
+        "description": "Check health of UpdateSummaries",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check health of UpdateSummaries": {
+            "$ref": "./examples/CheckHealth.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updateSummaries/default/checkUpdates": {
+      "post": {
+        "operationId": "UpdateSummariesOperationGroup_CheckUpdates",
+        "tags": [
+          "UpdateSummariesOperationGroup"
+        ],
+        "description": "Check for updates",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckUpdatesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check for specific update by name": {
+            "$ref": "./examples/CheckUpdatesWithUpdateName.json"
+          },
+          "Check for updates": {
+            "$ref": "./examples/CheckUpdates.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates": {
       "get": {
         "operationId": "Updates_List",
@@ -4381,6 +4782,142 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/checkHealth": {
+      "post": {
+        "operationId": "Updates_CheckHealth",
+        "tags": [
+          "Updates"
+        ],
+        "description": "Check health of Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateName",
+            "in": "path",
+            "description": "The name of the Update",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Check health of Update": {
+            "$ref": "./examples/CheckHealthUpdates.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/prepare": {
+      "post": {
+        "operationId": "Updates_Prepare",
+        "tags": [
+          "Updates"
+        ],
+        "description": "Prepare Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateName",
+            "in": "path",
+            "description": "The name of the Update",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Prepare Update": {
+            "$ref": "./examples/PrepareUpdates.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -4872,6 +5409,10 @@
           "$ref": "#/definitions/ArcSettingProperties",
           "description": "ArcSetting properties.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -5096,6 +5637,10 @@
           "$ref": "#/definitions/ArcSettingsPatchProperties",
           "description": "ArcSettings properties.",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
         }
       }
     },
@@ -5202,6 +5747,16 @@
         }
       }
     },
+    "CheckUpdatesRequest": {
+      "type": "object",
+      "description": "Request body for the check updates action on update summaries.",
+      "properties": {
+        "updateName": {
+          "type": "string",
+          "description": "Name of update"
+        }
+      }
+    },
     "Cluster": {
       "type": "object",
       "description": "Cluster details.",
@@ -5274,6 +5829,117 @@
           "type": "string"
         }
       }
+    },
+    "ClusterJob": {
+      "type": "object",
+      "description": "Cluster Jobs resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ClusterJobListResult": {
+      "type": "object",
+      "description": "List of Cluster Job resources for the HCI cluster.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClusterJob items on this page",
+          "items": {
+            "$ref": "#/definitions/ClusterJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterJobProperties": {
+      "type": "object",
+      "description": "Cluster Job properties",
+      "properties": {
+        "jobType": {
+          "$ref": "#/definitions/HciJobType",
+          "description": "Job Type to support polymorphic resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentMode": {
+          "type": "string",
+          "description": "Deployment mode to trigger job.",
+          "default": "Deploy",
+          "enum": [
+            "Validate",
+            "Deploy"
+          ],
+          "x-ms-enum": {
+            "name": "DeploymentMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Validate",
+                "value": "Validate",
+                "description": "Validate ECE action deployment for a cluster."
+              },
+              {
+                "name": "Deploy",
+                "value": "Deploy",
+                "description": "Deploy ECE action deployment for a cluster."
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Job provisioning state",
+          "readOnly": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Unique, immutable job id.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of Cluster job.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/JobReportedProperties",
+          "description": "Reported properties for job",
+          "readOnly": true
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
     },
     "ClusterList": {
       "type": "object",
@@ -5754,6 +6420,22 @@
         }
       }
     },
+    "ClusterSdnProperties": {
+      "type": "object",
+      "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
+      "properties": {
+        "sdnIntegrationIntent": {
+          "$ref": "#/definitions/SdnIntegrationIntent",
+          "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SdnProperties"
+        }
+      ]
+    },
     "CollectLogJobProperties": {
       "type": "object",
       "description": "Represents the properties of a log collection job.",
@@ -5839,6 +6521,150 @@
         ]
       }
     },
+    "ConfidentialVmIntent": {
+      "type": "string",
+      "description": "Captures the customer's intent to enable or disable Confidential Virtual Machine (CVM) support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialVmIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Indicates that the customer intends to enable CVM support on the cluster."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Indicates that the customer intends to disable CVM support on the cluster."
+          }
+        ]
+      }
+    },
+    "ConfidentialVmProfile": {
+      "type": "object",
+      "description": "Represents the Confidential Virtual Machine (CVM) configuration status for an edge device. It includes the current IGVM support state and detailed component-level status information.",
+      "properties": {
+        "igvmStatus": {
+          "$ref": "#/definitions/IgvmStatus",
+          "description": "Indicates whether Independent Guest Virtual Machine (IGVM) support is available on the device. This will be 'Enabled' if the device supports CVMs, 'Disabled' if not, and 'Unknown' if the status cannot be determined.",
+          "readOnly": true
+        },
+        "statusDetails": {
+          "type": "array",
+          "description": "Provides detailed status entries for IGVM-related components, including deployment status, compatibility checks, and error diagnostics.",
+          "items": {
+            "$ref": "#/definitions/IgvmStatusDetail"
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
+        }
+      }
+    },
+    "ConfidentialVmProperties": {
+      "type": "object",
+      "description": "Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.",
+      "properties": {
+        "confidentialVmIntent": {
+          "type": "string",
+          "description": "Captures the customer's intent to enable or disable CVM support on the cluster, either during initial deployment (Day-0) or at a later stage (Day-N).",
+          "default": "Disable",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "ConfidentialVmIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Indicates that the customer intends to enable CVM support on the cluster."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Indicates that the customer intends to disable CVM support on the cluster."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "confidentialVmStatus": {
+          "type": "string",
+          "description": "Captures the current status of CVM support on the cluster.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "PartiallyEnabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ConfidentialVmStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "CVM support is fully enabled on the cluster. All nodes are CVM capable."
+              },
+              {
+                "name": "PartiallyEnabled",
+                "value": "PartiallyEnabled",
+                "description": "CVM support is partially enabled. At least one node in the cluster is CVM capable."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "CVM support is disabled. None of the nodes in the cluster are CVM capable."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "confidentialVmStatusSummary": {
+          "type": "string",
+          "description": "Additional context about CVM support on the cluster, such as reasons for partial enablement or hardware constraints.",
+          "readOnly": true
+        }
+      }
+    },
+    "ConfidentialVmStatus": {
+      "type": "string",
+      "description": "Captures the current status of Confidential Virtual Machine (CVM) support on the cluster.",
+      "enum": [
+        "Enabled",
+        "PartiallyEnabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ConfidentialVmStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "CVM support is fully enabled on the cluster. All nodes are CVM capable."
+          },
+          {
+            "name": "PartiallyEnabled",
+            "value": "PartiallyEnabled",
+            "description": "CVM support is partially enabled. At least one node in the cluster is CVM capable."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "CVM support is disabled. None of the nodes in the cluster are CVM capable."
+          }
+        ]
+      }
+    },
     "ConnectivityStatus": {
       "type": "string",
       "description": "Overall connectivity status for the cluster resource. Indicates whether the cluster is connected to Azure, partially connected, or has not recently communicated.",
@@ -5919,42 +6745,6 @@
           "type": "string",
           "description": "Represents the file name of a update payload."
         }
-      }
-    },
-    "CreatedByType": {
-      "type": "string",
-      "description": "The type of identity that created the resource.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "CreatedByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "User"
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "Application"
-          },
-          {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
-            "description": "ManagedIdentity"
-          },
-          {
-            "name": "Key",
-            "value": "Key",
-            "description": "Key"
-          }
-        ]
       }
     },
     "DefaultExtensionDetails": {
@@ -6868,6 +7658,7 @@
         "kind": {
           "$ref": "#/definitions/DeviceKind",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -6891,6 +7682,7 @@
         "kind": {
           "$ref": "#/definitions/EdgeDeviceKind",
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7434,6 +8226,75 @@
         }
       }
     },
+    "GpuCreatePartitionJobProperties": {
+      "type": "object",
+      "description": "Properties for creating GPU partitions for virtualization and workload isolation.",
+      "properties": {
+        "partitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of partitions to be created on the GPU."
+        }
+      },
+      "required": [
+        "partitionCount"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "GpuCreatePartition"
+    },
+    "GpuMode": {
+      "type": "string",
+      "description": "GPU modes supported.",
+      "enum": [
+        "Unknown",
+        "GPUP",
+        "DDA"
+      ],
+      "x-ms-enum": {
+        "name": "GpuMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown mode."
+          },
+          {
+            "name": "GPUP",
+            "value": "GPUP",
+            "description": "GPU-P mode."
+          },
+          {
+            "name": "DDA",
+            "value": "DDA",
+            "description": "DDA mode."
+          }
+        ]
+      }
+    },
+    "GpuSwitchModeJobProperties": {
+      "type": "object",
+      "description": "Properties for switching GPU mode between DDA and GPU-P for different workload requirements.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/GpuMode",
+          "description": "Desired GPU mode to switch to."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "GpuSwitchMode"
+    },
     "HardwareClass": {
       "type": "string",
       "description": "Hardware class of the cluster.",
@@ -7500,6 +8361,16 @@
         }
       ],
       "x-ms-discriminator-value": "CollectLog"
+    },
+    "HciConfigureArcGatewayJobProperties": {
+      "type": "object",
+      "description": "Properties for configuring arc gateway to a cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureArcGateway"
     },
     "HciEdgeDevice": {
       "type": "object",
@@ -7902,6 +8773,34 @@
         }
       }
     },
+    "HciJobType": {
+      "type": "string",
+      "description": "ClusterJob Type supported.",
+      "enum": [
+        "ConfigureArcGateway",
+        "GpuCreatePartition",
+        "GpuSwitchMode"
+      ],
+      "x-ms-enum": {
+        "name": "HciJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ConfigureArcGateway",
+            "value": "ConfigureArcGateway",
+            "description": "Job to configure arc gateway for the cluster."
+          },
+          {
+            "name": "GpuCreatePartition",
+            "value": "GpuCreatePartition"
+          },
+          {
+            "name": "GpuSwitchMode",
+            "value": "GpuSwitchMode"
+          }
+        ]
+      }
+    },
     "HciNetworkProfile": {
       "type": "object",
       "description": "The network profile of a device.",
@@ -8225,6 +9124,52 @@
             "description": "Uses a local identity system integrated with Azure Key Vault for authentication. Suitable for AD-less environments where Active Directory is not available or required."
           }
         ]
+      }
+    },
+    "IgvmStatus": {
+      "type": "string",
+      "description": "Represents the IGVM support status for the device.",
+      "enum": [
+        "Unknown",
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "IgvmStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The IGVM status could not be determined due to a query failure or inconsistent system state."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "IGVM support is enabled, indicating that confidential VM features are available on this device."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "IGVM status is disabled, indicating that confidential VM features are not supported on this device."
+          }
+        ]
+      }
+    },
+    "IgvmStatusDetail": {
+      "type": "object",
+      "description": "Provides component-level status information related to IGVM enablement on the device.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "A machine-readable status code indicating the result or condition of a specific IGVM-related check or operation.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable message providing context or explanation for the associated status code.",
+          "readOnly": true
+        }
       }
     },
     "ImdsAttestation": {
@@ -10357,6 +11302,81 @@
         }
       }
     },
+    "SdnIntegrationIntent": {
+      "type": "string",
+      "description": "Indicates whether Software Defined Networking (SDN) integration should be enabled or disabled for this deployment.",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SdnIntegrationIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable SDN integration for the deployment."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable SDN integration for the deployment."
+          }
+        ]
+      }
+    },
+    "SdnProperties": {
+      "type": "object",
+      "description": "Represents the Software Defined Networking (SDN) configuration state.",
+      "properties": {
+        "sdnStatus": {
+          "$ref": "#/definitions/SdnStatus",
+          "description": "Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.",
+          "readOnly": true
+        },
+        "sdnDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name (FQDN) associated with the SDN deployment. This value is propagated from the Device Management Extension to the cluster resource. It is typically in the format `<sdnPrefix>-nc.<domain>` when SDN is enabled. May be null or absent in unsupported or disabled states.",
+          "readOnly": true
+        },
+        "sdnApiAddress": {
+          "type": "string",
+          "description": "Represents the API address for the SDN deployment.",
+          "readOnly": true
+        }
+      }
+    },
+    "SdnStatus": {
+      "type": "string",
+      "description": "Indicates the current Software Defined Networking (SDN) status of the resource, which may be an individual device or a cluster.",
+      "enum": [
+        "Unknown",
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "SdnStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The SDN status could not be determined due to a failure in querying the SDN API service. This may occur if the query script fails or if the system is in an inconsistent state. The domain name will be null in this case."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "SDN is not enabled on the resource. The domain name will be null. This is the default state when SDN has not been configured."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "SDN is successfully enabled on the resource. The domain name will be populated in the format `<sdnPrefix>-nc.<domain>`. Customers may need to manage DNS settings to ensure proper resolution."
+          }
+        ]
+      }
+    },
     "SecretsLocationDetails": {
       "type": "object",
       "description": "Secrets location details",
@@ -11361,28 +12381,24 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
         },
         "rebootRequired": {
           "$ref": "#/definitions/RebootRequirement",
-          "description": "Indicates whether a reboot is required after the update or operation. Helps determine if a system restart is necessary to complete the process.",
-          "x-ms-client-flatten": true
+          "description": "Indicates whether a reboot is required after the update or operation. Helps determine if a system restart is necessary to complete the process."
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Overall health state for update-specific health checks.",
-          "x-ms-client-flatten": true
+          "description": "Overall health state for update-specific health checks."
         },
         "healthCheckResult": {
           "type": "array",
           "description": "An array of PrecheckResult objects.",
           "items": {
             "$ref": "#/definitions/PrecheckResult"
-          },
-          "x-ms-client-flatten": true
+          }
         },
         "healthCheckDate": {
           "type": "string",
@@ -11636,7 +12652,6 @@
           "items": {
             "$ref": "#/definitions/PackageVersionInfo"
           },
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "version"
           ]
@@ -11661,8 +12676,7 @@
         },
         "healthState": {
           "$ref": "#/definitions/HealthState",
-          "description": "Overall health state for update-specific health checks.",
-          "x-ms-client-flatten": true
+          "description": "Overall health state for update-specific health checks."
         },
         "healthCheckResult": {
           "type": "array",
@@ -11670,7 +12684,6 @@
           "items": {
             "$ref": "#/definitions/PrecheckResult"
           },
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "name"
           ]

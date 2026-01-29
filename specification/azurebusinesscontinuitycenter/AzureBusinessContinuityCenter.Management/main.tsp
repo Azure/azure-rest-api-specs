@@ -7,8 +7,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models/unifiedprotecteditem.tsp";
 import "./models/deletedunifiedprotecteditem.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
@@ -20,9 +18,13 @@ namespace Microsoft.AzureBusinessContinuity;
 
 @doc("Microsoft.AzureBusinessContinuity Resource Provider supported API versions.")
 enum Versions {
-  @doc("Microsoft.AzureBusinessContinuity Resource Provider management API version 2024-03-01-preview.")
+  @doc("Microsoft.AzureBusinessContinuity Resource Provider management API version 2024-09-01-preview.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_09_01_preview: "2024-09-01-preview",
+
+  @doc("Microsoft.AzureBusinessContinuity Resource Provider management API version 2025-11-01-preview.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_11_01_preview: "2025-11-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -30,7 +32,8 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceOperations
 interface UnifiedProtectedItem {
   get is ArmResourceRead<UnifiedProtectedItemResource>;
-  listByResourceGroup is ArmResourceListByParent<UnifiedProtectedItemResource>;
+  @renamedFrom(Versions.v2025_11_01_preview, "listByResourceGroup")
+  listByResource is ArmResourceListByParent<UnifiedProtectedItemResource>;
 }
 
 @armResourceOperations

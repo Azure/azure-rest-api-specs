@@ -37,7 +37,7 @@ interface EdgeMachineJobs {
   delete is ArmResourceDeleteWithoutOkAsync<EdgeMachineJob>;
 
   @doc("List EdgeMachineJob resources by EdgeMachines")
-  listByCluster is ArmResourceListByParent<EdgeMachineJob>;
+  list is ArmResourceListByParent<EdgeMachineJob>;
 }
 
 @@doc(EdgeMachineJob.name, "Name of EdgeMachineJob");
@@ -523,6 +523,7 @@ model OsProvisionProfile {
   @doc("Hash of the OS package downloaded")
   imageHash?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Public key is not a secret."
   @doc("GPG Public Key used for package verification")
   gpgPubKey?: string;
 
@@ -550,6 +551,7 @@ model DownloadOsProfile {
   @doc("Hash of the OS package downloaded")
   imageHash?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Public key is not a secret."
   @doc("GPG Public Key used for package verification")
   gpgPubKey?: string;
 }

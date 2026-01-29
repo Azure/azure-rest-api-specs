@@ -1202,6 +1202,7 @@
             "description": "The Firmware analysis summary name describing the type of summary.",
             "required": true,
             "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
             "enum": [
               "Firmware",
               "CommonVulnerabilitiesAndExposures",
@@ -1221,7 +1222,7 @@
                 {
                   "name": "CommonVulnerabilitiesAndExposures",
                   "value": "CommonVulnerabilitiesAndExposures",
-                  "description": "The summary contains information about the Common Vulnerabilities and Exposures analysis results"
+                  "description": "The summary contains information about the CVE (Common Vulnerabilities and Exposures) analysis results (deprecated)"
                 },
                 {
                   "name": "BinaryHardening",
@@ -2171,19 +2172,19 @@
         },
         "cvssScore": {
           "type": "string",
-          "description": "Legacy property for the effective CVE score."
+          "description": "Legacy property for the effective CVE score (deprecated)."
         },
         "cvssV2Score": {
           "type": "string",
-          "description": "Legacy property for the CVE CVSS version 2 score, if one existed."
+          "description": "Legacy property for the CVE CVSS version 2 score, if one existed. (deprecated)"
         },
         "cvssV3Score": {
           "type": "string",
-          "description": "Legacy property for the CVE CVSS version 3 score, if one existed."
+          "description": "Legacy property for the CVE CVSS version 3 score, if one existed. (deprecated)"
         },
         "cvssVersion": {
           "type": "string",
-          "description": "Legacy property for the what CVSS version score was stored in the cvssScore property"
+          "description": "Legacy property for the what CVSS version score was stored in the cvssScore property (deprecated)."
         },
         "effectiveCvssScore": {
           "type": "number",
@@ -2227,7 +2228,7 @@
     },
     "CveSummary": {
       "type": "object",
-      "description": "Properties for a CVE analysis summary.",
+      "description": "Properties for a CVE (Common Vulnerabilities and Exposures) analysis summary (deprecated).",
       "properties": {
         "criticalCveCount": {
           "type": "integer",
@@ -2798,7 +2799,7 @@
           {
             "name": "CommonVulnerabilitiesAndExposures",
             "value": "CommonVulnerabilitiesAndExposures",
-            "description": "The summary contains information about the Common Vulnerabilities and Exposures analysis results"
+            "description": "The summary contains information about the CVE (Common Vulnerabilities and Exposures) analysis results (deprecated)"
           },
           {
             "name": "BinaryHardening",

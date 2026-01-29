@@ -68,8 +68,11 @@ model ConfluentSourceConnectorProperties extends DataSourceProperties {
   @doc("What to do when there is no initial offset in ZooKeeper or if an offset is out of range.")
   autoOffsetReset: ConfluentAutoOffsetReset;
 
-  @doc("UserName+Password Or OAuth for Confluent.")
-  authentication: Models.Auth.Authentication;
+  @doc("Authentication for Confluent.")
+  authentication?: Models.Auth.Authentication;
+
+  @doc("Client certificate for Confluent.")
+  clientCertAuthentication?: Models.Auth.CertificateAuthentication;
 
   @doc("Security protocol of the confluent.")
   securityProtocol?: ConfluentSecurityProtocol;

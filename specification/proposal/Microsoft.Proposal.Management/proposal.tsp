@@ -32,6 +32,10 @@ model ProposalResourceProperties {
 
   @doc("The proposal status.")
   status?: ProposalStatus;
+
+  @doc("The list of line items associated with the proposal.")
+  @identifiers(#["productCode"])
+  lineItems?: LineItem[];
 }
 
 @armResourceOperations(ProposalResource)

@@ -1,9 +1,11 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -152,6 +154,59 @@ union ProtectionStatus {
   string,
 }
 
+@added(Versions.v2025_11_01_preview)
+@doc("Enum for source side scan status.")
+union SourceSideScanStatus {
+  @doc("Not Applicable.")
+  NotApplicable: "NotApplicable",
+
+  string,
+
+  @doc("Source side scan is configured.")
+  Configured: "Configured",
+
+  string,
+
+  @doc("Source side scan is not configured.")
+  NotConfigured: "NotConfigured",
+
+  string,
+
+  @doc("Source side scan configuration has failed.")
+  ConfigurationFailed: "ConfigurationFailed",
+
+  string,
+}
+
+@added(Versions.v2025_11_01_preview)
+@doc("Enum for source side scan summary.")
+union SourceSideScanSummary {
+  @doc("Not Applicable.")
+  NotApplicable: "NotApplicable",
+
+  string,
+
+  @doc("Scan status is unknown.")
+  Unknown: "Unknown",
+
+  string,
+
+  @doc("Suspicious activity detected.")
+  Suspicious: "Suspicious",
+
+  string,
+
+  @doc("No issues detected, status is healthy.")
+  Healthy: "Healthy",
+
+  string,
+
+  @doc("No threats reported.")
+  NoThreatsReported: "NoThreatsReported",
+
+  string,
+}
+
 @doc("Definition of Tag")
 model Tag {
   @doc("Gets and sets the property key.")
@@ -201,6 +256,16 @@ model LinkedResourceInformation {
 
   @doc("Resource location of linked resource.")
   resourceLocation?: string;
+}
+
+@added(Versions.v2025_11_01_preview)
+@doc("Source side scan information.")
+model SourceSideScanInfo {
+  @doc("Source side scan status.")
+  sourceSideScanStatus: SourceSideScanStatus;
+
+  @doc("Source side scan summary.")
+  sourceSideScanSummary: SourceSideScanSummary;
 }
 
 @doc("Definition of nullable date time property info.")
@@ -469,6 +534,10 @@ model SolutionSpecificProtectedItem {
   @doc("BCDR Security score of protected item.")
   bcdrDataSecurityLevel: BCDRDataSecurityLevel;
 
+  @added(Versions.v2025_11_01_preview)
+  @doc("Source side scan information of protected item.")
+  sourceSideScanInfo: SourceSideScanInfo;
+
   @doc("Provider specific properties.")
   providerSpecificProperties?: ProviderSpecificProperties;
 
@@ -525,39 +594,44 @@ model UnifiedProtectedItemProperties {
   @visibility(Lifecycle.Read)
   friendlyName: string;
 
-  @doc("Data source information of protected item.")
+  @doc("Computed & aggregated data source information of UPI.")
   @visibility(Lifecycle.Read)
   dataSourceInformation: DataSourceInformation;
 
-  @doc("Linked resource information of the protected item.")
+  @doc("Computed & aggregated linked resource information of UPI.")
   @visibility(Lifecycle.Read)
   linkedResourceInformation: LinkedResourceInformation;
 
-  @doc("Datasource is protected in primary region or not.")
+  @doc("Computed & aggregated flag of UPI whether datasource is protected in primary region or not.")
   @visibility(Lifecycle.Read)
   isProtectedInPrimaryRegion: boolean;
 
-  @doc("Datasource is protected in secondary region or not.")
+  @doc("Computed & aggregated flag of UPI whether datasource is protected in secondary region or not.")
   @visibility(Lifecycle.Read)
   isProtectedInSecondaryRegion: boolean;
 
-  @doc("Protection status of Datasource in primary region.")
+  @doc("Computed & aggregated protection status of UPI for datasource in primary region.")
   @visibility(Lifecycle.Read)
   protectionStatusInPrimaryRegion: UPIProtectionStatus;
 
-  @doc("Protection status of Datasource in secondary region.")
+  @doc("Computed & aggregated protection status of UPI for datasource in secondary region.")
   @visibility(Lifecycle.Read)
   protectionStatusInSecondaryRegion: UPIProtectionStatus;
 
-  @doc("Security Level of protected item")
+  @doc("Computed & aggregated Security Level of UPI")
   @visibility(Lifecycle.Read)
   maximumBcdrDataSecurity: BCDRDataSecurityLevel;
 
-  @doc("Primary region properties of protected item.")
+  @added(Versions.v2025_11_01_preview)
+  @doc("Computed & aggregated source side scan information on UPI.")
+  @visibility(Lifecycle.Read)
+  sourceSideScanInfo: SourceSideScanInfo;
+
+  @doc("Primary region properties of UPI.")
   @visibility(Lifecycle.Read)
   primaryRegionProtectionDetails: RegionSpecificPropertiesForUnifiedProtectedItem;
 
-  @doc("Secondary region properties of protected item.")
+  @doc("Secondary region properties of UPI.")
   @visibility(Lifecycle.Read)
   secondaryRegionProtectionDetails?: RegionSpecificPropertiesForUnifiedProtectedItem;
 
@@ -566,7 +640,7 @@ model UnifiedProtectedItemProperties {
   @visibility(Lifecycle.Read)
   solutionSpecificProtectionProperties: Record<SolutionSpecificProtectionProperties>;
 
-  @doc("Detail of protected item.")
+  @doc("Detail of protected items.")
   @identifiers(#[])
   @visibility(Lifecycle.Read)
   protectedItems: SolutionSpecificProtectedItem[];
@@ -579,7 +653,7 @@ model UnifiedProtectedItemProperties {
   @visibility(Lifecycle.Read)
   distinctSolutionNames: string[];
 
-  @doc("TenantId of the protected items.")
+  @doc("TenantId of the UPI.")
   @visibility(Lifecycle.Read)
   tenantId: string;
 
@@ -589,7 +663,7 @@ model UnifiedProtectedItemProperties {
   deletedPiLastEventTimeMap: Record<utcDateTime>;
 
   @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
+  @doc("The status of the last operation of UPI.")
   provisioningState?: ProvisioningState;
 }
 

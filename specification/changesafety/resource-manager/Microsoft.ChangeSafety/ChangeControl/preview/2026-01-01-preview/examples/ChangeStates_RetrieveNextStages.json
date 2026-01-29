@@ -1,0 +1,71 @@
+{
+  "title": "ChangeStates_RetrieveNextStages",
+  "operationId": "ChangeStates_RetrieveNextStages",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "webApplicationChangeState"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "changeStateResourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/webApplicationChangeState",
+        "lastStageProgressionSequence": 7,
+        "nextStages": [
+          {
+            "stageReference": "staging-deployment",
+            "stageVariables": {
+              "environment": "staging",
+              "region": "East US"
+            },
+            "status": "Initialized",
+            "sequence": 8,
+            "comments": "Next stage: Staging environment deployment",
+            "links": [
+              {
+                "name": "workTrackingItem",
+                "uri": "https://dev.azure.com/contoso/AnalyticsProject/_workitems/edit/12369",
+                "description": "Work item for analytics platform deployment with ML capabilities"
+              },
+              {
+                "name": "approvalRequest",
+                "uri": "https://approval.contoso.com/requests/67914",
+                "description": "Analytics platform deployment approval with data governance review"
+              },
+              {
+                "name": "supportIncident",
+                "uri": "https://support.contoso.com/incidents/INC001258",
+                "description": "Support incident for analytics platform deployment and data pipeline monitoring"
+              },
+              {
+                "name": "accessElevationRequest",
+                "uri": "https://access.contoso.com/requests/AER-5702",
+                "description": "Access elevation request for analytics platform deployment with data access"
+              },
+              {
+                "name": "relatedChangeState",
+                "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/dataLakeUpgradeState",
+                "description": "Related data lake upgrade change state for analytics platform coordination"
+              },
+              {
+                "name": "testResults",
+                "uri": "https://testresults.contoso.com/runs/TR-9900",
+                "description": "Analytics platform deployment test results with data quality validation"
+              },
+              {
+                "name": "serviceCatalog",
+                "uri": "https://catalog.contoso.com/services/analytics-platform",
+                "description": "Analytics platform service catalog entry with ML and data processing specifications"
+              }
+            ],
+            "additionalData": {
+              "testSuite": "staging-validation",
+              "healthCheckEnabled": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -83,6 +83,7 @@ model BuildConfig {
   /**
    * Docker Registry to use for this deployment. This configuration is only applicable to 1st Gen functions, 2nd Gen functions can only use Artifact Registry. If `docker_repository` field is specified, this field will be automatically set as `ARTIFACT_REGISTRY`. If unspecified, it currently defaults to `CONTAINER_REGISTRY`. This field may be overridden by the backend for eligible deployments.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   dockerRegistry?:
     | "DOCKER_REGISTRY_UNSPECIFIED"
     | "CONTAINER_REGISTRY"
@@ -189,6 +190,7 @@ model EventTrigger {
   /**
    * Optional. If unset, then defaults to ignoring failures (i.e. not retrying them).
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   retryPolicy?:
     | "RETRY_POLICY_UNSPECIFIED"
     | "RETRY_POLICY_DO_NOT_RETRY"
@@ -237,6 +239,7 @@ model GcpFunctionProperties {
   /**
    * Describe whether the function is 1st Gen or 2nd Gen.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   environment?: "ENVIRONMENT_UNSPECIFIED" | "GEN_1" | "GEN_2" | string;
 
   /**
@@ -275,6 +278,7 @@ model GcpFunctionProperties {
   /**
    * Output only. State of the function.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   state?:
     | "STATE_UNSPECIFIED"
     | "ACTIVE"
@@ -314,6 +318,7 @@ model GoogleCloudFunctionsV2StateMessage {
   /**
    * Severity of the state message.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   severity?: "SEVERITY_UNSPECIFIED" | "ERROR" | "WARNING" | "INFO" | string;
 
   /**
@@ -468,6 +473,7 @@ model ServiceConfig {
   /**
    * The ingress settings for the function, controlling what traffic can reach it.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   ingressSettings?:
     | "INGRESS_SETTINGS_UNSPECIFIED"
     | "ALLOW_ALL"
@@ -510,6 +516,7 @@ model ServiceConfig {
   /**
    * Security level configure whether the function only accepts https. This configuration is only applicable to 1st Gen functions with Http trigger. By default https is optional for 1st Gen functions; 2nd Gen functions are https ONLY.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   securityLevel?:
     | "SECURITY_LEVEL_UNSPECIFIED"
     | "SECURE_ALWAYS"
@@ -540,6 +547,7 @@ model ServiceConfig {
   /**
    * The egress settings for the connector, controlling what traffic is diverted through it.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
   vpcConnectorEgressSettings?:
     | "VPC_CONNECTOR_EGRESS_SETTINGS_UNSPECIFIED"
     | "PRIVATE_RANGES_ONLY"

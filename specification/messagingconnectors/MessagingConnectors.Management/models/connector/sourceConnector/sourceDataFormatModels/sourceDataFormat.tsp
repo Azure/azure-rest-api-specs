@@ -64,19 +64,25 @@ model ConfluentAvroSourceDataFormat extends SourceDataFormat {
   @doc("Registry url for Confluent.")
   schemaRegistryUrl: url;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "not a secret"
   @doc("Access key for Confluent.")
-  key: string;
+  key?: string;
 
   @doc("Secret for Confluent.")
   @secret
-  secret: string;
+  secret?: string;
 
   @doc("subject name.")
   subjectName?: string;
 
   @doc("schema context.")
   schemaContext?: string;
+
+  @doc("Configuration for ssl.")
+  sslConfiguration?: Models.Auth.SslConfiguration;
+
+  @doc("Client certificate for Confluent.")
+  clientCertAuthentication?: Models.Auth.CertificateAuthentication;
 }
 
 @doc("Avro Source data format model")

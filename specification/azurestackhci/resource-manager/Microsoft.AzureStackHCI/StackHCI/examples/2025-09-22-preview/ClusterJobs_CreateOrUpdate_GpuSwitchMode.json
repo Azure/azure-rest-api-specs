@@ -1,0 +1,164 @@
+{
+  "title": "ClusterJobs_CreateOrUpdate_GpuSwitchModeJob",
+  "operationId": "ClusterJobs_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "clusterName": "myCluster",
+    "jobsName": "gpuSwitchMode",
+    "api-version": "2025-09-22-preview",
+    "resource": {
+      "properties": {
+        "jobType": "GpuSwitchMode",
+        "deploymentMode": "Deploy",
+        "mode": "GPUP"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/gpuSwitchMode",
+        "name": "gpuSwitchMode",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-29T10:43:27.9471574Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
+        },
+        "properties": {
+          "jobType": "GpuSwitchMode",
+          "deploymentMode": "Deploy",
+          "mode": "GPUP",
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "GPU Mode Switch Validation",
+                  "description": "Validate GPU mode switch requirements.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T00:10:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "GPU Compatibility Check",
+                      "description": "Check GPU compatibility with target mode",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T00:09:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "GPU Mode Switch Deployment",
+                  "description": "Switch GPU mode to GPUP.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T00:15:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Mode Configuration",
+                      "description": "Configure GPU for GPUP mode",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T00:15:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/jobs/gpuSwitchMode",
+        "name": "gpuSwitchMode",
+        "type": "Microsoft.AzureStackHCI/clusters/jobs",
+        "systemData": {
+          "createdBy": "user@microsoft.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-29T10:43:27.9471574Z",
+          "lastModifiedBy": "user@microsoft.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-29T10:43:27.9471574Z"
+        },
+        "properties": {
+          "jobType": "GpuSwitchMode",
+          "deploymentMode": "Deploy",
+          "mode": "GPUP",
+          "reportedProperties": {
+            "validationStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "GPU Mode Switch Validation",
+                  "description": "Validate GPU mode switch requirements.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T00:10:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "GPU Compatibility Check",
+                      "description": "Check GPU compatibility with target mode",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T00:09:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "fullStepIndex": "0",
+                  "name": "GPU Mode Switch Deployment",
+                  "description": "Switch GPU mode to GPUP.",
+                  "startTimeUtc": "2023-06-09T00:08:19",
+                  "endTimeUtc": "2023-06-09T00:15:47",
+                  "status": "Succeeded",
+                  "steps": [
+                    {
+                      "fullStepIndex": "0.1",
+                      "name": "Mode Configuration",
+                      "description": "Configure GPU for GPUP mode",
+                      "startTimeUtc": "2023-06-09T00:08:23",
+                      "endTimeUtc": "2023-06-09T00:15:10",
+                      "status": "Succeeded",
+                      "steps": []
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "status": "Succeeded"
+        }
+      }
+    }
+  }
+}

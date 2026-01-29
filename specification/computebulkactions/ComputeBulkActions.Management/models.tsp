@@ -6,9 +6,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./virtualMachineProfile.tsp";
 import "./virtualMachines.tsp";
 import "./virtualMachineExtension.tsp";
+import "./scheduledactionmodel.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
+using Http;
+using Rest;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -28,6 +29,32 @@ alias LocationParameter = {
   @segment("locations")
   @key
   location: azureLocation;
+};
+
+alias OperationParameter = {
+  /** The async operation id. */
+  @path
+  @minLength(1)
+  @segment("operations")
+  @key
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  id: string;
+};
+
+alias LaunchBulkInstancesOperationId = {
+  /** The name of the LaunchBulkInstancesOperation. */
+  @path
+  @minLength(1)
+  @segment("launchBulkInstancesOperations")
+  @key
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  name: string;
+};
+
+alias DeleteInstancesParameter = {
+  /** When true, deletes all virtual machines created by this BulkAction Operation. */
+  @query
+  deleteInstances?: boolean;
 };
 
 alias SubscriptionParams = {
@@ -50,13 +77,21 @@ alias CustomParams = {
 @Azure.Core.lroStatus
 union ProvisioningState {
   string,
-  ResourceProvisioningState,
 
   @doc("Initial creation in progress.")
   Creating: "Creating",
 
+  @doc("The operation has completed successfully.")
+  Succeeded: "Succeeded",
+
+  @doc("The operation has failed.")
+  Failed: "Failed",
+
   @doc("Deletion in progress.")
   Deleting: "Deleting",
+
+  @doc("The operation has been canceled.")
+  Canceled: "Canceled",
 }
 
 @doc("Capacity types for LaunchBulkInstancesOperation.")
@@ -70,7 +105,7 @@ union CapacityType {
   VCpu: "VCpu",
 }
 
-@doc("Allocation strategy types for LaunchBulkInstancesOperation")
+@doc("Specifies the priority type of virtual machines to launch.")
 union VirtualMachineType {
   string,
 
@@ -102,7 +137,7 @@ union AllocationStrategy {
   @doc("VM sizes distribution will be determined to optimize for capacity.")
   CapacityOptimized: "CapacityOptimized",
 
-  @doc("VM sizes distribution will be determined to optimize for the 'priority' as specified for each vm size.")
+  @doc("VM sizes distribution will be determined to optimize for the 'rank' specified for each vm size.")
   Prioritized: "Prioritized",
 }
 
@@ -278,22 +313,71 @@ model ResourcePlanUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.Plan>>;
 
 @doc("A LaunchBulkInstancesOperation resource")
-model LaunchBulkInstancesOperation
-  is ProxyResource<LaunchBulkInstancesOperationProperties> {
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The field name `name` is the valid field name."
-  @doc("The ID of the LaunchBulkInstancesOperation")
-  @segment("launchBulkInstancesOperations")
-  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-  @path
-  @key
-  name: string;
-
+model LaunchBulkInstancesOperation {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Zones is a valid property"
   @doc("Zones in which the LaunchBulkInstancesOperation is available")
   zones?: Array<string>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "This field is using the existing compute context for tags where this field is a free-form JSON object."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Tags is a standard ARM resource property"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+
   ...ManagedServiceIdentityProperty;
   ...ResourcePlanProperty;
+}
+
+@doc("Location based type.")
+model LocationBasedLaunchBulkInstancesOperation
+  is ProxyResource<LaunchBulkInstancesOperationProperties> {
+  @doc("The location name.")
+  @path
+  @minLength(1)
+  @segment("locations")
+  @key
+  @visibility(Lifecycle.Read)
+  location: azureLocation;
+
+  ...LaunchBulkInstancesOperation;
+}
+
+// model OperationStatus is OmitProperties<ArmOperationStatus, "name"> {
+//   ...ResourceNameParameter<OperationStatus>;
+// }
+
+@doc("Status of a long-running operation.")
+model OperationStatus {
+  /** The operation status */
+  @Azure.Core.lroStatus
+  status: Azure.ResourceManager.ResourceProvisioningState;
+
+  /** The unique identifier for the operationStatus resource */
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  /** The name of the  operationStatus resource */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** The type of the  operationStatus resource */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /** Operation start time */
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  /** Operation complete time */
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  /** The progress made toward completing the operation */
+  @visibility(Lifecycle.Read)
+  percentComplete?: float64;
+
+  /** Errors that occurred if the operation ended with Canceled or Failed status */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
 // ------------------ Models --------------- //
@@ -301,7 +385,8 @@ model LaunchBulkInstancesOperation
 model LaunchBulkInstancesOperationListResult {
   @pageItems
   @doc("The list of LaunchBulkInstancesOperation resources.")
-  value: LaunchBulkInstancesOperation[];
+  // @OpenAPI.extension("x-ms-identifiers", #[])
+  value: LocationBasedLaunchBulkInstancesOperation[];
 
   @doc("The URL to get the next set of results.")
   @nextLink
@@ -326,7 +411,7 @@ model LaunchBulkInstancesOperationProperties {
 
   @identifiers(#[])
   @doc("List of VM sizes supported for LaunchBulkInstancesOperation")
-  vmSizesProfile: Array<VmSizeProfile>;
+  vmSizesProfile?: Array<VmSizeProfile>;
 
   @doc("Attributes to launch instances.")
   vmAttributes?: VMAttributes;
@@ -353,7 +438,7 @@ model PriorityProfile {
   @doc("Eviction Policy to follow when evicting Spot VMs.")
   evictionPolicy?: EvictionPolicy;
 
-  @doc("Allocation strategy to follow when determining the VM sizes distribution for Spot VMs.")
+  @doc("Allocation strategy to follow when determining the VM sizes distribution.")
   allocationStrategy?: AllocationStrategy;
 }
 
@@ -381,7 +466,7 @@ model ComputeProfile {
   @doc("""
     Virtual Machine Extensions Array to be specified according to "specification/compute/resource-manager/Microsoft.Compute/ComputeRP/stable/{computeApiVersion}/virtualMachine.json#/definitions/VirtualMachineExtension"
     """)
-  extensions: Array<VirtualMachineExtension>;
+  extensions?: Array<VirtualMachineExtension>;
 
   @doc("""
     Specifies the Microsoft.Compute API version to use when creating underlying Virtual Machines.
@@ -415,15 +500,6 @@ model ZonePreference {
   rank?: int32;
 }
 
-@doc("The retry policy for the operation")
-model RetryPolicy {
-  @doc("Retry count for operation")
-  retryCount?: int32;
-
-  @doc("Retry window in minutes for the operation")
-  retryWindowInMinutes?: int32;
-}
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMAttributeMinMaxInteger which does not follow camel casing"
 @doc("While retrieving VMSizes from CRS, Min = 0 (uint.MinValue) if not specified, Max = 4294967295 (uint.MaxValue) if not specified. This allows to filter VMAttributes on all available VMSizes.")
 model VMAttributeMinMaxInteger {
@@ -440,11 +516,11 @@ model VMAttributeMinMaxInteger {
 @doc("VMAttributes using double values.")
 model VMAttributeMinMaxDouble {
   @minValue(0.0)
-  @doc("Minimum value. default 0. Double.MinValue()")
+  @doc("Minimum value. If not specified, no minimum filter is applied.")
   min?: float64;
 
   @minValue(0.0)
-  @doc("Maximum value. Double.MaxValue(1.7976931348623157E+308)")
+  @doc("Maximum value. Must be greater than zero. Double.MaxValue(1.7976931348623157E+308).")
   max?: float64;
 }
 
@@ -539,9 +615,9 @@ model VMAttributes {
   @doc("Specifies whether the VMSize supporting burstable capability should be used to launch instances or not.")
   burstableSupport?: VMAttributeSupport;
 
-  @doc("Specifies which VMSizes should be allowed for filtering on attributes. Optional parameter.")
+  @doc("Specifies which VMSizes should be allowed while filtering on VMAttributes. Cannot be specified together with excludedVMSizes. Maximum of 10 VM sizes allowed. Optional parameter.")
   allowedVMSizes?: Array<string>;
 
-  @doc("Specifies which VMSizes should be excluded for filtering on attributes. Optional parameter.")
+  @doc("Specifies which VMSizes should be excluded while filtering on VMAttributes. Cannot be specified together with allowedVMSizes. Maximum of 10 VM sizes allowed. Optional parameter.")
   excludedVMSizes?: Array<string>;
 }

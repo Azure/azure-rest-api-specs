@@ -41,6 +41,9 @@ model GenerateGcpTemplateRequest {
 
   @doc("The GCP cloud profile.")
   gcpCloudProfile?: GcpCloudProfile;
+
+  @doc("Optional template output format. Defaults to 'terraform' if not provided")
+  gcpTemplateFormat?: GcpTemplateFormat;
 }
 
 @doc("The properties of Solution Type")
@@ -499,6 +502,17 @@ interface GenerateGcpTemplate {
     @body
     generateGcpTemplateRequest: GenerateGcpTemplateRequest,
   ): Azure.ResourceManager.ArmResponse<GenerateGcpTemplateResponse> | ErrorResponse;
+}
+
+@doc("GCP template format.")
+union GcpTemplateFormat {
+  string,
+
+  @doc("Terraform template format")
+  Terraform: "terraform",
+
+  @doc("Shell script template format")
+  ShellScript: "shellscript",
 }
 
 /**

@@ -24,10 +24,7 @@ union TlsRevokeMode {
 }
 
 @doc("CertificateAuthentication Model.")
-model CertificateAuthentication extends Authentication {
-  @doc("Type of the Auth Model.")
-  authenticationMode: AuthenticationMode.Certificate;
-
+model CertificateAuthentication {
   @doc("Self-signed CA, null means client certificate is signed off by public well-known CA")
   certificationAuthorityCert?: KeyVaultCertificateInfo;
 

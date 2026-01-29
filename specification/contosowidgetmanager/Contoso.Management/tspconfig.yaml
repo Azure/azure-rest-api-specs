@@ -21,7 +21,7 @@ options:
     generate-test: true
     generate-sample: true
     flavor: "azure"
-    namespace: azure.mgmt.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    namespace: azure.mgmt.contoso #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-contoso"
     namespace: "com.azure.resourcemanager.contoso"
@@ -29,6 +29,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-contoso"
+    experimental-extensible-enums: true
     is-modular-library: true
     flavor: "azure"
     package-details:

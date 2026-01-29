@@ -27,7 +27,7 @@ These are the global settings for the Microsoft.DatacenterHardware.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-10-06-preview
+tag: package-2025-12-02-preview
 ```
 
 ### Tag: package-2025-10-06-preview
@@ -37,4 +37,13 @@ These settings apply only when `--tag=package-2025-10-06-preview` is specified o
 ```yaml $(tag) == 'package-2025-10-06-preview'
 input-file:
   - Microsoft.DatacenterHardware/preview/2025-10-06-preview/microsoft-datacenterhardware.json
+```
+
+### Tag: package-2025-12-02-preview
+
+These settings apply only when `--tag=package-2025-12-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-02-preview'
+input-file:
+  - Microsoft.DatacenterHardware/preview/2025-12-02-preview/microsoft-datacenterhardware.json
 ```

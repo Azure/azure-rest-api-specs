@@ -13,15 +13,19 @@ namespace Microsoft.Workloads;
   "SapApplicationServerInstances",
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPApplicationServerInstance.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPCentralServerInstance.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPDatabaseInstance.properties,
   "autorest"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPVirtualInstance.properties,
   "autorest"
 );

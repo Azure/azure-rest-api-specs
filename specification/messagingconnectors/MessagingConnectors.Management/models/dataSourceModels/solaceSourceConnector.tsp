@@ -39,7 +39,7 @@ model SolacePubsubSourceConnectorProperties extends DataSourceProperties {
   @doc("If enabled, maps/forwards the Solace message standard properties (e.g. correlationId, applicationMessageId, redelivered, dmqEligible, COS etc) to Kafka record headers")
   mapSolaceProperties?: boolean;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "not a secret"
   @doc("When using SolaceSampleKeyedMessageProcessor, defines which part of a PubSub+ message shall be converted to a Kafka record key")
   kafkaMessageKey?: string;
 }

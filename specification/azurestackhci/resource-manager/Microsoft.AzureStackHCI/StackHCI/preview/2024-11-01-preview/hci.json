@@ -40,9 +40,6 @@
   },
   "tags": [
     {
-      "name": "EdgeMachineExtensions"
-    },
-    {
       "name": "DevicePools"
     },
     {
@@ -50,6 +47,15 @@
     },
     {
       "name": "EdgeMachineJobs"
+    },
+    {
+      "name": "EdgeMachineExtensions"
+    },
+    {
+      "name": "EdgeMachineGpus"
+    },
+    {
+      "name": "EdgeMachineGpuJobs"
     }
   ],
   "paths": {
@@ -1264,9 +1270,574 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/gpus": {
+      "get": {
+        "operationId": "EdgeMachineGpus_List",
+        "tags": [
+          "EdgeMachineGpus"
+        ],
+        "description": "List all GPUs on an Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GpuList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpus_List": {
+            "$ref": "./examples/EdgeMachineGpus_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/gpus/{gpuName}": {
+      "get": {
+        "operationId": "EdgeMachineGpus_Get",
+        "tags": [
+          "EdgeMachineGpus"
+        ],
+        "description": "Get a specific GPU on an Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "gpuName",
+            "in": "path",
+            "description": "The name of the EdgeMachineGpu",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,85}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineGpu"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpus_Get": {
+            "$ref": "./examples/EdgeMachineGpus_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeMachineGpus_CreateOrUpdate",
+        "tags": [
+          "EdgeMachineGpus"
+        ],
+        "description": "Create or update a GPU on an Edge Machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "gpuName",
+            "in": "path",
+            "description": "The name of the EdgeMachineGpu",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,85}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineGpu"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeMachineGpu' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineGpu"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeMachineGpu' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineGpu"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpus_CreateOrUpdate": {
+            "$ref": "./examples/EdgeMachineGpus_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeMachineGpus_Delete",
+        "tags": [
+          "EdgeMachineGpus"
+        ],
+        "description": "Delete a EdgeMachineGpu",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "gpuName",
+            "in": "path",
+            "description": "The name of the EdgeMachineGpu",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,85}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpus_Delete": {
+            "$ref": "./examples/EdgeMachineGpus_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/gpus/{gpuName}/jobs": {
+      "get": {
+        "operationId": "EdgeMachineGpuJobs_List",
+        "tags": [
+          "EdgeMachineGpuJobs"
+        ],
+        "description": "List EdgeMachineGpuJob resources by EdgeMachineGpu",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "gpuName",
+            "in": "path",
+            "description": "The name of the EdgeMachineGpu",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,85}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineGpuJobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpuJobs_List_MaximumSet_Gen": {
+            "$ref": "./examples/EdgeMachineGpuJobs_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/gpus/{gpuName}/jobs/{jobsName}": {
+      "get": {
+        "operationId": "EdgeMachineGpuJobs_Get",
+        "tags": [
+          "EdgeMachineGpuJobs"
+        ],
+        "description": "Get a specific GPU Job on an Edge Machine GPU.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "gpuName",
+            "in": "path",
+            "description": "The name of the EdgeMachineGpu",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,85}$"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of EdgeMachineGpuJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,512}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineGpuJob"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpuJobs_Get": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_MaximumSet_Gen.json"
+          },
+          "EdgeMachineGpuJobs_Get_AssignPartition": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_AssignPartition.json"
+          },
+          "EdgeMachineGpuJobs_Get_CreatePartition": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_CreatePartition.json"
+          },
+          "EdgeMachineGpuJobs_Get_RemovePartition": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_RemovePartition.json"
+          },
+          "EdgeMachineGpuJobs_Get_SwitchMode": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Get_SwitchMode.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeMachineGpuJobs_CreateOrUpdate",
+        "tags": [
+          "EdgeMachineGpuJobs"
+        ],
+        "description": "Create or update a GPU Job on an Edge Machine GPU.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "gpuName",
+            "in": "path",
+            "description": "The name of the EdgeMachineGpu",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,85}$"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of EdgeMachineGpuJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,512}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineGpuJob"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeMachineGpuJob' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineGpuJob"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeMachineGpuJob' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeMachineGpuJob"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpuJobs_CreateOrUpdate_AssignPartition": {
+            "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_AssignPartition.json"
+          },
+          "EdgeMachineGpuJobs_CreateOrUpdate_CreatePartition": {
+            "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_CreatePartition.json"
+          },
+          "EdgeMachineGpuJobs_CreateOrUpdate_RemovePartition": {
+            "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_RemovePartition.json"
+          },
+          "EdgeMachineGpuJobs_CreateOrUpdate_SwitchMode": {
+            "$ref": "./examples/EdgeMachineGpuJobs_CreateOrUpdate_SwitchMode.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeMachineGpuJobs_Delete",
+        "tags": [
+          "EdgeMachineGpuJobs"
+        ],
+        "description": "Delete a specific GPU Job on an Edge Machine GPU.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "gpuName",
+            "in": "path",
+            "description": "The name of the EdgeMachineGpu",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,85}$"
+          },
+          {
+            "name": "jobsName",
+            "in": "path",
+            "description": "Name of EdgeMachineGpuJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,512}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeMachineGpuJobs_Delete_MaximumSet": {
+            "$ref": "./examples/EdgeMachineGpuJobs_Delete_MaximumSet.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/jobs": {
       "get": {
-        "operationId": "EdgeMachineJobs_ListByCluster",
+        "operationId": "EdgeMachineJobs_List",
         "tags": [
           "EdgeMachineJobs"
         ],
@@ -1305,8 +1876,8 @@
           }
         },
         "x-ms-examples": {
-          "EdgeMachineJobs_ListByCluster_MaximumSet": {
-            "$ref": "./examples/EdgeMachineJobs_ListByCluster_MaximumSet_Gen.json"
+          "EdgeMachineJobs_List_MaximumSet": {
+            "$ref": "./examples/EdgeMachineJobs_List_MaximumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -1880,6 +2451,25 @@
       },
       "readOnly": true
     },
+    "AssignPartitionGpuJobProperties": {
+      "type": "object",
+      "description": "Properties for assigning GPU partition to a specific workload or virtual machine.",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "Virtual machine ID to which the GPU partition is assigned."
+        }
+      },
+      "required": [
+        "vmId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AssignPartition"
+    },
     "ClaimDeviceRequest": {
       "type": "object",
       "description": "Request for claiming devices of the pool.",
@@ -1938,6 +2528,42 @@
         }
       ],
       "x-ms-discriminator-value": "CollectLog"
+    },
+    "CreatePartitionGpuJobProperties": {
+      "type": "object",
+      "description": "Properties for creating GPU partitions for virtualization and workload isolation.",
+      "properties": {
+        "partitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of partitions to be created on the GPU."
+        }
+      },
+      "required": [
+        "partitionCount"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CreatePartition"
+    },
+    "DdaDetails": {
+      "type": "object",
+      "description": "Represents the details of the GPU specifically in DDA mode.",
+      "properties": {
+        "ddaPool": {
+          "type": "string",
+          "description": "It is a resource pool on each server containing the clustered GPU resources.",
+          "readOnly": true
+        },
+        "workloadDetail": {
+          "$ref": "#/definitions/WorkloadDetails",
+          "description": "The workload to which this GPU is assigned.",
+          "readOnly": true
+        }
+      }
     },
     "DeploymentMode": {
       "type": "string",
@@ -2337,6 +2963,228 @@
       "required": [
         "value"
       ]
+    },
+    "EdgeMachineGpu": {
+      "type": "object",
+      "description": "Details of a particular GPU in an EdgeMachine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeMachineGpuProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeMachineGpuJob": {
+      "type": "object",
+      "description": "Details of a GPU Job on an Edge Machine GPU.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeMachineGpuJobListResult": {
+      "type": "object",
+      "description": "The response of a EdgeMachineGpuJob list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeMachineGpuJob items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineGpuJob"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeMachineGpuJobProperties": {
+      "type": "object",
+      "description": "EdgeMachine GPU Job properties",
+      "properties": {
+        "gpuId": {
+          "type": "string",
+          "description": "The ID of the GPU on which the job is to be performed.",
+          "readOnly": true
+        },
+        "jobType": {
+          "$ref": "#/definitions/EdgeMachineGpuJobType",
+          "description": "Type of GPU job to be performed.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deploymentMode": {
+          "$ref": "#/definitions/DeploymentMode",
+          "description": "Deployment mode for the GPU job."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Job provisioning state",
+          "readOnly": true
+        },
+        "jobId": {
+          "type": "string",
+          "description": "Unique, immutable job id.",
+          "readOnly": true
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job started.",
+          "readOnly": true
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC date and time at which the job completed.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus",
+          "description": "Status of GPU job.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "Error details.",
+          "readOnly": true
+        },
+        "reportedProperties": {
+          "$ref": "#/definitions/JobReportedProperties",
+          "description": "Reported properties specific to the GPU job.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "jobType",
+      "required": [
+        "jobType"
+      ]
+    },
+    "EdgeMachineGpuJobType": {
+      "type": "string",
+      "description": "GPU Job Type supported for Edge Machine GPU operations.",
+      "enum": [
+        "CreatePartition",
+        "SwitchMode",
+        "AssignPartition",
+        "RemovePartition"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeMachineGpuJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CreatePartition",
+            "value": "CreatePartition",
+            "description": "Create GPU partitions for virtualization and workload isolation."
+          },
+          {
+            "name": "SwitchMode",
+            "value": "SwitchMode",
+            "description": "Switch GPU mode between DDA and GPU-P for different workload requirements."
+          },
+          {
+            "name": "AssignPartition",
+            "value": "AssignPartition",
+            "description": "Assign GPU partition to a specific workload or virtual machine."
+          },
+          {
+            "name": "RemovePartition",
+            "value": "RemovePartition",
+            "description": "Remove GPU partition and free up resources for other workloads."
+          }
+        ]
+      }
+    },
+    "EdgeMachineGpuProperties": {
+      "type": "object",
+      "description": "GPU resource properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the GPU.",
+          "readOnly": true
+        },
+        "gpuId": {
+          "type": "string",
+          "description": "Represents the instance Id of the GPU.",
+          "readOnly": true
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "The vendor of the GPU.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "The model of the GPU.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the GPU.",
+          "readOnly": true
+        },
+        "pciLocation": {
+          "type": "string",
+          "description": "The PCI location of the GPU.",
+          "readOnly": true
+        },
+        "assignable": {
+          "type": "boolean",
+          "description": "Indicates whether the GPU is assignable.",
+          "readOnly": true
+        },
+        "partitionable": {
+          "type": "boolean",
+          "description": "Indicates whether the GPU is partitionable.",
+          "readOnly": true
+        },
+        "hostDriverVersion": {
+          "type": "string",
+          "description": "This is the host driver for the host on which GPU is assigned, only for DDA",
+          "readOnly": true
+        },
+        "assignmentStatus": {
+          "type": "string",
+          "description": "This is the assignment status of the GPU.",
+          "readOnly": true
+        },
+        "gpuMode": {
+          "$ref": "#/definitions/GpuMode",
+          "description": "Specified by admin whether this GPU can be used as DDA, GPU-P with LM. Can only be updated when the GPU is not attached to any VM.",
+          "readOnly": true
+        },
+        "ddaDetails": {
+          "$ref": "#/definitions/DdaDetails",
+          "description": "Details of the workload using DDA mode.",
+          "readOnly": true
+        },
+        "partitionDetails": {
+          "$ref": "#/definitions/GpuPartitionDetails",
+          "description": "Details of the GPU specifically in GPU-P mode.",
+          "readOnly": true
+        }
+      }
     },
     "EdgeMachineJob": {
       "type": "object",
@@ -2821,7 +3669,7 @@
     },
     "ExtensionAggregateState": {
       "type": "string",
-      "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+      "description": "Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).",
       "enum": [
         "NotSpecified",
         "Error",
@@ -3013,7 +3861,7 @@
         ]
       }
     },
-    "ExtensionParametersContent": {
+    "ExtensionParameters": {
       "type": "object",
       "description": "Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.",
       "properties": {
@@ -3080,7 +3928,7 @@
           "readOnly": true
         },
         "extensionParameters": {
-          "$ref": "#/definitions/ExtensionParametersContent",
+          "$ref": "#/definitions/ExtensionParameters",
           "description": "Parameters specific to this extension type."
         },
         "aggregateState": {
@@ -3115,6 +3963,159 @@
           "type": "string",
           "description": "description of failure why edge machine set to Failed state."
         }
+      }
+    },
+    "GpuList": {
+      "type": "object",
+      "description": "List of GPUs in Edge Machine.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeMachineGpu items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineGpu"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GpuMode": {
+      "type": "string",
+      "description": "GPU modes supported.",
+      "enum": [
+        "Unknown",
+        "GPUP",
+        "DDA"
+      ],
+      "x-ms-enum": {
+        "name": "GpuMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown mode."
+          },
+          {
+            "name": "GPUP",
+            "value": "GPUP",
+            "description": "GPU-P mode."
+          },
+          {
+            "name": "DDA",
+            "value": "DDA",
+            "description": "DDA mode."
+          }
+        ]
+      }
+    },
+    "GpuPartitionDetails": {
+      "type": "object",
+      "description": "Represents the details of the GPU specifically in GPU-P mode.",
+      "properties": {
+        "partitionableGpuName": {
+          "type": "string",
+          "description": "The name used by Hyper-V commandlets for GPU partitioning"
+        },
+        "partitionSizeGb": {
+          "type": "string",
+          "description": "Reported partition size (default: 0 for DDA) For e.g. 2, 4, etc.",
+          "readOnly": true
+        },
+        "totalPartitions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This is the count of total partitions.",
+          "readOnly": true
+        },
+        "availablePartitions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of available partitions.",
+          "readOnly": true
+        },
+        "assignedPartitions": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This is the count of assigned partitions.",
+          "readOnly": true
+        },
+        "availableEncode": {
+          "type": "string",
+          "description": "It is the available processing power to encode video.",
+          "readOnly": true
+        },
+        "availableDecode": {
+          "type": "string",
+          "description": "It is the available processing power to decode video.",
+          "readOnly": true
+        },
+        "availableVram": {
+          "type": "string",
+          "description": "It is a high-speed memory which drivers allow the GPU to borrow from system memory.",
+          "readOnly": true
+        },
+        "totalVram": {
+          "type": "string",
+          "description": "VRAM (Video Random-Access Memory) is the total RAM that is plugged into your GPU and acts as temporary storage for data related to graphics rendering.",
+          "readOnly": true
+        },
+        "validPartitionCount": {
+          "type": "array",
+          "description": "IA set of valid partition counts that's predefined to configure.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "partitions": {
+          "type": "array",
+          "description": "partition details to which GPU is assigned.",
+          "items": {
+            "$ref": "#/definitions/PartitionDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "uniqueId"
+          ]
+        }
+      }
+    },
+    "GpuVendorType": {
+      "type": "string",
+      "description": "GPU Vendor Type supported.",
+      "enum": [
+        "Nvidia",
+        "AMD",
+        "Intel"
+      ],
+      "x-ms-enum": {
+        "name": "GpuVendorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Nvidia",
+            "value": "Nvidia",
+            "description": "Nvidia GPU."
+          },
+          {
+            "name": "AMD",
+            "value": "AMD",
+            "description": "AMD GPU."
+          },
+          {
+            "name": "Intel",
+            "value": "Intel",
+            "description": "Intel GPU."
+          }
+        ]
       }
     },
     "HardwareProfile": {
@@ -4134,6 +5135,43 @@
         ]
       }
     },
+    "PartitionDetails": {
+      "type": "object",
+      "description": "Represents the GPU partition details",
+      "properties": {
+        "uniqueId": {
+          "type": "string",
+          "description": "Unique identifier for the partition",
+          "readOnly": true
+        },
+        "partitionId": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The partition number that is being used by the workload",
+          "readOnly": true
+        },
+        "currentVram": {
+          "type": "string",
+          "description": "The current vRAM that is used by the partition",
+          "readOnly": true
+        },
+        "currentEncode": {
+          "type": "string",
+          "description": "The current encode that is used by the partition",
+          "readOnly": true
+        },
+        "currentDecode": {
+          "type": "string",
+          "description": "The current decode that is used by the partition",
+          "readOnly": true
+        },
+        "workloadDetail": {
+          "$ref": "#/definitions/WorkloadDetails",
+          "description": "The workload to which this partition is assigned.",
+          "readOnly": true
+        }
+      }
+    },
     "PerNodeExtensionState": {
       "type": "object",
       "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
@@ -4603,6 +5641,25 @@
         ]
       }
     },
+    "RemovePartitionGpuJobProperties": {
+      "type": "object",
+      "description": "Properties for removing GPU partition and freeing up resources for other workloads.",
+      "properties": {
+        "vmId": {
+          "type": "string",
+          "description": "Virtual machine ID from which the GPU partition is removed."
+        }
+      },
+      "required": [
+        "vmId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "RemovePartition"
+    },
     "ReportedProperties": {
       "type": "object",
       "description": "Reported properties for edge machine.",
@@ -4854,6 +5911,25 @@
         }
       }
     },
+    "SwitchModeGpuJobProperties": {
+      "type": "object",
+      "description": "Properties for switching GPU mode between DDA and GPU-P for different workload requirements.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/GpuMode",
+          "description": "Desired GPU mode to switch to."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EdgeMachineGpuJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SwitchMode"
+    },
     "TimeConfiguration": {
       "type": "object",
       "description": "Time configuration.",
@@ -4947,6 +6023,37 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "WorkloadDetails": {
+      "type": "object",
+      "description": "Represents the details of a workload.",
+      "properties": {
+        "workloadId": {
+          "type": "string",
+          "description": "workload Id to which GPU is assigned.",
+          "readOnly": true
+        },
+        "workloadName": {
+          "type": "string",
+          "description": "This gives information about workload name (VM/AKS) specifically the VM Name or AKS Name.",
+          "readOnly": true
+        },
+        "workloadStatus": {
+          "type": "string",
+          "description": "This gives information about workload status, running or down.",
+          "readOnly": true
+        },
+        "workloadType": {
+          "type": "string",
+          "description": "This tells if workload is VM, AKS, etc.",
+          "readOnly": true
+        },
+        "slotLocation": {
+          "type": "string",
+          "description": "This is the unique instance path for a workload using GPU-P.",
+          "readOnly": true
         }
       }
     }

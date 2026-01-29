@@ -1,0 +1,114 @@
+{
+  "title": "ChangeStates_Get",
+  "operationId": "ChangeStates_Get",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "resourceGroupName": "rgChangeControl",
+    "changeStateName": "webApplicationChangeState"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "InProgress",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Web application deployment to production environment with comprehensive testing and monitoring. This deployment includes frontend updates, API enhancements, and security improvements for the customer-facing web platform.",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/webApplicationStageMap"
+          },
+          "status": "InProgress",
+          "comments": "Web application deployment progressing with staged rollout and continuous monitoring enabled.",
+          "changeDefinition": {
+            "name": "webApplicationDeployment",
+            "kind": "ApiOperation",
+            "details": {
+              "operations": [
+                {
+                  "httpMethod": "DELETE",
+                  "uri": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.Network/trafficmanagerprofiles/myTrafficManagerProfile"
+                }
+              ]
+            }
+          },
+          "releaseLabel": "Release-2.4.0-Production",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T09:30:17.815Z",
+          "orchestrationTool": "Azure DevOps",
+          "links": [
+            {
+              "name": "workTrackingItem",
+              "uri": "https://dev.azure.com/contoso/AnalyticsProject/_workitems/edit/12369",
+              "description": "Work item for analytics platform deployment with ML capabilities"
+            },
+            {
+              "name": "approvalRequest",
+              "uri": "https://approval.contoso.com/requests/67914",
+              "description": "Analytics platform deployment approval with data governance review"
+            },
+            {
+              "name": "supportIncident",
+              "uri": "https://support.contoso.com/incidents/INC001258",
+              "description": "Support incident for analytics platform deployment and data pipeline monitoring"
+            },
+            {
+              "name": "accessElevationRequest",
+              "uri": "https://access.contoso.com/requests/AER-5702",
+              "description": "Access elevation request for analytics platform deployment with data access"
+            },
+            {
+              "name": "relatedChangeState",
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/dataLakeUpgradeState",
+              "description": "Related data lake upgrade change state for analytics platform coordination"
+            },
+            {
+              "name": "testResults",
+              "uri": "https://testresults.contoso.com/runs/TR-9900",
+              "description": "Analytics platform deployment test results with data quality validation"
+            },
+            {
+              "name": "serviceCatalog",
+              "uri": "https://catalog.contoso.com/services/analytics-platform",
+              "description": "Analytics platform service catalog entry with ML and data processing specifications"
+            }
+          ],
+          "additionalData": {
+            "deploymentStrategy": "blue-green",
+            "uiVersion": "v2.4",
+            "featureFlags": [
+              "newDashboard",
+              "enhancedSearch"
+            ],
+            "performanceBaseline": "enabled"
+          },
+          "stageMapSnapshot": [
+            {
+              "stageName": "development",
+              "status": "completed"
+            },
+            {
+              "stageName": "staging",
+              "status": "completed"
+            },
+            {
+              "stageName": "production",
+              "status": "in-progress"
+            }
+          ]
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/changeStates/webApplicationChangeState",
+        "name": "webApplicationChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "webapp@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "webapp@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

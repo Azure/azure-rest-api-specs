@@ -1,0 +1,340 @@
+{
+  "title": "ChangeStates_CreateOrUpdateAtSubscriptionLevel",
+  "operationId": "ChangeStates_CreateOrUpdateAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeStateName": "subscriptionLevelChangeState",
+    "resource": {
+      "properties": {
+        "changeType": "AppDeployment",
+        "rolloutType": "Normal",
+        "description": "Subscription-level application deployment for multi-region service rollout with enhanced monitoring and automated compliance checks. This deployment includes infrastructure updates, security policy enforcement, and service mesh configuration across all regions.",
+        "stageMap": {
+          "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscriptionStageMap"
+        },
+        "parameters": {
+          "deploymentScope": {
+            "type": "Parameter",
+            "metadata": {
+              "description": "Scope of the subscription-level deployment"
+            }
+          }
+        },
+        "status": "Initialized",
+        "comments": "Subscription-level change state initialized for comprehensive multi-region deployment with governance and compliance validation.",
+        "changeDefinition": {
+          "name": "subscriptionDeployment",
+          "kind": "ApiOperation",
+          "details": {
+            "operations": [
+              {
+                "templateUri": "https://templates.contoso.com/subscription-deployment.json",
+                "parameters": {
+                  "subscriptionScope": true,
+                  "regions": [
+                    "eastus2",
+                    "westus2",
+                    "centralus"
+                  ],
+                  "complianceLevel": "enterprise"
+                }
+              }
+            ]
+          }
+        },
+        "releaseLabel": "Release-3.0.0-Subscription",
+        "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+        "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+        "orchestrationTool": "Azure Resource Manager",
+        "links": [
+          {
+            "name": "workTrackingItem",
+            "uri": "https://dev.azure.com/contoso/AnalyticsProject/_workitems/edit/12369",
+            "description": "Work item for analytics platform deployment with ML capabilities"
+          },
+          {
+            "name": "approvalRequest",
+            "uri": "https://approval.contoso.com/requests/67914",
+            "description": "Analytics platform deployment approval with data governance review"
+          },
+          {
+            "name": "supportIncident",
+            "uri": "https://support.contoso.com/incidents/INC001258",
+            "description": "Support incident for analytics platform deployment and data pipeline monitoring"
+          },
+          {
+            "name": "accessElevationRequest",
+            "uri": "https://access.contoso.com/requests/AER-5702",
+            "description": "Access elevation request for analytics platform deployment with data access"
+          },
+          {
+            "name": "relatedChangeState",
+            "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/dataLakeUpgradeState",
+            "description": "Related data lake upgrade change state for analytics platform coordination"
+          },
+          {
+            "name": "testResults",
+            "uri": "https://testresults.contoso.com/runs/TR-9900",
+            "description": "Analytics platform deployment test results with data quality validation"
+          },
+          {
+            "name": "serviceCatalog",
+            "uri": "https://catalog.contoso.com/services/analytics-platform",
+            "description": "Analytics platform service catalog entry with ML and data processing specifications"
+          }
+        ],
+        "additionalData": {
+          "scope": "subscription",
+          "regions": [
+            "eastus2",
+            "westus2",
+            "centralus"
+          ],
+          "governanceLevel": "enterprise",
+          "complianceFramework": "SOC2"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Subscription-level application deployment for multi-region service rollout with enhanced monitoring and automated compliance checks. This deployment includes infrastructure updates, security policy enforcement, and service mesh configuration across all regions.",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscriptionStageMap"
+          },
+          "parameters": {
+            "deploymentScope": {
+              "type": "Parameter",
+              "metadata": {
+                "description": "Scope of the subscription-level deployment"
+              }
+            }
+          },
+          "status": "Initialized",
+          "comments": "Subscription-level change state initialized for comprehensive multi-region deployment with governance and compliance validation.",
+          "changeDefinition": {
+            "name": "subscriptionDeployment",
+            "kind": "ApiOperation",
+            "details": {
+              "operations": [
+                {
+                  "templateUri": "https://templates.contoso.com/subscription-deployment.json",
+                  "parameters": {
+                    "subscriptionScope": true,
+                    "regions": [
+                      "eastus2",
+                      "westus2",
+                      "centralus"
+                    ],
+                    "complianceLevel": "enterprise"
+                  }
+                }
+              ]
+            }
+          },
+          "releaseLabel": "Release-3.0.0-Subscription",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+          "orchestrationTool": "Azure Resource Manager",
+          "links": [
+            {
+              "name": "workTrackingItem",
+              "uri": "https://dev.azure.com/contoso/AnalyticsProject/_workitems/edit/12369",
+              "description": "Work item for analytics platform deployment with ML capabilities"
+            },
+            {
+              "name": "approvalRequest",
+              "uri": "https://approval.contoso.com/requests/67914",
+              "description": "Analytics platform deployment approval with data governance review"
+            },
+            {
+              "name": "supportIncident",
+              "uri": "https://support.contoso.com/incidents/INC001258",
+              "description": "Support incident for analytics platform deployment and data pipeline monitoring"
+            },
+            {
+              "name": "accessElevationRequest",
+              "uri": "https://access.contoso.com/requests/AER-5702",
+              "description": "Access elevation request for analytics platform deployment with data access"
+            },
+            {
+              "name": "relatedChangeState",
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/dataLakeUpgradeState",
+              "description": "Related data lake upgrade change state for analytics platform coordination"
+            },
+            {
+              "name": "testResults",
+              "uri": "https://testresults.contoso.com/runs/TR-9900",
+              "description": "Analytics platform deployment test results with data quality validation"
+            },
+            {
+              "name": "serviceCatalog",
+              "uri": "https://catalog.contoso.com/services/analytics-platform",
+              "description": "Analytics platform service catalog entry with ML and data processing specifications"
+            }
+          ],
+          "additionalData": {
+            "scope": "subscription",
+            "regions": [
+              "eastus2",
+              "westus2",
+              "centralus"
+            ],
+            "governanceLevel": "enterprise",
+            "complianceFramework": "SOC2"
+          },
+          "stageMapSnapshot": [
+            {
+              "stageName": "governance",
+              "status": "completed"
+            },
+            {
+              "stageName": "compliance",
+              "status": "completed"
+            },
+            {
+              "stageName": "deployment",
+              "status": "initialized"
+            }
+          ]
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionLevelChangeState",
+        "name": "subscriptionLevelChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "enterprise@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "enterprise@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "changeType": "AppDeployment",
+          "rolloutType": "Normal",
+          "description": "Subscription-level application deployment for multi-region service rollout with enhanced monitoring and automated compliance checks. This deployment includes infrastructure updates, security policy enforcement, and service mesh configuration across all regions.",
+          "stageMap": {
+            "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/resourceGroups/rgChangeControl/providers/Microsoft.ChangeSafety/stageMaps/subscriptionStageMap"
+          },
+          "parameters": {
+            "deploymentScope": {
+              "type": "Parameter",
+              "metadata": {
+                "description": "Scope of the subscription-level deployment"
+              }
+            }
+          },
+          "status": "Initialized",
+          "comments": "Subscription-level change state initialized for comprehensive multi-region deployment with governance and compliance validation.",
+          "changeDefinition": {
+            "name": "subscriptionDeployment",
+            "kind": "ApiOperation",
+            "details": {
+              "operations": [
+                {
+                  "templateUri": "https://templates.contoso.com/subscription-deployment.json",
+                  "parameters": {
+                    "subscriptionScope": true,
+                    "regions": [
+                      "eastus2",
+                      "westus2",
+                      "centralus"
+                    ],
+                    "complianceLevel": "enterprise"
+                  }
+                }
+              ]
+            }
+          },
+          "releaseLabel": "Release-3.0.0-Subscription",
+          "anticipatedStartTime": "2025-07-09T07:30:17.815Z",
+          "anticipatedEndTime": "2025-07-09T11:30:17.815Z",
+          "orchestrationTool": "Azure Resource Manager",
+          "links": [
+            {
+              "name": "workTrackingItem",
+              "uri": "https://dev.azure.com/contoso/AnalyticsProject/_workitems/edit/12369",
+              "description": "Work item for analytics platform deployment with ML capabilities"
+            },
+            {
+              "name": "approvalRequest",
+              "uri": "https://approval.contoso.com/requests/67914",
+              "description": "Analytics platform deployment approval with data governance review"
+            },
+            {
+              "name": "supportIncident",
+              "uri": "https://support.contoso.com/incidents/INC001258",
+              "description": "Support incident for analytics platform deployment and data pipeline monitoring"
+            },
+            {
+              "name": "accessElevationRequest",
+              "uri": "https://access.contoso.com/requests/AER-5702",
+              "description": "Access elevation request for analytics platform deployment with data access"
+            },
+            {
+              "name": "relatedChangeState",
+              "uri": "https://portal.azure.com/#resource/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/dataLakeUpgradeState",
+              "description": "Related data lake upgrade change state for analytics platform coordination"
+            },
+            {
+              "name": "testResults",
+              "uri": "https://testresults.contoso.com/runs/TR-9900",
+              "description": "Analytics platform deployment test results with data quality validation"
+            },
+            {
+              "name": "serviceCatalog",
+              "uri": "https://catalog.contoso.com/services/analytics-platform",
+              "description": "Analytics platform service catalog entry with ML and data processing specifications"
+            }
+          ],
+          "additionalData": {
+            "scope": "subscription",
+            "regions": [
+              "eastus2",
+              "westus2",
+              "centralus"
+            ],
+            "governanceLevel": "enterprise",
+            "complianceFramework": "SOC2"
+          },
+          "stageMapSnapshot": [
+            {
+              "stageName": "governance",
+              "status": "completed"
+            },
+            {
+              "stageName": "compliance",
+              "status": "completed"
+            },
+            {
+              "stageName": "deployment",
+              "status": "initialized"
+            }
+          ]
+        },
+        "id": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionLevelChangeState",
+        "name": "subscriptionLevelChangeState",
+        "type": "Microsoft.ChangeSafety/changeStates",
+        "systemData": {
+          "createdBy": "enterprise@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "enterprise@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

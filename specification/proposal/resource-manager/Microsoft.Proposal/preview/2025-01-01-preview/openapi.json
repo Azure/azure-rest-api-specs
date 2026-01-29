@@ -3,6 +3,7 @@
   "info": {
     "title": "Microsoft.Proposal",
     "version": "2025-01-01-preview",
+    "description": "Microsoft.Proposal RP provides APIs to purchase, manage and display proposals in the Marketplace",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -501,6 +502,81 @@
         }
       ]
     },
+    "LineItem": {
+      "type": "object",
+      "description": "The line items to purchase in the proposal.",
+      "properties": {
+        "productCode": {
+          "type": "string",
+          "description": "The product code of the line item as a UUID that uniquely identifies this line item within the proposal."
+        },
+        "resourceUri": {
+          "type": "string",
+          "description": "The resource URI of the line item.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/LineItemStatus",
+          "description": "The status of the line item.",
+          "readOnly": true
+        },
+        "errorCode": {
+          "type": "string",
+          "description": "The error code if any error occurs during processing the line item.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "The error message if any error occurs during processing the line item.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "productCode"
+      ]
+    },
+    "LineItemStatus": {
+      "type": "string",
+      "description": "The status of the line item in the proposal.",
+      "enum": [
+        "NotDeployed",
+        "Success",
+        "InProgress",
+        "Canceled",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "LineItemStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotDeployed",
+            "value": "NotDeployed",
+            "description": "NotDeployed - Initial status when a line item is created."
+          },
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "Success - status when a line item is successfully deployed."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress - status when a line item deployment is in progress."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled - status when a line item deployment is canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed - status when a line item deployment has failed."
+          }
+        ]
+      }
+    },
     "ProductResource": {
       "type": "object",
       "description": "Concrete extension resource types can be created by aliasing this type using a specific property type.",
@@ -604,6 +680,16 @@
         "status": {
           "$ref": "#/definitions/ProposalStatus",
           "description": "The proposal status."
+        },
+        "lineItems": {
+          "type": "array",
+          "description": "The list of line items associated with the proposal.",
+          "items": {
+            "$ref": "#/definitions/LineItem"
+          },
+          "x-ms-identifiers": [
+            "productCode"
+          ]
         }
       },
       "required": [
@@ -621,6 +707,16 @@
         "status": {
           "$ref": "#/definitions/ProposalStatus",
           "description": "The proposal status."
+        },
+        "lineItems": {
+          "type": "array",
+          "description": "The list of line items associated with the proposal.",
+          "items": {
+            "$ref": "#/definitions/LineItem"
+          },
+          "x-ms-identifiers": [
+            "productCode"
+          ]
         }
       }
     },

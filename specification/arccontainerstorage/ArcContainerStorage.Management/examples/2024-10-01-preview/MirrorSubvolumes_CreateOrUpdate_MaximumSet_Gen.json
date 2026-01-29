@@ -1,0 +1,127 @@
+{
+  "title": "MirrorSubvolumes_CreateOrUpdate_MaximumSet",
+  "operationId": "MirrorSubvolumes_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2024-10-01-preview",
+    "resourceUri": "subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.Kubernetes/connectedClusters/cluster",
+    "edgeVolumeName": "myedgevolume",
+    "mirrorSubvolumeName": "mirrorsubvol1",
+    "resource": {
+      "properties": {
+        "path": "/mirrorsubvolume1",
+        "authentication": {
+          "authType": "WORKLOAD_IDENTITY"
+        },
+        "account": {
+          "accountType": "blob",
+          "containerName": "container1",
+          "accountEndpoint": "https://mysa.core.windows.net",
+          "indexTagsMode": "NoIndexTags"
+        },
+        "blobFiltering": {
+          "blobNamePrefix": "data/logs"
+        },
+        "authSys": {
+          "uid": 3123602755,
+          "gid": 493703770
+        },
+        "schedule": {
+          "frequency": "@daily",
+          "oneshot": "0ca47ee0-cb21-4317-9b89-fbd292411774"
+        },
+        "status": {
+          "state": "unknown"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "path": "/mirrorsubvolume1",
+          "authentication": {
+            "authType": "WORKLOAD_IDENTITY"
+          },
+          "account": {
+            "accountType": "blob",
+            "containerName": "container1",
+            "accountEndpoint": "https://mysa.core.windows.net",
+            "indexTagsMode": "NoIndexTags"
+          },
+          "blobFiltering": {
+            "blobNamePrefix": "data/logs"
+          },
+          "authSys": {
+            "uid": 3123602755,
+            "gid": 493703770
+          },
+          "schedule": {
+            "frequency": "@daily",
+            "oneshot": "0ca47ee0-cb21-4317-9b89-fbd292411774"
+          },
+          "provisioningState": "Succeeded",
+          "status": {
+            "state": "unknown"
+          }
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.Kubernetes/connectedClusters/cluster/providers/Microsoft.ArcContainerStorage/edgevolumes/myedgevolume/mirrorsubvolumes/mirrorsubvol1",
+        "name": "mirrorsubvol1",
+        "type": "Microsoft.ArcContainerStorage/edgevolumes/mirrorsubvolumes",
+        "systemData": {
+          "createdBy": "pnmtlcihvxxnruqqtcbbzokd",
+          "createdByType": "User",
+          "createdAt": "2025-07-16T20:21:00.749Z",
+          "lastModifiedBy": "kllnlkyjbwz",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-16T20:21:00.749Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "path": "/mirrorsubvolume1",
+          "authentication": {
+            "authType": "WORKLOAD_IDENTITY"
+          },
+          "account": {
+            "accountType": "blob",
+            "containerName": "container1",
+            "accountEndpoint": "https://mysa.core.windows.net",
+            "indexTagsMode": "NoIndexTags"
+          },
+          "blobFiltering": {
+            "blobNamePrefix": "data/logs"
+          },
+          "authSys": {
+            "uid": 3123602755,
+            "gid": 493703770
+          },
+          "schedule": {
+            "frequency": "@daily",
+            "oneshot": "0ca47ee0-cb21-4317-9b89-fbd292411774"
+          },
+          "provisioningState": "Succeeded",
+          "status": {
+            "state": "unknown"
+          }
+        },
+        "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/rgopenapi/providers/Microsoft.Kubernetes/connectedClusters/cluster/providers/Microsoft.ArcContainerStorage/edgevolumes/myedgevolume/mirrorsubvolumes/mirrorsubvol1",
+        "name": "mirrorsubvol1",
+        "type": "Microsoft.ArcContainerStorage/edgevolumes/mirrorsubvolumes",
+        "systemData": {
+          "createdBy": "pnmtlcihvxxnruqqtcbbzokd",
+          "createdByType": "User",
+          "createdAt": "2025-07-16T20:21:00.749Z",
+          "lastModifiedBy": "kllnlkyjbwz",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-16T20:21:00.749Z"
+        }
+      }
+    }
+  }
+}

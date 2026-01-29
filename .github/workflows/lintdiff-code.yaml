@@ -20,20 +20,20 @@ jobs:
 
     steps:
       - name: Checkout eng
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           sparse-checkout: |
             eng/
             .github/
 
       - name: Checkout 'after' state
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
           path: after
 
       - name: Checkout 'before' state
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           path: before
@@ -42,7 +42,7 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Get changed files
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const { getChangedFiles } = await import('${{ github.workspace }}/.github/shared/src/changed-files.js');
@@ -80,7 +80,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.run-lintdiff.outputs.summary }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: job-summary
           path: ${{ steps.run-lintdiff.outputs.summary }}

@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "../shared/maintenancemodeconfiguration.tsp";
+import "../shared/monitoring.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -25,6 +26,17 @@ union FirewallSKU {
 
   @doc("FirewallSKU Premium")
   Premium: "Premium",
+}
+
+@doc("Policy Override")
+union PolicyOverride {
+  string,
+
+  @doc("PolicyOverride Enclave.")
+  Enclave: "Enclave",
+
+  @doc("PolicyOverride None.")
+  None: "None",
 }
 
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -207,7 +219,7 @@ model CommunityBaseModel {
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
-  policyOverride?: "Enclave" | "None" | string;
+  policyOverride?: PolicyOverride;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
@@ -239,7 +251,12 @@ model CommunityProperties is CommunityBaseModel {
   @added(Microsoft.Mission.Versions.v2025_11_01_preview)
   @identifiers(#[])
   @doc("DedicatedHub List.")
+  @visibility(Lifecycle.Read)
   dedicatedHubList?: DedicatedHubResource[];
+
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsModel;
 }
 
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -272,10 +289,9 @@ model CommunityPatchProperties
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
 
-  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
-  @identifiers(#[])
-  @doc("DedicatedHub List.")
-  dedicatedHubList?: DedicatedHubBaseModel[];
+  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
+  monitoringSettings?: MonitoringSettingsPatchModel;
 }
 
 @doc("Community Patch Resource")

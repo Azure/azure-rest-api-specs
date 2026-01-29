@@ -1,0 +1,887 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Dell.Storage",
+    "version": "2025-03-21",
+    "description": "Dell Storage service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "FileSystems"
+    }
+  ],
+  "paths": {
+    "/providers/Dell.Storage/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Dell.Storage/filesystems": {
+      "get": {
+        "operationId": "FileSystems_ListBySubscription",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "List FileSystemResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "FileSystems_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dell.Storage/filesystems": {
+      "get": {
+        "operationId": "FileSystems_ListByResourceGroup",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "List FileSystemResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "FileSystems_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dell.Storage/filesystems/{filesystemName}": {
+      "get": {
+        "operationId": "FileSystems_Get",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "Get a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "filesystemName",
+            "in": "path",
+            "description": "Name of the filesystem resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_Get_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_Get_MaximumSet_Gen.json"
+          },
+          "FileSystems_Get_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FileSystems_CreateOrUpdate",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "Create a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "filesystemName",
+            "in": "path",
+            "description": "Name of the filesystem resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FileSystemResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'FileSystemResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "FileSystems_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FileSystems_Update",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "Update a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "filesystemName",
+            "in": "path",
+            "description": "Name of the filesystem resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_Update_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_Update_MaximumSet_Gen.json"
+          },
+          "FileSystems_Update_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FileSystems_Delete",
+        "tags": [
+          "FileSystems"
+        ],
+        "description": "Delete a FileSystemResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "filesystemName",
+            "in": "path",
+            "description": "Name of the filesystem resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FileSystems_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/FileSystems_Delete_MaximumSet_Gen.json"
+          },
+          "FileSystems_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/FileSystems_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "FileSystemResourceListResult": {
+      "type": "object",
+      "description": "The response of a FileSystemResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FileSystemResource items on this page",
+          "items": {
+            "$ref": "#/definitions/LiftrBase.Storage.FileSystemResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LiftrBase.EncryptionIdentityProperties": {
+      "type": "object",
+      "description": "EncryptionIdentityProperties of Dell FileSystem resource",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/LiftrBase.EncryptionIdentityType",
+          "description": "Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now"
+        },
+        "identityResourceId": {
+          "type": "string",
+          "description": "User-assigned identity resource id - Only when user opts for UserAssigned identity and hence optional"
+        }
+      }
+    },
+    "LiftrBase.EncryptionIdentityType": {
+      "type": "string",
+      "description": "Identity type of ManagedIdentity Associated with Dell FileSystem resource",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "System Assigned Managed identity"
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "User Assigned managed identity"
+          }
+        ]
+      }
+    },
+    "LiftrBase.EncryptionIdentityUpdateProperties": {
+      "type": "object",
+      "description": "EncryptionIdentityUpdateProperties of Dell FileSystem resource",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/LiftrBase.EncryptionIdentityType",
+          "description": "Identity type - SystemAssigned/UserAssigned - Only UserAssigned is supported now"
+        },
+        "identityResourceId": {
+          "type": "string",
+          "description": "User-assigned identity resource id - Only when user opts for UserAssigned identity and hence optional"
+        }
+      }
+    },
+    "LiftrBase.EncryptionProperties": {
+      "type": "object",
+      "description": "EncryptionProperties of Dell FileSystem resource",
+      "properties": {
+        "encryptionType": {
+          "$ref": "#/definitions/LiftrBase.ResourceEncryptionType",
+          "description": "Encryption Type - MMK/CMK"
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Versioned Encryption Key Url - Only when user opts for CMK and hence optional"
+        },
+        "encryptionIdentityProperties": {
+          "$ref": "#/definitions/LiftrBase.EncryptionIdentityProperties",
+          "description": "Identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault - Only when user opts for CMK and hence optional"
+        }
+      },
+      "required": [
+        "encryptionType"
+      ]
+    },
+    "LiftrBase.EncryptionUpdateProperties": {
+      "type": "object",
+      "description": "EncryptionUpdateProperties of Dell FileSystem resource",
+      "properties": {
+        "encryptionType": {
+          "$ref": "#/definitions/LiftrBase.ResourceEncryptionType",
+          "description": "Encryption Type - MMK/CMK"
+        },
+        "keyUrl": {
+          "type": "string",
+          "description": "Versioned Encryption Key Url - Only when user opts for CMK and hence optional"
+        },
+        "encryptionIdentityProperties": {
+          "$ref": "#/definitions/LiftrBase.EncryptionIdentityUpdateProperties",
+          "description": "Identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault - Only when user opts for CMK and hence optional"
+        }
+      }
+    },
+    "LiftrBase.MarketplaceDetails": {
+      "type": "object",
+      "description": "MarketplaceDetails of Dell FileSystem resource",
+      "properties": {
+        "marketplaceSubscriptionId": {
+          "type": "string",
+          "description": "Marketplace Subscription Id"
+        },
+        "planId": {
+          "type": "string",
+          "description": "Plan Id"
+        },
+        "offerId": {
+          "type": "string",
+          "description": "Offer Id"
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "Publisher Id"
+        },
+        "privateOfferId": {
+          "type": "string",
+          "description": "Private Offer Id"
+        },
+        "planName": {
+          "type": "string",
+          "description": "Plan Name"
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
+          "description": "Marketplace subscription status",
+          "readOnly": true
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End Date of the subscription"
+        },
+        "termUnit": {
+          "type": "string",
+          "description": "Term Unit"
+        }
+      },
+      "required": [
+        "planId",
+        "offerId",
+        "planName"
+      ]
+    },
+    "LiftrBase.MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace subscription status of the file system resource",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingFulfillmentStart",
+            "value": "PendingFulfillmentStart",
+            "description": "Fulfillment has not started"
+          },
+          {
+            "name": "Subscribed",
+            "value": "Subscribed",
+            "description": "Marketplace offer is subscribed"
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "Marketplace offer is suspended because of non payment"
+          },
+          {
+            "name": "Unsubscribed",
+            "value": "Unsubscribed",
+            "description": "Marketplace offer is unsubscribed"
+          }
+        ]
+      }
+    },
+    "LiftrBase.ProvisioningState": {
+      "type": "string",
+      "description": "Provisioning State of the File system resource",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "File system resource creation request accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "File system resource creation started"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "File system resource is being updated"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "File system resource deletion started"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "File system resource creation successful"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "File system resource creation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "File system resource creation canceled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "File system resource is deleted"
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified",
+            "description": "File system resource state is unknown"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "LiftrBase.ResourceEncryptionType": {
+      "type": "string",
+      "description": "Identity type of ManagedIdentity Associated with Dell FileSystem resource",
+      "enum": [
+        "Microsoft-managed keys (MMK)",
+        "Customer-managed keys (CMK)"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft-managed keys (MMK)",
+            "value": "Microsoft-managed keys (MMK)",
+            "description": "Microsoft managed keys (Default)"
+          },
+          {
+            "name": "Customer-managed keys (CMK)",
+            "value": "Customer-managed keys (CMK)",
+            "description": "Customer managed keys\n(CMK) - Only UserAssigned identity is supported"
+          }
+        ]
+      }
+    },
+    "LiftrBase.Storage.Capacity": {
+      "type": "object",
+      "description": "Capacity for a Resource",
+      "properties": {
+        "min": {
+          "type": "string",
+          "description": "Minimum Capacity"
+        },
+        "max": {
+          "type": "string",
+          "description": "Maximum Capacity"
+        },
+        "incremental": {
+          "type": "string",
+          "description": "Units to be increased"
+        },
+        "current": {
+          "type": "string",
+          "description": "Current Capacity of the resource"
+        }
+      }
+    },
+    "LiftrBase.Storage.FileSystemResource": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "LiftrBase.Storage.FileSystemResourceProperties": {
+      "type": "object",
+      "description": "Properties specific to the Dell File System resource",
+      "properties": {
+        "capacity": {
+          "$ref": "#/definitions/LiftrBase.Storage.Capacity",
+          "description": "Capacity for Dell Filesystem, Will be received as part of Job Status"
+        },
+        "marketplace": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
+          "description": "Marketplace details"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/LiftrBase.ProvisioningState",
+          "description": "Provisioning State of the resource",
+          "readOnly": true
+        },
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        },
+        "delegatedSubnetCidr": {
+          "type": "string",
+          "description": "Domain range for the delegated subnet",
+          "pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}/(16|24)$"
+        },
+        "user": {
+          "$ref": "#/definitions/LiftrBase.UserDetails",
+          "description": "User Details"
+        },
+        "fileSystemId": {
+          "type": "string",
+          "description": "File system Id of the resource"
+        },
+        "smartConnectFqdn": {
+          "type": "string",
+          "description": "Smart Connect FQDN of the resource"
+        },
+        "oneFsUrl": {
+          "type": "string",
+          "description": "OneFS url"
+        },
+        "dellReferenceNumber": {
+          "type": "string",
+          "description": "DellReferenceNumber of the resource"
+        },
+        "encryption": {
+          "$ref": "#/definitions/LiftrBase.EncryptionProperties",
+          "description": "EncryptionProperties of the resource"
+        }
+      },
+      "required": [
+        "marketplace",
+        "delegatedSubnetId",
+        "delegatedSubnetCidr",
+        "user",
+        "dellReferenceNumber",
+        "encryption"
+      ]
+    },
+    "LiftrBase.Storage.FileSystemResourceUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the FileSystemResource.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/LiftrBase.Storage.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/LiftrBase.Storage.FileSystemResourceUpdateProperties",
+          "description": "The updatable properties of the FileSystemResource."
+        }
+      }
+    },
+    "LiftrBase.Storage.FileSystemResourceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the FileSystemResource.",
+      "properties": {
+        "delegatedSubnetId": {
+          "type": "string",
+          "description": "Delegated subnet id for Vnet injection"
+        },
+        "capacity": {
+          "$ref": "#/definitions/LiftrBase.Storage.Capacity",
+          "description": "Capacity for Dell Filesystem"
+        },
+        "encryption": {
+          "$ref": "#/definitions/LiftrBase.EncryptionUpdateProperties",
+          "description": "Encryption Details of the resource"
+        }
+      }
+    },
+    "LiftrBase.Storage.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "LiftrBase.UserDetails": {
+      "type": "object",
+      "description": "User Details of Dell FileSystem resource",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "User Email",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "email"
+      ]
+    }
+  },
+  "parameters": {}
+}

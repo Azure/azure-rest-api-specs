@@ -10559,6 +10559,42 @@
         }
       ]
     },
+    "InternalState": {
+      "type": "string",
+      "description": "Internal state of resource",
+      "enum": [
+        "PendingValidation",
+        "Validated",
+        "ValidatedWithSchema",
+        "ValidatedWithoutSchema"
+      ],
+      "x-ms-enum": {
+        "name": "InternalState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingValidation",
+            "value": "PendingValidation",
+            "description": "Resource is pending validation"
+          },
+          {
+            "name": "Validated",
+            "value": "Validated",
+            "description": "Resource is validated"
+          },
+          {
+            "name": "ValidatedWithSchema",
+            "value": "ValidatedWithSchema",
+            "description": "Resource is ValidatedWithSchema"
+          },
+          {
+            "name": "ValidatedWithoutSchema",
+            "value": "ValidatedWithoutSchema",
+            "description": "Resource is ValidatedWithoutSchema"
+          }
+        ]
+      }
+    },
     "Job": {
       "type": "object",
       "description": "Job extension resource for tracking job execution and substatuses.",
@@ -10785,7 +10821,8 @@
         "deploy",
         "publish",
         "staging",
-        "externalValidation"
+        "externalValidation",
+        "uninstall"
       ],
       "x-ms-enum": {
         "name": "JobType",
@@ -10810,6 +10847,11 @@
             "name": "ExternalValidation",
             "value": "externalValidation",
             "description": "A validation job."
+          },
+          {
+            "name": "Uninstall",
+            "value": "uninstall",
+            "description": "An Uninstall job."
           }
         ]
       }
@@ -11982,6 +12024,11 @@
           "$ref": "#/definitions/OrchestratorType",
           "description": "Orchestrator type"
         },
+        "internalState": {
+          "$ref": "#/definitions/InternalState",
+          "description": "Internal State of resource",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
@@ -12772,6 +12819,48 @@
         "name",
         "specification"
       ]
+    },
+    "UninstallJobParameter": {
+      "type": "object",
+      "description": "Parameters for an Uninstall job.",
+      "properties": {
+        "parameter": {
+          "$ref": "#/definitions/UninstallSolutionParameter"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobParameterBase"
+        }
+      ],
+      "x-ms-discriminator-value": "uninstall"
+    },
+    "UninstallJobStepStatistics": {
+      "type": "object",
+      "description": "Uninstall statistics for a job step, including total, success, and failed counts.",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of items processed in this step"
+        },
+        "successCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of successful items in this step"
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of failed items in this step"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobStepStatisticsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "uninstall"
     },
     "UninstallSolutionParameter": {
       "type": "object",

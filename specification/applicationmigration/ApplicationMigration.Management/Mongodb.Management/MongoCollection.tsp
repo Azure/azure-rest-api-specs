@@ -9,7 +9,7 @@ namespace Microsoft.ApplicationMigration;
 /**
  * The MongoCollection resource definition.
  */
-@parentResource(MongoDatabase)
+@parentResource(MongoSite)
 model MongoCollection
   is Azure.ResourceManager.ProxyResource<MongoCollectionProperties, false> {
   ...ResourceNameParameter<
@@ -48,9 +48,9 @@ interface MongoCollections {
   delete is ArmResourceDeleteSync<MongoCollection>;
 
   /**
-   * Lists the MongoCollection resources in MongoDatabase.
+   * Lists the MongoCollection resources in MongoSite.
    */
-  listByDatabase is ArmResourceListByParent<
+  listBySite is ArmResourceListByParent<
     MongoCollection,
     Response = ArmResponse<MongoCollectionList>
   >;

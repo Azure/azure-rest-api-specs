@@ -54,8 +54,9 @@ model EdgeVolumeStatus {
   @doc("Additional details about the EdgeVolume status.")
   details?: string;
 
+  // The pattern for this is slightly altered version from kubernetes apimachinery sources: https://github.com/kubernetes/apimachinery/blob/b72d93d174332f952a8d431419fece5e6f044bcb/pkg/api/resource/quantity.go#L149
   @doc("The amount of space available (string format, e.g., '500Mi').")
-  @pattern("^[0-9][0-9]*([.][0-9]+)?[KMGTP]i?$")
+  @pattern("^(|[0-9.]+[eEinumkKMGTP]*[-+]?[0-9]*)$")
   spaceAvailable?: string;
 
   @doc("The name of the kubernetes persistent volume resource underlying this edgevolume.")

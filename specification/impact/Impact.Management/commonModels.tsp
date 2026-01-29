@@ -273,3 +273,22 @@ model SourceOrTarget {
   @pattern("(\\/[0-9a-zA-Z]+)*")
   azureResourceId?: string;
 }
+
+@doc("Group of insights for a category")
+model InsightCategoryGroup {
+  @doc("Category name")
+  category: string;
+
+  @doc("Status of the insights in this category")
+  status?: string;
+
+  @doc("List of insight references in this category")
+  @Azure.ResourceManager.identifiers(#["id"])
+  insights?: InsightReference[];
+}
+
+@doc("Reference to an Insight resource")
+model InsightReference {
+  @doc("Azure resource ID of the insight")
+  id: string;
+}

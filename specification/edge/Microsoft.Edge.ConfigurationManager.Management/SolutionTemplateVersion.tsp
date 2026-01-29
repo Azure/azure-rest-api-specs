@@ -36,6 +36,11 @@ model SolutionTemplateVersionProperties {
   @doc("Orchestrator type")
   orchestratorType?: OrchestratorType;
 
+  @added(Versions.v2025_08_01)
+  @doc("Internal State of resource")
+  @visibility(Lifecycle.Read)
+  internalState?: InternalState;
+
   @doc("Provisioning state of resource")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
