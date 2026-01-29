@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Devices;
 
@@ -145,6 +146,29 @@ union DeviceRegistryNamespaceAuthenticationType {
    */
   SystemAssigned: "SystemAssigned",
 }
+
+/**
+ * IotHub MI authentication type: UserAssigned, SystemAssigned.
+ */
+union IotHubAuthenticationType {
+  string,
+
+  /**
+   * Key Based authentication type.
+   */
+  KeyBased: "KeyBased",
+
+  /**
+   * User assigned authentication type.
+   */
+  UserAssigned: "UserAssigned",
+
+  /**
+   * System assigned authentication type.
+   */
+  SystemAssigned: "SystemAssigned",
+}
+
 
 /**
  * Allocation policy to be used by this provisioning service.
@@ -489,9 +513,39 @@ model IotHubDefinitionDescription {
   name?: string;
 
   /**
+   * Host name of the IoT hub. This is required when connectionString is not provided.
+   */
+  @added(Versions.v2026_03_01_preview)
+  hostName?: string;
+
+  /**
+   * IotHub MI authentication type: KeyBased, UserAssigned, SystemAssigned.
+   */
+  @added(Versions.v2026_03_01_preview)
+  authenticationType?: IotHubAuthenticationType;
+
+  /**
+   * The selected user-assigned identity resource Id associated with IoT hub. This is required when authenticationType is UserAssigned.
+   */
+  @added(Versions.v2026_03_01_preview)
+  selectedUserAssignedIdentityResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+
+  /**
    * Connection string of the IoT hub.
    */
-  connectionString: string;
+  @removed(Versions.v2026_03_01_preview)
+  @renamedFrom(Versions.v2026_03_01_preview, "connectionString")
+  oldConnectionString: string;
+
+  /**
+   * Connection string of the IoT hub. This is required when authenticationType is KeyBased.
+   */
+  @added(Versions.v2026_03_01_preview)
+  connectionString?: string;
 
   /**
    * ARM region of the IoT hub.
