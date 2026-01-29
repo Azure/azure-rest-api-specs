@@ -98,3 +98,58 @@ interface ContentUnderstandingClient {
   "Raw image bytes. Provide bytes-like object; do not base64-encode. Only one of url or data should be specified.",
   DocumentationMode.replace
 );
+
+// Custom parameter order for analyzeBinary: put required 'input' before optional parameters with defaults.
+// This ensures 'contentType' (which has a default) appears after the required body parameter.
+op analyzeBinaryCustomSignature(
+  @doc("The unique identifier of the analyzer.")
+  @path
+  analyzerId: string,
+
+  @doc("The binary content of the document to analyze.")
+  @bodyRoot
+  input: bytes,
+
+  @doc("Range of the input to analyze (ex. `1-3,5,9-`). Document content uses 1-based page numbers, while audio visual content uses integer milliseconds.")
+  @query
+  range?: RangeExpression,
+
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Conflicts with @typespec/http/content-type-string"
+  @doc("Request content type.")
+  @header
+  contentType: string = "application/octet-stream",
+
+  @doc("The location where the data may be processed. Defaults to global.")
+  @query
+  processingLocation?: ProcessingLocation = ProcessingLocation.global,
+
+  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'. Default is 'codePoint'.")
+  @query
+  stringEncoding?: string = "codePoint",
+): AnalyzeResult;
+
+@@override(ContentUnderstandingClient.analyzeBinary, analyzeBinaryCustomSignature);
+
+// Custom parameter order for analyze: put main input data before optional processing parameters.
+// Order: analyzerId, inputs, modelDeployments, processingLocation, stringEncoding
+op analyzeCustomSignature(
+  @doc("The unique identifier of the analyzer.")
+  @path
+  analyzerId: string,
+
+  @doc("Inputs to analyze. Currently, only pro mode supports multiple inputs.")
+  inputs?: AnalyzeInput[],
+
+  @doc("Override default mapping of model names to deployments. Ex. { \"gpt-4.1\": \"myGpt41Deployment\" }.")
+  modelDeployments?: Record<string>,
+
+  @doc("The location where the data may be processed. Defaults to global.")
+  @query
+  processingLocation?: ProcessingLocation = ProcessingLocation.global,
+
+  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'. Default is 'codePoint'.")
+  @query
+  stringEncoding?: string = "codePoint",
+): AnalyzeResult;
+
+@@override(ContentUnderstandingClient.analyze, analyzeCustomSignature);
