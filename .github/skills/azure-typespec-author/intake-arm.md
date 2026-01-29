@@ -1,6 +1,4 @@
-
 # TypeSpec ARM Authoring - Intake and Clarification
-
 
 This document focuses on Step 1: Intake and Clarification for TypeSpec ARM authoring workflows. It collects all necessary information before moving forward with implementation.
 
@@ -9,9 +7,11 @@ This document focuses on Step 1: Intake and Clarification for TypeSpec ARM autho
 **Before asking any case-specific questions, ALWAYS complete these steps:**
 
 ### Step 1.1: Analyze the Codebase
+
 **Goal**: Understand the current TypeSpec project structure
 
 **Actions**:
+
 1. Locate the TypeSpec project files (main.tsp, tspconfig.yaml)
 2. Read and parse the main.tsp file to identify:
    - Service namespace
@@ -21,6 +21,7 @@ This document focuses on Step 1: Intake and Clarification for TypeSpec ARM autho
 3. Determine the project structure and file organization
 
 **Output**: Display analysis results:
+
 ```
 📊 TypeSpec Project Analysis
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -31,13 +32,13 @@ Project Path: /path/to/tspconfig.yaml
 API Versions:
   ✓ 2024-01-01 (stable)
   ✓ 2024-06-01-preview (preview)
-  
+
 Latest Version: 2024-06-01-preview (preview)
 
 Existing Resources:
   • ResourceType1
   • ResourceType2
-  
+
 Existing Models: [count]
 Existing Enums: [count]
 ```
@@ -45,13 +46,16 @@ Existing Enums: [count]
 ---
 
 ### Step 1.2: Identify Latest Version Type
+
 **Goal**: Determine if the latest version is preview or stable
 
 **Actions**:
+
 - Check if the latest version string contains "-preview"
 - Verify with version enum decorators (@previewVersion)
 
-**Output**: 
+**Output**:
+
 ```
 🔍 Latest Version Status
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -77,6 +81,7 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
 **Context from Analysis**: Latest version is [version] ([preview/stable])
 
 **Additional Questions to Ask**:
+
 ```
 1. What is the new preview version you want to add?
    Format: YYYY-MM-DD-preview
@@ -85,11 +90,13 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
 ```
 
 **Validation**:
+
 - Version format: YYYY-MM-DD-preview
 - Date is not in the past
 - Version doesn't already exist in versions enum
 
 **Information Collected**:
+
 ```json
 {
   "case": "add-new-preview-version",
@@ -107,6 +114,7 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
 **Context from Analysis**: Latest version is [version] ([preview/stable])
 
 **Additional Questions to Ask**:
+
 ```
 1. What is the new stable version you want to add?
    Format: YYYY-MM-DD
@@ -119,11 +127,13 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
 ```
 
 **Validation**:
+
 - Version format: YYYY-MM-DD (no -preview suffix)
 - Date is not in the past
 - If promoting from preview, source version must exist
 
 **Information Collected**:
+
 ```json
 {
   "case": "add-new-stable-version",
@@ -131,7 +141,7 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
   "projectPath": "[from analysis]",
   "currentLatestVersion": "[from analysis]",
   "newVersion": "[user input]",
-  "sourcePreviewVersion": "[if applicable]",
+  "sourcePreviewVersion": "[if applicable]"
 }
 ```
 
@@ -139,11 +149,13 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
 
 ### Case: Add New Resource Type
 
-**Context from Analysis**: 
+**Context from Analysis**:
+
 - Latest version: [version] ([preview/stable])
 - Existing resources: [list]
 
 **Additional Questions to Ask**:
+
 ```
 1. Which API version(s) should include this new resource?
    □ Latest version only ([version])
@@ -151,11 +163,11 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
 
 2. What is the resource type name?
    Format: PascalCase (e.g., Widget, VirtualMachine)
-   
+
 3. Is this a top-level resource or nested under a parent?
    □ Top-level (e.g., /subscriptions/.../resourceGroups/.../providers/Microsoft.Service/resources/{name})
    □ Nested (e.g., /.../{parentName}/childResources/{name})
-   
+
    If nested, what is the parent resource? [show existing resources]
 
 4. What properties should this resource have?
@@ -163,10 +175,12 @@ After completing Steps 1.1 and 1.2, proceed with case-specific questions based o
 ```
 
 **Validation**:
+
 - Resource name is PascalCase
 - If nested, parent resource exists
 
 **Information Collected**:
+
 ```json
 {
   "case": "add-new-resource-type",
@@ -237,21 +251,25 @@ Next actions:
 ## Common Validation Rules
 
 ### For All Cases
+
 - Service namespace follows Microsoft.ServiceName pattern
 - TypeSpec project path exists and contains tspconfig.yaml and main.tsp
 - Target API version is valid format
 
 ### Version Format Validation
+
 - Preview: YYYY-MM-DD-preview (e.g., 2025-03-01-preview)
 - Stable: YYYY-MM-DD (e.g., 2025-03-01)
 - Date must not be in the past (allow current date)
 
 ### Naming Conventions
+
 - Resource types: PascalCase (e.g., Widget, VirtualMachine)
 - Operations/Actions: camelCase (e.g., start, listByResourceGroup)
 - Models/Enums/Unions: PascalCase (e.g., WidgetProperties, ProvisioningState)
 - Properties: camelCase (e.g., displayName, provisioningState)
 
 ### Breaking Change Rules
+
 - Preview versions: Breaking changes allowed
 - Stable versions: Breaking changes require careful consideration and clear justification
