@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.ApplicationMigration management service",
-    "version": "2025-02-01-preview",
+    "version": "2026-01-01-preview",
     "description": "Microsoft.ApplicationMigration Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -1113,6 +1113,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/discoveryHubs/{discoveryHubName}/startAutoAppDiscovery": {
+      "post": {
+        "operationId": "DiscoveryHubs_StartAutoAppDiscovery",
+        "tags": [
+          "DiscoveryHubs"
+        ],
+        "summary": "Initiates automatic discovery of applications from uploaded inventory.",
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "discoveryHubName",
+            "in": "path",
+            "description": "The name of the DiscoveryHub",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AutoDiscoverAppsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Initiates automatic discovery of applications from uploaded inventory.": {
+            "$ref": "./examples/DiscoveryHubs_StartAutoAppDiscovery_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/discoveryHubs/{discoveryHubName}/startImportApplications": {
       "post": {
         "operationId": "DiscoveryHubs_StartImportApplications",
@@ -1195,6 +1249,155 @@
     }
   },
   "definitions": {
+    "AppDiscoveryFeatureState": {
+      "type": "string",
+      "description": "The feature state of application discovery.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AppDiscoveryFeatureState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Application discovery feature is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Application discovery feature is disabled."
+          }
+        ]
+      }
+    },
+    "AppDiscoveryState": {
+      "type": "object",
+      "description": "Application discovery settings and runtime status.",
+      "properties": {
+        "featureState": {
+          "$ref": "#/definitions/AppDiscoveryFeatureState",
+          "description": "Indicates whether the application discovery feature is enabled or disabled."
+        },
+        "status": {
+          "$ref": "#/definitions/AppDiscoveryStatus",
+          "description": "The current operational status of application discovery.",
+          "readOnly": true
+        },
+        "lastAttemptedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when discovery was last attempted.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "Errors encountered during the most recent discovery operation.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "summary": {
+          "$ref": "#/definitions/AppDiscoverySummary",
+          "description": "Summary of the current or most recent discovery operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "AppDiscoveryStatus": {
+      "type": "string",
+      "description": "The operational status of application discovery.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "AppDiscoveryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Application discovery has not been started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Application discovery is in progress."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Application discovery has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Application discovery has failed."
+          }
+        ]
+      }
+    },
+    "AppDiscoverySummary": {
+      "type": "object",
+      "description": "Progress tracking information for application discovery.",
+      "properties": {
+        "machineProcessingPercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of machines that have been processed for application discovery.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the auto app discovery operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time the auto app discovery operation."
+        },
+        "discoveredApplications": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of applications discovered so far.",
+          "minimum": 0
+        },
+        "machineCoveragePercentage": {
+          "type": "number",
+          "format": "float",
+          "description": "Percentage of machines that have been identified as part of applications.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "totalMachines": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of machines being processed for discovery.",
+          "minimum": 0
+        },
+        "processedMachines": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of machines that have been processed.",
+          "minimum": 0
+        },
+        "machinesInApplications": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of machines that are part of discovered applications.",
+          "minimum": 0
+        }
+      }
+    },
     "AppOperationType": {
       "type": "string",
       "description": "The operation type for import applications.",
@@ -1291,6 +1494,16 @@
           "$ref": "#/definitions/Complexity",
           "description": "The complexity of the application."
         },
+        "managedBy": {
+          "$ref": "#/definitions/ManagedBy",
+          "description": "The entity that manages the application."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "float",
+          "description": "The confidence score for the application (used in autoAppDiscovery).",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning status of Application.",
@@ -1336,6 +1549,16 @@
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "AutoDiscoverAppsRequest": {
+      "type": "object",
+      "description": "Request model for the auto-discover applications operation.",
+      "properties": {
+        "forceDiscover": {
+          "type": "boolean",
+          "description": "Flag to force rediscovery even if discovery was already completed."
+        }
+      }
     },
     "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
       "type": "object",
@@ -1460,6 +1683,15 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the DiscoveryHub resource.",
           "readOnly": true
+        },
+        "masterSiteId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The masterSite identifier associated with the discovery hub."
+        },
+        "appDiscovery": {
+          "$ref": "#/definitions/AppDiscoveryState",
+          "description": "Application discovery settings and runtime status."
         }
       }
     },
@@ -1632,6 +1864,30 @@
       "required": [
         "operationType"
       ]
+    },
+    "ManagedBy": {
+      "type": "string",
+      "description": "The enum defining the entity that manages the application.",
+      "enum": [
+        "System",
+        "User"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "System",
+            "value": "System",
+            "description": "The application is managed by the system."
+          },
+          {
+            "name": "User",
+            "value": "User",
+            "description": "The application is managed by a user."
+          }
+        ]
+      }
     },
     "Member": {
       "type": "object",

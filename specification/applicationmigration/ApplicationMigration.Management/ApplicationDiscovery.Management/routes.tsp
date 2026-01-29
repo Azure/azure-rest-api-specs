@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
@@ -10,6 +11,7 @@ import "./member.tsp";
 import "./main.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApplicationMigration;
 
@@ -44,6 +46,14 @@ interface DiscoveryHubs {
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ImportApplicationsOperationStatusResult> &
       ArmLroLocationHeader<FinalResult = ImportApplicationsOperationStatusResult> &
       Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @summary("Initiates automatic discovery of applications from uploaded inventory.")
+  @added(Microsoft.ApplicationMigration.Versions.v2026_01_01_preview)
+  startAutoAppDiscovery is ArmResourceActionSync<
+    DiscoveryHub,
+    AutoDiscoverAppsRequest,
+    void
   >;
 }
 
