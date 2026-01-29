@@ -38,6 +38,7 @@ interface DscConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscConfiguration_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   get is ArmResourceRead<DscConfiguration>;
 
   /**
@@ -45,6 +46,7 @@ interface DscConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscConfiguration_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     DscConfiguration,
     Request = DscConfigurationCreateOrUpdateParameters
@@ -56,6 +58,7 @@ interface DscConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscConfiguration_Update")
   @patch(#{ implicitOptionality: false })
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     DscConfiguration,
     PatchModel = DscConfigurationUpdateParameters,
@@ -67,6 +70,7 @@ interface DscConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscConfiguration_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   delete is ArmResourceDeleteSync<DscConfiguration>;
 
   /**
@@ -74,6 +78,7 @@ interface DscConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscConfiguration_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   listByAutomationAccount is ArmResourceListByParent<
     DscConfiguration,
     Parameters = {
@@ -100,13 +105,15 @@ interface DscConfigurations {
        */
       @query("$inlinecount")
       $inlinecount?: string;
-    }
+    },
+    Response = ArmResponse<DscConfigurationListResult>
   >;
 
   /**
    * Retrieve the configuration script identified by configuration name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   @operationId("DscConfiguration_GetContent")
   @get
   @action("content")

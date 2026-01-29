@@ -32,6 +32,7 @@ interface HybridRunbookWorkerGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HybridRunbookWorkerGroup_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   get is ArmResourceRead<HybridRunbookWorkerGroup>;
 
   /**
@@ -39,6 +40,7 @@ interface HybridRunbookWorkerGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HybridRunbookWorkerGroup_Create")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     HybridRunbookWorkerGroup,
     Request = HybridRunbookWorkerGroupCreateOrUpdateParameters
@@ -49,6 +51,7 @@ interface HybridRunbookWorkerGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HybridRunbookWorkerGroup_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     HybridRunbookWorkerGroup,
@@ -61,6 +64,7 @@ interface HybridRunbookWorkerGroups {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("HybridRunbookWorkerGroup_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   delete is ArmResourceDeleteSync<
     HybridRunbookWorkerGroup,
     Response = ArmDeletedResponse
@@ -71,6 +75,7 @@ interface HybridRunbookWorkerGroups {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HybridRunbookWorkerGroup_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   listByAutomationAccount is ArmResourceListByParent<
     HybridRunbookWorkerGroup,
     Parameters = {
@@ -79,7 +84,8 @@ interface HybridRunbookWorkerGroups {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = ArmResponse<HybridRunbookWorkerGroupsListResult>
   >;
 }
 

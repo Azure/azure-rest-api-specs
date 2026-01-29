@@ -32,6 +32,7 @@ interface DscNodeConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscNodeConfiguration_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeconfigurations")
   get is ArmResourceRead<DscNodeConfiguration>;
 
   /**
@@ -40,6 +41,7 @@ interface DscNodeConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("DscNodeConfiguration_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeconfigurations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DscNodeConfiguration,
     Request = DscNodeConfigurationCreateOrUpdateParameters,
@@ -55,6 +57,7 @@ interface DscNodeConfigurations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("DscNodeConfiguration_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeconfigurations")
   delete is ArmResourceDeleteSync<
     DscNodeConfiguration,
     Response = ArmDeletedResponse
@@ -65,6 +68,7 @@ interface DscNodeConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscNodeConfiguration_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeconfigurations")
   listByAutomationAccount is ArmResourceListByParent<
     DscNodeConfiguration,
     Parameters = {
@@ -91,7 +95,8 @@ interface DscNodeConfigurations {
        */
       @query("$inlinecount")
       $inlinecount?: string;
-    }
+    },
+    Response = ArmResponse<DscNodeConfigurationListResult>
   >;
 }
 

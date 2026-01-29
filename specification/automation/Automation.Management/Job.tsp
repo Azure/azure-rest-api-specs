@@ -31,6 +31,7 @@ interface Jobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Job_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   get is ArmResourceRead<
     Job,
     Parameters = {
@@ -48,6 +49,7 @@ interface Jobs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Job_Create")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Job,
     Request = JobCreateParameters,
@@ -66,6 +68,7 @@ interface Jobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Job_GetOutput")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get
   @action("output")
   getOutput is ArmResourceActionSync<
@@ -86,6 +89,7 @@ interface Jobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Job_GetRunbookContent")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get
   @action("runbookContent")
   getRunbookContent is ArmResourceActionSync<
@@ -106,6 +110,7 @@ interface Jobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Job_Suspend")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   suspend is ArmResourceActionSync<
     Job,
     void,
@@ -124,6 +129,7 @@ interface Jobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Job_Stop")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   stop is ArmResourceActionSync<
     Job,
     void,
@@ -142,6 +148,7 @@ interface Jobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Job_Resume")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   resume is ArmResourceActionSync<
     Job,
     void,
@@ -160,17 +167,18 @@ interface Jobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("JobStream_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
   @get
-  @action("{jobStreamId}")
-  jobStreamGet is ArmResourceActionSync<
+  jobStreamGet is ArmResourceRead<
     Job,
-    void,
-    ArmResponse<JobStream>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Job>,
+    Response = ArmResponse<JobStream>,
     Parameters = {
       /**
        * The job stream id.
        */
       @path
+      @segment("streams")
       jobStreamId: string;
 
       /**
@@ -186,6 +194,7 @@ interface Jobs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("JobStream_ListByJob")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
   @list
   @get
   @action("streams")

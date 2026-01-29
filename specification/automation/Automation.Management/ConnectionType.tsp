@@ -32,6 +32,7 @@ interface ConnectionTypes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionType_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectiontypeoperations")
   get is ArmResourceRead<ConnectionType>;
 
   /**
@@ -40,6 +41,7 @@ interface ConnectionTypes {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("ConnectionType_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectiontypeoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     ConnectionType,
     Request = ConnectionTypeCreateOrUpdateParameters,
@@ -51,6 +53,7 @@ interface ConnectionTypes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionType_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectiontypeoperations")
   delete is ArmResourceDeleteSync<ConnectionType>;
 
   /**
@@ -58,6 +61,7 @@ interface ConnectionTypes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionType_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectiontypeoperations")
   listByAutomationAccount is ArmResourceListByParent<ConnectionType>;
 }
 

@@ -30,16 +30,19 @@ interface RuntimeEnvironments {
   /**
    * Get information about the Runtime Environment
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runtimeEnvironmentOperations")
   get is ArmResourceRead<RuntimeEnvironment>;
 
   /**
    * Create or update Runtime Environment
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runtimeEnvironmentOperations")
   create is ArmResourceCreateOrReplaceSync<RuntimeEnvironment>;
 
   /**
    * Update an Runtime Environment.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     RuntimeEnvironment,
@@ -49,11 +52,13 @@ interface RuntimeEnvironments {
   /**
    * Delete the Runtime Environment.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runtimeEnvironmentOperations")
   delete is ArmResourceDeleteSync<RuntimeEnvironment>;
 
   /**
    * Retrieve a list of RuntimeEnvironments.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   listByAutomationAccount is ArmResourceListByParent<RuntimeEnvironment>;
 }
 

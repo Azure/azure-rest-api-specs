@@ -15,13 +15,13 @@ namespace Microsoft.Automation;
  * Software update configuration properties.
  */
 @parentResource(AutomationAccount)
-model SoftwareUpdateConfiguration
+model softwareUpdateConfiguration
   is Azure.ResourceManager.ProxyResource<
-    SoftwareUpdateConfigurationProperties,
+    softwareUpdateConfigurationProperties,
     false
   > {
   ...ResourceNameParameter<
-    Resource = SoftwareUpdateConfiguration,
+    Resource = softwareUpdateConfiguration,
     KeyName = "softwareUpdateConfigurationName",
     SegmentName = "softwareUpdateConfigurations",
     NamePattern = ""
@@ -33,8 +33,9 @@ interface SoftwareUpdateConfigurations {
   /**
    * Get a single software update configuration by name.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   getByName is ArmResourceRead<
-    SoftwareUpdateConfiguration,
+    softwareUpdateConfiguration,
     Parameters = {
       /**
        * Identifies this specific client request.
@@ -47,8 +48,9 @@ interface SoftwareUpdateConfigurations {
   /**
    * Create a new software update configuration with the name given in the URI.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   create is ArmResourceCreateOrReplaceSync<
-    SoftwareUpdateConfiguration,
+    softwareUpdateConfiguration,
     Parameters = {
       /**
        * Identifies this specific client request.
@@ -61,8 +63,9 @@ interface SoftwareUpdateConfigurations {
   /**
    * delete a specific software update configuration.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   delete is ArmResourceDeleteSync<
-    SoftwareUpdateConfiguration,
+    softwareUpdateConfiguration,
     Parameters = {
       /**
        * Identifies this specific client request.
@@ -73,10 +76,10 @@ interface SoftwareUpdateConfigurations {
   >;
 }
 
-@@doc(SoftwareUpdateConfiguration.name,
+@@doc(softwareUpdateConfiguration.name,
   "The name of the software update configuration to be created."
 );
-@@doc(SoftwareUpdateConfiguration.properties,
+@@doc(softwareUpdateConfiguration.properties,
   "Software update configuration properties."
 );
 @@doc(SoftwareUpdateConfigurations.create::parameters.resource,

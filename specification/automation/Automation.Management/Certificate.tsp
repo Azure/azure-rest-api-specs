@@ -32,6 +32,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificate_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   get is ArmResourceRead<Certificate>;
 
   /**
@@ -39,6 +40,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificate_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Certificate,
     Request = CertificateCreateOrUpdateParameters
@@ -49,6 +51,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificate_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Certificate,
@@ -61,6 +64,7 @@ interface Certificates {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("Certificate_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   delete is ArmResourceDeleteSync<Certificate, Response = ArmDeletedResponse>;
 
   /**
@@ -68,6 +72,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificate_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   listByAutomationAccount is ArmResourceListByParent<Certificate>;
 }
 

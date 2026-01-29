@@ -30,11 +30,13 @@ interface HybridRunbookWorkers {
   /**
    * Retrieve a hybrid runbook worker.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   get is ArmResourceRead<HybridRunbookWorker>;
 
   /**
    * Create a hybrid runbook worker.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     HybridRunbookWorker,
     Request = HybridRunbookWorkerCreateParameters
@@ -43,6 +45,7 @@ interface HybridRunbookWorkers {
   /**
    * Update a hybrid runbook worker.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   @patch(#{ implicitOptionality: false })
   patch is Azure.ResourceManager.Legacy.CustomPatchSync<
     HybridRunbookWorker,
@@ -53,11 +56,13 @@ interface HybridRunbookWorkers {
   /**
    * Delete a hybrid runbook worker.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   delete is ArmResourceDeleteSync<HybridRunbookWorker>;
 
   /**
    * Retrieve a list of hybrid runbook workers.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   listByHybridRunbookWorkerGroup is ArmResourceListByParent<
     HybridRunbookWorker,
     Parameters = {
@@ -66,12 +71,14 @@ interface HybridRunbookWorkers {
        */
       @query("$filter")
       $filter?: string;
-    }
+    },
+    Response = ArmResponse<HybridRunbookWorkersListResult>
   >;
 
   /**
    * Move a hybrid worker to a different group.
    */
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   move is ArmResourceActionSync<
     HybridRunbookWorker,
     HybridRunbookWorkerMoveParameters,

@@ -42,6 +42,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AutomationAccount_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   get is ArmResourceRead<AutomationAccount>;
 
   /**
@@ -49,6 +50,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AutomationAccount_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     AutomationAccount,
     Request = AutomationAccountCreateOrUpdateParameters
@@ -59,6 +61,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AutomationAccount_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AutomationAccount,
@@ -70,6 +73,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AutomationAccount_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   delete is ArmResourceDeleteSync<AutomationAccount>;
 
   /**
@@ -77,6 +81,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AutomationAccount_ListByResourceGroup")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   listByResourceGroup is ArmResourceListByParent<AutomationAccount>;
 
   /**
@@ -84,6 +89,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AutomationAccount_List")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   list is ArmListBySubscription<AutomationAccount>;
 
   /**
@@ -91,18 +97,19 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NodeCountInformation_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/nodecounts")
   @list
   @get
-  @action("{countType}")
-  nodeCountInformationGet is ArmResourceActionSync<
+  nodeCountInformationGet is ArmResourceRead<
     AutomationAccount,
-    void,
-    ArmResponse<NodeCounts>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
+    Response = ArmResponse<NodeCounts>,
     Parameters = {
       /**
        * The type of counts to retrieve
        */
       @path
+      @segment("nodecounts")
       countType: CountType;
     }
   >;
@@ -112,13 +119,14 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SoftwareUpdateConfigurations_List")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @list
   @get
   @action("softwareUpdateConfigurations")
   softwareUpdateConfigurationsList is ArmResourceActionSync<
     AutomationAccount,
     void,
-    ArmResponse<SoftwareUpdateConfigurationListResult>,
+    ArmResponse<softwareUpdateConfigurationListResult>,
     Parameters = {
       /**
        * Identifies this specific client request.
@@ -155,6 +163,7 @@ interface AutomationAccounts {
   @operationId("AgentRegistrationInformation_Get")
   @get
   @action("agentRegistrationInformation")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/agentregistrationoperations")
   agentRegistrationInformationGet is ArmResourceActionSync<
     AutomationAccount,
     void,
@@ -166,6 +175,8 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AgentRegistrationInformation_RegenerateKey")
+  @action("agentRegistrationInformation/regenerateKey")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/agentregistrationoperations")
   regenerateKey is ArmResourceActionSync<
     AutomationAccount,
     AgentRegistrationRegenerateKeyParameter,
@@ -189,6 +200,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Statistics_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/statisticsoperations")
   @list
   @get
   @action("statistics")
@@ -210,6 +222,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Usages_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/usageoperations")
   @list
   @get
   @action("usages")
@@ -236,6 +249,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Job_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @list
   @get
   @action("jobs")
@@ -263,6 +277,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("LinkedWorkspace_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/linkedworkspaceoperations")
   @get
   @action("linkedWorkspace")
   linkedWorkspaceGet is ArmResourceActionSync<
@@ -276,18 +291,20 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ObjectDataTypes_ListFieldsByType")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/objectdatatypeoperations")
   @list
   @get
   @action("fields")
-  listFieldsByType is ArmResourceActionSync<
+  listFieldsByType is ArmResourceRead<
     AutomationAccount,
-    void,
-    ArmResponse<TypeFieldListResult>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
+    Response = ArmResponse<TypeFieldListResult>,
     Parameters = {
       /**
        * The name of type.
        */
       @path
+      @segment("objectDataTypes")
       typeName: string;
     }
   >;
@@ -308,12 +325,12 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SoftwareUpdateConfigurationMachineRuns_GetById")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
-  @action("{softwareUpdateConfigurationMachineRunId}")
-  getById is ArmResourceActionSync<
+  getById is ArmResourceRead<
     AutomationAccount,
-    void,
-    ArmResponse<SoftwareUpdateConfigurationMachineRun>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
+    Response = ArmResponse<softwareUpdateConfigurationMachineRun>,
     Parameters = {
       /**
        * The Id of the software update configuration machine run.
@@ -321,6 +338,7 @@ interface AutomationAccounts {
       #suppress "@azure-tools/typespec-azure-core/no-format"
       @format("uuid")
       @path
+      @segment("softwareUpdateConfigurationMachineRuns")
       softwareUpdateConfigurationMachineRunId: string;
 
       /**
@@ -336,13 +354,13 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SoftwareUpdateConfigurationMachineRuns_List")
-  @list
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
   @action("softwareUpdateConfigurationMachineRuns")
   softwareUpdateConfigurationMachineRunsList is ArmResourceActionSync<
     AutomationAccount,
     void,
-    ArmResponse<SoftwareUpdateConfigurationMachineRunListResult>,
+    ArmResponse<softwareUpdateConfigurationMachineRunListResult>,
     Parameters = {
       /**
        * Identifies this specific client request.
@@ -375,12 +393,12 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SoftwareUpdateConfigurationRuns_GetById")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationrunoperations")
   @get
-  @action("{softwareUpdateConfigurationRunId}")
-  softwareUpdateConfigurationRunsGetById is ArmResourceActionSync<
+  softwareUpdateConfigurationRunsGetById is ArmResourceRead<
     AutomationAccount,
-    void,
-    ArmResponse<SoftwareUpdateConfigurationRun>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
+    Response = ArmResponse<softwareUpdateConfigurationRun>,
     Parameters = {
       /**
        * The Id of the software update configuration run.
@@ -388,6 +406,7 @@ interface AutomationAccounts {
       #suppress "@azure-tools/typespec-azure-core/no-format"
       @format("uuid")
       @path
+      @segment("softwareUpdateConfigurationRuns")
       softwareUpdateConfigurationRunId: string;
 
       /**
@@ -403,13 +422,13 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SoftwareUpdateConfigurationRuns_List")
-  @list
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
   @action("softwareUpdateConfigurationRuns")
   softwareUpdateConfigurationRunsList is ArmResourceActionSync<
     AutomationAccount,
     void,
-    ArmResponse<SoftwareUpdateConfigurationRunListResult>,
+    ArmResponse<softwareUpdateConfigurationRunListResult>,
     Parameters = {
       /**
        * Identifies this specific client request.
@@ -442,6 +461,8 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Webhook_GenerateUri")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
+  @action("webhooks/generateUri")
   generateUri is ArmResourceActionSync<
     AutomationAccount,
     void,

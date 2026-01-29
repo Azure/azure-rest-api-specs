@@ -31,6 +31,7 @@ interface Webhooks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Webhook_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   get is ArmResourceRead<Webhook>;
 
   /**
@@ -38,6 +39,7 @@ interface Webhooks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Webhook_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Webhook,
     Request = WebhookCreateOrUpdateParameters
@@ -48,6 +50,7 @@ interface Webhooks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Webhook_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Webhook, PatchModel = WebhookUpdateParameters>;
 
@@ -57,6 +60,7 @@ interface Webhooks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("Webhook_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   delete is ArmResourceDeleteSync<Webhook, Response = ArmDeletedResponse>;
 
   /**
@@ -64,6 +68,7 @@ interface Webhooks {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Webhook_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   listByAutomationAccount is ArmResourceListByParent<
     Webhook,
     Parameters = {

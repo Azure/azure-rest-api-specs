@@ -31,6 +31,7 @@ interface Packages {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Package_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   get is ArmResourceRead<Package>;
 
   /**
@@ -38,6 +39,7 @@ interface Packages {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Package_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Package,
     Request = PackageCreateOrUpdateParameters
@@ -48,6 +50,7 @@ interface Packages {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Package_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Package, PatchModel = PackageUpdateParameters>;
 
@@ -56,6 +59,7 @@ interface Packages {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Package_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   delete is ArmResourceDeleteSync<Package>;
 
   /**
@@ -63,6 +67,7 @@ interface Packages {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Package_ListByRuntimeEnvironment")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   listByRuntimeEnvironment is ArmResourceListByParent<Package>;
 }
 

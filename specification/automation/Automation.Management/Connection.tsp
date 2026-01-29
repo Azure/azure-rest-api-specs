@@ -31,6 +31,7 @@ interface Connections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   get is ArmResourceRead<Connection>;
 
   /**
@@ -38,6 +39,7 @@ interface Connections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Connection,
     Request = ConnectionCreateOrUpdateParameters
@@ -48,6 +50,7 @@ interface Connections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Connection,
@@ -59,6 +62,7 @@ interface Connections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   delete is ArmResourceDeleteSync<Connection>;
 
   /**
@@ -66,6 +70,7 @@ interface Connections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   listByAutomationAccount is ArmResourceListByParent<Connection>;
 }
 

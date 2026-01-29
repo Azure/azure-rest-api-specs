@@ -31,6 +31,7 @@ interface Credentials {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Credential_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   get is ArmResourceRead<Credential>;
 
   /**
@@ -38,6 +39,7 @@ interface Credentials {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Credential_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Credential,
     Request = CredentialCreateOrUpdateParameters
@@ -48,6 +50,7 @@ interface Credentials {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Credential_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Credential,
@@ -60,6 +63,7 @@ interface Credentials {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("Credential_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   delete is ArmResourceDeleteSync<Credential, Response = ArmDeletedResponse>;
 
   /**
@@ -67,6 +71,7 @@ interface Credentials {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Credential_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   listByAutomationAccount is ArmResourceListByParent<Credential>;
 }
 

@@ -31,6 +31,7 @@ interface DscNodes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscNode_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeoperations")
   get is ArmResourceRead<DscNode>;
 
   /**
@@ -38,6 +39,7 @@ interface DscNodes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscNode_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<DscNode, PatchModel = DscNodeUpdateParameters>;
 
@@ -47,6 +49,7 @@ interface DscNodes {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("DscNode_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeoperations")
   delete is ArmResourceDeleteSync<DscNode, Response = ArmDeletedResponse>;
 
   /**
@@ -54,6 +57,7 @@ interface DscNodes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DscNode_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeoperations")
   listByAutomationAccount is ArmResourceListByParent<
     DscNode,
     Parameters = {
@@ -80,7 +84,8 @@ interface DscNodes {
        */
       @query("$inlinecount")
       $inlinecount?: string;
-    }
+    },
+    Response = ArmResponse<DscNodeListResult>
   >;
 
   /**
@@ -88,6 +93,7 @@ interface DscNodes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NodeReports_ListByNode")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @list
   @get
   @action("reports")
@@ -109,17 +115,18 @@ interface DscNodes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NodeReports_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @get
-  @action("{reportId}")
-  nodeReportsGet is ArmResourceActionSync<
+  nodeReportsGet is ArmResourceRead<
     DscNode,
-    void,
-    ArmResponse<DscNodeReport>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DscNode>,
+    Response = ArmResponse<DscNodeReport>,
     Parameters = {
       /**
        * The report id.
        */
       @path
+      @segment("reports")
       reportId: string;
     }
   >;
@@ -129,17 +136,19 @@ interface DscNodes {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("NodeReports_GetContent")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @get
   @action("content")
-  getContent is ArmResourceActionSync<
+  getContent is ArmResourceRead<
     DscNode,
-    void,
-    ArmResponse<unknown>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DscNode>,
+    Response = ArmResponse<unknown>,
     Parameters = {
       /**
        * The report id.
        */
       @path
+      @segment("reports")
       reportId: string;
     }
   >;

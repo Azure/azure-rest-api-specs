@@ -32,6 +32,7 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControl_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   get is ArmResourceRead<SourceControl>;
 
   /**
@@ -39,6 +40,7 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControl_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     SourceControl,
     Request = SourceControlCreateOrUpdateParameters
@@ -49,6 +51,7 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControl_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SourceControl,
@@ -61,6 +64,7 @@ interface SourceControls {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("SourceControl_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   delete is ArmResourceDeleteSync<SourceControl, Response = ArmDeletedResponse>;
 
   /**
@@ -68,6 +72,7 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControl_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   listByAutomationAccount is ArmResourceListByParent<
     SourceControl,
     Parameters = {
@@ -84,12 +89,12 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControlSyncJob_Create")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @put
-  @action("{sourceControlSyncJobId}")
-  create is ArmResourceActionSync<
+  create is ArmResourceRead<
     SourceControl,
-    SourceControlSyncJobCreateParameters,
-    ArmResourceCreatedSyncResponse<SourceControlSyncJob>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
+    Response = ArmResourceCreatedSyncResponse<SourceControlSyncJob>,
     Parameters = {
       /**
        * The source control sync job id.
@@ -97,7 +102,14 @@ interface SourceControls {
       #suppress "@azure-tools/typespec-azure-core/no-format"
       @format("uuid")
       @path
+      @segment("sourceControlSyncJobs")
       sourceControlSyncJobId: string;
+
+      /**
+       * The parameters supplied to the create source control sync job operation.
+       */
+      @body
+      parameters: SourceControlSyncJobCreateParameters;
     }
   >;
 
@@ -106,12 +118,12 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControlSyncJob_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @get
-  @action("{sourceControlSyncJobId}")
-  sourceControlSyncJobGet is ArmResourceActionSync<
+  sourceControlSyncJobGet is ArmResourceRead<
     SourceControl,
-    void,
-    ArmResponse<SourceControlSyncJobById>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
+    Response = ArmResponse<SourceControlSyncJobById>,
     Parameters = {
       /**
        * The source control sync job id.
@@ -119,6 +131,7 @@ interface SourceControls {
       #suppress "@azure-tools/typespec-azure-core/no-format"
       @format("uuid")
       @path
+      @segment("sourceControlSyncJobs")
       sourceControlSyncJobId: string;
     }
   >;
@@ -128,6 +141,7 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControlSyncJob_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @list
   @get
   @action("sourceControlSyncJobs")
@@ -149,6 +163,7 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControlSyncJobStreams_ListBySyncJob")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @list
   @get
   @action("streams")
@@ -163,6 +178,7 @@ interface SourceControls {
       #suppress "@azure-tools/typespec-azure-core/no-format"
       @format("uuid")
       @path
+      @segment("sourceControlSyncJobs")
       sourceControlSyncJobId: string;
 
       /**
@@ -178,12 +194,12 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SourceControlSyncJobStreams_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @get
-  @action("{streamId}")
-  sourceControlSyncJobStreamsGet is ArmResourceActionSync<
+  sourceControlSyncJobStreamsGet is ArmResourceRead<
     SourceControl,
-    void,
-    ArmResponse<SourceControlSyncJobStreamById>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
+    Response = ArmResponse<SourceControlSyncJobStreamById>,
     Parameters = {
       /**
        * The source control sync job id.
@@ -191,12 +207,14 @@ interface SourceControls {
       #suppress "@azure-tools/typespec-azure-core/no-format"
       @format("uuid")
       @path
+      @segment("sourceControlSyncJobs")
       sourceControlSyncJobId: string;
 
       /**
        * The id of the sync job stream.
        */
       @path
+      @segment("streams")
       streamId: string;
     }
   >;
@@ -209,7 +227,4 @@ interface SourceControls {
 );
 @@doc(SourceControls.update::parameters.properties,
   "The parameters supplied to the update source control operation."
-);
-@@doc(SourceControls.create::parameters.body,
-  "The parameters supplied to the create source control sync job operation."
 );

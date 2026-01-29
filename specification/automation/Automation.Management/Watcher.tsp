@@ -38,6 +38,7 @@ interface Watchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Watcher_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   get is ArmResourceRead<Watcher>;
 
   /**
@@ -45,6 +46,7 @@ interface Watchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Watcher_CreateOrUpdate")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Watcher>;
 
   /**
@@ -52,6 +54,7 @@ interface Watchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Watcher_Update")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Watcher, PatchModel = WatcherUpdateParameters>;
 
@@ -61,6 +64,7 @@ interface Watchers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("Watcher_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   delete is ArmResourceDeleteSync<Watcher, Response = ArmDeletedResponse>;
 
   /**
@@ -68,6 +72,7 @@ interface Watchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Watcher_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   listByAutomationAccount is ArmResourceListByParent<
     Watcher,
     Parameters = {
@@ -84,6 +89,7 @@ interface Watchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Watcher_Start")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   start is ArmResourceActionSync<Watcher, void, OkResponse>;
 
   /**
@@ -91,6 +97,7 @@ interface Watchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Watcher_Stop")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   stop is ArmResourceActionSync<Watcher, void, OkResponse>;
 }
 

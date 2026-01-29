@@ -10,6 +10,92 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Automation;
+/**
+ * The response model for the list dsc nodes operation.
+ */
+model DscNodeListResult {
+  /**
+   * Gets or sets a list of dsc nodes.
+   */
+  @pageItems
+  value?: DscNode[];
+
+  /**
+   * Gets or sets the next link.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the total number of nodes matching filter criteria.
+   */
+  totalCount?: int32;
+}
+/**
+ * The response model for the list configuration operation.
+ */
+model DscConfigurationListResult {
+  /**
+   * Gets or sets a list of configurations.
+   */
+  @pageItems
+  value?: DscConfiguration[];
+
+  /**
+   * Gets or sets the next link.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets the total number of configurations matching filter criteria.
+   */
+  totalCount?: int32;
+}
+
+/**
+ * The response model for the list job operation.
+ */
+model DscNodeConfigurationListResult {
+  /**
+   * Gets or sets a list of Dsc node configurations.
+   */
+  @pageItems
+  value?: DscNodeConfiguration[];
+
+  /**
+   * Gets or sets the next link.
+   */
+  @nextLink
+  nextLink?: string;
+
+  /**
+   * Gets or sets the total rows in query.
+   */
+  totalCount?: int32;
+}
+
+model HybridRunbookWorkersListResult is ResourceListResult<HybridRunbookWorker>;
+model HybridRunbookWorkerGroupsListResult
+  is ResourceListResult<HybridRunbookWorkerGroup>;
+
+/**
+ * The response model for the list of Automation operations
+ */
+model OperationListResult {
+  /**
+   * List of Automation operations supported by the Automation resource provider.
+   */
+  @pageItems
+  @identifiers(#["name"])
+  value: Operation[];
+
+  /**
+   * The URL to get the next set of results, if any.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 @mediaTypeHint("text/powershell")
 scalar stringTextPowershell extends string;
@@ -1259,11 +1345,11 @@ model ErrorResponse {
 /**
  * Software update configuration properties.
  */
-model SoftwareUpdateConfigurationProperties {
+model softwareUpdateConfigurationProperties {
   /**
    * update specific properties for the Software update configuration
    */
-  updateConfiguration: UpdateConfiguration;
+  updateConfiguration: updateConfiguration;
 
   /**
    * Schedule information for the Software update configuration
@@ -1311,13 +1397,13 @@ model SoftwareUpdateConfigurationProperties {
   /**
    * Tasks information for the Software update configuration.
    */
-  tasks?: SoftwareUpdateConfigurationTasks;
+  tasks?: softwareUpdateConfigurationTasks;
 }
 
 /**
  * Update specific properties of the software update configuration.
  */
-model UpdateConfiguration {
+model updateConfiguration {
   /**
    * operating system of target machines
    */
@@ -1492,7 +1578,7 @@ model SUCScheduleProperties {
    * Gets or sets the end time of the schedule.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expiryTime?: utcDateTime;
+  expiryTime?: utcDateTime | null;
 
   /**
    * Gets or sets the expiry time's offset in minutes.
@@ -1508,7 +1594,7 @@ model SUCScheduleProperties {
    * Gets or sets the next run time of the schedule.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  nextRun?: utcDateTime;
+  nextRun?: utcDateTime | null;
 
   /**
    * Gets or sets the next run time's offset in minutes.
@@ -1592,22 +1678,22 @@ model AdvancedScheduleMonthlyOccurrence {
 /**
  * Task properties of the software update configuration.
  */
-model SoftwareUpdateConfigurationTasks {
+model softwareUpdateConfigurationTasks {
   /**
    * Pre task properties.
    */
-  preTask?: TaskProperties;
+  preTask?: taskProperties;
 
   /**
    * Post task properties.
    */
-  postTask?: TaskProperties;
+  postTask?: taskProperties;
 }
 
 /**
  * Task properties of the software update configuration.
  */
-model TaskProperties {
+model taskProperties {
   /**
    * Gets or sets the parameters of the task.
    */
@@ -1623,18 +1709,18 @@ model TaskProperties {
 /**
  * result of listing all software update configuration
  */
-model SoftwareUpdateConfigurationListResult {
+model softwareUpdateConfigurationListResult {
   /**
    * outer object returned when listing all software update configurations
    */
   @pageItems
-  value?: SoftwareUpdateConfigurationCollectionItem[];
+  value?: softwareUpdateConfigurationCollectionItem[];
 }
 
 /**
  * Software update configuration collection item properties.
  */
-model SoftwareUpdateConfigurationCollectionItem {
+model softwareUpdateConfigurationCollectionItem {
   /**
    * Name of the software update configuration.
    */
@@ -1650,22 +1736,22 @@ model SoftwareUpdateConfigurationCollectionItem {
   /**
    * Software update configuration properties.
    */
-  properties: SoftwareUpdateConfigurationCollectionItemProperties;
+  properties: softwareUpdateConfigurationCollectionItemProperties;
 }
 
 /**
  * Software update configuration collection item properties.
  */
-model SoftwareUpdateConfigurationCollectionItemProperties {
+model softwareUpdateConfigurationCollectionItemProperties {
   /**
    * Update specific properties of the software update configuration.
    */
-  updateConfiguration?: UpdateConfiguration;
+  updateConfiguration?: updateConfiguration;
 
   /**
    * Pre and Post Tasks defined
    */
-  tasks?: SoftwareUpdateConfigurationTasks;
+  tasks?: softwareUpdateConfigurationTasks;
 
   /**
    * execution frequency of the schedule associated with the software update configuration
@@ -1702,7 +1788,7 @@ model SoftwareUpdateConfigurationCollectionItemProperties {
    * ext run time of the update.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  nextRun?: utcDateTime;
+  nextRun?: utcDateTime | null;
 }
 
 /**
@@ -1781,6 +1867,9 @@ model PrivateLinkResourceListResult {
    */
   @pageItems
   value?: PrivateLinkResource[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -1892,7 +1981,7 @@ model DscNodeProperties {
   /**
    * Gets or sets the configuration of the node.
    */
-  nodeConfiguration?: DscNodeConfigurationAssociationProperty;
+  nodeConfiguration?: DscNodeConfigurationAssociationProperty | null;
 
   /**
    * Gets or sets the status of the node.
@@ -1980,7 +2069,7 @@ model DscNodeReport {
    * Gets or sets the end time of the node report.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * Gets or sets the lastModifiedTime of the node report.
@@ -1992,7 +2081,7 @@ model DscNodeReport {
    * Gets or sets the start time of the node report.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: utcDateTime | null;
 
   /**
    * Gets or sets the type of the node report.
@@ -2571,6 +2660,9 @@ model StatisticsListResult {
    */
   @pageItems
   value?: Statistics[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2601,7 +2693,7 @@ model Statistics {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * Gets the id.
@@ -2619,6 +2711,9 @@ model UsageListResult {
    */
   @pageItems
   value?: Usage[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2755,7 +2850,7 @@ model DeletedRunbookProperties {
   /**
    * Environment of the runbook.
    */
-  runtimeEnvironment?: string;
+  runtimeEnvironment?: string | null;
 
   /**
    * Gets or sets the creation time.
@@ -3648,13 +3743,13 @@ model JobProperties {
    * Gets or sets the start time of the job.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: utcDateTime | null;
 
   /**
    * Gets or sets the end time of the job.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * Gets or sets the exception of the job.
@@ -3665,13 +3760,13 @@ model JobProperties {
    * Gets or sets the last modified time of the job.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedTime?: utcDateTime;
+  lastModifiedTime?: utcDateTime | null;
 
   /**
    * Gets or sets the last status modified time of the job.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastStatusModifiedTime?: utcDateTime;
+  lastStatusModifiedTime?: utcDateTime | null;
 
   /**
    * Gets or sets the parameters of the job.
@@ -3774,7 +3869,7 @@ model JobCollectionItemProperties {
    * Gets or sets the job started by.
    */
   @visibility(Lifecycle.Read)
-  startedBy?: string;
+  startedBy?: string | null;
 
   /**
    * The creation time of the job.
@@ -3794,21 +3889,21 @@ model JobCollectionItemProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: utcDateTime | null;
 
   /**
    * The end time of the job.
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * The last modified time of the job.
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastModifiedTime?: utcDateTime;
+  lastModifiedTime?: utcDateTime | null;
 
   /**
    * The provisioning state of a resource.
@@ -3870,7 +3965,7 @@ model JobStreamProperties {
   /**
    * Gets or sets the summary.
    */
-  summary?: string;
+  summary?: string | null;
 
   /**
    * Gets or sets the values of the job stream.
@@ -4316,6 +4411,9 @@ model TypeFieldListResult {
   @pageItems
   @identifiers(#[])
   value?: TypeField[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4488,12 +4586,12 @@ model GraphicalRunbookContent {
   /**
    * Raw graphical Runbook content.
    */
-  rawContent?: RawGraphicalRunbookContent;
+  rawContent?: RawGraphicalRunbookContent | null;
 
   /**
    * Graphical Runbook content as JSON
    */
-  graphRunbookJson?: string;
+  graphRunbookJson?: string | null;
 }
 
 /**
@@ -4632,6 +4730,9 @@ model PrivateEndpointConnectionListResult {
    */
   @pageItems
   value?: PrivateEndpointConnection[];
+
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5003,13 +5104,13 @@ model TestJob {
    * Gets or sets the start time of the test job.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: utcDateTime | null;
 
   /**
    * Gets or sets the end time of the test job.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * Gets or sets the exception of the test job.
@@ -5026,7 +5127,7 @@ model TestJob {
    * Gets or sets the last status modified time of the test job.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastStatusModifiedTime?: utcDateTime;
+  lastStatusModifiedTime?: utcDateTime | null;
 
   /**
    * Gets or sets the parameters of the test job.
@@ -5138,7 +5239,7 @@ model ScheduleCreateOrUpdateProperties {
    * Gets or sets the end time of the schedule.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expiryTime?: utcDateTime;
+  expiryTime?: utcDateTime | null;
 
   /**
    * Gets or sets the interval of the schedule.
@@ -5182,7 +5283,7 @@ model ScheduleProperties {
    * Gets or sets the end time of the schedule.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  expiryTime?: utcDateTime;
+  expiryTime?: utcDateTime | null;
 
   /**
    * Gets or sets the expiry time's offset in minutes.
@@ -5198,7 +5299,7 @@ model ScheduleProperties {
    * Gets or sets the next run time of the schedule.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  nextRun?: utcDateTime;
+  nextRun?: utcDateTime | null;
 
   /**
    * Gets or sets the next run time's offset in minutes.
@@ -5276,7 +5377,7 @@ model ScheduleUpdateProperties {
 /**
  * Software update configuration machine run model.
  */
-model SoftwareUpdateConfigurationMachineRun {
+model softwareUpdateConfigurationMachineRun {
   /**
    * Name of the software update configuration machine run
    */
@@ -5292,13 +5393,13 @@ model SoftwareUpdateConfigurationMachineRun {
   /**
    * Software update configuration machine run properties.
    */
-  properties?: UpdateConfigurationMachineRunProperties;
+  properties?: updateConfigurationMachineRunProperties;
 }
 
 /**
  * Software update configuration machine run properties.
  */
-model UpdateConfigurationMachineRunProperties {
+model updateConfigurationMachineRunProperties {
   /**
    * name of the updated computer
    */
@@ -5314,7 +5415,7 @@ model UpdateConfigurationMachineRunProperties {
   /**
    * software update configuration triggered this run
    */
-  softwareUpdateConfiguration?: UpdateConfigurationNavigation;
+  softwareUpdateConfiguration?: updateConfigurationNavigation;
 
   /**
    * Status of the software update configuration machine run.
@@ -5356,7 +5457,7 @@ model UpdateConfigurationMachineRunProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * configured duration for the software update configuration run.
@@ -5367,7 +5468,7 @@ model UpdateConfigurationMachineRunProperties {
   /**
    * Job associated with the software update configuration machine run
    */
-  job?: JobNavigation;
+  job?: jobNavigation;
 
   /**
    * Creation time of the resource, which only appears in the response.
@@ -5404,7 +5505,7 @@ model UpdateConfigurationMachineRunProperties {
 /**
  * Software update configuration Run Navigation model.
  */
-model UpdateConfigurationNavigation {
+model updateConfigurationNavigation {
   /**
    * Name of the software update configuration triggered the software update configuration run
    */
@@ -5415,7 +5516,7 @@ model UpdateConfigurationNavigation {
 /**
  * Software update configuration machine run job navigation properties.
  */
-model JobNavigation {
+model jobNavigation {
   /**
    * Id of the job associated with the software update configuration run
    */
@@ -5426,13 +5527,13 @@ model JobNavigation {
 /**
  * result of listing all software update configuration machine runs
  */
-model SoftwareUpdateConfigurationMachineRunListResult
-  is Azure.Core.Page<SoftwareUpdateConfigurationMachineRun>;
+model softwareUpdateConfigurationMachineRunListResult
+  is Azure.Core.Page<softwareUpdateConfigurationMachineRun>;
 
 /**
  * Software update configuration Run properties.
  */
-model SoftwareUpdateConfigurationRun {
+model softwareUpdateConfigurationRun {
   /**
    * Name of the software update configuration run.
    */
@@ -5448,17 +5549,17 @@ model SoftwareUpdateConfigurationRun {
   /**
    * Software update configuration Run properties.
    */
-  properties?: SoftwareUpdateConfigurationRunProperties;
+  properties?: softwareUpdateConfigurationRunProperties;
 }
 
 /**
  * Software update configuration properties.
  */
-model SoftwareUpdateConfigurationRunProperties {
+model softwareUpdateConfigurationRunProperties {
   /**
    * software update configuration triggered this run
    */
-  softwareUpdateConfiguration?: UpdateConfigurationNavigation;
+  softwareUpdateConfiguration?: updateConfigurationNavigation;
 
   /**
    * Status of the software update configuration run.
@@ -5490,7 +5591,7 @@ model SoftwareUpdateConfigurationRunProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * Number of computers in the software update configuration run.
@@ -5533,28 +5634,28 @@ model SoftwareUpdateConfigurationRunProperties {
   /**
    * Software update configuration tasks triggered in this run
    */
-  tasks?: SoftwareUpdateConfigurationRunTasks;
+  tasks?: softwareUpdateConfigurationRunTasks;
 }
 
 /**
  * Software update configuration run tasks model.
  */
-model SoftwareUpdateConfigurationRunTasks {
+model softwareUpdateConfigurationRunTasks {
   /**
    * Pre task properties.
    */
-  preTask?: SoftwareUpdateConfigurationRunTaskProperties;
+  preTask?: softwareUpdateConfigurationRunTaskProperties;
 
   /**
    * Post task properties.
    */
-  postTask?: SoftwareUpdateConfigurationRunTaskProperties;
+  postTask?: softwareUpdateConfigurationRunTaskProperties;
 }
 
 /**
  * Task properties of the software update configuration.
  */
-model SoftwareUpdateConfigurationRunTaskProperties {
+model softwareUpdateConfigurationRunTaskProperties {
   /**
    * The status of the task.
    */
@@ -5574,8 +5675,8 @@ model SoftwareUpdateConfigurationRunTaskProperties {
 /**
  * result of listing all software update configuration runs
  */
-model SoftwareUpdateConfigurationRunListResult
-  is Azure.Core.Page<SoftwareUpdateConfigurationRun>;
+model softwareUpdateConfigurationRunListResult
+  is Azure.Core.Page<softwareUpdateConfigurationRun>;
 
 /**
  * The parameters supplied to the create or update source control operation.
@@ -5771,6 +5872,7 @@ model SourceControlSyncJobCreateProperties {
   /**
    * The commit id of the source control sync job. If not syncing to a commitId, enter an empty string.
    */
+  @minLength(0)
   commitId: string;
 }
 
@@ -5828,14 +5930,14 @@ model SourceControlSyncJobProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: utcDateTime | null;
 
   /**
    * The end time of the job.
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * The sync type.
@@ -5884,14 +5986,14 @@ model SourceControlSyncJobByIdProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  startTime?: utcDateTime;
+  startTime?: utcDateTime | null;
 
   /**
    * The end time of the job.
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  endTime?: utcDateTime;
+  endTime?: utcDateTime | null;
 
   /**
    * The sync type.
@@ -5945,7 +6047,7 @@ model SourceControlSyncJobStreamProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  time?: utcDateTime;
+  time?: utcDateTime | null;
 
   /**
    * The type of the sync job stream.
@@ -5988,7 +6090,7 @@ model SourceControlSyncJobStreamByIdProperties {
    */
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  time?: utcDateTime;
+  time?: utcDateTime | null;
 
   /**
    * The type of the sync job stream.
@@ -6055,7 +6157,7 @@ model VariableProperties {
   /**
    * Gets or sets the encrypted flag of the variable.
    */
-  isEncrypted?: boolean;
+  isEncrypted?: boolean | null;
 
   /**
    * Gets or sets the creation time.
@@ -6211,7 +6313,7 @@ model WebhookProperties {
    * Gets or sets the last invoked time.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastInvokedTime?: utcDateTime;
+  lastInvokedTime?: utcDateTime | null;
 
   /**
    * Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.

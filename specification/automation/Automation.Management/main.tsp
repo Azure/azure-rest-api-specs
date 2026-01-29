@@ -48,7 +48,7 @@ using TypeSpec.Versioning;
  * Automation Client
  */
 @armProviderNamespace
-@service(#{ title: "AutomationClient" })
+@service(#{ title: "AutomationManagementClient" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Automation;
@@ -63,4 +63,9 @@ enum Versions {
   v2024_10_23: "2024-10-23",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<ArmResponse<OperationListResult>> {}
+
+@@doc(Operations.list,
+  "Lists all of the available Automation REST API operations."
+);

@@ -4,7 +4,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Automation;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(SoftwareUpdateConfigurationCollectionItem.properties);
+@@Legacy.flattenProperty(softwareUpdateConfigurationCollectionItem.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(DeletedAutomationAccount.properties);
@@ -23,10 +23,6 @@ using Microsoft.Automation;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AutomationAccountCreateOrUpdateParameters.properties);
-
-@@clientName(Key.KeyName, "keyName");
-@@clientName(Key.Permissions, "permissions");
-@@clientName(Key.Value, "value");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(DeletedRunbook.properties);
@@ -121,10 +117,10 @@ using Microsoft.Automation;
 @@Legacy.flattenProperty(ScheduleUpdateParameters.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(SoftwareUpdateConfigurationMachineRun.properties);
+@@Legacy.flattenProperty(softwareUpdateConfigurationMachineRun.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(SoftwareUpdateConfigurationRun.properties);
+@@Legacy.flattenProperty(softwareUpdateConfigurationRun.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(SourceControlCreateOrUpdateParameters.properties);
@@ -166,7 +162,7 @@ using Microsoft.Automation;
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
-@@Legacy.flattenProperty(SoftwareUpdateConfiguration.properties);
+@@Legacy.flattenProperty(softwareUpdateConfiguration.properties);
 
 @@clientLocation(DscNodes.get, "DscNode");
 @@clientLocation(DscNodes.update, "DscNode");
@@ -454,7 +450,6 @@ using Microsoft.Automation;
 @@clientLocation(SourceControls.delete, "SourceControl");
 @@clientLocation(SourceControls.listByAutomationAccount, "SourceControl");
 @@clientLocation(SourceControls.create, "SourceControlSyncJob");
-@@clientName(SourceControls.create::parameters.body, "parameters");
 @@clientLocation(SourceControls.sourceControlSyncJobGet,
   "SourceControlSyncJob"
 );

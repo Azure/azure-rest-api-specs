@@ -32,6 +32,7 @@ interface JobSchedules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("JobSchedule_Get")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   get is ArmResourceRead<JobSchedule>;
 
   /**
@@ -40,6 +41,7 @@ interface JobSchedules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("JobSchedule_Create")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     JobSchedule,
     Request = JobScheduleCreateParameters,
@@ -52,6 +54,7 @@ interface JobSchedules {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("JobSchedule_Delete")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   delete is ArmResourceDeleteSync<JobSchedule, Response = ArmDeletedResponse>;
 
   /**
@@ -59,6 +62,7 @@ interface JobSchedules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("JobSchedule_ListByAutomationAccount")
+  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   listByAutomationAccount is ArmResourceListByParent<
     JobSchedule,
     Parameters = {
