@@ -1493,9 +1493,9 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "parameters",
             "in": "body",
-            "description": "",
+            "description": "The resource of persistent storage and its properties",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PersistentStorage"
@@ -1503,6 +1503,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Resource 'PersistentStorage' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PersistentStorage"
+            }
+          },
           "201": {
             "description": "Resource 'PersistentStorage' create operation succeeded",
             "schema": {
@@ -1512,6 +1518,11 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -3919,7 +3930,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PersistentStorageProperties",
-          "description": "Properties of a persistent storage."
+          "description": "Properties of a persistent storage.",
+          "x-ms-client-flatten": true
         }
       },
       "required": [
