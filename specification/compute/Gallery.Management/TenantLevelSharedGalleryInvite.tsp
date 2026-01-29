@@ -44,7 +44,7 @@ interface TenantLevelSharedGalleryInvites {
     ArmAcceptedLroResponse<
       "Resource operation accepted.",
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > & {}
+    > | (ArmNoContentResponse<"Action completed successfully."> & {})
   >;
 
   /**
@@ -61,6 +61,6 @@ interface TenantLevelSharedGalleryInvites {
     ArmAcceptedLroResponse<
       "Resource operation accepted.",
       ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    > & {}
+    > | (ArmNoContentResponse<"Action completed successfully."> & {})
   >;
 }
