@@ -1,0 +1,4775 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ServiceFabricManagementClient",
+    "version": "2023-11-01-preview",
+    "description": "Service Fabric Management Client",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Clusters"
+    },
+    {
+      "name": "VMSizes"
+    },
+    {
+      "name": "ApplicationTypeResources"
+    },
+    {
+      "name": "ApplicationTypeVersionResources"
+    },
+    {
+      "name": "ApplicationResources"
+    },
+    {
+      "name": "ServiceResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ServiceFabric/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List available operations": {
+            "$ref": "./examples/Operations_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/clusters": {
+      "get": {
+        "operationId": "Clusters_List",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Gets all Service Fabric cluster resources created or in the process of being created in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List clusters": {
+            "$ref": "./examples/ClusterListOperation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions": {
+      "get": {
+        "operationId": "ClusterVersions_List",
+        "summary": "Gets the list of Service Fabric cluster code versions available for the specified location.",
+        "description": "Gets all available code versions for Service Fabric cluster resources by location.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cluster versions": {
+            "$ref": "./examples/ClusterVersionsList_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}": {
+      "get": {
+        "operationId": "ClusterVersions_Get",
+        "summary": "Gets information about a Service Fabric cluster code version available in the specified location.",
+        "description": "Gets information about an available Service Fabric cluster code version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "clusterVersion",
+            "in": "path",
+            "description": "The cluster code version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get cluster version": {
+            "$ref": "./examples/ClusterVersionsGet_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions": {
+      "get": {
+        "operationId": "ClusterVersions_ListByEnvironment",
+        "summary": "Gets the list of Service Fabric cluster code versions available for the specified environment.",
+        "description": "Gets all available code versions for Service Fabric cluster resources by environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "description": "The operating system of the cluster. The default means all.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ],
+            "x-ms-enum": {
+              "name": "ClusterVersionsEnvironment",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Windows",
+                  "value": "Windows",
+                  "description": "Windows operating system"
+                },
+                {
+                  "name": "Linux",
+                  "value": "Linux",
+                  "description": "Linux operating system"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cluster versions by environment": {
+            "$ref": "./examples/ClusterVersionsListByEnvironment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}": {
+      "get": {
+        "operationId": "ClusterVersions_GetByEnvironment",
+        "summary": "Gets information about a Service Fabric cluster code version available for the specified environment.",
+        "description": "Gets information about an available Service Fabric cluster code version by environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "description": "The operating system of the cluster. The default means all.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ],
+            "x-ms-enum": {
+              "name": "ClusterVersionsEnvironment",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Windows",
+                  "value": "Windows",
+                  "description": "Windows operating system"
+                },
+                {
+                  "name": "Linux",
+                  "value": "Linux",
+                  "description": "Linux operating system"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "clusterVersion",
+            "in": "path",
+            "description": "The cluster code version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterCodeVersionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get cluster version by environment": {
+            "$ref": "./examples/ClusterVersionsGetByEnvironment_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/unsupportedVmSizes": {
+      "get": {
+        "operationId": "UnsupportedVmSizes_List",
+        "tags": [
+          "VMSizes"
+        ],
+        "description": "Get the lists of unsupported vm sizes for Service Fabric Clusters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location for the unsupported VM size(s). This is different from cluster location.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMSizesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List unsupported vm sizes": {
+            "$ref": "./examples/UnsupportedVMSizesList_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/unsupportedVmSizes/{vmSize}": {
+      "get": {
+        "operationId": "UnsupportedVmSizes_Get",
+        "tags": [
+          "VMSizes"
+        ],
+        "description": "Get unsupported vm size for Service Fabric Clusters.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "vmSize",
+            "in": "path",
+            "description": "VM Size name.",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMSizeResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get unsupported vm sizes": {
+            "$ref": "./examples/UnsupportedVMSizesGet_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters": {
+      "get": {
+        "operationId": "Clusters_ListByResourceGroup",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Gets all Service Fabric cluster resources created or in the process of being created in the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cluster by resource group": {
+            "$ref": "./examples/ClusterListByResourceGroupOperation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}": {
+      "get": {
+        "operationId": "Clusters_Get",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Get a Service Fabric cluster resource created or in the process of being created in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a cluster": {
+            "$ref": "./examples/ClusterGetOperation_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Clusters_CreateOrUpdate",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Create or update a Service Fabric cluster resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The cluster resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Cluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put a cluster with maximum parameters": {
+            "$ref": "./examples/ClusterPutOperation_example_max.json"
+          },
+          "Put a cluster with minimum parameters": {
+            "$ref": "./examples/ClusterPutOperation_example_min.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/Cluster"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Clusters_Update",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Update the configuration of a Service Fabric cluster resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The parameters which contains the property value and property name which used to update the cluster configuration.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ClusterUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a cluster": {
+            "$ref": "./examples/ClusterPatchOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Clusters_Delete",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Delete a Service Fabric cluster resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a cluster": {
+            "$ref": "./examples/ClusterDeleteOperation_example.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes": {
+      "get": {
+        "operationId": "ApplicationTypes_List",
+        "tags": [
+          "ApplicationTypeResources"
+        ],
+        "description": "Gets all application type name resources created or in the process of being created in the Service Fabric cluster resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of application type name resources": {
+            "$ref": "./examples/ApplicationTypeNameListOperation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}": {
+      "get": {
+        "operationId": "ApplicationTypes_Get",
+        "tags": [
+          "ApplicationTypeResources"
+        ],
+        "description": "Get a Service Fabric application type name resource created or in the process of being created in the Service Fabric cluster resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type name resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an application type": {
+            "$ref": "./examples/ApplicationTypeNameGetOperation_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApplicationTypes_CreateOrUpdate",
+        "tags": [
+          "ApplicationTypeResources"
+        ],
+        "description": "Create or update a Service Fabric application type name resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type name resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application type name resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ApplicationTypeResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put an application type": {
+            "$ref": "./examples/ApplicationTypeNamePutOperation_example.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ApplicationTypes_Delete",
+        "tags": [
+          "ApplicationTypeResources"
+        ],
+        "description": "Delete a Service Fabric application type name resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type name resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an application type": {
+            "$ref": "./examples/ApplicationTypeNameDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}/versions": {
+      "get": {
+        "operationId": "ApplicationTypeVersions_List",
+        "tags": [
+          "ApplicationTypeVersionResources"
+        ],
+        "description": "Gets all application type version resources created or in the process of being created in the Service Fabric application type name resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type name resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of application type version resources": {
+            "$ref": "./examples/ApplicationTypeVersionListOperation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applicationTypes/{applicationTypeName}/versions/{version}": {
+      "get": {
+        "operationId": "ApplicationTypeVersions_Get",
+        "tags": [
+          "ApplicationTypeVersionResources"
+        ],
+        "description": "Get a Service Fabric application type version resource created or in the process of being created in the Service Fabric application type name resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type name resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The application type version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionGetOperation_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ApplicationTypeVersions_CreateOrUpdate",
+        "tags": [
+          "ApplicationTypeVersionResources"
+        ],
+        "description": "Create or update a Service Fabric application type version resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type name resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The application type version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application type version resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationTypeVersionResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionPutOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ApplicationTypeVersionResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ApplicationTypeVersions_Delete",
+        "tags": [
+          "ApplicationTypeVersionResources"
+        ],
+        "description": "Delete a Service Fabric application type version resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationTypeName",
+            "in": "path",
+            "description": "The name of the application type name resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The application type version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an application type version": {
+            "$ref": "./examples/ApplicationTypeVersionDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications": {
+      "get": {
+        "operationId": "Applications_List",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Gets all application resources created or in the process of being created in the Service Fabric cluster resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of application resources": {
+            "$ref": "./examples/ApplicationListOperation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}": {
+      "get": {
+        "operationId": "Applications_Get",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Get a Service Fabric application resource created or in the process of being created in the Service Fabric cluster resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an application": {
+            "$ref": "./examples/ApplicationGetOperation_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Applications_CreateOrUpdate",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Create or update a Service Fabric application resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put an application with maximum parameters": {
+            "$ref": "./examples/ApplicationPutOperation_example_max.json"
+          },
+          "Put an application with minimum parameters": {
+            "$ref": "./examples/ApplicationPutOperation_example_min.json"
+          },
+          "Put an application with recreate option": {
+            "$ref": "./examples/ApplicationPutOperation_recreate_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ApplicationResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Applications_Update",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Update a Service Fabric application resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The application resource for patch operations.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch an application": {
+            "$ref": "./examples/ApplicationPatchOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Applications_Delete",
+        "tags": [
+          "ApplicationResources"
+        ],
+        "description": "Delete a Service Fabric application resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an application": {
+            "$ref": "./examples/ApplicationDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services": {
+      "get": {
+        "operationId": "Services_List",
+        "tags": [
+          "ServiceResources"
+        ],
+        "description": "Gets all service resources created or in the process of being created in the Service Fabric application resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResourceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of service resources": {
+            "$ref": "./examples/ServiceListOperation_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/applications/{applicationName}/services/{serviceName}": {
+      "get": {
+        "operationId": "Services_Get",
+        "tags": [
+          "ServiceResources"
+        ],
+        "description": "Get a Service Fabric service resource created or in the process of being created in the Service Fabric application resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service resource in the format of {applicationName}~{serviceName}.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a service": {
+            "$ref": "./examples/ServiceGetOperation_example.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Services_CreateOrUpdate",
+        "tags": [
+          "ServiceResources"
+        ],
+        "description": "Create or update a Service Fabric service resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service resource in the format of {applicationName}~{serviceName}.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The service resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put a service with maximum parameters": {
+            "$ref": "./examples/ServicePutOperation_example_max.json"
+          },
+          "Put a service with minimum parameters": {
+            "$ref": "./examples/ServicePutOperation_example_min.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ServiceResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Services_Update",
+        "tags": [
+          "ServiceResources"
+        ],
+        "description": "Update a Service Fabric service resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service resource in the format of {applicationName}~{serviceName}.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The service resource for patch operations.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ServiceResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a service": {
+            "$ref": "./examples/ServicePatchOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Services_Delete",
+        "tags": [
+          "ServiceResources"
+        ],
+        "description": "Delete a Service Fabric service resource with the specified name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service resource in the format of {applicationName}~{serviceName}.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a service": {
+            "$ref": "./examples/ServiceDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters/{clusterName}/listUpgradableVersions": {
+      "post": {
+        "operationId": "Clusters_ListUpgradableVersions",
+        "tags": [
+          "Clusters"
+        ],
+        "description": "If a target is not provided, it will get the minimum and maximum versions available from the current cluster version. If a target is given, it will provide the required path to get from the current cluster version to the target version.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionsDescription",
+            "in": "body",
+            "description": "The upgrade path description with target version.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionsDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpgradableVersionPathResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get minimum and maximum code versions": {
+            "$ref": "./examples/ListUpgradableVersionsMinMax_example.json"
+          },
+          "Get upgrade path": {
+            "$ref": "./examples/ListUpgradableVersionsPath_example.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddOnFeatures": {
+      "type": "string",
+      "description": "Available cluster add-on features",
+      "enum": [
+        "RepairManager",
+        "DnsService",
+        "BackupRestoreService",
+        "ResourceMonitorService"
+      ],
+      "x-ms-enum": {
+        "name": "AddOnFeatures",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RepairManager",
+            "value": "RepairManager",
+            "description": "Add on RepairManager"
+          },
+          {
+            "name": "DnsService",
+            "value": "DnsService",
+            "description": "Add on DnsService"
+          },
+          {
+            "name": "BackupRestoreService",
+            "value": "BackupRestoreService",
+            "description": "Add on BackupRestoreService"
+          },
+          {
+            "name": "ResourceMonitorService",
+            "value": "ResourceMonitorService",
+            "description": "Add on ResourceMonitorService"
+          }
+        ]
+      }
+    },
+    "ApplicationDeltaHealthPolicy": {
+      "type": "object",
+      "description": "Defines a delta health policy used to evaluate the health of an application or one of its child entities when upgrading the cluster.",
+      "properties": {
+        "defaultServiceTypeDeltaHealthPolicy": {
+          "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy",
+          "description": "The delta health policy used by default to evaluate the health of a service type when upgrading the cluster."
+        },
+        "serviceTypeDeltaHealthPolicies": {
+          "type": "object",
+          "description": "The map with service type delta health policy per service type name. The map is empty by default.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ServiceTypeDeltaHealthPolicy"
+          }
+        }
+      }
+    },
+    "ApplicationHealthPolicy": {
+      "type": "object",
+      "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.",
+      "properties": {
+        "defaultServiceTypeHealthPolicy": {
+          "$ref": "#/definitions/ServiceTypeHealthPolicy",
+          "description": "The health policy used by default to evaluate the health of a service type."
+        },
+        "serviceTypeHealthPolicies": {
+          "type": "object",
+          "description": "The map with service type health policy per service type name. The map is empty by default.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ServiceTypeHealthPolicy"
+          }
+        }
+      }
+    },
+    "ApplicationMetricDescription": {
+      "type": "object",
+      "description": "Describes capacity information for a custom resource balancing metric. This can be used to limit the total consumption of this metric by the services of this application.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "maximumCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum node capacity for Service Fabric application.\nThis is the maximum Load for an instance of this application on a single node. Even if the capacity of node is greater than this value, Service Fabric will limit the total load of services within the application on each node to this value.\nIf set to zero, capacity for this metric is unlimited on each node.\nWhen creating a new application with application capacity defined, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.\nWhen updating existing application with application capacity, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity."
+        },
+        "reservationCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The node reservation capacity for Service Fabric application.\nThis is the amount of load which is reserved on nodes which have instances of this application.\nIf MinimumNodes is specified, then the product of these values will be the capacity reserved in the cluster for the application.\nIf set to zero, no capacity is reserved for this metric.\nWhen setting application capacity or when updating application capacity; this value must be smaller than or equal to MaximumCapacity for each metric."
+        },
+        "totalApplicationCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total metric capacity for Service Fabric application.\nThis is the total metric capacity for this application in the cluster. Service Fabric will try to limit the sum of loads of services within the application to this value.\nWhen creating a new application with application capacity defined, the product of MaximumNodes and MaximumCapacity must always be smaller than or equal to this value."
+        }
+      }
+    },
+    "ApplicationResource": {
+      "type": "object",
+      "description": "The application resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationResourceProperties",
+          "description": "The application resource properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApplicationResourceList": {
+      "type": "object",
+      "description": "The list of application resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplicationResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ApplicationResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationResourceProperties": {
+      "type": "object",
+      "description": "The application resource properties.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response",
+          "readOnly": true
+        },
+        "typeName": {
+          "type": "string",
+          "description": "The application type name as defined in the application manifest."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationResourceUpdateProperties"
+        }
+      ]
+    },
+    "ApplicationResourceUpdate": {
+      "type": "object",
+      "description": "The application resource for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ApplicationResourceUpdateProperties",
+          "description": "The application resource properties for patch operations."
+        }
+      },
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/ApplicationResourceUpdateProperties",
+              "description": "The resource-specific properties for this resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          ]
+        }
+      ]
+    },
+    "ApplicationResourceUpdateProperties": {
+      "type": "object",
+      "description": "The application resource properties for patch operations.",
+      "properties": {
+        "typeVersion": {
+          "type": "string",
+          "description": "The version of the application type as defined in the application manifest."
+        },
+        "parameters": {
+          "type": "object",
+          "description": "List of application parameters with overridden values from their default values specified in the application manifest.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "upgradePolicy": {
+          "$ref": "#/definitions/ApplicationUpgradePolicy",
+          "description": "Describes the policy for a monitored application upgrade."
+        },
+        "minimumNodes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The minimum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. If this property is set to zero, no capacity will be reserved. The value of this property cannot be more than the value of the MaximumNodes property.",
+          "minimum": 0
+        },
+        "maximumNodes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum number of nodes where Service Fabric will reserve capacity for this application. Note that this does not mean that the services of this application will be placed on all of those nodes. By default, the value of this property is zero and it means that the services can be placed on any node.",
+          "default": 0,
+          "minimum": 0
+        },
+        "removeApplicationCapacity": {
+          "type": "boolean",
+          "description": "Remove the current application capacity settings."
+        },
+        "metrics": {
+          "type": "array",
+          "description": "List of application capacity metric description.",
+          "items": {
+            "$ref": "#/definitions/ApplicationMetricDescription"
+          }
+        },
+        "managedIdentities": {
+          "type": "array",
+          "description": "List of user assigned identities for the application, each mapped to a friendly name.",
+          "items": {
+            "$ref": "#/definitions/ApplicationUserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "ApplicationTypeResource": {
+      "type": "object",
+      "description": "The application type name resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationTypeResourceProperties",
+          "description": "The application type name properties"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApplicationTypeResourceList": {
+      "type": "object",
+      "description": "The list of application type names.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplicationTypeResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ApplicationTypeResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationTypeResourceProperties": {
+      "type": "object",
+      "description": "The application type name properties",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response.",
+          "readOnly": true
+        }
+      }
+    },
+    "ApplicationTypeVersionResource": {
+      "type": "object",
+      "description": "An application type version resource for the specified application type name resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApplicationTypeVersionResourceProperties",
+          "description": "The properties of the application type version resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ApplicationTypeVersionResourceList": {
+      "type": "object",
+      "description": "The list of application type version resources for the specified application type name resource.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplicationTypeVersionResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ApplicationTypeVersionResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ApplicationTypeVersionResourceProperties": {
+      "type": "object",
+      "description": "The properties of the application type version resource.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response",
+          "readOnly": true
+        },
+        "appPackageUrl": {
+          "type": "string",
+          "description": "The URL to the application package"
+        },
+        "defaultParameterList": {
+          "type": "object",
+          "description": "List of application type parameters that can be overridden when creating or updating the application.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appPackageUrl"
+      ]
+    },
+    "ApplicationTypeVersionsCleanupPolicy": {
+      "type": "object",
+      "description": "The policy used to clean up unused versions.",
+      "properties": {
+        "maxUnusedVersionsToKeep": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number of unused versions per application type to keep.",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "maxUnusedVersionsToKeep"
+      ]
+    },
+    "ApplicationUpgradePolicy": {
+      "type": "object",
+      "description": "Describes the policy for a monitored application upgrade.",
+      "properties": {
+        "upgradeReplicaSetCheckTimeout": {
+          "type": "string",
+          "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer)."
+        },
+        "forceRestart": {
+          "type": "boolean",
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
+          "default": false
+        },
+        "rollingUpgradeMonitoringPolicy": {
+          "$ref": "#/definitions/ArmRollingUpgradeMonitoringPolicy",
+          "description": "The policy used for monitoring the application upgrade"
+        },
+        "applicationHealthPolicy": {
+          "$ref": "#/definitions/ArmApplicationHealthPolicy",
+          "description": "Defines a health policy used to evaluate the health of an application or one of its children entities."
+        },
+        "upgradeMode": {
+          "type": "string",
+          "description": "The mode used to monitor health during a rolling upgrade. The values are UnmonitoredAuto, UnmonitoredManual, and Monitored.",
+          "default": "Monitored",
+          "enum": [
+            "Invalid",
+            "UnmonitoredAuto",
+            "UnmonitoredManual",
+            "Monitored"
+          ],
+          "x-ms-enum": {
+            "name": "RollingUpgradeMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Invalid",
+                "value": "Invalid",
+                "description": "Indicates the upgrade mode is invalid. All Service Fabric enumerations have the invalid type. The value is zero."
+              },
+              {
+                "name": "UnmonitoredAuto",
+                "value": "UnmonitoredAuto",
+                "description": "The upgrade will proceed automatically without performing any health monitoring. The value is 1"
+              },
+              {
+                "name": "UnmonitoredManual",
+                "value": "UnmonitoredManual",
+                "description": "The upgrade will stop after completing each upgrade domain, giving the opportunity to manually monitor health before proceeding. The value is 2"
+              },
+              {
+                "name": "Monitored",
+                "value": "Monitored",
+                "description": "The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding. The value is 3"
+              }
+            ]
+          }
+        },
+        "recreateApplication": {
+          "type": "boolean",
+          "description": "Determines whether the application should be recreated on update. If value=true, the rest of the upgrade policy parameters are not allowed and it will result in availability loss."
+        }
+      }
+    },
+    "ApplicationUserAssignedIdentity": {
+      "type": "object",
+      "description": "Describes a user assigned identity for the application.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The friendly name of user assigned identity."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity."
+        }
+      },
+      "required": [
+        "name",
+        "principalId"
+      ]
+    },
+    "ArmApplicationHealthPolicy": {
+      "type": "object",
+      "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.",
+      "properties": {
+        "considerWarningAsError": {
+          "type": "boolean",
+          "description": "Indicates whether warnings are treated with the same severity as errors.",
+          "default": false
+        },
+        "maxPercentUnhealthyDeployedApplications": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.",
+          "default": 0
+        },
+        "defaultServiceTypeHealthPolicy": {
+          "$ref": "#/definitions/ArmServiceTypeHealthPolicy",
+          "description": "The health policy used by default to evaluate the health of a service type."
+        },
+        "serviceTypeHealthPolicyMap": {
+          "type": "object",
+          "description": "The map with service type health policy per service type name. The map is empty by default.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArmServiceTypeHealthPolicy"
+          }
+        }
+      }
+    },
+    "ArmRollingUpgradeMonitoringPolicy": {
+      "type": "object",
+      "description": "The policy used for monitoring the application upgrade",
+      "properties": {
+        "failureAction": {
+          "$ref": "#/definitions/ArmUpgradeFailureAction",
+          "description": "The activation Mode of the service package"
+        },
+        "healthCheckWaitDuration": {
+          "type": "string",
+          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
+          "default": "0"
+        },
+        "healthCheckStableDuration": {
+          "type": "string",
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
+          "default": "PT0H2M0S"
+        },
+        "healthCheckRetryTimeout": {
+          "type": "string",
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
+          "default": "PT0H10M0S"
+        },
+        "upgradeTimeout": {
+          "type": "string",
+          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
+          "default": "P10675199DT02H48M05.4775807S"
+        },
+        "upgradeDomainTimeout": {
+          "type": "string",
+          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
+          "default": "P10675199DT02H48M05.4775807S"
+        }
+      }
+    },
+    "ArmServicePackageActivationMode": {
+      "type": "string",
+      "description": "The activation Mode of the service package",
+      "enum": [
+        "SharedProcess",
+        "ExclusiveProcess"
+      ],
+      "x-ms-enum": {
+        "name": "ArmServicePackageActivationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SharedProcess",
+            "value": "SharedProcess",
+            "description": "Indicates the application package activation mode will use shared process."
+          },
+          {
+            "name": "ExclusiveProcess",
+            "value": "ExclusiveProcess",
+            "description": "Indicates the application package activation mode will use exclusive process."
+          }
+        ]
+      }
+    },
+    "ArmServiceTypeHealthPolicy": {
+      "type": "object",
+      "description": "Represents the health policy used to evaluate the health of services belonging to a service type.",
+      "properties": {
+        "maxPercentUnhealthyServices": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyPartitionsPerService": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyReplicasPerPartition": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "ArmUpgradeFailureAction": {
+      "type": "string",
+      "description": "The activation Mode of the service package",
+      "enum": [
+        "Rollback",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "ArmUpgradeFailureAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Rollback",
+            "value": "Rollback",
+            "description": "Indicates that a rollback of the upgrade will be performed by Service Fabric if the upgrade fails."
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "Indicates that a manual repair will need to be performed by the administrator if the upgrade fails. Service Fabric will not proceed to the next upgrade domain automatically."
+          }
+        ]
+      }
+    },
+    "AzureActiveDirectory": {
+      "type": "object",
+      "description": "The settings to enable AAD authentication on the cluster.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Azure active directory tenant id."
+        },
+        "clusterApplication": {
+          "type": "string",
+          "description": "Azure active directory cluster application id."
+        },
+        "clientApplication": {
+          "type": "string",
+          "description": "Azure active directory client application id."
+        }
+      }
+    },
+    "CertificateDescription": {
+      "type": "object",
+      "description": "Describes the certificate details.",
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the primary certificate."
+        },
+        "thumbprintSecondary": {
+          "type": "string",
+          "description": "Thumbprint of the secondary certificate."
+        },
+        "x509StoreName": {
+          "$ref": "#/definitions/StoreName",
+          "description": "The local certificate store location."
+        }
+      },
+      "required": [
+        "thumbprint"
+      ]
+    },
+    "ClientCertificateCommonName": {
+      "type": "object",
+      "description": "Describes the client certificate details using common name.",
+      "properties": {
+        "isAdmin": {
+          "type": "boolean",
+          "description": "Indicates if the client certificate has admin access to the cluster. Non admin clients can perform only read only operations on the cluster."
+        },
+        "certificateCommonName": {
+          "type": "string",
+          "description": "The common name of the client certificate."
+        },
+        "certificateIssuerThumbprint": {
+          "type": "string",
+          "description": "The issuer thumbprint of the client certificate."
+        }
+      },
+      "required": [
+        "isAdmin",
+        "certificateCommonName",
+        "certificateIssuerThumbprint"
+      ]
+    },
+    "ClientCertificateThumbprint": {
+      "type": "object",
+      "description": "Describes the client certificate details using thumbprint.",
+      "properties": {
+        "isAdmin": {
+          "type": "boolean",
+          "description": "Indicates if the client certificate has admin access to the cluster. Non admin clients can perform only read only operations on the cluster."
+        },
+        "certificateThumbprint": {
+          "type": "string",
+          "description": "The thumbprint of the client certificate."
+        }
+      },
+      "required": [
+        "isAdmin",
+        "certificateThumbprint"
+      ]
+    },
+    "Cluster": {
+      "type": "object",
+      "description": "The cluster resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterProperties",
+          "description": "The cluster resource properties"
+        },
+        "etag": {
+          "type": "string",
+          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ClusterCodeVersionsListResult": {
+      "type": "object",
+      "description": "The response of a ClusterCodeVersions list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ClusterCodeVersions items on this page",
+          "items": {
+            "$ref": "#/definitions/ClusterCodeVersionsResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterCodeVersionsResult": {
+      "type": "object",
+      "description": "The result of the Service Fabric runtime versions",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The identification of the result"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the result"
+        },
+        "type": {
+          "type": "string",
+          "description": "The result resource type"
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterVersionDetails",
+          "description": "The detail of the Service Fabric runtime version result"
+        }
+      }
+    },
+    "ClusterEnvironment": {
+      "type": "string",
+      "description": "Cluster operating system, the default will be Windows",
+      "enum": [
+        "Windows",
+        "Linux"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Windows",
+            "value": "Windows",
+            "description": "Windows operating system"
+          },
+          {
+            "name": "Linux",
+            "value": "Linux",
+            "description": "Linux operating system"
+          }
+        ]
+      }
+    },
+    "ClusterHealthPolicy": {
+      "type": "object",
+      "description": "Defines a health policy used to evaluate the health of the cluster or of a cluster node.",
+      "properties": {
+        "maxPercentUnhealthyNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy nodes before reporting an error. For example, to allow 10% of nodes to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of nodes that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy node, the health is evaluated as Warning.\nThe percentage is calculated by dividing the number of unhealthy nodes over the total number of nodes in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n\nIn large clusters, some nodes will always be down or out for repairs, so this percentage should be configured to tolerate that.",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyApplications": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of unhealthy applications before reporting an error. For example, to allow 10% of applications to be unhealthy, this value would be 10.\n\nThe percentage represents the maximum tolerated percentage of applications that can be unhealthy before the cluster is considered in error.\nIf the percentage is respected but there is at least one unhealthy application, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy applications over the total number of application instances in the cluster, excluding applications of application types that are included in the ApplicationTypeHealthPolicyMap.\nThe computation rounds up to tolerate one failure on small numbers of applications. Default percentage is zero.",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "applicationHealthPolicies": {
+          "type": "object",
+          "description": "Defines the application health policy map used to evaluate the health of an application or one of its children entities.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApplicationHealthPolicy"
+          }
+        }
+      }
+    },
+    "ClusterListResult": {
+      "type": "object",
+      "description": "The response of a Cluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Cluster items on this page",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ClusterProperties": {
+      "type": "object",
+      "description": "Describes the cluster resource properties.",
+      "properties": {
+        "addOnFeatures": {
+          "type": "array",
+          "description": "The list of add-on features to enable in the cluster.",
+          "items": {
+            "$ref": "#/definitions/AddOnFeatures"
+          }
+        },
+        "availableClusterVersions": {
+          "type": "array",
+          "description": "The Service Fabric runtime versions available for this cluster.",
+          "items": {
+            "$ref": "#/definitions/ClusterVersionDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "codeVersion",
+            "environment"
+          ]
+        },
+        "azureActiveDirectory": {
+          "$ref": "#/definitions/AzureActiveDirectory",
+          "description": "The AAD authentication settings of the cluster."
+        },
+        "certificate": {
+          "$ref": "#/definitions/CertificateDescription",
+          "description": "The certificate to use for securing the cluster. The certificate provided will be used for node to node security within the cluster, SSL certificate for cluster management endpoint and default admin client."
+        },
+        "certificateCommonNames": {
+          "$ref": "#/definitions/ServerCertificateCommonNames",
+          "description": "Describes a list of server certificates referenced by common name that are used to secure the cluster."
+        },
+        "clientCertificateCommonNames": {
+          "type": "array",
+          "description": "The list of client certificates referenced by common name that are allowed to manage the cluster.",
+          "items": {
+            "$ref": "#/definitions/ClientCertificateCommonName"
+          },
+          "x-ms-identifiers": [
+            "certificateCommonName"
+          ]
+        },
+        "clientCertificateThumbprints": {
+          "type": "array",
+          "description": "The list of client certificates referenced by thumbprint that are allowed to manage the cluster.",
+          "items": {
+            "$ref": "#/definitions/ClientCertificateThumbprint"
+          },
+          "x-ms-identifiers": [
+            "certificateThumbprint"
+          ]
+        },
+        "clusterCodeVersion": {
+          "type": "string",
+          "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](https://learn.microsoft.com/rest/api/servicefabric/cluster-versions/list). To get the list of available version for existing clusters use **availableClusterVersions**."
+        },
+        "clusterEndpoint": {
+          "type": "string",
+          "description": "The Azure Resource Provider endpoint. A system service in the cluster connects to this  endpoint.",
+          "readOnly": true
+        },
+        "clusterId": {
+          "type": "string",
+          "description": "A service generated unique identifier for the cluster resource.",
+          "readOnly": true
+        },
+        "clusterState": {
+          "$ref": "#/definitions/ClusterState",
+          "description": "The current state of the cluster.\n\n- WaitingForNodes - Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it.\n- Deploying - Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up.\n- BaselineUpgrade - Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time.\n- UpdatingUserConfiguration - Indicates that the cluster is being upgraded with the user provided configuration.\n- UpdatingUserCertificate - Indicates that the cluster is being upgraded with the user provided certificate.\n- UpdatingInfrastructure - Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'.\n- EnforcingClusterVersion - Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version.\n- UpgradeServiceUnreachable - Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider.\n- AutoScale - Indicates that the ReliabilityLevel of the cluster is being adjusted.\n- Ready - Indicates that the cluster is in a stable state.",
+          "readOnly": true
+        },
+        "diagnosticsStorageAccountConfig": {
+          "$ref": "#/definitions/DiagnosticsStorageAccountConfig",
+          "description": "The storage account information for storing Service Fabric diagnostic logs."
+        },
+        "eventStoreServiceEnabled": {
+          "type": "boolean",
+          "description": "Indicates if the event store service is enabled."
+        },
+        "fabricSettings": {
+          "type": "array",
+          "description": "The list of custom fabric settings to configure the cluster.",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          }
+        },
+        "managementEndpoint": {
+          "type": "string",
+          "description": "The http management endpoint of the cluster."
+        },
+        "nodeTypes": {
+          "type": "array",
+          "description": "The list of node types in the cluster.",
+          "items": {
+            "$ref": "#/definitions/NodeTypeDescription"
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the cluster resource.",
+          "readOnly": true
+        },
+        "reliabilityLevel": {
+          "$ref": "#/definitions/ReliabilityLevel",
+          "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n- None - Run the System services with a target replica set count of 1. This should only be used for test clusters.\n- Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.\n- Silver - Run the System services with a target replica set count of 5.\n- Gold - Run the System services with a target replica set count of 7.\n- Platinum - Run the System services with a target replica set count of 9."
+        },
+        "reverseProxyCertificate": {
+          "$ref": "#/definitions/CertificateDescription",
+          "description": "The server certificate used by reverse proxy."
+        },
+        "reverseProxyCertificateCommonNames": {
+          "$ref": "#/definitions/ServerCertificateCommonNames",
+          "description": "Describes a list of server certificates referenced by common name that are used to secure the cluster."
+        },
+        "upgradeDescription": {
+          "$ref": "#/definitions/ClusterUpgradePolicy",
+          "description": "The policy to use when upgrading the cluster."
+        },
+        "upgradeMode": {
+          "type": "string",
+          "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.",
+          "default": "Automatic",
+          "enum": [
+            "Automatic",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Automatic",
+                "value": "Automatic",
+                "description": "The cluster will be automatically upgraded to the latest Service Fabric runtime version, **upgradeWave** will determine when the upgrade starts after the new version becomes available."
+              },
+              {
+                "name": "Manual",
+                "value": "Manual",
+                "description": "The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource."
+              }
+            ]
+          }
+        },
+        "applicationTypeVersionsCleanupPolicy": {
+          "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
+          "description": "The policy used to clean up unused versions."
+        },
+        "vmImage": {
+          "type": "string",
+          "description": "The VM image VMSS has been configured with. Generic names such as Windows or Linux can be used."
+        },
+        "sfZonalUpgradeMode": {
+          "$ref": "#/definitions/SfZonalUpgradeMode",
+          "description": "This property controls the logical grouping of VMs in upgrade domains (UDs). This property can't be modified if a node type with multiple Availability Zones is already present in the cluster."
+        },
+        "vmssZonalUpgradeMode": {
+          "$ref": "#/definitions/VmssZonalUpgradeMode",
+          "description": "This property defines the upgrade mode for the virtual machine scale set, it is mandatory if a node type with multiple Availability Zones is added."
+        },
+        "infrastructureServiceManager": {
+          "type": "boolean",
+          "description": "Indicates if infrastructure service manager is enabled."
+        },
+        "upgradeWave": {
+          "$ref": "#/definitions/ClusterUpgradeCadence",
+          "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0. Only applies when **upgradeMode** is set to 'Automatic'."
+        },
+        "upgradePauseStartTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the start date and time to pause automatic runtime version upgrades on the cluster for an specific period of time on the cluster (UTC)."
+        },
+        "upgradePauseEndTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Indicates the end date and time to pause automatic runtime version upgrades on the cluster for an specific period of time on the cluster (UTC)."
+        },
+        "waveUpgradePaused": {
+          "type": "boolean",
+          "description": "Boolean to pause automatic runtime version upgrades to the cluster."
+        },
+        "notifications": {
+          "type": "array",
+          "description": "Indicates a list of notification channels for cluster events.",
+          "items": {
+            "$ref": "#/definitions/Notification"
+          },
+          "x-ms-identifiers": []
+        },
+        "enableHttpGatewayExclusiveAuthMode": {
+          "type": "boolean",
+          "description": "If true, token-based authentication is not allowed on the HttpGatewayEndpoint. This is required to support TLS versions 1.3 and above. If token-based authentication is used, HttpGatewayTokenAuthEndpointPort must be defined."
+        }
+      },
+      "required": [
+        "managementEndpoint",
+        "nodeTypes"
+      ]
+    },
+    "ClusterPropertiesUpdateParameters": {
+      "type": "object",
+      "description": "Describes the cluster resource properties that can be updated during PATCH operation.",
+      "properties": {
+        "addOnFeatures": {
+          "type": "array",
+          "description": "The list of add-on features to enable in the cluster.",
+          "items": {
+            "$ref": "#/definitions/AddOnFeatures"
+          }
+        },
+        "certificate": {
+          "$ref": "#/definitions/CertificateDescription",
+          "description": "The certificate to use for securing the cluster. The certificate provided will be used for  node to node security within the cluster, SSL certificate for cluster management endpoint and default  admin client."
+        },
+        "certificateCommonNames": {
+          "$ref": "#/definitions/ServerCertificateCommonNames",
+          "description": "Describes a list of server certificates referenced by common name that are used to secure the cluster."
+        },
+        "clientCertificateCommonNames": {
+          "type": "array",
+          "description": "The list of client certificates referenced by common name that are allowed to manage the cluster. This will overwrite the existing list.",
+          "items": {
+            "$ref": "#/definitions/ClientCertificateCommonName"
+          },
+          "x-ms-identifiers": [
+            "certificateCommonName"
+          ]
+        },
+        "clientCertificateThumbprints": {
+          "type": "array",
+          "description": "The list of client certificates referenced by thumbprint that are allowed to manage the cluster. This will overwrite the existing list.",
+          "items": {
+            "$ref": "#/definitions/ClientCertificateThumbprint"
+          },
+          "x-ms-identifiers": [
+            "certificateThumbprint"
+          ]
+        },
+        "clusterCodeVersion": {
+          "type": "string",
+          "description": "The Service Fabric runtime version of the cluster. This property can only by set the user when **upgradeMode** is set to 'Manual'. To get list of available Service Fabric versions for new clusters use [ClusterVersion API](https://learn.microsoft.com/rest/api/servicefabric/cluster-versions/list). To get the list of available version for existing clusters use **availableClusterVersions**."
+        },
+        "eventStoreServiceEnabled": {
+          "type": "boolean",
+          "description": "Indicates if the event store service is enabled."
+        },
+        "fabricSettings": {
+          "type": "array",
+          "description": "The list of custom fabric settings to configure the cluster. This will overwrite the existing list.",
+          "items": {
+            "$ref": "#/definitions/SettingsSectionDescription"
+          }
+        },
+        "nodeTypes": {
+          "type": "array",
+          "description": "The list of node types in the cluster. This will overwrite the existing list.",
+          "items": {
+            "$ref": "#/definitions/NodeTypeDescription"
+          }
+        },
+        "reliabilityLevel": {
+          "$ref": "#/definitions/ReliabilityLevel",
+          "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n- None - Run the System services with a target replica set count of 1. This should only be used for test clusters.\n- Bronze - Run the System services with a target replica set count of 3. This should only be used for test clusters.\n- Silver - Run the System services with a target replica set count of 5.\n- Gold - Run the System services with a target replica set count of 7.\n- Platinum - Run the System services with a target replica set count of 9."
+        },
+        "reverseProxyCertificate": {
+          "$ref": "#/definitions/CertificateDescription",
+          "description": "The server certificate used by reverse proxy."
+        },
+        "upgradeDescription": {
+          "$ref": "#/definitions/ClusterUpgradePolicy",
+          "description": "The policy to use when upgrading the cluster."
+        },
+        "applicationTypeVersionsCleanupPolicy": {
+          "$ref": "#/definitions/ApplicationTypeVersionsCleanupPolicy",
+          "description": "The policy used to clean up unused versions."
+        },
+        "upgradeMode": {
+          "type": "string",
+          "description": "The upgrade mode of the cluster when new Service Fabric runtime version is available.",
+          "default": "Automatic",
+          "enum": [
+            "Automatic",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "UpgradeMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Automatic",
+                "value": "Automatic",
+                "description": "The cluster will be automatically upgraded to the latest Service Fabric runtime version, **upgradeWave** will determine when the upgrade starts after the new version becomes available."
+              },
+              {
+                "name": "Manual",
+                "value": "Manual",
+                "description": "The cluster will not be automatically upgraded to the latest Service Fabric runtime version. The cluster is upgraded by setting the **clusterCodeVersion** property in the cluster resource."
+              }
+            ]
+          }
+        },
+        "sfZonalUpgradeMode": {
+          "$ref": "#/definitions/SfZonalUpgradeMode",
+          "description": "This property controls the logical grouping of VMs in upgrade domains (UDs). This property can't be modified if a node type with multiple Availability Zones is already present in the cluster."
+        },
+        "vmssZonalUpgradeMode": {
+          "$ref": "#/definitions/VmssZonalUpgradeMode",
+          "description": "This property defines the upgrade mode for the virtual machine scale set, it is mandatory if a node type with multiple Availability Zones is added."
+        },
+        "infrastructureServiceManager": {
+          "type": "boolean",
+          "description": "Indicates if infrastructure service manager is enabled."
+        },
+        "upgradeWave": {
+          "$ref": "#/definitions/ClusterUpgradeCadence",
+          "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0. Only applies when **upgradeMode** is set to 'Automatic'."
+        },
+        "upgradePauseStartTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start timestamp to pause runtime version upgrades on the cluster (UTC)."
+        },
+        "upgradePauseEndTimestampUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end timestamp of pause runtime version upgrades on the cluster (UTC)."
+        },
+        "waveUpgradePaused": {
+          "type": "boolean",
+          "description": "Boolean to pause automatic runtime version upgrades to the cluster."
+        },
+        "notifications": {
+          "type": "array",
+          "description": "Indicates a list of notification channels for cluster events.",
+          "items": {
+            "$ref": "#/definitions/Notification"
+          },
+          "x-ms-identifiers": []
+        },
+        "enableHttpGatewayExclusiveAuthMode": {
+          "type": "boolean",
+          "description": "If true, token-based authentication is not allowed on the HttpGatewayEndpoint. This is required to support TLS versions 1.3 and above. If token-based authentication is used, HttpGatewayTokenAuthEndpointPort must be defined."
+        }
+      }
+    },
+    "ClusterState": {
+      "type": "string",
+      "description": "The current state of the cluster.",
+      "enum": [
+        "WaitingForNodes",
+        "Deploying",
+        "BaselineUpgrade",
+        "UpdatingUserConfiguration",
+        "UpdatingUserCertificate",
+        "UpdatingInfrastructure",
+        "EnforcingClusterVersion",
+        "UpgradeServiceUnreachable",
+        "AutoScale",
+        "Ready"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WaitingForNodes",
+            "value": "WaitingForNodes",
+            "description": "Indicates that the cluster resource is created and the resource provider is waiting for Service Fabric VM extension to boot up and report to it."
+          },
+          {
+            "name": "Deploying",
+            "value": "Deploying",
+            "description": "Indicates that the Service Fabric runtime is being installed on the VMs. Cluster resource will be in this state until the cluster boots up and system services are up."
+          },
+          {
+            "name": "BaselineUpgrade",
+            "value": "BaselineUpgrade",
+            "description": "Indicates that the cluster is upgrading to establishes the cluster version. This upgrade is automatically initiated when the cluster boots up for the first time."
+          },
+          {
+            "name": "UpdatingUserConfiguration",
+            "value": "UpdatingUserConfiguration",
+            "description": "Indicates that the cluster is being upgraded with the user provided configuration."
+          },
+          {
+            "name": "UpdatingUserCertificate",
+            "value": "UpdatingUserCertificate",
+            "description": "Indicates that the cluster is being upgraded with the user provided certificate."
+          },
+          {
+            "name": "UpdatingInfrastructure",
+            "value": "UpdatingInfrastructure",
+            "description": "Indicates that the cluster is being upgraded with the latest Service Fabric runtime version. This happens only when the **upgradeMode** is set to 'Automatic'."
+          },
+          {
+            "name": "EnforcingClusterVersion",
+            "value": "EnforcingClusterVersion",
+            "description": "Indicates that cluster is on a different version than expected and the cluster is being upgraded to the expected version."
+          },
+          {
+            "name": "UpgradeServiceUnreachable",
+            "value": "UpgradeServiceUnreachable",
+            "description": "Indicates that the system service in the cluster is no longer polling the Resource Provider. Clusters in this state cannot be managed by the Resource Provider."
+          },
+          {
+            "name": "AutoScale",
+            "value": "AutoScale",
+            "description": "Indicates that the ReliabilityLevel of the cluster is being adjusted."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "Indicates that the cluster is in a stable state."
+          }
+        ]
+      }
+    },
+    "ClusterUpdateParameters": {
+      "type": "object",
+      "description": "Cluster update request",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ClusterPropertiesUpdateParameters",
+          "description": "Describes the cluster resource properties that can be updated during PATCH operation."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Cluster update parameters",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClusterUpgradeCadence": {
+      "type": "string",
+      "description": "Indicates when new cluster runtime version upgrades will be applied after they are released. By default is Wave0.",
+      "enum": [
+        "Wave0",
+        "Wave1",
+        "Wave2"
+      ],
+      "x-ms-enum": {
+        "name": "ClusterUpgradeCadence",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Wave0",
+            "value": "Wave0",
+            "description": "Cluster upgrade starts immediately after a new version is rolled out. Recommended for Test/Dev clusters."
+          },
+          {
+            "name": "Wave1",
+            "value": "Wave1",
+            "description": "Cluster upgrade starts 7 days after a new version is rolled out. Recommended for Pre-prod clusters."
+          },
+          {
+            "name": "Wave2",
+            "value": "Wave2",
+            "description": "Cluster upgrade starts 14 days after a new version is rolled out. Recommended for Production clusters."
+          }
+        ]
+      }
+    },
+    "ClusterUpgradeDeltaHealthPolicy": {
+      "type": "object",
+      "description": "Describes the delta health policies for the cluster upgrade.",
+      "properties": {
+        "maxPercentDeltaUnhealthyNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the nodes at the beginning of upgrade and the state of the nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUpgradeDomainDeltaUnhealthyNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of upgrade domain nodes health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the upgrade domain nodes at the beginning of upgrade and the state of the upgrade domain nodes at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion for all completed upgrade domains to make sure the state of the upgrade domains is within tolerated limits.",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentDeltaUnhealthyApplications": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of applications health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the applications at the beginning of upgrade and the state of the applications at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits. System services are not included in this.",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "applicationDeltaHealthPolicies": {
+          "type": "object",
+          "description": "Defines the application delta health policy map used to evaluate the health of an application or one of its child entities when upgrading the cluster.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ApplicationDeltaHealthPolicy"
+          }
+        }
+      },
+      "required": [
+        "maxPercentDeltaUnhealthyNodes",
+        "maxPercentUpgradeDomainDeltaUnhealthyNodes",
+        "maxPercentDeltaUnhealthyApplications"
+      ]
+    },
+    "ClusterUpgradePolicy": {
+      "type": "object",
+      "description": "Describes the policy used when upgrading the cluster.",
+      "properties": {
+        "forceRestart": {
+          "type": "boolean",
+          "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data).",
+          "default": false
+        },
+        "upgradeReplicaSetCheckTimeout": {
+          "type": "string",
+          "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "healthCheckWaitDuration": {
+          "type": "string",
+          "description": "The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "healthCheckStableDuration": {
+          "type": "string",
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "healthCheckRetryTimeout": {
+          "type": "string",
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "upgradeTimeout": {
+          "type": "string",
+          "description": "The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "upgradeDomainTimeout": {
+          "type": "string",
+          "description": "The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+        },
+        "healthPolicy": {
+          "$ref": "#/definitions/ClusterHealthPolicy",
+          "description": "The cluster health policy used when upgrading the cluster."
+        },
+        "deltaHealthPolicy": {
+          "$ref": "#/definitions/ClusterUpgradeDeltaHealthPolicy",
+          "description": "The cluster delta health policy used when upgrading the cluster."
+        }
+      },
+      "required": [
+        "upgradeReplicaSetCheckTimeout",
+        "healthCheckWaitDuration",
+        "healthCheckStableDuration",
+        "healthCheckRetryTimeout",
+        "upgradeTimeout",
+        "upgradeDomainTimeout",
+        "healthPolicy"
+      ]
+    },
+    "ClusterVersionDetails": {
+      "type": "object",
+      "description": "The detail of the Service Fabric runtime version result",
+      "properties": {
+        "codeVersion": {
+          "type": "string",
+          "description": "The Service Fabric runtime version of the cluster."
+        },
+        "supportExpiryUtc": {
+          "type": "string",
+          "description": "The date of expiry of support of the version."
+        },
+        "environment": {
+          "$ref": "#/definitions/ClusterEnvironment",
+          "description": "Indicates if this version is for Windows or Linux operating system."
+        }
+      }
+    },
+    "DiagnosticsStorageAccountConfig": {
+      "type": "object",
+      "description": "The storage account information for storing Service Fabric diagnostic logs.",
+      "properties": {
+        "storageAccountName": {
+          "type": "string",
+          "description": "The Azure storage account name."
+        },
+        "protectedAccountKeyName": {
+          "type": "string",
+          "description": "The protected diagnostics storage key name."
+        },
+        "protectedAccountKeyName2": {
+          "type": "string",
+          "description": "The secondary protected diagnostics storage key name. If one of the storage account keys is rotated the cluster will fallback to using the other."
+        },
+        "blobEndpoint": {
+          "type": "string",
+          "description": "The blob endpoint of the azure storage account."
+        },
+        "queueEndpoint": {
+          "type": "string",
+          "description": "The queue endpoint of the azure storage account."
+        },
+        "tableEndpoint": {
+          "type": "string",
+          "description": "The table endpoint of the azure storage account."
+        }
+      },
+      "required": [
+        "storageAccountName",
+        "protectedAccountKeyName",
+        "blobEndpoint",
+        "queueEndpoint",
+        "tableEndpoint"
+      ]
+    },
+    "DurabilityLevel": {
+      "type": "string",
+      "description": "The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).",
+      "enum": [
+        "Bronze",
+        "Silver",
+        "Gold"
+      ],
+      "x-ms-enum": {
+        "name": "DurabilityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Bronze",
+            "value": "Bronze",
+            "description": "No privileges. This is the default."
+          },
+          {
+            "name": "Silver",
+            "value": "Silver",
+            "description": "The infrastructure jobs can be paused for a duration of 10 minutes per UD."
+          },
+          {
+            "name": "Gold",
+            "value": "Gold",
+            "description": "The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc."
+          }
+        ]
+      }
+    },
+    "EndpointRangeDescription": {
+      "type": "object",
+      "description": "Port range details",
+      "properties": {
+        "startPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Starting port of a range of ports"
+        },
+        "endPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "End port of a range of ports"
+        }
+      },
+      "required": [
+        "startPort",
+        "endPort"
+      ]
+    },
+    "MoveCost": {
+      "type": "string",
+      "description": "Specifies the move cost for the service.",
+      "enum": [
+        "Zero",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "MoveCost",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zero",
+            "value": "Zero",
+            "description": "Zero move cost. This value is zero."
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Specifies the move cost of the service as Low. The value is 1."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Specifies the move cost of the service as Medium. The value is 2."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "Specifies the move cost of the service as High. The value is 3."
+          }
+        ]
+      }
+    },
+    "NamedPartitionSchemeDescription": {
+      "type": "object",
+      "description": "Describes the named partition scheme of the service.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of partitions."
+        },
+        "names": {
+          "type": "array",
+          "description": "Array of size specified by the ‘count’ parameter, for the names of the partitions.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "count",
+        "names"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartitionSchemeDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Named"
+    },
+    "NodeTypeDescription": {
+      "type": "object",
+      "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the node type."
+        },
+        "placementProperties": {
+          "type": "object",
+          "description": "The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "capacities": {
+          "type": "object",
+          "description": "The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "clientConnectionEndpointPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The TCP cluster management endpoint port."
+        },
+        "httpGatewayEndpointPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP cluster management endpoint port."
+        },
+        "durabilityLevel": {
+          "$ref": "#/definitions/DurabilityLevel",
+          "description": "The durability level of the node type. Learn about [DurabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).\n\n- Bronze - No privileges. This is the default.\n- Silver - The infrastructure jobs can be paused for a duration of 10 minutes per UD.\n- Gold - The infrastructure jobs can be paused for a duration of 2 hours per UD. Gold durability can be enabled only on full node VM skus like D15_V2, G5 etc."
+        },
+        "applicationPorts": {
+          "$ref": "#/definitions/EndpointRangeDescription",
+          "description": "The range of ports from which cluster assigned port to Service Fabric applications."
+        },
+        "ephemeralPorts": {
+          "$ref": "#/definitions/EndpointRangeDescription",
+          "description": "The range of ephemeral ports that nodes in this node type should be configured with."
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "description": "The node type on which system services will run. Only one node type should be marked as primary. Primary node type cannot be deleted or changed for existing clusters."
+        },
+        "vmInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "VMInstanceCount should be 1 to n, where n indicates the number of VM instances corresponding to this nodeType. VMInstanceCount = 0 can be done only in these scenarios: NodeType is a secondary nodeType. Durability = Bronze or Durability >= Bronze and InfrastructureServiceManager = true. If VMInstanceCount = 0, implies the VMs for this nodeType will not be used for the initial cluster size computation.",
+          "minimum": 0,
+          "maximum": 2147483647
+        },
+        "reverseProxyEndpointPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The endpoint used by reverse proxy."
+        },
+        "isStateless": {
+          "type": "boolean",
+          "description": "Indicates if the node type can only host Stateless workloads."
+        },
+        "multipleAvailabilityZones": {
+          "type": "boolean",
+          "description": "Indicates if the node type is enabled to support multiple zones."
+        },
+        "httpGatewayTokenAuthEndpointPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port used for token-auth based HTTPS connections to the cluster. Cannot be set to the same port as HttpGatewayEndpoint."
+        }
+      },
+      "required": [
+        "name",
+        "clientConnectionEndpointPort",
+        "httpGatewayEndpointPort",
+        "isPrimary",
+        "vmInstanceCount"
+      ]
+    },
+    "Notification": {
+      "type": "object",
+      "description": "Describes the notification channel for cluster events.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates if the notification is enabled."
+        },
+        "notificationCategory": {
+          "$ref": "#/definitions/NotificationCategory",
+          "description": "The category of notification."
+        },
+        "notificationLevel": {
+          "$ref": "#/definitions/NotificationLevel",
+          "description": "The level of notification."
+        },
+        "notificationTargets": {
+          "type": "array",
+          "description": "List of targets that subscribe to the notification.",
+          "items": {
+            "$ref": "#/definitions/NotificationTarget"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "isEnabled",
+        "notificationCategory",
+        "notificationLevel",
+        "notificationTargets"
+      ]
+    },
+    "NotificationCategory": {
+      "type": "string",
+      "description": "The category of notification.",
+      "enum": [
+        "WaveProgress"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WaveProgress",
+            "value": "WaveProgress",
+            "description": "Notification will be regarding wave progress."
+          }
+        ]
+      }
+    },
+    "NotificationChannel": {
+      "type": "string",
+      "description": "The notification channel indicates the type of receivers subscribed to the notification, either user or subscription.",
+      "enum": [
+        "EmailUser",
+        "EmailSubscription"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EmailUser",
+            "value": "EmailUser",
+            "description": "For email user receivers. In this case, the parameter receivers should be a list of email addresses that will receive the notifications."
+          },
+          {
+            "name": "EmailSubscription",
+            "value": "EmailSubscription",
+            "description": "For subscription receivers. In this case, the parameter receivers should be a list of roles of the subscription for the cluster (eg. Owner, AccountAdmin, etc) that will receive the notifications."
+          }
+        ]
+      }
+    },
+    "NotificationLevel": {
+      "type": "string",
+      "description": "The level of notification.",
+      "enum": [
+        "Critical",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "NotificationLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Critical",
+            "value": "Critical",
+            "description": "Receive only critical notifications."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Receive all notifications."
+          }
+        ]
+      }
+    },
+    "NotificationTarget": {
+      "type": "object",
+      "description": "Describes the notification target properties.",
+      "properties": {
+        "notificationChannel": {
+          "$ref": "#/definitions/NotificationChannel",
+          "description": "The notification channel indicates the type of receivers subscribed to the notification, either user or subscription."
+        },
+        "receivers": {
+          "type": "array",
+          "description": "List of targets that subscribe to the notification.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "notificationChannel",
+        "receivers"
+      ]
+    },
+    "PartitionScheme": {
+      "type": "string",
+      "description": "Enumerates the ways that a service can be partitioned.",
+      "enum": [
+        "Invalid",
+        "Singleton",
+        "UniformInt64Range",
+        "Named"
+      ],
+      "x-ms-enum": {
+        "name": "PartitionScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Indicates the partition kind is invalid. All Service Fabric enumerations have the invalid type. The value is zero."
+          },
+          {
+            "name": "Singleton",
+            "value": "Singleton",
+            "description": "Indicates that the partition is based on string names, and is a SingletonPartitionSchemeDescription object, The value is 1."
+          },
+          {
+            "name": "UniformInt64Range",
+            "value": "UniformInt64Range",
+            "description": "Indicates that the partition is based on Int64 key ranges, and is a UniformInt64RangePartitionSchemeDescription object. The value is 2."
+          },
+          {
+            "name": "Named",
+            "value": "Named",
+            "description": "Indicates that the partition is based on string names, and is a NamedPartitionSchemeDescription object. The value is 3"
+          }
+        ]
+      }
+    },
+    "PartitionSchemeDescription": {
+      "type": "object",
+      "description": "Describes how the service is partitioned.",
+      "properties": {
+        "partitionScheme": {
+          "$ref": "#/definitions/PartitionScheme",
+          "description": "Specifies how the service is partitioned."
+        }
+      },
+      "discriminator": "partitionScheme",
+      "required": [
+        "partitionScheme"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the cluster resource.",
+      "enum": [
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Cluster is updating."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Cluster provisioning succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Cluster provisioning failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Cluster provisioning was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ReliabilityLevel": {
+      "type": "string",
+      "description": "The reliability level sets the replica set size of system services. Learn about [ReliabilityLevel](https://docs.microsoft.com/azure/service-fabric/service-fabric-cluster-capacity).",
+      "enum": [
+        "None",
+        "Bronze",
+        "Silver",
+        "Gold",
+        "Platinum"
+      ],
+      "x-ms-enum": {
+        "name": "ReliabilityLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Run the System services with a target replica set count of 1. This should only be used for test clusters."
+          },
+          {
+            "name": "Bronze",
+            "value": "Bronze",
+            "description": "Run the System services with a target replica set count of 3. This should only be used for test clusters."
+          },
+          {
+            "name": "Silver",
+            "value": "Silver",
+            "description": "Run the System services with a target replica set count of 5."
+          },
+          {
+            "name": "Gold",
+            "value": "Gold",
+            "description": "Run the System services with a target replica set count of 7."
+          },
+          {
+            "name": "Platinum",
+            "value": "Platinum",
+            "description": "Run the System services with a target replica set count of 9."
+          }
+        ]
+      }
+    },
+    "ServerCertificateCommonName": {
+      "type": "object",
+      "description": "Describes the server certificate details using common name.",
+      "properties": {
+        "certificateCommonName": {
+          "type": "string",
+          "description": "The common name of the server certificate."
+        },
+        "certificateIssuerThumbprint": {
+          "type": "string",
+          "description": "The issuer thumbprint of the server certificate."
+        }
+      },
+      "required": [
+        "certificateCommonName",
+        "certificateIssuerThumbprint"
+      ]
+    },
+    "ServerCertificateCommonNames": {
+      "type": "object",
+      "description": "Describes a list of server certificates referenced by common name that are used to secure the cluster.",
+      "properties": {
+        "commonNames": {
+          "type": "array",
+          "description": "The list of server certificates referenced by common name that are used to secure the cluster.",
+          "items": {
+            "$ref": "#/definitions/ServerCertificateCommonName"
+          },
+          "x-ms-identifiers": [
+            "certificateCommonName"
+          ]
+        },
+        "x509StoreName": {
+          "$ref": "#/definitions/StoreName",
+          "description": "The local certificate store location."
+        }
+      }
+    },
+    "ServiceCorrelationDescription": {
+      "type": "object",
+      "description": "Creates a particular correlation between services.",
+      "properties": {
+        "scheme": {
+          "$ref": "#/definitions/ServiceCorrelationScheme",
+          "description": "The ServiceCorrelationScheme which describes the relationship between this service and the service specified via ServiceName."
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "The name of the service that the correlation relationship is established with."
+        }
+      },
+      "required": [
+        "scheme",
+        "serviceName"
+      ]
+    },
+    "ServiceCorrelationScheme": {
+      "type": "string",
+      "description": "The service correlation scheme.",
+      "enum": [
+        "Invalid",
+        "Affinity",
+        "AlignedAffinity",
+        "NonAlignedAffinity"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceCorrelationScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "An invalid correlation scheme. Cannot be used. The value is zero."
+          },
+          {
+            "name": "Affinity",
+            "value": "Affinity",
+            "description": "Indicates that this service has an affinity relationship with another service. Provided for backwards compatibility, consider preferring the Aligned or NonAlignedAffinity options. The value is 1."
+          },
+          {
+            "name": "AlignedAffinity",
+            "value": "AlignedAffinity",
+            "description": "Aligned affinity ensures that the primaries of the partitions of the affinitized services are collocated on the same nodes. This is the default and is the same as selecting the Affinity scheme. The value is 2."
+          },
+          {
+            "name": "NonAlignedAffinity",
+            "value": "NonAlignedAffinity",
+            "description": "Non-Aligned affinity guarantees that all replicas of each service will be placed on the same nodes. Unlike Aligned Affinity, this does not guarantee that replicas of particular role will be collocated. The value is 3."
+          }
+        ]
+      }
+    },
+    "ServiceKind": {
+      "type": "string",
+      "description": "The kind of service (Stateless or Stateful).",
+      "enum": [
+        "Invalid",
+        "Stateless",
+        "Stateful"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Indicates the service kind is invalid. All Service Fabric enumerations have the invalid type. The value is zero."
+          },
+          {
+            "name": "Stateless",
+            "value": "Stateless",
+            "description": "Does not use Service Fabric to make its state highly available or reliable. The value is 1."
+          },
+          {
+            "name": "Stateful",
+            "value": "Stateful",
+            "description": "Uses Service Fabric to make its state or part of its state highly available and reliable. The value is 2."
+          }
+        ]
+      }
+    },
+    "ServiceLoadMetricDescription": {
+      "type": "object",
+      "description": "Specifies a metric to load balance a service during runtime.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric. If the service chooses to report load during runtime, the load metric name should match the name that is specified in Name exactly. Note that metric names are case sensitive."
+        },
+        "weight": {
+          "$ref": "#/definitions/ServiceLoadMetricWeight",
+          "description": "The service load metric relative weight, compared to other metrics configured for this service, as a number."
+        },
+        "primaryDefaultLoad": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Primary replica."
+        },
+        "secondaryDefaultLoad": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Secondary replica."
+        },
+        "defaultLoad": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Used only for Stateless services. The default amount of load, as a number, that this service creates for this metric."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ServiceLoadMetricWeight": {
+      "type": "string",
+      "description": "Determines the metric weight relative to the other metrics that are configured for this service. During runtime, if two metrics end up in conflict, the Cluster Resource Manager prefers the metric with the higher weight.",
+      "enum": [
+        "Zero",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceLoadMetricWeight",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Zero",
+            "value": "Zero",
+            "description": "Disables resource balancing for this metric. This value is zero."
+          },
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Specifies the metric weight of the service load as Low. The value is 1."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Specifies the metric weight of the service load as Medium. The value is 2."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "Specifies the metric weight of the service load as High. The value is 3."
+          }
+        ]
+      }
+    },
+    "ServicePlacementPolicyDescription": {
+      "type": "object",
+      "description": "Describes the policy to be used for placement of a Service Fabric service.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ServicePlacementPolicyType",
+          "description": "The type of placement policy for a service fabric service. Following are the possible values."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ServicePlacementPolicyType": {
+      "type": "string",
+      "description": "The type of placement policy for a service fabric service. Following are the possible values.",
+      "enum": [
+        "Invalid",
+        "InvalidDomain",
+        "RequiredDomain",
+        "PreferredPrimaryDomain",
+        "RequiredDomainDistribution",
+        "NonPartiallyPlaceService"
+      ],
+      "x-ms-enum": {
+        "name": "ServicePlacementPolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Indicates the type of the placement policy is invalid. All Service Fabric enumerations have the invalid type. The value is zero."
+          },
+          {
+            "name": "InvalidDomain",
+            "value": "InvalidDomain",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementInvalidDomainPolicyDescription, which indicates that a particular fault or upgrade domain cannot be used for placement of this service. The value is 1."
+          },
+          {
+            "name": "RequiredDomain",
+            "value": "RequiredDomain",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementRequireDomainDistributionPolicyDescription indicating that the replicas of the service must be placed in a specific domain. The value is 2."
+          },
+          {
+            "name": "PreferredPrimaryDomain",
+            "value": "PreferredPrimaryDomain",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementPreferPrimaryDomainPolicyDescription, which indicates that if possible the Primary replica for the partitions of the service should be located in a particular domain as an optimization. The value is 3."
+          },
+          {
+            "name": "RequiredDomainDistribution",
+            "value": "RequiredDomainDistribution",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementRequireDomainDistributionPolicyDescription, indicating that the system will disallow placement of any two replicas from the same partition in the same domain at any time. The value is 4."
+          },
+          {
+            "name": "NonPartiallyPlaceService",
+            "value": "NonPartiallyPlaceService",
+            "description": "Indicates that the ServicePlacementPolicyDescription is of type ServicePlacementNonPartiallyPlaceServicePolicyDescription, which indicates that if possible all replicas of a particular partition of the service should be placed atomically. The value is 5."
+          }
+        ]
+      }
+    },
+    "ServiceResource": {
+      "type": "object",
+      "description": "The service resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceResourceProperties",
+          "description": "The service resource properties."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ServiceResourceList": {
+      "type": "object",
+      "description": "The list of service resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ServiceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/ServiceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceResourceProperties": {
+      "type": "object",
+      "description": "The service resource properties.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The current deployment or provisioning state, which only appears in the response",
+          "readOnly": true
+        },
+        "serviceKind": {
+          "$ref": "#/definitions/ServiceKind",
+          "description": "The kind of service (Stateless or Stateful)."
+        },
+        "serviceTypeName": {
+          "type": "string",
+          "description": "The name of the service type"
+        },
+        "partitionDescription": {
+          "$ref": "#/definitions/PartitionSchemeDescription",
+          "description": "Describes how the service is partitioned."
+        },
+        "servicePackageActivationMode": {
+          "$ref": "#/definitions/ArmServicePackageActivationMode",
+          "description": "The activation Mode of the service package"
+        },
+        "serviceDnsName": {
+          "type": "string",
+          "description": "Dns name used for the service. If this is specified, then the DNS name can be used to return the IP addresses of service endpoints for application layer protocols (e.g., HTTP).\nWhen updating serviceDnsName, old name may be temporarily resolvable. However, rely on new name.\nWhen removing serviceDnsName, removed name may temporarily be resolvable. Do not rely on the name being unresolvable."
+        }
+      },
+      "discriminator": "serviceKind",
+      "required": [
+        "serviceKind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourcePropertiesBase"
+        }
+      ]
+    },
+    "ServiceResourcePropertiesBase": {
+      "type": "object",
+      "description": "The common service resource properties.",
+      "properties": {
+        "placementConstraints": {
+          "type": "string",
+          "description": "The placement constraints as a string. Placement constraints are boolean expressions on node properties and allow for restricting a service to particular nodes based on the service requirements. For example, to place a service on nodes where NodeType is blue specify the following: \"NodeColor == blue)\"."
+        },
+        "correlationScheme": {
+          "type": "array",
+          "description": "A list that describes the correlation of the service with other services.",
+          "items": {
+            "$ref": "#/definitions/ServiceCorrelationDescription"
+          },
+          "x-ms-identifiers": []
+        },
+        "serviceLoadMetrics": {
+          "type": "array",
+          "description": "The service load metrics is given as an array of ServiceLoadMetricDescription objects.",
+          "items": {
+            "$ref": "#/definitions/ServiceLoadMetricDescription"
+          }
+        },
+        "servicePlacementPolicies": {
+          "type": "array",
+          "description": "A list that describes the correlation of the service with other services.",
+          "items": {
+            "$ref": "#/definitions/ServicePlacementPolicyDescription"
+          },
+          "x-ms-identifiers": []
+        },
+        "defaultMoveCost": {
+          "$ref": "#/definitions/MoveCost",
+          "description": "Specifies the move cost for the service."
+        }
+      }
+    },
+    "ServiceResourceUpdate": {
+      "type": "object",
+      "description": "The service resource for patch operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceResourceUpdateProperties",
+          "description": "The RP-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ServiceResourceUpdateProperties": {
+      "type": "object",
+      "description": "The service resource properties for patch operations.",
+      "properties": {
+        "serviceKind": {
+          "$ref": "#/definitions/ServiceKind",
+          "description": "The kind of service (Stateless or Stateful)."
+        }
+      },
+      "discriminator": "serviceKind",
+      "required": [
+        "serviceKind"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourcePropertiesBase"
+        }
+      ]
+    },
+    "ServiceTypeDeltaHealthPolicy": {
+      "type": "object",
+      "description": "Represents the delta health policy used to evaluate the health of services belonging to a service type when upgrading the cluster.",
+      "properties": {
+        "maxPercentDeltaUnhealthyServices": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum allowed percentage of services health degradation allowed during cluster upgrades.\nThe delta is measured between the state of the services at the beginning of upgrade and the state of the services at the time of the health evaluation.\nThe check is performed after every upgrade domain upgrade completion to make sure the global state of the cluster is within tolerated limits.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "ServiceTypeHealthPolicy": {
+      "type": "object",
+      "description": "Represents the health policy used to evaluate the health of services belonging to a service type.",
+      "properties": {
+        "maxPercentUnhealthyServices": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "SettingsParameterDescription": {
+      "type": "object",
+      "description": "Describes a parameter in fabric settings of the cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The parameter name of fabric setting."
+        },
+        "value": {
+          "type": "string",
+          "description": "The parameter value of fabric setting."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "SettingsSectionDescription": {
+      "type": "object",
+      "description": "Describes a section in the fabric settings of the cluster.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The section name of the fabric settings."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "The collection of parameters in the section.",
+          "items": {
+            "$ref": "#/definitions/SettingsParameterDescription"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "parameters"
+      ]
+    },
+    "SfZonalUpgradeMode": {
+      "type": "string",
+      "description": "This property controls the logical grouping of VMs in upgrade domains (UDs). This property can't be modified if a node type with multiple Availability Zones is already present in the cluster.",
+      "enum": [
+        "Parallel",
+        "Hierarchical"
+      ],
+      "x-ms-enum": {
+        "name": "SfZonalUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Parallel",
+            "value": "Parallel",
+            "description": "VMs under the node type are grouped into UDs and ignore the zone info in five UDs. This setting causes UDs across all zones to be upgraded at the same time. This deployment mode is faster for upgrades, we don't recommend it because it goes against the SDP guidelines, which state that the updates should be applied to one zone at a time."
+          },
+          {
+            "name": "Hierarchical",
+            "value": "Hierarchical",
+            "description": "If this value is omitted or set to Hierarchical, VMs are grouped to reflect the zonal distribution in up to 15 UDs. Each of the three zones has five UDs. This ensures that the zones are updated one at a time, moving to next zone only after completing five UDs within the first zone. This update process is safer for the cluster and the user application."
+          }
+        ]
+      }
+    },
+    "SingletonPartitionSchemeDescription": {
+      "type": "object",
+      "description": "Describes the partition scheme of a singleton-partitioned, or non-partitioned service.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartitionSchemeDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "Singleton"
+    },
+    "StatefulServiceProperties": {
+      "type": "object",
+      "description": "The properties of a stateful service resource.",
+      "properties": {
+        "hasPersistedState": {
+          "type": "boolean",
+          "description": "A flag indicating whether this is a persistent service which stores states on the local disk. If it is then the value of this property is true, if not it is false."
+        },
+        "targetReplicaSetSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target replica set size as a number.",
+          "minimum": 1
+        },
+        "minReplicaSetSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum replica set size as a number.",
+          "minimum": 1
+        },
+        "replicaRestartWaitDuration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format (hh:mm:ss.s)."
+        },
+        "quorumLossWaitDuration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format (hh:mm:ss.s)."
+        },
+        "standByReplicaKeepDuration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format (hh:mm:ss.s)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful"
+    },
+    "StatefulServiceUpdateProperties": {
+      "type": "object",
+      "description": "The properties of a stateful service resource for patch operations.",
+      "properties": {
+        "targetReplicaSetSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The target replica set size as a number.",
+          "minimum": 1
+        },
+        "minReplicaSetSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum replica set size as a number.",
+          "minimum": 1
+        },
+        "replicaRestartWaitDuration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The duration between when a replica goes down and when a new replica is created, represented in ISO 8601 format (hh:mm:ss.s)."
+        },
+        "quorumLossWaitDuration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The maximum duration for which a partition is allowed to be in a state of quorum loss, represented in ISO 8601 format (hh:mm:ss.s)."
+        },
+        "standByReplicaKeepDuration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The definition on how long StandBy replicas should be maintained before being removed, represented in ISO 8601 format (hh:mm:ss.s)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateful"
+    },
+    "StatelessServiceProperties": {
+      "type": "object",
+      "description": "The properties of a stateless service resource.",
+      "properties": {
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The instance count.",
+          "minimum": -1
+        },
+        "instanceCloseDelayDuration": {
+          "type": "string",
+          "description": "Delay duration for RequestDrain feature to ensures that the endpoint advertised by the stateless instance is removed before the delay starts prior to closing the instance. This delay enables existing requests to drain gracefully before the instance actually goes down (https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-application-upgrade-advanced#avoid-connection-drops-during-stateless-service-planned-downtime-preview). It is represented in ISO 8601 format (hh:mm:ss.s)."
+        },
+        "minInstanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "MinInstanceCount is the minimum number of instances that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstanceCount computation -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service."
+        },
+        "minInstancePercentage": {
+          "type": "string",
+          "format": "byte",
+          "description": "MinInstancePercentage is the minimum percentage of InstanceCount that must be up to meet the EnsureAvailability safety check during operations like upgrade or deactivate node. The actual number that is used is max( MinInstanceCount, ceil( MinInstancePercentage/100.0 * InstanceCount) ). Note, if InstanceCount is set to -1, during MinInstancePercentage computation, -1 is first converted into the number of nodes on which the instances are allowed to be placed according to the placement constraints on the service."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless"
+    },
+    "StatelessServiceUpdateProperties": {
+      "type": "object",
+      "description": "The properties of a stateless service resource for patch operations.",
+      "properties": {
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The instance count.",
+          "minimum": -1
+        },
+        "instanceCloseDelayDuration": {
+          "type": "string",
+          "description": "Delay duration for RequestDrain feature to ensures that the endpoint advertised by the stateless instance is removed before the delay starts prior to closing the instance. This delay enables existing requests to drain gracefully before the instance actually goes down (https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-application-upgrade-advanced#avoid-connection-drops-during-stateless-service-planned-downtime-preview). It is represented in ISO 8601 format (hh:mm:ss.s)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResourceUpdateProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Stateless"
+    },
+    "StoreName": {
+      "type": "string",
+      "description": "The local certificate store location.",
+      "enum": [
+        "AddressBook",
+        "AuthRoot",
+        "CertificateAuthority",
+        "Disallowed",
+        "My",
+        "Root",
+        "TrustedPeople",
+        "TrustedPublisher"
+      ],
+      "x-ms-enum": {
+        "name": "StoreName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AddressBook",
+            "value": "AddressBook",
+            "description": "Static value for AddressBook"
+          },
+          {
+            "name": "AuthRoot",
+            "value": "AuthRoot",
+            "description": "Static value for AuthRoot"
+          },
+          {
+            "name": "CertificateAuthority",
+            "value": "CertificateAuthority",
+            "description": "Static value for CertificateAuthority"
+          },
+          {
+            "name": "Disallowed",
+            "value": "Disallowed",
+            "description": "Static value for Disallowed"
+          },
+          {
+            "name": "My",
+            "value": "My",
+            "description": "Static value for My"
+          },
+          {
+            "name": "Root",
+            "value": "Root",
+            "description": "Static value for Root"
+          },
+          {
+            "name": "TrustedPeople",
+            "value": "TrustedPeople",
+            "description": "Static value for TrustedPeople"
+          },
+          {
+            "name": "TrustedPublisher",
+            "value": "TrustedPublisher",
+            "description": "Static value for TrustedPublisher"
+          }
+        ]
+      }
+    },
+    "UniformInt64RangePartitionSchemeDescription": {
+      "type": "object",
+      "description": "Describes a partitioning scheme where an integer range is allocated evenly across a number of partitions.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of partitions."
+        },
+        "lowKey": {
+          "type": "string",
+          "description": "String indicating the lower bound of the partition key range that\nshould be split between the partition ‘count’"
+        },
+        "highKey": {
+          "type": "string",
+          "description": "String indicating the upper bound of the partition key range that\nshould be split between the partition ‘count’"
+        }
+      },
+      "required": [
+        "count",
+        "lowKey",
+        "highKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/PartitionSchemeDescription"
+        }
+      ],
+      "x-ms-discriminator-value": "UniformInt64Range"
+    },
+    "UpgradableVersionPathResult": {
+      "type": "object",
+      "description": "The list of intermediate cluster code versions for an upgrade or downgrade, or minimum and maximum upgradable version if no target was given.",
+      "properties": {
+        "supportedPath": {
+          "type": "array",
+          "description": "The list of intermediate cluster code versions for an upgrade or downgrade.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpgradableVersionsDescription": {
+      "type": "object",
+      "description": "The upgrade path description with target version.",
+      "properties": {
+        "targetVersion": {
+          "type": "string",
+          "description": "The target code version."
+        }
+      },
+      "required": [
+        "targetVersion"
+      ]
+    },
+    "VMSize": {
+      "type": "object",
+      "description": "VM Sizes properties.",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "VM Size name.",
+          "readOnly": true
+        }
+      }
+    },
+    "VMSizeResource": {
+      "type": "object",
+      "description": "Describes a VM Sizes.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMSize",
+          "description": "VM Size properties.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "VM Size id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "VM Size name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "VM Size type.",
+          "readOnly": true
+        }
+      }
+    },
+    "VMSizesResult": {
+      "type": "object",
+      "description": "Describes the result of the request to list VM Sizes for Service Fabric Clusters.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VMSizeResource items on this page",
+          "items": {
+            "$ref": "#/definitions/VMSizeResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VmssZonalUpgradeMode": {
+      "type": "string",
+      "description": "This property defines the upgrade mode for the virtual machine scale set, it is mandatory if a node type with multiple Availability Zones is added.",
+      "enum": [
+        "Parallel",
+        "Hierarchical"
+      ],
+      "x-ms-enum": {
+        "name": "VmssZonalUpgradeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Parallel",
+            "value": "Parallel",
+            "description": "Updates will happen in all Availability Zones at once for the virtual machine scale sets."
+          },
+          {
+            "name": "Hierarchical",
+            "value": "Hierarchical",
+            "description": "VMs are grouped to reflect the zonal distribution in up to 15 UDs. Each of the three zones has five UDs. This ensures that the zones are updated one at a time, moving to next zone only after completing five UDs within the first zone."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,51 @@
+parameters:
+  "service-dir":
+    "default": "sdk/servicefabric"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-file: "{version-status}/{version}/servicefabric.json"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  # "@azure-typespec/http-client-csharp-mgmt":
+  #   emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  #   clear-output-folder: true
+  #   model-namespace: false
+  #   namespace: "Azure.ResourceManager.ServiceFabric"
+  #   flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-servicefabric"
+    namespace: "azure.mgmt.servicefabric"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-servicefabric"
+    package-details:
+      name: "@azure/arm-servicefabric"
+    flavor: azure
+    experimental-extensible-enums: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/servicefabric"
+    emitter-output-dir: "{output-dir}/{service-dir}/armservicefabric"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armservicefabric"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicefabric"
+    namespace: com.azure.resourcemanager.servicefabric
+    flavor: azure
+    service-name: Service Fabric
+    use-object-for-unknown: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
