@@ -128,7 +128,9 @@ op analyzeBinaryCustomSignature(
   stringEncoding?: string = "codePoint",
 ): AnalyzeResult;
 
-@@override(ContentUnderstandingClient.analyzeBinary, analyzeBinaryCustomSignature);
+@@override(ContentUnderstandingClient.analyzeBinary,
+  analyzeBinaryCustomSignature
+);
 
 // Custom parameter order for analyze: put main input data before optional processing parameters.
 // Order: analyzerId, inputs, modelDeployments, processingLocation, stringEncoding
