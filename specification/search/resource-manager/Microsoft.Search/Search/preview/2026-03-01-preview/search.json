@@ -3087,6 +3087,7 @@
       "description": "The response containing a list of features and SKUs offered in various regions.",
       "properties": {
         "value": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/OfferingsByRegion"
@@ -3129,69 +3130,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the feature offered in this region.",
-          "enum": [
-            "Grok",
-            "ImageVectorization",
-            "DocumentIntelligence",
-            "QueryRewrite",
-            "S3",
-            "StorageOptimized",
-            "SemanticSearch",
-            "MegaStore",
-            "AvailabilityZones"
-          ],
-          "x-ms-enum": {
-            "name": "FeatureName",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Grok",
-                "name": "Grok",
-                "description": "Supports Grok feature."
-              },
-              {
-                "value": "ImageVectorization",
-                "name": "ImageVectorization",
-                "description": "Supports Image Vectorization feature."
-              },
-              {
-                "value": "DocumentIntelligence",
-                "name": "DocumentIntelligence",
-                "description": "Supports Document Intelligence feature."
-              },
-              {
-                "value": "QueryRewrite",
-                "name": "QueryRewrite",
-                "description": "Supports Query Rewrite feature."
-              },
-              {
-                "value": "S3",
-                "name": "S3",
-                "description": "Supports S3 feature."
-              },
-              {
-                "value": "StorageOptimized",
-                "name": "StorageOptimized",
-                "description": "Supports Storage Optimized feature."
-              },
-              {
-                "value": "SemanticSearch",
-                "name": "SemanticSearch",
-                "description": "Supports Semantic Search feature."
-              },
-              {
-                "value": "MegaStore",
-                "name": "MegaStore",
-                "description": "Supports Mega Store feature."
-              },
-              {
-                "value": "AvailabilityZones",
-                "name": "AvailabilityZones",
-                "description": "Supports Availability Zones feature."
-              }
-            ]
-          }
+          "description": "The name of the feature offered in this region."
         }
       }
     },
