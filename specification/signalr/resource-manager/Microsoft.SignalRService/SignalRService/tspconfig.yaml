@@ -1,8 +1,8 @@
+emit:
+  - "@azure-tools/typespec-autorest"
 parameters:
   "service-dir":
     default: "sdk/signalr"
-emit:
-  - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
@@ -10,17 +10,11 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/signalr.json"
     examples-dir: "{project-root}/examples"
-
     emit-lro-options: "all"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.SignalR"
-    examples-dir: "{project-root}/examples"
-    enable-bicep-serialization: true
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-signalr"
     namespace: "azure.mgmt.signalr"
