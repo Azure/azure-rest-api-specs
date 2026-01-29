@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 // tool_choice: "auto" | "none" | { "type": "function", "name": string }
 
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "External API shape is defined in OpenAPI 3.0 as oneOf."
-#suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility with existing clients."
 alias ChatCompletionsToolSelection = ChatCompletionsToolSelectionPreset | ChatCompletionsNamedToolSelection;
 
 @added(ServiceApiVersions.v2024_02_15_Preview)

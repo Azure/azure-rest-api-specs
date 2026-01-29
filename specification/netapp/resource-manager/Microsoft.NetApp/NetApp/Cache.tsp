@@ -24,6 +24,7 @@ model Cache is Azure.ResourceManager.TrackedResource<CacheProperties, false> {
     SegmentName = "caches",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...Azure.ResourceManager.AvailabilityZonesProperty;
 }
@@ -207,7 +208,7 @@ model SmbSettings {
   /**
    * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
-  smbAccessBasedEnumerations?: SmbAccessBasedEnumeration;
+  smbAccessBasedEnumeration?: SmbAccessBasedEnumeration;
 
   /**
    * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume

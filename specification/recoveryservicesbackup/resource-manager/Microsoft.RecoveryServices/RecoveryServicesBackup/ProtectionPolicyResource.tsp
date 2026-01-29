@@ -12,6 +12,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup policy. Workload-specific backup policies are derived from this class.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(VaultResource)
 model ProtectionPolicyResource
   is TrackedResourceWithOptionalLocation<ProtectionPolicy> {

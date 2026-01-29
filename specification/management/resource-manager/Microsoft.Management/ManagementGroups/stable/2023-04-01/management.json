@@ -1,0 +1,2151 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Management Groups API",
+    "version": "2023-04-01",
+    "description": "The Azure Management Groups API enables consolidation of multiple\nsubscriptions/resources into an organizational hierarchy and centrally\nmanage access control, policies, alerting and reporting for those resources.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ManagementGroups"
+    },
+    {
+      "name": "SubscriptionUnderManagementGroups"
+    },
+    {
+      "name": "HierarchySettingsOperationGroup"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Management/checkNameAvailability": {
+      "post": {
+        "operationId": "CheckNameAvailability",
+        "description": "Checks if the specified management group name is valid and unique",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "checkNameAvailabilityRequest",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckManagementGroupNameAvailability": {
+            "$ref": "./examples/CheckManagementGroupNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/getEntities": {
+      "post": {
+        "operationId": "Entities_List",
+        "description": "List all entities (Management Groups, Subscriptions, etc.) for the authenticated user.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "Page continuation token is only used if a previous operation returned a partial result.\nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skip",
+            "in": "query",
+            "description": "Number of entities to skip over when retrieving results. Passing this in will override $skipToken.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Number of elements to return when retrieving results. Passing this in will override $skipToken.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "$select",
+            "in": "query",
+            "description": "This parameter specifies the fields to include in the response. Can include any combination of Name,DisplayName,Type,ParentDisplayNameChain,ParentChain, e.g. '$select=Name,DisplayName,Type,ParentDisplayNameChain,ParentNameChain'. When specified the $select parameter can override select in $skipToken.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$search",
+            "in": "query",
+            "description": "The $search parameter is used in conjunction with the $filter parameter to return three different outputs depending on the parameter passed in.\nWith $search=AllowedParents the API will return the entity info of all groups that the requested entity will be able to reparent to as determined by the user's permissions.\nWith $search=AllowedChildren the API will return the entity info of all entities that can be added as children of the requested entity.\nWith $search=ParentAndFirstLevelChildren the API will return the parent and  first level of children that the user has either direct access to or indirect access via one of their descendants.\nWith $search=ParentOnly the API will return only the group if the user has access to at least one of the descendants of the group.\nWith $search=ChildrenOnly the API will return only the first level of children of the group entity info specified in $filter.  The user must have direct access to the children entities or one of it's descendants for it to show up in the results.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "AllowedParents",
+              "AllowedChildren",
+              "ParentAndFirstLevelChildren",
+              "ParentOnly",
+              "ChildrenOnly"
+            ],
+            "x-ms-enum": {
+              "name": "EntitySearchType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "AllowedParents",
+                  "value": "AllowedParents",
+                  "description": "AllowedParents"
+                },
+                {
+                  "name": "AllowedChildren",
+                  "value": "AllowedChildren",
+                  "description": "AllowedChildren"
+                },
+                {
+                  "name": "ParentAndFirstLevelChildren",
+                  "value": "ParentAndFirstLevelChildren",
+                  "description": "ParentAndFirstLevelChildren"
+                },
+                {
+                  "name": "ParentOnly",
+                  "value": "ParentOnly",
+                  "description": "ParentOnly"
+                },
+                {
+                  "name": "ChildrenOnly",
+                  "value": "ChildrenOnly",
+                  "description": "ChildrenOnly"
+                }
+              ]
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter parameter allows you to filter on the the name or display name fields. You can check for equality on the name field (e.g. name eq '{entityName}')  and you can check for substrings on either the name or display name fields(e.g. contains(name, '{substringToSearch}'), contains(displayName, '{substringToSearch')). Note that the '{entityName}' and '{substringToSearch}' fields are checked case insensitively.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$view",
+            "in": "query",
+            "description": "The view parameter allows clients to filter the type of data that is returned by the getEntities call.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "FullHierarchy",
+              "GroupsOnly",
+              "SubscriptionsOnly",
+              "Audit"
+            ],
+            "x-ms-enum": {
+              "name": "EntityViewParameterType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "FullHierarchy",
+                  "value": "FullHierarchy",
+                  "description": "FullHierarchy"
+                },
+                {
+                  "name": "GroupsOnly",
+                  "value": "GroupsOnly",
+                  "description": "GroupsOnly"
+                },
+                {
+                  "name": "SubscriptionsOnly",
+                  "value": "SubscriptionsOnly",
+                  "description": "SubscriptionsOnly"
+                },
+                {
+                  "name": "Audit",
+                  "value": "Audit",
+                  "description": "Audit"
+                }
+              ]
+            }
+          },
+          {
+            "name": "groupName",
+            "in": "query",
+            "description": "A filter which allows the get entities call to focus on a particular group (i.e. \"$filter=name eq 'groupName'\")",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Cache-Control",
+            "in": "header",
+            "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
+            "required": false,
+            "type": "string",
+            "default": "no-cache"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EntityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntities": {
+            "$ref": "./examples/GetEntities.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups": {
+      "get": {
+        "operationId": "ManagementGroups_List",
+        "description": "List management groups for the authenticated user.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Cache-Control",
+            "in": "header",
+            "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
+            "required": false,
+            "type": "string",
+            "default": "no-cache"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "Page continuation token is only used if a previous operation returned a partial result.\nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagementGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListManagementGroups": {
+            "$ref": "./examples/ListManagementGroups.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}": {
+      "get": {
+        "operationId": "ManagementGroups_Get",
+        "tags": [
+          "ManagementGroups"
+        ],
+        "description": "Get the details of the management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The $expand=children query string parameter allows clients to request inclusion of children in the response payload.  $expand=path includes the path from the root group to the current group.  $expand=ancestors includes the ancestor Ids of the current group.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "children",
+              "path",
+              "ancestors"
+            ],
+            "x-ms-enum": {
+              "name": "ManagementGroupExpandType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "children",
+                  "value": "children",
+                  "description": "children"
+                },
+                {
+                  "name": "path",
+                  "value": "path",
+                  "description": "path"
+                },
+                {
+                  "name": "ancestors",
+                  "value": "ancestors",
+                  "description": "ancestors"
+                }
+              ]
+            }
+          },
+          {
+            "name": "$recurse",
+            "in": "query",
+            "description": "The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload. Note that  $expand=children must be passed up if $recurse is set to true.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "A filter which allows the exclusion of subscriptions from results (i.e. '$filter=children.childType ne Subscription')",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "Cache-Control",
+            "in": "header",
+            "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
+            "required": false,
+            "type": "string",
+            "default": "no-cache"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagementGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetManagementGroup": {
+            "$ref": "./examples/GetManagementGroup.json"
+          },
+          "GetManagementGroupWithAncestors": {
+            "$ref": "./examples/GetManagementGroupWithAncestors.json"
+          },
+          "GetManagementGroupWithExpand": {
+            "$ref": "./examples/GetManagementGroupWithExpand.json"
+          },
+          "GetManagementGroupWithPath": {
+            "$ref": "./examples/GetManagementGroupWithPath.json"
+          },
+          "GetManagementGroupsWithExpandAndRecurse": {
+            "$ref": "./examples/GetManagementGroupWithExpandAndRecurse.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagementGroups_CreateOrUpdate",
+        "tags": [
+          "ManagementGroups"
+        ],
+        "description": "Create or update a management group.\nIf a management group is already created and a subsequent create request is issued with different properties, the management group properties will be updated.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Cache-Control",
+            "in": "header",
+            "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
+            "required": false,
+            "type": "string",
+            "default": "no-cache"
+          },
+          {
+            "name": "createManagementGroupRequest",
+            "in": "body",
+            "description": "Management group creation parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateManagementGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagementGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagementGroup"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/AzureAsyncOperationResults"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutManagementGroup": {
+            "$ref": "./examples/PutManagementGroup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ManagementGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagementGroups_Update",
+        "tags": [
+          "ManagementGroups"
+        ],
+        "description": "Update a management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Cache-Control",
+            "in": "header",
+            "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
+            "required": false,
+            "type": "string",
+            "default": "no-cache"
+          },
+          {
+            "name": "patchGroupRequest",
+            "in": "body",
+            "description": "Management group patch parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchManagementGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagementGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchManagementGroup": {
+            "$ref": "./examples/PatchManagementGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ManagementGroups_Delete",
+        "tags": [
+          "ManagementGroups"
+        ],
+        "description": "Delete management group.\nIf a management group contains child resources, the request will fail.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Cache-Control",
+            "in": "header",
+            "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
+            "required": false,
+            "type": "string",
+            "default": "no-cache"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/AzureAsyncOperationResults"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteManagementGroup": {
+            "$ref": "./examples/DeleteManagementGroup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/descendants": {
+      "get": {
+        "operationId": "ManagementGroups_GetDescendants",
+        "tags": [
+          "ManagementGroups"
+        ],
+        "description": "List all entities that descend from a management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "Page continuation token is only used if a previous operation returned a partial result.\nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "Number of elements to return when retrieving results. Passing this in will override $skipToken.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DescendantListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDescendants": {
+            "$ref": "./examples/GetDescendants.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/settings": {
+      "get": {
+        "operationId": "HierarchySettings_List",
+        "tags": [
+          "ManagementGroups"
+        ],
+        "description": "Gets all the hierarchy settings defined at the Management Group level. Settings can only be set on the root Management Group of the hierarchy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchySettingsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListGroupSettings": {
+            "$ref": "./examples/ListHierarchySettings.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/settings/default": {
+      "get": {
+        "operationId": "HierarchySettings_Get",
+        "tags": [
+          "HierarchySettingsOperationGroup"
+        ],
+        "description": "Gets the hierarchy settings defined at the Management Group level. Settings can only be set on the root Management Group of the hierarchy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchySettings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetGroupSettings": {
+            "$ref": "./examples/GetHierarchySettings.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HierarchySettings_CreateOrUpdate",
+        "tags": [
+          "HierarchySettingsOperationGroup"
+        ],
+        "description": "Creates or updates the hierarchy settings defined at the Management Group level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "CreateTenantSettingsRequest",
+            "in": "body",
+            "description": "Tenant level settings request parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateSettingsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HierarchySettings' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HierarchySettings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetGroupSettings": {
+            "$ref": "./examples/PutHierarchySettings.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "HierarchySettings_Update",
+        "tags": [
+          "HierarchySettingsOperationGroup"
+        ],
+        "description": "Updates the hierarchy settings defined at the Management Group level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "CreateTenantSettingsRequest",
+            "in": "body",
+            "description": "Tenant level settings request parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateOrUpdateSettingsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HierarchySettings"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetGroupSettings": {
+            "$ref": "./examples/PatchHierarchySettings.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "HierarchySettings_Delete",
+        "tags": [
+          "HierarchySettingsOperationGroup"
+        ],
+        "description": "Deletes the hierarchy settings defined at the Management Group level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetGroupSettings": {
+            "$ref": "./examples/DeleteHierarchySettings.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions": {
+      "get": {
+        "operationId": "ManagementGroupSubscriptions_GetSubscriptionsUnderManagementGroup",
+        "tags": [
+          "SubscriptionUnderManagementGroups"
+        ],
+        "description": "Retrieves details about all subscriptions which are associated with the management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "Page continuation token is only used if a previous operation returned a partial result.\nIf a previous response contains a nextLink element, the value of the nextLink element will include a token parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListSubscriptionUnderManagementGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAllSubscriptionsFromManagementGroup": {
+            "$ref": "./examples/GetAllSubscriptionsFromManagementGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions/{subscriptionId}": {
+      "get": {
+        "operationId": "ManagementGroupSubscriptions_GetSubscription",
+        "tags": [
+          "SubscriptionUnderManagementGroups"
+        ],
+        "description": "Retrieves details about given subscription which is associated with the management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Cache-Control",
+            "in": "header",
+            "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
+            "required": false,
+            "type": "string",
+            "default": "no-cache"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionUnderManagementGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetSubscriptionFromManagementGroup": {
+            "$ref": "./examples/GetSubscriptionFromManagementGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagementGroupSubscriptions_Create",
+        "tags": [
+          "SubscriptionUnderManagementGroups"
+        ],
+        "description": "Associates existing subscription with the management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Cache-Control",
+            "in": "header",
+            "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
+            "required": false,
+            "type": "string",
+            "default": "no-cache"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SubscriptionUnderManagementGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionUnderManagementGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AddSubscriptionToManagementGroup": {
+            "$ref": "./examples/AddManagementGroupSubscription.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ManagementGroupSubscriptions_Delete",
+        "tags": [
+          "SubscriptionUnderManagementGroups"
+        ],
+        "description": "De-associates subscription from the management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "Management Group ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Cache-Control",
+            "in": "header",
+            "description": "Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.",
+            "required": false,
+            "type": "string",
+            "default": "no-cache"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteSubscriptionFromManagementGroup": {
+            "$ref": "./examples/RemoveManagementGroupSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/startTenantBackfill": {
+      "post": {
+        "operationId": "StartTenantBackfill",
+        "description": "Starts backfilling subscriptions for the Tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TenantBackfillStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StartTenantBackfill": {
+            "$ref": "./examples/StartTenantBackfillRequest.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/tenantBackfillStatus": {
+      "post": {
+        "operationId": "TenantBackfillStatus",
+        "description": "Gets tenant backfill status",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TenantBackfillStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TenantBackfillStatus": {
+            "$ref": "./examples/TenantBackfillStatusRequest.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AzureAsyncOperationResults": {
+      "type": "object",
+      "description": "The results of Azure-AsyncOperation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Management/managementGroups",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the management group. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the asynchronous operation performed . For example, Running, Succeeded, Failed",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagementGroupInfoProperties",
+          "description": "The generic properties of a management group.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CheckNameAvailabilityRequest": {
+      "type": "object",
+      "description": "Management group name availability check parameters.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "the name to check for availability"
+        },
+        "type": {
+          "type": "string",
+          "description": "fully qualified resource type which includes provider namespace",
+          "enum": [
+            "Microsoft.Management/managementGroups"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "type": "object",
+      "description": "Describes the result of the request to check management group name availability.",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Required. True indicates name is valid and available. False indicates the name is invalid, unavailable, or both.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/Reason",
+          "description": "Required if nameAvailable == false. Invalid indicates the name provided does not match the resource provider's naming requirements (incorrect length, unsupported characters, etc.) AlreadyExists indicates that the name is already in use and is therefore unavailable.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Required if nameAvailable == false. Localized. If reason == invalid, provide the user with the reason why the given name is invalid, and provide the resource naming requirements so that the user can select a valid name. If reason == AlreadyExists, explain that is already in use, and direct them to select a different name.",
+          "readOnly": true
+        }
+      }
+    },
+    "CreateManagementGroupChildInfo": {
+      "type": "object",
+      "description": "The child information of a management group used during creation.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagementGroupChildType",
+          "description": "The fully qualified resource type which includes provider namespace (e.g. Microsoft.Management/managementGroups)",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the child resource (management group or subscription).  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the child entity.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the child resource.",
+          "readOnly": true
+        },
+        "children": {
+          "type": "array",
+          "description": "The list of children.",
+          "items": {
+            "$ref": "#/definitions/CreateManagementGroupChildInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CreateManagementGroupDetails": {
+      "type": "object",
+      "description": "The details of a management group used during creation.",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version number of the object.",
+          "readOnly": true
+        },
+        "updatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when this object was last updated.",
+          "readOnly": true
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "The identity of the principal or process that updated the object.",
+          "readOnly": true
+        },
+        "parent": {
+          "$ref": "#/definitions/CreateParentGroupInfo",
+          "description": "(Optional) The ID of the parent management group used during creation."
+        }
+      }
+    },
+    "CreateManagementGroupProperties": {
+      "type": "object",
+      "description": "The generic properties of a management group used during creation.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group. If no value is passed then this  field will be set to the groupId.",
+          "x-nullable": true
+        },
+        "details": {
+          "$ref": "#/definitions/CreateManagementGroupDetails",
+          "description": "The details of a management group used during creation."
+        },
+        "children": {
+          "type": "array",
+          "description": "The list of children.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/CreateManagementGroupChildInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "CreateManagementGroupRequest": {
+      "type": "object",
+      "description": "Management group creation parameters.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Management/managementGroups",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the management group. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "properties": {
+          "$ref": "#/definitions/CreateManagementGroupProperties",
+          "description": "The generic properties of a management group used during creation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CreateOrUpdateSettingsProperties": {
+      "type": "object",
+      "description": "The properties of the request to create or update Management Group settings",
+      "properties": {
+        "requireAuthorizationForGroupCreation": {
+          "type": "boolean",
+          "description": "Indicates whether RBAC access is required upon group creation under the root Management Group. If set to true, user will require Microsoft.Management/managementGroups/write action on the root Management Group scope in order to create new Groups directly under the root. This will prevent new users from creating new Management Groups, unless they are given access."
+        },
+        "defaultManagementGroup": {
+          "type": "string",
+          "description": "Settings that sets the default Management Group under which new subscriptions get added in this tenant. For example, /providers/Microsoft.Management/managementGroups/defaultGroup"
+        }
+      }
+    },
+    "CreateOrUpdateSettingsRequest": {
+      "type": "object",
+      "description": "Parameters for creating or updating Management Group settings",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CreateOrUpdateSettingsProperties",
+          "description": "The properties of the request to create or update Management Group settings",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "CreateParentGroupInfo": {
+      "type": "object",
+      "description": "(Optional) The ID of the parent management group used during creation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the parent management group",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the parent management group.",
+          "readOnly": true
+        }
+      }
+    },
+    "DescendantInfo": {
+      "type": "object",
+      "description": "The descendant.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the descendant.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000 or /subscriptions/0000000-0000-0000-0000-000000000000",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. For example, Microsoft.Management/managementGroups or /subscriptions",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the descendant. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DescendantInfoProperties",
+          "description": "The generic properties of an descendant.",
+          "x-nullable": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DescendantInfoProperties": {
+      "type": "object",
+      "description": "The generic properties of an descendant.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group.",
+          "x-nullable": true
+        },
+        "parent": {
+          "$ref": "#/definitions/DescendantParentGroupInfo",
+          "description": "The ID of the parent management group.",
+          "x-nullable": true
+        }
+      }
+    },
+    "DescendantListResult": {
+      "type": "object",
+      "description": "Paged collection of DescendantInfo items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DescendantInfo items on this page",
+          "items": {
+            "$ref": "#/definitions/DescendantInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DescendantParentGroupInfo": {
+      "type": "object",
+      "description": "The ID of the parent management group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "EntityInfo": {
+      "type": "object",
+      "description": "The entity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the entity.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. For example, Microsoft.Management/managementGroups",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the entity. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/EntityInfoProperties",
+          "description": "The generic properties of an entity.",
+          "x-nullable": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "EntityInfoProperties": {
+      "type": "object",
+      "description": "The generic properties of an entity.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the entity. For example, 00000000-0000-0000-0000-000000000000",
+          "x-nullable": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group.",
+          "x-nullable": true
+        },
+        "parent": {
+          "$ref": "#/definitions/EntityParentGroupInfo",
+          "description": "(Optional) The ID of the parent management group.",
+          "x-nullable": true
+        },
+        "permissions": {
+          "$ref": "#/definitions/Permissions",
+          "description": "The users specific permissions to this item.",
+          "x-nullable": true
+        },
+        "inheritedPermissions": {
+          "$ref": "#/definitions/Permissions",
+          "description": "The users specific permissions to this item.",
+          "x-nullable": true
+        },
+        "numberOfDescendants": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Descendants",
+          "x-nullable": true
+        },
+        "numberOfChildren": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of children is the number of Groups and Subscriptions that are exactly one level underneath the current Group.",
+          "x-nullable": true
+        },
+        "numberOfChildGroups": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of children is the number of Groups that are exactly one level underneath the current Group.",
+          "x-nullable": true
+        },
+        "parentDisplayNameChain": {
+          "type": "array",
+          "description": "The parent display name chain from the root group to the immediate parent",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "parentNameChain": {
+          "type": "array",
+          "description": "The parent name chain from the root group to the immediate parent",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntityListResult": {
+      "type": "object",
+      "description": "Describes the result of the request to view entities.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EntityInfo items on this page",
+          "items": {
+            "$ref": "#/definitions/EntityInfo"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of records that match the filter."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EntityParentGroupInfo": {
+      "type": "object",
+      "description": "(Optional) The ID of the parent management group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "HierarchySettings": {
+      "type": "object",
+      "description": "Settings defined at the Management Group scope.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HierarchySettingsProperties",
+          "description": "The generic properties of hierarchy settings.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HierarchySettingsInfo": {
+      "type": "object",
+      "description": "The hierarchy settings resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the settings object.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000/settings/default.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.  For example, Microsoft.Management/managementGroups/settings.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the object. In this case, default.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/HierarchySettingsProperties",
+          "description": "The generic properties of hierarchy settings.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HierarchySettingsList": {
+      "type": "object",
+      "description": "Lists all hierarchy settings.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of hierarchy settings.",
+          "items": {
+            "$ref": "#/definitions/HierarchySettingsInfo"
+          }
+        },
+        "@nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results.",
+          "readOnly": true,
+          "x-ms-client-name": "NextLink"
+        }
+      }
+    },
+    "HierarchySettingsProperties": {
+      "type": "object",
+      "description": "The generic properties of hierarchy settings.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the hierarchy settings. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "requireAuthorizationForGroupCreation": {
+          "type": "boolean",
+          "description": "Indicates whether RBAC access is required upon group creation under the root Management Group. If set to true, user will require Microsoft.Management/managementGroups/write action on the root Management Group scope in order to create new Groups directly under the root. This will prevent new users from creating new Management Groups, unless they are given access."
+        },
+        "defaultManagementGroup": {
+          "type": "string",
+          "description": "Settings that sets the default Management Group under which new subscriptions get added in this tenant. For example, /providers/Microsoft.Management/managementGroups/defaultGroup"
+        }
+      }
+    },
+    "ListSubscriptionUnderManagementGroup": {
+      "type": "object",
+      "description": "The details of all subscriptions under management group.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SubscriptionUnderManagementGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/SubscriptionUnderManagementGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagementGroup": {
+      "type": "object",
+      "description": "The management group details.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagementGroupProperties",
+          "description": "The generic properties of a management group.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagementGroupChildInfo": {
+      "type": "object",
+      "description": "The child information of a management group.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagementGroupChildType",
+          "description": "The fully qualified resource type which includes provider namespace (e.g. Microsoft.Management/managementGroups)"
+        },
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the child resource (management group or subscription).  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the child entity."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the child resource."
+        },
+        "children": {
+          "type": "array",
+          "description": "The list of children.",
+          "items": {
+            "$ref": "#/definitions/ManagementGroupChildInfo"
+          }
+        }
+      }
+    },
+    "ManagementGroupChildType": {
+      "type": "string",
+      "description": "The type of child resource.",
+      "enum": [
+        "Microsoft.Management/managementGroups",
+        "/subscriptions"
+      ],
+      "x-ms-enum": {
+        "name": "ManagementGroupChildType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Microsoft.Management/managementGroups",
+            "value": "Microsoft.Management/managementGroups",
+            "description": "Microsoft.Management/managementGroups"
+          },
+          {
+            "name": "/subscriptions",
+            "value": "/subscriptions",
+            "description": "/subscriptions"
+          }
+        ]
+      }
+    },
+    "ManagementGroupDetails": {
+      "type": "object",
+      "description": "The details of a management group.",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The version number of the object."
+        },
+        "updatedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when this object was last updated."
+        },
+        "updatedBy": {
+          "type": "string",
+          "description": "The identity of the principal or process that updated the object."
+        },
+        "parent": {
+          "$ref": "#/definitions/ParentGroupInfo",
+          "description": "(Optional) The ID of the parent management group."
+        },
+        "path": {
+          "type": "array",
+          "description": "The path from the root to the current group.",
+          "items": {
+            "$ref": "#/definitions/ManagementGroupPathElement"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "managementGroupAncestors": {
+          "type": "array",
+          "description": "The ancestors of the management group.",
+          "x-nullable": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "managementGroupAncestorsChain": {
+          "type": "array",
+          "description": "The ancestors of the management group displayed in reversed order, from immediate parent to the root.",
+          "items": {
+            "$ref": "#/definitions/ManagementGroupPathElement"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ManagementGroupInfo": {
+      "type": "object",
+      "description": "The management group resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. For example, Microsoft.Management/managementGroups",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the management group. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagementGroupInfoProperties",
+          "description": "The generic properties of a management group.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ManagementGroupInfoProperties": {
+      "type": "object",
+      "description": "The generic properties of a management group.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group."
+        }
+      }
+    },
+    "ManagementGroupListResult": {
+      "type": "object",
+      "description": "Describes the result of the request to list management groups.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of management groups.",
+          "items": {
+            "$ref": "#/definitions/ManagementGroupInfo"
+          }
+        },
+        "@nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results.",
+          "readOnly": true,
+          "x-ms-client-name": "NextLink"
+        }
+      }
+    },
+    "ManagementGroupPathElement": {
+      "type": "object",
+      "description": "A path element of a management group ancestors.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the group."
+        }
+      }
+    },
+    "ManagementGroupProperties": {
+      "type": "object",
+      "description": "The generic properties of a management group.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group."
+        },
+        "details": {
+          "$ref": "#/definitions/ManagementGroupDetails",
+          "description": "The details of a management group."
+        },
+        "children": {
+          "type": "array",
+          "description": "The list of children.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/ManagementGroupChildInfo"
+          }
+        }
+      }
+    },
+    "ParentGroupInfo": {
+      "type": "object",
+      "description": "(Optional) The ID of the parent management group.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the parent management group"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the parent management group."
+        }
+      }
+    },
+    "PatchManagementGroupRequest": {
+      "type": "object",
+      "description": "Management group patch parameters.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the management group."
+        },
+        "parentGroupId": {
+          "type": "string",
+          "description": "(Optional) The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
+        }
+      }
+    },
+    "Permissions": {
+      "type": "string",
+      "description": "The users specific permissions to this item.",
+      "enum": [
+        "noaccess",
+        "view",
+        "edit",
+        "delete"
+      ],
+      "x-ms-enum": {
+        "name": "Permissions",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "noaccess",
+            "value": "noaccess",
+            "description": "noaccess"
+          },
+          {
+            "name": "view",
+            "value": "view",
+            "description": "view"
+          },
+          {
+            "name": "edit",
+            "value": "edit",
+            "description": "edit"
+          },
+          {
+            "name": "delete",
+            "value": "delete",
+            "description": "delete"
+          }
+        ]
+      }
+    },
+    "Reason": {
+      "type": "string",
+      "description": "Required if nameAvailable == false. Invalid indicates the name provided does not match the resource provider's naming requirements (incorrect length, unsupported characters, etc.) AlreadyExists indicates that the name is already in use and is therefore unavailable.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "Reason",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "Invalid"
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "AlreadyExists"
+          }
+        ]
+      }
+    },
+    "Status": {
+      "type": "string",
+      "description": "The status of the Tenant Backfill",
+      "enum": [
+        "NotStarted",
+        "NotStartedButGroupsExist",
+        "Started",
+        "Failed",
+        "Cancelled",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "NotStarted"
+          },
+          {
+            "name": "NotStartedButGroupsExist",
+            "value": "NotStartedButGroupsExist",
+            "description": "NotStartedButGroupsExist"
+          },
+          {
+            "name": "Started",
+            "value": "Started",
+            "description": "Started"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "Cancelled"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Completed"
+          }
+        ]
+      }
+    },
+    "SubscriptionUnderManagementGroup": {
+      "type": "object",
+      "description": "The details of subscription under management group.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SubscriptionUnderManagementGroupProperties",
+          "description": "The generic properties of subscription under a management group.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SubscriptionUnderManagementGroupProperties": {
+      "type": "object",
+      "description": "The generic properties of subscription under a management group.",
+      "properties": {
+        "tenant": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the subscription. For example, 00000000-0000-0000-0000-000000000000"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The friendly name of the subscription."
+        },
+        "parent": {
+          "$ref": "#/definitions/DescendantParentGroupInfo",
+          "description": "The ID of the parent management group.",
+          "x-nullable": true
+        },
+        "state": {
+          "type": "string",
+          "description": "The state of the subscription."
+        }
+      }
+    },
+    "TenantBackfillStatusResult": {
+      "type": "object",
+      "description": "The tenant backfill status",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The AAD Tenant ID associated with the management group. For example, 00000000-0000-0000-0000-000000000000",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the Tenant Backfill",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

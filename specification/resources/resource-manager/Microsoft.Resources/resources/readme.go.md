@@ -14,7 +14,7 @@ directive:
 
 ``` yaml $(go) && $(track2) && $(package-resources)
 license-header: MICROSOFT_MIT_NO_VERSION
-module-name: sdk/resourcemanager/resources/armresources
+module-name: sdk/resourcemanager/resources/armresources/v3
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true

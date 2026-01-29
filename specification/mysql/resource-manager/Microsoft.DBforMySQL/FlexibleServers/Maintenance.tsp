@@ -36,6 +36,7 @@ interface Maintenances {
    * Update maintenances.
    */
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("original-uri")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     Maintenance,
     PatchModel = MaintenanceUpdate,

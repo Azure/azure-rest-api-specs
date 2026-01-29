@@ -24,6 +24,7 @@ model ActiveDirectoryConfig
     SegmentName = "activeDirectoryConfigs",
     NamePattern = "^[a-zA-Z][a-zA-Z0-9\\-_]{0,63}$"
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }

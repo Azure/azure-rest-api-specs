@@ -142,7 +142,7 @@ model PlacementPolicyProperties {
 model PlacementPolicyUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("The properties of a placement policy resource that may be updated")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!javascript")
   properties?: PlacementPolicyUpdateProperties;
 }
 

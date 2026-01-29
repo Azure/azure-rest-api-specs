@@ -1,0 +1,45 @@
+{
+  "title": "Volumes_ListByVolumeGroup",
+  "operationId": "Volumes_ListByVolumeGroup",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01",
+    "volumeGroupName": "volumegroup-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "space": {
+                "totalUsed": 1073741824,
+                "unique": 536870912,
+                "snapshots": 268435456,
+                "shared": 268435456
+              },
+              "provisionedSize": 10737418240,
+              "serialNumber": "PURE-VOL-ABC123XYZ",
+              "createdAt": "2026-01-16T07:25:56.721Z",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/storagePools/storagepool-01/volumeGroups/volumegroup-01/volumes/volume-01",
+            "name": "volume-01",
+            "type": "PureStorage.Block/storagePools/volumeGroups/volumes",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-01-16T07:25:56.721Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-01-16T07:25:56.721Z"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { basename, join, relative } from "path";
+import { isDeepStrictEqual } from "util";
 import { AutorestRunResult, BeforeAfter, LintDiffViolation, Source } from "./lintdiff-types.js";
 import { getDefaultTag } from "./markdown-utils.js";
 import { isFailure, isWarning, pathExists, relativizePath } from "./util.js";
@@ -40,10 +41,12 @@ export async function correlateRuns(
       const beforeReadme = new Readme(beforeReadmePath);
       const defaultTag = await getDefaultTag(beforeReadme);
       if (!defaultTag) {
-        throw new Error(`No default tag found for readme ${readme.toString()} in before state`);
+        throw new Error(`No default tag found for readme ${readme.path} in before state`);
       }
       const beforeDefaultTagCandidates = beforeChecks.filter(
-        (r) => relative(beforePath, r.readme.path) === readmePathRelative && r.tag === defaultTag,
+        (r) =>
+          relative(beforePath, r.readme.path) === readmePathRelative &&
+          (r.tag === defaultTag || r.tag === ""),
       );
 
       if (beforeDefaultTagCandidates.length === 1) {
@@ -70,7 +73,7 @@ export async function correlateRuns(
         continue;
       } else if (beforeReadmeCandidate.length > 1) {
         throw new Error(
-          `Multiple before candidates found for key ${key} using readme ${readme.toString()}`,
+          `Multiple before candidates found for key ${key} using readme ${readme.path}`,
         );
       }
     }
@@ -150,8 +153,8 @@ export function getLintDiffViolations(runResult: AutorestRunResult): LintDiffVio
       continue;
     }
 
-    const result = JSON.parse(line.trim()) as { code: string };
-    if (result.code == undefined) {
+    const result = JSON.parse(line.trim()) as { code: string | undefined };
+    if (result.code === undefined) {
       // Results without a code can be assumed to be fatal errors. Set the code
       // to "FATAL"
       result.code = "FATAL";
@@ -189,7 +192,7 @@ export function getNewItems(
         beforeViolation.source?.length &&
         afterViolation.source?.length &&
         isSameSources(beforeViolation.source, afterViolation.source) &&
-        arrayIsEqual(beforeViolation.details?.jsonpath, afterViolation.details?.jsonpath)
+        isDeepStrictEqual(beforeViolation.details?.jsonpath, afterViolation.details?.jsonpath)
       ) {
         errorIsNew = false;
         existingItems.push(afterViolation);
@@ -211,18 +214,6 @@ export function getNewItems(
 export function isSameSources(a: Source[], b: Source[]) {
   if (a?.length && b?.length) {
     return basename(a?.[0]?.document) === basename(b?.[0]?.document);
-  }
-  return true;
-}
-
-export function arrayIsEqual(a: unknown[], b: unknown[]) {
-  if (a.length !== b.length) {
-    return false;
-  }
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[i]) {
-      return false;
-    }
   }
   return true;
 }

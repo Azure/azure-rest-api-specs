@@ -193,7 +193,7 @@ model PrivateCloudUpdate {
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
   @doc("The updatable properties of a private cloud resource")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!javascript")
   properties?: PrivateCloudUpdateProperties;
 }
 
