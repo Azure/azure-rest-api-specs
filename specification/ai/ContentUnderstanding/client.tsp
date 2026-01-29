@@ -102,10 +102,8 @@ interface ContentUnderstandingClient {
 
 // Custom parameter order for analyzeBinary: put required 'input' before optional parameters with defaults.
 // This ensures 'contentType' (which has a default) appears after the required body parameter.
-// Default stringEncoding is "utf16" for Java and .NET, "codePoint" for others.
-
-// analyzeBinary override for Java and .NET (stringEncoding defaults to "utf16")
-op analyzeBinaryCustomSignatureUtf16(
+// stringEncoding is required - each SDK will set the appropriate default via language-specific customization.
+op analyzeBinaryCustomSignature(
   @doc("The unique identifier of the analyzer.")
   @path
   analyzerId: string,
@@ -113,6 +111,10 @@ op analyzeBinaryCustomSignatureUtf16(
   @doc("The binary content of the document to analyze.")
   @bodyRoot
   input: bytes,
+
+  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'.")
+  @query
+  stringEncoding: string,
 
   @doc("Range of the input to analyze (ex. `1-3,5,9-`). Document content uses 1-based page numbers, while audio visual content uses integer milliseconds.")
   @query
@@ -127,69 +129,26 @@ op analyzeBinaryCustomSignatureUtf16(
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global,
 
-  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'. Default is 'utf16'.")
-  @query
-  stringEncoding?: string = "utf16",
-
   @doc("The API version to use for this operation.")
   @query("api-version")
   apiVersion: string,
 ): AnalyzeResult;
 
-@@override(ContentUnderstandingClient.analyzeBinary,
-  analyzeBinaryCustomSignatureUtf16,
-  "java, csharp"
-);
-
-// analyzeBinary override for Python, JavaScript, Go (stringEncoding defaults to "codePoint")
-op analyzeBinaryCustomSignatureCodePoint(
-  @doc("The unique identifier of the analyzer.")
-  @path
-  analyzerId: string,
-
-  @doc("The binary content of the document to analyze.")
-  @bodyRoot
-  input: bytes,
-
-  @doc("Range of the input to analyze (ex. `1-3,5,9-`). Document content uses 1-based page numbers, while audio visual content uses integer milliseconds.")
-  @query
-  range?: RangeExpression,
-
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Conflicts with @typespec/http/content-type-string"
-  @doc("Request content type.")
-  @header
-  contentType?: string = "application/octet-stream",
-
-  @doc("The location where the data may be processed. Defaults to global.")
-  @query
-  processingLocation?: ProcessingLocation = ProcessingLocation.global,
-
-  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'. Default is 'codePoint'.")
-  @query
-  stringEncoding?: string = "codePoint",
-
-  @doc("The API version to use for this operation.")
-  @query("api-version")
-  apiVersion: string,
-): AnalyzeResult;
-
-@@override(ContentUnderstandingClient.analyzeBinary,
-  analyzeBinaryCustomSignatureCodePoint,
-  "python, javascript"
-);
+@@override(ContentUnderstandingClient.analyzeBinary, analyzeBinaryCustomSignature);
 
 // Custom parameter order for analyze: put main input data before optional processing parameters.
-// Order: analyzerId, inputs, modelDeployments, processingLocation, stringEncoding
-// Default stringEncoding is "utf16" for Java and .NET, "codePoint" for others.
-
-// analyze override for Java and .NET (stringEncoding defaults to "utf16")
-op analyzeCustomSignatureUtf16(
+// stringEncoding is required - each SDK will set the appropriate default via language-specific customization.
+op analyzeCustomSignature(
   @doc("The unique identifier of the analyzer.")
   @path
   analyzerId: string,
 
   @doc("Inputs to analyze. Currently, only pro mode supports multiple inputs.")
   inputs?: AnalyzeInput[],
+
+  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'.")
+  @query
+  stringEncoding: string,
 
   @doc("Override default mapping of model names to deployments. Ex. { \"gpt-4.1\": \"myGpt41Deployment\" }.")
   modelDeployments?: Record<string>,
@@ -198,46 +157,9 @@ op analyzeCustomSignatureUtf16(
   @query
   processingLocation?: ProcessingLocation = ProcessingLocation.global,
 
-  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'. Default is 'utf16'.")
-  @query
-  stringEncoding?: string = "utf16",
-
   @doc("The API version to use for this operation.")
   @query("api-version")
   apiVersion: string,
 ): AnalyzeResult;
 
-@@override(ContentUnderstandingClient.analyze,
-  analyzeCustomSignatureUtf16,
-  "java, csharp"
-);
-
-// analyze override for Python, JavaScript, Go (stringEncoding defaults to "codePoint")
-op analyzeCustomSignatureCodePoint(
-  @doc("The unique identifier of the analyzer.")
-  @path
-  analyzerId: string,
-
-  @doc("Inputs to analyze. Currently, only pro mode supports multiple inputs.")
-  inputs?: AnalyzeInput[],
-
-  @doc("Override default mapping of model names to deployments. Ex. { \"gpt-4.1\": \"myGpt41Deployment\" }.")
-  modelDeployments?: Record<string>,
-
-  @doc("The location where the data may be processed. Defaults to global.")
-  @query
-  processingLocation?: ProcessingLocation = ProcessingLocation.global,
-
-  @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'. Default is 'codePoint'.")
-  @query
-  stringEncoding?: string = "codePoint",
-
-  @doc("The API version to use for this operation.")
-  @query("api-version")
-  apiVersion: string,
-): AnalyzeResult;
-
-@@override(ContentUnderstandingClient.analyze,
-  analyzeCustomSignatureCodePoint,
-  "python, javascript"
-);
+@@override(ContentUnderstandingClient.analyze, analyzeCustomSignature);
