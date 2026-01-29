@@ -38,7 +38,7 @@ model BookshelfProperties {
   provisioningState?: ProvisioningState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
-  @doc("User assigned identity IDs to be used by knowledgebase workloads.")
+  @doc("User assigned identity IDs to be used by knowledgebase workloads. The key value must be the resource ID of the identity resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Versions.v2026_02_01_preview)
   workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;

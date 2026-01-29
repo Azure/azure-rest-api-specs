@@ -144,7 +144,7 @@ model SupercomputerIdentities {
   kubeletIdentity: Microsoft.Discovery.Identity;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
-  @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer.")
+  @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
 }
