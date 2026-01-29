@@ -16,3 +16,8 @@ using Azure.ClientGenerator.Core;
   "waitValue",
   "java"
 );
+
+@@clientName(Microsoft.KubernetesConfiguration.OCIRepositoryDefinition,
+  "OciRepositoryDefinition",
+  "java"
+);
