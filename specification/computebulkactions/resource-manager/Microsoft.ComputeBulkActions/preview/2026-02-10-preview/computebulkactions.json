@@ -2394,42 +2394,6 @@
         }
       }
     },
-    "FungibleProperties": {
-      "type": "object",
-      "description": "The fungible properties which the customers can use to specify multiple VM SKU options and allocation strategy, for greater flexibility and higher chances of successful VM creation",
-      "properties": {
-        "vmSizesProfile": {
-          "type": "array",
-          "description": "List of VM sizes supported for fungible VMs",
-          "minItems": 1,
-          "maxItems": 10,
-          "items": {
-            "$ref": "#/definitions/VmSizeProfile"
-          }
-        },
-        "osType": {
-          "type": "string",
-          "description": "The OS type to create fungible VMs"
-        },
-        "capacityType": {
-          "$ref": "#/definitions/CapacityType",
-          "description": "Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs."
-        },
-        "priorityProfile": {
-          "$ref": "#/definitions/PriorityProfile",
-          "description": "Configuration Options for Regular or Spot instances in fungible VMs"
-        },
-        "zoneAllocationPolicy": {
-          "$ref": "#/definitions/ZoneAllocationPolicy",
-          "description": "Zone Allocation Policy for launching instances."
-        }
-      },
-      "required": [
-        "vmSizesProfile",
-        "osType",
-        "priorityProfile"
-      ]
-    },
     "GetOperationErrorsRequest": {
       "type": "object",
       "description": "This is the request to get errors per vm operations",
@@ -3690,6 +3654,42 @@
         }
       }
     },
+    "Properties": {
+      "type": "object",
+      "description": "The properties model which the customers can use to specify multiple VM SKU options and allocation strategy, for greater flexibility and higher chances of successful VM creation",
+      "properties": {
+        "vmSizesProfile": {
+          "type": "array",
+          "description": "List of VM sizes supported for properties model",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/VmSizeProfile"
+          }
+        },
+        "osType": {
+          "type": "string",
+          "description": "Specifies the OS type for creating the VMs"
+        },
+        "capacityType": {
+          "$ref": "#/definitions/CapacityType",
+          "description": "Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs."
+        },
+        "priorityProfile": {
+          "$ref": "#/definitions/PriorityProfile",
+          "description": "Configuration Options for Regular or Spot instances in the VMs"
+        },
+        "zoneAllocationPolicy": {
+          "$ref": "#/definitions/ZoneAllocationPolicy",
+          "description": "Zone Allocation Policy for launching instances."
+        }
+      },
+      "required": [
+        "vmSizesProfile",
+        "osType",
+        "priorityProfile"
+      ]
+    },
     "ProtocolTypes": {
       "type": "string",
       "description": "Specifies the protocol of WinRM listener. Possible values are: **http,** **https.**",
@@ -4239,9 +4239,9 @@
           "type": "string",
           "description": "if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1.."
         },
-        "fungibleProperties": {
-          "$ref": "#/definitions/FungibleProperties",
-          "description": "Fungible properties tag to create Vms based on size, zone and allocation strategy"
+        "properties": {
+          "$ref": "#/definitions/Properties",
+          "description": "Properties tag to create Vms based on size, zone and allocation strategy"
         }
       },
       "required": [

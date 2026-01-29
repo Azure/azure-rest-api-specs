@@ -221,20 +221,20 @@ model ResourcesWithContext {
 }
 
 @added(Versions.`2026-02-10-preview`)
-@doc("The fungible properties which the customers can use to specify multiple VM SKU options and allocation strategy, for greater flexibility and higher chances of successful VM creation")
-model FungibleProperties {
-  @doc("List of VM sizes supported for fungible VMs")
+@doc("The properties model which the customers can use to specify multiple VM SKU options and allocation strategy, for greater flexibility and higher chances of successful VM creation")
+model Properties {
+  @doc("List of VM sizes supported for properties model")
   @minItems(1)
   @maxItems(10)
   vmSizesProfile: Array<VmSizeProfile>;
 
-  @doc("The OS type to create fungible VMs")
+  @doc("Specifies the OS type for creating the VMs")
   osType: string;
 
   @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
   capacityType?: CapacityType;
 
-  @doc("Configuration Options for Regular or Spot instances in fungible VMs")
+  @doc("Configuration Options for Regular or Spot instances in the VMs")
   priorityProfile: PriorityProfile;
 
   @doc("Zone Allocation Policy for launching instances.")
@@ -258,8 +258,8 @@ model ResourceProvisionPayload {
   resourcePrefix?: string;
 
   @added(Versions.`2026-02-10-preview`)
-  @doc("Fungible properties tag to create Vms based on size, zone and allocation strategy")
-  fungibleProperties?: FungibleProperties;
+  @doc("Properties tag to create Vms based on size, zone and allocation strategy")
+  properties?: Properties;
 }
 
 @doc("The retry policy for the user request")
