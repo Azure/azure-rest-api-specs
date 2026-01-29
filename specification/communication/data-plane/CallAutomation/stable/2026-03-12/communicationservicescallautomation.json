@@ -2800,6 +2800,7 @@
       "additionalProperties": false
     },
     "MediaStreamingOptions": {
+      "description": "Options for media streaming.",
       "required": [
         "audioChannelType",
         "transportType"
@@ -2813,7 +2814,6 @@
           "$ref": "#/definitions/MediaStreamingAudioChannelType"
         }
       },
-      "additionalProperties": false,
       "discriminator": "transportType"
     },
     "MediaStreamingStarted": {
@@ -4239,6 +4239,7 @@
       "additionalProperties": false
     },
     "TranscriptionOptions": {
+      "description": "Options for transcription.",
       "required": [
         "transportType"
       ],
@@ -4251,7 +4252,6 @@
           "type": "string"
         }
       },
-      "additionalProperties": false,
       "discriminator": "transportType"
     },
     "TranscriptionResultType": {
@@ -4259,7 +4259,11 @@
         "final",
         "intermediate"
       ],
-      "type": "string"
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TranscriptionResultType",
+        "modelAsString": true
+      }
     },
     "TranscriptionStarted": {
       "type": "object",
@@ -4526,64 +4530,80 @@
       }
     },
     "WebSocketMediaStreamingOptions": {
+      "description": "Represents the options for WebSocket transport.",
       "required": [
         "audioChannelType",
         "transportType"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaStreamingOptions"
+        }
+      ],
       "properties": {
         "transportUrl": {
+          "description": "The transport URL for media streaming.",
           "type": "string"
         },
         "contentType": {
           "$ref": "#/definitions/MediaStreamingContentType"
         },
         "startMediaStreaming": {
+          "description": "A value indicating whether the media streaming should start immediately after the call is answered.",
           "type": "boolean"
         },
         "enableBidirectional": {
+          "description": "A value indicating whether bidirectional streaming is enabled.",
           "type": "boolean"
         },
         "audioFormat": {
           "$ref": "#/definitions/AudioFormat"
         },
         "enableDtmfTones": {
+          "description": "A value that indicates whether to stream the DTMF tones.",
           "type": "boolean"
-        },
-        "transportType": {
-          "$ref": "#/definitions/StreamingTransportType"
-        },
-        "audioChannelType": {
-          "$ref": "#/definitions/MediaStreamingAudioChannelType"
         }
       },
-      "additionalProperties": false
+      "x-ms-discriminator-value": "websocket"
     },
     "WebSocketTranscriptionOptions": {
+      "description": "Represents the options for WebSocket transcription transport.",
       "required": [
         "transportType"
       ],
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TranscriptionOptions"
+        }
+      ],
       "properties": {
         "transportUrl": {
+          "description": "The transport URL for transcription.",
           "type": "string"
         },
         "speechModelEndpointId": {
+          "description": "The speech model endpoint ID.",
           "type": "string"
         },
         "startTranscription": {
+          "description": "A value indicating whether transcription should start immediately.",
           "type": "boolean"
         },
         "enableIntermediateResults": {
+          "description": "A value indicating whether intermediate results are enabled.",
           "type": "boolean"
         },
         "piiRedactionOptions": {
           "$ref": "#/definitions/PiiRedactionOptions"
         },
         "enableSentimentAnalysis": {
+          "description": "A value indicating whether sentiment analysis is enabled.",
           "type": "boolean"
         },
         "locales": {
+          "description": "The list of locales for transcription.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4591,15 +4611,9 @@
         },
         "summarizationOptions": {
           "$ref": "#/definitions/SummarizationOptions"
-        },
-        "transportType": {
-          "$ref": "#/definitions/StreamingTransportType"
-        },
-        "locale": {
-          "type": "string"
         }
       },
-      "additionalProperties": false
+      "x-ms-discriminator-value": "websocket"
     }
   },
   "parameters": {
@@ -4632,7 +4646,7 @@
   },
   "security": [
     {
-      "Authorization": [ ]
+      "Authorization": []
     }
   ],
   "x-ms-parameterized-host": {
