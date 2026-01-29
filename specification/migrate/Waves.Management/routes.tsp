@@ -2,7 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@azure-tools/typespec-client-generator-core";
 import "./ApiVersions.tsp";
-import "./WebModels/Waves/DownloadWaveRecommendationUrl.tsp";
+import "./WebModels/Waves/GenerateWavePlan.tsp";
 import "./WebModels/Waves/MigrationWaves.tsp";
 import "./WebModels/MigrationEntity/MigrationEntity.tsp";
 import "./WebModels/MigrationEntityGroup/MigrationEntityGroups.tsp";
@@ -24,8 +24,8 @@ interface MigrateProjects {
   @added(ApiVersions.v2025_12_01_preview)
   generateWavePlan is ArmResourceActionAsync<
     MigrateProject,
-    void,
-    DownloadWaveRecommendationUrl
+    GenerateWavePlanRequest,
+    GenerateWavePlanResponse
   >;
 }
 
