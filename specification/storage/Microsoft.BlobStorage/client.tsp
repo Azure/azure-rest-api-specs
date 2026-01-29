@@ -63,6 +63,7 @@ namespace Customizations;
   "blobAnalyticsLogging",
   "javascript"
 );
+@@clientName(Logging.delete, "deleteProperty", "javascript");
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "javascript");
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "javascript");
 @@clientName(UserDelegationKey.signedStart, "signedStartsOn", "javascript");
