@@ -312,6 +312,8 @@ interface AvailableEndpointServicesOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 interface ExpressRouteServiceProvidersOperationGroup {
   /**
    * Gets all the available express route service providers.

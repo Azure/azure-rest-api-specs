@@ -4783,24 +4783,6 @@
         }
       }
     },
-    "ListP2SVpnGatewaysResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/P2SVpnGateway"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "ListVirtualHubIpConfigurationResults__deleted": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -4909,27 +4891,6 @@
         }
       }
     },
-    "P2SConnectionConfiguration__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/P2SConnectionConfigurationProperties",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
-    },
     "PeerRouteList__deleted": {
       "type": "object",
       "additionalProperties": {
@@ -4966,31 +4927,6 @@
         }
       }
     },
-    "VpnServerConfigurationPolicyGroup__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VpnServerConfigurationPolicyGroupProperties",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
-    },
     "VpnSiteId__deleted": {
       "type": "object",
       "properties": {
@@ -4999,56 +4935,6 @@
           "readOnly": true
         }
       }
-    },
-    "VpnSiteLink__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VpnSiteLinkProperties",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
-    },
-    "VpnSiteLinkConnection__deleted": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/VpnSiteLinkConnectionProperties",
-          "x-ms-client-flatten": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./network.json#/definitions/SubResource"
-        }
-      ]
     },
     "Record<PeerRoute[]>__added": {
       "type": "object",
@@ -5334,6 +5220,11 @@
         "value"
       ]
     },
+    "ListP2SVpnGatewaysResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "ListRouteMapsResult": {
       "required__added": [
         "value"
@@ -5377,17 +5268,7 @@
     "ListVpnSiteLinksResult": {
       "required__added": [
         "value"
-      ],
-      "properties": {
-        "value": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/VpnSiteLink",
-              "__new": "./common.json#/definitions/VpnSiteLink"
-            }
-          }
-        }
-      }
+      ]
     },
     "ListVpnSitesResult": {
       "required__added": [
@@ -5443,6 +5324,19 @@
         }
       }
     },
+    "P2SConnectionConfiguration": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
     "P2SConnectionConfigurationProperties": {
       "properties": {
         "configurationPolicyGroupAssociations": {
@@ -5451,14 +5345,6 @@
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
               "__new": "./common.json#/definitions/SubResource"
-            }
-          }
-        },
-        "previousConfigurationPolicyGroupAssociations": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/VpnServerConfigurationPolicyGroup",
-              "__new": "./common.json#/definitions/VpnServerConfigurationPolicyGroup"
             }
           }
         },
@@ -5492,14 +5378,6 @@
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
             "__new": "./common.json#/definitions/SubResource"
-          }
-        },
-        "p2SConnectionConfigurations": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/P2SConnectionConfiguration",
-              "__new": "./common.json#/definitions/P2SConnectionConfiguration"
-            }
           }
         },
         "provisioningState": {
@@ -5989,7 +5867,7 @@
           "items": {
             "$ref": {
               "__old": "./virtualNetworkGateway.json#/definitions/TrafficSelectorPolicy",
-              "__new": "./common.json#/definitions/TrafficSelectorPolicy"
+              "__new": "./networkGateway.json#/definitions/TrafficSelectorPolicy"
             }
           }
         },
@@ -5997,14 +5875,6 @@
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
             "__new": "./common.json#/definitions/NetworkProvisioningState"
-          }
-        },
-        "vpnLinkConnections": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/VpnSiteLinkConnection",
-              "__new": "./common.json#/definitions/VpnSiteLinkConnection"
-            }
           }
         }
       }
@@ -6137,6 +6007,28 @@
         ]
       ]
     },
+    "VpnServerConfigurationPolicyGroup": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
     "VpnServerConfigurationPolicyGroupMember": {
       "properties": {
         "attributeType": {
@@ -6218,15 +6110,7 @@
           "items": {
             "$ref": {
               "__old": "./virtualNetworkGateway.json#/definitions/RadiusServer",
-              "__new": "./common.json#/definitions/RadiusServer"
-            }
-          }
-        },
-        "configurationPolicyGroups": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/VpnServerConfigurationPolicyGroup",
-              "__new": "./common.json#/definitions/VpnServerConfigurationPolicyGroup"
+              "__new": "./networkGateway.json#/definitions/RadiusServer"
             }
           }
         }
@@ -6243,6 +6127,50 @@
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
               "__new": "./common.json#/definitions/ResourceWithRequiredLocation"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnSiteLink": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnSiteLinkConnection": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
             }
           }
         ]
@@ -6360,14 +6288,6 @@
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
             "__new": "./common.json#/definitions/NetworkProvisioningState"
-          }
-        },
-        "vpnSiteLinks": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/VpnSiteLink",
-              "__new": "./common.json#/definitions/VpnSiteLink"
-            }
           }
         },
         "o365Policy": {

@@ -608,67 +608,6 @@
         "type": "string"
       }
     },
-    "ExclusionManagedRule__deleted": {
-      "type": "object",
-      "properties": {
-        "ruleId": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "ruleId"
-      ]
-    },
-    "GroupByUserSession__deleted": {
-      "type": "object",
-      "properties": {
-        "groupByVariables": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GroupByVariable"
-          }
-        }
-      },
-      "required": [
-        "groupByVariables"
-      ]
-    },
-    "GroupByVariable__deleted": {
-      "type": "object",
-      "properties": {
-        "variableName": {
-          "type": "string",
-          "enum": [
-            "ClientAddr",
-            "GeoLocation",
-            "None",
-            "ClientAddrXFFHeader",
-            "GeoLocationXFFHeader"
-          ],
-          "x-ms-enum": {
-            "name": "ApplicationGatewayFirewallUserSessionVariable",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "variableName"
-      ]
-    },
-    "HeaderValueMatcher__deleted": {
-      "type": "object",
-      "properties": {
-        "pattern": {
-          "type": "string"
-        },
-        "ignoreCase": {
-          "type": "boolean"
-        },
-        "negate": {
-          "type": "boolean"
-        }
-      }
-    },
     "PolicySettingsLogScrubbing__added": {
       "type": "object",
       "properties": {
@@ -857,7 +796,7 @@
           "items": {
             "$ref": {
               "__old": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
-              "__new": "./common.json#/definitions/NetworkInterfaceIPConfiguration"
+              "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
             }
           }
         },
@@ -874,7 +813,7 @@
         "ipConfiguration": {
           "$ref": {
             "__old": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
-            "__new": "./common.json#/definitions/NetworkInterfaceIPConfiguration"
+            "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
           }
         },
         "health": {
@@ -1317,11 +1256,7 @@
     "ApplicationGatewayHeaderConfiguration": {
       "properties": {
         "headerValueMatcher": {
-          "type__deleted": "object",
-          "$ref": {
-            "__old": "#/definitions/HeaderValueMatcher",
-            "__new": "./common.json#/definitions/HeaderValueMatcher"
-          }
+          "type__deleted": "object"
         }
       }
     },
@@ -2557,15 +2492,22 @@
         }
       }
     },
-    "ExclusionManagedRuleGroup": {
+    "GroupByVariable": {
       "properties": {
-        "rules": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/ExclusionManagedRule",
-              "__new": "./common.json#/definitions/ExclusionManagedRule"
-            }
-          }
+        "variableName": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "ClientAddr",
+            "GeoLocation",
+            "None",
+            "ClientAddrXFFHeader",
+            "GeoLocationXFFHeader"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ApplicationGatewayFirewallUserSessionVariable",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/ApplicationGatewayFirewallUserSessionVariable"
         }
       }
     },
@@ -2819,14 +2761,6 @@
             "modelAsString": true
           },
           "$ref__added": "./common.json#/definitions/WebApplicationFirewallRuleType"
-        },
-        "groupByUserSession": {
-          "items": {
-            "$ref": {
-              "__old": "#/definitions/GroupByUserSession",
-              "__new": "./common.json#/definitions/GroupByUserSession"
-            }
-          }
         },
         "action": {
           "type__deleted": "string",

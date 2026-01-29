@@ -2531,7 +2531,7 @@
           "description": "Header name of the header configuration."
         },
         "headerValueMatcher": {
-          "$ref": "./common.json#/definitions/HeaderValueMatcher",
+          "$ref": "#/definitions/HeaderValueMatcher",
           "description": "An optional field under \"Rewrite Action\". It lets you capture and modify the value(s) of a specific header when multiple headers with the same name exist. Currently supported for Set-Cookie Response header only. For more details, visit https://aka.ms/appgwheadercrud"
         },
         "headerValue": {
@@ -4483,6 +4483,19 @@
         "valueMatchOperator"
       ]
     },
+    "ExclusionManagedRule": {
+      "type": "object",
+      "description": "Defines a managed rule to use for exclusion.",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Identifier for the managed rule."
+        }
+      },
+      "required": [
+        "ruleId"
+      ]
+    },
     "ExclusionManagedRuleGroup": {
       "type": "object",
       "description": "Defines a managed rule group to use for exclusion.",
@@ -4495,7 +4508,7 @@
           "type": "array",
           "description": "List of rules that will be excluded. If none specified, all rules in the group will be excluded.",
           "items": {
-            "$ref": "./common.json#/definitions/ExclusionManagedRule"
+            "$ref": "#/definitions/ExclusionManagedRule"
           }
         }
       },
@@ -4527,6 +4540,54 @@
         "ruleSetType",
         "ruleSetVersion"
       ]
+    },
+    "GroupByUserSession": {
+      "type": "object",
+      "description": "Define user session identifier group by clauses.",
+      "properties": {
+        "groupByVariables": {
+          "type": "array",
+          "description": "List of group by clause variables.",
+          "items": {
+            "$ref": "#/definitions/GroupByVariable"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "groupByVariables"
+      ]
+    },
+    "GroupByVariable": {
+      "type": "object",
+      "description": "Define user session group by clause variables.",
+      "properties": {
+        "variableName": {
+          "$ref": "./common.json#/definitions/ApplicationGatewayFirewallUserSessionVariable",
+          "description": "User Session clause variable."
+        }
+      },
+      "required": [
+        "variableName"
+      ]
+    },
+    "HeaderValueMatcher": {
+      "type": "object",
+      "description": "An optional field under \"Rewrite Action\". It lets you capture and modify the value(s) of a specific header when multiple headers with the same name exist. Currently supported for Set-Cookie Response header only. For more details, visit https://aka.ms/appgwheadercrud",
+      "properties": {
+        "pattern": {
+          "type": "string",
+          "description": "The pattern, either fixed string or regular expression, that evaluates if a header value should be selected for rewrite."
+        },
+        "ignoreCase": {
+          "type": "boolean",
+          "description": "Setting this parameter to truth value with force the pattern to do a case in-sensitive comparison."
+        },
+        "negate": {
+          "type": "boolean",
+          "description": "Setting this value as truth will force to check the negation of the condition given by the user in the pattern field."
+        }
+      }
     },
     "ManagedRuleGroupOverride": {
       "type": "object",
@@ -4876,7 +4937,7 @@
           "type": "array",
           "description": "List of user session identifier group by clauses.",
           "items": {
-            "$ref": "./common.json#/definitions/GroupByUserSession"
+            "$ref": "#/definitions/GroupByUserSession"
           },
           "x-ms-identifiers": []
         },

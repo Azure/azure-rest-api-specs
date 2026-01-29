@@ -1351,7 +1351,7 @@
         "backendIPConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/NetworkInterfaceIPConfiguration"
+            "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
           },
           "readOnly": true
         },
@@ -1424,7 +1424,7 @@
           "type": "string"
         },
         "ipConfiguration": {
-          "$ref": "./common.json#/definitions/NetworkInterfaceIPConfiguration"
+          "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
         },
         "health": {
           "$ref": "./common.json#/definitions/ApplicationGatewayBackendHealthServerHealth"
@@ -1966,7 +1966,7 @@
           "type": "string"
         },
         "headerValueMatcher": {
-          "$ref": "./common.json#/definitions/HeaderValueMatcher"
+          "$ref": "#/definitions/HeaderValueMatcher"
         },
         "headerValue": {
           "type": "string"
@@ -3577,6 +3577,17 @@
         "valueMatchOperator"
       ]
     },
+    "ExclusionManagedRule": {
+      "type": "object",
+      "properties": {
+        "ruleId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ruleId"
+      ]
+    },
     "ExclusionManagedRuleGroup": {
       "type": "object",
       "properties": {
@@ -3586,7 +3597,7 @@
         "rules": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/ExclusionManagedRule"
+            "$ref": "#/definitions/ExclusionManagedRule"
           }
         }
       },
@@ -3614,6 +3625,45 @@
         "ruleSetType",
         "ruleSetVersion"
       ]
+    },
+    "GroupByUserSession": {
+      "type": "object",
+      "properties": {
+        "groupByVariables": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupByVariable"
+          }
+        }
+      },
+      "required": [
+        "groupByVariables"
+      ]
+    },
+    "GroupByVariable": {
+      "type": "object",
+      "properties": {
+        "variableName": {
+          "$ref": "./common.json#/definitions/ApplicationGatewayFirewallUserSessionVariable"
+        }
+      },
+      "required": [
+        "variableName"
+      ]
+    },
+    "HeaderValueMatcher": {
+      "type": "object",
+      "properties": {
+        "pattern": {
+          "type": "string"
+        },
+        "ignoreCase": {
+          "type": "boolean"
+        },
+        "negate": {
+          "type": "boolean"
+        }
+      }
     },
     "ManagedRuleGroupOverride": {
       "type": "object",
@@ -3902,7 +3952,7 @@
         "groupByUserSession": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/GroupByUserSession"
+            "$ref": "#/definitions/GroupByUserSession"
           }
         },
         "action": {

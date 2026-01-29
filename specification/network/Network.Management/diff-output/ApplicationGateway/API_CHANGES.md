@@ -57,6 +57,7 @@
 | `definitions.ExceptionEntry.properties.matchVariable.$ref__added` | added | `./common.json#/definitions/ExceptionEntryMatchVariable` |
 | `definitions.ExceptionEntry.properties.selectorMatchOperator.$ref__added` | added | `./common.json#/definitions/ExceptionEntrySelectorMatchOperator` |
 | `definitions.ExceptionEntry.properties.valueMatchOperator.$ref__added` | added | `./common.json#/definitions/ExceptionEntryValueMatchOperator` |
+| `definitions.GroupByVariable.properties.variableName.$ref__added` | added | `./common.json#/definitions/ApplicationGatewayFirewallUserSessionVariable` |
 | `definitions.ManagedRuleOverride.properties.action.$ref__added` | added | `./common.json#/definitions/ActionType` |
 | `definitions.ManagedRuleOverride.properties.sensitivity.$ref__added` | added | `./common.json#/definitions/SensitivityType` |
 | `definitions.ManagedRuleOverride.properties.state.$ref__added` | added | `./common.json#/definitions/ManagedRuleEnabledState` |
@@ -129,6 +130,7 @@
 | `definitions.ExceptionEntry.properties.matchVariable.type__deleted` | deleted | `string` |
 | `definitions.ExceptionEntry.properties.selectorMatchOperator.type__deleted` | deleted | `string` |
 | `definitions.ExceptionEntry.properties.valueMatchOperator.type__deleted` | deleted | `string` |
+| `definitions.GroupByVariable.properties.variableName.type__deleted` | deleted | `string` |
 | `definitions.ManagedRuleOverride.properties.action.type__deleted` | deleted | `string` |
 | `definitions.ManagedRuleOverride.properties.sensitivity.type__deleted` | deleted | `string` |
 | `definitions.ManagedRuleOverride.properties.state.type__deleted` | deleted | `string` |
@@ -199,30 +201,6 @@
 |------|------------|-------|
 | `definitions.ApplicationGatewayAvailableServerVariablesResult__deleted` | deleted | `{"type":"array","items":{"type":"string"}}` |
 
-### Changes for `ExclusionManagedRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ExclusionManagedRule__deleted` | deleted | `{"type":"object","properties":{"ruleId":{"type":"string"}},"required":["ruleId"]}` |
-
-### Changes for `GroupByUserSession`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GroupByUserSession__deleted` | deleted | `{"type":"object","properties":{"groupByVariables":{"type":"array","items":{"$ref":"#/definitions/Gro...` |
-
-### Changes for `GroupByVariable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.GroupByVariable__deleted` | deleted | `{"type":"object","properties":{"variableName":{"type":"string","enum":["ClientAddr","GeoLocation","N...` |
-
-### Changes for `HeaderValueMatcher`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.HeaderValueMatcher__deleted` | deleted | `{"type":"object","properties":{"pattern":{"type":"string"},"ignoreCase":{"type":"boolean"},"negate":...` |
-
 ### Changes for `PolicySettingsLogScrubbing`
 
 | Path | Change Type | Value |
@@ -290,6 +268,7 @@
 | `definitions.ExceptionEntry.properties.matchVariable.enum__deleted` | deleted | `["RequestURI","RemoteAddr","RequestHeader"]` |
 | `definitions.ExceptionEntry.properties.selectorMatchOperator.enum__deleted` | deleted | `["Equals","Contains","StartsWith","EndsWith"]` |
 | `definitions.ExceptionEntry.properties.valueMatchOperator.enum__deleted` | deleted | `["Equals","Contains","StartsWith","EndsWith","IPMatch"]` |
+| `definitions.GroupByVariable.properties.variableName.enum__deleted` | deleted | `["ClientAddr","GeoLocation","None","ClientAddrXFFHeader","GeoLocationXFFHeader"]` |
 | `definitions.ManagedRuleOverride.properties.action.enum__deleted` | deleted | `["AnomalyScoring","Allow","Block","Log","JSChallenge"]` |
 | `definitions.ManagedRuleOverride.properties.sensitivity.enum__deleted` | deleted | `["Low","Medium","High"]` |
 | `definitions.ManagedRuleOverride.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |
@@ -354,6 +333,7 @@
 | `definitions.ExceptionEntry.properties.matchVariable['x-ms-enum__deleted']` | deleted | `{"name":"ExceptionEntryMatchVariable","modelAsString":true}` |
 | `definitions.ExceptionEntry.properties.selectorMatchOperator['x-ms-enum__deleted']` | deleted | `{"name":"ExceptionEntrySelectorMatchOperator","modelAsString":true}` |
 | `definitions.ExceptionEntry.properties.valueMatchOperator['x-ms-enum__deleted']` | deleted | `{"name":"ExceptionEntryValueMatchOperator","modelAsString":true}` |
+| `definitions.GroupByVariable.properties.variableName['x-ms-enum__deleted']` | deleted | `{"name":"ApplicationGatewayFirewallUserSessionVariable","modelAsString":true}` |
 | `definitions.ManagedRuleOverride.properties.action['x-ms-enum__deleted']` | deleted | `{"name":"ActionType","modelAsString":true}` |
 | `definitions.ManagedRuleOverride.properties.sensitivity['x-ms-enum__deleted']` | deleted | `{"name":"SensitivityType","modelAsString":true}` |
 | `definitions.ManagedRuleOverride.properties.state['x-ms-enum__deleted']` | deleted | `{"name":"ManagedRuleEnabledState","modelAsString":true}` |
@@ -444,9 +424,9 @@
 | `definitions.ApplicationGatewayAvailableSslOptions.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
 | `definitions.ApplicationGatewayAvailableSslOptionsPropertiesFormat.properties.predefinedPolicies.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.ApplicationGatewayBackendAddressPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
-| `definitions.ApplicationGatewayBackendAddressPoolPropertiesFormat.properties.backendIPConfigurations.items.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./common.json#/definitions/NetworkInterfaceIPConfiguration` |
+| `definitions.ApplicationGatewayBackendAddressPoolPropertiesFormat.properties.backendIPConfigurations.items.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration` |
 | `definitions.ApplicationGatewayBackendAddressPoolPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.ApplicationGatewayBackendHealthServer.properties.ipConfiguration.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./common.json#/definitions/NetworkInterfaceIPConfiguration` |
+| `definitions.ApplicationGatewayBackendHealthServer.properties.ipConfiguration.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration` |
 | `definitions.ApplicationGatewayBackendHttpSettings.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.authenticationCertificates.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.ApplicationGatewayBackendHttpSettingsPropertiesFormat.properties.probe.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
@@ -469,7 +449,6 @@
 | `definitions.ApplicationGatewayFrontendIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.ApplicationGatewayFrontendPort.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.ApplicationGatewayFrontendPortPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.ApplicationGatewayHeaderConfiguration.properties.headerValueMatcher.$ref` | `#/definitions/HeaderValueMatcher` | `./common.json#/definitions/HeaderValueMatcher` |
 | `definitions.ApplicationGatewayHttpListener.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.firewallPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.ApplicationGatewayHttpListenerPropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
@@ -554,8 +533,6 @@
 | `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.defaultRedirectConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.defaultRewriteRuleSet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.ApplicationGatewayUrlPathMapPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.ExclusionManagedRuleGroup.properties.rules.items.$ref` | `#/definitions/ExclusionManagedRule` | `./common.json#/definitions/ExclusionManagedRule` |
-| `definitions.WebApplicationFirewallCustomRule.properties.groupByUserSession.items.$ref` | `#/definitions/GroupByUserSession` | `./common.json#/definitions/GroupByUserSession` |
 | `definitions.WebApplicationFirewallPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
 | `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.applicationGateways.items.$ref` | `./applicationGateway.json#/definitions/ApplicationGateway` | `#/definitions/ApplicationGateway` |
 | `definitions.WebApplicationFirewallPolicyPropertiesFormat.properties.httpListeners.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |

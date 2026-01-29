@@ -954,6 +954,27 @@
         "value"
       ]
     },
+    "ListP2SVpnGatewaysResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/P2SVpnGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ListRouteMapsResult": {
       "type": "object",
       "description": "[Placeholder] Discription for page model",
@@ -1130,7 +1151,7 @@
           "type": "array",
           "description": "[Placeholder] Discription for value property",
           "items": {
-            "$ref": "./common.json#/definitions/VpnSiteLink"
+            "$ref": "#/definitions/VpnSiteLink"
           }
         },
         "nextLink": {
@@ -1239,6 +1260,27 @@
         }
       }
     },
+    "P2SConnectionConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/P2SConnectionConfigurationProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
     "P2SConnectionConfigurationProperties": {
       "type": "object",
       "properties": {
@@ -1260,7 +1302,7 @@
         "previousConfigurationPolicyGroupAssociations": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/VpnServerConfigurationPolicyGroup"
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
           },
           "readOnly": true
         },
@@ -1330,7 +1372,7 @@
         "p2SConnectionConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/P2SConnectionConfiguration"
+            "$ref": "#/definitions/P2SConnectionConfiguration"
           }
         },
         "provisioningState": {
@@ -2120,7 +2162,7 @@
         "trafficSelectorPolicies": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/TrafficSelectorPolicy"
+            "$ref": "./networkGateway.json#/definitions/TrafficSelectorPolicy"
           }
         },
         "enableRateLimiting": {
@@ -2139,7 +2181,7 @@
         "vpnLinkConnections": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/VpnSiteLinkConnection"
+            "$ref": "#/definitions/VpnSiteLinkConnection"
           }
         },
         "routingConfiguration": {
@@ -2406,6 +2448,24 @@
         }
       ]
     },
+    "VpnServerConfigurationPolicyGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnServerConfigurationPolicyGroupProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
     "VpnServerConfigurationPolicyGroupMember": {
       "type": "object",
       "properties": {
@@ -2508,7 +2568,7 @@
         "radiusServers": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/RadiusServer"
+            "$ref": "./networkGateway.json#/definitions/RadiusServer"
           }
         },
         "aadAuthenticationParameters": {
@@ -2528,7 +2588,7 @@
         "configurationPolicyGroups": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/VpnServerConfigurationPolicyGroup"
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
           }
         },
         "etag": {
@@ -2563,6 +2623,42 @@
       "allOf": [
         {
           "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
+    "VpnSiteLink": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnSiteLinkProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "VpnSiteLinkConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnSiteLinkConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
         }
       ]
     },
@@ -2703,7 +2799,7 @@
         "vpnSiteLinks": {
           "type": "array",
           "items": {
-            "$ref": "./common.json#/definitions/VpnSiteLink"
+            "$ref": "#/definitions/VpnSiteLink"
           }
         },
         "o365Policy": {
