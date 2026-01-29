@@ -129,6 +129,11 @@ suppressions:
   - code: ResourceNameRestriction
     reason: Parameter exists in previous API versions without pattern, cannot add now without breaking change.
     from: cognitiveservices.json
+  - code: ParametersSchemaAsTypeObject
+    reason: Backend is expecting a list/array.  This is to allow the TypeSpec migration to proceed.
+    where:
+      - $.definitions.RaiBlocklistItemsBulkDeleteRequest
+      - $.definitions.RaiBlocklistItemsBulkAddRequest
 ```
 
 ### Tag: package-2025-09-01
