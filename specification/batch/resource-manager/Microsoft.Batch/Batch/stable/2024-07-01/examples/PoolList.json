@@ -1,0 +1,167 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2024-07-01",
+    "poolName": "testpool",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testpool",
+            "type": "Microsoft.Batch/batchAccounts/pools",
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+            "properties": {
+              "allocationState": "Steady",
+              "allocationStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+              "applicationLicenses": [
+                "app-license0",
+                "app-license1"
+              ],
+              "applicationPackages": [
+                {
+                  "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/applications/app_1234",
+                  "version": "asdf"
+                }
+              ],
+              "certificates": [
+                {
+                  "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/certificates/sha1-1234567",
+                  "storeLocation": "LocalMachine",
+                  "storeName": "MY",
+                  "visibility": [
+                    "RemoteUser"
+                  ]
+                }
+              ],
+              "creationTime": "2017-08-28T10:22:55.9407275Z",
+              "currentDedicatedNodes": 0,
+              "currentLowPriorityNodes": 0,
+              "deploymentConfiguration": {
+                "virtualMachineConfiguration": {
+                  "imageReference": {
+                    "offer": "WindowsServer",
+                    "publisher": "MicrosoftWindowsServer",
+                    "sku": "2016-Datacenter-SmallDisk",
+                    "version": "latest"
+                  },
+                  "nodeAgentSkuId": "batch.node.windows amd64"
+                }
+              },
+              "interNodeCommunication": "Enabled",
+              "lastModified": "2017-08-28T10:22:55.9407275Z",
+              "metadata": [
+                {
+                  "name": "metadata-1",
+                  "value": "value-1"
+                },
+                {
+                  "name": "metadata-2",
+                  "value": "value-2"
+                }
+              ],
+              "networkConfiguration": {
+                "endpointConfiguration": {
+                  "inboundNatPools": [
+                    {
+                      "name": "testnat",
+                      "backendPort": 12001,
+                      "frontendPortRangeEnd": 15100,
+                      "frontendPortRangeStart": 15000,
+                      "networkSecurityGroupRules": [
+                        {
+                          "access": "Allow",
+                          "priority": 150,
+                          "sourceAddressPrefix": "192.100.12.45",
+                          "sourcePortRanges": [
+                            "*"
+                          ]
+                        },
+                        {
+                          "access": "Deny",
+                          "priority": 3500,
+                          "sourceAddressPrefix": "*",
+                          "sourcePortRanges": [
+                            "*"
+                          ]
+                        }
+                      ],
+                      "protocol": "TCP"
+                    }
+                  ]
+                },
+                "subnetId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123"
+              },
+              "provisioningState": "Succeeded",
+              "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+              "resizeOperationStatus": {
+                "errors": [
+                  {
+                    "code": "AllocationTimedout",
+                    "message": "Desired number of dedicated nodes could not be allocated as the resize timeout was reached"
+                  }
+                ],
+                "nodeDeallocationOption": "TaskCompletion",
+                "resizeTimeout": "PT8M",
+                "startTime": "2017-08-28T10:22:55.9407275Z",
+                "targetDedicatedNodes": 6,
+                "targetLowPriorityNodes": 28
+              },
+              "scaleSettings": {
+                "fixedScale": {
+                  "resizeTimeout": "PT8M",
+                  "targetDedicatedNodes": 6,
+                  "targetLowPriorityNodes": 28
+                }
+              },
+              "startTask": {
+                "commandLine": "cmd /c SET",
+                "environmentSettings": [
+                  {
+                    "name": "MYSET",
+                    "value": "1234"
+                  }
+                ],
+                "maxTaskRetryCount": 6,
+                "resourceFiles": [
+                  {
+                    "fileMode": "777",
+                    "filePath": "c:\\temp\\gohere",
+                    "httpUrl": "https://testaccount.blob.core.windows.net/example-blob-file"
+                  }
+                ],
+                "userIdentity": {
+                  "autoUser": {
+                    "elevationLevel": "Admin",
+                    "scope": "Pool"
+                  }
+                },
+                "waitForSuccess": true
+              },
+              "taskSchedulingPolicy": {
+                "nodeFillType": "Pack"
+              },
+              "taskSlotsPerNode": 13,
+              "userAccounts": [
+                {
+                  "name": "username1",
+                  "elevationLevel": "Admin",
+                  "linuxUserConfiguration": {
+                    "gid": 4567,
+                    "uid": 1234
+                  }
+                }
+              ],
+              "vmSize": "STANDARD_D4"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Pool_ListByBatchAccount",
+  "title": "ListPool"
+}

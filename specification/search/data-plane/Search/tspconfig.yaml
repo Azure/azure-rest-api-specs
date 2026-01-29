@@ -13,16 +13,10 @@ options:
     package-name: "{package-dir}"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-search-documents"
-  "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Search.Documents"
-    namespace: "Azure.Search.Documents"
-    clear-output-folder: true
-    model-namespace: false
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.Search.Documents"
   "@azure-typespec/http-client-csharp":
     namespace: "Azure.Search.Documents"
-    model-namespace: false
+    model-namespace: true
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.Search.Documents"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/search-documents"
     generate-metadata: false
@@ -38,17 +32,6 @@ options:
     namespace: "com.azure.search.documents"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-search-documents"
-  "@azure-tools/typespec-go":
-    service-dir: "sdk/search/azsearchdocuments"
-    package-dir: "azsearchdocuments"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    fix-const-stuttering: true
-    flavor: "azure"
-    generate-samples: true
-    generate-fakes: true
-    head-as-boolean: true
-    inject-spans: true
-    emitter-output-dir: "{output-dir}/{service-dir}/azsearchdocuments"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

@@ -220,6 +220,9 @@ model ProductDetails {
 
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
+
+  @doc("Indicates that the SKU has add-ons")
+  hasAddOns?: boolean;
 }
 
 @doc("Returns a subset of Plan attributes")
@@ -386,6 +389,44 @@ model PlanDetails {
   @doc("SKU price related properties.")
   @identifiers(#[])
   offeringProperties?: OfferingProperties[];
+
+  @doc("Indicates if this SKU has consumption components")
+  hasConsumptionComponents?: boolean;
+
+  @doc("Indicates if this SKU is available for end users")
+  isEndUserEligible?: boolean;
+
+  @doc("Indicates if this SKU is available for admins")
+  isAdminEligible?: boolean;
+
+  @doc("The entra id version for products that come with entra id support")
+  entraIdVersion?: string;
+
+  @doc("Technical Requirements")
+  technicalRequirements?: string;
+
+  @doc("The URI to the FAQ page")
+  faqUri?: string;
+
+  @doc("Fulfillment instructions for this SKU")
+  fulfillmentData?: FulfillmentData;
+
+  @doc("Provides promotion data")
+  @identifiers(#[])
+  benefits?: Benefit[];
+
+  @doc("Contains constraint product properties to determine eligibility")
+  constraintsData?: ConstraintsData;
+
+  @doc("Meter type descriptions")
+  @identifiers(#[])
+  meterTypeDescriptions?: MeterTypeDescription[];
+
+  @doc("Usage unit")
+  usageUnit?: string;
+
+  @doc("Sku name")
+  skuName?: string;
 }
 
 @doc("The SKU properties, contains some of the attributes for faster OData filter")
@@ -613,6 +654,18 @@ model Term {
 
   @doc("Indicates if autorenew is enabled")
   isAutorenewable?: boolean;
+
+  @doc("Defines the lifecycle management policy for the term")
+  lifecyclePolicy?: LifecyclePolicy;
+
+  @doc("Product code for this term")
+  productCode?: string;
+
+  @doc("Term state")
+  state?: string;
+
+  @doc("Term Actions")
+  actions?: string[];
 }
 
 @doc("Availability for a given plan")
@@ -704,4 +757,154 @@ model Image {
 
   @doc("Image type")
   type?: string;
+}
+
+@doc("Contains fulfillment configuration and instructions")
+model FulfillmentData {
+  @doc("Differentiates between fulfillment types")
+  fulfillmentType?: string;
+
+  @doc("Fulfillment attributes")
+  attributes?: FulfillmentAttributes;
+
+  @doc("Bundled products included defining additional product/SKU combinations")
+  @identifiers(#[])
+  additionalProducts?: ProductFulfillmentConfig[];
+}
+
+@doc("Configuration for additional products bundled with early access pass SKUs")
+model ProductFulfillmentConfig {
+  @doc("Product and SKU ID for bundled products included with the license")
+  productSkuId?: string;
+
+  @doc("Quantity of the bundled product per license ")
+  defaultKeyActivationCount?: int32;
+}
+
+@doc("Attributes that define fulfillment timing and delay handling")
+model FulfillmentAttributes {
+  @doc("Timing configuration for product fulfillment")
+  fulfillmentTiming?: string;
+
+  @doc("Mitigation explanation for delayed fulfillment")
+  fulfillmentDelayMitigation?: string;
+}
+
+@doc("Benefit information for a plan")
+model Benefit {
+  @doc("Benefit type")
+  benefitType?: string;
+
+  @doc("Base plan ID")
+  basePlanId?: string;
+
+  @doc("Billing plan")
+  billingPlan?: string;
+
+  @doc("Term duration. Examples: 'P1M' (1 month), 'P30D' (30 days)")
+  termDuration?: string;
+}
+
+@doc("Constraints data for a plan")
+model ConstraintsData {
+  @doc("Seat constraint configurations defining minimum and maximum seat limits")
+  @identifiers(#[])
+  seatConstraints?: MinMaxSeatsConstraint[];
+
+  @doc("Asset ownership limits")
+  @identifiers(#[])
+  assetOwnershipLimits?: AssetOwnershipLimit[];
+
+  @doc("Lists eligible prerequisite SKUs")
+  prerequisiteSkus?: Prerequisites;
+}
+
+@doc("Defines minimum and maximum seat limits for a specific constraint type")
+model MinMaxSeatsConstraint {
+  @doc("Constraint type")
+  type?: string;
+
+  @doc("Minimum seats")
+  minSeats?: int32;
+
+  @doc("Maximum seats")
+  maxSeats?: int32;
+}
+
+@doc("Minimum and maximum percentage seats constraint")
+model MinMaxPercentageSeatsConstraint {
+  @doc("Constraint type")
+  type?: string;
+
+  @doc("Minimum percent seats")
+  minPercentSeats?: float64;
+
+  @doc("Maximum percent seats")
+  maxPercentSeats?: float64;
+}
+
+@doc("Defines ownership restrictions and limits for SKU assets")
+model AssetOwnershipLimit {
+  @doc("Limit type")
+  type?: string;
+
+  @doc("Minimum number of assets")
+  minAssets?: int32;
+
+  @doc("Maximum number of assets")
+  maxAssets?: int32;
+}
+
+@doc("Defines prerequisite SKU requirements and seat constraints")
+model Prerequisites {
+  @doc("Prerequisite sets where all specified SKUs must be owned")
+  @identifiers(#[])
+  mustHaveAll?: PrerequisiteSet[];
+
+  @doc("Prerequisite sets where any one of the specified SKUs must be owned")
+  @identifiers(#[])
+  mustHaveAny?: PrerequisiteSet[];
+
+  @doc("Percentage-based seat constraints for prerequisite SKUs")
+  @identifiers(#[])
+  seatConstraints?: MinMaxPercentageSeatsConstraint[];
+}
+
+@doc("Prerequisite set")
+model PrerequisiteSet {
+  @doc("Product ID")
+  productId?: string;
+
+  @doc("SKU IDs")
+  skuIds?: string[];
+}
+
+@doc("Meter type description")
+model MeterTypeDescription {
+  @doc("Meter Type Description key")
+  key?: string;
+
+  @doc("Meter type description value")
+  value?: MeterTypeDescriptionValue;
+}
+
+@doc("Meter type description value")
+model MeterTypeDescriptionValue {
+  @doc("The type of meter")
+  meterType?: string;
+
+  @doc("The unit of measurement for the meter")
+  unitOfMeasure?: string;
+}
+
+@doc("Defines lifecycle management policy")
+model LifecyclePolicy {
+  @doc("Grace period duration where customers retain access to their product. Examples: 'P1M' (1 month), 'P30D' (30 days), 'P0D' (0 days)")
+  graceDuration?: string;
+
+  @doc("Inactive period duration")
+  inactiveDuration?: string;
+
+  @doc("Lockout period duration")
+  lockoutDuration?: string;
 }

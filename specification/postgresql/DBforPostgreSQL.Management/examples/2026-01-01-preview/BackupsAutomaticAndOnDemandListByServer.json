@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "backup_638830782181266873",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/backups",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/backups/backup_638830782181266873",
+            "properties": {
+              "backupType": "Full",
+              "completedTime": "2025-06-01T14:30:22.123456+00:00",
+              "source": "Automatic"
+            }
+          },
+          {
+            "name": "ondemandbackup-20250601T183022",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/backups",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/backups/ondemandbackup-20250601T183022",
+            "properties": {
+              "backupType": "Customer On-Demand",
+              "completedTime": "2025-06-01T18:30:22.123456+00:00",
+              "source": "Customer Initiated"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupsAutomaticAndOnDemand_ListByServer",
+  "title": "List all available backups of a server."
+}

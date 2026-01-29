@@ -1,0 +1,44 @@
+{
+  "operationId": "EdgeActionVersions_ListByEdgeAction",
+  "title": "GetEdgeActionVersionsByEdgeAction",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2024-07-22-preview",
+    "edgeActionName": "edgeAction1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/versions/version1",
+            "name": "version1",
+            "type": "Microsoft.Cdn/edgeActions/versions",
+            "location": "global",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "deploymentType": "zip",
+              "validationStatus": "Succeeded",
+              "isDefaultVersion": "True",
+              "lastPackageUpdateTime": "2024-05-25T16:19:23Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeactions/edgeaction1/versions/version2",
+            "name": "version2",
+            "type": "Microsoft.Cdn/edgeactions/versions",
+            "location": "global",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "deploymentType": "zip",
+              "validationStatus": "Succeeded",
+              "isDefaultVersion": "False",
+              "lastPackageUpdateTime": "2024-05-25T11:19:23Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

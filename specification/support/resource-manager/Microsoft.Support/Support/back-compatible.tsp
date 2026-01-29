@@ -84,3 +84,19 @@ using Microsoft.Support;
 @@clientLocation(SupportTicketsNoSubscription.checkNameAvailability,
   CommunicationsNoSubscription
 );
+
+@@clientName(ClassifyProblems.classifyProblems::parameters.body,
+  "problemClassificationsClassificationInput"
+);
+@@clientName(ClassifyProblemsNoSubscription.classifyProblems::parameters.body,
+  "problemClassificationsClassificationInput"
+);
+@@clientName(ClassifyServices.classifyServices::parameters.body,
+  "serviceClassificationRequest"
+);
+@@clientName(ClassifyServicesNoSubscription.classifyServices::parameters.body,
+  "serviceClassificationRequest"
+);
+@@clientName(SupportTickets.lookUpResourceId::parameters.body,
+  "lookUpResourceIdRequest"
+);
