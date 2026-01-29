@@ -18,6 +18,7 @@ namespace Microsoft.MachineLearningServices;
  * RaiBlocklistItemPropertiesBasicResource is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(RaiBlocklistPropertiesBasicResource)
 model RaiBlocklistItemPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiBlocklistItemProperties, false> {
@@ -33,6 +34,7 @@ model RaiBlocklistItemPropertiesBasicResource
  * RaiBlocklistItemPropertiesBasicResources interface is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface RaiBlocklistItemPropertiesBasicResources {
   /**

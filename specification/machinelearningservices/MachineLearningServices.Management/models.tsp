@@ -852,10 +852,12 @@ union JobType {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   FineTuning: "FineTuning",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   Distillation: "Distillation",
 }
 
@@ -5142,6 +5144,7 @@ model EnvironmentVersionProperties extends AssetBase {
    * Environment image details.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   imageDetails?: ImageDetails;
 
   /**
@@ -5192,6 +5195,7 @@ model BuildContext {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model ImageDetails {
   /**
    * Indicates if image exists
@@ -7114,6 +7118,7 @@ model JobBaseProperties extends ResourceBase {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   parentJobName?: string | null;
 
   /**
@@ -7669,6 +7674,7 @@ model ContentSafety {
    * Specifies the current safety level for content safety.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   contentSafetyLevel?: ContentSafetyLevel = ContentSafetyLevel.Blocking;
 
   /**
@@ -8090,6 +8096,7 @@ model WorkspaceProperties {
    * The URI of agents endpoint associated with this workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @visibility(Lifecycle.Read)
   agentsEndpointUri?: url;
 
@@ -8103,6 +8110,7 @@ model WorkspaceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8115,6 +8123,7 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   containerRegistries?: string[];
 
   /**
@@ -8142,12 +8151,14 @@ model WorkspaceProperties {
    * Flag to tell if simplified CMK should be enabled for this workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   enableSimplifiedCmk?: boolean;
 
   /**
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   enableSoftwareBillOfMaterials?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
@@ -8155,6 +8166,7 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   existingWorkspaces?: string[];
 
   /**
@@ -8184,6 +8196,7 @@ model WorkspaceProperties {
    * The list of IPv4  addresses that are allowed to access the workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   ipAllowlist?: string[];
 
   /**
@@ -8194,6 +8207,7 @@ model WorkspaceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   keyVaults?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
@@ -8210,6 +8224,7 @@ model WorkspaceProperties {
    * A set of rules governing the network accessibility of the workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8278,6 +8293,7 @@ model WorkspaceProperties {
    * Retention time in days after workspace get soft deleted.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -8287,6 +8303,7 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   storageAccounts?: string[];
 
   /**
@@ -8715,6 +8732,7 @@ model WorkspacePropertiesUpdateParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8739,6 +8757,7 @@ model WorkspacePropertiesUpdateParameters {
    * Flag to tell if SoftwareBillOfMaterials should be enabled for this workspace
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   enableSoftwareBillOfMaterials?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
@@ -8764,6 +8783,7 @@ model WorkspacePropertiesUpdateParameters {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   ipAllowlist?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
@@ -8774,6 +8794,7 @@ model WorkspacePropertiesUpdateParameters {
    * A set of rules governing the network accessibility of the workspace.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8800,6 +8821,7 @@ model WorkspacePropertiesUpdateParameters {
    * Retention time in days after workspace get soft deleted.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -9388,6 +9410,7 @@ model EndpointResourceProperties {
    * Deployments info.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   deployments?: EndpointDeploymentResourcePropertiesBasicResource[];
 
   /**
@@ -10287,6 +10310,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   autologgerSettings?: ComputeInstanceAutologgerSettings | null;
 
   /**
@@ -10355,6 +10379,7 @@ model ComputeInstanceProperties {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @summary("Enable Auto OS Patching.")
   enableOSPatching?: boolean | null = false;
 
@@ -10363,6 +10388,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @summary("Enable root access.")
   enableRootAccess?: boolean | null = true;
 
@@ -10379,6 +10405,7 @@ model ComputeInstanceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @summary("Release quota if compute instance stopped.")
   releaseQuotaOnStop?: boolean | null = false;
 
@@ -10458,6 +10485,7 @@ model ComputeInstanceProperties {
  * Specifies settings for autologger.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model ComputeInstanceAutologgerSettings {
   /**
    * Indicates whether mlflow autologger is enabled for notebooks.
@@ -11987,6 +12015,7 @@ model AzureOpenAiHyperParameters {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @discriminator("modelProvider")
 model FineTuningVertical {
   /**
@@ -13171,6 +13200,7 @@ model FeatureImportanceSettings {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @discriminator("dataGenerationType")
 model DataGenerationVertical {
   /**
@@ -13326,6 +13356,7 @@ model DefaultScaleSettings extends OnlineScaleSettings {
  * Distillation Job definition.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model DistillationJob extends JobBaseProperties {
   /**
    * [Required]
@@ -13365,6 +13396,7 @@ model DistillationJob extends JobBaseProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model FinetuningDetails {
   /**
    * Finetuning Hyperparameters
@@ -13502,6 +13534,7 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
  * FineTuning Job definition.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 model FineTuningJob extends JobBaseProperties {
   /**
    * [Required]

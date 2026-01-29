@@ -18,6 +18,7 @@ namespace Microsoft.MachineLearningServices;
  * RaiBlocklistPropertiesBasicResource is a preview-only resource.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiBlocklistPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiBlocklistProperties, false> {
@@ -33,6 +34,7 @@ model RaiBlocklistPropertiesBasicResource
  * RaiBlocklistPropertiesBasicResources interface is preview-only.
  */
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
 @armResourceOperations
 interface RaiBlocklistPropertiesBasicResources {
   /**
@@ -96,6 +98,7 @@ interface RaiBlocklistPropertiesBasicResources {
    * Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.
    */
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
   @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")
   @action("addRaiBlocklistItems")
   addBulk is ArmResourceActionAsync<
@@ -105,6 +108,7 @@ interface RaiBlocklistPropertiesBasicResources {
       @body
       @identifiers(#[])
       @removed(Versions.v2025_12_01)
+      @added(Versions.v2026_01_15_preview)
       _?: RaiBlocklistItemPropertiesBasicResource[];
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
