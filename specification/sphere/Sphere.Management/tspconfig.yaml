@@ -31,6 +31,21 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sphere"
+    namespace: "com.azure.resourcemanager.sphere"
+    service-name: "Azure Sphere"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/sphere"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsphere"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsphere"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

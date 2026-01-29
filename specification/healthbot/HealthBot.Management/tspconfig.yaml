@@ -23,10 +23,11 @@ options:
     namespace: "com.azure.resourcemanager.healthbot"
     service-name: "Healthbot" # human-readable service name, whitespace allowed
     flavor: azure
+    use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     service-dir: sdk/healthbot
     emitter-output-dir: "{output-dir}/{service-dir}/arm-healthbot"
-    is-modular-library: true
+    compatibility-lro: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
@@ -41,6 +42,9 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.HealthBot"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -23,6 +23,7 @@ namespace Microsoft.Cdn;
 
 enum Versions {
   `2025-09-01-preview`,
+  `2025-12-01-preview`,
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU property required at envelope level for backwards compatibility with 2024-07-22-preview"
@@ -84,10 +85,12 @@ model EdgeActionExecutionFilter
 interface EdgeActions {
   get is ArmResourceRead<EdgeAction>;
   create is ArmResourceCreateOrUpdateAsync<EdgeAction>;
-  update is ArmResourcePatchAsync<EdgeAction, EdgeActionProperties>;
+  update is ArmCustomPatchAsync<EdgeAction, EdgeActionUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<EdgeAction>;
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
+
+  @removed(Versions.`2025-12-01-preview`)
   addAttachment is ArmResourceActionAsync<
     EdgeAction,
     EdgeActionAttachment,
@@ -95,6 +98,7 @@ interface EdgeActions {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Operation matches 2024 baseline with 200, 202 responses"
+  @removed(Versions.`2025-12-01-preview`)
   deleteAttachment is ArmResourceActionNoContentAsync<
     EdgeAction,
     EdgeActionAttachment
@@ -105,9 +109,12 @@ interface EdgeActions {
 interface EdgeActionVersions {
   get is ArmResourceRead<EdgeActionVersion>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionVersion>;
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     EdgeActionVersion,
-    EdgeActionVersionProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      EdgeActionVersion,
+      EdgeActionVersionProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<EdgeActionVersion>;
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
@@ -130,9 +137,12 @@ interface EdgeActionVersions {
 interface EdgeActionExecutionFilters {
   get is ArmResourceRead<EdgeActionExecutionFilter>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionExecutionFilter>;
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     EdgeActionExecutionFilter,
-    EdgeActionExecutionFilterProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      EdgeActionExecutionFilter,
+      EdgeActionExecutionFilterProperties
+    >
   >;
   delete is ArmResourceDeleteWithoutOkAsync<EdgeActionExecutionFilter>;
   listByEdgeAction is ArmResourceListByParent<EdgeActionExecutionFilter>;

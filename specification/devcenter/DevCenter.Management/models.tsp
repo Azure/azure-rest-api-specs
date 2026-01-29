@@ -1415,6 +1415,22 @@ model ImageProperties {
   @doc("Indicates whether this image has hibernate enabled. Not all images are capable of supporting hibernation. To find out more see https://aka.ms/devbox/hibernate")
   @visibility(Lifecycle.Read)
   hibernateSupport?: HibernateSupport;
+
+  /** The architecture type of the image. */
+  @added(Versions.v2026_01_01_preview)
+  @visibility(Lifecycle.Read)
+  architecture?: ArchitectureType;
+}
+
+/** Architecture Types. */
+union ArchitectureType {
+  string,
+
+  /** x64 architecture */
+  x64: "x64",
+
+  /** ARM64 architecture */
+  Arm64: "Arm64",
 }
 
 @doc("Properties for a recommended machine configuration.")

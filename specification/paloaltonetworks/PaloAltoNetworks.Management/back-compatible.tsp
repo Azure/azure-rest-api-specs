@@ -39,7 +39,7 @@ using PaloAltoNetworks.Cloudngfw;
 );
 @@clientLocation(GlobalRulestackResources.revert, "GlobalRulestack");
 @@clientName(GlobalRulestackResources.revert, "revert");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(GlobalRulestackResource.properties);
 
 @@clientLocation(CertificateObjectGlobalRulestackResources.get,
@@ -54,7 +54,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientLocation(CertificateObjectGlobalRulestackResources.list,
   "CertificateObjectGlobalRulestack"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CertificateObjectGlobalRulestackResource.properties);
 
 @@clientLocation(FqdnListGlobalRulestackResources.get,
@@ -69,7 +69,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientLocation(FqdnListGlobalRulestackResources.list,
   "FqdnListGlobalRulestack"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FqdnListGlobalRulestackResource.properties);
 
 @@clientLocation(PostRulesResources.get, "PostRules");
@@ -82,7 +82,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(PostRulesResources.refreshCounters, "refreshCounters");
 @@clientLocation(PostRulesResources.resetCounters, "PostRules");
 @@clientName(PostRulesResources.resetCounters, "resetCounters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PostRulesResource.properties);
 
 @@clientLocation(PrefixListGlobalRulestackResources.get,
@@ -97,7 +97,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientLocation(PrefixListGlobalRulestackResources.list,
   "PrefixListGlobalRulestack"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrefixListGlobalRulestackResource.properties);
 
 @@clientLocation(PreRulesResources.get, "PreRules");
@@ -110,7 +110,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(PreRulesResources.refreshCounters, "refreshCounters");
 @@clientLocation(PreRulesResources.resetCounters, "PreRules");
 @@clientName(PreRulesResources.resetCounters, "resetCounters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PreRulesResource.properties);
 
 @@clientLocation(FirewallResources.get, "Firewalls");
@@ -128,7 +128,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientLocation(FirewallResources.saveLogProfile, "Firewalls");
 @@clientName(FirewallResources.saveLogProfile, "saveLogProfile");
 @@clientName(FirewallResources.saveLogProfile::parameters.body, "logSettings");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FirewallResource.properties);
 
 @@clientLocation(LocalRulestackResources.get, "LocalRulestacks");
@@ -171,7 +171,7 @@ using PaloAltoNetworks.Cloudngfw;
 );
 @@clientLocation(LocalRulestackResources.revert, "LocalRulestacks");
 @@clientName(LocalRulestackResources.revert, "revert");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(LocalRulestackResource.properties);
 
 @@clientLocation(MetricsObjectFirewallResources.get, "MetricsObjectFirewall");
@@ -184,12 +184,12 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientLocation(MetricsObjectFirewallResources.listByFirewalls,
   "MetricsObjectFirewall"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MetricsObjectFirewallResource.properties);
 
 @@clientLocation(FirewallStatusResources.get, "FirewallStatus");
 @@clientLocation(FirewallStatusResources.listByFirewalls, "FirewallStatus");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FirewallStatusResource.properties);
 
 @@clientLocation(CertificateObjectLocalRulestackResources.get,
@@ -204,7 +204,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientLocation(CertificateObjectLocalRulestackResources.listByLocalRulestacks,
   "CertificateObjectLocalRulestack"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CertificateObjectLocalRulestackResource.properties);
 
 @@clientLocation(FqdnListLocalRulestackResources.get, "FqdnListLocalRulestack");
@@ -217,7 +217,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientLocation(FqdnListLocalRulestackResources.listByLocalRulestacks,
   "FqdnListLocalRulestack"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FqdnListLocalRulestackResource.properties);
 
 @@clientLocation(LocalRulesResources.get, "LocalRules");
@@ -230,7 +230,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(LocalRulesResources.refreshCounters, "refreshCounters");
 @@clientLocation(LocalRulesResources.resetCounters, "LocalRules");
 @@clientName(LocalRulesResources.resetCounters, "resetCounters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(LocalRulesResource.properties);
 
 @@clientLocation(PrefixListResources.get, "PrefixListLocalRulestack");
@@ -241,7 +241,7 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientLocation(PrefixListResources.listByLocalRulestacks,
   "PrefixListLocalRulestack"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PrefixListResource.properties);
 
 @@clientLocation(PaloAltoNetworksCloudngfwOperationsOperationGroup.createProductSerialNumber,

@@ -27,3 +27,21 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-astro"
+    namespace: "com.azure.resourcemanager.astro"
+    service-name: "Astro"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/astro"
+    emitter-output-dir: "{output-dir}/{service-dir}/armastro"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armastro"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Astro"
+    emitter-output-dir: "{output-dir}/sdk/astronomer/{namespace}"

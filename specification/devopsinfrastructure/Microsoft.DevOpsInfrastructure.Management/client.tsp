@@ -113,6 +113,20 @@ using Microsoft.DevOpsInfrastructure;
 @@clientName(EphemeralType, "DevOpsEphemeralType", "csharp");
 /* Rename opeartions */
 @@clientName(SubscriptionUsages.usages, "GetUsages", "csharp");
+@@clientName(ResourceDetails.listByPool, "GetResourceDetails", "csharp");
+@@clientName(Sku.listByLocation, "GetSkusByLocation", "csharp");
+@@clientName(ImageVersions.listByImage, "GetImageVersionsByImage", "csharp");
+@@clientName(NetworkProfile.ipAddresses, "IPAddresses", "csharp");
+@@clientName(NetworkProfile.staticIpAddressCount,
+  "StaticIPAddressCount",
+  "csharp"
+);
+@@clientName(StorageProfile.osDiskStorageAccountType,
+  "OSDiskStorageAccountType",
+  "csharp"
+);
+@@clientName(VmssFabricProfile.osProfile, "OSProfile", "csharp");
+@@clientName(OsDiskStorageAccountType, "OSDiskStorageAccountType", "csharp");
 
 @@clientName(StorageAccountType.StandardSSDLRS, "StandardSSDLRS", "javascript");
 @@clientName(StorageAccountType.StandardSSDZRS, "StandardSSDZRS", "javascript");
