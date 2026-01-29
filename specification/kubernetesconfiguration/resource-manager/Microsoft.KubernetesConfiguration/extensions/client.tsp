@@ -8,4 +8,4 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
-@@clientName(AKSIdentityType, "AksIdentityType", "java);
+@@clientName(AKSIdentityType, "AksIdentityType", "java");
