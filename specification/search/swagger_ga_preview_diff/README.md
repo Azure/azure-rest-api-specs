@@ -124,8 +124,20 @@ The Excel output applies background colors to guide human review:
 
 **Preview as Source of Truth:**
 - All Preview (2025-11-01-preview) operations are listed
-- GA (2025-09-01) is used only for diff annotation
+- GA (2025-09-01) is used for diff annotation
+- Aug Preview (2025-08-01-preview) is used for diff annotation
 - For knowledgebase spec: GA doesn't exist, all marked as "new in 2025-11-01-preview"
+
+**Row Generation Rules:**
+
+Routes Diff:
+- All Nov preview operations are listed (source of truth)
+- Each row includes both GA and Aug preview comparisons
+
+Models Diff:
+- **Rows are generated ONLY from Sep GA vs Nov preview differences**
+- Aug preview columns provide annotation context (NOT a source of new rows)
+- For knowledgebase: Since no Sep GA exists, all Nov preview models/properties generate rows
 
 **Route Matching:**
 - Operations matched by: normalized path + HTTP method

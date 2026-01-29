@@ -425,31 +425,37 @@ def compute_model_diffs_unified(
     """
     Compute unified model diffs with Nov preview as baseline.
 
+    ROW INCLUSION RULE:
+    - Rows are generated ONLY from Sep GA vs Nov preview differences
+    - Aug preview columns are populated as annotations for existing rows
+
     Returns list of diff records with new structure:
     - model_name
     - property_name
     - nov_value (2025-11-01-preview)
     - sep_change_type (Change Type Sep vs Nov)
     - sep_value (2025-09-01 GA)
-    - aug_change_type (Change Type Aug vs Nov)
-    - aug_value (2025-08-01-preview)
+    - aug_change_type (Change Type Aug vs Nov) - annotation only
+    - aug_value (2025-08-01-preview) - annotation only
     - sep_impact (Impact Sep vs Nov)
     """
     diffs = []
 
-    # Also include models that exist only in Sep or Aug (removed in Nov)
-    all_model_names = set(nov_models.keys()) | set(sep_models.keys()) | set(aug_models.keys())
+    # Only iterate over models that exist in Nov or Sep (not Aug-only models)
+    all_model_names = set(nov_models.keys()) | set(sep_models.keys())
 
     for model_name in sorted(all_model_names):
         nov_model = nov_models.get(model_name)
         sep_model = sep_models.get(model_name)
         aug_model = aug_models.get(model_name)
 
-        # Determine if we need model-level rows
-        # We'll process property-level diffs primarily, but add model-level for new/removed models
+        # Skip model-level rows entirely - only generate property-level rows
+        # Don't process properties if model doesn't exist in Nov
+        if not nov_model:
+            continue
 
+        # Property-level diffs (only if model exists in Nov)
         if nov_model:
-            # Model exists in Nov - process all its properties
             nov_props = nov_model.get("properties", {})
             nov_required = set(nov_model.get("required", []))
 
@@ -459,8 +465,8 @@ def compute_model_diffs_unified(
             aug_props = aug_model.get("properties", {}) if aug_model else {}
             aug_required = set(aug_model.get("required", [])) if aug_model else set()
 
-            # Also check for properties that existed in Sep/Aug but removed in Nov
-            all_props = set(nov_props.keys()) | set(sep_props.keys()) | set(aug_props.keys())
+            # Only iterate over properties that exist in Nov or Sep (not Aug-only)
+            all_props = set(nov_props.keys()) | set(sep_props.keys())
 
             for prop_name in sorted(all_props):
                 nov_prop = nov_props.get(prop_name)
@@ -471,34 +477,46 @@ def compute_model_diffs_unified(
                 if nov_prop:
                     nov_type = get_property_type(nov_prop, nov_swagger)
                     is_required = prop_name in nov_required
-                    nov_value = f"{nov_type} ({'required' if is_required else 'optional'})"
+                    nov_value = (
+                        f"{nov_type} ({'required' if is_required else 'optional'})"
+                    )
                 else:
                     nov_value = "(not present)"
 
-                # Compare with Sep GA
+                # Compare with Sep GA to determine if row should be included
                 sep_change_type = ""
                 sep_value = ""
                 sep_impact = ""
 
                 if nov_prop and not sep_prop:
+                    # New property in Nov vs Sep
                     sep_change_type = "property added"
                     sep_value = "(not present)"
-                    sep_impact = "breaking" if prop_name in nov_required else "non-breaking"
+                    sep_impact = (
+                        "breaking" if prop_name in nov_required else "non-breaking"
+                    )
+
                 elif sep_prop and not nov_prop:
+                    # Property removed in Nov vs Sep
                     sep_change_type = "property removed"
                     sep_type = get_property_type(sep_prop, sep_swagger)
                     was_required = prop_name in sep_required
-                    sep_value = f"{sep_type} ({'required' if was_required else 'optional'})"
+                    sep_value = (
+                        f"{sep_type} ({'required' if was_required else 'optional'})"
+                    )
                     sep_impact = "breaking"
+
                 elif sep_prop and nov_prop:
                     # Both exist - check for changes
                     nov_type = get_property_type(nov_prop, nov_swagger)
                     sep_type = get_property_type(sep_prop, sep_swagger)
-                    
+
                     was_required_sep = prop_name in sep_required
                     is_required_nov = prop_name in nov_required
 
-                    sep_value = f"{sep_type} ({'required' if was_required_sep else 'optional'})"
+                    sep_value = (
+                        f"{sep_type} ({'required' if was_required_sep else 'optional'})"
+                    )
 
                     if nov_type != sep_type:
                         sep_change_type = "type changed"
@@ -510,9 +528,13 @@ def compute_model_diffs_unified(
                         else:
                             sep_change_type = "required → optional"
                             sep_impact = "non-breaking"
-                    # If no changes, leave blank
+                    # else: no Sep vs Nov change, don't add row
 
-                # Compare with Aug preview
+                # ONLY add row if there's a Sep vs Nov change
+                if not sep_change_type:
+                    continue
+
+                # Now compute Aug annotation for this row
                 aug_change_type = ""
                 aug_value = ""
 
@@ -523,16 +545,20 @@ def compute_model_diffs_unified(
                     aug_change_type = "property removed"
                     aug_type = get_property_type(aug_prop, aug_swagger)
                     was_required_aug = prop_name in aug_required
-                    aug_value = f"{aug_type} ({'required' if was_required_aug else 'optional'})"
+                    aug_value = (
+                        f"{aug_type} ({'required' if was_required_aug else 'optional'})"
+                    )
                 elif aug_prop and nov_prop:
                     # Both exist - check for changes
                     nov_type = get_property_type(nov_prop, nov_swagger)
                     aug_type = get_property_type(aug_prop, aug_swagger)
-                    
+
                     was_required_aug = prop_name in aug_required
                     is_required_nov = prop_name in nov_required
 
-                    aug_value = f"{aug_type} ({'required' if was_required_aug else 'optional'})"
+                    aug_value = (
+                        f"{aug_type} ({'required' if was_required_aug else 'optional'})"
+                    )
 
                     if nov_type != aug_type:
                         aug_change_type = "type changed"
@@ -541,11 +567,14 @@ def compute_model_diffs_unified(
                             aug_change_type = "optional → required"
                         else:
                             aug_change_type = "required → optional"
-                    # If no changes, leave blank
+                    # else: no Aug vs Nov change, leave blank
+                else:
+                    # Property doesn't exist in Aug
+                    aug_value = "(not present)"
 
-                # Only add row if there's at least one change (Sep or Aug)
-                if sep_change_type or aug_change_type:
-                    diffs.append({
+                # Add the row (we know sep_change_type is not empty)
+                diffs.append(
+                    {
                         "model_name": model_name,
                         "property_name": prop_name,
                         "nov_value": nov_value,
@@ -554,34 +583,8 @@ def compute_model_diffs_unified(
                         "aug_change_type": aug_change_type,
                         "aug_value": aug_value,
                         "sep_impact": sep_impact,
-                    })
-
-            # If model is new in Nov (not in Sep), add a model-level row
-            if not sep_model:
-                diffs.append({
-                    "model_name": model_name,
-                    "property_name": "(model-level)",
-                    "nov_value": "new model",
-                    "sep_change_type": "property added",  # Using "property added" for consistency
-                    "sep_value": "(not present)",
-                    "aug_change_type": "property added" if not aug_model else "",
-                    "aug_value": "(not present)" if not aug_model else "",
-                    "sep_impact": "non-breaking",
-                })
-
-        else:
-            # Model removed in Nov (exists in Sep or Aug but not Nov)
-            if sep_model or aug_model:
-                diffs.append({
-                    "model_name": model_name,
-                    "property_name": "(model-level)",
-                    "nov_value": "(not present)",
-                    "sep_change_type": "property removed" if sep_model else "",
-                    "sep_value": "model exists" if sep_model else "",
-                    "aug_change_type": "property removed" if aug_model else "",
-                    "aug_value": "model exists" if aug_model else "",
-                    "sep_impact": "breaking" if sep_model else "",
-                })
+                    }
+                )
 
     return diffs
 
@@ -922,7 +925,10 @@ def create_models_sheet(
                 row_color = COLORS["light_yellow"]
 
         # 3. Non-breaking additions at model level (light gray for informational)
-        elif diff["property_name"] == "(model-level)" and sep_change_type == "property added":
+        elif (
+            diff["property_name"] == "(model-level)"
+            and sep_change_type == "property added"
+        ):
             row_color = COLORS["light_gray"]
 
         # Apply color to entire row
@@ -1038,17 +1044,94 @@ def main():
         print(f"  GA models: {len(ga_models)}")
         print(f"  Aug Preview models: {len(aug_models)}")
 
-        # Compute unified model diffs with new structure
-        model_diffs = compute_model_diffs_unified(
+        # Compute model diffs (Sep GA vs Nov Preview only)
+        model_diffs = compute_model_diffs(
             preview_models,
             ga_models,
-            aug_models,
             preview_swagger,
             ga_swagger if ga_swagger else {},
-            aug_swagger if aug_swagger else {},
         )
 
         print(f"  Model diffs: {len(model_diffs)}")
+
+        # Annotate Sep vs Nov diffs with Aug preview information
+        for diff in model_diffs:
+            model_name = diff["model_name"]
+            prop_name = diff["property_name"]
+            
+            nov_model = preview_models.get(model_name)
+            aug_model = aug_models.get(model_name)
+            
+            # Convert old format to new format
+            nov_value = diff["preview_value"]
+            sep_change_type = diff["change_type"]
+            sep_value = diff["ga_value"]
+            sep_impact = diff["impact"]
+            
+            # Determine Aug annotation
+            aug_change_type = ""
+            aug_value = ""
+            
+            if not aug_model:
+                # Model doesn't exist in Aug
+                if nov_model:
+                    aug_change_type = "property added"
+                    aug_value = "(not present)"
+            elif not nov_model:
+                # Model removed in Nov (exists in Aug)
+                aug_change_type = "property removed"
+                aug_value = "model exists"
+            elif prop_name == "":
+                # Model-level diff - model exists in both Aug and Nov
+                aug_value = "model exists"
+                aug_change_type = ""
+            else:
+                # Property-level - check Aug vs Nov
+                aug_props = aug_model.get("properties", {})
+                nov_props = nov_model.get("properties", {})
+                
+                aug_required = set(aug_model.get("required", []))
+                nov_required = set(nov_model.get("required", []))
+                
+                aug_prop = aug_props.get(prop_name)
+                nov_prop = nov_props.get(prop_name)
+                
+                if aug_prop and not nov_prop:
+                    # Property removed in Nov vs Aug
+                    aug_type = get_property_type(aug_prop, aug_swagger)
+                    was_required = prop_name in aug_required
+                    aug_value = f"{aug_type} ({'required' if was_required else 'optional'})"
+                    aug_change_type = "property removed"
+                elif not aug_prop and nov_prop:
+                    # Property added in Nov vs Aug
+                    aug_value = "(not present)"
+                    aug_change_type = "property added"
+                elif aug_prop and nov_prop:
+                    # Both exist - check for changes
+                    aug_type = get_property_type(aug_prop, aug_swagger)
+                    nov_type = get_property_type(nov_prop, preview_swagger)
+                    
+                    was_required_aug = prop_name in aug_required
+                    is_required_nov = prop_name in nov_required
+                    
+                    aug_value = f"{aug_type} ({'required' if was_required_aug else 'optional'})"
+                    
+                    if aug_type != nov_type:
+                        aug_change_type = "type changed"
+                    elif was_required_aug != is_required_nov:
+                        if is_required_nov:
+                            aug_change_type = "optional → required"
+                        else:
+                            aug_change_type = "required → optional"
+                    # else: no change, leave blank
+            
+            # Update diff with new structure
+            diff["nov_value"] = nov_value
+            diff["sep_change_type"] = sep_change_type
+            diff["sep_value"] = sep_value
+            diff["aug_change_type"] = aug_change_type
+            diff["aug_value"] = aug_value
+            diff["sep_impact"] = sep_impact
 
         # Add to sheets
         if route_diffs:
