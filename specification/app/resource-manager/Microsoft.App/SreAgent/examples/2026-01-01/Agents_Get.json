@@ -1,0 +1,83 @@
+{
+  "title": "Agents_Get",
+  "operationId": "Agents_Get",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentName": "testAgent",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agents/testAgent",
+        "name": "testAgent",
+        "type": "Microsoft.App/agents",
+        "location": "East US",
+        "tags": {
+          "environment": "production",
+          "owner": "team-alpha"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-2222-3333-4444-555555555555",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "agentEndpoint": "https://testAgent.eastus.agents.azurecontainerapps.io",
+          "runningState": "Running",
+          "powerState": "Running",
+          "agentSpaceId": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
+          "knowledgeGraphConfiguration": {
+            "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testIdentity",
+            "managedResources": [
+              "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.Storage/storageAccounts/teststorage",
+              "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.KeyVault/vaults/testkv"
+            ]
+          },
+          "actionConfiguration": {
+            "identity": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/actionIdentity",
+            "mode": "Autonomous",
+            "accessLevel": "High"
+          },
+          "logConfiguration": {
+            "applicationInsightsConfiguration": {
+              "appId": "87654321-4321-4321-4321-210987654321"
+            }
+          },
+          "incidentManagementConfiguration": {
+            "type": "ServiceNow",
+            "connectionName": "ServiceNowConnection",
+            "connectionUrl": "https://testinstance.service-now.com",
+            "oboUser": "test@contoso.com"
+          },
+          "permissions": [
+            {
+              "displayName": "John Doe",
+              "objectId": "11111111-2222-3333-4444-555555555555",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "role": "StandardUser"
+            },
+            {
+              "displayName": "Jane Smith",
+              "objectId": "22222222-3333-4444-5555-666666666666",
+              "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+              "role": "Author"
+            }
+          ],
+          "upgradeChannel": "Stable",
+          "agentIdentity": {
+            "enabled": true,
+            "clientId": "88888888-9999-aaaa-bbbb-cccccccccccc",
+            "initialSponsorGroupId": "99999999-aaaa-bbbb-cccc-dddddddddddd"
+          },
+          "defaultModel": {
+            "provider": "MicrosoftFoundry",
+            "name": "gpt-5"
+          }
+        }
+      }
+    }
+  }
+}
