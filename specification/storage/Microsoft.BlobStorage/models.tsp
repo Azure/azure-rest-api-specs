@@ -14,6 +14,14 @@ namespace Storage.Blob;
 @encode(BytesKnownEncoding.base64)
 scalar base64Bytes extends bytes;
 
+/** The error response. */
+@error
+model StorageError {
+  /** The error message. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
+  Message?: string;
+}
+
 /** Error codes returned by the Azure Blob Storage service. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 union StorageErrorCode {
