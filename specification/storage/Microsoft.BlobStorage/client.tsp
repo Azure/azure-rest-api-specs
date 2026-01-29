@@ -92,3 +92,13 @@ namespace Customizations;
 @@alternateType(AccessPolicy.expiry, utcDateTime, "go");
 @@alternateType(BlobItemInternal.name, string, "go");
 @@alternateType(BlobPrefix.name, string, "go");
+
+@@alternateType(AccessPolicy.start, string, "python");
+@@alternateType(AccessPolicy.expiry, string, "python");
+
+@@clientName(QueryType, "QueryFormatType", "python");
+@@clientName(Storage.Blob.BlockBlob.uploadBlobFromUrl,
+  "putBlobFromUrl",
+  "python"
+);
+@@clientName(BlobServiceProperties, "StorageServiceProperties", "python");
