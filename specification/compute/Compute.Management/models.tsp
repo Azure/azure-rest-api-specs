@@ -335,13 +335,14 @@ union NetworkApiVersion {
  */
 union SecurityTypes {
   string,
-  
- /** 
-  * Standard added officially as of 2025-11-01 api version.
-  * It's the default value in response when user doesn't specify the security type.
- */
+
+  /**
+   * Standard added officially as of 2025-11-01 api version.
+   * It's the default value in response when user doesn't specify the security type.
+   */
   @added(Versions.v2025_11_01)
   Standard: "Standard",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TrustedLaunch: "TrustedLaunch",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
