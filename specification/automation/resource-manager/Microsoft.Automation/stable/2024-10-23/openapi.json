@@ -161,10 +161,8 @@
         "tags": [
           "AutomationAccounts"
         ],
+        "summary": "Lists the Automation Accounts within an Azure subscription.",
         "description": "Retrieve a list of accounts within a given subscription.",
-        "externalDocs": {
-          "url": "http://aka.ms/azureautomationsdk/automationaccountoperations"
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -17319,7 +17317,12 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "location": {
           "type": "string",

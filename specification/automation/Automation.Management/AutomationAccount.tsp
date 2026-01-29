@@ -89,7 +89,7 @@ interface AutomationAccounts {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("AutomationAccount_List")
-  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
+  @summary("Lists the Automation Accounts within an Azure subscription.")
   list is ArmListBySubscription<AutomationAccount>;
 
   /**

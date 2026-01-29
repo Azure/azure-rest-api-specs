@@ -503,3 +503,5 @@ using Microsoft.Automation;
 @@clientLocation(deletedAutomationAccountsOperationGroup.listBySubscription,
   "deletedAutomationAccounts"
 );
+
+@@visibility(Watcher.tags, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
