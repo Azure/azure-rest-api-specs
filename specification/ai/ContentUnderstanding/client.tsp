@@ -6,6 +6,7 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using ContentUnderstanding;
+using TypeSpec.Http;
 
 namespace ClientCustomizations;
 
@@ -126,6 +127,10 @@ op analyzeBinaryCustomSignature(
   @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'. Default is 'codePoint'.")
   @query
   stringEncoding?: string = "codePoint",
+
+  @doc("The API version to use for this operation.")
+  @query("api-version")
+  apiVersion: string,
 ): AnalyzeResult;
 
 @@override(ContentUnderstandingClient.analyzeBinary,
@@ -152,6 +157,10 @@ op analyzeCustomSignature(
   @doc("The string encoding format for content spans in the response. Possible values are 'codePoint', 'utf16', and 'utf8'. Default is 'codePoint'.")
   @query
   stringEncoding?: string = "codePoint",
+
+  @doc("The API version to use for this operation.")
+  @query("api-version")
+  apiVersion: string,
 ): AnalyzeResult;
 
 @@override(ContentUnderstandingClient.analyze, analyzeCustomSignature);
