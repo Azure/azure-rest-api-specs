@@ -27,7 +27,97 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-10-01-preview
+tag: package-preview-2026-01-15-preview
+```
+
+### Tag: package-preview-2026-01-15-preview
+
+These settings apply only when `--tag=package-preview-2026-01-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-15-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2026-01-15-preview/openapi.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: This is necessary to allow users to specify custom inference parameters and 
+      fine-tuning hyperparameters for any model. Enforcing typecasting would require modifying 
+      contracts for each new addition by model providers. A similar approach has been previously 
+      permitted for the FinetuningJob.
+    where:
+      - $.definitions.TeacherModelSettings.properties.teacherModelInferenceParameters
+      - $.definitions.FinetuningDetails.properties.hyperParameters
+      - $.definitions.DistillationJob.properties.outputs
+  - code: DeleteResponseCodes
+    reason: Existing API behavior in 2025-04-01-preview.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}"].delete
+  - code: PatchIdentityProperty
+    reason: Existing API behavior in 2025-04-01-preview.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}"].patch.parameters[6]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}"].patch.parameters[6]
+  - code: PathForResourceAction
+    reason: Existing API behavior in 2025-04-01-preview.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify"]
+  - code: NestedResourcesMustHaveListOperation
+    reason: This resource will have many kind and we currently only start with the first kind that will have a 1 to 1 
+        mapping with the parent resource, so right now we didn't implement List API, 
+        we will add whence needed in the future.
+    where:
+      - $.definitions["CapabilityHostResource"]
+  - code: AvoidAdditionalProperties
+    reason: These are hyperparameters which can vary by model and the finetuning task type,
+      so cannot have strictly typed properties.
+    where:
+      - $.definitions.CustomModelFineTuning.properties.hyperParameters
+  - code: AvoidAdditionalProperties
+    reason: ModelID is a string representing the asset id for the model. The list of modelIds is dynamic since it based
+      on which models the user previously attempted to add to the InferenceGroup
+    where:
+      - $.definitions.DeltaModelStatusResponse.properties.deltaModels
+  - code: AvoidAdditionalProperties
+    reason: JobOutputs is a common-type predefined reference, which is an allowed scenario
+    where:
+      - $.definitions.FineTuningJob.properties.outputs
+  - code: AvoidAdditionalProperties
+    reason: As discussed In office hour this conf property is string dictionary 
+      and passed by user as per there requirements depending on runtime version. 
+      This passed to downstream and we have multiple validation on all required 
+      configuration before passing it downstream, All optional property passed as 
+      user wants and any failure due to that considered as user error.
+    where:
+      - $.definitions.SparkJob.properties.conf
+  - code: AvoidAdditionalProperties
+    reason: This is for feature parity with other job type like commandjob, sweepjob etc.
+      We have one interface for all type of job and other job take environment variable like this to match with them 
+      we also pass environment variable in this format. please check existing "CommandJob" in same file.
+    where:
+      - $.definitions.SparkJob.properties.environmentVariables
+  - code: AvoidAdditionalProperties
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
+      - $.definitions.DiagnoseRequestProperties.properties.requiredResourceProviders
+  - code: PatchBodyParametersSchema
+    reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    reason: Existing API behavior, the whole property is not required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: PatchBodyParametersSchema
+    reason: The required part is within a property, the whole property itself is not required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: This should be exist in 2024-10-01-preview and got suppressed already, not sure why it got triggered.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"].put
 ```
 
 ### Tag: package-preview-2025-10-01-preview
