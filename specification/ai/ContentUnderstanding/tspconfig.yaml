@@ -29,8 +29,8 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentunderstanding"
     namespace: "azure.ai.contentunderstanding"
     package-version: 1.0.0b1
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/ai-content-understanding-rest"
@@ -38,13 +38,15 @@ options:
       name: "@azure-rest/ai-content-understanding"
       description: "Azure Content Understanding Rest Client"
       version: "1.0.0-beta.1"
-    generate-test: true
+    generate-test: false
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-contentunderstanding"
     namespace: com.azure.ai.contentunderstanding
     enable-sync-stack: true
-    generate-tests: true
+    generate-tests: false
+    generate-sample: false
     partial-update: true
     use-eclipse-language-server: false
     flavor: azure
+    customization-class: customization/src/main/java/ContentUnderstandingCustomizations.java
