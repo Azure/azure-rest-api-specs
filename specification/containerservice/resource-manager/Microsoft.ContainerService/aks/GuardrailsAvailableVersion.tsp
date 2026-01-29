@@ -33,6 +33,7 @@ interface GuardrailsAvailableVersions {
   /**
    * Contains Guardrails version along with its support info and whether it is a default version.
    */
+  @summary("Gets supported Guardrails version in the specified subscription and location.")
   getGuardrailsVersions is ArmResourceRead<
     GuardrailsAvailableVersion,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -41,6 +42,7 @@ interface GuardrailsAvailableVersions {
   /**
    * Contains list of Guardrails version along with its support info and whether it is a default version.
    */
+  @summary("Gets a list of supported Guardrails versions in the specified subscription and location.")
   listGuardrailsVersions is ArmResourceListByParent<
     GuardrailsAvailableVersion,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

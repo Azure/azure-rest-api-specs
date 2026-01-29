@@ -33,6 +33,7 @@ interface SafeguardsAvailableVersions {
   /**
    * Contains Safeguards version along with its support info and whether it is a default version.
    */
+  @summary("Gets supported Safeguards version in the specified subscription and location.")
   getSafeguardsVersions is ArmResourceRead<
     SafeguardsAvailableVersion,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -41,6 +42,7 @@ interface SafeguardsAvailableVersions {
   /**
    * Contains list of Safeguards version along with its support info and whether it is a default version.
    */
+  @summary("Gets a list of supported Safeguards versions in the specified subscription and location.")
   listSafeguardsVersions is ArmResourceListByParent<
     SafeguardsAvailableVersion,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
