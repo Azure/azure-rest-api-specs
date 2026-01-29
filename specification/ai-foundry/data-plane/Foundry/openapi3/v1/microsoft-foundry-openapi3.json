@@ -13619,9 +13619,11 @@
               "red_team",
               "response_retrieval",
               "red_team_seed_prompts",
-              "red_team_taxonomy",
-              "synthetic_data_gen_preview"
+              "red_team_taxonomy"
             ]
+          },
+          {
+            "$ref": "#/components/schemas/SyntheticDataGenItemGenerationParamsType"
           }
         ],
         "description": "The types of parameters for red team item generation."
@@ -32926,6 +32928,20 @@
           }
         ]
       },
+      "SyntheticDataGenItemGenerationParamsType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "synthetic_data_gen_preview"
+            ]
+          }
+        ],
+        "description": "The types of parameters for synthetic data generation item generation."
+      },
       "SyntheticDataGenerationPreviewEvalRunDataSource": {
         "type": "object",
         "required": [
@@ -32983,9 +32999,10 @@
         ],
         "properties": {
           "type": {
-            "type": "string",
-            "enum": [
-              "synthetic_data_gen_preview"
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SyntheticDataGenItemGenerationParamsType"
+              }
             ],
             "description": "The type of item generation parameters."
           },

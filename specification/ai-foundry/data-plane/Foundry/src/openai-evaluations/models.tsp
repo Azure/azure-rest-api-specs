@@ -183,7 +183,15 @@ union ItemGenerationParamsType {
   redTeamTaxonomy: "red_team_taxonomy",
 
   /** Parameters for synthetic data item generation. */
-  syntheticData: "synthetic_data_gen_preview",
+  syntheticDataGeneration: SyntheticDataGenItemGenerationParamsType,
+}
+
+/** The types of parameters for synthetic data generation item generation. */
+union SyntheticDataGenItemGenerationParamsType {
+  string,
+
+  /** Parameters for synthetic data generation preview. */
+  syntheticDataGenerationPreview: "synthetic_data_gen_preview",
 }
 
 /** Represents the set of parameters used to control item generation operations. */
@@ -369,7 +377,7 @@ model SyntheticDataGenerationPreviewEvalRunDataSource
 model SyntheticDataGenerationPreviewItemGenerationParams
   extends ItemGenerationParams {
   /** The type of item generation parameters. */
-  type: ItemGenerationParamsType.syntheticData;
+  type: ItemGenerationParamsType.syntheticDataGeneration;
 
   /** The maximum number of data samples to generate. */
   samples_count: int32;
