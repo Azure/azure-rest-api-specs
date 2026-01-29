@@ -26,3 +26,18 @@ using Azure.ClientGenerator.Core;
   "OciRepositoryRefDefinition",
   "java"
 );
+
+@@clientName(Microsoft.KubernetesConfiguration.SourceKindType.OCIRepository,
+  "OciRepository",
+  "java"
+);
+
+@@clientName(Microsoft.KubernetesConfiguration.OCIRepositoryPatchDefinition,
+  "OciRepositoryPatchDefinition",
+  "java"
+);
+
+@@clientName(Microsoft.KubernetesConfiguration.OCIRepositoryRefPatchDefinition,
+  "OciRepositoryRefPatchDefinition",
+  "java"
+);
