@@ -83,6 +83,27 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
   scenario: "red_team" | "responses" | "traces";
 }
 
+/** Metadata for benchmark evaluation configuration. */
+model BenchmarkMetadata {
+  /** The name of the benchmark specification. */
+  benchmark_name: string;
+
+  /** The version of the benchmark specification (e.g., '0.1'). */
+  benchmark_version?: string;
+}
+
+/** Data source configuration for benchmark evaluations. */
+model AzureAIBenchmarkDataSourceConfig extends DataSourceConfig {
+  /** The object type, which is always `azure_ai_source`. */
+  type: "azure_ai_source";
+
+  /** Data schema scenario, always `benchmark` for benchmark evaluations. */
+  scenario: "benchmark";
+
+  /** Metadata identifying the benchmark to use. */
+  metadata: BenchmarkMetadata;
+}
+
 /** Adding Azure AI Source type to data source for foundry extension. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
@@ -94,6 +115,7 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
     | OpenAI.CreateEvalLogsDataSourceConfig
     | OpenAI.CreateEvalStoredCompletionsDataSourceConfig
     | AzureAIDataSourceConfig
+    | AzureAIBenchmarkDataSourceConfig
 );
 
 /** Adding Azure AI Evaluator type to testing criteria for foundry extension. */
@@ -139,6 +161,7 @@ model Eval is OpenAI.Eval {
     | OpenAI.CreateEvalLogsDataSourceConfig
     | OpenAI.CreateEvalStoredCompletionsDataSourceConfig
     | AzureAIDataSourceConfig
+    | AzureAIBenchmarkDataSourceConfig
 );
 
 /** Adding Azure AI Evaluator type to testing criteria for foundry extension. */
@@ -386,6 +409,21 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
   target: Target;
 }
 
+/** Represents a data source for benchmark evaluation runs. */
+model AzureAIBenchmarkEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_benchmark`. */
+  type: "azure_ai_benchmark";
+
+  /**
+   * The target model or agent to evaluate against the benchmark.
+   * When using `azure_ai_model` target, `sampling_params` must not be provided;
+   * inference parameters are auto-filled from the benchmark specification stored in eval group properties.
+   */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  target: AzureAIModelTarget | AzureAIAgentTarget;
+}
+
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
@@ -394,7 +432,7 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkEvalRunDataSource */
 );
 
 model EvalRun is OpenAI.EvalRun {
@@ -423,7 +461,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkEvalRunDataSource */
 );
 
 model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
