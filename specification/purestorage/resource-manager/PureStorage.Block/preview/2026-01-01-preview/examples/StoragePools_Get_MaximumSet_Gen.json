@@ -1,0 +1,59 @@
+{
+  "title": "StoragePools_Get",
+  "operationId": "StoragePools_Get",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "storagePoolName": "storagepool-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "storagePoolInternalId": "pool-abc123",
+          "availabilityZone": "1",
+          "vnetInjection": {
+            "subnetId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/Microsoft.Network/virtualNetworks/vnet-01/subnets/subnet-01",
+            "vnetId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/Microsoft.Network/virtualNetworks/vnet-01"
+          },
+          "dataRetentionPeriod": 23,
+          "provisionedBandwidthMbPerSec": 17,
+          "provisionedIops": 3,
+          "avs": {
+            "avsEnabled": true,
+            "sddcResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/Microsoft.AVS/privateClouds/avs-cloud-01"
+          },
+          "provisioningState": "Succeeded",
+          "reservationResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/reservations/reservation-01"
+        },
+        "identity": {
+          "principalId": "22222222-2222-2222-2222-222222222222",
+          "tenantId": "22222222-2222-2222-2222-222222222222",
+          "type": "None",
+          "userAssignedIdentities": {
+            "identity-01": {
+              "principalId": "22222222-2222-2222-2222-222222222222",
+              "clientId": "22222222-2222-2222-2222-222222222222"
+            }
+          }
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+        "name": "storagepool-01",
+        "type": "PureStorage.Block/storagePools",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-16T07:25:56.721Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-16T07:25:56.721Z"
+        }
+      }
+    }
+  }
+}

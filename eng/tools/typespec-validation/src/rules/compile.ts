@@ -89,11 +89,7 @@ export class CompileRule implements Rule {
           // Necessary to handle multi-project specs like keyvault.
           //
           // Globby only accepts patterns like posix paths.
-          const pattern = path.posix.join(
-            ...outputFolder.split(path.win32.sep),
-            "**",
-            outputFilename,
-          );
+          const pattern = path.posix.join(...outputFolder.split(path.sep), "**", outputFilename);
           const allSwaggers = (await globby(pattern, { ignore: ["**/examples/**"] })).map(
             // Globby always returns posix paths
             (p) => normalize(p),
@@ -162,14 +158,62 @@ export class CompileRule implements Rule {
           const extraSwaggers = remainingSwaggers.filter((s) => !outputSwaggers.includes(s));
 
           if (extraSwaggers.length > 0) {
-            success = false;
-            errorOutput += pc.red(
-              `\nOutput folder '${outputFolder}' appears to contain TypeSpec-generated ` +
-                `swagger files, not generated from the current TypeSpec sources. ` +
-                `Perhaps you deleted a version from your TypeSpec, but didn't delete ` +
-                `the associated swaggers?\n\n`,
-            );
-            errorOutput += pc.red(extraSwaggers.join("\n") + "\n");
+            // Helper function to extract version from swagger path
+            // Normalize to POSIX path for consistent pattern matching
+            const extractVersion = (swaggerPath: string): string | null => {
+              const posixPath = swaggerPath.split(path.sep).join(path.posix.sep);
+              const match = posixPath.match(/\/(preview|stable)\/([^/]+)\//);
+              return match ? match[2] : null;
+            };
+
+            // Check if all extra swaggers are preview versions
+            const allArePreview = extraSwaggers.every((s) => {
+              const posixPath = s.split(path.sep).join(path.posix.sep);
+              return posixPath.includes("/preview/");
+            });
+
+            let isOnlyOlderPreviews = false;
+            if (allArePreview) {
+              // Get all preview versions from tspGeneratedSwaggers
+              const previewVersions = tspGeneratedSwaggers
+                .filter((s) => {
+                  const posixPath = s.split(path.sep).join(path.posix.sep);
+                  return posixPath.includes("/preview/");
+                })
+                .map(extractVersion)
+                .filter((v): v is string => v !== null);
+
+              if (previewVersions.length > 0) {
+                // Find the latest preview version (sort descending)
+                const sortedVersions = [...new Set(previewVersions)].sort().reverse();
+                const latestPreview = sortedVersions[0];
+
+                // Check if any extraSwagger is from the latest preview
+                const hasLatestPreview = extraSwaggers.some((s) => {
+                  const version = extractVersion(s);
+                  return version === latestPreview;
+                });
+
+                isOnlyOlderPreviews = !hasLatestPreview;
+              }
+            }
+
+            if (!isOnlyOlderPreviews) {
+              success = false;
+              errorOutput += pc.red(
+                `\nOutput folder '${outputFolder}' appears to contain TypeSpec-generated ` +
+                  `swagger files, not generated from the current TypeSpec sources. ` +
+                  `Perhaps you deleted a version from your TypeSpec, but didn't delete ` +
+                  `the associated swaggers?\n\n`,
+              );
+              errorOutput += pc.red(extraSwaggers.join("\n") + "\n");
+            } else {
+              stdOutput += pc.yellow(
+                `\nNote: Found extra preview swaggers from older versions (not the latest preview). ` +
+                  `These are allowed to remain:\n`,
+              );
+              stdOutput += pc.yellow(extraSwaggers.join("\n") + "\n");
+            }
           }
         } else {
           success = false;

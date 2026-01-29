@@ -3122,7 +3122,7 @@
         "executedDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Test run initiated time.",
+          "description": "Test run initiated time. This is legacy, new developments should use createdDateTime.",
           "readOnly": true
         },
         "portalUrl": {
@@ -3832,7 +3832,7 @@
     "ListTestRunQueryParams.orderby": {
       "name": "orderby",
       "in": "query",
-      "description": "Sort on the supported fields in (field asc/desc) format. eg: executedDateTime\nasc. Supported fields - executedDateTime",
+      "description": "Sort on the supported fields in (field asc/desc) format. eg: createdDateTime asc.\nSupported fields - createdDateTime, executedDateTime (legacy)",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"

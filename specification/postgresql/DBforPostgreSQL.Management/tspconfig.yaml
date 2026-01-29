@@ -11,9 +11,6 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
-  "@azure-typespec/http-client-csharp-mgmt":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.ResourceManager.PostgreSql"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-postgresql"
     namespace: "azure.mgmt.postgresql"
@@ -32,6 +29,7 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-postgresql-flexible"
     flavor: "azure"
     experimental-extensible-enums: true
+    compatibility-lro: true
     package-details:
       name: "@azure/arm-postgresql-flexible"
   "@azure-tools/typespec-go":

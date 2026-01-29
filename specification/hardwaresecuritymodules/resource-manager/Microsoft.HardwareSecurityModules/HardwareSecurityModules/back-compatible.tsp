@@ -6,7 +6,7 @@ using Microsoft.HardwareSecurityModules;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackupResult.properties,
-  "!python,!java,!csharp"
+  "!python,!java,!csharp,!javascript"
 );
 @@clientName(Error.innererror, "innerError");
 @@clientName(CloudHsmClusters.createOrUpdate::parameters.resource, "body");
@@ -17,7 +17,7 @@ using Microsoft.HardwareSecurityModules;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudHsmCluster.properties,
-  "!python,!java,!csharp"
+  "!python,!java,!csharp,!javascript"
 );
 @@clientName(PrivateEndpointConnections.create::parameters.resource,
   "properties"
@@ -25,14 +25,14 @@ using Microsoft.HardwareSecurityModules;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
-  "!python,!java,!csharp"
+  "!python,!java,!csharp,!javascript"
 );
 @@clientName(DedicatedHsms.createOrUpdate::parameters.resource, "parameters");
 @@clientName(DedicatedHsms.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedHsm.properties,
-  "!python,!java,!csharp"
+  "!python,!java,!csharp,!javascript"
 );
 @@clientName(CloudHsmClusters.validateBackupProperties::parameters.body,
   "backupRequestProperties",

@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/azurelargeinstance"
 emit:
   - "@azure-tools/typespec-autorest"
 linter:
@@ -10,3 +13,6 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     output-file: "{version-status}/{version}/azurelargeinstance.json"
     use-read-only-status-schema: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.LargeInstance"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"

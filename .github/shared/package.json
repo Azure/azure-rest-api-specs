@@ -53,9 +53,10 @@
     "cross-env": "^10.1.0",
     "eslint": "^9.22.0",
     "globals": "^17.0.0",
-    "prettier": "3.7.4",
+    "prettier": "3.8.0",
     "prettier-plugin-organize-imports": "^4.2.0",
     "semver": "^7.7.1",
+    "tinybench": "^6.0.0",
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.45.0",
     "vitest": "^4.0.15"
@@ -68,6 +69,7 @@
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "perf": "node perf/perf.js",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   }

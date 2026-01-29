@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "diagnosticCategory": "availability",
+    "resourceGroupName": "Sample-WestUSResourceGroup",
+    "siteName": "SampleApp",
+    "slot": "staging",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "servicehealth",
+            "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/slots/staging/diagnostics/availability/detectors/servicehealth",
+            "properties": {
+              "description": null,
+              "displayName": "Service Health",
+              "isEnabled": true,
+              "rank": 1
+            }
+          },
+          {
+            "name": "siteswap",
+            "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/slots/staging/diagnostics/availability/detectors/siteswap",
+            "properties": {
+              "description": null,
+              "displayName": "Site Swap Operations",
+              "isEnabled": true,
+              "rank": 8
+            }
+          },
+          {
+            "name": "sitecrashes",
+            "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/slots/staging/diagnostics/availability/detectors/sitecrashes",
+            "properties": {
+              "description": null,
+              "displayName": "Site Crash Events",
+              "isEnabled": true,
+              "rank": 9
+            }
+          },
+          {
+            "name": "deployment",
+            "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/sites/BuggyBakery/slots/staging/diagnostics/availability/detectors/deployment",
+            "properties": {
+              "description": null,
+              "displayName": "Site Deployments",
+              "isEnabled": true,
+              "rank": 7
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Diagnostics_ListSiteDetectors",
+  "title": "List App Slot Detectors"
+}

@@ -18,7 +18,7 @@ op AppliancesUpdateCustomized(
   ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
   ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
   ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+  ...Azure.ResourceManager.ProviderNamespace<Appliance>,
 
   @path
   @maxLength(63)

@@ -748,7 +748,7 @@ union CharFilterName {
   HtmlStrip: "html_strip",
 }
 
-/** Defines flags that can be combined to control how regular expressions are used in the pattern analyzer and pattern tokenizer. */
+/** Defines a regular expression flag that can be used in the pattern analyzer and pattern tokenizer. */
 union RegexFlags {
   string,
 
@@ -1673,130 +1673,6 @@ union EntityCategory {
 
   /** Entities describing an email address. */
   Email: "email",
-}
-
-/** Deprecated. The language codes supported for input text by EntityRecognitionSkill. */
-union EntityRecognitionSkillLanguage {
-  string,
-
-  /** Arabic */
-  ar: "ar",
-
-  /** Czech */
-  cs: "cs",
-
-  /** Chinese-Simplified */
-  `zh-Hans`: "zh-Hans",
-
-  /** Chinese-Traditional */
-  `zh-Hant`: "zh-Hant",
-
-  /** Danish */
-  da: "da",
-
-  /** Dutch */
-  nl: "nl",
-
-  /** English */
-  en: "en",
-
-  /** Finnish */
-  fi: "fi",
-
-  /** French */
-  fr: "fr",
-
-  /** German */
-  de: "de",
-
-  /** Greek */
-  el: "el",
-
-  /** Hungarian */
-  hu: "hu",
-
-  /** Italian */
-  it: "it",
-
-  /** Japanese */
-  ja: "ja",
-
-  /** Korean */
-  ko: "ko",
-
-  /** Norwegian (Bokmaal) */
-  no: "no",
-
-  /** Polish */
-  pl: "pl",
-
-  /** Portuguese (Portugal) */
-  `pt-PT`: "pt-PT",
-
-  /** Portuguese (Brazil) */
-  `pt-BR`: "pt-BR",
-
-  /** Russian */
-  ru: "ru",
-
-  /** Spanish */
-  es: "es",
-
-  /** Swedish */
-  sv: "sv",
-
-  /** Turkish */
-  tr: "tr",
-}
-
-/** Deprecated. The language codes supported for input text by SentimentSkill. */
-union SentimentSkillLanguage {
-  string,
-
-  /** Danish */
-  da: "da",
-
-  /** Dutch */
-  nl: "nl",
-
-  /** English */
-  en: "en",
-
-  /** Finnish */
-  fi: "fi",
-
-  /** French */
-  fr: "fr",
-
-  /** German */
-  de: "de",
-
-  /** Greek */
-  el: "el",
-
-  /** Italian */
-  it: "it",
-
-  /** Norwegian (Bokmaal) */
-  no: "no",
-
-  /** Polish */
-  pl: "pl",
-
-  /** Portuguese (Portugal) */
-  `pt-PT`: "pt-PT",
-
-  /** Russian */
-  ru: "ru",
-
-  /** Spanish */
-  es: "es",
-
-  /** Swedish */
-  sv: "sv",
-
-  /** Turkish */
-  tr: "tr",
 }
 
 /** A string indicating what maskingMode to use to mask the personal information detected in the input text. */
@@ -4816,8 +4692,11 @@ model PatternAnalyzer extends LexicalAnalyzer {
   /** A regular expression pattern to match token separators. Default is an expression that matches one or more non-word characters. */
   pattern?: string = "\\W+";
 
-  /** Regular expression flags. */
-  flags?: RegexFlags;
+  /** Regular expression flags, specified as a '|' separated string of RegexFlags values. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
+  @encode(ArrayEncoding.pipeDelimited)
+  flags?: RegexFlags[];
 
   /** A list of stopwords. */
   stopwords?: string[];
@@ -4999,8 +4878,11 @@ model PatternTokenizer extends LexicalTokenizer {
   /** A regular expression pattern to match token separators. Default is an expression that matches one or more non-word characters. */
   pattern?: string = "\\W+";
 
-  /** Regular expression flags. */
-  flags?: RegexFlags;
+  /** Regular expression flags, specified as a '|' separated string of RegexFlags values. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-autorest/unknown-format" "Pre-existing API contract"
+  @encode(ArrayEncoding.pipeDelimited)
+  flags?: RegexFlags[];
 
   /** The zero-based ordinal of the matching group in the regular expression pattern to extract into tokens. Use -1 if you want to use the entire pattern to split the input into tokens, irrespective of matching groups. Default is -1. */
   group?: int32 = -1;
@@ -6017,37 +5899,6 @@ model MergeSkill extends SearchIndexerSkill {
   /** A URI fragment specifying the type of skill. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
   `@odata.type`: "#Microsoft.Skills.Text.MergeSkill";
-}
-
-/** This skill is deprecated. Use the V3.EntityRecognitionSkill instead. */
-model EntityRecognitionSkill extends SearchIndexerSkill {
-  /** A list of entity categories that should be extracted. */
-  categories?: EntityCategory[];
-
-  /** A value indicating which language code to use. Default is `en`. */
-  defaultLanguageCode?: EntityRecognitionSkillLanguage;
-
-  /** Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  includeTypelessEntities?: boolean | null;
-
-  /** A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included. */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
-  minimumPrecision?: float64 | null;
-
-  /** A URI fragment specifying the type of skill. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  `@odata.type`: "#Microsoft.Skills.Text.EntityRecognitionSkill";
-}
-
-/** This skill is deprecated. Use the V3.SentimentSkill instead. */
-model SentimentSkill extends SearchIndexerSkill {
-  /** A value indicating which language code to use. Default is `en`. */
-  defaultLanguageCode?: SentimentSkillLanguage;
-
-  /** A URI fragment specifying the type of skill. */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-  `@odata.type`: "#Microsoft.Skills.Text.SentimentSkill";
 }
 
 /** Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as "negative", "neutral" and "positive") based on the highest confidence score found by the service at a sentence and document-level. */
