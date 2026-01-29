@@ -56,6 +56,7 @@ using Azure.Core;
   "ManagedHsmPrivateLinkResourceData",
   "csharp"
 );
+@@usage(MhsmPrivateLinkResource, Usage.input | Usage.output, "csharp");
 
 @@clientName(MhsmPrivateEndpointConnection,
   "ManagedHsmPrivateEndpointConnection",
@@ -109,6 +110,7 @@ using Azure.Core;
 @@clientName(VaultProperties.networkAcls, "NetworkRuleSet", "csharp");
 @@clientName(Vault, "KeyVault", "csharp");
 @@clientName(Vaults.createOrUpdate::parameters.resource, "content", "csharp");
+@@clientName(Vaults.update::parameters.properties, "patch", "csharp");
 @@clientName(VirtualNetworkRule, "KeyVaultVirtualNetworkRule", "csharp");
 @@clientName(Permissions, "IdentityAccessPermissions", "csharp");
 @@clientName(IPRule, "KeyVaultIPRule", "csharp");
@@ -200,6 +202,7 @@ using Azure.Core;
 @@alternateType(VaultAccessPolicyParameters.location, azureLocation, "csharp");
 @@alternateType(Secret.location, azureLocation, "csharp");
 @@clientName(Secrets.createOrUpdate::parameters.resource, "content", "csharp");
+@@clientName(Secrets.update::parameters.properties, "patch", "csharp");
 @@alternateType(Key.location, azureLocation, "csharp");
 @@alternateType(ManagedHsm.location, azureLocation, "csharp");
 @@alternateType(MhsmPrivateEndpointConnection.location,
