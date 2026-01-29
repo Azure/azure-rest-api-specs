@@ -410,9 +410,9 @@ model RedTeamEvalRunDataSource extends EvalRunDataSource {
 }
 
 /** Represents a data source for benchmark evaluation runs. */
-model AzureAIBenchmarkEvalRunDataSource extends EvalRunDataSource {
-  /** The type of data source, always `azure_ai_benchmark`. */
-  type: "azure_ai_benchmark";
+model AzureAIBenchmarkPreviewEvalRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_benchmark_preview`. */
+  type: "azure_ai_benchmark_preview";
 
   /**
    * The target model or agent to evaluate against the benchmark.
@@ -432,7 +432,7 @@ model AzureAIBenchmarkEvalRunDataSource extends EvalRunDataSource {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource */
 );
 
 model EvalRun is OpenAI.EvalRun {
@@ -461,7 +461,7 @@ model EvalRun is OpenAI.EvalRun {
     | OpenAI.CreateEvalJsonlRunDataSource
     | OpenAI.CreateEvalCompletionsRunDataSource
     | OpenAI.CreateEvalResponsesRunDataSource
-    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkEvalRunDataSource */
+    | EvalRunDataSource /* RedTeamEvalRunDataSource | TargetCompletionsEvalRunDataSource | AzureAIResponsesEvalRunDataSource | TracesPreviewEvalRunDataSource | AzureAIBenchmarkPreviewEvalRunDataSource */
 );
 
 model CreateEvalRunRequest is OpenAI.CreateEvalRunRequest {
