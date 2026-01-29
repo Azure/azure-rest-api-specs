@@ -1,0 +1,45 @@
+parameters:
+  "service-dir":
+    default: "sdk/commerce"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: false
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/commerce.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-commerce"
+    namespace: "azure.mgmt.commerce"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-commerce"
+    namespace: "com.azure.resourcemanager.commerce"
+    service-name: "Commerce" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-commerce"
+    flavor: "azure"
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-commerce"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/commerce"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcommerce"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcommerce"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
