@@ -5,12 +5,12 @@
     "geocodingBatchRequestBody": {
       "batchItems": [
         {
-          "addressLine": "15127 NE 24th Street, Redmond, WA 98052",
+          "query": "15127 NE 24th Street, Redmond, WA 98052",
           "top": 2,
           "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
         },
         {
-          "query": "Pike Pl",
+          "addressline": "Pike Pl",
           "locality": "Seattle",
           "top": 3
         }
@@ -26,19 +26,68 @@
         },
         "batchItems": [
           {
-            "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B",
             "type": "FeatureCollection",
             "features": [
               {
                 "type": "Feature",
+                "geometry": {
+                  "type": "Point",
+                  "coordinates": [
+                    -122.138677,
+                    47.630351
+                  ]
+                },
+                "bbox": [
+                  -122.1463188230466,
+                  47.62648828242932,
+                  -122.1310351769534,
+                  47.634213717570674
+                ],
                 "properties": {
                   "type": "Address",
                   "confidence": "High",
                   "matchCodes": [
                     "Good"
                   ],
+                  "geocodePoints": [
+                    {
+                      "calculationMethod": "Rooftop",
+                      "usageTypes": [
+                        "Display"
+                      ],
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -122.138677,
+                          47.630351
+                        ]
+                      }
+                    },
+                    {
+                      "calculationMethod": "Rooftop",
+                      "usageTypes": [
+                        "Route"
+                      ],
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -122.1386748,
+                          47.630218
+                        ]
+                      }
+                    }
+                  ],
                   "address": {
+                    "addressLine": "15127 NE 24th St",
+                    "streetName": "NE 24th St",
+                    "streetNumber": "15127",
+                    "postalCode": "98052",
                     "locality": "Redmond",
+                    "formattedAddress": "15127 NE 24th St, Redmond, WA 98052",
+                    "countryRegion": {
+                      "name": "United States",
+                      "ISO": "US"
+                    },
                     "adminDistricts": [
                       {
                         "shortName": "WA"
@@ -46,68 +95,75 @@
                       {
                         "shortName": "King County"
                       }
-                    ],
-                    "countryRegion": {
-                      "ISO": "US",
-                      "name": "United States"
-                    },
-                    "postalCode": "98052",
-                    "formattedAddress": "15127 NE 24th St, Redmond, WA 98052",
-                    "streetName": "NE 24th St",
-                    "streetNumber": "15127",
-                    "addressLine": "15127 NE 24th St"
-                  },
-                  "geocodePoints": [
-                    {
-                      "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                          -122.138669,
-                          47.630359
-                        ]
-                      },
-                      "calculationMethod": "Rooftop",
-                      "usageTypes": [
-                        "Display",
-                        "Route"
-                      ]
-                    },
-                    {
-                      "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                          -122.1387383,
-                          47.630563
-                        ]
-                      },
-                      "calculationMethod": "Rooftop",
-                      "usageTypes": [
-                        "Route"
-                      ]
-                    }
-                  ]
-                },
+                    ]
+                  }
+                }
+              }
+            ],
+            "optionalId": "4C3681A6C8AA4AC3441412763A2A25C81444DC8B"
+          },
+          {
+            "type": "FeatureCollection",
+            "features": [
+              {
+                "type": "Feature",
                 "geometry": {
                   "type": "Point",
                   "coordinates": [
-                    -122.138669,
-                    47.630359
+                    -122.341979399674,
+                    47.6095253501216
                   ]
                 },
                 "bbox": [
-                  -122.14631082421619,
-                  47.62649628242932,
-                  -122.1310271757838,
-                  47.634221717570675
-                ]
+                  -122.34961817972945,
+                  47.605662632550924,
+                  -122.33434061961856,
+                  47.61338806769228
+                ],
+                "properties": {
+                  "type": "Address",
+                  "confidence": "High",
+                  "matchCodes": [
+                    "Good"
+                  ],
+                  "geocodePoints": [
+                    {
+                      "calculationMethod": "Interpolation",
+                      "usageTypes": [
+                        "Display"
+                      ],
+                      "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                          -122.341979399674,
+                          47.6095253501216
+                        ]
+                      }
+                    }
+                  ],
+                  "address": {
+                    "addressLine": "Pike Pl",
+                    "streetName": "Pike Pl",
+                    "postalCode": "98101",
+                    "neighborhood": "Downtown Seattle",
+                    "locality": "Seattle",
+                    "formattedAddress": "Pike Pl, Seattle, WA 98101",
+                    "countryRegion": {
+                      "name": "United States",
+                      "ISO": "US"
+                    },
+                    "adminDistricts": [
+                      {
+                        "shortName": "WA"
+                      },
+                      {
+                        "shortName": "King County"
+                      }
+                    ]
+                  }
+                }
               }
             ]
-          },
-          {
-            "error": {
-              "code": "Conflicting Parameters",
-              "message": "When 'query' is present, only the following parameters are valid: 'bbox, location, view, top'. 'locality' was passed"
-            }
           }
         ]
       }
