@@ -6173,7 +6173,7 @@ alias ETagHeader = {
  */
 model StorageConnectorProperties {
   /**
-   * System-generated identifier for the Storage Connector. Not a valid input parameter when creating.
+   * System-generated GUID identifier for the Storage Connector. Not a valid input parameter when creating.
    */
   @visibility(Lifecycle.Read)
   uniqueId?: string;
@@ -6185,7 +6185,8 @@ model StorageConnectorProperties {
   state?: StorageConnectorState = StorageConnectorState.Active;
 
   /**
-   * System-generated creation time for the Storage Connector. Not a valid input parameter when creating.
+   * System-generated creation time of the Storage Connector in ISO 8601 date-time format (YYYY-MM-DDTHH:mm:ssZ).
+   * Not a valid input parameter during creating.
    */
   @visibility(Lifecycle.Read)
   creationTime?: string;
@@ -6348,7 +6349,7 @@ model TestConnectionResponse {
  */
 model StorageDataShareProperties {
   /**
-   * System-generated identifier for the Storage DataShare. Not a valid input parameter when creating.
+   * System-generated GUID identifier for the Storage DataShare. Not a valid input parameter when creating.
    */
   @visibility(Lifecycle.Read)
   @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
