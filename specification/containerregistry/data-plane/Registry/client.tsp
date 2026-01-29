@@ -4,6 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
+// TCGC usage decorators for output-only types
+@@usage(ContainerRegistry.TokenGrantType, Usage.output);
+@@usage(ContainerRegistry.AcrErrors, Usage.output);
+
 @@clientName(ContainerRegistry, "ContainerRegistry");
 // Rename ChangeableAttributes models to WriteableProperties for Python SDK backward compatibility
 @@clientName(ContainerRegistry.ManifestChangeableAttributes,

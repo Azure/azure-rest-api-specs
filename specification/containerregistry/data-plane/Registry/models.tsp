@@ -1,12 +1,9 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 
 namespace ContainerRegistry;
 
@@ -180,7 +177,6 @@ union PostContentSchemaGrantType {
 /**
  * Grant type is expected to be refresh_token
  */
-@usage(Usage.output)
 union TokenGrantType {
   string,
 
@@ -242,7 +238,6 @@ union ArtifactManifestOrder {
 /**
  * Acr error response describing why the operation failed
  */
-@usage(Usage.output)
 @error
 model AcrErrors {
   /**

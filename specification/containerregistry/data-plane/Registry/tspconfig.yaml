@@ -12,14 +12,14 @@ linter:
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
-    emitter-output-dir: "{project-root}/.."
+    emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
-    output-file: "Registry/{version-status}/{version}/containerregistry.json"
+    output-file: "{version-status}/{version}/containerregistry.json"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-containerregistry"
     package-name: "azure-containerregistry"
     package-pprint-name: "Azure Container Registry"
-    namespace: "azure.containerregistry"
+    namespace: "azure.containerregistry._generated"
     package-version: "1.2.0"
     flavor: "azure"
     generate-test: false

@@ -1,11 +1,8 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/openapi";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.Core.Foundations;
 
@@ -129,9 +126,7 @@ interface ContainerRegistry {
       @path
       reference: string;
     },
-    {
-      @statusCode statusCode: 202;
-    } | NotFoundResponse
+    TypeSpec.Http.AcceptedResponse | NotFoundResponse
   >;
 
   /**
