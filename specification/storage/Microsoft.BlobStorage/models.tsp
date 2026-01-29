@@ -17,6 +17,10 @@ scalar base64Bytes extends bytes;
 /** The error response. */
 @error
 model StorageError {
+  /** The error code. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
+  Code?: StorageErrorCode;
+
   /** The error message. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API"
   Message?: string;
