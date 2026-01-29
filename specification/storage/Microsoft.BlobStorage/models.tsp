@@ -14,38 +14,6 @@ namespace Storage.Blob;
 @encode(BytesKnownEncoding.base64)
 scalar base64Bytes extends bytes;
 
-/** The error response. */
-@error
-@mediaTypeHint("application/xml")
-model StorageError {
-  /** The error code. */
-  @header("x-ms-error-code")
-  errorCode?: StorageErrorCode;
-
-  /** The error code for the copy source. */
-  @header("x-ms-copy-source-error-code")
-  xMsCopySourceErrorCode?: string;
-
-  /** The status code for the copy source. */
-  @header("x-ms-copy-source-status-code")
-  xMsCopySourceStatusCode?: int32;
-
-  /** The error code. */
-  @Xml.name("Code") code?: string;
-
-  /** The error message. */
-  @Xml.name("Message") message?: string;
-
-  /** Copy source status code */
-  @Xml.name("CopySourceStatusCode") copySourceStatusCode?: int32;
-
-  /** Copy source error code */
-  @Xml.name("CopySourceErrorCode") copySourceErrorCode?: string;
-
-  /** Copy source error message */
-  @Xml.name("CopySourceErrorMessage") copySourceErrorMessage?: string;
-}
-
 /** Error codes returned by the Azure Blob Storage service. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 union StorageErrorCode {
@@ -894,7 +862,7 @@ union ArchiveStatus {
 
 /** An Azure Storage Blob */
 @Xml.name("Blob")
-model BlobItemInternal {
+model BlobItem {
   /** The name of the blob. */
   @Xml.name("Name") name: BlobName;
 
@@ -911,7 +879,7 @@ model BlobItemInternal {
   @Xml.name("IsCurrentVersion") isCurrentVersion?: boolean;
 
   /** The properties of the blob. */
-  @Xml.name("Properties") properties: BlobPropertiesInternal;
+  @Xml.name("Properties") properties: BlobProperties;
 
   /** The metadata of the blob. */
   @Xml.name("Metadata") metadata?: BlobMetadata;
@@ -930,7 +898,7 @@ model BlobItemInternal {
 
 /** The properties of a blob. */
 @Xml.name("Properties")
-model BlobPropertiesInternal {
+model BlobProperties {
   /** The date-time the blob was created in RFC1123 format. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
   @encode("rfc7231")
@@ -1292,7 +1260,7 @@ model BlobFlatListSegment {
   @pageItems
   @Xml.name("Blob")
   @Xml.unwrapped
-  blobItems: BlobItemInternal[];
+  blobItems: BlobItem[];
 }
 
 /** Represents a page list. */
@@ -2457,7 +2425,7 @@ model BlobHierarchyListSegment {
   @pageItems
   @Xml.name("Blob")
   @Xml.unwrapped
-  blobItems: BlobItemInternal[];
+  blobItems: BlobItem[];
 
   /** The blob prefixes. */
   @Xml.name("BlobPrefix")
