@@ -2667,6 +2667,31 @@
             "description": "The name of the capacity reservation group.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "virtualMachineScaleSetVMs/$ref",
+              "virtualMachines/$ref"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypesForGetCapacityReservationGroups",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "virtualMachineScaleSetVMs/$ref",
+                  "value": "virtualMachineScaleSetVMs/$ref"
+                },
+                {
+                  "name": "virtualMachines/$ref",
+                  "value": "virtualMachines/$ref"
+                }
+              ]
+            }
           }
         ],
         "responses": {
