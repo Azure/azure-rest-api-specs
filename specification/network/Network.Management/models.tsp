@@ -29326,17 +29326,27 @@ scalar stringApplicationJson extends string;
 model AuthorizationListResult
   is Azure.Core.Page<ExpressRouteCircuitAuthorization>;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerBackendAddressPoolListResult
   is Azure.Core.Page<BackendAddressPool>;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerFrontendIPConfigurationListResult
   is Azure.Core.Page<FrontendIPConfiguration>;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerOutboundRuleListResult is Azure.Core.Page<OutboundRule>;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerProbeListResult is Azure.Core.Page<Probe>;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 model LoadBalancerLoadBalancingRuleListResult
   is Azure.Core.Page<LoadBalancingRule>;
 

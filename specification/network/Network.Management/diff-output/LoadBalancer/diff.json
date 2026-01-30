@@ -1,4 +1,27 @@
 {
+  "tags__added": [
+    {
+      "name": "LoadBalancers"
+    },
+    {
+      "name": "BackendAddressPools"
+    },
+    {
+      "name": "FrontendIPConfigurations"
+    },
+    {
+      "name": "InboundNatRules"
+    },
+    {
+      "name": "LoadBalancingRules"
+    },
+    {
+      "name": "OutboundRules"
+    },
+    {
+      "name": "Probes"
+    }
+  ],
   "info": {
     "title": {
       "__old": "NetworkManagementClient",
@@ -10,800 +33,6 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses__deleted": {
-      "post": {
-        "operationId": "LoadBalancers_SwapPublicIpAddresses",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/LoadBalancerVipSwapRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Swap VIPs between two load balancers.": {
-            "$ref": "./examples/LoadBalancersSwapPublicIpAddresses.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools__deleted": {
-      "get": {
-        "operationId": "LoadBalancerBackendAddressPools_List",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/LoadBalancerBackendAddressPoolListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Load balancer with BackendAddressPool containing BackendAddresses": {
-            "$ref": "./examples/LBBackendAddressPoolListWithBackendAddressesPoolType.json"
-          },
-          "LoadBalancerBackendAddressPoolList": {
-            "$ref": "./examples/LoadBalancerBackendAddressPoolList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}__deleted": {
-      "get": {
-        "operationId": "LoadBalancerBackendAddressPools_Get",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "backendAddressPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/BackendAddressPool"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LoadBalancer with BackendAddressPool with BackendAddresses": {
-            "$ref": "./examples/LBBackendAddressPoolWithBackendAddressesGet.json"
-          },
-          "LoadBalancerBackendAddressPoolGet": {
-            "$ref": "./examples/LoadBalancerBackendAddressPoolGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "LoadBalancerBackendAddressPools_CreateOrUpdate",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "backendAddressPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/BackendAddressPool"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/BackendAddressPool"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/BackendAddressPool"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update load balancer backend pool with backend addresses containing virtual network and  IP address.": {
-            "$ref": "./examples/LBBackendAddressPoolWithBackendAddressesPut.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "LoadBalancerBackendAddressPools_Delete",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "backendAddressPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BackendAddressPoolDelete": {
-            "$ref": "./examples/LoadBalancerBackendAddressPoolDelete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendPoolName}/queryInboundNatRulePortMapping__deleted": {
-      "post": {
-        "operationId": "LoadBalancers_ListInboundNatRulePortMappings",
-        "parameters": [
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "backendPoolName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueryInboundNatRulePortMappingRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/BackendAddressInboundNatRulePortMappings"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/BackendAddressInboundNatRulePortMappings"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Query inbound NAT rule port mapping": {
-            "$ref": "./examples/QueryInboundNatRulePortMapping.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations__deleted": {
-      "get": {
-        "operationId": "LoadBalancerFrontendIPConfigurations_List",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/LoadBalancerFrontendIPConfigurationListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LoadBalancerFrontendIPConfigurationList": {
-            "$ref": "./examples/LoadBalancerFrontendIPConfigurationList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}__deleted": {
-      "get": {
-        "operationId": "LoadBalancerFrontendIPConfigurations_Get",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "frontendIPConfigurationName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/FrontendIPConfiguration"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LoadBalancerFrontendIPConfigurationGet": {
-            "$ref": "./examples/LoadBalancerFrontendIPConfigurationGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules__deleted": {
-      "get": {
-        "operationId": "InboundNatRules_List",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InboundNatRuleListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InboundNatRuleList": {
-            "$ref": "./examples/InboundNatRuleList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}__deleted": {
-      "get": {
-        "operationId": "InboundNatRules_Get",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "inboundNatRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InboundNatRule"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InboundNatRuleGet": {
-            "$ref": "./examples/InboundNatRuleGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "InboundNatRules_CreateOrUpdate",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "inboundNatRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "inboundNatRuleParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/InboundNatRule"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InboundNatRule"
-            }
-          },
-          "201": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/InboundNatRule"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InboundNatRuleCreate": {
-            "$ref": "./examples/InboundNatRuleCreate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "InboundNatRules_Delete",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "inboundNatRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore"
-          },
-          "202": {
-            "description": "ignore"
-          },
-          "204": {
-            "description": "ignore"
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "InboundNatRuleDelete": {
-            "$ref": "./examples/InboundNatRuleDelete.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules__deleted": {
-      "get": {
-        "operationId": "LoadBalancerLoadBalancingRules_List",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/LoadBalancerLoadBalancingRuleListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LoadBalancerLoadBalancingRuleList": {
-            "$ref": "./examples/LoadBalancerLoadBalancingRuleList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}__deleted": {
-      "get": {
-        "operationId": "LoadBalancerLoadBalancingRules_Get",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "loadBalancingRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/LoadBalancingRule"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LoadBalancerLoadBalancingRuleGet": {
-            "$ref": "./examples/LoadBalancerLoadBalancingRuleGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health__deleted": {
-      "post": {
-        "operationId": "LoadBalancerLoadBalancingRules_Health",
-        "parameters": [
-          {
-            "name": "groupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "loadBalancingRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/LoadBalancerHealthPerRule"
-            }
-          },
-          "202": {
-            "description": "ignore",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "URI to query the status of the long-running operation."
-              }
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Query load balancing rule health": {
-            "$ref": "./examples/LoadBalancerHealth.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules__deleted": {
-      "get": {
-        "operationId": "LoadBalancerOutboundRules_List",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/LoadBalancerOutboundRuleListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LoadBalancerOutboundRuleList": {
-            "$ref": "./examples/LoadBalancerOutboundRuleList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}__deleted": {
-      "get": {
-        "operationId": "LoadBalancerOutboundRules_Get",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "outboundRuleName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/OutboundRule"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LoadBalancerOutboundRuleGet": {
-            "$ref": "./examples/LoadBalancerOutboundRuleGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes__deleted": {
-      "get": {
-        "operationId": "LoadBalancerProbes_List",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/LoadBalancerProbeListResult"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LoadBalancerProbeList": {
-            "$ref": "./examples/LoadBalancerProbeList.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}__deleted": {
-      "get": {
-        "operationId": "LoadBalancerProbes_Get",
-        "parameters": [
-          {
-            "name": "loadBalancerName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "probeName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "#/definitions/Probe"
-            }
-          },
-          "default": {
-            "description": "ignore",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "LoadBalancerProbeGet": {
-            "$ref": "./examples/LoadBalancerProbeGet.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/loadBalancers": {
       "get": {
         "responses": {
@@ -811,7 +40,47 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json/definitions/CloudError"
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses": {
+      "post": {
+        "tags__deleted": [
+          "LoadBalancers"
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
               }
             }
           }
@@ -825,7 +94,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json/definitions/CloudError"
+                "__new": "./common.json#/definitions/CloudError"
               }
             }
           }
@@ -839,7 +108,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json/definitions/CloudError"
+                "__new": "./common.json#/definitions/CloudError"
               }
             }
           }
@@ -859,7 +128,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json/definitions/CloudError"
+                "__new": "./common.json#/definitions/CloudError"
               }
             }
           }
@@ -879,7 +148,7 @@
               "schema": {
                 "$ref": {
                   "__old": "./network.json#/definitions/TagsObject",
-                  "__new": "./common.json/definitions/TagsObject"
+                  "__new": "./common.json#/definitions/TagsObject"
                 }
               }
             }
@@ -890,7 +159,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json/definitions/CloudError"
+                "__new": "./common.json#/definitions/CloudError"
               }
             }
           }
@@ -910,7 +179,391 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json/definitions/CloudError"
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/BackendAddressPool"
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendPoolName}/queryInboundNatRulePortMapping": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "FrontendIPConfigurations"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "FrontendIPConfigurations"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "InboundNatRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "InboundNatRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "InboundNatRules"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/InboundNatRule"
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "InboundNatRules"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "LoadBalancingRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "LoadBalancingRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "LoadBalancingRules"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to query the status of the long-running operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
               }
             }
           }
@@ -924,7 +577,7 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json/definitions/CloudError"
+                "__new": "./common.json#/definitions/CloudError"
               }
             }
           }
@@ -938,7 +591,7 @@
             "schema": {
               "$ref": {
                 "__old": "./networkInterface.json#/definitions/NetworkInterfaceListResult",
-                "__new": "./virtualNetwork.json/definitions/NetworkInterfaceListResult"
+                "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceListResult"
               }
             }
           },
@@ -946,7 +599,103 @@
             "schema": {
               "$ref": {
                 "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json/definitions/CloudError"
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "OutboundRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "OutboundRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "Probes"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "Probes"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
               }
             }
           }
@@ -955,96 +704,6 @@
     }
   },
   "definitions": {
-    "LoadBalancerBackendAddressPoolListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/BackendAddressPool"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "LoadBalancerFrontendIPConfigurationListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/FrontendIPConfiguration"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "LoadBalancerLoadBalancingRuleListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/LoadBalancingRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "LoadBalancerOutboundRuleListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/OutboundRule"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
-    "LoadBalancerProbeListResult__deleted": {
-      "type": "object",
-      "description": "[Placeholder] Discription for page model",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "[Placeholder] Discription for value property",
-          "items": {
-            "$ref": "#/definitions/Probe"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "[Placeholder] Discription for nextLink property"
-        }
-      }
-    },
     "BackendAddressPool": {
       "properties": {
         "name__deleted": {
@@ -1061,7 +720,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResourceModel"
+              "__new": "./common.json#/definitions/SubResourceModel"
             }
           }
         ]
@@ -1073,7 +732,7 @@
           "items": {
             "$ref": {
               "__old": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
-              "__new": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration"
+              "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
             }
           }
         },
@@ -1081,21 +740,21 @@
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
         "outboundRule": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "outboundRules": {
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
@@ -1103,20 +762,20 @@
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
         "provisioningState": {
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
-            "__new": "./common.json/definitions/NetworkProvisioningState"
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
           }
         },
         "virtualNetwork": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "syncMode": {
@@ -1129,7 +788,7 @@
             "name": "SyncMode",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/SyncMode"
+          "$ref__added": "./common.json#/definitions/SyncMode"
         }
       }
     },
@@ -1149,7 +808,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResourceModel"
+              "__new": "./common.json#/definitions/SubResourceModel"
             }
           }
         ]
@@ -1161,7 +820,7 @@
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
@@ -1169,7 +828,7 @@
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
@@ -1177,7 +836,7 @@
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
@@ -1185,50 +844,44 @@
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
         "privateIPAllocationMethod": {
           "$ref": {
             "__old": "./network.json#/definitions/IPAllocationMethod",
-            "__new": "./common.json/definitions/IPAllocationMethod"
+            "__new": "./common.json#/definitions/IPAllocationMethod"
           }
         },
         "privateIPAddressVersion": {
           "$ref": {
             "__old": "./network.json#/definitions/IPVersion",
-            "__new": "./common.json/definitions/IPVersion"
-          }
-        },
-        "subnet": {
-          "$ref": {
-            "__old": "./virtualNetwork.json#/definitions/Subnet",
-            "__new": "./virtualNetwork.json/definitions/Subnet"
+            "__new": "./common.json#/definitions/IPVersion"
           }
         },
         "publicIPAddress": {
           "$ref": {
             "__old": "./publicIpAddress.json#/definitions/PublicIPAddress",
-            "__new": "./virtualNetwork.json/definitions/PublicIPAddress"
+            "__new": "./virtualNetwork.json#/definitions/PublicIPAddress"
           }
         },
         "publicIPPrefix": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "gatewayLoadBalancer": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "provisioningState": {
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
-            "__new": "./common.json/definitions/NetworkProvisioningState"
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
           }
         }
       }
@@ -1246,7 +899,7 @@
             "name": "GatewayLoadBalancerTunnelProtocol",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/GatewayLoadBalancerTunnelProtocol"
+          "$ref__added": "./common.json#/definitions/GatewayLoadBalancerTunnelProtocol"
         },
         "type": {
           "type__deleted": "string",
@@ -1259,7 +912,7 @@
             "name": "GatewayLoadBalancerTunnelInterfaceType",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/GatewayLoadBalancerTunnelInterfaceType"
+          "$ref__added": "./common.json#/definitions/GatewayLoadBalancerTunnelInterfaceType"
         }
       }
     },
@@ -1270,7 +923,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         ]
@@ -1281,7 +934,7 @@
         "frontendIPConfiguration": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "protocol": {
@@ -1296,12 +949,12 @@
             "name": "TransportProtocol",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/TransportProtocol"
+          "$ref__added": "./common.json#/definitions/TransportProtocol"
         },
         "provisioningState": {
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
-            "__new": "./common.json/definitions/NetworkProvisioningState"
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
           }
         }
       }
@@ -1322,7 +975,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResourceModel"
+              "__new": "./common.json#/definitions/SubResourceModel"
             }
           }
         ]
@@ -1347,7 +1000,7 @@
             "name": "TransportProtocol",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/TransportProtocol"
+          "$ref__added": "./common.json#/definitions/TransportProtocol"
         }
       }
     },
@@ -1356,13 +1009,13 @@
         "frontendIPConfiguration": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "backendIPConfiguration": {
           "$ref": {
             "__old": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
-            "__new": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration"
+            "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
           }
         },
         "protocol": {
@@ -1377,18 +1030,18 @@
             "name": "TransportProtocol",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/TransportProtocol"
+          "$ref__added": "./common.json#/definitions/TransportProtocol"
         },
         "backendAddressPool": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "provisioningState": {
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
-            "__new": "./common.json/definitions/NetworkProvisioningState"
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
           }
         }
       }
@@ -1398,7 +1051,7 @@
         "extendedLocation": {
           "$ref": {
             "__old": "./network.json#/definitions/ExtendedLocation",
-            "__new": "./common.json/definitions/ExtendedLocation"
+            "__new": "./common.json#/definitions/ExtendedLocation"
           }
         }
       },
@@ -1408,10 +1061,15 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/Resource",
-              "__new": "./common.json/definitions/Resource"
+              "__new": "./common.json#/definitions/Resource"
             }
           }
         ]
+      ]
+    },
+    "LoadBalancerBackendAddressPoolListResult": {
+      "required__added": [
+        "value"
       ]
     },
     "LoadBalancerBackendAddressPropertiesFormat": {
@@ -1419,13 +1077,13 @@
         "virtualNetwork": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "subnet": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "ipAddress": {
@@ -1434,14 +1092,14 @@
         "networkInterfaceIPConfiguration": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "loadBalancerFrontendIPConfiguration": {
           "readOnly__deleted": false,
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "adminState": {
@@ -1455,11 +1113,31 @@
             "name": "LoadBalancerBackendAddressAdminState",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/LoadBalancerBackendAddressAdminState"
+          "$ref__added": "./common.json#/definitions/LoadBalancerBackendAddressAdminState"
         }
       }
     },
+    "LoadBalancerFrontendIPConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
     "LoadBalancerListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerLoadBalancingRuleListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerOutboundRuleListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerProbeListResult": {
       "required__added": [
         "value"
       ]
@@ -1469,7 +1147,7 @@
         "provisioningState": {
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
-            "__new": "./common.json/definitions/NetworkProvisioningState"
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
           }
         },
         "scope": {
@@ -1482,7 +1160,7 @@
             "name": "LoadBalancerScope",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/LoadBalancerScope"
+          "$ref__added": "./common.json#/definitions/LoadBalancerScope"
         }
       }
     },
@@ -1499,7 +1177,7 @@
             "name": "LoadBalancerSkuName",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/LoadBalancerSkuName"
+          "$ref__added": "./common.json#/definitions/LoadBalancerSkuName"
         },
         "tier": {
           "type__deleted": "string",
@@ -1511,7 +1189,7 @@
             "name": "LoadBalancerSkuTier",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/LoadBalancerSkuTier"
+          "$ref__added": "./common.json#/definitions/LoadBalancerSkuTier"
         }
       }
     },
@@ -1520,7 +1198,7 @@
         "publicIPAddress": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         }
       }
@@ -1541,7 +1219,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResourceModel"
+              "__new": "./common.json#/definitions/SubResourceModel"
             }
           }
         ]
@@ -1552,27 +1230,27 @@
         "frontendIPConfiguration": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "backendAddressPool": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "backendAddressPools": {
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
         "probe": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "protocol": {
@@ -1587,7 +1265,7 @@
             "name": "TransportProtocol",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/TransportProtocol"
+          "$ref__added": "./common.json#/definitions/TransportProtocol"
         },
         "loadDistribution": {
           "type__deleted": "string",
@@ -1600,12 +1278,12 @@
             "name": "LoadDistribution",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/LoadDistribution"
+          "$ref__added": "./common.json#/definitions/LoadDistribution"
         },
         "provisioningState": {
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
-            "__new": "./common.json/definitions/NetworkProvisioningState"
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
           }
         }
       }
@@ -1626,7 +1304,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResourceModel"
+              "__new": "./common.json#/definitions/SubResourceModel"
             }
           }
         ]
@@ -1638,20 +1316,20 @@
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
         "backendAddressPool": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         },
         "provisioningState": {
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
-            "__new": "./common.json/definitions/NetworkProvisioningState"
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
           }
         },
         "protocol": {
@@ -1665,7 +1343,7 @@
             "name": "LoadBalancerOutboundRuleProtocol",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/LoadBalancerOutboundRuleProtocol"
+          "$ref__added": "./common.json#/definitions/LoadBalancerOutboundRuleProtocol"
         },
         "idleTimeoutInMinutes": {
           "format__added": "int32"
@@ -1688,7 +1366,7 @@
           {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResourceModel"
+              "__new": "./common.json#/definitions/SubResourceModel"
             }
           }
         ]
@@ -1700,7 +1378,7 @@
           "items": {
             "$ref": {
               "__old": "./network.json#/definitions/SubResource",
-              "__new": "./common.json/definitions/SubResource"
+              "__new": "./common.json#/definitions/SubResource"
             }
           }
         },
@@ -1715,7 +1393,7 @@
             "name": "ProbeProtocol",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/ProbeProtocol"
+          "$ref__added": "./common.json#/definitions/ProbeProtocol"
         },
         "noHealthyBackendsBehavior": {
           "type__deleted": "string",
@@ -1727,12 +1405,12 @@
             "name": "ProbeNoHealthyBackendsBehavior",
             "modelAsString": true
           },
-          "$ref__added": "./common.json/definitions/ProbeNoHealthyBackendsBehavior"
+          "$ref__added": "./common.json#/definitions/ProbeNoHealthyBackendsBehavior"
         },
         "provisioningState": {
           "$ref": {
             "__old": "./network.json#/definitions/ProvisioningState",
-            "__new": "./common.json/definitions/NetworkProvisioningState"
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
           }
         }
       }
@@ -1742,7 +1420,7 @@
         "ipConfiguration": {
           "$ref": {
             "__old": "./network.json#/definitions/SubResource",
-            "__new": "./common.json/definitions/SubResource"
+            "__new": "./common.json#/definitions/SubResource"
           }
         }
       }

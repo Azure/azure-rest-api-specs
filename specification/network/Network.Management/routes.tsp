@@ -332,6 +332,8 @@ interface ExpressRouteServiceProvidersOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 interface LoadBalancersOperationGroup {
   /**
    * Swaps VIPs between two load balancers.

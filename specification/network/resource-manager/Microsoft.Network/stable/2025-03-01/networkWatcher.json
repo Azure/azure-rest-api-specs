@@ -258,7 +258,7 @@
             "description": "Parameters supplied to update network watcher tags.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/TagsObject"
+              "$ref": "./common.json#/definitions/TagsObject"
             }
           }
         ],
@@ -1919,7 +1919,7 @@
           "description": "The name of the connection monitor endpoint."
         },
         "type": {
-          "$ref": "./common.json/definitions/EndpointType",
+          "$ref": "./common.json#/definitions/EndpointType",
           "description": "The endpoint type."
         },
         "resourceId": {
@@ -1939,7 +1939,7 @@
           "description": "Endpoint scope defines which target resource to monitor in case of compound resource endpoints like VMSS, AzureSubnet, AzureVNet, MMAWorkspaceNetwork, AzureArcNetwork."
         },
         "coverageLevel": {
-          "$ref": "./common.json/definitions/CoverageLevel",
+          "$ref": "./common.json#/definitions/CoverageLevel",
           "description": "Test coverage for the endpoint."
         },
         "locationDetails": {
@@ -1960,7 +1960,7 @@
       "description": "Describes the connection monitor endpoint filter.",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/ConnectionMonitorEndpointFilterType",
+          "$ref": "./common.json#/definitions/ConnectionMonitorEndpointFilterType",
           "description": "The behavior of the endpoint filter. Currently only 'Include' is supported."
         },
         "items": {
@@ -1977,7 +1977,7 @@
       "description": "Describes the connection monitor endpoint filter item.",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/ConnectionMonitorEndpointFilterItemType",
+          "$ref": "./common.json#/definitions/ConnectionMonitorEndpointFilterItemType",
           "description": "The type of item included in the filter. Currently only 'AgentAddress' is supported."
         },
         "address": {
@@ -2038,7 +2038,7 @@
           "maximum": 65535
         },
         "method": {
-          "$ref": "./common.json/definitions/HTTPConfigurationMethod",
+          "$ref": "./common.json#/definitions/HTTPConfigurationMethod",
           "description": "The HTTP method to use."
         },
         "path": {
@@ -2097,7 +2097,7 @@
       "description": "Describes a connection monitor output destination.",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/OutputType",
+          "$ref": "./common.json#/definitions/OutputType",
           "description": "Connection monitor output destination type. Currently, only \"Workspace\" is supported."
         },
         "workspaceSettings": {
@@ -2177,7 +2177,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/TrackedResourcewithOptionalLocation"
+          "$ref": "./common.json#/definitions/TrackedResourcewithOptionalLocation"
         }
       ]
     },
@@ -2186,7 +2186,7 @@
       "description": "Describes the properties of a connection monitor.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the connection monitor.",
           "readOnly": true
         },
@@ -2202,7 +2202,7 @@
           "readOnly": true
         },
         "connectionMonitorType": {
-          "$ref": "./common.json/definitions/ConnectionMonitorType",
+          "$ref": "./common.json#/definitions/ConnectionMonitorType",
           "description": "Type of connection monitor.",
           "readOnly": true
         }
@@ -2265,7 +2265,7 @@
           "description": "Value indicating whether path evaluation with trace route should be disabled."
         },
         "destinationPortBehavior": {
-          "$ref": "./common.json/definitions/DestinationPortBehavior",
+          "$ref": "./common.json#/definitions/DestinationPortBehavior",
           "description": "Destination port behavior."
         }
       }
@@ -2284,11 +2284,11 @@
           "description": "The frequency of test evaluation, in seconds."
         },
         "protocol": {
-          "$ref": "./common.json/definitions/ConnectionMonitorTestConfigurationProtocol",
+          "$ref": "./common.json#/definitions/ConnectionMonitorTestConfigurationProtocol",
           "description": "The protocol to use in test evaluation."
         },
         "preferredIPVersion": {
-          "$ref": "./common.json/definitions/PreferredIPVersion",
+          "$ref": "./common.json#/definitions/PreferredIPVersion",
           "description": "The preferred IP version to use in test evaluation. The connection monitor may choose to use a different version depending on other parameters."
         },
         "httpConfiguration": {
@@ -2464,7 +2464,7 @@
           "readOnly": true
         },
         "connectionStatus": {
-          "$ref": "./common.json/definitions/ConnectionStatus",
+          "$ref": "./common.json#/definitions/ConnectionStatus",
           "description": "The connection status.",
           "readOnly": true
         },
@@ -2505,17 +2505,17 @@
       "description": "Information about an issue encountered in the process of checking for connectivity.",
       "properties": {
         "origin": {
-          "$ref": "./common.json/definitions/Origin",
+          "$ref": "./common.json#/definitions/Origin",
           "description": "The origin of the issue.",
           "readOnly": true
         },
         "severity": {
-          "$ref": "./common.json/definitions/Severity",
+          "$ref": "./common.json#/definitions/Severity",
           "description": "The severity of the issue.",
           "readOnly": true
         },
         "type": {
-          "$ref": "./common.json/definitions/IssueType",
+          "$ref": "./common.json#/definitions/IssueType",
           "description": "The type of issue.",
           "readOnly": true
         },
@@ -2545,7 +2545,7 @@
           "description": "The destination of connection."
         },
         "protocol": {
-          "$ref": "./common.json/definitions/Protocol",
+          "$ref": "./common.json#/definitions/Protocol",
           "description": "Network protocol."
         },
         "protocolConfiguration": {
@@ -2553,7 +2553,7 @@
           "description": "Configuration of the protocol."
         },
         "preferredIPVersion": {
-          "$ref": "./common.json/definitions/IPVersion",
+          "$ref": "./common.json#/definitions/IPVersion",
           "description": "Preferred IP version of the connection."
         }
       },
@@ -2587,7 +2587,7 @@
       "description": "The error object.",
       "properties": {
         "error": {
-          "$ref": "./common.json/definitions/ErrorDetails",
+          "$ref": "./common.json#/definitions/ErrorDetails",
           "title": "Error",
           "description": "The error details object."
         }
@@ -2634,13 +2634,13 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "./common.json/definitions/ManagedServiceIdentity",
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
           "description": "FlowLog resource Managed Identity"
         }
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/Resource"
+          "$ref": "./common.json#/definitions/Resource"
         }
       ]
     },
@@ -2649,7 +2649,7 @@
       "description": "Parameters that define the flow log format.",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/FlowLogFormatType",
+          "$ref": "./common.json#/definitions/FlowLogFormatType",
           "description": "The file type of flow log."
         },
         "version": {
@@ -2678,7 +2678,7 @@
           "description": "Parameters that define the configuration of traffic analytics."
         },
         "identity": {
-          "$ref": "./common.json/definitions/ManagedServiceIdentity",
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
           "description": "FlowLog resource Managed Identity"
         }
       },
@@ -2784,7 +2784,7 @@
           "description": "Parameters that define the configuration of traffic analytics."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the flow log.",
           "readOnly": true
         }
@@ -2812,7 +2812,7 @@
       "description": "HTTP configuration of the connectivity check.",
       "properties": {
         "method": {
-          "$ref": "./common.json/definitions/HTTPMethod",
+          "$ref": "./common.json#/definitions/HTTPMethod",
           "description": "HTTP method."
         },
         "headers": {
@@ -2941,7 +2941,7 @@
           "description": "The ID of the target resource to perform network configuration diagnostic. Valid options are VM, NetworkInterface, VMSS/NetworkInterface and Application Gateway."
         },
         "verbosityLevel": {
-          "$ref": "./common.json/definitions/VerbosityLevel",
+          "$ref": "./common.json#/definitions/VerbosityLevel",
           "description": "Verbosity level."
         },
         "profiles": {
@@ -2962,7 +2962,7 @@
       "description": "Parameters to compare with network configuration.",
       "properties": {
         "direction": {
-          "$ref": "./common.json/definitions/Direction",
+          "$ref": "./common.json#/definitions/Direction",
           "description": "The direction of the traffic."
         },
         "protocol": {
@@ -3031,7 +3031,7 @@
           "type": "array",
           "description": "Collection of custom security rules.",
           "items": {
-            "$ref": "./virtualNetwork.json/definitions/SecurityRule"
+            "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
           }
         }
       }
@@ -3041,7 +3041,7 @@
       "description": "Network configuration diagnostic result corresponded provided traffic query.",
       "properties": {
         "securityRuleAccessResult": {
-          "$ref": "./common.json/definitions/SecurityRuleAccess",
+          "$ref": "./common.json#/definitions/SecurityRuleAccess",
           "description": "The network traffic is allowed or denied."
         },
         "evaluatedNetworkSecurityGroups": {
@@ -3101,7 +3101,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/Resource"
+          "$ref": "./common.json#/definitions/Resource"
         }
       ]
     },
@@ -3127,7 +3127,7 @@
       "description": "The network watcher properties.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the network watcher resource.",
           "readOnly": true
         }
@@ -3165,7 +3165,7 @@
       "description": "The information about next hop from the specified VM.",
       "properties": {
         "nextHopType": {
-          "$ref": "./common.json/definitions/NextHopType",
+          "$ref": "./common.json#/definitions/NextHopType",
           "description": "Next hop type."
         },
         "nextHopIpAddress": {
@@ -3295,7 +3295,7 @@
           "description": "A list of AzureVMSS instances which can be included or excluded to run packet capture. If both included and excluded are empty, then the packet capture will run on all instances of AzureVMSS."
         },
         "targetType": {
-          "$ref": "./common.json/definitions/PacketCaptureTargetType",
+          "$ref": "./common.json#/definitions/PacketCaptureTargetType",
           "description": "Target type of the resource provided."
         },
         "bytesToCapturePerPacket": {
@@ -3365,7 +3365,7 @@
           "description": "The start time of the packet capture session."
         },
         "packetCaptureStatus": {
-          "$ref": "./common.json/definitions/PcStatus",
+          "$ref": "./common.json#/definitions/PcStatus",
           "description": "The status of the packet capture session."
         },
         "stopReason": {
@@ -3376,7 +3376,7 @@
           "type": "array",
           "description": "List of errors of packet capture session.",
           "items": {
-            "$ref": "./common.json/definitions/PcError"
+            "$ref": "./common.json#/definitions/PcError"
           }
         }
       }
@@ -3412,7 +3412,7 @@
       "description": "The properties of a packet capture session.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the packet capture session.",
           "readOnly": true
         }
@@ -3571,14 +3571,14 @@
           "type": "array",
           "description": "Collection of default security rules of the network security group.",
           "items": {
-            "$ref": "./virtualNetwork.json/definitions/SecurityRule"
+            "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
           }
         },
         "effectiveSecurityRules": {
           "type": "array",
           "description": "Collection of effective security rules.",
           "items": {
-            "$ref": "./virtualNetwork.json/definitions/EffectiveNetworkSecurityRule"
+            "$ref": "./virtualNetwork.json#/definitions/EffectiveNetworkSecurityRule"
           }
         }
       }
@@ -3596,7 +3596,7 @@
           "type": "array",
           "description": "Collection of custom security rules.",
           "items": {
-            "$ref": "./virtualNetwork.json/definitions/SecurityRule"
+            "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
           }
         }
       }
@@ -3644,7 +3644,7 @@
           "description": "The ID of the resource that is associated with the parent resource."
         },
         "associationType": {
-          "$ref": "./common.json/definitions/AssociationType",
+          "$ref": "./common.json#/definitions/AssociationType",
           "description": "The association type of the child resource to the parent resource."
         }
       }
@@ -3658,11 +3658,11 @@
           "description": "The name of the target resource group to perform topology on."
         },
         "targetVirtualNetwork": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The reference to the Virtual Network resource."
         },
         "targetSubnet": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The reference to the Subnet resource."
         }
       }
@@ -3853,11 +3853,11 @@
           "description": "The ID of the target resource to perform next-hop on."
         },
         "direction": {
-          "$ref": "./common.json/definitions/Direction",
+          "$ref": "./common.json#/definitions/Direction",
           "description": "The direction of the packet represented as a 5-tuple."
         },
         "protocol": {
-          "$ref": "./common.json/definitions/IpFlowProtocol",
+          "$ref": "./common.json#/definitions/IpFlowProtocol",
           "description": "Protocol to be verified on."
         },
         "localPort": {
@@ -3896,7 +3896,7 @@
       "description": "Results of IP flow verification on the target resource.",
       "properties": {
         "access": {
-          "$ref": "./common.json/definitions/Access",
+          "$ref": "./common.json#/definitions/Access",
           "description": "Indicates whether the traffic is allowed or denied."
         },
         "ruleName": {

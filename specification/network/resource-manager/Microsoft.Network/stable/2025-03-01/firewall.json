@@ -66,7 +66,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -105,7 +105,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -147,7 +147,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -196,7 +196,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -278,7 +278,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -337,7 +337,7 @@
             "description": "Parameters supplied to update azure firewall tags.",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/TagsObject"
+              "$ref": "./common.json#/definitions/TagsObject"
             }
           }
         ],
@@ -365,7 +365,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -428,7 +428,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -492,7 +492,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -560,7 +560,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -633,7 +633,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -661,7 +661,7 @@
           "x-ms-client-flatten": true
         },
         "extendedLocation": {
-          "$ref": "./common.json/definitions/ExtendedLocation",
+          "$ref": "./common.json#/definitions/ExtendedLocation",
           "description": "The extended location of type local virtual network gateway."
         },
         "zones": {
@@ -679,7 +679,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/Resource"
+          "$ref": "./common.json#/definitions/Resource"
         }
       ]
     },
@@ -753,7 +753,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         }
       ]
     },
@@ -780,7 +780,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the application rule collection resource.",
           "readOnly": true
         }
@@ -791,7 +791,7 @@
       "description": "Properties of the application rule protocol.",
       "properties": {
         "protocolType": {
-          "$ref": "./common.json/definitions/AzureFirewallApplicationRuleProtocolType",
+          "$ref": "./common.json#/definitions/AzureFirewallApplicationRuleProtocolType",
           "description": "Protocol type."
         },
         "port": {
@@ -840,7 +840,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/Resource"
+          "$ref": "./common.json#/definitions/Resource"
         }
       ]
     },
@@ -870,7 +870,7 @@
       "description": "Azure Firewall FQDN Tag Properties.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the Azure firewall FQDN tag resource.",
           "readOnly": true
         },
@@ -907,7 +907,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         }
       ]
     },
@@ -921,15 +921,15 @@
           "readOnly": true
         },
         "subnet": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "Reference to the subnet resource. This resource must be named 'AzureFirewallSubnet' or 'AzureFirewallManagementSubnet'."
         },
         "publicIPAddress": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "Reference to the PublicIP resource. This field is a mandatory input if subnet is not null."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the Azure firewall IP configuration resource.",
           "readOnly": true
         }
@@ -977,7 +977,7 @@
       "description": "AzureFirewall NAT Rule Collection Action.",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/AzureFirewallNatRCActionType",
+          "$ref": "./common.json#/definitions/AzureFirewallNatRCActionType",
           "description": "The type of action."
         }
       }
@@ -1019,7 +1019,7 @@
           "type": "array",
           "description": "Array of AzureFirewallNetworkRuleProtocols applicable to this NAT rule.",
           "items": {
-            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
+            "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol"
           }
         },
         "translatedAddress": {
@@ -1064,7 +1064,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         }
       ]
     },
@@ -1091,7 +1091,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the NAT rule collection resource.",
           "readOnly": true
         }
@@ -1113,7 +1113,7 @@
           "type": "array",
           "description": "Array of AzureFirewallNetworkRuleProtocols.",
           "items": {
-            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
+            "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol"
           }
         },
         "sourceAddresses": {
@@ -1181,7 +1181,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         }
       ]
     },
@@ -1208,7 +1208,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the network rule collection resource.",
           "readOnly": true
         }
@@ -1219,7 +1219,7 @@
       "description": "Properties of the AzureFirewallRCAction.",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/AzureFirewallPacketCaptureFlagsType",
+          "$ref": "./common.json#/definitions/AzureFirewallPacketCaptureFlagsType",
           "description": "Flags to capture"
         }
       }
@@ -1229,7 +1229,7 @@
       "description": "Response of an Azure Firewall Packet Capture Operation.",
       "properties": {
         "statusCode": {
-          "$ref": "./common.json/definitions/AzureFirewallPacketCaptureResponseCode",
+          "$ref": "./common.json#/definitions/AzureFirewallPacketCaptureResponseCode",
           "description": "The response code of the performed packet capture operation"
         },
         "message": {
@@ -1302,20 +1302,20 @@
           "description": "IP configuration of the Azure Firewall used for management traffic."
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the Azure firewall resource.",
           "readOnly": true
         },
         "threatIntelMode": {
-          "$ref": "./common.json/definitions/AzureFirewallThreatIntelMode",
+          "$ref": "./common.json#/definitions/AzureFirewallThreatIntelMode",
           "description": "The operation mode for Threat Intelligence."
         },
         "virtualHub": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The virtualHub to which the firewall belongs."
         },
         "firewallPolicy": {
-          "$ref": "./common.json/definitions/SubResource",
+          "$ref": "./common.json#/definitions/SubResource",
           "description": "The firewallPolicy associated with this azure firewall."
         },
         "hubIPAddresses": {
@@ -1362,7 +1362,7 @@
       "description": "Properties of the AzureFirewallRCAction.",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/AzureFirewallRCActionType",
+          "$ref": "./common.json#/definitions/AzureFirewallRCActionType",
           "description": "The type of action."
         }
       }
@@ -1372,11 +1372,11 @@
       "description": "SKU of an Azure Firewall.",
       "properties": {
         "name": {
-          "$ref": "./common.json/definitions/AzureFirewallSkuName",
+          "$ref": "./common.json#/definitions/AzureFirewallSkuName",
           "description": "Name of an Azure Firewall SKU."
         },
         "tier": {
-          "$ref": "./common.json/definitions/AzureFirewallSkuTier",
+          "$ref": "./common.json#/definitions/AzureFirewallSkuTier",
           "description": "Tier of an Azure Firewall."
         }
       }
@@ -1410,7 +1410,7 @@
           "description": "Name of file to be uploaded to sasURL"
         },
         "protocol": {
-          "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol",
+          "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol",
           "description": "The protocol of packets to capture"
         },
         "flags": {

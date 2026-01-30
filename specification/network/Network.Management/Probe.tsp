@@ -42,6 +42,8 @@ model Probe extends SubResourceModel {
   "The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource."
 );
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
 @armResourceOperations
 interface Probes {
   /**
