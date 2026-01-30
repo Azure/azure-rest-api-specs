@@ -900,16 +900,16 @@
       "description": "Defines the behavior of resources that are no longer managed after the stack is updated or deleted.",
       "properties": {
         "resources": {
-          "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum",
-          "description": "Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state."
+          "$ref": "#/definitions/UnmanageActionResourceMode",
+          "description": "Specifies an action for a newly unmanaged resource."
         },
         "resourceGroups": {
-          "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum",
-          "description": "Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state."
+          "$ref": "#/definitions/UnmanageActionResourceGroupMode",
+          "description": "Specifies an action for a newly unmanaged resource group."
         },
         "managementGroups": {
-          "$ref": "#/definitions/DeploymentStacksDeleteDetachEnum",
-          "description": "Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state."
+          "$ref": "#/definitions/UnmanageActionManagementGroupMode",
+          "description": "Specifies an action for a newly unmanaged management group."
         }
       },
       "required": [
@@ -1052,7 +1052,8 @@
       "properties": {
         "error": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "The error detail."
+          "description": "The error detail.",
+          "readOnly": true
         },
         "template": {
           "type": "object",
@@ -1266,30 +1267,6 @@
         }
       }
     },
-    "DeploymentStacksDeleteDetachEnum": {
-      "type": "string",
-      "description": "Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.",
-      "enum": [
-        "delete",
-        "detach"
-      ],
-      "x-ms-enum": {
-        "name": "DeploymentStacksDeleteDetachEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Delete",
-            "value": "delete",
-            "description": "Delete the specified resources from Azure"
-          },
-          {
-            "name": "Detach",
-            "value": "detach",
-            "description": "Keep the specified resources in Azure"
-          }
-        ]
-      }
-    },
     "DeploymentStacksParametersLink": {
       "type": "object",
       "description": "Entity representing the reference to the deployment parameters.",
@@ -1487,8 +1464,81 @@
         },
         "error": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
-          "description": "The error detail."
+          "description": "The error detail.",
+          "readOnly": true
         }
+      }
+    },
+    "UnmanageActionManagementGroupMode": {
+      "type": "string",
+      "description": "Specifies an action for a newly unmanaged resource.",
+      "enum": [
+        "delete",
+        "detach"
+      ],
+      "x-ms-enum": {
+        "name": "UnmanageActionManagementGroupMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "delete",
+            "description": "Delete the management groups from Azure."
+          },
+          {
+            "name": "Detach",
+            "value": "detach",
+            "description": "Keep the management groups in Azure."
+          }
+        ]
+      }
+    },
+    "UnmanageActionResourceGroupMode": {
+      "type": "string",
+      "description": "Specifies an action for a newly unmanaged resource group.",
+      "enum": [
+        "delete",
+        "detach"
+      ],
+      "x-ms-enum": {
+        "name": "UnmanageActionResourceGroupMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "delete",
+            "description": "Delete the resource groups from Azure."
+          },
+          {
+            "name": "Detach",
+            "value": "detach",
+            "description": "Keep the resource groups in Azure."
+          }
+        ]
+      }
+    },
+    "UnmanageActionResourceMode": {
+      "type": "string",
+      "description": "Specifies an action for a newly unmanaged resource.",
+      "enum": [
+        "delete",
+        "detach"
+      ],
+      "x-ms-enum": {
+        "name": "UnmanageActionResourceMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Delete",
+            "value": "delete",
+            "description": "Delete the resources from Azure."
+          },
+          {
+            "name": "Detach",
+            "value": "detach",
+            "description": "Keep the resources in Azure."
+          }
+        ]
       }
     }
   },
@@ -1504,18 +1554,18 @@
         "detach"
       ],
       "x-ms-enum": {
-        "name": "DeploymentStacksDeleteDetachEnum",
+        "name": "UnmanageActionManagementGroupMode",
         "modelAsString": true,
         "values": [
           {
             "name": "Delete",
             "value": "delete",
-            "description": "Delete the specified resources from Azure"
+            "description": "Delete the management groups from Azure."
           },
           {
             "name": "Detach",
             "value": "detach",
-            "description": "Keep the specified resources in Azure"
+            "description": "Keep the management groups in Azure."
           }
         ]
       },
@@ -1533,18 +1583,18 @@
         "detach"
       ],
       "x-ms-enum": {
-        "name": "DeploymentStacksDeleteDetachEnum",
+        "name": "UnmanageActionResourceGroupMode",
         "modelAsString": true,
         "values": [
           {
             "name": "Delete",
             "value": "delete",
-            "description": "Delete the specified resources from Azure"
+            "description": "Delete the resource groups from Azure."
           },
           {
             "name": "Detach",
             "value": "detach",
-            "description": "Keep the specified resources in Azure"
+            "description": "Keep the resource groups in Azure."
           }
         ]
       },
@@ -1562,18 +1612,18 @@
         "detach"
       ],
       "x-ms-enum": {
-        "name": "DeploymentStacksDeleteDetachEnum",
+        "name": "UnmanageActionResourceMode",
         "modelAsString": true,
         "values": [
           {
             "name": "Delete",
             "value": "delete",
-            "description": "Delete the specified resources from Azure"
+            "description": "Delete the resources from Azure."
           },
           {
             "name": "Detach",
             "value": "detach",
-            "description": "Keep the specified resources in Azure"
+            "description": "Keep the resources in Azure."
           }
         ]
       },

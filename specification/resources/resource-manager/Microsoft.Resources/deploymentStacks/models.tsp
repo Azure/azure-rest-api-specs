@@ -41,15 +41,41 @@ alias DeploymentStackNameParameter = ResourceNameParameter<
 @@doc(DeploymentStack.name, "Name of the deployment stack.");
 
 /**
- * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
+ * Specifies an action for a newly unmanaged resource.
  */
-union DeploymentStacksDeleteDetachEnum {
+union UnmanageActionResourceMode {
   string,
 
-  /** Delete the specified resources from Azure */
+  /** Delete the resources from Azure. */
   Delete: "delete",
 
-  /** Keep the specified resources in Azure */
+  /** Keep the resources in Azure. */
+  Detach: "detach",
+}
+
+/**
+ * Specifies an action for a newly unmanaged resource group.
+ */
+union UnmanageActionResourceGroupMode {
+  string,
+
+  /** Delete the resource groups from Azure. */
+  Delete: "delete",
+
+  /** Keep the resource groups in Azure. */
+  Detach: "detach",
+}
+
+/**
+ * Specifies an action for a newly unmanaged resource.
+ */
+union UnmanageActionManagementGroupMode {
+  string,
+
+  /** Delete the management groups from Azure. */
+  Delete: "delete",
+
+  /** Keep the management groups in Azure. */
   Detach: "detach",
 }
 
@@ -57,13 +83,13 @@ union DeploymentStacksDeleteDetachEnum {
  * Specifies an action for resources that do not support deletion.
  */
 @added(Versions.v2025_07_01)
-union DeploymentStacksResourcesWithoutDeleteSupportEnum {
+union ResourcesWithoutDeleteSupportAction {
   string,
 
-  /** Detach the specified resources from the deployment stack and continue */
+  /** Detach the specified resources from the deployment stack and continue. */
   Detach: "detach",
 
-  /** Fail the deployment stack if resources cannot be deleted */
+  /** Fail the deployment stack if resources cannot be deleted. */
   Fail: "fail",
 }
 
@@ -216,26 +242,26 @@ model ActionOnUnmanageDeleteParameters {
    * Flag to indicate delete rather than detach for unmanaged resources.
    */
   @query("unmanageAction.Resources")
-  unmanageActionResources?: DeploymentStacksDeleteDetachEnum;
+  unmanageActionResources?: UnmanageActionResourceMode;
 
   /**
    * Flag to indicate delete rather than detach for unmanaged resource groups.
    */
   @query("unmanageAction.ResourceGroups")
-  unmanageActionResourceGroups?: DeploymentStacksDeleteDetachEnum;
+  unmanageActionResourceGroups?: UnmanageActionResourceGroupMode;
 
   /**
    * Flag to indicate delete rather than detach for unmanaged management groups.
    */
   @query("unmanageAction.ManagementGroups")
-  unmanageActionManagementGroups?: DeploymentStacksDeleteDetachEnum;
+  unmanageActionManagementGroups?: UnmanageActionManagementGroupMode;
 
   /**
    * Some resources do not support deletion.  This flag will denote how the stack should handle those resources.
    */
   @query("unmanageAction.ResourcesWithoutDeleteSupport")
   @added(Versions.v2025_07_01)
-  unmanageActionResourcesWithoutDeleteSupport?: DeploymentStacksResourcesWithoutDeleteSupportEnum;
+  unmanageActionResourcesWithoutDeleteSupport?: ResourcesWithoutDeleteSupportAction;
 
   /**
    * Flag to bypass service errors that indicate the stack resource list is not correctly synchronized.
@@ -546,25 +572,25 @@ model DeploymentExternalInputDefinition {
  */
 model ActionOnUnmanage {
   /**
-   * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
+   * Specifies an action for a newly unmanaged resource.
    */
-  resources: DeploymentStacksDeleteDetachEnum;
+  resources: UnmanageActionResourceMode;
 
   /**
-   * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
+   * Specifies an action for a newly unmanaged resource group.
    */
-  resourceGroups?: DeploymentStacksDeleteDetachEnum;
+  resourceGroups?: UnmanageActionResourceGroupMode;
 
   /**
-   * Specifies an action for a newly unmanaged resource. Delete will attempt to delete the resource from Azure. Detach will leave the resource in it's current state.
+   * Specifies an action for a newly unmanaged management group.
    */
-  managementGroups?: DeploymentStacksDeleteDetachEnum;
+  managementGroups?: UnmanageActionManagementGroupMode;
 
   /**
    * Some resources do not support deletion.  This flag will denote how the stack should handle those resources.
    */
   @added(Versions.v2025_07_01)
-  resourcesWithoutDeleteSupport?: DeploymentStacksResourcesWithoutDeleteSupportEnum;
+  resourcesWithoutDeleteSupport?: ResourcesWithoutDeleteSupportAction;
 }
 
 /**
@@ -629,7 +655,7 @@ model ResourceReference {
   /**
    * The extensible resource identifiers.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The schema of tis object is determined by the deployment extension."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The schema of this object is determined by the deployment extension."
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   identifiers?: Record<unknown>;
@@ -657,6 +683,7 @@ alias DeploymentStacksError = {
   /**
    * The error detail.
    */
+  @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 };
 
