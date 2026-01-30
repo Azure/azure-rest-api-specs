@@ -24,6 +24,20 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
+/** The SKU tier for the DeidService resource. */
+union DeidServiceSkuTier {
+  string,
+
+  /** Free tier with limited capabilities. */
+  Free: "Free",
+
+  /** Basic tier with standard capabilities. */
+  Basic: "Basic",
+
+  /** Standard tier with full capabilities. */
+  Standard: "Standard",
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Case-sensitive name"
@@ -40,6 +54,27 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+
+  /** The SKU (Stock Keeping Unit) assigned to this resource. */
+  sku?: DeidServiceSku;
+}
+
+/** The SKU for the DeidService resource. */
+model DeidServiceSku {
+  /** The name of the SKU. Ex - Free, Basic, Standard. */
+  name: DeidServiceSkuTier;
+
+  /** The SKU tier. This is based on the SKU name. */
+  tier?: Azure.ResourceManager.CommonTypes.SkuTier;
+
+  /** The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. */
+  size?: string;
+
+  /** If the service has different generations of hardware, for the same SKU, then that can be captured here. */
+  family?: string;
+
+  /** If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted. */
+  capacity?: int32;
 }
 
 /** Patch request body for DeidService */
@@ -51,6 +86,9 @@ model DeidUpdate {
 
   /** RP-specific properties */
   properties?: DeidPropertiesUpdate;
+
+  /** The SKU (Stock Keeping Unit) assigned to this resource. */
+  sku?: DeidServiceSku;
 }
 
 model DeidPropertiesUpdate
