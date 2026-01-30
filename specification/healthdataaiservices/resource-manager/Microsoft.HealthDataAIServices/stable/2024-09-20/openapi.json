@@ -740,6 +740,10 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/DeidServiceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       },
       "allOf": [
@@ -797,6 +801,66 @@
         }
       }
     },
+    "DeidServiceSku": {
+      "type": "object",
+      "description": "The SKU for the DeidService resource.",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/DeidServiceSkuTier",
+          "description": "The name of the SKU. Ex - Free, Basic, Standard."
+        },
+        "tier": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/SkuTier",
+          "description": "The SKU tier. This is based on the SKU name."
+        },
+        "size": {
+          "type": "string",
+          "description": "The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code."
+        },
+        "family": {
+          "type": "string",
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DeidServiceSkuTier": {
+      "type": "string",
+      "description": "The SKU tier for the DeidService resource.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard"
+      ],
+      "x-ms-enum": {
+        "name": "DeidServiceSkuTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Free",
+            "value": "Free",
+            "description": "Free tier with limited capabilities."
+          },
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Basic tier with standard capabilities."
+          },
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard tier with full capabilities."
+          }
+        ]
+      }
+    },
     "DeidUpdate": {
       "type": "object",
       "description": "Patch request body for DeidService",
@@ -815,6 +879,10 @@
         "properties": {
           "$ref": "#/definitions/DeidPropertiesUpdate",
           "description": "RP-specific properties"
+        },
+        "sku": {
+          "$ref": "#/definitions/DeidServiceSku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         }
       }
     },

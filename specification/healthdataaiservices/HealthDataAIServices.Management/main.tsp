@@ -55,6 +55,7 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU is a standard ARM envelope property"
   /** The SKU (Stock Keeping Unit) assigned to this resource. */
   sku?: DeidServiceSku;
 }
