@@ -25,3 +25,12 @@ These settings apply only when `--tag=package-2025-10-01` is specified on the co
 input-file:
   - stable/2025-10-01/GeneratedSystemEvents.json
 ```
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: OAV133
+    from: GeneratedSystemEvents.json
+    reason: OpenAI and Azure require two different discriminators.
+```
