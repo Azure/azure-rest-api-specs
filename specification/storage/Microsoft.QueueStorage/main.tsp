@@ -30,7 +30,7 @@ using TypeSpec.Versioning;
   "The host name of the queue storage account, e.g. accountName.queue.core.windows.net",
   {
     @doc("The host name of the queue storage account, e.g. accountName.queue.core.windows.net")
-    url: string,
+    url: url,
   }
 )
 @versioned(Versions)
@@ -38,6 +38,6 @@ namespace Storage.Queues;
 
 @doc("The Azure.Storage.Queue service versions.")
 enum Versions {
-  @doc("The 2018-03-28 version of the Azure.Storage.Queue service.")
-  v2018_03_28: "2018-03-28",
+  @doc("The 2026-04-06 version of the Azure.Storage.Queue service.")
+  v2026_04_06: "2026-04-06",
 }

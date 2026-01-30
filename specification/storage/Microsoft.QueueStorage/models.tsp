@@ -2,10 +2,189 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/xml";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
+using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace Storage.Queues;
+
+/** Error codes returned by the service */
+union StorageErrorCode {
+  /** AccountAlreadyExists */
+  AccountAlreadyExists: "AccountAlreadyExists",
+
+  /** AccountBeingCreated */
+  AccountBeingCreated: "AccountBeingCreated",
+
+  /** AccountIsDisabled */
+  AccountIsDisabled: "AccountIsDisabled",
+
+  /** AuthenticationFailed */
+  AuthenticationFailed: "AuthenticationFailed",
+
+  /** AuthorizationFailure */
+  AuthorizationFailure: "AuthorizationFailure",
+
+  /** ConditionHeadersNotSupported */
+  ConditionHeadersNotSupported: "ConditionHeadersNotSupported",
+
+  /** ConditionNotMet */
+  ConditionNotMet: "ConditionNotMet",
+
+  /** EmptyMetadataKey */
+  EmptyMetadataKey: "EmptyMetadataKey",
+
+  /** InsufficientAccountPermissions */
+  InsufficientAccountPermissions: "InsufficientAccountPermissions",
+
+  /** InternalError */
+  InternalError: "InternalError",
+
+  /** InvalidAuthenticationInfo */
+  InvalidAuthenticationInfo: "InvalidAuthenticationInfo",
+
+  /** InvalidHeaderValue */
+  InvalidHeaderValue: "InvalidHeaderValue",
+
+  /** InvalidHttpVerb */
+  InvalidHttpVerb: "InvalidHttpVerb",
+
+  /** InvalidInput */
+  InvalidInput: "InvalidInput",
+
+  /** InvalidMd5 */
+  InvalidMd5: "InvalidMd5",
+
+  /** InvalidMetadata */
+  InvalidMetadata: "InvalidMetadata",
+
+  /** InvalidQueryParameterValue */
+  InvalidQueryParameterValue: "InvalidQueryParameterValue",
+
+  /** InvalidRange */
+  InvalidRange: "InvalidRange",
+
+  /** InvalidResourceName */
+  InvalidResourceName: "InvalidResourceName",
+
+  /** InvalidUri */
+  InvalidUri: "InvalidUri",
+
+  /** InvalidXmlDocument */
+  InvalidXmlDocument: "InvalidXmlDocument",
+
+  /** InvalidXmlNodeValue */
+  InvalidXmlNodeValue: "InvalidXmlNodeValue",
+
+  /** Md5Mismatch */
+  Md5Mismatch: "Md5Mismatch",
+
+  /** MetadataTooLarge */
+  MetadataTooLarge: "MetadataTooLarge",
+
+  /** MissingContentLengthHeader */
+  MissingContentLengthHeader: "MissingContentLengthHeader",
+
+  /** MissingRequiredQueryParameter */
+  MissingRequiredQueryParameter: "MissingRequiredQueryParameter",
+
+  /** MissingRequiredHeader */
+  MissingRequiredHeader: "MissingRequiredHeader",
+
+  /** MissingRequiredXmlNode */
+  MissingRequiredXmlNode: "MissingRequiredXmlNode",
+
+  /** MultipleConditionHeadersNotSupported */
+  MultipleConditionHeadersNotSupported: "MultipleConditionHeadersNotSupported",
+
+  /** OperationTimedOut */
+  OperationTimedOut: "OperationTimedOut",
+
+  /** OutOfRangeInput */
+  OutOfRangeInput: "OutOfRangeInput",
+
+  /** OutOfRangeQueryParameterValue */
+  OutOfRangeQueryParameterValue: "OutOfRangeQueryParameterValue",
+
+  /** RequestBodyTooLarge */
+  RequestBodyTooLarge: "RequestBodyTooLarge",
+
+  /** ResourceTypeMismatch */
+  ResourceTypeMismatch: "ResourceTypeMismatch",
+
+  /** RequestUrlFailedToParse */
+  RequestUrlFailedToParse: "RequestUrlFailedToParse",
+
+  /** ResourceAlreadyExists */
+  ResourceAlreadyExists: "ResourceAlreadyExists",
+
+  /** ResourceNotFound */
+  ResourceNotFound: "ResourceNotFound",
+
+  /** ServerBusy */
+  ServerBusy: "ServerBusy",
+
+  /** UnsupportedHeader */
+  UnsupportedHeader: "UnsupportedHeader",
+
+  /** UnsupportedXmlNode */
+  UnsupportedXmlNode: "UnsupportedXmlNode",
+
+  /** UnsupportedQueryParameter */
+  UnsupportedQueryParameter: "UnsupportedQueryParameter",
+
+  /** UnsupportedHttpVerb */
+  UnsupportedHttpVerb: "UnsupportedHttpVerb",
+
+  /** InvalidMarker */
+  InvalidMarker: "InvalidMarker",
+
+  /** MessageNotFound */
+  MessageNotFound: "MessageNotFound",
+
+  /** MessageTooLarge */
+  MessageTooLarge: "MessageTooLarge",
+
+  /** PopReceiptMismatch */
+  PopReceiptMismatch: "PopReceiptMismatch",
+
+  /** QueueAlreadyExists */
+  QueueAlreadyExists: "QueueAlreadyExists",
+
+  /** QueueBeingDeleted */
+  QueueBeingDeleted: "QueueBeingDeleted",
+
+  /** QueueDisabled */
+  QueueDisabled: "QueueDisabled",
+
+  /** QueueNotEmpty */
+  QueueNotEmpty: "QueueNotEmpty",
+
+  /** QueueNotFound */
+  QueueNotFound: "QueueNotFound",
+
+  /** AuthorizationSourceIPMismatch */
+  AuthorizationSourceIPMismatch: "AuthorizationSourceIPMismatch",
+
+  /** AuthorizationProtocolMismatch */
+  AuthorizationProtocolMismatch: "AuthorizationProtocolMismatch",
+
+  /** AuthorizationPermissionMismatch */
+  AuthorizationPermissionMismatch: "AuthorizationPermissionMismatch",
+
+  /** AuthorizationServiceMismatch */
+  AuthorizationServiceMismatch: "AuthorizationServiceMismatch",
+
+  /** AuthorizationResourceTypeMismatch */
+  AuthorizationResourceTypeMismatch: "AuthorizationResourceTypeMismatch",
+
+  /** FeatureVersionMismatch */
+  FeatureVersionMismatch: "FeatureVersionMismatch",
+
+  string,
+}
 
 /** Include this parameter to specify that the queue's metadata be returned as part of the response body. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
@@ -404,4 +583,167 @@ model PeekedMessage {
    * The content of the Message.
    */
   @Xml.name("MessageText") messageText: string;
+}
+
+alias MessageIdPathParameter = {
+  /**
+   * The id of the queue message.
+   */
+  @path
+  messageId: string;
+};
+
+alias PopReceiptQueryParameter = {
+  /**
+   * Required. Specifies the valid pop receipt value returned from an earlier call to the Get Messages or Update Message operation.
+   */
+  @query("popReceipt")
+  popReceipt: string;
+};
+
+alias RequestIdResponseHeader = {
+  @access(Access.internal)
+  @visibility(Lifecycle.Read)
+  @header("x-ms-request-id")
+  @doc("An opaque, globally-unique, server-generated string identifier for the request.")
+  requestId?: uuid;
+};
+
+/** The timeout parameter. */
+alias TimeoutParameter = {
+  @doc("The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>")
+  @query
+  @minValue(0)
+  timeout?: int32;
+};
+
+alias VisibilityTimeoutParameter = {
+  @doc("Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time.")
+  @maxValue(604800)
+  @query("visibilityTimeout")
+  visibilityTimeout?: int32;
+};
+
+/** The Date response header */
+alias DateResponseHeader = {
+  /** UTC date/time value generated by the service that indicates the time at which the response was initiated */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("Date")
+  date: utcDateTime;
+};
+
+/** The approximate messages count header */
+alias ApproximateMessagesCountHeader = {
+  /** The approximate number of messages in the queue. This number is not lower than the actual number of messages in the queue, but could be higher. */
+  @header("x-ms-approximate-messages-count")
+  approximateMessagesCount?: int64;
+};
+
+/** The pop receipt response header */
+alias PopReceiptResponseHeader = {
+  /** The pop receipt of the queue message. */
+  @header("x-ms-popreceipt")
+  popReceipt: string;
+};
+
+/** The time next visible response header */
+alias TimeNextVisibleResponseHeader = {
+  /** A UTC date/time value that represents when the message will be visible on the queue. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @encode("rfc7231")
+  @header("x-ms-time-next-visible")
+  timeNextVisible: utcDateTime;
+};
+
+/** The queue name path parameter */
+alias QueueNamePathParameter = {
+  /** The name of the queue. */
+  @path
+  queueName: string;
+};
+
+/** The metadata headers. */
+alias MetadataHeaders = {
+  /** The metadata headers. */
+  @alternateType(Record<string>, "rust")
+  @header("x-ms-meta")
+  metadata?: string;
+};
+
+alias ApiVersionHeader = {
+  /** Specifies the version of the operation to use for this request. */
+  @apiVersion
+  @access(Access.internal)
+  @header("x-ms-version")
+  version: string;
+};
+
+alias ClientRequestIdHeader = {
+  @access(Access.internal)
+  @header("x-ms-client-request-id")
+  @doc("An opaque, globally-unique, client-generated string identifier for the request.")
+  clientRequestId?: uuid;
+};
+
+alias QueueMessageBodyParameter = {
+  /**
+   * A Message object which can be stored in a Queue
+   */
+  @bodyRoot
+  queueMessage?: QueueMessage;
+};
+
+/** Key information for user delegation key */
+model KeyInfo {
+  /** The date-time the key is active in ISO 8601 UTC time */
+  @Xml.name("Start")
+  @encode("rfc3339")
+  start?: utcDateTime;
+
+  /** The date-time the key expires in ISO 8601 UTC time */
+  @Xml.name("Expiry")
+  @encode("rfc3339")
+  expiry: utcDateTime;
+
+  /** The delegated user tenant id in Azure AD */
+  @Xml.name("DelegatedUserTid")
+  delegatedUserTid?: string;
+}
+
+/** A user delegation key */
+model UserDelegationKey {
+  /** The Azure Active Directory object ID in GUID format. */
+  @Xml.name("SignedOid")
+  signedOid: string;
+
+  /** The Azure Active Directory tenant ID in GUID format */
+  @Xml.name("SignedTid")
+  signedTid: string;
+
+  /** The date-time the key is active */
+  @Xml.name("SignedStart")
+  @encode("rfc7231")
+  signedStart: utcDateTime;
+
+  /** The date-time the key expires */
+  @Xml.name("SignedExpiry")
+  @encode("rfc7231")
+  signedExpiry: utcDateTime;
+
+  /** The service that created the key */
+  @Xml.name("SignedService")
+  signedService: string;
+
+  /** The version of the service that created the key */
+  @Xml.name("SignedVersion")
+  signedVersion: string;
+
+  /** The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified. */
+  @Xml.name("SignedDelegatedUserTid")
+  signedDelegatedUserTid?: string;
+
+  /** The key as a base64 string */
+  @Xml.name("Value")
+  value: string;
 }
