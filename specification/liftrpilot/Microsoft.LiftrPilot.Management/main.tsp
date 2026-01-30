@@ -158,6 +158,8 @@ model AgentResourceUpdate {
 interface Agents {
   get is ArmResourceRead<AgentResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<AgentResource>;
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchSync<AgentResource, AgentResourceUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<AgentResource>;
   listByResourceGroup is ArmResourceListByParent<AgentResource>;
   listBySubscription is ArmListBySubscription<AgentResource>;
@@ -336,7 +338,7 @@ interface TestTrackedResources {
     @bodyRoot
     @doc("The body type of the operation request.")
     request: StopBackupTestTrackedResourceRequest,
-  ): ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse | ArmNoContentResponse<"Operation completed successfully"> | ErrorResponse;
 }
 
 @added(Versions.v2025_05_21_preview)
@@ -424,7 +426,7 @@ interface TestProxyResources {
     @bodyRoot
     @doc("The body type of the operation request.")
     request: ExportTestProxyResourceRequest,
-  ): ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse | ArmNoContentResponse<"Operation completed successfully"> | ErrorResponse;
 }
 
 @added(Versions.v2025_05_21_preview)
@@ -513,7 +515,7 @@ interface TestChildPureProxyResources {
     @bodyRoot
     @doc("The body type of the operation request.")
     request: UnregisterTestChildPureProxyResourceRequest,
-  ): ArmAcceptedLroResponse | ErrorResponse;
+  ): ArmAcceptedLroResponse | ArmNoContentResponse<"Operation completed successfully"> | ErrorResponse;
 }
 
 @added(Versions.v2025_05_21_preview)
