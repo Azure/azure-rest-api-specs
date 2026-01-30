@@ -49,6 +49,16 @@
             "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
           },
           "healthModelId": "/subscriptions/ef4ab5a7-c2c0-4304-af80-af49f48af3d1/resourceGroups/DeleteDemoRG/providers/Microsoft.CloudHealth/healthmodels/ahm-demo"
+        },
+        "chaosResourceProperties": {
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          },
+          "chaosResourceIdentityForFaults": {
+            "type": "UserAssigned",
+                "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          }
         }
       }
     }
@@ -114,10 +124,14 @@
             "rbacNeededForDrillOnAzureHealthModel": [
               "yvtpfipqppawimvylrqq"
             ],
-            "runbookFaultRbacOnTargets": "Set"
+            "runbookFaultRbacOnTargets": "Set",
+            "includedResourceInDrill": "Exists"
           },
           "systemMetadata": {
-            "initialConfig": "Pending"
+            "initialConfig": "Pending",
+            "trackedResourceCategories": [
+              "AzureSiteRecoveryVMsPresent"
+            ]
           },
           "drillType": "Zonal",
           "lastRunProperties": {
@@ -151,7 +165,24 @@
           },
           "provisioningState": "Succeeded",
           "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
-          "lastSyncTime": "2025-05-05T05:36:37.151Z"
+          "drillAssetProperties": {
+            "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+            "region": "westus"
+          },
+          "chaosResourceProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosResourceIdentityForFaults": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosResourceId": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourceGroups/resourceGroup1/providers/Microsoft.Chaos/workspaces/asdas",
+            "faultDurationInMin": 0
+          },
+          "lastSyncTime": "2025-05-05T05:36:37.151Z",
+          "lastResyncTime": "2026-01-30T17:16:00.547Z"
         },
         "identity": {
           "type": "None",

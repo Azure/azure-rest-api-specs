@@ -62,7 +62,8 @@
           "rbacNeededForDrillOnAzureHealthModel": [
             "yvtpfipqppawimvylrqq"
           ],
-          "runbookFaultRbacOnTargets": "Set"
+          "runbookFaultRbacOnTargets": "Set",
+          "includedResourceInDrill": "Exists"
         },
         "systemMetadata": {
           "initialConfig": "Pending"
@@ -83,6 +84,20 @@
         "managedOnBehalfOfConfiguration": {},
         "recoveryPlanProperties": {
           "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          }
+        },
+        "drillAssetProperties": {
+          "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+          "region": "eastus"
+        },
+        "chaosResourceProperties": {
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          },
+          "chaosResourceIdentityForFaults": {
             "type": "UserAssigned",
             "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
           }
@@ -155,10 +170,14 @@
             "rbacNeededForDrillOnAzureHealthModel": [
               "yvtpfipqppawimvylrqq"
             ],
-            "runbookFaultRbacOnTargets": "Set"
+            "runbookFaultRbacOnTargets": "Set",
+            "includedResourceInDrill": "Exists"
           },
           "systemMetadata": {
-            "initialConfig": "Pending"
+            "initialConfig": "Pending",
+            "trackedResourceCategories": [
+              "AzureSiteRecoveryVMsPresent"
+            ]
           },
           "drillType": "DrillProperties",
           "lastRunProperties": {
@@ -192,7 +211,24 @@
           },
           "provisioningState": "Succeeded",
           "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
-          "lastSyncTime": "2025-05-05T05:36:37.151Z"
+          "drillAssetProperties": {
+            "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+            "region": "eastus"
+          },
+          "chaosResourceProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosResourceIdentityForFaults": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosResourceId": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourceGroups/resourceGroup1/providers/Microsoft.Chaos/workspaces/asdas",
+            "faultDurationInMin": 0
+          },
+          "lastSyncTime": "2025-05-05T05:36:37.151Z",
+          "lastResyncTime": "2026-01-30T17:16:00.547Z"
         },
         "identity": {
           "type": "None",
@@ -276,10 +312,14 @@
             "rbacNeededForDrillOnAzureHealthModel": [
               "yvtpfipqppawimvylrqq"
             ],
-            "runbookFaultRbacOnTargets": "Set"
+            "runbookFaultRbacOnTargets": "Set",
+            "includedResourceInDrill": "Exists"
           },
           "systemMetadata": {
-            "initialConfig": "Pending"
+            "initialConfig": "Pending",
+            "trackedResourceCategories": [
+              "AzureSiteRecoveryVMsPresent"
+            ]
           },
           "drillType": "DrillProperties",
           "lastRunProperties": {
@@ -313,7 +353,24 @@
           },
           "provisioningState": "Succeeded",
           "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
-          "lastSyncTime": "2025-05-05T05:36:37.151Z"
+          "drillAssetProperties": {
+            "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
+            "region": "eastus"
+          },
+          "chaosResourceProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosResourceIdentityForFaults": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "chaosResourceId": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourceGroups/resourceGroup1/providers/Microsoft.Chaos/workspaces/asdas",
+            "faultDurationInMin": 0
+          },
+          "lastSyncTime": "2025-05-05T05:36:37.151Z",
+          "lastResyncTime": "2026-01-30T17:16:00.547Z"
         },
         "identity": {
           "type": "None",
