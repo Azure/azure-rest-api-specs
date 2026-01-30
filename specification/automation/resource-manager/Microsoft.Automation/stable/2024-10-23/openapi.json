@@ -6632,7 +6632,7 @@
           "url": "http://aka.ms/azureautomationsdk/runbookdraftoperations"
         },
         "produces": [
-          "text/powershell",
+          "*/*",
           "application/json"
         ],
         "parameters": [
@@ -6665,7 +6665,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/stringTextPowershell"
+              "type": "file"
             }
           },
           "default": {

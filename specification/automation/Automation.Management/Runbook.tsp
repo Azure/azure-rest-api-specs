@@ -98,11 +98,7 @@ interface Runbooks {
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   @get
   @action("draft/content")
-  getContent is ArmResourceActionSync<
-    Runbook,
-    void,
-    ArmResponse<stringTextPowershell>
-  >;
+  getContent is ArmResourceActionSync<Runbook, void, ArmResponse<File>>;
 
   /**
    * Replaces the runbook draft content.
