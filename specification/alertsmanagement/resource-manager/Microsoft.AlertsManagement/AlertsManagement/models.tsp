@@ -783,7 +783,8 @@ model AlertModificationItem {
   /**
    * Base details class.
    */
-  details?: BaseDetails;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  details?: BaseDetails | null;
 }
 
 /**
