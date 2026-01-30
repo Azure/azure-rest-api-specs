@@ -277,6 +277,39 @@ input-file:
 
 ---
 
+## Suppression
+
+``` yaml
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: containerregistry.json
+    reason: Previously existing implementation, flagged as part of Typespec conversion
+    where: 
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: containerregistry.json
+    reason: Previously existing implementation, flagged as part of Typespec conversion
+    where: 
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].put
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].put
+  - code: TrackedResourcePatchOperation
+    from: containerregistry.json
+    reason: Previously existing implementation, flagged as part of Typespec conversion
+    where: 
+        - $.definitions.ExportPipeline
+        - $.definitions.ImportPipeline
+  - code: DeleteResponseCodes
+    from: containerregistry.json
+    reason: Previously existing implementation, flagged as part of Typespec conversion
+    where: 
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].delete
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].delete
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns/{pipelineRunName}"].delete
+
+```
+
+---
+
 # Code Generation
 
 ## Swagger to SDK
