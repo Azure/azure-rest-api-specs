@@ -24,8 +24,8 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-/** The SKU tier for the DeidService resource. */
-union DeidServiceSkuTier {
+/** The SKU name for the DeidService resource. */
+union DeidServiceSkuName {
   string,
 
   /** Free tier with limited capabilities. */
@@ -63,7 +63,7 @@ model DeidService is TrackedResource<DeidServiceProperties> {
 /** The SKU for the DeidService resource. */
 model DeidServiceSku {
   /** The name of the SKU. Ex - Free, Basic, Standard. */
-  name: DeidServiceSkuTier;
+  name: DeidServiceSkuName;
 
   /** The SKU tier. This is based on the SKU name. */
   tier?: Azure.ResourceManager.CommonTypes.SkuTier;

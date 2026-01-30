@@ -34,10 +34,11 @@ namespace Microsoft.HealthDataAIServices {
     "HealthDataAIServicesSku",
     "csharp"
   );
-  @@clientName(DeidServiceSkuTier,
-    "HealthDataAIServicesSkuTier",
+  @@clientName(DeidServiceSkuName,
+    "HealthDataAIServicesSkuName",
     "csharp"
   );
+  @@access(DeidServiceSkuName, Access.public, "csharp");
 
   @@clientName(Versions.v2024_09_20,
     "$DO_NOT_NORMALIZE$V2024_09_20",
