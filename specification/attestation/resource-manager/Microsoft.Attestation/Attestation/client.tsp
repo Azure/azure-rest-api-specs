@@ -58,4 +58,8 @@ using Microsoft.Attestation;
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(AttestationProviders.listByProvider,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(AttestationProvidersOperationGroup.listDefault,
+  "csharp"
+);
 @@usage(AttestationProvider, Usage.input, "csharp");
