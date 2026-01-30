@@ -65,6 +65,5 @@ namespace Customizations;
 @@scope(Storage.Blob.Blob.setExpiry, "!rust");
 @@scope(Storage.Blob.Blob.startCopyFromUrl, "!rust");
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
-@@scope(Storage.Blob.BlockBlob.stageBlockFromUrl, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");

@@ -14,7 +14,11 @@ namespace Storage.Blob;
 @encode(BytesKnownEncoding.base64)
 scalar base64Bytes extends bytes;
 
-/** The error response. */
+/**
+ * The error response.
+ *
+ * This defines the wire format only. Language SDKs wrap this in idiomatic error types.
+ */
 @error
 model StorageError {
   /** The error code. */
