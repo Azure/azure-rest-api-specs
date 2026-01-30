@@ -232,6 +232,7 @@ model PatchVaultWithEtag
 /**
  * Information to be stored in Vault properties as an element of privateEndpointConnections List.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateEndpointConnectionVaultPropertiesReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<
@@ -251,6 +252,7 @@ model PrivateEndpointConnectionVaultPropertiesReplacement
 /**
  * Certificate corresponding to a vault that can be used by clients to register themselves with the vault.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VaultCertificateResponseReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<VaultCertificateResponse, "id" | "name" | "type">;
