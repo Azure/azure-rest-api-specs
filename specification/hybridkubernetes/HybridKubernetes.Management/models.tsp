@@ -66,6 +66,20 @@ union ConnectivityStatus {
 }
 
 /**
+ * Represents the inbound connectivity status of the connected cluster.
+ */
+@added(Versions.v2026_02_01_preview)
+union InboundConnectivityStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Connecting: "Connecting",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Connected: "Connected",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Offline: "Offline",
+}
+
+/**
  * Property which describes the state of private link on a connected cluster resource.
  */
 union PrivateLinkState {
@@ -236,6 +250,21 @@ model ConnectedClusterProperties {
    */
   @visibility(Lifecycle.Read)
   connectivityStatus?: ConnectivityStatus;
+
+  /**
+   * Time representing the last instance when inbound connectivity was established with the cluster
+   */
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastInboundConnectivityTime?: utcDateTime;
+
+  /**
+   * Represents the inbound connectivity status of the connected cluster.
+   */
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  inboundConnectivityStatus?: InboundConnectivityStatus;
 
   /**
    * Property which describes the state of private link on a connected cluster resource.
