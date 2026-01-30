@@ -33,7 +33,7 @@ jobs:
         if: ${{ env.user-allowed != 'true' }}
         with:
           # Required since "HEAD^" is passed to Get-ChangedFiles
-          fetch-depth: 2
+          fetch-depth: 1
 
       - name: Detect changes to protected files
         if: ${{ env.user-allowed != 'true' }}

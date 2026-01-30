@@ -30,7 +30,7 @@ jobs:
         with:
           # We compare HEAD (PR merge commit) against HEAD^ (base) via git diff,
           # so we only need enough history to include the merge commit and its parent.
-          fetch-depth: 2
+          fetch-depth: 1
           # Check only needs to view contents of changed files as a string, so can use
           # "git show" on specific files instead of cloning whole repo
           sparse-checkout: |
