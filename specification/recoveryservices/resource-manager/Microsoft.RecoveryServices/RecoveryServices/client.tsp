@@ -226,11 +226,6 @@ model PatchVaultWithEtag extends Azure.ResourceManager.Foundations.TrackedResour
   etag?: eTag;
 }
 
-// @@alternateType(PatchTrackedResource,
-//   Azure.ResourceManager.Foundations.TrackedResource,
-//   "csharp"
-// );
-
 @@alternateType(PatchVault, PatchVaultWithEtag, "csharp");
 
 /**
