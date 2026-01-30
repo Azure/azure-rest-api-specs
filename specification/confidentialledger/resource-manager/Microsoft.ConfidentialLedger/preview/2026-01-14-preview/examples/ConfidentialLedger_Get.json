@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2026-01-14-preview",
+    "ledgerName": "DummyLedgerName",
+    "resourceGroupName": "DummyResourceGroupName",
+    "subscriptionId": "0000000-0000-0000-0000-000000000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "DummyLedgerName",
+        "type": "Microsoft.ConfidentialLedger/ledgers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000001/providers/Microsoft.ConfidentialLedger/ledgers/DummyLedgerName",
+        "location": "EastUS",
+        "properties": {
+          "aadBasedSecurityPrincipals": [
+            {
+              "ledgerRoleName": "Administrator",
+              "principalId": "34621747-6fc8-4771-a2eb-72f31c461f2e",
+              "tenantId": "bce123b9-2b7b-4975-8360-5ca0b9b1cd08"
+            }
+          ],
+          "identityServiceUri": "https://dummy.accledger.identity.com/DummyLedgerName",
+          "ledgerInternalNamespace": "dummyNamespace",
+          "ledgerName": "DummyLedgerName",
+          "ledgerSku": "Standard",
+          "ledgerType": "Public",
+          "ledgerUri": "https://dummy.accledger.domain.com/DummyLedgerName",
+          "provisioningState": "Succeeded",
+          "runningState": "Active"
+        },
+        "systemData": {
+          "createdAt": "2020-12-01T00:00:00.1234567Z",
+          "createdBy": "ledgerAdmin@contoso.com",
+          "createdByType": "Admin1",
+          "lastModifiedAt": "2020-12-02T00:00:00.1234567Z",
+          "lastModifiedBy": "ledgerAdmin2@outlook.com",
+          "lastModifiedByType": "Admin2"
+        },
+        "tags": {
+          "additionalProps1": "additional properties"
+        }
+      }
+    }
+  },
+  "operationId": "Ledger_Get",
+  "title": "ConfidentialLedgerGet"
+}
