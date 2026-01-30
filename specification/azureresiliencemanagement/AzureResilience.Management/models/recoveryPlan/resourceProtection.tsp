@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
@@ -10,6 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -101,6 +103,11 @@ model ResourceProtectionSolutionSettings {
   @doc("TestFailover state of the recovery orchestration resource.")
   @visibility(Lifecycle.Read)
   testFailoverState?: TestFailoverState;
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Physical zones of the Azure resource associated with the recovery orchestration plan.")
+  @visibility(Lifecycle.Read)
+  physicalZones?: string[];
 }
 
 @doc("Definition of recovery orchestration resource protection solution setting with recovery orchestration plan.")

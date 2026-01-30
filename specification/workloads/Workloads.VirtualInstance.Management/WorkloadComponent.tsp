@@ -37,10 +37,7 @@ interface WorkloadComponents {
    * Updates a workload component corresponding to the Virtual Instance resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
-    WorkloadComponent,
-    UpdateWorkloadComponentRequest
-  >;
+  update is ArmCustomPatchAsync<WorkloadComponent, WorkloadComponentUpdate>;
 
   /**
    * Deletes the workload component corresponding to the Virtual Instance resource.
@@ -57,7 +54,4 @@ interface WorkloadComponents {
 @@doc(WorkloadComponent.name, "The name of the Workload Component resource");
 @@doc(WorkloadComponents.create::parameters.resource,
   "Request body to create the Workload Component resource."
-);
-@@doc(WorkloadComponents.update::parameters.properties,
-  "Request body to update the Workload Component resource."
 );
