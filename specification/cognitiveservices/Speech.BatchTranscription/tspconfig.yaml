@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/transcription"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    # Intentionally not overwriting the data-plane spec files & gitignoring the output of this emitter
+    # since this specification is only intended for generating the SDK for now
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/tsp-output"
+    omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/@azure-tools/typespec-autorest/{version-status}/{version}/Transcription.json"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Speech.BatchTranscription"
+    namespace: "Azure.AI.Speech.BatchTranscription"
+    model-namespace: false
+    generate-protocol-methods: true
+    generate-convenience-methods: true
+  "@azure-tools/typespec-java":
+    namespace: com.azure.ai.speech.batchtranscription
+    partial-update: true
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-batchtranscription"
+    package-version: "1.0.0-beta.1"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-batchtranscription"
+    is-modular-library: true
+    package-details:
+      name: "@azure/azure-ai-speech-batchtranscription"
+      version: "1.0.0-beta.1"
+    flavor: azure
+    generate-metadata: true
+  "@azure-tools/typespec-python":
+    package-version: "1.0.0b1"
+    package-name: "azure-ai-speech-batchtranscription"
+    package-pprint-name: '"Azure AI Speech BatchTranscription"'
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-batchtranscription"
+    flavor: azure
+    generate-test: true
+    generate-sample: true

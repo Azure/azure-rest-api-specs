@@ -1,0 +1,60 @@
+parameters:
+  "service-dir":
+    default: "sdk/transcription"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    # Intentionally not overwriting the data-plane spec files & gitignoring the output of this emitter
+    # since this specification is only intended for generating the SDK for now
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/tsp-output"
+    omit-unreachable-types: true
+    output-file: "{azure-resource-provider-folder}/@azure-tools/typespec-autorest/{version-status}/{version}/Transcription.json"
+  #"@azure-typespec/http-client-csharp":
+  # emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Speech.Transcription"
+  #  namespace: "Azure.AI.Speech.Transcription"
+  #  model-namespace: false
+  #  generate-protocol-methods: true
+  #  generate-convenience-methods: true
+  "@typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Speech.Transcription"
+    package-name: Azure.AI.Speech.Transcription
+    unreferenced-types-handling: internalize
+    disable-xml-docs: false
+  "@azure-tools/typespec-java":
+    namespace: com.azure.ai.speech.transcription
+    partial-update: true
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-transcription"
+    package-version: "1.0.0-beta.1"
+    flavor: azure
+    generate-protocol-methods: true
+    generate-convenience-methods: true
+    customization-class: customization/src/main/java/SpeechTranscriptionCustomization.java
+  "@azure-tools/typespec-python":
+    package-version: "1.0.0b1"
+    package-name: "azure-ai-transcription"
+    package-pprint-name: '"Azure AI Transcription"'
+    namespace: "azure.ai.transcription"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-transcription"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-transcription"
+    is-modular-library: true
+    package-details:
+      name: "@azure/azure-ai-speech-transcription"
+      version: "1.0.0-beta.1"
+    flavor: azure
+    generate-metadata: true
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/azspeechtranscription"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azspeechtranscription"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    flavor: azure
