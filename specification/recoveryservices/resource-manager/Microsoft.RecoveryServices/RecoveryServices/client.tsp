@@ -204,7 +204,8 @@ namespace Microsoft.RecoveryServices;
  * Patch Resource information, as returned by the resource provider.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PatchVaultWithEtag extends Azure.ResourceManager.Foundations.TrackedResource {
+model PatchVaultWithEtag
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   /**
    * Properties of the vault.
    */
