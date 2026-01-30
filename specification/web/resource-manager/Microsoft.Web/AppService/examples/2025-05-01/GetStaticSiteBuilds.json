@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "name": "testStaticSite0",
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0/builds/default",
+            "properties": {
+              "buildId": "default",
+              "createdTimeUtc": "2020-03-04T17:33:11.641Z",
+              "hostname": "happy-sea-15afae3e.azurestaticwebsites.net",
+              "lastUpdatedOn": "2020-03-04T17:33:11.641Z",
+              "linkedBackends": [],
+              "pullRequestTitle": null,
+              "sourceBranch": "demo",
+              "status": "Ready",
+              "userProvidedFunctionApps": null
+            }
+          },
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0/builds/12",
+            "properties": {
+              "buildId": "12",
+              "createdTimeUtc": "2020-03-04T17:33:11.641Z",
+              "hostname": "happy-sea-15afae3e-12.westus2.azurestaticwebsites.net",
+              "lastUpdatedOn": "2020-03-04T17:33:11.641Z",
+              "linkedBackends": [
+                {
+                  "backendResourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.ApiManagement/service/apimService0",
+                  "createdOn": "2022-03-27T04:57:24.8058474",
+                  "provisioningState": "Succeeded",
+                  "region": null
+                }
+              ],
+              "pullRequestTitle": "Update README.md",
+              "sourceBranch": "demo-patch2",
+              "status": "Ready",
+              "userProvidedFunctionApps": null
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "StaticSites_GetStaticSiteBuilds",
+  "title": "Get all builds for a static site"
+}

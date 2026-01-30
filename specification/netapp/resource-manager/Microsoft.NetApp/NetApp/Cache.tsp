@@ -208,7 +208,7 @@ model SmbSettings {
   /**
    * Enables access-based enumeration share property for SMB Shares. Only applicable for SMB/DualProtocol volume
    */
-  smbAccessBasedEnumerations?: SmbAccessBasedEnumeration;
+  smbAccessBasedEnumeration?: SmbAccessBasedEnumeration;
 
   /**
    * Enables non-browsable property for SMB Shares. Only applicable for SMB/DualProtocol volume
