@@ -417,14 +417,9 @@ describe("command-helpers", () => {
 
       // Only Swagger files should be returned, with renames returned separately
       expect(result).toEqual({
-        additions: [
-          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
-          TEST_CONSTANTS.SWAGGER_PATHS.BAZ,
-        ],
+        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO, TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
         modifications: [TEST_CONSTANTS.SWAGGER_PATHS.QUX_MGMT],
-        deletions: [
-          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
-        ],
+        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
         renames: [
           {
             from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
@@ -480,13 +475,9 @@ describe("command-helpers", () => {
 
       // Renames should be returned separately, not added to additions and deletions
       expect(result).toEqual({
-        additions: [
-          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
-        ],
+        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO],
         modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
-        deletions: [
-          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
-        ],
+        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
         renames: [
           {
             from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
