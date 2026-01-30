@@ -94,7 +94,10 @@ export async function getExistedVersionOperations(
 
   // Get all current and previous versions of the swaggers with different fileNames
   const previousVersionSwaggers = swaggersWithVersions
-    .filter((item) => item.fileName.toLowerCase() !== fileName.toLowerCase() && item.version <= currentVersion)
+    .filter(
+      (item) =>
+        item.fileName.toLowerCase() !== fileName.toLowerCase() && item.version <= currentVersion,
+    )
     .sort((a, b) => a.version.localeCompare(b.version))
     .map((item) => item.swagger);
 
