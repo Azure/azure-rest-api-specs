@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-11-01",
+    "capacityReservationGroupName": "blockCapacityReservationGroup",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "department": "finance"
+      },
+      "zones": [
+        "1",
+        "2"
+      ],
+      "properties": {
+        "reservationType": "Block"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "blockCapacityReservationGroup",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/blockCapacityReservationGroup",
+        "tags": {
+          "department": "finance"
+        },
+        "zones": [
+          "1",
+          "2"
+        ],
+        "properties": {
+          "reservationType": "Block"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "location": "westus",
+        "tags": {
+          "department": "finance",
+          "owner": "myCompany"
+        },
+        "name": "blockCapacityReservationGroup",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/blockCapacityReservationGroup",
+        "zones": [
+          "1",
+          "2"
+        ],
+        "properties": {
+          "reservationType": "Block"
+        }
+      }
+    }
+  },
+  "operationId": "CapacityReservationGroups_CreateOrUpdate",
+  "title": "Create or update a block capacity reservation group."
+}

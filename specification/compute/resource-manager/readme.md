@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-03-03
+tag: package-2025-11-01
 
 directive:
   - where:
@@ -349,6 +349,32 @@ suppressions:
     reason: ScaleOut operation returns both 200 and 202, but 200 will not return schema. This is a common pattern for VMSS action operations. 
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/scaleOut"].post
+  - code: ParametersInPost
+    reason: forceDeallocate added as query parameter for consistency with hibernation in Deallocate POST API.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate"].post.parameters
+```
+
+### Tag: package-2025-11-01
+
+These settings apply only when `--tag=package-2025-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-11-01'
+input-file:
+  - Microsoft.Compute/ComputeRP/stable/2025-11-01/ComputeRP.json
+  - Microsoft.Compute/DiskRP/stable/2025-01-02/DiskRP.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2025-03-03/GalleryRP.json
+  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+```
+
+### Tag: package-2025-11-01-only
+
+These settings apply only when `--tag=package-2025-11-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01-only'
+input-file:
+  - Microsoft.Compute/ComputeRP/stable/2025-11-01/ComputeRP.json
 ```
 
 ### Tag: package-2025-03-03
