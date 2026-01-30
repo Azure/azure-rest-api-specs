@@ -135,6 +135,12 @@ model ElasticEncryptionIdentity {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
   ]>;
+
+  /**
+   * ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults.
+   */
+  @added(Versions.v2025_12_15_preview)
+  federatedClientId?: string;
 }
 
 @armResourceOperations
