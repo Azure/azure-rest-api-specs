@@ -444,7 +444,8 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&restype=container&acquire")
+  @sharedRoute
+  @route("?comp=lease&restype=container")
   acquireLease is StorageOperationNoBody<
     {
       ...LeaseDurationHeaderParameter;
@@ -467,7 +468,8 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&restype=container&release")
+  @sharedRoute
+  @route("?comp=lease&restype=container")
   releaseLease is StorageOperation<
     {
       ...LeaseIdRequiredParameter;
@@ -487,7 +489,8 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&restype=container&renew")
+  @sharedRoute
+  @route("?comp=lease&restype=container")
   renewLease is StorageOperation<
     {
       ...LeaseIdRequiredParameter;
@@ -507,7 +510,8 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
-  @route("?comp=lease&restype=container&break")
+  @sharedRoute
+  @route("?comp=lease&restype=container")
   breakLease is StorageOperation<
     {
       ...TimeoutParameter;
@@ -529,7 +533,8 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&restype=container&change")
+  @sharedRoute
+  @route("?comp=lease&restype=container")
   changeLease is StorageOperation<
     {
       ...LeaseIdRequiredParameter;
@@ -551,7 +556,8 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @list
-  @route("?restype=container&comp=list&flat")
+  @sharedRoute
+  @route("?restype=container&comp=list")
   listBlobFlatSegment is StorageOperation<
     {
       ...PrefixParameter;
@@ -573,7 +579,8 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @list
-  @route("?restype=container&comp=list&hierarchy")
+  @sharedRoute
+  @route("?restype=container&comp=list")
   listBlobHierarchySegment is StorageOperation<
     {
       /** When the request includes this parameter, the operation returns a BlobPrefix element in the response body that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
@@ -909,7 +916,8 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=properties&SetHTTPHeaders")
+  @sharedRoute
+  @route("?comp=properties")
   setProperties is StorageOperation<
     {
       ...TimeoutParameter;
@@ -1022,7 +1030,8 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&acquire")
+  @sharedRoute
+  @route("?comp=lease")
   acquireLease is StorageOperationNoBody<
     {
       ...TimeoutParameter;
@@ -1048,7 +1057,8 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&release")
+  @sharedRoute
+  @route("?comp=lease")
   releaseLease is StorageOperation<
     {
       ...TimeoutParameter;
@@ -1071,7 +1081,8 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&renew")
+  @sharedRoute
+  @route("?comp=lease")
   renewLease is StorageOperation<
     {
       ...TimeoutParameter;
@@ -1095,7 +1106,8 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
-  @route("?comp=lease&change")
+  @sharedRoute
+  @route("?comp=lease")
   changeLease is StorageOperation<
     {
       ...TimeoutParameter;
@@ -1120,7 +1132,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=lease&break")
+  @route("?comp=lease")
   breakLease is StorageOperation<
     {
       ...TimeoutParameter;
@@ -1279,7 +1291,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=copy&copyid")
+  @route("?comp=copy")
   abortCopyFromUrl is StorageOperation<
     {
       ...TimeoutParameter;
@@ -1332,7 +1344,7 @@ interface Blob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @get
   @sharedRoute
-  @route("?restype=account&comp=properties&blob")
+  @route("?restype=account&comp=properties")
   getAccountInfo is StorageOperation<
     {
       ...TimeoutParameter;
@@ -1463,7 +1475,7 @@ interface PageBlob {
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=page&update")
+  @route("?comp=page")
   uploadPages is StorageOperation<
     {
       /** The data to upload. */
@@ -1516,7 +1528,7 @@ interface PageBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=page&clear")
+  @route("?comp=page")
   clearPages is StorageOperationNoBody<
     {
       /** value must be 0 when x-ms-page-write is clear */
@@ -1560,7 +1572,7 @@ interface PageBlob {
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=page&update&fromUrl")
+  @route("?comp=page")
   uploadPagesFromUrl is StorageOperationNoBody<
     {
       ...SourceUrlParameter;
@@ -1619,6 +1631,7 @@ interface PageBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
+  @sharedRoute
   @route("?comp=pagelist")
   getPageRanges is StorageOperation<
     {
@@ -1645,7 +1658,8 @@ interface PageBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
-  @route("?comp=pagelist&diff")
+  @sharedRoute
+  @route("?comp=pagelist")
   getPageRangesDiff is StorageOperation<
     {
       ...SnapshotParameter;
@@ -1682,7 +1696,7 @@ interface PageBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=properties&Resize")
+  @route("?comp=properties")
   resize is StorageOperation<
     {
       ...TimeoutParameter;
@@ -1711,7 +1725,7 @@ interface PageBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=properties&UpdateSequenceNumber")
+  @route("?comp=properties")
   setSequenceNumber is StorageOperation<
     {
       ...TimeoutParameter;
@@ -1864,7 +1878,7 @@ interface AppendBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=appendblock&fromUrl")
+  @route("?comp=appendblock")
   appendBlockFromUrl is StorageOperation<
     {
       ...SourceUrlParameter;
@@ -2001,7 +2015,6 @@ interface BlockBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @sharedRoute
-  @route("?BlockBlob&fromUrl")
   uploadBlobFromUrl is StorageOperationNoBody<
     {
       ...MetadataHeaders;
@@ -2104,7 +2117,7 @@ interface BlockBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @put
   @sharedRoute
-  @route("?comp=block&fromURL")
+  @route("?comp=block")
   stageBlockFromUrl is StorageOperation<
     {
       ...BlockIdParameter;
