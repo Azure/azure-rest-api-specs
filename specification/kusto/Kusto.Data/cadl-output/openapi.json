@@ -1,0 +1,508 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Kusto Query/Management API",
+    "version": "0000-00-00",
+    "description": "This is the entry point for Kusto Data operations"
+  },
+  "tags": [],
+  "paths": {
+    "/v2/rest/query": {
+      "get": {
+        "operationId": "Query_get",
+        "description": "Query Kusto V2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.accept"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.acceptEncoding"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.authorization"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.connection"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.contentLength"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.expect"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.host"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.app"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.user"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.userId"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.clientRequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.clientVersion"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.readonly"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestQueryParameters.csl"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestQueryParameters.db"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestQueryParameters.properties"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/Models.V2DataSetHeaderFrame"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Models.V2DataSetTableFrame"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Models.V2DataSetCompletionFrame"
+                      }
+                    ],
+                    "x-cadl-name": "Models.V2DataSetHeaderFrame | Models.V2DataSetTableFrame | Models.V2DataSetCompletionFrame"
+                  },
+                  "x-cadl-name": "Models.V2DataSetHeaderFrame | Models.V2DataSetTableFrame | Models.V2DataSetCompletionFrame[]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Query_post",
+        "description": "Query Kusto V2",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.accept"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.acceptEncoding"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.authorization"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.connection"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.contentLength"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.expect"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestParameters.host"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.app"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.user"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.userId"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.clientRequestId"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.clientVersion"
+          },
+          {
+            "$ref": "#/components/parameters/Models.KustoRequestTelemetryHeaders.readonly"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/Models.V2DataSetHeaderFrame"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Models.V2DataSetTableFrame"
+                      },
+                      {
+                        "$ref": "#/components/schemas/Models.V2DataSetCompletionFrame"
+                      }
+                    ],
+                    "x-cadl-name": "Models.V2DataSetHeaderFrame | Models.V2DataSetTableFrame | Models.V2DataSetCompletionFrame"
+                  },
+                  "x-cadl-name": "Models.V2DataSetHeaderFrame | Models.V2DataSetTableFrame | Models.V2DataSetCompletionFrame[]"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "description": "The Kusto Request parameters body",
+          "content": {
+            "application/json;charset=utf-8": {
+              "schema": {
+                "$ref": "#/components/schemas/Models.KustoRequestBodyParameters"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "Models.KustoRequestParameters.accept": {
+        "name": "accept",
+        "in": "header",
+        "required": true,
+        "description": "The Accept header",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "application/json"
+          ]
+        }
+      },
+      "Models.KustoRequestParameters.acceptEncoding": {
+        "name": "acceptEncoding",
+        "in": "header",
+        "required": true,
+        "description": "The Accept-Encoding header",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "gzip",
+            "deflate"
+          ]
+        }
+      },
+      "Models.KustoRequestParameters.authorization": {
+        "name": "authorization",
+        "in": "header",
+        "required": true,
+        "description": "The Authorization header",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestParameters.connection": {
+        "name": "connection",
+        "in": "header",
+        "required": false,
+        "description": "The Connection header",
+        "schema": {
+          "type": "string",
+          "enum": [
+            "Keep-Alive"
+          ]
+        }
+      },
+      "Models.KustoRequestParameters.contentLength": {
+        "name": "contentLength",
+        "in": "header",
+        "required": false,
+        "description": "The Content-Length header",
+        "schema": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "Models.KustoRequestParameters.expect": {
+        "name": "expect",
+        "in": "header",
+        "required": false,
+        "description": "The Expect header.  Can be set to 100-Continue",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestParameters.host": {
+        "name": "host",
+        "in": "header",
+        "required": true,
+        "description": "The Host header. Set to the qualified domain name that the request was sent to (for example, help.kusto.windows.net)",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestTelemetryHeaders.app": {
+        "name": "app",
+        "in": "header",
+        "required": false,
+        "description": "The (friendly) name of the application making the request",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestTelemetryHeaders.user": {
+        "name": "user",
+        "in": "header",
+        "required": false,
+        "description": "The (friendly) name of the user making the request",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestTelemetryHeaders.userId": {
+        "name": "userId",
+        "in": "header",
+        "required": false,
+        "description": "The (friendly) name of the user making the request",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestTelemetryHeaders.clientRequestId": {
+        "name": "clientRequestId",
+        "in": "header",
+        "required": false,
+        "description": "A unique identifier for the request",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestTelemetryHeaders.clientVersion": {
+        "name": "clientVersion",
+        "in": "header",
+        "required": false,
+        "description": "The (friendly) version identifier for the client making the request",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestTelemetryHeaders.readonly": {
+        "name": "readonly",
+        "in": "header",
+        "required": false,
+        "description": "If specified, forces the request to run in read-only mode, preventing it from making long-lasting changes",
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "Models.KustoRequestQueryParameters.csl": {
+        "name": "csl",
+        "in": "query",
+        "required": true,
+        "description": "Text of the query or control command to execute",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestQueryParameters.db": {
+        "name": "db",
+        "in": "query",
+        "required": false,
+        "description": "Name of the database in scope that is the target of the query or control command",
+        "schema": {
+          "type": "string"
+        }
+      },
+      "Models.KustoRequestQueryParameters.properties": {
+        "name": "properties",
+        "in": "query",
+        "required": false,
+        "description": "Provides client request properties that modify how the request is processed and its results.",
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "Models.V2DataSetHeaderFrame": {
+        "type": "object",
+        "properties": {
+          "FrameType": {
+            "type": "string",
+            "enum": [
+              "DataSetHeader"
+            ]
+          },
+          "IsProgressive": {
+            "type": "boolean"
+          },
+          "Version": {
+            "type": "string"
+          }
+        },
+        "description": "Kusto Response V2 DataSet Header Frame",
+        "required": [
+          "FrameType",
+          "IsProgressive",
+          "Version"
+        ]
+      },
+      "Models.V2DataSetTableFrame": {
+        "type": "object",
+        "properties": {
+          "FrameType": {
+            "type": "string",
+            "enum": [
+              "DataTable"
+            ]
+          }
+        },
+        "required": [
+          "FrameType"
+        ],
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Models.V2Table"
+          }
+        ]
+      },
+      "Models.V2DataSetCompletionFrame": {
+        "type": "object",
+        "properties": {
+          "FrameType": {
+            "type": "string",
+            "enum": [
+              "DataSetCompletion"
+            ]
+          },
+          "HasErrors": {
+            "type": "boolean"
+          },
+          "Cancelled": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "FrameType",
+          "HasErrors",
+          "Cancelled"
+        ]
+      },
+      "Models.KustoRequestBodyParameters": {
+        "type": "object",
+        "properties": {
+          "csl": {
+            "type": "string",
+            "description": "Text of the query or control command to execute"
+          },
+          "db": {
+            "type": "string",
+            "description": "Name of the database in scope that is the target of the query or control command"
+          },
+          "properties": {
+            "type": "string",
+            "description": "Provides client request properties that modify how the request is processed and its results."
+          }
+        },
+        "description": "Common Kusto Request Body Parameters",
+        "required": [
+          "csl"
+        ]
+      },
+      "Models.KustoRequestParameters": {
+        "type": "object",
+        "properties": {},
+        "description": "Kusto Request Headers"
+      },
+      "Models.KustoRequestTelemetryHeaders": {
+        "type": "object",
+        "properties": {},
+        "description": "Kusto Request Telemetry Headers"
+      },
+      "Models.KustoRequestQueryParameters": {
+        "type": "object",
+        "properties": {},
+        "description": "Common Kusto Request Query Paramters"
+      },
+      "Models.V2Table": {
+        "type": "object",
+        "properties": {
+          "TableKind": {
+            "type": "string"
+          },
+          "TableName": {
+            "type": "string"
+          },
+          "TableId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Models.V2Column"
+            },
+            "x-cadl-name": "Models.V2Column[]"
+          },
+          "Rows": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/object"
+              },
+              "x-cadl-name": "object[]"
+            },
+            "x-cadl-name": "object[][]"
+          }
+        },
+        "required": [
+          "TableName",
+          "Columns",
+          "Rows"
+        ]
+      },
+      "Models.V2Column": {
+        "type": "object",
+        "properties": {
+          "ColumnName": {
+            "type": "string"
+          },
+          "ColumnType": {
+            "type": "string"
+          },
+          "DateType": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ColumnName"
+        ]
+      },
+      "object": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{cluster}.kusto.windows.net",
+      "description": "Kusto Cluster",
+      "variables": {
+        "cluster": {
+          "default": "",
+          "description": "Kusto Cluster Name"
+        }
+      }
+    }
+  ]
+}
