@@ -28,7 +28,44 @@ These are the global settings for the Storage API.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-06
+tag: package-2025-08
+```
+
+### Tag: package-2025-08
+
+These settings apply only when `--tag=package-2025-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08'
+input-file:
+  - Microsoft.Storage/stable/2025-08-01/openapi.json
+
+directive:
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].put
+    suppress: PutResponseCodes
+    reason: This is an existing RP which has the same pattern, 202 response code for async PUT, in stable API version
+    approved-by: "@ramoka178"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages"]
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages/{fileServiceUsagesName}"]
+    suppress: PathResourceTypeNameCamelCase
+    reason: The {fileServiceName} is an existing resource type used for the above two new API's ListFileServiceUsages and GetFileServiceUsage.
+
+  - where:
+    - $.definitions.AccountLimits.properties.maxProvisionedIOPS
+    - $.definitions.FileShareLimits.properties.minProvisionedIOPS
+    - $.definitions.FileShareLimits.properties.maxProvisionedIOPS
+    - $.definitions.FileShareRecommendations.properties.baseIOPS
+    - $.definitions.BurstingConstants.properties.burstFloorIOPS
+    - $.definitions.AccountUsageElements.properties.provisionedIOPS
+    suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The GetFileServiceUsage API has properties with "IOPS" in its response body. The names need to match feature spec and server code, so cannot be changed now per camel case rule in swagger.
+
+  - where:
+    - $.definitions.StorageAccount
+    suppress: BodyTopLevelProperties
+    reason: The 'placement' property is already a top-level property in Microsoft.Compute/virtualMachines, so the schema should stay consistent here.
 ```
 
 ### Tag: package-2025-06
