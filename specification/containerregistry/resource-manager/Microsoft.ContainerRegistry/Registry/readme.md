@@ -284,8 +284,7 @@ suppressions:
   - code: PatchBodyParametersSchema
     from: containerregistry.json
     reason: Previously existing implementation, flagged as part of Typespec conversion
-    where: 
-        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     from: containerregistry.json
     reason: Previously existing implementation, flagged as part of Typespec conversion
