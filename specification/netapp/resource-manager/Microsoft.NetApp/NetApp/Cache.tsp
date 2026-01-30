@@ -16,6 +16,8 @@ namespace Microsoft.NetApp;
  * Cache resource
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 @parentResource(CapacityPool)
 model Cache is Azure.ResourceManager.TrackedResource<CacheProperties, false> {
   ...ResourceNameParameter<
@@ -33,12 +35,16 @@ model Cache is Azure.ResourceManager.TrackedResource<CacheProperties, false> {
  * List of Cache resources
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model CacheList is Azure.Core.Page<Cache>;
 
 /**
  * Cache resource properties
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model CacheProperties {
   /**
    * The file path of the Cache.
@@ -199,6 +205,8 @@ model CacheProperties {
  * SMB settings for the cache
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model SmbSettings {
   /**
    * Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol cache.
@@ -220,6 +228,8 @@ model SmbSettings {
  * Stores the origin cluster information associated to a cache.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model OriginClusterInformation {
   /**
    * ONTAP cluster name of external cluster hosting the origin volume
@@ -231,6 +241,13 @@ model OriginClusterInformation {
    */
   @minItems(1)
   peerAddresses: string[];
+
+  /**
+   * Actual ONTAP Intercluster LIF IP addresses. The modifyClusterPeer operation can be used to update these addresses.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @visibility(Lifecycle.Read)
+  actualPeerAddresses?: string[];
 
   /**
    * External Vserver (SVM) name  name of the SVM hosting the origin volume
@@ -247,6 +264,8 @@ model OriginClusterInformation {
  * The response containing peering passphrases and commands for cluster and vserver peering.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model PeeringPassphrases {
   /**
    * The cluster peering command.
@@ -262,12 +281,21 @@ model PeeringPassphrases {
    * The vserver peering command.
    */
   vserverPeeringCommand: string;
+
+  /**
+   * Warnings that are critical for the cluster peering and vserver peering processes.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @visibility(Lifecycle.Read)
+  criticalWarning?: string;
 }
 
 /**
  * Contains all the information needed to mount a cache
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model CacheMountTargetProperties {
   /**
    * UUID v4 used to identify the MountTarget
@@ -295,6 +323,8 @@ model CacheMountTargetProperties {
  * Flag indicating whether writeback is enabled for the cache.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union EnableWriteBackState {
   string,
 
@@ -313,6 +343,8 @@ union EnableWriteBackState {
  * Specifies whether LDAP is enabled or not.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union LdapState {
   string,
 
@@ -342,6 +374,8 @@ model CachePropertiesExportPolicy {
  * Flag indicating whether the global file lock is enabled for the cache.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union GlobalFileLockingState {
   string,
 
@@ -360,6 +394,8 @@ union GlobalFileLockingState {
  * Flag indicating whether a CIFS change notification is enabled for the cache.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union CifsChangeNotifyState {
   string,
 
@@ -378,6 +414,8 @@ union CifsChangeNotifyState {
  * Specifies if the cache is encryption or not.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union EncryptionState {
   string,
 
@@ -396,6 +434,8 @@ union EncryptionState {
  * Describe if a cache is Kerberos enabled.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union KerberosState {
   string,
 
@@ -414,6 +454,8 @@ union KerberosState {
  * Azure NetApp Files Cache lifecycle management
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union CacheLifeCycleState {
   string,
 
@@ -447,6 +489,8 @@ union CacheLifeCycleState {
  * Enables encryption for in-flight smb3 data. Only applicable for SMB/DualProtocol cache
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union SmbEncryptionState {
   string,
 
@@ -465,6 +509,8 @@ union SmbEncryptionState {
  * Set of supported protocol types, which include NFSv3, NFSv4 and SMB protocol
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union ProtocolTypes {
   string,
 
@@ -488,6 +534,8 @@ union ProtocolTypes {
  * Azure lifecycle management
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union CacheProvisioningState {
   string,
 
@@ -522,8 +570,35 @@ union CacheProvisioningState {
   Canceled: "Canceled",
 }
 
+/**
+ * Break file locks request
+ */
+@added(Versions.v2025_12_15_preview)
+model CacheBreakFileLocksRequest {
+  /**
+   * The IP address of the client whose file locks should be broken
+   */
+  clientIp?: Azure.Core.ipV4Address;
+}
+
+/**
+ * Modify cluster peer request
+ */
+@added(Versions.v2025_12_15_preview)
+model ModifyClusterPeerRequest {
+  /**
+   * The complete set of peer addresses for the cluster.
+   * This array replaces the existing peer addresses. Include all addresses you want to keep, plus any new addresses.
+   * Any existing addresses not included in this array will be removed from the cluster peer configuration.
+   */
+  @minItems(1)
+  newPeerAddresses: string[];
+}
+
 @armResourceOperations
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 interface Caches {
   /**
    * Get the details of the specified Cache
@@ -581,10 +656,50 @@ interface Caches {
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Resets the SMB password for the cache
+   */
+  @added(Versions.v2025_12_15_preview)
+  resetSmbPassword is ArmResourceActionAsync<
+    Resource = Cache,
+    Request = void,
+    Response = Cache,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Break all the file locks on a cache for a given client IP and if no client IP is provided, break all file locks on the cache.
+   */
+  @added(Versions.v2025_12_15_preview)
+  breakFileLocks is ArmResourceActionAsync<
+    Resource = Cache,
+    Request = CacheBreakFileLocksRequest,
+    OptionalRequestBody = true,
+    Response = Cache,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Modify the cluster peer addresses for the cache's origin cluster.
+   */
+  @added(Versions.v2025_12_15_preview)
+  modifyClusterPeer is ArmResourceActionAsync<
+    Resource = Cache,
+    Request = ModifyClusterPeerRequest,
+    Response = Cache,
+    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @@doc(Caches.poolChange::parameters.body,
   "Move cache to the pool supplied in the body of the operation."
+);
+@@doc(Caches.breakFileLocks::parameters.body,
+  "Request to break file locks on a cache. Note: NFSv3 byte-range locks are held at the origin volume and must be broken there. SMB and NFSv4 locks (share locks and byte-range locks) are held at the cache and can be broken using this operation."
 );
 
 @@maxLength(Cache.name, 64);

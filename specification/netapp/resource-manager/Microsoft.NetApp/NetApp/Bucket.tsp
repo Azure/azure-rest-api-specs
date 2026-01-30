@@ -19,6 +19,8 @@ namespace Microsoft.NetApp;
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 @parentResource(Volume)
 model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
   ...ResourceNameParameter<
@@ -37,6 +39,8 @@ model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model BucketList is Azure.Core.Page<Bucket>;
 
 /**
@@ -47,6 +51,8 @@ model BucketList is Azure.Core.Page<Bucket>;
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model BucketProperties {
   /**
    * The volume path mounted inside the bucket. The default is the root path '/' if no value is provided when the bucket is created.
@@ -95,6 +101,8 @@ model BucketProperties {
    * 2. These properties are mutually exclusive with the server.certificateObject property.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   akvDetails?: AzureKeyVaultDetails;
 }
 
@@ -106,6 +114,8 @@ model BucketProperties {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model FileSystemUser {
   /**
    * The effective NFS User ID and Group ID when accessing the volume data.
@@ -126,6 +136,8 @@ model FileSystemUser {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model NfsUser {
   /**
    * The NFS user's UID
@@ -146,6 +158,8 @@ model NfsUser {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model CifsUser {
   /**
    * The CIFS user's username
@@ -161,6 +175,8 @@ model CifsUser {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model BucketServerProperties {
   /**
    * The host part of the bucket URL, resolving to the bucket IP address and allowed by the server certificate.
@@ -206,6 +222,8 @@ model BucketServerProperties {
    * Note: This is only used when Azure Key Vault is not configured. This property is mutually exclusive with the Azure Key Vault 'akv' properties.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @maxLength(20480)
   @minLength(1)
   @secret
@@ -217,6 +235,8 @@ model BucketServerProperties {
    * Possible values include: 'Update', 'Fail'
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   onCertificateConflictAction?: OnCertificateConflictAction;
 }
 
@@ -232,6 +252,8 @@ model BucketServerProperties {
  * 2. These properties are mutually exclusive with the server.certificateObject property.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model AzureKeyVaultDetails {
   /**
    * Specifies the Azure Key Vault settings for retrieving the bucket server certificate.
@@ -248,6 +270,8 @@ model AzureKeyVaultDetails {
  * Specifies the Azure Key Vault settings for retrieving the bucket server certificate.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model CertificateAkvDetails {
   /**
    * The base URI of the Azure Key Vault that is used when retrieving the bucket certificate.
@@ -268,6 +292,8 @@ model CertificateAkvDetails {
  * Specifies the Azure Key Vault settings for storing the bucket credentials.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model CredentialsAkvDetails {
   /**
    * The base URI of the Azure Key Vault that is used when storing the bucket credentials.
@@ -298,6 +324,8 @@ model CredentialsAkvDetails {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Bucket properties
@@ -313,6 +341,8 @@ model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model BucketPatchProperties {
   /**
    * The volume path mounted inside the bucket.
@@ -351,6 +381,8 @@ model BucketPatchProperties {
    * 2. These properties are mutually exclusive with the server.certificateObject property.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   akvDetails?: AzureKeyVaultDetails;
 }
 
@@ -362,6 +394,8 @@ model BucketPatchProperties {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model BucketServerPatchProperties {
   /**
    * The host part of the bucket URL, resolving to the bucket IP address and allowed by the server certificate.
@@ -386,6 +420,8 @@ model BucketServerPatchProperties {
    * Note: This is only used when Azure Key Vault is not configured. This property is mutually exclusive with the Azure Key Vault 'akv' properties.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @maxLength(20480)
   @minLength(1)
   @secret
@@ -397,6 +433,8 @@ model BucketServerPatchProperties {
    * Possible values include: 'Update', 'Fail'
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   onCertificateConflictAction?: OnCertificateConflictAction;
 }
 
@@ -408,6 +446,8 @@ model BucketServerPatchProperties {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model BucketCredentialsExpiry {
   /**
    * The number of days from now until the newly generated Access and Secret key pair will expire.
@@ -424,19 +464,21 @@ model BucketCredentialsExpiry {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 model BucketGenerateCredentials {
   /**
    * The Access Key that is required along with the Secret Key to access the bucket.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property as @secret if this value should be kept private"
   @visibility(Lifecycle.Read)
+  @secret
   accessKey?: string;
 
   /**
    * The Secret Key that is required along with the Access Key to access the bucket.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Mark this property as @secret if this value should be kept private"
   @visibility(Lifecycle.Read)
+  @secret
   secretKey?: string;
 
   /**
@@ -459,6 +501,8 @@ model BucketGenerateCredentials {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union CredentialsStatus {
   string,
 
@@ -486,6 +530,8 @@ union CredentialsStatus {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union BucketPermissions {
   string,
 
@@ -508,6 +554,8 @@ union BucketPermissions {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union BucketPatchPermissions {
   string,
 
@@ -528,6 +576,8 @@ union BucketPatchPermissions {
  * Note: This applies both to certificates provided directly via the certificateObject property and to those retrieved from Azure Key Vault. Details for the latter case are specified in the akvDetails.certificateAkvDetails section.
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 union OnCertificateConflictAction {
   string,
 
@@ -547,6 +597,8 @@ union OnCertificateConflictAction {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_09_01)
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
+@added(Versions.v2025_12_15_preview)
 @armResourceOperations
 interface Buckets {
   /**
@@ -598,6 +650,8 @@ interface Buckets {
    * Generate the access key and secret key used for accessing the specified volume bucket and store in Azure Key Vault.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @Azure.Core.useFinalStateVia("azure-async-operation")
   generateAkvCredentials is ArmResourceActionNoResponseContentAsync<
     Bucket,
@@ -610,6 +664,8 @@ interface Buckets {
    * This operation will fetch the certificate from Azure Key Vault and install it on the bucket server.
    */
   @added(Versions.v2025_09_01_preview)
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2025_12_15_preview)
   @Azure.Core.useFinalStateVia("azure-async-operation")
   refreshCertificate is ArmResourceActionNoResponseContentAsync<
     Bucket,

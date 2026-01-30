@@ -49,7 +49,7 @@ model VolumeQuotaRulesProperties {
    * Type of quota
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  quotaType?: Type;
+  quotaType?: QuotaType;
 
   /**
    * UserID/GroupID/SID based on the quota target type. UserID and groupID can be found by running ‘id’ or ‘getent’ command for the user or group and SID can be found by running <wmic useraccount where name='user-name' get sid>
@@ -61,7 +61,7 @@ model VolumeQuotaRulesProperties {
 /**
  * Type of quota
  */
-union Type {
+union QuotaType {
   string,
 
   /**
