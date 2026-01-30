@@ -1,3 +1,6 @@
+parameters:
+  "service-dir":
+    default: "sdk/automation"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -8,6 +11,35 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-automation"
+    namespace: "azure.mgmt.automation"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-automation"
+    namespace: "com.azure.resourcemanager.automation"
+    service-name: "Automation" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/automation
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-automation"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-automation"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/automation"
+    emitter-output-dir: "{output-dir}/{service-dir}/armautomation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armautomation"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
