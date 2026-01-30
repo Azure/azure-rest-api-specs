@@ -331,10 +331,18 @@ union NetworkApiVersion {
 }
 
 /**
- * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
+ * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. By default the value in response will be Standard starting 2025-11-01 api version.
  */
 union SecurityTypes {
   string,
+
+  /**
+   * Standard added officially as of 2025-11-01 api version.
+   * It's the default value in response when user doesn't specify the security type.
+   */
+  @added(Versions.v2025_11_01)
+  Standard: "Standard",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   TrustedLaunch: "TrustedLaunch",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -3011,7 +3019,7 @@ model SecurityProfile {
   encryptionAtHost?: boolean;
 
   /**
-   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set.
+   * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings. The default behavior is: UefiSettings will not be enabled unless this property is set and is not Standard. By default the value in response will be Standard starting 2025-11-01 api version.
    */
   securityType?: SecurityTypes;
 
