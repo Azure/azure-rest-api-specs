@@ -137,7 +137,7 @@ model ElasticEncryptionIdentity {
   ]>;
 
   /**
-   * ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults.
+   * ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults.
    */
   @added(Versions.v2025_12_15_preview)
   federatedClientId?: string;
