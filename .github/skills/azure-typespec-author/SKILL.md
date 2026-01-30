@@ -7,7 +7,7 @@ description: "Use this skill when authoring or modifying Azure TypeSpec API spec
 
 ## Operating Principles (non-negotiable)
 
-1. **Do not edit any files until you have required inputs and have retrieved solution** Use the `azsdk_typespec_consult ` tool.
+1. **Do not edit any files until you have required inputs and have retrieved solution** Use the `azure-sdk-mcp/azsdk_typespec_generate_authoring_plan` tool.
 2. Make **minimal, scoped edits** to satisfy the request. Avoid refactors unless explicitly asked.
 3. After edits, **validate** (compile / lint / emitter checks if available) and report results.
 4. Always provide **references** (titles/sections/links) from retrieved context that justify the recommended approach.
@@ -18,11 +18,11 @@ When encountering a TypeSpec authoring cases, follow this workflow (must follow 
 
 ### Step 1 — Intake & Clarification (no file edits)
 
-- Follow the `intake-arm.md` to gather all required inputs and confirm with the user.
+- Follow the `intake-arm.md` to gather all required inputs and confirm with the user based on different cases.
 
 ### Step 2 — Retrieve Solution
 
-Call the `azure-sdk-mcp/azsdk_typespec_consult` tool:
+Call the `azure-sdk-mcp/azsdk_typespec_generate_authoring_plan` tool:
 
 - Provide the best available arguments derived from the intake:
   - plane
