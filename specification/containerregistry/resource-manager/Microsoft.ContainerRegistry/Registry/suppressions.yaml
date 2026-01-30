@@ -67,27 +67,3 @@
 - tool: TypeSpecRequirement
   path: ./preview/2025-06-01-preview/*.json
   reason: Previously existing versions, flagged as part of folder structure change
-- code: PatchBodyParametersSchema
-  from: containerregistry.json
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch
-- code: RequestSchemaForTrackedResourcesMustHaveTags
-  from: containerregistry.json
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].put
-- code: RequestSchemaForTrackedResourcesMustHaveTags
-  from: containerregistry.json
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].put
-- code: TrackedResourcePatchOperation
-  from: containerregistry.json
-  where: $.definitions.ExportPipeline
-- code: TrackedResourcePatchOperation
-  from: containerregistry.json
-  where: $.definitions.ImportPipeline
-- code: DeleteResponseCodes
-  from: containerregistry.json
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].delete
-- code: DeleteResponseCodes
-  from: containerregistry.json
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].delete
-- code: DeleteResponseCodes
-  from: containerregistry.json
-  where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns/{pipelineRunName}"].delete
