@@ -7,6 +7,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -383,4 +384,36 @@ union AutoFailover {
 
   @doc("Disable AutoFailover.")
   Disable: "Disable",
+}
+
+@doc("A state type that indicates qualification of a resource for an operation.")
+@added(Versions.v2026_03_01_preview)
+union DrillResourceNonQualificationReasons {
+  string, 
+
+  @doc("Resource is not included in the recovery plan.")
+  @added(Versions.v2026_03_01_preview)
+  ResourceNotIncludedInRecoveryPlan: "ResourceNotIncludedInRecoveryPlan",
+
+  @doc("Resource is not included in the drill.")
+  @added(Versions.v2026_03_01_preview)
+  ResourceNotIncludedInDrill: "ResourceNotIncludedInDrill",
+
+  @doc("Resource location does not match the source location.")
+  @added(Versions.v2026_03_01_preview)
+  ResourceLocationNotMatchingWithSourceLocation: "ResourceLocationNotMatchingWithSourceLocation",
+
+  @doc("Resource zone does not match the source zone.")
+  @added(Versions.v2026_03_01_preview)
+  ResourceZoneNotMatchingWithSourceZone: "ResourceZoneNotMatchingWithSourceZone",
+}
+
+@doc("A state type that indicates qualification of a resource for an operation.")
+@added(Versions.v2026_03_01_preview)
+union TrackedResourceCategories {
+  string, 
+
+  @doc("Indicates that alteast one Azure Site Recovery VMs are present.")
+  @added(Versions.v2026_03_01_preview)
+  AzureSiteRecoveryVMsPresent: "AzureSiteRecoveryVMsPresent",
 }

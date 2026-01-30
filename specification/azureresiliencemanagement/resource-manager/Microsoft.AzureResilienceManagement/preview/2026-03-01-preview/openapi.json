@@ -2083,6 +2083,64 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/resync": {
+      "post": {
+        "operationId": "Drills_Resync",
+        "tags": [
+          "Drills"
+        ],
+        "description": "This triggers detection of any drifts from the desired state of Target and capabilities and RBAC.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RequiredRequestHeaders"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/start": {
       "post": {
         "operationId": "Drills_Start",
@@ -2153,6 +2211,79 @@
         "x-ms-examples": {
           "Drills_Start_MaximumSet": {
             "$ref": "./examples/Drills_Start_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/validateForExecute": {
+      "post": {
+        "operationId": "Drills_ValidateForExecute",
+        "tags": [
+          "Drills"
+        ],
+        "description": "This returns eligible resource to be faulted or failed over.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ServiceGroupBaseParameters"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/RequiredRequestHeaders"
+          },
+          {
+            "name": "drillName",
+            "in": "path",
+            "description": "The name of the Drill",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateForExecuteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidateForExecuteResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5113,6 +5244,24 @@
         "value"
       ]
     },
+    "AssetPropertiesOfDrill": {
+      "type": "object",
+      "description": "Drill asset properties.",
+      "properties": {
+        "subscription": {
+          "type": "string",
+          "description": "Subscription where Drill's internal resources will be created."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region where Drill's internal resources will be created."
+        }
+      },
+      "required": [
+        "subscription",
+        "region"
+      ]
+    },
     "AssociatedIdentity": {
       "type": "object",
       "description": "Definition of associated identity linked with the various resources.",
@@ -5630,6 +5779,54 @@
       ],
       "x-ms-discriminator-value": "ChaosExperiment"
     },
+    "ChaosResourcePropertiesOfDrill": {
+      "type": "object",
+      "description": "Chaos Resource properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity to use for Chaos Resource operations."
+        },
+        "chaosResourceIdentityForFaults": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity to be used by the Chaos Resource for invoking faults on resources."
+        },
+        "chaosResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Chaos Resource created for this Drill",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": []
+          }
+        },
+        "faultDurationInMin": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of faults.",
+          "minimum": 0,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "identity",
+        "chaosResourceIdentityForFaults"
+      ]
+    },
+    "ChaosResourcePropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "Chaos Resource properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to use for Chaos Resource operations."
+        },
+        "chaosResourceIdentityForFaults": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to be used by the Chaos Resource for invoking faults on resources."
+        }
+      }
+    },
     "ChildJobProperties": {
       "type": "object",
       "description": "Represents the properties of a child job within the Resiliency Hub.",
@@ -5954,6 +6151,10 @@
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
           "description": "Chaos Experiment properties."
         },
+        "chaosResourceProperties": {
+          "$ref": "#/definitions/ChaosResourcePropertiesOfDrill",
+          "description": "Chaos Resource properties."
+        },
         "healthModelProperties": {
           "$ref": "#/definitions/HealthModelPropertiesOfDrill",
           "description": "HealthModel properties."
@@ -5962,7 +6163,10 @@
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
         }
-      }
+      },
+      "required": [
+        "chaosResourceProperties"
+      ]
     },
     "DrillProperties": {
       "type": "object",
@@ -5997,6 +6201,14 @@
         "recoveryPlanProperties": {
           "$ref": "#/definitions/RecoveryPlanPropertiesOfDrill",
           "description": "ROPlan properties."
+        },
+        "drillAssetProperties": {
+          "$ref": "#/definitions/AssetPropertiesOfDrill",
+          "description": "Properties for internal resources that are created for the Drill."
+        },
+        "chaosResourceProperties": {
+          "$ref": "#/definitions/ChaosResourcePropertiesOfDrill",
+          "description": "Chaos Resource properties."
         },
         "chaosExperimentProperties": {
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
@@ -6037,6 +6249,12 @@
           "description": "Last sync time.",
           "readOnly": true
         },
+        "lastResyncTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last resync and readiness check time.",
+          "readOnly": true
+        },
         "managedOnBehalfOfConfiguration": {
           "$ref": "#/definitions/ManagedOnBehalfOfConfiguration",
           "description": "Managed RG v2 properties.",
@@ -6053,6 +6271,8 @@
       "discriminator": "drillType",
       "required": [
         "recoveryPlanProperties",
+        "drillAssetProperties",
+        "chaosResourceProperties",
         "chaosExperimentProperties",
         "drillType"
       ]
@@ -6172,6 +6392,42 @@
         "value"
       ]
     },
+    "DrillResourceNonQualificationReasons": {
+      "type": "string",
+      "description": "A state type that indicates qualification of a resource for an operation.",
+      "enum": [
+        "ResourceNotIncludedInRecoveryPlan",
+        "ResourceNotIncludedInDrill",
+        "ResourceLocationNotMatchingWithSourceLocation",
+        "ResourceZoneNotMatchingWithSourceZone"
+      ],
+      "x-ms-enum": {
+        "name": "DrillResourceNonQualificationReasons",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ResourceNotIncludedInRecoveryPlan",
+            "value": "ResourceNotIncludedInRecoveryPlan",
+            "description": "Resource is not included in the recovery plan."
+          },
+          {
+            "name": "ResourceNotIncludedInDrill",
+            "value": "ResourceNotIncludedInDrill",
+            "description": "Resource is not included in the drill."
+          },
+          {
+            "name": "ResourceLocationNotMatchingWithSourceLocation",
+            "value": "ResourceLocationNotMatchingWithSourceLocation",
+            "description": "Resource location does not match the source location."
+          },
+          {
+            "name": "ResourceZoneNotMatchingWithSourceZone",
+            "value": "ResourceZoneNotMatchingWithSourceZone",
+            "description": "Resource zone does not match the source zone."
+          }
+        ]
+      }
+    },
     "DrillResourceProperties": {
       "type": "object",
       "description": "Properties of the Resiliency Drill Resource",
@@ -6187,6 +6443,19 @@
         "resourceType": {
           "type": "string",
           "description": "Type of the Drill resource."
+        },
+        "activeLocation": {
+          "type": "string",
+          "description": "Active location and zones of the Azure resource.",
+          "readOnly": true
+        },
+        "recoveryLocations": {
+          "type": "array",
+          "description": "List of recovery locations and zones of the Azure resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         },
         "inclusionState": {
           "$ref": "#/definitions/DrillResourceInclusionState",
@@ -6274,6 +6543,26 @@
       "required": [
         "resourceId",
         "resourceType"
+      ]
+    },
+    "DrillResourceQualification": {
+      "type": "object",
+      "description": "Details of qualified resources for validateForExecute operation.",
+      "properties": {
+        "qualifiedResource": {
+          "$ref": "#/definitions/QualifiedResource",
+          "description": "Drill resource.",
+          "readOnly": true
+        },
+        "resourceQualificationDetails": {
+          "$ref": "#/definitions/ResourceQualificationDetails",
+          "description": "Details of qualification for the operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "qualifiedResource",
+        "resourceQualificationDetails"
       ]
     },
     "DrillResourceReadinessState": {
@@ -6850,6 +7139,10 @@
         "chaosExperimentProperties": {
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrillUpdate",
           "description": "Chaos Experiment properties."
+        },
+        "chaosResourceProperties": {
+          "$ref": "#/definitions/ChaosResourcePropertiesOfDrillUpdate",
+          "description": "Chaos Resource properties."
         },
         "healthModelProperties": {
           "$ref": "#/definitions/HealthModelPropertiesOfDrillUpdate",
@@ -8748,6 +9041,101 @@
         ]
       }
     },
+    "QualifiedResource": {
+      "type": "object",
+      "description": "Qualified resource.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Resource ID of the Azure resource.",
+          "readOnly": true
+        },
+        "activeLocation": {
+          "type": "string",
+          "description": "Active Resource location and zones of Azure Resource.",
+          "readOnly": true
+        },
+        "recoveryLocation": {
+          "type": "array",
+          "description": "Recovery Resource location and zones of HA Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "activePhysicalLocation": {
+          "type": "string",
+          "description": "Active Resource location and physical zones of Azure Resource.",
+          "readOnly": true
+        },
+        "recoveryPhysicalLocation": {
+          "type": "array",
+          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "drillInclusionState": {
+          "$ref": "#/definitions/DrillResourceInclusionState",
+          "description": "Inclusion State of the Drill resource in Drill",
+          "readOnly": true
+        },
+        "recoveryInclusionState": {
+          "$ref": "#/definitions/ResourceInclusionState",
+          "description": "A state that indicates the resource status with respect to the recovery orchestration plan.",
+          "readOnly": true
+        },
+        "protectionStatus": {
+          "$ref": "#/definitions/ResourceProtectionStatus",
+          "description": "A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.",
+          "readOnly": true
+        },
+        "selectedProtectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected.",
+          "readOnly": true
+        },
+        "resourceProtectionSolutions": {
+          "type": "array",
+          "description": "A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.",
+          "items": {
+            "$ref": "#/definitions/ResourceProtectionSolutionSettings"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "selectedProtectionSolutionSetting": {
+          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting",
+          "description": "Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.",
+          "readOnly": true
+        },
+        "faultState": {
+          "$ref": "#/definitions/DrillResourceFaultState",
+          "description": "Fault State of the Drill resource",
+          "readOnly": true
+        },
+        "faultProperties": {
+          "$ref": "#/definitions/FaultProperties",
+          "description": "Fault Properties",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId",
+        "activeLocation",
+        "recoveryLocation",
+        "activePhysicalLocation",
+        "recoveryPhysicalLocation",
+        "drillInclusionState",
+        "protectionStatus",
+        "selectedProtectionSolutionType",
+        "resourceProtectionSolutions",
+        "faultState",
+        "faultProperties"
+      ]
+    },
     "RBACSetupMode": {
       "type": "string",
       "description": "RBAC setup mode.",
@@ -10254,6 +10642,42 @@
         ]
       }
     },
+    "ResourceQualificationDetails": {
+      "type": "object",
+      "description": "Details of qualification for an operation.",
+      "properties": {
+        "drillQualificationState": {
+          "$ref": "#/definitions/QualificationState",
+          "description": "Resource qualification state for the operation.",
+          "readOnly": true
+        },
+        "recoveryQualificationState": {
+          "$ref": "#/definitions/QualificationState",
+          "description": "Resource qualification state for the operation.",
+          "readOnly": true
+        },
+        "recoveryNotQualifiedReasons": {
+          "type": "array",
+          "description": "Reasons for resource not qualified for the recovery operation.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "drillsNotQualifiedReasons": {
+          "type": "array",
+          "description": "Reasons for resource not qualified for the drills operation.",
+          "items": {
+            "$ref": "#/definitions/DrillResourceNonQualificationReasons"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "drillQualificationState",
+        "recoveryQualificationState"
+      ]
+    },
     "ResourceReplicationRole": {
       "type": "string",
       "description": "A state specific to the resource that helps identify its role in replication.",
@@ -10488,6 +10912,14 @@
         "initialConfig": {
           "$ref": "#/definitions/InitialConfig",
           "description": "Indicates if the Initial system configuration of the Drill is complete or not."
+        },
+        "trackedResourceCategories": {
+          "type": "array",
+          "description": "An indication whether a tracked resource is present in drill resource.",
+          "items": {
+            "$ref": "#/definitions/TrackedResourceCategories"
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -10525,6 +10957,24 @@
             "name": "TestFailoverCleanupPending",
             "value": "TestFailoverCleanupPending",
             "description": "he resource is in test failover cleanup pending state."
+          }
+        ]
+      }
+    },
+    "TrackedResourceCategories": {
+      "type": "string",
+      "description": "A state type that indicates qualification of a resource for an operation.",
+      "enum": [
+        "AzureSiteRecoveryVMsPresent"
+      ],
+      "x-ms-enum": {
+        "name": "TrackedResourceCategories",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureSiteRecoveryVMsPresent",
+            "value": "AzureSiteRecoveryVMsPresent",
+            "description": "Indicates that alteast one Azure Site Recovery VMs are present."
           }
         ]
       }
@@ -10723,6 +11173,50 @@
           }
         ]
       }
+    },
+    "ValidateForExecuteProperties": {
+      "type": "object",
+      "description": "Additional properties for Failover.",
+      "properties": {
+        "sourceLocations": {
+          "type": "array",
+          "description": "Physiscal Source locations from where resources to be failed-over or faulted.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "sourceLocations"
+      ]
+    },
+    "ValidateForExecuteRequest": {
+      "type": "object",
+      "description": "Request body of the Validate For Execute Action of Drill.",
+      "properties": {
+        "validateForExecuteProperties": {
+          "$ref": "#/definitions/ValidateForExecuteProperties",
+          "description": "Additional properties for Validate for execute."
+        }
+      }
+    },
+    "ValidateForExecuteResponse": {
+      "type": "object",
+      "description": "ValidateForExecute post action response.",
+      "properties": {
+        "drillResourceQualifications": {
+          "type": "array",
+          "description": "Qualification details of resources for the operation.",
+          "items": {
+            "$ref": "#/definitions/DrillResourceQualification"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "drillResourceQualifications"
+      ]
     },
     "ValidateForOperationRequest": {
       "type": "object",
