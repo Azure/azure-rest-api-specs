@@ -1,0 +1,56 @@
+parameters:
+  "service-dir":
+    default: "sdk/ai"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    omit-unreachable-types: false
+    output-file: "{version-status}/{version}/GeneratedSystemEvents.json"
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-ai-voicelive"
+    namespace: "azure.ai.voicelive"
+    generate-test: false
+    generate-sample: false
+    flavor: azure
+    package-name: "azure-ai-voicelive"
+    emitter-output-dir: "{output-dir}/azure-ai-voicelive"
+  "@azure-tools/typespec-csharp":
+    package-dir: "Azure.AI.VoiceLive"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.AI.VoiceLive"
+    flavor: azure
+    emitterPackageJsonPath: eng/azure-typespec-http-client-csharp-emitter-package.json
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.VoiceLive"
+  "@azure-typespec/http-client-csharp":
+    namespace: Azure.AI.VoiceLive
+    model-namespace: false
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-voicelive"
+    package-details:
+      name: "@azure/ai-voicelive"
+    flavor: azure
+    is-modular-library: true
+    generate-metadata: false
+    generate-test: false
+    src-folder: "generated"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voicelive"
+    namespace: com.azure.ai.voicelive
+    use-eclipse-language-server: false
+    custom-types-subpackage: implementation.models
+    flavor: azure
+    partial-update: true
+    dev-options:
+      loglevel: info
