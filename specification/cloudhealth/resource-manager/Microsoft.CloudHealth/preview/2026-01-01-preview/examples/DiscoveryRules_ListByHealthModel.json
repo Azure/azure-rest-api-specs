@@ -1,0 +1,69 @@
+{
+  "title": "DiscoveryRules_ListByHealthModel",
+  "operationId": "DiscoveryRules_ListByHealthModel",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-resource-group",
+    "healthModelName": "my-health-model"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "authenticationSetting": "authSetting1",
+              "provisioningState": "Succeeded",
+              "displayName": "ARG Discovery Rule",
+              "discoverRelationships": "Enabled",
+              "addRecommendedSignals": "Enabled",
+              "specification": {
+                "kind": "ResourceGraphQuery",
+                "resourceGraphQuery": "resources | where subscriptionId == '7ddfffd7-9b32-40df-1234-828cbd55d6f4' | where resourceGroup == 'my-rg'"
+              },
+              "entityName": "f1f0ef5e-a5b5-4d02-b69c-7145f4658829"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CloudHealth/healthModels/myHealthModel/discoveryRules/myArgDiscoveryRule",
+            "name": "myArgDiscoveryRule",
+            "type": "Microsoft.CloudHealth/healthModels/discoveryRules",
+            "systemData": {
+              "createdBy": "myCreatedBy",
+              "createdByType": "User",
+              "createdAt": "2023-09-18T14:04:09.327Z",
+              "lastModifiedBy": "myLastModifiedBy",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+            }
+          },
+          {
+            "properties": {
+              "authenticationSetting": "authSetting1",
+              "provisioningState": "Succeeded",
+              "displayName": "Application Insights Discovery Rule",
+              "discoverRelationships": "Enabled",
+              "addRecommendedSignals": "Enabled",
+              "specification": {
+                "kind": "ApplicationInsightsTopology",
+                "applicationInsightsResourceId": "/subscriptions/7ddfffd7-9b32-40df-1234-828cbd55d6f4/resourceGroups/my-rg/providers/Microsoft.Insights/components/my-app-insights"
+              },
+              "entityName": "a2b3c4d5-e6f7-8901-2345-678901234567"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.CloudHealth/healthModels/myHealthModel/discoveryRules/myAppInsightsDiscoveryRule",
+            "name": "myAppInsightsDiscoveryRule",
+            "type": "Microsoft.CloudHealth/healthModels/discoveryRules",
+            "systemData": {
+              "createdBy": "myCreatedBy",
+              "createdByType": "User",
+              "createdAt": "2023-09-20T10:15:30.123Z",
+              "lastModifiedBy": "myLastModifiedBy",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-09-20T10:15:30.456Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/ahgxpg"
+      }
+    }
+  }
+}
