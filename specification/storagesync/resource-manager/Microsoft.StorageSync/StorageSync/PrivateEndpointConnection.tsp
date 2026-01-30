@@ -14,7 +14,9 @@ namespace Microsoft.StorageSync;
 /**
  * The private endpoint connection resource.
  */
+@parentResource(StorageSyncService)
 model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+
 alias PrivateEndpointOperations = Azure.ResourceManager.PrivateEndpoints<PrivateEndpointConnection>;
 
 @armResourceOperations
@@ -54,7 +56,7 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("location")
   delete is PrivateEndpointOperations.DeleteAsync<
     StorageSyncService,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
+    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id")

@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "checkNameAvailabilityInput": {
+      "name": "sampleName",
+      "type": "Microsoft.Support/communications"
+    },
+    "supportTicketName": "testticket"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "message": "Name not available",
+        "nameAvailable": false,
+        "reason": "Name is already in use"
+      }
+    }
+  },
+  "operationId": "CommunicationsNoSubscription_CheckNameAvailability",
+  "title": "Checks whether name is available for Communication resource"
+}

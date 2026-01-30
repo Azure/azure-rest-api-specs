@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "Cache-Control": "no-cache",
+    "api-version": "2023-04-01",
+    "createManagementGroupRequest": {
+      "properties": {
+        "displayName": "ChildGroup",
+        "details": {
+          "parent": {
+            "id": "/providers/Microsoft.Management/managementGroups/RootGroup"
+          }
+        }
+      }
+    },
+    "groupId": "ChildGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ChildGroup",
+        "type": "Microsoft.Management/managementGroups",
+        "id": "/providers/Microsoft.Management/managementGroups/ChildGroup",
+        "properties": {
+          "displayName": "ChildGroup",
+          "tenantId": "20000000-0000-0000-0000-000000000000",
+          "details": {
+            "parent": {
+              "name": "RootGroup",
+              "displayName": "RootGroup",
+              "id": "/providers/Microsoft.Management/managementGroups/RootGroup"
+            },
+            "updatedBy": "16b8ef21-5c9f-420c-bcc9-e4f8c9f30b4b",
+            "updatedTime": "2018-01-01T00:00:00.00Z",
+            "version": 1
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "ChildGroup",
+        "type": "Microsoft.Management/managementGroups",
+        "id": "/providers/Microsoft.Management/managementGroups/ChildGroup",
+        "status": "NotStarted"
+      }
+    }
+  },
+  "operationId": "ManagementGroups_CreateOrUpdate",
+  "title": "PutManagementGroup"
+}

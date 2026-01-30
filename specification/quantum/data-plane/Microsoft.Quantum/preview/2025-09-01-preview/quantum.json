@@ -17,23 +17,17 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "https://{region}.{serviceBaseUrl}",
+    "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
       {
-        "name": "region",
+        "name": "endpoint",
         "in": "path",
-        "description": "The Azure region where the Azure Quantum Workspace is located.",
-        "required": true,
-        "type": "string"
-      },
-      {
-        "name": "serviceBaseUrl",
-        "in": "path",
-        "description": "The Azure Quantum service base url.",
+        "description": "The endpoint of the Azure Quantum service. For example, https://{region}.quantum.azure.com",
         "required": true,
         "type": "string",
-        "default": "quantum.azure.com"
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
       }
     ]
   },
@@ -416,7 +410,7 @@
       },
       "delete": {
         "operationId": "Jobs_Cancel",
-        "description": "Request the cancellation of an existing job.",
+        "description": "Delete a job by its id. Use for cancellation in versions before 2025-12-01-preview.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1059,7 +1053,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/storage/sasUri": {
       "post": {
         "operationId": "Storage_GetSasUri",
-        "description": "Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output.",
+        "description": "Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. Starting with version 2026-01-15-preview, when used for a container the container is also created if it does not already exist. The SAS URL can be used to upload job input and/or download job output.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"

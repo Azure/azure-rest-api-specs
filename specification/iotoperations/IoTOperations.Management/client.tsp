@@ -30,6 +30,10 @@ using Microsoft.IoTOperations;
   "IotOperationsBrokerListenerProperties",
   "csharp"
 );
+@@clientName(BrokerListenerProperties.serviceType,
+  "ListenerServiceType",
+  "csharp"
+);
 @@clientName(BrokerResource, "IotOperationsBroker", "csharp");
 @@clientName(BrokerProperties, "IotOperationsBrokerProperties", "csharp");
 @@clientName(DataflowEndpointResource,
@@ -73,18 +77,24 @@ using Microsoft.IoTOperations;
 @@clientName(MetricProperties, "IotOperationsMetricsProperties", "csharp");
 @@clientName(OperationalMode, "IotOperationsOperationalMode", "csharp");
 @@clientName(OperationType, "DataflowOperationType", "csharp");
-@@clientName(OperatorValues, "BrokerOperatorValues", "csharp");
+@@clientName(OperatorValues, "BrokerOperatorValue", "csharp");
 @@clientName(PrincipalDefinition, "PrincipalConfig", "csharp");
 @@clientName(ProfileDiagnostics, "DataflowProfileDiagnostics", "csharp");
 @@clientName(ProvisioningState, "IotOperationsProvisioningState", "csharp");
 @@clientName(SelfCheck, "BrokerDiagnosticSelfCheck", "csharp");
 @@clientName(SelfTracing, "DiagnosticSelfTracing", "csharp");
-@@clientName(ServiceType, "BlockerListenerServiceType", "csharp");
+@@clientName(ServiceType, "BrokerListenerServiceType", "csharp");
+@@clientName(ServiceType.ClusterIp, "ClusterIP", "csharp");
 @@clientName(SourceSerializationFormat,
   "DataflowSourceSerializationFormat",
   "csharp"
 );
+@@clientName(BrokerAuthenticatorValidationMethods,
+  "BrokerAuthenticatorValidationMethod",
+  "csharp"
+);
 @@clientName(TlsCertMethod, "ListenerPortTlsCertMethod", "csharp");
+@@clientName(X509ManualCertificate, "BrokerX509ManualCertificate", "csharp");
 @@clientName(TlsProperties, "IotOperationsTlsProperties", "csharp");
 @@clientName(Traces, "BrokerDiagnosticTraces", "csharp");
 @@clientName(AkriConnectorResource, "IotOperationsAkriConnector", "csharp");
@@ -113,6 +123,17 @@ using Microsoft.IoTOperations;
   "IotOperationsRegistryEndpointProperties",
   "csharp"
 );
+@@clientName(BrokerResourceDefinitionMethods,
+  "BrokerResourceDefinitionMethod",
+  "csharp"
+);
+@@clientName(DataflowEndpointKafkaAcks, "DataflowEndpointKafkaAck", "csharp");
+@@clientName(SanForCert.ip, "IP", "csharp");
+@@clientName(StateStoreResourceDefinitionMethods,
+  "StateStoreResourceDefinitionMethod",
+  "csharp"
+);
+@@clientName(StateStoreResourceKeyTypes, "StateStoreResourceKeyType", "csharp");
 
 @@clientName(Versions.`2024-11-01`,
   "$DO_NOT_NORMALIZE$V2024-11-01",

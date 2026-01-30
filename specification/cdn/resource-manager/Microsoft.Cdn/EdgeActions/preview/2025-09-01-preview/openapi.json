@@ -1470,25 +1470,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "EdgeAction": {
       "type": "object",
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
@@ -1649,9 +1630,26 @@
         "executionFilterIdentifierHeaderValue"
       ]
     },
-    "EdgeActionExecutionFilterPropertiesUpdate": {
+    "EdgeActionExecutionFilterUpdate": {
       "type": "object",
-      "description": "Properties for edge action execution filter",
+      "description": "The type used for update operations of the EdgeActionExecutionFilter.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/EdgeActionExecutionFilterUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "EdgeActionExecutionFilterUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the EdgeActionExecutionFilter.",
       "properties": {
         "versionId": {
           "$ref": "#/definitions/EdgeActionVersionId",
@@ -1681,26 +1679,6 @@
           ]
         }
       }
-    },
-    "EdgeActionExecutionFilterUpdate": {
-      "type": "object",
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EdgeActionExecutionFilterPropertiesUpdate",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "EdgeActionIsDefaultVersion": {
       "type": "string",
@@ -1775,27 +1753,24 @@
     },
     "EdgeActionUpdate": {
       "type": "object",
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "description": "The type used for update operations of the EdgeAction.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/EdgeActionPropertiesUpdate",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "description": "The resource-specific properties for this resource."
         },
         "sku": {
           "$ref": "#/definitions/SkuTypeUpdate",
           "description": "The sku type of the edge action"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "EdgeActionVersion": {
       "type": "object",
@@ -1926,9 +1901,26 @@
         "lastPackageUpdateTime"
       ]
     },
-    "EdgeActionVersionPropertiesUpdate": {
+    "EdgeActionVersionUpdate": {
       "type": "object",
-      "description": "Represents an edge action version",
+      "description": "The type used for update operations of the EdgeActionVersion.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/EdgeActionVersionUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "EdgeActionVersionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the EdgeActionVersion.",
       "properties": {
         "deploymentType": {
           "$ref": "#/definitions/EdgeActionVersionDeploymentType",
@@ -1949,26 +1941,6 @@
           ]
         }
       }
-    },
-    "EdgeActionVersionUpdate": {
-      "type": "object",
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/EdgeActionVersionPropertiesUpdate",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "EdgeActionVersionValidationStatus": {
       "type": "string",
@@ -2058,7 +2030,7 @@
     },
     "SkuTypeUpdate": {
       "type": "object",
-      "description": "The SKU type for the edge action",
+      "description": "The SKU type for update operations",
       "properties": {
         "name": {
           "type": "string",
