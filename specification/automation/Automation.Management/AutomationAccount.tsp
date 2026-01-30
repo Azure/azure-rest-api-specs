@@ -25,13 +25,13 @@ model AutomationAccount
   /**
    * Gets or sets the etag of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Identity;
 }
 
@@ -40,7 +40,7 @@ interface AutomationAccounts {
   /**
    * Get information about an Automation Account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutomationAccount_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   get is ArmResourceRead<AutomationAccount>;
@@ -48,7 +48,7 @@ interface AutomationAccounts {
   /**
    * Create or update automation account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutomationAccount_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -59,7 +59,7 @@ interface AutomationAccounts {
   /**
    * Update an automation account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutomationAccount_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   @patch(#{ implicitOptionality: false })
@@ -71,7 +71,7 @@ interface AutomationAccounts {
   /**
    * Delete an automation account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutomationAccount_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   delete is ArmResourceDeleteSync<AutomationAccount>;
@@ -79,7 +79,7 @@ interface AutomationAccounts {
   /**
    * Retrieve a list of accounts within a given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutomationAccount_ListByResourceGroup")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/automationaccountoperations")
   listByResourceGroup is ArmResourceListByParent<AutomationAccount>;
@@ -87,7 +87,7 @@ interface AutomationAccounts {
   /**
    * Retrieve a list of accounts within a given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutomationAccount_List")
   @summary("Lists the Automation Accounts within an Azure subscription.")
   list is ArmListBySubscription<AutomationAccount>;
@@ -95,7 +95,7 @@ interface AutomationAccounts {
   /**
    * Retrieve counts for Dsc Nodes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NodeCountInformation_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/nodecounts")
   @list
@@ -117,7 +117,7 @@ interface AutomationAccounts {
   /**
    * Get all software update configurations for the account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SoftwareUpdateConfigurations_List")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @list
@@ -145,7 +145,7 @@ interface AutomationAccounts {
   /**
    * Gets the private link resources that need to be created for Automation account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkResources_Automation")
   @list
   @get
@@ -159,7 +159,7 @@ interface AutomationAccounts {
   /**
    * Retrieve the automation agent registration information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AgentRegistrationInformation_Get")
   @get
   @action("agentRegistrationInformation")
@@ -173,7 +173,7 @@ interface AutomationAccounts {
   /**
    * Regenerate a primary or secondary agent registration key
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AgentRegistrationInformation_RegenerateKey")
   @action("agentRegistrationInformation/regenerateKey")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/agentregistrationoperations")
@@ -186,7 +186,7 @@ interface AutomationAccounts {
   /**
    * Retrieve the deleted runbooks for an automation account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("AutomationAccount_ListDeletedRunbooks")
   @list
   listDeletedRunbooks is ArmResourceActionSync<
@@ -198,7 +198,7 @@ interface AutomationAccounts {
   /**
    * Retrieve the statistics for the account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Statistics_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/statisticsoperations")
   @list
@@ -220,7 +220,7 @@ interface AutomationAccounts {
   /**
    * Retrieve the usage for the account id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Usages_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/usageoperations")
   @list
@@ -235,7 +235,7 @@ interface AutomationAccounts {
   /**
    * Retrieve the automation keys for an account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Keys_ListByAutomationAccount")
   @action("listKeys")
   keysListByAutomationAccount is ArmResourceActionSync<
@@ -247,7 +247,7 @@ interface AutomationAccounts {
   /**
    * Retrieve a list of jobs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Job_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @list
@@ -275,7 +275,7 @@ interface AutomationAccounts {
   /**
    * Retrieve the linked workspace for the account id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LinkedWorkspace_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/linkedworkspaceoperations")
   @get
@@ -289,7 +289,7 @@ interface AutomationAccounts {
   /**
    * Retrieve a list of fields of a given type across all accessible modules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ObjectDataTypes_ListFieldsByType")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/objectdatatypeoperations")
   @list
@@ -312,7 +312,7 @@ interface AutomationAccounts {
   /**
    * Post operation to serialize or deserialize GraphRunbookContent
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("convertGraphRunbookContent")
   convertGraphRunbookContent is ArmResourceActionSync<
     AutomationAccount,
@@ -323,7 +323,7 @@ interface AutomationAccounts {
   /**
    * Get a single software update configuration machine run by Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SoftwareUpdateConfigurationMachineRuns_GetById")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
@@ -335,7 +335,7 @@ interface AutomationAccounts {
       /**
        * The Id of the software update configuration machine run.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @path
       @segment("softwareUpdateConfigurationMachineRuns")
@@ -352,7 +352,7 @@ interface AutomationAccounts {
   /**
    * Return list of software update configuration machine runs
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SoftwareUpdateConfigurationMachineRuns_List")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
@@ -391,7 +391,7 @@ interface AutomationAccounts {
   /**
    * Get a single software update configuration Run by Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SoftwareUpdateConfigurationRuns_GetById")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationrunoperations")
   @get
@@ -403,7 +403,7 @@ interface AutomationAccounts {
       /**
        * The Id of the software update configuration run.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @format("uuid")
       @path
       @segment("softwareUpdateConfigurationRuns")
@@ -420,7 +420,7 @@ interface AutomationAccounts {
   /**
    * Return list of software update configuration runs
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SoftwareUpdateConfigurationRuns_List")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   @get
@@ -459,7 +459,7 @@ interface AutomationAccounts {
   /**
    * Generates a Uri for use in creating a webhook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Webhook_GenerateUri")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   @action("webhooks/generateUri")

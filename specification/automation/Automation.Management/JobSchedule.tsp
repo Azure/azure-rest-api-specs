@@ -30,7 +30,7 @@ interface JobSchedules {
   /**
    * Retrieve the job schedule identified by job schedule name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("JobSchedule_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   get is ArmResourceRead<JobSchedule>;
@@ -38,8 +38,8 @@ interface JobSchedules {
   /**
    * Create a job schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("JobSchedule_Create")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -51,8 +51,8 @@ interface JobSchedules {
   /**
    * Delete the job schedule identified by job schedule name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("JobSchedule_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   delete is ArmResourceDeleteSync<JobSchedule, Response = ArmDeletedResponse>;
@@ -60,7 +60,7 @@ interface JobSchedules {
   /**
    * Retrieve a list of job schedules.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("JobSchedule_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   listByAutomationAccount is ArmResourceListByParent<
@@ -75,7 +75,7 @@ interface JobSchedules {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format"
+#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@format(JobSchedule.name, "uuid");
 @@doc(JobSchedule.name, "The job schedule name.");
 @@doc(JobSchedule.properties,

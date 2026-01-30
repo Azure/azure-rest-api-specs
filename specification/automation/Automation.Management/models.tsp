@@ -103,7 +103,7 @@ scalar stringTextPowershell extends string;
 @mediaTypeHint("text/plain")
 scalar stringTextPlain extends string;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CountType {
   string,
 
@@ -541,7 +541,7 @@ union JobStatus {
 /**
  * The provisioning state of the resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union JobProvisioningState {
   string,
 
@@ -799,7 +799,7 @@ union PackageProvisioningState {
   Updating: "Updating",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union HttpStatusCode {
   string,
 
@@ -1160,7 +1160,7 @@ union TokenType {
 /**
  * The provisioning state of the job.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ProvisioningState {
   string,
 
@@ -1217,7 +1217,7 @@ union StreamType {
 /**
  * Target operating system for the software update configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum OperatingSystemType {
   /**
    * Windows
@@ -1233,7 +1233,7 @@ enum OperatingSystemType {
 /**
  * Filter VMs by Any or All specified tags.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum TagOperators {
   /**
    * All
@@ -1249,7 +1249,7 @@ enum TagOperators {
 /**
  * Encryption Key Source
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum EncryptionKeySourceType {
   /**
    * Microsoft.Automation
@@ -1265,7 +1265,7 @@ enum EncryptionKeySourceType {
 /**
  * The identity type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResourceIdentityType {
   /**
    * SystemAssigned
@@ -1314,11 +1314,11 @@ model NodeCount {
    */
   name?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: NodeCountProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NodeCountProperties {
   /**
    * Gets the count for the name
@@ -1360,7 +1360,7 @@ model softwareUpdateConfigurationProperties {
   /**
    * Provisioning state for the software update configuration, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1536,7 +1536,7 @@ model TagSettingsProperties {
   /**
    * Dictionary of tags with its list of values.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string[]>;
 
   /**
@@ -1704,7 +1704,7 @@ model taskProperties {
   /**
    * Gets or sets the parameters of the task.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 
   /**
@@ -1887,7 +1887,7 @@ model PrivateLinkResourceListResult {
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResource
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -1966,7 +1966,7 @@ model AgentRegistrationRegenerateKeyParameter {
 /**
  * The properties of a DscNode
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DscNodeProperties {
   /**
    * Gets or sets the last seen time of the node.
@@ -2057,11 +2057,11 @@ model DscNodeUpdateParameters {
    */
   nodeId?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DscNodeUpdateParametersProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DscNodeUpdateParametersProperties {
   /**
    * Gets or sets the configuration of the node.
@@ -2352,7 +2352,7 @@ model AutomationAccountUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -2476,11 +2476,11 @@ model Identity {
   /**
    * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserAssignedIdentitiesProperties>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UserAssignedIdentitiesProperties {
   /**
    * The principal id of user assigned identity.
@@ -2498,7 +2498,7 @@ model UserAssignedIdentitiesProperties {
 /**
  * Definition of the account property.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutomationAccountProperties {
   /**
    * Gets or sets the SKU of account.
@@ -2564,7 +2564,7 @@ model AutomationAccountProperties {
 /**
  * Properties of a private endpoint connection.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateEndpointConnectionProperties {
   /**
    * Private endpoint which the connection belongs to.
@@ -2640,7 +2640,7 @@ model AutomationAccountCreateOrUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -2787,7 +2787,7 @@ model UsageCounterName {
   localizedValue?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model KeyListResult {
   /**
    * Lists the automation keys.
@@ -2893,7 +2893,7 @@ model DeletedRunbookProperties {
 /**
  * Properties of the certificate.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CertificateProperties {
   /**
    * Gets the thumbprint of the certificate.
@@ -3002,7 +3002,7 @@ model CertificateUpdateProperties {
 /**
  * Definition of the connection properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionProperties {
   /**
    * Gets or sets the connectionType of the connection.
@@ -3012,7 +3012,7 @@ model ConnectionProperties {
   /**
    * Gets the field definition values of the connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   fieldDefinitionValues?: Record<string>;
 
@@ -3078,7 +3078,7 @@ model ConnectionCreateOrUpdateProperties {
   /**
    * Gets or sets the field definition properties of the connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   fieldDefinitionValues?: Record<string>;
 }
 
@@ -3109,14 +3109,14 @@ model ConnectionUpdateProperties {
   /**
    * Gets or sets the field definition values of the connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   fieldDefinitionValues?: Record<string>;
 }
 
 /**
  * Properties of the connection type.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionTypeProperties {
   /**
    * Gets or sets a Boolean value to indicate if the connection type is global.
@@ -3126,7 +3126,7 @@ model ConnectionTypeProperties {
   /**
    * Gets the field definitions of the connection type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   fieldDefinitions?: Record<FieldDefinition>;
 
@@ -3196,14 +3196,14 @@ model ConnectionTypeCreateOrUpdateProperties {
   /**
    * Gets or sets the field definitions of the connection type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   fieldDefinitions: Record<FieldDefinition>;
 }
 
 /**
  * Definition of the credential properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CredentialProperties {
   /**
    * Gets the user name of the credential.
@@ -3308,7 +3308,7 @@ model DscConfigurationProperties {
   /**
    * Gets or sets the provisioning state of the configuration.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: "Succeeded";
 
   /**
@@ -3319,7 +3319,7 @@ model DscConfigurationProperties {
   /**
    * Gets or sets the configuration parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<DscConfigurationParameter>;
 
   /**
@@ -3447,7 +3447,7 @@ model DscConfigurationCreateOrUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -3473,7 +3473,7 @@ model DscConfigurationCreateOrUpdateProperties {
   /**
    * Gets or sets the configuration parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<DscConfigurationParameter>;
 
   /**
@@ -3499,14 +3499,14 @@ model DscConfigurationUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Properties for the DscNodeConfiguration
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DscNodeConfigurationProperties {
   /**
    * Gets or sets the last modified time.
@@ -3568,7 +3568,7 @@ model DscNodeConfigurationCreateOrUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -3595,7 +3595,7 @@ model DscNodeConfigurationCreateOrUpdateParametersProperties {
 /**
  * Definition of hybrid runbook worker property.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HybridRunbookWorkerProperties {
   /**
    * Gets or sets the assigned machine IP address.
@@ -3670,7 +3670,7 @@ model HybridRunbookWorkerMoveParameters {
 /**
  * Definition of hybrid runbook worker group property.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HybridRunbookWorkerGroupProperties {
   /**
    * Type of the HybridWorkerGroup.
@@ -3746,7 +3746,7 @@ model JobProperties {
   /**
    * Gets or sets the id of the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @format("uuid")
   jobId?: string;
 
@@ -3802,7 +3802,7 @@ model JobProperties {
   /**
    * Gets or sets the parameters of the job.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 
   /**
@@ -3842,7 +3842,7 @@ model JobCreateParameters {
   properties: JobCreateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobCreateProperties {
   /**
    * Gets or sets the runbook.
@@ -3852,7 +3852,7 @@ model JobCreateProperties {
   /**
    * Gets or sets the parameters of the job.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 
   /**
@@ -3869,7 +3869,7 @@ model JobListResultV2 is Azure.Core.Page<JobCollectionItem>;
 /**
  * Job collection item properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobCollectionItem
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -3891,7 +3891,7 @@ model JobCollectionItemProperties {
   /**
    * The id of the job.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   jobId?: string;
@@ -4006,7 +4006,7 @@ model JobStreamProperties {
   /**
    * Gets or sets the values of the job stream.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: Record<unknown>;
 }
 
@@ -4018,7 +4018,7 @@ model JobStreamListResult is Azure.Core.Page<JobStream>;
 /**
  * Definition of job schedule parameters.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobScheduleProperties {
   /**
    * Gets or sets the id of job schedule.
@@ -4043,7 +4043,7 @@ model JobScheduleProperties {
   /**
    * Gets or sets the parameters of the job schedule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 }
 
@@ -4089,7 +4089,7 @@ model JobScheduleCreateProperties {
   /**
    * Gets or sets a list of job properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 }
 
@@ -4293,7 +4293,7 @@ model ModuleProperties {
   /**
    * Gets or sets the provisioning state of the module.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ModuleProvisioningState;
 
   /**
@@ -4386,7 +4386,7 @@ model ModuleCreateOrUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -4424,7 +4424,7 @@ model ModuleUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -4789,7 +4789,7 @@ model PythonPackageCreateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -4810,11 +4810,11 @@ model PythonPackageUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RunbookDraft {
   /**
    * Gets or sets whether runbook is in edit mode.
@@ -4841,7 +4841,7 @@ model RunbookDraft {
   /**
    * Gets or sets the runbook draft parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<RunbookParameter>;
 
   /**
@@ -4879,9 +4879,9 @@ model RunbookParameter {
  * The response model for the undo edit runbook operation.
  */
 model RunbookDraftUndoEditResult {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   statusCode?: HttpStatusCode;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestId?: string;
 }
 
@@ -4932,7 +4932,7 @@ model RunbookProperties {
   /**
    * Gets or sets the runbook parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<RunbookParameter>;
 
   /**
@@ -4948,7 +4948,7 @@ model RunbookProperties {
   /**
    * Gets or sets the provisioning state of the runbook.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: "Succeeded";
 
   /**
@@ -4996,7 +4996,7 @@ model RunbookCreateOrUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -5067,7 +5067,7 @@ model RunbookUpdateParameters {
   /**
    * Gets or sets the tags attached to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -5103,7 +5103,7 @@ model TestJobCreateParameters {
   /**
    * Gets or sets the parameters of the test job.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 
   /**
@@ -5180,7 +5180,7 @@ model TestJob {
   /**
    * Gets or sets the parameters of the test job.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 
   /**
@@ -5213,14 +5213,14 @@ model RuntimeEnvironmentUpdateProperties {
   /**
    * List of Default packages for Environment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defaultPackages?: Record<string>;
 }
 
 /**
  * Runtime Environment properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RuntimeEnvironmentProperties {
   /**
    *  Runtime properties.
@@ -5230,7 +5230,7 @@ model RuntimeEnvironmentProperties {
   /**
    * List of Default packages for Environment
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   defaultPackages?: Record<string>;
 
   /**
@@ -5317,7 +5317,7 @@ model ScheduleCreateOrUpdateProperties {
 /**
  * Definition of schedule parameters.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScheduleProperties {
   /**
    * Gets or sets the start time of the schedule.
@@ -5489,7 +5489,7 @@ model updateConfigurationMachineRunProperties {
   /**
    * correlation id of the software update configuration machine run
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   correlationId?: string;
@@ -5497,7 +5497,7 @@ model updateConfigurationMachineRunProperties {
   /**
    * source computer id of the software update configuration machine run
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   sourceComputerId?: string;
@@ -5804,7 +5804,7 @@ model SourceControlCreateOrUpdateProperties {
   description?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SourceControlSecurityTokenProperties {
   /**
    * The access token.
@@ -5827,7 +5827,7 @@ model SourceControlSecurityTokenProperties {
 /**
  * Definition of the source control properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SourceControlProperties {
   /**
    * The repo url of the source control.
@@ -6178,7 +6178,7 @@ model SourceControlSyncJobStreamByIdProperties {
   /**
    * The values of the job stream.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: Record<unknown>;
 }
 
@@ -6220,7 +6220,7 @@ model VariableCreateOrUpdateProperties {
 /**
  * Definition of the variable properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VariableProperties {
   /**
    * Gets or sets the value of the variable.
@@ -6284,7 +6284,7 @@ model VariableUpdateProperties {
 /**
  * Definition of the watcher properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WatcherProperties {
   /**
    * Gets or sets the frequency at which the watcher is invoked.
@@ -6299,7 +6299,7 @@ model WatcherProperties {
   /**
    * Gets or sets the parameters of the script.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   scriptParameters?: Record<string>;
 
   /**
@@ -6340,7 +6340,7 @@ model WatcherProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WatcherUpdateParameters {
   /**
    * Gets or sets the watcher update properties.
@@ -6366,7 +6366,7 @@ model WatcherUpdateProperties {
 /**
  * Definition of the webhook properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WebhookProperties {
   /**
    * Gets or sets the value of the enabled flag of the webhook.
@@ -6394,7 +6394,7 @@ model WebhookProperties {
   /**
    * Gets or sets the parameters of the job that is created when the webhook calls the runbook it is associated with.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 
   /**
@@ -6468,7 +6468,7 @@ model WebhookCreateOrUpdateProperties {
   /**
    * Gets or sets the parameters of the job.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 
   /**
@@ -6514,7 +6514,7 @@ model WebhookUpdateProperties {
   /**
    * Gets or sets the parameters of the job.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 
   /**

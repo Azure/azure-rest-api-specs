@@ -29,7 +29,7 @@ interface Credentials {
   /**
    * Retrieve the credential identified by credential name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Credential_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   get is ArmResourceRead<Credential>;
@@ -37,7 +37,7 @@ interface Credentials {
   /**
    * Create a credential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Credential_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -48,7 +48,7 @@ interface Credentials {
   /**
    * Update a credential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Credential_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   @patch(#{ implicitOptionality: false })
@@ -60,8 +60,8 @@ interface Credentials {
   /**
    * Delete the credential.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Credential_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   delete is ArmResourceDeleteSync<Credential, Response = ArmDeletedResponse>;
@@ -69,7 +69,7 @@ interface Credentials {
   /**
    * Retrieve a list of credentials.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Credential_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/credentialoperations")
   listByAutomationAccount is ArmResourceListByParent<Credential>;

@@ -29,7 +29,7 @@ interface Connections {
   /**
    * Retrieve the connection identified by connection name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   get is ArmResourceRead<Connection>;
@@ -37,7 +37,7 @@ interface Connections {
   /**
    * Create or update a connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -48,7 +48,7 @@ interface Connections {
   /**
    * Update a connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   @patch(#{ implicitOptionality: false })
@@ -60,7 +60,7 @@ interface Connections {
   /**
    * Delete the connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   delete is ArmResourceDeleteSync<Connection>;
@@ -68,7 +68,7 @@ interface Connections {
   /**
    * Retrieve a list of connections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Connection_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectionoperations")
   listByAutomationAccount is ArmResourceListByParent<Connection>;

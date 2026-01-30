@@ -29,7 +29,7 @@ interface Variables {
   /**
    * Retrieve the variable identified by variable name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Variable_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/variableoperations")
   get is ArmResourceRead<Variable>;
@@ -37,7 +37,7 @@ interface Variables {
   /**
    * Create a variable.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Variable_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/variableoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -48,7 +48,7 @@ interface Variables {
   /**
    * Update a variable.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Variable_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/variableoperations")
   @patch(#{ implicitOptionality: false })
@@ -57,8 +57,8 @@ interface Variables {
   /**
    * Delete the variable.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Variable_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/variableoperations")
   delete is ArmResourceDeleteSync<Variable, Response = ArmDeletedResponse>;
@@ -66,7 +66,7 @@ interface Variables {
   /**
    * Retrieve a list of variables.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Variable_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/variableoperations")
   listByAutomationAccount is ArmResourceListByParent<Variable>;

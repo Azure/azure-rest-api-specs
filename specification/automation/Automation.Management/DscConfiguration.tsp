@@ -27,7 +27,7 @@ model DscConfiguration
   /**
    * Gets or sets the etag of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -36,7 +36,7 @@ interface DscConfigurations {
   /**
    * Retrieve the configuration identified by configuration name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DscConfiguration_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   get is ArmResourceRead<DscConfiguration>;
@@ -44,7 +44,7 @@ interface DscConfigurations {
   /**
    * Create the configuration identified by configuration name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DscConfiguration_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -55,7 +55,7 @@ interface DscConfigurations {
   /**
    * Create the configuration identified by configuration name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DscConfiguration_Update")
   @patch(#{ implicitOptionality: false })
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
@@ -68,7 +68,7 @@ interface DscConfigurations {
   /**
    * Delete the dsc configuration identified by configuration name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DscConfiguration_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   delete is ArmResourceDeleteSync<DscConfiguration>;
@@ -76,7 +76,7 @@ interface DscConfigurations {
   /**
    * Retrieve a list of configurations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DscConfiguration_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   listByAutomationAccount is ArmResourceListByParent<
@@ -112,7 +112,7 @@ interface DscConfigurations {
   /**
    * Retrieve the configuration script identified by configuration name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/configurationoperations")
   @operationId("DscConfiguration_GetContent")
   @get

@@ -30,7 +30,7 @@ interface Jobs {
   /**
    * Retrieve the job identified by job name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Job_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   get is ArmResourceRead<
@@ -47,8 +47,8 @@ interface Jobs {
   /**
    * Create a job of the runbook.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Job_Create")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -67,7 +67,7 @@ interface Jobs {
   /**
    * Retrieve the job output identified by job name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Job_GetOutput")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get
@@ -88,7 +88,7 @@ interface Jobs {
   /**
    * Retrieve the runbook content of the job identified by job name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Job_GetRunbookContent")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get
@@ -109,7 +109,7 @@ interface Jobs {
   /**
    * Suspend the job identified by job name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Job_Suspend")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   suspend is ArmResourceActionSync<
@@ -128,7 +128,7 @@ interface Jobs {
   /**
    * Stop the job identified by jobName.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Job_Stop")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   stop is ArmResourceActionSync<
@@ -147,7 +147,7 @@ interface Jobs {
   /**
    * Resume the job identified by jobName.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Job_Resume")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   resume is ArmResourceActionSync<
@@ -166,7 +166,7 @@ interface Jobs {
   /**
    * Retrieve the job stream identified by job stream id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("JobStream_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
   @get
@@ -193,7 +193,7 @@ interface Jobs {
   /**
    * Retrieve a list of jobs streams identified by job name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("JobStream_ListByJob")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
   @list

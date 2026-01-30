@@ -30,7 +30,7 @@ interface ConnectionTypes {
   /**
    * Retrieve the connection type identified by connection type name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionType_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectiontypeoperations")
   get is ArmResourceRead<ConnectionType>;
@@ -38,8 +38,8 @@ interface ConnectionTypes {
   /**
    * Create a connection type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionType_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectiontypeoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -51,7 +51,7 @@ interface ConnectionTypes {
   /**
    * Delete the connection type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionType_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectiontypeoperations")
   delete is ArmResourceDeleteSync<ConnectionType>;
@@ -59,7 +59,7 @@ interface ConnectionTypes {
   /**
    * Retrieve a list of connection types.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ConnectionType_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/connectiontypeoperations")
   listByAutomationAccount is ArmResourceListByParent<ConnectionType>;

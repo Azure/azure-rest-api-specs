@@ -29,7 +29,7 @@ interface Webhooks {
   /**
    * Retrieve the webhook identified by webhook name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Webhook_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   get is ArmResourceRead<Webhook>;
@@ -37,7 +37,7 @@ interface Webhooks {
   /**
    * Create the webhook identified by webhook name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Webhook_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
@@ -48,7 +48,7 @@ interface Webhooks {
   /**
    * Update the webhook identified by webhook name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Webhook_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   @patch(#{ implicitOptionality: false })
@@ -57,8 +57,8 @@ interface Webhooks {
   /**
    * Delete the webhook by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Webhook_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   delete is ArmResourceDeleteSync<Webhook, Response = ArmDeletedResponse>;
@@ -66,7 +66,7 @@ interface Webhooks {
   /**
    * Retrieve a list of webhooks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Webhook_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/webhookoperations")
   listByAutomationAccount is ArmResourceListByParent<
