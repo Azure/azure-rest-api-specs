@@ -7,7 +7,8 @@ using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+  "!javascript"
 );
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "vault");

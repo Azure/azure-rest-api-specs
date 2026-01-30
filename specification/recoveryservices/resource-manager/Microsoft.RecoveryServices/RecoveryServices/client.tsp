@@ -71,10 +71,7 @@ namespace Microsoft.RecoveryServices;
 @@clientName(CapabilitiesResponse, "CapabilitiesResult", "csharp");
 @@alternateType(VaultExtendedInfoResource.etag, eTag, "csharp");
 @@clientName(MonitoringSettings, "VaultMonitoringSettings", "csharp");
-@@clientName(PrivateEndpointConnectionVaultPropertiesReplacement,
-  "RecoveryServicesPrivateEndpointConnectionVaultProperties",
-  "csharp"
-);
+
 @@alternateType(PrivateEndpointConnectionVaultProperties.location,
   azureLocation,
   "csharp"
@@ -248,6 +245,10 @@ model PrivateEndpointConnectionVaultPropertiesReplacement
 }
 @@alternateType(PrivateEndpointConnectionVaultProperties,
   PrivateEndpointConnectionVaultPropertiesReplacement,
+  "csharp"
+);
+@@clientName(PrivateEndpointConnectionVaultPropertiesReplacement,
+  "RecoveryServicesPrivateEndpointConnectionVaultProperties",
   "csharp"
 );
 
