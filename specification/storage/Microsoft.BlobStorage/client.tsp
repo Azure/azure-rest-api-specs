@@ -27,10 +27,10 @@ namespace Customizations;
 @@clientName(ContainerProperties.immutableStorageWithVersioningEnabled,
   "IsImmutableStorageWithVersioningEnabled"
 );
-@@clientName(BlobPropertiesInternal.expiryTime, "ExpiresOn");
-@@clientName(BlobPropertiesInternal.sealed, "IsSealed");
-@@clientName(BlobPropertiesInternal.lastAccessTime, "LastAccessedOn");
-@@clientName(BlobPropertiesInternal.immutabilityPolicyUntilDate,
+@@clientName(BlobProperties.expiryTime, "ExpiresOn");
+@@clientName(BlobProperties.sealed, "IsSealed");
+@@clientName(BlobProperties.lastAccessTime, "LastAccessedOn");
+@@clientName(BlobProperties.immutabilityPolicyUntilDate,
   "ImmutabilityPolicyExpiresOn"
 );
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
@@ -41,7 +41,7 @@ namespace Customizations;
 @@clientName(ImmutabilityPolicyExpiryRequiredParameter.immutabilityPolicyExpiry,
   "expiry"
 );
-@@alternateType(BlobPropertiesInternal.contentLength, uint64, "rust");
+@@alternateType(BlobProperties.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
 @@alternateType(ContentLengthParameter.contentLength, uint64, "rust");
@@ -56,3 +56,14 @@ namespace Customizations;
 
 @@scope(Storage.Blob.Container.submitBatch, "!rust");
 @@scope(Storage.Blob.Service.submitBatch, "!rust");
+@@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
+@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
+@@scope(Storage.Blob.Container.rename, "!rust");
+@@scope(Storage.Blob.Container.restore, "!rust");
+@@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
+@@scope(Storage.Blob.Blob.copyFromUrl, "!rust");
+@@scope(Storage.Blob.Blob.setExpiry, "!rust");
+@@scope(Storage.Blob.Blob.startCopyFromUrl, "!rust");
+@@scope(Storage.Blob.BlockBlob.query, "!rust");
+@@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
+@@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
