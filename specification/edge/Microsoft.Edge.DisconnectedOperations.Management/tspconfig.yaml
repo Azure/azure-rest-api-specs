@@ -7,6 +7,11 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-disconnectedoperations"
     package-details:
       name: "@azure/arm-disconnectedoperations"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.ResourceManager.DisconnectedOperations
+    clear-output-folder: true
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
@@ -95,9 +100,6 @@ options:
       - where:
           parameter-name: ImageName
         clear-alias: true
-  "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.DisconnectedOperations"
-    emitter-output-dir: "{output-dir}/sdk/disconnectedoperations/{namespace}"
 
 linter:
   extends:
