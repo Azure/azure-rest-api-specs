@@ -35,6 +35,21 @@ model AlertsClientOptions {
   "java"
 );
 
+@@clientName(Microsoft.AlertsManagement.AlertsMetaData,
+  "AlertsMetadata",
+  "java"
+);
+@@clientName(Microsoft.AlertsManagement.AlertsMetaDataProperties,
+  "AlertsMetadataProperties",
+  "java"
+);
+@@clientName(Microsoft.AlertsManagement.Essentials.lastModifiedUserName,
+  "lastModifiedUsername",
+  "java"
+);
+
+@@clientName(Microsoft.AlertsManagement, "AlertsManagementClient", "java");
+
 @@clientName(TimeRange.`1h`, "OneH", "go");
 @@clientName(TimeRange.`1d`, "OneD", "go");
 @@clientName(TimeRange.`7d`, "SevenD", "go");
