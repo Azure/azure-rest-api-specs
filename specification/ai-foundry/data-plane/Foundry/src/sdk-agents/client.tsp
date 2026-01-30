@@ -58,7 +58,6 @@ using Azure.AI.Projects;
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
 @@access(FoundryPreviewOptInKeys, Access.public);
-@@access(FoundryPreviewOptInKeys, Access.public);
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);
