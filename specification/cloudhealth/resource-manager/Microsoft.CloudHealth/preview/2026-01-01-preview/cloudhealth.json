@@ -2677,13 +2677,6 @@
           "minLength": 1,
           "maxLength": 260
         },
-        "kind": {
-          "type": "string",
-          "description": "Entity kind",
-          "default": "Default",
-          "minLength": 1,
-          "maxLength": 260
-        },
         "canvasPosition": {
           "$ref": "#/definitions/EntityCoordinates",
           "description": "Positioning of the entity on the model canvas"
@@ -2780,6 +2773,39 @@
         "unhealthyRule"
       ]
     },
+    "ExternalSignal": {
+      "type": "object",
+      "description": "An externally submitted signal instance assigned to an entity.",
+      "properties": {
+        "evaluationRules": {
+          "$ref": "#/definitions/EvaluationRule",
+          "description": "Evaluation rules for the external signal as submitted."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SignalInstanceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ExternalSignal"
+    },
+    "ExternalSignalGroup": {
+      "type": "object",
+      "description": "A grouping of externally submitted signals.",
+      "properties": {
+        "signals": {
+          "type": "array",
+          "description": "Signals assigned to this signal group.",
+          "items": {
+            "$ref": "#/definitions/ExternalSignal"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
     "HealthModel": {
       "type": "object",
       "description": "A HealthModel resource",
@@ -2828,10 +2854,6 @@
           "$ref": "#/definitions/HealthModelProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
-        },
-        "discovery": {
-          "$ref": "#/definitions/ModelDiscoverySettings",
-          "description": "Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model."
         }
       }
     },
@@ -2890,20 +2912,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/HealthModelUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "HealthModelUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the HealthModel.",
-      "properties": {
-        "discovery": {
-          "$ref": "#/definitions/ModelDiscoverySettingsUpdate",
-          "description": "Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model."
         }
       }
     },
@@ -3284,46 +3292,6 @@
             "value": "Total"
           }
         ]
-      }
-    },
-    "ModelDiscoverySettings": {
-      "type": "object",
-      "description": "Settings for automatically discovering entities for the health model.",
-      "properties": {
-        "scope": {
-          "$ref": "#/definitions/string4096",
-          "description": "The scope from which entities should be automatically discovered. For example, the resource id of a Service Group."
-        },
-        "addRecommendedSignals": {
-          "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
-          "description": "Whether to add all recommended signals to the discovered entities."
-        },
-        "identity": {
-          "$ref": "#/definitions/string4096",
-          "description": "Which Managed Identity of the health model to use for discovery. Defaults to SystemAssigned, if not set. Can be set to 'SystemAssigned' or to the resource id of a user-assigned managed identity which is linked to the health model."
-        }
-      },
-      "required": [
-        "scope",
-        "addRecommendedSignals"
-      ]
-    },
-    "ModelDiscoverySettingsUpdate": {
-      "type": "object",
-      "description": "Settings for automatically discovering entities for the health model.",
-      "properties": {
-        "scope": {
-          "$ref": "#/definitions/string4096",
-          "description": "The scope from which entities should be automatically discovered. For example, the resource id of a Service Group."
-        },
-        "addRecommendedSignals": {
-          "$ref": "#/definitions/DiscoveryRuleRecommendedSignalsBehavior",
-          "description": "Whether to add all recommended signals to the discovered entities."
-        },
-        "identity": {
-          "$ref": "#/definitions/string4096",
-          "description": "Which Managed Identity of the health model to use for discovery. Defaults to SystemAssigned, if not set. Can be set to 'SystemAssigned' or to the resource id of a user-assigned managed identity which is linked to the health model."
-        }
       }
     },
     "PrometheusMetricsSignal": {
@@ -3759,6 +3727,11 @@
         "dependencies": {
           "$ref": "#/definitions/DependenciesSignalGroup",
           "description": "Settings for dependency signals to control how the health state of child entities influences the health state of the parent entity."
+        },
+        "external": {
+          "$ref": "#/definitions/ExternalSignalGroup",
+          "description": "List of signals which have been externally submitted for this entity.",
+          "readOnly": true
         }
       }
     },
@@ -3876,7 +3849,8 @@
       "enum": [
         "AzureResourceMetric",
         "LogAnalyticsQuery",
-        "PrometheusMetricsQuery"
+        "PrometheusMetricsQuery",
+        "ExternalSignal"
       ],
       "x-ms-enum": {
         "name": "SignalKind",
@@ -3893,6 +3867,10 @@
           {
             "name": "PrometheusMetricsQuery",
             "value": "PrometheusMetricsQuery"
+          },
+          {
+            "name": "ExternalSignal",
+            "value": "ExternalSignal"
           }
         ]
       }
