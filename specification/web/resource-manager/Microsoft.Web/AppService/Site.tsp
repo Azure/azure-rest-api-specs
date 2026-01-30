@@ -1078,8 +1078,10 @@ interface Sites {
       @header("Content-Type")
       contentType: "application/xml";
 
+      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
       @doc("Receipt body in COSE format")
       @bodyRoot
+      @encode("binary")
       body: bytes;
     },
     OverrideErrorType = DefaultErrorResponse
@@ -2310,8 +2312,10 @@ interface WebApps {
       @header("Content-Type")
       contentType: "application/xml";
 
+      #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
       @doc("Receipt body in COSE format")
       @bodyRoot
+      @encode("binary")
       body: bytes;
     },
     OverrideErrorType = DefaultErrorResponse
