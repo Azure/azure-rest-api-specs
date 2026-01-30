@@ -1,0 +1,175 @@
+{
+  "title": "Organizations_CreateOrUpdate",
+  "operationId": "Organizations_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-11-27",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization",
+    "resource": {
+      "properties": {
+        "informaticaProperties": {
+          "organizationId": "org123",
+          "organizationName": "MyInformaticaOrg",
+          "informaticaRegion": "westus",
+          "singleSignOnUrl": "https://sso.informatica.com/myorg"
+        },
+        "marketplaceDetails": {
+          "marketplaceSubscriptionId": "mktplace-sub-123",
+          "marketplaceSubscriptionStatus": "Subscribed",
+          "offerDetails": {
+            "publisherId": "informatica",
+            "offerId": "informatica-cloud",
+            "planId": "enterprise-plan",
+            "planName": "Enterprise Plan",
+            "termUnit": "P1M",
+            "termId": "term-001"
+          }
+        },
+        "userDetails": {
+          "firstName": "John",
+          "lastName": "Doe",
+          "emailAddress": "john.doe@example.com",
+          "upn": "john.doe@example.com",
+          "phoneNumber": "+1-555-0100"
+        },
+        "companyDetails": {
+          "companyName": "Contoso Ltd",
+          "officeAddress": "123 Main Street, Seattle, WA 98101",
+          "country": "USA",
+          "domain": "contoso.com",
+          "business": "Technology",
+          "numberOfEmployees": 500
+        },
+        "linkOrganization": {
+          "token": "link-token-abc123"
+        }
+      },
+      "tags": {
+        "environment": "production"
+      },
+      "location": "westus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "informaticaProperties": {
+            "organizationId": "org123",
+            "organizationName": "MyInformaticaOrg",
+            "informaticaRegion": "westus",
+            "singleSignOnUrl": "https://sso.informatica.com/myorg"
+          },
+          "marketplaceDetails": {
+            "marketplaceSubscriptionId": "mktplace-sub-123",
+            "marketplaceSubscriptionStatus": "Subscribed",
+            "offerDetails": {
+              "publisherId": "informatica",
+              "offerId": "informatica-cloud",
+              "planId": "enterprise-plan",
+              "planName": "Enterprise Plan",
+              "termUnit": "P1M",
+              "termId": "term-001"
+            }
+          },
+          "userDetails": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "emailAddress": "john.doe@example.com",
+            "upn": "john.doe@example.com",
+            "phoneNumber": "+1-555-0100"
+          },
+          "companyDetails": {
+            "companyName": "Contoso Ltd",
+            "officeAddress": "123 Main Street, Seattle, WA 98101",
+            "country": "USA",
+            "domain": "contoso.com",
+            "business": "Technology",
+            "numberOfEmployees": 500
+          },
+          "linkOrganization": {
+            "token": "link-token-abc123"
+          }
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "westus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization",
+        "name": "myOrganization",
+        "type": "Informatica.DataManagement/organizations",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Informatica.DataManagement/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Accepted",
+          "informaticaProperties": {
+            "organizationId": "org123",
+            "organizationName": "MyInformaticaOrg",
+            "informaticaRegion": "westus",
+            "singleSignOnUrl": "https://sso.informatica.com/myorg"
+          },
+          "marketplaceDetails": {
+            "marketplaceSubscriptionId": "mktplace-sub-123",
+            "marketplaceSubscriptionStatus": "Subscribed",
+            "offerDetails": {
+              "publisherId": "informatica",
+              "offerId": "informatica-cloud",
+              "planId": "enterprise-plan",
+              "planName": "Enterprise Plan",
+              "termUnit": "P1M",
+              "termId": "term-001"
+            }
+          },
+          "userDetails": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "emailAddress": "john.doe@example.com",
+            "upn": "john.doe@example.com",
+            "phoneNumber": "+1-555-0100"
+          },
+          "companyDetails": {
+            "companyName": "Contoso Ltd",
+            "officeAddress": "123 Main Street, Seattle, WA 98101",
+            "country": "USA",
+            "domain": "contoso.com",
+            "business": "Technology",
+            "numberOfEmployees": 500
+          },
+          "linkOrganization": {
+            "token": "link-token-abc123"
+          }
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "westus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization",
+        "name": "myOrganization",
+        "type": "Informatica.DataManagement/organizations",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}

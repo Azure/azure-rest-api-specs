@@ -1,0 +1,57 @@
+{
+  "title": "ServerlessRuntimes_ListByInformaticaOrganizationResource",
+  "operationId": "ServerlessRuntimes_ListByInformaticaOrganizationResource",
+  "parameters": {
+    "api-version": "2025-11-27",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "description": "Production serverless runtime",
+              "platform": "AZURE",
+              "applicationType": "CDI",
+              "computeUnits": "4",
+              "executionTimeout": "3600",
+              "serverlessAccountLocation": "westus",
+              "serverlessRuntimeDataDisks": [
+                {
+                  "type": "NFS",
+                  "serverHostOrIpAddress": "10.0.0.5",
+                  "sourceMount": "/source/data",
+                  "targetMount": "/target/data",
+                  "mountOptions": "rw,sync"
+                }
+              ],
+              "serverlessRuntimeNetworkProfile": {
+                "networkInterfaceConfiguration": {
+                  "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Network/virtualNetworks/myVnet",
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default",
+                  "vnetResourceGuid": "vnet-guid-001"
+                }
+              }
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization/serverlessRuntimes/myServerlessRuntime",
+            "name": "myServerlessRuntime",
+            "type": "Informatica.DataManagement/organizations/serverlessRuntimes",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2024-01-01T00:00:00.000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization/serverlessRuntimes?api-version=2025-11-27&$skiptoken=token"
+      }
+    }
+  }
+}
