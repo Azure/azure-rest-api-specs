@@ -135,7 +135,9 @@ interface Incidents {
   runPlaybook is IncidentOps.ActionSync<
     Incident,
     Request = ManualTriggerRequestBody,
-    Response = NoContentResponse,
+    Response = NoContentResponse & {
+      @body body: {};
+    },
     ErrorType = CloudError,
     OptionalRequestBody = true
   >;

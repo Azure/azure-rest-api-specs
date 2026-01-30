@@ -26,20 +26,100 @@ model EntityResource {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface EntitiesOperationGroup {
+interface DataConnectorsCheckRequirementsOperationGroup {
   /**
-   * Triggers playbook on a specific entity.
+   * Get requirements state for a data connector type.
    */
-  @autoRoute
-  runPlaybook is Extension.ActionSync<
-    OperationalInsights,
-    EntityResource,
-    Request = EntityManualTriggerRequestBody,
-    OptionalRequestBody = true,
-    Response = void,
-    Error = CloudError
-  >;
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("DataConnectorsCheckRequirements_Post")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectorsCheckRequirements")
+  @post
+  post(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the workspace.
+     */
+    @maxLength(90)
+    @minLength(1)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    @path
+    workspaceName: string,
+
+    /**
+     * The parameters for requirements check message
+     */
+    @bodyRoot
+    DataConnectorsCheckRequirements: DataConnectorsCheckRequirements,
+  ): ArmResponse<DataConnectorRequirementsState> | CloudError;
 }
+
+/**
+ * Get geodata for a single IP address
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/enrichment/{enrichmentType}/listGeodataByIp")
+@post
+op listGeodataByIp(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+
+  /**
+   * The name of the workspace.
+   */
+  @maxLength(90)
+  @minLength(1)
+  @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+  @path
+  workspaceName: string,
+
+  /**
+   * Enrichment type
+   */
+  @path
+  enrichmentType: EnrichmentType,
+
+  /**
+   * IP address (v4 or v6) to be enriched
+   */
+  @bodyRoot
+  ipAddressBody: EnrichmentIpAddressBody,
+): ArmResponse<EnrichmentIpGeodata> | CloudError;
+
+/**
+ * Get whois information for a single domain name
+ */
+@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/enrichment/{enrichmentType}/listWhoisByDomain")
+@post
+op listWhoisByDomain(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+
+  /**
+   * The name of the workspace.
+   */
+  @maxLength(90)
+  @minLength(1)
+  @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+  @path
+  workspaceName: string,
+
+  /**
+   * Enrichment type
+   */
+  @path
+  enrichmentType: EnrichmentType,
+
+  /**
+   * Domain name to be enriched. Only domain name is accepted
+   */
+  @bodyRoot
+  domainBody: EnrichmentDomainBody,
+): ArmResponse<EnrichmentDomainWhois> | CloudError;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 interface SourceControlOperationGroup {
@@ -143,4 +223,76 @@ interface ThreatIntelligenceIndicatorMetricsOperationGroup {
     Response = ThreatIntelligenceMetricsList,
     Error = CloudError
   >;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+interface ThreatIntelligenceOperationGroup {
+  /**
+   * Gets the count of all TI objects for the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ThreatIntelligence_Count")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{tiType}/count")
+  @post
+  count(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the workspace.
+     */
+    @maxLength(90)
+    @minLength(1)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    @path
+    workspaceName: string,
+
+    /**
+     * TI type
+     */
+    @path
+    tiType: TiType,
+
+    /**
+     * The query to run on the TI objects in the workspace.
+     */
+    @bodyRoot
+    query?: CountQuery,
+  ): ArmResponse<ThreatIntelligenceCount> | CloudError;
+
+  /**
+   * Gets all TI objects for the workspace.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("ThreatIntelligence_Query")
+  @list
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/{tiType}/query")
+  @post
+  query(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the workspace.
+     */
+    @maxLength(90)
+    @minLength(1)
+    @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
+    @path
+    workspaceName: string,
+
+    /**
+     * TI type
+     */
+    @path
+    tiType: TiType,
+
+    /**
+     * The query to run on the TI objects in the workspace.
+     */
+    @bodyRoot
+    query?: Query,
+  ): ArmResponse<ThreatIntelligenceList> | CloudError;
 }

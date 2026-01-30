@@ -1,44 +1,46 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "entityId": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
     "resourceGroupName": "myRg",
-    "workspaceName": "myWorkspace",
-    "entityId": "e1d3d618-e11f-478b-98e3-bb381539a8e1"
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "workspaceName": "myWorkspace"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1",
         "name": "e1d3d618-e11f-478b-98e3-bb381539a8e1",
         "type": "Microsoft.SecurityInsights/entities",
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/entities/e1d3d618-e11f-478b-98e3-bb381539a8e1",
         "kind": "MailCluster",
         "properties": {
-          "friendlyName": "ClusterSourceIdentifier",
-          "networkMessageIds": [
-            "ccfce855-e02f-491b-a1cc-5bafb371ad0c"
-          ],
+          "clusterGroup": "cluster group",
+          "clusterSourceIdentifier": "cluster source identifier",
+          "clusterSourceType": "Similarity",
           "countByDeliveryStatus": {
             "deliveryStatus": 5
-          },
-          "countByThreatType": {
-            "threatType": 6
           },
           "countByProtectionStatus": {
             "protectionStatus": 65
           },
-          "threats": [
-            "thrreat1",
-            "thread2"
+          "countByThreatType": {
+            "threatType": 6
+          },
+          "friendlyName": "ClusterSourceIdentifier",
+          "networkMessageIds": [
+            "ccfce855-e02f-491b-a1cc-5bafb371ad0c"
           ],
           "query": "kqlFilter",
           "queryTime": "2021-09-01T01:42:01.6026755Z",
           "source": "ClusterSourceIdentifier",
-          "clusterSourceIdentifier": "cluster source identifier",
-          "clusterSourceType": "Similarity",
-          "clusterGroup": "cluster group"
+          "threats": [
+            "thrreat1",
+            "thread2"
+          ]
         }
       }
     }
-  }
+  },
+  "operationId": "Entities_Get",
+  "title": "Get a mailCluster entity."
 }

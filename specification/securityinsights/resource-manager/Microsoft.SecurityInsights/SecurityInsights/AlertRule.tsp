@@ -67,6 +67,19 @@ interface AlertRules {
     Response = ArmResponse<AlertRulesList>,
     Error = CloudError
   >;
+
+  /**
+   * triggers analytics rule run
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("alertRule_TriggerRuleRun")
+  triggerRuleRun is Extension.ActionAsyncBase<
+    OperationalInsights,
+    AlertRule,
+    Request = AnalyticsRuleRunTrigger,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AlertRule>>,
+    Error = ErrorResponse
+  >;
 }
 
 @@doc(AlertRule.name, "Alert rule ID");

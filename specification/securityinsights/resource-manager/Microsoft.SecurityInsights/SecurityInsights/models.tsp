@@ -122,6 +122,15 @@ union ActionType {
 }
 
 /**
+ * The kind of the billing statistic
+ */
+union BillingStatisticKind {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  SapSolutionUsage: "SapSolutionUsage",
+}
+
+/**
  * The severity of the incident
  */
 union IncidentSeverity {
@@ -306,6 +315,294 @@ union DataConnectorKind {
   MicrosoftDefenderAdvancedThreatProtection: "MicrosoftDefenderAdvancedThreatProtection",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   RestApiPoller: "RestApiPoller",
+}
+
+/**
+ * The authentication kind used to poll the data
+ */
+union ConnectAuthKind {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Basic: "Basic",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  OAuth2: "OAuth2",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  APIKey: "APIKey",
+}
+
+/**
+ * Describes the state of user's authorization for a connector kind.
+ */
+union DataConnectorAuthorizationState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Valid: "Valid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Invalid: "Invalid",
+}
+
+/**
+ * Describes the state of user's license for a connector kind.
+ */
+union DataConnectorLicenseState {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Valid: "Valid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Invalid: "Invalid",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unknown: "Unknown",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union EnrichmentType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  main: "main",
+}
+
+/**
+ * The entity query kind
+ */
+union EntityTimelineKind {
+  string,
+
+  /**
+   * activity
+   */
+  Activity: "Activity",
+
+  /**
+   * bookmarks
+   */
+  Bookmark: "Bookmark",
+
+  /**
+   * security alerts
+   */
+  SecurityAlert: "SecurityAlert",
+
+  /**
+   * anomaly
+   */
+  Anomaly: "Anomaly",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union EntityItemQueryKind {
+  string,
+
+  /**
+   * insight
+   */
+  Insight: "Insight",
+}
+
+/**
+ * The kind of the entity query
+ */
+union EntityQueryKind {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Expansion: "Expansion",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Insight: "Insight",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Activity: "Activity",
+}
+
+/**
+ * the query kind
+ */
+union GetInsightsError {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Insight: "Insight",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union EntityQueryTemplateKind {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Activity: "Activity",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Insight: "Insight",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  SecurityAlert: "SecurityAlert",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Bookmark: "Bookmark",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Expansion: "Expansion",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  GuidedInsight: "GuidedInsight",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Anomaly: "Anomaly",
+}
+
+/**
+ * Describes how to ingest the records in the file.
+ */
+union IngestionMode {
+  string,
+
+  /**
+   * No records should be ingested when invalid records are detected.
+   */
+  IngestOnlyIfAllAreValid: "IngestOnlyIfAllAreValid",
+
+  /**
+   * Valid records should still be ingested when invalid records are detected.
+   */
+  IngestAnyValidRecords: "IngestAnyValidRecords",
+
+  /**
+   * Unspecified
+   */
+  Unspecified: "Unspecified",
+}
+
+/**
+ * The content type of this file.
+ */
+union FileImportContentType {
+  string,
+
+  /**
+   * File containing records with the core fields of an indicator, plus the observables to construct the STIX pattern.
+   */
+  BasicIndicator: "BasicIndicator",
+
+  /**
+   * File containing STIX indicators.
+   */
+  StixIndicator: "StixIndicator",
+
+  /**
+   * File containing other records.
+   */
+  Unspecified: "Unspecified",
+}
+
+/**
+ * The format of the file
+ */
+union FileFormat {
+  string,
+
+  /**
+   * A CSV file.
+   */
+  CSV: "CSV",
+
+  /**
+   * A JSON file.
+   */
+  JSON: "JSON",
+
+  /**
+   * A file of other format.
+   */
+  Unspecified: "Unspecified",
+}
+
+/**
+ * Indicates whether the file was deleted from the storage account.
+ */
+union DeleteStatus {
+  string,
+
+  /**
+   * The file was deleted.
+   */
+  Deleted: "Deleted",
+
+  /**
+   * The file was not deleted.
+   */
+  NotDeleted: "NotDeleted",
+
+  /**
+   * Unspecified
+   */
+  Unspecified: "Unspecified",
+}
+
+/**
+ * The state of the file import.
+ */
+union FileImportState {
+  string,
+
+  /**
+   * A fatal error has occurred while ingesting the file.
+   */
+  FatalError: "FatalError",
+
+  /**
+   * The file has been ingested.
+   */
+  Ingested: "Ingested",
+
+  /**
+   * The file has been ingested with errors.
+   */
+  IngestedWithErrors: "IngestedWithErrors",
+
+  /**
+   * The file ingestion is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The file is invalid.
+   */
+  Invalid: "Invalid",
+
+  /**
+   * Waiting for the file to be uploaded.
+   */
+  WaitingForUpload: "WaitingForUpload",
+
+  /**
+   * Unspecified state.
+   */
+  Unspecified: "Unspecified",
+}
+
+/**
+ * The status of the hunt.
+ */
+union Status {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  New: "New",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Active: "Active",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Closed: "Closed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Backlog: "Backlog",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Approved: "Approved",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Succeeded: "Succeeded",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  InProgress: "InProgress",
+}
+
+/**
+ * The hypothesis status of the hunt.
+ */
+union HypothesisStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unknown: "Unknown",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Invalidated: "Invalidated",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Validated: "Validated",
 }
 
 /**
@@ -779,6 +1076,21 @@ union IncidentTaskStatus {
 }
 
 /**
+ * The kind of the setting
+ */
+union SettingKind {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Anomalies: "Anomalies",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  EyesOn: "EyesOn",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  EntityAnalytics: "EntityAnalytics",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Ueba: "Ueba",
+}
+
+/**
  * The kind of security ML analytics settings
  */
 union SecurityMLAnalyticsSettingsKind {
@@ -935,6 +1247,79 @@ union ThreatIntelligenceSortingOrder {
   descending: "descending",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+union TiType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  main: "main",
+}
+
+/**
+ * Represents boolean connectives used to join clauses in conditions.
+ */
+union Connective {
+  string,
+
+  /**
+   * 'And' connective
+   */
+  And: "And",
+
+  /**
+   * 'Or' connective
+   */
+  Or: "Or",
+}
+
+/**
+ * The direction to sort the results by.
+ */
+union SortingDirection {
+  string,
+
+  /**
+   * Indicates that the query should be sorted from lowest-to-highest value.
+   */
+  ASC: "ASC",
+
+  /**
+   * Indicates that the query should be sorted from lowest-to-highest value.
+   */
+  DESC: "DESC",
+}
+
+/**
+ * The kind of the TI object
+ */
+union TIObjectKind {
+  string,
+
+  /**
+   * A TI object that represents an attack pattern.
+   */
+  AttackPattern: "AttackPattern",
+
+  /**
+   * A TI object that represents an identity.
+   */
+  Identity: "Identity",
+
+  /**
+   * A TI object that represents an indicator.
+   */
+  Indicator: "Indicator",
+
+  /**
+   * A TI object that represents a relationship between two TI objects.
+   */
+  Relationship: "Relationship",
+
+  /**
+   * A TI object that represents a threat actor.
+   */
+  ThreatActor: "ThreatActor",
+}
+
 /**
  * The sourceType of the watchlist
  */
@@ -950,6 +1335,23 @@ union SourceType {
    * The source from Azure storage.
    */
   AzureStorage: "AzureStorage",
+}
+
+/**
+ * The current mode of the workspace manager configuration
+ */
+union Mode {
+  string,
+
+  /**
+   * The workspace manager configuration is enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * The workspace manager configuration is disabled
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -2405,6 +2807,11 @@ model ManualTriggerRequestBody {
 }
 
 /**
+ * List of all Microsoft Sentinel billing statistics.
+ */
+model BillingStatisticList is Azure.Core.Page<BillingStatistic>;
+
+/**
  * List all the bookmarks.
  */
 model BookmarkList is Azure.Core.Page<Bookmark>;
@@ -2532,6 +2939,111 @@ model IncidentInfo {
    * Relation Name
    */
   relationName?: string;
+}
+
+/**
+ * The parameters required to execute an expand operation on the given bookmark.
+ */
+model BookmarkExpandParameters {
+  /**
+   * The end date filter, so the only expansion results returned are before this date.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
+
+  /**
+   * The Id of the expansion to perform.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @format("uuid")
+  expansionId?: string;
+
+  /**
+   * The start date filter, so the only expansion results returned are after this date.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
+}
+
+/**
+ * The entity expansion result operation response.
+ */
+model BookmarkExpandResponse {
+  /**
+   * The metadata from the expansion operation results.
+   */
+  metaData?: ExpansionResultsMetadata;
+
+  /**
+   * The expansion result values.
+   */
+  value?: BookmarkExpandResponseValue;
+}
+
+/**
+ * Expansion result metadata.
+ */
+model ExpansionResultsMetadata {
+  /**
+   * Information of the aggregated nodes in the expansion result.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  aggregations?: ExpansionResultAggregation[];
+}
+
+/**
+ * Information of a specific aggregation in the expansion result.
+ */
+model ExpansionResultAggregation {
+  /**
+   * The common type of the aggregation. (for e.g. entity field name)
+   */
+  aggregationType?: string;
+
+  /**
+   * Total number of aggregations of the given kind (and aggregationType if given) in the expansion result.
+   */
+  count: int32;
+
+  /**
+   * The display name of the aggregation by type.
+   */
+  displayName?: string;
+
+  /**
+   * The kind of the aggregated entity.
+   */
+  entityKind: EntityKindEnum;
+}
+
+/**
+ * The expansion result values.
+ */
+model BookmarkExpandResponseValue {
+  /**
+   * Array of the expansion result entities.
+   */
+  entities?: Entity[];
+
+  /**
+   * Array of expansion result connected entities
+   */
+  edges?: ConnectedEntity[];
+}
+
+/**
+ * Expansion result connected entities
+ */
+model ConnectedEntity {
+  /**
+   * Entity Id of the connected entity
+   */
+  targetEntityId?: string;
+
+  /**
+   * key-value pairs for a connected entity mapping
+   */
+  additionalData?: Record<unknown>;
 }
 
 /**
@@ -3018,9 +3530,1050 @@ model DataConnectorDefinitionArmCollectionWrapper
 model DataConnectorList is Azure.Core.Page<DataConnector>;
 
 /**
+ * Represents Codeless API Polling data connector.
+ */
+model DataConnectorConnectBody {
+  /**
+   * The authentication kind used to poll the data
+   */
+  kind?: ConnectAuthKind;
+
+  /**
+   * The API key of the audit server.
+   */
+  apiKey?: string;
+
+  /**
+   * Used in v2 logs connector. Represents the data collection ingestion endpoint in log analytics.
+   */
+  dataCollectionEndpoint?: string;
+
+  /**
+   * Used in v2 logs connector. The data collection rule immutable id, the rule defines the transformation and data destination.
+   */
+  dataCollectionRuleImmutableId?: string;
+
+  /**
+   * Used in v2 logs connector. The stream we are sending the data to, this is the name of the streamDeclarations defined in the DCR.
+   */
+  outputStream?: string;
+
+  /**
+   * The client secret of the OAuth 2.0 application.
+   */
+  clientSecret?: string;
+
+  /**
+   * The client id of the OAuth 2.0 application.
+   */
+  clientId?: string;
+
+  /**
+   * The authorization code used in OAuth 2.0 code flow to issue a token.
+   */
+  authorizationCode?: string;
+
+  /**
+   * The user name in the audit log server.
+   */
+  userName?: string;
+
+  /**
+   * The user password in the audit log server.
+   */
+  password?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  requestConfigUserInputValues?: Record<unknown>[];
+}
+
+/**
+ * Data connector requirements properties.
+ */
+@discriminator("kind")
+model DataConnectorsCheckRequirements {
+  /**
+   * Describes the kind of connector to be checked.
+   */
+  kind: DataConnectorKind;
+}
+
+/**
+ * Data connector requirements status.
+ */
+model DataConnectorRequirementsState {
+  /**
+   * Authorization state for this connector
+   */
+  authorizationState?: DataConnectorAuthorizationState;
+
+  /**
+   * License state for this connector
+   */
+  licenseState?: DataConnectorLicenseState;
+}
+
+/**
+ * IP address (v4 or v6) to be enriched
+ */
+model EnrichmentIpAddressBody {
+  /**
+   * The dotted-decimal or colon-separated string representation of the IP address
+   */
+  ipAddress?: string;
+}
+
+/**
+ * Geodata information for a given IP address
+ */
+model EnrichmentIpGeodata {
+  /**
+   * The autonomous system number associated with this IP address
+   */
+  asn?: string;
+
+  /**
+   * The name of the carrier for this IP address
+   */
+  carrier?: string;
+
+  /**
+   * The city this IP address is located in
+   */
+  city?: string;
+
+  /**
+   * A numeric rating of confidence that the value in the 'city' field is correct, on a scale of 0-100
+   */
+  @maxValue(100)
+  cityConfidenceFactor?: int32;
+
+  /**
+   * The continent this IP address is located on
+   */
+  continent?: string;
+
+  /**
+   * The county this IP address is located in
+   */
+  country?: string;
+
+  /**
+   * A numeric rating of confidence that the value in the 'country' field is correct on a scale of 0-100
+   */
+  @maxValue(100)
+  countryConfidenceFactor?: int32;
+
+  /**
+   * The dotted-decimal or colon-separated string representation of the IP address
+   */
+  ipAddr?: string;
+
+  /**
+   * A description of the connection type of this IP address
+   */
+  ipRoutingType?: string;
+
+  /**
+   * The latitude of this IP address
+   */
+  latitude?: string;
+
+  /**
+   * The longitude of this IP address
+   */
+  longitude?: string;
+
+  /**
+   * The name of the organization for this IP address
+   */
+  organization?: string;
+
+  /**
+   * The type of the organization for this IP address
+   */
+  organizationType?: string;
+
+  /**
+   * The geographic region this IP address is located in
+   */
+  region?: string;
+
+  /**
+   * The state this IP address is located in
+   */
+  state?: string;
+
+  /**
+   * A numeric rating of confidence that the value in the 'state' field is correct on a scale of 0-100
+   */
+  @maxValue(100)
+  stateConfidenceFactor?: int32;
+
+  /**
+   * The abbreviated name for the state this IP address is located in
+   */
+  stateCode?: string;
+}
+
+/**
+ * Domain name to be enriched
+ */
+model EnrichmentDomainBody {
+  /**
+   * The domain name
+   */
+  domain?: string;
+}
+
+/**
+ * Whois information for a given domain and associated metadata
+ */
+model EnrichmentDomainWhois {
+  /**
+   * The domain for this whois record
+   */
+  domain?: string;
+
+  /**
+   * The hostname of this registrar's whois server
+   */
+  server?: string;
+
+  /**
+   * The timestamp at which this record was created
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  created?: utcDateTime;
+
+  /**
+   * The timestamp at which this record was last updated
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  updated?: utcDateTime;
+
+  /**
+   * The timestamp at which this record will expire
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expires?: utcDateTime;
+
+  /**
+   * The whois record for a given domain
+   */
+  parsedWhois?: EnrichmentDomainWhoisDetails;
+}
+
+/**
+ * The whois record for a given domain
+ */
+model EnrichmentDomainWhoisDetails {
+  /**
+   * The registrar associated with this domain
+   */
+  registrar?: EnrichmentDomainWhoisRegistrarDetails;
+
+  /**
+   * The set of contacts associated with this domain
+   */
+  contacts?: EnrichmentDomainWhoisContacts;
+
+  /**
+   * A list of name servers associated with this domain
+   */
+  nameServers?: string[];
+
+  /**
+   * The set of status flags for this whois record
+   */
+  statuses?: string[];
+}
+
+/**
+ * The registrar associated with this domain
+ */
+model EnrichmentDomainWhoisRegistrarDetails {
+  /**
+   * The name of this registrar
+   */
+  name?: string;
+
+  /**
+   * This registrar's abuse contact email
+   */
+  abuseContactEmail?: string;
+
+  /**
+   * This registrar's abuse contact phone number
+   */
+  abuseContactPhone?: string;
+
+  /**
+   * This registrar's Internet Assigned Numbers Authority id
+   */
+  ianaId?: string;
+
+  /**
+   * This registrar's URL
+   */
+  url?: string;
+
+  /**
+   * The hostname of this registrar's whois server
+   */
+  whoisServer?: string;
+}
+
+/**
+ * The set of contacts associated with this domain
+ */
+model EnrichmentDomainWhoisContacts {
+  /**
+   * The admin contact for this whois record
+   */
+  admin?: EnrichmentDomainWhoisContact;
+
+  /**
+   * The billing contact for this whois record
+   */
+  billing?: EnrichmentDomainWhoisContact;
+
+  /**
+   * The registrant contact for this whois record
+   */
+  registrant?: EnrichmentDomainWhoisContact;
+
+  /**
+   * The technical contact for this whois record
+   */
+  tech?: EnrichmentDomainWhoisContact;
+}
+
+/**
+ * An individual contact associated with this domain
+ */
+model EnrichmentDomainWhoisContact {
+  /**
+   * The name of this contact
+   */
+  name?: string;
+
+  /**
+   * The organization for this contact
+   */
+  org?: string;
+
+  /**
+   * A list describing the street address for this contact
+   */
+  street?: string[];
+
+  /**
+   * The city for this contact
+   */
+  city?: string;
+
+  /**
+   * The state for this contact
+   */
+  state?: string;
+
+  /**
+   * The postal code for this contact
+   */
+  postal?: string;
+
+  /**
+   * The country for this contact
+   */
+  country?: string;
+
+  /**
+   * The phone number for this contact
+   */
+  phone?: string;
+
+  /**
+   * The fax number for this contact
+   */
+  fax?: string;
+
+  /**
+   * The email address for this contact
+   */
+  email?: string;
+}
+
+/**
+ * List of all the entities.
+ */
+model EntityList is Azure.Core.Page<Entity>;
+
+/**
+ * The parameters required to execute an expand operation on the given entity.
+ */
+model EntityExpandParameters {
+  /**
+   * The end date filter, so the only expansion results returned are before this date.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
+
+  /**
+   * The Id of the expansion to perform.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @format("uuid")
+  expansionId?: string;
+
+  /**
+   * The start date filter, so the only expansion results returned are after this date.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
+}
+
+/**
+ * The entity expansion result operation response.
+ */
+model EntityExpandResponse {
+  /**
+   * The metadata from the expansion operation results.
+   */
+  metaData?: ExpansionResultsMetadata;
+
+  /**
+   * The expansion result values.
+   */
+  value?: EntityExpandResponseValue;
+}
+
+/**
+ * The expansion result values.
+ */
+model EntityExpandResponseValue {
+  /**
+   * Array of the expansion result entities.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  entities?: Entity[];
+
+  /**
+   * Array of edges that connects the entity to the list of entities.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  edges?: EntityEdges[];
+}
+
+/**
+ * The edge that connects the entity to the other entity.
+ */
+model EntityEdges {
+  /**
+   * The target entity Id.
+   */
+  targetEntityId?: string;
+
+  /**
+   * A bag of custom fields that should be part of the entity and will be presented to the user.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  additionalData?: Record<unknown>;
+}
+
+/**
+ * The parameters required to execute s timeline operation on the given entity.
+ */
+model EntityTimelineParameters {
+  /**
+   * Array of timeline Item kinds.
+   */
+  kinds?: EntityTimelineKind[];
+
+  /**
+   * The start timeline date, so the results returned are after this date.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime: utcDateTime;
+
+  /**
+   * The end timeline date, so the results returned are before this date.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime: utcDateTime;
+
+  /**
+   * The number of bucket for timeline queries aggregation.
+   */
+  numberOfBucket?: int32;
+}
+
+/**
+ * The entity timeline result operation response.
+ */
+model EntityTimelineResponse {
+  /**
+   * The metadata from the timeline operation results.
+   */
+  metaData?: TimelineResultsMetadata;
+
+  /**
+   * The timeline result values.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  value?: EntityTimelineItem[];
+}
+
+/**
+ * Expansion result metadata.
+ */
+model TimelineResultsMetadata {
+  /**
+   * the total items found for the timeline request
+   */
+  totalCount: int32;
+
+  /**
+   * timeline aggregation per kind
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  aggregations: TimelineAggregation[];
+
+  /**
+   * information about the failure queries
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  errors?: TimelineError[];
+}
+
+/**
+ * timeline aggregation information per kind
+ */
+model TimelineAggregation {
+  /**
+   * the total items found for a kind
+   */
+  count: int32;
+
+  /**
+   * the query kind
+   */
+  kind: EntityTimelineKind;
+}
+
+/**
+ * Timeline Query Errors.
+ */
+model TimelineError {
+  /**
+   * the query kind
+   */
+  kind: EntityTimelineKind;
+
+  /**
+   * the query id
+   */
+  queryId?: string;
+
+  /**
+   * the error message
+   */
+  errorMessage: string;
+}
+
+/**
  * List all the incidents.
  */
 model IncidentList is Azure.Core.Page<Incident>;
+
+/**
+ * Entity timeline Item.
+ */
+@discriminator("kind")
+model EntityTimelineItem {
+  /**
+   * The entity query kind type.
+   */
+  kind: EntityTimelineKind;
+}
+
+/**
+ * Retrieve queries for entity result operation response.
+ */
+model GetQueriesResponse {
+  /**
+   * The query result values.
+   */
+  @pageItems
+  value?: EntityQueryItem[];
+
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * An abstract Query item for entity
+ */
+@discriminator("kind")
+model EntityQueryItem {
+  /**
+   * Query Template ARM ID
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Query Template ARM Name
+   */
+  name?: string;
+
+  /**
+   * ARM Type
+   */
+  type?: string;
+
+  /**
+   * The kind of the entity query
+   */
+  kind: EntityQueryKind;
+}
+
+/**
+ * The parameters required to execute insights operation on the given entity.
+ */
+model EntityGetInsightsParameters {
+  /**
+   * The start timeline date, so the results returned are after this date.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime: utcDateTime;
+
+  /**
+   * The end timeline date, so the results returned are before this date.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime: utcDateTime;
+
+  /**
+   * Indicates if query time range should be extended with default time range of the query. Default value is false
+   */
+  addDefaultExtendedTimeRange?: boolean;
+
+  /**
+   * List of Insights Query Id. If empty, default value is all insights of this entity
+   */
+  insightQueryIds?: string[];
+}
+
+/**
+ * The Get Insights result operation response.
+ */
+model EntityGetInsightsResponse {
+  /**
+   * The metadata from the get insights operation results.
+   */
+  metaData?: GetInsightsResultsMetadata;
+
+  /**
+   * The insights result values.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  value?: EntityInsightItem[];
+}
+
+/**
+ * Get Insights result metadata.
+ */
+model GetInsightsResultsMetadata {
+  /**
+   * the total items found for the insights request
+   */
+  totalCount: int32;
+
+  /**
+   * information about the failed queries
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  errors?: GetInsightsErrorKind[];
+}
+
+/**
+ * GetInsights Query Errors.
+ */
+model GetInsightsErrorKind {
+  /**
+   * the query kind
+   */
+  kind: GetInsightsError;
+
+  /**
+   * the query id
+   */
+  queryId?: string;
+
+  /**
+   * the error message
+   */
+  errorMessage: string;
+}
+
+/**
+ * Entity insight Item.
+ */
+model EntityInsightItem {
+  /**
+   * The query id of the insight
+   */
+  queryId?: string;
+
+  /**
+   * The Time interval that the query actually executed on.
+   */
+  queryTimeInterval?: EntityInsightItemQueryTimeInterval;
+
+  /**
+   * Query results for table insights query.
+   */
+  tableQueryResults?: InsightsTableResult;
+
+  /**
+   * Query results for table insights query.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  chartQueryResults?: InsightsTableResult[];
+}
+
+/**
+ * The Time interval that the query actually executed on.
+ */
+model EntityInsightItemQueryTimeInterval {
+  /**
+   * Insight query start time
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
+
+  /**
+   * Insight query end time
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
+}
+
+/**
+ * Query results for table insights query.
+ */
+model InsightsTableResult {
+  /**
+   * Columns Metadata of the table
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  columns?: InsightsTableResultColumnsItem[];
+
+  /**
+   * Rows data of the table
+   */
+  rows?: string[][];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model InsightsTableResultColumnsItem {
+  /**
+   * the type of the column
+   */
+  type?: string;
+
+  /**
+   * the name of the column
+   */
+  name?: string;
+}
+
+/**
+ * List of all the entity queries.
+ */
+model EntityQueryList is Azure.Core.Page<EntityQuery>;
+
+/**
+ * List of all the entity query templates.
+ */
+model EntityQueryTemplateList is Azure.Core.Page<EntityQueryTemplate>;
+
+/**
+ * List all the file imports.
+ */
+model FileImportList is Azure.Core.Page<FileImport>;
+
+/**
+ * Describes the FileImport's properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model FileImportProperties {
+  /**
+   * Describes how to ingest the records in the file.
+   */
+  ingestionMode: IngestionMode;
+
+  /**
+   * The content type of this file.
+   */
+  contentType: FileImportContentType;
+
+  /**
+   * The time the file was imported.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  createdTimeUTC?: utcDateTime;
+
+  /**
+   * Represents the error file (if the import was ingested with errors or failed the validation).
+   */
+  @visibility(Lifecycle.Read)
+  errorFile?: FileMetadata;
+
+  /**
+   * An ordered list of some of the errors that were encountered during validation.
+   */
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  errorsPreview?: ValidationError[];
+
+  /**
+   * Represents the imported file.
+   */
+  importFile: FileMetadata;
+
+  /**
+   * The number of records that have been successfully ingested.
+   */
+  @visibility(Lifecycle.Read)
+  ingestedRecordCount?: int32;
+
+  /**
+   * The source for the data in the file.
+   */
+  source: string;
+
+  /**
+   * The state of the file import.
+   */
+  @visibility(Lifecycle.Read)
+  state?: FileImportState;
+
+  /**
+   * The number of records in the file.
+   */
+  @visibility(Lifecycle.Read)
+  totalRecordCount?: int32;
+
+  /**
+   * The number of records that have passed validation.
+   */
+  @visibility(Lifecycle.Read)
+  validRecordCount?: int32;
+
+  /**
+   * The time the files associated with this import are deleted from the storage account.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  filesValidUntilTimeUTC?: utcDateTime;
+
+  /**
+   * The time the file import record is soft deleted from the database and history.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  importValidUntilTimeUTC?: utcDateTime;
+}
+
+/**
+ * Represents a file.
+ */
+model FileMetadata {
+  /**
+   * The format of the file
+   */
+  fileFormat?: FileFormat;
+
+  /**
+   * The name of the file.
+   */
+  fileName?: string;
+
+  /**
+   * The size of the file.
+   */
+  fileSize?: int32;
+
+  /**
+   * A URI with a valid SAS token to allow uploading / downloading the file.
+   */
+  @visibility(Lifecycle.Read)
+  fileContentUri?: string;
+
+  /**
+   * Indicates whether the file was deleted from the storage account.
+   */
+  @visibility(Lifecycle.Read)
+  deleteStatus?: DeleteStatus;
+}
+
+/**
+ * Describes an error encountered in the file during validation.
+ */
+model ValidationError {
+  /**
+   * The number of the record that has the error.
+   */
+  recordIndex?: int32;
+
+  /**
+   * A list of descriptions of the error.
+   */
+  @visibility(Lifecycle.Read)
+  errorMessages?: string[];
+}
+
+/**
+ * List all the hunts.
+ */
+model HuntList is Azure.Core.Page<Hunt>;
+
+/**
+ * Describes hunt properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model HuntProperties {
+  /**
+   * The display name of the hunt
+   */
+  displayName: string;
+
+  /**
+   * The description of the hunt
+   */
+  description: string;
+
+  /**
+   * The status of the hunt.
+   */
+  status?: Status;
+
+  /**
+   * The hypothesis status of the hunt.
+   */
+  hypothesisStatus?: HypothesisStatus = HypothesisStatus.Unknown;
+
+  /**
+   * A list of mitre attack tactics the hunt is associated with
+   */
+  attackTactics?: AttackTactic[];
+
+  /**
+   * A list of a mitre attack techniques the hunt is associated with
+   */
+  attackTechniques?: string[];
+
+  /**
+   * List of labels relevant to this hunt
+   */
+  labels?: string[];
+
+  /**
+   * Describes a user that the hunt is assigned to
+   */
+  owner?: HuntOwner;
+}
+
+/**
+ * Describes a user that the hunt is assigned to
+ */
+model HuntOwner {
+  /**
+   * The email of the user the hunt is assigned to.
+   */
+  email?: string;
+
+  /**
+   * The name of the user the hunt is assigned to.
+   */
+  assignedTo?: string;
+
+  /**
+   * The object id of the user the hunt is assigned to.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @format("uuid")
+  objectId?: string;
+
+  /**
+   * The user principal name of the user the hunt is assigned to.
+   */
+  userPrincipalName?: string;
+
+  /**
+   * The type of the owner the hunt is assigned to.
+   */
+  ownerType?: OwnerType;
+}
+
+/**
+ * List of all the hunt relations
+ */
+model HuntRelationList is Azure.Core.Page<HuntRelation>;
+
+/**
+ * Describes hunt relation properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model HuntRelationProperties {
+  /**
+   * The id of the related resource
+   */
+  relatedResourceId: string;
+
+  /**
+   * The name of the related resource
+   */
+  @visibility(Lifecycle.Read)
+  relatedResourceName?: string;
+
+  /**
+   * The type of the hunt relation
+   */
+  @visibility(Lifecycle.Read)
+  relationType?: string;
+
+  /**
+   * The resource that the relation is related to
+   */
+  @visibility(Lifecycle.Read)
+  relatedResourceKind?: string;
+
+  /**
+   * List of labels relevant to this hunt
+   */
+  labels?: string[];
+}
+
+/**
+ * List of all hunt comments
+ */
+model HuntCommentList is Azure.Core.Page<HuntComment>;
+
+/**
+ * Describes a hunt comment properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model HuntCommentProperties {
+  /**
+   * The message for the comment
+   */
+  message: string;
+}
 
 /**
  * Describes incident properties
@@ -3450,18 +5003,6 @@ model EntityCommonProperties {
    */
   @visibility(Lifecycle.Read)
   friendlyName?: string;
-}
-
-/**
- * Specific entity.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@discriminator("kind")
-model Entity extends Azure.ResourceManager.CommonTypes.Resource {
-  /**
-   * The kind of the entity.
-   */
-  kind: EntityKindEnum;
 }
 
 /**
@@ -3925,6 +5466,27 @@ model MetadataPropertiesPatch {
 }
 
 /**
+ * List of all the office365 consents.
+ */
+model OfficeConsentList is Azure.Core.Page<OfficeConsent>;
+
+/**
+ * Consent property bag.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model OfficeConsentProperties {
+  /**
+   * The tenantId of the Office365 with the consent.
+   */
+  tenantId?: string;
+
+  /**
+   * Help to easily cascade among the data layers.
+   */
+  consentId?: string;
+}
+
+/**
  * The Sentinel onboarding state properties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -3995,6 +5557,133 @@ model OperationDisplay {
    */
   resource?: string;
 }
+/**
+ * A list of recommendations
+ */
+model RecommendationList is Azure.Core.Page<Recommendation>;
+
+/**
+ * Recommendation properties object.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model RecommendationProperties {
+  /**
+   * Id of the recommendation type.
+   */
+  recommendationTypeId: string;
+
+  /**
+   * State of the recommendation.
+   */
+  state: State;
+
+  /**
+   * Title of the recommendation.
+   */
+  title: string;
+
+  /**
+   * Description of the recommendation.
+   */
+  description: string;
+
+  /**
+   * The time stamp (UTC) when the recommendation was created.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  creationTimeUtc: utcDateTime;
+
+  /**
+   * The time stamp (UTC) when the recommendation was last evaluated.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastEvaluatedTimeUtc: utcDateTime;
+
+  /**
+   * The time stamp (UTC) when the recommendation was last modified.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastModifiedTimeUtc: utcDateTime;
+
+  /**
+   * List of suggestions to take for this recommendation.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  suggestions: RecommendedSuggestion[];
+
+  /**
+   * Id of the resource this recommendation refers to.
+   */
+  resourceId?: string;
+
+  /**
+   * Collection of additional properties for the recommendation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  additionalProperties?: Record<string>;
+}
+
+/**
+ * What suggestions should be taken to complete the recommendation.
+ */
+model RecommendedSuggestion {
+  /**
+   * Id of the suggestion type.
+   */
+  suggestionTypeId: string;
+
+  /**
+   * Title of the suggestion.
+   */
+  title: string;
+
+  /**
+   * Description of the suggestion.
+   */
+  description: string;
+
+  /**
+   * Action of the suggestion.
+   */
+  action: string;
+
+  /**
+   * Collection of additional properties for the suggestion.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  additionalProperties?: Record<string>;
+}
+
+/**
+ * Recommendation Fields to update.
+ */
+model RecommendationPatch {
+  /**
+   * Recommendation Fields Properties to update.
+   */
+  properties?: RecommendationPatchProperties;
+}
+
+/**
+ * Recommendation Fields Properties to update.
+ */
+model RecommendationPatchProperties {
+  /**
+   * State of the recommendation.
+   */
+  state?: State;
+}
+
+/**
+ * Reevaluate response object.
+ */
+model ReevaluateResponse {
+  /**
+   * The time stamp (UTC) when the recommendation was last evaluated.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastEvaluatedTimeUtc?: utcDateTime;
+}
 
 /**
  * List all the SecurityMLAnalyticsSettings
@@ -4002,6 +5691,11 @@ model OperationDisplay {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SecurityMLAnalyticsSettingsList
   is Azure.Core.Page<SecurityMLAnalyticsSetting>;
+
+/**
+ * List of all the settings.
+ */
+model SettingList is Azure.Core.Page<Settings>;
 
 /**
  * Credentials to access repository.
@@ -4869,6 +6563,277 @@ model ThreatIntelligenceAppendTags {
    */
   threatIntelligenceTags?: string[];
 }
+
+/**
+ * Represents a query to run on the TI objects in the workspace.
+ */
+model CountQuery {
+  /**
+   * Query properties
+   */
+  properties?: QueryProperties;
+}
+
+/**
+ * Describes the query properties
+ */
+model QueryProperties {
+  /**
+   * Represents a condition used to query for TI objects.
+   */
+  condition?: ConditionProperties;
+}
+
+/**
+ * Represents a condition used to query for TI objects.
+ */
+model ConditionProperties {
+  /**
+   * The STIX type for the objects returned by this query.
+   */
+  @visibility(Lifecycle.Read)
+  stixObjectType?: string;
+
+  /**
+   * The list of clauses to be evaluated in disjunction or conjunction base on the specified top level connective operator.
+   */
+  clauses: ConditionClause[];
+
+  /**
+   * The top level connective operator for this condition.
+   */
+  conditionConnective?: Connective;
+}
+
+/**
+ * Represents a single clause to be evaluated by a NormalizedCondition.
+ */
+model ConditionClause {
+  /**
+   * The connective used to join all values in this ConditionClause
+   */
+  clauseConnective?: Connective;
+
+  /**
+   * The name of the field that is evaluated.
+   */
+  field: string;
+
+  /**
+   * Represents an operator in a ConditionClause.
+   */
+  operator: Operator;
+
+  /**
+   * The top level connective operator for this condition.
+   */
+  values: string[];
+}
+
+/**
+ * Count of all the threat intelligence objects on the workspace that match the provided query.
+ */
+model ThreatIntelligenceCount {
+  /**
+   * Count of all the threat intelligence objects on the workspace that match the provided query.
+   */
+  @visibility(Lifecycle.Read)
+  count: int32;
+}
+
+/**
+ * Represents a query to run on the TI objects in the workspace.
+ */
+model Query {
+  /**
+   * Represents a condition used to query for TI objects.
+   */
+  condition?: QueryCondition;
+
+  /**
+   * Specifies how to sort the query results.
+   */
+  sortBy?: QuerySortBy;
+
+  /**
+   * Represents the maximum size of the page that will be returned from the query API.
+   */
+  maxPageSize?: int32;
+
+  /**
+   * Represents the minimum size of the page that will be returned from the query API.
+   */
+  minPageSize?: int32;
+}
+
+/**
+ * Represents a condition used to query for TI objects.
+ */
+model QueryCondition {
+  /**
+   * The STIX type for the objects returned by this query.
+   */
+  stixObjectType?: string;
+
+  /**
+   * The list of clauses to be evaluated in disjunction or conjunction base on the specified top level connective operator.
+   */
+  clauses: ConditionClause[];
+
+  /**
+   * The top level connective operator for this condition.
+   */
+  conditionConnective?: Connective;
+}
+
+/**
+ * Specifies how to sort the query results.
+ */
+model QuerySortBy {
+  /**
+   * The direction to sort the results by.
+   */
+  direction?: SortingDirection;
+
+  /**
+   * Represents the field to sort the results by.
+   */
+  field?: string;
+}
+
+/**
+ * List all the threat intelligence objects on the workspace that match the provided query.
+ */
+model ThreatIntelligenceList is Azure.Core.Page<TIObject>;
+
+/**
+ * Represents a threat intelligence object in Azure Security Insights.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@discriminator("kind")
+model TIObject extends Azure.ResourceManager.CommonTypes.Resource {
+  /**
+   * The properties of the TI object
+   */
+  properties?: TIObjectCommonProperties;
+
+  /**
+   * The kind of the TI object
+   */
+  kind: TIObjectKind;
+}
+
+/**
+ * Describes properties common to all threat intelligence objects
+ */
+model TIObjectCommonProperties {
+  /**
+   * The core STIX object that this TI object represents.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility(Lifecycle.Read)
+  data?: Record<unknown>;
+
+  /**
+   * The UserInfo of the user/entity which originally created this TI object.
+   */
+  @visibility(Lifecycle.Read)
+  createdBy?: UserInfo;
+
+  /**
+   * The source name for this TI object.
+   */
+  @visibility(Lifecycle.Read)
+  source?: string;
+
+  /**
+   * The timestamp for the first time this object was ingested.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  firstIngestedTimeUtc?: utcDateTime;
+
+  /**
+   * The timestamp for the last time this object was ingested.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastIngestedTimeUtc?: utcDateTime;
+
+  /**
+   * The ID of the rules version that was active when this TI object was last ingested.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format"
+  @visibility(Lifecycle.Read)
+  @format("uuid")
+  ingestionRulesVersion?: string;
+
+  /**
+   * The name of the method/application that initiated the last write to this TI object.
+   */
+  @visibility(Lifecycle.Read)
+  lastUpdateMethod?: string;
+
+  /**
+   * The UserInfo of the user/entity which last modified this TI object.
+   */
+  @visibility(Lifecycle.Read)
+  lastModifiedBy?: UserInfo;
+
+  /**
+   * The timestamp for the last time this TI object was updated.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastUpdatedDateTimeUtc?: utcDateTime;
+
+  /**
+   * A dictionary used to help follow relationships from this object to other STIX objects. The keys are field names from the STIX object (in the 'data' field), and the values are lists of sources that can be prepended to the object ID in order to efficiently locate the target TI object.
+   */
+  @visibility(Lifecycle.Read)
+  relationshipHints?: RelationshipHint[];
+}
+
+/**
+ * An object used to help follow relationships from this object to other STIX objects.
+ */
+model RelationshipHint {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  fieldName?: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  source?: string;
+}
+
+/**
+ * The triggered analytics rule run Properties
+ */
+model TriggeredAnalyticsRuleRunProperties {
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  executionTimeUtc: utcDateTime;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  ruleId: string;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  triggeredAnalyticsRuleRunId: string;
+
+  /**
+   * The triggered analytics rule run provisioning state
+   */
+  provisioningState: ProvisioningState;
+
+  /**
+   * Dictionary of <any>
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  ruleRunAdditionalData?: Record<unknown>;
+}
+
+/**
+ * The triggered analytics rule run array
+ */
+model TriggeredAnalyticsRuleRuns is Azure.Core.Page<TriggeredAnalyticsRuleRun>;
+
 /**
  * Analytics Rule Run Trigger request
  */
@@ -5075,6 +7040,202 @@ model WatchlistItemProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   entityMapping?: unknown;
+}
+
+/**
+ * List of all the workspace manager assignments.
+ */
+model WorkspaceManagerAssignmentList
+  is Azure.Core.Page<WorkspaceManagerAssignment>;
+
+/**
+ * The workspace manager assignment properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model WorkspaceManagerAssignmentProperties {
+  /**
+   * The resource name of the workspace manager group targeted by the workspace manager assignment
+   */
+  targetResourceName: string;
+
+  /**
+   * The time the last job associated to this assignment ended at
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  lastJobEndTime?: utcDateTime;
+
+  /**
+   * State of the last job associated to this assignment
+   */
+  @visibility(Lifecycle.Read)
+  lastJobProvisioningState?: ProvisioningState;
+
+  /**
+   * List of resources included in this workspace manager assignment
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  items: AssignmentItem[];
+}
+
+/**
+ * An entity describing a content item.
+ */
+model AssignmentItem {
+  /**
+   * The resource id of the content item
+   */
+  resourceId?: string;
+}
+
+/**
+ * List of all the jobs
+ */
+model JobList is Azure.Core.Page<Job>;
+
+/**
+ * The job properties
+ */
+model JobProperties {
+  /**
+   * The time the job completed
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  endTime?: utcDateTime;
+
+  /**
+   * List of items published by the job
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  items?: JobItem[];
+
+  /**
+   * State of the job
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The time the job started
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startTime?: utcDateTime;
+
+  /**
+   * Message to describe error, if an error exists
+   */
+  @visibility(Lifecycle.Read)
+  errorMessage?: string;
+}
+
+/**
+ * An entity describing the publish status of a content item.
+ */
+model JobItem {
+  /**
+   * The resource id of the content item
+   */
+  resourceId?: string;
+
+  /**
+   * Status of the item publication
+   */
+  @visibility(Lifecycle.Read)
+  status?: Status;
+
+  /**
+   * The time the item publishing was completed
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  executionTime?: utcDateTime;
+
+  /**
+   * The list of error descriptions if the item publication fails.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  errors?: Error[];
+}
+
+/**
+ * The error description for why a publication failed
+ */
+model Error {
+  /**
+   * The member resource name for which the publication error occured
+   */
+  memberResourceName: string;
+
+  /**
+   * The error message
+   */
+  errorMessage: string;
+}
+
+/**
+ * List all the workspace manager configurations for the workspace.
+ */
+model WorkspaceManagerConfigurationList
+  is Azure.Core.Page<WorkspaceManagerConfiguration>;
+
+/**
+ * The workspace manager configuration properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model WorkspaceManagerConfigurationProperties {
+  /**
+   * The current mode of the workspace manager configuration
+   */
+  mode: Mode;
+}
+
+/**
+ * List of all the workspace manager groups.
+ */
+model WorkspaceManagerGroupList is Azure.Core.Page<WorkspaceManagerGroup>;
+
+/**
+ * The workspace manager group properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model WorkspaceManagerGroupProperties {
+  /**
+   * The description of the workspace manager group
+   */
+  description?: string;
+
+  /**
+   * The display name of the workspace manager group
+   */
+  displayName: string;
+
+  /**
+   * The names of the workspace manager members participating in this group.
+   */
+  memberResourceNames: string[];
+}
+
+/**
+ * List of workspace manager members
+ */
+model WorkspaceManagerMembersList is Azure.Core.Page<WorkspaceManagerMember>;
+
+/**
+ * The workspace manager member properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+model WorkspaceManagerMemberProperties {
+  /**
+   * Fully qualified resource ID of the target Sentinel workspace joining the given Sentinel workspace manager
+   */
+  targetWorkspaceResourceId: string;
+
+  /**
+   * Tenant id of the target Sentinel workspace joining the given Sentinel workspace manager
+   */
+  targetWorkspaceTenantId: string;
 }
 
 /**

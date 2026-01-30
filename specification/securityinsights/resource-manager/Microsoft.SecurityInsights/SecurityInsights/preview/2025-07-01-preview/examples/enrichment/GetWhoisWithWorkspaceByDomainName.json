@@ -1,73 +1,64 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "subscriptionId": "bd794837-4d29-4647-9105-6339bfdb4e6a",
-    "resourceGroupName": "myRg",
-    "workspaceName": "myWorkspace",
-    "enrichmentType": "main",
     "domainBody": {
       "domain": "microsoft.com"
-    }
+    },
+    "enrichmentType": "main",
+    "resourceGroupName": "myRg",
+    "subscriptionId": "bd794837-4d29-4647-9105-6339bfdb4e6a",
+    "workspaceName": "myWorkspace"
   },
   "responses": {
     "200": {
       "body": {
-        "domain": "microsoft.com",
-        "server": null,
         "created": "2021-09-01T16:15:01.187045Z",
-        "updated": "2021-09-01T16:15:01.187045Z",
+        "domain": "microsoft.com",
         "expires": null,
         "parsedWhois": {
-          "registrar": {
-            "name": "MarkMonitor, Inc",
-            "abuseContactPhone": "12083895770",
-            "abuseContactEmail": "abuse@microsoft.com",
-            "url": "http://www.markmonitor.com",
-            "whoisServer": "whois.markmonitor.com"
-          },
           "contacts": {
             "admin": {
               "name": "Administrator",
+              "city": null,
+              "country": "United States",
+              "email": "mail@microsoft.com",
+              "fax": null,
               "org": "Microsoft",
+              "phone": "1-800-555-1234",
+              "postal": "98052",
+              "state": "WA",
               "street": [
                 "One Microsoft Way"
-              ],
-              "city": null,
-              "state": "WA",
-              "postal": "98052",
-              "country": "United States",
-              "phone": "1-800-555-1234",
-              "fax": null,
-              "email": "mail@microsoft.com"
+              ]
             },
-            "registrant": null,
             "billing": {
               "name": "Administrator",
+              "city": null,
+              "country": "United States",
+              "email": "mail@microsoft.com",
+              "fax": null,
               "org": "Microsoft",
+              "phone": "1-800-555-1234",
+              "postal": "98052",
+              "state": "WA",
               "street": [
                 "One Microsoft Way"
-              ],
-              "city": null,
-              "state": "WA",
-              "postal": "98052",
-              "country": "United States",
-              "phone": "1-800-555-1234",
-              "fax": null,
-              "email": "mail@microsoft.com"
+              ]
             },
+            "registrant": null,
             "tech": {
               "name": "Administrator",
+              "city": null,
+              "country": "United States",
+              "email": "mail@microsoft.com",
+              "fax": null,
               "org": "Microsoft",
+              "phone": "1-800-555-1234",
+              "postal": "98052",
+              "state": "WA",
               "street": [
                 "One Microsoft Way"
-              ],
-              "city": null,
-              "state": "WA",
-              "postal": "98052",
-              "country": "United States",
-              "phone": "1-800-555-1234",
-              "fax": null,
-              "email": "mail@microsoft.com"
+              ]
             }
           },
           "nameServers": [
@@ -76,6 +67,13 @@
             "ns3-205.azure-dns.org",
             "ns4-205.azure-dns.info"
           ],
+          "registrar": {
+            "name": "MarkMonitor, Inc",
+            "abuseContactEmail": "abuse@microsoft.com",
+            "abuseContactPhone": "12083895770",
+            "url": "http://www.markmonitor.com",
+            "whoisServer": "whois.markmonitor.com"
+          },
           "statuses": [
             "clientUpdateProhibited",
             "clientTransferProhibited",
@@ -84,8 +82,12 @@
             "serverTransferProhibited",
             "serverDeleteProhibited"
           ]
-        }
+        },
+        "server": null,
+        "updated": "2021-09-01T16:15:01.187045Z"
       }
     }
-  }
+  },
+  "operationId": "ListWhoisByDomain",
+  "title": "Get whois information for a single domain name"
 }

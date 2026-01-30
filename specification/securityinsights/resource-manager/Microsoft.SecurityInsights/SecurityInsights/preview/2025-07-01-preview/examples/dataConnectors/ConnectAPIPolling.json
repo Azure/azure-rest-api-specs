@@ -1,13 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
-    "resourceGroupName": "myRg",
-    "workspaceName": "myWorkspace",
-    "dataConnectorId": "316ec55e-7138-4d63-ab18-90c8a60fd1c8",
     "connectBody": {
-      "kind": "APIKey",
       "apiKey": "123456789",
+      "kind": "APIKey",
       "requestConfigUserInputValues": [
         {
           "displayText": "Organization Name",
@@ -16,9 +12,15 @@
           "requestObjectKey": "apiEndpoint"
         }
       ]
-    }
+    },
+    "dataConnectorId": "316ec55e-7138-4d63-ab18-90c8a60fd1c8",
+    "resourceGroupName": "myRg",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "workspaceName": "myWorkspace"
   },
   "responses": {
     "200": {}
-  }
+  },
+  "operationId": "DataConnectors_Connect",
+  "title": "Connect an APIPolling data connector"
 }

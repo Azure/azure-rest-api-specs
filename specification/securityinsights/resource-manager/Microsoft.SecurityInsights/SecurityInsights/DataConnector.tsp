@@ -65,6 +65,28 @@ interface DataConnectors {
     Response = ArmResponse<DataConnectorList>,
     Error = CloudError
   >;
+
+  /**
+   * Connects a data connector.
+   */
+  connect is Extension.ActionSync<
+    OperationalInsights,
+    DataConnector,
+    DataConnectorConnectBody,
+    OkResponse,
+    Error = CloudError
+  >;
+
+  /**
+   * Disconnect a data connector.
+   */
+  disconnect is Extension.ActionSync<
+    OperationalInsights,
+    DataConnector,
+    void,
+    OkResponse,
+    Error = CloudError
+  >;
 }
 
 @@doc(DataConnector.name, "Connector ID");

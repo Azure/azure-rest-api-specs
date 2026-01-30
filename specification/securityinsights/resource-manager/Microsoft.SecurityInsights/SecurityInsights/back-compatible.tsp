@@ -346,11 +346,6 @@ using Azure.ClientGenerator.Core.Legacy;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(WatchlistItem.properties);
 
-@@clientLocation(EntitiesOperationGroup.runPlaybook, "Entities");
-@@clientName(EntitiesOperationGroup.runPlaybook::parameters.body,
-  "requestBody"
-);
-
 @@clientLocation(SourceControlOperationGroup.listRepositories, "SourceControl");
 @@clientName(SourceControlOperationGroup.listRepositories, "listRepositories");
 
@@ -414,4 +409,34 @@ using Azure.ClientGenerator.Core.Legacy;
 );
 @@pattern(Azure.ResourceManager.Legacy.PolymorphicResourceKindProperty.kind,
   ""
+);
+@@clientName(AlertRules.triggerRuleRun::parameters.body,
+  "analyticsRuleRunTriggerParameter"
+);
+@@clientName(Bookmarks.expand::parameters.body, "parameters");
+@@clientName(DataConnectors.connect::parameters.body, "connectBody");
+@@clientName(Entities.expand::parameters.body, "parameters");
+@@clientName(Entities.getInsights::parameters.body, "parameters");
+@@clientName(Entities.getInsights::parameters.body, "parameters");
+@@clientName(Entities.entitiesGetTimelineList::parameters.body, "parameters");
+@@clientName(EntityQueries.createOrUpdate::parameters.resource, "entityQuery");
+@@clientName(FileImports.create::parameters.resource, "fileImport");
+@@clientName(Hunts.createOrUpdate::parameters.resource, "hunt");
+@@clientName(HuntComments.createOrUpdate::parameters.resource, "huntComment");
+@@clientName(HuntRelations.createOrUpdate::parameters.resource, "huntRelation");
+@@doc(IncidentComments.get, "Gets an incident comment.");
+@@doc(Relations.createOrUpdate, "Creates or updates the incident relation.");
+@@clientName(Recommendations.recommendation::parameters.properties,
+  "recommendationPatch"
+);
+@@clientName(ProductSettings.update::parameters.resource, "settings");
+@@clientName(Entities.runPlaybook::parameters.body, "requestBody");
+@@clientName(WorkspaceManagerAssignments.createOrUpdate::parameters.resource,
+  "workspaceManagerAssignment"
+);
+@@clientName(WorkspaceManagerConfigurations.createOrUpdate::parameters.resource,
+  "workspaceManagerConfiguration"
+);
+@@clientName(WorkspaceManagerGroups.createOrUpdate::parameters.resource,
+  "workspaceManagerGroup"
 );
