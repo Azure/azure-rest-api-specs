@@ -25,6 +25,17 @@ model AlertsClientOptions {
 @@clientName(TimeRange.`7d`, "SEVEN_D", "python");
 @@clientName(TimeRange.`30d`, "THIRTY_D", "python");
 
-@@clientName(AlertsManagementErrorResponse, "ErrorResponseForAlertsManagement", "go");
+@@clientName(AlertsManagementErrorResponse,
+  "ErrorResponseForAlertsManagement",
+  "go"
+);
 
-@@clientName(Microsoft.AlertsManagement.NotificationResult.statusURL, "statusUrl", "java");
+@@clientName(Microsoft.AlertsManagement.NotificationResult.statusURL,
+  "statusUrl",
+  "java"
+);
+
+@@clientName(TimeRange.`1h`, "OneH", "go");
+@@clientName(TimeRange.`1d`, "OneD", "go");
+@@clientName(TimeRange.`7d`, "SevenD", "go");
+@@clientName(TimeRange.`30d`, "ThirtyD", "go");
