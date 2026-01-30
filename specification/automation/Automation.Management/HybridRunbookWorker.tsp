@@ -30,12 +30,14 @@ interface HybridRunbookWorkers {
   /**
    * Retrieve a hybrid runbook worker.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   get is ArmResourceRead<HybridRunbookWorker>;
 
   /**
    * Create a hybrid runbook worker.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     HybridRunbookWorker,
@@ -45,6 +47,7 @@ interface HybridRunbookWorkers {
   /**
    * Update a hybrid runbook worker.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   @patch(#{ implicitOptionality: false })
   patch is Azure.ResourceManager.Legacy.CustomPatchSync<
@@ -56,12 +59,14 @@ interface HybridRunbookWorkers {
   /**
    * Delete a hybrid runbook worker.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   delete is ArmResourceDeleteSync<HybridRunbookWorker>;
 
   /**
    * Retrieve a list of hybrid runbook workers.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   listByHybridRunbookWorkerGroup is ArmResourceListByParent<
     HybridRunbookWorker,
@@ -78,6 +83,7 @@ interface HybridRunbookWorkers {
   /**
    * Move a hybrid worker to a different group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkeroperations")
   move is ArmResourceActionSync<
     HybridRunbookWorker,

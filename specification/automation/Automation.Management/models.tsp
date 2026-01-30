@@ -1345,6 +1345,7 @@ model ErrorResponse {
 /**
  * Software update configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationProperties {
   /**
    * update specific properties for the Software update configuration
@@ -1403,6 +1404,7 @@ model softwareUpdateConfigurationProperties {
 /**
  * Update specific properties of the software update configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model updateConfiguration {
   /**
    * operating system of target machines
@@ -1561,6 +1563,7 @@ model NonAzureQueryProperties {
 /**
  * Definition of schedule parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SUCScheduleProperties {
   /**
    * Gets or sets the start time of the schedule.
@@ -1577,6 +1580,7 @@ model SUCScheduleProperties {
   /**
    * Gets or sets the end time of the schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTime?: utcDateTime | null;
 
@@ -1593,6 +1597,7 @@ model SUCScheduleProperties {
   /**
    * Gets or sets the next run time of the schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextRun?: utcDateTime | null;
 
@@ -1678,6 +1683,7 @@ model AdvancedScheduleMonthlyOccurrence {
 /**
  * Task properties of the software update configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationTasks {
   /**
    * Pre task properties.
@@ -1693,6 +1699,7 @@ model softwareUpdateConfigurationTasks {
 /**
  * Task properties of the software update configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model taskProperties {
   /**
    * Gets or sets the parameters of the task.
@@ -1709,6 +1716,7 @@ model taskProperties {
 /**
  * result of listing all software update configuration
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationListResult {
   /**
    * outer object returned when listing all software update configurations
@@ -1720,6 +1728,7 @@ model softwareUpdateConfigurationListResult {
 /**
  * Software update configuration collection item properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationCollectionItem {
   /**
    * Name of the software update configuration.
@@ -1742,6 +1751,7 @@ model softwareUpdateConfigurationCollectionItem {
 /**
  * Software update configuration collection item properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationCollectionItemProperties {
   /**
    * Update specific properties of the software update configuration.
@@ -1787,6 +1797,7 @@ model softwareUpdateConfigurationCollectionItemProperties {
   /**
    * ext run time of the update.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextRun?: utcDateTime | null;
 }
@@ -1868,6 +1879,7 @@ model PrivateLinkResourceListResult {
   @pageItems
   value?: PrivateLinkResource[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -1981,6 +1993,7 @@ model DscNodeProperties {
   /**
    * Gets or sets the configuration of the node.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   nodeConfiguration?: DscNodeConfigurationAssociationProperty | null;
 
   /**
@@ -2068,6 +2081,7 @@ model DscNodeReport {
   /**
    * Gets or sets the end time of the node report.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
 
@@ -2080,6 +2094,7 @@ model DscNodeReport {
   /**
    * Gets or sets the start time of the node report.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime | null;
 
@@ -2148,11 +2163,13 @@ model DscNodeReport {
   /**
    * Gets or sets the IPv4 address of the node that sent the report.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   iPV4Addresses?: string[];
 
   /**
    * Gets or sets the IPv6 address of the node that sent the report.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   iPV6Addresses?: string[];
 
   /**
@@ -2431,6 +2448,7 @@ model EncryptionPropertiesIdentity {
   /**
    * The user identity used for CMK. It will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentity?: unknown;
 }
 
@@ -2661,6 +2679,7 @@ model StatisticsListResult {
   @pageItems
   value?: Statistics[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -2691,6 +2710,7 @@ model Statistics {
   /**
    * Gets the endTime of the statistic.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
@@ -2712,6 +2732,7 @@ model UsageListResult {
   @pageItems
   value?: Usage[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -2782,18 +2803,21 @@ model Key {
   /**
    * Automation key name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   KeyName?: AutomationKeyName;
 
   /**
    * Automation key permissions.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   Permissions?: AutomationKeyPermissions;
 
   /**
    * Value of the Automation Key used for registration.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   Value?: string;
 }
@@ -2850,6 +2874,7 @@ model DeletedRunbookProperties {
   /**
    * Environment of the runbook.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   runtimeEnvironment?: string | null;
 
   /**
@@ -3608,6 +3633,7 @@ model HybridRunbookWorkerProperties {
 /**
  * The parameters supplied to the create hybrid runbook worker operation.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HybridRunbookWorkerCreateParameters {
   /**
    * Gets or sets hybrid runbook worker group create or update properties.
@@ -3670,6 +3696,7 @@ model RunAsCredentialAssociationProperty {
 /**
  * The parameters supplied to the create hybrid runbook worker group operation.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model HybridRunbookWorkerGroupCreateOrUpdateParameters {
   /**
    * Gets or sets hybrid runbook worker group create or update properties.
@@ -3742,12 +3769,14 @@ model JobProperties {
   /**
    * Gets or sets the start time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime | null;
 
   /**
    * Gets or sets the end time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
 
@@ -3759,12 +3788,14 @@ model JobProperties {
   /**
    * Gets or sets the last modified time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime | null;
 
   /**
    * Gets or sets the last status modified time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastStatusModifiedTime?: utcDateTime | null;
 
@@ -3868,6 +3899,7 @@ model JobCollectionItemProperties {
   /**
    * Gets or sets the job started by.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   startedBy?: string | null;
 
@@ -3887,6 +3919,7 @@ model JobCollectionItemProperties {
   /**
    * The start time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime | null;
@@ -3894,6 +3927,7 @@ model JobCollectionItemProperties {
   /**
    * The end time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
@@ -3901,6 +3935,7 @@ model JobCollectionItemProperties {
   /**
    * The last modified time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastModifiedTime?: utcDateTime | null;
@@ -3965,6 +4000,7 @@ model JobStreamProperties {
   /**
    * Gets or sets the summary.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   summary?: string | null;
 
   /**
@@ -4257,6 +4293,7 @@ model ModuleProperties {
   /**
    * Gets or sets the provisioning state of the module.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ModuleProvisioningState;
 
   /**
@@ -4412,6 +4449,7 @@ model TypeFieldListResult {
   @identifiers(#[])
   value?: TypeField[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -4586,11 +4624,13 @@ model GraphicalRunbookContent {
   /**
    * Raw graphical Runbook content.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rawContent?: RawGraphicalRunbookContent | null;
 
   /**
    * Graphical Runbook content as JSON
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   graphRunbookJson?: string | null;
 }
 
@@ -4699,6 +4739,7 @@ model PackageCreateOrUpdateProperties {
 /**
  * The parameters supplied to the update package operation.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PackageUpdateParameters {
   /**
    * Gets or sets the package update properties.
@@ -4731,6 +4772,7 @@ model PrivateEndpointConnectionListResult {
   @pageItems
   value?: PrivateEndpointConnection[];
 
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -5103,12 +5145,16 @@ model TestJob {
   /**
    * Gets or sets the start time of the test job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime | null;
 
   /**
    * Gets or sets the end time of the test job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
 
@@ -5126,6 +5172,8 @@ model TestJob {
   /**
    * Gets or sets the last status modified time of the test job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastStatusModifiedTime?: utcDateTime | null;
 
@@ -5144,6 +5192,7 @@ model TestJob {
 /**
  * The parameters supplied to the update automation account operation.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RuntimeEnvironmentUpdateParameters {
   /**
    * Gets or sets Runtime update properties.
@@ -5238,12 +5287,15 @@ model ScheduleCreateOrUpdateProperties {
   /**
    * Gets or sets the end time of the schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTime?: utcDateTime | null;
 
   /**
    * Gets or sets the interval of the schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   interval?: unknown;
 
   /**
@@ -5282,6 +5334,7 @@ model ScheduleProperties {
   /**
    * Gets or sets the end time of the schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiryTime?: utcDateTime | null;
 
@@ -5298,6 +5351,7 @@ model ScheduleProperties {
   /**
    * Gets or sets the next run time of the schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextRun?: utcDateTime | null;
 
@@ -5309,6 +5363,7 @@ model ScheduleProperties {
   /**
    * Gets or sets the interval of the schedule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   interval?: unknown;
 
   /**
@@ -5377,6 +5432,7 @@ model ScheduleUpdateProperties {
 /**
  * Software update configuration machine run model.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationMachineRun {
   /**
    * Name of the software update configuration machine run
@@ -5399,6 +5455,7 @@ model softwareUpdateConfigurationMachineRun {
 /**
  * Software update configuration machine run properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model updateConfigurationMachineRunProperties {
   /**
    * name of the updated computer
@@ -5455,6 +5512,7 @@ model updateConfigurationMachineRunProperties {
   /**
    * End time of the software update configuration machine run.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
@@ -5505,6 +5563,7 @@ model updateConfigurationMachineRunProperties {
 /**
  * Software update configuration Run Navigation model.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model updateConfigurationNavigation {
   /**
    * Name of the software update configuration triggered the software update configuration run
@@ -5516,6 +5575,7 @@ model updateConfigurationNavigation {
 /**
  * Software update configuration machine run job navigation properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model jobNavigation {
   /**
    * Id of the job associated with the software update configuration run
@@ -5527,12 +5587,14 @@ model jobNavigation {
 /**
  * result of listing all software update configuration machine runs
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationMachineRunListResult
   is Azure.Core.Page<softwareUpdateConfigurationMachineRun>;
 
 /**
  * Software update configuration Run properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationRun {
   /**
    * Name of the software update configuration run.
@@ -5555,6 +5617,7 @@ model softwareUpdateConfigurationRun {
 /**
  * Software update configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationRunProperties {
   /**
    * software update configuration triggered this run
@@ -5589,6 +5652,7 @@ model softwareUpdateConfigurationRunProperties {
   /**
    * End time of the software update configuration run.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
@@ -5640,6 +5704,7 @@ model softwareUpdateConfigurationRunProperties {
 /**
  * Software update configuration run tasks model.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationRunTasks {
   /**
    * Pre task properties.
@@ -5655,6 +5720,7 @@ model softwareUpdateConfigurationRunTasks {
 /**
  * Task properties of the software update configuration.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationRunTaskProperties {
   /**
    * The status of the task.
@@ -5675,6 +5741,7 @@ model softwareUpdateConfigurationRunTaskProperties {
 /**
  * result of listing all software update configuration runs
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model softwareUpdateConfigurationRunListResult
   is Azure.Core.Page<softwareUpdateConfigurationRun>;
 
@@ -5928,6 +5995,7 @@ model SourceControlSyncJobProperties {
   /**
    * The start time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime | null;
@@ -5935,6 +6003,7 @@ model SourceControlSyncJobProperties {
   /**
    * The end time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
@@ -5984,6 +6053,7 @@ model SourceControlSyncJobByIdProperties {
   /**
    * The start time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime | null;
@@ -5991,6 +6061,7 @@ model SourceControlSyncJobByIdProperties {
   /**
    * The end time of the job.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime | null;
@@ -6045,6 +6116,7 @@ model SourceControlSyncJobStreamProperties {
   /**
    * The time of the sync job stream.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   time?: utcDateTime | null;
@@ -6088,6 +6160,7 @@ model SourceControlSyncJobStreamByIdProperties {
   /**
    * The time of the sync job stream.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   time?: utcDateTime | null;
@@ -6157,6 +6230,7 @@ model VariableProperties {
   /**
    * Gets or sets the encrypted flag of the variable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   isEncrypted?: boolean | null;
 
   /**
@@ -6265,6 +6339,7 @@ model WatcherProperties {
   description?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model WatcherUpdateParameters {
   /**
@@ -6312,6 +6387,7 @@ model WebhookProperties {
   /**
    * Gets or sets the last invoked time.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastInvokedTime?: utcDateTime | null;
 

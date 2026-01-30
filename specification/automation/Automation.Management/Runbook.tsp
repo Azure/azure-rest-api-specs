@@ -103,6 +103,7 @@ interface Runbooks {
   /**
    * Replaces the runbook draft content.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RunbookDraft_ReplaceContent")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
@@ -112,7 +113,7 @@ interface Runbooks {
   replaceContent is ArmResourceActionAsync<
     Runbook,
     File,
-    File,
+    ArmResponse<File>,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -212,6 +213,7 @@ interface Runbooks {
   /**
    * Create a test job of the runbook.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TestJob_Create")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/testjoboperations")

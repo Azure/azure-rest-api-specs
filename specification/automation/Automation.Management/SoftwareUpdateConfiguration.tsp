@@ -14,6 +14,8 @@ namespace Microsoft.Automation;
 /**
  * Software update configuration properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(AutomationAccount)
 model softwareUpdateConfiguration
   is Azure.ResourceManager.ProxyResource<
@@ -33,6 +35,7 @@ interface SoftwareUpdateConfigurations {
   /**
    * Get a single software update configuration by name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   getByName is ArmResourceRead<
     softwareUpdateConfiguration,
@@ -48,6 +51,7 @@ interface SoftwareUpdateConfigurations {
   /**
    * Create a new software update configuration with the name given in the URI.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   create is ArmResourceCreateOrReplaceSync<
     softwareUpdateConfiguration,
@@ -63,6 +67,7 @@ interface SoftwareUpdateConfigurations {
   /**
    * delete a specific software update configuration.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations")
   delete is ArmResourceDeleteSync<
     softwareUpdateConfiguration,

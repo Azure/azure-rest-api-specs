@@ -210,12 +210,14 @@ interface Python2Package {
   /**
    * Retrieve the python 2 package identified by package name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   get is Python2PackageOps.Read<Module>;
 
   /**
    * Create or Update the python 2 package identified by package name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   createOrUpdate is Python2PackageOps.CreateOrUpdateSync<
     Module,
@@ -225,6 +227,7 @@ interface Python2Package {
   /**
    * Update the python 2 package identified by package name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   @patch(#{ implicitOptionality: false })
   update is Python2PackageOps.CustomPatchSync<
@@ -236,12 +239,14 @@ interface Python2Package {
    * Delete the python 2 package by name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   delete is Python2PackageOps.DeleteSync<Module, Response = ArmDeletedResponse>;
 
   /**
    * Retrieve a list of python 2 packages.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   listByAutomationAccount is Python2PackageOps.List<Module>;
 }
@@ -272,12 +277,14 @@ interface Python3Package {
   /**
    * Retrieve the python 3 package identified by package name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   get is Python3PackageOps.Read<Module>;
 
   /**
    * Create or Update the python 3 package identified by package name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   createOrUpdate is Python3PackageOps.CreateOrUpdateSync<
     Module,
@@ -287,6 +294,7 @@ interface Python3Package {
   /**
    * Update the python 3 package identified by package name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   @patch(#{ implicitOptionality: false })
   update is Python3PackageOps.CustomPatchSync<
@@ -297,12 +305,14 @@ interface Python3Package {
   /**
    * Delete the python 3 package by name.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   delete is Python3PackageOps.DeleteSync<Module>;
 
   /**
    * Retrieve a list of python 3 packages.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   listByAutomationAccount is Python3PackageOps.List<Module>;
 }
