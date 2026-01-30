@@ -423,9 +423,8 @@ union QueryType {
 }
 
 /** Specifies whether any or all of the search terms must be matched in order to count the document as a match. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union SearchMode {
-  string,
-
   /** Any of the search terms must be matched in order to count the document as a match. */
   Any: "any",
 
@@ -434,9 +433,8 @@ union SearchMode {
 }
 
 /** A value that specifies whether we want to calculate scoring statistics (such as document frequency) globally for more consistent scoring, or locally, for lower latency. The default is 'local'. Use 'global' to aggregate scoring statistics globally before scoring. Using global scoring statistics can increase latency of search queries. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union ScoringStatistics {
-  string,
-
   /** The scoring statistics will be calculated locally for lower latency. */
   Local: "local",
 
@@ -445,9 +443,8 @@ union ScoringStatistics {
 }
 
 /** The operation to perform on a document in an indexing batch. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union IndexActionType {
-  string,
-
   /** Inserts the document into the index if it is new and updates it if it exists. All fields are replaced in the update case. */
   Upload: "upload",
 
@@ -462,9 +459,8 @@ union IndexActionType {
 }
 
 /** Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context in producing autocomplete terms. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union AutocompleteMode {
-  string,
-
   /** Only one term is suggested. If the query has two terms, only the last term is completed. For example, if the input is 'washington medic', the suggested terms could include 'medicaid', 'medicare', and 'medicine'. */
   OneTerm: "oneTerm",
 

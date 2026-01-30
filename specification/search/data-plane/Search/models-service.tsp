@@ -2144,9 +2144,8 @@ union DocumentIntelligenceLayoutSkillChunkingUnit {
 }
 
 /** Represents the overall indexer status. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union IndexerStatus {
-  string,
-
   /** Indicates that the indexer is in an unknown state. */
   Unknown: "unknown",
 
@@ -2158,9 +2157,8 @@ union IndexerStatus {
 }
 
 /** Represents the status of an individual indexer execution. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union IndexerExecutionStatus {
-  string,
-
   /** An indexer invocation has failed, but the failure may be transient. Indexer invocations will continue per schedule. */
   TransientFailure: "transientFailure",
 
@@ -2175,9 +2173,8 @@ union IndexerExecutionStatus {
 }
 
 /** Defines the function used to interpolate score boosting across a range of documents. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union ScoringFunctionInterpolation {
-  string,
-
   /** Boosts scores by a linearly decreasing amount. This is the default interpolation for scoring functions. */
   Linear: "linear",
 
@@ -2192,9 +2189,8 @@ union ScoringFunctionInterpolation {
 }
 
 /** Defines the aggregation function used to combine the results of all the scoring functions in a scoring profile. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union ScoringFunctionAggregation {
-  string,
-
   /** Boost scores by the sum of all scoring function results. */
   Sum: "sum",
 
@@ -2215,9 +2211,8 @@ union ScoringFunctionAggregation {
 }
 
 /** Represents classes of characters on which a token filter can operate. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union TokenCharacterKind {
-  string,
-
   /** Keeps letters in tokens. */
   Letter: "letter",
 
@@ -2235,9 +2230,8 @@ union TokenCharacterKind {
 }
 
 /** Lists the languages supported by the Microsoft language tokenizer. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union MicrosoftTokenizerLanguage {
-  string,
-
   /** Selects the Microsoft tokenizer for Bangla. */
   Bangla: "bangla",
 
@@ -2366,9 +2360,8 @@ union MicrosoftTokenizerLanguage {
 }
 
 /** Lists the languages supported by the Microsoft language stemming tokenizer. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union MicrosoftStemmingTokenizerLanguage {
-  string,
-
   /** Selects the Microsoft stemming tokenizer for Arabic. */
   Arabic: "arabic",
 
@@ -2506,9 +2499,8 @@ union MicrosoftStemmingTokenizerLanguage {
 }
 
 /** Scripts that can be ignored by CjkBigramTokenFilter. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union CjkBigramTokenFilterScripts {
-  string,
-
   /** Ignore Han script when forming bigrams of CJK terms. */
   Han: "han",
 
@@ -2523,9 +2515,8 @@ union CjkBigramTokenFilterScripts {
 }
 
 /** Specifies which side of the input an n-gram should be generated from. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union EdgeNGramTokenFilterSide {
-  string,
-
   /** Specifies that the n-gram should be generated from the front of the input. */
   Front: "front",
 
@@ -2534,9 +2525,8 @@ union EdgeNGramTokenFilterSide {
 }
 
 /** Identifies the type of phonetic encoder to use with a PhoneticTokenFilter. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union PhoneticEncoder {
-  string,
-
   /** Encodes a token into a Metaphone value. */
   Metaphone: "metaphone",
 
@@ -2572,9 +2562,8 @@ union PhoneticEncoder {
 }
 
 /** The language to use for a Snowball token filter. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union SnowballTokenFilterLanguage {
-  string,
-
   /** Selects the Lucene Snowball stemming tokenizer for Armenian. */
   Armenian: "armenian",
 
@@ -2643,9 +2632,8 @@ union SnowballTokenFilterLanguage {
 }
 
 /** The language to use for a stemmer token filter. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union StemmerTokenFilterLanguage {
-  string,
-
   /** Selects the Lucene stemming tokenizer for Arabic. */
   Arabic: "arabic",
 
@@ -2810,9 +2798,8 @@ union StemmerTokenFilterLanguage {
 }
 
 /** Identifies a predefined list of language-specific stopwords. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Closed enum by design"
 union StopwordsList {
-  string,
-
   /** Selects the stopword list for Arabic. */
   Arabic: "arabic",
 
