@@ -27,10 +27,6 @@ export class LinterRulesetRule implements Rule {
     const configText = await readTspConfig(folder);
     const config = parse(configText);
 
-    const rpFolder =
-      config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
-    stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
-
     const mainTspExists = await fileExists(join(folder, "main.tsp"));
     const clientTspExists = await fileExists(join(folder, "client.tsp"));
     const files = [];
@@ -45,25 +41,21 @@ export class LinterRulesetRule implements Rule {
     const linterExtends = config?.linter?.extends;
     stdOutput += `linter.extends: ${JSON.stringify(linterExtends)}`;
 
+    // Normalize path separators
+    const normalizedFolder = folder.replace(/\\/g, "/");
+
     let requiredRuleset = "";
-    if (rpFolder?.trim()?.endsWith("resource-manager")) {
+    if (
+      normalizedFolder.includes("/resource-manager/") ||
+      normalizedFolder.trim().endsWith(".Management")
+    ) {
       requiredRuleset = "@azure-tools/typespec-azure-rulesets/resource-manager";
-    } else if (rpFolder?.trim()?.endsWith("data-plane")) {
-      requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
     } else if (clientTspExists && !mainTspExists) {
       // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
       // are data-plane (e.g. HealthInsights.TrialMatcher)
       requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
     } else {
-      // Cannot determine if spec is data-plane or resource-manager, so cannot know
-      // which linter ruleset is required.
-      success = false;
-      errorOutput +=
-        "tspconfig.yaml must define the following property:\n" +
-        "\n" +
-        "options:\n" +
-        '  "@azure-tools/typespec-autorest":\n' +
-        '    azure-resource-provider-folder: "data-plane" | "resource-manager"\n';
+      requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
     }
 
     if (linterExtends) {
