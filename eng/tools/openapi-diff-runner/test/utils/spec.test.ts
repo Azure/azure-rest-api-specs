@@ -118,6 +118,19 @@ describe("Helper functions for version analysis", () => {
         expect(result.preview).toBeUndefined();
       }
     });
+
+    it("should find preceding versions with case-insensitive filename matching", async () => {
+      // Test case-insensitive matching: a.json vs A.json
+      const mockSwaggers: MockSwagger[] = [
+        createMockSwagger("/test/stable/2020-07-02/a.json", ApiVersionLifecycleStage.STABLE),
+        createMockSwagger("/test/stable/2020-08-04/A.json", ApiVersionLifecycleStage.STABLE),
+      ];
+
+      const result = await getPrecedingSwaggers("/test/stable/2020-08-04/A.json", mockSwaggers);
+
+      expectResultStructure(result, "/test/stable/2020-08-04/A.json");
+      expect(result.preview).toBeUndefined();
+    });
   });
 
   describe("getExistedVersionOperations", () => {
@@ -240,6 +253,36 @@ describe("Helper functions for version analysis", () => {
         const result = await getExistedVersionOperations(TEST_PATHS.stable2020_08_04, swaggers, []);
         expect(result).toBeInstanceOf(Map);
         expect(result.size).toBe(0);
+      }
+    });
+
+    it("should find operations with case-insensitive filename filtering", async () => {
+      // Test case-insensitive matching: operations should be found even with different case
+      const mockOperations1 = createOperationsMap([OPERATIONS.test1]);
+      const mockOperations2 = createOperationsMap([OPERATIONS.test1]);
+
+      const mockSwaggers: MockSwagger[] = [
+        // Different file names with different case: B.json vs b.json
+        createMockSwagger("/test/stable/2020-07-02/B.json", undefined, mockOperations1),
+        createMockSwagger("/test/stable/2020-08-04/a.json", undefined, mockOperations2),
+      ];
+
+      const targetOperations = [createMockOperation(OPERATIONS.test1.id, OPERATIONS.test1.path)];
+
+      const result = await getExistedVersionOperations(
+        "/test/stable/2020-08-04/a.json",
+        mockSwaggers,
+        targetOperations,
+      );
+
+      expect(result).toBeInstanceOf(Map);
+      expect(result.has("/test/stable/2020-07-02/B.json")).toBe(true);
+
+      const operations = result.get("/test/stable/2020-07-02/B.json");
+      expect(operations).toBeDefined();
+      if (operations) {
+        expect(operations).toHaveLength(1);
+        expect(operations[0]).toHaveProperty("id", OPERATIONS.test1.id);
       }
     });
   });
