@@ -38,10 +38,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a location-based action interface, not a standard ARM resource interface"
 @tag("DataCollectionRuleConfigurationMetadata")
 interface DataCollectionRuleConfigurationMetadata {
-  /** Fetches summary configuration metadata for all supported data sources. */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadataSummary")
+  /** Fetches configuration metadata for data collection rules. When withStreamMetadata is true, returns detailed stream information. */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadata")
   @post
-  fetchSummary(
+  fetchDataCollectionRuleConfigurationMetadata(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
@@ -49,24 +49,8 @@ interface DataCollectionRuleConfigurationMetadata {
     @path
     location: string,
 
-    /** Request body containing optional resource type filter. */
+    /** Request body containing filter options and stream metadata flag. */
     @body
     body?: DataCollectionRuleConfigurationMetadataRequest,
-  ): ArmResponse<DataCollectionRuleConfigurationMetadataResponse> | ErrorResponse;
-
-  /** Fetches detailed configuration metadata for a specific resource type. */
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadataDetails")
-  @post
-  fetchDetails(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /** The Azure region for the metadata request. */
-    @path
-    location: string,
-
-    /** Request body containing resource type filter. */
-    @body
-    body: DataCollectionRuleConfigurationMetadataRequest,
   ): ArmResponse<DataCollectionRuleConfigurationMetadataResponse> | ErrorResponse;
 }

@@ -13,8 +13,11 @@ model DataCollectionRuleConfigurationMetadataRequest {
   /** DCR Kind for which metadata is being requested (e.g., PlatformTelemetry). */
   dcrKind?: string;
 
-  /** Optional resource type filter (e.g., Microsoft.Compute/virtualMachines). If specified, returns detailed configuration metadata for that resource type. */
+  /** Optional resource type filter (e.g., Microsoft.Compute/virtualMachines). If specified, returns configuration metadata for that resource type. */
   resourceType?: string;
+
+  /** When true, returns detailed stream metadata in the response. Defaults to false. */
+  withStreamMetadata?: boolean;
 }
 
 /** Response containing configuration metadata for data collection rules. */
@@ -46,7 +49,7 @@ model TelemetryTypeMetadata {
   /** List of supported source resource types. */
   supportedResourceTypes?: string[];
 
-  /** Detailed stream information (only in fetchDetails response). */
+  /** Detailed stream information. Only returned when withStreamMetadata is true in the request. */
   @identifiers(#["streamId"])
   supportedStreams?: StreamMetadata[];
 }
@@ -81,7 +84,7 @@ model LogsSpecification {
   groups?: string[];
 }
 
-/** Specification for a metrics stream. */
+/** Specification for a metrics stream. Properties are driven by the service and are manifest driven. */
 model MetricsSpecification {
   /** The name of the metric. */
   name?: string;
@@ -92,10 +95,18 @@ model MetricsSpecification {
   /** Description of the metric. */
   description?: string;
 
-  /** The unit of measurement for the metric. */
+   /**
+   * The unit of measurement for the metric.
+   * This value is provided by the service and is manifest-driven; the set of possible values may evolve over time.
+   * Example: "Count".
+   */
   unit?: string;
 
-  /** The aggregation type for the metric. */
+ /**
+   * The aggregation type for the metric.
+   * This value is provided by the service and is manifest-driven; the set of possible values may evolve over time.
+   * Example: "Total".
+   */
   aggregationType?: string;
 
   /** Categorization groups for the metric. */
