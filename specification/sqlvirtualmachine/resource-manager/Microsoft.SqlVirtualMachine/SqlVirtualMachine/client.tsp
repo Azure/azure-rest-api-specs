@@ -133,9 +133,6 @@ using Microsoft.SqlVirtualMachine;
   "SqlServerConfigurationsManagementSettings",
   "csharp"
 );
-// @@clientName(Operation, "SqlVmInfo", "csharp");
-@@clientName(OperationDisplay, "SqlVmOperationDisplay", "csharp");
-@@clientName(OperationOrigin, "SqlVmOperationOrigin", "csharp");
 @@clientName(OsType, "SqlVmOsType", "csharp");
 @@clientName(TroubleshootingScenario, "SqlVmTroubleshootingScenario", "csharp");
 @@clientName(TroubleshootingStatus, "SqlVmTroubleshootingStatus", "csharp");
