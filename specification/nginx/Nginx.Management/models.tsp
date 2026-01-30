@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Nginx.NginxPlus;
 
@@ -1161,6 +1163,71 @@ model NginxDeploymentWafPolicyMetadataProperties {
    */
   @visibility(Lifecycle.Read)
   applyingState?: NginxDeploymentWafPolicyApplyingStatus;
+}
+
+/**
+ * Nginx Deployment Waf Policy Error
+ */
+@added(Versions.v2025_11_01)
+model NginxDeploymentWafPolicyError {
+  /**
+   * Error code
+   */
+  code?: string;
+
+  /**
+   * Field that caused the error
+   */
+  field?: string;
+
+  /**
+   * Error message
+   */
+  message?: string;
+}
+
+/**
+ * Nginx Deployment Waf Policy Analysis Create Request
+ */
+@added(Versions.v2025_11_01)
+model NginxDeploymentWafPolicyAnalysisCreateRequest {
+  /**
+   * The byte content of the policy
+   */
+  content?: bytes;
+
+  /**
+   * The absolute file path of the policy as in the virtual machine
+   */
+  filepath?: string;
+}
+
+/**
+ * Nginx Deployment Waf Policy Analysis Data
+ */
+@added(Versions.v2025_11_01)
+model NginxDeploymentWafPolicyAnalysisData {
+  /**
+   * List of errors found during analysis
+   */
+  @identifiers(#[])
+  errors?: NginxDeploymentWafPolicyError[];
+}
+
+/**
+ * Nginx Deployment Waf Policy Analysis Response
+ */
+@added(Versions.v2025_11_01)
+model NginxDeploymentWafPolicyAnalysisResponse {
+  /**
+   * The status of the analysis. The possible values can be arbitrary
+   */
+  status?: string;
+
+  /**
+   * The analysis data containing errors
+   */
+  data?: NginxDeploymentWafPolicyAnalysisData;
 }
 
 /**

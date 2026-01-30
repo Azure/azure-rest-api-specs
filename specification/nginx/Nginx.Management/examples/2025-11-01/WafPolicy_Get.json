@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "deploymentName": "myDeployment",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "wafPolicyName": "myWafPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myWafPolicy",
+        "type": "Nginx.NginxPlus/nginxDeployments/wafPolicies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment/wafPolicies/myWafPolicy",
+        "properties": {
+          "applyingState": {
+            "code": "Succeeded",
+            "displayStatus": "Policy Applied",
+            "time": "2025-03-02T10:05:00.000Z"
+          },
+          "compilingState": {
+            "code": "Succeeded",
+            "displayStatus": "Compiled Successfully",
+            "time": "2025-03-02T10:00:00.000Z"
+          },
+          "content": "QUJDREVGR0g=",
+          "filepath": "/etc/nginx/waf/policy.conf",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "WafPolicy_Get",
+  "title": "WafPolicy_Get"
+}
