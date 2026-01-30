@@ -95,14 +95,14 @@ model MetricsSpecification {
   /** Description of the metric. */
   description?: string;
 
-   /**
+  /**
    * The unit of measurement for the metric.
    * This value is provided by the service and is manifest-driven; the set of possible values may evolve over time.
    * Example: "Count".
    */
   unit?: string;
 
- /**
+  /**
    * The aggregation type for the metric.
    * This value is provided by the service and is manifest-driven; the set of possible values may evolve over time.
    * Example: "Total".
