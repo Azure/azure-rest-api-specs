@@ -121,12 +121,13 @@ interface Drills {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST with no response body requires 202 + 204"
   @route(ServiceGroupRoute)
   @added(Versions.v2026_03_01_preview)
   @armResourceAction(Drill)
   @post
   @doc("This triggers detection of any drifts from the desired state of Target and capabilities and RBAC.")
-  resync is ArmResourceActionNoResponseContentAsync<
+  resync is ArmResourceActionNoContentAsync<
     Drill,
     void,
     ServiceGroupAndRequestHeadersParameters,
