@@ -199,13 +199,6 @@ model CacheProperties {
    * Flag indicating whether writeback is enabled for the cache.
    */
   writeBack?: EnableWriteBackState;
-
-  /**
-   * Flag indicating whether file access logs are enabled for the cache, based on active diagnostic settings present on the cache.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @visibility(Lifecycle.Read)
-  fileAccessLogs?: FileAccessLogs = FileAccessLogs.Disabled;
 }
 
 /**
