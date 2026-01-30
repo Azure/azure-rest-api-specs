@@ -39,6 +39,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.Attestation"
+    namespace: "{package-name}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
