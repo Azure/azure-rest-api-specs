@@ -38,23 +38,7 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-09-01'
 input-file:
-  - stable/2025-09-01/AlertRules.json
-  - stable/2025-09-01/AutomationRules.json
-  - stable/2025-09-01/Bookmarks.json
-  - stable/2025-09-01/ContentPackages.json
-  - stable/2025-09-01/ContentProductPackages.json
-  - stable/2025-09-01/ContentProductTemplates.json
-  - stable/2025-09-01/ContentTemplates.json
-  - stable/2025-09-01/dataConnectorDefinitions.json
-  - stable/2025-09-01/DataConnectors.json
-  - stable/2025-09-01/Incidents.json
-  - stable/2025-09-01/Metadata.json
-  - stable/2025-09-01/OnboardingStates.json
-  - stable/2025-09-01/operations.json
-  - stable/2025-09-01/SecurityMLAnalyticsSettings.json
-  - stable/2025-09-01/SourceControls.json
-  - stable/2025-09-01/ThreatIntelligence.json
-  - stable/2025-09-01/Watchlists.json
+  - stable/2025-09-01/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
     from: dataConnectors.json
