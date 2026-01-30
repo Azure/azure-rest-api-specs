@@ -245,10 +245,13 @@ function comparePaths(oldDocument: OpenAPI2Document, newDocument: OpenAPI2Docume
 function compareOperation(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
   const pathDiffs: PathDiff[] = [];
 
-  if (oldOperation.parameters.length !== newOperation.parameters.length) {
+  const oldParamsLength = oldOperation.parameters?.length ?? 0;
+  const newParamsLength = newOperation.parameters?.length ?? 0;
+
+  if (oldParamsLength !== newParamsLength) {
     pathDiffs.push({
-      before: oldOperation.parameters.length,
-      after: newOperation.parameters.length,
+      before: oldParamsLength,
+      after: newParamsLength,
       operationId: operationId,
       type: "parameters",
       level: "error"

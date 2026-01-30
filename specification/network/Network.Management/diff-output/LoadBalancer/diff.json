@@ -1,0 +1,1429 @@
+{
+  "tags__added": [
+    {
+      "name": "LoadBalancers"
+    },
+    {
+      "name": "BackendAddressPools"
+    },
+    {
+      "name": "FrontendIPConfigurations"
+    },
+    {
+      "name": "InboundNatRules"
+    },
+    {
+      "name": "LoadBalancingRules"
+    },
+    {
+      "name": "OutboundRules"
+    },
+    {
+      "name": "Probes"
+    }
+  ],
+  "info": {
+    "title": {
+      "__old": "NetworkManagementClient",
+      "__new": "WebApplicationFirewallManagement"
+    },
+    "description": {
+      "__old": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+      "__new": "APIs to manage web application firewall rules."
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/loadBalancers": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses": {
+      "post": {
+        "tags__deleted": [
+          "LoadBalancers"
+        ],
+        "parameters": [
+          [
+            "~",
+            {
+              "name__deleted": "location",
+              "in__deleted": "path",
+              "required__deleted": true,
+              "type__deleted": "string",
+              "$ref__added": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            }
+          ],
+          [
+            " "
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/LoadBalancer"
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "./network.json#/definitions/TagsObject",
+                  "__new": "./common.json#/definitions/TagsObject"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/BackendAddressPool"
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendPoolName}/queryInboundNatRulePortMapping": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "BackendAddressPools"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "FrontendIPConfigurations"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "FrontendIPConfigurations"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "InboundNatRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "InboundNatRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "InboundNatRules"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/InboundNatRule"
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "InboundNatRules"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "LoadBalancingRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "LoadBalancingRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "LoadBalancingRules"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "Location": {
+                "description": {
+                  "__old": "URI to query the status of the long-running operation.",
+                  "__new": "The Location header contains the URL where the status of the long running operation can be checked."
+                }
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/migrateToIpBased": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/networkInterfaces": {
+      "get": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "./networkInterface.json#/definitions/NetworkInterfaceListResult",
+                "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "OutboundRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "OutboundRules"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "Probes"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "LoadBalancers"
+          ],
+          [
+            "+",
+            "Probes"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BackendAddressPool": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "BackendAddressPoolPropertiesFormat": {
+      "properties": {
+        "backendIPConfigurations": {
+          "items": {
+            "$ref": {
+              "__old": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+              "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
+            }
+          }
+        },
+        "loadBalancingRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "outboundRule": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "outboundRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "inboundNatRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "virtualNetwork": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "syncMode": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Automatic",
+            "Manual"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "SyncMode",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/SyncMode"
+        }
+      }
+    },
+    "FrontendIPConfiguration": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "FrontendIPConfigurationPropertiesFormat": {
+      "properties": {
+        "inboundNatRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "inboundNatPools": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "outboundRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "loadBalancingRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "privateIPAllocationMethod": {
+          "$ref": {
+            "__old": "./network.json#/definitions/IPAllocationMethod",
+            "__new": "./common.json#/definitions/IPAllocationMethod"
+          }
+        },
+        "privateIPAddressVersion": {
+          "$ref": {
+            "__old": "./network.json#/definitions/IPVersion",
+            "__new": "./common.json#/definitions/IPVersion"
+          }
+        },
+        "publicIPAddress": {
+          "$ref": {
+            "__old": "./publicIpAddress.json#/definitions/PublicIPAddress",
+            "__new": "./virtualNetwork.json#/definitions/PublicIPAddress"
+          }
+        },
+        "publicIPPrefix": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "gatewayLoadBalancer": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "GatewayLoadBalancerTunnelInterface": {
+      "properties": {
+        "protocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "Native",
+            "VXLAN"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "GatewayLoadBalancerTunnelProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/GatewayLoadBalancerTunnelProtocol"
+        },
+        "type": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "Internal",
+            "External"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "GatewayLoadBalancerTunnelInterfaceType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/GatewayLoadBalancerTunnelInterfaceType"
+        }
+      }
+    },
+    "InboundNatPool": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "InboundNatPoolPropertiesFormat": {
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "protocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Udp",
+            "Tcp",
+            "All",
+            "Quic"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "TransportProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/TransportProtocol"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "InboundNatRule": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "InboundNatRuleListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "InboundNatRulePortMapping": {
+      "properties": {
+        "protocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Udp",
+            "Tcp",
+            "All",
+            "Quic"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "TransportProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/TransportProtocol"
+        }
+      }
+    },
+    "InboundNatRulePropertiesFormat": {
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "backendIPConfiguration": {
+          "$ref": {
+            "__old": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+            "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
+          }
+        },
+        "protocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Udp",
+            "Tcp",
+            "All",
+            "Quic"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "TransportProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/TransportProtocol"
+        },
+        "backendAddressPool": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "LoadBalancer": {
+      "properties": {
+        "extendedLocation": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ExtendedLocation",
+            "__new": "./common.json#/definitions/ExtendedLocation"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "LoadBalancerBackendAddressPoolListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerBackendAddressPropertiesFormat": {
+      "properties": {
+        "virtualNetwork": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "subnet": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "ipAddress": {
+          "x-ms-azure-resource__deleted": false
+        },
+        "networkInterfaceIPConfiguration": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "loadBalancerFrontendIPConfiguration": {
+          "readOnly__deleted": false,
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "adminState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "Up",
+            "Down"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "LoadBalancerBackendAddressAdminState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/LoadBalancerBackendAddressAdminState"
+        }
+      }
+    },
+    "LoadBalancerFrontendIPConfigurationListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerLoadBalancingRuleListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerOutboundRuleListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerProbeListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LoadBalancerPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "scope": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Public",
+            "Private"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "LoadBalancerScope",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/LoadBalancerScope"
+        }
+      }
+    },
+    "LoadBalancerSku": {
+      "properties": {
+        "name": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Basic",
+            "Standard",
+            "Gateway"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "LoadBalancerSkuName",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/LoadBalancerSkuName"
+        },
+        "tier": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Regional",
+            "Global"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "LoadBalancerSkuTier",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/LoadBalancerSkuTier"
+        }
+      }
+    },
+    "LoadBalancerVipSwapRequestFrontendIPConfigurationProperties": {
+      "properties": {
+        "publicIPAddress": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "LoadBalancingRule": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "LoadBalancingRulePropertiesFormat": {
+      "properties": {
+        "frontendIPConfiguration": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "backendAddressPool": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "backendAddressPools": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "probe": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "protocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Udp",
+            "Tcp",
+            "All",
+            "Quic"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "TransportProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/TransportProtocol"
+        },
+        "loadDistribution": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Default",
+            "SourceIP",
+            "SourceIPProtocol"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "LoadDistribution",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/LoadDistribution"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "OutboundRule": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "OutboundRulePropertiesFormat": {
+      "properties": {
+        "frontendIPConfigurations": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "backendAddressPool": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "protocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Tcp",
+            "Udp",
+            "All"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "LoadBalancerOutboundRuleProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/LoadBalancerOutboundRuleProtocol"
+        },
+        "idleTimeoutInMinutes": {
+          "format__added": "int32"
+        }
+      }
+    },
+    "Probe": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "ProbePropertiesFormat": {
+      "properties": {
+        "loadBalancingRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "protocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Http",
+            "Tcp",
+            "Https"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ProbeProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/ProbeProtocol"
+        },
+        "noHealthyBackendsBehavior": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "AllProbedDown",
+            "AllProbedUp"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ProbeNoHealthyBackendsBehavior",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/ProbeNoHealthyBackendsBehavior"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "QueryInboundNatRulePortMappingRequest": {
+      "properties": {
+        "ipConfiguration": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        }
+      }
+    }
+  }
+}

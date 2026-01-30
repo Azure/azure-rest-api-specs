@@ -1,0 +1,1512 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-03-01",
+    "description": "APIs to manage web application firewall rules.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AzureFirewalls"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureFirewallFqdnTags": {
+      "get": {
+        "operationId": "AzureFirewallFqdnTags_ListAll",
+        "description": "Gets all the Azure Firewall FQDN Tags in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewallFqdnTagListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Azure Firewall FQDN Tags for a given subscription": {
+            "$ref": "./examples/AzureFirewallFqdnTagsListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureFirewalls": {
+      "get": {
+        "operationId": "AzureFirewalls_ListAll",
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "description": "Gets all the Azure Firewalls in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewallListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Azure Firewalls for a given subscription": {
+            "$ref": "./examples/AzureFirewallListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls": {
+      "get": {
+        "operationId": "AzureFirewalls_List",
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "description": "Lists all Azure Firewalls in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewallListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Azure Firewalls for a given resource group": {
+            "$ref": "./examples/AzureFirewallListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}": {
+      "get": {
+        "operationId": "AzureFirewalls_Get",
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "description": "Gets the specified Azure Firewall.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "description": "The name of the Azure Firewall.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Firewall": {
+            "$ref": "./examples/AzureFirewallGet.json"
+          },
+          "Get Azure Firewall With Additional Properties": {
+            "$ref": "./examples/AzureFirewallGetWithAdditionalProperties.json"
+          },
+          "Get Azure Firewall With IpGroups": {
+            "$ref": "./examples/AzureFirewallGetWithIpGroups.json"
+          },
+          "Get Azure Firewall With Zones": {
+            "$ref": "./examples/AzureFirewallGetWithZones.json"
+          },
+          "Get Azure Firewall With management subnet": {
+            "$ref": "./examples/AzureFirewallGetWithMgmtSubnet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AzureFirewalls_CreateOrUpdate",
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "description": "Creates or updates the specified Azure Firewall.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "description": "The name of the Azure Firewall.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update Azure Firewall operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AzureFirewall' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            }
+          },
+          "201": {
+            "description": "Resource 'AzureFirewall' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Azure Firewall": {
+            "$ref": "./examples/AzureFirewallPut.json"
+          },
+          "Create Azure Firewall With Additional Properties": {
+            "$ref": "./examples/AzureFirewallPutWithAdditionalProperties.json"
+          },
+          "Create Azure Firewall With IpGroups": {
+            "$ref": "./examples/AzureFirewallPutWithIpGroups.json"
+          },
+          "Create Azure Firewall With Zones": {
+            "$ref": "./examples/AzureFirewallPutWithZones.json"
+          },
+          "Create Azure Firewall With management subnet": {
+            "$ref": "./examples/AzureFirewallPutWithMgmtSubnet.json"
+          },
+          "Create Azure Firewall in virtual Hub": {
+            "$ref": "./examples/AzureFirewallPutInHub.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AzureFirewall"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AzureFirewalls_UpdateTags",
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "description": "Updates tags of an Azure Firewall resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "description": "The name of the Azure Firewall.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update azure firewall tags.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewall"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Azure Firewall Tags": {
+            "$ref": "./examples/AzureFirewallUpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AzureFirewall"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AzureFirewalls_Delete",
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "description": "Deletes the specified Azure Firewall.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "description": "The name of the Azure Firewall.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Azure Firewall": {
+            "$ref": "./examples/AzureFirewallDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}/learnedIPPrefixes": {
+      "post": {
+        "operationId": "AzureFirewalls_ListLearnedPrefixes",
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "description": "Retrieves a list of all IP prefixes that azure firewall has learned to not SNAT.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "description": "The name of the Azure Firewall.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IPPrefixesList"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureFirewallListLearnedPrefixes": {
+            "$ref": "./examples/AzureFirewallListLearnedIPPrefixes.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/IPPrefixesList"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture": {
+      "post": {
+        "operationId": "AzureFirewalls_PacketCapture",
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "description": "Runs a packet capture on AzureFirewall.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "description": "The name of the Azure Firewall.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to run packet capture on azure firewall.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPacketCaptureParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureFirewallPacketCapture": {
+            "$ref": "./examples/AzureFirewallPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/azureFirewalls/{azureFirewallName}/packetCaptureOperation": {
+      "post": {
+        "operationId": "AzureFirewalls_PacketCaptureOperation",
+        "tags": [
+          "AzureFirewalls"
+        ],
+        "description": "Runs a packet capture operation on AzureFirewall.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "azureFirewallName",
+            "in": "path",
+            "description": "The name of the Azure Firewall.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to run packet capture on azure firewall.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPacketCaptureParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureFirewallPacketCaptureResponse"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AzureFirewallPacketCaptureOperation": {
+            "$ref": "./examples/AzureFirewallPacketCaptureOperation.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AzureFirewallPacketCaptureResponse"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AzureFirewall": {
+      "type": "object",
+      "description": "Azure Firewall resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallPropertiesFormat",
+          "description": "Properties of the azure firewall.",
+          "x-ms-client-flatten": true
+        },
+        "extendedLocation": {
+          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "description": "The extended location of type local virtual network gateway."
+        },
+        "zones": {
+          "type": "array",
+          "description": "A list of availability zones denoting where the resource needs to come from.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AzureFirewallApplicationRule": {
+      "type": "object",
+      "description": "Properties of an application rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the application rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule."
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "description": "Array of ApplicationRuleProtocols.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallApplicationRuleProtocol"
+          }
+        },
+        "targetFqdns": {
+          "type": "array",
+          "description": "List of FQDNs for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdnTags": {
+          "type": "array",
+          "description": "List of FQDN Tags for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallApplicationRuleCollection": {
+      "type": "object",
+      "description": "Application rule collection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallApplicationRuleCollectionPropertiesFormat",
+          "description": "Properties of the azure firewall application rule collection.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within the Azure firewall. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "AzureFirewallApplicationRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of the application rule collection.",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority of the application rule collection resource.",
+          "minimum": 100,
+          "maximum": 65000
+        },
+        "action": {
+          "$ref": "#/definitions/AzureFirewallRCAction",
+          "description": "The action type of a rule collection."
+        },
+        "rules": {
+          "type": "array",
+          "description": "Collection of rules used by a application rule collection.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallApplicationRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the application rule collection resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallApplicationRuleProtocol": {
+      "type": "object",
+      "description": "Properties of the application rule protocol.",
+      "properties": {
+        "protocolType": {
+          "$ref": "./common.json#/definitions/AzureFirewallApplicationRuleProtocolType",
+          "description": "Protocol type."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number for the protocol, cannot be greater than 64000. This field is optional.",
+          "minimum": 0,
+          "maximum": 64000
+        }
+      }
+    },
+    "AzureFirewallAutoscaleConfiguration": {
+      "type": "object",
+      "description": "Azure Firewall Autoscale Configuration parameters.",
+      "properties": {
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of capacity units for this azure firewall. Use null to reset the value to the service default.",
+          "minimum": 2,
+          "x-nullable": true
+        },
+        "maxCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of capacity units for this azure firewall. Use null to reset the value to the service default.",
+          "minimum": 2,
+          "x-nullable": true
+        }
+      }
+    },
+    "AzureFirewallFqdnTag": {
+      "type": "object",
+      "description": "Azure Firewall FQDN Tag Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallFqdnTagPropertiesFormat",
+          "description": "Properties of the azure firewall FQDN tag.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AzureFirewallFqdnTagListResult": {
+      "type": "object",
+      "description": "The response of a AzureFirewallFqdnTag list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureFirewallFqdnTag items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallFqdnTag"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzureFirewallFqdnTagPropertiesFormat": {
+      "type": "object",
+      "description": "Azure Firewall FQDN Tag Properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the Azure firewall FQDN tag resource.",
+          "readOnly": true
+        },
+        "fqdnTagName": {
+          "type": "string",
+          "description": "The name of this FQDN Tag.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallIPConfiguration": {
+      "type": "object",
+      "description": "IP configuration of an Azure Firewall.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallIPConfigurationPropertiesFormat",
+          "description": "Properties of the azure firewall IP configuration.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "AzureFirewallIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of IP configuration of an Azure Firewall.",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The Firewall Internal Load Balancer IP to be used as the next hop in User Defined Routes.",
+          "readOnly": true
+        },
+        "subnet": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Reference to the subnet resource. This resource must be named 'AzureFirewallSubnet' or 'AzureFirewallManagementSubnet'."
+        },
+        "publicIPAddress": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "Reference to the PublicIP resource. This field is a mandatory input if subnet is not null."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the Azure firewall IP configuration resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallIpGroups": {
+      "type": "object",
+      "description": "IpGroups associated with azure firewall.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID.",
+          "readOnly": true
+        },
+        "changeNumber": {
+          "type": "string",
+          "description": "The iteration number.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallListResult": {
+      "type": "object",
+      "description": "The response of a AzureFirewall list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureFirewall items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureFirewall"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AzureFirewallNatRCAction": {
+      "type": "object",
+      "description": "AzureFirewall NAT Rule Collection Action.",
+      "properties": {
+        "type": {
+          "$ref": "./common.json#/definitions/AzureFirewallNatRCActionType",
+          "description": "The type of action."
+        }
+      }
+    },
+    "AzureFirewallNatRule": {
+      "type": "object",
+      "description": "Properties of a NAT rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the NAT rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule."
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "List of destination IP addresses for this rule. Supports IP ranges, prefixes, and service tags.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of destination ports.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocols": {
+          "type": "array",
+          "description": "Array of AzureFirewallNetworkRuleProtocols applicable to this NAT rule.",
+          "items": {
+            "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol"
+          }
+        },
+        "translatedAddress": {
+          "type": "string",
+          "description": "The translated address for this NAT rule."
+        },
+        "translatedPort": {
+          "type": "string",
+          "description": "The translated port for this NAT rule."
+        },
+        "translatedFqdn": {
+          "type": "string",
+          "description": "The translated FQDN for this NAT rule."
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallNatRuleCollection": {
+      "type": "object",
+      "description": "NAT rule collection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallNatRuleCollectionProperties",
+          "description": "Properties of the azure firewall NAT rule collection.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within the Azure firewall. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "AzureFirewallNatRuleCollectionProperties": {
+      "type": "object",
+      "description": "Properties of the NAT rule collection.",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority of the NAT rule collection resource.",
+          "minimum": 100,
+          "maximum": 65000
+        },
+        "action": {
+          "$ref": "#/definitions/AzureFirewallNatRCAction",
+          "description": "The action type of a NAT rule collection."
+        },
+        "rules": {
+          "type": "array",
+          "description": "Collection of rules used by a NAT rule collection.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallNatRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the NAT rule collection resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallNetworkRule": {
+      "type": "object",
+      "description": "Properties of the network rule.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule."
+        },
+        "protocols": {
+          "type": "array",
+          "description": "Array of AzureFirewallNetworkRuleProtocols.",
+          "items": {
+            "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol"
+          }
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "List of destination IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of destination ports.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationFqdns": {
+          "type": "array",
+          "description": "List of destination FQDNs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "description": "List of destination IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallNetworkRuleCollection": {
+      "type": "object",
+      "description": "Network rule collection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureFirewallNetworkRuleCollectionPropertiesFormat",
+          "description": "Properties of the azure firewall network rule collection.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within the Azure firewall. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "AzureFirewallNetworkRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of the network rule collection.",
+      "properties": {
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority of the network rule collection resource.",
+          "minimum": 100,
+          "maximum": 65000
+        },
+        "action": {
+          "$ref": "#/definitions/AzureFirewallRCAction",
+          "description": "The action type of a rule collection."
+        },
+        "rules": {
+          "type": "array",
+          "description": "Collection of rules used by a network rule collection.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallNetworkRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the network rule collection resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureFirewallPacketCaptureFlags": {
+      "type": "object",
+      "description": "Properties of the AzureFirewallRCAction.",
+      "properties": {
+        "type": {
+          "$ref": "./common.json#/definitions/AzureFirewallPacketCaptureFlagsType",
+          "description": "Flags to capture"
+        }
+      }
+    },
+    "AzureFirewallPacketCaptureResponse": {
+      "type": "object",
+      "description": "Response of an Azure Firewall Packet Capture Operation.",
+      "properties": {
+        "statusCode": {
+          "$ref": "./common.json#/definitions/AzureFirewallPacketCaptureResponseCode",
+          "description": "The response code of the performed packet capture operation"
+        },
+        "message": {
+          "type": "string",
+          "description": "Localized Message String of The Result Of The Azure Firewall Packet Capture Operation"
+        }
+      }
+    },
+    "AzureFirewallPacketCaptureRule": {
+      "type": "object",
+      "description": "Group of src/dest ips and ports to be captured.",
+      "properties": {
+        "sources": {
+          "type": "array",
+          "description": "List of source IP addresses/subnets to be captured.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinations": {
+          "type": "array",
+          "description": "List of destination IP addresses/subnets to be captured.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of ports to be captured.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AzureFirewallPropertiesFormat": {
+      "type": "object",
+      "description": "Properties of the Azure Firewall.",
+      "properties": {
+        "applicationRuleCollections": {
+          "type": "array",
+          "description": "Collection of application rule collections used by Azure Firewall.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallApplicationRuleCollection"
+          }
+        },
+        "natRuleCollections": {
+          "type": "array",
+          "description": "Collection of NAT rule collections used by Azure Firewall.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallNatRuleCollection"
+          }
+        },
+        "networkRuleCollections": {
+          "type": "array",
+          "description": "Collection of network rule collections used by Azure Firewall.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallNetworkRuleCollection"
+          }
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "description": "IP configuration of the Azure Firewall resource.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallIPConfiguration"
+          }
+        },
+        "managementIpConfiguration": {
+          "$ref": "#/definitions/AzureFirewallIPConfiguration",
+          "description": "IP configuration of the Azure Firewall used for management traffic."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the Azure firewall resource.",
+          "readOnly": true
+        },
+        "threatIntelMode": {
+          "$ref": "./common.json#/definitions/AzureFirewallThreatIntelMode",
+          "description": "The operation mode for Threat Intelligence."
+        },
+        "virtualHub": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The virtualHub to which the firewall belongs."
+        },
+        "firewallPolicy": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The firewallPolicy associated with this azure firewall."
+        },
+        "hubIPAddresses": {
+          "$ref": "#/definitions/HubIPAddresses",
+          "description": "IP addresses associated with AzureFirewall."
+        },
+        "ipGroups": {
+          "type": "array",
+          "description": "IpGroups associated with AzureFirewall.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallIpGroups"
+          },
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/AzureFirewallSku",
+          "description": "The Azure Firewall Resource SKU."
+        },
+        "additionalProperties": {
+          "type": "object",
+          "description": "The additional properties used to further config this azure firewall.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "autoscaleConfiguration": {
+          "$ref": "#/definitions/AzureFirewallAutoscaleConfiguration",
+          "description": "Properties to provide a custom autoscale configuration to this azure firewall."
+        }
+      }
+    },
+    "AzureFirewallPublicIPAddress": {
+      "type": "object",
+      "description": "Public IP Address associated with azure firewall.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Public IP Address value."
+        }
+      }
+    },
+    "AzureFirewallRCAction": {
+      "type": "object",
+      "description": "Properties of the AzureFirewallRCAction.",
+      "properties": {
+        "type": {
+          "$ref": "./common.json#/definitions/AzureFirewallRCActionType",
+          "description": "The type of action."
+        }
+      }
+    },
+    "AzureFirewallSku": {
+      "type": "object",
+      "description": "SKU of an Azure Firewall.",
+      "properties": {
+        "name": {
+          "$ref": "./common.json#/definitions/AzureFirewallSkuName",
+          "description": "Name of an Azure Firewall SKU."
+        },
+        "tier": {
+          "$ref": "./common.json#/definitions/AzureFirewallSkuTier",
+          "description": "Tier of an Azure Firewall."
+        }
+      }
+    },
+    "FirewallPacketCaptureParameters": {
+      "type": "object",
+      "description": "Azure Firewall Packet Capture Parameters.",
+      "properties": {
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of packet capture in seconds. If the field is not provided, the default value is 60.",
+          "default": 60,
+          "minimum": 30,
+          "maximum": 1800
+        },
+        "numberOfPacketsToCapture": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of packets to be captured. If the field is not provided, the default value is 1000.",
+          "default": 1000,
+          "minimum": 100,
+          "maximum": 90000
+        },
+        "sasUrl": {
+          "type": "string",
+          "description": "Upload capture location"
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Name of file to be uploaded to sasURL"
+        },
+        "protocol": {
+          "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol",
+          "description": "The protocol of packets to capture"
+        },
+        "flags": {
+          "type": "array",
+          "description": "The tcp-flag type to be captured. Used with protocol TCP",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPacketCaptureFlags"
+          },
+          "x-ms-identifiers": []
+        },
+        "filters": {
+          "type": "array",
+          "description": "Rules to filter packet captures.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPacketCaptureRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "operation": {
+          "type": "string",
+          "description": "The packet capture operation to perform. If the Start operation is selected, please provide all the fields in the firewallPacketCaptureParameters to successfully initiate the packet capture. If the Status or Stop operation is selected, only the operation field is required; all other fields in the firewallPacketCaptureParameters can be omitted to successfully retrieve the capture status or stop the capture.",
+          "default": "Start",
+          "enum": [
+            "Start",
+            "Status",
+            "Stop"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallPacketCaptureOperationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Start",
+                "value": "Start",
+                "description": "Start"
+              },
+              {
+                "name": "Status",
+                "value": "Status",
+                "description": "Status"
+              },
+              {
+                "name": "Stop",
+                "value": "Stop",
+                "description": "Stop"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "HubIPAddresses": {
+      "type": "object",
+      "description": "IP addresses associated with azure firewall.",
+      "properties": {
+        "publicIPs": {
+          "$ref": "#/definitions/HubPublicIPAddresses",
+          "description": "Public IP addresses associated with azure firewall."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "Private IP Address associated with azure firewall."
+        }
+      }
+    },
+    "HubPublicIPAddresses": {
+      "type": "object",
+      "description": "Public IP addresses associated with azure firewall.",
+      "properties": {
+        "addresses": {
+          "type": "array",
+          "description": "The list of Public IP addresses associated with azure firewall or IP addresses to be retained.",
+          "items": {
+            "$ref": "#/definitions/AzureFirewallPublicIPAddress"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of Public IP addresses associated with azure firewall."
+        }
+      }
+    },
+    "IPPrefixesList": {
+      "type": "object",
+      "description": "List of SNAT IP Prefixes learnt by firewall to not SNAT",
+      "properties": {
+        "ipPrefixes": {
+          "type": "array",
+          "description": "IP Prefix value.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

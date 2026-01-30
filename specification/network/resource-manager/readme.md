@@ -225,8 +225,6 @@ input-file:
   - Microsoft.Network/stable/2025-03-01/virtualNetworkTap.json
   - Microsoft.Network/stable/2025-03-01/virtualRouter.json
   - Microsoft.Network/stable/2025-03-01/virtualWan.json
-  - Microsoft.Network/stable/2025-03-01/vmssNetworkInterface.json
-  - Microsoft.Network/stable/2025-03-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2025-03-01/webapplicationfirewall.json
 suppressions:
   - code: PutResponseCodes

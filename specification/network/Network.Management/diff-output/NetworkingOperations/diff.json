@@ -1,0 +1,114 @@
+{
+  "tags__added": [
+    {
+      "name": "Operations"
+    }
+  ],
+  "info": {
+    "title": {
+      "__old": "NetworkManagementClient",
+      "__new": "WebApplicationFirewallManagement"
+    },
+    "description": {
+      "__old": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+      "__new": "APIs to manage web application firewall rules."
+    }
+  },
+  "paths": {
+    "/providers/microsoft.Network/operations": {
+      "get": {
+        "tags__added": [
+          "Operations"
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": {
+                "__old": "#/definitions/OperationListResult",
+                "__new": "./common.json/definitions/OperationListResult"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "Operation": {
+      "properties": {
+        "display": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft Network."
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Type of the operation: get, read, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
+            }
+          },
+          "$ref__added": "./common.json/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationPropertiesFormat": {
+      "properties": {
+        "serviceSpecification": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "metricSpecifications": {
+              "type": "array",
+              "description": "Operation service specification.",
+              "items": {
+                "$ref": "#/definitions/MetricSpecification"
+              }
+            },
+            "logSpecifications": {
+              "type": "array",
+              "description": "Operation log specification.",
+              "items": {
+                "$ref": "#/definitions/LogSpecification"
+              }
+            }
+          },
+          "$ref__added": "./common.json/definitions/OperationPropertiesFormatServiceSpecification"
+        }
+      }
+    }
+  }
+}

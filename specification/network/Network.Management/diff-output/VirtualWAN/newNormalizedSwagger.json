@@ -1,0 +1,2812 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-03-01",
+    "description": "APIs to manage web application firewall rules."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "VirtualWANS"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualWans": {
+      "get": {
+        "operationId": "VirtualWans_List",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualWANsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANList": {
+            "$ref": "./examples/VirtualWANList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans": {
+      "get": {
+        "operationId": "VirtualWans_ListByResourceGroup",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualWANsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANListByResourceGroup": {
+            "$ref": "./examples/VirtualWANListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}": {
+      "get": {
+        "operationId": "VirtualWans_Get",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANGet": {
+            "$ref": "./examples/VirtualWANGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualWans_CreateOrUpdate",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "WANParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANCreate": {
+            "$ref": "./examples/VirtualWANPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/VirtualWAN"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualWans_UpdateTags",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "WANParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualWAN"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANUpdate": {
+            "$ref": "./examples/VirtualWANUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VirtualWans_Delete",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [
+          {
+            "name": "VirtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualWANDelete": {
+            "$ref": "./examples/VirtualWANDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile": {
+      "post": {
+        "operationId": "generatevirtualwanvpnserverconfigurationvpnprofile",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [
+          {
+            "name": "virtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vpnClientParams",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualWanVpnProfileParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnProfileResponse"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateVirtualWanVpnServerConfigurationVpnProfile": {
+            "$ref": "./examples/GenerateVirtualWanVpnServerConfigurationVpnProfile.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders": {
+      "get": {
+        "operationId": "SupportedSecurityProviders",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [
+          {
+            "name": "virtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualWanSecurityProviders"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "supportedSecurityProviders": {
+            "$ref": "./examples/VirtualWanSupportedSecurityProviders.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
+      "post": {
+        "operationId": "VpnSitesConfiguration_Download",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [
+          {
+            "name": "virtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetVpnSitesConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSitesConfigurationDownload": {
+            "$ref": "./examples/VpnSitesConfigurationDownload.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations": {
+      "post": {
+        "operationId": "VpnServerConfigurationsAssociatedWithVirtualWan_List",
+        "tags": [
+          "VirtualWANS"
+        ],
+        "parameters": [
+          {
+            "name": "virtualWANName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfigurationsResponse"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualWanVpnServerConfigurations": {
+            "$ref": "./examples/GetVirtualWanVpnServerConfigurations.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AadAuthenticationParameters": {
+      "type": "object",
+      "properties": {
+        "aadTenant": {
+          "type": "string"
+        },
+        "aadAudience": {
+          "type": "string"
+        },
+        "aadIssuer": {
+          "type": "string"
+        }
+      }
+    },
+    "Action": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "./common.json#/definitions/RouteMapActionType"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Parameter"
+          }
+        }
+      }
+    },
+    "BgpConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BgpConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "BgpConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "peerAsn": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "peerIp": {
+          "type": "string"
+        },
+        "hubVirtualNetworkConnection": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "connectionState": {
+          "$ref": "./common.json#/definitions/HubBgpConnectionStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "Criterion": {
+      "type": "object",
+      "properties": {
+        "routePrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "community": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "asPath": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matchCondition": {
+          "$ref": "./common.json#/definitions/RouteMapMatchCondition"
+        }
+      }
+    },
+    "DeviceProperties": {
+      "type": "object",
+      "properties": {
+        "deviceVendor": {
+          "type": "string"
+        },
+        "deviceModel": {
+          "type": "string"
+        },
+        "linkSpeedInMbps": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "EffectiveRouteMapRoute": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "string"
+        },
+        "bgpCommunities": {
+          "type": "string"
+        },
+        "asPath": {
+          "type": "string"
+        }
+      }
+    },
+    "EffectiveRouteMapRouteList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EffectiveRouteMapRoute"
+          }
+        }
+      }
+    },
+    "EffectiveRoutesParameters": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string"
+        },
+        "virtualWanResourceType": {
+          "type": "string"
+        }
+      }
+    },
+    "ExpressRouteCircuitPeeringId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ExpressRouteConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ExpressRouteConnectionId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ExpressRouteConnectionList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteConnection"
+          }
+        }
+      }
+    },
+    "ExpressRouteConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "expressRouteCircuitPeering": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringId"
+        },
+        "authorizationKey": {
+          "type": "string"
+        },
+        "routingWeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "enableInternetSecurity": {
+          "type": "boolean"
+        },
+        "expressRouteGatewayBypass": {
+          "type": "boolean"
+        },
+        "enablePrivateLinkFastPath": {
+          "type": "boolean"
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration"
+        }
+      },
+      "required": [
+        "expressRouteCircuitPeering"
+      ]
+    },
+    "ExpressRouteGateway": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteGatewayProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ExpressRouteGatewayList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteGateway"
+          }
+        }
+      }
+    },
+    "ExpressRouteGatewayProperties": {
+      "type": "object",
+      "properties": {
+        "autoScaleConfiguration": {
+          "$ref": "./common.json#/definitions/ExpressRouteGatewayPropertiesAutoScaleConfiguration"
+        },
+        "expressRouteConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteConnection"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "virtualHub": {
+          "$ref": "#/definitions/VirtualHubId"
+        },
+        "allowNonVirtualWanTraffic": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "virtualHub"
+      ]
+    },
+    "GetInboundRoutesParameters": {
+      "type": "object",
+      "properties": {
+        "resourceUri": {
+          "type": "string"
+        },
+        "connectionType": {
+          "type": "string"
+        }
+      }
+    },
+    "GetOutboundRoutesParameters": {
+      "type": "object",
+      "properties": {
+        "resourceUri": {
+          "type": "string"
+        },
+        "connectionType": {
+          "type": "string"
+        }
+      }
+    },
+    "GetVpnSitesConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "vpnSites": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputBlobSasUrl": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "outputBlobSasUrl"
+      ]
+    },
+    "HubIPConfigurationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "privateIPAddress": {
+          "type": "string"
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "./common.json#/definitions/IPAllocationMethod"
+        },
+        "subnet": {
+          "$ref": "./virtualNetwork.json#/definitions/Subnet"
+        },
+        "publicIPAddress": {
+          "$ref": "./virtualNetwork.json#/definitions/PublicIPAddress"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "HubIpConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HubIPConfigurationPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "HubRoute": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "destinationType": {
+          "type": "string"
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopType": {
+          "type": "string"
+        },
+        "nextHop": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "destinations",
+        "destinationType",
+        "name",
+        "nextHop",
+        "nextHopType"
+      ]
+    },
+    "HubRouteTable": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HubRouteTableProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "HubRouteTableProperties": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HubRoute"
+          }
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "associatedConnections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "propagatingConnections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "HubVirtualNetworkConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HubVirtualNetworkConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "HubVirtualNetworkConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "remoteVirtualNetwork": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "allowHubToRemoteVnetTransit": {
+          "type": "boolean"
+        },
+        "allowRemoteVnetToUseHubVnetGateways": {
+          "type": "boolean"
+        },
+        "enableInternetSecurity": {
+          "type": "boolean"
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ListHubRouteTablesResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/HubRouteTable"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListP2SVpnGatewaysResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/P2SVpnGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListRouteMapsResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/RouteMap"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListRoutingIntentResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/RoutingIntent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVirtualHubBgpConnectionResults": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/BgpConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVirtualHubsResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VirtualHub"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVirtualWANsResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VirtualWAN"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnConnectionsResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VpnConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnGatewayNatRulesResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VpnGatewayNatRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnGatewaysResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VpnGateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnSiteLinksResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VpnSiteLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ListVpnSitesResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VpnSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkVirtualApplianceConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkVirtualApplianceConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "NetworkVirtualApplianceConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "asn": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "tunnelIdentifier": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "bgpPeerAddress": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enableInternetSecurity": {
+          "type": "boolean"
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration"
+        }
+      }
+    },
+    "O365BreakOutCategoryPolicies": {
+      "type": "object",
+      "properties": {
+        "allow": {
+          "type": "boolean"
+        },
+        "optimize": {
+          "type": "boolean"
+        },
+        "default": {
+          "type": "boolean"
+        }
+      }
+    },
+    "O365PolicyProperties": {
+      "type": "object",
+      "properties": {
+        "breakOutCategories": {
+          "$ref": "#/definitions/O365BreakOutCategoryPolicies"
+        }
+      }
+    },
+    "P2SConnectionConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/P2SConnectionConfigurationProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "P2SConnectionConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "vpnClientAddressPool": {
+          "$ref": "./virtualNetwork.json#/definitions/AddressSpace"
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration"
+        },
+        "enableInternetSecurity": {
+          "type": "boolean"
+        },
+        "configurationPolicyGroupAssociations": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          }
+        },
+        "previousConfigurationPolicyGroupAssociations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "P2SVpnConnectionHealth": {
+      "type": "object",
+      "properties": {
+        "sasUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "P2SVpnConnectionHealthRequest": {
+      "type": "object",
+      "properties": {
+        "vpnUserNamesFilter": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "outputBlobSasUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "P2SVpnConnectionRequest": {
+      "type": "object",
+      "properties": {
+        "vpnConnectionIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "P2SVpnGateway": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/P2SVpnGatewayProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
+    "P2SVpnGatewayProperties": {
+      "type": "object",
+      "properties": {
+        "virtualHub": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "p2SConnectionConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/P2SConnectionConfiguration"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "vpnGatewayScaleUnit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "vpnServerConfiguration": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "vpnClientConnectionHealth": {
+          "$ref": "./networkGateway.json#/definitions/VpnClientConnectionHealth",
+          "readOnly": true
+        },
+        "customDnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isRoutingPreferenceInternet": {
+          "type": "boolean"
+        }
+      }
+    },
+    "P2SVpnProfileParameters": {
+      "type": "object",
+      "properties": {
+        "authenticationMethod": {
+          "$ref": "./common.json#/definitions/AuthenticationMethod"
+        }
+      }
+    },
+    "Parameter": {
+      "type": "object",
+      "properties": {
+        "routePrefix": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "community": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "asPath": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PeerRoute": {
+      "type": "object",
+      "properties": {
+        "localAddress": {
+          "type": "string",
+          "readOnly": true
+        },
+        "network": {
+          "type": "string",
+          "readOnly": true
+        },
+        "nextHop": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sourcePeer": {
+          "type": "string",
+          "readOnly": true
+        },
+        "origin": {
+          "type": "string",
+          "readOnly": true
+        },
+        "asPath": {
+          "type": "string",
+          "readOnly": true
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "PropagatedRouteTable": {
+      "type": "object",
+      "properties": {
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "Record<PeerRoute[]>": {
+      "type": "object",
+      "additionalProperties": {
+        "items": {
+          "$ref": "#/definitions/PeerRoute"
+        },
+        "type": "array"
+      }
+    },
+    "RouteMap": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RouteMapProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ReadOnlySubResourceModel"
+        }
+      ]
+    },
+    "RouteMapProperties": {
+      "type": "object",
+      "properties": {
+        "associatedInboundConnections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "associatedOutboundConnections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteMapRule"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "RouteMapRule": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "matchCriteria": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Criterion"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Action"
+          }
+        },
+        "nextStepIfMatched": {
+          "$ref": "./common.json#/definitions/NextStep"
+        }
+      }
+    },
+    "RoutingConfiguration": {
+      "type": "object",
+      "properties": {
+        "associatedRouteTable": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "propagatedRouteTables": {
+          "$ref": "#/definitions/PropagatedRouteTable"
+        },
+        "vnetRoutes": {
+          "$ref": "#/definitions/VnetRoute"
+        },
+        "inboundRouteMap": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "outboundRouteMap": {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      }
+    },
+    "RoutingIntent": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingIntentProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "RoutingIntentProperties": {
+      "type": "object",
+      "properties": {
+        "routingPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoutingPolicy"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "RoutingPolicy": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHop": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "destinations",
+        "name",
+        "nextHop"
+      ]
+    },
+    "SharedKeyProperties": {
+      "type": "object",
+      "properties": {
+        "sharedKey": {
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
+        },
+        "sharedKeyLength": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "StaticRoute": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopIpAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "StaticRoutesConfig": {
+      "type": "object",
+      "properties": {
+        "propagateStaticRoutes": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "vnetLocalRouteOverrideCriteria": {
+          "$ref": "./common.json#/definitions/VnetLocalRouteOverrideCriteria"
+        }
+      }
+    },
+    "VirtualHub": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualHubProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
+    "VirtualHubEffectiveRoute": {
+      "type": "object",
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHops": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopType": {
+          "type": "string"
+        },
+        "asPath": {
+          "type": "string"
+        },
+        "routeOrigin": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualHubEffectiveRouteList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualHubEffectiveRoute"
+          }
+        }
+      }
+    },
+    "VirtualHubId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualHubProperties": {
+      "type": "object",
+      "properties": {
+        "virtualWan": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "vpnGateway": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "p2SVpnGateway": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "expressRouteGateway": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "azureFirewall": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "securityPartnerProvider": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "addressPrefix": {
+          "type": "string"
+        },
+        "routeTable": {
+          "$ref": "#/definitions/VirtualHubRouteTable"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "securityProviderName": {
+          "type": "string"
+        },
+        "virtualHubRouteTableV2s": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRouteTableV2"
+          }
+        },
+        "sku": {
+          "type": "string"
+        },
+        "routingState": {
+          "$ref": "./common.json#/definitions/RoutingState",
+          "readOnly": true
+        },
+        "bgpConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "routeMaps": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "virtualRouterAsn": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "virtualRouterIps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowBranchToBranchTraffic": {
+          "type": "boolean"
+        },
+        "preferredRoutingGateway": {
+          "$ref": "./common.json#/definitions/PreferredRoutingGateway"
+        },
+        "hubRoutingPreference": {
+          "$ref": "./common.json#/definitions/HubRoutingPreference"
+        },
+        "virtualRouterAutoScaleConfiguration": {
+          "$ref": "#/definitions/VirtualRouterAutoScaleConfiguration"
+        }
+      }
+    },
+    "VirtualHubRoute": {
+      "type": "object",
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopIpAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualHubRouteTable": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRoute"
+          }
+        }
+      }
+    },
+    "VirtualHubRouteTableV2": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualHubRouteTableV2Properties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "VirtualHubRouteTableV2Properties": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRouteV2"
+          }
+        },
+        "attachedConnections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualHubRouteV2": {
+      "type": "object",
+      "properties": {
+        "destinationType": {
+          "type": "string"
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopType": {
+          "type": "string"
+        },
+        "nextHops": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VirtualRouterAutoScaleConfiguration": {
+      "type": "object",
+      "properties": {
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      }
+    },
+    "VirtualWAN": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualWanProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
+    "VirtualWanProperties": {
+      "type": "object",
+      "properties": {
+        "disableVpnEncryption": {
+          "type": "boolean"
+        },
+        "virtualHubs": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "vpnSites": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "allowBranchToBranchTraffic": {
+          "type": "boolean"
+        },
+        "allowVnetToVnetTraffic": {
+          "type": "boolean"
+        },
+        "office365LocalBreakoutCategory": {
+          "$ref": "./common.json#/definitions/OfficeTrafficCategory",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "VirtualWanSecurityProvider": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "./common.json#/definitions/VirtualWanSecurityProviderType",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualWanSecurityProviders": {
+      "type": "object",
+      "properties": {
+        "supportedProviders": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualWanSecurityProvider"
+          }
+        }
+      }
+    },
+    "VirtualWanVpnProfileParameters": {
+      "type": "object",
+      "properties": {
+        "vpnServerConfigurationResourceId": {
+          "type": "string"
+        },
+        "authenticationMethod": {
+          "$ref": "./common.json#/definitions/AuthenticationMethod"
+        }
+      }
+    },
+    "VnetRoute": {
+      "type": "object",
+      "properties": {
+        "staticRoutesConfig": {
+          "$ref": "#/definitions/StaticRoutesConfig"
+        },
+        "staticRoutes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticRoute"
+          }
+        },
+        "bgpConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "VpnConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "VpnConnectionPacketCaptureStartParameters": {
+      "type": "object",
+      "properties": {
+        "filterData": {
+          "type": "string"
+        },
+        "linkConnectionNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VpnConnectionPacketCaptureStopParameters": {
+      "type": "object",
+      "properties": {
+        "sasUrl": {
+          "type": "string"
+        },
+        "linkConnectionNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VpnConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "remoteVpnSite": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "routingWeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dpdTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "connectionStatus": {
+          "$ref": "./common.json#/definitions/VpnConnectionStatus",
+          "readOnly": true
+        },
+        "vpnConnectionProtocolType": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol"
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "connectionBandwidth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sharedKey": {
+          "type": "string"
+        },
+        "enableBgp": {
+          "type": "boolean"
+        },
+        "usePolicyBasedTrafficSelectors": {
+          "type": "boolean"
+        },
+        "ipsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkGateway.json#/definitions/IpsecPolicy"
+          }
+        },
+        "trafficSelectorPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkGateway.json#/definitions/TrafficSelectorPolicy"
+          }
+        },
+        "enableRateLimiting": {
+          "type": "boolean"
+        },
+        "enableInternetSecurity": {
+          "type": "boolean"
+        },
+        "useLocalAzureIpAddress": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "vpnLinkConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnSiteLinkConnection"
+          }
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration"
+        }
+      }
+    },
+    "VpnGateway": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnGatewayProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
+    "VpnGatewayIpConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "publicIpAddress": {
+          "type": "string"
+        },
+        "privateIpAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnGatewayNatRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnGatewayNatRuleProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "VpnGatewayNatRuleProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "./common.json#/definitions/VpnNatRuleType"
+        },
+        "mode": {
+          "$ref": "./common.json#/definitions/VpnNatRuleMode"
+        },
+        "internalMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnNatRuleMapping"
+          }
+        },
+        "externalMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnNatRuleMapping"
+          }
+        },
+        "ipConfigurationId": {
+          "type": "string"
+        },
+        "egressVpnSiteLinkConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "ingressVpnSiteLinkConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "VpnGatewayPacketCaptureStartParameters": {
+      "type": "object",
+      "properties": {
+        "filterData": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnGatewayPacketCaptureStopParameters": {
+      "type": "object",
+      "properties": {
+        "sasUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnGatewayProperties": {
+      "type": "object",
+      "properties": {
+        "virtualHub": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnConnection"
+          }
+        },
+        "bgpSettings": {
+          "$ref": "./networkGateway.json#/definitions/BgpSettings"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "vpnGatewayScaleUnit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnGatewayIpConfiguration"
+          },
+          "readOnly": true
+        },
+        "enableBgpRouteTranslationForNat": {
+          "type": "boolean"
+        },
+        "isRoutingPreferenceInternet": {
+          "type": "boolean"
+        },
+        "natRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnGatewayNatRule"
+          }
+        }
+      }
+    },
+    "VpnLinkBgpSettings": {
+      "type": "object",
+      "properties": {
+        "asn": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "bgpPeeringAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnLinkProviderProperties": {
+      "type": "object",
+      "properties": {
+        "linkProviderName": {
+          "type": "string"
+        },
+        "linkSpeedInMbps": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "VpnNatRuleMapping": {
+      "type": "object",
+      "properties": {
+        "addressSpace": {
+          "type": "string"
+        },
+        "portRange": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnProfileResponse": {
+      "type": "object",
+      "properties": {
+        "profileUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnServerConfigRadiusClientRootCertificate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "thumbprint": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnServerConfigRadiusServerRootCertificate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "publicCertData": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnServerConfigVpnClientRevokedCertificate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "thumbprint": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnServerConfigVpnClientRootCertificate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "publicCertData": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnServerConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnServerConfigurationProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithWritableName"
+        }
+      ]
+    },
+    "VpnServerConfigurationPolicyGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnServerConfigurationPolicyGroupProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "VpnServerConfigurationPolicyGroupMember": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "attributeType": {
+          "$ref": "./common.json#/definitions/VpnPolicyMemberAttributeType"
+        },
+        "attributeValue": {
+          "type": "string"
+        }
+      }
+    },
+    "VpnServerConfigurationPolicyGroupProperties": {
+      "type": "object",
+      "properties": {
+        "isDefault": {
+          "type": "boolean"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "policyMembers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroupMember"
+          }
+        },
+        "p2SConnectionConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "VpnServerConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "vpnProtocols": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/VpnGatewayTunnelingProtocol"
+          }
+        },
+        "vpnAuthenticationTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/VpnAuthenticationType"
+          }
+        },
+        "vpnClientRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigVpnClientRootCertificate"
+          }
+        },
+        "vpnClientRevokedCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigVpnClientRevokedCertificate"
+          }
+        },
+        "radiusServerRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigRadiusServerRootCertificate"
+          }
+        },
+        "radiusClientRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigRadiusClientRootCertificate"
+          }
+        },
+        "vpnClientIpsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkGateway.json#/definitions/IpsecPolicy"
+          }
+        },
+        "radiusServerAddress": {
+          "type": "string"
+        },
+        "radiusServerSecret": {
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
+        },
+        "radiusServers": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkGateway.json#/definitions/RadiusServer"
+          }
+        },
+        "aadAuthenticationParameters": {
+          "$ref": "#/definitions/AadAuthenticationParameters"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true
+        },
+        "p2SVpnGateways": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/P2SVpnGateway"
+          },
+          "readOnly": true
+        },
+        "configurationPolicyGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VpnServerConfigurationsResponse": {
+      "type": "object",
+      "properties": {
+        "vpnServerConfigurationResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VpnSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnSiteProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
+    "VpnSiteLink": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnSiteLinkProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "VpnSiteLinkConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnSiteLinkConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "VpnSiteLinkConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "vpnSiteLink": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "routingWeight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "vpnLinkConnectionMode": {
+          "$ref": "./common.json#/definitions/VpnLinkConnectionMode"
+        },
+        "connectionStatus": {
+          "$ref": "./common.json#/definitions/VpnConnectionStatus",
+          "readOnly": true
+        },
+        "vpnConnectionProtocolType": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol"
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "connectionBandwidth": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sharedKey": {
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
+        },
+        "enableBgp": {
+          "type": "boolean"
+        },
+        "vpnGatewayCustomBgpAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkGateway.json#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+          }
+        },
+        "usePolicyBasedTrafficSelectors": {
+          "type": "boolean"
+        },
+        "ipsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./networkGateway.json#/definitions/IpsecPolicy"
+          }
+        },
+        "enableRateLimiting": {
+          "type": "boolean"
+        },
+        "useLocalAzureIpAddress": {
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "ingressNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          }
+        },
+        "egressNatRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          }
+        },
+        "dpdTimeoutSeconds": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "VpnSiteLinkProperties": {
+      "type": "object",
+      "properties": {
+        "linkProperties": {
+          "$ref": "#/definitions/VpnLinkProviderProperties"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "fqdn": {
+          "type": "string"
+        },
+        "bgpProperties": {
+          "$ref": "#/definitions/VpnLinkBgpSettings"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "VpnSiteProperties": {
+      "type": "object",
+      "properties": {
+        "virtualWan": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "deviceProperties": {
+          "$ref": "#/definitions/DeviceProperties"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "siteKey": {
+          "type": "string"
+        },
+        "addressSpace": {
+          "$ref": "./virtualNetwork.json#/definitions/AddressSpace"
+        },
+        "bgpProperties": {
+          "$ref": "./networkGateway.json#/definitions/BgpSettings"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "isSecuritySite": {
+          "type": "boolean"
+        },
+        "vpnSiteLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnSiteLink"
+          }
+        },
+        "o365Policy": {
+          "$ref": "#/definitions/O365PolicyProperties"
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

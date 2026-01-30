@@ -1,0 +1,6299 @@
+{
+  "tags__added": [
+    {
+      "name": "VirtualWANS"
+    }
+  ],
+  "info": {
+    "title": {
+      "__old": "VirtualWANAsAServiceManagementClient",
+      "__new": "WebApplicationFirewallManagement"
+    },
+    "description": {
+      "__old": "REST API for Azure VirtualWAN As a Service.",
+      "__new": "APIs to manage web application firewall rules."
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteGateways__deleted": {
+      "get": {
+        "operationId": "ExpressRouteGateways_ListBySubscription",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGatewayList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayListBySubscription": {
+            "$ref": "./examples/ExpressRouteGatewayListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/p2svpnGateways__deleted": {
+      "get": {
+        "operationId": "P2sVpnGateways_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListP2SVpnGatewaysResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayListBySubscription": {
+            "$ref": "./examples/P2SVpnGatewayList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualHubs__deleted": {
+      "get": {
+        "operationId": "VirtualHubs_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualHubsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubList": {
+            "$ref": "./examples/VirtualHubList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/vpnGateways__deleted": {
+      "get": {
+        "operationId": "VpnGateways_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnGatewaysResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnGatewayListBySubscription": {
+            "$ref": "./examples/VpnGatewayList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/vpnServerConfigurations__deleted": {
+      "get": {
+        "operationId": "VpnServerConfigurations_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnServerConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnServerConfigurationList": {
+            "$ref": "./examples/VpnServerConfigurationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/vpnSites__deleted": {
+      "get": {
+        "operationId": "VpnSites_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnSitesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteList": {
+            "$ref": "./examples/VpnSiteList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways__deleted": {
+      "get": {
+        "operationId": "ExpressRouteGateways_ListByResourceGroup",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGatewayList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayListByResourceGroup": {
+            "$ref": "./examples/ExpressRouteGatewayListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}__deleted": {
+      "get": {
+        "operationId": "ExpressRouteGateways_Get",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "parameters": [
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayGet": {
+            "$ref": "./examples/ExpressRouteGatewayGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRouteGateways_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "parameters": [
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "putExpressRouteGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayCreate": {
+            "$ref": "./examples/ExpressRouteGatewayCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ExpressRouteGateways_UpdateTags",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "parameters": [
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expressRouteGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteGateway"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayUpdate": {
+            "$ref": "./examples/ExpressRouteGatewayUpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExpressRouteGateways_Delete",
+        "tags": [
+          "ExpressRouteGateways"
+        ],
+        "parameters": [
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteGatewayDelete": {
+            "$ref": "./examples/ExpressRouteGatewayDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections__deleted": {
+      "get": {
+        "operationId": "ExpressRouteConnections_List",
+        "tags": [
+          "ExpressRouteConnections"
+        ],
+        "parameters": [
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnectionList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteConnectionList": {
+            "$ref": "./examples/ExpressRouteConnectionList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}__deleted": {
+      "get": {
+        "operationId": "ExpressRouteConnections_Get",
+        "tags": [
+          "ExpressRouteConnections"
+        ],
+        "parameters": [
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteConnectionGet": {
+            "$ref": "./examples/ExpressRouteConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRouteConnections_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteConnections"
+        ],
+        "parameters": [
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "putExpressRouteConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteConnectionCreate": {
+            "$ref": "./examples/ExpressRouteConnectionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExpressRouteConnections_Delete",
+        "tags": [
+          "ExpressRouteConnections"
+        ],
+        "parameters": [
+          {
+            "name": "expressRouteGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteConnectionDelete": {
+            "$ref": "./examples/ExpressRouteConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections__deleted": {
+      "get": {
+        "operationId": "NetworkVirtualApplianceConnections_List",
+        "parameters": [
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnectionList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkVirtualApplianceConnectionList": {
+            "$ref": "./examples/NetworkVirtualApplianceConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}__deleted": {
+      "get": {
+        "operationId": "NetworkVirtualApplianceConnections_Get",
+        "parameters": [
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkVirtualApplianceConnectionGet": {
+            "$ref": "./examples/NetworkVirtualApplianceConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkVirtualApplianceConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+"
+          },
+          {
+            "name": "NetworkVirtualApplianceConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkVirtualApplianceConnectionPut": {
+            "$ref": "./examples/NetworkVirtualApplianceConnectionPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NetworkVirtualApplianceConnections_Delete",
+        "parameters": [
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "location": {
+                "type": "string",
+                "description": "The URL of the resource used to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkVirtualApplianceConnectionDelete": {
+            "$ref": "./examples/NetworkVirtualApplianceConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways__deleted": {
+      "get": {
+        "operationId": "P2sVpnGateways_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListP2SVpnGatewaysResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayListByResourceGroup": {
+            "$ref": "./examples/P2SVpnGatewayListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}__deleted": {
+      "get": {
+        "operationId": "P2sVpnGateways_Get",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/P2SVpnGateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayGet": {
+            "$ref": "./examples/P2SVpnGatewayGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "P2sVpnGateways_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "p2SVpnGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/P2SVpnGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/P2SVpnGateway"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/P2SVpnGateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayPut": {
+            "$ref": "./examples/P2SVpnGatewayPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "P2sVpnGateways_UpdateTags",
+        "tags": [
+          "P2SVpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "p2SVpnGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/P2SVpnGateway"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayUpdate": {
+            "$ref": "./examples/P2SVpnGatewayUpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "P2sVpnGateways_Delete",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayDelete": {
+            "$ref": "./examples/P2SVpnGatewayDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{p2sVpnGatewayName}/disconnectP2sVpnConnections__deleted": {
+      "post": {
+        "operationId": "P2sVpnGateways_DisconnectP2sVpnConnections",
+        "tags": [
+          "P2SVpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "p2sVpnGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/P2SVpnConnectionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disconnect VpnConnections from P2sVpn Gateway": {
+            "$ref": "./examples/P2sVpnGatewaysDisconnectP2sVpnConnections.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/generatevpnprofile__deleted": {
+      "post": {
+        "operationId": "P2sVpnGateways_GenerateVpnProfile",
+        "tags": [
+          "P2SVpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/P2SVpnProfileParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnProfileResponse"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateP2SVpnGatewayVPNProfile": {
+            "$ref": "./examples/P2SVpnGatewayGenerateVpnProfile.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealth__deleted": {
+      "post": {
+        "operationId": "P2sVpnGateways_GetP2sVpnConnectionHealth",
+        "tags": [
+          "P2SVpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/P2SVpnGateway"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayGetConnectionHealth": {
+            "$ref": "./examples/P2SVpnGatewayGetConnectionHealth.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealthDetailed__deleted": {
+      "post": {
+        "operationId": "P2sVpnGateways_GetP2sVpnConnectionHealthDetailed",
+        "tags": [
+          "P2SVpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/P2SVpnConnectionHealthRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/P2SVpnConnectionHealth"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayGetConnectionHealthDetailed": {
+            "$ref": "./examples/P2SVpnGatewayGetConnectionHealthDetailed.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}/reset__deleted": {
+      "post": {
+        "operationId": "P2SVpnGateways_Reset",
+        "tags": [
+          "P2SVpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/P2SVpnGateway"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResetP2SVpnGateway": {
+            "$ref": "./examples/P2SVpnGatewayReset.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs__deleted": {
+      "get": {
+        "operationId": "VirtualHubs_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualHubsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubListByResourceGroup": {
+            "$ref": "./examples/VirtualHubListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}__deleted": {
+      "get": {
+        "operationId": "VirtualHubs_Get",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubGet": {
+            "$ref": "./examples/VirtualHubGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualHubs_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualHubParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubPut": {
+            "$ref": "./examples/VirtualHubPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualHubs_UpdateTags",
+        "tags": [
+          "VirtualWANs"
+        ],
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualHubParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHub"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubUpdate": {
+            "$ref": "./examples/VirtualHubUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VirtualHubs_Delete",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubDelete": {
+            "$ref": "./examples/VirtualHubDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections__deleted": {
+      "get": {
+        "operationId": "VirtualHubBgpConnections_List",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualHubBgpConnectionResults"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2List": {
+            "$ref": "./examples/VirtualHubBgpConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections/{connectionName}__deleted": {
+      "get": {
+        "operationId": "VirtualHubBgpConnection_Get",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/BgpConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubVirtualHubRouteTableV2Get": {
+            "$ref": "./examples/VirtualHubBgpConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualHubBgpConnection_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BgpConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/BgpConnection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/BgpConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Put": {
+            "$ref": "./examples/VirtualHubBgpConnectionPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualHubBgpConnection_Delete",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Delete": {
+            "$ref": "./examples/VirtualHubBgpConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes__deleted": {
+      "post": {
+        "operationId": "VirtualHubBgpConnections_ListAdvertisedRoutes",
+        "parameters": [
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PeerRouteList"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualRouterPeerListAdvertisedRoutes": {
+            "$ref": "./examples/VirtualRouterPeerListAdvertisedRoute.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes__deleted": {
+      "post": {
+        "operationId": "VirtualHubBgpConnections_ListLearnedRoutes",
+        "parameters": [
+          {
+            "name": "hubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PeerRouteList"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualRouterPeerListLearnedRoutes": {
+            "$ref": "./examples/VirtualRouterPeerListLearnedRoute.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes__deleted": {
+      "post": {
+        "operationId": "VirtualHubs_GetEffectiveVirtualHubRoutes",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "effectiveRoutesParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EffectiveRoutesParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubEffectiveRouteList"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Effective Routes for a Connection resource": {
+            "$ref": "./examples/EffectiveRoutesListForConnection.json"
+          },
+          "Effective Routes for a Route Table resource": {
+            "$ref": "./examples/EffectiveRoutesListForRouteTable.json"
+          },
+          "Effective Routes for the Virtual Hub": {
+            "$ref": "./examples/EffectiveRoutesListForVirtualHub.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables__deleted": {
+      "get": {
+        "operationId": "HubRouteTables_List",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListHubRouteTablesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteTableList": {
+            "$ref": "./examples/HubRouteTableList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}__deleted": {
+      "get": {
+        "operationId": "HubRouteTables_Get",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteTableGet": {
+            "$ref": "./examples/HubRouteTableGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HubRouteTables_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubRouteTable"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteTablePut": {
+            "$ref": "./examples/HubRouteTablePut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HubRouteTables_Delete",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteTableDelete": {
+            "$ref": "./examples/HubRouteTableDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections__deleted": {
+      "get": {
+        "operationId": "HubVirtualNetworkConnections_List",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListHubVirtualNetworkConnectionsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionList": {
+            "$ref": "./examples/HubVirtualNetworkConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}__deleted": {
+      "get": {
+        "operationId": "HubVirtualNetworkConnections_Get",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionGet": {
+            "$ref": "./examples/HubVirtualNetworkConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HubVirtualNetworkConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hubVirtualNetworkConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubVirtualNetworkConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionPut": {
+            "$ref": "./examples/HubVirtualNetworkConnectionPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HubVirtualNetworkConnections_Delete",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HubVirtualNetworkConnectionDelete": {
+            "$ref": "./examples/HubVirtualNetworkConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/inboundRoutes__deleted": {
+      "post": {
+        "operationId": "VirtualHubs_GetInboundRoutes",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "getInboundRoutesParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetInboundRoutesParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/EffectiveRouteMapRouteList"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Inbound Routes for the Virtual Hub on a Particular Connection": {
+            "$ref": "./examples/GetInboundRoutes.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations__deleted": {
+      "get": {
+        "operationId": "VirtualHubIpConfiguration_List",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualHubIpConfigurationResults"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2List": {
+            "$ref": "./examples/VirtualHubIpConfigurationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations/{ipConfigName}__deleted": {
+      "get": {
+        "operationId": "VirtualHubIpConfiguration_Get",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ipConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubIpConfiguration"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubVirtualHubRouteTableV2Get": {
+            "$ref": "./examples/VirtualHubIpConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualHubIpConfiguration_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ipConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubIpConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubIpConfiguration"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/HubIpConfiguration"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubIpConfigurationPut": {
+            "$ref": "./examples/VirtualHubIpConfigurationPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualHubIpConfiguration_Delete",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ipConfigName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubIpConfigurationDelete": {
+            "$ref": "./examples/VirtualHubIpConfigurationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/outboundRoutes__deleted": {
+      "post": {
+        "operationId": "VirtualHubs_GetOutboundRoutes",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "getOutboundRoutesParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetOutboundRoutesParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/EffectiveRouteMapRouteList"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Outbound Routes for the Virtual Hub on a Particular Connection": {
+            "$ref": "./examples/GetOutboundRoutes.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeMaps__deleted": {
+      "get": {
+        "operationId": "RouteMaps_List",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListRouteMapsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteMapList": {
+            "$ref": "./examples/RouteMapList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeMaps/{routeMapName}__deleted": {
+      "get": {
+        "operationId": "RouteMaps_Get",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeMapName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteMap"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteMapGet": {
+            "$ref": "./examples/RouteMapGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RouteMaps_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeMapName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeMapParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteMap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteMap"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteMap"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteMapPut": {
+            "$ref": "./examples/RouteMapPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RouteMaps_Delete",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeMapName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteMapDelete": {
+            "$ref": "./examples/RouteMapDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables__deleted": {
+      "get": {
+        "operationId": "VirtualHubRouteTableV2s_List",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualHubRouteTableV2sResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2List": {
+            "$ref": "./examples/VirtualHubRouteTableV2List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}__deleted": {
+      "get": {
+        "operationId": "VirtualHubRouteTableV2s_Get",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubVirtualHubRouteTableV2Get": {
+            "$ref": "./examples/VirtualHubRouteTableV2Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualHubRouteTableV2s_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "virtualHubRouteTableV2Parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Put": {
+            "$ref": "./examples/VirtualHubRouteTableV2Put.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualHubRouteTableV2s_Delete",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Delete": {
+            "$ref": "./examples/VirtualHubRouteTableV2Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent__deleted": {
+      "get": {
+        "operationId": "RoutingIntent_List",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListRoutingIntentResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RoutingIntentList": {
+            "$ref": "./examples/RoutingIntentList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent/{routingIntentName}__deleted": {
+      "get": {
+        "operationId": "RoutingIntent_Get",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routingIntentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingIntent"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteTableGet": {
+            "$ref": "./examples/RoutingIntentGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RoutingIntent_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routingIntentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routingIntentParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoutingIntent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingIntent"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RoutingIntent"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteTablePut": {
+            "$ref": "./examples/RoutingIntentPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RoutingIntent_Delete",
+        "parameters": [
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routingIntentName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteTableDelete": {
+            "$ref": "./examples/RoutingIntentDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways__deleted": {
+      "get": {
+        "operationId": "VpnGateways_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnGatewaysResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnGatewayListByResourceGroup": {
+            "$ref": "./examples/VpnGatewayListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}__deleted": {
+      "get": {
+        "operationId": "VpnGateways_Get",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnGatewayGet": {
+            "$ref": "./examples/VpnGatewayGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnGateways_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vpnGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnGatewayPut": {
+            "$ref": "./examples/VpnGatewayPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VpnGateways_UpdateTags",
+        "tags": [
+          "VpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vpnGatewayParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnGatewayUpdate": {
+            "$ref": "./examples/VpnGatewayUpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VpnGateways_Delete",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnGatewayDelete": {
+            "$ref": "./examples/VpnGatewayDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/natRules__deleted": {
+      "get": {
+        "operationId": "NatRules_ListByVpnGateway",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnGatewayNatRulesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NatRuleList": {
+            "$ref": "./examples/NatRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/natRules/{natRuleName}__deleted": {
+      "get": {
+        "operationId": "NatRules_Get",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayNatRule"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NatRuleGet": {
+            "$ref": "./examples/NatRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NatRules_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "NatRuleParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayNatRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayNatRule"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayNatRule"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NatRulePut": {
+            "$ref": "./examples/NatRulePut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NatRules_Delete",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NatRuleDelete": {
+            "$ref": "./examples/NatRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/reset__deleted": {
+      "post": {
+        "operationId": "VpnGateways_Reset",
+        "tags": [
+          "VpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ipConfigurationId",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResetVpnGateway": {
+            "$ref": "./examples/VpnGatewayReset.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/startpacketcapture__deleted": {
+      "post": {
+        "operationId": "VpnGateways_StartPacketCapture",
+        "tags": [
+          "VpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayPacketCaptureStartParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start packet capture on vpn gateway with filter": {
+            "$ref": "./examples/VpnGatewayStartPacketCaptureFilterData.json"
+          },
+          "Start packet capture on vpn gateway without filter": {
+            "$ref": "./examples/VpnGatewayStartPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/stoppacketcapture__deleted": {
+      "post": {
+        "operationId": "VpnGateways_StopPacketCapture",
+        "tags": [
+          "VpnGateways"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VpnGatewayPacketCaptureStopParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop packet capture on vpn gateway": {
+            "$ref": "./examples/VpnGatewayStopPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections__deleted": {
+      "get": {
+        "operationId": "VpnConnections_ListByVpnGateway",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnConnectionsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnConnectionList": {
+            "$ref": "./examples/VpnConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}__deleted": {
+      "get": {
+        "operationId": "VpnConnections_Get",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnConnectionGet": {
+            "$ref": "./examples/VpnConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnConnections_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "VpnConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnConnectionPut": {
+            "$ref": "./examples/VpnConnectionPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VpnConnections_Delete",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnConnectionDelete": {
+            "$ref": "./examples/VpnConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/startpacketcapture__deleted": {
+      "post": {
+        "operationId": "VpnConnections_StartPacketCapture",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vpnConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VpnConnectionPacketCaptureStartParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start packet capture on vpn connection with filter": {
+            "$ref": "./examples/VpnConnectionStartPacketCaptureFilterData.json"
+          },
+          "Start packet capture on vpn connection without filter": {
+            "$ref": "./examples/VpnConnectionStartPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/stoppacketcapture__deleted": {
+      "post": {
+        "operationId": "VpnConnections_StopPacketCapture",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vpnConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VpnConnectionPacketCaptureStopParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start packet capture on vpn connection without filter": {
+            "$ref": "./examples/VpnConnectionStopPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections__deleted": {
+      "get": {
+        "operationId": "VpnLinkConnections_ListByVpnConnection",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnSiteLinkConnectionsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteLinkConnectionList": {
+            "$ref": "./examples/VpnSiteLinkConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}__deleted": {
+      "get": {
+        "operationId": "VpnSiteLinkConnections_Get",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnSiteLinkConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteLinkConnectionGet": {
+            "$ref": "./examples/VpnSiteLinkConnectionGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas__deleted": {
+      "post": {
+        "operationId": "VpnLinkConnections_GetIkeSas",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVpnLinkConnectionIkeSa": {
+            "$ref": "./examples/VpnSiteLinkConnectionGetIkeSas.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetconnection__deleted": {
+      "post": {
+        "operationId": "VpnLinkConnections_ResetConnection",
+        "tags": [
+          "vpnLinkConnections"
+        ],
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResetVpnLinkConnection": {
+            "$ref": "./examples/VpnSiteLinkConnectionReset.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys__deleted": {
+      "get": {
+        "operationId": "VpnLinkConnections_GetAllSharedKeys",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKeyResultList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteLinkConnectionSharedKeysGet": {
+            "$ref": "./examples/VpnSiteLinkConnectionSharedKeysGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default__deleted": {
+      "get": {
+        "operationId": "VpnLinkConnections_GetDefaultSharedKey",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKeyResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteLinkConnectionDefaultSharedKeyGet": {
+            "$ref": "./examples/VpnSiteLinkConnectionDefaultSharedKeyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnLinkConnections_SetOrInitDefaultSharedKey",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ConnectionSharedKeyParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKeyResult"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKeyResult"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKeyResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteLinkConnectionDefaultSharedKeyPut": {
+            "$ref": "./examples/VpnSiteLinkConnectionDefaultSharedKeyPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey__deleted": {
+      "post": {
+        "operationId": "VpnLinkConnections_ListDefaultSharedKey",
+        "parameters": [
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKeyResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteLinkConnectionDefaultSharedKeyList": {
+            "$ref": "./examples/VpnSiteLinkConnectionDefaultSharedKeyList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations__deleted": {
+      "get": {
+        "operationId": "VpnServerConfigurations_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnServerConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnServerConfigurationListByResourceGroup": {
+            "$ref": "./examples/VpnServerConfigurationListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}__deleted": {
+      "get": {
+        "operationId": "VpnServerConfigurations_Get",
+        "parameters": [
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnServerConfigurationGet": {
+            "$ref": "./examples/VpnServerConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnServerConfigurations_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "VpnServerConfigurationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnServerConfigurationCreate": {
+            "$ref": "./examples/VpnServerConfigurationPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VpnServerConfigurations_UpdateTags",
+        "tags": [
+          "VpnServerConfigurations"
+        ],
+        "parameters": [
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "VpnServerConfigurationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnServerConfigurationUpdate": {
+            "$ref": "./examples/VpnServerConfigurationUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VpnServerConfigurations_Delete",
+        "parameters": [
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnServerConfigurationDelete": {
+            "$ref": "./examples/VpnServerConfigurationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/configurationPolicyGroups__deleted": {
+      "get": {
+        "operationId": "configurationPolicyGroups_ListByVpnServerConfiguration",
+        "parameters": [
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnServerConfigurationPolicyGroupsResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationPolicyGroupListByVpnServerConfiguration": {
+            "$ref": "./examples/ConfigurationPolicyGroupListByVpnServerConfiguration.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/configurationPolicyGroups/{configurationPolicyGroupName}__deleted": {
+      "get": {
+        "operationId": "ConfigurationPolicyGroups_Get",
+        "parameters": [
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationPolicyGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationPolicyGroupGet": {
+            "$ref": "./examples/ConfigurationPolicyGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConfigurationPolicyGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationPolicyGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "VpnServerConfigurationPolicyGroupParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationPolicyGroupPut": {
+            "$ref": "./examples/ConfigurationPolicyGroupPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ConfigurationPolicyGroups_Delete",
+        "parameters": [
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "configurationPolicyGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConfigurationPolicyGroupDelete": {
+            "$ref": "./examples/ConfigurationPolicyGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/listRadiusSecrets__deleted": {
+      "post": {
+        "operationId": "VpnServerConfigurations_ListRadiusSecrets",
+        "tags": [
+          "VpnServerConfigurations"
+        ],
+        "parameters": [
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_]+"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./virtualNetworkGateway.json#/definitions/RadiusAuthServerListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAllVpnServerConfigurationRadiusServerSecrets": {
+            "$ref": "./examples/AllVpnServerConfigurationRadiusServerSecretsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites__deleted": {
+      "get": {
+        "operationId": "VpnSites_ListByResourceGroup",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnSitesResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteListByResourceGroup": {
+            "$ref": "./examples/VpnSiteListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites/{vpnSiteName}__deleted": {
+      "get": {
+        "operationId": "VpnSites_Get",
+        "parameters": [
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteGet": {
+            "$ref": "./examples/VpnSiteGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnSites_CreateOrUpdate",
+        "parameters": [
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "VpnSiteParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteCreate": {
+            "$ref": "./examples/VpnSitePut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VpnSites_UpdateTags",
+        "tags": [
+          "VpnSites"
+        ],
+        "parameters": [
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "VpnSiteParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnSite"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteUpdate": {
+            "$ref": "./examples/VpnSiteUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VpnSites_Delete",
+        "parameters": [
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteDelete": {
+            "$ref": "./examples/VpnSiteDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites/{vpnSiteName}/vpnSiteLinks__deleted": {
+      "get": {
+        "operationId": "VpnSiteLinks_ListByVpnSite",
+        "parameters": [
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ListVpnSiteLinksResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteLinkListByVpnSite": {
+            "$ref": "./examples/VpnSiteLinkListByVpnSite.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites/{vpnSiteName}/vpnSiteLinks/{vpnSiteLinkName}__deleted": {
+      "get": {
+        "operationId": "VpnSiteLinks_Get",
+        "parameters": [
+          {
+            "name": "vpnSiteName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vpnSiteLinkName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VpnSiteLink"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VpnSiteGet": {
+            "$ref": "./examples/VpnSiteLinkGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualWans": {
+      "get": {
+        "tags__added": [
+          "VirtualWANS"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans": {
+      "get": {
+        "tags__added": [
+          "VirtualWANS"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}": {
+      "get": {
+        "tags__added": [
+          "VirtualWANS"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags__added": [
+          "VirtualWANS"
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/VirtualWAN"
+        }
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "VirtualWANs"
+          ],
+          [
+            "+",
+            "VirtualWANS"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "./network.json#/definitions/TagsObject",
+                  "__new": "./common.json#/definitions/TagsObject"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags__added": [
+          "VirtualWANS"
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile": {
+      "post": {
+        "tags__added": [
+          "VirtualWANS"
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders": {
+      "get": {
+        "tags__added": [
+          "VirtualWANS"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
+      "post": {
+        "tags__added": [
+          "VirtualWANS"
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations": {
+      "post": {
+        "tags__added": [
+          "VirtualWANS"
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConnectionSharedKeyResult__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SharedKeyProperties"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ConnectionSharedKeyResultList__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ConnectionSharedKeyResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ListHubVirtualNetworkConnectionsResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/HubVirtualNetworkConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ListVirtualHubIpConfigurationResults__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/HubIpConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ListVirtualHubRouteTableV2sResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRouteTableV2"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ListVpnServerConfigurationPolicyGroupsResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigurationPolicyGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ListVpnServerConfigurationsResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "ListVpnSiteLinkConnectionsResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VpnSiteLinkConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "NetworkVirtualApplianceConnectionList__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "PeerRouteList__deleted": {
+      "type": "object",
+      "additionalProperties": {
+        "description": "List of peer routes.",
+        "items": {
+          "$ref": "#/definitions/PeerRoute"
+        },
+        "type": "array",
+        "x-ms-identifiers": []
+      }
+    },
+    "VpnClientConnectionHealth__deleted": {
+      "type": "object",
+      "properties": {
+        "totalIngressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "totalEgressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "vpnClientConnectionsCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "allocatedIpAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VpnSiteId__deleted": {
+      "type": "object",
+      "properties": {
+        "vpnSite": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Record<PeerRoute[]>__added": {
+      "type": "object",
+      "additionalProperties": {
+        "items": {
+          "$ref": "#/definitions/PeerRoute"
+        },
+        "type": "array"
+      }
+    },
+    "Action": {
+      "properties": {
+        "type": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Remove",
+            "Add",
+            "Replace",
+            "Drop"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "RouteMapActionType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/RouteMapActionType"
+        }
+      }
+    },
+    "BgpConnection": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "BgpConnectionProperties": {
+      "properties": {
+        "peerAsn": {
+          "readOnly__deleted": false
+        },
+        "peerIp": {
+          "readOnly__deleted": false
+        },
+        "hubVirtualNetworkConnection": {
+          "readOnly__deleted": false,
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "connectionState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "HubBgpConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/HubBgpConnectionStatus"
+        }
+      }
+    },
+    "Criterion": {
+      "properties": {
+        "matchCondition": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Contains",
+            "Equals",
+            "NotContains",
+            "NotEquals"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "RouteMapMatchCondition",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/RouteMapMatchCondition"
+        }
+      }
+    },
+    "ExpressRouteConnection": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ExpressRouteConnectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "routingWeight": {
+          "format__added": "int32"
+        }
+      }
+    },
+    "ExpressRouteGateway": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "ExpressRouteGatewayProperties": {
+      "properties": {
+        "autoScaleConfiguration": {
+          "type__deleted": "object",
+          "properties__deleted": {
+            "bounds": {
+              "description": "Minimum and maximum number of scale units to deploy.",
+              "properties": {
+                "min": {
+                  "type": "integer",
+                  "description": "Minimum number of scale units deployed for ExpressRoute gateway."
+                },
+                "max": {
+                  "type": "integer",
+                  "description": "Maximum number of scale units deployed for ExpressRoute gateway."
+                }
+              }
+            }
+          },
+          "$ref__added": "./common.json#/definitions/ExpressRouteGatewayPropertiesAutoScaleConfiguration"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "HubIPConfigurationPropertiesFormat": {
+      "properties": {
+        "privateIPAllocationMethod": {
+          "$ref": {
+            "__old": "./network.json#/definitions/IPAllocationMethod",
+            "__new": "./common.json#/definitions/IPAllocationMethod"
+          }
+        },
+        "publicIPAddress": {
+          "$ref": {
+            "__old": "./publicIpAddress.json#/definitions/PublicIPAddress",
+            "__new": "./virtualNetwork.json#/definitions/PublicIPAddress"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "HubIpConfiguration": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "HubRouteTable": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "HubRouteTableProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "HubVirtualNetworkConnection": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "HubVirtualNetworkConnectionProperties": {
+      "properties": {
+        "remoteVirtualNetwork": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "ListHubRouteTablesResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListP2SVpnGatewaysResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListRouteMapsResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListRoutingIntentResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListVirtualHubBgpConnectionResults": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListVirtualHubsResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListVirtualWANsResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListVpnConnectionsResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListVpnGatewayNatRulesResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListVpnGatewaysResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListVpnSiteLinksResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "ListVpnSitesResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "NetworkVirtualApplianceConnection": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "NetworkVirtualApplianceConnectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "asn": {
+          "readOnly__deleted": false
+        },
+        "tunnelIdentifier": {
+          "readOnly__deleted": false
+        }
+      }
+    },
+    "O365BreakOutCategoryPolicies": {
+      "properties": {
+        "allow": {
+          "readOnly__deleted": false
+        },
+        "optimize": {
+          "readOnly__deleted": false
+        },
+        "default": {
+          "readOnly__deleted": false
+        }
+      }
+    },
+    "O365PolicyProperties": {
+      "properties": {
+        "breakOutCategories": {
+          "readOnly__deleted": false
+        }
+      }
+    },
+    "P2SConnectionConfiguration": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "P2SConnectionConfigurationProperties": {
+      "properties": {
+        "configurationPolicyGroupAssociations": {
+          "readOnly__deleted": false,
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "P2SVpnGateway": {
+      "required__deleted": [
+        "location"
+      ],
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/ResourceWithRequiredLocation"
+            }
+          }
+        ]
+      ]
+    },
+    "P2SVpnGatewayProperties": {
+      "properties": {
+        "virtualHub": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "vpnServerConfiguration": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "vpnClientConnectionHealth": {
+          "$ref": {
+            "__old": "#/definitions/VpnClientConnectionHealth",
+            "__new": "./networkGateway.json#/definitions/VpnClientConnectionHealth"
+          }
+        }
+      }
+    },
+    "P2SVpnProfileParameters": {
+      "properties": {
+        "authenticationMethod": {
+          "$ref": {
+            "__old": "./network.json#/definitions/AuthenticationMethod",
+            "__new": "./common.json#/definitions/AuthenticationMethod"
+          }
+        }
+      }
+    },
+    "PropagatedRouteTable": {
+      "properties": {
+        "ids": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        }
+      }
+    },
+    "RouteMap": {
+      "properties": {
+        "name__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        },
+        "id__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/ReadOnlySubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "RouteMapProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "RouteMapRule": {
+      "properties": {
+        "nextStepIfMatched": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Continue",
+            "Terminate"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "NextStep",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/NextStep"
+        }
+      }
+    },
+    "RoutingConfiguration": {
+      "properties": {
+        "associatedRouteTable": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "inboundRouteMap": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "outboundRouteMap": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "RoutingIntent": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "RoutingIntentProperties": {
+      "properties": {
+        "routingPolicies": {
+          "readOnly__deleted": false
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "SharedKeyProperties": {
+      "properties": {
+        "sharedKey": {
+          "format__added": "password"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "StaticRoutesConfig": {
+      "properties": {
+        "vnetLocalRouteOverrideCriteria": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Contains",
+            "Equal"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VnetLocalRouteOverrideCriteria",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VnetLocalRouteOverrideCriteria"
+        }
+      }
+    },
+    "VirtualHub": {
+      "required__deleted": [
+        "location"
+      ],
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/ResourceWithRequiredLocation"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualHubProperties": {
+      "properties": {
+        "virtualWan": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "vpnGateway": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "p2SVpnGateway": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "expressRouteGateway": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "azureFirewall": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "securityPartnerProvider": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "routingState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "Provisioned",
+            "Provisioning",
+            "Failed"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "RoutingState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/RoutingState"
+        },
+        "bgpConnections": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "ipConfigurations": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "routeMaps": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "virtualRouterAsn": {
+          "readOnly__deleted": false
+        },
+        "virtualRouterIps": {
+          "readOnly__deleted": false
+        },
+        "allowBranchToBranchTraffic": {
+          "readOnly__deleted": false
+        },
+        "preferredRoutingGateway": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "ExpressRoute",
+            "VpnGateway",
+            "None"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "PreferredRoutingGateway",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/PreferredRoutingGateway"
+        },
+        "hubRoutingPreference": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "ExpressRoute",
+            "VpnGateway",
+            "ASPath"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "HubRoutingPreference",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/HubRoutingPreference"
+        }
+      }
+    },
+    "VirtualHubRouteTableV2": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualHubRouteTableV2Properties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VirtualWAN": {
+      "required__deleted": [
+        "location"
+      ],
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/ResourceWithRequiredLocation"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualWanProperties": {
+      "properties": {
+        "virtualHubs": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "vpnSites": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "office365LocalBreakoutCategory": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Optimize",
+            "OptimizeAndAllow",
+            "All",
+            "None"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "OfficeTrafficCategory",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/OfficeTrafficCategory"
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VirtualWanSecurityProvider": {
+      "properties": {
+        "type": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "External",
+            "Native"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualWanSecurityProviderType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualWanSecurityProviderType"
+        }
+      }
+    },
+    "VirtualWanVpnProfileParameters": {
+      "properties": {
+        "authenticationMethod": {
+          "$ref": {
+            "__old": "./network.json#/definitions/AuthenticationMethod",
+            "__new": "./common.json#/definitions/AuthenticationMethod"
+          }
+        }
+      }
+    },
+    "VnetRoute": {
+      "properties": {
+        "bgpConnections": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        }
+      }
+    },
+    "VpnConnection": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnConnectionProperties": {
+      "properties": {
+        "remoteVpnSite": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "connectionStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnConnectionStatus"
+        },
+        "vpnConnectionProtocolType": {
+          "$ref": {
+            "__old": "./virtualNetworkGateway.json#/definitions/ConnectionProtocol",
+            "__new": "./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol"
+          }
+        },
+        "ipsecPolicies": {
+          "items": {
+            "$ref": {
+              "__old": "./virtualNetworkGateway.json#/definitions/IpsecPolicy",
+              "__new": "./networkGateway.json#/definitions/IpsecPolicy"
+            }
+          }
+        },
+        "trafficSelectorPolicies": {
+          "items": {
+            "$ref": {
+              "__old": "./virtualNetworkGateway.json#/definitions/TrafficSelectorPolicy",
+              "__new": "./networkGateway.json#/definitions/TrafficSelectorPolicy"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VpnGateway": {
+      "required__deleted": [
+        "location"
+      ],
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/ResourceWithRequiredLocation"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnGatewayNatRule": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnGatewayNatRuleProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "type": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnNatRuleType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnNatRuleType"
+        },
+        "mode": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "EgressSnat",
+            "IngressSnat"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnNatRuleMode",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnNatRuleMode"
+        },
+        "egressVpnSiteLinkConnections": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "ingressVpnSiteLinkConnections": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        }
+      }
+    },
+    "VpnGatewayProperties": {
+      "properties": {
+        "virtualHub": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "bgpSettings": {
+          "$ref": {
+            "__old": "./virtualNetworkGateway.json#/definitions/BgpSettings",
+            "__new": "./networkGateway.json#/definitions/BgpSettings"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VpnServerConfiguration": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/ResourceWithWritableName"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnServerConfigurationPolicyGroup": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnServerConfigurationPolicyGroupMember": {
+      "properties": {
+        "attributeType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "CertificateGroupId",
+            "AADGroupId",
+            "RadiusAzureGroupId"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnPolicyMemberAttributeType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnPolicyMemberAttributeType"
+        }
+      }
+    },
+    "VpnServerConfigurationPolicyGroupProperties": {
+      "properties": {
+        "p2SConnectionConfigurations": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VpnServerConfigurationProperties": {
+      "properties": {
+        "vpnProtocols": {
+          "items": {
+            "type__deleted": "string",
+            "enum__deleted": [
+              "IkeV2",
+              "OpenVPN"
+            ],
+            "x-ms-enum__deleted": {
+              "name": "VpnGatewayTunnelingProtocol",
+              "modelAsString": true
+            },
+            "$ref__added": "./common.json#/definitions/VpnGatewayTunnelingProtocol"
+          }
+        },
+        "vpnAuthenticationTypes": {
+          "items": {
+            "type__deleted": "string",
+            "enum__deleted": [
+              "Certificate",
+              "Radius",
+              "AAD"
+            ],
+            "x-ms-enum__deleted": {
+              "name": "VpnAuthenticationType",
+              "modelAsString": true
+            },
+            "$ref__added": "./common.json#/definitions/VpnAuthenticationType"
+          }
+        },
+        "vpnClientIpsecPolicies": {
+          "items": {
+            "$ref": {
+              "__old": "./virtualNetworkGateway.json#/definitions/IpsecPolicy",
+              "__new": "./networkGateway.json#/definitions/IpsecPolicy"
+            }
+          }
+        },
+        "radiusServerSecret": {
+          "format__added": "password"
+        },
+        "radiusServers": {
+          "items": {
+            "$ref": {
+              "__old": "./virtualNetworkGateway.json#/definitions/RadiusServer",
+              "__new": "./networkGateway.json#/definitions/RadiusServer"
+            }
+          }
+        }
+      }
+    },
+    "VpnSite": {
+      "required__deleted": [
+        "location"
+      ],
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/ResourceWithRequiredLocation"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnSiteLink": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnSiteLinkConnection": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnSiteLinkConnectionProperties": {
+      "properties": {
+        "vpnSiteLink": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "vpnLinkConnectionMode": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Default",
+            "ResponderOnly",
+            "InitiatorOnly"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnLinkConnectionMode",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnLinkConnectionMode"
+        },
+        "connectionStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnConnectionStatus"
+        },
+        "vpnConnectionProtocolType": {
+          "$ref": {
+            "__old": "./virtualNetworkGateway.json#/definitions/ConnectionProtocol",
+            "__new": "./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol"
+          }
+        },
+        "sharedKey": {
+          "format__added": "password"
+        },
+        "vpnGatewayCustomBgpAddresses": {
+          "items": {
+            "$ref": {
+              "__old": "./virtualNetworkGateway.json#/definitions/GatewayCustomBgpIpAddressIpConfiguration",
+              "__new": "./networkGateway.json#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+            }
+          }
+        },
+        "ipsecPolicies": {
+          "items": {
+            "$ref": {
+              "__old": "./virtualNetworkGateway.json#/definitions/IpsecPolicy",
+              "__new": "./networkGateway.json#/definitions/IpsecPolicy"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "ingressNatRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "egressNatRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        }
+      }
+    },
+    "VpnSiteLinkProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VpnSiteProperties": {
+      "properties": {
+        "virtualWan": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "bgpProperties": {
+          "$ref": {
+            "__old": "./virtualNetworkGateway.json#/definitions/BgpSettings",
+            "__new": "./networkGateway.json#/definitions/BgpSettings"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "o365Policy": {
+          "readOnly__deleted": false
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,2615 @@
+{
+  "tags__added": [
+    {
+      "name": "VirtualNetworkGateways"
+    },
+    {
+      "name": "VirtualNetworkGatewayConnections"
+    },
+    {
+      "name": "LocalNetworkGateways"
+    },
+    {
+      "name": "VirtualNetworkGatewayNatRules"
+    },
+    {
+      "name": "VirtualNetworkTaps"
+    }
+  ],
+  "info": {
+    "title": {
+      "__old": "NetworkManagementClient",
+      "__new": "WebApplicationFirewallManagement"
+    },
+    "description": {
+      "__old": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+      "__new": "APIs to manage web application firewall rules."
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkTaps": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/VirtualNetworkGatewayConnection"
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "./network.json#/definitions/TagsObject",
+                  "__new": "./common.json#/definitions/TagsObject"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/VirtualNetworkGatewayConnection"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/resetconnection": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/ConnectionSharedKey"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/Error",
+                "__new": "./common.json#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/Error",
+                "__new": "./common.json#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript": {
+      "post": {
+        "tags": [
+          [
+            "-",
+            "VirtualNetworkGateways"
+          ],
+          [
+            "+",
+            "VirtualNetworkGatewayConnections"
+          ]
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/localNetworkGateways/{localNetworkGatewayName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/LocalNetworkGateway"
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "./network.json#/definitions/TagsObject",
+                  "__new": "./common.json#/definitions/TagsObject"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/VirtualNetworkGateway"
+        }
+      },
+      "patch": {
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "./network.json#/definitions/TagsObject",
+                  "__new": "./common.json#/definitions/TagsObject"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/VirtualNetworkGateway"
+        }
+      },
+      "delete": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration": {
+      "post": {
+        "tags__added": [
+          "VirtualNetworkGateways"
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration": {
+      "post": {
+        "tags__added": [
+          "VirtualNetworkGateways"
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/connections": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/disconnectVirtualNetworkGatewayVpnConnections": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration": {
+      "post": {
+        "tags__added": [
+          "VirtualNetworkGateways"
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnclientpackage": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/generatevpnprofile": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverAllTestsDetails": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref__deleted": "#/definitions/ExpressRouteFailoverAllTestDetails",
+              "type__added": "array",
+              "items__added": {
+                "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+              }
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getFailoverSingleTestDetails": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref__deleted": "#/definitions/ExpressRouteFailoverSingleTestDetailsObject",
+              "type__added": "array",
+              "items__added": {
+                "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
+              }
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getResiliencyInformation": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getRoutesInformation": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getVpnClientConnectionHealth": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnclientipsecparameters": {
+      "post": {
+        "responses": {
+          "200": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getvpnprofilepackageurl": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/listRadiusSecrets": {
+      "post": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules": {
+      "get": {
+        "tags__added": [
+          "VirtualNetworkGatewayNatRules"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules/{natRuleName}": {
+      "get": {
+        "tags__added": [
+          "VirtualNetworkGatewayNatRules"
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags__added": [
+          "VirtualNetworkGatewayNatRules"
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/VirtualNetworkGatewayNatRule"
+        }
+      },
+      "delete": {
+        "tags__added": [
+          "VirtualNetworkGatewayNatRules"
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration": {
+      "post": {
+        "tags__added": [
+          "VirtualNetworkGateways"
+        ],
+        "responses": {
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/reset": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/resetvpnclientsharedkey": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/setvpnclientipsecparameters": {
+      "post": {
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startPacketCapture": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/Error",
+                "__new": "./common.json#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startSiteFailoverTest": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopPacketCapture": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/Error",
+                "__new": "./common.json#/definitions/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stopSiteFailoverTest": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "headers": {
+              "location__deleted": {
+                "type": "string"
+              },
+              "Location__added": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/supportedvpndevices": {
+      "post": {
+        "responses": {
+          "200": {
+            "schema": {
+              "type__deleted": "string",
+              "$ref__added": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps": {
+      "get": {
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}": {
+      "get": {
+        "tags": [
+          [
+            "-",
+            "VirtualNetworkTap"
+          ],
+          [
+            "+",
+            "VirtualNetworkTaps"
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          [
+            "-",
+            "VirtualNetworkTap"
+          ],
+          [
+            "+",
+            "VirtualNetworkTaps"
+          ]
+        ],
+        "responses": {
+          "201": {
+            "headers__added": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-schema__added": "#/definitions/VirtualNetworkTap"
+        }
+      },
+      "patch": {
+        "tags": [
+          [
+            "-",
+            "VirtualNetworkTap"
+          ],
+          [
+            "+",
+            "VirtualNetworkTaps"
+          ]
+        ],
+        "parameters": [
+          [
+            " "
+          ],
+          [
+            "~",
+            {
+              "schema": {
+                "$ref": {
+                  "__old": "./network.json#/definitions/TagsObject",
+                  "__new": "./common.json#/definitions/TagsObject"
+                }
+              }
+            }
+          ]
+        ],
+        "responses": {
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          [
+            "-",
+            "VirtualNetworkTap"
+          ],
+          [
+            "+",
+            "VirtualNetworkTaps"
+          ]
+        ],
+        "responses": {
+          "202": {
+            "headers__added": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": {
+                "__old": "./network.json#/definitions/CloudError",
+                "__new": "./common.json#/definitions/CloudError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ExpressRouteFailoverAllTestDetails__deleted": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
+      }
+    },
+    "ExpressRouteFailoverSingleTestDetailsObject__deleted": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
+      }
+    },
+    "BgpPeerStatus": {
+      "properties": {
+        "state": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Stopped",
+            "Idle",
+            "Connecting",
+            "Connected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "BgpPeerState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/BgpPeerState"
+        }
+      }
+    },
+    "ConnectionSharedKey": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "ExpressRouteFailoverConnectionResourceDetails": {
+      "properties": {
+        "status": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Connected",
+            "Disconnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "FailoverConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/FailoverConnectionStatus"
+        }
+      }
+    },
+    "ExpressRouteFailoverSingleTestDetails": {
+      "properties": {
+        "status": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "NotStarted",
+            "Starting",
+            "Running",
+            "StartFailed",
+            "Stopping",
+            "Completed",
+            "StopFailed",
+            "Invalid",
+            "Expired"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "FailoverTestStatusForSingleTest",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/FailoverTestStatusForSingleTest"
+        }
+      }
+    },
+    "ExpressRouteFailoverTestDetails": {
+      "properties": {
+        "status": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "NotStarted",
+            "Starting",
+            "Running",
+            "StartFailed",
+            "Stopping",
+            "Completed",
+            "StopFailed",
+            "Invalid",
+            "Expired"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "FailoverTestStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/FailoverTestStatus"
+        },
+        "testType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "SingleSiteFailover",
+            "MultiSiteFailover",
+            "All"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "FailoverTestType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/FailoverTestType"
+        }
+      }
+    },
+    "IpsecPolicy": {
+      "properties": {
+        "ipsecEncryption": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "IpsecEncryption",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/IpsecEncryption"
+        },
+        "ipsecIntegrity": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "IpsecIntegrity",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/IpsecIntegrity"
+        },
+        "ikeEncryption": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256",
+            "GCMAES256",
+            "GCMAES128"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "IkeEncryption",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/IkeEncryption"
+        },
+        "ikeIntegrity": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "SHA384",
+            "GCMAES256",
+            "GCMAES128"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "IkeIntegrity",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/IkeIntegrity"
+        },
+        "dhGroup": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "DHGroup1",
+            "DHGroup2",
+            "DHGroup14",
+            "DHGroup2048",
+            "ECP256",
+            "ECP384",
+            "DHGroup24"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "DhGroup",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/DhGroup"
+        },
+        "pfsGroup": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "PFS1",
+            "PFS2",
+            "PFS2048",
+            "ECP256",
+            "ECP384",
+            "PFS24",
+            "PFS14",
+            "PFSMM"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "PfsGroup",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/PfsGroup"
+        }
+      }
+    },
+    "ListVirtualNetworkGatewayNatRulesResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LocalNetworkGateway": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "LocalNetworkGatewayListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "LocalNetworkGatewayPropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "RadiusAuthServer": {
+      "properties": {
+        "radiusServerSecret": {
+          "format__added": "password"
+        }
+      }
+    },
+    "RadiusAuthServerListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "RadiusServer": {
+      "properties": {
+        "radiusServerSecret": {
+          "format__added": "password"
+        }
+      }
+    },
+    "TunnelConnectionHealth": {
+      "properties": {
+        "connectionStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayConnectionStatus"
+        }
+      }
+    },
+    "VirtualNetworkGateway": {
+      "properties": {
+        "extendedLocation": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ExtendedLocation",
+            "__new": "./common.json#/definitions/ExtendedLocation"
+          }
+        },
+        "identity": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ManagedServiceIdentity",
+            "__new": "./common.json#/definitions/ManagedServiceIdentity"
+          }
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualNetworkGatewayAutoScaleBounds": {
+      "properties": {
+        "min": {
+          "format__added": "int32"
+        },
+        "max": {
+          "format__added": "int32"
+        }
+      }
+    },
+    "VirtualNetworkGatewayConnection": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualNetworkGatewayConnectionListEntity": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualNetworkGatewayConnectionListEntityPropertiesFormat": {
+      "properties": {
+        "connectionType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "IPsec",
+            "Vnet2Vnet",
+            "ExpressRoute",
+            "VPNClient"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayConnectionType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayConnectionType"
+        },
+        "connectionProtocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "IKEv2",
+            "IKEv1"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayConnectionProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol"
+        },
+        "connectionMode": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Default",
+            "ResponderOnly",
+            "InitiatorOnly"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayConnectionMode",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayConnectionMode"
+        },
+        "connectionStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayConnectionStatus"
+        },
+        "peer": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VirtualNetworkGatewayConnectionListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "VirtualNetworkGatewayConnectionPropertiesFormat": {
+      "properties": {
+        "ingressNatRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "egressNatRules": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "connectionType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "IPsec",
+            "Vnet2Vnet",
+            "ExpressRoute",
+            "VPNClient"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayConnectionType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayConnectionType"
+        },
+        "connectionProtocol": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "IKEv2",
+            "IKEv1"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayConnectionProtocol",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol"
+        },
+        "connectionMode": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Default",
+            "ResponderOnly",
+            "InitiatorOnly"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayConnectionMode",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayConnectionMode"
+        },
+        "sharedKey": {
+          "format__added": "password"
+        },
+        "connectionStatus": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Unknown",
+            "Connecting",
+            "Connected",
+            "NotConnected"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayConnectionStatus",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayConnectionStatus"
+        },
+        "peer": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "authenticationType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "PSK",
+            "Certificate"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ConnectionAuthenticationType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/ConnectionAuthenticationType"
+        }
+      }
+    },
+    "VirtualNetworkGatewayIPConfiguration": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
+      "properties": {
+        "privateIPAllocationMethod": {
+          "$ref": {
+            "__old": "./network.json#/definitions/IPAllocationMethod",
+            "__new": "./common.json#/definitions/IPAllocationMethod"
+          }
+        },
+        "subnet": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "publicIPAddress": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VirtualNetworkGatewayListConnectionsResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "VirtualNetworkGatewayListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "VirtualNetworkGatewayMigrationParameters": {
+      "properties": {
+        "migrationType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "UpgradeDeploymentToStandardIP"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayMigrationType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayMigrationType"
+        }
+      }
+    },
+    "VirtualNetworkGatewayMigrationStatus": {
+      "properties": {
+        "state": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "InProgress",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayMigrationState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayMigrationState"
+        },
+        "phase": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "Prepare",
+            "PrepareSucceeded",
+            "Execute",
+            "ExecuteSucceeded",
+            "Commit",
+            "CommitSucceeded",
+            "AbortSucceeded",
+            "Abort"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayMigrationPhase",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayMigrationPhase"
+        }
+      }
+    },
+    "VirtualNetworkGatewayNatRule": {
+      "properties": {
+        "name__deleted": {
+          "type": "string"
+        },
+        "type__deleted": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResourceModel"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualNetworkGatewayNatRuleProperties": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "type": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Static",
+            "Dynamic"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnNatRuleType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnNatRuleType"
+        },
+        "mode": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "EgressSnat",
+            "IngressSnat"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnNatRuleMode",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnNatRuleMode"
+        }
+      }
+    },
+    "VirtualNetworkGatewayPolicyGroup": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualNetworkGatewayPolicyGroupMember": {
+      "properties": {
+        "attributeType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "CertificateGroupId",
+            "AADGroupId",
+            "RadiusAzureGroupId"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnPolicyMemberAttributeType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnPolicyMemberAttributeType"
+        }
+      }
+    },
+    "VirtualNetworkGatewayPolicyGroupProperties": {
+      "properties": {
+        "vngClientConnectionConfigurations": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VirtualNetworkGatewayPropertiesFormat": {
+      "properties": {
+        "gatewayType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Vpn",
+            "ExpressRoute",
+            "LocalGateway"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewayType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewayType"
+        },
+        "vpnType": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "PolicyBased",
+            "RouteBased"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnType",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnType"
+        },
+        "vpnGatewayGeneration": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "Generation1",
+            "Generation2"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VpnGatewayGeneration",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VpnGatewayGeneration"
+        },
+        "gatewayDefaultSite": {
+          "$ref": {
+            "__old": "./network.json#/definitions/SubResource",
+            "__new": "./common.json#/definitions/SubResource"
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "adminState": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "AdminState",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/AdminState"
+        },
+        "resiliencyModel": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "SingleHomed",
+            "MultiHomed"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ResiliencyModel",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/ResiliencyModel"
+        }
+      }
+    },
+    "VirtualNetworkGatewaySku": {
+      "properties": {
+        "name": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Basic",
+            "HighPerformance",
+            "Standard",
+            "UltraPerformance",
+            "VpnGw1",
+            "VpnGw2",
+            "VpnGw3",
+            "VpnGw4",
+            "VpnGw5",
+            "VpnGw1AZ",
+            "VpnGw2AZ",
+            "VpnGw3AZ",
+            "VpnGw4AZ",
+            "VpnGw5AZ",
+            "ErGw1AZ",
+            "ErGw2AZ",
+            "ErGw3AZ",
+            "ErGwScale"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewaySkuName",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewaySkuName"
+        },
+        "tier": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Basic",
+            "HighPerformance",
+            "Standard",
+            "UltraPerformance",
+            "VpnGw1",
+            "VpnGw2",
+            "VpnGw3",
+            "VpnGw4",
+            "VpnGw5",
+            "VpnGw1AZ",
+            "VpnGw2AZ",
+            "VpnGw3AZ",
+            "VpnGw4AZ",
+            "VpnGw5AZ",
+            "ErGw1AZ",
+            "ErGw2AZ",
+            "ErGw3AZ",
+            "ErGwScale"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "VirtualNetworkGatewaySkuTier",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/VirtualNetworkGatewaySkuTier"
+        }
+      }
+    },
+    "VirtualNetworkTap": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/Resource",
+              "__new": "./common.json#/definitions/Resource"
+            }
+          }
+        ]
+      ]
+    },
+    "VirtualNetworkTapListResult": {
+      "required__added": [
+        "value"
+      ]
+    },
+    "VirtualNetworkTapPropertiesFormat": {
+      "properties": {
+        "networkInterfaceTapConfigurations": {
+          "items": {
+            "$ref": {
+              "__old": "./networkInterface.json#/definitions/NetworkInterfaceTapConfiguration",
+              "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        },
+        "destinationNetworkInterfaceIPConfiguration": {
+          "$ref": {
+            "__old": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+            "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
+          }
+        },
+        "destinationPort": {
+          "format__added": "int32"
+        }
+      }
+    },
+    "VngClientConnectionConfiguration": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "VngClientConnectionConfigurationProperties": {
+      "properties": {
+        "virtualNetworkGatewayPolicyGroups": {
+          "items": {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VpnClientConfiguration": {
+      "properties": {
+        "vpnClientProtocols": {
+          "items": {
+            "type__deleted": "string",
+            "enum__deleted": [
+              "IkeV2",
+              "SSTP",
+              "OpenVPN"
+            ],
+            "x-ms-enum__deleted": {
+              "name": "VpnClientProtocol",
+              "modelAsString": true
+            },
+            "$ref__added": "./common.json#/definitions/VpnClientProtocol"
+          }
+        },
+        "vpnAuthenticationTypes": {
+          "items": {
+            "type__deleted": "string",
+            "enum__deleted": [
+              "Certificate",
+              "Radius",
+              "AAD"
+            ],
+            "x-ms-enum__deleted": {
+              "name": "VpnAuthenticationType",
+              "modelAsString": true
+            },
+            "$ref__added": "./common.json#/definitions/VpnAuthenticationType"
+          }
+        },
+        "radiusServerSecret": {
+          "format__added": "password"
+        }
+      }
+    },
+    "VpnClientIPsecParameters": {
+      "properties": {
+        "ipsecEncryption": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "IpsecEncryption",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/IpsecEncryption"
+        },
+        "ipsecIntegrity": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "GCMAES128",
+            "GCMAES192",
+            "GCMAES256"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "IpsecIntegrity",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/IpsecIntegrity"
+        },
+        "ikeEncryption": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "DES",
+            "DES3",
+            "AES128",
+            "AES192",
+            "AES256",
+            "GCMAES256",
+            "GCMAES128"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "IkeEncryption",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/IkeEncryption"
+        },
+        "ikeIntegrity": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "SHA384",
+            "GCMAES256",
+            "GCMAES128"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "IkeIntegrity",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/IkeIntegrity"
+        },
+        "dhGroup": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "DHGroup1",
+            "DHGroup2",
+            "DHGroup14",
+            "DHGroup2048",
+            "ECP256",
+            "ECP384",
+            "DHGroup24"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "DhGroup",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/DhGroup"
+        },
+        "pfsGroup": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "None",
+            "PFS1",
+            "PFS2",
+            "PFS2048",
+            "ECP256",
+            "ECP384",
+            "PFS24",
+            "PFS14",
+            "PFSMM"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "PfsGroup",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/PfsGroup"
+        }
+      }
+    },
+    "VpnClientParameters": {
+      "properties": {
+        "processorArchitecture": {
+          "type__deleted": "string",
+          "enum__deleted": [
+            "Amd64",
+            "X86"
+          ],
+          "x-ms-enum__deleted": {
+            "name": "ProcessorArchitecture",
+            "modelAsString": true
+          },
+          "$ref__added": "./common.json#/definitions/ProcessorArchitecture"
+        },
+        "authenticationMethod": {
+          "$ref": {
+            "__old": "./network.json#/definitions/AuthenticationMethod",
+            "__new": "./common.json#/definitions/AuthenticationMethod"
+          }
+        }
+      }
+    },
+    "VpnClientRevokedCertificate": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnClientRevokedCertificatePropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    },
+    "VpnClientRootCertificate": {
+      "allOf": [
+        [
+          "~",
+          {
+            "$ref": {
+              "__old": "./network.json#/definitions/SubResource",
+              "__new": "./common.json#/definitions/SubResource"
+            }
+          }
+        ]
+      ]
+    },
+    "VpnClientRootCertificatePropertiesFormat": {
+      "properties": {
+        "provisioningState": {
+          "$ref": {
+            "__old": "./network.json#/definitions/ProvisioningState",
+            "__new": "./common.json#/definitions/NetworkProvisioningState"
+          }
+        }
+      }
+    }
+  }
+}

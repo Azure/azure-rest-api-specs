@@ -1,0 +1,699 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-03-01",
+    "description": "APIs to manage web application firewall rules."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "NetworkSecurityPerimeters"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/networkSecurityPerimeters": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeters_ListBySubscription",
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimetersList": {
+            "$ref": "./examples/NetworkSecurityPerimeterListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeters_List",
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeters_Get",
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "parameters": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterGet": {
+            "$ref": "./examples/NetworkSecurityPerimeterGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkSecurityPerimeters_CreateOrUpdate",
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "parameters": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterPut.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NetworkSecurityPerimeters_Patch",
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "parameters": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateTagsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeter"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Network Security Perimeter": {
+            "$ref": "./examples/NetworkSecurityPerimeterPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NetworkSecurityPerimeters_Delete",
+        "tags": [
+          "NetworkSecurityPerimeters"
+        ],
+        "parameters": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterDelete": {
+            "$ref": "./examples/NetworkSecurityPerimeterDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "NetworkSecurityPerimeter": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/CommonTrackedResource"
+        }
+      ]
+    },
+    "NetworkSecurityPerimeterListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeter"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkSecurityPerimeterProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NspProvisioningState",
+          "readOnly": true
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NspAccessRuleProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NspProvisioningState",
+          "readOnly": true
+        },
+        "direction": {
+          "$ref": "./common.json/definitions/AccessRuleDirection"
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fullyQualifiedDomainNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subscriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubscriptionId"
+          },
+          "x-ms-client-flatten": true
+        },
+        "networkSecurityPerimeters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerimeterBasedAccessRule"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "emailAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serviceTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NspAssociationProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NspProvisioningState",
+          "readOnly": true
+        },
+        "privateLinkResource": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "profile": {
+          "$ref": "./common.json/definitions/SubResource"
+        },
+        "accessMode": {
+          "$ref": "./common.json/definitions/AssociationAccessMode"
+        },
+        "hasProvisioningIssues": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NspLinkProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NspLinkProvisioningState",
+          "readOnly": true
+        },
+        "autoApprovedRemotePerimeterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          }
+        },
+        "remotePerimeterGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "remotePerimeterLocation": {
+          "type": "string",
+          "readOnly": true
+        },
+        "localInboundProfiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "localOutboundProfiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "remoteInboundProfiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "remoteOutboundProfiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "./common.json/definitions/NspLinkStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "NspLinkReferenceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json/definitions/NspLinkProvisioningState",
+          "readOnly": true
+        },
+        "remotePerimeterResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          }
+        },
+        "remotePerimeterGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "remotePerimeterLocation": {
+          "type": "string",
+          "readOnly": true
+        },
+        "localInboundProfiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "localOutboundProfiles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "remoteInboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "remoteOutboundProfiles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./common.json/definitions/NspLinkStatus"
+        }
+      }
+    },
+    "NspLoggingConfigurationProperties": {
+      "type": "object",
+      "properties": {
+        "enabledLogCategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "NspProfileProperties": {
+      "type": "object",
+      "properties": {
+        "accessRulesVersion": {
+          "type": "string",
+          "readOnly": true
+        },
+        "diagnosticSettingsVersion": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NspServiceTagsResource": {
+      "type": "object",
+      "properties": {
+        "serviceTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PerimeterAssociableResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PerimeterAssociableResourceProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PerimeterAssociableResourceProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "publicDnsZones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PerimeterBasedAccessRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          }
+        },
+        "perimeterGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Resources/subscriptions"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "UpdateTagsRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/networkSecurityPerimeters"
+              }
+            ]
+          }
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

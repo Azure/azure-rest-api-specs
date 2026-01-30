@@ -1,18 +1,23 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "NetworkManager",
-    "description": "The Microsoft Azure Virtual Network Manager API provides a RESTful set of web services that interact with Microsoft Azure Network Manager service to manage your network resources.",
-    "version": "2025-03-01"
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-03-01",
+    "description": "APIs to manage web application firewall rules.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
-  "consumes": [
+  "host": "management.azure.com",
+  "produces": [
     "application/json"
   ],
-  "produces": [
+  "consumes": [
     "application/json"
   ],
   "security": [
@@ -25,47 +30,392 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
+  "tags": [
+    {
+      "name": "NetworkManagers"
+    },
+    {
+      "name": "NetworkManagerConnections"
+    },
+    {
+      "name": "ConnectivityConfigurations"
+    },
+    {
+      "name": "NetworkGroups"
+    },
+    {
+      "name": "NetworkManagerRoutingConfigurations"
+    },
+    {
+      "name": "ScopeConnections"
+    },
+    {
+      "name": "SecurityAdminConfigurations"
+    },
+    {
+      "name": "SecurityUserConfigurations"
+    },
+    {
+      "name": "EffectiveConfigurations"
+    }
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagerConnections": {
       "get": {
+        "operationId": "SubscriptionNetworkManagerConnections_List",
+        "tags": [
+          "NetworkManagerConnections"
+        ],
+        "description": "List all network manager connections created by this subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Subscription Network Manager Connection": {
+            "$ref": "./examples/NetworkManagerConnectionSubscriptionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagerConnections/{networkManagerConnectionName}": {
+      "get": {
+        "operationId": "SubscriptionNetworkManagerConnections_Get",
+        "tags": [
+          "NetworkManagerConnections"
+        ],
+        "description": "Get a specified connection created by this subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "networkManagerConnectionName",
+            "in": "path",
+            "description": "Name for the network manager connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Subscription Network Manager Connection": {
+            "$ref": "./examples/NetworkManagerConnectionSubscriptionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SubscriptionNetworkManagerConnections_CreateOrUpdate",
+        "tags": [
+          "NetworkManagerConnections"
+        ],
+        "description": "Create a network manager connection on this subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "networkManagerConnectionName",
+            "in": "path",
+            "description": "Name for the network manager connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Network manager connection to be created/updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkManagerConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkManagerConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Subscription Network Manager Connection": {
+            "$ref": "./examples/NetworkManagerConnectionSubscriptionPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SubscriptionNetworkManagerConnections_Delete",
+        "tags": [
+          "NetworkManagerConnections"
+        ],
+        "description": "Delete specified connection created by this subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "networkManagerConnectionName",
+            "in": "path",
+            "description": "Name for the network manager connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Subscription Network Manager Connection": {
+            "$ref": "./examples/NetworkManagerConnectionSubscriptionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagers": {
+      "get": {
+        "operationId": "NetworkManagers_ListBySubscription",
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "NetworkManagers_Get",
-        "description": "Gets the specified Network Manager.",
+        "description": "List all network managers in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the network manager.",
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagersList": {
+            "$ref": "./examples/NetworkManagerListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers": {
+      "get": {
+        "operationId": "NetworkManagers_List",
+        "tags": [
+          "NetworkManagers"
+        ],
+        "description": "List network managers in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Manager": {
+            "$ref": "./examples/NetworkManagerList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}": {
+      "get": {
+        "operationId": "NetworkManagers_Get",
+        "tags": [
+          "NetworkManagers"
+        ],
+        "description": "Gets the specified Network Manager.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkManager"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -76,39 +426,56 @@
         }
       },
       "put": {
+        "operationId": "NetworkManagers_CreateOrUpdate",
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "NetworkManagers_CreateOrUpdate",
         "description": "Creates or updates a Network Manager.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
             "name": "parameters",
             "in": "body",
+            "description": "Parameters supplied to specify which network manager is.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/NetworkManager"
-            },
-            "description": "Parameters supplied to specify which network manager is."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated - Returns information about the network manager.",
+            "description": "Resource 'NetworkManager' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/NetworkManager"
             }
           },
           "201": {
-            "description": "Created - Returns information about the network manager.",
+            "description": "Resource 'NetworkManager' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/NetworkManager"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -118,78 +485,51 @@
           }
         }
       },
-      "delete": {
-        "tags": [
-          "NetworkManagers"
-        ],
-        "operationId": "NetworkManagers_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ForceDeleteParameter"
-          }
-        ],
-        "description": "Deletes a network manager.",
-        "responses": {
-          "200": {
-            "description": "Delete Succeed."
-          },
-          "202": {
-            "description": "Accepted and will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Request successful. The resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-examples": {
-          "NetworkManagersDelete": {
-            "$ref": "./examples/NetworkManagerDelete.json"
-          }
-        }
-      },
       "patch": {
+        "operationId": "NetworkManagers_Patch",
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "NetworkManagers_Patch",
         "description": "Patch NetworkManager.",
         "parameters": [
           {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
             "name": "parameters",
             "in": "body",
+            "description": "Parameters supplied to specify which network manager is.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchObject"
-            },
-            "description": "Parameters supplied to specify which network manager is."
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated - Returns information about the network manager.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkManager"
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -198,123 +538,609 @@
             "$ref": "./examples/NetworkManagerPatch.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commit": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
+      },
+      "delete": {
+        "operationId": "NetworkManagers_Delete",
         "tags": [
           "NetworkManagers"
         ],
-        "operationId": "NetworkManagerCommits_Post",
-        "description": "Post a Network Manager Commit.",
+        "description": "Deletes a network manager.",
         "parameters": [
           {
-            "name": "parameters",
-            "in": "body",
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/NetworkManagerCommit"
-            },
-            "description": "Parameters supplied to specify which Managed Network commit is."
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
           "200": {
-            "description": "Succeed.",
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkManagersDelete": {
+            "$ref": "./examples/NetworkManagerDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/commit": {
+      "post": {
+        "operationId": "NetworkManagerCommits_Post",
+        "tags": [
+          "NetworkManagers"
+        ],
+        "description": "Post a Network Manager Commit.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to specify which Managed Network commit is.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerCommit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkManagerCommit"
             }
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously",
-            "headers": {
-              "Location": {
-                "description": "The URL of the resource used to check the status of the asynchronous operation.",
-                "type": "string"
-              }
-            },
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/NetworkManagerCommit"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-examples": {
           "NetworkManageCommitPost": {
             "$ref": "./examples/NetworkManagerCommitPost.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NetworkManagerCommit"
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkManagerNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/ListTopParameter"
-        }
-      ],
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations": {
+      "get": {
+        "operationId": "ConnectivityConfigurations_List",
         "tags": [
-          "NetworkManagers"
+          "ConnectivityConfigurations"
         ],
-        "operationId": "NetworkManagerDeploymentStatus_List",
-        "description": "Post to List of Network Manager Deployment Status.",
+        "description": "Lists all the network manager connectivity configuration in a specified network manager.",
         "parameters": [
           {
-            "name": "parameters",
-            "in": "body",
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/NetworkManagerDeploymentStatusParameter"
-            },
-            "description": "Parameters supplied to specify which Managed Network deployment status is."
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns a list of deployment status.",
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsList": {
+            "$ref": "./examples/NetworkManagerConnectivityConfigurationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/connectivityConfigurations/{configurationName}": {
+      "get": {
+        "operationId": "ConnectivityConfigurations_Get",
+        "tags": [
+          "ConnectivityConfigurations"
+        ],
+        "description": "Gets a Network Connectivity Configuration, specified by the resource group, network manager name, and connectivity Configuration name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager connectivity configuration.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsGet": {
+            "$ref": "./examples/NetworkManagerConnectivityConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ConnectivityConfigurations_CreateOrUpdate",
+        "tags": [
+          "ConnectivityConfigurations"
+        ],
+        "description": "Creates/Updates a new network manager connectivity configuration",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager connectivity configuration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectivityConfiguration",
+            "in": "body",
+            "description": "Parameters supplied to create/update a network manager connectivity configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ConnectivityConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConnectivityConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectivityConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsPut": {
+            "$ref": "./examples/NetworkManagerConnectivityConfigurationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ConnectivityConfigurations_Delete",
+        "tags": [
+          "ConnectivityConfigurations"
+        ],
+        "description": "Deletes a network manager connectivity configuration, specified by the resource group, network manager name, and connectivity configuration name",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager connectivity configuration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ConnectivityConfigurationsDelete": {
+            "$ref": "./examples/NetworkManagerConnectivityConfigurationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations": {
+      "post": {
+        "operationId": "ListActiveConnectivityConfigurations",
+        "tags": [
+          "NetworkManagers"
+        ],
+        "description": "Lists active connectivity configurations in a network manager.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Active Configuration Parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActiveConfigurationParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActiveConnectivityConfigurationsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Active Connectivity Configurations": {
+            "$ref": "./examples/NetworkManagerActiveConnectivityConfigurationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules": {
+      "post": {
+        "operationId": "ListActiveSecurityAdminRules",
+        "tags": [
+          "NetworkManagers"
+        ],
+        "description": "Lists active security admin rules in a network manager.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Active Configuration Parameter.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActiveConfigurationParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ActiveSecurityAdminRulesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Active Security Admin Rules": {
+            "$ref": "./examples/NetworkManagerActiveSecurityAdminRulesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listDeploymentStatus": {
+      "post": {
+        "operationId": "NetworkManagerDeploymentStatus_List",
+        "tags": [
+          "NetworkManagers"
+        ],
+        "description": "Post to List of Network Manager Deployment Status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to specify which Managed Network deployment status is.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerDeploymentStatusParameter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/NetworkManagerDeploymentStatusListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -325,322 +1151,2384 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkManagers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups": {
       "get": {
+        "operationId": "NetworkGroups_List",
         "tags": [
-          "NetworkManagers"
+          "NetworkGroups"
         ],
-        "operationId": "NetworkManagers_ListBySubscription",
-        "description": "List all network managers in a subscription.",
+        "description": "Lists the specified network group.",
         "parameters": [
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ListTopParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ListSkipTokenParameter"
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns information about the network managers.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerListResult"
+              "$ref": "#/definitions/NetworkGroupListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkGroupsList": {
+            "$ref": "./examples/NetworkManagerGroupList.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/networkGroups/{networkGroupName}": {
+      "get": {
+        "operationId": "NetworkGroups_Get",
+        "tags": [
+          "NetworkGroups"
+        ],
+        "description": "Gets the specified network group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "networkGroupName",
+            "in": "path",
+            "description": "The name of the network group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
         },
         "x-ms-examples": {
-          "NetworkManagersList": {
-            "$ref": "./examples/NetworkManagerListAll.json"
+          "NetworkGroupsGet": {
+            "$ref": "./examples/NetworkManagerGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkGroups_CreateOrUpdate",
+        "tags": [
+          "NetworkGroups"
+        ],
+        "description": "Creates or updates a network group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "networkGroupName",
+            "in": "path",
+            "description": "The name of the network group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The ETag of the transformation. Omit this value to always overwrite the current resource. Specify the last-seen ETag value to prevent accidentally overwriting concurrent changes.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "IfMatch"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the specify which network group need to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/NetworkGroup"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/NetworkGroup"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The current entity tag."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkGroupsPut": {
+            "$ref": "./examples/NetworkManagerGroupPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NetworkGroups_Delete",
+        "tags": [
+          "NetworkGroups"
+        ],
+        "description": "Deletes a network group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "networkGroupName",
+            "in": "path",
+            "description": "The name of the network group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkGroupsDelete": {
+            "$ref": "./examples/NetworkManagerGroupDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations": {
+      "get": {
+        "operationId": "NetworkManagerRoutingConfigurations_List",
+        "tags": [
+          "NetworkManagerRoutingConfigurations"
+        ],
+        "description": "Lists all the network manager routing configurations in a network manager, in a paginated format.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List routing configurations in a network manager": {
+            "$ref": "./examples/NetworkManagerRoutingConfigurationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}": {
+      "get": {
+        "operationId": "NetworkManagerRoutingConfigurations_Get",
+        "tags": [
+          "NetworkManagerRoutingConfigurations"
+        ],
+        "description": "Retrieves a network manager routing configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager Routing Configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get routing configurations": {
+            "$ref": "./examples/NetworkManagerRoutingConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkManagerRoutingConfigurations_CreateOrUpdate",
+        "tags": [
+          "NetworkManagerRoutingConfigurations"
+        ],
+        "description": "Creates or updates a network manager routing configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager Routing Configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "routingConfiguration",
+            "in": "body",
+            "description": "The routing configuration to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkManagerRoutingConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkManagerRoutingConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create network manager routing configuration": {
+            "$ref": "./examples/NetworkManagerRoutingConfigurationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NetworkManagerRoutingConfigurations_Delete",
+        "tags": [
+          "NetworkManagerRoutingConfigurations"
+        ],
+        "description": "Deletes a network manager routing configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager Routing Configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete network manager routing configuration": {
+            "$ref": "./examples/NetworkManagerRoutingConfigurationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/scopeConnections": {
+      "get": {
+        "operationId": "ScopeConnections_List",
+        "tags": [
+          "ScopeConnections"
+        ],
+        "description": "List all scope connections created by this network manager.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScopeConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Network Manager Scope Connection": {
+            "$ref": "./examples/NetworkManagerScopeConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/scopeConnections/{scopeConnectionName}": {
+      "get": {
+        "operationId": "ScopeConnections_Get",
+        "tags": [
+          "ScopeConnections"
+        ],
+        "description": "Get specified scope connection created by this Network Manager.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "scopeConnectionName",
+            "in": "path",
+            "description": "Name for the cross-tenant connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScopeConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Network Manager Scope Connection": {
+            "$ref": "./examples/NetworkManagerScopeConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ScopeConnections_CreateOrUpdate",
+        "tags": [
+          "ScopeConnections"
+        ],
+        "description": "Creates or updates scope connection from Network Manager",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "scopeConnectionName",
+            "in": "path",
+            "description": "Name for the cross-tenant connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Scope connection to be created/updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopeConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ScopeConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ScopeConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'ScopeConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ScopeConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Network Manager Scope Connection": {
+            "$ref": "./examples/NetworkManagerScopeConnectionPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ScopeConnections_Delete",
+        "tags": [
+          "ScopeConnections"
+        ],
+        "description": "Delete the pending scope connection created by this network manager.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "scopeConnectionName",
+            "in": "path",
+            "description": "Name for the cross-tenant connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Network Manager Scope Connection": {
+            "$ref": "./examples/NetworkManagerScopeConnectionDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations": {
       "get": {
+        "operationId": "SecurityAdminConfigurations_List",
         "tags": [
-          "NetworkManagers"
+          "SecurityAdminConfigurations"
         ],
-        "operationId": "NetworkManagers_List",
-        "description": "List network managers in a resource group.",
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
+        "description": "Lists all the network manager security admin configurations in a network manager, in a paginated format.",
         "parameters": [
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ListTopParameter"
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
           },
           {
-            "$ref": "#/parameters/ListSkipTokenParameter"
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns a list of network managers.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerListResult"
+              "$ref": "#/definitions/SecurityAdminConfigurationListResult"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CommonErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "List Network Manager": {
-            "$ref": "./examples/NetworkManagerList.json"
+          "List security admin configurations in a network manager": {
+            "$ref": "./examples/NetworkManagerSecurityAdminConfigurationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityAdminConfigurations/{configurationName}": {
+      "get": {
+        "operationId": "SecurityAdminConfigurations_Get",
+        "tags": [
+          "SecurityAdminConfigurations"
+        ],
+        "description": "Retrieves a network manager security admin configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager Security Configuration.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityAdminConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get security admin configurations": {
+            "$ref": "./examples/NetworkManagerSecurityAdminConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SecurityAdminConfigurations_CreateOrUpdate",
+        "tags": [
+          "SecurityAdminConfigurations"
+        ],
+        "description": "Creates or updates a network manager security admin configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager Security Configuration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "securityAdminConfiguration",
+            "in": "body",
+            "description": "The security admin configuration to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityAdminConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SecurityAdminConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityAdminConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'SecurityAdminConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityAdminConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create manual-mode security admin configuration": {
+            "$ref": "./examples/NetworkManagerSecurityAdminConfigurationPut_ManualAggregation.json"
+          },
+          "Create network manager security admin configuration": {
+            "$ref": "./examples/NetworkManagerSecurityAdminConfigurationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SecurityAdminConfigurations_Delete",
+        "tags": [
+          "SecurityAdminConfigurations"
+        ],
+        "description": "Deletes a network manager security admin configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager Security Configuration.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete network manager security admin configuration": {
+            "$ref": "./examples/NetworkManagerSecurityAdminConfigurationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations": {
+      "get": {
+        "operationId": "SecurityUserConfigurations_List",
+        "tags": [
+          "SecurityUserConfigurations"
+        ],
+        "description": "Lists all the network manager security user configurations in a network manager, in a paginated format.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List security user configurations in a network manager": {
+            "$ref": "./examples/NetworkManagerSecurityUserConfigurationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}": {
+      "get": {
+        "operationId": "SecurityUserConfigurations_Get",
+        "tags": [
+          "SecurityUserConfigurations"
+        ],
+        "description": "Retrieves a network manager security user configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager Security Configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get security user configurations": {
+            "$ref": "./examples/NetworkManagerSecurityUserConfigurationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SecurityUserConfigurations_CreateOrUpdate",
+        "tags": [
+          "SecurityUserConfigurations"
+        ],
+        "description": "Creates or updates a network manager security user configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager Security Configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "securityUserConfiguration",
+            "in": "body",
+            "description": "The security user configuration to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SecurityUserConfiguration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SecurityUserConfiguration' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserConfiguration"
+            }
+          },
+          "201": {
+            "description": "Resource 'SecurityUserConfiguration' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SecurityUserConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create network manager security user configuration": {
+            "$ref": "./examples/NetworkManagerSecurityUserConfigurationPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SecurityUserConfigurations_Delete",
+        "tags": [
+          "SecurityUserConfigurations"
+        ],
+        "description": "Deletes a network manager security user configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "description": "The name of the network manager.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "The name of the network manager Security Configuration.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete network manager security user configuration": {
+            "$ref": "./examples/NetworkManagerSecurityUserConfigurationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations": {
+      "post": {
+        "operationId": "ListNetworkManagerEffectiveConnectivityConfigurations",
+        "tags": [
+          "EffectiveConfigurations"
+        ],
+        "description": "List all effective connectivity configurations applied on a virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to list correct page.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryRequestOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerEffectiveConnectivityConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List effective connectivity configuration": {
+            "$ref": "./examples/NetworkManagerEffectiveConnectivityConfigurationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules": {
+      "post": {
+        "operationId": "ListNetworkManagerEffectiveSecurityAdminRules",
+        "tags": [
+          "EffectiveConfigurations"
+        ],
+        "description": "List all effective security admin rules applied on a virtual network.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "The name of the virtual network.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to list correct page.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryRequestOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkManagerEffectiveSecurityAdminRulesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List effective security admin rules": {
+            "$ref": "./examples/NetworkManagerEffectiveSecurityAdminRulesList.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "NetworkManager": {
+    "ActiveBaseSecurityAdminRule": {
       "type": "object",
+      "description": "Network base admin rule.",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkManagerProperties",
-          "description": "The network manager properties"
-        },
-        "etag": {
-          "readOnly": true,
+        "id": {
           "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
+          "description": "Resource ID."
         },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system metadata related to this resource.",
-          "$ref": "./network.json#/definitions/SystemData"
+        "commitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Deployment time string."
+        },
+        "region": {
+          "type": "string",
+          "description": "Deployment region."
+        },
+        "configurationDescription": {
+          "type": "string",
+          "description": "A description of the security admin configuration."
+        },
+        "ruleCollectionDescription": {
+          "type": "string",
+          "description": "A description of the rule collection."
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "description": "Groups for rule collection",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "ruleGroups": {
+          "type": "array",
+          "description": "Effective configuration groups.",
+          "items": {
+            "$ref": "#/definitions/ConfigurationGroup"
+          }
+        },
+        "kind": {
+          "$ref": "./common.json#/definitions/EffectiveAdminRuleKind",
+          "description": "Whether the rule is custom or default."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "ActiveConfigurationParameter": {
+      "type": "object",
+      "description": "Effective Virtual Networks Parameter.",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "description": "List of regions.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "ActiveConnectivityConfiguration": {
+      "type": "object",
+      "description": "Active connectivity configuration.",
+      "properties": {
+        "commitTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Deployment time string."
+        },
+        "region": {
+          "type": "string",
+          "description": "Deployment region."
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+          "$ref": "#/definitions/EffectiveConnectivityConfiguration"
         }
-      ],
-      "description": "The Managed Network resource"
+      ]
     },
-    "NetworkManagerListResult": {
+    "ActiveConnectivityConfigurationsListResult": {
       "type": "object",
+      "description": "Result of the request to list active connectivity configurations. It contains a list of active connectivity configurations and a skiptoken to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "Gets a page of active connectivity configurations.",
           "items": {
-            "$ref": "#/definitions/NetworkManager"
-          },
-          "description": "Gets a page of NetworkManager"
+            "$ref": "#/definitions/ActiveConnectivityConfiguration"
+          }
         },
-        "nextLink": {
+        "skipToken": {
           "type": "string",
-          "description": "Gets the URL to get the next page of results."
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "ActiveDefaultSecurityAdminRule": {
+      "type": "object",
+      "description": "Network default admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DefaultAdminPropertiesFormat",
+          "description": "Indicates the properties of the default security admin rule",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "Result of the request to list NetworkManager. It contains a list of network managers and a URL link to get the next set of results."
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
     },
-    "NetworkManagerProperties": {
+    "ActiveSecurityAdminRule": {
       "type": "object",
+      "description": "Network admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminPropertiesFormat",
+          "description": "Indicates the properties of the security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "ActiveSecurityAdminRulesListResult": {
+      "type": "object",
+      "description": "Result of the request to list active security admin rules. It contains a list of active security admin rules and a skiptoken to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets a page of active security admin rules.",
+          "items": {
+            "$ref": "#/definitions/ActiveBaseSecurityAdminRule"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "AddressPrefixItem": {
+      "type": "object",
+      "description": "Address prefix item.",
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "Address prefix."
+        },
+        "addressPrefixType": {
+          "$ref": "./common.json#/definitions/AddressPrefixType",
+          "description": "Address prefix type."
+        }
+      }
+    },
+    "AdminPropertiesFormat": {
+      "type": "object",
+      "description": "Security admin rule resource.",
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description of the network manager."
+          "description": "A description for this rule. Restricted to 140 chars."
         },
-        "networkManagerScopes": {
-          "type": "object",
-          "properties": {
-            "managementGroups": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "List of management groups."
-            },
-            "subscriptions": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "List of subscriptions."
-            },
-            "crossTenantScopes": {
-              "readOnly": true,
-              "type": "array",
-              "x-ms-identifiers": [],
-              "items": {
-                "$ref": "#/definitions/CrossTenantScopes"
-              },
-              "description": "List of cross tenant scopes."
-            }
-          },
-          "description": "Scope of Network Manager."
+        "protocol": {
+          "$ref": "./common.json#/definitions/SecurityConfigurationRuleProtocol",
+          "description": "Network protocol this rule applies to."
         },
-        "networkManagerScopeAccesses": {
+        "sources": {
           "type": "array",
+          "description": "The CIDR or source IP ranges.",
           "items": {
-            "type": "string",
-            "$ref": "#/definitions/ConfigurationType"
+            "$ref": "#/definitions/AddressPrefixItem"
           },
-          "description": "Scope Access."
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "description": "The destination address prefixes. CIDR or destination IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "description": "The source port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "description": "The destination port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "access": {
+          "$ref": "./common.json#/definitions/SecurityConfigurationRuleAccess",
+          "description": "Indicates the access allowed for this particular rule"
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be between 1 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "direction": {
+          "$ref": "./common.json#/definitions/SecurityConfigurationRuleDirection",
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound."
         },
         "provisioningState": {
-          "readOnly": true,
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the network manager resource."
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
         },
         "resourceGuid": {
           "type": "string",
-          "readOnly": true,
-          "description": "Unique identifier for this resource."
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
         }
       },
       "required": [
-        "networkManagerScopes"
+        "protocol",
+        "access",
+        "priority",
+        "direction"
+      ]
+    },
+    "AdminRule": {
+      "type": "object",
+      "description": "Network admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminPropertiesFormat",
+          "description": "Indicates the properties of the security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAdminRule"
+        }
       ],
-      "description": "Properties of Managed Network"
+      "x-ms-discriminator-value": "Custom"
+    },
+    "AdminRuleCollection": {
+      "type": "object",
+      "description": "Defines the admin rule collection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager admin rule collection.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "AdminRuleCollectionListResult": {
+      "type": "object",
+      "description": "The response of a AdminRuleCollection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AdminRuleCollection items on this page",
+          "items": {
+            "$ref": "#/definitions/AdminRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AdminRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the admin rule collection properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the admin rule collection."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "description": "Groups for configuration",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appliesToGroups"
+      ]
+    },
+    "BaseAdminRule": {
+      "type": "object",
+      "description": "Network base admin rule.",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "./common.json#/definitions/AdminRuleKind",
+          "description": "Whether the rule is custom or default."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "ConfigurationGroup": {
+      "type": "object",
+      "description": "The network configuration group resource",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Network group ID."
+        },
+        "properties": {
+          "$ref": "#/definitions/NetworkGroupProperties",
+          "description": "The network configuration group properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConnectivityConfiguration": {
+      "type": "object",
+      "description": "The network manager connectivity configuration resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectivityConfigurationProperties",
+          "description": "Properties of a network manager connectivity configuration",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "ConnectivityConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a ConnectivityConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ConnectivityConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/ConnectivityConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ConnectivityConfigurationProperties": {
+      "type": "object",
+      "description": "Properties of network manager connectivity configuration",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the connectivity configuration."
+        },
+        "connectivityTopology": {
+          "$ref": "./common.json#/definitions/ConnectivityTopology",
+          "description": "Connectivity topology type."
+        },
+        "hubs": {
+          "type": "array",
+          "description": "List of hubItems",
+          "items": {
+            "$ref": "#/definitions/Hub"
+          },
+          "x-ms-identifiers": [
+            "resourceId"
+          ]
+        },
+        "isGlobal": {
+          "$ref": "./common.json#/definitions/IsGlobal",
+          "description": "Flag if global mesh is supported."
+        },
+        "connectivityCapabilities": {
+          "$ref": "./common.json#/definitions/ConnectivityConfigurationPropertiesConnectivityCapabilities",
+          "description": "Collection of additional settings to enhance specific topology behaviors of the connectivity configuration resource."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "description": "Groups for configuration",
+          "items": {
+            "$ref": "#/definitions/connectivityGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the connectivity configuration resource.",
+          "readOnly": true
+        },
+        "deleteExistingPeering": {
+          "$ref": "./common.json#/definitions/DeleteExistingPeering",
+          "description": "Flag if need to remove current existing peerings."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectivityTopology",
+        "appliesToGroups"
+      ]
     },
     "CrossTenantScopes": {
       "type": "object",
+      "description": "Cross tenant scopes.",
       "properties": {
         "tenantId": {
-          "readOnly": true,
           "type": "string",
-          "description": "Tenant ID."
+          "description": "Tenant ID.",
+          "readOnly": true
         },
         "managementGroups": {
           "type": "array",
-          "readOnly": true,
+          "description": "List of management groups.",
           "items": {
             "type": "string"
           },
-          "description": "List of management groups."
+          "readOnly": true
         },
         "subscriptions": {
           "type": "array",
-          "readOnly": true,
+          "description": "List of subscriptions.",
           "items": {
             "type": "string"
           },
-          "description": "List of subscriptions."
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultAdminPropertiesFormat": {
+      "type": "object",
+      "description": "Security default admin rule resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for this rule. Restricted to 140 chars.",
+          "readOnly": true
+        },
+        "flag": {
+          "type": "string",
+          "description": "Default rule flag."
+        },
+        "protocol": {
+          "$ref": "./common.json#/definitions/SecurityConfigurationRuleProtocol",
+          "description": "Network protocol this rule applies to.",
+          "readOnly": true
+        },
+        "sources": {
+          "type": "array",
+          "description": "The CIDR or source IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "description": "The destination address prefixes. CIDR or destination IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "description": "The source port ranges.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "description": "The destination port ranges.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "access": {
+          "$ref": "./common.json#/definitions/SecurityConfigurationRuleAccess",
+          "description": "Indicates the access allowed for this particular rule",
+          "readOnly": true
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. The value can be between 1 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.",
+          "readOnly": true
+        },
+        "direction": {
+          "$ref": "./common.json#/definitions/SecurityConfigurationRuleDirection",
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "DefaultAdminRule": {
+      "type": "object",
+      "description": "Network default admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DefaultAdminPropertiesFormat",
+          "description": "Indicates the properties of the security admin rule",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "Cross tenant scopes."
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "EffectiveBaseSecurityAdminRule": {
+      "type": "object",
+      "description": "Network base admin rule.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "configurationDescription": {
+          "type": "string",
+          "description": "A description of the security admin configuration."
+        },
+        "ruleCollectionDescription": {
+          "type": "string",
+          "description": "A description of the rule collection."
+        },
+        "ruleCollectionAppliesToGroups": {
+          "type": "array",
+          "description": "Groups for rule collection",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerSecurityGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "ruleGroups": {
+          "type": "array",
+          "description": "Effective configuration groups.",
+          "items": {
+            "$ref": "#/definitions/ConfigurationGroup"
+          }
+        },
+        "kind": {
+          "$ref": "./common.json#/definitions/EffectiveAdminRuleKind",
+          "description": "Whether the rule is custom or default."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ]
+    },
+    "EffectiveConnectivityConfiguration": {
+      "type": "object",
+      "description": "The network manager effective connectivity configuration",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Connectivity configuration ID."
+        },
+        "properties": {
+          "$ref": "#/definitions/ConnectivityConfigurationProperties",
+          "description": "Properties of a network manager connectivity configuration",
+          "x-ms-client-flatten": true
+        },
+        "configurationGroups": {
+          "type": "array",
+          "description": "Effective configuration groups.",
+          "items": {
+            "$ref": "#/definitions/ConfigurationGroup"
+          }
+        }
+      }
+    },
+    "EffectiveDefaultSecurityAdminRule": {
+      "type": "object",
+      "description": "Network default admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DefaultAdminPropertiesFormat",
+          "description": "Indicates the properties of the default security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Default"
+    },
+    "EffectiveSecurityAdminRule": {
+      "type": "object",
+      "description": "Network admin rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdminPropertiesFormat",
+          "description": "Indicates the properties of the security admin rule",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+        }
+      ],
+      "x-ms-discriminator-value": "Custom"
+    },
+    "Hub": {
+      "type": "object",
+      "description": "Hub Item.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "Resource Type."
+        }
+      }
+    },
+    "NetworkGroup": {
+      "type": "object",
+      "description": "The network group resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkGroupProperties",
+          "description": "The Network Group properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "NetworkGroupListResult": {
+      "type": "object",
+      "description": "The response of a NetworkGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkGroupProperties": {
+      "type": "object",
+      "description": "Properties of network group",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the network group."
+        },
+        "memberType": {
+          "$ref": "./common.json#/definitions/GroupMemberType",
+          "description": "The type of the group member."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the scope assignment resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkManager": {
+      "type": "object",
+      "description": "The Managed Network resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkManagerProperties",
+          "description": "The network manager properties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
     },
     "NetworkManagerCommit": {
       "type": "object",
+      "description": "Network Manager Commit.",
       "properties": {
         "commitId": {
           "type": "string",
-          "readOnly": true,
-          "description": "Commit Id."
+          "description": "Commit Id.",
+          "readOnly": true
         },
         "targetLocations": {
           "type": "array",
+          "description": "List of target locations.",
           "items": {
             "type": "string"
-          },
-          "description": "List of target locations."
+          }
         },
         "configurationIds": {
           "type": "array",
+          "description": "List of configuration ids.",
           "items": {
             "type": "string"
-          },
-          "description": "List of configuration ids."
+          }
         },
         "commitType": {
-          "type": "string",
-          "$ref": "#/definitions/ConfigurationType",
+          "$ref": "./common.json#/definitions/ConfigurationType",
           "description": "Commit Type."
         }
       },
       "required": [
         "targetLocations",
         "commitType"
-      ],
-      "description": "Network Manager Commit."
+      ]
     },
-    "PatchObject": {
+    "NetworkManagerConnection": {
       "type": "object",
+      "description": "The Network Manager Connection resource",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
+        "properties": {
+          "$ref": "#/definitions/NetworkManagerConnectionProperties",
+          "description": "The scope connection properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
         }
       },
-      "description": "Object for patch operations."
-    },
-    "NetworkManagerDeploymentStatusParameter": {
-      "type": "object",
-      "properties": {
-        "regions": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of locations."
-        },
-        "deploymentTypes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConfigurationType"
-          },
-          "description": "List of deployment types."
-        },
-        "skipToken": {
-          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query.",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
         }
-      },
-      "description": "Network Manager Deployment Status Parameter."
+      ]
     },
-    "NetworkManagerDeploymentStatusListResult": {
+    "NetworkManagerConnectionListResult": {
       "type": "object",
+      "description": "The response of a NetworkManagerConnection list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "x-ms-identifiers": [],
+          "description": "The NetworkManagerConnection items on this page",
           "items": {
-            "$ref": "#/definitions/NetworkManagerDeploymentStatus"
-          },
-          "description": "Gets a page of Network Manager Deployment Status"
+            "$ref": "#/definitions/NetworkManagerConnection"
+          }
         },
-        "skipToken": {
-          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data.",
-          "type": "string"
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
-      "description": "A list of Network Manager Deployment Status"
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkManagerConnectionProperties": {
+      "type": "object",
+      "description": "Information about the network manager connection.",
+      "properties": {
+        "networkManagerId": {
+          "type": "string",
+          "description": "Network Manager Id."
+        },
+        "connectionState": {
+          "$ref": "./common.json#/definitions/ScopeConnectionState",
+          "description": "Connection state.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the network manager connection."
+        }
+      }
     },
     "NetworkManagerDeploymentStatus": {
       "type": "object",
+      "description": "Network Manager Deployment Status.",
       "properties": {
         "commitTime": {
           "type": "string",
@@ -652,104 +3540,971 @@
           "description": "Region Name."
         },
         "deploymentStatus": {
-          "type": "string",
-          "enum": [
-            "NotStarted",
-            "Deploying",
-            "Deployed",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "DeploymentStatus",
-            "modelAsString": true
-          },
+          "$ref": "./common.json#/definitions/DeploymentStatus",
           "description": "Deployment Status."
         },
         "configurationIds": {
           "type": "array",
+          "description": "List of configuration ids.",
           "items": {
             "type": "string"
-          },
-          "description": "List of configuration ids."
+          }
         },
         "deploymentType": {
-          "type": "string",
-          "$ref": "#/definitions/ConfigurationType"
+          "$ref": "./common.json#/definitions/ConfigurationType",
+          "description": "Configuration Deployment Type."
         },
         "errorMessage": {
           "type": "string",
           "description": "Error Message."
         }
-      },
-      "description": "Network Manager Deployment Status."
+      }
     },
-    "ConfigurationType": {
-      "type": "string",
-      "enum": [
-        "SecurityAdmin",
-        "Connectivity",
-        "SecurityUser",
-        "Routing"
-      ],
-      "x-ms-enum": {
-        "name": "ConfigurationType",
-        "modelAsString": true
+    "NetworkManagerDeploymentStatusListResult": {
+      "type": "object",
+      "description": "A list of Network Manager Deployment Status",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets a page of Network Manager Deployment Status",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerDeploymentStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "NetworkManagerDeploymentStatusParameter": {
+      "type": "object",
+      "description": "Network Manager Deployment Status Parameter.",
+      "properties": {
+        "regions": {
+          "type": "array",
+          "description": "List of locations.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "deploymentTypes": {
+          "type": "array",
+          "description": "List of deployment types.",
+          "items": {
+            "$ref": "./common.json#/definitions/ConfigurationType"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Continuation token for pagination, capturing the next page size and offset, as well as the context of the query."
+        }
+      }
+    },
+    "NetworkManagerEffectiveConnectivityConfigurationListResult": {
+      "type": "object",
+      "description": "Result of the request to list networkManagerEffectiveConnectivityConfiguration. It contains a list of groups and a skiptoken to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets a page of NetworkManagerEffectiveConnectivityConfiguration",
+          "items": {
+            "$ref": "#/definitions/EffectiveConnectivityConfiguration"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "NetworkManagerEffectiveSecurityAdminRulesListResult": {
+      "type": "object",
+      "description": "Result of the request to list networkManagerEffectiveSecurityAdminRules. It contains a list of groups and a skiptoken to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Gets a page of NetworkManagerEffectiveSecurityAdminRules",
+          "items": {
+            "$ref": "#/definitions/EffectiveBaseSecurityAdminRule"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "NetworkManagerListResult": {
+      "type": "object",
+      "description": "The response of a NetworkManager list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkManager items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkManager"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
       },
-      "description": "Configuration Deployment Type."
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkManagerProperties": {
+      "type": "object",
+      "description": "Properties of Managed Network",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the network manager."
+        },
+        "networkManagerScopes": {
+          "$ref": "./common.json#/definitions/NetworkManagerPropertiesNetworkManagerScopes",
+          "description": "Scope of Network Manager."
+        },
+        "networkManagerScopeAccesses": {
+          "type": "array",
+          "description": "Scope Access.",
+          "items": {
+            "$ref": "./common.json#/definitions/ConfigurationType"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the network manager resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "networkManagerScopes"
+      ]
+    },
+    "NetworkManagerRoutingConfiguration": {
+      "type": "object",
+      "description": "Defines the routing configuration",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkManagerRoutingConfigurationPropertiesFormat",
+          "description": "Indicates the properties for the network manager routing configuration.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "NetworkManagerRoutingConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a NetworkManagerRoutingConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkManagerRoutingConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkManagerRoutingConfigurationPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the routing configuration properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the routing configuration."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        },
+        "routeTableUsageMode": {
+          "type": "string",
+          "description": "Route table usage mode defines which route table will be used by the configuration. If not defined, this will default to 'ManagedOnly'.",
+          "default": "ManagedOnly",
+          "enum": [
+            "ManagedOnly",
+            "UseExisting"
+          ],
+          "x-ms-enum": {
+            "name": "RouteTableUsageMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ManagedOnly",
+                "value": "ManagedOnly",
+                "description": "Only route tables managed by the routing configuration will be used."
+              },
+              {
+                "name": "UseExisting",
+                "value": "UseExisting",
+                "description": "Use existing user-defined route tables already associated with resources."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "NetworkManagerRoutingGroupItem": {
+      "type": "object",
+      "description": "Network manager routing group item.",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network manager group Id."
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ]
+    },
+    "NetworkManagerSecurityGroupItem": {
+      "type": "object",
+      "description": "Network manager security group item.",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network manager group Id."
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ]
+    },
+    "PatchObject": {
+      "type": "object",
+      "description": "Object for patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryRequestOptions": {
+      "type": "object",
+      "description": "Query Request Options",
+      "properties": {
+        "skipToken": {
+          "type": "string",
+          "description": "When present, the value can be passed to a subsequent query call (together with the same query and scopes used in the current request) to retrieve the next page of data."
+        }
+      }
+    },
+    "RoutingRule": {
+      "type": "object",
+      "description": "Network routing rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingRulePropertiesFormat",
+          "description": "Indicates the properties of the routing rule",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "RoutingRuleCollection": {
+      "type": "object",
+      "description": "Defines the routing rule collection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoutingRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager routing rule collection.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "RoutingRuleCollectionListResult": {
+      "type": "object",
+      "description": "The response of a RoutingRuleCollection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoutingRuleCollection items on this page",
+          "items": {
+            "$ref": "#/definitions/RoutingRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoutingRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the routing rule collection properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the routing rule collection."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        },
+        "appliesTo": {
+          "type": "array",
+          "description": "Groups for configuration",
+          "items": {
+            "$ref": "#/definitions/NetworkManagerRoutingGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "disableBgpRoutePropagation": {
+          "$ref": "./common.json#/definitions/DisableBgpRoutePropagation",
+          "description": "Determines whether BGP route propagation is enabled. Defaults to true."
+        }
+      },
+      "required": [
+        "appliesTo"
+      ]
+    },
+    "RoutingRuleListResult": {
+      "type": "object",
+      "description": "The response of a RoutingRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RoutingRule items on this page",
+          "items": {
+            "$ref": "#/definitions/RoutingRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RoutingRuleNextHop": {
+      "type": "object",
+      "description": "Next hop.",
+      "properties": {
+        "nextHopType": {
+          "$ref": "./common.json#/definitions/RoutingRuleNextHopType",
+          "description": "Next hop type."
+        },
+        "nextHopAddress": {
+          "type": "string",
+          "description": "Next hop address. Only required if the next hop type is VirtualAppliance."
+        }
+      },
+      "required": [
+        "nextHopType"
+      ]
+    },
+    "RoutingRulePropertiesFormat": {
+      "type": "object",
+      "description": "Routing rule resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for this rule."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        },
+        "destination": {
+          "$ref": "#/definitions/RoutingRuleRouteDestination",
+          "description": "Indicates the destination for this particular rule."
+        },
+        "nextHop": {
+          "$ref": "#/definitions/RoutingRuleNextHop",
+          "description": "Indicates the next hop for this particular rule."
+        }
+      },
+      "required": [
+        "destination",
+        "nextHop"
+      ]
+    },
+    "RoutingRuleRouteDestination": {
+      "type": "object",
+      "description": "Route destination.",
+      "properties": {
+        "type": {
+          "$ref": "./common.json#/definitions/RoutingRuleDestinationType",
+          "description": "Destination type."
+        },
+        "destinationAddress": {
+          "type": "string",
+          "description": "Destination address."
+        }
+      },
+      "required": [
+        "type",
+        "destinationAddress"
+      ]
+    },
+    "ScopeConnection": {
+      "type": "object",
+      "description": "The Scope Connections resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ScopeConnectionProperties",
+          "description": "The scope connection properties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "ScopeConnectionListResult": {
+      "type": "object",
+      "description": "The response of a ScopeConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ScopeConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/ScopeConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScopeConnectionProperties": {
+      "type": "object",
+      "description": "Scope connection.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID."
+        },
+        "connectionState": {
+          "$ref": "./common.json#/definitions/ScopeConnectionState",
+          "description": "Connection State",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the scope connection."
+        }
+      }
+    },
+    "SecurityAdminConfiguration": {
+      "type": "object",
+      "description": "Defines the security admin configuration",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityAdminConfigurationPropertiesFormat",
+          "description": "Indicates the properties for the network manager security admin configuration.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityAdminConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a SecurityAdminConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SecurityAdminConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/SecurityAdminConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecurityAdminConfigurationPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the security admin configuration properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the security configuration."
+        },
+        "applyOnNetworkIntentPolicyBasedServices": {
+          "type": "array",
+          "description": "Enum list of network intent policy based services.",
+          "items": {
+            "$ref": "./common.json#/definitions/NetworkIntentPolicyBasedService"
+          }
+        },
+        "networkGroupAddressSpaceAggregationOption": {
+          "$ref": "./common.json#/definitions/AddressSpaceAggregationOption",
+          "description": "Determine update behavior for changes to network groups referenced within the rules in this configuration."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityUserConfiguration": {
+      "type": "object",
+      "description": "Defines the security user configuration",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityUserConfigurationPropertiesFormat",
+          "description": "Indicates the properties for the network manager security user configuration.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityUserConfigurationListResult": {
+      "type": "object",
+      "description": "The response of a SecurityUserConfiguration list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SecurityUserConfiguration items on this page",
+          "items": {
+            "$ref": "#/definitions/SecurityUserConfiguration"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecurityUserConfigurationPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the security user configuration properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the security user configuration."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SecurityUserGroupItem": {
+      "type": "object",
+      "description": "Network manager security user group item.",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network manager group Id."
+        }
+      },
+      "required": [
+        "networkGroupId"
+      ]
+    },
+    "SecurityUserRule": {
+      "type": "object",
+      "description": "Network security user rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityUserRulePropertiesFormat",
+          "description": "Indicates the properties of the security user rule",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityUserRuleCollection": {
+      "type": "object",
+      "description": "Defines the security user rule collection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecurityUserRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager security user rule collection.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "SecurityUserRuleCollectionListResult": {
+      "type": "object",
+      "description": "The response of a SecurityUserRuleCollection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SecurityUserRuleCollection items on this page",
+          "items": {
+            "$ref": "#/definitions/SecurityUserRuleCollection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecurityUserRuleCollectionPropertiesFormat": {
+      "type": "object",
+      "description": "Defines the security user rule collection properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description of the security user rule collection."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "description": "Groups for configuration",
+          "items": {
+            "$ref": "#/definitions/SecurityUserGroupItem"
+          },
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "appliesToGroups"
+      ]
+    },
+    "SecurityUserRuleListResult": {
+      "type": "object",
+      "description": "The response of a SecurityUserRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SecurityUserRule items on this page",
+          "items": {
+            "$ref": "#/definitions/SecurityUserRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SecurityUserRulePropertiesFormat": {
+      "type": "object",
+      "description": "Security rule resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "A description for this rule."
+        },
+        "protocol": {
+          "$ref": "./common.json#/definitions/SecurityConfigurationRuleProtocol",
+          "description": "Network protocol this rule applies to."
+        },
+        "sources": {
+          "type": "array",
+          "description": "The CIDR or source IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "destinations": {
+          "type": "array",
+          "description": "The destination address prefixes. CIDR or destination IP ranges.",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixItem"
+          },
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ]
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "description": "The source port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "description": "The destination port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "direction": {
+          "$ref": "./common.json#/definitions/SecurityConfigurationRuleDirection",
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the security configuration user rule resource.",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "Unique identifier for this resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "protocol",
+        "direction"
+      ]
+    },
+    "StaticMember": {
+      "type": "object",
+      "description": "StaticMember Item.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StaticMemberProperties",
+          "description": "The Static Member properties",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "description": "The system metadata related to this resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ChildResource"
+        }
+      ]
+    },
+    "StaticMemberListResult": {
+      "type": "object",
+      "description": "The response of a StaticMember list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The StaticMember items on this page",
+          "items": {
+            "$ref": "#/definitions/StaticMember"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "StaticMemberProperties": {
+      "type": "object",
+      "description": "Properties of static member.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "region": {
+          "type": "string",
+          "description": "Resource region.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the scope assignment resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "connectivityGroupItem": {
+      "type": "object",
+      "description": "Connectivity group item.",
+      "properties": {
+        "networkGroupId": {
+          "type": "string",
+          "description": "Network group Id."
+        },
+        "useHubGateway": {
+          "$ref": "./common.json#/definitions/UseHubGateway",
+          "description": "Flag if need to use hub gateway."
+        },
+        "isGlobal": {
+          "$ref": "./common.json#/definitions/IsGlobal",
+          "description": "Flag if global is supported."
+        },
+        "groupConnectivity": {
+          "$ref": "./common.json#/definitions/GroupConnectivity",
+          "description": "Group connectivity type."
+        }
+      },
+      "required": [
+        "networkGroupId",
+        "groupConnectivity"
+      ]
     }
   },
-  "parameters": {
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "NetworkManagerNameParameter": {
-      "name": "networkManagerName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$",
-      "description": "The name of the network manager.",
-      "x-ms-parameter-location": "method"
-    },
-    "OperationResultIdParameter": {
-      "name": "operationResultId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The id of operation Result.",
-      "x-ms-parameter-location": "method"
-    },
-    "ListTopParameter": {
-      "name": "$top",
-      "description": "An optional query parameter which specifies the maximum number of records to be returned by the server.",
-      "in": "query",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "minimum": 1,
-      "maximum": 20,
-      "x-ms-parameter-location": "method"
-    },
-    "ListSkipTokenParameter": {
-      "name": "$skipToken",
-      "description": "SkipToken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "ForceDeleteParameter": {
-      "name": "force",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "Deletes the resource even if it is part of a deployed configuration. If the configuration has been deployed, the service will do a cleanup deployment in the background, prior to the delete.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "parameters": {}
 }

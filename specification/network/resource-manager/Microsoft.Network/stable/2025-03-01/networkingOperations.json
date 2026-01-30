@@ -1,0 +1,263 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-03-01",
+    "description": "APIs to manage web application firewall rules.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Network/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Network Rest API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of operations for a resource provider": {
+            "$ref": "./examples/OperationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Availability": {
+      "type": "object",
+      "description": "Availability of the metric.",
+      "properties": {
+        "timeGrain": {
+          "type": "string",
+          "description": "The time grain of the availability."
+        },
+        "retention": {
+          "type": "string",
+          "description": "The retention of the availability."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Duration of the availability blob."
+        }
+      }
+    },
+    "Dimension": {
+      "type": "object",
+      "description": "Dimension of the metric.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the dimension."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the dimension."
+        },
+        "internalName": {
+          "type": "string",
+          "description": "The internal name of the dimension."
+        }
+      }
+    },
+    "LogSpecification": {
+      "type": "object",
+      "description": "Description of logging specification.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the specification."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the specification."
+        },
+        "blobDuration": {
+          "type": "string",
+          "description": "Duration of the blob."
+        }
+      }
+    },
+    "MetricSpecification": {
+      "type": "object",
+      "description": "Description of metrics specification.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the metric."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the metric."
+        },
+        "displayDescription": {
+          "type": "string",
+          "description": "The description of the metric."
+        },
+        "unit": {
+          "type": "string",
+          "description": "Units the metric to be displayed in."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The aggregation type."
+        },
+        "availabilities": {
+          "type": "array",
+          "description": "List of availability.",
+          "items": {
+            "$ref": "#/definitions/Availability"
+          }
+        },
+        "enableRegionalMdmAccount": {
+          "type": "boolean",
+          "description": "Whether regional MDM account enabled."
+        },
+        "fillGapWithZero": {
+          "type": "boolean",
+          "description": "Whether gaps would be filled with zeros."
+        },
+        "metricFilterPattern": {
+          "type": "string",
+          "description": "Pattern for the filter of the metric."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "List of dimensions.",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          }
+        },
+        "isInternal": {
+          "type": "boolean",
+          "description": "Whether the metric is internal."
+        },
+        "sourceMdmAccount": {
+          "type": "string",
+          "description": "The source MDM account."
+        },
+        "sourceMdmNamespace": {
+          "type": "string",
+          "description": "The source MDM namespace."
+        },
+        "resourceIdDimensionNameOverride": {
+          "type": "string",
+          "description": "The resource Id dimension name override."
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Network REST API operation definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}."
+        },
+        "display": {
+          "$ref": "./common.json#/definitions/OperationDisplay",
+          "description": "Display metadata associated with the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin of the operation."
+        },
+        "properties": {
+          "$ref": "#/definitions/OperationPropertiesFormat",
+          "description": "Operation properties format.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Paged collection of Operation items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OperationPropertiesFormat": {
+      "type": "object",
+      "description": "Description of operation properties format.",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "./common.json#/definitions/OperationPropertiesFormatServiceSpecification",
+          "description": "Specification of the service."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,5279 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "WebApplicationFirewallManagement",
+    "version": "2025-03-01",
+    "description": "APIs to manage web application firewall rules."
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "ExpressRouteProviderPorts"
+    },
+    {
+      "name": "ExpressRouteCircuitAuthorizations"
+    },
+    {
+      "name": "ExpressRouteCircuits"
+    },
+    {
+      "name": "ExpressRouteCircuitPeerings"
+    },
+    {
+      "name": "ExpressRouteCircuitConnections"
+    },
+    {
+      "name": "PeerExpressRouteCircuitConnections"
+    },
+    {
+      "name": "ExpressRouteCrossConnections"
+    },
+    {
+      "name": "ExpressRoutePortsLocations"
+    },
+    {
+      "name": "ExpressRoutePorts"
+    },
+    {
+      "name": "ExpressRoutePortAuthorizations"
+    },
+    {
+      "name": "RouteFilters"
+    },
+    {
+      "name": "ServiceEndpointPolicies"
+    },
+    {
+      "name": "ServiceEndpointPolicyDefinitions"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities": {
+      "get": {
+        "operationId": "BgpServiceCommunities_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/BgpServiceCommunityListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ServiceCommunityList": {
+            "$ref": "./examples/ServiceCommunityList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteCircuits": {
+      "get": {
+        "operationId": "ExpressRouteCircuits_ListAll",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuits in a subscription": {
+            "$ref": "./examples/ExpressRouteCircuitListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteCrossConnections": {
+      "get": {
+        "operationId": "ExpressRouteCrossConnections_List",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCrossConnectionList": {
+            "$ref": "./examples/ExpressRouteCrossConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePorts": {
+      "get": {
+        "operationId": "ExpressRoutePorts_List",
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePortListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRoutePortList": {
+            "$ref": "./examples/ExpressRoutePortList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations": {
+      "get": {
+        "operationId": "ExpressRoutePortsLocations_List",
+        "tags": [
+          "ExpressRoutePortsLocations"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePortsLocationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRoutePortsLocationList": {
+            "$ref": "./examples/ExpressRoutePortsLocationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePortsLocations/{locationName}": {
+      "get": {
+        "operationId": "ExpressRoutePortsLocations_Get",
+        "tags": [
+          "ExpressRoutePortsLocations"
+        ],
+        "parameters": [
+          {
+            "name": "locationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePortsLocation"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRoutePortsLocationGet": {
+            "$ref": "./examples/ExpressRoutePortsLocationGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts": {
+      "get": {
+        "operationId": "ExpressRouteProviderPortsLocation_List",
+        "tags": [
+          "ExpressRouteProviderPorts"
+        ],
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteProviderPortListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteProviderPortList": {
+            "$ref": "./examples/expressRouteProviderPortList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts/{providerport}": {
+      "get": {
+        "operationId": "ExpressRouteProviderPort",
+        "tags": [
+          "ExpressRouteProviderPorts"
+        ],
+        "parameters": [
+          {
+            "name": "providerport",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteProviderPort"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteProviderPort": {
+            "$ref": "./examples/expressRouteProviderPort.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders": {
+      "get": {
+        "operationId": "ExpressRouteServiceProviders_List",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteServiceProviderListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRoute providers": {
+            "$ref": "./examples/ExpressRouteProviderList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/routeFilters": {
+      "get": {
+        "operationId": "RouteFilters_List",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterList": {
+            "$ref": "./examples/RouteFilterList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/serviceEndpointPolicies": {
+      "get": {
+        "operationId": "ServiceEndpointPolicies_List",
+        "tags": [
+          "ServiceEndpointPolicies"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all service endpoint policy": {
+            "$ref": "./examples/ServiceEndpointPolicyListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits": {
+      "get": {
+        "operationId": "ExpressRouteCircuits_List",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuits in a resource group": {
+            "$ref": "./examples/ExpressRouteCircuitListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}": {
+      "get": {
+        "operationId": "ExpressRouteCircuits_Get",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuit"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteCircuitGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRouteCircuits_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuit"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuit"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteCircuitCreate.json"
+          },
+          "Create ExpressRouteCircuit on ExpressRoutePort": {
+            "$ref": "./examples/ExpressRouteCircuitCreateOnExpressRoutePort.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRouteCircuit"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ExpressRouteCircuits_UpdateTags",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuit"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Express Route Circuit Tags": {
+            "$ref": "./examples/ExpressRouteCircuitUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ExpressRouteCircuits_Delete",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteCircuitDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations": {
+      "get": {
+        "operationId": "ExpressRouteCircuitAuthorizations_List",
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/AuthorizationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/authorizations/{authorizationName}": {
+      "get": {
+        "operationId": "ExpressRouteCircuitAuthorizations_Get",
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRouteCircuitAuthorizations_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRouteCircuitAuthorization"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExpressRouteCircuitAuthorizations_Delete",
+        "tags": [
+          "ExpressRouteCircuitAuthorizations"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit Authorization": {
+            "$ref": "./examples/ExpressRouteCircuitAuthorizationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings": {
+      "get": {
+        "operationId": "ExpressRouteCircuitPeerings_List",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitPeeringListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuit Peerings": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}": {
+      "get": {
+        "operationId": "ExpressRouteCircuitPeerings_Get",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitPeering"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteCircuit Peering": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRouteCircuitPeerings_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitPeering"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitPeering"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitPeering"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ExpressRouteCircuit Peerings": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRouteCircuitPeering"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExpressRouteCircuitPeerings_Delete",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit Peerings": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}": {
+      "post": {
+        "operationId": "ExpressRouteCircuits_ListArpTable",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ARP Table": {
+            "$ref": "./examples/ExpressRouteCircuitARPTableList.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections": {
+      "get": {
+        "operationId": "ExpressRouteCircuitConnections_List",
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRouteCircuit Connection": {
+            "$ref": "./examples/ExpressRouteCircuitConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/connections/{connectionName}": {
+      "get": {
+        "operationId": "ExpressRouteCircuitConnections_Get",
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCircuitConnectionGet": {
+            "$ref": "./examples/ExpressRouteCircuitConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRouteCircuitConnections_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expressRouteCircuitConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCircuitConnectionCreate": {
+            "$ref": "./examples/ExpressRouteCircuitConnectionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRouteCircuitConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExpressRouteCircuitConnections_Delete",
+        "tags": [
+          "ExpressRouteCircuitConnections"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ExpressRouteCircuit": {
+            "$ref": "./examples/ExpressRouteCircuitConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections": {
+      "get": {
+        "operationId": "PeerExpressRouteCircuitConnections_List",
+        "tags": [
+          "PeerExpressRouteCircuitConnections"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PeerExpressRouteCircuitConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Peer ExpressRouteCircuit Connection": {
+            "$ref": "./examples/PeerExpressRouteCircuitConnectionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/peerConnections/{connectionName}": {
+      "get": {
+        "operationId": "PeerExpressRouteCircuitConnections_Get",
+        "tags": [
+          "PeerExpressRouteCircuitConnections"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/PeerExpressRouteCircuitConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PeerExpressRouteCircuitConnectionGet": {
+            "$ref": "./examples/PeerExpressRouteCircuitConnectionGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}": {
+      "post": {
+        "operationId": "ExpressRouteCircuits_ListRoutesTable",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Route Tables": {
+            "$ref": "./examples/ExpressRouteCircuitRouteTableList.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
+      "post": {
+        "operationId": "ExpressRouteCircuits_ListRoutesTableSummary",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableSummaryListResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Route Table Summary": {
+            "$ref": "./examples/ExpressRouteCircuitRouteTableSummaryList.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/stats": {
+      "get": {
+        "operationId": "ExpressRouteCircuits_GetPeeringStats",
+        "tags": [
+          "ExpressRouteCircuitPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitStats"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRoute Circuit Peering Traffic Stats": {
+            "$ref": "./examples/ExpressRouteCircuitPeeringStats.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}/stats": {
+      "get": {
+        "operationId": "ExpressRouteCircuits_GetStats",
+        "tags": [
+          "ExpressRouteCircuits"
+        ],
+        "parameters": [
+          {
+            "name": "circuitName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitStats"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRoute Circuit Traffic Stats": {
+            "$ref": "./examples/ExpressRouteCircuitStats.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections": {
+      "get": {
+        "operationId": "ExpressRouteCrossConnections_ListByResourceGroup",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCrossConnectionListByResourceGroup": {
+            "$ref": "./examples/ExpressRouteCrossConnectionListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}": {
+      "get": {
+        "operationId": "ExpressRouteCrossConnections_Get",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetExpressRouteCrossConnection": {
+            "$ref": "./examples/ExpressRouteCrossConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRouteCrossConnections_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateExpressRouteCrossConnection": {
+            "$ref": "./examples/ExpressRouteCrossConnectionUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRouteCrossConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ExpressRouteCrossConnections_UpdateTags",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "crossConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnection"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateExpressRouteCrossConnectionTags": {
+            "$ref": "./examples/ExpressRouteCrossConnectionUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings": {
+      "get": {
+        "operationId": "ExpressRouteCrossConnectionPeerings_List",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringList"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCrossConnectionBgpPeeringList": {
+            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}": {
+      "get": {
+        "operationId": "ExpressRouteCrossConnectionPeerings_Get",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetExpressRouteCrossConnectionBgpPeering": {
+            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRouteCrossConnectionPeerings_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteCrossConnectionBgpPeeringCreate": {
+            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRouteCrossConnectionPeering"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExpressRouteCrossConnectionPeerings_Delete",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteExpressRouteCrossConnectionBgpPeering": {
+            "$ref": "./examples/ExpressRouteCrossConnectionBgpPeeringDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/arpTables/{devicePath}": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_ListArpTable",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitsArpTableListResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetExpressRouteCrossConnectionsArpTable": {
+            "$ref": "./examples/ExpressRouteCrossConnectionsArpTable.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTables/{devicePath}": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_ListRoutesTable",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCircuitsRoutesTableListResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetExpressRouteCrossConnectionsRouteTable": {
+            "$ref": "./examples/ExpressRouteCrossConnectionsRouteTable.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}": {
+      "post": {
+        "operationId": "ExpressRouteCrossConnections_ListRoutesTableSummary",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "parameters": [
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devicePath",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnectionsRoutesTableSummaryListResult"
+            }
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetExpressRouteCrossConnectionsRouteTableSummary": {
+            "$ref": "./examples/ExpressRouteCrossConnectionsRouteTableSummary.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts": {
+      "get": {
+        "operationId": "ExpressRoutePorts_ListByResourceGroup",
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePortListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRoutePortListByResourceGroup": {
+            "$ref": "./examples/ExpressRoutePortListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}": {
+      "get": {
+        "operationId": "ExpressRoutePorts_Get",
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePort"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRoutePortGet": {
+            "$ref": "./examples/ExpressRoutePortGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRoutePorts_CreateOrUpdate",
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePort"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePort"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePort"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRoutePortCreate": {
+            "$ref": "./examples/ExpressRoutePortCreate.json"
+          },
+          "ExpressRoutePortUpdateLink": {
+            "$ref": "./examples/ExpressRoutePortUpdateLink.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRoutePort"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ExpressRoutePorts_UpdateTags",
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePort"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRoutePortUpdateTags": {
+            "$ref": "./examples/ExpressRoutePortUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ExpressRoutePorts_Delete",
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRoutePortDelete": {
+            "$ref": "./examples/ExpressRoutePortDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations": {
+      "get": {
+        "operationId": "ExpressRoutePortAuthorizations_List",
+        "tags": [
+          "ExpressRoutePortAuthorizations"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePortAuthorizationListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRoutePort Authorization": {
+            "$ref": "./examples/ExpressRoutePortAuthorizationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}": {
+      "get": {
+        "operationId": "ExpressRoutePortAuthorizations_Get",
+        "tags": [
+          "ExpressRoutePortAuthorizations"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePortAuthorization"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRoutePort Authorization": {
+            "$ref": "./examples/ExpressRoutePortAuthorizationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRoutePortAuthorizations_CreateOrUpdate",
+        "tags": [
+          "ExpressRoutePortAuthorizations"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePortAuthorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePortAuthorization"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRoutePortAuthorization"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ExpressRoutePort Authorization": {
+            "$ref": "./examples/ExpressRoutePortAuthorizationCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRoutePortAuthorization"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExpressRoutePortAuthorizations_Delete",
+        "tags": [
+          "ExpressRoutePortAuthorizations"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ExpressRoutePort Authorization": {
+            "$ref": "./examples/ExpressRoutePortAuthorizationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/generateLoa": {
+      "post": {
+        "operationId": "ExpressRoutePorts_GenerateLOA",
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateExpressRoutePortsLOARequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/GenerateExpressRoutePortsLOAResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GenerateExpressRoutePortLOA": {
+            "$ref": "./examples/GenerateExpressRoutePortsLOA.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/links": {
+      "get": {
+        "operationId": "ExpressRouteLinks_List",
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLinkListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteLinkGet": {
+            "$ref": "./examples/ExpressRouteLinkList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/links/{linkName}": {
+      "get": {
+        "operationId": "ExpressRouteLinks_Get",
+        "tags": [
+          "ExpressRoutePorts"
+        ],
+        "parameters": [
+          {
+            "name": "expressRoutePortName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLink"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExpressRouteLinkGet": {
+            "$ref": "./examples/ExpressRouteLinkGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters": {
+      "get": {
+        "operationId": "RouteFilters_ListByResourceGroup",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterListByResourceGroup": {
+            "$ref": "./examples/RouteFilterListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}": {
+      "get": {
+        "operationId": "RouteFilters_Get",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterGet": {
+            "$ref": "./examples/RouteFilterGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RouteFilters_CreateOrUpdate",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeFilterParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterCreate": {
+            "$ref": "./examples/RouteFilterCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/RouteFilter"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "RouteFilters_UpdateTags",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilter"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update route filter tags": {
+            "$ref": "./examples/RouteFilterUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RouteFilters_Delete",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterDelete": {
+            "$ref": "./examples/RouteFilterDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules": {
+      "get": {
+        "operationId": "RouteFilterRules_ListByRouteFilter",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRuleListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterRuleListByRouteFilter": {
+            "$ref": "./examples/RouteFilterRuleListByRouteFilter.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}": {
+      "get": {
+        "operationId": "RouteFilterRules_Get",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRule"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterRuleGet": {
+            "$ref": "./examples/RouteFilterRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "RouteFilterRules_CreateOrUpdate",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "routeFilterRuleParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRule"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/RouteFilterRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterRuleCreate": {
+            "$ref": "./examples/RouteFilterRuleCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/RouteFilterRule"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "RouteFilterRules_Delete",
+        "tags": [
+          "RouteFilters"
+        ],
+        "parameters": [
+          {
+            "name": "routeFilterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RouteFilterRuleDelete": {
+            "$ref": "./examples/RouteFilterRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies": {
+      "get": {
+        "operationId": "ServiceEndpointPolicies_ListByResourceGroup",
+        "tags": [
+          "ServiceEndpointPolicies"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List resource group service endpoint policies": {
+            "$ref": "./examples/ServiceEndpointPolicyList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}": {
+      "get": {
+        "operationId": "ServiceEndpointPolicies_Get",
+        "tags": [
+          "ServiceEndpointPolicies"
+        ],
+        "parameters": [
+          {
+            "name": "serviceEndpointPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get service endPoint Policy": {
+            "$ref": "./examples/ServiceEndpointPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServiceEndpointPolicies_CreateOrUpdate",
+        "tags": [
+          "ServiceEndpointPolicies"
+        ],
+        "parameters": [
+          {
+            "name": "serviceEndpointPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicy"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicy"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create service endpoint policy": {
+            "$ref": "./examples/ServiceEndpointPolicyCreate.json"
+          },
+          "Create service endpoint policy with definition": {
+            "$ref": "./examples/ServiceEndpointPolicyCreateWithDefinition.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ServiceEndpointPolicy"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ServiceEndpointPolicies_UpdateTags",
+        "tags": [
+          "ServiceEndpointPolicies"
+        ],
+        "parameters": [
+          {
+            "name": "serviceEndpointPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicy"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update service endpoint policy tags": {
+            "$ref": "./examples/ServiceEndpointPolicyUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ServiceEndpointPolicies_Delete",
+        "tags": [
+          "ServiceEndpointPolicies"
+        ],
+        "parameters": [
+          {
+            "name": "serviceEndpointPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete service endpoint policy": {
+            "$ref": "./examples/ServiceEndpointPolicyDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions": {
+      "get": {
+        "operationId": "ServiceEndpointPolicyDefinitions_ListByResourceGroup",
+        "tags": [
+          "ServiceEndpointPolicyDefinitions"
+        ],
+        "parameters": [
+          {
+            "name": "serviceEndpointPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicyDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List service endpoint definitions in service end point policy": {
+            "$ref": "./examples/ServiceEndpointPolicyDefinitionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}": {
+      "get": {
+        "operationId": "ServiceEndpointPolicyDefinitions_Get",
+        "tags": [
+          "ServiceEndpointPolicyDefinitions"
+        ],
+        "parameters": [
+          {
+            "name": "serviceEndpointPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceEndpointPolicyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get service endpoint definition in service endpoint policy": {
+            "$ref": "./examples/ServiceEndpointPolicyDefinitionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ServiceEndpointPolicyDefinitions_CreateOrUpdate",
+        "tags": [
+          "ServiceEndpointPolicyDefinitions"
+        ],
+        "parameters": [
+          {
+            "name": "serviceEndpointPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceEndpointPolicyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ServiceEndpointPolicyDefinitions",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create service endpoint policy definition": {
+            "$ref": "./examples/ServiceEndpointPolicyDefinitionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ServiceEndpointPolicyDefinition"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ServiceEndpointPolicyDefinitions_Delete",
+        "tags": [
+          "ServiceEndpointPolicyDefinitions"
+        ],
+        "parameters": [
+          {
+            "name": "serviceEndpointPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceEndpointPolicyDefinitionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete service endpoint policy definitions from service endpoint policy": {
+            "$ref": "./examples/ServiceEndpointPolicyDefinitionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AdvertisedPublicPrefixProperties": {
+      "type": "object",
+      "properties": {
+        "prefix": {
+          "type": "string"
+        },
+        "validationId": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        },
+        "validationState": {
+          "$ref": "./common.json#/definitions/AdvertisedPublicPrefixPropertiesValidationState",
+          "readOnly": true
+        }
+      }
+    },
+    "AuthorizationListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AuthorizationPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "authorizationKey": {
+          "type": "string"
+        },
+        "authorizationUseStatus": {
+          "$ref": "./common.json#/definitions/AuthorizationUseStatus"
+        },
+        "connectionResourceUri": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "BGPCommunity": {
+      "type": "object",
+      "properties": {
+        "serviceSupportedRegion": {
+          "type": "string"
+        },
+        "communityName": {
+          "type": "string"
+        },
+        "communityValue": {
+          "type": "string"
+        },
+        "communityPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isAuthorizedToUse": {
+          "type": "boolean"
+        },
+        "serviceGroup": {
+          "type": "string"
+        }
+      }
+    },
+    "BgpServiceCommunity": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BgpServiceCommunityPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "BgpServiceCommunityListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/BgpServiceCommunity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BgpServiceCommunityPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "serviceName": {
+          "type": "string"
+        },
+        "bgpCommunities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BGPCommunity"
+          }
+        }
+      }
+    },
+    "ExpressRouteCircuit": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCircuitPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ExpressRouteCircuitSku"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ExpressRouteCircuitArpTable": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "macAddress": {
+          "type": "string"
+        }
+      }
+    },
+    "ExpressRouteCircuitAuthorization": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AuthorizationPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "ExpressRouteCircuitConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCircuitConnectionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "ExpressRouteCircuitConnectionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteCircuitConnectionPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "expressRouteCircuitPeering": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "peerExpressRouteCircuitPeering": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "addressPrefix": {
+          "type": "string"
+        },
+        "authorizationKey": {
+          "type": "string"
+        },
+        "ipv6CircuitConnectionConfig": {
+          "$ref": "#/definitions/Ipv6CircuitConnectionConfig"
+        },
+        "circuitConnectionStatus": {
+          "$ref": "./common.json#/definitions/CircuitConnectionStatus",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ExpressRouteCircuitListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuit"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteCircuitPeering": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "ExpressRouteCircuitPeeringConfig": {
+      "type": "object",
+      "properties": {
+        "advertisedPublicPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "advertisedCommunities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "advertisedPublicPrefixesState": {
+          "$ref": "./common.json#/definitions/ExpressRouteCircuitPeeringAdvertisedPublicPrefixState",
+          "readOnly": true
+        },
+        "legacyMode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "customerASN": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "routingRegistryName": {
+          "type": "string"
+        },
+        "advertisedPublicPrefixInfo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdvertisedPublicPrefixProperties"
+          }
+        }
+      }
+    },
+    "ExpressRouteCircuitPeeringListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitPeering"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteCircuitPeeringPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "peeringType": {
+          "$ref": "./common.json#/definitions/ExpressRoutePeeringType"
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/ExpressRoutePeeringState"
+        },
+        "azureASN": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "peerASN": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "primaryPeerAddressPrefix": {
+          "type": "string"
+        },
+        "secondaryPeerAddressPrefix": {
+          "type": "string"
+        },
+        "primaryAzurePort": {
+          "type": "string"
+        },
+        "secondaryAzurePort": {
+          "type": "string"
+        },
+        "sharedKey": {
+          "type": "string"
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "microsoftPeeringConfig": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig"
+        },
+        "stats": {
+          "$ref": "#/definitions/ExpressRouteCircuitStats"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "gatewayManagerEtag": {
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "readOnly": true
+        },
+        "routeFilter": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "ipv6PeeringConfig": {
+          "$ref": "#/definitions/Ipv6ExpressRouteCircuitPeeringConfig"
+        },
+        "expressRouteConnection": {
+          "$ref": "./virtualWan.json#/definitions/ExpressRouteConnectionId"
+        },
+        "connections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitConnection"
+          }
+        },
+        "peeredConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeerExpressRouteCircuitConnection"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ExpressRouteCircuitPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "allowClassicOperations": {
+          "type": "boolean"
+        },
+        "circuitProvisioningState": {
+          "type": "string"
+        },
+        "serviceProviderProvisioningState": {
+          "$ref": "./common.json#/definitions/ServiceProviderProvisioningState"
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitAuthorization"
+          }
+        },
+        "peerings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitPeering"
+          }
+        },
+        "serviceKey": {
+          "type": "string"
+        },
+        "serviceProviderNotes": {
+          "type": "string"
+        },
+        "serviceProviderProperties": {
+          "$ref": "#/definitions/ExpressRouteCircuitServiceProviderProperties"
+        },
+        "expressRoutePort": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "bandwidthInGbps": {
+          "type": "number",
+          "format": "float"
+        },
+        "stag": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "gatewayManagerEtag": {
+          "type": "string"
+        },
+        "globalReachEnabled": {
+          "type": "boolean"
+        },
+        "authorizationKey": {
+          "type": "string"
+        },
+        "authorizationStatus": {
+          "type": "string",
+          "readOnly": true
+        },
+        "enableDirectPortRateLimit": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ExpressRouteCircuitReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "ExpressRouteCircuitRoutesTable": {
+      "type": "object",
+      "properties": {
+        "network": {
+          "type": "string"
+        },
+        "nextHop": {
+          "type": "string"
+        },
+        "locPrf": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "ExpressRouteCircuitRoutesTableSummary": {
+      "type": "object",
+      "properties": {
+        "neighbor": {
+          "type": "string"
+        },
+        "v": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "as": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "upDown": {
+          "type": "string"
+        },
+        "statePfxRcd": {
+          "type": "string"
+        }
+      }
+    },
+    "ExpressRouteCircuitServiceProviderProperties": {
+      "type": "object",
+      "properties": {
+        "serviceProviderName": {
+          "type": "string"
+        },
+        "peeringLocation": {
+          "type": "string"
+        },
+        "bandwidthInMbps": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ExpressRouteCircuitSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "tier": {
+          "$ref": "./common.json#/definitions/ExpressRouteCircuitSkuTier"
+        },
+        "family": {
+          "$ref": "./common.json#/definitions/ExpressRouteCircuitSkuFamily"
+        }
+      }
+    },
+    "ExpressRouteCircuitStats": {
+      "type": "object",
+      "properties": {
+        "primarybytesIn": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "primarybytesOut": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "secondarybytesIn": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "secondarybytesOut": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ExpressRouteCircuitsArpTableListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitArpTable"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteCircuitsRoutesTableListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitRoutesTable"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteCircuitsRoutesTableSummaryListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitRoutesTableSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteCrossConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCrossConnectionProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ExpressRouteCrossConnectionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCrossConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteCrossConnectionPeering": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteCrossConnectionPeeringProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ExpressRouteCrossConnectionPeeringList": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteCrossConnectionPeeringProperties": {
+      "type": "object",
+      "properties": {
+        "peeringType": {
+          "$ref": "./common.json#/definitions/ExpressRoutePeeringType"
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/ExpressRoutePeeringState"
+        },
+        "azureASN": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "peerASN": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1,
+          "maximum": 4294967295
+        },
+        "primaryPeerAddressPrefix": {
+          "type": "string"
+        },
+        "secondaryPeerAddressPrefix": {
+          "type": "string"
+        },
+        "primaryAzurePort": {
+          "type": "string",
+          "readOnly": true
+        },
+        "secondaryAzurePort": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sharedKey": {
+          "type": "string"
+        },
+        "vlanId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "microsoftPeeringConfig": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "gatewayManagerEtag": {
+          "type": "string"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "readOnly": true
+        },
+        "ipv6PeeringConfig": {
+          "$ref": "#/definitions/Ipv6ExpressRouteCircuitPeeringConfig"
+        }
+      }
+    },
+    "ExpressRouteCrossConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "primaryAzurePort": {
+          "type": "string",
+          "readOnly": true
+        },
+        "secondaryAzurePort": {
+          "type": "string",
+          "readOnly": true
+        },
+        "sTag": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "peeringLocation": {
+          "type": "string",
+          "readOnly": true
+        },
+        "bandwidthInMbps": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "expressRouteCircuit": {
+          "$ref": "#/definitions/ExpressRouteCircuitReference"
+        },
+        "serviceProviderProvisioningState": {
+          "$ref": "./common.json#/definitions/ServiceProviderProvisioningState"
+        },
+        "serviceProviderNotes": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "peerings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCrossConnectionPeering"
+          }
+        }
+      }
+    },
+    "ExpressRouteCrossConnectionRoutesTableSummary": {
+      "type": "object",
+      "properties": {
+        "neighbor": {
+          "type": "string"
+        },
+        "asn": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "upDown": {
+          "type": "string"
+        },
+        "stateOrPrefixesReceived": {
+          "type": "string"
+        }
+      }
+    },
+    "ExpressRouteCrossConnectionsRoutesTableSummaryListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCrossConnectionRoutesTableSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteLink": {
+      "type": "object",
+      "title": "ExpressRouteLink",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteLinkPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "ExpressRouteLinkListResult": {
+      "type": "object",
+      "title": "ExpressRouteLink List Result",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLink"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteLinkMacSecConfig": {
+      "type": "object",
+      "title": "Definition of ExpressRouteLink Mac Security configuration.",
+      "properties": {
+        "cknSecretIdentifier": {
+          "type": "string"
+        },
+        "cakSecretIdentifier": {
+          "type": "string"
+        },
+        "cipher": {
+          "$ref": "./common.json#/definitions/ExpressRouteLinkMacSecCipher"
+        },
+        "sciState": {
+          "$ref": "./common.json#/definitions/ExpressRouteLinkMacSecSciState"
+        }
+      }
+    },
+    "ExpressRouteLinkPropertiesFormat": {
+      "type": "object",
+      "title": "ExpressRouteLink Resource Properties",
+      "properties": {
+        "routerName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "interfaceName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "patchPanelId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "rackId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "coloLocation": {
+          "type": "string",
+          "readOnly": true
+        },
+        "connectorType": {
+          "$ref": "./common.json#/definitions/ExpressRouteLinkConnectorType",
+          "readOnly": true
+        },
+        "adminState": {
+          "$ref": "./common.json#/definitions/ExpressRouteLinkAdminState"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "macSecConfig": {
+          "$ref": "#/definitions/ExpressRouteLinkMacSecConfig"
+        }
+      }
+    },
+    "ExpressRoutePort": {
+      "type": "object",
+      "title": "ExpressRoute Port",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRoutePortPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "./common.json#/definitions/ManagedServiceIdentity"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ExpressRoutePortAuthorization": {
+      "type": "object",
+      "title": "ExpressRoute Port Authorization",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRoutePortAuthorizationPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "ExpressRoutePortAuthorizationListResult": {
+      "type": "object",
+      "title": "ExpressRoute Port Authorization List Result",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRoutePortAuthorization"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRoutePortAuthorizationPropertiesFormat": {
+      "type": "object",
+      "title": "ExpressRoute Port Authorization Properties",
+      "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "readOnly": true
+        },
+        "authorizationUseStatus": {
+          "$ref": "./common.json#/definitions/ExpressRoutePortAuthorizationUseStatus",
+          "readOnly": true
+        },
+        "circuitResourceUri": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ExpressRoutePortListResult": {
+      "type": "object",
+      "title": "ExpressRoute Port List Result",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRoutePort"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRoutePortPropertiesFormat": {
+      "type": "object",
+      "title": "ExpressRoutePort Properties",
+      "properties": {
+        "peeringLocation": {
+          "type": "string"
+        },
+        "bandwidthInGbps": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "provisionedBandwidthInGbps": {
+          "type": "number",
+          "format": "float",
+          "readOnly": true
+        },
+        "mtu": {
+          "type": "string",
+          "readOnly": true
+        },
+        "encapsulation": {
+          "$ref": "./common.json#/definitions/ExpressRoutePortsEncapsulation"
+        },
+        "etherType": {
+          "type": "string",
+          "readOnly": true
+        },
+        "allocationDate": {
+          "type": "string",
+          "readOnly": true
+        },
+        "links": {
+          "type": "array",
+          "title": "ExpressRouteLink Sub-Resources",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLink"
+          }
+        },
+        "circuits": {
+          "type": "array",
+          "items": {
+            "$ref": "./common.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "billingType": {
+          "$ref": "./common.json#/definitions/ExpressRoutePortsBillingType"
+        }
+      }
+    },
+    "ExpressRoutePortsLocation": {
+      "type": "object",
+      "title": "ExpressRoutePorts Peering Location",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRoutePortsLocationPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ExpressRoutePortsLocationBandwidths": {
+      "type": "object",
+      "title": "ExpressRoutePorts Location Bandwidths",
+      "properties": {
+        "offerName": {
+          "type": "string",
+          "readOnly": true
+        },
+        "valueInGbps": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "ExpressRoutePortsLocationListResult": {
+      "type": "object",
+      "title": "ExpressRoutePorts Location List Result",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRoutePortsLocation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRoutePortsLocationPropertiesFormat": {
+      "type": "object",
+      "title": "ExpressRoutePorts Location Properties",
+      "properties": {
+        "address": {
+          "type": "string",
+          "readOnly": true
+        },
+        "contact": {
+          "type": "string",
+          "readOnly": true
+        },
+        "availableBandwidths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRoutePortsLocationBandwidths"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ExpressRouteProviderPort": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteProviderPortProperties",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithReadOnlyNameAndID"
+        }
+      ]
+    },
+    "ExpressRouteProviderPortListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteProviderPort"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteProviderPortProperties": {
+      "type": "object",
+      "properties": {
+        "portPairDescriptor": {
+          "type": "string",
+          "readOnly": true
+        },
+        "primaryAzurePort": {
+          "type": "string",
+          "readOnly": true
+        },
+        "secondaryAzurePort": {
+          "type": "string",
+          "readOnly": true
+        },
+        "peeringLocation": {
+          "type": "string"
+        },
+        "overprovisionFactor": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "portBandwidthInMbps": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "usedBandwidthInMbps": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "remainingBandwidthInMbps": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ExpressRouteServiceProvider": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteServiceProviderPropertiesFormat",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ExpressRouteServiceProviderBandwidthsOffered": {
+      "type": "object",
+      "properties": {
+        "offerName": {
+          "type": "string"
+        },
+        "valueInMbps": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ExpressRouteServiceProviderListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteServiceProvider"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteServiceProviderPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "peeringLocations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "bandwidthsOffered": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteServiceProviderBandwidthsOffered"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "GenerateExpressRoutePortsLOARequest": {
+      "type": "object",
+      "properties": {
+        "customerName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "customerName"
+      ]
+    },
+    "GenerateExpressRoutePortsLOAResult": {
+      "type": "object",
+      "properties": {
+        "encodedContent": {
+          "type": "string"
+        }
+      }
+    },
+    "Ipv6CircuitConnectionConfig": {
+      "type": "object",
+      "properties": {
+        "addressPrefix": {
+          "type": "string"
+        },
+        "circuitConnectionStatus": {
+          "$ref": "./common.json#/definitions/CircuitConnectionStatus",
+          "readOnly": true
+        }
+      }
+    },
+    "Ipv6ExpressRouteCircuitPeeringConfig": {
+      "type": "object",
+      "properties": {
+        "primaryPeerAddressPrefix": {
+          "type": "string"
+        },
+        "secondaryPeerAddressPrefix": {
+          "type": "string"
+        },
+        "microsoftPeeringConfig": {
+          "$ref": "#/definitions/ExpressRouteCircuitPeeringConfig"
+        },
+        "routeFilter": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/ExpressRouteCircuitPeeringState"
+        }
+      }
+    },
+    "PatchRouteFilter": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RouteFilterPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "PatchRouteFilterRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RouteFilterRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "PeerExpressRouteCircuitConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PeerExpressRouteCircuitConnectionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "PeerExpressRouteCircuitConnectionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/PeerExpressRouteCircuitConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PeerExpressRouteCircuitConnectionPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "expressRouteCircuitPeering": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "peerExpressRouteCircuitPeering": {
+          "$ref": "./common.json#/definitions/SubResource"
+        },
+        "addressPrefix": {
+          "type": "string"
+        },
+        "circuitConnectionStatus": {
+          "$ref": "./common.json#/definitions/CircuitConnectionStatus",
+          "readOnly": true
+        },
+        "connectionName": {
+          "type": "string"
+        },
+        "authResourceGuid": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "RouteFilter": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RouteFilterPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ResourceWithRequiredLocation"
+        }
+      ]
+    },
+    "RouteFilterListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/RouteFilter"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RouteFilterPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RouteFilterRule"
+          }
+        },
+        "peerings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitPeering"
+          },
+          "readOnly": true
+        },
+        "ipv6Peerings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteCircuitPeering"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "RouteFilterRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RouteFilterRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "RouteFilterRuleListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/RouteFilterRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RouteFilterRulePropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "access": {
+          "$ref": "./common.json#/definitions/Access"
+        },
+        "routeFilterRuleType": {
+          "$ref": "./common.json#/definitions/RouteFilterRuleType"
+        },
+        "communities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "access",
+        "communities",
+        "routeFilterRuleType"
+      ]
+    },
+    "ServiceEndpointPolicy": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceEndpointPolicyPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ServiceEndpointPolicyDefinition": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceEndpointPolicyDefinitionPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "ServiceEndpointPolicyDefinitionListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceEndpointPolicyDefinitionPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "service": {
+          "type": "string"
+        },
+        "serviceResources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceEndpointPolicyListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/ServiceEndpointPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServiceEndpointPolicyPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "serviceEndpointPolicyDefinitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceEndpointPolicyDefinition"
+          }
+        },
+        "subnets": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualNetwork.json#/definitions/Subnet"
+          },
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "serviceAlias": {
+          "type": "string"
+        },
+        "contextualServiceEndpointPolicies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
