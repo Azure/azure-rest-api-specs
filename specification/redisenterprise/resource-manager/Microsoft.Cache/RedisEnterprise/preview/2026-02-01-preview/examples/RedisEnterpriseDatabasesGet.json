@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "clusterName": "cache1",
+    "databaseName": "default",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1/default",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+        "properties": {
+          "accessKeysAuthentication": "Enabled",
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "OSSCluster",
+          "deferUpgrade": "NotDeferred",
+          "evictionPolicy": "AllKeysLRU",
+          "keySpaceNotification": "",
+          "modules": [
+            {
+              "name": "RediSearch",
+              "args": "",
+              "version": "1.0.0"
+            }
+          ],
+          "persistence": {
+            "rdbEnabled": true,
+            "rdbFrequency": "12h"
+          },
+          "port": 10000,
+          "provisioningState": "Succeeded",
+          "redisVersion": "6.0",
+          "resourceState": "Running"
+        }
+      }
+    }
+  },
+  "operationId": "Databases_Get",
+  "title": "RedisEnterpriseDatabasesGet"
+}

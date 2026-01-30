@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "clusterName": "cache1",
+    "databaseName": "default",
+    "parameters": {
+      "properties": {
+        "clientProtocol": "Encrypted",
+        "clusteringPolicy": "NoCluster",
+        "evictionPolicy": "NoEviction",
+        "keySpaceNotification": "",
+        "port": 10000
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1/default",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+        "properties": {
+          "accessKeysAuthentication": "Enabled",
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "NoCluster",
+          "deferUpgrade": "NotDeferred",
+          "evictionPolicy": "NoEviction",
+          "keySpaceNotification": "",
+          "port": 10000,
+          "provisioningState": "Updating",
+          "redisVersion": "7.2",
+          "resourceState": "Updating"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "cache1/default",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+        "properties": {
+          "accessKeysAuthentication": "Enabled",
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "NoCluster",
+          "deferUpgrade": "NotDeferred",
+          "evictionPolicy": "NoEviction",
+          "keySpaceNotification": "",
+          "port": 10000,
+          "provisioningState": "Creating",
+          "redisVersion": "7.2",
+          "resourceState": "Creating"
+        }
+      }
+    }
+  },
+  "operationId": "Databases_Create",
+  "title": "RedisEnterpriseDatabasesCreate No Cluster Cache"
+}

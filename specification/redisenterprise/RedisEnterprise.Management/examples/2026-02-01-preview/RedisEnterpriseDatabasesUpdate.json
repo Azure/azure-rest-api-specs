@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "clusterName": "cache1",
+    "databaseName": "default",
+    "parameters": {
+      "properties": {
+        "accessKeysAuthentication": "Enabled",
+        "clientProtocol": "Encrypted",
+        "evictionPolicy": "AllKeysLRU",
+        "keySpaceNotification": "KEA",
+        "persistence": {
+          "rdbEnabled": true,
+          "rdbFrequency": "12h"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "cache1/default",
+        "type": "Microsoft.Cache/redisEnterprise/databases",
+        "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default",
+        "properties": {
+          "accessKeysAuthentication": "Enabled",
+          "clientProtocol": "Encrypted",
+          "clusteringPolicy": "OSSCluster",
+          "deferUpgrade": "NotDeferred",
+          "evictionPolicy": "AllKeysLRU",
+          "keySpaceNotification": "KEA",
+          "modules": [
+            {
+              "name": "RediSearch",
+              "args": "",
+              "version": "1.0.0"
+            }
+          ],
+          "persistence": {
+            "rdbEnabled": true,
+            "rdbFrequency": "12h"
+          },
+          "port": 10000,
+          "provisioningState": "Updating",
+          "redisVersion": "6.0",
+          "resourceState": "Updating"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationStatus...",
+        "Location": "https://management.azure.com/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/providers/Microsoft.Cache/...pathToOperationResult..."
+      }
+    }
+  },
+  "operationId": "Databases_Update",
+  "title": "RedisEnterpriseDatabasesUpdate"
+}
