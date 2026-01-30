@@ -285,29 +285,29 @@ model ChaosExperimentPropertiesOfDrill {
 }
 
 /**
-* Model that represents the Chaos Resource properties
-*/
+ * Model that represents the Chaos Resource properties
+ */
 @doc("Chaos Resource properties.")
 @added(Versions.v2026_03_01_preview)
-model ChaosResourcePropertiesOfDrill{
+model ChaosResourcePropertiesOfDrill {
   @doc("Identity to use for Chaos Resource operations.")
   @added(Versions.v2026_03_01_preview)
   identity: AssociatedIdentity;
- 
+
   @doc("Identity to be used by the Chaos Resource for invoking faults on resources.")
   @added(Versions.v2026_03_01_preview)
   chaosResourceIdentityForFaults: AssociatedIdentity;
- 
+
   @doc("Chaos Resource created for this Drill")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   chaosResourceId?: armResourceIdentifier<[]>;
- 
+
   @doc("Duration of faults.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   @minValue(0)
-  faultDurationInMin ?: int32;
+  faultDurationInMin?: int32;
 }
 
 @doc("Drill asset properties.")
@@ -636,7 +636,6 @@ model ResourceQualificationDetails {
   @visibility(Lifecycle.Read)
   drillsNotQualifiedReasons?: DrillResourceNonQualificationReasons[];
 }
-
 
 @doc("Details of qualified resources for validateForExecute operation.")
 @added(Versions.v2026_03_01_preview)

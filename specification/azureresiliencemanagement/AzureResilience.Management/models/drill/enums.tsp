@@ -389,7 +389,7 @@ union AutoFailover {
 @doc("A state type that indicates qualification of a resource for an operation.")
 @added(Versions.v2026_03_01_preview)
 union DrillResourceNonQualificationReasons {
-  string, 
+  string,
 
   @doc("Resource is not included in the recovery plan.")
   @added(Versions.v2026_03_01_preview)
@@ -411,7 +411,7 @@ union DrillResourceNonQualificationReasons {
 @doc("A state type that indicates qualification of a resource for an operation.")
 @added(Versions.v2026_03_01_preview)
 union TrackedResourceCategories {
-  string, 
+  string,
 
   @doc("Indicates that alteast one Azure Site Recovery VMs are present.")
   @added(Versions.v2026_03_01_preview)
