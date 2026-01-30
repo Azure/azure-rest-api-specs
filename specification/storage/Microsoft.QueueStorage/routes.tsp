@@ -58,7 +58,7 @@ namespace Storage.Queues {
       ...TimeoutParameter;
 
       /** The storage service properties to set. */
-      @body
+      @bodyRoot
       queueServiceProperties: QueueServiceProperties;
     },
     AcceptedResponse
@@ -85,8 +85,8 @@ namespace Storage.Queues {
       ...DateResponseHeader;
 
       /** Storage service statistics */
-      @body
-      queueServiceStats: QueueServiceStats;
+      @bodyRoot
+      body: QueueServiceStats;
     }
   >;
 
@@ -100,15 +100,15 @@ namespace Storage.Queues {
       ...TimeoutParameter;
 
       /** Key information */
-      @body
+      @bodyRoot
       keyInfo: KeyInfo;
     },
     {
       ...DateResponseHeader;
 
       /** A user delegation key */
-      @body
-      userDelegationKey: UserDelegationKey;
+      @bodyRoot
+      body: UserDelegationKey;
     }
   >;
 
@@ -228,7 +228,7 @@ namespace Storage.Queues {
         ...TimeoutParameter;
       },
       {
-        @body body: ListOfSignedIdentifier;
+        @bodyRoot body: ListOfSignedIdentifier;
         ...DateResponseHeader;
       }
     >;
@@ -246,7 +246,7 @@ namespace Storage.Queues {
 
         /** The access control list for the queue. */
         #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
-        @body
+        @bodyRoot
         queueAcl: ListOfSignedIdentifier;
       },
       {
@@ -336,7 +336,7 @@ namespace Storage.Queues {
         ...TimeoutParameter;
 
         /** A Message object which can be stored in a Queue */
-        @body
+        @bodyRoot
         queueMessage: QueueMessage;
       },
       {
@@ -373,7 +373,7 @@ namespace Storage.Queues {
       },
       {
         ...DateResponseHeader;
-        @bodyRoot queueMessagesList: ListOfPeekedMessage;
+        @bodyRoot body: ListOfPeekedMessage;
       }
     >;
 
