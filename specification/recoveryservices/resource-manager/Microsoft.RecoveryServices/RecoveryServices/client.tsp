@@ -200,18 +200,11 @@ namespace Microsoft.RecoveryServices;
   "java"
 );
 
-@@alternateType(PatchTrackedResource,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-
-@@alternateType(PatchVault, PatchVaultWithEtag, "csharp");
-
 /**
  * Patch Resource information, as returned by the resource provider.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PatchVaultWithEtag extends PatchTrackedResource {
+model PatchVaultWithEtag extends Azure.ResourceManager.Foundations.TrackedResource {
   /**
    * Properties of the vault.
    */
@@ -232,6 +225,13 @@ model PatchVaultWithEtag extends PatchTrackedResource {
    */
   etag?: eTag;
 }
+
+// @@alternateType(PatchTrackedResource,
+//   Azure.ResourceManager.Foundations.TrackedResource,
+//   "csharp"
+// );
+
+@@alternateType(PatchVault, PatchVaultWithEtag, "csharp");
 
 /**
  * Information to be stored in Vault properties as an element of privateEndpointConnections List.
