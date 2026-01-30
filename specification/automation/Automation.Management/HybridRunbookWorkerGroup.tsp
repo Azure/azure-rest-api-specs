@@ -31,7 +31,6 @@ interface HybridRunbookWorkerGroups {
    * Retrieve a hybrid runbook worker group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HybridRunbookWorkerGroup_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   get is ArmResourceRead<HybridRunbookWorkerGroup>;
 
@@ -39,7 +38,6 @@ interface HybridRunbookWorkerGroups {
    * Create a hybrid runbook worker group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HybridRunbookWorkerGroup_Create")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     HybridRunbookWorkerGroup,
@@ -50,7 +48,6 @@ interface HybridRunbookWorkerGroups {
    * Update a hybrid runbook worker group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HybridRunbookWorkerGroup_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -61,9 +58,8 @@ interface HybridRunbookWorkerGroups {
   /**
    * Delete a hybrid runbook worker group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HybridRunbookWorkerGroup_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   delete is ArmResourceDeleteSync<
     HybridRunbookWorkerGroup,
@@ -74,7 +70,6 @@ interface HybridRunbookWorkerGroups {
    * Retrieve a list of hybrid runbook worker groups.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HybridRunbookWorkerGroup_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/hybridrunbookworkergroupoperations")
   listByAutomationAccount is ArmResourceListByParent<
     HybridRunbookWorkerGroup,

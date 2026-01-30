@@ -50,7 +50,6 @@ interface Runbooks {
    * Retrieve the runbook identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Runbook_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   get is ArmResourceRead<Runbook>;
 
@@ -58,7 +57,6 @@ interface Runbooks {
    * Create the runbook identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Runbook_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Runbook,
@@ -69,7 +67,6 @@ interface Runbooks {
    * Update the runbook identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Runbook_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Runbook, PatchModel = RunbookUpdateParameters>;
@@ -78,7 +75,6 @@ interface Runbooks {
    * Delete the runbook by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Runbook_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   delete is ArmResourceDeleteSync<Runbook>;
 
@@ -86,7 +82,6 @@ interface Runbooks {
    * Retrieve a list of runbooks.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Runbook_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   listByAutomationAccount is ArmResourceListByParent<Runbook>;
 
@@ -94,7 +89,6 @@ interface Runbooks {
    * Retrieve the content of runbook draft identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RunbookDraft_GetContent")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   @get
   @action("draft/content")
@@ -105,7 +99,6 @@ interface Runbooks {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RunbookDraft_ReplaceContent")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   @put
   @action("draft/content")
@@ -121,7 +114,6 @@ interface Runbooks {
    * Retrieve the runbook draft identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RunbookDraft_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   @get
   @action("draft")
@@ -135,7 +127,6 @@ interface Runbooks {
    * Undo draft edit to last known published state identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RunbookDraft_UndoEdit")
   @action("draft/undoEdit")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   undoEdit is ArmResourceActionSync<
@@ -148,7 +139,6 @@ interface Runbooks {
    * Publish runbook draft.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Runbook_Publish")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookdraftoperations")
   publish is ArmResourceActionAsyncBase<
     Runbook,
@@ -161,7 +151,6 @@ interface Runbooks {
    * Retrieve the content of runbook identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Runbook_GetContent")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   @get
   @action("content")
@@ -171,7 +160,6 @@ interface Runbooks {
    * Retrieve a test job stream of the test job identified by runbook name and stream id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TestJobStreams_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Automation/automationAccounts/{automationAccountName}/runbooks/{runbookName}/draft/testJob/streams/{jobStreamId}")
@@ -192,7 +180,6 @@ interface Runbooks {
    * Retrieve a list of test job streams identified by runbook name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TestJobStreams_ListByTestJob")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
   @list
   @get
@@ -215,7 +202,6 @@ interface Runbooks {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TestJob_Create")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/testjoboperations")
   @put
   @action("draft/testJob")
@@ -229,7 +215,6 @@ interface Runbooks {
    * Retrieve the test job for the specified runbook.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TestJob_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/testjoboperations")
   @get
   @action("draft/testJob")
@@ -239,7 +224,6 @@ interface Runbooks {
    * Resume the test job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TestJob_Resume")
   @action("draft/testJob/resume")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/testjoboperations")
   resume is ArmResourceActionSync<Runbook, void, OkResponse>;
@@ -248,7 +232,6 @@ interface Runbooks {
    * Stop the test job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TestJob_Stop")
   @action("draft/testJob/stop")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/testjoboperations")
   stop is ArmResourceActionSync<Runbook, void, OkResponse>;
@@ -257,7 +240,6 @@ interface Runbooks {
    * Suspend the test job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TestJob_Suspend")
   @action("draft/testJob/suspend")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/testjoboperations")
   suspend is ArmResourceActionSync<Runbook, void, OkResponse>;

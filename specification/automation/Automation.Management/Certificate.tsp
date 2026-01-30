@@ -31,7 +31,6 @@ interface Certificates {
    * Retrieve the certificate identified by certificate name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Certificate_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   get is ArmResourceRead<Certificate>;
 
@@ -39,7 +38,6 @@ interface Certificates {
    * Create a certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Certificate_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Certificate,
@@ -50,7 +48,6 @@ interface Certificates {
    * Update a certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Certificate_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -61,9 +58,8 @@ interface Certificates {
   /**
    * Delete the certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Certificate_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   delete is ArmResourceDeleteSync<Certificate, Response = ArmDeletedResponse>;
 
@@ -71,7 +67,6 @@ interface Certificates {
    * Retrieve a list of certificates.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Certificate_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/certificateoperations")
   listByAutomationAccount is ArmResourceListByParent<Certificate>;
 }

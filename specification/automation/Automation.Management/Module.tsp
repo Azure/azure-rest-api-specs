@@ -58,7 +58,6 @@ interface Modules {
    * Retrieve the module identified by module name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Module_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   get is ModuleOps.Read<Module>;
 
@@ -66,7 +65,6 @@ interface Modules {
    * Create or Update the module identified by module name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Module_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   createOrUpdate is ModuleOps.CreateOrUpdateSync<
     Module,
@@ -77,7 +75,6 @@ interface Modules {
    * Update the module identified by module name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Module_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   @patch(#{ implicitOptionality: false })
   update is ModuleOps.CustomPatchSync<
@@ -90,7 +87,6 @@ interface Modules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Module_Delete")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   delete is ModuleOps.DeleteSync<Module, Response = ArmDeletedResponse>;
 
@@ -98,7 +94,6 @@ interface Modules {
    * Retrieve a list of modules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Module_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/moduleoperations")
   listByAutomationAccount is ModuleOps.List<Module>;
 
@@ -106,7 +101,6 @@ interface Modules {
    * Retrieve the activity in the module identified by module name and activity name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Activity_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/activityoperations")
   @get
   activityGet is ModuleOps.Read<
@@ -126,7 +120,6 @@ interface Modules {
    * Retrieve a list of activities in the module identified by module name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Activity_ListByModule")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/activityoperations")
   @list
   @get
@@ -164,7 +157,6 @@ interface Modules {
    * Retrieve a list of fields of a given type identified by module name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Fields_ListByType")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/typefieldoperations")
   @list
   @get

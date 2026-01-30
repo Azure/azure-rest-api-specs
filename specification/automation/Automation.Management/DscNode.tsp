@@ -30,7 +30,6 @@ interface DscNodes {
    * Retrieve the dsc node identified by node id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DscNode_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeoperations")
   get is ArmResourceRead<DscNode>;
 
@@ -38,7 +37,6 @@ interface DscNodes {
    * Update the dsc node.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DscNode_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<DscNode, PatchModel = DscNodeUpdateParameters>;
@@ -46,9 +44,8 @@ interface DscNodes {
   /**
    * Delete the dsc node identified by node id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DscNode_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeoperations")
   delete is ArmResourceDeleteSync<DscNode, Response = ArmDeletedResponse>;
 
@@ -56,7 +53,6 @@ interface DscNodes {
    * Retrieve a list of dsc nodes.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DscNode_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeoperations")
   listByAutomationAccount is ArmResourceListByParent<
     DscNode,
@@ -92,7 +88,6 @@ interface DscNodes {
    * Retrieve the Dsc node report list by node id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NodeReports_ListByNode")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @list
   @get
@@ -114,7 +109,6 @@ interface DscNodes {
    * Retrieve the Dsc node report data by node id and report id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NodeReports_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @get
   nodeReportsGet is ArmResourceRead<
@@ -135,7 +129,6 @@ interface DscNodes {
    * Retrieve the Dsc node reports by node id and report id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NodeReports_GetContent")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodereportoperations")
   @get
   @action("content")

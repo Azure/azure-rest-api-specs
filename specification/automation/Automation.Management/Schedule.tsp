@@ -30,7 +30,6 @@ interface Schedules {
    * Retrieve the schedule identified by schedule name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Schedule_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/scheduleoperations")
   get is ArmResourceRead<Schedule>;
 
@@ -39,7 +38,6 @@ interface Schedules {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Schedule_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/scheduleoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Schedule,
@@ -51,7 +49,6 @@ interface Schedules {
    * Update the schedule identified by schedule name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Schedule_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/scheduleoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Schedule, PatchModel = ScheduleUpdateParameters>;
@@ -59,9 +56,8 @@ interface Schedules {
   /**
    * Delete the schedule identified by schedule name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Schedule_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/scheduleoperations")
   delete is ArmResourceDeleteSync<Schedule, Response = ArmDeletedResponse>;
 
@@ -69,7 +65,6 @@ interface Schedules {
    * Retrieve a list of schedules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Schedule_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/scheduleoperations")
   listByAutomationAccount is ArmResourceListByParent<Schedule>;
 }

@@ -30,7 +30,6 @@ interface Packages {
    * Retrieve the Package identified by Package name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Package_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   get is ArmResourceRead<Package>;
 
@@ -38,7 +37,6 @@ interface Packages {
    * Create or update the package identified by package name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Package_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Package,
@@ -49,7 +47,6 @@ interface Packages {
    * Update the Package identified by Package name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Package_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Package, PatchModel = PackageUpdateParameters>;
@@ -66,7 +63,6 @@ interface Packages {
    * Retrieve the a list of Packages
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Package_ListByRuntimeEnvironment")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/packageoperations")
   listByRuntimeEnvironment is ArmResourceListByParent<Package>;
 }

@@ -38,7 +38,6 @@ interface Watchers {
    * Retrieve the watcher identified by watcher name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Watcher_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   get is ArmResourceRead<Watcher>;
 
@@ -46,7 +45,6 @@ interface Watchers {
    * Create the watcher identified by watcher name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Watcher_CreateOrUpdate")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   createOrUpdate is ArmResourceCreateOrReplaceSync<Watcher>;
 
@@ -55,7 +53,6 @@ interface Watchers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Watcher_Update")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Watcher, PatchModel = WatcherUpdateParameters>;
@@ -63,9 +60,8 @@ interface Watchers {
   /**
    * Delete the watcher by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Watcher_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   delete is ArmResourceDeleteSync<Watcher, Response = ArmDeletedResponse>;
 
@@ -73,7 +69,6 @@ interface Watchers {
    * Retrieve a list of watchers.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Watcher_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   listByAutomationAccount is ArmResourceListByParent<
     Watcher,
@@ -90,7 +85,6 @@ interface Watchers {
    * Resume the watcher identified by watcher name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Watcher_Start")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   start is ArmResourceActionSync<Watcher, void, OkResponse>;
 
@@ -98,7 +92,6 @@ interface Watchers {
    * Resume the watcher identified by watcher name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Watcher_Stop")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/watcheroperations")
   stop is ArmResourceActionSync<Watcher, void, OkResponse>;
 }

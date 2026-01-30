@@ -31,16 +31,14 @@ interface JobSchedules {
    * Retrieve the job schedule identified by job schedule name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("JobSchedule_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   get is ArmResourceRead<JobSchedule>;
 
   /**
    * Create a job schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("JobSchedule_Create")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     JobSchedule,
@@ -51,9 +49,8 @@ interface JobSchedules {
   /**
    * Delete the job schedule identified by job schedule name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("JobSchedule_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   delete is ArmResourceDeleteSync<JobSchedule, Response = ArmDeletedResponse>;
 
@@ -61,7 +58,6 @@ interface JobSchedules {
    * Retrieve a list of job schedules.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("JobSchedule_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobscheduleoperations")
   listByAutomationAccount is ArmResourceListByParent<
     JobSchedule,

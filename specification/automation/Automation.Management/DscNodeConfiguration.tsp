@@ -31,7 +31,6 @@ interface DscNodeConfigurations {
    * Retrieve the Dsc node configurations by node configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DscNodeConfiguration_Get")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeconfigurations")
   get is ArmResourceRead<DscNodeConfiguration>;
 
@@ -39,9 +38,8 @@ interface DscNodeConfigurations {
    * Create the node configuration identified by node configuration name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DscNodeConfiguration_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeconfigurations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DscNodeConfiguration,
@@ -55,9 +53,8 @@ interface DscNodeConfigurations {
   /**
    * Delete the Dsc node configurations by node configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DscNodeConfiguration_Delete")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeconfigurations")
   delete is ArmResourceDeleteSync<
     DscNodeConfiguration,
@@ -68,7 +65,6 @@ interface DscNodeConfigurations {
    * Retrieve a list of dsc node configurations.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DscNodeConfiguration_ListByAutomationAccount")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscnodeconfigurations")
   listByAutomationAccount is ArmResourceListByParent<
     DscNodeConfiguration,
