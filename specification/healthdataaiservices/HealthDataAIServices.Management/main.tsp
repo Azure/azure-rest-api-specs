@@ -20,6 +20,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2024-09-20 version.")
   v2024_09_20: "2024-09-20",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @doc("The 2026-02-01-preview version.")
+  v2026_02_01_preview: "2026-02-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -40,6 +44,11 @@ model DeidService is TrackedResource<DeidServiceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Adding property for versioning"
+  @added(Versions.v2026_02_01_preview)
+  @doc("The SKU (Stock Keeping Unit) assigned to this resource.")
+  sku?: Azure.ResourceManager.CommonTypes.Sku;
 }
 
 /** Patch request body for DeidService */
@@ -51,6 +60,10 @@ model DeidUpdate {
 
   /** RP-specific properties */
   properties?: DeidPropertiesUpdate;
+
+  /** The SKU (Stock Keeping Unit) assigned to this resource. */
+  @added(Versions.v2026_02_01_preview)
+  sku?: Azure.ResourceManager.CommonTypes.Sku;
 }
 
 model DeidPropertiesUpdate
