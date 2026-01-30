@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "RG01",
+    "vmScaleSetName": "VMSS01",
+    "lifeCycleHookEventName": "445c0a08-cfc5-4ef6-bb89-fe77c5178628",
+    "api-version": "2025-11-01",
+    "vmssLchEventUpdateParameters": {
+      "properties": {
+        "waitUntil": "2025-05-08T11:17:55.6844555+00:00",
+        "targetResources": [
+          {
+            "resource": {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/virtualMachines/2"
+            },
+            "actionState": "Approved"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "445c0a08-cfc5-4ef6-bb89-fe77c5178628",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/lifecycleHookEvents/445c0a08-cfc5-4ef6-bb89-fe77c5178628",
+        "properties": {
+          "type": "UpgradeAutoOSRollingBatchStarting",
+          "waitUntil": "2025-05-08T11:17:55.6844555+00:00",
+          "maxWaitUntil": "2025-05-08T13:17:55.6844555+00:00",
+          "timeCreated": "2025-05-08T07:17:55.6844555+00:00",
+          "defaultAction": "Approve",
+          "targetResources": [
+            {
+              "resource": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/virtualMachines/2"
+              },
+              "actionState": "Approved"
+            },
+            {
+              "resource": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/RG01/providers/Microsoft.Compute/virtualMachineScaleSets/VMSS01/virtualMachines/3"
+              },
+              "actionState": "Waiting"
+            }
+          ],
+          "state": "Active"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Update",
+  "title": "The operation to update the virtual machine scale set lifecycle hook event."
+}
