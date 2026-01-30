@@ -9354,7 +9354,7 @@
     },
     "IntervalUnit": {
       "type": "string",
-      "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
+      "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'",
       "enum": [
         "Days"
       ],
@@ -14052,27 +14052,27 @@
         "startFrom": {
           "type": "string",
           "format": "date-time",
-          "description": "When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
+          "description": "When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'"
         },
         "interval": {
           "type": "integer",
           "format": "int32",
-          "description": "Run interval of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
+          "description": "Run interval of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'",
           "minimum": 1
         },
         "intervalUnit": {
           "$ref": "#/definitions/IntervalUnit",
-          "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
+          "description": "Run interval unit of task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'"
         },
         "endBy": {
           "type": "string",
           "format": "date-time",
-          "description": "When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
+          "description": "When to end task execution. This is a required field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'"
         },
         "startOn": {
           "type": "string",
           "format": "date-time",
-          "description": "When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'"
+          "description": "When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule' or 'MockRun'"
         }
       }
     },
@@ -14083,27 +14083,27 @@
         "startFrom": {
           "type": "string",
           "format": "date-time",
-          "description": "When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
+          "description": "When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'"
         },
         "interval": {
           "type": "integer",
           "format": "int32",
-          "description": "Run interval of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'",
+          "description": "Run interval of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'",
           "minimum": 1
         },
         "intervalUnit": {
           "$ref": "#/definitions/IntervalUnit",
-          "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
+          "description": "Run interval unit of task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'"
         },
         "endBy": {
           "type": "string",
           "format": "date-time",
-          "description": "When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce'"
+          "description": "When to end task execution. This is a mutable field when ExecutionTrigger.properties.type is 'OnSchedule'; this property should not be present when ExecutionTrigger.properties.type is 'RunOnce' or 'MockRun'"
         },
         "startOn": {
           "type": "string",
           "format": "date-time",
-          "description": "When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'"
+          "description": "When to start task execution. This is a mutable field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule' or 'MockRun'"
         }
       }
     },
@@ -14120,11 +14120,13 @@
         "values": [
           {
             "name": "RunOnce",
-            "value": "RunOnce"
+            "value": "RunOnce",
+            "description": "RunOnce trigger type"
           },
           {
             "name": "OnSchedule",
-            "value": "OnSchedule"
+            "value": "OnSchedule",
+            "description": "OnSchedule trigger type"
           }
         ]
       }

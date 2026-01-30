@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "accountName": "accountname",
+    "api-version": "2025-06-01",
+    "migrationName": "default",
+    "monitor": "true",
+    "resourceGroupName": "resource-group-name",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Storage/storageAccounts/accountMigrations",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/resource-group-name/providers/Microsoft.Storage/storageAccounts/accountname/accountMigrations/default",
+        "properties": {
+          "migrationFailedDetailedReason": "ZRS is not supported for accounts with archive data.",
+          "migrationFailedReason": "ZrsNotSupportedForAccountWithArchiveData",
+          "migrationStatus": "Failed",
+          "targetSkuName": "Standard_ZRS"
+        }
+      }
+    }
+  },
+  "operationId": "StorageAccounts_GetCustomerInitiatedMigration",
+  "title": "StorageAccountGetMigrationFailed"
+}
