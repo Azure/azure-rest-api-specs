@@ -183,7 +183,7 @@ union ItemGenerationParamsType {
   redTeamTaxonomy: "red_team_taxonomy",
 
   /** Parameters for synthetic data item generation. */
-  syntheticDataGeneration: SyntheticDataGenItemGenerationParamsType,
+  syntheticDataGeneration: "synthetic_data_gen_preview",
 }
 
 /** The types of parameters for synthetic data generation item generation. */
