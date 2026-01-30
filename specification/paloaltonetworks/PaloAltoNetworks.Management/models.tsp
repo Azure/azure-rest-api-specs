@@ -1772,6 +1772,12 @@ model FirewallResourceUpdateProperties {
   panEtag?: string;
 
   /**
+   * Firewall SKU type
+   */
+  @added(Versions.v2026_01_26_preview)
+  firewallSku?: FirewallSkuType;
+
+  /**
    * Network settings
    */
   networkProfile?: NetworkProfile;
