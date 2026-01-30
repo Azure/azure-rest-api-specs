@@ -13384,9 +13384,11 @@
           "description": "Name of the Active Directory domain"
         },
         "dns": {
-          "type": "string",
+          "type": "array",
           "description": "Comma separated list of DNS server IP addresses (IPv4 only) for the Active Directory domain",
-          "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$"
+          "items": {
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
+          }
         },
         "status": {
           "$ref": "#/definitions/ActiveDirectoryStatus",
@@ -16582,7 +16584,7 @@
         },
         "federatedClientId": {
           "type": "string",
-          "description": "ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults."
+          "description": "ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults."
         }
       }
     },
@@ -17683,7 +17685,7 @@
         },
         "federatedClientId": {
           "type": "string",
-          "description": "ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults."
+          "description": "ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults."
         }
       }
     },
@@ -18450,7 +18452,7 @@
           "type": "array",
           "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
           }
         },
         "ldapOverTLS": {
@@ -18487,7 +18489,7 @@
           "type": "array",
           "description": "List of LDAP server IP addresses (IPv4 only) for the LDAP domain.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Azure.Core.ipV4Address"
           }
         },
         "ldapOverTLS": {
@@ -19786,7 +19788,7 @@
       "description": "Quota report record properties",
       "properties": {
         "quotaType": {
-          "$ref": "#/definitions/Type",
+          "$ref": "#/definitions/QuotaType",
           "description": "Type of quota"
         },
         "quotaTarget": {
@@ -19819,7 +19821,7 @@
       "description": "Quota report filters. When filtering by quotaType or quotaTarget, both properties must be supplied together. This constraint is enforced by the service/API at runtime, and requests violating this rule will return a validation error. The usageThresholdPercentage filter is independent and can be used alone or in combination with quotaType and quotaTarget to further refine results.",
       "properties": {
         "quotaType": {
-          "$ref": "#/definitions/Type",
+          "$ref": "#/definitions/QuotaType",
           "description": "Type of quota. If provided, quotaTarget must also be specified. The quotaType and quotaTarget properties are optional, but when filtering by quota type, quotaType and quotaTarget must be supplied together. Service/API will return an error if only one is provided."
         },
         "quotaTarget": {
@@ -19833,6 +19835,42 @@
           "minimum": 1,
           "maximum": 100
         }
+      }
+    },
+    "QuotaType": {
+      "type": "string",
+      "description": "Type of quota",
+      "enum": [
+        "DefaultUserQuota",
+        "DefaultGroupQuota",
+        "IndividualUserQuota",
+        "IndividualGroupQuota"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DefaultUserQuota",
+            "value": "DefaultUserQuota",
+            "description": "Default user quota"
+          },
+          {
+            "name": "DefaultGroupQuota",
+            "value": "DefaultGroupQuota",
+            "description": "Default group quota"
+          },
+          {
+            "name": "IndividualUserQuota",
+            "value": "IndividualUserQuota",
+            "description": "Individual user quota"
+          },
+          {
+            "name": "IndividualGroupQuota",
+            "value": "IndividualGroupQuota",
+            "description": "Individual group quota"
+          }
+        ]
       }
     },
     "RansomwareProtectionPatchSettings": {
@@ -21235,42 +21273,6 @@
           "type": "string",
           "description": "A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>"
         }
-      }
-    },
-    "Type": {
-      "type": "string",
-      "description": "Type of quota",
-      "enum": [
-        "DefaultUserQuota",
-        "DefaultGroupQuota",
-        "IndividualUserQuota",
-        "IndividualGroupQuota"
-      ],
-      "x-ms-enum": {
-        "name": "Type",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DefaultUserQuota",
-            "value": "DefaultUserQuota",
-            "description": "Default user quota"
-          },
-          {
-            "name": "DefaultGroupQuota",
-            "value": "DefaultGroupQuota",
-            "description": "Default group quota"
-          },
-          {
-            "name": "IndividualUserQuota",
-            "value": "IndividualUserQuota",
-            "description": "Individual user quota"
-          },
-          {
-            "name": "IndividualGroupQuota",
-            "value": "IndividualGroupQuota",
-            "description": "Individual group quota"
-          }
-        ]
       }
     },
     "UnixPermissions": {
@@ -23103,7 +23105,7 @@
           "description": "Size of quota"
         },
         "quotaType": {
-          "$ref": "#/definitions/Type",
+          "$ref": "#/definitions/QuotaType",
           "description": "Type of quota",
           "x-ms-mutability": [
             "read",

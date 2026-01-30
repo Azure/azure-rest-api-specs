@@ -6,6 +6,7 @@ import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ResourceManager;
+using Azure.Core;
 using Http;
 using Versioning;
 using Rest;
@@ -225,7 +226,7 @@ model LdapConfiguration {
   /**
    * List of LDAP server IP addresses (IPv4 only) for the LDAP domain.
    */
-  ldapServers?: string[];
+  ldapServers?: ipV4Address[];
 
   /**
    * Specifies whether or not the LDAP traffic needs to be secured via TLS.
@@ -266,7 +267,7 @@ model LdapConfigurationPatch {
   /**
    * List of LDAP server IP addresses (IPv4 only) for the LDAP domain.
    */
-  ldapServers?: string[];
+  ldapServers?: ipV4Address[];
 
   /**
    * Specifies whether or not the LDAP traffic needs to be secured via TLS.
@@ -326,8 +327,7 @@ model ActiveDirectory {
   /**
    * Comma separated list of DNS server IP addresses (IPv4 only) for the Active Directory domain
    */
-  @pattern("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$")
-  dns?: string;
+  dns?: ipV4Address[];
 
   /**
    * Status of the Active Directory
@@ -534,7 +534,7 @@ model EncryptionIdentity {
   userAssignedIdentity?: string;
 
   /**
-   * ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults.
+   * ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults.
    */
   federatedClientId?: string;
 }
