@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleserver",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "location": "eastus",
+        "properties": {
+          "administratorLogin": "exampleadministratorlogin",
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "availabilityZone": "1",
+          "backup": {
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2025-06-01T18:35:22.123456Z",
+            "geoRedundantBackup": "Disabled"
+          },
+          "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "minorVersion": "5",
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "privateEndpointConnections": [
+            {
+              "name": "exampleprivateendpoint.40c899c7-5847-493e-9c9e-d0a0c90aaf92",
+              "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateEndpointConnections",
+              "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/privateEndpointConnections/exampleprivateendpoint.40c899c7-5847-493e-9c9e-d0a0c90aaf92",
+              "properties": {
+                "groupIds": [
+                  "postgresqlServer"
+                ],
+                "privateEndpoint": {
+                  "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleprivateendpointresourcegroup/providers/Microsoft.Network/privateEndpoints/exampleprivateendpoint"
+                },
+                "privateLinkServiceConnectionState": {
+                  "description": "Auto-Approved",
+                  "actionsRequired": "None",
+                  "status": "Approved"
+                },
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Disabled",
+            "iops": 2300,
+            "storageSizeGB": 512,
+            "tier": "P20"
+          },
+          "version": "17"
+        },
+        "sku": {
+          "name": "Standard_D4ds_v5",
+          "tier": "GeneralPurpose"
+        }
+      }
+    }
+  },
+  "operationId": "Servers_Get",
+  "title": "Get information about an existing server that isn't integrated into a virtual network provided by customer and has private endpoint connections."
+}

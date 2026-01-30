@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampleserver",
+        "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver",
+        "location": "eastus",
+        "properties": {
+          "administratorLogin": "exampleadministratorlogin",
+          "authConfig": {
+            "activeDirectoryAuth": "Disabled",
+            "passwordAuth": "Enabled"
+          },
+          "availabilityZone": "1",
+          "backup": {
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2025-06-01T18:35:22.123456Z",
+            "geoRedundantBackup": "Enabled"
+          },
+          "dataEncryption": {
+            "type": "SystemManaged"
+          },
+          "fullyQualifiedDomainName": "exampleserver.postgres.database.azure.com",
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "maintenanceWindow": {
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "minorVersion": "5",
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "privateEndpointConnections": [],
+          "replica": {
+            "capacity": 5,
+            "role": "Primary"
+          },
+          "replicaCapacity": 5,
+          "replicationRole": "Primary",
+          "state": "Ready",
+          "storage": {
+            "type": "",
+            "autoGrow": "Disabled",
+            "iops": 500,
+            "storageSizeGB": 128,
+            "tier": "P10"
+          },
+          "version": "17"
+        },
+        "sku": {
+          "name": "Standard_D4ds_v5",
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2025-06-01T18:30:22.123456Z"
+        }
+      }
+    }
+  },
+  "operationId": "Servers_Get",
+  "title": "Get information about an existing server."
+}

@@ -101,6 +101,72 @@ using Microsoft.EdgeOrder;
   "GetProductFamiliesMetadata",
   "csharp"
 );
+@@clientName(ConfigurationsRequest, "ConfigurationsContent", "csharp");
+@@clientName(Configurations, "ProductConfigurations", "csharp");
+@@clientName(ProductFamiliesRequest, "ProductFamiliesContent", "csharp");
+@@clientName(SupportedFilterTypes, "SupportedFilterType", "csharp");
+@@clientName(TransportShipmentTypes, "TransportShipmentType", "csharp");
+@@clientName(AdditionalConfiguration,
+  "EdgeOrderAdditionalConfiguration",
+  "csharp"
+);
+@@clientName(AddressClassification, "EdgeOrderAddressClassification", "csharp");
+@@clientName(AutoProvisioningStatus,
+  "EdgeOrderAutoProvisioningStatus",
+  "csharp"
+);
+@@clientName(CategoryInformation, "EdgeOrderCategoryInformation", "csharp");
+@@clientName(ChildConfiguration, "EdgeOrderChildConfiguration", "csharp");
+@@clientName(ChildConfigurationFilter,
+  "EdgeOrderChildConfigurationFilter",
+  "csharp"
+);
+@@clientName(ChildConfigurationType,
+  "EdgeOrderChildConfigurationType",
+  "csharp"
+);
+@@clientName(ConfigurationDeviceDetails,
+  "EdgeOrderConfigurationDeviceDetails",
+  "csharp"
+);
+@@clientName(FulfillmentType, "EdgeOrderFulfillmentType", "csharp");
+@@clientName(GroupedChildConfigurations,
+  "EdgeOrderGroupedChildConfigurations",
+  "csharp"
+);
+@@clientName(IdentificationType, "EdgeOrderIdentificationType", "csharp");
+@@clientName(OrderMode, "EdgeOrderOrderMode", "csharp");
+@@clientName(ProvisioningDetails, "EdgeOrderProvisioningDetails", "csharp");
+@@clientName(ProvisioningState, "EdgeOrderProvisioningState", "csharp");
+@@clientName(ProvisioningSupport, "EdgeOrderProvisioningSupport", "csharp");
+@@clientName(ResourceIdentity, "EdgeOrderResourceIdentity", "csharp");
+@@clientName(TermCommitmentInformation,
+  "EdgeOrderTermCommitmentInformation",
+  "csharp"
+);
+@@clientName(TermCommitmentPreferences,
+  "EdgeOrderTermCommitmentPreferences",
+  "csharp"
+);
+@@clientName(TermCommitmentType, "EdgeOrderTermCommitmentType", "csharp");
+@@clientName(TermTypeDetails, "EdgeOrderTermTypeDetails", "csharp");
+@@clientName(ProductFamilyProperties.resourceProviderDetails,
+  "ResourceProviderDetailsList",
+  "csharp"
+);
+@@clientName(OrdersOperationGroup.listBySubscription,
+  "GetEdgeOrders",
+  "csharp"
+);
+// Add this to solve the naming conflict problem of the following operation
+@@clientLocation(OrdersOperationGroup.listBySubscription,
+  "OrdersOperationGroup2",
+  "csharp"
+);
+@@clientName(OrdersOperationGroup.listByResourceGroup,
+  "GetEdgeOrders",
+  "csharp"
+);
 @@alternateType(OrderItemProperties.orderId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -115,3 +181,9 @@ using Microsoft.EdgeOrder;
 @@alternateType(CostInformation.billingInfoUrl, url, "csharp");
 @@alternateType(ForwardShippingDetails.trackingUrl, url, "csharp");
 @@alternateType(Pav2MeterDetails.meterGuid, Azure.Core.uuid, "csharp");
+@@alternateType(SiteDetails.siteId, Azure.Core.uuid, "csharp");
+@@alternateType(ProvisioningDetails.uniqueDeviceIdentifier,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@usage(OrderResource, Usage.input, "csharp");

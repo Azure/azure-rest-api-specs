@@ -16,10 +16,11 @@ interface Diff {
  * finalresult: the final result schema of the long-running operation should be the same as the schema of 200 response
  * responses: the response codes for the same operationId should have the same count and same response code
  * response: the response schema for the same response code should be the same
+ * tags: the tags for the same operationId should be the same
  */
 interface PathDiff extends Diff {
   operationId: string;
-  type: "path" | "parameters" | "pageable" | "longrunning" | "finalstate" | "finalresult" | "responses" | "response";
+  type: "path" | "parameters" | "pageable" | "longrunning" | "finalstate" | "finalresult" | "responses" | "response" | "tags";
 }
 
 /**
@@ -60,6 +61,8 @@ function getPathDiffMessage(diff: PathDiff): string {
       return `The response codes for operation "${diff.operationId}" changed:`;
     case "response":
       return `The response schema for operation "${diff.operationId}" changed:`;
+    case "tags":
+      return `The tags for operation "${diff.operationId}" changed:`;
     default:
       return `The ${diff.type} for operation "${diff.operationId}" changed:`;
   }
@@ -255,12 +258,33 @@ function compareOperation(oldOperation: OpenAPI2Operation, newOperation: OpenAPI
     });
   }
 
+  pathDiffs.push(...compareTags(oldOperation, newOperation, operationId));
   pathDiffs.push(...comparePagination(oldOperation, newOperation, operationId));
   pathDiffs.push(...compareLongRunning(oldOperation, newOperation, operationId));
   pathDiffs.push(...compareResponses(oldOperation, newOperation, operationId));
 
   // TO-DO: Compare parameters in detail
   return pathDiffs;
+}
+
+function compareTags(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
+  const oldTags = oldOperation.tags || [];
+  const newTags = newOperation.tags || [];
+
+  // Check if tags are different
+  if (oldTags.length !== newTags.length ||
+    !oldTags.every(tag => newTags.includes(tag)) ||
+    !newTags.every(tag => oldTags.includes(tag))) {
+    return [{
+      before: oldTags,
+      after: newTags,
+      operationId: operationId,
+      type: "tags",
+      level: "error"
+    }];
+  }
+
+  return [];
 }
 
 function compareResponses(oldOperation: OpenAPI2Operation, newOperation: OpenAPI2Operation, operationId: string): PathDiff[] {
