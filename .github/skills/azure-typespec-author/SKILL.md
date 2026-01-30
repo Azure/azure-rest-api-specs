@@ -12,26 +12,40 @@ description: "Use this skill when authoring or modifying Azure TypeSpec API spec
 3. After edits, **validate** (compile / lint / emitter checks if available) and report results.
 4. Always provide **references** (titles/sections/links) from retrieved context that justify the recommended approach.
 
+## Required Inputs Checklist (ask if missing)
+Before planning edits, ensure you have:
+- **Spec root / folder** (where the TypeSpec project lives)
+- **Service Type**: management-plane vs data-plane
+- **Existing API versions**
+- **Target API version(s)** (existing or new; preview/stable)
+- **Intent**: add/modify/fix (resource, operation, model, decorator, versioning, etc.)
+- **Target resource/interface/operation names** (if known)
+- **Constraints**: breaking-change limits, naming/versioning rules, emitter targets, etc.
+
+If any of the above is missing, ask **up to 6 concise questions** and stop.
+
 ## Workflow
 
 When encountering a TypeSpec authoring cases, follow this workflow (must follow exactly):
 
 ### Step 1 — Intake & Clarification (no file edits)
-
-- Follow the `intake-arm.md` to gather all required inputs and confirm with the user based on different cases.
+- Read the user request.
+- Extract any provided values for the Required Inputs Checklist.
+- If missing, ask concise questions and wait for the user reply. ask the questions one by one, with each question confirming a specific piece of information.
 
 ### Step 2 — Retrieve Solution
 
 Call the `azure-sdk-mcp/azsdk_typespec_generate_authoring_plan` tool:
 
 - Provide the best available arguments derived from the intake:
-  - plane
+  - Service Type
   - apiVersion / versions
   - intent
   - resource/interface/operation names
   - key constraints / keywords
 - Use user request (verbatim) as parameter `request`
 - Read the relative code (.tsp) for this request, and put it as `additionalInformation` parameter
+- use typespec project root path as `typeSpecProjectRootPath` parameter
 
 ### Step 3 — Apply Changes (edits)
 
@@ -53,9 +67,5 @@ Return:
 - What changed and why (brief)
 - Validation results (pass/fail + key output)
 - References from RETRIEVED_CONTEXT used to justify important decisions
-
-### Step 6 - Next steps
-
-- Follow `next-steps-arm.md` to identify and suggest any relevant next steps based on the completed case.
 
 ---
