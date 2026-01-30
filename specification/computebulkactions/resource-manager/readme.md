@@ -27,8 +27,43 @@ These are the global settings for the computebulkactions.
 ```yaml
 openapi-subtype: providerHub
 openapi-type: arm
-tag: package-2025-10-30-preview
+tag: package-2026-02-10-preview
 ```
+
+### Tag: package-2025-02-10-preview
+
+These settings apply only when `--tag=package-2026-02-10-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-10-preview'
+input-file:
+  - Microsoft.ComputeBulkActions/preview/2026-02-10-preview/computebulkactions.json
+suppressions:  
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: SSD is the abbreviation for solid state drive used in the property name.
+    from: computebulkactions.json
+    where: $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
+  - code:  AvoidAdditionalProperties
+    reason: Tags are mimicing the existing object structure from compute, bulkactions is a passthrough API and will deliver the object as is to compute.
+    from: computebulkactions.json
+    where: $.definitions.VirtualMachineExtensionProperties.properties.settings
+  - code:  AvoidAdditionalProperties
+    reason: Tags are mimicing the existing object structure from compute, bulkactions is a passthrough API and will deliver the object as is to compute.
+    from: computebulkactions.json
+    where: $.definitions.VirtualMachineExtensionProperties.properties.protectedSettings
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computebulkactions.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computebulkactions.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+  - code: BodyTopLevelProperties
+    from: computebulkactions.json
+    where: $.definitions.OperationStatus
+```
+
+---
 
 ### Tag: package-2025-10-30-preview
 
