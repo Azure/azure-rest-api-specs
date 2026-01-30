@@ -26,7 +26,16 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-11
+tag: package-2026-01-preview
+```
+
+### Tag: package-2026-01-preview
+
+These settings apply only when `--tag=package-2026-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-01-preview'
+input-file:
+  - preview/2026-01-01-preview/containerregistry.json
 ```
 
 ### Tag: package-2025-11
@@ -264,6 +273,40 @@ These settings apply only when `--tag=package-2017-03` is specified on the comma
 ``` yaml $(tag) == 'package-2017-03'
 input-file:
 - stable/2017-03-01/containerregistry.json
+```
+
+---
+
+## Suppression
+
+``` yaml
+suppressions:
+  - code: PatchBodyParametersSchema
+    from: containerregistry.json
+    reason: Previously existing implementation, flagged as part of Typespec conversion
+    where: 
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch.parameters[4].schema.properties.properties.retentionDays
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch.parameters[4].schema.properties.properties.metadataSearch
+  - code: RequestSchemaForTrackedResourcesMustHaveTags
+    from: containerregistry.json
+    reason: Previously existing implementation, flagged as part of Typespec conversion
+    where: 
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].put
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].put
+  - code: TrackedResourcePatchOperation
+    from: containerregistry.json
+    reason: Previously existing implementation, flagged as part of Typespec conversion
+    where: 
+        - $.definitions.ExportPipeline
+        - $.definitions.ImportPipeline
+  - code: DeleteResponseCodes
+    from: containerregistry.json
+    reason: Previously existing implementation, flagged as part of Typespec conversion
+    where: 
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].delete
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].delete
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns/{pipelineRunName}"].delete
+
 ```
 
 ---
