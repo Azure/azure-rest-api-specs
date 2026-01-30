@@ -66,6 +66,7 @@ model HealthModelProperties {
   @doc("The status of the last operation.")
   provisioningState?: HealthModelProvisioningState;
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Configure to automatically discover entities from a given scope, such as a Service Group. The discovered entities will be linked to the root entity of the health model.")
   discovery?: ModelDiscoverySettings;
 }
@@ -79,6 +80,7 @@ union HealthModelProvisioningState {
   Deleting: "Deleting",
 }
 
+@removed(Versions.v2026_01_01_preview)
 @doc("Settings for automatically discovering entities for the health model.")
 model ModelDiscoverySettings {
   @doc("The scope from which entities should be automatically discovered. For example, the resource id of a Service Group.")
@@ -471,6 +473,7 @@ model EntityProperties {
   @maxLength(260)
   displayName?: string;
 
+  @removed(Versions.v2026_01_01_preview)
   @doc("Entity kind")
   @minLength(1)
   @maxLength(260)
