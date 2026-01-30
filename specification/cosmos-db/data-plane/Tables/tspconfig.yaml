@@ -1,0 +1,29 @@
+parameters:
+  "service-dir":
+    default: "sdk/tables"
+  "dependencies":
+    default: ""
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    emit-lro-options: "none"
+    examples-dir: "{project-root}/examples"
+    output-file: "Tables/{version-status}/{version}/table.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-data-tables"
+    package-dir: "azure-data-tables"
+    package-name: "{package-dir}"
+    package-mode: dataplane
+    flavor: azure
+  # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
+  # "@azure-tools/typespec-java": true
+  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
+  # "@azure-tools/typespec-csharp": true
+  # Uncomment this line and add "@azure-tools/typespec-ts" to your package.json to generate Typescript code
+  # "@azure-tools/typespec-ts": true
