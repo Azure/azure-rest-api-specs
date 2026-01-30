@@ -338,7 +338,7 @@ interface TestTrackedResources {
     @bodyRoot
     @doc("The body type of the operation request.")
     request: StopBackupTestTrackedResourceRequest,
-  ): ArmAcceptedLroResponse | ArmNoContentResponse<"Operation completed successfully"> | ErrorResponse;
+  ): ArmAcceptedLroResponse | ErrorResponse;
 }
 
 @added(Versions.v2025_05_21_preview)
@@ -426,7 +426,7 @@ interface TestProxyResources {
     @bodyRoot
     @doc("The body type of the operation request.")
     request: ExportTestProxyResourceRequest,
-  ): ArmAcceptedLroResponse | ArmNoContentResponse<"Operation completed successfully"> | ErrorResponse;
+  ): ArmAcceptedLroResponse | ErrorResponse;
 }
 
 @added(Versions.v2025_05_21_preview)
@@ -515,7 +515,7 @@ interface TestChildPureProxyResources {
     @bodyRoot
     @doc("The body type of the operation request.")
     request: UnregisterTestChildPureProxyResourceRequest,
-  ): ArmAcceptedLroResponse | ArmNoContentResponse<"Operation completed successfully"> | ErrorResponse;
+  ): ArmAcceptedLroResponse | ErrorResponse;
 }
 
 @added(Versions.v2025_05_21_preview)

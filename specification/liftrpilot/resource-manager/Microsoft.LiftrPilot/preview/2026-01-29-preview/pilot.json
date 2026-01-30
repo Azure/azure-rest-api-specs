@@ -546,6 +546,57 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "operationId": "Agents_Update",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Update a AgentResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "Name of the Agent resource",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_\\-.: ]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "delete": {
         "operationId": "Agents_Delete",
         "tags": [
@@ -3133,7 +3184,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
         }
       }
