@@ -236,7 +236,35 @@ interface RecoveryJobs {
   @route(ServiceGroupRoute)
   @post
   @doc("This action attempts to cancel the ongoing recovery orchestration job.")
+  @removed(Versions.v2026_03_01_preview)
+  @renamedFrom(Versions.v2026_03_01_preview, "cancel")
+  @sharedRoute
+  cancelOld is ArmResourceActionAsync<
+    RecoveryJob,
+    void,
+    ArmResponse<Azure.ResourceManager.ErrorResponse>,
+    ServiceGroupAndRequestHeadersParameters
+  >;
+
+  @route(ServiceGroupRoute)
+  @post
+  @doc("This action attempts to cancel the ongoing recovery orchestration job.")
+  @added(Versions.v2026_03_01_preview)
+  @sharedRoute
   cancel is ArmResourceActionAsync<
+    RecoveryJob,
+    RecoveryActionRequest,
+    ArmResponse<Azure.ResourceManager.ErrorResponse>,
+    ServiceGroupAndRequestHeadersParameters
+  >;
+
+  @route(ServiceGroupRoute)
+  @post
+  @doc("This action resumes the ongoing recovery orchestration job that was paused for required user intervention.")
+  @removed(Versions.v2026_03_01_preview)
+  @renamedFrom(Versions.v2026_03_01_preview, "resume")
+  @sharedRoute
+  resumeOld is ArmResourceActionAsync<
     RecoveryJob,
     void,
     ArmResponse<Azure.ResourceManager.ErrorResponse>,
@@ -246,9 +274,11 @@ interface RecoveryJobs {
   @route(ServiceGroupRoute)
   @post
   @doc("This action resumes the ongoing recovery orchestration job that was paused for required user intervention.")
+  @added(Versions.v2026_03_01_preview)
+  @sharedRoute
   resume is ArmResourceActionAsync<
     RecoveryJob,
-    void,
+    RecoveryActionRequest,
     ArmResponse<Azure.ResourceManager.ErrorResponse>,
     ServiceGroupAndRequestHeadersParameters
   >;
