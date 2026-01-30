@@ -1,0 +1,43 @@
+parameters:
+  "service-dir":
+    default: "sdk/artifactsigning"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emit-lro-options: "none"
+    emitter-output-dir: "{project-root}"
+    omit-unreachable-types: true
+    output-file: "{version-status}/{version}/azure.developer.artifactsigning.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-artifactsigning"
+    namespace: "azure.developer.artifactsigning"
+    flavor: azure
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.Developer.ArtifactSigning"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Developer.ArtifactSigning
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/developer-artifactsigning-rest"
+    generate-metadata: true
+    is-modular-library: false
+    package-details:
+      name: "@azure-rest/developer-artifactsigning"
+      description: "Azure artifact signing service"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-artifactsigning"
+    namespace: "com.azure.developer.artifactsigning"
+    flavor: azure
