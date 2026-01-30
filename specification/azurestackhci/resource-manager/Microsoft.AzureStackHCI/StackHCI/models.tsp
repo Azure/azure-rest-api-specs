@@ -5862,3 +5862,14 @@ model ReportedProperties {
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
 }
+
+/**
+ * Request body for the check updates action on update summaries.
+ */
+@removed(Versions.v2025_12_01_preview)
+model CheckUpdatesRequest {
+  /**
+   * Name of update
+   */
+  updateName?: string;
+}

@@ -2795,6 +2795,20 @@
         ]
       }
     },
+    "MarketplaceOfferDetails": {
+      "type": "object",
+      "description": "Details about the marketplace offer associated with the monitor resource.",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The publisher ID (e.g., \"datadog1591740804488\")."
+        },
+        "offerId": {
+          "type": "string",
+          "description": "The offer ID (e.g., \"dd_liftr_v3_decoupled\")."
+        }
+      }
+    },
     "MarketplaceSaaSInfo": {
       "type": "object",
       "description": "Marketplace SAAS Info of the resource.",
@@ -2940,6 +2954,10 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "marketplaceOfferDetails": {
+          "$ref": "#/definitions/MarketplaceOfferDetails",
+          "description": "Details about the marketplace offer associated with the resource.\nRequired for API version 2025-11 and later.\nFor earlier API versions, defaults to the legacy offer."
         }
       }
     },

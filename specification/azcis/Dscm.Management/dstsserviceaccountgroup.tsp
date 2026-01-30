@@ -18,6 +18,9 @@ model DstsServiceAccountGroupResourceProperties {
   @doc("Service Account Group name. Case-insensitive.")
   groupName: string;
 
+  @doc("This property is used to enable auto-creation of service accounts in all regions. By default no service accounts are created.")
+  serviceAvailabilityStrategy: ServiceAvailabilityStrategy;
+
   @doc("Desired naming pattern of the accounts in this group.")
   accountName?: string;
 
@@ -50,9 +53,6 @@ model DstsServiceAccountGroupResourceProperties {
 
   @doc("Account version.")
   accountVersion?: string;
-
-  @doc("This property is used to enable auto-creation of service accounts in all regions. By default no service accounts are created.")
-  serviceAvailabilityStrategy?: ServiceAvailabilityStrategy;
 
   @doc("Create Jit dSTS controlled resource with service account group.")
   dstsControlledResource?: DstsControlledResource;

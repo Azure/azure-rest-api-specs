@@ -220,6 +220,27 @@ model ResourcesWithContext {
   ids: Array<ResourceWithContext>;
 }
 
+@added(Versions.`2026-02-10-preview`)
+@doc("The properties model which the customers can use to specify multiple VM SKU options and allocation strategy, for greater flexibility and higher chances of successful VM creation")
+model Properties {
+  @doc("List of VM sizes supported for properties model")
+  @minItems(1)
+  @maxItems(10)
+  vmSizesProfile: Array<VmSizeProfile>;
+
+  @doc("Specifies the OS type for creating the VMs")
+  osType: string;
+
+  @doc("Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs.")
+  capacityType?: CapacityType;
+
+  @doc("Configuration Options for Regular or Spot instances in the VMs")
+  priorityProfile: PriorityProfile;
+
+  @doc("Zone Allocation Policy for launching instances.")
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
+}
+
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
@@ -235,6 +256,10 @@ model ResourceProvisionPayload {
 
   @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
   resourcePrefix?: string;
+
+  @added(Versions.`2026-02-10-preview`)
+  @doc("Properties tag to create Vms based on size, zone and allocation strategy")
+  properties?: Properties;
 }
 
 @doc("The retry policy for the user request")
