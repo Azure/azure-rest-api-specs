@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "containerName": "iaasvmcontainer;iaasvmcontainerv2;iaasvm-rg;iaasvm-1",
+    "fabricName": "Azure",
+    "protectedItemName": "vm;iaasvmcontainerv2;iaasvm-rg;iaasvm-1",
+    "resourceGroupName": "PythonSDKBackupTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "PySDKBackupTestRsVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "VM;iaasvmcontainerv2;iaasvm-rg;iaasvm-1",
+        "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;iaasvm-rg;iaasvm-1/protectedItems/VM;iaasvmcontainerv2;iaasvm-rg;iaasvm-1",
+        "properties": {
+          "backupManagementType": "AzureIaasVM",
+          "containerName": "iaasvmcontainerv2;iaasvm-rg;iaasvm-1",
+          "friendlyName": "iaasvm-1",
+          "healthStatus": "Passed",
+          "lastBackupStatus": "Completed",
+          "lastBackupTime": "2018-01-22T12:25:32.048723Z",
+          "lastRecoveryPoint": "2017-11-22T12:25:32.048723Z",
+          "policyId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupPolicies/testPolicy1",
+          "policyType": "V2",
+          "protectedItemDataId": "636482643132986882",
+          "protectedItemType": "Microsoft.Compute/virtualMachines",
+          "protectionState": "Protected",
+          "protectionStatus": "Healthy",
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
+          "virtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
+          "workloadType": "VM"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ProtectedItems_Get",
+  "title": "Get Protected Virtual Machine Details"
+}

@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "rishgrp",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "rishTestVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "backupResourceEncryptionConfig",
+        "type": "Microsoft.RecoveryServices/vaults/backupEncryptionConfigs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rishgrp/providers/Microsoft.RecoveryServicesBVTD2/vaults/rishTestVault/backupEncryptionConfigs/backupResourceEncryptionConfig",
+        "properties": {
+          "encryptionAtRestType": "CustomerManaged",
+          "infrastructureEncryptionState": "Disabled",
+          "keyUri": "https://gktestkv1.vault.azure.net/keys/Test1/ed2e8cdc7f86477ebf0c6462b504a9ed",
+          "lastUpdateStatus": "Succeeded",
+          "subscriptionId": "1a2311d9-66f5-47d3-a9fb-7a37da63934b",
+          "useSystemAssignedIdentity": false,
+          "userAssignedIdentity": "/subscriptions/85bf5e8c-3084-4f42-add2-746ebb7e97b2/resourcegroups/defaultrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/examplemsi"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "BackupResourceEncryptionConfigs_Get",
+  "title": "Get Vault Encryption Configuration"
+}

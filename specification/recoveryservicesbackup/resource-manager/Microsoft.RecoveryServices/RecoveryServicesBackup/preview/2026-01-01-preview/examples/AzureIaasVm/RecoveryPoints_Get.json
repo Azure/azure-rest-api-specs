@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
+    "fabricName": "Azure",
+    "protectedItemName": "VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
+    "recoveryPointId": "26083826328862",
+    "resourceGroupName": "rshhtestmdvmrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "rshvault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "26083826328862",
+        "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/26083826328862",
+        "properties": {
+          "isInstantIlrSessionActive": false,
+          "isManagedVirtualMachine": true,
+          "isPrivateAccessEnabledOnAnyDisk": true,
+          "isSourceVMEncrypted": false,
+          "objectType": "IaasVMRecoveryPoint",
+          "originalStorageAccountOption": false,
+          "recoveryPointAdditionalInfo": "",
+          "recoveryPointMoveReadinessInfo": {
+            "ArchivedRP": {
+              "isReadyForMove": true
+            }
+          },
+          "recoveryPointTierDetails": [
+            {
+              "type": "HardenedRP",
+              "status": "Valid"
+            }
+          ],
+          "recoveryPointTime": "2017-11-22T22:32:46.6088472Z",
+          "recoveryPointType": "CrashConsistent",
+          "sourceVMStorageType": "NormalStorage",
+          "virtualMachineSize": "Standard_D1",
+          "zones": [
+            "1"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "RecoveryPoints_Get",
+  "title": "Get Azure Vm Recovery Point Details"
+}

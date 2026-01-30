@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "$filter": "backupManagementType eq 'AzureIaasVM'",
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "NetSDKTestRsVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "VM;iaasvmcontainer;iaasvm-rg;iaasvm-1",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectableItems",
+            "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/protectionContainers/IaasVMContainer;iaasvmcontainer;iaasvm-rg;iaasvm-1/protectableItems/VM;iaasvmcontainer;iaasvm-rg;iaasvm-1",
+            "properties": {
+              "backupManagementType": "AzureIaasVM",
+              "friendlyName": "iaasvm-1",
+              "protectableItemType": "Microsoft.ClassicCompute/virtualMachines",
+              "protectionState": "NotProtected",
+              "virtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/providers/Microsoft.ClassicCompute/virtualMachines/iaasvm-1",
+              "workloadType": "VM"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupProtectableItems_List",
+  "title": "List protectable items with backupManagementType filter as AzureIaasVm"
+}

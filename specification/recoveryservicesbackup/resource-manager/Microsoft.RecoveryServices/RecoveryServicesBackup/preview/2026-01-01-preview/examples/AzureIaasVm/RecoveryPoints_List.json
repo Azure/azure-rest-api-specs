@@ -1,0 +1,138 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
+    "fabricName": "Azure",
+    "protectedItemName": "VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall",
+    "resourceGroupName": "rshhtestmdvmrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "rshvault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "22244821112382",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/22244821112382",
+            "properties": {
+              "isInstantIlrSessionActive": false,
+              "isManagedVirtualMachine": true,
+              "isSourceVMEncrypted": false,
+              "objectType": "IaasVMRecoveryPoint",
+              "originalStorageAccountOption": false,
+              "recoveryPointAdditionalInfo": "",
+              "recoveryPointMoveReadinessInfo": {
+                "Archive": {
+                  "isReadyForMove": true
+                }
+              },
+              "recoveryPointTierDetails": [
+                {
+                  "type": "InstantRP",
+                  "status": "Deleted"
+                },
+                {
+                  "type": "HardenedRP",
+                  "status": "Valid"
+                }
+              ],
+              "recoveryPointTime": "2017-12-21T22:48:25.4353958Z",
+              "recoveryPointType": "CrashConsistent",
+              "sourceVMStorageType": "NormalStorage",
+              "virtualMachineSize": "Standard_D1"
+            }
+          },
+          {
+            "name": "24977149827250",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rshhtestmdvmrg/providers/Microsoft.RecoveryServices/vaults/rshvault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/protectedItems/VM;iaasvmcontainerv2;rshhtestmdvmrg;rshmdvmsmall/recoveryPoints/24977149827250",
+            "properties": {
+              "isInstantIlrSessionActive": false,
+              "isManagedVirtualMachine": true,
+              "isPrivateAccessEnabledOnAnyDisk": true,
+              "isSourceVMEncrypted": false,
+              "objectType": "IaasVMRecoveryPoint",
+              "originalStorageAccountOption": false,
+              "recoveryPointAdditionalInfo": "",
+              "recoveryPointMoveReadinessInfo": {
+                "ArchivedRP": {
+                  "additionalInfo": "Recovery point cannot be moved to archive tier since it has already been moved.",
+                  "isReadyForMove": false
+                }
+              },
+              "recoveryPointTierDetails": [
+                {
+                  "type": "InstantRP",
+                  "status": "Deleted"
+                },
+                {
+                  "type": "HardenedRP",
+                  "status": "Deleted"
+                },
+                {
+                  "type": "ArchivedRP",
+                  "extendedInfo": {
+                    "RehydratedRPExpiryTime": "2020-12-21T22:48:25.4353958Z"
+                  },
+                  "status": "Rehydrated"
+                }
+              ],
+              "recoveryPointTime": "2017-12-20T22:49:44.3317945Z",
+              "recoveryPointType": "CrashConsistent",
+              "sourceVMStorageType": "NormalStorage",
+              "virtualMachineSize": "Standard_D1",
+              "zones": [
+                "1"
+              ]
+            }
+          },
+          {
+            "name": "70477518625276",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/FijiValidation-asr-microsoftrrdclab3-408/providers/Microsoft.RecoveryServices/vaults/testVault408/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;fijivalidation-asr-microsoftrrdclab3-408;vm408/protectedItems/VM;iaasvmcontainerv2;fijivalidation-asr-microsoftrrdclab3-408;vm408/recoveryPoints/70477518625276",
+            "properties": {
+              "extendedLocation": {
+                "name": "microsoftrrdclab3",
+                "type": "EdgeZone"
+              },
+              "isInstantIlrSessionActive": false,
+              "isManagedVirtualMachine": true,
+              "isPrivateAccessEnabledOnAnyDisk": false,
+              "isSourceVMEncrypted": true,
+              "objectType": "IaasVMRecoveryPoint",
+              "originalStorageAccountOption": false,
+              "osType": "Windows",
+              "recoveryPointAdditionalInfo": "",
+              "recoveryPointMoveReadinessInfo": {
+                "ArchivedRP": {
+                  "additionalInfo": "We're still determining if this Recovery Point can be moved.. Please check again after some time.",
+                  "isReadyForMove": false
+                }
+              },
+              "recoveryPointTierDetails": [
+                {
+                  "type": "InstantRP",
+                  "status": "Valid"
+                },
+                {
+                  "type": "HardenedRP",
+                  "status": "Valid"
+                }
+              ],
+              "recoveryPointTime": "2023-09-22T20:02:00.1225746Z",
+              "recoveryPointType": "CrashConsistent",
+              "securityType": "None",
+              "sourceVMStorageType": "PremiumVMOnPartialPremiumStorage",
+              "virtualMachineSize": "Standard_D2s_v3"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RecoveryPoints_List",
+  "title": "Get Protected Azure Vm Recovery Points"
+}

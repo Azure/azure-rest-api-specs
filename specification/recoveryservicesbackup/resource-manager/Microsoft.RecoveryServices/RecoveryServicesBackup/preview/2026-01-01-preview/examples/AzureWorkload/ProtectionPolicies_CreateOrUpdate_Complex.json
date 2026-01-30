@@ -1,0 +1,262 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "parameters": {
+      "properties": {
+        "backupManagementType": "AzureWorkload",
+        "settings": {
+          "issqlcompression": false,
+          "timeZone": "Pacific Standard Time"
+        },
+        "subProtectionPolicy": [
+          {
+            "policyType": "Full",
+            "retentionPolicy": {
+              "monthlySchedule": {
+                "retentionDuration": {
+                  "count": 1,
+                  "durationType": "Months"
+                },
+                "retentionScheduleFormatType": "Weekly",
+                "retentionScheduleWeekly": {
+                  "daysOfTheWeek": [
+                    "Sunday"
+                  ],
+                  "weeksOfTheMonth": [
+                    "Second"
+                  ]
+                },
+                "retentionTimes": [
+                  "2018-01-24T10:00:00Z"
+                ]
+              },
+              "retentionPolicyType": "LongTermRetentionPolicy",
+              "weeklySchedule": {
+                "daysOfTheWeek": [
+                  "Sunday",
+                  "Tuesday"
+                ],
+                "retentionDuration": {
+                  "count": 2,
+                  "durationType": "Weeks"
+                },
+                "retentionTimes": [
+                  "2018-01-24T10:00:00Z"
+                ]
+              },
+              "yearlySchedule": {
+                "monthsOfYear": [
+                  "January",
+                  "June",
+                  "December"
+                ],
+                "retentionDuration": {
+                  "count": 1,
+                  "durationType": "Years"
+                },
+                "retentionScheduleFormatType": "Weekly",
+                "retentionScheduleWeekly": {
+                  "daysOfTheWeek": [
+                    "Sunday"
+                  ],
+                  "weeksOfTheMonth": [
+                    "Last"
+                  ]
+                },
+                "retentionTimes": [
+                  "2018-01-24T10:00:00Z"
+                ]
+              }
+            },
+            "schedulePolicy": {
+              "schedulePolicyType": "SimpleSchedulePolicy",
+              "scheduleRunDays": [
+                "Sunday",
+                "Tuesday"
+              ],
+              "scheduleRunFrequency": "Weekly",
+              "scheduleRunTimes": [
+                "2018-01-24T10:00:00Z"
+              ]
+            }
+          },
+          {
+            "policyType": "Differential",
+            "retentionPolicy": {
+              "retentionDuration": {
+                "count": 8,
+                "durationType": "Days"
+              },
+              "retentionPolicyType": "SimpleRetentionPolicy"
+            },
+            "schedulePolicy": {
+              "schedulePolicyType": "SimpleSchedulePolicy",
+              "scheduleRunDays": [
+                "Friday"
+              ],
+              "scheduleRunFrequency": "Weekly",
+              "scheduleRunTimes": [
+                "2018-01-24T10:00:00Z"
+              ]
+            }
+          },
+          {
+            "policyType": "Log",
+            "retentionPolicy": {
+              "retentionDuration": {
+                "count": 7,
+                "durationType": "Days"
+              },
+              "retentionPolicyType": "SimpleRetentionPolicy"
+            },
+            "schedulePolicy": {
+              "scheduleFrequencyInMins": 60,
+              "schedulePolicyType": "LogSchedulePolicy"
+            }
+          }
+        ],
+        "workLoadType": "SQLDataBase"
+      }
+    },
+    "policyName": "testPolicy1",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "NetSDKTestRsVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPolicy1",
+        "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1",
+        "properties": {
+          "backupManagementType": "AzureWorkload",
+          "protectedItemsCount": 0,
+          "settings": {
+            "issqlcompression": false,
+            "timeZone": "Pacific Standard Time"
+          },
+          "subProtectionPolicy": [
+            {
+              "policyType": "Full",
+              "retentionPolicy": {
+                "monthlySchedule": {
+                  "retentionDuration": {
+                    "count": 1,
+                    "durationType": "Months"
+                  },
+                  "retentionScheduleFormatType": "Weekly",
+                  "retentionScheduleWeekly": {
+                    "daysOfTheWeek": [
+                      "Sunday"
+                    ],
+                    "weeksOfTheMonth": [
+                      "Second"
+                    ]
+                  },
+                  "retentionTimes": [
+                    "2018-01-24T10:00:00Z"
+                  ]
+                },
+                "retentionPolicyType": "LongTermRetentionPolicy",
+                "weeklySchedule": {
+                  "daysOfTheWeek": [
+                    "Sunday",
+                    "Tuesday"
+                  ],
+                  "retentionDuration": {
+                    "count": 2,
+                    "durationType": "Weeks"
+                  },
+                  "retentionTimes": [
+                    "2018-01-24T10:00:00Z"
+                  ]
+                },
+                "yearlySchedule": {
+                  "monthsOfYear": [
+                    "January",
+                    "June",
+                    "December"
+                  ],
+                  "retentionDuration": {
+                    "count": 1,
+                    "durationType": "Years"
+                  },
+                  "retentionScheduleFormatType": "Weekly",
+                  "retentionScheduleWeekly": {
+                    "daysOfTheWeek": [
+                      "Sunday"
+                    ],
+                    "weeksOfTheMonth": [
+                      "Last"
+                    ]
+                  },
+                  "retentionTimes": [
+                    "2018-01-24T10:00:00Z"
+                  ]
+                }
+              },
+              "schedulePolicy": {
+                "schedulePolicyType": "SimpleSchedulePolicy",
+                "scheduleRunDays": [
+                  "Sunday",
+                  "Tuesday"
+                ],
+                "scheduleRunFrequency": "Weekly",
+                "scheduleRunTimes": [
+                  "2018-01-24T10:00:00Z"
+                ],
+                "scheduleWeeklyFrequency": 0
+              }
+            },
+            {
+              "policyType": "Differential",
+              "retentionPolicy": {
+                "retentionDuration": {
+                  "count": 8,
+                  "durationType": "Days"
+                },
+                "retentionPolicyType": "SimpleRetentionPolicy"
+              },
+              "schedulePolicy": {
+                "schedulePolicyType": "SimpleSchedulePolicy",
+                "scheduleRunDays": [
+                  "Friday"
+                ],
+                "scheduleRunFrequency": "Weekly",
+                "scheduleRunTimes": [
+                  "2018-01-24T10:00:00Z"
+                ],
+                "scheduleWeeklyFrequency": 0
+              }
+            },
+            {
+              "policyType": "Log",
+              "retentionPolicy": {
+                "retentionDuration": {
+                  "count": 7,
+                  "durationType": "Days"
+                },
+                "retentionPolicyType": "SimpleRetentionPolicy"
+              },
+              "schedulePolicy": {
+                "scheduleFrequencyInMins": 60,
+                "schedulePolicyType": "LogSchedulePolicy"
+              }
+            }
+          ],
+          "workLoadType": "SQLDataBase"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operations/00000000-0000-0000-0000-000000000000?api-version=2016-06-01",
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-06-01",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ProtectionPolicies_CreateOrUpdate",
+  "title": "Create or Update Full Azure Workload Protection Policy"
+}

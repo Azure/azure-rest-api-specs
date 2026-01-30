@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "backupEngineName": "testServer",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testServer",
+        "type": "Microsoft.RecoveryServices/vaults/backupEngines",
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.RecoveryServices/vaults/testVault/backupEngines/testServer",
+        "properties": {
+          "azureBackupAgentVersion": "2.0.9532.0",
+          "backupEngineState": "Active",
+          "backupEngineType": "DpmBackupEngine",
+          "dpmVersion": "5.1.348.0",
+          "extendedInfo": {
+            "availableDiskSpace": 50,
+            "diskCount": 5,
+            "protectedItemsCount": 35,
+            "protectedServersCount": 21,
+            "usedDiskSpace": 20
+          },
+          "friendlyName": "testServer",
+          "isAzureBackupAgentUpgradeAvailable": false,
+          "isDpmUpgradeAvailable": false,
+          "registrationStatus": "Registered"
+        }
+      }
+    }
+  },
+  "operationId": "BackupEngines_Get",
+  "title": "Get Dpm/AzureBackupServer/Lajolla Backup Engine Details"
+}

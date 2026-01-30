@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "parameters": {
+      "dataMoveLevel": "Vault",
+      "targetRegion": "USGov Virginia",
+      "targetResourceId": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/targetRG/providers/Microsoft.RecoveryServices/vaults/target-rsv"
+    },
+    "resourceGroupName": "sourceRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "source-rsv"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sourceRG/providers/Microsoft.RecoveryServices/vaults/source-rsv/backupStorageConfig/vaultStorageConfig/backupDataMove/operationStatus/00000000-0000-0000-0000-000000000000?api-version=2020-07-01-preview",
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sourceRG/providers/Microsoft.RecoveryServices/vaults/source-rsv/backupStorageConfig/vaultStorageConfig/prepareDataMove/operationResult/00000000-0000-0000-0000-000000000000?api-version=2020-07-01-preview",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "BMSPrepareDataMove",
+  "title": "Prepare Data Move"
+}
