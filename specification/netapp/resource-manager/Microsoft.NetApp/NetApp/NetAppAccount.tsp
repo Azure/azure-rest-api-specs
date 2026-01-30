@@ -327,7 +327,7 @@ model ActiveDirectory {
   /**
    * Comma separated list of DNS server IP addresses (IPv4 only) for the Active Directory domain
    */
-  dns?: ipV4Address[];
+  dns?: ipV4Address;
 
   /**
    * Status of the Active Directory
