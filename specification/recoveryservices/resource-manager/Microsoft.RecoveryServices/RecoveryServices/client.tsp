@@ -232,7 +232,7 @@ model PatchVaultWithEtag
 /**
  * Information to be stored in Vault properties as an element of privateEndpointConnections List.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model PrivateEndpointConnectionVaultPropertiesReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<
