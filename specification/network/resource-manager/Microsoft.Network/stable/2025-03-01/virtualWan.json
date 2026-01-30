@@ -2300,7 +2300,7 @@
           "description": "The VpnServerConfiguration to which the p2sVpnGateway is attached to."
         },
         "vpnClientConnectionHealth": {
-          "$ref": "./networkGateway.json#/definitions/VpnClientConnectionHealth",
+          "$ref": "#/definitions/VpnClientConnectionHealth",
           "description": "All P2S VPN clients' connection health status.",
           "readOnly": true
         },
@@ -3115,6 +3115,36 @@
             "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
+        }
+      }
+    },
+    "VpnClientConnectionHealth": {
+      "type": "object",
+      "description": "VpnClientConnectionHealth properties.",
+      "properties": {
+        "totalIngressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total of the Ingress Bytes Transferred in this P2S Vpn connection.",
+          "readOnly": true
+        },
+        "totalEgressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total of the Egress Bytes Transferred in this connection.",
+          "readOnly": true
+        },
+        "vpnClientConnectionsCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total of p2s vpn clients connected at this time to this P2SVpnGateway."
+        },
+        "allocatedIpAddresses": {
+          "type": "array",
+          "description": "List of allocated ip addresses to the connected p2s vpn clients.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },

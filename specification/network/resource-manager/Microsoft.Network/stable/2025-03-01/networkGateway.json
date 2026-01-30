@@ -43,6 +43,15 @@
       "name": "VirtualNetworkGateways"
     },
     {
+      "name": "VirtualNetworkGatewayConnections"
+    },
+    {
+      "name": "LocalNetworkGateways"
+    },
+    {
+      "name": "VirtualNetworkGatewayNatRules"
+    },
+    {
       "name": "VirtualNetworkTaps"
     }
   ],
@@ -84,6 +93,1106 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
+      "get": {
+        "operationId": "VirtualNetworkGatewayConnections_List",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "The List VirtualNetworkGatewayConnections operation retrieves all the virtual network gateways connections created.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualNetworkGatewayConnectionsinResourceGroup": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
+      "get": {
+        "operationId": "VirtualNetworkGatewayConnections_Get",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "Gets the specified virtual network gateway connection by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayConnection": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworkGatewayConnections_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "Creates or updates a virtual network gateway connection in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update virtual network gateway connection operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualNetworkGatewayConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualNetworkGatewayConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateVirtualNetworkGatewayConnection_S2S": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/VirtualNetworkGatewayConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualNetworkGatewayConnections_UpdateTags",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "Updates a virtual network gateway connection tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update virtual network gateway connection tags.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayConnection"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateVirtualNetworkGatewayConnectionTags": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionUpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/VirtualNetworkGatewayConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualNetworkGatewayConnections_Delete",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "Deletes the specified virtual network Gateway connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteVirtualNetworkGatewayConnection": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/getikesas": {
+      "post": {
+        "operationId": "VirtualNetworkGatewayConnections_GetIkeSas",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "Lists IKE Security Associations for the virtual network gateway connection in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayConnectionIkeSa": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionGetIkeSas.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/resetconnection": {
+      "post": {
+        "operationId": "VirtualNetworkGatewayConnections_ResetConnection",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "Resets the virtual network gateway connection specified.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResetVirtualNetworkGatewayConnection": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionReset.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey": {
+      "get": {
+        "operationId": "VirtualNetworkGatewayConnections_GetSharedKey",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayConnectionSharedKey": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionGetSharedKey.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworkGatewayConnections_SetSharedKey",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            }
+          },
+          "201": {
+            "description": "Resource 'ConnectionSharedKey' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKey"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SetVirtualNetworkGatewayConnectionSharedKey": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionSetSharedKey.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ConnectionSharedKey"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/sharedkey/reset": {
+      "post": {
+        "operationId": "VirtualNetworkGatewayConnections_ResetSharedKey",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "The VirtualNetworkGatewayConnectionResetSharedKey operation resets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the begin reset virtual network gateway connection shared key operation through network resource provider.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectionResetSharedKey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionResetSharedKey"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResetVirtualNetworkGatewayConnectionSharedKey": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionResetSharedKey.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ConnectionResetSharedKey"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startPacketCapture": {
+      "post": {
+        "operationId": "VirtualNetworkGatewayConnections_StartPacketCapture",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "Starts packet capture on virtual network gateway connection in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Virtual network gateway packet capture parameters supplied to start packet capture on gateway connection.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStartParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start packet capture on virtual network gateway connection with filter": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionStartPacketCaptureFilterData.json"
+          },
+          "Start packet capture on virtual network gateway connection without filter": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionStartPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stopPacketCapture": {
+      "post": {
+        "operationId": "VirtualNetworkGatewayConnections_StopPacketCapture",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "Stops packet capture on virtual network gateway connection in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway connection.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStopParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop packet capture on virtual network gateway connection": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionStopPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/vpndeviceconfigurationscript": {
+      "post": {
+        "operationId": "VirtualNetworkGateways_VpnDeviceConfigurationScript",
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "description": "Gets a xml format representation for vpn device configuration script.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "description": "The name of the virtual network gateway connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the generate vpn device script operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnDeviceScriptParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/stringApplicationJson"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVPNDeviceConfigurationScript": {
+            "$ref": "./examples/VirtualNetworkGatewayVpnDeviceConfigurationScript.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways": {
+      "get": {
+        "operationId": "LocalNetworkGateways_List",
+        "tags": [
+          "LocalNetworkGateways"
+        ],
+        "description": "Gets all the local network gateways in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalNetworkGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListLocalNetworkGateways": {
+            "$ref": "./examples/LocalNetworkGatewayList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}": {
+      "get": {
+        "operationId": "LocalNetworkGateways_Get",
+        "tags": [
+          "LocalNetworkGateways"
+        ],
+        "description": "Gets the specified local network gateway in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "localNetworkGatewayName",
+            "in": "path",
+            "description": "The name of the local network gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalNetworkGateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetLocalNetworkGateway": {
+            "$ref": "./examples/LocalNetworkGatewayGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LocalNetworkGateways_CreateOrUpdate",
+        "tags": [
+          "LocalNetworkGateways"
+        ],
+        "description": "Creates or updates a local network gateway in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "localNetworkGatewayName",
+            "in": "path",
+            "description": "The name of the local network gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update local network gateway operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocalNetworkGateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LocalNetworkGateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LocalNetworkGateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'LocalNetworkGateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LocalNetworkGateway"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateLocalNetworkGateway": {
+            "$ref": "./examples/LocalNetworkGatewayCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/LocalNetworkGateway"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "LocalNetworkGateways_UpdateTags",
+        "tags": [
+          "LocalNetworkGateways"
+        ],
+        "description": "Updates a local network gateway tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "localNetworkGatewayName",
+            "in": "path",
+            "description": "The name of the local network gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update local network gateway tags.",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocalNetworkGateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateLocalNetworkGatewayTags": {
+            "$ref": "./examples/LocalNetworkGatewayUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LocalNetworkGateways_Delete",
+        "tags": [
+          "LocalNetworkGateways"
+        ],
+        "description": "Deletes the specified local network gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "localNetworkGatewayName",
+            "in": "path",
+            "description": "The name of the local network gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteLocalNetworkGateway": {
+            "$ref": "./examples/LocalNetworkGatewayDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways": {
@@ -534,7 +1643,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/VirtualNetworkGatewayListConnectionsResult"
+              "$ref": "#/definitions/VirtualNetworkGatewayListConnectionsResult"
             }
           },
           "default": {
@@ -1563,7 +2672,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./common.json#/definitions/RadiusAuthServerListResult"
+              "$ref": "#/definitions/RadiusAuthServerListResult"
             }
           },
           "default": {
@@ -1578,6 +2687,259 @@
             "$ref": "./examples/AllVirtualNetworkGatewayRadiusServerSecretsList.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules": {
+      "get": {
+        "operationId": "VirtualNetworkGatewayNatRules_ListByVirtualNetworkGateway",
+        "tags": [
+          "VirtualNetworkGatewayNatRules"
+        ],
+        "description": "Retrieves all nat rules for a particular virtual network gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "description": "The name of the virtual network gateway.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListVirtualNetworkGatewayNatRulesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayNatRuleList": {
+            "$ref": "./examples/VirtualNetworkGatewayNatRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules/{natRuleName}": {
+      "get": {
+        "operationId": "VirtualNetworkGatewayNatRules_Get",
+        "tags": [
+          "VirtualNetworkGatewayNatRules"
+        ],
+        "description": "Retrieves the details of a nat rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "description": "The name of the virtual network gateway.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayNatRuleGet": {
+            "$ref": "./examples/VirtualNetworkGatewayNatRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworkGatewayNatRules_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworkGatewayNatRules"
+        ],
+        "description": "Creates a nat rule to a scalable virtual network gateway if it doesn't exist else updates the existing nat rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "description": "The name of the virtual network gateway.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "NatRuleParameters",
+            "in": "body",
+            "description": "Parameters supplied to create or Update a Nat Rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualNetworkGatewayNatRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualNetworkGatewayNatRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayNatRulePut": {
+            "$ref": "./examples/VirtualNetworkGatewayNatRulePut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/VirtualNetworkGatewayNatRule"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualNetworkGatewayNatRules_Delete",
+        "tags": [
+          "VirtualNetworkGatewayNatRules"
+        ],
+        "description": "Deletes a nat rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "description": "The name of the virtual network gateway.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworkGatewayNatRuleDelete": {
+            "$ref": "./examples/VirtualNetworkGatewayNatRuleDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration": {
@@ -1610,7 +2972,7 @@
             "description": "Parameters supplied to the Begin Prepare migration on basic vpn gateway through Network resource provider.",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/VirtualNetworkGatewayMigrationParameters"
+              "$ref": "#/definitions/VirtualNetworkGatewayMigrationParameters"
             }
           }
         ],
@@ -3128,7 +4490,7 @@
           "type": "array",
           "description": "The VirtualNetworkGatewayNatRule items on this page",
           "items": {
-            "$ref": "./common.json#/definitions/VirtualNetworkGatewayNatRule"
+            "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
           }
         },
         "nextLink": {
@@ -3233,6 +4595,27 @@
           "x-ms-secret": true
         }
       }
+    },
+    "RadiusAuthServerListResult": {
+      "type": "object",
+      "description": "List of Radius servers with respective radius secrets.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RadiusAuthServer items on this page",
+          "items": {
+            "$ref": "#/definitions/RadiusAuthServer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "RadiusServer": {
       "type": "object",
@@ -3375,7 +4758,7 @@
       "description": "A common class for general resource information.",
       "properties": {
         "properties": {
-          "$ref": "./common.json#/definitions/VirtualNetworkGatewayPropertiesFormat",
+          "$ref": "#/definitions/VirtualNetworkGatewayPropertiesFormat",
           "description": "Properties of the virtual network gateway.",
           "x-ms-client-flatten": true
         },
@@ -3400,6 +4783,224 @@
         {
           "$ref": "./common.json#/definitions/Resource"
         }
+      ]
+    },
+    "VirtualNetworkGatewayAutoScaleBounds": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum scale Units for Autoscale configuration"
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum Scale Units for Autoscale configuration"
+        }
+      }
+    },
+    "VirtualNetworkGatewayAutoScaleConfiguration": {
+      "type": "object",
+      "description": "Virtual Network Gateway Autoscale Configuration details",
+      "properties": {
+        "bounds": {
+          "$ref": "#/definitions/VirtualNetworkGatewayAutoScaleBounds",
+          "description": "The bounds of the autoscale configuration"
+        }
+      }
+    },
+    "VirtualNetworkGatewayConnection": {
+      "type": "object",
+      "description": "A common class for general resource information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat",
+          "description": "Properties of the virtual network gateway connection.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "VirtualNetworkGatewayConnectionListEntity": {
+      "type": "object",
+      "description": "A common class for general resource information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntityPropertiesFormat",
+          "description": "Properties of the virtual network gateway connection.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "VirtualNetworkGatewayConnectionListEntityPropertiesFormat": {
+      "type": "object",
+      "description": "VirtualNetworkGatewayConnection properties.",
+      "properties": {
+        "authorizationKey": {
+          "type": "string",
+          "description": "The authorizationKey."
+        },
+        "virtualNetworkGateway1": {
+          "$ref": "#/definitions/VirtualNetworkConnectionGatewayReference",
+          "description": "The reference to virtual network gateway resource."
+        },
+        "virtualNetworkGateway2": {
+          "$ref": "#/definitions/VirtualNetworkConnectionGatewayReference",
+          "description": "The reference to virtual network gateway resource."
+        },
+        "localNetworkGateway2": {
+          "$ref": "#/definitions/VirtualNetworkConnectionGatewayReference",
+          "description": "The reference to local network gateway resource."
+        },
+        "connectionType": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionType",
+          "description": "Gateway connection type."
+        },
+        "connectionProtocol": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionProtocol",
+          "description": "Connection protocol used for this connection."
+        },
+        "routingWeight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The routing weight."
+        },
+        "connectionMode": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionMode",
+          "description": "The connection mode for this connection."
+        },
+        "sharedKey": {
+          "type": "string",
+          "description": "The IPSec shared key. We will no longer return sharedKey in VirtualNetworkGatewayConnection Create/Update/Get/List/UpdateTags APIs response. Please use VirtualNetworkGatewayConnection GetSharedKey API to fetch connection sharedKey."
+        },
+        "connectionStatus": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionStatus",
+          "description": "Virtual Network Gateway connection status.",
+          "readOnly": true
+        },
+        "tunnelConnectionStatus": {
+          "type": "array",
+          "description": "Collection of all tunnels' connection health status.",
+          "items": {
+            "$ref": "#/definitions/TunnelConnectionHealth"
+          },
+          "readOnly": true
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The egress bytes transferred in this connection.",
+          "readOnly": true
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ingress bytes transferred in this connection.",
+          "readOnly": true
+        },
+        "peer": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The reference to peerings resource."
+        },
+        "enableBgp": {
+          "type": "boolean",
+          "description": "EnableBgp flag."
+        },
+        "gatewayCustomBgpIpAddresses": {
+          "type": "array",
+          "description": "GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection.",
+          "items": {
+            "$ref": "#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "usePolicyBasedTrafficSelectors": {
+          "type": "boolean",
+          "description": "Enable policy-based traffic selectors."
+        },
+        "ipsecPolicies": {
+          "type": "array",
+          "description": "The IPSec Policies to be considered by this connection.",
+          "items": {
+            "$ref": "#/definitions/IpsecPolicy"
+          }
+        },
+        "trafficSelectorPolicies": {
+          "type": "array",
+          "description": "The Traffic Selector Policies to be considered by this connection.",
+          "items": {
+            "$ref": "#/definitions/TrafficSelectorPolicy"
+          }
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the virtual network gateway connection resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the virtual network gateway connection resource.",
+          "readOnly": true
+        },
+        "expressRouteGatewayBypass": {
+          "type": "boolean",
+          "description": "Bypass ExpressRoute Gateway for data forwarding."
+        },
+        "enablePrivateLinkFastPath": {
+          "type": "boolean",
+          "description": "Bypass the ExpressRoute gateway when accessing private-links. ExpressRoute FastPath (expressRouteGatewayBypass) must be enabled."
+        }
+      },
+      "required": [
+        "virtualNetworkGateway1",
+        "connectionType"
+      ]
+    },
+    "VirtualNetworkGatewayConnectionListResult": {
+      "type": "object",
+      "description": "The response of a VirtualNetworkGatewayConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualNetworkGatewayConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "VirtualNetworkGatewayConnectionPropertiesFormat": {
@@ -3462,7 +5063,7 @@
           "type": "array",
           "description": "Tunnel properties for virtual network gateway connection",
           "items": {
-            "$ref": "./common.json#/definitions/VirtualNetworkGatewayConnectionTunnelProperties"
+            "$ref": "#/definitions/VirtualNetworkGatewayConnectionTunnelProperties"
           }
         },
         "sharedKey": {
@@ -3566,6 +5167,44 @@
         "connectionType"
       ]
     },
+    "VirtualNetworkGatewayConnectionTunnelProperties": {
+      "type": "object",
+      "properties": {
+        "tunnelIpAddress": {
+          "type": "string",
+          "description": "Tunnel remote IP address"
+        },
+        "bgpPeeringAddress": {
+          "type": "string",
+          "description": "Tunnel BGP peering address"
+        }
+      }
+    },
+    "VirtualNetworkGatewayIPConfiguration": {
+      "type": "object",
+      "description": "IP configuration for virtual network gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat",
+          "description": "Properties of the virtual network gateway ip configuration.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
     "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
       "type": "object",
       "description": "Properties of VirtualNetworkGatewayIPConfiguration.",
@@ -3594,6 +5233,27 @@
         }
       }
     },
+    "VirtualNetworkGatewayListConnectionsResult": {
+      "type": "object",
+      "description": "Response for the VirtualNetworkGatewayListConnections API service call.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualNetworkGatewayConnectionListEntity items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayConnectionListEntity"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "VirtualNetworkGatewayListResult": {
       "type": "object",
       "description": "The response of a VirtualNetworkGateway list operation.",
@@ -3613,6 +5273,62 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "VirtualNetworkGatewayMigrationParameters": {
+      "type": "object",
+      "description": "Virtual network gateway migration parameters.",
+      "properties": {
+        "migrationType": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayMigrationType",
+          "description": "MigrationType for the virtual network gateway."
+        },
+        "resourceUrl": {
+          "type": "string",
+          "description": "Resource url that needs to be passed in to migration."
+        }
+      },
+      "required": [
+        "migrationType"
+      ]
+    },
+    "VirtualNetworkGatewayMigrationStatus": {
+      "type": "object",
+      "description": "Migration status for the Virtual Network Gateway.",
+      "properties": {
+        "state": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayMigrationState",
+          "description": "Represent the current state of gateway migration."
+        },
+        "phase": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayMigrationPhase",
+          "description": "Represent the current migration phase of gateway."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error if any occurs during migration."
+        }
+      }
+    },
+    "VirtualNetworkGatewayNatRule": {
+      "type": "object",
+      "description": "VirtualNetworkGatewayNatRule Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayNatRuleProperties",
+          "description": "Properties of the Virtual Network Gateway NAT rule.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
       ]
     },
     "VirtualNetworkGatewayNatRuleProperties": {
@@ -3651,6 +5367,31 @@
           "description": "The IP Configuration ID this NAT rule applies to."
         }
       }
+    },
+    "VirtualNetworkGatewayPolicyGroup": {
+      "type": "object",
+      "description": "Parameters for VirtualNetworkGatewayPolicyGroup.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroupProperties",
+          "description": "Properties of tVirtualNetworkGatewayPolicyGroup.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
     },
     "VirtualNetworkGatewayPolicyGroupMember": {
       "type": "object",
@@ -3711,6 +5452,136 @@
         "policyMembers"
       ]
     },
+    "VirtualNetworkGatewayPropertiesFormat": {
+      "type": "object",
+      "description": "VirtualNetworkGateway properties.",
+      "properties": {
+        "autoScaleConfiguration": {
+          "$ref": "#/definitions/VirtualNetworkGatewayAutoScaleConfiguration",
+          "description": "Autoscale configuration for virutal network gateway"
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "description": "IP configurations for virtual network gateway.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayIPConfiguration"
+          }
+        },
+        "gatewayType": {
+          "$ref": "./common.json#/definitions/VirtualNetworkGatewayType",
+          "description": "The type of this virtual network gateway."
+        },
+        "vpnType": {
+          "$ref": "./common.json#/definitions/VpnType",
+          "description": "The type of this virtual network gateway."
+        },
+        "vpnGatewayGeneration": {
+          "$ref": "./common.json#/definitions/VpnGatewayGeneration",
+          "description": "The generation for this VirtualNetworkGateway. Must be None if gatewayType is not VPN."
+        },
+        "enableBgp": {
+          "type": "boolean",
+          "description": "Whether BGP is enabled for this virtual network gateway or not."
+        },
+        "enablePrivateIpAddress": {
+          "type": "boolean",
+          "description": "Whether private IP needs to be enabled on this gateway for connections or not."
+        },
+        "virtualNetworkGatewayMigrationStatus": {
+          "$ref": "#/definitions/VirtualNetworkGatewayMigrationStatus",
+          "description": "The reference to the VirtualNetworkGatewayMigrationStatus which represents the status of migration."
+        },
+        "activeActive": {
+          "type": "boolean",
+          "description": "ActiveActive flag."
+        },
+        "enableHighBandwidthVpnGateway": {
+          "type": "boolean",
+          "description": "To enable Advanced Connectivity feature for VPN gateway"
+        },
+        "disableIPSecReplayProtection": {
+          "type": "boolean",
+          "description": "disableIPSecReplayProtection flag."
+        },
+        "gatewayDefaultSite": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The reference to the LocalNetworkGateway resource which represents local network site having default routes. Assign Null value in case of removing existing default site setting."
+        },
+        "sku": {
+          "$ref": "#/definitions/VirtualNetworkGatewaySku",
+          "description": "The reference to the VirtualNetworkGatewaySku resource which represents the SKU selected for Virtual network gateway."
+        },
+        "vpnClientConfiguration": {
+          "$ref": "#/definitions/VpnClientConfiguration",
+          "description": "The reference to the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
+        },
+        "virtualNetworkGatewayPolicyGroups": {
+          "type": "array",
+          "description": "The reference to the VirtualNetworkGatewayPolicyGroup resource which represents the available VirtualNetworkGatewayPolicyGroup for the gateway.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayPolicyGroup"
+          }
+        },
+        "bgpSettings": {
+          "$ref": "#/definitions/BgpSettings",
+          "description": "Virtual network gateway's BGP speaker settings."
+        },
+        "customRoutes": {
+          "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
+          "description": "The reference to the address space resource which represents the custom routes address space specified by the customer for virtual network gateway and VpnClient."
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the virtual network gateway resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the virtual network gateway resource.",
+          "readOnly": true
+        },
+        "enableDnsForwarding": {
+          "type": "boolean",
+          "description": "Whether dns forwarding is enabled or not."
+        },
+        "inboundDnsForwardingEndpoint": {
+          "type": "string",
+          "description": "The IP address allocated by the gateway to which dns requests can be sent.",
+          "readOnly": true
+        },
+        "vNetExtendedLocationResourceId": {
+          "type": "string",
+          "description": "Customer vnet resource id. VirtualNetworkGateway of type local gateway is associated with the customer vnet."
+        },
+        "natRules": {
+          "type": "array",
+          "description": "NatRules for virtual network gateway.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkGatewayNatRule"
+          }
+        },
+        "enableBgpRouteTranslationForNat": {
+          "type": "boolean",
+          "description": "EnableBgpRouteTranslationForNat flag."
+        },
+        "allowVirtualWanTraffic": {
+          "type": "boolean",
+          "description": "Configures this gateway to accept traffic from remote Virtual WAN networks."
+        },
+        "allowRemoteVnetTraffic": {
+          "type": "boolean",
+          "description": "Configure this gateway to accept traffic from other Azure Virtual Networks. This configuration does not support connectivity to Azure Virtual WAN."
+        },
+        "adminState": {
+          "$ref": "./common.json#/definitions/AdminState",
+          "description": "Property to indicate if the Express Route Gateway serves traffic when there are multiple Express Route Gateways in the vnet"
+        },
+        "resiliencyModel": {
+          "$ref": "./common.json#/definitions/ResiliencyModel",
+          "description": "Property to indicate if the Express Route Gateway has resiliency model of MultiHomed or SingleHomed"
+        }
+      }
+    },
     "VirtualNetworkGatewaySku": {
       "type": "object",
       "description": "VirtualNetworkGatewaySku details.",
@@ -3736,7 +5607,7 @@
       "description": "Virtual Network Tap resource.",
       "properties": {
         "properties": {
-          "$ref": "./common.json#/definitions/VirtualNetworkTapPropertiesFormat",
+          "$ref": "#/definitions/VirtualNetworkTapPropertiesFormat",
           "description": "Virtual Network Tap Properties.",
           "x-ms-client-flatten": true
         },
@@ -3771,6 +5642,68 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "VirtualNetworkTapPropertiesFormat": {
+      "type": "object",
+      "description": "Virtual Network Tap properties.",
+      "properties": {
+        "networkInterfaceTapConfigurations": {
+          "type": "array",
+          "description": "Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped.",
+          "items": {
+            "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
+          },
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "description": "The resource GUID property of the virtual network tap resource.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the virtual network tap resource.",
+          "readOnly": true
+        },
+        "destinationNetworkInterfaceIPConfiguration": {
+          "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration",
+          "description": "The reference to the private IP Address of the collector nic that will receive the tap."
+        },
+        "destinationLoadBalancerFrontEndIPConfiguration": {
+          "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration",
+          "description": "The reference to the private IP address on the internal Load Balancer that will receive the tap."
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The VXLAN destination port that will receive the tapped traffic."
+        }
+      }
+    },
+    "VngClientConnectionConfiguration": {
+      "type": "object",
+      "description": "A vpn client connection configuration for client connection configuration.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VngClientConnectionConfigurationProperties",
+          "description": "Properties of the vpn client root certificate.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
       ]
     },
     "VngClientConnectionConfigurationProperties": {
@@ -3811,14 +5744,14 @@
           "type": "array",
           "description": "VpnClientRootCertificate for virtual network gateway.",
           "items": {
-            "$ref": "./common.json#/definitions/VpnClientRootCertificate"
+            "$ref": "#/definitions/VpnClientRootCertificate"
           }
         },
         "vpnClientRevokedCertificates": {
           "type": "array",
           "description": "VpnClientRevokedCertificate for Virtual network gateway.",
           "items": {
-            "$ref": "./common.json#/definitions/VpnClientRevokedCertificate"
+            "$ref": "#/definitions/VpnClientRevokedCertificate"
           }
         },
         "vpnClientProtocols": {
@@ -3875,37 +5808,7 @@
           "type": "array",
           "description": "per ip address pool connection policy for virtual network gateway P2S client.",
           "items": {
-            "$ref": "./common.json#/definitions/VngClientConnectionConfiguration"
-          }
-        }
-      }
-    },
-    "VpnClientConnectionHealth": {
-      "type": "object",
-      "description": "VpnClientConnectionHealth properties.",
-      "properties": {
-        "totalIngressBytesTransferred": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total of the Ingress Bytes Transferred in this P2S Vpn connection.",
-          "readOnly": true
-        },
-        "totalEgressBytesTransferred": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total of the Egress Bytes Transferred in this connection.",
-          "readOnly": true
-        },
-        "vpnClientConnectionsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The total of p2s vpn clients connected at this time to this P2SVpnGateway."
-        },
-        "allocatedIpAddresses": {
-          "type": "array",
-          "description": "List of allocated ip addresses to the connected p2s vpn clients.",
-          "items": {
-            "type": "string"
+            "$ref": "#/definitions/VngClientConnectionConfiguration"
           }
         }
       }
@@ -4070,6 +5973,92 @@
           }
         }
       }
+    },
+    "VpnClientRevokedCertificate": {
+      "type": "object",
+      "description": "VPN client revoked certificate of virtual network gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnClientRevokedCertificatePropertiesFormat",
+          "description": "Properties of the vpn client revoked certificate.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "VpnClientRevokedCertificatePropertiesFormat": {
+      "type": "object",
+      "description": "Properties of the revoked VPN client certificate of virtual network gateway.",
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "The revoked VPN client certificate thumbprint."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the VPN client revoked certificate resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "VpnClientRootCertificate": {
+      "type": "object",
+      "description": "VPN client root certificate of virtual network gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VpnClientRootCertificatePropertiesFormat",
+          "description": "Properties of the vpn client root certificate.",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "VpnClientRootCertificatePropertiesFormat": {
+      "type": "object",
+      "description": "Properties of SSL certificates of application gateway.",
+      "properties": {
+        "publicCertData": {
+          "type": "string",
+          "description": "The certificate public data."
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the VPN client root certificate resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "publicCertData"
+      ]
     },
     "VpnDeviceScriptParameters": {
       "type": "object",

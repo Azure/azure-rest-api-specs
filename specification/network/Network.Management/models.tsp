@@ -7998,6 +7998,8 @@ model NetworkInterfaceIPConfigurationPropertiesFormat {
 /**
  * Virtual Network Tap properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkTapPropertiesFormat {
   /**
    * Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped.
@@ -23368,6 +23370,8 @@ model VirtualNetworkDdosProtectionStatusResult
 /**
  * VirtualNetworkGateway properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayPropertiesFormat {
   /**
    * Autoscale configuration for virutal network gateway
@@ -23517,6 +23521,8 @@ model VirtualNetworkGatewayPropertiesFormat {
 /**
  * Virtual Network Gateway Autoscale Configuration details
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayAutoScaleConfiguration {
   /**
    * The bounds of the autoscale configuration
@@ -23525,6 +23531,8 @@ model VirtualNetworkGatewayAutoScaleConfiguration {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayAutoScaleBounds {
   /**
    * Minimum scale Units for Autoscale configuration
@@ -23541,6 +23549,8 @@ model VirtualNetworkGatewayAutoScaleBounds {
  * IP configuration for virtual network gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayIPConfiguration extends SubResource {
   /**
    * Properties of the virtual network gateway ip configuration.
@@ -23600,6 +23610,8 @@ model VirtualNetworkGatewayIPConfigurationPropertiesFormat {
 /**
  * Migration status for the Virtual Network Gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayMigrationStatus {
   /**
    * Represent the current state of gateway migration.
@@ -23719,6 +23731,8 @@ model VpnClientConfiguration {
  * VPN client root certificate of virtual network gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientRootCertificate extends SubResource {
   /**
    * Properties of the vpn client root certificate.
@@ -23740,6 +23754,8 @@ model VpnClientRootCertificate extends SubResource {
 /**
  * Properties of SSL certificates of application gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientRootCertificatePropertiesFormat {
   /**
    * The certificate public data.
@@ -23757,6 +23773,8 @@ model VpnClientRootCertificatePropertiesFormat {
  * VPN client revoked certificate of virtual network gateway.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientRevokedCertificate extends SubResource {
   /**
    * Properties of the vpn client revoked certificate.
@@ -23778,6 +23796,8 @@ model VpnClientRevokedCertificate extends SubResource {
 /**
  * Properties of the revoked VPN client certificate of virtual network gateway.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VpnClientRevokedCertificatePropertiesFormat {
   /**
    * The revoked VPN client certificate thumbprint.
@@ -23867,6 +23887,8 @@ model RadiusServer {
  * A vpn client connection configuration for client connection configuration.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VngClientConnectionConfiguration extends SubResource {
   /**
    * Properties of the vpn client root certificate.
@@ -23912,6 +23934,8 @@ model VngClientConnectionConfigurationProperties {
  * Parameters for VirtualNetworkGatewayPolicyGroup.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayPolicyGroup extends SubResource {
   /**
    * Properties of tVirtualNetworkGatewayPolicyGroup.
@@ -24108,6 +24132,8 @@ model VpnNatRuleMapping {
 /**
  * Response for the VirtualNetworkGatewayListConnections API service call.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayListConnectionsResult
   is Azure.Core.Page<VirtualNetworkGatewayConnectionListEntity>;
 
@@ -24117,6 +24143,8 @@ model VirtualNetworkGatewayListConnectionsResult
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayConnectionListEntity extends Resource {
   /**
    * Properties of the virtual network gateway connection.
@@ -24133,6 +24161,8 @@ model VirtualNetworkGatewayConnectionListEntity extends Resource {
 /**
  * VirtualNetworkGatewayConnection properties.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
   /**
    * The authorizationKey.
@@ -24450,6 +24480,8 @@ model BgpPeerStatus {
 /**
  * List of Radius servers with respective radius secrets.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model RadiusAuthServerListResult is Azure.Core.Page<RadiusAuthServer>;
 
 /**
@@ -25256,6 +25288,8 @@ model LocalNetworkGatewayPropertiesFormat {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayConnectionTunnelProperties {
   /**
    * Tunnel remote IP address
@@ -25434,6 +25468,8 @@ model ListVirtualNetworkGatewayNatRulesResult
 /**
  * Virtual network gateway migration parameters.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkGatewayMigrationParameters {
   /**
    * MigrationType for the virtual network gateway.
@@ -26297,7 +26333,7 @@ model VpnServerConfigurationPolicyGroupMember {
  * VpnClientConnectionHealth properties.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkGateway)
+@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 model VpnClientConnectionHealth {
   /**
    * Total of the Ingress Bytes Transferred in this P2S Vpn connection.
