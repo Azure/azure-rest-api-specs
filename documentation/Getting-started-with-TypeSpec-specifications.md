@@ -27,3 +27,4 @@ Within the azure-rest-api-specs repository, the TypeSpec specification serves as
 - Read up on [Folder Structure for TypeSpec](./typespec-structure-guidelines.md)
 - [Setting up a new TypeSpec project](./typespec-rest-api-dev-process.md#3-creating-a-new-typespec-project)
 - [Setting up and regenerate SDK projects](./typespec-rest-api-dev-process.md#5-generate-sdk-code-from-a-typespec-project)
+- [Body Parameter Naming Conventions for PATCH and POST operations](./body-parameter-naming-guide.md)
