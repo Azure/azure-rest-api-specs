@@ -13,7 +13,7 @@ using Microsoft.RecoveryServices;
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "vault");
 @@clientName(Vaults.update::parameters.properties, "vault");
-@@clientName(Vaults.create::parameters.properties, "certificateRequest");
+@@clientName(Vaults.create::parameters.resource, "certificateRequest");
 
 @@clientName(VaultExtendedInfoResources.createOrUpdate::parameters.resource,
   "resourceResourceExtendedInfoDetails",
