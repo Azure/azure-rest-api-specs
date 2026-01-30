@@ -182,11 +182,6 @@ namespace Microsoft.RecoveryServices;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(RawCertificateData.certificate, "CertificateData", "csharp");
-// @@clientName(ResourceCertificateDetails.certificate,
-//   "CertificateData",
-//   "csharp"
-// );
 
 @@alternateType(PatchVault.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
