@@ -41,7 +41,7 @@ interface DataCollectionRuleConfigurationMetadata {
   /** Fetches configuration metadata for data collection rules. When withStreamMetadata is true, returns detailed stream information. */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadata")
   @post
-  fetchDataCollectionRuleConfigurationMetadata(
+  fetch(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
