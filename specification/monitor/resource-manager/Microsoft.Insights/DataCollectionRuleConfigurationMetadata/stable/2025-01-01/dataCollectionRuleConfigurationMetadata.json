@@ -83,13 +83,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadataDetails": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadata": {
       "post": {
-        "operationId": "DataCollectionRuleConfigurationMetadata_FetchDetails",
+        "operationId": "DataCollectionRuleConfigurationMetadata_FetchDataCollectionRuleConfigurationMetadata",
         "tags": [
           "DataCollectionRuleConfigurationMetadata"
         ],
-        "description": "Fetches detailed configuration metadata for a specific resource type.",
+        "description": "Fetches configuration metadata for data collection rules. When withStreamMetadata is true, returns detailed stream information.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -107,59 +107,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "Request body containing resource type filter.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DataCollectionRuleConfigurationMetadataRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataCollectionRuleConfigurationMetadataResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Fetch detailed configuration metadata": {
-            "$ref": "./examples/DataCollectionRuleConfigurationMetadataFetchDetails.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/locations/{location}/fetchDataCollectionRuleConfigurationMetadataSummary": {
-      "post": {
-        "operationId": "DataCollectionRuleConfigurationMetadata_FetchSummary",
-        "tags": [
-          "DataCollectionRuleConfigurationMetadata"
-        ],
-        "description": "Fetches summary configuration metadata for all supported data sources.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The Azure region for the metadata request.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Request body containing optional resource type filter.",
+            "description": "Request body containing filter options and stream metadata flag.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/DataCollectionRuleConfigurationMetadataRequest"
@@ -181,8 +129,11 @@
           }
         },
         "x-ms-examples": {
-          "Fetch summary configuration metadata": {
-            "$ref": "./examples/DataCollectionRuleConfigurationMetadataFetchSummary.json"
+          "Fetch configuration metadata": {
+            "$ref": "./examples/DataCollectionRuleConfigurationMetadataFetch.json"
+          },
+          "Fetch configuration metadata with stream details": {
+            "$ref": "./examples/DataCollectionRuleConfigurationMetadataFetchWithStreamMetadata.json"
           }
         }
       }
@@ -209,7 +160,11 @@
         },
         "resourceType": {
           "type": "string",
-          "description": "Optional resource type filter (e.g., Microsoft.Compute/virtualMachines). If specified, returns detailed configuration metadata for that resource type."
+          "description": "Optional resource type filter (e.g., Microsoft.Compute/virtualMachines). If specified, returns configuration metadata for that resource type."
+        },
+        "withStreamMetadata": {
+          "type": "boolean",
+          "description": "When true, returns detailed stream metadata in the response. Defaults to false."
         }
       }
     },
@@ -246,7 +201,7 @@
     },
     "MetricsSpecification": {
       "type": "object",
-      "description": "Specification for a metrics stream.",
+      "description": "Specification for a metrics stream. Properties are driven by the service and are manifest driven.",
       "properties": {
         "name": {
           "type": "string",
@@ -262,11 +217,11 @@
         },
         "unit": {
           "type": "string",
-          "description": "The unit of measurement for the metric."
+          "description": "The unit of measurement for the metric.\nThis value is provided by the service and is manifest-driven; the set of possible values may evolve over time.\nExample: \"Count\"."
         },
         "aggregationType": {
           "type": "string",
-          "description": "The aggregation type for the metric."
+          "description": "The aggregation type for the metric.\nThis value is provided by the service and is manifest-driven; the set of possible values may evolve over time.\nExample: \"Total\"."
         },
         "groups": {
           "type": "array",
@@ -339,7 +294,7 @@
         },
         "supportedStreams": {
           "type": "array",
-          "description": "Detailed stream information (only in fetchDetails response).",
+          "description": "Detailed stream information. Only returned when withStreamMetadata is true in the request.",
           "items": {
             "$ref": "#/definitions/StreamMetadata"
           },

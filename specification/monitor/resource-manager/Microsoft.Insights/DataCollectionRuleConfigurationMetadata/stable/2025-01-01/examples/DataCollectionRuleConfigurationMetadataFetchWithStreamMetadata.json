@@ -1,0 +1,75 @@
+{
+  "operationId": "DataCollectionRuleConfigurationMetadata_FetchDataCollectionRuleConfigurationMetadata",
+  "title": "Fetch configuration metadata with stream details",
+  "parameters": {
+    "subscriptionId": "703362b3-f278-4e4b-9179-c76eaf41ffc2",
+    "location": "eastus",
+    "api-version": "2025-01-01",
+    "body": {
+      "dcrKind": "PlatformTelemetry",
+      "resourceType": "Microsoft.Storage/storageAccounts",
+      "withStreamMetadata": true
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configurationMetadata": {
+          "platformTelemetry": {
+            "platformLogs": {
+              "supportedDestinations": [
+                "Microsoft.OperationalInsights/workspaces",
+                "Microsoft.EventHub/namespaces",
+                "Microsoft.Storage/storageAccounts"
+              ],
+              "supportedResourceTypes": [
+                "Microsoft.Storage/storageAccounts"
+              ],
+              "supportedStreams": [
+                {
+                  "streamId": "Microsoft-StorageRead",
+                  "metadata": {
+                    "logsSpecification": {
+                      "name": "StorageRead",
+                      "displayName": "Storage Read Operations",
+                      "groups": [
+                        "audit",
+                        "read"
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            "platformMetrics": {
+              "supportedDestinations": [
+                "Microsoft.OperationalInsights/workspaces",
+                "Microsoft.Storage/storageAccounts"
+              ],
+              "supportedResourceTypes": [
+                "Microsoft.Storage/storageAccounts"
+              ],
+              "supportedStreams": [
+                {
+                  "streamId": "Microsoft-Transactions",
+                  "metadata": {
+                    "metricsSpecification": {
+                      "name": "transactions",
+                      "displayName": "Transactions",
+                      "description": "Number of requests made to storage service",
+                      "unit": "Count",
+                      "aggregationType": "Total",
+                      "groups": [
+                        "capacity"
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
