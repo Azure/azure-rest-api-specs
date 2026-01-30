@@ -252,7 +252,7 @@ model PrivateEndpointConnectionVaultPropertiesReplacement
 /**
  * Certificate corresponding to a vault that can be used by clients to register themselves with the vault.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
 model VaultCertificateResponseReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<VaultCertificateResponse, "id" | "name" | "type">;
