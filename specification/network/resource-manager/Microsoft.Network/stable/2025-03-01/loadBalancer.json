@@ -69,7 +69,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -111,7 +111,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -167,7 +167,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -240,7 +240,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -311,7 +311,7 @@
             "description": "Parameters supplied to update load balancer tags.",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/TagsObject"
+              "$ref": "./common.json/definitions/TagsObject"
             }
           }
         ],
@@ -325,7 +325,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -383,7 +383,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -447,7 +447,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -487,13 +487,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceListResult"
+              "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -542,7 +542,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResourceModel"
+          "$ref": "./common.json/definitions/SubResourceModel"
         }
       ]
     },
@@ -572,7 +572,7 @@
           "type": "array",
           "description": "An array of references to IP addresses defined in network interfaces.",
           "items": {
-            "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
+            "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration"
           },
           "readOnly": true
         },
@@ -580,12 +580,12 @@
           "type": "array",
           "description": "An array of references to load balancing rules that use this backend address pool.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           },
           "readOnly": true
         },
         "outboundRule": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "A reference to an outbound rule that uses this backend address pool.",
           "readOnly": true
         },
@@ -593,7 +593,7 @@
           "type": "array",
           "description": "An array of references to outbound rules that use this backend address pool.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -601,12 +601,12 @@
           "type": "array",
           "description": "An array of references to inbound NAT rules that use this backend address pool.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           },
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the backend address pool resource.",
           "readOnly": true
         },
@@ -616,11 +616,11 @@
           "description": "Amount of seconds Load Balancer waits for before sending RESET to client and backend address."
         },
         "virtualNetwork": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "A reference to a virtual network."
         },
         "syncMode": {
-          "$ref": "./common.json#/definitions/SyncMode",
+          "$ref": "./common.json/definitions/SyncMode",
           "description": "Backend address synchronous mode for the backend pool"
         }
       }
@@ -649,7 +649,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResourceModel"
+          "$ref": "./common.json/definitions/SubResourceModel"
         }
       ]
     },
@@ -661,7 +661,7 @@
           "type": "array",
           "description": "An array of references to inbound rules that use this frontend IP.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -669,7 +669,7 @@
           "type": "array",
           "description": "An array of references to inbound pools that use this frontend IP.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -677,7 +677,7 @@
           "type": "array",
           "description": "An array of references to outbound rules that use this frontend IP.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -685,7 +685,7 @@
           "type": "array",
           "description": "An array of references to load balancing rules that use this frontend IP.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           },
           "readOnly": true
         },
@@ -694,31 +694,31 @@
           "description": "The private IP address of the IP configuration."
         },
         "privateIPAllocationMethod": {
-          "$ref": "./common.json#/definitions/IPAllocationMethod",
+          "$ref": "./common.json/definitions/IPAllocationMethod",
           "description": "The Private IP allocation method."
         },
         "privateIPAddressVersion": {
-          "$ref": "./common.json#/definitions/IPVersion",
+          "$ref": "./common.json/definitions/IPVersion",
           "description": "Whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4."
         },
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "$ref": "./virtualNetwork.json/definitions/Subnet",
           "description": "The reference to the subnet resource."
         },
         "publicIPAddress": {
-          "$ref": "./virtualNetwork.json#/definitions/PublicIPAddress",
+          "$ref": "./virtualNetwork.json/definitions/PublicIPAddress",
           "description": "The reference to the Public IP resource."
         },
         "publicIPPrefix": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "The reference to the Public IP Prefix resource."
         },
         "gatewayLoadBalancer": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "The reference to gateway load balancer frontend IP."
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the frontend IP configuration resource.",
           "readOnly": true
         }
@@ -739,11 +739,11 @@
           "description": "Identifier of gateway load balancer tunnel interface."
         },
         "protocol": {
-          "$ref": "./common.json#/definitions/GatewayLoadBalancerTunnelProtocol",
+          "$ref": "./common.json/definitions/GatewayLoadBalancerTunnelProtocol",
           "description": "Protocol of gateway load balancer tunnel interface."
         },
         "type": {
-          "$ref": "./common.json#/definitions/GatewayLoadBalancerTunnelInterfaceType",
+          "$ref": "./common.json/definitions/GatewayLoadBalancerTunnelInterfaceType",
           "description": "Traffic type of gateway load balancer tunnel interface."
         }
       }
@@ -774,7 +774,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResource"
+          "$ref": "./common.json/definitions/SubResource"
         }
       ]
     },
@@ -783,11 +783,11 @@
       "description": "Properties of Inbound NAT pool.",
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "A reference to frontend IP addresses."
         },
         "protocol": {
-          "$ref": "./common.json#/definitions/TransportProtocol",
+          "$ref": "./common.json/definitions/TransportProtocol",
           "description": "The reference to the transport protocol used by the inbound NAT pool."
         },
         "frontendPortRangeStart": {
@@ -819,7 +819,7 @@
           "description": "Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP."
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the inbound NAT pool resource.",
           "readOnly": true
         }
@@ -848,7 +848,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResourceModel"
+          "$ref": "./common.json/definitions/SubResourceModel"
         }
       ]
     },
@@ -883,7 +883,7 @@
           "readOnly": true
         },
         "protocol": {
-          "$ref": "./common.json#/definitions/TransportProtocol",
+          "$ref": "./common.json/definitions/TransportProtocol",
           "description": "The reference to the transport protocol used by the inbound NAT rule.",
           "readOnly": true
         },
@@ -906,16 +906,16 @@
       "description": "Properties of the inbound NAT rule.",
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "A reference to frontend IP addresses."
         },
         "backendIPConfiguration": {
-          "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration",
+          "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration",
           "description": "A reference to a private IP address defined on a network interface of a VM. Traffic sent to the frontend port of each of the frontend IP configurations is forwarded to the backend IP.",
           "readOnly": true
         },
         "protocol": {
-          "$ref": "./common.json#/definitions/TransportProtocol",
+          "$ref": "./common.json/definitions/TransportProtocol",
           "description": "The reference to the transport protocol used by the load balancing rule."
         },
         "frontendPort": {
@@ -952,11 +952,11 @@
           "description": "The port range end for the external endpoint. This property is used together with BackendAddressPool and FrontendPortRangeStart. Individual inbound NAT rule port mappings will be created for each backend address from BackendAddressPool. Acceptable values range from 1 to 65534."
         },
         "backendAddressPool": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "A reference to backendAddressPool resource."
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the inbound NAT rule resource.",
           "readOnly": true
         }
@@ -977,7 +977,7 @@
           "readOnly": true
         },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "$ref": "./common.json/definitions/ExtendedLocation",
           "description": "The extended location of the load balancer."
         },
         "sku": {
@@ -987,7 +987,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/Resource"
+          "$ref": "./common.json/definitions/Resource"
         }
       ]
     },
@@ -1011,11 +1011,11 @@
       "description": "Properties of the load balancer backend addresses.",
       "properties": {
         "virtualNetwork": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "Reference to an existing virtual network."
         },
         "subnet": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "Reference to an existing subnet."
         },
         "ipAddress": {
@@ -1023,12 +1023,12 @@
           "description": "IP Address belonging to the referenced virtual network."
         },
         "networkInterfaceIPConfiguration": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "Reference to IP address defined in network interfaces.",
           "readOnly": true
         },
         "loadBalancerFrontendIPConfiguration": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "Reference to the frontend ip address configuration defined in regional loadbalancer."
         },
         "inboundNatRulesPortMapping": {
@@ -1040,7 +1040,7 @@
           "readOnly": true
         },
         "adminState": {
-          "$ref": "./common.json#/definitions/LoadBalancerBackendAddressAdminState",
+          "$ref": "./common.json/definitions/LoadBalancerBackendAddressAdminState",
           "description": "A list of administrative states which once set can override health probe so that Load Balancer will always forward new connections to backend, or deny new connections and reset existing connections."
         }
       }
@@ -1170,12 +1170,12 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the load balancer resource.",
           "readOnly": true
         },
         "scope": {
-          "$ref": "./common.json#/definitions/LoadBalancerScope",
+          "$ref": "./common.json/definitions/LoadBalancerScope",
           "description": "Indicates the scope of the load balancer: external (Public) or internal (Private)."
         }
       }
@@ -1185,11 +1185,11 @@
       "description": "SKU of a load balancer.",
       "properties": {
         "name": {
-          "$ref": "./common.json#/definitions/LoadBalancerSkuName",
+          "$ref": "./common.json/definitions/LoadBalancerSkuName",
           "description": "Name of a load balancer SKU."
         },
         "tier": {
-          "$ref": "./common.json#/definitions/LoadBalancerSkuTier",
+          "$ref": "./common.json/definitions/LoadBalancerSkuTier",
           "description": "Tier of a load balancer SKU."
         }
       }
@@ -1227,7 +1227,7 @@
       "description": "The properties of VIP swap request's frontend IP configuration object.",
       "properties": {
         "publicIPAddress": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "A reference to public IP address resource."
         }
       }
@@ -1249,7 +1249,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResourceModel"
+          "$ref": "./common.json/definitions/SubResourceModel"
         }
       ]
     },
@@ -1258,30 +1258,30 @@
       "description": "Properties of the load balancer.",
       "properties": {
         "frontendIPConfiguration": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "A reference to frontend IP addresses."
         },
         "backendAddressPool": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "A reference to a pool of DIPs. Inbound traffic is randomly load balanced across IPs in the backend IPs."
         },
         "backendAddressPools": {
           "type": "array",
           "description": "An array of references to pool of DIPs.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           }
         },
         "probe": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "The reference to the load balancer probe used by the load balancing rule."
         },
         "protocol": {
-          "$ref": "./common.json#/definitions/TransportProtocol",
+          "$ref": "./common.json/definitions/TransportProtocol",
           "description": "The reference to the transport protocol used by the load balancing rule."
         },
         "loadDistribution": {
-          "$ref": "./common.json#/definitions/LoadDistribution",
+          "$ref": "./common.json/definitions/LoadDistribution",
           "description": "The load distribution policy for this rule."
         },
         "frontendPort": {
@@ -1316,7 +1316,7 @@
           "description": "Defines whether connections between 2 communicating endpoints can be tracked and associated to the same backend VM over its lifetime when using UDP protocol."
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the load balancing rule resource.",
           "readOnly": true
         }
@@ -1389,7 +1389,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResourceModel"
+          "$ref": "./common.json/definitions/SubResourceModel"
         }
       ]
     },
@@ -1406,20 +1406,20 @@
           "type": "array",
           "description": "The Frontend IP addresses of the load balancer.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           }
         },
         "backendAddressPool": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs."
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the outbound rule resource.",
           "readOnly": true
         },
         "protocol": {
-          "$ref": "./common.json#/definitions/LoadBalancerOutboundRuleProtocol",
+          "$ref": "./common.json/definitions/LoadBalancerOutboundRuleProtocol",
           "description": "The protocol for the outbound rule in load balancer."
         },
         "enableTcpReset": {
@@ -1455,7 +1455,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResourceModel"
+          "$ref": "./common.json/definitions/SubResourceModel"
         }
       ]
     },
@@ -1467,12 +1467,12 @@
           "type": "array",
           "description": "The load balancer rules that use this probe.",
           "items": {
-            "$ref": "./common.json#/definitions/SubResource"
+            "$ref": "./common.json/definitions/SubResource"
           },
           "readOnly": true
         },
         "protocol": {
-          "$ref": "./common.json#/definitions/ProbeProtocol",
+          "$ref": "./common.json/definitions/ProbeProtocol",
           "description": "The protocol of the end point. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful."
         },
         "port": {
@@ -1486,7 +1486,7 @@
           "description": "The interval, in seconds, for how frequently to probe the endpoint for health status. Typically, the interval is slightly less than half the allocated timeout period (in seconds) which allows two full probes before taking the instance out of rotation. The default value is 15, the minimum value is 5."
         },
         "noHealthyBackendsBehavior": {
-          "$ref": "./common.json#/definitions/ProbeNoHealthyBackendsBehavior",
+          "$ref": "./common.json/definitions/ProbeNoHealthyBackendsBehavior",
           "description": "Determines how new connections are handled by the load balancer when all backend instances are probed down."
         },
         "numberOfProbes": {
@@ -1504,7 +1504,7 @@
           "description": "The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value."
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the probe resource.",
           "readOnly": true
         }
@@ -1519,7 +1519,7 @@
       "description": "The request for a QueryInboundNatRulePortMapping API. Either IpConfiguration or IpAddress should be set",
       "properties": {
         "ipConfiguration": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "NetworkInterfaceIPConfiguration set in load balancer backend address."
         },
         "ipAddress": {

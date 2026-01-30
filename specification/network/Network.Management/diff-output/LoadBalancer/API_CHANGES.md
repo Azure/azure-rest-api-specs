@@ -47,101 +47,95 @@ Change Type: deleted
 
 ## Swagger Changes
 
-### Changes for `tags`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `tags__added` | added | `[{"name":"LoadBalancers"}]` |
-
 ### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses__deleted']` | deleted | `{"post":{"operationId":"LoadBalancers_SwapPublicIpAddresses","tags":["LoadBalancers"],"parameters":[...` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses__deleted']` | deleted | `{"post":{"operationId":"LoadBalancers_SwapPublicIpAddresses","parameters":[{"name":"location","in":"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerBackendAddressPools_List","tags":["LoadBalancers"],"parameters":[...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerBackendAddressPools_List","parameters":[{"name":"loadBalancerName...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerBackendAddressPools_Get","tags":["LoadBalancers"],"parameters":[{...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerBackendAddressPools_Get","parameters":[{"name":"loadBalancerName"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendPoolName}/queryInboundNatRulePortMapping`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendPoolName}/queryInboundNatRulePortMapping__deleted']` | deleted | `{"post":{"operationId":"LoadBalancers_ListInboundNatRulePortMappings","tags":["LoadBalancers"],"para...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendPoolName}/queryInboundNatRulePortMapping__deleted']` | deleted | `{"post":{"operationId":"LoadBalancers_ListInboundNatRulePortMappings","parameters":[{"name":"groupNa...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerFrontendIPConfigurations_List","tags":["LoadBalancers"],"paramete...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerFrontendIPConfigurations_List","parameters":[{"name":"loadBalance...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerFrontendIPConfigurations_Get","tags":["LoadBalancers"],"parameter...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerFrontendIPConfigurations_Get","parameters":[{"name":"loadBalancer...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules__deleted']` | deleted | `{"get":{"operationId":"InboundNatRules_List","tags":["LoadBalancers"],"parameters":[{"name":"loadBal...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules__deleted']` | deleted | `{"get":{"operationId":"InboundNatRules_List","parameters":[{"name":"loadBalancerName","in":"path","r...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}__deleted']` | deleted | `{"get":{"operationId":"InboundNatRules_Get","tags":["LoadBalancers"],"parameters":[{"name":"loadBala...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}__deleted']` | deleted | `{"get":{"operationId":"InboundNatRules_Get","parameters":[{"name":"loadBalancerName","in":"path","re...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerLoadBalancingRules_List","tags":["LoadBalancers"],"parameters":[{...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerLoadBalancingRules_List","parameters":[{"name":"loadBalancerName"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerLoadBalancingRules_Get","tags":["LoadBalancers"],"parameters":[{"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerLoadBalancingRules_Get","parameters":[{"name":"loadBalancerName",...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health__deleted']` | deleted | `{"post":{"operationId":"LoadBalancerLoadBalancingRules_Health","tags":["LoadBalancers"],"parameters"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health__deleted']` | deleted | `{"post":{"operationId":"LoadBalancerLoadBalancingRules_Health","parameters":[{"name":"groupName","in...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerOutboundRules_List","tags":["LoadBalancers"],"parameters":[{"name...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerOutboundRules_List","parameters":[{"name":"loadBalancerName","in"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerOutboundRules_Get","tags":["LoadBalancers"],"parameters":[{"name"...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerOutboundRules_Get","parameters":[{"name":"loadBalancerName","in":...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerProbes_List","tags":["LoadBalancers"],"parameters":[{"name":"load...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerProbes_List","parameters":[{"name":"loadBalancerName","in":"path"...` |
 
 ### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerProbes_Get","tags":["LoadBalancers"],"parameters":[{"name":"loadB...` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}__deleted']` | deleted | `{"get":{"operationId":"LoadBalancerProbes_Get","parameters":[{"name":"loadBalancerName","in":"path",...` |
 
 ### Changes for `headers`
 
@@ -155,36 +149,6 @@ Change Type: deleted
 | Path | Change Type | Value |
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/LoadBalancer` |
-
-### Changes for `BackendAddressPool`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.BackendAddressPool__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/BackendAddressPoolPropertiesForma...` |
-
-### Changes for `FrontendIPConfiguration`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.FrontendIPConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/FrontendIPConfigurationProperties...` |
-
-### Changes for `InboundNatPool`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.InboundNatPool__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/InboundNatPoolPropertiesFormat","...` |
-
-### Changes for `InboundNatRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.InboundNatRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/InboundNatRulePropertiesFormat","...` |
-
-### Changes for `InboundNatRuleListResult`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.InboundNatRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
 ### Changes for `LoadBalancerBackendAddressPoolListResult`
 
@@ -216,41 +180,40 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.LoadBalancerProbeListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
 
-### Changes for `LoadBalancingRule`
+### Changes for `name`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.LoadBalancingRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/LoadBalancingRulePropertiesFormat...` |
-
-### Changes for `OutboundRule`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.OutboundRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/OutboundRulePropertiesFormat","x-...` |
-
-### Changes for `Probe`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.Probe__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ProbePropertiesFormat","x-ms-clie...` |
+| `definitions.BackendAddressPool.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.FrontendIPConfiguration.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.InboundNatRule.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.LoadBalancingRule.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.OutboundRule.properties.name__deleted` | deleted | `{"type":"string"}` |
+| `definitions.Probe.properties.name__deleted` | deleted | `{"type":"string"}` |
 
 ### Changes for `type`
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.BackendAddressPool.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.syncMode.type__deleted` | deleted | `string` |
+| `definitions.FrontendIPConfiguration.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.GatewayLoadBalancerTunnelInterface.properties.protocol.type__deleted` | deleted | `string` |
 | `definitions.GatewayLoadBalancerTunnelInterface.properties.type.type__deleted` | deleted | `string` |
 | `definitions.InboundNatPoolPropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.InboundNatRule.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.InboundNatRulePortMapping.properties.protocol.type__deleted` | deleted | `string` |
 | `definitions.InboundNatRulePropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.adminState.type__deleted` | deleted | `string` |
 | `definitions.LoadBalancerPropertiesFormat.properties.scope.type__deleted` | deleted | `string` |
 | `definitions.LoadBalancerSku.properties.name.type__deleted` | deleted | `string` |
 | `definitions.LoadBalancerSku.properties.tier.type__deleted` | deleted | `string` |
+| `definitions.LoadBalancingRule.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.loadDistribution.type__deleted` | deleted | `string` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.OutboundRule.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.OutboundRulePropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
+| `definitions.Probe.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.ProbePropertiesFormat.properties.noHealthyBackendsBehavior.type__deleted` | deleted | `string` |
 | `definitions.ProbePropertiesFormat.properties.protocol.type__deleted` | deleted | `string` |
 
@@ -314,6 +277,13 @@ Change Type: deleted
 | `definitions.ProbePropertiesFormat.properties.noHealthyBackendsBehavior.$ref__added` | added | `./common.json/definitions/ProbeNoHealthyBackendsBehavior` |
 | `definitions.ProbePropertiesFormat.properties.protocol.$ref__added` | added | `./common.json/definitions/ProbeProtocol` |
 
+### Changes for `required`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.InboundNatRuleListResult.required__added` | added | `["value"]` |
+| `definitions.LoadBalancerListResult.required__added` | added | `["value"]` |
+
 ### Changes for `x-ms-azure-resource`
 
 | Path | Change Type | Value |
@@ -326,12 +296,6 @@ Change Type: deleted
 |------|------------|-------|
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.loadBalancerFrontendIPConfiguration.readOnly__deleted` | deleted | `false` |
 
-### Changes for `required`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.LoadBalancerListResult.required__added` | added | `["value"]` |
-
 ### Changes for `format`
 
 | Path | Change Type | Value |
@@ -342,13 +306,15 @@ Change Type: deleted
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `definitions.BackendAddressPoolPropertiesFormat.properties.backendIPConfigurations.items.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./common.json/definitions/NetworkInterfaceIPConfiguration` |
+| `definitions.BackendAddressPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
+| `definitions.BackendAddressPoolPropertiesFormat.properties.backendIPConfigurations.items.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.inboundNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.loadBalancingRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.outboundRule.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.outboundRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.BackendAddressPoolPropertiesFormat.properties.virtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.FrontendIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.gatewayLoadBalancer.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.inboundNatPools.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.inboundNatRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
@@ -359,11 +325,13 @@ Change Type: deleted
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./publicIpAddress.json#/definitions/PublicIPAddress` | `./virtualNetwork.json/definitions/PublicIPAddress` |
 | `definitions.FrontendIPConfigurationPropertiesFormat.properties.publicIPPrefix.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.FrontendIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `./common.json/definitions/Subnet` |
+| `definitions.FrontendIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./virtualNetwork.json#/definitions/Subnet` | `./virtualNetwork.json/definitions/Subnet` |
+| `definitions.InboundNatPool.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.InboundNatPoolPropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.InboundNatPoolPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.InboundNatRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
 | `definitions.InboundNatRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.InboundNatRulePropertiesFormat.properties.backendIPConfiguration.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./common.json/definitions/NetworkInterfaceIPConfiguration` |
+| `definitions.InboundNatRulePropertiesFormat.properties.backendIPConfiguration.$ref` | `./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration` | `./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration` |
 | `definitions.InboundNatRulePropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.InboundNatRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.LoadBalancer.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
@@ -372,23 +340,19 @@ Change Type: deleted
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.networkInterfaceIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.LoadBalancerBackendAddressPropertiesFormat.properties.virtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.LoadBalancerPropertiesFormat.properties.backendAddressPools.items.$ref` | `#/definitions/BackendAddressPool` | `./common.json/definitions/BackendAddressPool` |
-| `definitions.LoadBalancerPropertiesFormat.properties.frontendIPConfigurations.items.$ref` | `#/definitions/FrontendIPConfiguration` | `./common.json/definitions/FrontendIPConfiguration` |
-| `definitions.LoadBalancerPropertiesFormat.properties.inboundNatPools.items.$ref` | `#/definitions/InboundNatPool` | `./common.json/definitions/InboundNatPool` |
-| `definitions.LoadBalancerPropertiesFormat.properties.inboundNatRules.items.$ref` | `#/definitions/InboundNatRule` | `./common.json/definitions/InboundNatRule` |
-| `definitions.LoadBalancerPropertiesFormat.properties.loadBalancingRules.items.$ref` | `#/definitions/LoadBalancingRule` | `./common.json/definitions/LoadBalancingRule` |
-| `definitions.LoadBalancerPropertiesFormat.properties.outboundRules.items.$ref` | `#/definitions/OutboundRule` | `./common.json/definitions/OutboundRule` |
-| `definitions.LoadBalancerPropertiesFormat.properties.probes.items.$ref` | `#/definitions/Probe` | `./common.json/definitions/Probe` |
 | `definitions.LoadBalancerPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.LoadBalancerVipSwapRequestFrontendIPConfigurationProperties.properties.publicIPAddress.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.LoadBalancingRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.backendAddressPools.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.frontendIPConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.probe.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.LoadBalancingRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.OutboundRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
 | `definitions.OutboundRulePropertiesFormat.properties.backendAddressPool.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.OutboundRulePropertiesFormat.properties.frontendIPConfigurations.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.OutboundRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
+| `definitions.Probe.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResourceModel` |
 | `definitions.ProbePropertiesFormat.properties.loadBalancingRules.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
 | `definitions.ProbePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
 | `definitions.QueryInboundNatRulePortMappingRequest.properties.ipConfiguration.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |

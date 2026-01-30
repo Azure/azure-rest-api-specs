@@ -41,12 +41,6 @@
   "tags": [
     {
       "name": "AzureFirewalls"
-    },
-    {
-      "name": "AzureWebCategories"
-    },
-    {
-      "name": "FirewallPolicies"
     }
   ],
   "paths": {
@@ -72,7 +66,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -111,141 +105,13 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
         "x-ms-examples": {
           "List all Azure Firewalls for a given subscription": {
             "$ref": "./examples/AzureFirewallListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureWebCategories": {
-      "get": {
-        "operationId": "WebCategories_ListBySubscription",
-        "tags": [
-          "AzureWebCategories"
-        ],
-        "description": "Gets all the Azure Web Categories in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AzureWebCategoryListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all Azure Web Categories for a given subscription": {
-            "$ref": "./examples/AzureWebCategoriesListBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureWebCategories/{name}": {
-      "get": {
-        "operationId": "WebCategories_Get",
-        "tags": [
-          "AzureWebCategories"
-        ],
-        "description": "Gets the specified Azure Web Category.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the azureWebCategory.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Expands resourceIds back referenced by the azureWebCategory resource.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AzureWebCategory"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Azure Web Category by name": {
-            "$ref": "./examples/AzureWebCategoryGet.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/firewallPolicies": {
-      "get": {
-        "operationId": "FirewallPolicies_ListAll",
-        "tags": [
-          "FirewallPolicies"
-        ],
-        "description": "Gets all the Firewall Policies in a subscription.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FirewallPolicyListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all Firewall Policies for a given subscription": {
-            "$ref": "./examples/FirewallPolicyListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -281,7 +147,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -330,7 +196,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -412,7 +278,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -471,7 +337,7 @@
             "description": "Parameters supplied to update azure firewall tags.",
             "required": true,
             "schema": {
-              "$ref": "./common.json#/definitions/TagsObject"
+              "$ref": "./common.json/definitions/TagsObject"
             }
           }
         ],
@@ -499,7 +365,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -562,7 +428,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -626,7 +492,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -694,7 +560,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -767,7 +633,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
+              "$ref": "./common.json/definitions/CloudError"
             }
           }
         },
@@ -782,464 +648,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies": {
-      "get": {
-        "operationId": "FirewallPolicies_List",
-        "tags": [
-          "FirewallPolicies"
-        ],
-        "description": "Lists all Firewall Policies in a resource group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FirewallPolicyListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List all Firewall Policies for a given resource group": {
-            "$ref": "./examples/FirewallPolicyListByResourceGroup.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}": {
-      "get": {
-        "operationId": "FirewallPolicies_Get",
-        "tags": [
-          "FirewallPolicies"
-        ],
-        "description": "Gets the specified Firewall Policy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "firewallPolicyName",
-            "in": "path",
-            "description": "The name of the Firewall Policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "in": "query",
-            "description": "Expands referenced resources.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FirewallPolicy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get FirewallPolicy": {
-            "$ref": "./examples/FirewallPolicyGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "FirewallPolicies_CreateOrUpdate",
-        "tags": [
-          "FirewallPolicies"
-        ],
-        "description": "Creates or updates the specified Firewall Policy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "firewallPolicyName",
-            "in": "path",
-            "description": "The name of the Firewall Policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters supplied to the create or update Firewall Policy operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FirewallPolicy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'FirewallPolicy' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FirewallPolicy"
-            }
-          },
-          "201": {
-            "description": "Resource 'FirewallPolicy' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/FirewallPolicy"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create FirewallPolicy": {
-            "$ref": "./examples/FirewallPolicyPut.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/FirewallPolicy"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "patch": {
-        "operationId": "FirewallPolicies_UpdateTags",
-        "tags": [
-          "FirewallPolicies"
-        ],
-        "description": "Updates tags of a Azure Firewall Policy resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "firewallPolicyName",
-            "in": "path",
-            "description": "The name of the Firewall Policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters supplied to update Azure Firewall Policy tags.",
-            "required": true,
-            "schema": {
-              "$ref": "./common.json#/definitions/TagsObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/FirewallPolicy"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update FirewallPolicy Tags": {
-            "$ref": "./examples/FirewallPolicyPatch.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "FirewallPolicies_Delete",
-        "tags": [
-          "FirewallPolicies"
-        ],
-        "description": "Deletes the specified Firewall Policy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "firewallPolicyName",
-            "in": "path",
-            "description": "The name of the Firewall Policy.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Firewall Policy": {
-            "$ref": "./examples/FirewallPolicyDelete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy": {
-      "post": {
-        "operationId": "FirewallPolicyDeployments_Deploy",
-        "tags": [
-          "FirewallPolicies"
-        ],
-        "description": "Deploys the firewall policy draft and child rule collection group drafts.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "firewallPolicyName",
-            "in": "path",
-            "description": "The name of the Firewall Policy.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "deploy firewall policy draft": {
-            "$ref": "./examples/FirewallPolicyDraftDeploy.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsFilterOptions": {
-      "post": {
-        "operationId": "FirewallPolicyIdpsSignaturesFilterValues_List",
-        "tags": [
-          "FirewallPolicies"
-        ],
-        "description": "Retrieves the current filter values for the signatures overrides",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "firewallPolicyName",
-            "in": "path",
-            "description": "The name of the Firewall Policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "./common.json#/definitions/SignatureOverridesFilterValuesQuery"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "./common.json#/definitions/SignatureOverridesFilterValuesResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "query signature overrides": {
-            "$ref": "./examples/FirewallPolicyQuerySignatureOverridesFilterValues.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures": {
-      "post": {
-        "operationId": "FirewallPolicyIdpsSignatures_List",
-        "tags": [
-          "FirewallPolicies"
-        ],
-        "description": "Retrieves the current status of IDPS signatures for the relevant policy. Maximal amount of returned signatures is 1000.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "firewallPolicyName",
-            "in": "path",
-            "description": "The name of the Firewall Policy.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "./common.json#/definitions/IDPSQueryObject"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "./common.json#/definitions/QueryResults"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "./common.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "query signature overrides": {
-            "$ref": "./examples/FirewallPolicyQuerySignatureOverrides.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1253,7 +661,7 @@
           "x-ms-client-flatten": true
         },
         "extendedLocation": {
-          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "$ref": "./common.json/definitions/ExtendedLocation",
           "description": "The extended location of type local virtual network gateway."
         },
         "zones": {
@@ -1271,7 +679,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/Resource"
+          "$ref": "./common.json/definitions/Resource"
         }
       ]
     },
@@ -1345,7 +753,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResource"
+          "$ref": "./common.json/definitions/SubResource"
         }
       ]
     },
@@ -1372,7 +780,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the application rule collection resource.",
           "readOnly": true
         }
@@ -1383,7 +791,7 @@
       "description": "Properties of the application rule protocol.",
       "properties": {
         "protocolType": {
-          "$ref": "./common.json#/definitions/AzureFirewallApplicationRuleProtocolType",
+          "$ref": "./common.json/definitions/AzureFirewallApplicationRuleProtocolType",
           "description": "Protocol type."
         },
         "port": {
@@ -1432,7 +840,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/Resource"
+          "$ref": "./common.json/definitions/Resource"
         }
       ]
     },
@@ -1462,7 +870,7 @@
       "description": "Azure Firewall FQDN Tag Properties.",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the Azure firewall FQDN tag resource.",
           "readOnly": true
         },
@@ -1499,7 +907,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResource"
+          "$ref": "./common.json/definitions/SubResource"
         }
       ]
     },
@@ -1513,21 +921,21 @@
           "readOnly": true
         },
         "subnet": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "Reference to the subnet resource. This resource must be named 'AzureFirewallSubnet' or 'AzureFirewallManagementSubnet'."
         },
         "publicIPAddress": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "Reference to the PublicIP resource. This field is a mandatory input if subnet is not null."
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the Azure firewall IP configuration resource.",
           "readOnly": true
         }
       }
     },
-    "AzureFirewallIPGroups": {
+    "AzureFirewallIpGroups": {
       "type": "object",
       "description": "IpGroups associated with azure firewall.",
       "properties": {
@@ -1569,7 +977,7 @@
       "description": "AzureFirewall NAT Rule Collection Action.",
       "properties": {
         "type": {
-          "$ref": "./common.json#/definitions/AzureFirewallNatRCActionType",
+          "$ref": "./common.json/definitions/AzureFirewallNatRCActionType",
           "description": "The type of action."
         }
       }
@@ -1611,7 +1019,7 @@
           "type": "array",
           "description": "Array of AzureFirewallNetworkRuleProtocols applicable to this NAT rule.",
           "items": {
-            "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol"
+            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
           }
         },
         "translatedAddress": {
@@ -1656,7 +1064,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResource"
+          "$ref": "./common.json/definitions/SubResource"
         }
       ]
     },
@@ -1683,7 +1091,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the NAT rule collection resource.",
           "readOnly": true
         }
@@ -1705,7 +1113,7 @@
           "type": "array",
           "description": "Array of AzureFirewallNetworkRuleProtocols.",
           "items": {
-            "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol"
+            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
           }
         },
         "sourceAddresses": {
@@ -1773,7 +1181,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResource"
+          "$ref": "./common.json/definitions/SubResource"
         }
       ]
     },
@@ -1800,7 +1208,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the network rule collection resource.",
           "readOnly": true
         }
@@ -1811,7 +1219,7 @@
       "description": "Properties of the AzureFirewallRCAction.",
       "properties": {
         "type": {
-          "$ref": "./common.json#/definitions/AzureFirewallPacketCaptureFlagsType",
+          "$ref": "./common.json/definitions/AzureFirewallPacketCaptureFlagsType",
           "description": "Flags to capture"
         }
       }
@@ -1821,7 +1229,7 @@
       "description": "Response of an Azure Firewall Packet Capture Operation.",
       "properties": {
         "statusCode": {
-          "$ref": "./common.json#/definitions/AzureFirewallPacketCaptureResponseCode",
+          "$ref": "./common.json/definitions/AzureFirewallPacketCaptureResponseCode",
           "description": "The response code of the performed packet capture operation"
         },
         "message": {
@@ -1894,20 +1302,20 @@
           "description": "IP configuration of the Azure Firewall used for management traffic."
         },
         "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "$ref": "./common.json/definitions/NetworkProvisioningState",
           "description": "The provisioning state of the Azure firewall resource.",
           "readOnly": true
         },
         "threatIntelMode": {
-          "$ref": "./common.json#/definitions/AzureFirewallThreatIntelMode",
+          "$ref": "./common.json/definitions/AzureFirewallThreatIntelMode",
           "description": "The operation mode for Threat Intelligence."
         },
         "virtualHub": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "The virtualHub to which the firewall belongs."
         },
         "firewallPolicy": {
-          "$ref": "./common.json#/definitions/SubResource",
+          "$ref": "./common.json/definitions/SubResource",
           "description": "The firewallPolicy associated with this azure firewall."
         },
         "hubIPAddresses": {
@@ -1918,7 +1326,7 @@
           "type": "array",
           "description": "IpGroups associated with AzureFirewall.",
           "items": {
-            "$ref": "#/definitions/AzureFirewallIPGroups"
+            "$ref": "#/definitions/AzureFirewallIpGroups"
           },
           "readOnly": true
         },
@@ -1954,7 +1362,7 @@
       "description": "Properties of the AzureFirewallRCAction.",
       "properties": {
         "type": {
-          "$ref": "./common.json#/definitions/AzureFirewallRCActionType",
+          "$ref": "./common.json/definitions/AzureFirewallRCActionType",
           "description": "The type of action."
         }
       }
@@ -1964,51 +1372,14 @@
       "description": "SKU of an Azure Firewall.",
       "properties": {
         "name": {
-          "$ref": "./common.json#/definitions/AzureFirewallSkuName",
+          "$ref": "./common.json/definitions/AzureFirewallSkuName",
           "description": "Name of an Azure Firewall SKU."
         },
         "tier": {
-          "$ref": "./common.json#/definitions/AzureFirewallSkuTier",
+          "$ref": "./common.json/definitions/AzureFirewallSkuTier",
           "description": "Tier of an Azure Firewall."
         }
       }
-    },
-    "AzureWebCategory": {
-      "type": "object",
-      "description": "Azure Web Category Resource.",
-      "properties": {
-        "properties": {
-          "$ref": "./common.json#/definitions/AzureWebCategoryPropertiesFormat",
-          "description": "Properties of the Azure Web Category.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "AzureWebCategoryListResult": {
-      "type": "object",
-      "description": "The response of a AzureWebCategory list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AzureWebCategory items on this page",
-          "items": {
-            "$ref": "#/definitions/AzureWebCategory"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "FirewallPacketCaptureParameters": {
       "type": "object",
@@ -2039,7 +1410,7 @@
           "description": "Name of file to be uploaded to sasURL"
         },
         "protocol": {
-          "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol",
+          "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol",
           "description": "The protocol of packets to capture"
         },
         "flags": {
@@ -2087,233 +1458,6 @@
                 "description": "Stop"
               }
             ]
-          }
-        }
-      }
-    },
-    "FirewallPolicy": {
-      "type": "object",
-      "description": "FirewallPolicy Resource.",
-      "properties": {
-        "properties": {
-          "$ref": "./common.json#/definitions/FirewallPolicyPropertiesFormat",
-          "description": "Properties of the firewall policy.",
-          "x-ms-client-flatten": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated.",
-          "readOnly": true
-        },
-        "identity": {
-          "$ref": "./common.json#/definitions/ManagedServiceIdentity",
-          "description": "The identity of the firewall policy."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/Resource"
-        }
-      ]
-    },
-    "FirewallPolicyIntrusionDetection": {
-      "type": "object",
-      "description": "Configuration for intrusion detection mode and rules.",
-      "properties": {
-        "mode": {
-          "$ref": "./common.json#/definitions/FirewallPolicyIntrusionDetectionStateType",
-          "description": "Intrusion detection general state. When attached to a parent policy, the firewall's effective IDPS mode is the stricter mode of the two."
-        },
-        "profile": {
-          "$ref": "./common.json#/definitions/FirewallPolicyIntrusionDetectionProfileType",
-          "description": "IDPS profile name. When attached to a parent policy, the firewall's effective profile is the profile name of the parent policy."
-        },
-        "configuration": {
-          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionConfiguration",
-          "description": "Intrusion detection configuration properties."
-        }
-      }
-    },
-    "FirewallPolicyIntrusionDetectionBypassTrafficSpecifications": {
-      "type": "object",
-      "description": "Intrusion detection bypass traffic specification.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the bypass traffic rule."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the bypass traffic rule."
-        },
-        "protocol": {
-          "$ref": "./common.json#/definitions/FirewallPolicyIntrusionDetectionProtocol",
-          "description": "The rule bypass protocol."
-        },
-        "sourceAddresses": {
-          "type": "array",
-          "description": "List of source IP addresses or ranges for this rule.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationAddresses": {
-          "type": "array",
-          "description": "List of destination IP addresses or ranges for this rule.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationPorts": {
-          "type": "array",
-          "description": "List of destination ports or ranges.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sourceIpGroups": {
-          "type": "array",
-          "description": "List of source IpGroups for this rule.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "destinationIpGroups": {
-          "type": "array",
-          "description": "List of destination IpGroups for this rule.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "FirewallPolicyIntrusionDetectionConfiguration": {
-      "type": "object",
-      "description": "The operation for configuring intrusion detection.",
-      "properties": {
-        "signatureOverrides": {
-          "type": "array",
-          "description": "List of specific signatures states.",
-          "items": {
-            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionSignatureSpecification"
-          }
-        },
-        "bypassTrafficSettings": {
-          "type": "array",
-          "description": "List of rules for traffic to bypass.",
-          "items": {
-            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"
-          },
-          "x-ms-identifiers": []
-        },
-        "privateRanges": {
-          "type": "array",
-          "description": "IDPS Private IP address ranges are used to identify traffic direction (i.e. inbound, outbound, etc.). By default, only ranges defined by IANA RFC 1918 are considered private IP addresses. To modify default ranges, specify your Private IP address ranges with this property",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "FirewallPolicyIntrusionDetectionSignatureSpecification": {
-      "type": "object",
-      "description": "Intrusion detection signatures specification states.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Signature id."
-        },
-        "mode": {
-          "$ref": "./common.json#/definitions/FirewallPolicyIntrusionDetectionStateType",
-          "description": "The signature state."
-        }
-      }
-    },
-    "FirewallPolicyListResult": {
-      "type": "object",
-      "description": "The response of a FirewallPolicy list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FirewallPolicy items on this page",
-          "items": {
-            "$ref": "#/definitions/FirewallPolicy"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "FirewallPolicyRuleCollectionGroupProperties": {
-      "type": "object",
-      "description": "Properties of the rule collection group.",
-      "properties": {
-        "size": {
-          "type": "string",
-          "description": "A read-only string that represents the size of the FirewallPolicyRuleCollectionGroupProperties in MB. (ex 1.2MB)",
-          "readOnly": true
-        },
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Priority of the Firewall Policy Rule Collection Group resource.",
-          "minimum": 100,
-          "maximum": 65000
-        },
-        "ruleCollections": {
-          "type": "array",
-          "description": "Group of Firewall Policy rule collections.",
-          "items": {
-            "$ref": "./common.json#/definitions/FirewallPolicyRuleCollection"
-          },
-          "x-ms-identifiers": []
-        },
-        "provisioningState": {
-          "$ref": "./common.json#/definitions/NetworkProvisioningState",
-          "description": "The provisioning state of the firewall policy rule collection group resource.",
-          "readOnly": true
-        }
-      }
-    },
-    "FirewallPolicySNAT": {
-      "type": "object",
-      "description": "The private IP addresses/IP ranges to which traffic will not be SNAT.",
-      "properties": {
-        "privateRanges": {
-          "type": "array",
-          "description": "List of private IP addresses/IP address ranges to not be SNAT.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "autoLearnPrivateRanges": {
-          "$ref": "./common.json#/definitions/AutoLearnPrivateRangesMode",
-          "description": "The operation mode for automatically learning private ranges to not be SNAT"
-        }
-      }
-    },
-    "FirewallPolicyThreatIntelWhitelist": {
-      "type": "object",
-      "description": "ThreatIntel Whitelist for Firewall Policy.",
-      "properties": {
-        "ipAddresses": {
-          "type": "array",
-          "description": "List of IP addresses for the ThreatIntel Whitelist.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "fqdns": {
-          "type": "array",
-          "description": "List of FQDNs for the ThreatIntel Whitelist.",
-          "items": {
-            "type": "string"
           }
         }
       }

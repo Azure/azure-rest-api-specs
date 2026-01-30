@@ -15324,8 +15324,6 @@ model FirewallPolicyPropertiesFormat {
 /**
  * ThreatIntel Whitelist for Firewall Policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyThreatIntelWhitelist {
   /**
    * List of IP addresses for the ThreatIntel Whitelist.
@@ -15392,8 +15390,6 @@ model FirewallPolicyLogAnalyticsWorkspace {
 /**
  * The private IP addresses/IP ranges to which traffic will not be SNAT.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicySnat {
   /**
    * List of private IP addresses/IP address ranges to not be SNAT.
@@ -15484,8 +15480,6 @@ model ExplicitProxy {
 /**
  * Configuration for intrusion detection mode and rules.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyIntrusionDetection {
   /**
    * Intrusion detection general state. When attached to a parent policy, the firewall's effective IDPS mode is the stricter mode of the two.
@@ -15506,8 +15500,6 @@ model FirewallPolicyIntrusionDetection {
 /**
  * The operation for configuring intrusion detection.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyIntrusionDetectionConfiguration {
   /**
    * List of specific signatures states.
@@ -15529,8 +15521,6 @@ model FirewallPolicyIntrusionDetectionConfiguration {
 /**
  * Intrusion detection signatures specification states.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyIntrusionDetectionSignatureSpecification {
   /**
    * Signature id.
@@ -15546,8 +15536,6 @@ model FirewallPolicyIntrusionDetectionSignatureSpecification {
 /**
  * Intrusion detection bypass traffic specification.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyIntrusionDetectionBypassTrafficSpecifications {
   /**
    * Name of the bypass traffic rule.
@@ -15628,8 +15616,6 @@ model FirewallPolicySku {
 /**
  * Properties of the rule collection group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewall)
 model FirewallPolicyRuleCollectionGroupProperties {
   /**
    * A read-only string that represents the size of the FirewallPolicyRuleCollectionGroupProperties in MB. (ex 1.2MB)
@@ -29436,6 +29422,9 @@ model BastionHostListResult is Azure.Core.Page<BastionHost>;
 );
 @@Azure.ClientGenerator.Core.clientName(VirtualApplianceNetworkInterfaceConfiguration.type,
   "NicType"
+);
+@@Azure.ClientGenerator.Core.clientName(AzureFirewallIPGroups,
+  "AzureFirewallIpGroups"
 );
 @@doc(PacketCaptureListResult, "List of packet capture sessions.");
 @@doc(PacketCaptureListResult.value,

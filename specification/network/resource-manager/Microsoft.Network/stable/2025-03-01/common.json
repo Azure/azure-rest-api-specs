@@ -40,6 +40,12 @@
   },
   "tags": [
     {
+      "name": "AzureWebCategories"
+    },
+    {
+      "name": "FirewallPolicies"
+    },
+    {
       "name": "FirewallPolicyRuleCollectionGroups"
     },
     {
@@ -253,7 +259,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/NetworkManagerConnectionListResult"
+              "$ref": "./networkManager.json/definitions/NetworkManagerConnectionListResult"
             }
           },
           "default": {
@@ -304,7 +310,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/NetworkManagerConnection"
+              "$ref": "./networkManager.json/definitions/NetworkManagerConnection"
             }
           },
           "default": {
@@ -351,7 +357,7 @@
             "description": "Network manager connection to be created/updated.",
             "required": true,
             "schema": {
-              "$ref": "./networkManager.json#/definitions/NetworkManagerConnection"
+              "$ref": "./networkManager.json/definitions/NetworkManagerConnection"
             }
           }
         ],
@@ -359,13 +365,13 @@
           "200": {
             "description": "Resource 'NetworkManagerConnection' update operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/NetworkManagerConnection"
+              "$ref": "./networkManager.json/definitions/NetworkManagerConnection"
             }
           },
           "201": {
             "description": "Resource 'NetworkManagerConnection' create operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/NetworkManagerConnection"
+              "$ref": "./networkManager.json/definitions/NetworkManagerConnection"
             }
           },
           "default": {
@@ -428,6 +434,134 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureWebCategories": {
+      "get": {
+        "operationId": "WebCategories_ListBySubscription",
+        "tags": [
+          "AzureWebCategories"
+        ],
+        "description": "Gets all the Azure Web Categories in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureWebCategoryListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Azure Web Categories for a given subscription": {
+            "$ref": "./examples/AzureWebCategoriesListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/azureWebCategories/{name}": {
+      "get": {
+        "operationId": "WebCategories_Get",
+        "tags": [
+          "AzureWebCategories"
+        ],
+        "description": "Gets the specified Azure Web Category.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the azureWebCategory.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands resourceIds back referenced by the azureWebCategory resource.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AzureWebCategory"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure Web Category by name": {
+            "$ref": "./examples/AzureWebCategoryGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/firewallPolicies": {
+      "get": {
+        "operationId": "FirewallPolicies_ListAll",
+        "tags": [
+          "FirewallPolicies"
+        ],
+        "description": "Gets all the Firewall Policies in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Firewall Policies for a given subscription": {
+            "$ref": "./examples/FirewallPolicyListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices": {
       "get": {
         "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServices",
@@ -447,7 +581,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/AutoApprovedPrivateLinkServicesResult"
+              "$ref": "./virtualNetwork.json/definitions/AutoApprovedPrivateLinkServicesResult"
             }
           },
           "default": {
@@ -486,7 +620,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/AvailablePrivateEndpointTypesResult"
+              "$ref": "./virtualNetwork.json/definitions/AvailablePrivateEndpointTypesResult"
             }
           },
           "default": {
@@ -526,7 +660,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/CheckPrivateLinkServiceVisibilityRequest"
+              "$ref": "./virtualNetwork.json/definitions/CheckPrivateLinkServiceVisibilityRequest"
             }
           }
         ],
@@ -534,7 +668,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/PrivateLinkServiceVisibility"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkServiceVisibility"
             }
           },
           "202": {
@@ -565,7 +699,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualNetwork.json#/definitions/PrivateLinkServiceVisibility"
+          "final-state-schema": "./virtualNetwork.json/definitions/PrivateLinkServiceVisibility"
         },
         "x-ms-long-running-operation": true
       }
@@ -710,7 +844,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/LoadBalancerVipSwapRequest"
+              "$ref": "./loadBalancer.json/definitions/LoadBalancerVipSwapRequest"
             }
           }
         ],
@@ -769,7 +903,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkVirtualApplianceSkuListResult"
+              "$ref": "./virtualNetwork.json/definitions/NetworkVirtualApplianceSkuListResult"
             }
           },
           "default": {
@@ -815,7 +949,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkVirtualApplianceSku"
+              "$ref": "./virtualNetwork.json/definitions/NetworkVirtualApplianceSku"
             }
           },
           "default": {
@@ -851,7 +985,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListP2SVpnGatewaysResult"
+              "$ref": "./virtualWan.json/definitions/ListP2SVpnGatewaysResult"
             }
           },
           "default": {
@@ -890,7 +1024,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/PrivateLinkServiceListResult"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkServiceListResult"
             }
           },
           "default": {
@@ -929,7 +1063,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVirtualHubsResult"
+              "$ref": "./virtualWan.json/definitions/ListVirtualHubsResult"
             }
           },
           "default": {
@@ -968,7 +1102,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVpnGatewaysResult"
+              "$ref": "./virtualWan.json/definitions/ListVpnGatewaysResult"
             }
           },
           "default": {
@@ -1046,7 +1180,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVpnSitesResult"
+              "$ref": "./virtualWan.json/definitions/ListVpnSitesResult"
             }
           },
           "default": {
@@ -1412,7 +1546,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -1470,7 +1604,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -1514,7 +1648,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/ConnectionSharedKey"
+              "$ref": "./networkGateway.json/definitions/ConnectionSharedKey"
             }
           },
           "default": {
@@ -1559,7 +1693,7 @@
             "description": "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider.",
             "required": true,
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/ConnectionSharedKey"
+              "$ref": "./networkGateway.json/definitions/ConnectionSharedKey"
             }
           }
         ],
@@ -1567,13 +1701,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/ConnectionSharedKey"
+              "$ref": "./networkGateway.json/definitions/ConnectionSharedKey"
             }
           },
           "201": {
             "description": "Resource 'ConnectionSharedKey' create operation succeeded",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/ConnectionSharedKey"
+              "$ref": "./networkGateway.json/definitions/ConnectionSharedKey"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1601,7 +1735,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./networkGateway.json#/definitions/ConnectionSharedKey"
+          "final-state-schema": "./networkGateway.json/definitions/ConnectionSharedKey"
         },
         "x-ms-long-running-operation": true
       }
@@ -1636,7 +1770,7 @@
             "description": "Parameters supplied to the begin reset virtual network gateway connection shared key operation through network resource provider.",
             "required": true,
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/ConnectionResetSharedKey"
+              "$ref": "./networkGateway.json/definitions/ConnectionResetSharedKey"
             }
           }
         ],
@@ -1644,7 +1778,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/ConnectionResetSharedKey"
+              "$ref": "./networkGateway.json/definitions/ConnectionResetSharedKey"
             }
           },
           "202": {
@@ -1675,7 +1809,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./networkGateway.json#/definitions/ConnectionResetSharedKey"
+          "final-state-schema": "./networkGateway.json/definitions/ConnectionResetSharedKey"
         },
         "x-ms-long-running-operation": true
       }
@@ -1710,7 +1844,7 @@
             "description": "Virtual network gateway packet capture parameters supplied to start packet capture on gateway connection.",
             "required": false,
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/VpnPacketCaptureStartParameters"
+              "$ref": "./networkGateway.json/definitions/VpnPacketCaptureStartParameters"
             }
           }
         ],
@@ -1786,7 +1920,7 @@
             "description": "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway connection.",
             "required": true,
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/VpnPacketCaptureStopParameters"
+              "$ref": "./networkGateway.json/definitions/VpnPacketCaptureStopParameters"
             }
           }
         ],
@@ -1859,7 +1993,7 @@
             "description": "Parameters supplied to the generate vpn device script operation.",
             "required": true,
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/VpnDeviceScriptParameters"
+              "$ref": "./networkGateway.json/definitions/VpnDeviceScriptParameters"
             }
           }
         ],
@@ -1882,6 +2016,354 @@
             "$ref": "./examples/VirtualNetworkGatewayVpnDeviceConfigurationScript.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies": {
+      "get": {
+        "operationId": "FirewallPolicies_List",
+        "tags": [
+          "FirewallPolicies"
+        ],
+        "description": "Lists all Firewall Policies in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Firewall Policies for a given resource group": {
+            "$ref": "./examples/FirewallPolicyListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}": {
+      "get": {
+        "operationId": "FirewallPolicies_Get",
+        "tags": [
+          "FirewallPolicies"
+        ],
+        "description": "Gets the specified Firewall Policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "Expands referenced resources.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FirewallPolicies_CreateOrUpdate",
+        "tags": [
+          "FirewallPolicies"
+        ],
+        "description": "Creates or updates the specified Firewall Policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update Firewall Policy operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FirewallPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'FirewallPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create FirewallPolicy": {
+            "$ref": "./examples/FirewallPolicyPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/FirewallPolicy"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "FirewallPolicies_UpdateTags",
+        "tags": [
+          "FirewallPolicies"
+        ],
+        "description": "Updates tags of a Azure Firewall Policy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update Azure Firewall Policy tags.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update FirewallPolicy Tags": {
+            "$ref": "./examples/FirewallPolicyPatch.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FirewallPolicies_Delete",
+        "tags": [
+          "FirewallPolicies"
+        ],
+        "description": "Deletes the specified Firewall Policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Firewall Policy": {
+            "$ref": "./examples/FirewallPolicyDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/deploy": {
+      "post": {
+        "operationId": "FirewallPolicyDeployments_Deploy",
+        "tags": [
+          "FirewallPolicies"
+        ],
+        "description": "Deploys the firewall policy draft and child rule collection group drafts.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "deploy firewall policy draft": {
+            "$ref": "./examples/FirewallPolicyDraftDeploy.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/firewallPolicyDrafts/default": {
@@ -2029,6 +2511,116 @@
         "x-ms-examples": {
           "delete firewall policy draft": {
             "$ref": "./examples/FirewallPolicyDraftDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsFilterOptions": {
+      "post": {
+        "operationId": "FirewallPolicyIdpsSignaturesFilterValues_List",
+        "tags": [
+          "FirewallPolicies"
+        ],
+        "description": "Retrieves the current filter values for the signatures overrides",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignatureOverridesFilterValuesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SignatureOverridesFilterValuesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "query signature overrides": {
+            "$ref": "./examples/FirewallPolicyQuerySignatureOverridesFilterValues.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/listIdpsSignatures": {
+      "post": {
+        "operationId": "FirewallPolicyIdpsSignatures_List",
+        "tags": [
+          "FirewallPolicies"
+        ],
+        "description": "Retrieves the current status of IDPS signatures for the relevant policy. Maximal amount of returned signatures is 1000.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "firewallPolicyName",
+            "in": "path",
+            "description": "The name of the Firewall Policy.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IDPSQueryObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QueryResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "query signature overrides": {
+            "$ref": "./examples/FirewallPolicyQuerySignatureOverrides.json"
           }
         }
       }
@@ -2769,7 +3361,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
+              "$ref": "./loadBalancer.json/definitions/BackendAddressPool"
             }
           },
           "default": {
@@ -2824,7 +3416,7 @@
             "description": "Parameters supplied to the create or update load balancer backend address pool operation.",
             "required": true,
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
+              "$ref": "./loadBalancer.json/definitions/BackendAddressPool"
             }
           }
         ],
@@ -2832,13 +3424,13 @@
           "200": {
             "description": "Resource 'BackendAddressPool' update operation succeeded",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
+              "$ref": "./loadBalancer.json/definitions/BackendAddressPool"
             }
           },
           "201": {
             "description": "Resource 'BackendAddressPool' create operation succeeded",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
+              "$ref": "./loadBalancer.json/definitions/BackendAddressPool"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -2866,7 +3458,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./loadBalancer.json#/definitions/BackendAddressPool"
+          "final-state-schema": "./loadBalancer.json/definitions/BackendAddressPool"
         },
         "x-ms-long-running-operation": true
       },
@@ -2980,7 +3572,7 @@
             "description": "Query inbound NAT rule port mapping request.",
             "required": true,
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/QueryInboundNatRulePortMappingRequest"
+              "$ref": "./loadBalancer.json/definitions/QueryInboundNatRulePortMappingRequest"
             }
           }
         ],
@@ -2988,13 +3580,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/BackendAddressInboundNatRulePortMappings"
+              "$ref": "./loadBalancer.json/definitions/BackendAddressInboundNatRulePortMappings"
             }
           },
           "202": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/BackendAddressInboundNatRulePortMappings"
+              "$ref": "./loadBalancer.json/definitions/BackendAddressInboundNatRulePortMappings"
             },
             "headers": {
               "Location": {
@@ -3022,7 +3614,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./loadBalancer.json#/definitions/BackendAddressInboundNatRulePortMappings"
+          "final-state-schema": "./loadBalancer.json/definitions/BackendAddressInboundNatRulePortMappings"
         },
         "x-ms-long-running-operation": true
       }
@@ -3112,7 +3704,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration"
+              "$ref": "./loadBalancer.json/definitions/FrontendIPConfiguration"
             }
           },
           "default": {
@@ -3158,7 +3750,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/InboundNatRuleListResult"
+              "$ref": "./loadBalancer.json/definitions/InboundNatRuleListResult"
             }
           },
           "default": {
@@ -3221,7 +3813,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/InboundNatRule"
+              "$ref": "./loadBalancer.json/definitions/InboundNatRule"
             }
           },
           "default": {
@@ -3273,7 +3865,7 @@
             "description": "Parameters supplied to the create or update inbound NAT rule operation.",
             "required": true,
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/InboundNatRule"
+              "$ref": "./loadBalancer.json/definitions/InboundNatRule"
             }
           }
         ],
@@ -3281,13 +3873,13 @@
           "200": {
             "description": "Resource 'InboundNatRule' update operation succeeded",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/InboundNatRule"
+              "$ref": "./loadBalancer.json/definitions/InboundNatRule"
             }
           },
           "201": {
             "description": "Resource 'InboundNatRule' create operation succeeded",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/InboundNatRule"
+              "$ref": "./loadBalancer.json/definitions/InboundNatRule"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -3315,7 +3907,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./loadBalancer.json#/definitions/InboundNatRule"
+          "final-state-schema": "./loadBalancer.json/definitions/InboundNatRule"
         },
         "x-ms-long-running-operation": true
       },
@@ -3474,7 +4066,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/LoadBalancingRule"
+              "$ref": "./loadBalancer.json/definitions/LoadBalancingRule"
             }
           },
           "default": {
@@ -3533,7 +4125,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/LoadBalancerHealthPerRule"
+              "$ref": "./loadBalancer.json/definitions/LoadBalancerHealthPerRule"
             }
           },
           "202": {
@@ -3564,7 +4156,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./loadBalancer.json#/definitions/LoadBalancerHealthPerRule"
+          "final-state-schema": "./loadBalancer.json/definitions/LoadBalancerHealthPerRule"
         },
         "x-ms-long-running-operation": true
       }
@@ -3654,7 +4246,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/OutboundRule"
+              "$ref": "./loadBalancer.json/definitions/OutboundRule"
             }
           },
           "default": {
@@ -3756,7 +4348,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./loadBalancer.json#/definitions/Probe"
+              "$ref": "./loadBalancer.json/definitions/Probe"
             }
           },
           "default": {
@@ -3795,7 +4387,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/LocalNetworkGatewayListResult"
+              "$ref": "./networkGateway.json/definitions/LocalNetworkGatewayListResult"
             }
           },
           "default": {
@@ -3845,7 +4437,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/LocalNetworkGateway"
+              "$ref": "./networkGateway.json/definitions/LocalNetworkGateway"
             }
           },
           "default": {
@@ -3891,7 +4483,7 @@
             "description": "Parameters supplied to the create or update local network gateway operation.",
             "required": true,
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/LocalNetworkGateway"
+              "$ref": "./networkGateway.json/definitions/LocalNetworkGateway"
             }
           }
         ],
@@ -3899,13 +4491,13 @@
           "200": {
             "description": "Resource 'LocalNetworkGateway' update operation succeeded",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/LocalNetworkGateway"
+              "$ref": "./networkGateway.json/definitions/LocalNetworkGateway"
             }
           },
           "201": {
             "description": "Resource 'LocalNetworkGateway' create operation succeeded",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/LocalNetworkGateway"
+              "$ref": "./networkGateway.json/definitions/LocalNetworkGateway"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -3933,7 +4525,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./networkGateway.json#/definitions/LocalNetworkGateway"
+          "final-state-schema": "./networkGateway.json/definitions/LocalNetworkGateway"
         },
         "x-ms-long-running-operation": true
       },
@@ -3975,7 +4567,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/LocalNetworkGateway"
+              "$ref": "./networkGateway.json/definitions/LocalNetworkGateway"
             }
           },
           "default": {
@@ -4077,7 +4669,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/AutoApprovedPrivateLinkServicesResult"
+              "$ref": "./virtualNetwork.json/definitions/AutoApprovedPrivateLinkServicesResult"
             }
           },
           "default": {
@@ -4119,7 +4711,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/AvailableDelegationsResult"
+              "$ref": "./virtualNetwork.json/definitions/AvailableDelegationsResult"
             }
           },
           "default": {
@@ -4161,7 +4753,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/AvailablePrivateEndpointTypesResult"
+              "$ref": "./virtualNetwork.json/definitions/AvailablePrivateEndpointTypesResult"
             }
           },
           "default": {
@@ -4204,7 +4796,7 @@
             "description": "The request body",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/CheckPrivateLinkServiceVisibilityRequest"
+              "$ref": "./virtualNetwork.json/definitions/CheckPrivateLinkServiceVisibilityRequest"
             }
           }
         ],
@@ -4212,7 +4804,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/PrivateLinkServiceVisibility"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkServiceVisibility"
             }
           },
           "202": {
@@ -4243,7 +4835,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualNetwork.json#/definitions/PrivateLinkServiceVisibility"
+          "final-state-schema": "./virtualNetwork.json/definitions/PrivateLinkServiceVisibility"
         },
         "x-ms-long-running-operation": true
       }
@@ -4277,7 +4869,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfigurationListResult"
+              "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfigurationListResult"
             }
           },
           "default": {
@@ -4333,7 +4925,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
+              "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration"
             }
           },
           "default": {
@@ -4379,7 +4971,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfigurationListResult"
+              "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceTapConfigurationListResult"
             }
           },
           "default": {
@@ -4435,7 +5027,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
+              "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceTapConfiguration"
             }
           },
           "default": {
@@ -4487,7 +5079,7 @@
             "description": "Parameters supplied to the create or update tap configuration operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
+              "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceTapConfiguration"
             }
           }
         ],
@@ -4495,13 +5087,13 @@
           "200": {
             "description": "Resource 'NetworkInterfaceTapConfiguration' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
+              "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceTapConfiguration"
             }
           },
           "201": {
             "description": "Resource 'NetworkInterfaceTapConfiguration' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
+              "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceTapConfiguration"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -4529,7 +5121,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
+          "final-state-schema": "./virtualNetwork.json/definitions/NetworkInterfaceTapConfiguration"
         },
         "x-ms-long-running-operation": true
       },
@@ -4657,7 +5249,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/StaticMemberListResult"
+              "$ref": "./networkManager.json/definitions/StaticMemberListResult"
             }
           },
           "default": {
@@ -4721,7 +5313,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/StaticMember"
+              "$ref": "./networkManager.json/definitions/StaticMember"
             }
           },
           "default": {
@@ -4781,7 +5373,7 @@
             "description": "Parameters supplied to the specify the static member to create",
             "required": true,
             "schema": {
-              "$ref": "./networkManager.json#/definitions/StaticMember"
+              "$ref": "./networkManager.json/definitions/StaticMember"
             }
           }
         ],
@@ -4789,13 +5381,13 @@
           "200": {
             "description": "Resource 'StaticMember' update operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/StaticMember"
+              "$ref": "./networkManager.json/definitions/StaticMember"
             }
           },
           "201": {
             "description": "Resource 'StaticMember' create operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/StaticMember"
+              "$ref": "./networkManager.json/definitions/StaticMember"
             }
           },
           "default": {
@@ -4926,7 +5518,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRuleCollectionListResult"
+              "$ref": "./networkManager.json/definitions/RoutingRuleCollectionListResult"
             }
           },
           "default": {
@@ -4992,7 +5584,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRuleCollection"
+              "$ref": "./networkManager.json/definitions/RoutingRuleCollection"
             }
           },
           "default": {
@@ -5054,7 +5646,7 @@
             "description": "The Rule Collection to create or update",
             "required": true,
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRuleCollection"
+              "$ref": "./networkManager.json/definitions/RoutingRuleCollection"
             }
           }
         ],
@@ -5062,13 +5654,13 @@
           "200": {
             "description": "Resource 'RoutingRuleCollection' update operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRuleCollection"
+              "$ref": "./networkManager.json/definitions/RoutingRuleCollection"
             }
           },
           "201": {
             "description": "Resource 'RoutingRuleCollection' create operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRuleCollection"
+              "$ref": "./networkManager.json/definitions/RoutingRuleCollection"
             }
           },
           "default": {
@@ -5234,7 +5826,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRuleListResult"
+              "$ref": "./networkManager.json/definitions/RoutingRuleListResult"
             }
           },
           "default": {
@@ -5308,7 +5900,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRule"
+              "$ref": "./networkManager.json/definitions/RoutingRule"
             }
           },
           "default": {
@@ -5378,7 +5970,7 @@
             "description": "The routing rule to create or update",
             "required": true,
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRule"
+              "$ref": "./networkManager.json/definitions/RoutingRule"
             }
           }
         ],
@@ -5386,13 +5978,13 @@
           "200": {
             "description": "Resource 'RoutingRule' update operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRule"
+              "$ref": "./networkManager.json/definitions/RoutingRule"
             }
           },
           "201": {
             "description": "Resource 'RoutingRule' create operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/RoutingRule"
+              "$ref": "./networkManager.json/definitions/RoutingRule"
             }
           },
           "default": {
@@ -5557,7 +6149,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/AdminRuleCollectionListResult"
+              "$ref": "./networkManager.json/definitions/AdminRuleCollectionListResult"
             }
           },
           "default": {
@@ -5621,7 +6213,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/AdminRuleCollection"
+              "$ref": "./networkManager.json/definitions/AdminRuleCollection"
             }
           },
           "default": {
@@ -5681,7 +6273,7 @@
             "description": "The Rule Collection to create or update",
             "required": true,
             "schema": {
-              "$ref": "./networkManager.json#/definitions/AdminRuleCollection"
+              "$ref": "./networkManager.json/definitions/AdminRuleCollection"
             }
           }
         ],
@@ -5689,13 +6281,13 @@
           "200": {
             "description": "Resource 'AdminRuleCollection' update operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/AdminRuleCollection"
+              "$ref": "./networkManager.json/definitions/AdminRuleCollection"
             }
           },
           "201": {
             "description": "Resource 'AdminRuleCollection' create operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/AdminRuleCollection"
+              "$ref": "./networkManager.json/definitions/AdminRuleCollection"
             }
           },
           "default": {
@@ -5928,7 +6520,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/BaseAdminRule"
+              "$ref": "./networkManager.json/definitions/BaseAdminRule"
             }
           },
           "default": {
@@ -5998,7 +6590,7 @@
             "description": "The admin rule to create or update",
             "required": true,
             "schema": {
-              "$ref": "./networkManager.json#/definitions/BaseAdminRule"
+              "$ref": "./networkManager.json/definitions/BaseAdminRule"
             }
           }
         ],
@@ -6006,13 +6598,13 @@
           "200": {
             "description": "Resource 'BaseAdminRule' update operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/BaseAdminRule"
+              "$ref": "./networkManager.json/definitions/BaseAdminRule"
             }
           },
           "201": {
             "description": "Resource 'BaseAdminRule' create operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/BaseAdminRule"
+              "$ref": "./networkManager.json/definitions/BaseAdminRule"
             }
           },
           "default": {
@@ -6178,7 +6770,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRuleCollectionListResult"
+              "$ref": "./networkManager.json/definitions/SecurityUserRuleCollectionListResult"
             }
           },
           "default": {
@@ -6244,7 +6836,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRuleCollection"
+              "$ref": "./networkManager.json/definitions/SecurityUserRuleCollection"
             }
           },
           "default": {
@@ -6306,7 +6898,7 @@
             "description": "The Security User Rule Collection to create or update",
             "required": true,
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRuleCollection"
+              "$ref": "./networkManager.json/definitions/SecurityUserRuleCollection"
             }
           }
         ],
@@ -6314,13 +6906,13 @@
           "200": {
             "description": "Resource 'SecurityUserRuleCollection' update operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRuleCollection"
+              "$ref": "./networkManager.json/definitions/SecurityUserRuleCollection"
             }
           },
           "201": {
             "description": "Resource 'SecurityUserRuleCollection' create operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRuleCollection"
+              "$ref": "./networkManager.json/definitions/SecurityUserRuleCollection"
             }
           },
           "default": {
@@ -6486,7 +7078,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRuleListResult"
+              "$ref": "./networkManager.json/definitions/SecurityUserRuleListResult"
             }
           },
           "default": {
@@ -6560,7 +7152,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRule"
+              "$ref": "./networkManager.json/definitions/SecurityUserRule"
             }
           },
           "default": {
@@ -6630,7 +7222,7 @@
             "description": "The security user rule to create or update",
             "required": true,
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRule"
+              "$ref": "./networkManager.json/definitions/SecurityUserRule"
             }
           }
         ],
@@ -6638,13 +7230,13 @@
           "200": {
             "description": "Resource 'SecurityUserRule' update operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRule"
+              "$ref": "./networkManager.json/definitions/SecurityUserRule"
             }
           },
           "201": {
             "description": "Resource 'SecurityUserRule' create operation succeeded",
             "schema": {
-              "$ref": "./networkManager.json#/definitions/SecurityUserRule"
+              "$ref": "./networkManager.json/definitions/SecurityUserRule"
             }
           },
           "default": {
@@ -6833,7 +7425,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/ReachabilityAnalysisRunListResult"
+              "$ref": "./virtualNetwork.json/definitions/ReachabilityAnalysisRunListResult"
             }
           },
           "default": {
@@ -6900,7 +7492,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/ReachabilityAnalysisRun"
+              "$ref": "./virtualNetwork.json/definitions/ReachabilityAnalysisRun"
             }
           },
           "default": {
@@ -6963,7 +7555,7 @@
             "description": "Analysis Run resource object to create/update.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/ReachabilityAnalysisRun"
+              "$ref": "./virtualNetwork.json/definitions/ReachabilityAnalysisRun"
             }
           }
         ],
@@ -6971,13 +7563,13 @@
           "200": {
             "description": "Resource 'ReachabilityAnalysisRun' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/ReachabilityAnalysisRun"
+              "$ref": "./virtualNetwork.json/definitions/ReachabilityAnalysisRun"
             }
           },
           "201": {
             "description": "Resource 'ReachabilityAnalysisRun' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/ReachabilityAnalysisRun"
+              "$ref": "./virtualNetwork.json/definitions/ReachabilityAnalysisRun"
             }
           },
           "default": {
@@ -7100,7 +7692,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/SecurityRuleListResult"
+              "$ref": "./virtualNetwork.json/definitions/SecurityRuleListResult"
             }
           },
           "default": {
@@ -7156,7 +7748,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
+              "$ref": "./virtualNetwork.json/definitions/SecurityRule"
             }
           },
           "default": {
@@ -7202,7 +7794,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/SecurityRuleListResult"
+              "$ref": "./virtualNetwork.json/definitions/SecurityRuleListResult"
             }
           },
           "default": {
@@ -7258,7 +7850,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
+              "$ref": "./virtualNetwork.json/definitions/SecurityRule"
             }
           },
           "default": {
@@ -7310,7 +7902,7 @@
             "description": "Parameters supplied to the create or update network security rule operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
+              "$ref": "./virtualNetwork.json/definitions/SecurityRule"
             }
           }
         ],
@@ -7318,13 +7910,13 @@
           "200": {
             "description": "Resource 'SecurityRule' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
+              "$ref": "./virtualNetwork.json/definitions/SecurityRule"
             }
           },
           "201": {
             "description": "Resource 'SecurityRule' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/SecurityRule"
+              "$ref": "./virtualNetwork.json/definitions/SecurityRule"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -7352,7 +7944,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualNetwork.json#/definitions/SecurityRule"
+          "final-state-schema": "./virtualNetwork.json/definitions/SecurityRule"
         },
         "x-ms-long-running-operation": true
       },
@@ -7474,7 +8066,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLinkReferenceListResult"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLinkReferenceListResult"
             }
           },
           "default": {
@@ -7534,7 +8126,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLinkReference"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLinkReference"
             }
           },
           "default": {
@@ -7672,7 +8264,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLinkListResult"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLinkListResult"
             }
           },
           "default": {
@@ -7732,7 +8324,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLink"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLink"
             }
           },
           "default": {
@@ -7788,7 +8380,7 @@
             "description": "Parameters that hold the NspLink resource to be created/updated.",
             "required": true,
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLink"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLink"
             }
           }
         ],
@@ -7796,13 +8388,13 @@
           "200": {
             "description": "Resource 'NspLink' update operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLink"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLink"
             }
           },
           "201": {
             "description": "Resource 'NspLink' create operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLink"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLink"
             }
           },
           "default": {
@@ -7923,7 +8515,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLoggingConfigurationListResult"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLoggingConfigurationListResult"
             }
           },
           "default": {
@@ -7983,7 +8575,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLoggingConfiguration"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLoggingConfiguration"
             }
           },
           "default": {
@@ -8039,7 +8631,7 @@
             "description": "Parameters that hold the NspLoggingConfiguration to be created/updated.",
             "required": true,
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLoggingConfiguration"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLoggingConfiguration"
             }
           }
         ],
@@ -8047,13 +8639,13 @@
           "200": {
             "description": "Resource 'NspLoggingConfiguration' update operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLoggingConfiguration"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLoggingConfiguration"
             }
           },
           "201": {
             "description": "Resource 'NspLoggingConfiguration' create operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspLoggingConfiguration"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspLoggingConfiguration"
             }
           },
           "default": {
@@ -8173,7 +8765,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspProfileListResult"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspProfileListResult"
             }
           },
           "default": {
@@ -8233,7 +8825,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspProfile"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspProfile"
             }
           },
           "default": {
@@ -8289,7 +8881,7 @@
             "description": "Parameters that hold the NspProfile resource to be created/updated.",
             "required": true,
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspProfile"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspProfile"
             }
           }
         ],
@@ -8297,13 +8889,13 @@
           "200": {
             "description": "Resource 'NspProfile' update operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspProfile"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspProfile"
             }
           },
           "201": {
             "description": "Resource 'NspProfile' create operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspProfile"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspProfile"
             }
           },
           "default": {
@@ -8432,7 +9024,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAccessRuleListResult"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAccessRuleListResult"
             }
           },
           "default": {
@@ -8501,7 +9093,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAccessRule"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAccessRule"
             }
           },
           "default": {
@@ -8566,7 +9158,7 @@
             "description": "Parameters that hold the NspAccessRule resource to be created/updated.",
             "required": true,
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAccessRule"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAccessRule"
             }
           }
         ],
@@ -8574,13 +9166,13 @@
           "200": {
             "description": "Resource 'NspAccessRule' update operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAccessRule"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAccessRule"
             }
           },
           "201": {
             "description": "Resource 'NspAccessRule' create operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAccessRule"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAccessRule"
             }
           },
           "default": {
@@ -8840,7 +9432,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAssociation"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAssociation"
             }
           },
           "default": {
@@ -8896,7 +9488,7 @@
             "description": "Parameters that hold the NspAssociation resource to be created/updated.",
             "required": true,
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAssociation"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAssociation"
             }
           }
         ],
@@ -8904,13 +9496,13 @@
           "200": {
             "description": "Resource 'NspAssociation' update operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAssociation"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAssociation"
             }
           },
           "201": {
             "description": "Resource 'NspAssociation' create operation succeeded",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAssociation"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAssociation"
             },
             "headers": {
               "Retry-After": {
@@ -8923,7 +9515,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "$ref": "./networkSecurityPerimeter.json#/definitions/NspAssociation"
+              "$ref": "./networkSecurityPerimeter.json/definitions/NspAssociation"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -8951,7 +9543,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./networkSecurityPerimeter.json#/definitions/NspAssociation"
+          "final-state-schema": "./networkSecurityPerimeter.json/definitions/NspAssociation"
         },
         "x-ms-long-running-operation": true
       },
@@ -9127,7 +9719,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/InboundSecurityRule"
+              "$ref": "./virtualNetwork.json/definitions/InboundSecurityRule"
             }
           },
           "default": {
@@ -9179,7 +9771,7 @@
             "description": "Parameters supplied to the create or update Network Virtual Appliance Inbound Security Rules operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/InboundSecurityRule"
+              "$ref": "./virtualNetwork.json/definitions/InboundSecurityRule"
             }
           }
         ],
@@ -9187,13 +9779,13 @@
           "200": {
             "description": "Resource 'InboundSecurityRule' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/InboundSecurityRule"
+              "$ref": "./virtualNetwork.json/definitions/InboundSecurityRule"
             }
           },
           "201": {
             "description": "Resource 'InboundSecurityRule' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/InboundSecurityRule"
+              "$ref": "./virtualNetwork.json/definitions/InboundSecurityRule"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -9221,7 +9813,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualNetwork.json#/definitions/InboundSecurityRule"
+          "final-state-schema": "./virtualNetwork.json/definitions/InboundSecurityRule"
         },
         "x-ms-long-running-operation": true
       }
@@ -9255,7 +9847,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/NetworkVirtualApplianceSiteListResult"
+              "$ref": "./virtualNetwork.json/definitions/NetworkVirtualApplianceSiteListResult"
             }
           },
           "default": {
@@ -9311,7 +9903,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualApplianceSite"
+              "$ref": "./virtualNetwork.json/definitions/VirtualApplianceSite"
             }
           },
           "default": {
@@ -9363,7 +9955,7 @@
             "description": "Parameters supplied to the create or update Network Virtual Appliance Site operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualApplianceSite"
+              "$ref": "./virtualNetwork.json/definitions/VirtualApplianceSite"
             }
           }
         ],
@@ -9371,13 +9963,13 @@
           "200": {
             "description": "Resource 'VirtualApplianceSite' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualApplianceSite"
+              "$ref": "./virtualNetwork.json/definitions/VirtualApplianceSite"
             }
           },
           "201": {
             "description": "Resource 'VirtualApplianceSite' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualApplianceSite"
+              "$ref": "./virtualNetwork.json/definitions/VirtualApplianceSite"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -9405,7 +9997,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualNetwork.json#/definitions/VirtualApplianceSite"
+          "final-state-schema": "./virtualNetwork.json/definitions/VirtualApplianceSite"
         },
         "x-ms-long-running-operation": true
       },
@@ -9508,13 +10100,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ConnectionMonitorListResult"
+              "$ref": "./networkWatcher.json/definitions/ConnectionMonitorListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -9564,13 +10156,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ConnectionMonitorResult"
+              "$ref": "./networkWatcher.json/definitions/ConnectionMonitorResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -9623,7 +10215,7 @@
             "description": "Parameters that define the operation to create a connection monitor.",
             "required": true,
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ConnectionMonitor"
+              "$ref": "./networkWatcher.json/definitions/ConnectionMonitor"
             }
           }
         ],
@@ -9631,13 +10223,13 @@
           "200": {
             "description": "Resource 'ConnectionMonitorResult' update operation succeeded",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ConnectionMonitorResult"
+              "$ref": "./networkWatcher.json/definitions/ConnectionMonitorResult"
             }
           },
           "201": {
             "description": "Resource 'ConnectionMonitorResult' create operation succeeded",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ConnectionMonitorResult"
+              "$ref": "./networkWatcher.json/definitions/ConnectionMonitorResult"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -9654,7 +10246,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -9671,7 +10263,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./networkWatcher.json#/definitions/ConnectionMonitorResult"
+          "final-state-schema": "./networkWatcher.json/definitions/ConnectionMonitorResult"
         },
         "x-ms-long-running-operation": true
       },
@@ -9719,13 +10311,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ConnectionMonitorResult"
+              "$ref": "./networkWatcher.json/definitions/ConnectionMonitorResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -9787,7 +10379,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -9855,7 +10447,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -9899,13 +10491,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/FlowLogListResult"
+              "$ref": "./networkWatcher.json/definitions/FlowLogListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -9955,13 +10547,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/FlowLog"
+              "$ref": "./networkWatcher.json/definitions/FlowLog"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -10007,7 +10599,7 @@
             "description": "Parameters that define the create or update flow log resource.",
             "required": true,
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/FlowLog"
+              "$ref": "./networkWatcher.json/definitions/FlowLog"
             }
           }
         ],
@@ -10015,13 +10607,13 @@
           "200": {
             "description": "Resource 'FlowLog' update operation succeeded",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/FlowLog"
+              "$ref": "./networkWatcher.json/definitions/FlowLog"
             }
           },
           "201": {
             "description": "Resource 'FlowLog' create operation succeeded",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/FlowLog"
+              "$ref": "./networkWatcher.json/definitions/FlowLog"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -10038,7 +10630,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -10049,7 +10641,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./networkWatcher.json#/definitions/FlowLog"
+          "final-state-schema": "./networkWatcher.json/definitions/FlowLog"
         },
         "x-ms-long-running-operation": true
       },
@@ -10097,13 +10689,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/FlowLog"
+              "$ref": "./networkWatcher.json/definitions/FlowLog"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -10165,7 +10757,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -10202,7 +10794,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListP2SVpnGatewaysResult"
+              "$ref": "./virtualWan.json/definitions/ListP2SVpnGatewaysResult"
             }
           },
           "default": {
@@ -10251,7 +10843,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnGateway"
+              "$ref": "./virtualWan.json/definitions/P2SVpnGateway"
             }
           },
           "default": {
@@ -10296,7 +10888,7 @@
             "description": "Parameters supplied to create or Update a virtual wan p2s vpn gateway.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnGateway"
+              "$ref": "./virtualWan.json/definitions/P2SVpnGateway"
             }
           }
         ],
@@ -10304,13 +10896,13 @@
           "200": {
             "description": "Resource 'P2SVpnGateway' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnGateway"
+              "$ref": "./virtualWan.json/definitions/P2SVpnGateway"
             }
           },
           "201": {
             "description": "Resource 'P2SVpnGateway' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnGateway"
+              "$ref": "./virtualWan.json/definitions/P2SVpnGateway"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -10338,7 +10930,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/P2SVpnGateway"
+          "final-state-schema": "./virtualWan.json/definitions/P2SVpnGateway"
         },
         "x-ms-long-running-operation": true
       },
@@ -10379,7 +10971,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnGateway"
+              "$ref": "./virtualWan.json/definitions/P2SVpnGateway"
             }
           },
           "202": {
@@ -10410,7 +11002,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/P2SVpnGateway"
+          "final-state-schema": "./virtualWan.json/definitions/P2SVpnGateway"
         },
         "x-ms-long-running-operation": true
       },
@@ -10507,7 +11099,7 @@
             "description": "The parameters are supplied to disconnect p2s vpn connections.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnConnectionRequest"
+              "$ref": "./virtualWan.json/definitions/P2SVpnConnectionRequest"
             }
           }
         ],
@@ -10577,7 +11169,7 @@
             "description": "Parameters supplied to the generate P2SVpnGateway VPN client package operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnProfileParameters"
+              "$ref": "./virtualWan.json/definitions/P2SVpnProfileParameters"
             }
           }
         ],
@@ -10585,7 +11177,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnProfileResponse"
+              "$ref": "./virtualWan.json/definitions/VpnProfileResponse"
             }
           },
           "202": {
@@ -10616,7 +11208,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/VpnProfileResponse"
+          "final-state-schema": "./virtualWan.json/definitions/VpnProfileResponse"
         },
         "x-ms-long-running-operation": true
       }
@@ -10650,7 +11242,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnGateway"
+              "$ref": "./virtualWan.json/definitions/P2SVpnGateway"
             }
           },
           "202": {
@@ -10681,7 +11273,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/P2SVpnGateway"
+          "final-state-schema": "./virtualWan.json/definitions/P2SVpnGateway"
         },
         "x-ms-long-running-operation": true
       }
@@ -10716,7 +11308,7 @@
             "description": "Request parameters supplied to get p2s vpn connections detailed health.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnConnectionHealthRequest"
+              "$ref": "./virtualWan.json/definitions/P2SVpnConnectionHealthRequest"
             }
           }
         ],
@@ -10724,7 +11316,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnConnectionHealth"
+              "$ref": "./virtualWan.json/definitions/P2SVpnConnectionHealth"
             }
           },
           "202": {
@@ -10755,7 +11347,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/P2SVpnConnectionHealth"
+          "final-state-schema": "./virtualWan.json/definitions/P2SVpnConnectionHealth"
         },
         "x-ms-long-running-operation": true
       }
@@ -10789,7 +11381,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnGateway"
+              "$ref": "./virtualWan.json/definitions/P2SVpnGateway"
             }
           },
           "202": {
@@ -10820,7 +11412,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/P2SVpnGateway"
+          "final-state-schema": "./virtualWan.json/definitions/P2SVpnGateway"
         },
         "x-ms-long-running-operation": true
       }
@@ -10847,7 +11439,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/PrivateLinkServiceListResult"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkServiceListResult"
             }
           },
           "default": {
@@ -10903,7 +11495,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/PrivateLinkService"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkService"
             }
           },
           "default": {
@@ -10948,7 +11540,7 @@
             "description": "Parameters supplied to the create or update private link service operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/PrivateLinkService"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkService"
             }
           }
         ],
@@ -10956,13 +11548,13 @@
           "200": {
             "description": "Resource 'PrivateLinkService' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/PrivateLinkService"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkService"
             }
           },
           "201": {
             "description": "Resource 'PrivateLinkService' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/PrivateLinkService"
+              "$ref": "./virtualNetwork.json/definitions/PrivateLinkService"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -10990,7 +11582,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualNetwork.json#/definitions/PrivateLinkService"
+          "final-state-schema": "./virtualNetwork.json/definitions/PrivateLinkService"
         },
         "x-ms-long-running-operation": true
       },
@@ -11086,7 +11678,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/RouteListResult"
+              "$ref": "./virtualNetwork.json/definitions/RouteListResult"
             }
           },
           "default": {
@@ -11142,7 +11734,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/Route"
+              "$ref": "./virtualNetwork.json/definitions/Route"
             }
           },
           "default": {
@@ -11194,7 +11786,7 @@
             "description": "Parameters supplied to the create or update route operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/Route"
+              "$ref": "./virtualNetwork.json/definitions/Route"
             }
           }
         ],
@@ -11202,13 +11794,13 @@
           "200": {
             "description": "Resource 'Route' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/Route"
+              "$ref": "./virtualNetwork.json/definitions/Route"
             }
           },
           "201": {
             "description": "Resource 'Route' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/Route"
+              "$ref": "./virtualNetwork.json/definitions/Route"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -11236,7 +11828,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualNetwork.json#/definitions/Route"
+          "final-state-schema": "./virtualNetwork.json/definitions/Route"
         },
         "x-ms-long-running-operation": true
       },
@@ -11332,7 +11924,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVirtualHubsResult"
+              "$ref": "./virtualWan.json/definitions/ListVirtualHubsResult"
             }
           },
           "default": {
@@ -11381,7 +11973,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHub"
+              "$ref": "./virtualWan.json/definitions/VirtualHub"
             }
           },
           "default": {
@@ -11426,7 +12018,7 @@
             "description": "Parameters supplied to create or update VirtualHub.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHub"
+              "$ref": "./virtualWan.json/definitions/VirtualHub"
             }
           }
         ],
@@ -11434,13 +12026,13 @@
           "200": {
             "description": "Resource 'VirtualHub' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHub"
+              "$ref": "./virtualWan.json/definitions/VirtualHub"
             }
           },
           "201": {
             "description": "Resource 'VirtualHub' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHub"
+              "$ref": "./virtualWan.json/definitions/VirtualHub"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -11468,7 +12060,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/VirtualHub"
+          "final-state-schema": "./virtualWan.json/definitions/VirtualHub"
         },
         "x-ms-long-running-operation": true
       },
@@ -11509,7 +12101,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHub"
+              "$ref": "./virtualWan.json/definitions/VirtualHub"
             }
           },
           "default": {
@@ -11617,7 +12209,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVirtualHubBgpConnectionResults"
+              "$ref": "./virtualWan.json/definitions/ListVirtualHubBgpConnectionResults"
             }
           },
           "default": {
@@ -11673,7 +12265,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/BgpConnection"
+              "$ref": "./virtualWan.json/definitions/BgpConnection"
             }
           },
           "default": {
@@ -11725,7 +12317,7 @@
             "description": "Parameters of Bgp connection.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/BgpConnection"
+              "$ref": "./virtualWan.json/definitions/BgpConnection"
             }
           }
         ],
@@ -11733,13 +12325,13 @@
           "200": {
             "description": "Resource 'BgpConnection' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/BgpConnection"
+              "$ref": "./virtualWan.json/definitions/BgpConnection"
             }
           },
           "201": {
             "description": "Resource 'BgpConnection' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/BgpConnection"
+              "$ref": "./virtualWan.json/definitions/BgpConnection"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -11767,7 +12359,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/BgpConnection"
+          "final-state-schema": "./virtualWan.json/definitions/BgpConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -11880,7 +12472,7 @@
               "type": "object",
               "additionalProperties": {
                 "items": {
-                  "$ref": "./virtualWan.json#/definitions/PeerRoute"
+                  "$ref": "./virtualWan.json/definitions/PeerRoute"
                 },
                 "type": "array"
               }
@@ -11914,7 +12506,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/Record%3CPeerRoute%5B%5D%3E"
+          "final-state-schema": "./virtualWan.json/definitions/Record%3CPeerRoute%5B%5D%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -11958,7 +12550,7 @@
               "type": "object",
               "additionalProperties": {
                 "items": {
-                  "$ref": "./virtualWan.json#/definitions/PeerRoute"
+                  "$ref": "./virtualWan.json/definitions/PeerRoute"
                 },
                 "type": "array"
               }
@@ -11992,7 +12584,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/Record%3CPeerRoute%5B%5D%3E"
+          "final-state-schema": "./virtualWan.json/definitions/Record%3CPeerRoute%5B%5D%3E"
         },
         "x-ms-long-running-operation": true
       }
@@ -12027,7 +12619,7 @@
             "description": "Parameters supplied to get the effective routes for a specific resource.",
             "required": false,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/EffectiveRoutesParameters"
+              "$ref": "./virtualWan.json/definitions/EffectiveRoutesParameters"
             }
           }
         ],
@@ -12035,7 +12627,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHubEffectiveRouteList"
+              "$ref": "./virtualWan.json/definitions/VirtualHubEffectiveRouteList"
             }
           },
           "202": {
@@ -12072,7 +12664,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/VirtualHubEffectiveRouteList"
+          "final-state-schema": "./virtualWan.json/definitions/VirtualHubEffectiveRouteList"
         },
         "x-ms-long-running-operation": true
       }
@@ -12106,7 +12698,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListHubRouteTablesResult"
+              "$ref": "./virtualWan.json/definitions/ListHubRouteTablesResult"
             }
           },
           "default": {
@@ -12162,7 +12754,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubRouteTable"
+              "$ref": "./virtualWan.json/definitions/HubRouteTable"
             }
           },
           "default": {
@@ -12214,7 +12806,7 @@
             "description": "Parameters supplied to create or update RouteTable.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubRouteTable"
+              "$ref": "./virtualWan.json/definitions/HubRouteTable"
             }
           }
         ],
@@ -12222,13 +12814,13 @@
           "200": {
             "description": "Resource 'HubRouteTable' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubRouteTable"
+              "$ref": "./virtualWan.json/definitions/HubRouteTable"
             }
           },
           "201": {
             "description": "Resource 'HubRouteTable' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubRouteTable"
+              "$ref": "./virtualWan.json/definitions/HubRouteTable"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -12256,7 +12848,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/HubRouteTable"
+          "final-state-schema": "./virtualWan.json/definitions/HubRouteTable"
         },
         "x-ms-long-running-operation": true
       },
@@ -12414,7 +13006,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubVirtualNetworkConnection"
+              "$ref": "./virtualWan.json/definitions/HubVirtualNetworkConnection"
             }
           },
           "default": {
@@ -12465,7 +13057,7 @@
             "description": "Parameters supplied to create or update a hub virtual network connection.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubVirtualNetworkConnection"
+              "$ref": "./virtualWan.json/definitions/HubVirtualNetworkConnection"
             }
           }
         ],
@@ -12473,13 +13065,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubVirtualNetworkConnection"
+              "$ref": "./virtualWan.json/definitions/HubVirtualNetworkConnection"
             }
           },
           "201": {
             "description": "Resource 'HubVirtualNetworkConnection' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubVirtualNetworkConnection"
+              "$ref": "./virtualWan.json/definitions/HubVirtualNetworkConnection"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -12507,7 +13099,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/HubVirtualNetworkConnection"
+          "final-state-schema": "./virtualWan.json/definitions/HubVirtualNetworkConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -12610,7 +13202,7 @@
             "description": "Parameters supplied to get the inbound routes for a connection resource.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/GetInboundRoutesParameters"
+              "$ref": "./virtualWan.json/definitions/GetInboundRoutesParameters"
             }
           }
         ],
@@ -12618,7 +13210,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/EffectiveRouteMapRouteList"
+              "$ref": "./virtualWan.json/definitions/EffectiveRouteMapRouteList"
             }
           },
           "202": {
@@ -12649,7 +13241,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/EffectiveRouteMapRouteList"
+          "final-state-schema": "./virtualWan.json/definitions/EffectiveRouteMapRouteList"
         },
         "x-ms-long-running-operation": true
       }
@@ -12739,7 +13331,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubIpConfiguration"
+              "$ref": "./virtualWan.json/definitions/HubIpConfiguration"
             }
           },
           "default": {
@@ -12791,7 +13383,7 @@
             "description": "Hub Ip Configuration parameters.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubIpConfiguration"
+              "$ref": "./virtualWan.json/definitions/HubIpConfiguration"
             }
           }
         ],
@@ -12799,13 +13391,13 @@
           "200": {
             "description": "Resource 'HubIpConfiguration' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubIpConfiguration"
+              "$ref": "./virtualWan.json/definitions/HubIpConfiguration"
             }
           },
           "201": {
             "description": "Resource 'HubIpConfiguration' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/HubIpConfiguration"
+              "$ref": "./virtualWan.json/definitions/HubIpConfiguration"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -12833,7 +13425,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/HubIpConfiguration"
+          "final-state-schema": "./virtualWan.json/definitions/HubIpConfiguration"
         },
         "x-ms-long-running-operation": true
       },
@@ -12937,7 +13529,7 @@
             "description": "Parameters supplied to get the outbound routes for a connection resource.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/GetOutboundRoutesParameters"
+              "$ref": "./virtualWan.json/definitions/GetOutboundRoutesParameters"
             }
           }
         ],
@@ -12945,7 +13537,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/EffectiveRouteMapRouteList"
+              "$ref": "./virtualWan.json/definitions/EffectiveRouteMapRouteList"
             }
           },
           "202": {
@@ -12976,7 +13568,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/EffectiveRouteMapRouteList"
+          "final-state-schema": "./virtualWan.json/definitions/EffectiveRouteMapRouteList"
         },
         "x-ms-long-running-operation": true
       }
@@ -13010,7 +13602,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListRouteMapsResult"
+              "$ref": "./virtualWan.json/definitions/ListRouteMapsResult"
             }
           },
           "default": {
@@ -13066,7 +13658,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/RouteMap"
+              "$ref": "./virtualWan.json/definitions/RouteMap"
             }
           },
           "default": {
@@ -13118,7 +13710,7 @@
             "description": "Parameters supplied to create or update a RouteMap.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/RouteMap"
+              "$ref": "./virtualWan.json/definitions/RouteMap"
             }
           }
         ],
@@ -13126,13 +13718,13 @@
           "200": {
             "description": "Resource 'RouteMap' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/RouteMap"
+              "$ref": "./virtualWan.json/definitions/RouteMap"
             }
           },
           "201": {
             "description": "Resource 'RouteMap' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/RouteMap"
+              "$ref": "./virtualWan.json/definitions/RouteMap"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -13160,7 +13752,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/RouteMap"
+          "final-state-schema": "./virtualWan.json/definitions/RouteMap"
         },
         "x-ms-long-running-operation": true
       },
@@ -13319,7 +13911,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHubRouteTableV2"
+              "$ref": "./virtualWan.json/definitions/VirtualHubRouteTableV2"
             }
           },
           "default": {
@@ -13371,7 +13963,7 @@
             "description": "Parameters supplied to create or update VirtualHubRouteTableV2.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHubRouteTableV2"
+              "$ref": "./virtualWan.json/definitions/VirtualHubRouteTableV2"
             }
           }
         ],
@@ -13379,13 +13971,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHubRouteTableV2"
+              "$ref": "./virtualWan.json/definitions/VirtualHubRouteTableV2"
             }
           },
           "201": {
             "description": "Resource 'VirtualHubRouteTableV2' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VirtualHubRouteTableV2"
+              "$ref": "./virtualWan.json/definitions/VirtualHubRouteTableV2"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -13413,7 +14005,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/VirtualHubRouteTableV2"
+          "final-state-schema": "./virtualWan.json/definitions/VirtualHubRouteTableV2"
         },
         "x-ms-long-running-operation": true
       },
@@ -13516,7 +14108,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListRoutingIntentResult"
+              "$ref": "./virtualWan.json/definitions/ListRoutingIntentResult"
             }
           },
           "default": {
@@ -13572,7 +14164,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/RoutingIntent"
+              "$ref": "./virtualWan.json/definitions/RoutingIntent"
             }
           },
           "default": {
@@ -13624,7 +14216,7 @@
             "description": "Parameters supplied to create or update RoutingIntent.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/RoutingIntent"
+              "$ref": "./virtualWan.json/definitions/RoutingIntent"
             }
           }
         ],
@@ -13632,13 +14224,13 @@
           "200": {
             "description": "Resource 'RoutingIntent' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/RoutingIntent"
+              "$ref": "./virtualWan.json/definitions/RoutingIntent"
             }
           },
           "201": {
             "description": "Resource 'RoutingIntent' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/RoutingIntent"
+              "$ref": "./virtualWan.json/definitions/RoutingIntent"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -13666,7 +14258,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/RoutingIntent"
+          "final-state-schema": "./virtualWan.json/definitions/RoutingIntent"
         },
         "x-ms-long-running-operation": true
       },
@@ -13769,7 +14361,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./networkGateway.json#/definitions/ListVirtualNetworkGatewayNatRulesResult"
+              "$ref": "./networkGateway.json/definitions/ListVirtualNetworkGatewayNatRulesResult"
             }
           },
           "default": {
@@ -14022,7 +14614,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/SubnetListResult"
+              "$ref": "./virtualNetwork.json/definitions/SubnetListResult"
             }
           },
           "default": {
@@ -14085,7 +14677,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/Subnet"
+              "$ref": "./virtualNetwork.json/definitions/Subnet"
             }
           },
           "default": {
@@ -14143,7 +14735,7 @@
             "description": "Parameters supplied to the create or update subnet operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/Subnet"
+              "$ref": "./virtualNetwork.json/definitions/Subnet"
             }
           }
         ],
@@ -14151,13 +14743,13 @@
           "200": {
             "description": "Resource 'Subnet' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/Subnet"
+              "$ref": "./virtualNetwork.json/definitions/Subnet"
             }
           },
           "201": {
             "description": "Resource 'Subnet' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/Subnet"
+              "$ref": "./virtualNetwork.json/definitions/Subnet"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -14197,7 +14789,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualNetwork.json#/definitions/Subnet"
+          "final-state-schema": "./virtualNetwork.json/definitions/Subnet"
         },
         "x-ms-long-running-operation": true
       },
@@ -14308,7 +14900,7 @@
             "description": "Parameters supplied to prepare subnet by applying network intent policies.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/PrepareNetworkPoliciesRequest"
+              "$ref": "./virtualNetwork.json/definitions/PrepareNetworkPoliciesRequest"
             }
           }
         ],
@@ -14384,7 +14976,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/ResourceNavigationLinksListResult"
+              "$ref": "./virtualNetwork.json/definitions/ResourceNavigationLinksListResult"
             }
           },
           "default": {
@@ -14437,7 +15029,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/ServiceAssociationLinksListResult"
+              "$ref": "./virtualNetwork.json/definitions/ServiceAssociationLinksListResult"
             }
           },
           "default": {
@@ -14491,7 +15083,7 @@
             "description": "Parameters supplied to unprepare subnet to remove network intent policies.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/UnprepareNetworkPoliciesRequest"
+              "$ref": "./virtualNetwork.json/definitions/UnprepareNetworkPoliciesRequest"
             }
           }
         ],
@@ -14560,7 +15152,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualNetworkPeeringListResult"
+              "$ref": "./virtualNetwork.json/definitions/VirtualNetworkPeeringListResult"
             }
           },
           "default": {
@@ -14619,7 +15211,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualNetworkPeering"
+              "$ref": "./virtualNetwork.json/definitions/VirtualNetworkPeering"
             }
           },
           "default": {
@@ -14701,7 +15293,7 @@
             "description": "Parameters supplied to the create or update virtual network peering operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualNetworkPeering"
+              "$ref": "./virtualNetwork.json/definitions/VirtualNetworkPeering"
             }
           }
         ],
@@ -14709,13 +15301,13 @@
           "200": {
             "description": "Resource 'VirtualNetworkPeering' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualNetworkPeering"
+              "$ref": "./virtualNetwork.json/definitions/VirtualNetworkPeering"
             }
           },
           "201": {
             "description": "Resource 'VirtualNetworkPeering' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualNetworkPeering"
+              "$ref": "./virtualNetwork.json/definitions/VirtualNetworkPeering"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -14761,7 +15353,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualNetwork.json#/definitions/VirtualNetworkPeering"
+          "final-state-schema": "./virtualNetwork.json/definitions/VirtualNetworkPeering"
         },
         "x-ms-long-running-operation": true
       },
@@ -14864,7 +15456,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualRouterPeeringListResult"
+              "$ref": "./virtualNetwork.json/definitions/VirtualRouterPeeringListResult"
             }
           },
           "default": {
@@ -14920,7 +15512,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualRouterPeering"
+              "$ref": "./virtualNetwork.json/definitions/VirtualRouterPeering"
             }
           },
           "default": {
@@ -14972,7 +15564,7 @@
             "description": "Parameters supplied to the create or update Virtual Router Peering operation.",
             "required": true,
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualRouterPeering"
+              "$ref": "./virtualNetwork.json/definitions/VirtualRouterPeering"
             }
           }
         ],
@@ -14980,13 +15572,13 @@
           "200": {
             "description": "Resource 'VirtualRouterPeering' update operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualRouterPeering"
+              "$ref": "./virtualNetwork.json/definitions/VirtualRouterPeering"
             }
           },
           "201": {
             "description": "Resource 'VirtualRouterPeering' create operation succeeded",
             "schema": {
-              "$ref": "./virtualNetwork.json#/definitions/VirtualRouterPeering"
+              "$ref": "./virtualNetwork.json/definitions/VirtualRouterPeering"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -15014,7 +15606,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualNetwork.json#/definitions/VirtualRouterPeering"
+          "final-state-schema": "./virtualNetwork.json/definitions/VirtualRouterPeering"
         },
         "x-ms-long-running-operation": true
       },
@@ -15110,7 +15702,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVpnGatewaysResult"
+              "$ref": "./virtualWan.json/definitions/ListVpnGatewaysResult"
             }
           },
           "default": {
@@ -15159,7 +15751,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGateway"
+              "$ref": "./virtualWan.json/definitions/VpnGateway"
             }
           },
           "default": {
@@ -15204,7 +15796,7 @@
             "description": "Parameters supplied to create or Update a virtual wan vpn gateway.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGateway"
+              "$ref": "./virtualWan.json/definitions/VpnGateway"
             }
           }
         ],
@@ -15212,13 +15804,13 @@
           "200": {
             "description": "Resource 'VpnGateway' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGateway"
+              "$ref": "./virtualWan.json/definitions/VpnGateway"
             }
           },
           "201": {
             "description": "Resource 'VpnGateway' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGateway"
+              "$ref": "./virtualWan.json/definitions/VpnGateway"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -15246,7 +15838,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/VpnGateway"
+          "final-state-schema": "./virtualWan.json/definitions/VpnGateway"
         },
         "x-ms-long-running-operation": true
       },
@@ -15287,7 +15879,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGateway"
+              "$ref": "./virtualWan.json/definitions/VpnGateway"
             }
           },
           "202": {
@@ -15318,7 +15910,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/VpnGateway"
+          "final-state-schema": "./virtualWan.json/definitions/VpnGateway"
         },
         "x-ms-long-running-operation": true
       },
@@ -15414,7 +16006,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVpnGatewayNatRulesResult"
+              "$ref": "./virtualWan.json/definitions/ListVpnGatewayNatRulesResult"
             }
           },
           "default": {
@@ -15470,7 +16062,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGatewayNatRule"
+              "$ref": "./virtualWan.json/definitions/VpnGatewayNatRule"
             }
           },
           "default": {
@@ -15522,7 +16114,7 @@
             "description": "Parameters supplied to create or Update a Nat Rule.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGatewayNatRule"
+              "$ref": "./virtualWan.json/definitions/VpnGatewayNatRule"
             }
           }
         ],
@@ -15530,13 +16122,13 @@
           "200": {
             "description": "Resource 'VpnGatewayNatRule' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGatewayNatRule"
+              "$ref": "./virtualWan.json/definitions/VpnGatewayNatRule"
             }
           },
           "201": {
             "description": "Resource 'VpnGatewayNatRule' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGatewayNatRule"
+              "$ref": "./virtualWan.json/definitions/VpnGatewayNatRule"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -15564,7 +16156,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/VpnGatewayNatRule"
+          "final-state-schema": "./virtualWan.json/definitions/VpnGatewayNatRule"
         },
         "x-ms-long-running-operation": true
       },
@@ -15674,7 +16266,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGateway"
+              "$ref": "./virtualWan.json/definitions/VpnGateway"
             }
           },
           "202": {
@@ -15705,7 +16297,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "./virtualWan.json#/definitions/VpnGateway"
+          "final-state-schema": "./virtualWan.json/definitions/VpnGateway"
         },
         "x-ms-long-running-operation": true
       }
@@ -15740,7 +16332,7 @@
             "description": "Vpn gateway packet capture parameters supplied to start packet capture on vpn gateway.",
             "required": false,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGatewayPacketCaptureStartParameters"
+              "$ref": "./virtualWan.json/definitions/VpnGatewayPacketCaptureStartParameters"
             }
           }
         ],
@@ -15816,7 +16408,7 @@
             "description": "Vpn gateway packet capture parameters supplied to stop packet capture on vpn gateway.",
             "required": false,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnGatewayPacketCaptureStopParameters"
+              "$ref": "./virtualWan.json/definitions/VpnGatewayPacketCaptureStopParameters"
             }
           }
         ],
@@ -15888,7 +16480,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVpnConnectionsResult"
+              "$ref": "./virtualWan.json/definitions/ListVpnConnectionsResult"
             }
           },
           "default": {
@@ -15944,7 +16536,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnConnection"
+              "$ref": "./virtualWan.json/definitions/VpnConnection"
             }
           },
           "default": {
@@ -15996,7 +16588,7 @@
             "description": "Parameters supplied to create or Update a VPN Connection.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnConnection"
+              "$ref": "./virtualWan.json/definitions/VpnConnection"
             }
           }
         ],
@@ -16004,13 +16596,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnConnection"
+              "$ref": "./virtualWan.json/definitions/VpnConnection"
             }
           },
           "201": {
             "description": "Resource 'VpnConnection' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnConnection"
+              "$ref": "./virtualWan.json/definitions/VpnConnection"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -16038,7 +16630,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/VpnConnection"
+          "final-state-schema": "./virtualWan.json/definitions/VpnConnection"
         },
         "x-ms-long-running-operation": true
       },
@@ -16149,7 +16741,7 @@
             "description": "Vpn Connection packet capture parameters supplied to start packet capture on gateway connection.",
             "required": false,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnConnectionPacketCaptureStartParameters"
+              "$ref": "./virtualWan.json/definitions/VpnConnectionPacketCaptureStartParameters"
             }
           }
         ],
@@ -16232,7 +16824,7 @@
             "description": "Vpn Connection packet capture parameters supplied to stop packet capture on gateway connection.",
             "required": false,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnConnectionPacketCaptureStopParameters"
+              "$ref": "./virtualWan.json/definitions/VpnConnectionPacketCaptureStopParameters"
             }
           }
         ],
@@ -16374,7 +16966,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnSiteLinkConnection"
+              "$ref": "./virtualWan.json/definitions/VpnSiteLinkConnection"
             }
           },
           "default": {
@@ -16454,7 +17046,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -16526,7 +17118,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "./networkWatcher.json#/definitions/ErrorResponse"
+              "$ref": "./networkWatcher.json/definitions/ErrorResponse"
             }
           }
         },
@@ -16884,7 +17476,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnServerConfiguration"
+              "$ref": "./virtualWan.json/definitions/VpnServerConfiguration"
             }
           },
           "default": {
@@ -16929,7 +17521,7 @@
             "description": "Parameters supplied to create or update VpnServerConfiguration.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnServerConfiguration"
+              "$ref": "./virtualWan.json/definitions/VpnServerConfiguration"
             }
           }
         ],
@@ -16937,13 +17529,13 @@
           "200": {
             "description": "Resource 'VpnServerConfiguration' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnServerConfiguration"
+              "$ref": "./virtualWan.json/definitions/VpnServerConfiguration"
             }
           },
           "201": {
             "description": "Resource 'VpnServerConfiguration' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnServerConfiguration"
+              "$ref": "./virtualWan.json/definitions/VpnServerConfiguration"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -16971,7 +17563,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/VpnServerConfiguration"
+          "final-state-schema": "./virtualWan.json/definitions/VpnServerConfiguration"
         },
         "x-ms-long-running-operation": true
       },
@@ -17012,7 +17604,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnServerConfiguration"
+              "$ref": "./virtualWan.json/definitions/VpnServerConfiguration"
             }
           },
           "default": {
@@ -17176,7 +17768,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnServerConfigurationPolicyGroup"
+              "$ref": "./virtualWan.json/definitions/VpnServerConfigurationPolicyGroup"
             }
           },
           "default": {
@@ -17228,7 +17820,7 @@
             "description": "Parameters supplied to create or update a VpnServerConfiguration PolicyGroup.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnServerConfigurationPolicyGroup"
+              "$ref": "./virtualWan.json/definitions/VpnServerConfigurationPolicyGroup"
             }
           }
         ],
@@ -17236,13 +17828,13 @@
           "200": {
             "description": "Resource 'VpnServerConfigurationPolicyGroup' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnServerConfigurationPolicyGroup"
+              "$ref": "./virtualWan.json/definitions/VpnServerConfigurationPolicyGroup"
             }
           },
           "201": {
             "description": "Resource 'VpnServerConfigurationPolicyGroup' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnServerConfigurationPolicyGroup"
+              "$ref": "./virtualWan.json/definitions/VpnServerConfigurationPolicyGroup"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -17270,7 +17862,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/VpnServerConfigurationPolicyGroup"
+          "final-state-schema": "./virtualWan.json/definitions/VpnServerConfigurationPolicyGroup"
         },
         "x-ms-long-running-operation": true
       },
@@ -17412,7 +18004,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVpnSitesResult"
+              "$ref": "./virtualWan.json/definitions/ListVpnSitesResult"
             }
           },
           "default": {
@@ -17461,7 +18053,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnSite"
+              "$ref": "./virtualWan.json/definitions/VpnSite"
             }
           },
           "default": {
@@ -17506,7 +18098,7 @@
             "description": "Parameters supplied to create or update VpnSite.",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnSite"
+              "$ref": "./virtualWan.json/definitions/VpnSite"
             }
           }
         ],
@@ -17514,13 +18106,13 @@
           "200": {
             "description": "Resource 'VpnSite' update operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnSite"
+              "$ref": "./virtualWan.json/definitions/VpnSite"
             }
           },
           "201": {
             "description": "Resource 'VpnSite' create operation succeeded",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnSite"
+              "$ref": "./virtualWan.json/definitions/VpnSite"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -17548,7 +18140,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
-          "final-state-schema": "./virtualWan.json#/definitions/VpnSite"
+          "final-state-schema": "./virtualWan.json/definitions/VpnSite"
         },
         "x-ms-long-running-operation": true
       },
@@ -17589,7 +18181,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnSite"
+              "$ref": "./virtualWan.json/definitions/VpnSite"
             }
           },
           "default": {
@@ -17697,7 +18289,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/ListVpnSiteLinksResult"
+              "$ref": "./virtualWan.json/definitions/ListVpnSiteLinksResult"
             }
           },
           "default": {
@@ -17753,7 +18345,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/VpnSiteLink"
+              "$ref": "./virtualWan.json/definitions/VpnSiteLink"
             }
           },
           "default": {
@@ -17972,7 +18564,7 @@
           "type": "array",
           "description": "The BaseAdminRule items on this page",
           "items": {
-            "$ref": "./networkManager.json#/definitions/BaseAdminRule"
+            "$ref": "./networkManager.json/definitions/BaseAdminRule"
           }
         },
         "nextLink": {
@@ -19641,6 +20233,43 @@
         ]
       }
     },
+    "AzureWebCategory": {
+      "type": "object",
+      "description": "Azure Web Category Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureWebCategoryPropertiesFormat",
+          "description": "Properties of the Azure Web Category.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AzureWebCategoryListResult": {
+      "type": "object",
+      "description": "The response of a AzureWebCategory list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AzureWebCategory items on this page",
+          "items": {
+            "$ref": "#/definitions/AzureWebCategory"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "AzureWebCategoryPropertiesFormat": {
       "type": "object",
       "description": "Azure Web Category Properties.",
@@ -19683,7 +20312,7 @@
           "type": "array",
           "description": "Sets the IP ACL rules for Developer Bastion Host.",
           "items": {
-            "$ref": "./virtualNetwork.json#/definitions/IPRule"
+            "$ref": "./virtualNetwork.json/definitions/IPRule"
           }
         }
       }
@@ -20197,7 +20826,7 @@
       "description": "SharedKey Resource .",
       "properties": {
         "properties": {
-          "$ref": "./virtualWan.json#/definitions/SharedKeyProperties",
+          "$ref": "./virtualWan.json/definitions/SharedKeyProperties",
           "description": "Properties of the shared key."
         }
       },
@@ -21759,6 +22388,31 @@
         }
       }
     },
+    "FirewallPolicy": {
+      "type": "object",
+      "description": "FirewallPolicy Resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallPolicyPropertiesFormat",
+          "description": "Properties of the firewall policy.",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the firewall policy."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
     "FirewallPolicyCertificateAuthority": {
       "type": "object",
       "description": "Trusted Root certificates properties for tls.",
@@ -21801,7 +22455,7 @@
           "description": "The operation mode for Threat Intelligence."
         },
         "threatIntelWhitelist": {
-          "$ref": "./firewall.json#/definitions/FirewallPolicyThreatIntelWhitelist",
+          "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist",
           "description": "ThreatIntel Whitelist for Firewall Policy."
         },
         "insights": {
@@ -21809,7 +22463,7 @@
           "description": "Insights on Firewall Policy."
         },
         "snat": {
-          "$ref": "./firewall.json#/definitions/FirewallPolicySNAT",
+          "$ref": "#/definitions/FirewallPolicySNAT",
           "description": "The private IP addresses/IP ranges to which traffic will not be SNAT."
         },
         "sql": {
@@ -21825,7 +22479,7 @@
           "description": "Explicit Proxy Settings definition."
         },
         "intrusionDetection": {
-          "$ref": "./firewall.json#/definitions/FirewallPolicyIntrusionDetection",
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetection",
           "description": "The configuration for Intrusion detection."
         }
       }
@@ -22053,6 +22707,105 @@
         }
       }
     },
+    "FirewallPolicyIntrusionDetection": {
+      "type": "object",
+      "description": "Configuration for intrusion detection mode and rules.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionStateType",
+          "description": "Intrusion detection general state. When attached to a parent policy, the firewall's effective IDPS mode is the stricter mode of the two."
+        },
+        "profile": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionProfileType",
+          "description": "IDPS profile name. When attached to a parent policy, the firewall's effective profile is the profile name of the parent policy."
+        },
+        "configuration": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionConfiguration",
+          "description": "Intrusion detection configuration properties."
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionBypassTrafficSpecifications": {
+      "type": "object",
+      "description": "Intrusion detection bypass traffic specification.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the bypass traffic rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the bypass traffic rule."
+        },
+        "protocol": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionProtocol",
+          "description": "The rule bypass protocol."
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "List of source IP addresses or ranges for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "List of destination IP addresses or ranges for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "List of destination ports or ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "List of source IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "description": "List of destination IpGroups for this rule.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "FirewallPolicyIntrusionDetectionConfiguration": {
+      "type": "object",
+      "description": "The operation for configuring intrusion detection.",
+      "properties": {
+        "signatureOverrides": {
+          "type": "array",
+          "description": "List of specific signatures states.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionSignatureSpecification"
+          }
+        },
+        "bypassTrafficSettings": {
+          "type": "array",
+          "description": "List of rules for traffic to bypass.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyIntrusionDetectionBypassTrafficSpecifications"
+          },
+          "x-ms-identifiers": []
+        },
+        "privateRanges": {
+          "type": "array",
+          "description": "IDPS Private IP address ranges are used to identify traffic direction (i.e. inbound, outbound, etc.). By default, only ranges defined by IANA RFC 1918 are considered private IP addresses. To modify default ranges, specify your Private IP address ranges with this property",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "FirewallPolicyIntrusionDetectionProfileType": {
       "type": "string",
       "description": "Possible Intrusion Detection profile values.",
@@ -22125,6 +22878,20 @@
         ]
       }
     },
+    "FirewallPolicyIntrusionDetectionSignatureSpecification": {
+      "type": "object",
+      "description": "Intrusion detection signatures specification states.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Signature id."
+        },
+        "mode": {
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetectionStateType",
+          "description": "The signature state."
+        }
+      }
+    },
     "FirewallPolicyIntrusionDetectionStateType": {
       "type": "string",
       "description": "Possible state values.",
@@ -22154,6 +22921,27 @@
           }
         ]
       }
+    },
+    "FirewallPolicyListResult": {
+      "type": "object",
+      "description": "The response of a FirewallPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FirewallPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "FirewallPolicyLogAnalyticsResources": {
       "type": "object",
@@ -22286,7 +23074,7 @@
           "description": "The operation mode for Threat Intelligence."
         },
         "threatIntelWhitelist": {
-          "$ref": "./firewall.json#/definitions/FirewallPolicyThreatIntelWhitelist",
+          "$ref": "#/definitions/FirewallPolicyThreatIntelWhitelist",
           "description": "ThreatIntel Whitelist for Firewall Policy."
         },
         "insights": {
@@ -22294,7 +23082,7 @@
           "description": "Insights on Firewall Policy."
         },
         "snat": {
-          "$ref": "./firewall.json#/definitions/FirewallPolicySNAT",
+          "$ref": "#/definitions/FirewallPolicySNAT",
           "description": "The private IP addresses/IP ranges to which traffic will not be SNAT."
         },
         "sql": {
@@ -22310,7 +23098,7 @@
           "description": "Explicit Proxy Settings definition."
         },
         "intrusionDetection": {
-          "$ref": "./firewall.json#/definitions/FirewallPolicyIntrusionDetection",
+          "$ref": "#/definitions/FirewallPolicyIntrusionDetection",
           "description": "The configuration for Intrusion detection."
         },
         "transportSecurity": {
@@ -22416,7 +23204,7 @@
       "description": "Rule Collection Group resource.",
       "properties": {
         "properties": {
-          "$ref": "./firewall.json#/definitions/FirewallPolicyRuleCollectionGroupProperties",
+          "$ref": "#/definitions/FirewallPolicyRuleCollectionGroupProperties",
           "description": "The properties of the firewall policy rule collection group.",
           "x-ms-client-flatten": true
         },
@@ -22494,6 +23282,37 @@
       "required": [
         "value"
       ]
+    },
+    "FirewallPolicyRuleCollectionGroupProperties": {
+      "type": "object",
+      "description": "Properties of the rule collection group.",
+      "properties": {
+        "size": {
+          "type": "string",
+          "description": "A read-only string that represents the size of the FirewallPolicyRuleCollectionGroupProperties in MB. (ex 1.2MB)",
+          "readOnly": true
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Priority of the Firewall Policy Rule Collection Group resource.",
+          "minimum": 100,
+          "maximum": 65000
+        },
+        "ruleCollections": {
+          "type": "array",
+          "description": "Group of Firewall Policy rule collections.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyRuleCollection"
+          },
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/NetworkProvisioningState",
+          "description": "The provisioning state of the firewall policy rule collection group resource.",
+          "readOnly": true
+        }
+      }
     },
     "FirewallPolicyRuleCollectionType": {
       "type": "string",
@@ -22585,6 +23404,23 @@
         ]
       }
     },
+    "FirewallPolicySNAT": {
+      "type": "object",
+      "description": "The private IP addresses/IP ranges to which traffic will not be SNAT.",
+      "properties": {
+        "privateRanges": {
+          "type": "array",
+          "description": "List of private IP addresses/IP address ranges to not be SNAT.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "autoLearnPrivateRanges": {
+          "$ref": "#/definitions/AutoLearnPrivateRangesMode",
+          "description": "The operation mode for automatically learning private ranges to not be SNAT"
+        }
+      }
+    },
     "FirewallPolicySQL": {
       "type": "object",
       "description": "SQL Settings in Firewall Policy.",
@@ -22633,6 +23469,26 @@
             "description": "Basic"
           }
         ]
+      }
+    },
+    "FirewallPolicyThreatIntelWhitelist": {
+      "type": "object",
+      "description": "ThreatIntel Whitelist for Firewall Policy.",
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "description": "List of IP addresses for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqdns": {
+          "type": "array",
+          "description": "List of FQDNs for the ThreatIntel Whitelist.",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "FirewallPolicyTransportSecurity": {
@@ -23519,7 +24375,7 @@
           "type": "array",
           "description": "The HubVirtualNetworkConnection items on this page",
           "items": {
-            "$ref": "./virtualWan.json#/definitions/HubVirtualNetworkConnection"
+            "$ref": "./virtualWan.json/definitions/HubVirtualNetworkConnection"
           }
         },
         "nextLink": {
@@ -23540,7 +24396,7 @@
           "type": "array",
           "description": "The HubIpConfiguration items on this page",
           "items": {
-            "$ref": "./virtualWan.json#/definitions/HubIpConfiguration"
+            "$ref": "./virtualWan.json/definitions/HubIpConfiguration"
           }
         },
         "nextLink": {
@@ -23561,7 +24417,7 @@
           "type": "array",
           "description": "The VirtualHubRouteTableV2 items on this page",
           "items": {
-            "$ref": "./virtualWan.json#/definitions/VirtualHubRouteTableV2"
+            "$ref": "./virtualWan.json/definitions/VirtualHubRouteTableV2"
           }
         },
         "nextLink": {
@@ -23582,7 +24438,7 @@
           "type": "array",
           "description": "The VpnServerConfigurationPolicyGroup items on this page",
           "items": {
-            "$ref": "./virtualWan.json#/definitions/VpnServerConfigurationPolicyGroup"
+            "$ref": "./virtualWan.json/definitions/VpnServerConfigurationPolicyGroup"
           }
         },
         "nextLink": {
@@ -23603,7 +24459,7 @@
           "type": "array",
           "description": "The VpnServerConfiguration items on this page",
           "items": {
-            "$ref": "./virtualWan.json#/definitions/VpnServerConfiguration"
+            "$ref": "./virtualWan.json/definitions/VpnServerConfiguration"
           }
         },
         "nextLink": {
@@ -23624,7 +24480,7 @@
           "type": "array",
           "description": "The VpnSiteLinkConnection items on this page",
           "items": {
-            "$ref": "./virtualWan.json#/definitions/VpnSiteLinkConnection"
+            "$ref": "./virtualWan.json/definitions/VpnSiteLinkConnection"
           }
         },
         "nextLink": {
@@ -23675,7 +24531,7 @@
           "type": "array",
           "description": "The BackendAddressPool items on this page",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
+            "$ref": "./loadBalancer.json/definitions/BackendAddressPool"
           }
         },
         "nextLink": {
@@ -23696,7 +24552,7 @@
           "type": "array",
           "description": "The FrontendIPConfiguration items on this page",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration"
+            "$ref": "./loadBalancer.json/definitions/FrontendIPConfiguration"
           }
         },
         "nextLink": {
@@ -23717,7 +24573,7 @@
           "type": "array",
           "description": "The LoadBalancingRule items on this page",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/LoadBalancingRule"
+            "$ref": "./loadBalancer.json/definitions/LoadBalancingRule"
           }
         },
         "nextLink": {
@@ -23738,7 +24594,7 @@
           "type": "array",
           "description": "The OutboundRule items on this page",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/OutboundRule"
+            "$ref": "./loadBalancer.json/definitions/OutboundRule"
           }
         },
         "nextLink": {
@@ -23789,7 +24645,7 @@
           "type": "array",
           "description": "The Probe items on this page",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/Probe"
+            "$ref": "./loadBalancer.json/definitions/Probe"
           }
         },
         "nextLink": {
@@ -24240,7 +25096,7 @@
           "type": "array",
           "description": "List of cross tenant scopes.",
           "items": {
-            "$ref": "./networkManager.json#/definitions/CrossTenantScopes"
+            "$ref": "./networkManager.json/definitions/CrossTenantScopes"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -24388,7 +25244,7 @@
           "type": "array",
           "description": "The NetworkVirtualApplianceConnection items on this page",
           "items": {
-            "$ref": "./virtualWan.json#/definitions/NetworkVirtualApplianceConnection"
+            "$ref": "./virtualWan.json/definitions/NetworkVirtualApplianceConnection"
           }
         },
         "nextLink": {
@@ -24408,7 +25264,7 @@
         "networkInterfaceConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "./virtualNetwork.json#/definitions/VirtualApplianceNetworkInterfaceConfiguration"
+            "$ref": "./virtualNetwork.json/definitions/VirtualApplianceNetworkInterfaceConfiguration"
           },
           "x-ms-identifiers": []
         }
@@ -24554,7 +25410,7 @@
           "type": "array",
           "description": "The NspAssociation items on this page",
           "items": {
-            "$ref": "./networkSecurityPerimeter.json#/definitions/NspAssociation"
+            "$ref": "./networkSecurityPerimeter.json/definitions/NspAssociation"
           }
         },
         "nextLink": {
@@ -24713,7 +25569,7 @@
           "type": "array",
           "description": "The NspServiceTagsResource items on this page",
           "items": {
-            "$ref": "./networkSecurityPerimeter.json#/definitions/NspServiceTagsResource"
+            "$ref": "./networkSecurityPerimeter.json/definitions/NspServiceTagsResource"
           }
         },
         "nextLink": {
@@ -24827,14 +25683,14 @@
           "type": "array",
           "description": "Operation service specification.",
           "items": {
-            "$ref": "./networkingOperations.json#/definitions/MetricSpecification"
+            "$ref": "./networkingOperations.json/definitions/MetricSpecification"
           }
         },
         "logSpecifications": {
           "type": "array",
           "description": "Operation log specification.",
           "items": {
-            "$ref": "./networkingOperations.json#/definitions/LogSpecification"
+            "$ref": "./networkingOperations.json/definitions/LogSpecification"
           }
         }
       }
@@ -25124,7 +25980,7 @@
           "type": "array",
           "description": "The PerimeterAssociableResource items on this page",
           "items": {
-            "$ref": "./networkSecurityPerimeter.json#/definitions/PerimeterAssociableResource"
+            "$ref": "./networkSecurityPerimeter.json/definitions/PerimeterAssociableResource"
           }
         },
         "nextLink": {
@@ -25286,7 +26142,7 @@
       "description": "The auto-approval list of the private link service.",
       "allOf": [
         {
-          "$ref": "./virtualNetwork.json#/definitions/ResourceSet"
+          "$ref": "./virtualNetwork.json/definitions/ResourceSet"
         }
       ]
     },
@@ -25295,7 +26151,7 @@
       "description": "The visibility list of the private link service.",
       "allOf": [
         {
-          "$ref": "./virtualNetwork.json#/definitions/ResourceSet"
+          "$ref": "./virtualNetwork.json/definitions/ResourceSet"
         }
       ]
     },
@@ -25803,7 +26659,7 @@
           "type": "array",
           "description": "The RadiusAuthServer items on this page",
           "items": {
-            "$ref": "./networkGateway.json#/definitions/RadiusAuthServer"
+            "$ref": "./networkGateway.json/definitions/RadiusAuthServer"
           }
         },
         "nextLink": {
@@ -27187,7 +28043,7 @@
       "description": "A common class for general resource information.",
       "properties": {
         "properties": {
-          "$ref": "./networkGateway.json#/definitions/VirtualNetworkGatewayConnectionPropertiesFormat",
+          "$ref": "./networkGateway.json/definitions/VirtualNetworkGatewayConnectionPropertiesFormat",
           "description": "Properties of the virtual network gateway connection.",
           "x-ms-client-flatten": true
         },
@@ -27239,15 +28095,15 @@
           "description": "The authorizationKey."
         },
         "virtualNetworkGateway1": {
-          "$ref": "./networkGateway.json#/definitions/VirtualNetworkConnectionGatewayReference",
+          "$ref": "./networkGateway.json/definitions/VirtualNetworkConnectionGatewayReference",
           "description": "The reference to virtual network gateway resource."
         },
         "virtualNetworkGateway2": {
-          "$ref": "./networkGateway.json#/definitions/VirtualNetworkConnectionGatewayReference",
+          "$ref": "./networkGateway.json/definitions/VirtualNetworkConnectionGatewayReference",
           "description": "The reference to virtual network gateway resource."
         },
         "localNetworkGateway2": {
-          "$ref": "./networkGateway.json#/definitions/VirtualNetworkConnectionGatewayReference",
+          "$ref": "./networkGateway.json/definitions/VirtualNetworkConnectionGatewayReference",
           "description": "The reference to local network gateway resource."
         },
         "connectionType": {
@@ -27280,7 +28136,7 @@
           "type": "array",
           "description": "Collection of all tunnels' connection health status.",
           "items": {
-            "$ref": "./networkGateway.json#/definitions/TunnelConnectionHealth"
+            "$ref": "./networkGateway.json/definitions/TunnelConnectionHealth"
           },
           "readOnly": true
         },
@@ -27308,7 +28164,7 @@
           "type": "array",
           "description": "GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection.",
           "items": {
-            "$ref": "./networkGateway.json#/definitions/GatewayCustomBgpIpAddressIpConfiguration"
+            "$ref": "./networkGateway.json/definitions/GatewayCustomBgpIpAddressIpConfiguration"
           },
           "x-ms-identifiers": []
         },
@@ -27320,14 +28176,14 @@
           "type": "array",
           "description": "The IPSec Policies to be considered by this connection.",
           "items": {
-            "$ref": "./networkGateway.json#/definitions/IpsecPolicy"
+            "$ref": "./networkGateway.json/definitions/IpsecPolicy"
           }
         },
         "trafficSelectorPolicies": {
           "type": "array",
           "description": "The Traffic Selector Policies to be considered by this connection.",
           "items": {
-            "$ref": "./networkGateway.json#/definitions/TrafficSelectorPolicy"
+            "$ref": "./networkGateway.json/definitions/TrafficSelectorPolicy"
           }
         },
         "resourceGuid": {
@@ -27519,7 +28375,7 @@
       "description": "IP configuration for virtual network gateway.",
       "properties": {
         "properties": {
-          "$ref": "./networkGateway.json#/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat",
+          "$ref": "./networkGateway.json/definitions/VirtualNetworkGatewayIPConfigurationPropertiesFormat",
           "description": "Properties of the virtual network gateway ip configuration.",
           "x-ms-client-flatten": true
         },
@@ -27720,7 +28576,7 @@
       "description": "VirtualNetworkGatewayNatRule Resource.",
       "properties": {
         "properties": {
-          "$ref": "./networkGateway.json#/definitions/VirtualNetworkGatewayNatRuleProperties",
+          "$ref": "./networkGateway.json/definitions/VirtualNetworkGatewayNatRuleProperties",
           "description": "Properties of the Virtual Network Gateway NAT rule.",
           "x-ms-client-flatten": true
         },
@@ -27741,7 +28597,7 @@
       "description": "Parameters for VirtualNetworkGatewayPolicyGroup.",
       "properties": {
         "properties": {
-          "$ref": "./networkGateway.json#/definitions/VirtualNetworkGatewayPolicyGroupProperties",
+          "$ref": "./networkGateway.json/definitions/VirtualNetworkGatewayPolicyGroupProperties",
           "description": "Properties of tVirtualNetworkGatewayPolicyGroup.",
           "x-ms-client-flatten": true
         },
@@ -27817,11 +28673,11 @@
           "description": "The reference to the LocalNetworkGateway resource which represents local network site having default routes. Assign Null value in case of removing existing default site setting."
         },
         "sku": {
-          "$ref": "./networkGateway.json#/definitions/VirtualNetworkGatewaySku",
+          "$ref": "./networkGateway.json/definitions/VirtualNetworkGatewaySku",
           "description": "The reference to the VirtualNetworkGatewaySku resource which represents the SKU selected for Virtual network gateway."
         },
         "vpnClientConfiguration": {
-          "$ref": "./networkGateway.json#/definitions/VpnClientConfiguration",
+          "$ref": "./networkGateway.json/definitions/VpnClientConfiguration",
           "description": "The reference to the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
         },
         "virtualNetworkGatewayPolicyGroups": {
@@ -27832,11 +28688,11 @@
           }
         },
         "bgpSettings": {
-          "$ref": "./networkGateway.json#/definitions/BgpSettings",
+          "$ref": "./networkGateway.json/definitions/BgpSettings",
           "description": "Virtual network gateway's BGP speaker settings."
         },
         "customRoutes": {
-          "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
+          "$ref": "./virtualNetwork.json/definitions/AddressSpace",
           "description": "The reference to the address space resource which represents the custom routes address space specified by the customer for virtual network gateway and VpnClient."
         },
         "resourceGuid": {
@@ -28235,7 +29091,7 @@
           "type": "array",
           "description": "Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped.",
           "items": {
-            "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
+            "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceTapConfiguration"
           },
           "readOnly": true
         },
@@ -28250,11 +29106,11 @@
           "readOnly": true
         },
         "destinationNetworkInterfaceIPConfiguration": {
-          "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration",
+          "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration",
           "description": "The reference to the private IP Address of the collector nic that will receive the tap."
         },
         "destinationLoadBalancerFrontEndIPConfiguration": {
-          "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration",
+          "$ref": "./loadBalancer.json/definitions/FrontendIPConfiguration",
           "description": "The reference to the private IP address on the internal Load Balancer that will receive the tap."
         },
         "destinationPort": {
@@ -28317,7 +29173,7 @@
       "description": "A vpn client connection configuration for client connection configuration.",
       "properties": {
         "properties": {
-          "$ref": "./networkGateway.json#/definitions/VngClientConnectionConfigurationProperties",
+          "$ref": "./networkGateway.json/definitions/VngClientConnectionConfigurationProperties",
           "description": "Properties of the vpn client root certificate.",
           "x-ms-client-flatten": true
         },

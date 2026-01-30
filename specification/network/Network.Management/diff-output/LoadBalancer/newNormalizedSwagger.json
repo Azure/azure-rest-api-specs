@@ -11,18 +11,10 @@
   "consumes": [
     "application/json"
   ],
-  "tags": [
-    {
-      "name": "LoadBalancers"
-    }
-  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/loadBalancers": {
       "get": {
         "operationId": "LoadBalancers_ListAll",
-        "tags": [
-          "LoadBalancers"
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -51,9 +43,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers": {
       "get": {
         "operationId": "LoadBalancers_List",
-        "tags": [
-          "LoadBalancers"
-        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -82,9 +71,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}": {
       "get": {
         "operationId": "LoadBalancers_Get",
-        "tags": [
-          "LoadBalancers"
-        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -123,9 +109,6 @@
       },
       "put": {
         "operationId": "LoadBalancers_CreateOrUpdate",
-        "tags": [
-          "LoadBalancers"
-        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -208,9 +191,6 @@
       },
       "patch": {
         "operationId": "LoadBalancers_UpdateTags",
-        "tags": [
-          "LoadBalancers"
-        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -249,9 +229,6 @@
       },
       "delete": {
         "operationId": "LoadBalancers_Delete",
-        "tags": [
-          "LoadBalancers"
-        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -294,9 +271,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/migrateToIpBased": {
       "post": {
         "operationId": "LoadBalancers_MigrateToIpBased",
-        "tags": [
-          "LoadBalancers"
-        ],
         "parameters": [
           {
             "name": "groupName",
@@ -344,9 +318,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/networkInterfaces": {
       "get": {
         "operationId": "LoadBalancerNetworkInterfaces_List",
-        "tags": [
-          "LoadBalancers"
-        ],
         "parameters": [
           {
             "name": "loadBalancerName",
@@ -395,6 +366,24 @@
         }
       }
     },
+    "BackendAddressPool": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackendAddressPoolPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/SubResourceModel"
+        }
+      ]
+    },
     "BackendAddressPoolPropertiesFormat": {
       "type": "object",
       "properties": {
@@ -416,7 +405,7 @@
         "backendIPConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/NetworkInterfaceIPConfiguration"
+            "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration"
           },
           "readOnly": true
         },
@@ -461,6 +450,30 @@
         }
       }
     },
+    "FrontendIPConfiguration": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FrontendIPConfigurationPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/SubResourceModel"
+        }
+      ]
+    },
     "FrontendIPConfigurationPropertiesFormat": {
       "type": "object",
       "properties": {
@@ -502,7 +515,7 @@
           "$ref": "./common.json/definitions/IPVersion"
         },
         "subnet": {
-          "$ref": "./common.json/definitions/Subnet"
+          "$ref": "./virtualNetwork.json/definitions/Subnet"
         },
         "publicIPAddress": {
           "$ref": "./virtualNetwork.json/definitions/PublicIPAddress"
@@ -537,6 +550,31 @@
           "$ref": "./common.json/definitions/GatewayLoadBalancerTunnelInterfaceType"
         }
       }
+    },
+    "InboundNatPool": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InboundNatPoolPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/SubResource"
+        }
+      ]
     },
     "InboundNatPoolPropertiesFormat": {
       "type": "object",
@@ -581,6 +619,45 @@
         "protocol"
       ]
     },
+    "InboundNatRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InboundNatRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "InboundNatRuleListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/InboundNatRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "InboundNatRulePortMapping": {
       "type": "object",
       "properties": {
@@ -611,7 +688,7 @@
           "$ref": "./common.json/definitions/SubResource"
         },
         "backendIPConfiguration": {
-          "$ref": "./common.json/definitions/NetworkInterfaceIPConfiguration",
+          "$ref": "./virtualNetwork.json/definitions/NetworkInterfaceIPConfiguration",
           "readOnly": true
         },
         "protocol": {
@@ -782,43 +859,43 @@
         "frontendIPConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/FrontendIPConfiguration"
+            "$ref": "#/definitions/FrontendIPConfiguration"
           }
         },
         "backendAddressPools": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/BackendAddressPool"
+            "$ref": "#/definitions/BackendAddressPool"
           }
         },
         "loadBalancingRules": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/LoadBalancingRule"
+            "$ref": "#/definitions/LoadBalancingRule"
           }
         },
         "probes": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/Probe"
+            "$ref": "#/definitions/Probe"
           }
         },
         "inboundNatRules": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/InboundNatRule"
+            "$ref": "#/definitions/InboundNatRule"
           }
         },
         "inboundNatPools": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/InboundNatPool"
+            "$ref": "#/definitions/InboundNatPool"
           }
         },
         "outboundRules": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/OutboundRule"
+            "$ref": "#/definitions/OutboundRule"
           }
         },
         "resourceGuid": {
@@ -875,6 +952,24 @@
           "$ref": "./common.json/definitions/SubResource"
         }
       }
+    },
+    "LoadBalancingRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LoadBalancingRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/SubResourceModel"
+        }
+      ]
     },
     "LoadBalancingRulePropertiesFormat": {
       "type": "object",
@@ -972,6 +1067,24 @@
         }
       }
     },
+    "OutboundRule": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OutboundRulePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/SubResourceModel"
+        }
+      ]
+    },
     "OutboundRulePropertiesFormat": {
       "type": "object",
       "properties": {
@@ -1007,6 +1120,24 @@
         "backendAddressPool",
         "frontendIPConfigurations",
         "protocol"
+      ]
+    },
+    "Probe": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProbePropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json/definitions/SubResourceModel"
+        }
       ]
     },
     "ProbePropertiesFormat": {
