@@ -80,7 +80,11 @@ model AzureAIDataSourceConfig extends DataSourceConfig {
 
   /** Data schema scenario. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
-  scenario: "red_team" | "responses" | "traces";
+  scenario:
+    | "red_team"
+    | "responses"
+    | "traces_preview"
+    | "synthetic_data_gen_preview";
 }
 
 /** Adding Azure AI Source type to data source for foundry extension. */
@@ -177,6 +181,17 @@ union ItemGenerationParamsType {
 
   /** Parameters for red team taxonomy item generation. */
   redTeamTaxonomy: "red_team_taxonomy",
+
+  /** Parameters for synthetic data item generation. */
+  syntheticDataGeneration: SyntheticDataGenItemGenerationParamsType,
+}
+
+/** The types of parameters for synthetic data generation item generation. */
+union SyntheticDataGenItemGenerationParamsType {
+  string,
+
+  /** Parameters for synthetic data generation preview. */
+  syntheticDataGenerationPreview: "synthetic_data_gen_preview",
 }
 
 /** Represents the set of parameters used to control item generation operations. */
@@ -227,8 +242,8 @@ model RedTeamTaxonomyItemGenerationParams extends ItemGenerationParams {
   source: OpenAI.EvalJsonlFileContentSource;
 }
 
-/** Represents the parameters for continuous evaluation item generation. */
-model ContinuousEvalItemGenerationParams extends ItemGenerationParams {
+/** Represents the parameters for response retrieval item generation. */
+model ResponseRetrievalItemGenerationParams extends ItemGenerationParams {
   /** The type of item generation parameters, always `response_retrieval`. */
   type: ItemGenerationParamsType.responseRetrieval;
 
@@ -343,13 +358,54 @@ model TracesPreviewEvalRunDataSource extends EvalRunDataSource {
   ingestion_delay_seconds?: duration = duration.fromISO("PT5M");
 }
 
+/** Represents a data source for evaluation runs that evaluates based on generated synthetic data for testing purposes. */
+model SyntheticDataGenerationPreviewEvalRunDataSource
+  extends EvalRunDataSource {
+  /** The type of data source, always `azure_ai_synthetic_data_gen_preview`. */
+  type: "azure_ai_synthetic_data_gen_preview";
+
+  /** The parameters for item generation. */
+  item_generation_params: SyntheticDataGenerationPreviewItemGenerationParams;
+
+  /** The target configuration for the evaluation. */
+  target: Target;
+
+  /** Input messages template configuration applicable only if target is of type 'azure_ai_model' */
+  input_messages?: OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate;
+}
+
+model SyntheticDataGenerationPreviewItemGenerationParams
+  extends ItemGenerationParams {
+  /** The type of item generation parameters. */
+  type: ItemGenerationParamsType.syntheticDataGeneration;
+
+  /** The maximum number of data samples to generate. */
+  samples_count: int32;
+
+  /** The prompt used for generating synthetic data. This is option if target is of type 'azure_ai_agent' with instructions configured in agent. */
+  prompt?: string;
+
+  /** The name of the model deployment to use for generating synthetic data. */
+  model_deployment_name: string;
+
+  /** The name of the output dataset where generated synthetic data will be stored. If not provided, service generates dataset name automatically. */
+  output_dataset_name?: string;
+
+  /** The identifier of the output dataset where generated synthetic data is stored. The generated data is a jsonl file with columns id, query and test_description. */
+  @visibility(Lifecycle.Read)
+  output_dataset_id?: string;
+
+  /** The optional seed data content source files for data generation. */
+  sources: OpenAI.EvalJsonlFileIdSource[];
+}
+
 /** Represents a data source for evaluation runs that are specific to Continuous Evaluation scenarios. */
 model AzureAIResponsesEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source, always `azure_ai_responses`. */
   type: "azure_ai_responses";
 
   /** The parameters for item generation. */
-  item_generation_params: ContinuousEvalItemGenerationParams;
+  item_generation_params: ResponseRetrievalItemGenerationParams;
 
   /** Maximum number of evaluation runs allowed per hour. */
   max_runs_hourly: int32;

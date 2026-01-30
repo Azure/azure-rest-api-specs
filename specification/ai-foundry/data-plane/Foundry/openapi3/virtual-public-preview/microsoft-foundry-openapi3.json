@@ -10092,7 +10092,8 @@
             "enum": [
               "red_team",
               "responses",
-              "traces"
+              "traces_preview",
+              "synthetic_data_gen_preview"
             ],
             "description": "Data schema scenario."
           }
@@ -10185,7 +10186,7 @@
           "item_generation_params": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/ContinuousEvalItemGenerationParams"
+                "$ref": "#/components/schemas/ResponseRetrievalItemGenerationParams"
               }
             ],
             "description": "The parameters for item generation."
@@ -11156,53 +11157,6 @@
             "ContainerAgents=v1"
           ]
         }
-      },
-      "ContinuousEvalItemGenerationParams": {
-        "type": "object",
-        "required": [
-          "type",
-          "max_num_turns",
-          "data_mapping",
-          "source"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "response_retrieval"
-            ],
-            "description": "The type of item generation parameters, always `response_retrieval`."
-          },
-          "max_num_turns": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The maximum number of turns of chat history to evaluate."
-          },
-          "data_mapping": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "Mapping from source fields to response_id field, required for retrieving chat history."
-          },
-          "source": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileContentSource"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
-              }
-            ],
-            "description": "The source from which JSONL content is read."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/ItemGenerationParams"
-          }
-        ],
-        "description": "Represents the parameters for continuous evaluation item generation."
       },
       "ContinuousEvaluationRuleAction": {
         "type": "object",
@@ -12427,6 +12381,7 @@
           "propertyName": "type",
           "mapping": {
             "azure_ai_traces_preview": "#/components/schemas/TracesPreviewEvalRunDataSource",
+            "azure_ai_synthetic_data_gen_preview": "#/components/schemas/SyntheticDataGenerationPreviewEvalRunDataSource",
             "azure_ai_responses": "#/components/schemas/AzureAIResponsesEvalRunDataSource",
             "azure_ai_target_completions": "#/components/schemas/TargetCompletionEvalRunDataSource",
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource"
@@ -14435,7 +14390,8 @@
           "mapping": {
             "red_team": "#/components/schemas/RedTeamItemGenerationParams",
             "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
-            "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams"
+            "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams",
+            "response_retrieval": "#/components/schemas/ResponseRetrievalItemGenerationParams"
           }
         },
         "description": "Represents the set of parameters used to control item generation operations."
@@ -14453,6 +14409,9 @@
               "red_team_seed_prompts",
               "red_team_taxonomy"
             ]
+          },
+          {
+            "$ref": "#/components/schemas/SyntheticDataGenItemGenerationParamsType"
           }
         ],
         "description": "The types of parameters for red team item generation."
@@ -33413,6 +33372,53 @@
         ],
         "description": "Represents the parameters for red team taxonomy item generation."
       },
+      "ResponseRetrievalItemGenerationParams": {
+        "type": "object",
+        "required": [
+          "type",
+          "max_num_turns",
+          "data_mapping",
+          "source"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "response_retrieval"
+            ],
+            "description": "The type of item generation parameters, always `response_retrieval`."
+          },
+          "max_num_turns": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of turns of chat history to evaluate."
+          },
+          "data_mapping": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Mapping from source fields to response_id field, required for retrieving chat history."
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileContentSource"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
+              }
+            ],
+            "description": "The source from which JSONL content is read."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemGenerationParams"
+          }
+        ],
+        "description": "Represents the parameters for response retrieval item generation."
+      },
       "RiskCategory": {
         "anyOf": [
           {
@@ -33835,6 +33841,120 @@
         "allOf": [
           {
             "$ref": "#/components/schemas/OpenAI.ItemResource"
+          }
+        ]
+      },
+      "SyntheticDataGenItemGenerationParamsType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "synthetic_data_gen_preview"
+            ]
+          }
+        ],
+        "description": "The types of parameters for synthetic data generation item generation."
+      },
+      "SyntheticDataGenerationPreviewEvalRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "item_generation_params",
+          "target"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "azure_ai_synthetic_data_gen_preview"
+            ],
+            "description": "The type of data source, always `azure_ai_synthetic_data_gen_preview`."
+          },
+          "item_generation_params": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams"
+              }
+            ],
+            "description": "The parameters for item generation."
+          },
+          "target": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Target"
+              }
+            ],
+            "description": "The target configuration for the evaluation."
+          },
+          "input_messages": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.CreateEvalResponsesRunDataSourceInputMessagesTemplate"
+              }
+            ],
+            "description": "Input messages template configuration applicable only if target is of type 'azure_ai_model'"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Represents a data source for evaluation runs that evaluates based on generated synthetic data for testing purposes."
+      },
+      "SyntheticDataGenerationPreviewItemGenerationParams": {
+        "type": "object",
+        "required": [
+          "type",
+          "samples_count",
+          "model_deployment_name",
+          "sources"
+        ],
+        "properties": {
+          "type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SyntheticDataGenItemGenerationParamsType"
+              }
+            ],
+            "description": "The type of item generation parameters."
+          },
+          "samples_count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of data samples to generate."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The prompt used for generating synthetic data. This is option if target is of type 'azure_ai_agent' with instructions configured in agent."
+          },
+          "model_deployment_name": {
+            "type": "string",
+            "description": "The name of the model deployment to use for generating synthetic data."
+          },
+          "output_dataset_name": {
+            "type": "string",
+            "description": "The name of the output dataset where generated synthetic data will be stored. If not provided, service generates dataset name automatically."
+          },
+          "output_dataset_id": {
+            "type": "string",
+            "description": "The identifier of the output dataset where generated synthetic data is stored. The generated data is a jsonl file with columns id, query and test_description.",
+            "readOnly": true
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.EvalJsonlFileIdSource"
+            },
+            "description": "The optional seed data content source files for data generation."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemGenerationParams"
           }
         ]
       },
