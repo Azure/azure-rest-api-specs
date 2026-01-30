@@ -1080,6 +1080,7 @@ interface Sites {
 
       @doc("Receipt body in COSE format")
       @bodyRoot
+      @encode("binary")
       body: bytes;
     },
     OverrideErrorType = DefaultErrorResponse
@@ -2312,6 +2313,7 @@ interface WebApps {
 
       @doc("Receipt body in COSE format")
       @bodyRoot
+      @encode("binary")
       body: bytes;
     },
     OverrideErrorType = DefaultErrorResponse
