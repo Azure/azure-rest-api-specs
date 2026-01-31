@@ -12,3 +12,8 @@ using Azure.ClientGenerator.Core;
   "AksIdentityType",
   "java"
 );
+
+@@clientName(Microsoft.KubernetesConfiguration,
+  "ExtensionsManager",
+  "java"
+);
