@@ -5438,7 +5438,7 @@
                   "items": {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/OpenAI.InputItem"
+                      "$ref": "#/components/schemas/OpenAI.Item"
                     },
                     "description": "Items for which to search for relevant memories."
                   },
@@ -5555,7 +5555,7 @@
                   "items": {
                     "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/OpenAI.InputItem"
+                      "$ref": "#/components/schemas/OpenAI.Item"
                     },
                     "description": "Conversation items from which to extract memories."
                   },
@@ -5940,14 +5940,7 @@
                   "items": {
                     "type": "array",
                     "items": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/components/schemas/OpenAI.Item"
-                        },
-                        {
-                          "$ref": "#/components/schemas/OpenAI.EasyInputMessage"
-                        }
-                      ]
+                      "$ref": "#/components/schemas/OpenAI.Item"
                     },
                     "maxItems": 20,
                     "description": "The items to add to the conversation. You may add up to 20 items at a time."
@@ -6042,7 +6035,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/OpenAI.ItemResource"
+                        "$ref": "#/components/schemas/OpenAI.OutputItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -6110,7 +6103,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.ItemResource"
+                  "$ref": "#/components/schemas/OpenAI.OutputItem"
                 }
               }
             }
@@ -7601,7 +7594,14 @@
                         "$ref": "#/components/schemas/OpenAI.ToolsArray"
                       },
                       "tool_choice": {
-                        "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                        "anyOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+                          },
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                          }
+                        ]
                       },
                       "prompt": {
                         "$ref": "#/components/schemas/OpenAI.Prompt"
@@ -7794,7 +7794,14 @@
                         "$ref": "#/components/schemas/OpenAI.ToolsArray"
                       },
                       "tool_choice": {
-                        "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                        "anyOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+                          },
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                          }
+                        ]
                       },
                       "prompt": {
                         "$ref": "#/components/schemas/OpenAI.Prompt"
@@ -8254,7 +8261,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/OpenAI.ItemResource"
+                        "$ref": "#/components/schemas/OpenAI.OutputItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -14695,7 +14702,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
       },
@@ -15379,7 +15386,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ],
         "description": "Request from the service for the user to perform OAuth consent."
@@ -15683,6 +15690,107 @@
             ]
           }
         ]
+      },
+      "OpenAI.ApplyPatchToolCallItemParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "status",
+          "operation"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "apply_patch_call"
+            ],
+            "description": "The type of the item. Always `apply_patch_call`.",
+            "x-stainless-const": true,
+            "default": "apply_patch_call"
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "The unique ID of the apply patch tool call generated by the model."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ApplyPatchCallStatusParam"
+              }
+            ],
+            "description": "The status of the apply patch tool call. One of `in_progress` or `completed`."
+          },
+          "operation": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ApplyPatchOperationParam"
+              }
+            ],
+            "description": "The specific create, delete, or update instruction for the apply_patch tool call."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Item"
+          }
+        ],
+        "description": "A tool call representing a request to create, delete, or update files using diff patches.",
+        "title": "Apply patch tool call"
+      },
+      "OpenAI.ApplyPatchToolCallOutputItemParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "status"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "apply_patch_call_output"
+            ],
+            "description": "The type of the item. Always `apply_patch_call_output`.",
+            "x-stainless-const": true,
+            "default": "apply_patch_call_output"
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "The unique ID of the apply patch tool call generated by the model."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ApplyPatchCallOutputStatusParam"
+              }
+            ],
+            "description": "The status of the apply patch tool call output. One of `completed` or `failed`."
+          },
+          "output": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Item"
+          }
+        ],
+        "description": "The streamed output emitted by an apply patch tool call.",
+        "title": "Apply patch tool call output"
       },
       "OpenAI.ApplyPatchToolParam": {
         "type": "object",
@@ -16017,6 +16125,40 @@
         "description": "A tool that runs Python code to help generate a response to a prompt.",
         "title": "Code interpreter"
       },
+      "OpenAI.CompactionSummaryItemParam": {
+        "type": "object",
+        "required": [
+          "type",
+          "encrypted_content"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "compaction"
+            ],
+            "description": "The type of the item. Always `compaction`.",
+            "x-stainless-const": true,
+            "default": "compaction"
+          },
+          "encrypted_content": {
+            "type": "string",
+            "maxLength": 10485760,
+            "description": "The encrypted content of the compaction summary."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Item"
+          }
+        ],
+        "description": "A compaction item generated by the [`v1/responses/compact` API](https://platform.openai.com/docs/api-reference/responses/compact).",
+        "title": "Compaction item"
+      },
       "OpenAI.ComparisonFilter": {
         "type": "object",
         "required": [
@@ -16158,6 +16300,60 @@
             ]
           }
         ]
+      },
+      "OpenAI.ComputerCallOutputItemParam": {
+        "type": "object",
+        "required": [
+          "call_id",
+          "type",
+          "output"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "The ID of the computer tool call that produced the output."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "computer_call_output"
+            ],
+            "description": "The type of the computer tool call output. Always `computer_call_output`.",
+            "x-stainless-const": true,
+            "default": "computer_call_output"
+          },
+          "output": {
+            "$ref": "#/components/schemas/OpenAI.ComputerScreenshotImage"
+          },
+          "acknowledged_safety_checks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.ComputerCallSafetyCheckParam"
+            },
+            "nullable": true
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.FunctionCallItemStatus"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Item"
+          }
+        ],
+        "description": "The output of a computer tool call.",
+        "title": "Computer tool call output"
       },
       "OpenAI.ComputerCallSafetyCheckParam": {
         "type": "object",
@@ -16377,8 +16573,8 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "function_call": "#/components/schemas/OpenAI.FunctionToolCallResource",
             "message": "#/components/schemas/OpenAI.ConversationItemMessage",
-            "function_call": "#/components/schemas/OpenAI.ConversationItemFunctionToolCallResource",
             "function_call_output": "#/components/schemas/OpenAI.ConversationItemFunctionToolCallOutputResource",
             "file_search_call": "#/components/schemas/OpenAI.ConversationItemFileSearchToolCall",
             "web_search_call": "#/components/schemas/OpenAI.ConversationItemWebSearchToolCall",
@@ -16976,55 +17172,6 @@
               }
             ],
             "description": "The output from the function call generated by your code.\n  Can be a string or an list of output content."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ConversationItem"
-          }
-        ]
-      },
-      "OpenAI.ConversationItemFunctionToolCallResource": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the function tool call."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "function_call"
-            ],
-            "description": "The type of the function tool call. Always `function_call`.",
-            "x-stainless-const": true
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the function tool call generated by the model."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the function to run."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of the arguments to pass to the function."
           },
           "status": {
             "type": "string",
@@ -17702,6 +17849,11 @@
             "default": "conversation"
           },
           "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              }
+            ],
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.\n  Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters."
           },
           "created_at": {
@@ -17806,7 +17958,7 @@
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OpenAI.InputItem"
+              "$ref": "#/components/schemas/OpenAI.Item"
             },
             "nullable": true
           }
@@ -17904,7 +18056,7 @@
             "items": {
               "anyOf": [
                 {
-                  "$ref": "#/components/schemas/OpenAI.EasyInputMessage"
+                  "$ref": "#/components/schemas/OpenAI.InputMessage"
                 },
                 {
                   "$ref": "#/components/schemas/OpenAI.EvalItem"
@@ -18869,68 +19021,11 @@
         "description": "An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`.",
         "title": "Coordinate"
       },
-      "OpenAI.EasyInputMessage": {
-        "type": "object",
-        "required": [
-          "role",
-          "content",
-          "type"
-        ],
-        "properties": {
-          "role": {
-            "type": "string",
-            "enum": [
-              "user",
-              "assistant",
-              "system",
-              "developer"
-            ],
-            "description": "The role of the message input. One of `user`, `assistant`, `system`, or\n  `developer`."
-          },
-          "content": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.InputMessageContentList"
-              }
-            ],
-            "description": "Text, image, or audio input to the model, used to generate a response.\n  Can also contain previous assistant responses."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "message"
-            ],
-            "description": "The type of the message input. Always `message`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A message input to the model with a role indicating instruction following\nhierarchy. Instructions given with the `developer` or `system` role take\nprecedence over instructions given with the `user` role. Messages with the\n`assistant` role are presumed to have been generated by the model in previous\ninteractions.",
-        "title": "Input message"
-      },
       "OpenAI.Error": {
         "type": "object",
         "required": [
           "code",
-          "message",
-          "param",
-          "type"
+          "message"
         ],
         "properties": {
           "code": {
@@ -20912,6 +21007,74 @@
           "incomplete"
         ]
       },
+      "OpenAI.FunctionCallOutputItemParam": {
+        "type": "object",
+        "required": [
+          "call_id",
+          "type",
+          "output"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "The unique ID of the function tool call generated by the model."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call_output"
+            ],
+            "description": "The type of the function tool call output. Always `function_call_output`.",
+            "x-stainless-const": true,
+            "default": "function_call_output"
+          },
+          "output": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/OpenAI.InputTextContentParam"
+                    },
+                    {
+                      "$ref": "#/components/schemas/OpenAI.InputImageContentParamAutoParam"
+                    },
+                    {
+                      "$ref": "#/components/schemas/OpenAI.InputFileContentParam"
+                    }
+                  ]
+                }
+              }
+            ],
+            "description": "Text, image, or file output of the function tool call."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.FunctionCallItemStatus"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Item"
+          }
+        ],
+        "description": "The output of a function tool call.",
+        "title": "Function tool call output"
+      },
       "OpenAI.FunctionObject": {
         "type": "object",
         "required": [
@@ -21010,6 +21173,58 @@
         },
         "description": "Commands and limits describing how to run the shell tool call.",
         "title": "Shell action"
+      },
+      "OpenAI.FunctionShellCallItemParam": {
+        "type": "object",
+        "required": [
+          "call_id",
+          "type",
+          "action"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "The unique ID of the shell tool call generated by the model."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "shell_call"
+            ],
+            "description": "The type of the item. Always `shell_call`.",
+            "x-stainless-const": true,
+            "default": "shell_call"
+          },
+          "action": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.FunctionShellActionParam"
+              }
+            ],
+            "description": "The shell commands and limits that describe how to run the tool call."
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.FunctionShellCallItemStatus"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Item"
+          }
+        ],
+        "description": "A tool representing a request to execute one or more shell commands.",
+        "title": "Shell tool call"
       },
       "OpenAI.FunctionShellCallItemStatus": {
         "type": "string",
@@ -21148,6 +21363,58 @@
         ],
         "description": "Indicates that the shell commands finished and returned an exit code.",
         "title": "Shell call exit outcome"
+      },
+      "OpenAI.FunctionShellCallOutputItemParam": {
+        "type": "object",
+        "required": [
+          "call_id",
+          "type",
+          "output"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "call_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "description": "The unique ID of the shell tool call generated by the model."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "shell_call_output"
+            ],
+            "description": "The type of the item. Always `shell_call_output`.",
+            "x-stainless-const": true,
+            "default": "shell_call_output"
+          },
+          "output": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.FunctionShellCallOutputContentParam"
+            },
+            "description": "Captured chunks of stdout and stderr output, along with their associated outcomes."
+          },
+          "max_output_length": {
+            "type": "integer",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.integer"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Item"
+          }
+        ],
+        "description": "The streamed output items emitted by a shell tool call.",
+        "title": "Shell tool call output"
       },
       "OpenAI.FunctionShellCallOutputOutcome": {
         "type": "object",
@@ -21332,6 +21599,55 @@
         ],
         "description": "Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling).",
         "title": "Function"
+      },
+      "OpenAI.FunctionToolCallResource": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "name",
+          "arguments"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the function tool call."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call"
+            ],
+            "description": "The type of the function tool call. Always `function_call`.",
+            "x-stainless-const": true
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The unique ID of the function tool call generated by the model."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the function to run."
+          },
+          "arguments": {
+            "type": "string",
+            "description": "A JSON string of the arguments to pass to the function."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "completed",
+              "incomplete"
+            ],
+            "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ConversationItem"
+          }
+        ]
       },
       "OpenAI.GraderLabelModel": {
         "type": "object",
@@ -22187,1277 +22503,42 @@
         "description": "An image input to the model. Learn about [image inputs](https://platform.openai.com/docs/guides/vision)",
         "title": "Input image"
       },
-      "OpenAI.InputItem": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.InputItemType"
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "message": "#/components/schemas/OpenAI.EasyInputMessage",
-            "item_reference": "#/components/schemas/OpenAI.ItemReferenceParam",
-            "output_message": "#/components/schemas/OpenAI.InputItemOutputMessage",
-            "file_search_call": "#/components/schemas/OpenAI.InputItemFileSearchToolCall",
-            "computer_call": "#/components/schemas/OpenAI.InputItemComputerToolCall",
-            "computer_call_output": "#/components/schemas/OpenAI.InputItemComputerCallOutputItemParam",
-            "web_search_call": "#/components/schemas/OpenAI.InputItemWebSearchToolCall",
-            "function_call": "#/components/schemas/OpenAI.InputItemFunctionToolCall",
-            "function_call_output": "#/components/schemas/OpenAI.InputItemFunctionCallOutputItemParam",
-            "reasoning": "#/components/schemas/OpenAI.InputItemReasoningItem",
-            "compaction": "#/components/schemas/OpenAI.InputItemCompactionSummaryItemParam",
-            "image_generation_call": "#/components/schemas/OpenAI.InputItemImageGenToolCall",
-            "code_interpreter_call": "#/components/schemas/OpenAI.InputItemCodeInterpreterToolCall",
-            "local_shell_call": "#/components/schemas/OpenAI.InputItemLocalShellToolCall",
-            "local_shell_call_output": "#/components/schemas/OpenAI.InputItemLocalShellToolCallOutput",
-            "shell_call": "#/components/schemas/OpenAI.InputItemFunctionShellCallItemParam",
-            "shell_call_output": "#/components/schemas/OpenAI.InputItemFunctionShellCallOutputItemParam",
-            "apply_patch_call": "#/components/schemas/OpenAI.InputItemApplyPatchToolCallItemParam",
-            "apply_patch_call_output": "#/components/schemas/OpenAI.InputItemApplyPatchToolCallOutputItemParam",
-            "mcp_list_tools": "#/components/schemas/OpenAI.InputItemMcpListTools",
-            "mcp_approval_request": "#/components/schemas/OpenAI.InputItemMcpApprovalRequest",
-            "mcp_approval_response": "#/components/schemas/OpenAI.InputItemMcpApprovalResponse",
-            "mcp_call": "#/components/schemas/OpenAI.InputItemMcpToolCall",
-            "custom_tool_call_output": "#/components/schemas/OpenAI.InputItemCustomToolCallOutput",
-            "custom_tool_call": "#/components/schemas/OpenAI.InputItemCustomToolCall"
-          }
-        },
-        "description": "An item representing part of the context for the response to be\ngenerated by the model. Can contain text, images, and audio inputs,\nas well as previous assistant responses and tool call outputs."
-      },
-      "OpenAI.InputItemApplyPatchToolCallItemParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "status",
-          "operation"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "apply_patch_call"
-            ],
-            "description": "The type of the item. Always `apply_patch_call`.",
-            "x-stainless-const": true,
-            "default": "apply_patch_call"
-          },
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the apply patch tool call generated by the model."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApplyPatchCallStatusParam"
-              }
-            ],
-            "description": "The status of the apply patch tool call. One of `in_progress` or `completed`."
-          },
-          "operation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApplyPatchOperationParam"
-              }
-            ],
-            "description": "The specific create, delete, or update instruction for the apply_patch tool call."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A tool call representing a request to create, delete, or update files using diff patches.",
-        "title": "Apply patch tool call"
-      },
-      "OpenAI.InputItemApplyPatchToolCallOutputItemParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "apply_patch_call_output"
-            ],
-            "description": "The type of the item. Always `apply_patch_call_output`.",
-            "x-stainless-const": true,
-            "default": "apply_patch_call_output"
-          },
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the apply patch tool call generated by the model."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApplyPatchCallOutputStatusParam"
-              }
-            ],
-            "description": "The status of the apply patch tool call output. One of `completed` or `failed`."
-          },
-          "output": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "The streamed output emitted by an apply patch tool call.",
-        "title": "Apply patch tool call output"
-      },
-      "OpenAI.InputItemCodeInterpreterToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "status",
-          "container_id",
-          "code",
-          "outputs"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "code_interpreter_call"
-            ],
-            "description": "The type of the code interpreter tool call. Always `code_interpreter_call`.",
-            "x-stainless-const": true,
-            "default": "code_interpreter_call"
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the code interpreter tool call."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "interpreting",
-              "failed"
-            ],
-            "description": "The status of the code interpreter tool call. Valid values are `in_progress`, `completed`, `incomplete`, `interpreting`, and `failed`."
-          },
-          "container_id": {
-            "type": "string",
-            "description": "The ID of the container used to run the code."
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "outputs": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/OpenAI.CodeInterpreterOutputLogs"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.CodeInterpreterOutputImage"
-                }
-              ]
-            },
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A tool call to run code.",
-        "title": "Code interpreter tool call"
-      },
-      "OpenAI.InputItemCompactionSummaryItemParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "encrypted_content"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "compaction"
-            ],
-            "description": "The type of the item. Always `compaction`.",
-            "x-stainless-const": true,
-            "default": "compaction"
-          },
-          "encrypted_content": {
-            "type": "string",
-            "maxLength": 10485760,
-            "description": "The encrypted content of the compaction summary."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A compaction item generated by the [`v1/responses/compact` API](https://platform.openai.com/docs/api-reference/responses/compact).",
-        "title": "Compaction item"
-      },
-      "OpenAI.InputItemComputerCallOutputItemParam": {
-        "type": "object",
-        "required": [
-          "call_id",
-          "type",
-          "output"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The ID of the computer tool call that produced the output."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "computer_call_output"
-            ],
-            "description": "The type of the computer tool call output. Always `computer_call_output`.",
-            "x-stainless-const": true,
-            "default": "computer_call_output"
-          },
-          "output": {
-            "$ref": "#/components/schemas/OpenAI.ComputerScreenshotImage"
-          },
-          "acknowledged_safety_checks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.ComputerCallSafetyCheckParam"
-            },
-            "nullable": true
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionCallItemStatus"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "The output of a computer tool call.",
-        "title": "Computer tool call output"
-      },
-      "OpenAI.InputItemComputerToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "call_id",
-          "action",
-          "pending_safety_checks",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "computer_call"
-            ],
-            "description": "The type of the computer call. Always `computer_call`.",
-            "default": "computer_call"
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the computer call."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "An identifier used when responding to the tool call with output."
-          },
-          "action": {
-            "$ref": "#/components/schemas/OpenAI.ComputerAction"
-          },
-          "pending_safety_checks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.ComputerCallSafetyCheckParam"
-            },
-            "description": "The pending safety checks for the computer call."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A tool call to a computer use tool. See the\n[computer use guide](https://platform.openai.com/docs/guides/tools-computer-use) for more information.",
-        "title": "Computer tool call"
-      },
-      "OpenAI.InputItemCustomToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "name",
-          "input"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "custom_tool_call"
-            ],
-            "description": "The type of the custom tool call. Always `custom_tool_call`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the custom tool call in the OpenAI platform."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "An identifier used to map this custom tool call to a tool call output."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the custom tool being called."
-          },
-          "input": {
-            "type": "string",
-            "description": "The input for the custom tool call generated by the model."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A call to a custom tool created by the model.",
-        "title": "Custom tool call"
-      },
-      "OpenAI.InputItemCustomToolCallOutput": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "output"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "custom_tool_call_output"
-            ],
-            "description": "The type of the custom tool call output. Always `custom_tool_call_output`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the custom tool call output in the OpenAI platform."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The call ID, used to map this custom tool call output to a custom tool call."
-          },
-          "output": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput"
-                }
-              }
-            ],
-            "description": "The output from the custom tool call generated by your code.\n  Can be a string or an list of output content."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "The output of a custom tool call from your code, being sent back to the model.",
-        "title": "Custom tool call output"
-      },
-      "OpenAI.InputItemFileSearchToolCall": {
-        "type": "object",
-        "required": [
-          "id",
-          "type",
-          "status",
-          "queries"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the file search tool call."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "file_search_call"
-            ],
-            "description": "The type of the file search tool call. Always `file_search_call`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "incomplete",
-              "failed"
-            ],
-            "description": "The status of the file search tool call. One of `in_progress`,\n  `searching`, `incomplete` or `failed`,"
-          },
-          "queries": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The queries used to search for files."
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.FileSearchToolCallResults"
-            },
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "The results of a file search tool call. See the\n[file search guide](https://platform.openai.com/docs/guides/tools-file-search) for more information.",
-        "title": "File search tool call"
-      },
-      "OpenAI.InputItemFunctionCallOutputItemParam": {
-        "type": "object",
-        "required": [
-          "call_id",
-          "type",
-          "output"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the function tool call generated by the model."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "function_call_output"
-            ],
-            "description": "The type of the function tool call output. Always `function_call_output`.",
-            "x-stainless-const": true,
-            "default": "function_call_output"
-          },
-          "output": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/OpenAI.InputTextContentParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/OpenAI.InputImageContentParamAutoParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/OpenAI.InputFileContentParam"
-                    }
-                  ]
-                }
-              }
-            ],
-            "description": "Text, image, or file output of the function tool call."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionCallItemStatus"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "The output of a function tool call.",
-        "title": "Function tool call output"
-      },
-      "OpenAI.InputItemFunctionShellCallItemParam": {
-        "type": "object",
-        "required": [
-          "call_id",
-          "type",
-          "action"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the shell tool call generated by the model."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "shell_call"
-            ],
-            "description": "The type of the item. Always `shell_call`.",
-            "x-stainless-const": true,
-            "default": "shell_call"
-          },
-          "action": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionShellActionParam"
-              }
-            ],
-            "description": "The shell commands and limits that describe how to run the tool call."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionShellCallItemStatus"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A tool representing a request to execute one or more shell commands.",
-        "title": "Shell tool call"
-      },
-      "OpenAI.InputItemFunctionShellCallOutputItemParam": {
-        "type": "object",
-        "required": [
-          "call_id",
-          "type",
-          "output"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the shell tool call generated by the model."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "shell_call_output"
-            ],
-            "description": "The type of the item. Always `shell_call_output`.",
-            "x-stainless-const": true,
-            "default": "shell_call_output"
-          },
-          "output": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.FunctionShellCallOutputContentParam"
-            },
-            "description": "Captured chunks of stdout and stderr output, along with their associated outcomes."
-          },
-          "max_output_length": {
-            "type": "integer",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.integer"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "The streamed output items emitted by a shell tool call.",
-        "title": "Shell tool call output"
-      },
-      "OpenAI.InputItemFunctionToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the function tool call."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "function_call"
-            ],
-            "description": "The type of the function tool call. Always `function_call`.",
-            "x-stainless-const": true
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the function tool call generated by the model."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the function to run."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of the arguments to pass to the function."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A tool call to run a function. See the\n[function calling guide](https://platform.openai.com/docs/guides/function-calling) for more information.",
-        "title": "Function tool call"
-      },
-      "OpenAI.InputItemImageGenToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "status",
-          "result"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "image_generation_call"
-            ],
-            "description": "The type of the image generation call. Always `image_generation_call`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the image generation call."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "generating",
-              "failed"
-            ],
-            "description": "The status of the image generation call."
-          },
-          "result": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "An image generation request made by the model.",
-        "title": "Image generation call"
-      },
-      "OpenAI.InputItemLocalShellToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "call_id",
-          "action",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "local_shell_call"
-            ],
-            "description": "The type of the local shell call. Always `local_shell_call`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the local shell call."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the local shell tool call generated by the model."
-          },
-          "action": {
-            "$ref": "#/components/schemas/OpenAI.LocalShellExecAction"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the local shell call."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A tool call to run a command on the local shell.",
-        "title": "Local shell call"
-      },
-      "OpenAI.InputItemLocalShellToolCallOutput": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "output"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "local_shell_call_output"
-            ],
-            "description": "The type of the local shell tool call output. Always `local_shell_call_output`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the local shell tool call generated by the model."
-          },
-          "output": {
-            "type": "string",
-            "description": "A JSON string of the output of the local shell tool call."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "The output of a local shell tool call.",
-        "title": "Local shell call output"
-      },
-      "OpenAI.InputItemMcpApprovalRequest": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "server_label",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_approval_request"
-            ],
-            "description": "The type of the item. Always `mcp_approval_request`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the approval request."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the MCP server making the request."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the tool to run."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of arguments for the tool."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A request for human approval of a tool invocation.",
-        "title": "MCP approval request"
-      },
-      "OpenAI.InputItemMcpApprovalResponse": {
-        "type": "object",
-        "required": [
-          "type",
-          "approval_request_id",
-          "approve"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_approval_response"
-            ],
-            "description": "The type of the item. Always `mcp_approval_response`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "approval_request_id": {
-            "type": "string",
-            "description": "The ID of the approval request being answered."
-          },
-          "approve": {
-            "type": "boolean",
-            "description": "Whether the request was approved."
-          },
-          "reason": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A response to an MCP approval request.",
-        "title": "MCP approval response"
-      },
-      "OpenAI.InputItemMcpListTools": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "server_label",
-          "tools"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_list_tools"
-            ],
-            "description": "The type of the item. Always `mcp_list_tools`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the list."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the MCP server."
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.MCPListToolsTool"
-            },
-            "description": "The tools available on the server."
-          },
-          "error": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A list of tools available on an MCP server.",
-        "title": "MCP list tools"
-      },
-      "OpenAI.InputItemMcpToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "server_label",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_call"
-            ],
-            "description": "The type of the item. Always `mcp_call`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the tool call."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the MCP server running the tool."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the tool that was run."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of the arguments passed to the tool."
-          },
-          "output": {
-            "type": "string",
-            "nullable": true
-          },
-          "error": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.MCPToolCallStatus"
-              }
-            ],
-            "description": "The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`."
-          },
-          "approval_request_id": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "An invocation of a tool on an MCP server.",
-        "title": "MCP tool call"
-      },
-      "OpenAI.InputItemOutputMessage": {
-        "type": "object",
-        "required": [
-          "id",
-          "type",
-          "role",
-          "content",
-          "status"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the output message.",
-            "x-stainless-go-json": "omitzero"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "output_message"
-            ],
-            "description": "The type of the output message. Always `message`.",
-            "x-stainless-const": true
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "assistant"
-            ],
-            "description": "The role of the output message. Always `assistant`.",
-            "x-stainless-const": true
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.OutputMessageContent"
-            },
-            "description": "The content of the output message."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the message input. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when input items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "An output message from the model.",
-        "title": "Output message"
-      },
-      "OpenAI.InputItemReasoningItem": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "summary"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "reasoning"
-            ],
-            "description": "The type of the object. Always `reasoning`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique identifier of the reasoning content."
-          },
-          "encrypted_content": {
-            "type": "string",
-            "nullable": true
-          },
-          "summary": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.Summary"
-            },
-            "description": "Reasoning summary content."
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.ReasoningTextContent"
-            },
-            "description": "Reasoning text content."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "A description of the chain of thought used by a reasoning model while generating\na response. Be sure to include these items in your `input` to the Responses API\nfor subsequent turns of a conversation if you are manually\n[managing context](https://platform.openai.com/docs/guides/conversation-state).",
-        "title": "Reasoning"
-      },
-      "OpenAI.InputItemType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "message",
-              "output_message",
-              "file_search_call",
-              "computer_call",
-              "computer_call_output",
-              "web_search_call",
-              "function_call",
-              "function_call_output",
-              "reasoning",
-              "compaction",
-              "image_generation_call",
-              "code_interpreter_call",
-              "local_shell_call",
-              "local_shell_call_output",
-              "shell_call",
-              "shell_call_output",
-              "apply_patch_call",
-              "apply_patch_call_output",
-              "mcp_list_tools",
-              "mcp_approval_request",
-              "mcp_approval_response",
-              "mcp_call",
-              "custom_tool_call_output",
-              "custom_tool_call",
-              "item_reference"
-            ]
-          }
-        ]
-      },
-      "OpenAI.InputItemWebSearchToolCall": {
-        "type": "object",
-        "required": [
-          "id",
-          "type",
-          "status",
-          "action"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the web search tool call."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "web_search_call"
-            ],
-            "description": "The type of the web search tool call. Always `web_search_call`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "failed"
-            ],
-            "description": "The status of the web search tool call."
-          },
-          "action": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.WebSearchActionSearch"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.WebSearchActionOpenPage"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.WebSearchActionFind"
-              }
-            ],
-            "description": "An object describing the specific action taken in this web search call.\n  Includes details on how the model used the web (search, open_page, find)."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
-          }
-        ],
-        "description": "The results of a web search tool call. See the\n[web search guide](https://platform.openai.com/docs/guides/tools-web-search) for more information.",
-        "title": "Web search tool call"
-      },
       "OpenAI.InputMessage": {
         "type": "object",
         "required": [
-          "type",
           "role",
-          "content"
+          "content",
+          "type"
         ],
         "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system",
+              "developer"
+            ],
+            "description": "The role of the message input. One of `user`, `assistant`, `system`, or\n  `developer`."
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.InputMessageContentList"
+              }
+            ],
+            "description": "Text, image, or audio input to the model, used to generate a response.\n  Can also contain previous assistant responses."
+          },
           "type": {
             "type": "string",
             "enum": [
               "message"
             ],
-            "description": "The type of the message input. Always set to `message`.",
+            "description": "The type of the message input. Always `message`.",
             "x-stainless-const": true
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "user",
-              "system",
-              "developer"
-            ],
-            "description": "The role of the message input. One of `user`, `system`, or `developer`."
           },
           "status": {
             "type": "string",
@@ -23467,9 +22548,6 @@
               "incomplete"
             ],
             "description": "The status of item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
-          },
-          "content": {
-            "$ref": "#/components/schemas/OpenAI.InputMessageContentList"
           }
         },
         "allOf": [
@@ -23477,7 +22555,7 @@
             "$ref": "#/components/schemas/OpenAI.Item"
           }
         ],
-        "description": "A message input to the model with a role indicating instruction following\nhierarchy. Instructions given with the `developer` or `system` role take\nprecedence over instructions given with the `user` role.",
+        "description": "A message input to the model with a role indicating instruction following\nhierarchy. Instructions given with the `developer` or `system` role take\nprecedence over instructions given with the `user` role. Messages with the\n`assistant` role are presumed to have been generated by the model in previous\ninteractions.",
         "title": "Input message"
       },
       "OpenAI.InputMessageContentList": {
@@ -23491,28 +22569,40 @@
       "OpenAI.InputMessageResource": {
         "type": "object",
         "required": [
-          "type",
           "role",
           "content",
+          "type",
           "id"
         ],
         "properties": {
+          "role": {
+            "type": "string",
+            "enum": [
+              "user",
+              "assistant",
+              "system",
+              "developer"
+            ],
+            "description": "The role of the message input. One of `user`, `assistant`, `system`, or\n  `developer`."
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.InputMessageContentList"
+              }
+            ],
+            "description": "Text, image, or audio input to the model, used to generate a response.\n  Can also contain previous assistant responses."
+          },
           "type": {
             "type": "string",
             "enum": [
               "message"
             ],
-            "description": "The type of the message input. Always set to `message`.",
+            "description": "The type of the message input. Always `message`.",
             "x-stainless-const": true
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "user",
-              "system",
-              "developer"
-            ],
-            "description": "The role of the message input. One of `user`, `system`, or `developer`."
           },
           "status": {
             "type": "string",
@@ -23523,9 +22613,6 @@
             ],
             "description": "The status of item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
           },
-          "content": {
-            "$ref": "#/components/schemas/OpenAI.InputMessageContentList"
-          },
           "id": {
             "type": "string",
             "description": "The unique ID of the message input."
@@ -23533,7 +22620,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
       },
@@ -23545,7 +22632,7 @@
           {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OpenAI.InputItem"
+              "$ref": "#/components/schemas/OpenAI.Item"
             }
           }
         ],
@@ -23615,133 +22702,33 @@
           "mapping": {
             "memory_search_call": "#/components/schemas/MemorySearchToolCallItemParam",
             "message": "#/components/schemas/OpenAI.InputMessage",
+            "computer_call_output": "#/components/schemas/OpenAI.ComputerCallOutputItemParam",
+            "function_call_output": "#/components/schemas/OpenAI.FunctionCallOutputItemParam",
+            "compaction": "#/components/schemas/OpenAI.CompactionSummaryItemParam",
+            "shell_call": "#/components/schemas/OpenAI.FunctionShellCallItemParam",
+            "shell_call_output": "#/components/schemas/OpenAI.FunctionShellCallOutputItemParam",
+            "apply_patch_call": "#/components/schemas/OpenAI.ApplyPatchToolCallItemParam",
+            "apply_patch_call_output": "#/components/schemas/OpenAI.ApplyPatchToolCallOutputItemParam",
+            "mcp_approval_response": "#/components/schemas/OpenAI.MCPApprovalResponse",
+            "item_reference": "#/components/schemas/OpenAI.ItemReferenceParam",
             "output_message": "#/components/schemas/OpenAI.ItemOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.ItemFileSearchToolCall",
             "computer_call": "#/components/schemas/OpenAI.ItemComputerToolCall",
-            "computer_call_output": "#/components/schemas/OpenAI.ItemComputerCallOutputItemParam",
             "web_search_call": "#/components/schemas/OpenAI.ItemWebSearchToolCall",
             "function_call": "#/components/schemas/OpenAI.ItemFunctionToolCall",
-            "function_call_output": "#/components/schemas/OpenAI.ItemFunctionCallOutputItemParam",
             "reasoning": "#/components/schemas/OpenAI.ItemReasoningItem",
-            "compaction": "#/components/schemas/OpenAI.ItemCompactionSummaryItemParam",
             "image_generation_call": "#/components/schemas/OpenAI.ItemImageGenToolCall",
             "code_interpreter_call": "#/components/schemas/OpenAI.ItemCodeInterpreterToolCall",
             "local_shell_call": "#/components/schemas/OpenAI.ItemLocalShellToolCall",
             "local_shell_call_output": "#/components/schemas/OpenAI.ItemLocalShellToolCallOutput",
-            "shell_call": "#/components/schemas/OpenAI.ItemFunctionShellCallItemParam",
-            "shell_call_output": "#/components/schemas/OpenAI.ItemFunctionShellCallOutputItemParam",
-            "apply_patch_call": "#/components/schemas/OpenAI.ItemApplyPatchToolCallItemParam",
-            "apply_patch_call_output": "#/components/schemas/OpenAI.ItemApplyPatchToolCallOutputItemParam",
             "mcp_list_tools": "#/components/schemas/OpenAI.ItemMcpListTools",
             "mcp_approval_request": "#/components/schemas/OpenAI.ItemMcpApprovalRequest",
-            "mcp_approval_response": "#/components/schemas/OpenAI.ItemMcpApprovalResponse",
             "mcp_call": "#/components/schemas/OpenAI.ItemMcpToolCall",
             "custom_tool_call_output": "#/components/schemas/OpenAI.ItemCustomToolCallOutput",
             "custom_tool_call": "#/components/schemas/OpenAI.ItemCustomToolCall"
           }
         },
         "description": "Content item used to generate a response."
-      },
-      "OpenAI.ItemApplyPatchToolCallItemParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "status",
-          "operation"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "apply_patch_call"
-            ],
-            "description": "The type of the item. Always `apply_patch_call`.",
-            "x-stainless-const": true,
-            "default": "apply_patch_call"
-          },
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the apply patch tool call generated by the model."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApplyPatchCallStatusParam"
-              }
-            ],
-            "description": "The status of the apply patch tool call. One of `in_progress` or `completed`."
-          },
-          "operation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApplyPatchOperationParam"
-              }
-            ],
-            "description": "The specific create, delete, or update instruction for the apply_patch tool call."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Item"
-          }
-        ],
-        "description": "A tool call representing a request to create, delete, or update files using diff patches.",
-        "title": "Apply patch tool call"
-      },
-      "OpenAI.ItemApplyPatchToolCallOutputItemParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "apply_patch_call_output"
-            ],
-            "description": "The type of the item. Always `apply_patch_call_output`.",
-            "x-stainless-const": true,
-            "default": "apply_patch_call_output"
-          },
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the apply patch tool call generated by the model."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApplyPatchCallOutputStatusParam"
-              }
-            ],
-            "description": "The status of the apply patch tool call output. One of `completed` or `failed`."
-          },
-          "output": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Item"
-          }
-        ],
-        "description": "The streamed output emitted by an apply patch tool call.",
-        "title": "Apply patch tool call output"
       },
       "OpenAI.ItemCodeInterpreterToolCall": {
         "type": "object",
@@ -23808,94 +22795,6 @@
         ],
         "description": "A tool call to run code.",
         "title": "Code interpreter tool call"
-      },
-      "OpenAI.ItemCompactionSummaryItemParam": {
-        "type": "object",
-        "required": [
-          "type",
-          "encrypted_content"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "compaction"
-            ],
-            "description": "The type of the item. Always `compaction`.",
-            "x-stainless-const": true,
-            "default": "compaction"
-          },
-          "encrypted_content": {
-            "type": "string",
-            "maxLength": 10485760,
-            "description": "The encrypted content of the compaction summary."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Item"
-          }
-        ],
-        "description": "A compaction item generated by the [`v1/responses/compact` API](https://platform.openai.com/docs/api-reference/responses/compact).",
-        "title": "Compaction item"
-      },
-      "OpenAI.ItemComputerCallOutputItemParam": {
-        "type": "object",
-        "required": [
-          "call_id",
-          "type",
-          "output"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The ID of the computer tool call that produced the output."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "computer_call_output"
-            ],
-            "description": "The type of the computer tool call output. Always `computer_call_output`.",
-            "x-stainless-const": true,
-            "default": "computer_call_output"
-          },
-          "output": {
-            "$ref": "#/components/schemas/OpenAI.ComputerScreenshotImage"
-          },
-          "acknowledged_safety_checks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.ComputerCallSafetyCheckParam"
-            },
-            "nullable": true
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionCallItemStatus"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Item"
-          }
-        ],
-        "description": "The output of a computer tool call.",
-        "title": "Computer tool call output"
       },
       "OpenAI.ItemComputerToolCall": {
         "type": "object",
@@ -24095,178 +22994,6 @@
         ],
         "description": "The results of a file search tool call. See the\n[file search guide](https://platform.openai.com/docs/guides/tools-file-search) for more information.",
         "title": "File search tool call"
-      },
-      "OpenAI.ItemFunctionCallOutputItemParam": {
-        "type": "object",
-        "required": [
-          "call_id",
-          "type",
-          "output"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the function tool call generated by the model."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "function_call_output"
-            ],
-            "description": "The type of the function tool call output. Always `function_call_output`.",
-            "x-stainless-const": true,
-            "default": "function_call_output"
-          },
-          "output": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/components/schemas/OpenAI.InputTextContentParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/OpenAI.InputImageContentParamAutoParam"
-                    },
-                    {
-                      "$ref": "#/components/schemas/OpenAI.InputFileContentParam"
-                    }
-                  ]
-                }
-              }
-            ],
-            "description": "Text, image, or file output of the function tool call."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionCallItemStatus"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Item"
-          }
-        ],
-        "description": "The output of a function tool call.",
-        "title": "Function tool call output"
-      },
-      "OpenAI.ItemFunctionShellCallItemParam": {
-        "type": "object",
-        "required": [
-          "call_id",
-          "type",
-          "action"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the shell tool call generated by the model."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "shell_call"
-            ],
-            "description": "The type of the item. Always `shell_call`.",
-            "x-stainless-const": true,
-            "default": "shell_call"
-          },
-          "action": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionShellActionParam"
-              }
-            ],
-            "description": "The shell commands and limits that describe how to run the tool call."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionShellCallItemStatus"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Item"
-          }
-        ],
-        "description": "A tool representing a request to execute one or more shell commands.",
-        "title": "Shell tool call"
-      },
-      "OpenAI.ItemFunctionShellCallOutputItemParam": {
-        "type": "object",
-        "required": [
-          "call_id",
-          "type",
-          "output"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "call_id": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 64,
-            "description": "The unique ID of the shell tool call generated by the model."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "shell_call_output"
-            ],
-            "description": "The type of the item. Always `shell_call_output`.",
-            "x-stainless-const": true,
-            "default": "shell_call_output"
-          },
-          "output": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.FunctionShellCallOutputContentParam"
-            },
-            "description": "Captured chunks of stdout and stderr output, along with their associated outcomes."
-          },
-          "max_output_length": {
-            "type": "integer",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.integer"
-              }
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Item"
-          }
-        ],
-        "description": "The streamed output items emitted by a shell tool call.",
-        "title": "Shell tool call output"
       },
       "OpenAI.ItemFunctionToolCall": {
         "type": "object",
@@ -24494,47 +23221,6 @@
         ],
         "description": "A request for human approval of a tool invocation.",
         "title": "MCP approval request"
-      },
-      "OpenAI.ItemMcpApprovalResponse": {
-        "type": "object",
-        "required": [
-          "type",
-          "approval_request_id",
-          "approve"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_approval_response"
-            ],
-            "description": "The type of the item. Always `mcp_approval_response`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "approval_request_id": {
-            "type": "string",
-            "description": "The ID of the approval request being answered."
-          },
-          "approve": {
-            "type": "boolean",
-            "description": "Whether the request was approved."
-          },
-          "reason": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.Item"
-          }
-        ],
-        "description": "A response to an MCP approval request.",
-        "title": "MCP approval response"
       },
       "OpenAI.ItemMcpListTools": {
         "type": "object",
@@ -24779,1096 +23465,11 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.InputItem"
+            "$ref": "#/components/schemas/OpenAI.Item"
           }
         ],
         "description": "An internal identifier for an item to reference.",
         "title": "Item reference"
-      },
-      "OpenAI.ItemResource": {
-        "type": "object",
-        "required": [
-          "type"
-        ],
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/OpenAI.ItemResourceType"
-          },
-          "created_by": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CreatedBy"
-              },
-              {
-                "type": "string"
-              }
-            ],
-            "description": "The information about the creator of the item"
-          },
-          "agent_reference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentReference"
-              }
-            ],
-            "description": "The agent that created the item."
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The response on which the item is created."
-          }
-        },
-        "discriminator": {
-          "propertyName": "type",
-          "mapping": {
-            "structured_outputs": "#/components/schemas/StructuredOutputsItemResource",
-            "workflow_preview_action": "#/components/schemas/WorkflowPreviewActionOutputItemResource",
-            "oauth_consent_request": "#/components/schemas/OAuthConsentRequestItemResource",
-            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource",
-            "message": "#/components/schemas/OpenAI.InputMessageResource",
-            "output_message": "#/components/schemas/OpenAI.ItemResourceOutputMessage",
-            "file_search_call": "#/components/schemas/OpenAI.ItemResourceFileSearchToolCall",
-            "computer_call": "#/components/schemas/OpenAI.ItemResourceComputerToolCall",
-            "computer_call_output": "#/components/schemas/OpenAI.ItemResourceComputerToolCallOutputResource",
-            "web_search_call": "#/components/schemas/OpenAI.ItemResourceWebSearchToolCall",
-            "function_call": "#/components/schemas/OpenAI.ItemResourceFunctionToolCallResource",
-            "function_call_output": "#/components/schemas/OpenAI.ItemResourceFunctionToolCallOutputResource",
-            "image_generation_call": "#/components/schemas/OpenAI.ItemResourceImageGenToolCall",
-            "code_interpreter_call": "#/components/schemas/OpenAI.ItemResourceCodeInterpreterToolCall",
-            "local_shell_call": "#/components/schemas/OpenAI.ItemResourceLocalShellToolCall",
-            "local_shell_call_output": "#/components/schemas/OpenAI.ItemResourceLocalShellToolCallOutput",
-            "shell_call": "#/components/schemas/OpenAI.ItemResourceFunctionShellCall",
-            "shell_call_output": "#/components/schemas/OpenAI.ItemResourceFunctionShellCallOutput",
-            "apply_patch_call": "#/components/schemas/OpenAI.ItemResourceApplyPatchToolCall",
-            "apply_patch_call_output": "#/components/schemas/OpenAI.ItemResourceApplyPatchToolCallOutput",
-            "mcp_list_tools": "#/components/schemas/OpenAI.ItemResourceMcpListTools",
-            "mcp_approval_request": "#/components/schemas/OpenAI.ItemResourceMcpApprovalRequest",
-            "mcp_approval_response": "#/components/schemas/OpenAI.ItemResourceMcpApprovalResponseResource",
-            "mcp_call": "#/components/schemas/OpenAI.ItemResourceMcpToolCall"
-          }
-        },
-        "description": "Content item used to generate a response."
-      },
-      "OpenAI.ItemResourceApplyPatchToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "call_id",
-          "status",
-          "operation"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "apply_patch_call"
-            ],
-            "description": "The type of the item. Always `apply_patch_call`.",
-            "x-stainless-const": true,
-            "default": "apply_patch_call"
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the apply patch tool call. Populated when this item is returned via API."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the apply patch tool call generated by the model."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApplyPatchCallStatus"
-              }
-            ],
-            "description": "The status of the apply patch tool call. One of `in_progress` or `completed`."
-          },
-          "operation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApplyPatchFileOperation"
-              }
-            ],
-            "description": "One of the create_file, delete_file, or update_file operations applied via apply_patch."
-          },
-          "created_by": {
-            "type": "string",
-            "description": "The ID of the entity that created this tool call."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "A tool call that applies file diffs by creating, deleting, or updating files.",
-        "title": "Apply patch tool call"
-      },
-      "OpenAI.ItemResourceApplyPatchToolCallOutput": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "call_id",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "apply_patch_call_output"
-            ],
-            "description": "The type of the item. Always `apply_patch_call_output`.",
-            "x-stainless-const": true,
-            "default": "apply_patch_call_output"
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the apply patch tool call output. Populated when this item is returned via API."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the apply patch tool call generated by the model."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ApplyPatchCallOutputStatus"
-              }
-            ],
-            "description": "The status of the apply patch tool call output. One of `completed` or `failed`."
-          },
-          "output": {
-            "type": "string",
-            "nullable": true
-          },
-          "created_by": {
-            "type": "string",
-            "description": "The ID of the entity that created this tool call output."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "The output emitted by an apply patch tool call.",
-        "title": "Apply patch tool call output"
-      },
-      "OpenAI.ItemResourceCodeInterpreterToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "status",
-          "container_id",
-          "code",
-          "outputs"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "code_interpreter_call"
-            ],
-            "description": "The type of the code interpreter tool call. Always `code_interpreter_call`.",
-            "x-stainless-const": true,
-            "default": "code_interpreter_call"
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the code interpreter tool call."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete",
-              "interpreting",
-              "failed"
-            ],
-            "description": "The status of the code interpreter tool call. Valid values are `in_progress`, `completed`, `incomplete`, `interpreting`, and `failed`."
-          },
-          "container_id": {
-            "type": "string",
-            "description": "The ID of the container used to run the code."
-          },
-          "code": {
-            "type": "string",
-            "nullable": true
-          },
-          "outputs": {
-            "type": "array",
-            "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/OpenAI.CodeInterpreterOutputLogs"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.CodeInterpreterOutputImage"
-                }
-              ]
-            },
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "A tool call to run code.",
-        "title": "Code interpreter tool call"
-      },
-      "OpenAI.ItemResourceComputerToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "call_id",
-          "action",
-          "pending_safety_checks",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "computer_call"
-            ],
-            "description": "The type of the computer call. Always `computer_call`.",
-            "default": "computer_call"
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the computer call."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "An identifier used when responding to the tool call with output."
-          },
-          "action": {
-            "$ref": "#/components/schemas/OpenAI.ComputerAction"
-          },
-          "pending_safety_checks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.ComputerCallSafetyCheckParam"
-            },
-            "description": "The pending safety checks for the computer call."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "A tool call to a computer use tool. See the\n[computer use guide](https://platform.openai.com/docs/guides/tools-computer-use) for more information.",
-        "title": "Computer tool call"
-      },
-      "OpenAI.ItemResourceComputerToolCallOutputResource": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "output"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "computer_call_output"
-            ],
-            "description": "The type of the computer tool call output. Always `computer_call_output`.",
-            "x-stainless-const": true,
-            "default": "computer_call_output"
-          },
-          "id": {
-            "type": "string",
-            "description": "The ID of the computer tool call output."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The ID of the computer tool call that produced the output."
-          },
-          "acknowledged_safety_checks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.ComputerCallSafetyCheckParam"
-            },
-            "description": "The safety checks reported by the API that have been acknowledged by the\n  developer."
-          },
-          "output": {
-            "$ref": "#/components/schemas/OpenAI.ComputerScreenshotImage"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the message input. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when input items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ]
-      },
-      "OpenAI.ItemResourceFileSearchToolCall": {
-        "type": "object",
-        "required": [
-          "id",
-          "type",
-          "status",
-          "queries"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the file search tool call."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "file_search_call"
-            ],
-            "description": "The type of the file search tool call. Always `file_search_call`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "incomplete",
-              "failed"
-            ],
-            "description": "The status of the file search tool call. One of `in_progress`,\n  `searching`, `incomplete` or `failed`,"
-          },
-          "queries": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "The queries used to search for files."
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.FileSearchToolCallResults"
-            },
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "The results of a file search tool call. See the\n[file search guide](https://platform.openai.com/docs/guides/tools-file-search) for more information.",
-        "title": "File search tool call"
-      },
-      "OpenAI.ItemResourceFunctionShellCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "call_id",
-          "action",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "shell_call"
-            ],
-            "description": "The type of the item. Always `shell_call`.",
-            "x-stainless-const": true,
-            "default": "shell_call"
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the shell tool call. Populated when this item is returned via API."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the shell tool call generated by the model."
-          },
-          "action": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.FunctionShellAction"
-              }
-            ],
-            "description": "The shell commands and limits that describe how to run the tool call."
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.LocalShellCallStatus"
-              }
-            ],
-            "description": "The status of the shell call. One of `in_progress`, `completed`, or `incomplete`."
-          },
-          "created_by": {
-            "type": "string",
-            "description": "The ID of the entity that created this tool call."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "A tool call that executes one or more shell commands in a managed environment.",
-        "title": "Shell tool call"
-      },
-      "OpenAI.ItemResourceFunctionShellCallOutput": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "call_id",
-          "output",
-          "max_output_length"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "shell_call_output"
-            ],
-            "description": "The type of the shell call output. Always `shell_call_output`.",
-            "x-stainless-const": true,
-            "default": "shell_call_output"
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the shell call output. Populated when this item is returned via API."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the shell tool call generated by the model."
-          },
-          "output": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.FunctionShellCallOutputContent"
-            },
-            "description": "An array of shell call output contents"
-          },
-          "max_output_length": {
-            "type": "integer",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.integer"
-              }
-            ],
-            "nullable": true
-          },
-          "created_by": {
-            "type": "string",
-            "description": "The identifier of the actor that created the item."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "The output of a shell tool call that was emitted.",
-        "title": "Shell call output"
-      },
-      "OpenAI.ItemResourceFunctionToolCallOutputResource": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "output"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the function tool call output. Populated when this item\n  is returned via API."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "function_call_output"
-            ],
-            "description": "The type of the function tool call output. Always `function_call_output`.",
-            "x-stainless-const": true
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the function tool call generated by the model."
-          },
-          "output": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput"
-                }
-              }
-            ],
-            "description": "The output from the function call generated by your code.\n  Can be a string or an list of output content."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ]
-      },
-      "OpenAI.ItemResourceFunctionToolCallResource": {
-        "type": "object",
-        "required": [
-          "type",
-          "call_id",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the function tool call."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "function_call"
-            ],
-            "description": "The type of the function tool call. Always `function_call`.",
-            "x-stainless-const": true
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the function tool call generated by the model."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the function to run."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of the arguments to pass to the function."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ]
-      },
-      "OpenAI.ItemResourceImageGenToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "status",
-          "result"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "image_generation_call"
-            ],
-            "description": "The type of the image generation call. Always `image_generation_call`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the image generation call."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "generating",
-              "failed"
-            ],
-            "description": "The status of the image generation call."
-          },
-          "result": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "An image generation request made by the model.",
-        "title": "Image generation call"
-      },
-      "OpenAI.ItemResourceLocalShellToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "call_id",
-          "action",
-          "status"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "local_shell_call"
-            ],
-            "description": "The type of the local shell call. Always `local_shell_call`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the local shell call."
-          },
-          "call_id": {
-            "type": "string",
-            "description": "The unique ID of the local shell tool call generated by the model."
-          },
-          "action": {
-            "$ref": "#/components/schemas/OpenAI.LocalShellExecAction"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the local shell call."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "A tool call to run a command on the local shell.",
-        "title": "Local shell call"
-      },
-      "OpenAI.ItemResourceLocalShellToolCallOutput": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "output"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "local_shell_call_output"
-            ],
-            "description": "The type of the local shell tool call output. Always `local_shell_call_output`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the local shell tool call generated by the model."
-          },
-          "output": {
-            "type": "string",
-            "description": "A JSON string of the output of the local shell tool call."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "The output of a local shell tool call.",
-        "title": "Local shell call output"
-      },
-      "OpenAI.ItemResourceMcpApprovalRequest": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "server_label",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_approval_request"
-            ],
-            "description": "The type of the item. Always `mcp_approval_request`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the approval request."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the MCP server making the request."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the tool to run."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of arguments for the tool."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "A request for human approval of a tool invocation.",
-        "title": "MCP approval request"
-      },
-      "OpenAI.ItemResourceMcpApprovalResponseResource": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "approval_request_id",
-          "approve"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_approval_response"
-            ],
-            "description": "The type of the item. Always `mcp_approval_response`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the approval response"
-          },
-          "approval_request_id": {
-            "type": "string",
-            "description": "The ID of the approval request being answered."
-          },
-          "approve": {
-            "type": "boolean",
-            "description": "Whether the request was approved."
-          },
-          "reason": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "A response to an MCP approval request.",
-        "title": "MCP approval response"
-      },
-      "OpenAI.ItemResourceMcpListTools": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "server_label",
-          "tools"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_list_tools"
-            ],
-            "description": "The type of the item. Always `mcp_list_tools`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the list."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the MCP server."
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.MCPListToolsTool"
-            },
-            "description": "The tools available on the server."
-          },
-          "error": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "A list of tools available on an MCP server.",
-        "title": "MCP list tools"
-      },
-      "OpenAI.ItemResourceMcpToolCall": {
-        "type": "object",
-        "required": [
-          "type",
-          "id",
-          "server_label",
-          "name",
-          "arguments"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "mcp_call"
-            ],
-            "description": "The type of the item. Always `mcp_call`.",
-            "x-stainless-const": true
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the tool call."
-          },
-          "server_label": {
-            "type": "string",
-            "description": "The label of the MCP server running the tool."
-          },
-          "name": {
-            "type": "string",
-            "description": "The name of the tool that was run."
-          },
-          "arguments": {
-            "type": "string",
-            "description": "A JSON string of the arguments passed to the tool."
-          },
-          "output": {
-            "type": "string",
-            "nullable": true
-          },
-          "error": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.MCPToolCallStatus"
-              }
-            ],
-            "description": "The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`."
-          },
-          "approval_request_id": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "An invocation of a tool on an MCP server.",
-        "title": "MCP tool call"
-      },
-      "OpenAI.ItemResourceOutputMessage": {
-        "type": "object",
-        "required": [
-          "id",
-          "type",
-          "role",
-          "content",
-          "status"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the output message.",
-            "x-stainless-go-json": "omitzero"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "output_message"
-            ],
-            "description": "The type of the output message. Always `message`.",
-            "x-stainless-const": true
-          },
-          "role": {
-            "type": "string",
-            "enum": [
-              "assistant"
-            ],
-            "description": "The role of the output message. Always `assistant`.",
-            "x-stainless-const": true
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.OutputMessageContent"
-            },
-            "description": "The content of the output message."
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "completed",
-              "incomplete"
-            ],
-            "description": "The status of the message input. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when input items are returned via API."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "An output message from the model.",
-        "title": "Output message"
-      },
-      "OpenAI.ItemResourceType": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "message",
-              "output_message",
-              "file_search_call",
-              "computer_call",
-              "computer_call_output",
-              "web_search_call",
-              "function_call",
-              "function_call_output",
-              "image_generation_call",
-              "code_interpreter_call",
-              "local_shell_call",
-              "local_shell_call_output",
-              "shell_call",
-              "shell_call_output",
-              "apply_patch_call",
-              "apply_patch_call_output",
-              "mcp_list_tools",
-              "mcp_approval_request",
-              "mcp_approval_response",
-              "mcp_call",
-              "structured_outputs",
-              "oauth_consent_request",
-              "memory_search_call",
-              "workflow_preview_action"
-            ]
-          }
-        ]
-      },
-      "OpenAI.ItemResourceWebSearchToolCall": {
-        "type": "object",
-        "required": [
-          "id",
-          "type",
-          "status",
-          "action"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the web search tool call."
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "web_search_call"
-            ],
-            "description": "The type of the web search tool call. Always `web_search_call`.",
-            "x-stainless-const": true
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "in_progress",
-              "searching",
-              "completed",
-              "failed"
-            ],
-            "description": "The status of the web search tool call."
-          },
-          "action": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.WebSearchActionSearch"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.WebSearchActionOpenPage"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.WebSearchActionFind"
-              }
-            ],
-            "description": "An object describing the specific action taken in this web search call.\n  Includes details on how the model used the web (search, open_page, find)."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
-          }
-        ],
-        "description": "The results of a web search tool call. See the\n[web search guide](https://platform.openai.com/docs/guides/tools-web-search) for more information.",
-        "title": "Web search tool call"
       },
       "OpenAI.ItemType": {
         "anyOf": [
@@ -25902,6 +23503,7 @@
               "mcp_call",
               "custom_tool_call_output",
               "custom_tool_call",
+              "item_reference",
               "structured_outputs",
               "oauth_consent_request",
               "memory_search_call",
@@ -26197,6 +23799,47 @@
         },
         "description": "The log probability of a token.",
         "title": "Log probability"
+      },
+      "OpenAI.MCPApprovalResponse": {
+        "type": "object",
+        "required": [
+          "type",
+          "approval_request_id",
+          "approve"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_approval_response"
+            ],
+            "description": "The type of the item. Always `mcp_approval_response`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "approval_request_id": {
+            "type": "string",
+            "description": "The ID of the approval request being answered."
+          },
+          "approve": {
+            "type": "boolean",
+            "description": "Whether the request was approved."
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Item"
+          }
+        ],
+        "description": "A response to an MCP approval request.",
+        "title": "MCP approval response"
       },
       "OpenAI.MCPListToolsTool": {
         "type": "object",
@@ -26572,11 +24215,39 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.OutputItemType"
+          },
+          "created_by": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CreatedBy"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "The information about the creator of the item"
+          },
+          "agent_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentReference"
+              }
+            ],
+            "description": "The agent that created the item."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The response on which the item is created."
           }
         },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "structured_outputs": "#/components/schemas/StructuredOutputsItemResource",
+            "workflow_preview_action": "#/components/schemas/WorkflowPreviewActionOutputItemResource",
+            "oauth_consent_request": "#/components/schemas/OAuthConsentRequestItemResource",
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource",
+            "message": "#/components/schemas/OpenAI.InputMessageResource",
             "output_message": "#/components/schemas/OpenAI.OutputItemOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.OutputItemFileSearchToolCall",
             "function_call": "#/components/schemas/OpenAI.OutputItemFunctionToolCall",
@@ -26594,7 +24265,11 @@
             "mcp_call": "#/components/schemas/OpenAI.OutputItemMcpToolCall",
             "mcp_list_tools": "#/components/schemas/OpenAI.OutputItemMcpListTools",
             "mcp_approval_request": "#/components/schemas/OpenAI.OutputItemMcpApprovalRequest",
-            "custom_tool_call": "#/components/schemas/OpenAI.OutputItemCustomToolCall"
+            "custom_tool_call": "#/components/schemas/OpenAI.OutputItemCustomToolCall",
+            "computer_call_output": "#/components/schemas/OpenAI.OutputItemComputerToolCallOutputResource",
+            "function_call_output": "#/components/schemas/OpenAI.OutputItemFunctionToolCallOutputResource",
+            "local_shell_call_output": "#/components/schemas/OpenAI.OutputItemLocalShellToolCallOutput",
+            "mcp_approval_response": "#/components/schemas/OpenAI.OutputItemMcpApprovalResponseResource"
           }
         }
       },
@@ -26864,6 +24539,57 @@
         "description": "A tool call to a computer use tool. See the\n[computer use guide](https://platform.openai.com/docs/guides/tools-computer-use) for more information.",
         "title": "Computer tool call"
       },
+      "OpenAI.OutputItemComputerToolCallOutputResource": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "output"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "computer_call_output"
+            ],
+            "description": "The type of the computer tool call output. Always `computer_call_output`.",
+            "x-stainless-const": true,
+            "default": "computer_call_output"
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID of the computer tool call output."
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The ID of the computer tool call that produced the output."
+          },
+          "acknowledged_safety_checks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.ComputerCallSafetyCheckParam"
+            },
+            "description": "The safety checks reported by the API that have been acknowledged by the\n  developer."
+          },
+          "output": {
+            "$ref": "#/components/schemas/OpenAI.ComputerScreenshotImage"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "completed",
+              "incomplete"
+            ],
+            "description": "The status of the message input. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when input items are returned via API."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
+          }
+        ]
+      },
       "OpenAI.OutputItemCustomToolCall": {
         "type": "object",
         "required": [
@@ -27124,6 +24850,60 @@
         "description": "A tool call to run a function. See the\n[function calling guide](https://platform.openai.com/docs/guides/function-calling) for more information.",
         "title": "Function tool call"
       },
+      "OpenAI.OutputItemFunctionToolCallOutputResource": {
+        "type": "object",
+        "required": [
+          "type",
+          "call_id",
+          "output"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the function tool call output. Populated when this item\n  is returned via API."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "function_call_output"
+            ],
+            "description": "The type of the function tool call output. Always `function_call_output`.",
+            "x-stainless-const": true
+          },
+          "call_id": {
+            "type": "string",
+            "description": "The unique ID of the function tool call generated by the model."
+          },
+          "output": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput"
+                }
+              }
+            ],
+            "description": "The output from the function call generated by your code.\n  Can be a string or an list of output content."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "completed",
+              "incomplete"
+            ],
+            "description": "The status of the item. One of `in_progress`, `completed`, or\n  `incomplete`. Populated when items are returned via API."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
+          }
+        ]
+      },
       "OpenAI.OutputItemImageGenToolCall": {
         "type": "object",
         "required": [
@@ -27215,6 +24995,48 @@
         "description": "A tool call to run a command on the local shell.",
         "title": "Local shell call"
       },
+      "OpenAI.OutputItemLocalShellToolCallOutput": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "output"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "local_shell_call_output"
+            ],
+            "description": "The type of the local shell tool call output. Always `local_shell_call_output`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the local shell tool call generated by the model."
+          },
+          "output": {
+            "type": "string",
+            "description": "A JSON string of the output of the local shell tool call."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "completed",
+              "incomplete"
+            ],
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
+          }
+        ],
+        "description": "The output of a local shell tool call.",
+        "title": "Local shell call output"
+      },
       "OpenAI.OutputItemMcpApprovalRequest": {
         "type": "object",
         "required": [
@@ -27257,6 +25079,48 @@
         ],
         "description": "A request for human approval of a tool invocation.",
         "title": "MCP approval request"
+      },
+      "OpenAI.OutputItemMcpApprovalResponseResource": {
+        "type": "object",
+        "required": [
+          "type",
+          "id",
+          "approval_request_id",
+          "approve"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "mcp_approval_response"
+            ],
+            "description": "The type of the item. Always `mcp_approval_response`.",
+            "x-stainless-const": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the approval response"
+          },
+          "approval_request_id": {
+            "type": "string",
+            "description": "The ID of the approval request being answered."
+          },
+          "approve": {
+            "type": "boolean",
+            "description": "Whether the request was approved."
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
+          }
+        ],
+        "description": "A response to an MCP approval request.",
+        "title": "MCP approval response"
       },
       "OpenAI.OutputItemMcpListTools": {
         "type": "object",
@@ -27503,7 +25367,16 @@
               "mcp_call",
               "mcp_list_tools",
               "mcp_approval_request",
-              "custom_tool_call"
+              "custom_tool_call",
+              "message",
+              "computer_call_output",
+              "function_call_output",
+              "local_shell_call_output",
+              "mcp_approval_response",
+              "structured_outputs",
+              "oauth_consent_request",
+              "memory_search_call",
+              "workflow_preview_action"
             ]
           }
         ]
@@ -27982,7 +25855,14 @@
             "$ref": "#/components/schemas/OpenAI.ToolsArray"
           },
           "tool_choice": {
-            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+              }
+            ]
           },
           "prompt": {
             "$ref": "#/components/schemas/OpenAI.Prompt"
@@ -28063,7 +25943,7 @@
               {
                 "type": "array",
                 "items": {
-                  "$ref": "#/components/schemas/OpenAI.InputItem"
+                  "$ref": "#/components/schemas/OpenAI.Item"
                 }
               }
             ],
@@ -28142,6 +26022,11 @@
             "description": "A chunk of Base64 encoded response audio bytes."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when there is a partial audio response.",
         "x-oaiMeta": {
           "name": "response.audio.delta",
@@ -28173,6 +26058,11 @@
             "description": "The sequence number of the delta."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the audio response is complete.",
         "x-oaiMeta": {
           "name": "response.audio.done",
@@ -28209,6 +26099,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when there is a partial transcript of audio.",
         "x-oaiMeta": {
           "name": "response.audio.transcript.delta",
@@ -28240,6 +26135,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the full audio transcript is completed.",
         "x-oaiMeta": {
           "name": "response.audio.transcript.done",
@@ -28290,6 +26190,11 @@
             "description": "The sequence number of this event, used to order streaming events."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a partial code snippet is streamed by the code interpreter.",
         "x-oaiMeta": {
           "name": "response.code_interpreter_call_code.delta",
@@ -28340,6 +26245,11 @@
             "description": "The sequence number of this event, used to order streaming events."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the code snippet is finalized by the code interpreter.",
         "x-oaiMeta": {
           "name": "response.code_interpreter_call_code.done",
@@ -28385,6 +26295,11 @@
             "description": "The sequence number of this event, used to order streaming events."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the code interpreter call is completed.",
         "x-oaiMeta": {
           "name": "response.code_interpreter_call.completed",
@@ -28430,6 +26345,11 @@
             "description": "The sequence number of this event, used to order streaming events."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a code interpreter call is in progress.",
         "x-oaiMeta": {
           "name": "response.code_interpreter_call.in_progress",
@@ -28475,6 +26395,11 @@
             "description": "The sequence number of this event, used to order streaming events."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the code interpreter is actively interpreting the code snippet.",
         "x-oaiMeta": {
           "name": "response.code_interpreter_call.interpreting",
@@ -28515,6 +26440,11 @@
             "description": "The sequence number for this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the model response is complete.",
         "x-oaiMeta": {
           "name": "response.completed",
@@ -28578,6 +26508,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a new content part is added.",
         "x-oaiMeta": {
           "name": "response.content_part.added",
@@ -28641,6 +26576,11 @@
             "description": "The content part that is done."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a content part is done.",
         "x-oaiMeta": {
           "name": "response.content_part.done",
@@ -28681,6 +26621,11 @@
             "description": "The sequence number for this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "An event that is emitted when a response is created.",
         "x-oaiMeta": {
           "name": "response.created",
@@ -28731,6 +26676,11 @@
             "description": "The incremental input data (delta) for the custom tool call."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Event representing a delta (partial update) to the input of a custom tool call.",
         "title": "ResponseCustomToolCallInputDelta",
         "x-oaiMeta": {
@@ -28782,6 +26732,11 @@
             "description": "The complete input data for the custom tool call."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Event indicating that input for a custom tool call is complete.",
         "title": "ResponseCustomToolCallInputDone",
         "x-oaiMeta": {
@@ -28870,6 +26825,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when an error occurs.",
         "x-oaiMeta": {
           "name": "error",
@@ -28910,6 +26870,11 @@
             "description": "The response that failed."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "An event that is emitted when a response fails.",
         "x-oaiMeta": {
           "name": "response.failed",
@@ -28955,6 +26920,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a file search call is completed (results found).",
         "x-oaiMeta": {
           "name": "response.file_search_call.completed",
@@ -29000,6 +26970,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a file search call is initiated.",
         "x-oaiMeta": {
           "name": "response.file_search_call.in_progress",
@@ -29045,6 +27020,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a file search is currently searching.",
         "x-oaiMeta": {
           "name": "response.file_search_call.searching",
@@ -29191,6 +27171,11 @@
             "description": "The function-call arguments delta that is added."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when there is a partial function-call arguments delta.",
         "x-oaiMeta": {
           "name": "response.function_call_arguments.delta",
@@ -29245,6 +27230,11 @@
             "description": "The function-call arguments."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when function-call arguments are finalized.",
         "x-oaiMeta": {
           "name": "response.function_call_arguments.done",
@@ -29290,6 +27280,11 @@
             "description": "The unique identifier of the image generation item being processed."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when an image generation tool call has completed and the final image is available.",
         "title": "ResponseImageGenCallCompletedEvent",
         "x-oaiMeta": {
@@ -29336,6 +27331,11 @@
             "description": "The sequence number of the image generation item being processed."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when an image generation tool call is actively generating an image (intermediate state).",
         "title": "ResponseImageGenCallGeneratingEvent",
         "x-oaiMeta": {
@@ -29382,6 +27382,11 @@
             "description": "The sequence number of the image generation item being processed."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when an image generation tool call is in progress.",
         "title": "ResponseImageGenCallInProgressEvent",
         "x-oaiMeta": {
@@ -29442,6 +27447,11 @@
             "description": "Base64-encoded partial image data, suitable for rendering as an image."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a partial image is available during image generation streaming.",
         "title": "ResponseImageGenCallPartialImageEvent",
         "x-oaiMeta": {
@@ -29483,6 +27493,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the response is in progress.",
         "x-oaiMeta": {
           "name": "response.in_progress",
@@ -29535,6 +27550,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "An event that is emitted when a response finishes as incomplete.",
         "x-oaiMeta": {
           "name": "response.incomplete",
@@ -29625,6 +27645,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when there is a delta (partial update) to the arguments of an MCP tool call.",
         "title": "ResponseMCPCallArgumentsDeltaEvent",
         "x-oaiMeta": {
@@ -29676,6 +27701,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the arguments for an MCP tool call are finalized.",
         "title": "ResponseMCPCallArgumentsDoneEvent",
         "x-oaiMeta": {
@@ -29722,6 +27752,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when an MCP  tool call has completed successfully.",
         "title": "ResponseMCPCallCompletedEvent",
         "x-oaiMeta": {
@@ -29768,6 +27803,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when an MCP  tool call has failed.",
         "title": "ResponseMCPCallFailedEvent",
         "x-oaiMeta": {
@@ -29814,6 +27854,11 @@
             "description": "The unique identifier of the MCP tool call item being processed."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when an MCP  tool call is in progress.",
         "title": "ResponseMCPCallInProgressEvent",
         "x-oaiMeta": {
@@ -29860,6 +27905,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the list of available MCP tools has been successfully retrieved.",
         "title": "ResponseMCPListToolsCompletedEvent",
         "x-oaiMeta": {
@@ -29906,6 +27956,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the attempt to list available MCP tools has failed.",
         "title": "ResponseMCPListToolsFailedEvent",
         "x-oaiMeta": {
@@ -29952,6 +28007,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when the system is in the process of retrieving the list of available MCP tools.",
         "title": "ResponseMCPListToolsInProgressEvent",
         "x-oaiMeta": {
@@ -30002,6 +28062,11 @@
             "description": "The output item that was added."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a new output item is added.",
         "x-oaiMeta": {
           "name": "response.output_item.added",
@@ -30051,6 +28116,11 @@
             "description": "The output item that was marked done."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when an output item is marked done.",
         "x-oaiMeta": {
           "name": "response.output_item.done",
@@ -30123,6 +28193,11 @@
             "description": "The annotation object being added. (See annotation schema for details.)"
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when an annotation is added to output text content.",
         "title": "ResponseOutputTextAnnotationAddedEvent",
         "x-oaiMeta": {
@@ -30187,6 +28262,11 @@
             "description": "The sequence number for this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a response is queued and waiting to be processed.",
         "title": "ResponseQueuedEvent",
         "x-oaiMeta": {
@@ -30251,6 +28331,11 @@
             "description": "The summary part that was added."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a new reasoning summary part is added.",
         "x-oaiMeta": {
           "name": "response.reasoning_summary_part.added",
@@ -30333,6 +28418,11 @@
             "description": "The completed summary part."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a reasoning summary part is completed.",
         "x-oaiMeta": {
           "name": "response.reasoning_summary_part.done",
@@ -30411,6 +28501,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a delta is added to a reasoning summary text.",
         "x-oaiMeta": {
           "name": "response.reasoning_summary_text.delta",
@@ -30470,6 +28565,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a reasoning summary text is completed.",
         "x-oaiMeta": {
           "name": "response.reasoning_summary_text.done",
@@ -30529,6 +28629,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a delta is added to a reasoning text.",
         "x-oaiMeta": {
           "name": "response.reasoning_text.delta",
@@ -30588,6 +28693,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a reasoning text is completed.",
         "x-oaiMeta": {
           "name": "response.reasoning_text.done",
@@ -30647,6 +28757,11 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when there is a partial refusal text.",
         "x-oaiMeta": {
           "name": "response.refusal.delta",
@@ -30706,12 +28821,150 @@
             "description": "The sequence number of this event."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when refusal text is finalized.",
         "x-oaiMeta": {
           "name": "response.refusal.done",
           "group": "responses",
           "example": "{\n  \"type\": \"response.refusal.done\",\n  \"item_id\": \"item-abc\",\n  \"output_index\": 1,\n  \"content_index\": 2,\n  \"refusal\": \"final refusal text\",\n  \"sequence_number\": 1\n}\n"
         }
+      },
+      "OpenAI.ResponseStreamEvent": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEventType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "response.audio.done": "#/components/schemas/OpenAI.ResponseAudioDoneEvent",
+            "response.audio.transcript.delta": "#/components/schemas/OpenAI.ResponseAudioTranscriptDeltaEvent",
+            "response.audio.transcript.done": "#/components/schemas/OpenAI.ResponseAudioTranscriptDoneEvent",
+            "response.code_interpreter_call_code.delta": "#/components/schemas/OpenAI.ResponseCodeInterpreterCallCodeDeltaEvent",
+            "response.code_interpreter_call_code.done": "#/components/schemas/OpenAI.ResponseCodeInterpreterCallCodeDoneEvent",
+            "response.code_interpreter_call.completed": "#/components/schemas/OpenAI.ResponseCodeInterpreterCallCompletedEvent",
+            "response.code_interpreter_call.in_progress": "#/components/schemas/OpenAI.ResponseCodeInterpreterCallInProgressEvent",
+            "response.code_interpreter_call.interpreting": "#/components/schemas/OpenAI.ResponseCodeInterpreterCallInterpretingEvent",
+            "response.completed": "#/components/schemas/OpenAI.ResponseCompletedEvent",
+            "response.content_part.added": "#/components/schemas/OpenAI.ResponseContentPartAddedEvent",
+            "response.content_part.done": "#/components/schemas/OpenAI.ResponseContentPartDoneEvent",
+            "response.created": "#/components/schemas/OpenAI.ResponseCreatedEvent",
+            "response.custom_tool_call_input.delta": "#/components/schemas/OpenAI.ResponseCustomToolCallInputDeltaEvent",
+            "response.custom_tool_call_input.done": "#/components/schemas/OpenAI.ResponseCustomToolCallInputDoneEvent",
+            "error": "#/components/schemas/OpenAI.ResponseErrorEvent",
+            "response.failed": "#/components/schemas/OpenAI.ResponseFailedEvent",
+            "response.file_search_call.completed": "#/components/schemas/OpenAI.ResponseFileSearchCallCompletedEvent",
+            "response.file_search_call.in_progress": "#/components/schemas/OpenAI.ResponseFileSearchCallInProgressEvent",
+            "response.file_search_call.searching": "#/components/schemas/OpenAI.ResponseFileSearchCallSearchingEvent",
+            "response.function_call_arguments.delta": "#/components/schemas/OpenAI.ResponseFunctionCallArgumentsDeltaEvent",
+            "response.function_call_arguments.done": "#/components/schemas/OpenAI.ResponseFunctionCallArgumentsDoneEvent",
+            "response.image_generation_call.completed": "#/components/schemas/OpenAI.ResponseImageGenCallCompletedEvent",
+            "response.image_generation_call.generating": "#/components/schemas/OpenAI.ResponseImageGenCallGeneratingEvent",
+            "response.image_generation_call.in_progress": "#/components/schemas/OpenAI.ResponseImageGenCallInProgressEvent",
+            "response.image_generation_call.partial_image": "#/components/schemas/OpenAI.ResponseImageGenCallPartialImageEvent",
+            "response.in_progress": "#/components/schemas/OpenAI.ResponseInProgressEvent",
+            "response.incomplete": "#/components/schemas/OpenAI.ResponseIncompleteEvent",
+            "response.mcp_call_arguments.delta": "#/components/schemas/OpenAI.ResponseMCPCallArgumentsDeltaEvent",
+            "response.mcp_call_arguments.done": "#/components/schemas/OpenAI.ResponseMCPCallArgumentsDoneEvent",
+            "response.mcp_call.completed": "#/components/schemas/OpenAI.ResponseMCPCallCompletedEvent",
+            "response.mcp_call.failed": "#/components/schemas/OpenAI.ResponseMCPCallFailedEvent",
+            "response.mcp_call.in_progress": "#/components/schemas/OpenAI.ResponseMCPCallInProgressEvent",
+            "response.mcp_list_tools.completed": "#/components/schemas/OpenAI.ResponseMCPListToolsCompletedEvent",
+            "response.mcp_list_tools.failed": "#/components/schemas/OpenAI.ResponseMCPListToolsFailedEvent",
+            "response.mcp_list_tools.in_progress": "#/components/schemas/OpenAI.ResponseMCPListToolsInProgressEvent",
+            "response.output_item.added": "#/components/schemas/OpenAI.ResponseOutputItemAddedEvent",
+            "response.output_item.done": "#/components/schemas/OpenAI.ResponseOutputItemDoneEvent",
+            "response.output_text.annotation.added": "#/components/schemas/OpenAI.ResponseOutputTextAnnotationAddedEvent",
+            "response.queued": "#/components/schemas/OpenAI.ResponseQueuedEvent",
+            "response.reasoning_summary_part.added": "#/components/schemas/OpenAI.ResponseReasoningSummaryPartAddedEvent",
+            "response.reasoning_summary_part.done": "#/components/schemas/OpenAI.ResponseReasoningSummaryPartDoneEvent",
+            "response.reasoning_summary_text.delta": "#/components/schemas/OpenAI.ResponseReasoningSummaryTextDeltaEvent",
+            "response.reasoning_summary_text.done": "#/components/schemas/OpenAI.ResponseReasoningSummaryTextDoneEvent",
+            "response.reasoning_text.delta": "#/components/schemas/OpenAI.ResponseReasoningTextDeltaEvent",
+            "response.reasoning_text.done": "#/components/schemas/OpenAI.ResponseReasoningTextDoneEvent",
+            "response.refusal.delta": "#/components/schemas/OpenAI.ResponseRefusalDeltaEvent",
+            "response.refusal.done": "#/components/schemas/OpenAI.ResponseRefusalDoneEvent",
+            "response.output_text.delta": "#/components/schemas/OpenAI.ResponseTextDeltaEvent",
+            "response.output_text.done": "#/components/schemas/OpenAI.ResponseTextDoneEvent",
+            "response.web_search_call.completed": "#/components/schemas/OpenAI.ResponseWebSearchCallCompletedEvent",
+            "response.web_search_call.in_progress": "#/components/schemas/OpenAI.ResponseWebSearchCallInProgressEvent",
+            "response.web_search_call.searching": "#/components/schemas/OpenAI.ResponseWebSearchCallSearchingEvent"
+          }
+        }
+      },
+      "OpenAI.ResponseStreamEventType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "response.audio.delta",
+              "response.audio.done",
+              "response.audio.transcript.delta",
+              "response.audio.transcript.done",
+              "response.code_interpreter_call_code.delta",
+              "response.code_interpreter_call_code.done",
+              "response.code_interpreter_call.completed",
+              "response.code_interpreter_call.in_progress",
+              "response.code_interpreter_call.interpreting",
+              "response.completed",
+              "response.content_part.added",
+              "response.content_part.done",
+              "response.created",
+              "error",
+              "response.file_search_call.completed",
+              "response.file_search_call.in_progress",
+              "response.file_search_call.searching",
+              "response.function_call_arguments.delta",
+              "response.function_call_arguments.done",
+              "response.in_progress",
+              "response.failed",
+              "response.incomplete",
+              "response.output_item.added",
+              "response.output_item.done",
+              "response.reasoning_summary_part.added",
+              "response.reasoning_summary_part.done",
+              "response.reasoning_summary_text.delta",
+              "response.reasoning_summary_text.done",
+              "response.reasoning_text.delta",
+              "response.reasoning_text.done",
+              "response.refusal.delta",
+              "response.refusal.done",
+              "response.output_text.delta",
+              "response.output_text.done",
+              "response.web_search_call.completed",
+              "response.web_search_call.in_progress",
+              "response.web_search_call.searching",
+              "response.image_generation_call.completed",
+              "response.image_generation_call.generating",
+              "response.image_generation_call.in_progress",
+              "response.image_generation_call.partial_image",
+              "response.mcp_call_arguments.delta",
+              "response.mcp_call_arguments.done",
+              "response.mcp_call.completed",
+              "response.mcp_call.failed",
+              "response.mcp_call.in_progress",
+              "response.mcp_list_tools.completed",
+              "response.mcp_list_tools.failed",
+              "response.mcp_list_tools.in_progress",
+              "response.output_text.annotation.added",
+              "response.queued",
+              "response.custom_tool_call_input.delta",
+              "response.custom_tool_call_input.done"
+            ]
+          }
+        ]
       },
       "OpenAI.ResponseStreamOptions": {
         "type": "object",
@@ -30783,6 +29036,11 @@
             "description": "The log probabilities of the tokens in the delta."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when there is an additional text delta.",
         "x-oaiMeta": {
           "name": "response.output_text.delta",
@@ -30850,6 +29108,11 @@
             "description": "The log probabilities of the tokens in the delta."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when text content is finalized.",
         "x-oaiMeta": {
           "name": "response.output_text.done",
@@ -30982,6 +29245,11 @@
             "description": "The sequence number of the web search call being processed."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a web search call is completed.",
         "x-oaiMeta": {
           "name": "response.web_search_call.completed",
@@ -31027,6 +29295,11 @@
             "description": "The sequence number of the web search call being processed."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a web search call is initiated.",
         "x-oaiMeta": {
           "name": "response.web_search_call.in_progress",
@@ -31072,6 +29345,11 @@
             "description": "The sequence number of the web search call being processed."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ResponseStreamEvent"
+          }
+        ],
         "description": "Emitted when a web search call is executing.",
         "x-oaiMeta": {
           "name": "response.web_search_call.searching",
@@ -31671,6 +29949,16 @@
         ],
         "description": "Use this option to force the model to call a specific tool on a remote MCP server.",
         "title": "MCP tool"
+      },
+      "OpenAI.ToolChoiceOptions": {
+        "type": "string",
+        "enum": [
+          "none",
+          "auto",
+          "required"
+        ],
+        "description": "Controls which (if any) tool is called by the model.\n`none` means the model will not call any tool and instead generates a message.\n`auto` means the model can pick between generating a message or calling one or\nmore tools.\n`required` means the model must call one or more tools.",
+        "title": "Tool choice mode"
       },
       "OpenAI.ToolChoiceParam": {
         "type": "object",
@@ -33765,7 +32053,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
       },
@@ -34491,7 +32779,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
       },

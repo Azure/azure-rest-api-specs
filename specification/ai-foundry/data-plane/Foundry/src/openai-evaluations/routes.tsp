@@ -1,5 +1,5 @@
 import "@typespec/rest";
-import "@azure-tools/openai-typespec/models/evals";
+import "@azure-tools/openai-typespec/views/client-emitters/models/evals";
 
 import "./models.tsp";
 
