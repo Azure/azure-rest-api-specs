@@ -3392,10 +3392,12 @@
     },
     "ApplicationPackageReference": {
       "type": "object",
+      "title": "Link to an application package inside the batch account",
       "description": "Link to an application package inside the batch account",
       "properties": {
         "id": {
           "type": "string",
+          "title": "The ID of the application package to install. This must be inside the same Batch account as the pool. This can either be a reference to a specific version or the default version if one exists.",
           "description": "The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists."
         },
         "version": {
@@ -3458,11 +3460,13 @@
     },
     "AutoScaleRun": {
       "type": "object",
+      "title": "The results and errors from an execution of a pool autoscale formula.",
       "description": "The results and errors from an execution of a pool autoscale formula.",
       "properties": {
         "evaluationTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time at which the autoscale formula was last evaluated.",
           "description": "The time at which the autoscale formula was last evaluated."
         },
         "results": {
@@ -3482,6 +3486,7 @@
     },
     "AutoScaleRunError": {
       "type": "object",
+      "title": "An error that occurred when autoscaling a pool.",
       "description": "An error that occurred when autoscaling a pool.",
       "properties": {
         "code": {
@@ -3494,6 +3499,7 @@
         },
         "details": {
           "type": "array",
+          "title": "Additional details about the error.",
           "description": "Additional details about the error.",
           "items": {
             "$ref": "#/definitions/AutoScaleRunError"
@@ -3510,10 +3516,12 @@
     },
     "AutoScaleSettings": {
       "type": "object",
+      "title": "AutoScale settings for the pool.",
       "description": "AutoScale settings for the pool.",
       "properties": {
         "formula": {
           "type": "string",
+          "title": "A formula for the desired number of compute nodes in the pool.",
           "description": "A formula for the desired number of compute nodes in the pool.",
           "externalDocs": {
             "description": "Create an automatic scaling formula for scaling compute nodes in a Batch pool",
@@ -3603,7 +3611,7 @@
     },
     "AutoUserScope": {
       "type": "string",
-      "description": "The default value is Pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by start tasks.",
+      "description": "The default value is Pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks.",
       "enum": [
         "Task",
         "Pool"
@@ -3627,6 +3635,7 @@
     },
     "AutoUserSpecification": {
       "type": "object",
+      "title": "Specifies the parameters for the auto user that runs a task on the Batch service.",
       "description": "Specifies the parameters for the auto user that runs a task on the Batch service.",
       "properties": {
         "scope": {
@@ -3665,14 +3674,17 @@
     },
     "AzureBlobFileSystemConfiguration": {
       "type": "object",
+      "title": "Information used to connect to an Azure Storage Container using Blobfuse.",
       "description": "Information used to connect to an Azure Storage Container using Blobfuse.",
       "properties": {
         "accountName": {
           "type": "string",
+          "title": "The Azure Storage Account name.",
           "description": "The Azure Storage Account name."
         },
         "containerName": {
           "type": "string",
+          "title": "The Azure Blob Storage Container name.",
           "description": "The Azure Blob Storage Container name."
         },
         "accountKey": {
@@ -3713,10 +3725,12 @@
     },
     "AzureFileShareConfiguration": {
       "type": "object",
+      "title": "Information used to connect to an Azure Fileshare.",
       "description": "Information used to connect to an Azure Fileshare.",
       "properties": {
         "accountName": {
           "type": "string",
+          "title": "The Azure Storage account name.",
           "description": "The Azure Storage account name."
         },
         "azureFileUrl": {
@@ -3727,6 +3741,7 @@
         "accountKey": {
           "type": "string",
           "format": "password",
+          "title": "The Azure Storage account key.",
           "description": "The Azure Storage account key.",
           "x-ms-secret": true
         },
@@ -4102,12 +4117,14 @@
         "poolQuota": {
           "type": "integer",
           "format": "int32",
+          "title": "The pool quota for the Batch account.",
           "description": "The pool quota for the Batch account.",
           "readOnly": true
         },
         "activeJobAndJobScheduleQuota": {
           "type": "integer",
           "format": "int32",
+          "title": "The active job and job schedule quota for the Batch account.",
           "description": "The active job and job schedule quota for the Batch account.",
           "readOnly": true
         },
@@ -4251,14 +4268,17 @@
     },
     "CIFSMountConfiguration": {
       "type": "object",
+      "title": "Information used to connect to a CIFS file system.",
       "description": "Information used to connect to a CIFS file system.",
       "properties": {
         "userName": {
           "type": "string",
+          "title": "The user to use for authentication against the CIFS file system.",
           "description": "The user to use for authentication against the CIFS file system."
         },
         "source": {
           "type": "string",
+          "title": "The URI of the file system to mount.",
           "description": "The URI of the file system to mount."
         },
         "relativeMountPath": {
@@ -4274,6 +4294,7 @@
         "password": {
           "type": "string",
           "format": "password",
+          "title": "The password to use for authentication against the CIFS file system.",
           "description": "The password to use for authentication against the CIFS file system.",
           "x-ms-secret": true
         }
@@ -4440,11 +4461,13 @@
         "provisioningState": {
           "$ref": "#/definitions/CertificateProvisioningState",
           "title": "The provisioned state of the resource",
+          "description": "The provisioned state of the resource",
           "readOnly": true
         },
         "provisioningStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time at which the certificate entered its current state.",
           "description": "The time at which the certificate entered its current state.",
           "readOnly": true
         },
@@ -4456,6 +4479,7 @@
         "previousProvisioningStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time at which the certificate entered its previous state.",
           "description": "The time at which the certificate entered its previous state.",
           "readOnly": true
         },
@@ -4479,6 +4503,7 @@
     },
     "CertificateProvisioningState": {
       "type": "string",
+      "description": "The current provisioning state of the certificate.",
       "enum": [
         "Succeeded",
         "Deleting",
@@ -4513,6 +4538,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "title": "The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool.",
           "description": "The fully qualified ID of the certificate to install on the pool. This must be inside the same batch account as the pool."
         },
         "storeLocation": {
@@ -4527,6 +4553,7 @@
         },
         "visibility": {
           "type": "array",
+          "title": "Which user accounts on the compute node should have access to the private data of the certificate.",
           "description": "Which user accounts on the compute node should have access to the private data of the certificate.",
           "items": {
             "$ref": "#/definitions/CertificateVisibility"
@@ -4563,6 +4590,7 @@
     },
     "CertificateVisibility": {
       "type": "string",
+      "description": "The visibility of the certificate.",
       "enum": [
         "StartTask",
         "Task",
@@ -4701,7 +4729,7 @@
           {
             "name": "RetainedData",
             "value": "RetainedData",
-            "description": "Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running tasks to complete, then wait for all task data retention periods to expire. Schedule no new tasks while waiting. Remove nodes when all task retention periods have expired."
+            "description": "Allow currently running tasks to complete, then wait for all task data retention periods to expire. Schedule no new tasks while waiting. Remove nodes when all task retention periods have expired."
           }
         ]
       }
@@ -4718,10 +4746,12 @@
     },
     "ContainerConfiguration": {
       "type": "object",
+      "title": "The configuration for container-enabled pools.",
       "description": "The configuration for container-enabled pools.",
       "properties": {
         "type": {
           "$ref": "#/definitions/ContainerType",
+          "title": "The container technology to be used.",
           "description": "The container technology to be used."
         },
         "containerImageNames": {
@@ -4750,10 +4780,12 @@
     },
     "ContainerHostBatchBindMountEntry": {
       "type": "object",
+      "title": "The entry of path and mount mode you want to mount into task container.",
       "description": "The entry of path and mount mode you want to mount into task container.",
       "properties": {
         "source": {
           "$ref": "#/definitions/ContainerHostDataPath",
+          "title": "The paths which will be mounted to container task's container.",
           "description": "The paths which will be mounted to container task's container."
         },
         "isReadOnly": {
@@ -4813,16 +4845,19 @@
     },
     "ContainerRegistry": {
       "type": "object",
+      "title": "A private container registry.",
       "description": "A private container registry.",
       "properties": {
         "username": {
           "type": "string",
+          "title": "The user name to log into the registry server.",
           "description": "The user name to log into the registry server.",
           "x-ms-client-name": "userName"
         },
         "password": {
           "type": "string",
           "format": "password",
+          "title": "The password to log into the registry server.",
           "description": "The password to log into the registry server.",
           "x-ms-secret": true
         },
@@ -4904,6 +4939,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
+          "title": "The initial disk size in GB when creating new data disk.",
           "description": "The initial disk size in GB when creating new data disk."
         },
         "storageAccountType": {
@@ -4951,6 +4987,7 @@
     },
     "DeploymentConfiguration": {
       "type": "object",
+      "title": "Deployment configuration properties.",
       "description": "Deployment configuration properties.",
       "properties": {
         "virtualMachineConfiguration": {
@@ -5039,6 +5076,7 @@
     },
     "DiffDiskSettings": {
       "type": "object",
+      "title": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
       "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
       "properties": {
         "placement": {
@@ -5213,14 +5251,17 @@
     },
     "EnvironmentSetting": {
       "type": "object",
+      "title": "An environment variable to be set on a task process.",
       "description": "An environment variable to be set on a task process.",
       "properties": {
         "name": {
           "type": "string",
+          "title": "The name of the environment variable.",
           "description": "The name of the environment variable."
         },
         "value": {
           "type": "string",
+          "title": "The value of the environment variable.",
           "description": "The value of the environment variable."
         }
       },
@@ -5230,6 +5271,7 @@
     },
     "FixedScaleSettings": {
       "type": "object",
+      "title": "Fixed scale settings for the pool.",
       "description": "Fixed scale settings for the pool.",
       "properties": {
         "resizeTimeout": {
@@ -5253,7 +5295,7 @@
         },
         "nodeDeallocationOption": {
           "$ref": "#/definitions/ComputeNodeDeallocationOption",
-          "title": "Determines what to do with a node and its running task(s) if the pool size is decreasing.",
+          "title": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
           "description": "If omitted, the default value is Requeue.",
           "x-ms-mutability": [
             "update",
@@ -5331,6 +5373,7 @@
     },
     "ImageReference": {
       "type": "object",
+      "title": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.",
       "description": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation.",
       "properties": {
         "publisher": {
@@ -5396,6 +5439,7 @@
     },
     "InboundNatPool": {
       "type": "object",
+      "title": "A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.",
       "description": "A inbound NAT pool that can be used to address specific ports on compute nodes in a Batch pool externally.",
       "properties": {
         "name": {
@@ -5405,6 +5449,7 @@
         },
         "protocol": {
           "$ref": "#/definitions/InboundEndpointProtocol",
+          "title": "The protocol of the endpoint.",
           "description": "The protocol of the endpoint."
         },
         "backendPort": {
@@ -5529,6 +5574,7 @@
     },
     "LinuxUserConfiguration": {
       "type": "object",
+      "title": "Properties used to create a user account on a Linux node.",
       "description": "Properties used to create a user account on a Linux node.",
       "properties": {
         "uid": {
@@ -5704,9 +5750,11 @@
     },
     "ManagedDisk": {
       "type": "object",
+      "description": "The managed disk parameters.",
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
+          "title": "The storage account type for use in creating data disks or OS disk.",
           "description": "The storage account type for use in creating data disks or OS disk."
         },
         "securityProfile": {
@@ -5723,10 +5771,12 @@
       "properties": {
         "name": {
           "type": "string",
+          "title": "The name of the metadata item.",
           "description": "The name of the metadata item."
         },
         "value": {
           "type": "string",
+          "title": "The value of the metadata item.",
           "description": "The value of the metadata item."
         }
       },
@@ -5737,6 +5787,7 @@
     },
     "MountConfiguration": {
       "type": "object",
+      "title": "The file system to mount on each node.",
       "description": "The file system to mount on each node.",
       "properties": {
         "azureBlobFileSystemConfiguration": {
@@ -5763,10 +5814,12 @@
     },
     "NFSMountConfiguration": {
       "type": "object",
+      "title": "Information used to connect to an NFS file system.",
       "description": "Information used to connect to an NFS file system.",
       "properties": {
         "source": {
           "type": "string",
+          "title": "The URI of the file system to mount.",
           "description": "The URI of the file system to mount."
         },
         "relativeMountPath": {
@@ -5819,11 +5872,12 @@
           "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication，including ports 29876 and 29877. Also enable outbound connections to Azure Storage on port 443. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
           "externalDocs": {
             "description": "Create an Azure Batch pool in a virtual network",
-            "url": "https://learn.microsoft.com/azure/batch/batch-virtual-network"
+            "url": "https://learn.microsoft.com/azure/batch/batch-virtual-networks"
           }
         },
         "dynamicVnetAssignmentScope": {
           "type": "string",
+          "title": "The scope of dynamic vnet assignment.",
           "description": "The scope of dynamic vnet assignment.",
           "default": "none",
           "enum": [
@@ -5884,6 +5938,7 @@
     },
     "NetworkSecurityGroupRule": {
       "type": "object",
+      "title": "A network security group rule to apply to an inbound endpoint.",
       "description": "A network security group rule to apply to an inbound endpoint.",
       "properties": {
         "priority": {
@@ -5894,6 +5949,7 @@
         },
         "access": {
           "$ref": "#/definitions/NetworkSecurityGroupRuleAccess",
+          "title": "The action that should be taken for a specified IP address, subnet range or tag.",
           "description": "The action that should be taken for a specified IP address, subnet range or tag."
         },
         "sourceAddressPrefix": {
@@ -5972,12 +6028,12 @@
     },
     "NodePlacementConfiguration": {
       "type": "object",
-      "title": "Node placement configuration for batch pools.",
+      "title": "Node placement configuration for Batch pools.",
       "description": "Allocation configuration used by Batch Service to provision the nodes.",
       "properties": {
         "policy": {
           "$ref": "#/definitions/NodePlacementPolicyType",
-          "title": "The placement policy for allocating nodes in the pool.",
+          "title": "Node placement Policy type on Batch pools.",
           "description": "Allocation policy used by Batch Service to provision the nodes. If not specified, Batch will use the regional policy."
         }
       }
@@ -6008,33 +6064,40 @@
     },
     "OSDisk": {
       "type": "object",
+      "title": "Settings for the operating system disk of the virtual machine.",
       "description": "Settings for the operating system disk of the virtual machine.",
       "properties": {
         "ephemeralOSDiskSettings": {
           "$ref": "#/definitions/DiffDiskSettings",
+          "title": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.",
           "description": "Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine."
         },
         "caching": {
           "$ref": "#/definitions/CachingType",
+          "title": "The type of caching to enable for the disk.",
           "description": "The type of caching to enable for the disk."
         },
         "managedDisk": {
           "$ref": "#/definitions/ManagedDisk",
-          "title": "The managed disk parameters."
+          "title": "The managed disk parameters.",
+          "description": "The managed disk parameters."
         },
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
+          "title": "The initial disk size in GB when creating new OS disk.",
           "description": "The initial disk size in GB when creating new OS disk."
         },
         "writeAcceleratorEnabled": {
           "type": "boolean",
+          "title": "Specifies whether writeAccelerator should be enabled or disabled on the disk.",
           "description": "Specifies whether writeAccelerator should be enabled or disabled on the disk."
         }
       }
     },
     "Operation": {
       "type": "object",
+      "title": "A REST API operation",
       "description": "A REST API operation",
       "properties": {
         "name": {
@@ -6048,13 +6111,16 @@
         },
         "display": {
           "$ref": "#/definitions/OperationDisplay",
+          "title": "The object that describes the operation.",
           "description": "The object that describes the operation."
         },
         "origin": {
           "type": "string",
+          "title": "The intended executor of the operation.",
           "description": "The intended executor of the operation."
         },
         "properties": {
+          "title": "Properties of the operation.",
           "description": "Properties of the operation."
         }
       }
@@ -6065,6 +6131,7 @@
       "properties": {
         "provider": {
           "type": "string",
+          "title": "Friendly name of the resource provider.",
           "description": "Friendly name of the resource provider."
         },
         "operation": {
@@ -6074,10 +6141,12 @@
         },
         "resource": {
           "type": "string",
+          "title": "The resource type on which the operation is performed.",
           "description": "The resource type on which the operation is performed."
         },
         "description": {
           "type": "string",
+          "title": "The friendly name of the operation",
           "description": "The friendly name of the operation"
         }
       }
@@ -6235,6 +6304,7 @@
     },
     "PoolEndpointConfiguration": {
       "type": "object",
+      "title": "The endpoint configuration for a pool.",
       "description": "The endpoint configuration for a pool.",
       "properties": {
         "inboundNatPools": {
@@ -6296,28 +6366,33 @@
         "creationTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The creation time of the pool.",
           "description": "The creation time of the pool.",
           "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/PoolProvisioningState",
+          "title": "The current state of the pool.",
           "description": "The current state of the pool.",
           "readOnly": true
         },
         "provisioningStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time at which the pool entered its current state.",
           "description": "The time at which the pool entered its current state.",
           "readOnly": true
         },
         "allocationState": {
           "$ref": "#/definitions/AllocationState",
+          "title": "Whether the pool is resizing.",
           "description": "Whether the pool is resizing.",
           "readOnly": true
         },
         "allocationStateTransitionTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time at which the pool entered its current allocation state.",
           "description": "The time at which the pool entered its current allocation state.",
           "readOnly": true
         },
@@ -6334,12 +6409,14 @@
         "currentDedicatedNodes": {
           "type": "integer",
           "format": "int32",
+          "title": "The number of dedicated compute nodes currently in the pool.",
           "description": "The number of dedicated compute nodes currently in the pool.",
           "readOnly": true
         },
         "currentLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
+          "title": "The number of Spot/low-priority compute nodes currently in the pool.",
           "description": "The number of Spot/low-priority compute nodes currently in the pool.",
           "readOnly": true
         },
@@ -6378,6 +6455,7 @@
         },
         "userAccounts": {
           "type": "array",
+          "title": "The list of user accounts to be created on each node in the pool.",
           "description": "The list of user accounts to be created on each node in the pool.",
           "items": {
             "$ref": "#/definitions/UserAccount"
@@ -6448,6 +6526,7 @@
         },
         "currentNodeCommunicationMode": {
           "$ref": "#/definitions/NodeCommunicationMode",
+          "title": "Determines how a pool communicates with the Batch service.",
           "description": "Determines how a pool communicates with the Batch service.",
           "x-nullable": true,
           "readOnly": true
@@ -6497,6 +6576,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "title": "The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.",
           "description": "The ARM resource identifier of the private endpoint. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}.",
           "readOnly": true
         }
@@ -6536,6 +6616,7 @@
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/PrivateEndpointConnectionProvisioningState",
+          "title": "The provisioning state of the private endpoint connection.",
           "description": "The provisioning state of the private endpoint connection.",
           "readOnly": true
         },
@@ -6556,6 +6637,7 @@
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "title": "The private link service connection state of the private endpoint connection.",
           "description": "The private link service connection state of the private endpoint connection."
         }
       }
@@ -6648,6 +6730,7 @@
         },
         "requiredMembers": {
           "type": "array",
+          "title": "The list of required members that are used to establish the private link connection.",
           "description": "The list of required members that are used to establish the private link connection.",
           "items": {
             "type": "string"
@@ -6656,6 +6739,7 @@
         },
         "requiredZoneNames": {
           "type": "array",
+          "title": "The list of required zone names for the private DNS resource name.",
           "description": "The list of required zone names for the private DNS resource name",
           "items": {
             "type": "string"
@@ -6670,14 +6754,17 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionStatus",
+          "title": "The status of the Batch private endpoint connection",
           "description": "The status of the Batch private endpoint connection"
         },
         "description": {
           "type": "string",
+          "title": "Description of the private Connection state",
           "description": "Description of the private Connection state"
         },
         "actionsRequired": {
           "type": "string",
+          "title": "Action required on the private connection state",
           "description": "Action required on the private connection state",
           "readOnly": true
         }
@@ -6791,6 +6878,7 @@
     },
     "ResizeError": {
       "type": "object",
+      "title": "An error that occurred when resizing a pool.",
       "description": "An error that occurred when resizing a pool.",
       "properties": {
         "code": {
@@ -6803,6 +6891,7 @@
         },
         "details": {
           "type": "array",
+          "title": "Additional details about the error.",
           "description": "Additional details about the error.",
           "items": {
             "$ref": "#/definitions/ResizeError"
@@ -6825,11 +6914,13 @@
         "targetDedicatedNodes": {
           "type": "integer",
           "format": "int32",
+          "title": "The desired number of dedicated compute nodes in the pool.",
           "description": "The desired number of dedicated compute nodes in the pool."
         },
         "targetLowPriorityNodes": {
           "type": "integer",
           "format": "int32",
+          "title": "The desired number of Spot/low-priority compute nodes in the pool.",
           "description": "The desired number of Spot/low-priority compute nodes in the pool."
         },
         "resizeTimeout": {
@@ -6846,6 +6937,7 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
+          "title": "The time when this resize operation was started.",
           "description": "The time when this resize operation was started."
         },
         "errors": {
@@ -6863,6 +6955,7 @@
     },
     "ResourceFile": {
       "type": "object",
+      "title": "A single file or multiple files to be downloaded to a compute node.",
       "description": "A single file or multiple files to be downloaded to a compute node.",
       "properties": {
         "autoStorageContainerName": {
@@ -7012,7 +7105,7 @@
     },
     "SecurityEncryptionTypes": {
       "type": "string",
-      "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
+      "description": "Specifies the EncryptionType of the managed disk. It is set to DiskWithVMGuestState for encryption of the managed disk along with VMGuestState blob, VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
       "enum": [
         "NonPersistedTPM",
         "VMGuestStateOnly"
@@ -7023,11 +7116,13 @@
         "values": [
           {
             "name": "NonPersistedTPM",
-            "value": "NonPersistedTPM"
+            "value": "NonPersistedTPM",
+            "description": "EncryptionType of the managed disk is set to NonPersistedTPM for not persisting firmware state in the VMGuestState blob."
           },
           {
             "name": "VMGuestStateOnly",
-            "value": "VMGuestStateOnly"
+            "value": "VMGuestStateOnly",
+            "description": "EncryptionType of the managed disk is set to VMGuestStateOnly for encryption of just the VMGuestState blob."
           }
         ]
       }
@@ -7038,6 +7133,7 @@
       "properties": {
         "securityType": {
           "$ref": "#/definitions/SecurityTypes",
+          "title": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.",
           "description": "Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings."
         },
         "encryptionAtHost": {
@@ -7046,6 +7142,7 @@
         },
         "uefiSettings": {
           "$ref": "#/definitions/UefiSettings",
+          "title": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine.",
           "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine."
         }
       }
@@ -7116,6 +7213,7 @@
         },
         "resourceFiles": {
           "type": "array",
+          "title": "A list of files that the Batch service will download to the compute node before running the command line.",
           "description": "A list of files that the Batch service will download to the compute node before running the command line.",
           "items": {
             "$ref": "#/definitions/ResourceFile"
@@ -7126,6 +7224,7 @@
         },
         "environmentSettings": {
           "type": "array",
+          "title": "A list of environment variable settings for the start task.",
           "description": "A list of environment variable settings for the start task.",
           "items": {
             "$ref": "#/definitions/EnvironmentSetting"
@@ -7247,6 +7346,7 @@
     },
     "TaskContainerSettings": {
       "type": "object",
+      "title": "The container settings for a task.",
       "description": "The container settings for a task.",
       "properties": {
         "containerRunOptions": {
@@ -7266,6 +7366,7 @@
         },
         "workingDirectory": {
           "$ref": "#/definitions/ContainerWorkingDirectory",
+          "title": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.",
           "description": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'."
         },
         "containerHostBatchBindMounts": {
@@ -7284,10 +7385,12 @@
     },
     "TaskSchedulingPolicy": {
       "type": "object",
+      "title": "Specifies how tasks should be distributed across compute nodes.",
       "description": "Specifies how tasks should be distributed across compute nodes.",
       "properties": {
         "nodeFillType": {
           "type": "string",
+          "title": "How tasks should be distributed across compute nodes.",
           "description": "How tasks should be distributed across compute nodes.",
           "default": "Spread",
           "enum": [
@@ -7366,14 +7469,17 @@
       "properties": {
         "mode": {
           "$ref": "#/definitions/UpgradeMode",
+          "title": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.",
           "description": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between."
         },
         "automaticOSUpgradePolicy": {
           "$ref": "#/definitions/AutomaticOSUpgradePolicy",
+          "title": "Configuration parameters used for performing automatic OS Upgrade.",
           "description": "The configuration parameters used for performing automatic OS upgrade."
         },
         "rollingUpgradePolicy": {
           "$ref": "#/definitions/RollingUpgradePolicy",
+          "title": "The configuration parameters used while performing a rolling upgrade.",
           "description": "The configuration parameters used while performing a rolling upgrade."
         }
       },
@@ -7383,15 +7489,18 @@
     },
     "UserAccount": {
       "type": "object",
+      "title": "Properties used to create a user on an Azure Batch node.",
       "description": "Properties used to create a user on an Azure Batch node.",
       "properties": {
         "name": {
           "type": "string",
+          "title": "The name of the user account. Names can contain any Unicode characters up to a maximum length of 20.",
           "description": "The name of the user account. Names can contain any Unicode characters up to a maximum length of 20."
         },
         "password": {
           "type": "string",
           "format": "password",
+          "title": "The password for the user account.",
           "description": "The password for the user account.",
           "x-ms-secret": true
         },
@@ -7455,28 +7564,34 @@
       "properties": {
         "securityEncryptionType": {
           "$ref": "#/definitions/SecurityEncryptionTypes",
+          "title": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.",
           "description": "Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs."
         }
       }
     },
     "VMExtension": {
       "type": "object",
+      "title": "The configuration for virtual machine extensions.",
       "description": "The configuration for virtual machine extensions.",
       "properties": {
         "name": {
           "type": "string",
+          "title": "The name of the virtual machine extension.",
           "description": "The name of the virtual machine extension."
         },
         "publisher": {
           "type": "string",
+          "title": "The name of the extension handler publisher.",
           "description": "The name of the extension handler publisher."
         },
         "type": {
           "type": "string",
+          "title": "The type of the extensions.",
           "description": "The type of the extensions."
         },
         "typeHandlerVersion": {
           "type": "string",
+          "title": "The version of script handler.",
           "description": "The version of script handler."
         },
         "autoUpgradeMinorVersion": {
@@ -7488,6 +7603,7 @@
           "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
         },
         "settings": {
+          "title": "JSON formatted public settings for the extension.",
           "description": "JSON formatted public settings for the extension."
         },
         "protectedSettings": {
@@ -7512,6 +7628,7 @@
     },
     "VirtualMachineConfiguration": {
       "type": "object",
+      "title": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.",
       "description": "The configuration for compute nodes in a pool based on the Azure Virtual Machines infrastructure.",
       "properties": {
         "imageReference": {
@@ -7579,6 +7696,7 @@
         },
         "securityProfile": {
           "$ref": "#/definitions/SecurityProfile",
+          "title": "Specifies the security profile settings for the virtual machine or virtual machine scale set.",
           "description": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
         },
         "serviceArtifactReference": {
@@ -7611,6 +7729,7 @@
     },
     "WindowsConfiguration": {
       "type": "object",
+      "title": "Windows operating system settings to apply to the virtual machine.",
       "description": "Windows operating system settings to apply to the virtual machine.",
       "properties": {
         "enableAutomaticUpdates": {
@@ -7622,6 +7741,7 @@
     },
     "WindowsUserConfiguration": {
       "type": "object",
+      "title": "Properties used to create a user account on a Windows node.",
       "description": "Properties used to create a user account on a Windows node.",
       "properties": {
         "loginMode": {

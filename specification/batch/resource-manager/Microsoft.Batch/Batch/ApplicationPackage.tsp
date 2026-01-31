@@ -27,15 +27,15 @@ model ApplicationPackage
   /**
    * The ETag of the resource, used for concurrency statements.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The tags of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   tags?: Record<string>;
 }
 
@@ -50,7 +50,7 @@ interface ApplicationPackages {
   /**
    * Creates an application package record. The record contains a storageUrl where the package should be uploaded to.  Once it is uploaded the `ApplicationPackage` needs to be activated using `ApplicationPackageActive` before it can be used. If the auto storage account was configured to use storage keys, the URL returned will contain a SAS.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy behavior"
   create is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     ApplicationPackage,
     Response = ArmResourceUpdatedResponse<ApplicationPackage>,
@@ -102,7 +102,7 @@ interface ApplicationPackages {
 @@doc(ApplicationPackages.activate::parameters.body,
   "The parameters for the request."
 );
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
 @@extension(Applications.create::parameters.resource, "required", false);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
 @@extension(ApplicationPackages.create::parameters.resource, "required", false);
