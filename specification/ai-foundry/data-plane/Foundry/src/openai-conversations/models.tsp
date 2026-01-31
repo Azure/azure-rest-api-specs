@@ -1,6 +1,3 @@
-import "@typespec/http";
-import "@typespec/openapi";
-
 import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;

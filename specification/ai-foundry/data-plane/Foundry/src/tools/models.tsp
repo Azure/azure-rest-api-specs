@@ -1,8 +1,3 @@
-import "@typespec/http";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core/experimental";
-import "@azure-tools/openai-typespec/views/client-emitters/models/responses";
-
 import "../memory_stores/models.tsp";
 
 using Azure.Core.Experimental;

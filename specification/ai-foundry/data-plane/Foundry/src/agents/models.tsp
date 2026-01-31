@@ -1,7 +1,3 @@
-import "@typespec/http";
-import "@typespec/openapi";
-import "@azure-tools/typespec-azure-core";
-
 import "../openai-responses/models.tsp";
 
 using TypeSpec.Http;

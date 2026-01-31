@@ -3865,9 +3865,7 @@ paths:
                 items:
                   type: array
                   items:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.Item'
-                      - $ref: '#/components/schemas/OpenAI.EasyInputMessage'
+                    $ref: '#/components/schemas/OpenAI.Item'
                   maxItems: 20
                   description: The items to add to the conversation. You may add up to 20 items at a time.
               required:
@@ -4976,7 +4974,9 @@ paths:
                     tools:
                       $ref: '#/components/schemas/OpenAI.ToolsArray'
                     tool_choice:
-                      $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                     prompt:
                       $ref: '#/components/schemas/OpenAI.Prompt'
                     truncation:
@@ -5106,7 +5106,9 @@ paths:
                     tools:
                       $ref: '#/components/schemas/OpenAI.ToolsArray'
                     tool_choice:
-                      $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                     prompt:
                       $ref: '#/components/schemas/OpenAI.Prompt'
                     truncation:
@@ -12160,6 +12162,8 @@ components:
           x-stainless-const: true
           default: conversation
         metadata:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Metadata'
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.
               Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters.
@@ -13017,8 +13021,6 @@ components:
       required:
         - code
         - message
-        - param
-        - type
       properties:
         code:
           type: string
@@ -17350,18 +17352,6 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.ItemResourceType'
-        created_by:
-          anyOf:
-            - $ref: '#/components/schemas/CreatedBy'
-            - type: string
-          description: The information about the creator of the item
-        agent_reference:
-          allOf:
-            - $ref: '#/components/schemas/AgentReference'
-          description: The agent that created the item.
-        response_id:
-          type: string
-          description: The response on which the item is created.
       discriminator:
         propertyName: type
         mapping:
@@ -18091,10 +18081,6 @@ components:
             - mcp_approval_request
             - mcp_approval_response
             - mcp_call
-            - structured_outputs
-            - oauth_consent_request
-            - memory_search_call
-            - workflow_preview_action
     OpenAI.ItemResourceWebSearchToolCall:
       type: object
       required:
@@ -18652,6 +18638,18 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.OutputItemType'
+        created_by:
+          anyOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - type: string
+          description: The information about the creator of the item
+        agent_reference:
+          allOf:
+            - $ref: '#/components/schemas/AgentReference'
+          description: The agent that created the item.
+        response_id:
+          type: string
+          description: The response on which the item is created.
       discriminator:
         propertyName: type
         mapping:
@@ -19338,6 +19336,10 @@ components:
             - mcp_list_tools
             - mcp_approval_request
             - custom_tool_call
+            - structured_outputs
+            - oauth_consent_request
+            - memory_search_call
+            - workflow_preview_action
     OpenAI.OutputItemWebSearchToolCall:
       type: object
       required:
@@ -19682,7 +19684,9 @@ components:
         tools:
           $ref: '#/components/schemas/OpenAI.ToolsArray'
         tool_choice:
-          $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+            - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
         prompt:
           $ref: '#/components/schemas/OpenAI.Prompt'
         truncation:
@@ -22801,6 +22805,19 @@ components:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Use this option to force the model to call a specific tool on a remote MCP server.
       title: MCP tool
+    OpenAI.ToolChoiceOptions:
+      type: string
+      enum:
+        - none
+        - auto
+        - required
+      description: |-
+        Controls which (if any) tool is called by the model.
+        `none` means the model will not call any tool and instead generates a message.
+        `auto` means the model can pick between generating a message or calling one or
+        more tools.
+        `required` means the model must call one or more tools.
+      title: Tool choice mode
     OpenAI.ToolChoiceParam:
       type: object
       required:

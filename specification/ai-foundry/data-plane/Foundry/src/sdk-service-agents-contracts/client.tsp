@@ -1,6 +1,3 @@
-import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-azure-core/experimental";
-import "@azure-tools/openai-typespec/views/client-emitters/models/responses";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;

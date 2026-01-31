@@ -1,8 +1,3 @@
-import "@azure-tools/typespec-azure-core/experimental";
-import "@typespec/http";
-import "@typespec/openapi";
-import "@typespec/versioning";
-
 import "../openai-conversations/models.tsp";
 import "../tools/models.tsp";
 

@@ -1,5 +1,3 @@
-import "@azure-tools/typespec-client-generator-core";
-
 import "./src/common/service.tsp";
 
 import "./src/connections/routes.tsp";

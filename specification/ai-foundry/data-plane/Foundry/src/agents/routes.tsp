@@ -1,8 +1,3 @@
-import "@typespec/http";
-import "@typespec/openapi";
-import "@typespec/streams";
-import "@azure-tools/typespec-azure-core";
-
 import "../common/models.tsp";
 import "./models.tsp";
 

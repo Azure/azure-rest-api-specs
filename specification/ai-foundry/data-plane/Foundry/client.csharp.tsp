@@ -1,11 +1,4 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-
 import "./src/common/service.tsp";
-
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/indexes/routes.tsp";
@@ -18,8 +11,6 @@ import "./src/insights/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./src/agents/routes.tsp";
 import "./src/memory_stores/routes.tsp";
-
-import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
