@@ -1,0 +1,54 @@
+parameters:
+  service-dir:
+    default: "sdk/discovery"
+output-dir: "{project-root}/../"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    examples-dir: "{project-root}/examples"
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/Microsoft.Discovery/{version-status}/{version}/discovery.json"
+    version: "2026-02-01-preview"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Discovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-discovery"
+    namespace: "azure.mgmt.discovery"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-discovery"
+    namespace: "com.azure.resourcemanager.discovery"
+    service-name: "Discovery" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-discovery"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-discovery"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/discovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdiscovery"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdiscovery"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/discovery/Discovery.Management.Shared/"
+      - "specification/discovery/Discovery.Bookshelf.Management/"
+      - "specification/discovery/Discovery.Supercomputer.Management/"
+      - "specification/discovery/Discovery.Workspace.Management/"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
