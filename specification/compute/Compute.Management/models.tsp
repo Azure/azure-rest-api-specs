@@ -4909,7 +4909,7 @@ model VirtualMachineScaleSetVMProperties {
   timeCreated?: utcDateTime;
 
   /**
-   * Specifies the identity of the standaone virtual machine associated with this VMSS VM. This property is only applicable to Virtual Machine Scale Sets with Flexible orchestration mode. Minimum api-version: 2025-11-01.
+   * Specifies the resource ID of the standaone virtual machine associated with this VMSS VM. This property is only applicable to Virtual Machine Scale Sets with Flexible orchestration mode. Minimum api-version: 2025-11-01.
    */
   @added(Versions.v2025_11_01)
   @visibility(Lifecycle.Read)
