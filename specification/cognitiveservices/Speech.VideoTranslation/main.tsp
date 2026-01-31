@@ -57,6 +57,9 @@ enum ApiVersions {
 
   @doc("The 2025-05-20 GA version of the VideoTranslation service.")
   v2025_05_20: "2025-05-20",
+
+  @doc("The 2026-03-01 version of the VideoTranslation service.")
+  v2026_03_01: "2026-03-01",
 }
 
 @doc("Task status.")
@@ -134,6 +137,15 @@ union EnableEmotionalPlatformVoice {
   Disable: "Disable",
 }
 
+@added(ApiVersions.v2026_03_01)
+@doc("Input source kind for the input video, audio or webvtt files.")
+union InputFileSourceKind {
+  string,
+
+  /** Azure storage blob with managed identity authentication. */
+  AzureStorageBlobManagedIdentity: "AzureStorageBlobManagedIdentity",
+}
+
 @doc("Translation webvtt file.")
 model WebvttFile {
   @doc("Translation webvtt file url.")
@@ -197,6 +209,18 @@ model TranslationInput {
 
   @doc("Export subtitle in video, if not specified, the default value is false, it will not burn subtitle to the translated video file.")
   exportSubtitleInVideo?: boolean;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("Indicate whether to automatically create the first iteration when creating a translation, if not specified, the default value is false without creating the first iteration automatically.")
+  autoCreateFirstIteration?: boolean;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("Input file source kind, if not specified, the default value is to access input file with anonymous access.")
+  inputFileSourceKind?: InputFileSourceKind;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("Managed identity client ID for user-assigned managed identity to access input file from Azure storage blob, if not specified, API will use system-assigned managed identity. This property is only used when inputFileSourceKind is AzureStorageBlobManagedIdentity.")
+  inputFileAzureStorageBlobManagedIdentityClientId?: Guid;
 }
 
 @doc("Iteration result.")
@@ -274,6 +298,34 @@ model IterationInput {
   @added(ApiVersions.v2025_05_20)
   @doc("This parameter specifies whether to enable emotion for platform voice. By default, the server determines whether to apply emotion based on the target locale to optimize quality. If not specified, the API will automatically decide whether to enable emotional expression on the server side.")
   enableEmotionalPlatformVoice?: EnableEmotionalPlatformVoice;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("Specify whether to adjust webvtt alignment according to the synthesized audio for the translated text, if not specified, the default value is false.")
+  adjustWebvttAlignment?: boolean;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("Specify whether to export adjusted prompt audio in webvtt, if not specified, the default value is false.")
+  exportAdjustedPromptAudioInWebvtt?: boolean;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("Specify subtitle vertical margin, the value range is from 0 to 200, if not specified, the default value is 10.")
+  @minValue(0)
+  @maxValue(200)
+  subtitleVerticalMargin?: int32;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("Adjust the background volume based on the maximum volume with this multiplier factor. The value range is (0, 1], the suggested value is 0.6 if you want to adjust the background volume. If not specified, the original background audio volume will be kept unchanged.")
+  @minValueExclusive(0)
+  @maxValue(1)
+  adjustBackgroundVolumeMultiplier?: float64;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("Azure storage blob directory URL to push iteration results to. When specified, the API will push the translation results to the specified Azure storage blob directory.")
+  pushResultToAzureStorageBlobDirUrl?: url;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("Managed identity client ID for user-assigned managed identity to push results to Azure storage blob, if not specified, API will use system-assigned managed identity. This property is only used when pushResultToAzureStorageBlobDirUrl is specified.")
+  pushResultToAzureStorageBlobManagedIdentityClientId?: Guid;
 }
 
 @added(ApiVersions.v2025_05_20)
@@ -314,6 +366,10 @@ model Translation {
   @doc("Translation input.")
   input: TranslationInput;
 
+  @added(ApiVersions.v2026_03_01)
+  @doc("First iteration input for the translation, this property is only used when autoCreateFirstIteration is true.")
+  firstIterationInput?: IterationInput;
+
   @doc("Translation display name.")
   displayName?: string;
 
@@ -323,6 +379,11 @@ model Translation {
   @doc("The timestamp when the object was created. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
   @visibility(Lifecycle.Read)
   createdDateTime?: utcDateTime;
+
+  @added(ApiVersions.v2026_03_01)
+  @doc("The timestamp when the translation will be automatically deleted. The timestamp is encoded as ISO 8601 date and time format (\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).")
+  @visibility(Lifecycle.Read)
+  expiresDateTime?: utcDateTime;
 
   @doc("Latest iteration of the translation.")
   @visibility(Lifecycle.Read)
