@@ -125,3 +125,53 @@ using Microsoft.Cache;
 );
 @@clientName(ExportRDBParameters, "ExportRdbContent", "csharp");
 @@clientName(ImportRDBParameters, "ImportRdbContent", "csharp");
+@@clientName(RedisLinkedServerCreateParameters,
+  "RedisRedisRebootParametersCreatOrUpdateContent",
+  "csharp"
+);
+@@clientName(RedisCreateParameters, "RedisCreateOrUpdateContent", "csharp");
+@@clientName(RedisRegenerateKeyParameters,
+  "RedisRegenerateKeyContent",
+  "csharp"
+);
+@@clientName(RedisRebootParameters, "RedisRebootParametersContent", "csharp");
+@@clientName(RedisLinkedServerWithProperties,
+  "RedisLinkedServerWithProperty",
+  "csharp"
+);
+@@alternateType(RedisLinkedServerCreateProperties.linkedRedisCacheId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RedisLinkedServerCreateProperties.linkedRedisCacheLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "RedisPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(RedisCommonPropertiesRedisConfiguration.authnotrequired,
+  "authnotRequired",
+  "csharp"
+);
+@@clientName(RedisCommonPropertiesRedisConfiguration.maxclients,
+  "maxClients",
+  "csharp"
+);
+@@clientName(RedisCommonPropertiesRedisConfiguration.`maxfragmentationmemory-reserved`,
+  "maxFragmentationMemoryReserved",
+  "csharp"
+);
+@@clientName(RedisCommonPropertiesRedisConfiguration.`maxmemory-reserved`,
+  "maxMemoryReserved",
+  "csharp"
+);
+@@clientName(RedisCommonPropertiesRedisConfiguration.`maxmemory-delta`,
+  "maxMemoryDelta",
+  "csharp"
+);
+@@clientName(RedisCommonPropertiesRedisConfiguration.`maxmemory-policy`,
+  "maxMemoryPolicy",
+  "csharp"
+);
