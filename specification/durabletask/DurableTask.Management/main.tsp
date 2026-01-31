@@ -25,8 +25,16 @@ enum Versions {
   v2025_04_01_Preview: "2025-04-01-preview",
 
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2025-05-04-preview")
+  v2025_05_04_Preview: "2025-05-04-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2025-11-01")
   v2025_11_01: "2025-11-01",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2026-02-01")
+  v2026_02_01: "2026-02-01",
 }
 
 @doc("A Durable Task Scheduler resource")
@@ -56,6 +64,43 @@ model SchedulerProperties {
 
   @doc("SKU of the durable task scheduler")
   sku: SchedulerSku;
+
+  @added(Versions.v2025_05_04_Preview)
+  @doc("Allow or disallow public network access to durable task scheduler")
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  /** The private endpoints exposed by this resource */
+  @added(Versions.v2025_05_04_Preview)
+  @visibility(Lifecycle.Read)
+  privateEndpointConnections?: PrivateEndpointConnection[];
+}
+
+/** Holder for private endpoint connections */
+@added(Versions.v2025_05_04_Preview)
+@parentResource(Scheduler)
+model PrivateEndpointConnectionResource
+  is ProxyResource<PrivateEndpointConnectionProperties> {
+  ...PrivateEndpointConnectionParameter;
+}
+
+/** Private Link Resource for Schedulers */
+// #suppress "@azure-tools/typespec-providerhub-controller/no-resource-operations" "Expected for private link resources"
+@added(Versions.v2025_05_04_Preview)
+@parentResource(Scheduler)
+model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+  ...PrivateLinkResourceParameter;
+}
+
+@doc("State of the public network access.")
+@added(Versions.v2025_05_04_Preview)
+union PublicNetworkAccess {
+  string,
+
+  @doc("The public network access is enabled")
+  Enabled: "Enabled",
+
+  @doc("The public network access is disabled")
+  Disabled: "Disabled",
 }
 
 @doc("The SKU (Stock Keeping Unit) assigned to this durable task scheduler")
@@ -276,4 +321,26 @@ interface RetentionPolicies {
   delete is ArmResourceDeleteWithoutOkAsync<RetentionPolicy>;
   @doc("List Retention Policies")
   listByScheduler is ArmResourceListByParent<RetentionPolicy>;
+}
+
+/** Private endpoint connections operations */
+@added(Versions.v2025_05_04_Preview)
+@armResourceOperations(PrivateEndpointConnectionResource)
+interface PrivateEndpointConnections {
+  /** List existing private endpoint connections */
+  list is ArmResourceListByParent<PrivateEndpointConnectionResource>;
+  /** Get a specific private endpoint connection */
+  get is ArmResourceRead<PrivateEndpointConnectionResource>;
+  /** Create a private endpoint connection */
+  create is ArmResourceCreateOrReplaceSync<PrivateEndpointConnectionResource>;
+  /** Delete the private endpoint connection */
+  delete is ArmResourceDeleteSync<PrivateEndpointConnectionResource>;
+}
+
+/** Operations for private link resources on Scheduler */
+@added(Versions.v2025_05_04_Preview)
+@armResourceOperations(PrivateLinkResource)
+interface PrivateLinkResources {
+  /** list private link resources on the given resource */
+  list is ArmResourceListByParent<PrivateLinkResource>;
 }

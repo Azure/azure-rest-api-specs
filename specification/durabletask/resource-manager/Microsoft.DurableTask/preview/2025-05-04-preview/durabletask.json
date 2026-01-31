@@ -1252,43 +1252,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
-    },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "PrivateEndpointConnectionResource": {
       "type": "object",
       "description": "Holder for private endpoint connections",
@@ -1471,7 +1434,7 @@
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "The orchestration is terminated"
+            "description": "The orchestration is canceled"
           }
         ]
       }
@@ -1598,10 +1561,6 @@
         "properties": {
           "$ref": "#/definitions/SchedulerProperties",
           "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
@@ -1676,8 +1635,18 @@
     },
     "SchedulerPropertiesUpdate": {
       "type": "object",
-      "description": "Details of the Scheduler",
+      "description": "The Scheduler resource properties to be updated",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "URL of the durable task scheduler",
+          "readOnly": true
+        },
         "ipAllowlist": {
           "type": "array",
           "description": "IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR",
@@ -1688,10 +1657,6 @@
         "sku": {
           "$ref": "#/definitions/SchedulerSkuUpdate",
           "description": "SKU of the durable task scheduler"
-        },
-        "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccess",
-          "description": "Allow or disallow public network access to durable task scheduler"
         }
       }
     },
@@ -1715,13 +1680,12 @@
         }
       },
       "required": [
-        "name",
-        "redundancyState"
+        "name"
       ]
     },
     "SchedulerSkuUpdate": {
       "type": "object",
-      "description": "The SKU (Stock Keeping Unit) assigned to this durable task scheduler",
+      "description": "The SKU (Stock Keeping Unit) properties to be updated",
       "properties": {
         "name": {
           "type": "string",
@@ -1731,27 +1695,30 @@
           "type": "integer",
           "format": "int32",
           "description": "The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy"
+        },
+        "redundancyState": {
+          "$ref": "#/definitions/RedundancyState",
+          "description": "Indicates whether the current SKU configuration is zone redundant",
+          "readOnly": true
         }
       }
     },
     "SchedulerUpdate": {
       "type": "object",
-      "description": "A Durable Task Scheduler resource",
+      "description": "The update request model for the Scheduler resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SchedulerPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         },
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "TaskHub": {
       "type": "object",
