@@ -7,7 +7,3 @@ using Azure.ClientGenerator.Core;
   "KubernetesConfigurationExtensionTypesMgmtClient",
   "python"
 );
-@@clientName(Microsoft.KubernetesConfiguration,
-  "ExtensionTypesClient",
-  "javascript"
-);
