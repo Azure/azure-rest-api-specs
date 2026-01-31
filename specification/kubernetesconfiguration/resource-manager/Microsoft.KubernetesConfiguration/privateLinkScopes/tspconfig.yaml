@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/privatelinkscopes"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/privateLinkScopes.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/kubernetesconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-kubernetesconfiguration-privatelinkscopes"
+    namespace: "azure.mgmt.kubernetesconfiguration.privatelinkscopes"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    service-dir: sdk/kubernetesconfiguration
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-kubernetesconfiguration-privatelinkscopes"
+    namespace: "com.azure.resourcemanager.kubernetesconfiguration.privatelinkscopes"
+    service-name: "Scope" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/kubernetesconfiguration
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-kubernetesconfiguration-privatelinkscopes"
+    flavor: "azure"
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-kubernetesconfiguration-privatelinkscopes"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/armprivatelinkscopes"
+    emitter-output-dir: "{output-dir}/{service-dir}/armprivatelinkscopes"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armprivatelinkscopes"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

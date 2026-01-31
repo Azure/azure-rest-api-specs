@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/extensiontypes"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: false
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/extensionTypes.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/kubernetesconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-kubernetesconfiguration-extensiontypes"
+    namespace: "azure.mgmt.kubernetesconfiguration.extensiontypes"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    service-dir: sdk/kubernetesconfiguration
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-kubernetesconfiguration-extensiontypes"
+    namespace: "com.azure.resourcemanager.kubernetesconfiguration.extensiontypes"
+    service-name: "ExtensionTypes" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/kubernetesconfiguration
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-kubernetesconfiguration-extensiontypes"
+    compatibility-lro: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-kubernetesconfiguration-extensiontypes"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/armextensiontypes"
+    emitter-output-dir: "{output-dir}/{service-dir}/armextensiontypes"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armextensiontypes"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
