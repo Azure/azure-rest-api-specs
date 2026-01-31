@@ -1,0 +1,101 @@
+{
+  "title": "List regional move containers at resource group scope",
+  "operationId": "RegionalMoveContainers_ListByResourceGroup",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sampleResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Resources/regionalMoveContainers/sampleContainer1",
+            "name": "sampleContainer1",
+            "type": "Microsoft.Resources/regionalMoveContainers",
+            "location": "westus",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "sourceLocation": "westus",
+              "targetLocation": "eastus",
+              "requestedResources": [
+                {
+                  "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleResource1",
+                  "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleResource1Copy",
+                  "apiVersion": "2025-04-01",
+                  "resourceOverrides": {
+                    "sku": {
+                      "name": "ExampleSkuForTargetLocation"
+                    },
+                    "properties": {
+                      "sampleResourceProperty1": "OverrideValue1",
+                      "sampleResourceProperty2": 42
+                    }
+                  }
+                },
+                {
+                  "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleResource2",
+                  "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleResource2Copy",
+                  "apiVersion": "2025-04-01"
+                }
+              ],
+              "resourceStatusDetails": [
+                {
+                  "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleResource1",
+                  "status": "MoveSucceeded"
+                },
+                {
+                  "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleResource2",
+                  "status": "MoveSucceeded"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Resources/regionalMoveContainers/sampleContainer1",
+            "name": "sampleContainer2",
+            "type": "Microsoft.Resources/regionalMoveContainers",
+            "location": "westeurope",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "sourceLocation": "westeurope",
+              "targetLocation": "northeurope",
+              "requestedResources": [
+                {
+                  "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleVm3",
+                  "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleVm3Copy",
+                  "apiVersion": "2025-04-01",
+                  "resourceOverrides": {
+                    "sku": {
+                      "name": "ExampleSkuForTargetLocation"
+                    },
+                    "properties": {
+                      "sampleResourceProperty1": "OverrideValue1",
+                      "sampleResourceProperty2": 42
+                    }
+                  }
+                },
+                {
+                  "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleVm4",
+                  "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleVm4Copy",
+                  "apiVersion": "2025-04-01"
+                }
+              ],
+              "resourceStatusDetails": [
+                {
+                  "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleVm3",
+                  "status": "MoveSucceeded"
+                },
+                {
+                  "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sampleResourceGroup/providers/Microsoft.Example/exampleResources/sampleVm4",
+                  "status": "MoveSucceeded"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
