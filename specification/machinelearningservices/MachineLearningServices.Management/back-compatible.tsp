@@ -3,23 +3,23 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.MachineLearningServices;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClusterUpdateParameters.properties
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(RegistryPrivateEndpointConnection.properties
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedPrivateLinkResource.properties
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkspaceUpdateParameters.properties
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
 );
 
@@ -266,7 +266,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(Registries.createOrUpdate::parameters.resource, "body");
 @@clientName(Registries.update::parameters.properties, "body");
 @@clientLocation(Registries.getBlobReferenceSAS, "RegistryDataReferences");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Registry.properties);
 
 @@clientName(Workspaces.createOrUpdate::parameters.resource, "body");
@@ -279,13 +279,13 @@ using Microsoft.MachineLearningServices;
 @@clientLocation(Workspaces.provisionManagedNetwork,
   "ManagedNetworkProvisions"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Workspace.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "body"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
 );
 

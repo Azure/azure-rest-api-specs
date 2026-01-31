@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -9,9 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * ManagedNetworkSettingsPropertiesBasicResource is a preview-only resource.
+ */
+@removed(Versions.v2025_12_01)
 @parentResource(Workspace)
 model ManagedNetworkSettingsPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<ManagedNetworkSettingsProperties> {
@@ -23,7 +29,11 @@ model ManagedNetworkSettingsPropertiesBasicResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * ManagedNetworkSettingsPropertiesBasicResources interface is preview-only.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Resource does not support delete operation"
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
@@ -35,7 +45,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   /**
    * PUT API for managed network settings of a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   @summary("PUT API for managed network settings of a machine learning workspace.")
   put is ArmResourceCreateOrReplaceAsync<
     ManagedNetworkSettingsPropertiesBasicResource,

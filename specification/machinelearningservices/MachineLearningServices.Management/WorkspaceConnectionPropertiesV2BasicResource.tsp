@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -9,22 +10,9 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
-
-@parentResource(Workspace)
-model WorkspaceConnectionPropertiesV2BasicResource
-  is Azure.ResourceManager.ProxyResource<
-    WorkspaceConnectionPropertiesV2,
-    false
-  > {
-  ...ResourceNameParameter<
-    Resource = WorkspaceConnectionPropertiesV2BasicResource,
-    KeyName = "connectionName",
-    SegmentName = "connections",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-  >;
-}
 
 alias WorkspaceConnectionListParameters = {
   /**
@@ -46,6 +34,20 @@ alias WorkspaceConnectionListParameters = {
   includeAll?: boolean = false;
 };
 
+@parentResource(Workspace)
+model WorkspaceConnectionPropertiesV2BasicResource
+  is Azure.ResourceManager.ProxyResource<
+    WorkspaceConnectionPropertiesV2,
+    false
+  > {
+  ...ResourceNameParameter<
+    Resource = WorkspaceConnectionPropertiesV2BasicResource,
+    KeyName = "connectionName",
+    SegmentName = "connections",
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+  >;
+}
+
 @armResourceOperations
 interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
@@ -57,7 +59,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Create or update machine learning workspaces connections under the specified workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   @summary("Create or update machine learning workspaces connections under the specified workspace.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     WorkspaceConnectionPropertiesV2BasicResource,
@@ -106,6 +108,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Test machine learning workspaces connections under the specified workspace.
    */
+  @removed(Versions.v2025_12_01)
   @summary("Test machine learning workspaces connections under the specified workspace.")
   @action("testconnection")
   testConnection is ArmResourceActionAsyncBase<
@@ -119,6 +122,7 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
   /**
    * Get available models under the Azure OpenAI connection.
    */
+  @removed(Versions.v2025_12_01)
   @summary("Get available models under the Azure OpenAI connection.")
   @list
   @get
@@ -128,7 +132,12 @@ interface WorkspaceConnectionPropertiesV2BasicResources {
     void,
     ArmResponse<EndpointModels>,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 }

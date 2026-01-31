@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 /**
@@ -22,16 +24,16 @@ model Workspace
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   kind?: string;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   location?: string;
   ...Azure.ResourceManager.ResourceSkuProperty;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
   tags?: Record<string>;
 }
 
@@ -54,7 +56,7 @@ interface Workspaces {
   /**
    * Creates or updates a workspace with the specified parameters.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   @summary("Creates or updates a workspace with the specified parameters.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
@@ -75,7 +77,7 @@ interface Workspaces {
   /**
    * Deletes a machine learning workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Deletes a machine learning workspace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
@@ -102,7 +104,7 @@ interface Workspaces {
       @query("$skip")
       $skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -127,7 +129,7 @@ interface Workspaces {
       @query("$skip")
       $skip?: string;
 
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
       @query("aiCapabilities")
       aiCapabilities?: string;
     }
@@ -235,6 +237,7 @@ interface Workspaces {
   /**
    * Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.
    */
+  @removed(Versions.v2025_12_01)
   @action("listConnectionModels")
   @summary("Get all models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.")
   getAllModels is ArmResourceActionSync<
@@ -244,8 +247,9 @@ interface Workspaces {
   >;
 
   /**
-   * Get all the deployments under the workspace scope
+   * Get all the deployments under the workspace scope.
    */
+  @removed(Versions.v2025_12_01)
   @summary("Get all the deployments under the workspace scope")
   @list
   @get

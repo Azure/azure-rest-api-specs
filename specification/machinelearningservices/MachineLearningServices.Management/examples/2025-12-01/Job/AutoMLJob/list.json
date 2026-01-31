@@ -1,0 +1,102 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "string",
+            "type": "string",
+            "id": "string",
+            "properties": {
+              "description": "string",
+              "computeId": "string",
+              "displayName": "string",
+              "environmentId": "string",
+              "environmentVariables": {
+                "string": "string"
+              },
+              "experimentName": "string",
+              "identity": {
+                "identityType": "AMLToken"
+              },
+              "isArchived": false,
+              "jobType": "AutoML",
+              "outputs": {
+                "string": {
+                  "description": "string",
+                  "jobOutputType": "uri_file",
+                  "mode": "ReadWriteMount",
+                  "uri": "string"
+                }
+              },
+              "properties": {
+                "string": "string"
+              },
+              "resources": {
+                "instanceCount": 1,
+                "instanceType": "string",
+                "properties": {
+                  "string": {
+                    "9bec0ab0-c62f-4fa9-a97c-7b24bbcc90ad": null
+                  }
+                }
+              },
+              "services": {
+                "string": {
+                  "endpoint": "string",
+                  "errorMessage": "string",
+                  "jobServiceType": "string",
+                  "port": 1,
+                  "properties": {
+                    "string": "string"
+                  },
+                  "status": "string"
+                }
+              },
+              "status": "Scheduled",
+              "tags": {
+                "string": "string"
+              },
+              "taskDetails": {
+                "limitSettings": {
+                  "maxTrials": 2
+                },
+                "modelSettings": {
+                  "validationCropSize": 2
+                },
+                "searchSpace": [
+                  {
+                    "validationCropSize": "choice(2, 360)"
+                  }
+                ],
+                "targetColumnName": "string",
+                "taskType": "ImageClassification",
+                "trainingData": {
+                  "jobInputType": "mltable",
+                  "uri": "string"
+                }
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "ManagedIdentity"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Jobs_List",
+  "title": "List AutoML Job."
+}

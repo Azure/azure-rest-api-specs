@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -10,9 +11,14 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * InferencePool is a preview-only resource.
+ */
+@removed(Versions.v2025_12_01)
 @parentResource(Workspace)
 model InferencePool
   is Azure.ResourceManager.TrackedResource<InferencePoolProperties, false> {
@@ -27,12 +33,16 @@ model InferencePool
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
+/**
+ * InferencePools interface is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface InferencePools {
   /**
@@ -81,7 +91,7 @@ interface InferencePools {
   /**
    * Delete InferencePool (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete InferencePool (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     InferencePool,
