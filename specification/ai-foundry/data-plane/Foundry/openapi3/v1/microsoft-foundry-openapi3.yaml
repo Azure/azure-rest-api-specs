@@ -242,18 +242,6 @@ paths:
       operationId: Agents_deleteAgent
       description: Deletes an agent.
       parameters:
-        - name: Foundry-Beta
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            anyOf:
-              - type: string
-                enum:
-                  - ContainerAgents=v1
-              - type: string
-                enum:
-                  - HostedAgents=v1
         - name: agent_name
           in: path
           required: true
@@ -14649,7 +14637,7 @@ components:
             - code_interpreter_call.outputs
             - reasoning.encrypted_content
             - message.output_text.logprobs
-            - memory_search_preview.results
+            - memory_search_call.results
       description: |-
         Specify additional output data to include in the model response. Currently supported values are:
         - `web_search_call.action.sources`: Include the sources of the web search tool call.

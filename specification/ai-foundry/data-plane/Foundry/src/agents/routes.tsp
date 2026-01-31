@@ -93,8 +93,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}")
-  deleteAgent is FoundryDataPlanePreviewOperation<
-    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1,
+  deleteAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to delete. */
       @path agent_name: string;

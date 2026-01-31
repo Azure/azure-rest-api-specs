@@ -378,28 +378,6 @@
         "description": "Deletes an agent.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=v1"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=v1"
-                  ]
-                }
-              ]
-            }
-          },
-          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -21861,7 +21839,7 @@
               "code_interpreter_call.outputs",
               "reasoning.encrypted_content",
               "message.output_text.logprobs",
-              "memory_search_preview.results"
+              "memory_search_call.results"
             ]
           }
         ],
