@@ -1,25 +1,11 @@
 {
-  "title": "Schedulers_Update",
-  "operationId": "Schedulers_Update",
+  "title": "Schedulers_Get",
+  "operationId": "Schedulers_Get",
   "parameters": {
-    "api-version": "2025-04-01-preview",
+    "api-version": "2025-11-01",
     "subscriptionId": "EE9BD735-67CE-4A90-89C4-439D3F6A4C93",
     "resourceGroupName": "rgopenapi",
-    "schedulerName": "testscheduler",
-    "properties": {
-      "tags": {
-        "hello": "world"
-      },
-      "properties": {
-        "ipAllowlist": [
-          "10.0.0.0/8"
-        ],
-        "sku": {
-          "name": "Dedicated",
-          "capacity": 3
-        }
-      }
-    }
+    "schedulerName": "testscheduler"
   },
   "responses": {
     "200": {
@@ -39,8 +25,7 @@
         },
         "tags": {
           "department": "research",
-          "development": "true",
-          "hello": "world"
+          "development": "true"
         },
         "id": "/subscriptions/EE9BD735-67CE-4A90-89C4-439D3F6A4C93/resourceGroups/rgopenapi/providers/Microsoft.DurableTask/schedulers/testscheduler",
         "name": "testscheduler",
@@ -53,11 +38,6 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2024-04-17T15:34:17.366Z"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "location": "https://contoso.com/operationstatus"
       }
     }
   }

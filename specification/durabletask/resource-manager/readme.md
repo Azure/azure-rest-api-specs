@@ -27,28 +27,26 @@ These are the global settings for the durabletask.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-02-01
+tag: package-2025-11-01
 ```
 
-### Tag: package-2025-02-01
+### Tag: package-2025-11-01
 
-```yaml $(tag) == 'package-2026-02-01'
+These settings apply only when `--tag=package-2025-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01'
 input-file:
-  - Microsoft.DurableTask/stable/2026-02-01/openapi.json
+  - Microsoft.DurableTask/stable/2025-11-01/durabletask.json
 ```
 
-### Tag: package-2025-05-04-preview
-
-```yaml $(tag) == 'package-2025-05-04-preview'
-input-file:
-  - Microsoft.DurableTask/preview/2025-05-04-preview/openapi.json
-```
 
 ### Tag: package-2025-04-01-preview
 
+These settings apply only when `--tag=package-2025-04-01-preview` is specified on the command line.
+
 ```yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
-  - Microsoft.DurableTask/preview/2025-04-01-preview/openapi.json
+  - Microsoft.DurableTask/preview/2025-04-01-preview/durabletask.json
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -57,16 +55,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - Microsoft.DurableTask/preview/2024-10-01-preview/openapi.json
-```
-
-### Tag: package-2024-02-01-preview
-
-These settings apply only when `--tag=package-2024-02-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-02-01-preview'
-input-file:
-  - Microsoft.DurableTask/preview/2024-02-01-preview/openapi.json
+  - Microsoft.DurableTask/preview/2024-10-01-preview/durabletask.json
 ```
 
 ---

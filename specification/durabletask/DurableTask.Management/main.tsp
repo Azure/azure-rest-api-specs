@@ -17,10 +17,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @doc("API Versions")
 enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @doc("2024-02-01-preview")
-  v2024_02_01_Preview: "2024-02-01-preview",
-
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2024-10-01-preview")
   v2024_10_01_Preview: "2024-10-01-preview",
 
@@ -29,12 +25,8 @@ enum Versions {
   v2025_04_01_Preview: "2025-04-01-preview",
 
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @doc("2025-05-04-preview")
-  v2025_05_04_Preview: "2025-05-04-preview",
-
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @doc("2026-02-01")
-  v2026_02_01: "2026-02-01",
+  @doc("2025-11-01")
+  v2025_11_01: "2025-11-01",
 }
 
 @doc("A Durable Task Scheduler resource")
@@ -46,10 +38,7 @@ model Scheduler is Azure.ResourceManager.TrackedResource<SchedulerProperties> {
     "schedulers",
     "^[a-zA-Z0-9-]{3,64}$"
   >;
-  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
-
-@@added(Scheduler.identity, Versions.v2025_05_04_Preview);
 
 @doc("Details of the Scheduler")
 @added(Versions.v2024_10_01_Preview)
@@ -67,50 +56,13 @@ model SchedulerProperties {
 
   @doc("SKU of the durable task scheduler")
   sku: SchedulerSku;
-
-  @added(Versions.v2025_05_04_Preview)
-  @doc("Allow or disallow public network access to durable task scheduler")
-  publicNetworkAccess?: PublicNetworkAccess;
-
-  /** The private endpoints exposed by this resource */
-  @added(Versions.v2025_05_04_Preview)
-  @visibility(Lifecycle.Read)
-  privateEndpointConnections?: PrivateEndpointConnection[];
-}
-
-/** Holder for private endpoint connections */
-@added(Versions.v2025_05_04_Preview)
-@parentResource(Scheduler)
-model PrivateEndpointConnectionResource
-  is ProxyResource<PrivateEndpointConnectionProperties> {
-  ...PrivateEndpointConnectionParameter;
-}
-
-/** Private Link Resource for Schedulers */
-// #suppress "@azure-tools/typespec-providerhub-controller/no-resource-operations" "Expected for private link resources"
-@added(Versions.v2025_05_04_Preview)
-@parentResource(Scheduler)
-model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
-  ...PrivateLinkResourceParameter;
-}
-
-@doc("State of the public network access.")
-@added(Versions.v2025_05_04_Preview)
-union PublicNetworkAccess {
-  string,
-
-  @doc("The public network access is enabled")
-  Enabled: "Enabled",
-
-  @doc("The public network access is disabled")
-  Disabled: "Disabled",
 }
 
 @doc("The SKU (Stock Keeping Unit) assigned to this durable task scheduler")
 @added(Versions.v2024_10_01_Preview)
 model SchedulerSku {
   @doc("The name of the SKU")
-  @typeChangedFrom(Versions.v2026_02_01, string)
+  @typeChangedFrom(Versions.v2025_11_01, string)
   name: SchedulerSkuName;
 
   @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
@@ -118,10 +70,10 @@ model SchedulerSku {
 
   @doc("Indicates whether the current SKU configuration is zone redundant")
   @visibility(Lifecycle.Read)
-  redundancyState: RedundancyState;
+  redundancyState?: RedundancyState;
 }
 
-@added(Versions.v2026_02_01)
+@added(Versions.v2025_11_01)
 @doc("The name of the Stock Keeping Unit (SKU) of a Durable Task Scheduler")
 union SchedulerSkuName {
   string,
@@ -130,6 +82,7 @@ union SchedulerSkuName {
   Dedicated: "Dedicated",
 
   @doc("Consumption SKU")
+  @added(Versions.v2025_04_01_Preview)
   Consumption: "Consumption",
 }
 
@@ -143,6 +96,28 @@ model TaskHub is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
     "taskHubs",
     "^[a-zA-Z0-9-]{3,64}$"
   >;
+}
+
+@doc("The state of the resource redundancy")
+union RedundancyState {
+  string,
+
+  @doc("The resource is not redundant")
+  None: "None",
+
+  @doc("The resource is zone redundant")
+  Zone: "Zone",
+}
+
+@doc("The properties of Task Hub")
+model TaskHubProperties {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation")
+  provisioningState?: ProvisioningState;
+
+  @doc("URL of the durable task scheduler dashboard")
+  @visibility(Lifecycle.Read)
+  dashboardUrl?: url;
 }
 
 @doc("A retention policy resource belonging to the scheduler")
@@ -194,30 +169,8 @@ union PurgeableOrchestrationState {
   @doc("The orchestration is terminated")
   Terminated: "Terminated",
 
-  @doc("The orchestration is terminated")
+  @doc("The orchestration is canceled")
   Canceled: "Canceled",
-}
-
-@doc("The state of the resource redundancy")
-union RedundancyState {
-  string,
-
-  @doc("The resource is not redundant")
-  None: "None",
-
-  @doc("The resource is zone redundant")
-  Zone: "Zone",
-}
-
-@doc("The properties of Task Hub")
-model TaskHubProperties {
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation")
-  provisioningState?: ProvisioningState;
-
-  @doc("URL of the durable task scheduler dashboard")
-  @visibility(Lifecycle.Read)
-  dashboardUrl?: url;
 }
 
 @doc("The status of the current operation")
@@ -239,7 +192,41 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-@added(Versions.v2024_10_01_Preview)
+@doc("The update request model for the Scheduler resource")
+model SchedulerUpdate
+  is UpdateableProperties<Azure.ResourceManager.TrackedResource<SchedulerPropertiesUpdate>>;
+
+@doc("The Scheduler resource properties to be updated")
+model SchedulerPropertiesUpdate {
+  @visibility(Lifecycle.Read)
+  @doc("The status of the last operation")
+  provisioningState?: ProvisioningState;
+
+  @doc("URL of the durable task scheduler")
+  @visibility(Lifecycle.Read)
+  endpoint?: string;
+
+  @doc("IP allow list for durable task scheduler. Values can be IPv4, IPv6 or CIDR")
+  ipAllowlist?: string[];
+
+  @doc("SKU of the durable task scheduler")
+  sku?: SchedulerSkuUpdate;
+}
+
+@doc("The SKU (Stock Keeping Unit) properties to be updated")
+model SchedulerSkuUpdate {
+  @doc("The name of the SKU")
+  @typeChangedFrom(Versions.v2025_11_01, string)
+  name?: SchedulerSkuName;
+
+  @doc("The SKU capacity. This allows scale out/in for the resource and impacts zone redundancy")
+  capacity?: int32;
+
+  @doc("Indicates whether the current SKU configuration is zone redundant")
+  @visibility(Lifecycle.Read)
+  redundancyState?: RedundancyState;
+}
+
 @armResourceOperations(Scheduler)
 interface Schedulers {
   @doc("Get a Scheduler")
@@ -250,8 +237,7 @@ interface Schedulers {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Scheduler>;
   @doc("Update a Scheduler")
   @errorsDoc("Validation error: required parameters are missing")
-  @Http.patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<Scheduler, Scheduler>;
+  update is ArmCustomPatchAsync<Scheduler, SchedulerUpdate>;
   @doc("Delete a Scheduler")
   delete is ArmResourceDeleteWithoutOkAsync<Scheduler>;
   @doc("List Schedulers by resource group")
@@ -260,7 +246,6 @@ interface Schedulers {
   listBySubscription is ArmListBySubscription<Scheduler>;
 }
 
-@added(Versions.v2024_10_01_Preview)
 @armResourceOperations(TaskHub)
 interface TaskHubs {
   @doc("Get a Task Hub")
@@ -286,111 +271,9 @@ interface RetentionPolicies {
   createOrReplace is ArmResourceCreateOrReplaceAsync<RetentionPolicy>;
   @doc("Update a Retention Policy")
   @errorsDoc("Validation error: required parameters are missing")
-  @Http.patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<RetentionPolicy, RetentionPolicy>;
+  update is ArmResourcePatchAsync<RetentionPolicy, RetentionPolicyProperties>;
   @doc("Delete a Retention Policy")
   delete is ArmResourceDeleteWithoutOkAsync<RetentionPolicy>;
   @doc("List Retention Policies")
   listByScheduler is ArmResourceListByParent<RetentionPolicy>;
-}
-
-/** Private endpoint connections operations */
-@added(Versions.v2025_05_04_Preview)
-@armResourceOperations(PrivateEndpointConnectionResource)
-interface PrivateEndpointConnections {
-  /** List existing private endpoint connections */
-  list is ArmResourceListByParent<PrivateEndpointConnectionResource>;
-  /** Get a specific private endpoint connection */
-  get is ArmResourceRead<PrivateEndpointConnectionResource>;
-  /** Create a private endpoint connection */
-  create is ArmResourceCreateOrReplaceSync<PrivateEndpointConnectionResource>;
-  /** Delete the private endpoint connection */
-  delete is ArmResourceDeleteSync<PrivateEndpointConnectionResource>;
-}
-
-/** Operations for private link resources on Scheduler */
-@added(Versions.v2025_05_04_Preview)
-@armResourceOperations(PrivateLinkResource)
-interface PrivateLinkResources {
-  /** list private link resources on the given resource */
-  list is ArmResourceListByParent<PrivateLinkResource>;
-}
-
-// resource specific to the previous version 2024-02-01-preview (Private Preview only to be deprecated and not made public)
-
-@doc("A Durable Task Scheduler namespace resource")
-@added(Versions.v2024_02_01_Preview)
-@removed(Versions.v2024_10_01_Preview)
-model Namespace is Azure.ResourceManager.TrackedResource<NamespaceProperties> {
-  ...ResourceNameParameter<
-    Scheduler,
-    "namespaceName",
-    "namespaces",
-    "^[a-zA-Z0-9-]{3,64}$"
-  >;
-}
-
-@doc("Details of the Namespace.")
-@added(Versions.v2024_02_01_Preview)
-@removed(Versions.v2024_10_01_Preview)
-model NamespaceProperties {
-  @visibility(Lifecycle.Read)
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
-
-  @doc("URL of the durable task service")
-  @visibility(Lifecycle.Read)
-  url?: string;
-
-  @doc("URL of the durable task service dashboard")
-  @visibility(Lifecycle.Read)
-  dashboardUrl?: string;
-
-  @doc("IP allow list for durable task service. Values can be Pv4, IPv6 or CIDR")
-  ipAllowlist?: string[];
-}
-
-@doc("A Task Hub resource belonging to the namespace")
-@removed(Versions.v2024_10_01_Preview)
-@renamedFrom(Versions.v2024_10_01_Preview, "TaskHub")
-@parentResource(Namespace)
-model TaskHubUnderNamespace
-  is Azure.ResourceManager.ProxyResource<TaskHubProperties> {
-  ...ResourceNameParameter<
-    TaskHubUnderNamespace,
-    "taskHubName",
-    "taskHubs",
-    "^[a-zA-Z0-9-]{3,64}$"
-  >;
-}
-
-@removed(Versions.v2024_10_01_Preview)
-@armResourceOperations(Namespace)
-interface Namespaces {
-  @errorsDoc("Not found error: resource does not exist")
-  get is ArmResourceRead<Namespace>;
-  @errorsDoc("Validation error: required parameters are missing")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Namespace>;
-  @errorsDoc("Validation error: required parameters are missing")
-  update is ArmResourcePatchAsync<Namespace, NamespaceProperties>;
-  delete is ArmResourceDeleteWithoutOkAsync<Namespace>;
-  listByResourceGroup is ArmResourceListByParent<Namespace>;
-  listBySubscription is ArmListBySubscription<Namespace>;
-}
-
-@removed(Versions.v2024_10_01_Preview)
-@renamedFrom(Versions.v2024_10_01_Preview, "TaskHubs")
-@armResourceOperations(TaskHubUnderNamespace)
-@tag("TaskHubs")
-interface TaskHubsUnderNamespace {
-  @doc("Get a Task Hub")
-  @errorsDoc("Not found error: resource does not exist")
-  get is ArmResourceRead<TaskHubUnderNamespace>;
-  @doc("Create or update a Task Hub")
-  @errorsDoc("Validation error: required parameters are missing")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<TaskHubUnderNamespace>;
-  @doc("Delete a Task Hub")
-  delete is ArmResourceDeleteSync<TaskHubUnderNamespace>;
-  @doc("List Task Hubs")
-  listByNamespace is ArmResourceListByParent<TaskHubUnderNamespace>;
 }
