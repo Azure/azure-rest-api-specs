@@ -44,4 +44,7 @@ enum APIVersion {
 
   @doc("Version 2025-10-01")
   v2025_10_01_preview: "2025-10-01-preview",
+
+  @doc("Version 2026-06-06")
+  v2026_06_06: "2026-06-06",
 }

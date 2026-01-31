@@ -1,0 +1,138 @@
+{
+  "title": "Gets the set of languages currently supported by other operations of the Translator.",
+  "operationId": "GetSupportedLanguages",
+  "parameters": {
+    "X-ClientTraceId": "kayfnugjec",
+    "scope": "translation,transliteration,models",
+    "Accept-Language": "en",
+    "If-None-Match": "fpnhruttllvc",
+    "api-version": "2026-06-06"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "translation": {
+          "ar": {
+            "name": "Arabic",
+            "nativeName": "العربية",
+            "dir": "rtl",
+            "models": [
+              "gpt-4o",
+              "gpt-4o-mini"
+            ]
+          },
+          "en": {
+            "name": "English",
+            "nativeName": "English",
+            "dir": "ltr",
+            "models": [
+              "gpt-4o",
+              "gpt-4o-mini"
+            ]
+          },
+          "yue": {
+            "name": "Cantonese (Traditional)",
+            "nativeName": "粵語 (繁體)",
+            "dir": "ltr",
+            "models": []
+          },
+          "zh-Hans": {
+            "name": "Chinese Simplified",
+            "nativeName": "中文 (简体)",
+            "dir": "ltr",
+            "models": [
+              "gpt-4o",
+              "gpt-4o-mini"
+            ]
+          }
+        },
+        "transliteration": {
+          "ar": {
+            "name": "Arabic",
+            "nativeName": "العربية",
+            "scripts": [
+              {
+                "code": "Arab",
+                "name": "Arabic",
+                "nativeName": "العربية",
+                "dir": "rtl",
+                "toScripts": [
+                  {
+                    "code": "Latn",
+                    "name": "Latin",
+                    "nativeName": "اللاتينية",
+                    "dir": "ltr"
+                  }
+                ]
+              },
+              {
+                "code": "Latn",
+                "name": "Latin",
+                "nativeName": "اللاتينية",
+                "dir": "ltr",
+                "toScripts": [
+                  {
+                    "code": "Arab",
+                    "name": "Arabic",
+                    "nativeName": "العربية",
+                    "dir": "rtl"
+                  }
+                ]
+              }
+            ]
+          },
+          "zh-Hans": {
+            "name": "Chinese Simplified",
+            "nativeName": "中文 (简体)",
+            "scripts": [
+              {
+                "code": "Hans",
+                "name": "Simplified",
+                "nativeName": "简体",
+                "dir": "ltr",
+                "toScripts": [
+                  {
+                    "code": "Hant",
+                    "name": "Hat",
+                    "nativeName": "繁体",
+                    "dir": "ltr"
+                  },
+                  {
+                    "code": "Latn",
+                    "name": "Latin",
+                    "nativeName": "拉丁文",
+                    "dir": "ltr"
+                  }
+                ]
+              },
+              {
+                "code": "Latn",
+                "name": "Latin",
+                "nativeName": "拉丁文",
+                "dir": "ltr",
+                "toScripts": [
+                  {
+                    "code": "Hans",
+                    "name": "Han",
+                    "nativeName": "简体",
+                    "dir": "ltr"
+                  },
+                  {
+                    "code": "Hant",
+                    "name": "Hat",
+                    "nativeName": "繁体",
+                    "dir": "ltr"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "models": [
+          "gpt-4o",
+          "gpt-4o-mini"
+        ]
+      }
+    }
+  }
+}
