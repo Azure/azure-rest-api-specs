@@ -13,7 +13,3 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 
-@@clientName(Microsoft.KubernetesConfiguration,
-  "ExtensionsManager",
-  "java"
-);
