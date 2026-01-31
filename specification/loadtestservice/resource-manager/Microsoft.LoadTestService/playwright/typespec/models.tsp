@@ -13,7 +13,6 @@ namespace Playwright.Management;
 @doc("Playwright workspace resource.")
 model PlaywrightWorkspace is TrackedResource<PlaywrightWorkspaceProperties> {
   ...ResourceNameParameter<PlaywrightWorkspace>;
-
   ...ManagedServiceIdentityProperty;
 }
 
