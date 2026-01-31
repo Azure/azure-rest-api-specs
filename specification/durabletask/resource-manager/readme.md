@@ -55,6 +55,7 @@ These settings apply only when `--tag=package-2025-05-04-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-04-preview'
 input-file:
   - Microsoft.DurableTask/preview/2025-05-04-preview/durabletask.json
+```
 
 ### Tag: package-2025-04-01-preview
 
