@@ -122,9 +122,15 @@ union IssueType {
  */
 union Severity {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * Warning severity
+   */
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * Error severity
+   */
   Error: "Error",
 }
 
@@ -133,20 +139,32 @@ union Severity {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The resource was created by a user.
+   */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The resource was created by an application.
+   */
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The resource was created by a managed identity.
+   */
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /**
+   * The resource was created by a key.
+   */
   Key: "Key",
 }
 
 /**
  * The authentication mode which the Batch service will use to manage the auto-storage account.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum AutoStorageAuthenticationMode {
   /**
    * The Batch service will authenticate requests to auto-storage using storage account keys.
@@ -162,7 +180,7 @@ enum AutoStorageAuthenticationMode {
 /**
  * The allocation mode for creating pools in the Batch account.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum PoolAllocationMode {
   /**
    * Pools will be allocated in subscriptions owned by the Batch service.
@@ -178,7 +196,7 @@ enum PoolAllocationMode {
 /**
  * The network access type for operating on the resources in the Batch account.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum PublicNetworkAccessType {
   /**
    * Enables connectivity to Azure Batch through public DNS.
@@ -199,7 +217,7 @@ enum PublicNetworkAccessType {
 /**
  * Default action for endpoint access. It is only applicable when publicNetworkAccess is enabled.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum EndpointAccessDefaultAction {
   /**
    * Allow client access.
@@ -215,7 +233,7 @@ enum EndpointAccessDefaultAction {
 /**
  * Type of the key source.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum KeySource {
   /**
    * Batch creates and manages the encryption keys used to protect the account data.
@@ -231,7 +249,7 @@ enum KeySource {
 /**
  * The authentication mode for the Batch account.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum AuthenticationMode {
   /**
    * The authentication mode using shared keys.
@@ -252,7 +270,7 @@ enum AuthenticationMode {
 /**
  * The type of identity used for the Batch account.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum ResourceIdentityType {
   /**
    * Batch account has a system assigned identity with it.
@@ -273,8 +291,8 @@ enum ResourceIdentityType {
 /**
  * The provisioned state of the resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
 enum ProvisioningState {
   /**
    * The account is in an invalid state.
@@ -310,8 +328,8 @@ enum ProvisioningState {
 /**
  * The provisioning state of the private endpoint connection.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
 enum PrivateEndpointConnectionProvisioningState {
   /**
    * The connection is creating.
@@ -347,7 +365,7 @@ enum PrivateEndpointConnectionProvisioningState {
 /**
  * The status of the Batch private endpoint connection
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum PrivateLinkServiceConnectionStatus {
   /**
    * The private endpoint connection is approved and can be used to access Batch account
@@ -373,7 +391,7 @@ enum PrivateLinkServiceConnectionStatus {
 /**
  * The type of account key to regenerate.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum AccountKeyType {
   /**
    * The primary account key.
@@ -389,7 +407,7 @@ enum AccountKeyType {
 /**
  * The current state of the application package.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum PackageState {
   /**
    * The application package has been created but has not yet been activated.
@@ -405,7 +423,7 @@ enum PackageState {
 /**
  * Gets the reason that a Batch account name could not be used. The Reason element is only returned if NameAvailable is false.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum NameAvailabilityReason {
   /**
    * The requested name is invalid.
@@ -418,9 +436,11 @@ enum NameAvailabilityReason {
   AlreadyExists,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The current provisioning state of the certificate.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
 @removed(Versions.v2025_06_01)
 enum CertificateProvisioningState {
   /**
@@ -442,7 +462,7 @@ enum CertificateProvisioningState {
 /**
  * The format of the certificate - either Pfx or Cer. If omitted, the default is Pfx.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 @removed(Versions.v2025_06_01)
 enum CertificateFormat {
   /**
@@ -459,8 +479,8 @@ enum CertificateFormat {
 /**
  * The current state of the pool.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
 enum PoolProvisioningState {
   /**
    * The pool is available to run tasks subject to the availability of compute nodes.
@@ -476,7 +496,7 @@ enum PoolProvisioningState {
 /**
  * Whether the pool is resizing.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum AllocationState {
   /**
    * The pool is not resizing. There are no changes to the number of nodes in the pool in progress. A pool enters this state when it is created and when no operations are being performed on the pool to change the number of nodes.
@@ -515,7 +535,7 @@ union IPFamily {
 /**
  * The type of caching to enable for the disk.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum CachingType {
   /**
    * The caching mode for the disk is not enabled.
@@ -536,7 +556,7 @@ enum CachingType {
 /**
  * The storage account type for use in creating data disks or OS disk.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum StorageAccountType {
   /**
    * The data disk / OS disk should use standard locally redundant storage.
@@ -557,7 +577,7 @@ enum StorageAccountType {
 /**
  * If omitted, no disks on the compute nodes in the pool will be encrypted.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 @summary("The disks to encrypt on each compute node.")
 enum DiskEncryptionTarget {
   /**
@@ -574,7 +594,7 @@ enum DiskEncryptionTarget {
 /**
  * The default value is regional.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum NodePlacementPolicyType {
   /**
    * All nodes in the pool will be allocated in the same region.
@@ -590,7 +610,7 @@ enum NodePlacementPolicyType {
 /**
  * Specifies the SecurityType of the virtual machine. It has to be set to any specified value to enable UefiSettings.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum SecurityTypes {
   /**
    * Trusted launch protects against advanced and persistent attack techniques.
@@ -606,7 +626,7 @@ enum SecurityTypes {
 /**
  * Determines what to do with a node and its running task(s) after it has been selected for deallocation.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum ComputeNodeDeallocationOption {
   /**
    * Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated.
@@ -632,7 +652,7 @@ enum ComputeNodeDeallocationOption {
 /**
  * This imposes restrictions on which nodes can be assigned to the pool. Enabling this value can reduce the chance of the requested number of nodes to be allocated in the pool. If not specified, this value defaults to 'Disabled'.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum InterNodeCommunicationState {
   /**
    * Enable network communication between virtual machines.
@@ -648,7 +668,7 @@ enum InterNodeCommunicationState {
 /**
  * The scope of dynamic vnet assignment.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum DynamicVNetAssignmentScope {
   /**
    * No dynamic VNet assignment is enabled.
@@ -664,7 +684,7 @@ enum DynamicVNetAssignmentScope {
 /**
  * The protocol of the endpoint.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum InboundEndpointProtocol {
   /**
    * Use TCP for the endpoint.
@@ -680,7 +700,7 @@ enum InboundEndpointProtocol {
 /**
  * The action that should be taken for a specified IP address, subnet range or tag.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum NetworkSecurityGroupRuleAccess {
   /**
    * Allow access.
@@ -714,7 +734,7 @@ union JobDefaultOrder {
 /**
  * The provisioning type for Public IP Addresses for the Batch Pool.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum IPAddressProvisioningType {
   /**
    * A public IP will be created and managed by Batch. There may be multiple public IPs depending on the size of the Pool.
@@ -735,7 +755,7 @@ enum IPAddressProvisioningType {
 /**
  * How tasks should be distributed across compute nodes.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum ComputeNodeFillType {
   /**
    * Tasks should be assigned evenly across all nodes in the pool.
@@ -751,7 +771,7 @@ enum ComputeNodeFillType {
 /**
  * The elevation level of the user.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum ElevationLevel {
   /**
    * The user is a standard user without elevated access.
@@ -767,7 +787,7 @@ enum ElevationLevel {
 /**
  * Specifies login mode for the user. The default value is Interactive.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum LoginMode {
   /**
    * The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended for long running parallel processes.
@@ -801,7 +821,7 @@ union HostEndpointSettingsModeTypes {
 /**
  * The default value is Pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum AutoUserScope {
   /**
    * Specifies that the service should create a new user for the task.
@@ -817,7 +837,7 @@ enum AutoUserScope {
 /**
  * A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum ContainerWorkingDirectory {
   /**
    * Use the standard Batch service task working directory, which will contain the Task resource files populated by Batch.
@@ -833,7 +853,7 @@ enum ContainerWorkingDirectory {
 /**
  * The default value is currentUser. This property is applicable only for pools configured with Windows compute nodes. For Linux compute nodes, the certificates are stored in a directory inside the task working directory and an environment variable AZ_BATCH_CERTIFICATES_DIR is supplied to the task to query for this location. For certificates with visibility of 'remoteUser', a 'certs' directory is created in the user's home directory (e.g., /home/{user-name}/certs) and certificates are placed in that directory.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 @removed(Versions.v2025_06_01)
 enum CertificateStoreLocation {
   /**
@@ -847,8 +867,10 @@ enum CertificateStoreLocation {
   LocalMachine,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The visibility of the certificate.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 @removed(Versions.v2025_06_01)
 enum CertificateVisibility {
   /**
@@ -870,7 +892,7 @@ enum CertificateVisibility {
 /**
  * Determines how a pool communicates with the Batch service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 @removed(Versions.v2025_06_01)
 enum NodeCommunicationMode {
   /**
@@ -892,7 +914,7 @@ enum NodeCommunicationMode {
 /**
  * Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum UpgradeMode {
   /**
    * All virtual machines in the scale set are automatically updated at the same time.
@@ -913,7 +935,7 @@ enum UpgradeMode {
 /**
  * The type of identity used for the Batch Pool.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum PoolIdentityType {
   /**
    * Batch pool has user assigned identities with it.
@@ -938,13 +960,13 @@ model BatchAccountCreateParameters {
   /**
    * The user-specified tags associated with the account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   tags?: Record<string>;
 
   /**
    * The properties of the Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy desgin"
   properties?: BatchAccountCreateProperties;
 
   /**
@@ -994,7 +1016,7 @@ model BatchAccountCreateProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 }
 
@@ -1087,7 +1109,7 @@ model EndpointAccessProfile {
 /**
  * The action when client IP address is matched.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum IPRuleAction {
   /**
    * Allow access for the matched client IP address.
@@ -1163,7 +1185,7 @@ model BatchAccountIdentity {
   /**
    * The list of user identities associated with the Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   userAssignedIdentities?: Record<UserAssignedIdentities>;
 }
 
@@ -1223,22 +1245,22 @@ model BatchAccountProperties {
   /**
    * The network access type for operating on the resources in the Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Legacy desgin"
   @summary("The network interface type for accessing Azure Batch service and Batch account operations.")
   publicNetworkAccess?: PublicNetworkAccessType | null = PublicNetworkAccessType.Enabled;
 
   /**
    * The network profile only takes effect when publicNetworkAccess is enabled.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
   @summary("Network profile for Batch account, which contains network rule settings for each endpoint.")
   networkProfile?: NetworkProfile | null;
 
   /**
    * List of private endpoint connections associated with the Batch account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[] | null;
 
@@ -1259,7 +1281,7 @@ model BatchAccountProperties {
   /**
    * For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
   @visibility(Lifecycle.Read)
   @summary("The dedicated core quota for the Batch account.")
   dedicatedCoreQuota?: int32 | null;
@@ -1267,7 +1289,7 @@ model BatchAccountProperties {
   /**
    * For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
   @visibility(Lifecycle.Read)
   @summary("The Spot/low-priority core quota for the Batch account.")
   lowPriorityCoreQuota?: int32 | null;
@@ -1275,9 +1297,9 @@ model BatchAccountProperties {
   /**
    * A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   dedicatedCoreQuotaPerVMFamily?: VirtualMachineFamilyCoreQuota[] | null;
@@ -1285,7 +1307,7 @@ model BatchAccountProperties {
   /**
    * If this flag is true, dedicated core quota is enforced via both the dedicatedCoreQuotaPerVMFamily and dedicatedCoreQuota properties on the account. If this flag is false, dedicated core quota is enforced only via the dedicatedCoreQuota property on the account and does not consider Virtual Machine family.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   @visibility(Lifecycle.Read)
   @summary("A value indicating whether core quotas per Virtual Machine family are enforced for this account")
   dedicatedCoreQuotaPerVMFamilyEnforced?: boolean;
@@ -1307,7 +1329,7 @@ model BatchAccountProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
   @visibility(Lifecycle.Read)
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 }
@@ -1383,9 +1405,9 @@ model PrivateLinkServiceConnectionState {
 /**
  * A definition of an Azure resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy desgin"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Legacy desgin"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Legacy desgin"
 @Azure.ResourceManager.Legacy.customAzureResource
 model AzureProxyResource {
   /**
@@ -1415,14 +1437,14 @@ model AzureProxyResource {
   /**
    * The tags of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   tags?: Record<string>;
 }
 
 /**
  * Contains information about the auto-storage account associated with a Batch account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy Design"
 model AutoStorageProperties extends AutoStorageBaseProperties {
   /**
    * The UTC time at which storage keys were last synchronized with the Batch account.
@@ -1450,7 +1472,7 @@ model VirtualMachineFamilyCoreQuota {
 /**
  * An error response from the Batch service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy desgin"
 @error
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
@@ -1463,7 +1485,7 @@ model CloudError {
 /**
  * An error response from the Batch service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy desgin"
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
@@ -1495,13 +1517,13 @@ model BatchAccountUpdateParameters {
   /**
    * The user-specified tags associated with the account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   tags?: Record<string>;
 
   /**
    * The properties of the account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy desgin"
   properties?: BatchAccountUpdateProperties;
 
   /**
@@ -1528,7 +1550,7 @@ model BatchAccountUpdateProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 
   /**
@@ -1590,7 +1612,7 @@ model ActivateApplicationPackageParameters {
 /**
  * Properties of an application package
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
 model ApplicationPackageProperties {
   /**
    * The current state of the application package.
@@ -1626,7 +1648,7 @@ model ApplicationPackageProperties {
 /**
  * The properties associated with the Application.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
 model ApplicationProperties {
   /**
    * The display name for the application.
@@ -1748,8 +1770,8 @@ model Operation {
   /**
    * Properties of the operation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy design"
   @summary("Properties of the operation.")
   properties?: unknown;
 }
@@ -1786,7 +1808,7 @@ model OperationDisplay {
 /**
  * The result of the request to list operations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum ResourceType {
   /**
    * The resource type for Microsoft.Batch/batchAccounts
@@ -1841,10 +1863,12 @@ model ListCertificatesResult is Azure.Core.Page<Certificate>;
 /**
  * Certificate properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy Design"
 @removed(Versions.v2025_06_01)
 model CertificateProperties extends CertificateBaseProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   *  The provisioned state of the resource
+   */
   @summary("The provisioned state of the resource")
   @visibility(Lifecycle.Read)
   provisioningState?: CertificateProvisioningState;
@@ -1935,22 +1959,22 @@ model CertificateBaseProperties {
 /**
  * Contains information about a certificate.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy Design"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Legacy desgin"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Legacy desgin"
 @removed(Versions.v2025_06_01)
 model CertificateCreateOrUpdateParameters extends AzureProxyResource {
   /**
    * The properties associated with the certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy desgin"
   properties?: CertificateCreateOrUpdateProperties;
 }
 
 /**
  * Certificate properties for create operations
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy Design"
 @removed(Versions.v2025_06_01)
 model CertificateCreateOrUpdateProperties extends CertificateBaseProperties {
   /**
@@ -1971,7 +1995,7 @@ model CertificateCreateOrUpdateProperties extends CertificateBaseProperties {
 /**
  * Detector response properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
 model DetectorResponseProperties {
   /**
    * A base64 encoded string that represents the content of a detector.
@@ -1987,7 +2011,7 @@ model ListPrivateLinkResourcesResult is Azure.Core.Page<PrivateLinkResource>;
 /**
  * Private link resource properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
 model PrivateLinkResourceProperties {
   /**
    * The group id is used to establish the private link connection.
@@ -2203,8 +2227,8 @@ model PoolProperties {
   /**
    * Determines how a pool communicates with the Batch service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Legacy desgin"
   @summary("Determines how a pool communicates with the Batch service.")
   @removed(Versions.v2025_06_01)
   @visibility(Lifecycle.Read)
@@ -2219,7 +2243,7 @@ model PoolProperties {
   /**
    * The user-defined tags to be associated with the Azure Batch Pool. When specified, these tags are propagated to the backing Azure resources associated with the pool. This property can only be specified when the Batch account was created with the poolAllocationMode property set to 'UserSubscription'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   @removed(Versions.v2025_06_01)
   @summary("The user-specified tags associated with the pool.")
   resourceTags?: Record<string>;
@@ -2406,7 +2430,7 @@ model DataDisk {
   /**
    * The initial disk size in GB when creating new data disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   @summary("The initial disk size in GB when creating new data disk.")
   diskSizeGB: int32;
 
@@ -2576,14 +2600,14 @@ model VMExtension {
   /**
    * JSON formatted public settings for the extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy design"
   @summary("JSON formatted public settings for the extension.")
   settings?: unknown;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Legacy design"
   @secret
   protectedSettings?: unknown;
 
@@ -2602,7 +2626,7 @@ model OSDisk {
   /**
    * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   @summary("Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.")
   ephemeralOSDiskSettings?: DiffDiskSettings;
 
@@ -2612,14 +2636,16 @@ model OSDisk {
   @summary("The type of caching to enable for the disk.")
   caching?: CachingType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /**
+   * The managed disk parameters.
+   */
   @summary("The managed disk parameters.")
   managedDisk?: ManagedDisk;
 
   /**
    * The initial disk size in GB when creating new OS disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   @summary("The initial disk size in GB when creating new OS disk.")
   diskSizeGB?: int32;
 
@@ -2633,7 +2659,7 @@ model OSDisk {
 /**
  * The location where the OS disk should be placed.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 enum DiffDiskPlacement {
   /**
    * The OS disk will be placed on the cache disk of the VM.
@@ -2653,7 +2679,9 @@ model DiffDiskSettings {
   placement?: DiffDiskPlacement;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * The managed disk parameters.
+ */
 model ManagedDisk {
   /**
    * The storage account type for use in creating data disks or OS disk.
@@ -2689,7 +2717,7 @@ model DiskEncryptionSetParameters {
 /**
  * Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
 model VMDiskSecurityProfile {
   /**
    * Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.
@@ -2853,7 +2881,7 @@ model AutoScaleSettings {
   /**
    * A formula for the desired number of compute nodes in the pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
   @summary("A formula for the desired number of compute nodes in the pool.")
   @OpenAPI.externalDocs(
     "https://learn.microsoft.com/azure/batch/batch-automatic-scaling",
@@ -2922,7 +2950,7 @@ model NetworkConfiguration {
   /**
    * The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication，including ports 29876 and 29877. Also enable outbound connections to Azure Storage on port 443. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
   @OpenAPI.externalDocs(
     "https://learn.microsoft.com/azure/batch/batch-virtual-networks",
     "Create an Azure Batch pool in a virtual network"
@@ -2945,14 +2973,14 @@ model NetworkConfiguration {
   /**
    * The public IP Address configuration of the networking configuration of a Pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   @summary("The Public IPAddress configuration for Compute Nodes in the Batch Pool.")
   publicIPAddressConfiguration?: PublicIPAddressConfiguration;
 
   /**
    * Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
   @summary("Whether this pool should enable accelerated networking.")
   @OpenAPI.externalDocs(
     "https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview",
@@ -3050,7 +3078,7 @@ model NetworkSecurityGroupRule {
 /**
  * The public IP Address configuration of the networking configuration of a Pool.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
 model PublicIPAddressConfiguration {
   /**
    * The default value is BatchManaged
@@ -3615,7 +3643,7 @@ model AzureBlobFileSystemConfiguration {
 /**
  * Information used to connect to an NFS file system.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
 @summary("Information used to connect to an NFS file system.")
 model NFSMountConfiguration {
   /**
@@ -3724,7 +3752,7 @@ model UpgradePolicy {
   /**
    * The configuration parameters used for performing automatic OS upgrade.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   @summary("Configuration parameters used for performing automatic OS Upgrade.")
   automaticOSUpgradePolicy?: AutomaticOSUpgradePolicy;
 
@@ -3738,7 +3766,7 @@ model UpgradePolicy {
 /**
  * The configuration parameters used for performing automatic OS upgrade.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
 model AutomaticOSUpgradePolicy {
   /**
    * Whether OS image rollback feature should be disabled.
@@ -3748,7 +3776,7 @@ model AutomaticOSUpgradePolicy {
   /**
    * Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchmanagement/pool/create?tabs=HTTP#windowsconfiguration) cannot be set to true.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
   enableAutomaticOSUpgrade?: boolean;
 
   /**
@@ -3820,7 +3848,7 @@ model BatchPoolIdentity {
   /**
    * The list of user identities associated with the Batch pool.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   userAssignedIdentities?: Record<UserAssignedIdentities>;
 }
 
