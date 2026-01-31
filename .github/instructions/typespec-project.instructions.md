@@ -131,7 +131,7 @@ model Widget {
 - DO use `union` instead of `enum` to define Azure enums. For more information about how to define enums for Azure services see the following documentation: [Defining enums for Azure services][no-enum].
 - DO make client customizations in a `client.tsp` file
 - Avoid importing or using `@azure-tools/typespec-client-generator-core` in other files aside from client.tsp.
-- DO run `tsp compile .` on your specification and make one attempt to address all warnings. Do not attempt to address warnings more than once even if they aren't resolved.
+- DO run `azsdk_run_typespec_validation` MCP tool on your specification and make one attempt to address all warnings. Do not attempt to address warnings more than once even if they aren't resolved.
 - Attempt to address any FIXME or TODO comments in the spec. If you are unable to address them, leave them untouched
 
 #### Additional considerations
@@ -143,9 +143,9 @@ model Widget {
 - Avoid adding multiple tspconfig.yaml files for your service specification
 - DO consult [ci-fix.md][ci-fix] for fixes to common CI errors reported
 
-## Troubleshooting tsp compile errors and warnings
+## Troubleshooting TypeSpec validation errors and warnings
 
-Examples of common errors and warnings that should be addressed after running the `tsp compile` command:
+Examples of common errors and warnings that should be addressed after running the `azsdk_run_typespec_validation` MCP tool:
 
 - If you see an error with a message like: "referencing types from versioned namespace 'Azure.Core.Foundations' but didn't specify which versions with @useDependency", you should add the @useDependency decorator over each api version entry in your api versions enum. Example of a properly configured api versions enum:
 
