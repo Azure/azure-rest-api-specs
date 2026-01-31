@@ -40,9 +40,6 @@ paths:
               - type: string
                 enum:
                   - WorkflowAgents=v1
-              - type: string
-                enum:
-                  - MemoryStores=v1
         - name: api-version
           in: query
           required: true
@@ -76,7 +73,6 @@ paths:
           - HostedAgents=v1
           - ContainerAgents=v1
           - WorkflowAgents=v1
-          - MemoryStores=v1
     get:
       operationId: Agents_listAgents
       description: Returns the list of all agents.
@@ -208,14 +204,6 @@ paths:
         Updates the agent by adding a new version if there are any changes to the agent definition.
         If no changes, returns the existing agent version.
       parameters:
-        - name: Foundry-Beta
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=v1
         - name: agent_name
           in: path
           required: true
@@ -250,9 +238,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UpdateAgentRequest'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - MemoryStores=v1
     delete:
       operationId: Agents_deleteAgent
       description: Deletes an agent.
@@ -304,14 +289,6 @@ paths:
         Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.
         If no changes, returns the existing agent version.
       parameters:
-        - name: Foundry-Beta
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - MemoryStores=v1
         - name: agent_name
           in: path
           required: true
@@ -519,9 +496,6 @@ paths:
               - type: string
                 enum:
                   - WorkflowAgents=v1
-              - type: string
-                enum:
-                  - MemoryStores=v1
         - name: agent_name
           in: path
           required: true
@@ -566,7 +540,6 @@ paths:
           - HostedAgents=v1
           - ContainerAgents=v1
           - WorkflowAgents=v1
-          - MemoryStores=v1
     get:
       operationId: Agents_listAgentVersions
       description: Returns the list of versions of an agent.
@@ -5915,7 +5888,6 @@ components:
           - HostedAgents=v1
           - ContainerAgents=v1
           - WorkflowAgents=v1
-          - MemoryStores=v1
     AgentKind:
       anyOf:
         - type: string
@@ -7133,13 +7105,11 @@ components:
               - HostedAgents=v1
               - ContainerAgents=v1
               - WorkflowAgents=v1
-              - MemoryStores=v1
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=v1
           - ContainerAgents=v1
           - WorkflowAgents=v1
-          - MemoryStores=v1
     CreateAgentVersionFromManifestRequest:
       type: object
       required:
@@ -7199,13 +7169,11 @@ components:
               - HostedAgents=v1
               - ContainerAgents=v1
               - WorkflowAgents=v1
-              - MemoryStores=v1
       x-ms-foundry-meta:
         conditional_previews:
           - HostedAgents=v1
           - ContainerAgents=v1
           - WorkflowAgents=v1
-          - MemoryStores=v1
     CreateEvalRequest:
       type: object
       required:
@@ -14681,7 +14649,7 @@ components:
             - code_interpreter_call.outputs
             - reasoning.encrypted_content
             - message.output_text.logprobs
-            - memory_search_call.results
+            - memory_search_preview.results
       description: |-
         Specify additional output data to include in the model response. Currently supported values are:
         - `web_search_call.action.sources`: Include the sources of the web search tool call.
@@ -24053,9 +24021,6 @@ components:
           type: object
           additionalProperties: {}
           description: The inputs to the manifest that will result in a fully materialized Agent.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - MemoryStores=v1
     UpdateAgentRequest:
       type: object
       required:
@@ -24086,10 +24051,6 @@ components:
               - HostedAgents=v1
               - ContainerAgents=v1
               - WorkflowAgents=v1
-              - MemoryStores=v1
-      x-ms-foundry-meta:
-        conditional_previews:
-          - MemoryStores=v1
     UpdateEvalParametersBody:
       type: object
       properties:

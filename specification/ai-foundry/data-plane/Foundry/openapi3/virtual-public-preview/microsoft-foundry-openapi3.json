@@ -84,12 +84,6 @@
                   "enum": [
                     "WorkflowAgents=v1"
                   ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "MemoryStores=v1"
-                  ]
                 }
               ]
             }
@@ -144,8 +138,7 @@
           "conditional_previews": [
             "HostedAgents=v1",
             "ContainerAgents=v1",
-            "WorkflowAgents=v1",
-            "MemoryStores=v1"
+            "WorkflowAgents=v1"
           ]
         }
       },
@@ -325,18 +318,6 @@
         "description": "Updates the agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=v1"
-              ]
-            }
-          },
-          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -390,11 +371,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "MemoryStores=v1"
-          ]
         }
       },
       "delete": {
@@ -475,18 +451,6 @@
         "operationId": "Agents_updateAgentFromManifest",
         "description": "Updates the agent from a manifest by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
         "parameters": [
-          {
-            "name": "Foundry-Beta",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "MemoryStores=v1"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -788,12 +752,6 @@
                   "enum": [
                     "WorkflowAgents=v1"
                   ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "MemoryStores=v1"
-                  ]
                 }
               ]
             }
@@ -858,8 +816,7 @@
           "conditional_previews": [
             "HostedAgents=v1",
             "ContainerAgents=v1",
-            "WorkflowAgents=v1",
-            "MemoryStores=v1"
+            "WorkflowAgents=v1"
           ]
         }
       },
@@ -9342,8 +9299,7 @@
           "conditional_previews": [
             "HostedAgents=v1",
             "ContainerAgents=v1",
-            "WorkflowAgents=v1",
-            "MemoryStores=v1"
+            "WorkflowAgents=v1"
           ]
         }
       },
@@ -11303,8 +11259,7 @@
               "conditional_previews": [
                 "HostedAgents=v1",
                 "ContainerAgents=v1",
-                "WorkflowAgents=v1",
-                "MemoryStores=v1"
+                "WorkflowAgents=v1"
               ]
             }
           }
@@ -11313,8 +11268,7 @@
           "conditional_previews": [
             "HostedAgents=v1",
             "ContainerAgents=v1",
-            "WorkflowAgents=v1",
-            "MemoryStores=v1"
+            "WorkflowAgents=v1"
           ]
         }
       },
@@ -11379,8 +11333,7 @@
               "conditional_previews": [
                 "HostedAgents=v1",
                 "ContainerAgents=v1",
-                "WorkflowAgents=v1",
-                "MemoryStores=v1"
+                "WorkflowAgents=v1"
               ]
             }
           }
@@ -11389,8 +11342,7 @@
           "conditional_previews": [
             "HostedAgents=v1",
             "ContainerAgents=v1",
-            "WorkflowAgents=v1",
-            "MemoryStores=v1"
+            "WorkflowAgents=v1"
           ]
         }
       },
@@ -21909,7 +21861,7 @@
               "code_interpreter_call.outputs",
               "reasoning.encrypted_content",
               "message.output_text.logprobs",
-              "memory_search_call.results"
+              "memory_search_preview.results"
             ]
           }
         ],
@@ -34330,11 +34282,6 @@
             "additionalProperties": {},
             "description": "The inputs to the manifest that will result in a fully materialized Agent."
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "MemoryStores=v1"
-          ]
         }
       },
       "UpdateAgentRequest": {
@@ -34367,16 +34314,10 @@
               "conditional_previews": [
                 "HostedAgents=v1",
                 "ContainerAgents=v1",
-                "WorkflowAgents=v1",
-                "MemoryStores=v1"
+                "WorkflowAgents=v1"
               ]
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "MemoryStores=v1"
-          ]
         }
       },
       "UpdateEvalParametersBody": {

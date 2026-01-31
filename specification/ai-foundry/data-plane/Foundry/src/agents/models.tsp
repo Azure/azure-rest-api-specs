@@ -13,13 +13,8 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     FoundryPreviewOptInKeys.hosted_agents_v1,
     FoundryPreviewOptInKeys.container_agents_v1,
-    FoundryPreviewOptInKeys.workflow_agents_v1,
-    FoundryPreviewOptInKeys.memory_stores_v1
+    FoundryPreviewOptInKeys.workflow_agents_v1
   ],
-};
-
-const MemoryStoreConditionalPreviews = #{
-  conditional_previews: #[FoundryPreviewOptInKeys.memory_stores_v1],
 };
 
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
@@ -62,7 +57,6 @@ model CreateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
 
-@extension("x-ms-foundry-meta", MemoryStoreConditionalPreviews)
 model UpdateAgentFromManifestRequest {
   ...CreateAgentVersionFromManifestRequest;
 }
@@ -81,7 +75,6 @@ model CreateAgentRequest {
   ...CreateAgentVersionRequest;
 }
 
-@extension("x-ms-foundry-meta", MemoryStoreConditionalPreviews)
 model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }

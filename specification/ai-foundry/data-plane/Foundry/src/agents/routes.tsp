@@ -36,11 +36,7 @@ interface Agents {
   @route("/agents")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgent is FoundryDataPlanePreviewOperation<
-
-      | FoundryPreviewOptInKeys.container_agents_v1
-      | FoundryPreviewOptInKeys.hosted_agents_v1
-      | FoundryPreviewOptInKeys.workflow_agents_v1
-      | FoundryPreviewOptInKeys.memory_stores_v1,
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1 | FoundryPreviewOptInKeys.workflow_agents_v1,
     CreateAgentRequest,
     AgentObject
   >;
@@ -52,9 +48,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}")
-  @extension("x-ms-foundry-meta", MemoryStoreConditionalPreviews)
-  updateAgent is FoundryDataPlanePreviewOperation<
-    FoundryPreviewOptInKeys.memory_stores_v1,
+  updateAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
@@ -83,8 +77,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}/import")
-  updateAgentFromManifest is FoundryDataPlanePreviewOperation<
-    FoundryPreviewOptInKeys.memory_stores_v1,
+  updateAgentFromManifest is FoundryDataPlaneOperation<
     {
       /** The name of the agent to update. */
       @path agent_name: string;
@@ -128,11 +121,7 @@ interface Agents {
   @route("/agents/{agent_name}/versions")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   createAgentVersion is FoundryDataPlanePreviewOperation<
-
-      | FoundryPreviewOptInKeys.container_agents_v1
-      | FoundryPreviewOptInKeys.hosted_agents_v1
-      | FoundryPreviewOptInKeys.workflow_agents_v1
-      | FoundryPreviewOptInKeys.memory_stores_v1,
+    FoundryPreviewOptInKeys.container_agents_v1 | FoundryPreviewOptInKeys.hosted_agents_v1 | FoundryPreviewOptInKeys.workflow_agents_v1,
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
