@@ -4461,6 +4461,7 @@
         "provisioningState": {
           "$ref": "#/definitions/CertificateProvisioningState",
           "title": "The provisioned state of the resource",
+          "description": "The provisioned state of the resource",
           "readOnly": true
         },
         "provisioningStateTransitionTime": {
@@ -4502,6 +4503,7 @@
     },
     "CertificateProvisioningState": {
       "type": "string",
+      "description": "The current provisioning state of the certificate.",
       "enum": [
         "Succeeded",
         "Deleting",
@@ -4588,6 +4590,7 @@
     },
     "CertificateVisibility": {
       "type": "string",
+      "description": "The visibility of the certificate.",
       "enum": [
         "StartTask",
         "Task",
@@ -5747,6 +5750,7 @@
     },
     "ManagedDisk": {
       "type": "object",
+      "description": "The managed disk parameters.",
       "properties": {
         "storageAccountType": {
           "$ref": "#/definitions/StorageAccountType",
@@ -6075,7 +6079,8 @@
         },
         "managedDisk": {
           "$ref": "#/definitions/ManagedDisk",
-          "title": "The managed disk parameters."
+          "title": "The managed disk parameters.",
+          "description": "The managed disk parameters."
         },
         "diskSizeGB": {
           "type": "integer",

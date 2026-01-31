@@ -11,7 +11,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Batch;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Legacy desgin"
 @tag("Location")
 interface LocationOperationGroup {
   /**

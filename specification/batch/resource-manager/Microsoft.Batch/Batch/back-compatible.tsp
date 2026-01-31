@@ -4,13 +4,13 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Batch;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(BatchAccountCreateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(BatchAccountUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(CertificateCreateOrUpdateParameters.properties);
 
 @@clientName(ContainerRegistry.username, "userName");
@@ -30,7 +30,7 @@ using Microsoft.Batch;
 @@clientLocation(BatchAccounts.listOutboundNetworkDependenciesEndpoints,
   "BatchAccount"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(BatchAccount.properties);
 
 @@clientLocation(PrivateEndpointConnections.get, "PrivateEndpointConnection");
@@ -46,7 +46,7 @@ using Microsoft.Batch;
 @@clientLocation(PrivateEndpointConnections.listByBatchAccount,
   "PrivateEndpointConnection"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientLocation(ApplicationPackages.get, "ApplicationPackage");
@@ -56,7 +56,7 @@ using Microsoft.Batch;
 @@clientLocation(ApplicationPackages.list, "ApplicationPackage");
 @@clientLocation(ApplicationPackages.activate, "ApplicationPackage");
 @@clientName(ApplicationPackages.activate::parameters.body, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(ApplicationPackage.properties);
 
 @@clientLocation(Applications.get, "Application");
@@ -66,7 +66,7 @@ using Microsoft.Batch;
 @@clientName(Applications.update::parameters.properties, "parameters");
 @@clientLocation(Applications.delete, "Application");
 @@clientLocation(Applications.list, "Application");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(Application.properties);
 
 @@clientLocation(Certificates.get, "Certificate");
@@ -77,19 +77,19 @@ using Microsoft.Batch;
 @@clientLocation(Certificates.delete, "Certificate");
 @@clientLocation(Certificates.listByBatchAccount, "Certificate");
 @@clientLocation(Certificates.cancelDeletion, "Certificate");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(Certificate.properties);
 
 @@clientLocation(DetectorResponses.getDetector, "BatchAccount");
 @@clientLocation(DetectorResponses.listDetectors, "BatchAccount");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(DetectorResponse.properties);
 
 @@clientLocation(PrivateLinkResources.get, "PrivateLinkResource");
 @@clientLocation(PrivateLinkResources.listByBatchAccount,
   "PrivateLinkResource"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(PrivateLinkResource.properties);
 
 @@clientLocation(Pools.get, "Pool");
@@ -101,7 +101,7 @@ using Microsoft.Batch;
 @@clientLocation(Pools.listByBatchAccount, "Pool");
 @@clientLocation(Pools.disableAutoScale, "Pool");
 @@clientLocation(Pools.stopResize, "Pool");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "brownfield service"
 @@flattenProperty(Pool.properties);
 
 @@clientLocation(NetworkSecurityPerimeterConfigurations.getConfiguration,
@@ -129,7 +129,9 @@ using Microsoft.Batch;
 );
 @@alternateType(IPRule.action, "Allow", "go");
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ *  The subscription resource ID for an access rule.
+ */
 model AccessRulePropertiesSubscriptionsItem {
   /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
   id?: Azure.Core.armResourceIdentifier;
