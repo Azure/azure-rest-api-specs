@@ -226,7 +226,6 @@ model WorkflowAgentDefinition extends AgentDefinition {
 }
 
 @doc("The hosted agent definition.")
-@discriminator("kind")
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[FoundryPreviewOptInKeys.hosted_agents_v1] }
