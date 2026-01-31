@@ -27,7 +27,7 @@ These are the global settings for the durabletask.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-11-01
+tag: package-2026-02-01
 ```
 
 ### Tag: package-2026-02-01
