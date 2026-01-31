@@ -30,6 +30,15 @@ openapi-subtype: rpaas
 tag: package-2025-11-01
 ```
 
+### Tag: package-2026-02-01
+
+These settings apply only when `--tag=package-2026-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-01'
+input-file:
+  - Microsoft.DurableTask/stable/2026-02-01/durabletask.json
+```
+
 ### Tag: package-2025-11-01
 
 These settings apply only when `--tag=package-2025-11-01` is specified on the command line.
