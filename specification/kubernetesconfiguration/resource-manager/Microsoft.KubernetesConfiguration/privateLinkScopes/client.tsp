@@ -19,3 +19,7 @@ using Azure.ClientGenerator.Core;
   "Connection",
   "java"
 );
+@@clientName(Microsoft.KubernetesConfiguration.PrivateEndpointConnections,
+  "Connections",
+  "java"
+);
