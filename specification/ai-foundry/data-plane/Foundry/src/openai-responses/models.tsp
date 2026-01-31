@@ -117,7 +117,7 @@ namespace Azure.AI.Projects {
   union _AgentItemType {
     structured_outputs: "structured_outputs",
     oauth_consent_request: "oauth_consent_request",
-    memory_search_preview_call: "memory_search_preview_call",
+    memory_search_call: "memory_search_call",
     workflow_preview_action: "workflow_preview_action",
   }
 
