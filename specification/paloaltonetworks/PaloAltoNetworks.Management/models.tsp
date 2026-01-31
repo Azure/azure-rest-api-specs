@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 
@@ -260,6 +262,7 @@ union BillingCycle {
 /**
  * Firewall SKU type
  */
+@added(Versions.v2026_01_26_preview)
 union FirewallSkuType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1241,7 +1244,8 @@ model FirewallDeploymentProperties {
   /**
    * Firewall SKU type
    */
-  firewallSku: FirewallSkuType;
+  @added(Versions.v2026_01_26_preview)
+  firewallSku?: FirewallSkuType;
 
   /**
    * Network settings
