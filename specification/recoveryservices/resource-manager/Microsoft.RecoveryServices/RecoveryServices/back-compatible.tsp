@@ -13,7 +13,7 @@ using Microsoft.RecoveryServices;
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "vault");
 @@clientName(Vaults.update::parameters.properties, "vault");
-@@clientName(Vaults.create::parameters.properties, "certificateRequest");
+@@clientName(Vaults.create::parameters.resource, "certificateRequest");
 
 @@clientName(VaultExtendedInfoResources.createOrUpdate::parameters.resource,
   "resourceResourceExtendedInfoDetails",
@@ -68,11 +68,14 @@ using Microsoft.RecoveryServices;
 );
 
 // Vaults operations
-@@clientLocation(Vaults.create, "VaultCertificates");
-@@clientLocation(Vaults.registeredIdentitiesDelete, "RegisteredIdentities");
-@@clientName(Vaults.registeredIdentitiesDelete, "Delete");
-@@clientLocation(Vaults.list, "ReplicationUsages");
-@@clientLocation(Vaults.listByVaults, "Usages");
+@@clientLocation(Vaults.create, "VaultCertificates", "!csharp");
+@@clientLocation(Vaults.registeredIdentitiesDelete,
+  "RegisteredIdentities",
+  "!csharp"
+);
+@@clientName(Vaults.registeredIdentitiesDelete, "Delete", "!csharp");
+@@clientLocation(Vaults.list, "ReplicationUsages", "!csharp");
+@@clientLocation(Vaults.listByVaults, "Usages", "!csharp");
 
 // GetOperationResult operations
 @@clientLocation(GetOperationResult.listByResourceGroup, Vaults);
