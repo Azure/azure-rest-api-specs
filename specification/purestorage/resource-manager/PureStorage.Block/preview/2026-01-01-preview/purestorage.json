@@ -2748,65 +2748,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/volumeGroups/{volumeGroupName}/getConnectionParameters": {
-      "post": {
-        "operationId": "VolumeGroups_GetConnectionParameters",
-        "tags": [
-          "VolumeGroups"
-        ],
-        "description": "Get connection parameters for ISCSI connection to the volume group",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "storagePoolName",
-            "in": "path",
-            "description": "Name of the storage pool",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 127,
-            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
-          },
-          {
-            "name": "volumeGroupName",
-            "in": "path",
-            "description": "Name of the volume group",
-            "required": true,
-            "type": "string",
-            "minLength": 2,
-            "maxLength": 40,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ConnectionParametersResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "VolumeGroups_GetConnectionParameters": {
-            "$ref": "./examples/VolumeGroups_GetConnectionParameters_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/volumeGroups/{volumeGroupName}/getStatus": {
       "post": {
         "operationId": "VolumeGroups_GetStatus",
@@ -2862,6 +2803,65 @@
         "x-ms-examples": {
           "VolumeGroups_GetStatus": {
             "$ref": "./examples/VolumeGroups_GetStatus_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PureStorage.Block/storagePools/{storagePoolName}/volumeGroups/{volumeGroupName}/listConnectionParameters": {
+      "post": {
+        "operationId": "VolumeGroups_ListConnectionParameters",
+        "tags": [
+          "VolumeGroups"
+        ],
+        "description": "Get connection parameters for ISCSI connection to the volume group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storagePoolName",
+            "in": "path",
+            "description": "Name of the storage pool",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 127,
+            "pattern": "^[a-zA-Z0-9\\-_]{1,127}$"
+          },
+          {
+            "name": "volumeGroupName",
+            "in": "path",
+            "description": "Name of the volume group",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 40,
+            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ConnectionParametersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VolumeGroups_ListConnectionParameters": {
+            "$ref": "./examples/VolumeGroups_ListConnectionParameters_MaximumSet_Gen.json"
           }
         }
       }
@@ -3828,6 +3828,13 @@
         "sourceVolumeResourceId": {
           "type": "string",
           "description": "Azure resource ID of the source volume for cloning",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceVolumeGroupResourceId": {
+          "type": "string",
+          "description": "Azure Resource ID of the source volume group to clone from.",
           "x-ms-mutability": [
             "create"
           ]
