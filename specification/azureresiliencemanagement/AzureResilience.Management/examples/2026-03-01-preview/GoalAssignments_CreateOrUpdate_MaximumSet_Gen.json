@@ -1,0 +1,109 @@
+{
+  "title": "GoalAssignments_CreateOrUpdate_MaximumSet",
+  "operationId": "GoalAssignments_CreateOrUpdate",
+  "parameters": {
+    "serviceGroupName": "sg1",
+    "api-version": "2026-03-01-preview",
+    "goalAssignmentName": "ga1",
+    "resource": {
+      "properties": {
+        "goalTemplateId": "/providers/Microsoft.AzureResilienceManagement/goaltemplates/gt1",
+        "goalAssignmentType": "Resiliency",
+        "serviceLevelResources": [
+          {
+            "serviceLevelIndicatorResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine",
+            "serviceLevelObjectiveResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine"
+          }
+        ]
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myManagedIdentity": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "goalTemplateId": "/providers/Microsoft.AzureResilienceManagement/goaltemplates/gt1",
+          "goalAssignmentType": "Resiliency",
+          "serviceLevelResources": [
+            {
+              "serviceLevelIndicatorResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine",
+              "serviceLevelObjectiveResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "errorDetails": null
+        },
+        "identity": {
+          "principalId": "b958c8d6-705d-4581-8cee-5120b43b0b16",
+          "tenantId": "0ddf1a8d-cd80-412e-b414-cdc9de46c7bf",
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myManagedIdentity": {
+              "principalId": "c262215f-7d86-4a76-b781-0f5eacc42a1d",
+              "clientId": "2b1a85e8-b6a5-47e4-95f7-49f7c44364d3"
+            }
+          }
+        },
+        "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1",
+        "name": "ga1",
+        "type": "Microsoft.AzureResilienceManagement/goalAssignments",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-02-06T15:03:42.796Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-06T15:03:42.797Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Retry-After": 30
+      },
+      "body": {
+        "properties": {
+          "goalTemplateId": "/providers/Microsoft.AzureResilienceManagement/goaltemplates/gt1",
+          "goalAssignmentType": "Resiliency",
+          "serviceLevelResources": [
+            {
+              "serviceLevelIndicatorResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine",
+              "serviceLevelObjectiveResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.Compute/virtualMachines/MyVirtualMachine"
+            }
+          ],
+          "provisioningState": "Creating",
+          "errorDetails": null
+        },
+        "identity": {
+          "principalId": "b958c8d6-705d-4581-8cee-5120b43b0b16",
+          "tenantId": "0ddf1a8d-cd80-412e-b414-cdc9de46c7bf",
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myManagedIdentity": {
+              "principalId": "c262215f-7d86-4a76-b781-0f5eacc42a1d",
+              "clientId": "2b1a85e8-b6a5-47e4-95f7-49f7c44364d3"
+            }
+          }
+        },
+        "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1",
+        "name": "ga1",
+        "type": "Microsoft.AzureResilienceManagement/goalAssignments",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-02-06T15:03:42.796Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-02-06T15:03:42.797Z"
+        }
+      }
+    }
+  }
+}
