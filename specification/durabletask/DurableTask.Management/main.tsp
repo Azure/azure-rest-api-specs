@@ -256,6 +256,10 @@ model SchedulerPropertiesUpdate {
 
   @doc("SKU of the durable task scheduler")
   sku?: SchedulerSkuUpdate;
+
+  @added(Versions.v2025_05_04_Preview)
+  @doc("Allow or disallow public network access to durable task scheduler")
+  publicNetworkAccess?: PublicNetworkAccess;
 }
 
 @doc("The SKU (Stock Keeping Unit) properties to be updated")
