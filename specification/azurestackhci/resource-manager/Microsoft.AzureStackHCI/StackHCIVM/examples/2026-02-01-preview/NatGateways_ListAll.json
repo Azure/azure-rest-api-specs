@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testnatgw",
+            "type": "Microsoft.AzureStackHCI/natGateways",
+            "extendedLocation": {
+              "name": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+              "type": "CustomLocation"
+            },
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/natGateways/testnatgw",
+            "location": "West US2",
+            "properties": {
+              "publicIPAddresses": [
+                {
+                  "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/azure-local-rg/providers/Microsoft.AzureStackHCI/publicIPAddresses/outbound-pip"
+                }
+              ],
+              "subnets": [
+                {
+                  "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/azure-local-rg/providers/Microsoft.AzureStackHCI/virtualNetworks/main-vnet/subnets/workload-subnet"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NatGateways_ListAll",
+  "title": "ListNatGatewayBySubscription"
+}
