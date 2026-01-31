@@ -1,0 +1,35 @@
+{
+  "title": "EvaluationRules_List_MinimumSet",
+  "operationId": "EvaluationRules_List",
+  "parameters": {
+    "api-version": "2025-11-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "my-continuous-eval-rule",
+            "displayName": "my-continuous-eval-rule",
+            "description": "Continuous evaluation rule for monitoring agent responses friendly",
+            "systemData": {
+              "createdAt": "10/11/2025 05:02:21",
+              "createdBy": "x",
+              "modifiedBy": "y"
+            },
+            "action": {
+              "type": "continuousEvaluation",
+              "evalId": "eval_5cfcadf8-cca2-4ad4-aa1a-7dbe2fca55a8",
+              "maxHourlyRuns": 100
+            },
+            "filter": {
+              "agentName": "my-agent-1"
+            },
+            "eventType": "responseCompleted",
+            "enabled": true
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+This file is just a placeholder, the `sdk-agents` directory only contains client library customizations.

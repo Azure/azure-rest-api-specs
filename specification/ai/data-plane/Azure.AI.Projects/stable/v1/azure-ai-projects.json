@@ -19,7 +19,7 @@
       {
         "name": "endpoint",
         "in": "path",
-        "description": "Project endpoint. In the form \"https://your-ai-services-account-name.services.ai.azure.com/api/projects/_project\"\nif your Foundry Hub has only one Project, or to use the default Project in your Hub. Or in the form \n\"https://your-ai-services-account-name.services.ai.azure.com/api/projects/your-project-name\" if you want to explicitly\nspecify the Foundry Project name.",
+        "description": "Foundry Project endpoint in the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/{project-name}\".\nIf you only have one Project in your Foundry Hub, or to target the default Project\nin your Hub, use the form\n\"https://{ai-services-account-name}.services.ai.azure.com/api/projects/_project\"",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -50,7 +50,11 @@
       }
     }
   },
-  "tags": [],
+  "tags": [
+    {
+      "name": "Evals"
+    }
+  ],
   "paths": {
     "/connections": {
       "get": {
@@ -1056,9 +1060,780 @@
           }
         }
       }
+    },
+    "/openai/evals": {
+      "get": {
+        "operationId": "OpenAIEvals_ListEvals",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "List all evaluations",
+        "description": "List evaluations for a project.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last run from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of runs to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.",
+            "required": false,
+            "type": "string",
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "description": "Evals can be ordered by creation time or last updated time. Use\n`created_at` for creation time or `updated_at` for last updated time.",
+            "required": false,
+            "type": "string",
+            "default": "created_at",
+            "enum": [
+              "created_at",
+              "updated_at"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/Eval"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list."
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list."
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list."
+                }
+              },
+              "required": [
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "OpenAIEvals_CreateEval",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Create evaluation",
+        "description": "Create the structure of an evaluation that can be used to test a model's performance.\nAn evaluation is a set of testing criteria and the config for a data source, which dictates the schema of the data used in the evaluation. After creating an evaluation, you can run it on different models and model parameters. We support several types of graders and datasources.\nFor more information, see the [Evals guide](https://platform.openai.com/docs/guides/evals).",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateEvalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Eval"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/openai/evals/{eval_id}": {
+      "get": {
+        "operationId": "OpenAIEvals_GetEval",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Get an evaluation",
+        "description": "Get an evaluation by ID.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "description": "The ID of the evaluation to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Eval"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "OpenAIEvals_UpdateEval",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Update an evaluation",
+        "description": "Update certain properties of an evaluation.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "description": "The ID of the evaluation to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateEvalParametersBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Eval"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "OpenAIEvals_DeleteEval",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Delete an evaluation",
+        "description": "Delete an evaluation.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "description": "The ID of the evaluation to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeleteEvalResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/openai/evals/{eval_id}/runs": {
+      "get": {
+        "operationId": "OpenAIEvals_ListRuns",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Get a list of runs for an evaluation",
+        "description": "Get a list of runs for an evaluation.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "description": "The ID of the evaluation to retrieve runs for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last run from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of runs to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.",
+            "required": false,
+            "type": "string",
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter runs by status. One of `queued` | `in_progress` | `failed` | `completed` | `canceled`.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "queued",
+              "in_progress",
+              "completed",
+              "canceled",
+              "failed"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/EvalRun"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list."
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list."
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list."
+                }
+              },
+              "required": [
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "OpenAIEvals_CreateEvalRun",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Create evaluation run",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "description": "The ID of the evaluation to create a run for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateEvalRunRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvalRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/openai/evals/{eval_id}/runs/{run_id}": {
+      "get": {
+        "operationId": "OpenAIEvals_GetEvalRun",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Get an evaluation run",
+        "description": "Get an evaluation run by ID.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "description": "The ID of the evaluation to retrieve runs for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "description": "The ID of the run to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvalRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "OpenAIEvals_CancelEvalRun",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Cancel evaluation run",
+        "description": "Cancel an ongoing evaluation run.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "description": "The ID of the evaluation whose run you want to cancel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "description": "The ID of the run to cancel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvalRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "OpenAIEvals_DeleteEvalRun",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Delete evaluation run",
+        "description": "Delete an eval run.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "description": "The ID of the evaluation to delete the run from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "description": "The ID of the run to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeleteEvalRunResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/openai/evals/{eval_id}/runs/{run_id}/output_items": {
+      "get": {
+        "operationId": "OpenAIEvals_GetEvalRunOutputItems",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Get evaluation run output items",
+        "description": "Get a list of output items for an evaluation run.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "description": "The ID of the run to retrieve output items for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "Identifier for the last run from the previous pagination request.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of runs to retrieve.",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.",
+            "required": false,
+            "type": "string",
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter output items by status. Use `failed` to filter by failed output\nitems or `pass` to filter by passed output items.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "fail",
+              "pass"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/EvalRunOutputItem"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list."
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list."
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list."
+                }
+              },
+              "required": [
+                "data",
+                "has_more"
+              ]
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/openai/evals/{eval_id}/runs/{run_id}/output_items/{output_item_id}": {
+      "get": {
+        "operationId": "OpenAIEvals_GetEvalRunOutputItem",
+        "tags": [
+          "Evals"
+        ],
+        "summary": "Get an output item of an evaluation run",
+        "description": "Get an evaluation run output item by ID.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "eval_id",
+            "in": "path",
+            "description": "The ID of the evaluation to retrieve runs for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "run_id",
+            "in": "path",
+            "description": "The ID of the run to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "output_item_id",
+            "in": "path",
+            "description": "The ID of the output item to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvalRunOutputItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ApiErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "ApiErrorResponse": {
+      "type": "object",
+      "description": "Error response for API failures.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/OpenAI.Error"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
     "ApiKeyCredentials": {
       "type": "object",
       "description": "API Key Credential definition",
@@ -1208,7 +1983,7 @@
       "properties": {
         "blobUri": {
           "type": "string",
-          "description": "Blob URI path for client to upload data. Example: https://blob.windows.core.net/Container/Path"
+          "description": "Blob URI path for client to upload data. Example: `https://blob.windows.core.net/Container/Path`"
         },
         "storageAccountArmId": {
           "type": "string",
@@ -1223,6 +1998,34 @@
         "blobUri",
         "storageAccountArmId",
         "credential"
+      ]
+    },
+    "CompletionMessageToolCallChunk": {
+      "type": "object",
+      "description": "Tool call details within a message.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Id for the tool call."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of tool call, which is always \"function\".",
+          "enum": [
+            "function"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "function": {
+          "$ref": "#/definitions/FunctionToolCall",
+          "description": "Details of the function tool call, if applicable."
+        }
+      },
+      "required": [
+        "id",
+        "type"
       ]
     },
     "Connection": {
@@ -1398,6 +2201,66 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
+    "CreateEvalRequest": {
+      "type": "object",
+      "title": "CreateEvalRequest",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the evaluation."
+        },
+        "metadata": {
+          "$ref": "#/definitions/OpenAI.Metadata",
+          "x-nullable": true
+        },
+        "data_source_config": {
+          "description": "The configuration for the data source used for the evaluation runs. Dictates the schema of the data used in the evaluation."
+        },
+        "testing_criteria": {
+          "type": "array",
+          "description": "A list of graders for all eval runs in this group. Graders can reference variables in the data source using double curly braces notation, like `{{item.variable_name}}`. To reference the model's output, use the `sample` namespace (ie, `{{sample.output_text}}`).",
+          "items": {}
+        },
+        "properties": {
+          "type": "object",
+          "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "data_source_config",
+        "testing_criteria"
+      ]
+    },
+    "CreateEvalRunRequest": {
+      "type": "object",
+      "title": "CreateEvalRunRequest",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the run."
+        },
+        "metadata": {
+          "$ref": "#/definitions/OpenAI.Metadata",
+          "x-nullable": true
+        },
+        "data_source": {
+          "description": "Details about the run's data source."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "data_source"
+      ]
+    },
     "CredentialType": {
       "type": "string",
       "description": "The credential type used by the connection",
@@ -1483,7 +2346,7 @@
       "properties": {
         "dataUri": {
           "type": "string",
-          "description": "URI of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330",
+          "description": "URI of the data ([example](https://go.microsoft.com/fwlink/?linkid=2202330))",
           "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "x-ms-mutability": [
@@ -1550,6 +2413,59 @@
         "name",
         "version"
       ]
+    },
+    "DeleteEvalResponse": {
+      "type": "object",
+      "description": "A deleted evaluation Object",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type. Always 'eval.deleted'.",
+          "enum": [
+            "eval.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "eval_id": {
+          "type": "string",
+          "description": "id of the eval."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "Whether the eval was successfully deleted."
+        }
+      },
+      "required": [
+        "object",
+        "eval_id",
+        "deleted"
+      ]
+    },
+    "DeleteEvalRunResponse": {
+      "type": "object",
+      "description": "A deleted evaluation run Object.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type. Always 'eval.deleted'.",
+          "enum": [
+            "eval.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "run_id": {
+          "type": "string",
+          "description": "id of the eval."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "Whether the eval was successfully deleted."
+        }
+      }
     },
     "Deployment": {
       "type": "object",
@@ -1621,6 +2537,373 @@
         }
       ],
       "x-ms-discriminator-value": "AAD"
+    },
+    "Eval": {
+      "type": "object",
+      "title": "Eval",
+      "description": "An Eval object with a data source config and testing criteria.\nAn Eval represents a task to be done for your LLM integration.\nLike:\n- Improve the quality of my chatbot\n- See how well my chatbot handles customer support\n- Check if o4-mini is better at my usecase than gpt-4o",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The object type.",
+          "default": "eval",
+          "enum": [
+            "eval"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-stainless-const": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the evaluation."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the evaluation."
+        },
+        "data_source_config": {
+          "description": "Configuration of data sources used in runs of the evaluation."
+        },
+        "testing_criteria": {
+          "type": "array",
+          "description": "A list of testing criteria.",
+          "items": {}
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The Unix timestamp (in seconds) for when the eval was created."
+        },
+        "metadata": {
+          "$ref": "#/definitions/OpenAI.Metadata",
+          "x-nullable": true
+        },
+        "modified_at": {
+          "$ref": "#/definitions/integer",
+          "description": "Unix timestamp (in seconds) when the evaluation run was last modified."
+        },
+        "created_by": {
+          "type": "string",
+          "description": "the name of the person who created the run."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "object",
+        "id",
+        "name",
+        "data_source_config",
+        "testing_criteria",
+        "created_at",
+        "metadata"
+      ],
+      "x-oaiMeta": {
+        "name": "The eval object",
+        "group": "evals",
+        "example": "{\n  \"object\": \"eval\",\n  \"id\": \"eval_67abd54d9b0081909a86353f6fb9317a\",\n  \"data_source_config\": {\n    \"type\": \"custom\",\n    \"item_schema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"label\": {\"type\": \"string\"},\n      },\n      \"required\": [\"label\"]\n    },\n    \"include_sample_schema\": true\n  },\n  \"testing_criteria\": [\n    {\n      \"name\": \"My string check grader\",\n      \"type\": \"string_check\",\n      \"input\": \"{{sample.output_text}}\",\n      \"reference\": \"{{item.label}}\",\n      \"operation\": \"eq\",\n    }\n  ],\n  \"name\": \"External Data Eval\",\n  \"created_at\": 1739314509,\n  \"metadata\": {\n    \"test\": \"synthetics\",\n  }\n}\n"
+      }
+    },
+    "EvalRun": {
+      "type": "object",
+      "title": "EvalRun",
+      "description": "A schema representing an evaluation run.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The type of the object. Always \"eval.run\".",
+          "default": "eval.run",
+          "enum": [
+            "eval.run"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-stainless-const": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the evaluation run."
+        },
+        "eval_id": {
+          "type": "string",
+          "description": "The identifier of the associated evaluation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the evaluation run."
+        },
+        "model": {
+          "type": "string",
+          "description": "The model that is evaluated, if applicable."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the evaluation run."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "Unix timestamp (in seconds) when the evaluation run was created."
+        },
+        "report_url": {
+          "type": "string",
+          "description": "The URL to the rendered evaluation run report on the UI dashboard."
+        },
+        "result_counts": {
+          "$ref": "#/definitions/OpenAI.EvalRunResultCounts",
+          "description": "Counters summarizing the outcomes of the evaluation run."
+        },
+        "per_model_usage": {
+          "type": "array",
+          "description": "Usage statistics for each model during the evaluation run.",
+          "items": {
+            "$ref": "#/definitions/OpenAI.EvalRunPerModelUsage"
+          }
+        },
+        "per_testing_criteria_results": {
+          "type": "array",
+          "description": "Results per testing criteria applied during the evaluation run.",
+          "items": {
+            "$ref": "#/definitions/OpenAI.EvalRunPerTestingCriteriaResults"
+          }
+        },
+        "data_source": {
+          "description": "Information about the run's data source."
+        },
+        "metadata": {
+          "$ref": "#/definitions/OpenAI.Metadata",
+          "x-nullable": true
+        },
+        "error": {
+          "$ref": "#/definitions/OpenAI.EvalApiError"
+        },
+        "modified_at": {
+          "$ref": "#/definitions/integer",
+          "description": "Unix timestamp (in seconds) when the evaluation run was last modified."
+        },
+        "created_by": {
+          "type": "string",
+          "description": "the name of the person who created the run."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "object",
+        "id",
+        "eval_id",
+        "status",
+        "model",
+        "name",
+        "created_at",
+        "report_url",
+        "result_counts",
+        "per_model_usage",
+        "per_testing_criteria_results",
+        "data_source",
+        "metadata",
+        "error"
+      ],
+      "x-oaiMeta": {
+        "name": "The eval run object",
+        "group": "evals",
+        "example": "{\n  \"object\": \"eval.run\",\n  \"id\": \"evalrun_67e57965b480819094274e3a32235e4c\",\n  \"eval_id\": \"eval_67e579652b548190aaa83ada4b125f47\",\n  \"report_url\": \"https://platform.openai.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c\",\n  \"status\": \"queued\",\n  \"model\": \"gpt-4o-mini\",\n  \"name\": \"gpt-4o-mini\",\n  \"created_at\": 1743092069,\n  \"result_counts\": {\n    \"total\": 0,\n    \"errored\": 0,\n    \"failed\": 0,\n    \"passed\": 0\n  },\n  \"per_model_usage\": null,\n  \"per_testing_criteria_results\": null,\n  \"data_source\": {\n    \"type\": \"completions\",\n    \"source\": {\n      \"type\": \"file_content\",\n      \"content\": [\n        {\n          \"item\": {\n            \"input\": \"Tech Company Launches Advanced Artificial Intelligence Platform\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Central Bank Increases Interest Rates Amid Inflation Concerns\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Summit Addresses Climate Change Strategies\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Major Retailer Reports Record-Breaking Holiday Sales\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"National Team Qualifies for World Championship Finals\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Stock Markets Rally After Positive Economic Data Released\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Manufacturer Announces Merger with Competitor\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Breakthrough in Renewable Energy Technology Unveiled\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"World Leaders Sign Historic Climate Agreement\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Professional Athlete Sets New Record in Championship Event\",\n            \"ground_truth\": \"Sports\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Financial Institutions Adapt to New Regulatory Requirements\",\n            \"ground_truth\": \"Business\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Tech Conference Showcases Advances in Artificial Intelligence\",\n            \"ground_truth\": \"Technology\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Global Markets Respond to Oil Price Fluctuations\",\n            \"ground_truth\": \"Markets\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"International Cooperation Strengthened Through New Treaty\",\n            \"ground_truth\": \"World\"\n          }\n        },\n        {\n          \"item\": {\n            \"input\": \"Sports League Announces Revised Schedule for Upcoming Season\",\n            \"ground_truth\": \"Sports\"\n          }\n        }\n      ]\n    },\n    \"input_messages\": {\n      \"type\": \"template\",\n      \"template\": [\n        {\n          \"type\": \"message\",\n          \"role\": \"developer\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"Categorize a given news headline into one of the following topics: Technology, Markets, World, Business, or Sports.\n\n# Steps\n\n1. Analyze the content of the news headline to understand its primary focus.\n2. Extract the subject matter, identifying any key indicators or keywords.\n3. Use the identified indicators to determine the most suitable category out of the five options: Technology, Markets, World, Business, or Sports.\n4. Ensure only one category is selected per headline.\n\n# Output Format\n\nRespond with the chosen category as a single word. For instance: \"Technology\", \"Markets\", \"World\", \"Business\", or \"Sports\".\n\n# Examples\n\n**Input**: \"Apple Unveils New iPhone Model, Featuring Advanced AI Features\"\n**Output**: \"Technology\"\n\n**Input**: \"Global Stocks Mixed as Investors Await Central Bank Decisions\"\n**Output**: \"Markets\"\n\n**Input**: \"War in Ukraine: Latest Updates on Negotiation Status\"\n**Output**: \"World\"\n\n**Input**: \"Microsoft in Talks to Acquire Gaming Company for $2 Billion\"\n**Output**: \"Business\"\n\n**Input**: \"Manchester United Secures Win in Premier League Football Match\"\n**Output**: \"Sports\"\n\n# Notes\n\n- If the headline appears to fit into more than one category, choose the most dominant theme.\n- Keywords or phrases such as \"stocks\", \"company acquisition\", \"match\", or technological brands can be good indicators for classification.\n\"\n          }\n        },\n        {\n          \"type\": \"message\",\n          \"role\": \"user\",\n          \"content\": {\n            \"type\": \"input_text\",\n            \"text\": \"{{item.input}}\"\n          }\n        }\n      ]\n    },\n    \"model\": \"gpt-4o-mini\",\n    \"sampling_params\": {\n      \"seed\": 42,\n      \"temperature\": 1.0,\n      \"top_p\": 1.0,\n      \"max_completions_tokens\": 2048\n    }\n  },\n  \"error\": null,\n  \"metadata\": {}\n}\n"
+      }
+    },
+    "EvalRunOutputItem": {
+      "type": "object",
+      "title": "EvalRunOutputItem",
+      "description": "A schema representing an evaluation run output item.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The type of the object. Always \"eval.run.output_item\".",
+          "default": "eval.run.output_item",
+          "enum": [
+            "eval.run.output_item"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "x-stainless-const": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the evaluation run output item."
+        },
+        "run_id": {
+          "type": "string",
+          "description": "The identifier of the evaluation run associated with this output item."
+        },
+        "eval_id": {
+          "type": "string",
+          "description": "The identifier of the evaluation group."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "Unix timestamp (in seconds) when the evaluation run was created."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the evaluation run."
+        },
+        "datasource_item_id": {
+          "$ref": "#/definitions/OpenAI.integer",
+          "description": "The identifier for the data source item."
+        },
+        "datasource_item": {
+          "type": "object",
+          "description": "Details of the input data source item.",
+          "additionalProperties": {}
+        },
+        "results": {
+          "type": "array",
+          "description": "A list of grader results for this output item.",
+          "items": {
+            "$ref": "#/definitions/EvalRunOutputItemResult"
+          }
+        },
+        "sample": {
+          "$ref": "#/definitions/OpenAI.EvalRunOutputItemSample",
+          "description": "A sample containing the input and output of the evaluation run."
+        }
+      },
+      "required": [
+        "object",
+        "id",
+        "run_id",
+        "eval_id",
+        "created_at",
+        "status",
+        "datasource_item_id",
+        "datasource_item",
+        "results",
+        "sample"
+      ],
+      "x-oaiMeta": {
+        "name": "The eval run output item object",
+        "group": "evals",
+        "example": "{\n  \"object\": \"eval.run.output_item\",\n  \"id\": \"outputitem_67abd55eb6548190bb580745d5644a33\",\n  \"run_id\": \"evalrun_67abd54d60ec8190832b46859da808f7\",\n  \"eval_id\": \"eval_67abd54d9b0081909a86353f6fb9317a\",\n  \"created_at\": 1739314509,\n  \"status\": \"pass\",\n  \"datasource_item_id\": 137,\n  \"datasource_item\": {\n      \"teacher\": \"To grade essays, I only check for style, content, and grammar.\",\n      \"student\": \"I am a student who is trying to write the best essay.\"\n  },\n  \"results\": [\n    {\n      \"name\": \"String Check Grader\",\n      \"type\": \"string-check-grader\",\n      \"score\": 1.0,\n      \"passed\": true,\n    }\n  ],\n  \"sample\": {\n    \"input\": [\n      {\n        \"role\": \"system\",\n        \"content\": \"You are an evaluator bot...\"\n      },\n      {\n        \"role\": \"user\",\n        \"content\": \"You are assessing...\"\n      }\n    ],\n    \"output\": [\n      {\n        \"role\": \"assistant\",\n        \"content\": \"The rubric is not clear nor concise.\"\n      }\n    ],\n    \"finish_reason\": \"stop\",\n    \"model\": \"gpt-4o-2024-08-06\",\n    \"usage\": {\n      \"total_tokens\": 521,\n      \"completion_tokens\": 2,\n      \"prompt_tokens\": 519,\n      \"cached_tokens\": 0\n    },\n    \"error\": null,\n    \"temperature\": 1.0,\n    \"max_completion_tokens\": 2048,\n    \"top_p\": 1.0,\n    \"seed\": 42\n  }\n}\n"
+      }
+    },
+    "EvalRunOutputItemResult": {
+      "type": "object",
+      "title": "EvalRunOutputItemResult",
+      "description": "A single grader result for an evaluation run output item.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "type": {
+          "type": "string",
+          "description": "The grader type (for example, \"string-check-grader\")."
+        },
+        "score": {
+          "$ref": "#/definitions/OpenAI.numeric",
+          "description": "The numeric score produced by the grader."
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "Whether the grader considered the output a pass."
+        },
+        "sample": {
+          "type": "object",
+          "description": "Optional sample or intermediate data produced by the grader.",
+          "x-nullable": true,
+          "additionalProperties": {}
+        },
+        "metric": {
+          "type": "string",
+          "description": "The name of the metric (e.g., \"fluency\", \"f1_score\")."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label associated with the test criteria metric (e.g., \"pass\", \"fail\", \"good\", \"bad\")."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "The threshold used to determine pass/fail for this test criteria, if it is numerical."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the test criteria metric."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional details about the test criteria metric.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "score",
+        "passed"
+      ],
+      "additionalProperties": {}
+    },
+    "EvalRunOutputItemSampleInput": {
+      "type": "object",
+      "description": "A message in the evaluation run.",
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "Tool calls made within the message, if any.",
+          "items": {
+            "$ref": "#/definitions/CompletionMessageToolCallChunk"
+          }
+        }
+      },
+      "required": [
+        "role",
+        "content",
+        "tool_calls"
+      ]
+    },
+    "EvalRunOutputItemSampleOutput": {
+      "type": "object",
+      "description": "A message in the evaluation run.",
+      "properties": {
+        "role": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "tool_calls": {
+          "type": "array",
+          "description": "Tool calls made within the message, if any.",
+          "items": {
+            "$ref": "#/definitions/CompletionMessageToolCallChunk"
+          }
+        }
+      },
+      "required": [
+        "tool_calls"
+      ]
     },
     "FieldMapping": {
       "type": "object",
@@ -1701,6 +2984,24 @@
         }
       ],
       "x-ms-discriminator-value": "uri_folder"
+    },
+    "FunctionToolCall": {
+      "type": "object",
+      "description": "Details of a function tool call.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the function to call."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments to call the function with, as generated by the model in JSON format."
+        }
+      },
+      "required": [
+        "name",
+        "arguments"
+      ]
     },
     "Index": {
       "type": "object",
@@ -1865,6 +3166,239 @@
       ],
       "x-ms-discriminator-value": "None"
     },
+    "OpenAI.Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "message": {
+          "type": "string"
+        },
+        "param": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenAI.Error"
+          }
+        },
+        "additionalInfo": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "debugInfo": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "param",
+        "type"
+      ]
+    },
+    "OpenAI.EvalApiError": {
+      "type": "object",
+      "title": "EvalApiError",
+      "description": "An object representing an error response from the Eval API.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "x-oaiMeta": {
+        "name": "The API error object",
+        "group": "evals",
+        "example": "{\n  \"code\": \"internal_error\",\n  \"message\": \"The eval run failed due to an internal error.\"\n}\n"
+      }
+    },
+    "OpenAI.EvalRunOutputItemSample": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EvalRunOutputItemSampleInput"
+          }
+        },
+        "output": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EvalRunOutputItemSampleOutput"
+          }
+        },
+        "finish_reason": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "usage": {
+          "$ref": "#/definitions/OpenAI.EvalRunOutputItemSampleUsage"
+        },
+        "error": {
+          "$ref": "#/definitions/OpenAI.EvalApiError"
+        },
+        "temperature": {
+          "$ref": "#/definitions/OpenAI.numeric"
+        },
+        "max_completion_tokens": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "top_p": {
+          "$ref": "#/definitions/OpenAI.numeric"
+        },
+        "seed": {
+          "$ref": "#/definitions/OpenAI.integer"
+        }
+      },
+      "required": [
+        "input",
+        "output",
+        "finish_reason",
+        "model",
+        "usage",
+        "error",
+        "temperature",
+        "max_completion_tokens",
+        "top_p",
+        "seed"
+      ]
+    },
+    "OpenAI.EvalRunOutputItemSampleUsage": {
+      "type": "object",
+      "properties": {
+        "total_tokens": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "completion_tokens": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "prompt_tokens": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "cached_tokens": {
+          "$ref": "#/definitions/OpenAI.integer"
+        }
+      },
+      "required": [
+        "total_tokens",
+        "completion_tokens",
+        "prompt_tokens",
+        "cached_tokens"
+      ]
+    },
+    "OpenAI.EvalRunPerModelUsage": {
+      "type": "object",
+      "properties": {
+        "model_name": {
+          "type": "string",
+          "x-stainless-naming": {
+            "python": {
+              "property_name": "run_model_name"
+            }
+          }
+        },
+        "invocation_count": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "prompt_tokens": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "completion_tokens": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "total_tokens": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "cached_tokens": {
+          "$ref": "#/definitions/OpenAI.integer"
+        }
+      },
+      "required": [
+        "model_name",
+        "invocation_count",
+        "prompt_tokens",
+        "completion_tokens",
+        "total_tokens",
+        "cached_tokens"
+      ]
+    },
+    "OpenAI.EvalRunPerTestingCriteriaResults": {
+      "type": "object",
+      "properties": {
+        "testing_criteria": {
+          "type": "string"
+        },
+        "passed": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "failed": {
+          "$ref": "#/definitions/OpenAI.integer"
+        }
+      },
+      "required": [
+        "testing_criteria",
+        "passed",
+        "failed"
+      ]
+    },
+    "OpenAI.EvalRunResultCounts": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "errored": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "failed": {
+          "$ref": "#/definitions/OpenAI.integer"
+        },
+        "passed": {
+          "$ref": "#/definitions/OpenAI.integer"
+        }
+      },
+      "required": [
+        "total",
+        "errored",
+        "failed",
+        "passed"
+      ]
+    },
+    "OpenAI.Metadata": {
+      "type": "object",
+      "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "x-oaiTypeLabel": "map"
+    },
+    "OpenAI.integer": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "OpenAI.numeric": {
+      "type": "number",
+      "format": "double"
+    },
     "PagedConnection": {
       "type": "object",
       "description": "Paged collection of Connection items",
@@ -1949,24 +3483,6 @@
         "value"
       ]
     },
-    "PendingUploadCredentialType": {
-      "type": "string",
-      "description": "The type of credential used to access the storage account.",
-      "enum": [
-        "SAS"
-      ],
-      "x-ms-enum": {
-        "name": "PendingUploadCredentialType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "sas",
-            "value": "SAS",
-            "description": "SAS credential type."
-          }
-        ]
-      }
-    },
     "PendingUploadRequest": {
       "type": "object",
       "description": "Represents a request for a pending upload.",
@@ -2026,30 +3542,6 @@
         "pendingUploadId",
         "pendingUploadType"
       ]
-    },
-    "PendingUploadType": {
-      "type": "string",
-      "description": "The type of pending upload.",
-      "enum": [
-        "None",
-        "BlobReference"
-      ],
-      "x-ms-enum": {
-        "name": "PendingUploadType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "none",
-            "value": "None",
-            "description": "No pending upload."
-          },
-          {
-            "name": "BlobReference",
-            "value": "BlobReference",
-            "description": "Blob Reference is the only supported type."
-          }
-        ]
-      }
     },
     "SASCredentials": {
       "type": "object",
@@ -2128,6 +3620,29 @@
         "size",
         "tier"
       ]
+    },
+    "UpdateEvalParametersBody": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/definitions/OpenAI.Metadata",
+          "x-nullable": true
+        },
+        "properties": {
+          "type": "object",
+          "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "integer": {
+      "type": "integer",
+      "format": "int64"
     }
   },
   "parameters": {

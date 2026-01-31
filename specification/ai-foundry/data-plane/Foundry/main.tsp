@@ -1,0 +1,25 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+import "./src/agents/routes.tsp";
+import "./src/common/custom_types.tsp";
+import "./src/common/service.tsp";
+import "./src/connections/routes.tsp";
+import "./src/datasets/routes.tsp";
+import "./src/deployments/routes.tsp";
+import "./src/evaluation_taxonomies/routes.tsp";
+import "./src/evaluationrules/routes.tsp";
+import "./src/evaluations/routes.tsp";
+import "./src/evaluators/routes.tsp";
+import "./src/indexes/routes.tsp";
+import "./src/insights/routes.tsp";
+import "./src/memory_stores/routes.tsp";
+import "./src/openai-conversations/routes.tsp";
+import "./src/openai-evaluations/routes.tsp";
+import "./src/openai-finetuning/routes.tsp";
+import "./src/openai-responses/routes.tsp";
+import "./src/red-teams/routes.tsp";
+import "./src/schedules/routes.tsp";
