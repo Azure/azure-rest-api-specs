@@ -1,0 +1,108 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "policyDefinitionName": "06a78e20-9358-41c9-923c-fb736d382a12"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "1.2.1",
+            "type": "Microsoft.Authorization/policyDefinitions/versions",
+            "id": "/providers/Microsoft.Authorization/policyDefinitions/06a78e20-9358-41c9-923c-fb736d382a12/versions/1.2.1",
+            "properties": {
+              "description": "Audit DB level audit setting for SQL databases",
+              "displayName": "Audit SQL DB Level Audit Setting",
+              "mode": "All",
+              "parameters": {
+                "setting": {
+                  "type": "String",
+                  "allowedValues": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "metadata": {
+                    "displayName": "Audit Setting"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "equals": "Microsoft.Sql/servers/databases",
+                  "field": "type"
+                },
+                "then": {
+                  "effect": "AuditIfNotExists",
+                  "details": {
+                    "name": "default",
+                    "type": "Microsoft.Sql/servers/databases/auditingSettings",
+                    "existenceCondition": {
+                      "allOf": [
+                        {
+                          "equals": "[parameters('setting')]",
+                          "field": "Microsoft.Sql/auditingSettings.state"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "policyType": "BuiltIn",
+              "version": "1.2.1"
+            }
+          },
+          {
+            "name": "1.0.0",
+            "type": "Microsoft.Authorization/policyDefinitions/versions",
+            "id": "/providers/Microsoft.Authorization/policyDefinitions/06a78e20-9358-41c9-923c-fb736d382a12/versions/1.0.0",
+            "properties": {
+              "description": "Audit DB level audit setting for SQL databases",
+              "displayName": "Audit SQL DB Level Audit Setting",
+              "mode": "All",
+              "parameters": {
+                "setting": {
+                  "type": "String",
+                  "allowedValues": [
+                    "enabled",
+                    "disabled",
+                    "default"
+                  ],
+                  "metadata": {
+                    "displayName": "Audit Setting"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "equals": "Microsoft.Sql/servers/databases",
+                  "field": "type"
+                },
+                "then": {
+                  "effect": "AuditIfNotExists",
+                  "details": {
+                    "name": "default",
+                    "type": "Microsoft.Sql/servers/databases/auditingSettings",
+                    "existenceCondition": {
+                      "allOf": [
+                        {
+                          "equals": "[parameters('setting')]",
+                          "field": "Microsoft.Sql/auditingSettings.state"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "policyType": "BuiltIn",
+              "version": "1.0.0"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyDefinitionVersions_ListBuiltIn",
+  "title": "List built-in policy definition versions"
+}

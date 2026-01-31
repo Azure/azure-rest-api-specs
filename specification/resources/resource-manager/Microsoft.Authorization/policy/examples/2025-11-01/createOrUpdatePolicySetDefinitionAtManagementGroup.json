@@ -1,0 +1,137 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "managementGroupId": "MyManagementGroup",
+    "parameters": {
+      "properties": {
+        "description": "Policies to enforce low cost storage SKUs",
+        "displayName": "Cost Management",
+        "metadata": {
+          "category": "Cost Management"
+        },
+        "policyDefinitions": [
+          {
+            "parameters": {
+              "listOfAllowedSKUs": {
+                "value": [
+                  "Standard_GRS",
+                  "Standard_LRS"
+                ]
+              }
+            },
+            "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "policyDefinitionReferenceId": "Limit_Skus"
+          },
+          {
+            "parameters": {
+              "prefix": {
+                "value": "DeptA"
+              },
+              "suffix": {
+                "value": "-LC"
+              }
+            },
+            "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+            "policyDefinitionReferenceId": "Resource_Naming"
+          }
+        ]
+      }
+    },
+    "policySetDefinitionName": "CostManagement"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "CostManagement",
+        "type": "Microsoft.Authorization/policySetDefinitions",
+        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
+        "properties": {
+          "description": "Policies to enforce low cost storage SKUs",
+          "displayName": "Cost Management",
+          "metadata": {
+            "category": "Cost Management"
+          },
+          "policyDefinitions": [
+            {
+              "definitionVersion": "1.*.*",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "value": [
+                    "Standard_GRS",
+                    "Standard_LRS"
+                  ]
+                }
+              },
+              "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+              "policyDefinitionReferenceId": "Limit_Skus"
+            },
+            {
+              "definitionVersion": "1.*.*",
+              "parameters": {
+                "prefix": {
+                  "value": "DeptA"
+                },
+                "suffix": {
+                  "value": "-LC"
+                }
+              },
+              "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+              "policyDefinitionReferenceId": "Resource_Naming"
+            }
+          ]
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "CostManagement",
+        "type": "Microsoft.Authorization/policySetDefinitions",
+        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
+        "properties": {
+          "description": "Policies to enforce low cost storage SKUs",
+          "displayName": "Cost Management",
+          "metadata": {
+            "category": "Cost Management"
+          },
+          "policyDefinitions": [
+            {
+              "definitionVersion": "1.*.*",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "value": [
+                    "Standard_GRS",
+                    "Standard_LRS"
+                  ]
+                }
+              },
+              "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+              "policyDefinitionReferenceId": "Limit_Skus"
+            },
+            {
+              "definitionVersion": "1.*.*",
+              "parameters": {
+                "prefix": {
+                  "value": "DeptA"
+                },
+                "suffix": {
+                  "value": "-LC"
+                }
+              },
+              "policyDefinitionId": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+              "policyDefinitionReferenceId": "Resource_Naming"
+            }
+          ],
+          "version": "1.2.1",
+          "versions": [
+            "1.2.1",
+            "1.0.0"
+          ]
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicySetDefinitions_CreateOrUpdateAtManagementGroup",
+  "title": "Create or update a policy set definition at management group level"
+}

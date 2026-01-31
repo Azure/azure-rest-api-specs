@@ -1,9 +1,11 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -82,22 +84,22 @@ union AssignmentType {
   string,
 
   /**
-   * NotSpecified
+   * The not specified assignment type.
    */
   NotSpecified: "NotSpecified",
 
   /**
-   * System
+   * The system assignment type.
    */
   System: "System",
 
   /**
-   * SystemHidden
+   * The system hidden assignment type.
    */
   SystemHidden: "SystemHidden",
 
   /**
-   * Custom
+   * The custom assignment type.
    */
   Custom: "Custom",
 }
@@ -136,22 +138,22 @@ union PolicyType {
   string,
 
   /**
-   * NotSpecified
+   * The not specified policy definition type.
    */
   NotSpecified: "NotSpecified",
 
   /**
-   * BuiltIn
+   * The built in policy definition type.
    */
   BuiltIn: "BuiltIn",
 
   /**
-   * Custom
+   * The custom policy definition type.
    */
   Custom: "Custom",
 
   /**
-   * Static
+   * The static policy definition type.
    */
   Static: "Static",
 }
@@ -163,37 +165,37 @@ union ParameterType {
   string,
 
   /**
-   * String
+   * The string parameter type.
    */
   String: "String",
 
   /**
-   * Array
+   * The array parameter type.
    */
   Array: "Array",
 
   /**
-   * Object
+   * The object parameter type.
    */
   Object: "Object",
 
   /**
-   * Boolean
+   * The boolean parameter type.
    */
   Boolean: "Boolean",
 
   /**
-   * Integer
+   * The integer parameter type.
    */
   Integer: "Integer",
 
   /**
-   * Float
+   * The float parameter type.
    */
   Float: "Float",
 
   /**
-   * DateTime
+   * The date-time parameter type.
    */
   DateTime: "DateTime",
 }
@@ -205,12 +207,12 @@ union PolicyTokenResult {
   string,
 
   /**
-   * Succeeded
+   * The token acquisition succeeded.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The token acquisition failed.
    */
   Failed: "Failed",
 }
@@ -222,14 +224,46 @@ union ExternalEndpointResult {
   string,
 
   /**
-   * Succeeded
+   * The external endpoint succeeded.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The external endpoint failed.
    */
   Failed: "Failed",
+}
+
+/**
+ * The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error.
+ */
+@added(Versions.v2025_11_01)
+union PolicyAction {
+  string,
+
+  /**
+   * The effective outcome of policy evaluation is unknown.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * The effective outcome of policy evaluation is to allow the request.
+  Allow: "Allow",
+
+  /**
+   * The effective outcome of policy evaluation is to audit the request.
+   */
+  Audit: "Audit",
+
+  /**
+   * The effective outcome of policy evaluation is to deny the request.
+   */
+  Deny: "Deny",
+
+  /**
+   * The policy evaluation resulted in an error.
+   */
+  Error: "Error",
 }
 
 /**
@@ -346,6 +380,28 @@ model PolicyAssignmentProperties {
    */
   @visibility(Lifecycle.Read)
   instanceId?: string;
+
+  /**
+   * The self-serve exemption settings for the policy assignment.
+   */
+  @added(Versions.v2025_11_01)
+  selfServeExemptionSettings?: SelfServeExemptionSettings;
+}
+
+/**
+ * The self-serve exemption settings for a policy assignment.
+ */
+@added(Versions.v2025_11_01)
+model SelfServeExemptionSettings {
+  /**
+   * Indicates whether self-serve exemption is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The policy definition reference IDs for self-serve exemption.
+   */
+  policyDefinitionReferenceIds?: string[];
 }
 
 /**
@@ -509,6 +565,12 @@ model PolicyAssignmentUpdateProperties {
    */
   @identifiers(#[])
   overrides?: Override[];
+
+  /**
+   * The self-serve exemption settings for the policy assignment.
+   */
+  @added(Versions.v2025_11_01)
+  selfServeExemptionSettings?: SelfServeExemptionSettings;
 }
 
 /**
@@ -948,6 +1010,12 @@ model PolicyTokenResponse {
   result?: PolicyTokenResult;
 
   /**
+   * The external evaluation request details.
+   */
+  @added(Versions.v2025_11_01)
+  requestDetails?: PolicyTokenEvaluatedRequestDetails;
+
+  /**
    * Status message with additional details about the token acquisition operation result.
    */
   message?: string;
@@ -955,7 +1023,6 @@ model PolicyTokenResponse {
   /**
    * The date and time after which the client can try to acquire a token again in the case of retry-able failures.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   retryAfter?: utcDateTime;
 
   /**
@@ -983,7 +1050,6 @@ model PolicyTokenResponse {
   /**
    * The expiration of the policy token.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiration?: utcDateTime;
 }
 
@@ -1002,6 +1068,12 @@ model ExternalEvaluationEndpointInvocationResult {
   result?: ExternalEndpointResult;
 
   /**
+   * The external evaluation endpoint kind.
+   */
+  @added(Versions.v2025_11_01)
+  endpointKind?: string;
+
+  /**
    * The status message with additional details about the invocation result.
    */
   message?: string;
@@ -1009,7 +1081,6 @@ model ExternalEvaluationEndpointInvocationResult {
   /**
    * The date and time after which a failed endpoint invocation can be retried.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   retryAfter?: utcDateTime;
 
   /**
@@ -1019,10 +1090,65 @@ model ExternalEvaluationEndpointInvocationResult {
   claims?: unknown;
 
   /**
+   * The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error.
+   */
+  @added(Versions.v2025_11_01)
+  policyAction?: PolicyAction;
+
+  /**
+   * The evaluation details returned by the policy evaluation engine.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  @added(Versions.v2025_11_01)
+  policyEvaluationDetails?: unknown;
+
+  /**
+   * The endpoint specific metadata.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  @added(Versions.v2025_11_01)
+  additionalInfo?: unknown;
+
+  /**
    * The expiration of the results.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiration?: utcDateTime;
+}
+
+/**
+ * The policy token evaluated request details.
+ */
+@added(Versions.v2025_11_01)
+model PolicyTokenEvaluatedRequestDetails {
+  /**
+   * The request URI of the resource operation that is targeted by the issued token.
+   */
+  uri: string;
+
+  /**
+   * The resource Id of the resource operation that is targeted by the issued token.
+   */
+  resourceId: string;
+
+  /**
+   * The api-version of the resource operation that is targeted by the issued token.
+   */
+  apiVersion: string;
+
+  /**
+   * The authorization action of the resource operation that is targeted by the issued token.
+   */
+  authorizationAction: string;
+
+  /**
+   * The http method of the resource operation that is targeted by the issued token.
+   */
+  httpMethod: string;
+
+  /**
+   * The hashed payload of the resource operation that is targeted by the issued token.
+   */
+  contentHash: string;
 }
 
 /**
