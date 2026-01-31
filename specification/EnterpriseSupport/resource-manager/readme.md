@@ -27,10 +27,23 @@ Global settings for the Enterprise Support Resource Provider API.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-05-01-preview
+tag: package-2026-01-31-preview
 ```
 
-### Tag: package-2023-05-01-preview
+---
+
+## Tag: package-2026-01-31-preview
+
+These settings apply only when `--tag=package-2026-01-31-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-01-31-preview'
+input-file:
+- Microsoft.EnterpriseSupport/preview/2026-01-31-preview/EnterpriseSupport.json
+```
+
+---
+
+## Tag: package-2023-05-01-preview
 
 These settings apply only when `--tag=package-2023-05-01-preview` is specified on the command line.
 
@@ -38,6 +51,8 @@ These settings apply only when `--tag=package-2023-05-01-preview` is specified o
 input-file:
 - Microsoft.EnterpriseSupport/preview/2023-05-01-preview/EnterpriseSupport.json
 ```
+
+---
 
 # Code Generation
 
@@ -48,9 +63,9 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-js
-  - repo: azure-resource-manager-schemas
-  - repo: azure-cli-extensions
+- repo: azure-sdk-for-python-track2
+- repo: azure-sdk-for-java
+- repo: azure-sdk-for-js
+- repo: azure-resource-manager-schemas
+- repo: azure-cli-extensions
 ```

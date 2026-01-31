@@ -1,0 +1,34 @@
+{
+  "operationId": "ProviderLevelOperations_ValidateEnterpriseSupport",
+  "title": "ValidateEnterpriseSupportEligibility_UfPAddOn",
+  "parameters": {
+    "api-version": "2026-01-31-preview",
+    "body": {
+      "lineItems": [
+        {
+          "scope": "/providers/Microsoft.Billing/billingAccounts/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_xxxx-xx-xx/billingProfiles/xxxx-xxxx-xxx-xxx",
+          "upn": "ufp-advanced-upn",
+          "quantity": 1,
+          "market": "US",
+          "endCustomerId": "/providers/Microsoft.Billing/billingAccounts/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_xxxx-xx-xx/customers/2281f543-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          "shipToAddressId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/addresses/headquarters",
+          "tenantId": "00000000-0000-0000-0000-000000000001"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "lineItems": [
+          {
+            "scope": "/providers/Microsoft.Billing/billingAccounts/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_xxxx-xx-xx/billingProfiles/xxxx-xxxx-xxx-xxx",
+            "upn": "ufp-advanced-upn",
+            "quantity": 1,
+            "isEligible": "eligible"
+          }
+        ]
+      }
+    }
+  }
+}

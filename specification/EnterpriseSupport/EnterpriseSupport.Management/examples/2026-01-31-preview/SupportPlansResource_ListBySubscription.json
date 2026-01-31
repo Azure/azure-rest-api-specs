@@ -1,0 +1,42 @@
+{
+  "operationId": "SupportPlansResource_ListBySubscription",
+  "title": "ListSupportPlansBySubscription",
+  "parameters": {
+    "subscriptionId": "54de1235-296d-4d62-a331-5854354a280f",
+    "api-version": "2026-01-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/54de1235-296d-4d62-a331-5854354a280f/resourceGroups/esrp-rg/providers/Microsoft.EnterpriseSupport/supportPlans/testsupport1",
+            "name": "testsupport1",
+            "type": "Microsoft.EnterpriseSupport/supportPlans",
+            "properties": {
+              "quantity": 1,
+              "serviceStartDate": "2025-11-10T18:59:59.190Z",
+              "upn": "000000c0-0000-0260-2654-64a36bcef7ba",
+              "provisioningState": "Succeeded"
+            },
+            "location": "global"
+          },
+          {
+            "id": "/subscriptions/54de1235-296d-4d62-a331-5854354a280f/resourceGroups/esrp-rg2/providers/Microsoft.EnterpriseSupport/supportPlans/testsupport-addon",
+            "name": "testsupport-addon",
+            "type": "Microsoft.EnterpriseSupport/supportPlans",
+            "properties": {
+              "quantity": 1,
+              "serviceStartDate": "2025-11-12T18:59:59.190Z",
+              "upn": "000000c0-0000-0260-2654-64a36bcef7ba",
+              "endCustomerId": "/providers/Microsoft.Billing/billingAccounts/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx_xxxx-xx-xx/customers/2281f543-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+              "shipToAddressId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/addresses/headquarters",
+              "provisioningState": "Succeeded"
+            },
+            "location": "global"
+          }
+        ]
+      }
+    }
+  }
+}
