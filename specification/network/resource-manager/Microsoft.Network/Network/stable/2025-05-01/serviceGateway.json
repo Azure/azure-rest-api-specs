@@ -1,0 +1,932 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2025-05-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceGateways/{serviceGatewayName}": {
+      "delete": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_Delete",
+        "description": "Deletes the specified service gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the service gateway.",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete service gateway": {
+            "$ref": "./examples/ServiceGatewayDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_Get",
+        "description": "Gets the specified service gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the service gateway.",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting ServiceGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGateway"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get load balancer": {
+            "$ref": "./examples/ServiceGatewayGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_CreateOrUpdate",
+        "description": "Creates or updates a service gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the service gateway.",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGateway"
+            },
+            "description": "Parameters supplied to the create or update service gateway operation."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Create successful. The operation returns the resulting ServiceGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGateway"
+            }
+          },
+          "200": {
+            "description": "Update successful. The operation returns the resulting ServiceGateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGateway"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create service gateway": {
+            "$ref": "./examples/ServiceGatewayCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_UpdateTags",
+        "description": "Updates a service gateway tags.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the service gateway.",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update service gateway tags."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Service gateway resource.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGateway"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update service gateway tags": {
+            "$ref": "./examples/ServiceGatewayUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/serviceGateways": {
+      "get": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_ListAll",
+        "description": "Gets all the service gateways in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ServiceGateway resources.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all load balancers": {
+            "$ref": "./examples/ServiceGatewayListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceGateways": {
+      "get": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_List",
+        "description": "Gets all the service gateways in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ServiceGateway resources.",
+            "schema": {
+              "$ref": "#/definitions/ServiceGatewayListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List service gateway in resource group": {
+            "$ref": "./examples/ServiceGatewayList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceGateways/{serviceGatewayName}/updateAddressLocations": {
+      "post": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_UpdateAddressLocations",
+        "description": "Creates or updates address locations within the service gateway.\n\nThe request supports both full and partial update modes at two levels: location and address.\n\nFull update replaces all existing data.\n\nPartial update modifies only the specified entries:\n\nFor location-level partial updates, if no address is provided, the existing address will be deleted.\n\nFor address-level partial updates, if no services are provided, the existing services will be considered for deletion.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the service gateway.",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGatewayUpdateAddressLocationsRequest"
+            },
+            "description": "Parameters supplied to the create or updates address locations in service gateway operation."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Full Update: Create, update, or delete address locations in the service gateway.": {
+            "$ref": "./examples/ServiceGatewayFullUpdateAddressLocationsRequest.json"
+          },
+          "Partial Update: Create, update, or delete address locations in the service gateway.": {
+            "$ref": "./examples/ServiceGatewayPartialUpdateAddressLocationsRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceGateways/{serviceGatewayName}/updateServices": {
+      "post": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_UpdateServices",
+        "description": "Creates, updates, or deletes services within the service gateway.\nThe request supports both full and partial update modes at the service level.\n\nFull update replaces all existing services with the new list provided in the request.\nPartial update modifies only the specified services.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the service gateway.",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceGatewayUpdateServicesRequest"
+            },
+            "description": "Parameters supplied to the create or updates services in service gateway operation."
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or full update services in service gateway": {
+            "$ref": "./examples/ServiceGatewayUpdateServicesRequest.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceGateways/{serviceGatewayName}/addressLocations": {
+      "get": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_GetAddressLocations",
+        "description": "Get address locations in service gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the service gateway.",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns service gateway address location",
+            "schema": {
+              "$ref": "#/definitions/GetServiceGatewayAddressLocationsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get address locations in service gateway": {
+            "$ref": "./examples/ServiceGatewayGetAddressLocationsResponse.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/serviceGateways/{serviceGatewayName}/services": {
+      "get": {
+        "tags": [
+          "ServiceGateways"
+        ],
+        "operationId": "ServiceGateways_GetServices",
+        "description": "Get Services in service gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serviceGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the service gateway.",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns service gateway services",
+            "schema": {
+              "$ref": "#/definitions/GetServiceGatewayServicesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get services in service gateway": {
+            "$ref": "./examples/ServiceGatewayGetServicesResponse.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RouteTargetAddressPropertiesFormat": {
+      "properties": {
+        "subnet": {
+          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "description": "The reference to the subnet resource."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "The private IPv4 or IPv6 address of the service gateway route target address."
+        },
+        "privateIPAllocationMethod": {
+          "$ref": "./network.json#/definitions/IPAllocationMethod",
+          "description": "The Private IP allocation method."
+        }
+      },
+      "type": "object",
+      "description": "Properties of route target address"
+    },
+    "ServiceGatewayPropertiesFormat": {
+      "properties": {
+        "virtualNetwork": {
+          "$ref": "./virtualNetwork.json#/definitions/VirtualNetwork",
+          "description": "Reference to an existing virtual network."
+        },
+        "routeTargetAddress": {
+          "$ref": "#/definitions/RouteTargetAddressPropertiesFormat",
+          "description": "Route Target address of Service gateway"
+        },
+        "routeTargetAddressV6": {
+          "$ref": "#/definitions/RouteTargetAddressPropertiesFormat",
+          "description": "Route Target address V6 of Service gateway"
+        },
+        "resourceGuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource GUID property of the service gateway resource."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the service gateway resource."
+        }
+      },
+      "description": "Properties of the service gateway.",
+      "type": "object"
+    },
+    "ServiceGateway": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceGatewayPropertiesFormat",
+          "description": "Properties of service gateway."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "sku": {
+          "$ref": "#/definitions/ServiceGatewaySku",
+          "description": "The service gateway SKU."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of availability zones denoting the zone in which service gateway should be deployed. \n\n- The zone values must be provided as strings representing numeric identifiers like \"1\", \"2\", \"3\" etc."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "ServiceGateway resource.",
+      "type": "object"
+    },
+    "ServiceGatewayListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGateway"
+          },
+          "description": "A list of service gateway in a resource group."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListServiceGateways API service call.",
+      "type": "object"
+    },
+    "ServiceGatewayAddress": {
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "Address to update"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Collection of services in address."
+        }
+      },
+      "description": "Properties of the service gateway address.",
+      "type": "object"
+    },
+    "ServiceGatewayAddressLocation": {
+      "properties": {
+        "addressLocation": {
+          "type": "string",
+          "description": "Location to update"
+        },
+        "addressUpdateAction": {
+          "type": "string",
+          "description": "Specifies the type of update operation to perform on addresses within the address location of service gateway.\n\n- FullUpdate: Replaces all existing address data with the new list provided in the request. Any previously defined addresses not included will be removed.\n- PartialUpdate: Updates only the specified addresses.",
+          "enum": [
+            "FullUpdate",
+            "PartialUpdate"
+          ],
+          "x-ms-enum": {
+            "name": "AddressUpdateAction",
+            "modelAsString": true
+          }
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGatewayAddress"
+          },
+          "description": "An array of addresses to create or update in locations.",
+          "x-ms-identifiers": [
+            "address"
+          ]
+        }
+      },
+      "description": "Properties of the service gateway address location.",
+      "type": "object"
+    },
+    "ServiceGatewayAddressLocationResponse": {
+      "properties": {
+        "addressLocation": {
+          "type": "string",
+          "description": "Location to update"
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGatewayAddress"
+          },
+          "description": "An array of addresses to create or update in locations.",
+          "x-ms-identifiers": [
+            "address"
+          ]
+        }
+      },
+      "description": "Properties of the service gateway address location.",
+      "type": "object"
+    },
+    "ServiceGatewayUpdateAddressLocationsRequest": {
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Specifies the type of update operation to perform on address locations within the service gateway.\n\n- FullUpdate: Replaces all existing address location data with the new list provided in the request. Any previously defined locations not included will be removed.\n- PartialUpdate: Updates only the specified address locations.",
+          "enum": [
+            "FullUpdate",
+            "PartialUpdate"
+          ],
+          "x-ms-enum": {
+            "name": "UpdateAction",
+            "modelAsString": true
+          }
+        },
+        "addressLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGatewayAddressLocation"
+          },
+          "description": "An array of address locations to create or update.",
+          "x-ms-identifiers": [
+            "addressLocation"
+          ]
+        }
+      },
+      "description": "Properties of the service gateway update address locations request.",
+      "type": "object"
+    },
+    "ServiceGatewayServicePropertiesFormat": {
+      "properties": {
+        "serviceType": {
+          "type": "string",
+          "description": "Name of the service.",
+          "enum": [
+            "Inbound",
+            "Outbound",
+            "InboundOutbound"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceType",
+            "modelAsString": true
+          }
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Set to true to mark default service for inbound or outbound."
+        },
+        "loadBalancerBackendPools": {
+          "type": "array",
+          "items": {
+            "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
+          },
+          "description": "An array of load balancer backend address pools."
+        },
+        "publicNatGatewayId": {
+          "type": "string",
+          "description": "Azure Resource Id of public natgateway."
+        }
+      },
+      "description": "Properties of the service gateway service.",
+      "type": "object"
+    },
+    "ServiceGatewayService": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the service"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceGatewayServicePropertiesFormat",
+          "description": "Properties of service gateway service."
+        }
+      },
+      "description": "Properties of the service gateway service.",
+      "type": "object"
+    },
+    "ServiceGatewayServiceRequest": {
+      "properties": {
+        "isDelete": {
+          "type": "boolean",
+          "description": "Set to true to mark the service for deletion."
+        },
+        "service": {
+          "$ref": "#/definitions/ServiceGatewayService",
+          "description": "Service of service gateway."
+        }
+      },
+      "description": "Properties of the service gateway services request.",
+      "type": "object"
+    },
+    "ServiceGatewayUpdateServicesRequest": {
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Specifies the type of update operation to perform on services within the service gateway.\n\n- FullUpdate: Replaces all existing services with the new list provided in the request. Any previously defined services not included will be removed.\n- PartialUpdate: Updates only the specified services.",
+          "enum": [
+            "FullUpdate",
+            "PartialUpdate"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceUpdateAction",
+            "modelAsString": true
+          }
+        },
+        "serviceRequests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGatewayServiceRequest"
+          },
+          "description": "Collection of service updates.",
+          "x-ms-identifiers": [
+            "service/name"
+          ]
+        }
+      },
+      "description": "Properties of the service gateway update services request.",
+      "type": "object"
+    },
+    "ServiceGatewaySku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of a service gateway SKU.",
+          "enum": [
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceGatewaySkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of a service gateway SKU.",
+          "enum": [
+            "Regional"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceGatewaySkuTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "SKU of a service gateway.",
+      "type": "object"
+    },
+    "GetServiceGatewayAddressLocationsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGatewayAddressLocationResponse"
+          },
+          "description": "A list of address locations of service gateway.",
+          "x-ms-identifiers": [
+            "addressLocation"
+          ]
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for get service gateway address locations.",
+      "type": "object",
+      "x-ms-azure-resource": false
+    },
+    "GetServiceGatewayServicesResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceGatewayService"
+          },
+          "description": "A list of services of service gateway.",
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for get service gateway services.",
+      "type": "object",
+      "x-ms-azure-resource": false
+    }
+  }
+}

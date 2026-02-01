@@ -1,0 +1,47 @@
+parameters:
+  "service-dir":
+    default: "sdk/containerservice"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/managedClusters.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerservice"
+    namespace: "azure.mgmt.containerservice"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservice-generated"
+    namespace: "com.azure.resourcemanager.containerservice.generated"
+    service-name: "Container Service"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/containerservice"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcontainerservice"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerservice"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/containerservice"
+    flavor: azure
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservice"
+    package-details:
+      name: "@azure/arm-containerservice"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
