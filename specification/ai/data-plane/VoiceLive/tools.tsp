@@ -12,8 +12,10 @@ namespace VoiceLive;
 union ToolType {
   string,
   function: "function",
+
   @added(Versions.v2026_01_01_preview)
   mcp: "mcp",
+
   @added(Versions.v2026_01_01_preview)
   foundry_agent: "foundry_agent",
 }

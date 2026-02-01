@@ -22,6 +22,7 @@ union ClientEventType {
   response_create: "response.create",
   response_cancel: "response.cancel",
   session_avatar_connect: "session.avatar.connect",
+
   @added(Versions.v2026_01_01_preview)
   mcp_approval_response: "mcp_approval_response",
 }
@@ -30,8 +31,10 @@ union ClientEventType {
 union ServerEventType {
   string,
   error: "error",
+
   @added(Versions.v2026_01_01_preview)
   warning: "warning",
+
   session_avatar_connecting: "session.avatar.connecting",
   session_created: "session.created",
   session_updated: "session.updated",
@@ -66,34 +69,49 @@ union ServerEventType {
   response_animation_viseme_done: "response.animation_viseme.done",
   response_function_call_arguments_delta: "response.function_call_arguments.delta",
   response_function_call_arguments_done: "response.function_call_arguments.done",
+
   @added(Versions.v2026_01_01_preview)
   mcp_list_tools_in_progress: "mcp_list_tools.in_progress",
+
   @added(Versions.v2026_01_01_preview)
   mcp_list_tools_completed: "mcp_list_tools.completed",
+
   @added(Versions.v2026_01_01_preview)
   mcp_list_tools_failed: "mcp_list_tools.failed",
+
   @added(Versions.v2026_01_01_preview)
   response_mcp_call_arguments_delta: "response.mcp_call_arguments.delta",
+
   @added(Versions.v2026_01_01_preview)
   response_mcp_call_arguments_done: "response.mcp_call_arguments.done",
+
   @added(Versions.v2026_01_01_preview)
   mcp_approval_request: "mcp_approval_request",
+
   @added(Versions.v2026_01_01_preview)
   mcp_approval_response: "mcp_approval_response",
+
   @added(Versions.v2026_01_01_preview)
   response_mcp_call_in_progress: "response.mcp_call.in_progress",
+
   @added(Versions.v2026_01_01_preview)
   response_mcp_call_completed: "response.mcp_call.completed",
+
   @added(Versions.v2026_01_01_preview)
   response_mcp_call_failed: "response.mcp_call.failed",
+
   @added(Versions.v2026_01_01_preview)
   response_foundry_agent_call_arguments_delta: "response.foundry_agent_call_arguments.delta",
+
   @added(Versions.v2026_01_01_preview)
   response_foundry_agent_call_arguments_done: "response.foundry_agent_call_arguments.done",
+
   @added(Versions.v2026_01_01_preview)
   response_foundry_agent_call_in_progress: "response.foundry_agent_call.in_progress",
+
   @added(Versions.v2026_01_01_preview)
   response_foundry_agent_call_completed: "response.foundry_agent_call.completed",
+
   @added(Versions.v2026_01_01_preview)
   response_foundry_agent_call_failed: "response.foundry_agent_call.failed",
 }

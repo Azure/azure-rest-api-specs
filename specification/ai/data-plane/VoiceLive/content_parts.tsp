@@ -9,8 +9,10 @@ union ContentPartType {
   string,
   input_text: "input_text",
   input_audio: "input_audio",
+
   @added(Versions.v2026_01_01_preview)
   input_image: "input_image",
+
   text: "text",
   audio: "audio",
 }

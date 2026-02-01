@@ -11,14 +11,19 @@ union ItemType {
   message: "message",
   function_call: "function_call",
   function_call_output: "function_call_output",
+
   @added(Versions.v2026_01_01_preview)
   mcp_list_tools: "mcp_list_tools",
+
   @added(Versions.v2026_01_01_preview)
   mcp_call: "mcp_call",
+
   @added(Versions.v2026_01_01_preview)
   mcp_approval_request: "mcp_approval_request",
+
   @added(Versions.v2026_01_01_preview)
   mcp_approval_response: "mcp_approval_response",
+
   @added(Versions.v2026_01_01_preview)
   foundry_agent_call: "foundry_agent_call",
 }
