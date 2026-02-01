@@ -6,6 +6,7 @@ import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace VoiceLive;
 
@@ -83,9 +84,11 @@ model RequestSession {
    * Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.
    * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
+  @added(Versions.v2026_01_01_preview)
   reasoning_effort?: ReasoningEffort;
 
   /** Configuration for filler response generation during latency or tool calls. */
+  @added(Versions.v2026_01_01_preview)
   filler_response?: FillerResponseConfig;
 }
 
@@ -94,6 +97,7 @@ model RequestSession {
  * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 union ReasoningEffort {
   string,
 
@@ -157,9 +161,11 @@ union OAIVoice {
   verse: "verse",
 
   /** Marin voice. */
+  @added(Versions.v2026_01_01_preview)
   marin: "marin",
 
   /** Cedar voice. */
+  @added(Versions.v2026_01_01_preview)
   cedar: "cedar",
 }
 
@@ -330,9 +336,11 @@ union OutputAudioFormat {
   pcm16: "pcm16",
 
   /** 16-bit PCM audio format at 8kHz sampling rate */
+  @added(Versions.v2026_01_01_preview)
   pcm16_8000hz: "pcm16_8000hz",
 
   /** 16-bit PCM audio format at 16kHz sampling rate */
+  @added(Versions.v2026_01_01_preview)
   pcm16_16000hz: "pcm16_16000hz",
 
   /** G.711 μ-law (mu-law) audio format at 8kHz sampling rate */
@@ -608,6 +616,7 @@ model Animation {
 
 /** Configuration for avatar's zoom level, position, rotation and movement amplitude in the video frame. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model Scene {
   /** Zoom level of the avatar. Range is (0, +∞). Values less than 1 zoom out, values greater than 1 zoom in. */
@@ -637,6 +646,7 @@ model Scene {
 @usage(RequestUsage)
 model AvatarConfig {
   /** Type of avatar to use. */
+  @added(Versions.v2026_01_01_preview)
   type?: AvatarConfigTypes;
 
   /** Optional list of ICE servers to use for WebRTC connection establishment. */
@@ -649,6 +659,7 @@ model AvatarConfig {
   style?: string;
 
   /** Base model to use for the avatar. Required for photo avatar. */
+  @added(Versions.v2026_01_01_preview)
   `model`?: PhotoAvatarBaseModes;
 
   /** Indicates whether the avatar is customized or not. */
@@ -658,16 +669,20 @@ model AvatarConfig {
   video?: VideoParams;
 
   /** Configuration for the avatar's zoom level, position, rotation and movement amplitude in the video frame. */
+  @added(Versions.v2026_01_01_preview)
   scene?: Scene;
 
   /** Output protocol for avatar streaming. Default is 'webrtc'. */
+  @added(Versions.v2026_01_01_preview)
   output_protocol?: AvatarOutputProtocol = AvatarOutputProtocol.webrtc;
 
   /** When enabled, forwards audit audio via WebSocket for review/debugging purposes, even when avatar output is delivered via WebRTC. */
+  @added(Versions.v2026_01_01_preview)
   output_audit_audio?: boolean = false;
 }
 
 /** Avatar config types */
+@added(Versions.v2026_01_01_preview)
 union AvatarConfigTypes {
   string,
 
@@ -679,6 +694,7 @@ union AvatarConfigTypes {
 }
 
 /** Photo avatar base modes */
+@added(Versions.v2026_01_01_preview)
 union PhotoAvatarBaseModes {
   string,
 
@@ -687,6 +703,7 @@ union PhotoAvatarBaseModes {
 }
 
 /** Avatar config output protocols */
+@added(Versions.v2026_01_01_preview)
 union AvatarOutputProtocol {
   string,
 
@@ -733,6 +750,7 @@ model AgentConfig {
 // --- Filler Response Configuration -----------------------------------------
 
 /** Triggers that can activate filler response generation. */
+@added(Versions.v2026_01_01_preview)
 union FillerTrigger {
   string,
 
@@ -745,6 +763,7 @@ union FillerTrigger {
 
 /** Union of filler response configuration types. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" // Discriminated union for filler config types.
+@added(Versions.v2026_01_01_preview)
 union FillerResponseConfig {
   BasicFillerResponseConfig,
   LlmFillerResponseConfig,
@@ -752,6 +771,7 @@ union FillerResponseConfig {
 
 /** Base model for filler response configuration. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @discriminator("type")
 @usage(RequestUsage)
 model FillerResponseConfigBase {
@@ -770,6 +790,7 @@ model FillerResponseConfigBase {
 }
 
 /** Filler response configuration types. */
+@added(Versions.v2026_01_01_preview)
 union FillerResponseConfigType {
   string,
 
@@ -785,6 +806,7 @@ union FillerResponseConfigType {
  * Randomly selects from configured texts when any trigger condition is met.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model BasicFillerResponseConfig extends FillerResponseConfigBase {
   type: FillerResponseConfigType.static_filler;
@@ -798,6 +820,7 @@ model BasicFillerResponseConfig extends FillerResponseConfigBase {
  * Uses LLM to generate context-aware filler responses when any trigger condition is met.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model LlmFillerResponseConfig extends FillerResponseConfigBase {
   type: FillerResponseConfigType.llm_filler;

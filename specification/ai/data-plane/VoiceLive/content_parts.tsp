@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace VoiceLive;
 
@@ -8,6 +9,7 @@ union ContentPartType {
   string,
   input_text: "input_text",
   input_audio: "input_audio",
+  @added(Versions.v2026_01_01_preview)
   input_image: "input_image",
   text: "text",
   audio: "audio",

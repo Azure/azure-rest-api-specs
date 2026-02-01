@@ -2,6 +2,7 @@ import "./content_parts.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace VoiceLive;
 
@@ -10,10 +11,15 @@ union ItemType {
   message: "message",
   function_call: "function_call",
   function_call_output: "function_call_output",
+  @added(Versions.v2026_01_01_preview)
   mcp_list_tools: "mcp_list_tools",
+  @added(Versions.v2026_01_01_preview)
   mcp_call: "mcp_call",
+  @added(Versions.v2026_01_01_preview)
   mcp_approval_request: "mcp_approval_request",
+  @added(Versions.v2026_01_01_preview)
   mcp_approval_response: "mcp_approval_response",
+  @added(Versions.v2026_01_01_preview)
   foundry_agent_call: "foundry_agent_call",
 }
 
@@ -43,6 +49,7 @@ model InputAudioContentPart extends MessageContentPart {
 }
 
 /** Input image content part. */
+@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model RequestImageContentPart extends ContentPart {
   type: ContentPartType.input_image;
@@ -51,6 +58,7 @@ model RequestImageContentPart extends ContentPart {
 }
 
 /** Specifies an image's detail level. Can be 'auto', 'low', 'high', or an unknown future value. */
+@added(Versions.v2026_01_01_preview)
 union RequestImageContentPartDetail {
   string,
 
@@ -331,6 +339,7 @@ model TokenUsage {
 /** Represents a mcp tool definition. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 #suppress "@azure-tools/typespec-azure-core/no-unknown" // The input_schema and annotations can be of any type according to OpenAI response.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model MCPTool {
   /** The name of the tool. */
@@ -348,6 +357,7 @@ model MCPTool {
 
 /** A response item that lists the tools available on an MCP server. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ResponseMCPListToolItem extends ResponseItem {
   /** The type of the item. */
@@ -363,6 +373,7 @@ model ResponseMCPListToolItem extends ResponseItem {
 /** A response item that represents a call to an MCP tool. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 #suppress "@azure-tools/typespec-azure-core/no-unknown" // The error can be of any type according to OpenAI response.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ResponseMCPCallItem extends ResponseItem {
   /** The type of the item. */
@@ -389,6 +400,7 @@ model ResponseMCPCallItem extends ResponseItem {
 
 /** A response item that represents a request for approval to call an MCP tool. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ResponseMCPApprovalRequestItem extends ResponseItem {
   /** The type of the item. */
@@ -406,6 +418,7 @@ model ResponseMCPApprovalRequestItem extends ResponseItem {
 
 /** A response item that represents a response to an MCP approval request. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ResponseMCPApprovalResponseItem extends ResponseItem {
   /** The type of the item. */
@@ -423,6 +436,7 @@ model ResponseMCPApprovalResponseItem extends ResponseItem {
 
 /** A request item that represents a response to an MCP approval request. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model MCPApprovalResponseRequestItem extends ConversationRequestItem {
   /** The type of the item. */
@@ -438,6 +452,7 @@ model MCPApprovalResponseRequestItem extends ConversationRequestItem {
 /** A response item that represents a call to a Foundry agent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 #suppress "@azure-tools/typespec-azure-core/no-unknown" // The error can be of any type according to OpenAI response.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ResponseFoundryAgentCallItem extends ResponseItem {
   /** The type of the item. */

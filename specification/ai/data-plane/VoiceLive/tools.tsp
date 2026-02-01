@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace VoiceLive;
 
@@ -11,7 +12,9 @@ namespace VoiceLive;
 union ToolType {
   string,
   function: "function",
+  @added(Versions.v2026_01_01_preview)
   mcp: "mcp",
+  @added(Versions.v2026_01_01_preview)
   foundry_agent: "foundry_agent",
 }
 
@@ -84,6 +87,7 @@ model ToolChoiceFunctionObject extends ToolChoiceObject {
  * The definition of an MCP server as used by the voicelive endpoint.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model MCPServer extends Tool {
   type: ToolType.mcp;
@@ -100,6 +104,7 @@ model MCPServer extends Tool {
 /**
  * The available set of MCP approval types.
  */
+@added(Versions.v2026_01_01_preview)
 union MCPApprovalType {
   string,
 
@@ -113,6 +118,7 @@ union MCPApprovalType {
 /**
  * The available set of Foundry agent context types.
  */
+@added(Versions.v2026_01_01_preview)
 union FoundryAgentContextType {
   string,
 
@@ -127,6 +133,7 @@ union FoundryAgentContextType {
  * The definition of a Foundry agent tool as used by the voicelive endpoint.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model FoundryAgentTool extends Tool {
   type: ToolType.foundry_agent;

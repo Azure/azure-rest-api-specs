@@ -4,6 +4,7 @@ import "./events.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace VoiceLive;
 
@@ -458,6 +459,7 @@ model ServerEventErrorDetails {
 
 /** Details of the warning. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventWarningDetails {
   /** A human-readable warning message. */
@@ -475,6 +477,7 @@ model ServerEventWarningDetails {
  * Returned when a warning occurs that does not interrupt the conversation flow.
  * Warnings are informational and the session will continue normally.
  */
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventWarning extends ServerEvent {
   /** The event type, must be `warning`. */
@@ -1183,6 +1186,7 @@ model ResponseCreateParams {
    * Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.
    * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
+  @added(Versions.v2026_01_01_preview)
   reasoning_effort?: ReasoningEffort;
 
   /**
@@ -1302,6 +1306,7 @@ model ServerEventResponseFunctionCallArgumentsDone extends ServerEvent {
 
 /** MCP list tools in progress message. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventMcpListToolsInProgress extends ServerEvent {
   /** @inheritdoc */
@@ -1313,6 +1318,7 @@ model ServerEventMcpListToolsInProgress extends ServerEvent {
 
 /** MCP list tools completed message. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventMcpListToolsCompleted extends ServerEvent {
   /** @inheritdoc */
@@ -1324,6 +1330,7 @@ model ServerEventMcpListToolsCompleted extends ServerEvent {
 
 /** MCP list tools failed message. */
 #suppress "@azure-tools/typespec-azure-core/casing-style"
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventMcpListToolsFailed extends ServerEvent {
   /** @inheritdoc */
@@ -1335,6 +1342,7 @@ model ServerEventMcpListToolsFailed extends ServerEvent {
 
 /** Represents a delta update of the arguments for an MCP tool call. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseMcpCallArgumentsDelta extends ServerEvent {
   /** @inheritdoc */
@@ -1358,6 +1366,7 @@ model ServerEventResponseMcpCallArgumentsDelta extends ServerEvent {
 
 /** Indicates the completion of the arguments for an MCP tool call. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseMcpCallArgumentsDone extends ServerEvent {
   /** @inheritdoc */
@@ -1378,6 +1387,7 @@ model ServerEventResponseMcpCallArgumentsDone extends ServerEvent {
 
 /** Indicates the MCP call running. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseMcpCallInProgress extends ServerEvent {
   /** @inheritdoc */
@@ -1392,6 +1402,7 @@ model ServerEventResponseMcpCallInProgress extends ServerEvent {
 
 /** Indicates the MCP call has completed. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseMcpCallCompleted extends ServerEvent {
   /** @inheritdoc */
@@ -1406,6 +1417,7 @@ model ServerEventResponseMcpCallCompleted extends ServerEvent {
 
 /** Indicates the MCP call has failed. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseMcpCallFailed extends ServerEvent {
   /** @inheritdoc */
@@ -1420,6 +1432,7 @@ model ServerEventResponseMcpCallFailed extends ServerEvent {
 
 /** Represents a delta update of the arguments for a Foundry agent call. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseFoundryAgentCallArgumentsDelta extends ServerEvent {
   /** @inheritdoc */
@@ -1440,6 +1453,7 @@ model ServerEventResponseFoundryAgentCallArgumentsDelta extends ServerEvent {
 
 /** Indicates the completion of the arguments for a Foundry agent call. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseFoundryAgentCallArgumentsDone extends ServerEvent {
   /** @inheritdoc */
@@ -1460,6 +1474,7 @@ model ServerEventResponseFoundryAgentCallArgumentsDone extends ServerEvent {
 
 /** Indicates the Foundry agent call is in progress. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseFoundryAgentCallInProgress extends ServerEvent {
   /** @inheritdoc */
@@ -1477,6 +1492,7 @@ model ServerEventResponseFoundryAgentCallInProgress extends ServerEvent {
 
 /** Indicates the Foundry agent call has completed. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseFoundryAgentCallCompleted extends ServerEvent {
   /** @inheritdoc */
@@ -1491,6 +1507,7 @@ model ServerEventResponseFoundryAgentCallCompleted extends ServerEvent {
 
 /** Indicates the Foundry agent call has failed. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(ResponseUsage)
 model ServerEventResponseFoundryAgentCallFailed extends ServerEvent {
   /** @inheritdoc */
