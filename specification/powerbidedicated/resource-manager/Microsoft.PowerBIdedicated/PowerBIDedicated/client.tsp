@@ -31,7 +31,7 @@ using Microsoft.PowerBIDedicated;
 );
 @@clientName(CapacitiesOperationGroup.listSkus, "GetSkusCapacities", "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "required for pageable"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "make it pageable for backwards compatibility"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(Capacities.listSkusForCapacity,
   "csharp"
 );
