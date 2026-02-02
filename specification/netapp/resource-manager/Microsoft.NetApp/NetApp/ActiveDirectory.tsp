@@ -162,7 +162,6 @@ interface ActiveDirectoryConfigs {
 
   /** Patch the specified active directory configuration */
   @added(Versions.v2025_09_01_preview)
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ActiveDirectoryConfig,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

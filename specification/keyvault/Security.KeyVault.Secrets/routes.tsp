@@ -64,7 +64,6 @@ op deleteSecret is KeyVaultOperation<
 #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("Updates the attributes associated with a specified secret in a given key vault.")
 @route("/secrets/{secret-name}/{secret-version}")
-@patch(#{ implicitOptionality: true })
 op updateSecret is KeyVaultOperation<
   {
     /**

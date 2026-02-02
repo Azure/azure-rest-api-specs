@@ -231,7 +231,6 @@ interface ManagedOps {
   list is ArmListBySubscription<ManagedOp>;
 
   @doc("Updates the ManagedOps instance with the supplied fields.")
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ManagedOp,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

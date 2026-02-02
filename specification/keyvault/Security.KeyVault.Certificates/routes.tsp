@@ -148,7 +148,6 @@ op setCertificateIssuer is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified certificate issuer.")
 @route("/certificates/issuers/{issuer-name}")
-@patch(#{ implicitOptionality: true })
 op updateCertificateIssuer is KeyVaultOperation<
   {
     /**
@@ -317,7 +316,6 @@ op getCertificatePolicy is KeyVaultOperation<
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the policy for a certificate.")
 @route("/certificates/{certificate-name}/policy")
-@patch(#{ implicitOptionality: true })
 op updateCertificatePolicy is KeyVaultOperation<
   {
     /**
@@ -342,7 +340,6 @@ op updateCertificatePolicy is KeyVaultOperation<
 #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("Updates the specified attributes associated with the given certificate.")
 @route("/certificates/{certificate-name}/{certificate-version}")
-@patch(#{ implicitOptionality: true })
 op updateCertificate is KeyVaultOperation<
   {
     /**

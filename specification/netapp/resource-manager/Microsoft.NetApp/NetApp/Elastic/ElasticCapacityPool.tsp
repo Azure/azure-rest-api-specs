@@ -249,7 +249,6 @@ interface ElasticCapacityPools {
 
   /** Patch the specified NetApp Elastic Capacity Pool */
   @added(Versions.v2025_09_01_preview)
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ElasticCapacityPool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -137,7 +137,6 @@ interface ElasticAccounts {
 
   /** Patch the specified NetApp Elastic Account */
   @added(Versions.v2025_09_01_preview)
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ElasticAccount,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
