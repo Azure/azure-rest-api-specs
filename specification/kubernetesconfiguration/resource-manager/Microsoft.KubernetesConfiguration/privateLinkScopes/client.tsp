@@ -16,7 +16,3 @@ using Microsoft.KubernetesConfiguration;
   "PrivateLinkScopesClient",
   "javascript"
 );
-@@clientName(KubernetesConfigurationPrivateLinkScopeProperties,
-  "PrivateLinkScopeProperties",
-  "java"
-);
