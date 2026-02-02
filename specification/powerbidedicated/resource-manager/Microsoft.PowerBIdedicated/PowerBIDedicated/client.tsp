@@ -40,3 +40,5 @@ using Microsoft.PowerBIDedicated;
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(CapacitiesOperationGroup.listSkus,
   "csharp"
 );
+
+@@clientName(CapacitySkuTier.PBIE_Azure, "PbieAzure", "csharp");
