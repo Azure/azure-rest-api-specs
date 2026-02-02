@@ -5898,7 +5898,7 @@
         },
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
-          "description": "The identity of the cache rule."
+          "description": "The identity of the import pipeline."
         }
       },
       "allOf": [
@@ -9216,42 +9216,6 @@
     },
     "SyncState": {
       "type": "string",
-      "description": "The status of the connected registry's most recent sync.",
-      "enum": [
-        "SyncTokenUpdate",
-        "InitialSync",
-        "ManualResync",
-        "RecoveryService"
-      ],
-      "x-ms-enum": {
-        "name": "SyncState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SyncTokenUpdate",
-            "value": "SyncTokenUpdate",
-            "description": "Connected Registry sync was triggered by a sync token update"
-          },
-          {
-            "name": "InitialSync",
-            "value": "InitialSync",
-            "description": "Connected Registry sync was triggered by an initial sync during activation"
-          },
-          {
-            "name": "ManualResync",
-            "value": "ManualResync",
-            "description": "Connected Registry sync was triggered by a manual resync request"
-          },
-          {
-            "name": "RecoveryService",
-            "value": "RecoveryService",
-            "description": "Connected Registry sync was triggered by the Connected Registry's recovery service"
-          }
-        ]
-      }
-    },
-    "SyncTrigger": {
-      "type": "string",
       "description": "The action that triggered the most recent registry sync.",
       "enum": [
         "NotActivated",
@@ -9262,7 +9226,7 @@
         "Pending"
       ],
       "x-ms-enum": {
-        "name": "SyncTrigger",
+        "name": "SyncState",
         "modelAsString": true,
         "values": [
           {
@@ -9294,6 +9258,42 @@
             "name": "Pending",
             "value": "Pending",
             "description": "Connected Registry sync is pending"
+          }
+        ]
+      }
+    },
+    "SyncTrigger": {
+      "type": "string",
+      "description": "The status of the connected registry's most recent sync.",
+      "enum": [
+        "SyncTokenUpdate",
+        "InitialSync",
+        "ManualResync",
+        "RecoveryService"
+      ],
+      "x-ms-enum": {
+        "name": "SyncTrigger",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SyncTokenUpdate",
+            "value": "SyncTokenUpdate",
+            "description": "Connected Registry sync was triggered by a sync token update"
+          },
+          {
+            "name": "InitialSync",
+            "value": "InitialSync",
+            "description": "Connected Registry sync was triggered by an initial sync during activation"
+          },
+          {
+            "name": "ManualResync",
+            "value": "ManualResync",
+            "description": "Connected Registry sync was triggered by a manual resync request"
+          },
+          {
+            "name": "RecoveryService",
+            "value": "RecoveryService",
+            "description": "Connected Registry sync was triggered by the Connected Registry's recovery service"
           }
         ]
       }

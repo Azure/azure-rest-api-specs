@@ -93,10 +93,37 @@ union AuditLogStatus {
 }
 
 /**
+ * The status of the connected registry's most recent sync.
+ */
+union SyncTrigger {
+  string,
+
+  /**
+   * Connected Registry sync was triggered by a sync token update
+   */
+  SyncTokenUpdate: "SyncTokenUpdate",
+
+  /**
+   * Connected Registry sync was triggered by an initial sync during activation
+   */
+  InitialSync: "InitialSync",
+
+  /**
+   * Connected Registry sync was triggered by a manual resync request
+   */
+  ManualResync: "ManualResync",
+
+  /**
+   * Connected Registry sync was triggered by the Connected Registry's recovery service
+   */
+  RecoveryService: "RecoveryService"
+}
+
+/**
  * The action that triggered the most recent registry sync.
  */
 @added(Versions.vLatestPreview)
-union SyncTrigger {
+union SyncState {
   string,
 
   /**
@@ -127,34 +154,7 @@ union SyncTrigger {
   /**
    * Connected Registry sync is pending
    */
-  Pending: "Pending",
-}
-
-/**
- * The status of the connected registry's most recent sync.
- */
-union SyncState {
-  string,
-
-  /**
-   * Connected Registry sync was triggered by a sync token update
-   */
-  SyncTokenUpdate: "SyncTokenUpdate",
-
-  /**
-   * Connected Registry sync was triggered by an initial sync during activation
-   */
-  InitialSync: "InitialSync",
-
-  /**
-   * Connected Registry sync was triggered by a manual resync request
-   */
-  ManualResync: "ManualResync",
-
-  /**
-   * Connected Registry sync was triggered by the Connected Registry's recovery service
-   */
-  RecoveryService: "RecoveryService",
+  Pending: "Pending"
 }
 
 /**
