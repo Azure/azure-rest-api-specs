@@ -2441,6 +2441,7 @@ model DataDisk {
    *  Premium_LRS - The data disk should use premium locally redundant storage.
    */
   @summary("The storage account type for use in creating data disks or OS disk.")
+  @removed(Versions.v2025_06_01)
   storageAccountType?: StorageAccountType;
 
   /**
