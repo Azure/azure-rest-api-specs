@@ -1,6 +1,7 @@
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core.Experimental;
 
 using Azure.AI.Projects;
 
@@ -48,6 +49,13 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
+
+// The original type is string | OpenAI.ToolChoiceParam . Making this just string
+// Prevents the emission of the full ToolChoiceParam class tree in Java, which
+// is already exposed by the Stainless library. Currently there aren't any azure-isms.
+@@changePropertyType(PromptAgentDefinition.tool_choice, string);
+
+@@access(FoundryPreviewOptInKeys, Access.public);
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);

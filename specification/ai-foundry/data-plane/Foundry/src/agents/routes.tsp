@@ -100,6 +100,7 @@ interface Agents {
    * Returns the list of all agents.
    */
   @route("/agents")
+  @list
   listAgents is FoundryDataPlaneOperation<
     {
       ...ListAgentQueryParameters;
