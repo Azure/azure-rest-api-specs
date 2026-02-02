@@ -6569,8 +6569,8 @@
       "type": "object",
       "description": "Details of qualified resources for validateForExecution operation.",
       "properties": {
-        "qualifiedResource": {
-          "$ref": "#/definitions/QualifiedResource",
+        "drillsQualifiedResource": {
+          "$ref": "#/definitions/DrillsQualifiedResource",
           "description": "Drill resource.",
           "readOnly": true
         },
@@ -6581,7 +6581,7 @@
         }
       },
       "required": [
-        "qualifiedResource",
+        "drillsQualifiedResource",
         "resourceQualificationDetails"
       ]
     },
@@ -7173,6 +7173,101 @@
           "description": "RBAC setup mode."
         }
       }
+    },
+    "DrillsQualifiedResource": {
+      "type": "object",
+      "description": "Qualified resource.",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM Resource ID of the Azure resource.",
+          "readOnly": true
+        },
+        "activeLocation": {
+          "type": "string",
+          "description": "Active Resource location and zones of Azure Resource.",
+          "readOnly": true
+        },
+        "recoveryLocation": {
+          "type": "array",
+          "description": "Recovery Resource location and zones of HA Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "activePhysicalLocation": {
+          "type": "string",
+          "description": "Active Resource location and physical zones of Azure Resource.",
+          "readOnly": true
+        },
+        "recoveryPhysicalLocation": {
+          "type": "array",
+          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "drillInclusionState": {
+          "$ref": "#/definitions/DrillResourceInclusionState",
+          "description": "Inclusion State of the Drill resource in Drill",
+          "readOnly": true
+        },
+        "recoveryInclusionState": {
+          "$ref": "#/definitions/ResourceInclusionState",
+          "description": "A state that indicates the resource status with respect to the recovery orchestration plan.",
+          "readOnly": true
+        },
+        "protectionStatus": {
+          "$ref": "#/definitions/ResourceProtectionStatus",
+          "description": "A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.",
+          "readOnly": true
+        },
+        "selectedProtectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected.",
+          "readOnly": true
+        },
+        "resourceProtectionSolutions": {
+          "type": "array",
+          "description": "A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.",
+          "items": {
+            "$ref": "#/definitions/ResourceProtectionSolutionSettings"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "selectedProtectionSolutionSetting": {
+          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting",
+          "description": "Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.",
+          "readOnly": true
+        },
+        "faultState": {
+          "$ref": "#/definitions/DrillResourceFaultState",
+          "description": "Fault State of the Drill resource",
+          "readOnly": true
+        },
+        "faultProperties": {
+          "$ref": "#/definitions/FaultProperties",
+          "description": "Fault Properties",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId",
+        "activeLocation",
+        "recoveryLocation",
+        "activePhysicalLocation",
+        "recoveryPhysicalLocation",
+        "drillInclusionState",
+        "protectionStatus",
+        "selectedProtectionSolutionType",
+        "resourceProtectionSolutions",
+        "faultState",
+        "faultProperties"
+      ]
     },
     "ErrorDetails": {
       "type": "object",
@@ -9060,101 +9155,6 @@
           }
         ]
       }
-    },
-    "QualifiedResource": {
-      "type": "object",
-      "description": "Qualified resource.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM Resource ID of the Azure resource.",
-          "readOnly": true
-        },
-        "activeLocation": {
-          "type": "string",
-          "description": "Active Resource location and zones of Azure Resource.",
-          "readOnly": true
-        },
-        "recoveryLocation": {
-          "type": "array",
-          "description": "Recovery Resource location and zones of HA Azure Resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "activePhysicalLocation": {
-          "type": "string",
-          "description": "Active Resource location and physical zones of Azure Resource.",
-          "readOnly": true
-        },
-        "recoveryPhysicalLocation": {
-          "type": "array",
-          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "drillInclusionState": {
-          "$ref": "#/definitions/DrillResourceInclusionState",
-          "description": "Inclusion State of the Drill resource in Drill",
-          "readOnly": true
-        },
-        "recoveryInclusionState": {
-          "$ref": "#/definitions/ResourceInclusionState",
-          "description": "A state that indicates the resource status with respect to the recovery orchestration plan.",
-          "readOnly": true
-        },
-        "protectionStatus": {
-          "$ref": "#/definitions/ResourceProtectionStatus",
-          "description": "A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.",
-          "readOnly": true
-        },
-        "selectedProtectionSolutionType": {
-          "$ref": "#/definitions/ResourceProtectionSolutionType",
-          "description": "A setting that indicates the protection solution selected.",
-          "readOnly": true
-        },
-        "resourceProtectionSolutions": {
-          "type": "array",
-          "description": "A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.",
-          "items": {
-            "$ref": "#/definitions/ResourceProtectionSolutionSettings"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "selectedProtectionSolutionSetting": {
-          "$ref": "#/definitions/ResourceBaseProtectionSolutionSetting",
-          "description": "Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.",
-          "readOnly": true
-        },
-        "faultState": {
-          "$ref": "#/definitions/DrillResourceFaultState",
-          "description": "Fault State of the Drill resource",
-          "readOnly": true
-        },
-        "faultProperties": {
-          "$ref": "#/definitions/FaultProperties",
-          "description": "Fault Properties",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "resourceId",
-        "activeLocation",
-        "recoveryLocation",
-        "activePhysicalLocation",
-        "recoveryPhysicalLocation",
-        "drillInclusionState",
-        "protectionStatus",
-        "selectedProtectionSolutionType",
-        "resourceProtectionSolutions",
-        "faultState",
-        "faultProperties"
-      ]
     },
     "RBACSetupMode": {
       "type": "string",

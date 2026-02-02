@@ -549,7 +549,7 @@ model ValidateForExecutionRequest {
 
 @doc("Qualified resource.")
 @added(Versions.v2026_03_01_preview)
-model QualifiedResource {
+model DrillsQualifiedResource {
   @doc("ARM Resource ID of the Azure resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
@@ -647,7 +647,7 @@ model DrillResourceQualification {
   @doc("Drill resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  qualifiedResource: QualifiedResource;
+  drillsQualifiedResource: DrillsQualifiedResource;
 
   @doc("Details of qualification for the operation.")
   @added(Versions.v2026_03_01_preview)
