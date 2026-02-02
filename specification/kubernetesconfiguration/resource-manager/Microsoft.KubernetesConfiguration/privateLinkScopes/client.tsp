@@ -17,28 +17,12 @@ using Microsoft.KubernetesConfiguration;
   "javascript"
 );
 @@clientName(Microsoft.KubernetesConfiguration, "ScopeClient", "java");
-@@clientLocation(KubernetesConfigurationPrivateLinkScopes.get,
-  "Scopes",
+@@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScope,
+  "PrivateLinkScope",
   "java"
 );
-@@clientLocation(KubernetesConfigurationPrivateLinkScopes.createOrUpdate,
-  "Scopes",
-  "java"
-);
-@@clientLocation(KubernetesConfigurationPrivateLinkScopes.updateTags,
-  "Scopes",
-  "java"
-);
-@@clientLocation(KubernetesConfigurationPrivateLinkScopes.delete,
-  "Scopes",
-  "java"
-);
-@@clientLocation(KubernetesConfigurationPrivateLinkScopes.listByResourceGroup,
-  "Scopes",
-  "java"
-);
-@@clientLocation(KubernetesConfigurationPrivateLinkScopes.list,
-  "Scopes",
+@@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopes,
+  "PrivateLinkScopes",
   "java"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
