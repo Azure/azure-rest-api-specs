@@ -125,11 +125,15 @@
               "yvtpfipqppawimvylrqq"
             ],
             "runbookFaultRbacOnTargets": "Set",
-            "includedResourceInDrill": "Exists"
+            "includedResourceInDrill": "Exists",
+            "missingRequiredResourceProviders": [
+              "Microsoft.Chaos",
+              "Microsoft.Automation"
+            ]
           },
           "systemMetadata": {
             "initialConfig": "Pending",
-            "trackedResourceCategories": [
+            "resourceTypeCategories": [
               "AzureSiteRecoveryVMsPresent"
             ]
           },
@@ -163,8 +167,6 @@
             "recoveryPlanId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/rePlan1",
             "recoveryPlanResourceExcludedCount": 29
           },
-          "provisioningState": "Succeeded",
-          "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
           "drillAssetProperties": {
             "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
             "region": "westus"
@@ -181,8 +183,10 @@
             "chaosResourceId": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourceGroups/resourceGroup1/providers/Microsoft.Chaos/workspaces/asdas",
             "faultDurationInMin": 0
           },
+          "provisioningState": "Succeeded",
+          "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
           "lastSyncTime": "2025-05-05T05:36:37.151Z",
-          "lastResyncTime": "2026-01-30T17:16:00.547Z"
+          "lastResyncTime": "2026-01-30T17:16:00.545Z"
         },
         "identity": {
           "type": "None",
@@ -192,7 +196,7 @@
         },
         "id": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/drills/drill1",
         "name": "drill1",
-        "type": "Microsoft.AzureResilienceManagement/validations",
+        "type": "Microsoft.AzureResilienceManagement/drills",
         "systemData": {
           "createdBy": "dvnfxbuyqhvivfjddjccdtlwajfht",
           "createdByType": "User",
