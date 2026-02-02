@@ -18,11 +18,11 @@ using Microsoft.KubernetesConfiguration;
 );
 @@clientName(Microsoft.KubernetesConfiguration, "ScopeClient", "java");
 @@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScope,
-  "PrivateLinkScope",
+  "Scope",
   "java"
 );
 @@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopes,
-  "PrivateLinkScopes",
+  "Scopes",
   "java"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
