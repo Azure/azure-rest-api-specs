@@ -25,30 +25,34 @@ model SuppressionListResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SuppressionLists {
   /**
    * Get a SuppressionList resource.
    */
   @summary("Get")
+  @tag("SuppressionLists")
   get is ArmResourceRead<SuppressionListResource>;
 
   /**
    * Add a new SuppressionList resource under the parent Domains resource or update an existing SuppressionList resource.
    */
   @summary("Create Or Update")
+  @tag("SuppressionLists")
   createOrUpdate is ArmResourceCreateOrReplaceSync<SuppressionListResource>;
 
   /**
    * Delete a SuppressionList.
    */
   @summary("Delete")
+  @tag("SuppressionLists")
   delete is ArmResourceDeleteSync<SuppressionListResource>;
 
   /**
    * List all suppression lists for a domains resource.
    */
   @summary("List")
+  @tag("SuppressionLists")
   listByDomain is ArmResourceListByParent<
     SuppressionListResource,
     Response = ArmResponse<SuppressionListResourceCollection>

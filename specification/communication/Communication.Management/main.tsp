@@ -52,3 +52,4 @@ interface Operations extends Azure.ResourceManager.Operations {}
   "Lists all of the available REST API operations of the Microsoft.Communication provider."
 );
 @@summary(Operations.list, "List Operations");
+@@tag(Operations.list, "Operations");

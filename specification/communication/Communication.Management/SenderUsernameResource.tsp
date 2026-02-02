@@ -25,30 +25,34 @@ model SenderUsernameResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SenderUsernames {
   /**
    * Get a valid sender username for a domains resource.
    */
   @summary("Get")
+  @tag("SenderUsernames")
   get is ArmResourceRead<SenderUsernameResource>;
 
   /**
    * Add a new SenderUsername resource under the parent Domains resource or update an existing SenderUsername resource.
    */
   @summary("Create Or Update")
+  @tag("SenderUsernames")
   createOrUpdate is ArmResourceCreateOrReplaceSync<SenderUsernameResource>;
 
   /**
    * Operation to delete a SenderUsernames resource.
    */
   @summary("Delete")
+  @tag("SenderUsernames")
   delete is ArmResourceDeleteSync<SenderUsernameResource>;
 
   /**
    * List all valid sender usernames for a domains resource.
    */
   @summary("ListBy_Domains")
+  @tag("SenderUsernames")
   listByDomains is ArmResourceListByParent<
     SenderUsernameResource,
     Response = ArmResponse<SenderUsernameResourceCollection>

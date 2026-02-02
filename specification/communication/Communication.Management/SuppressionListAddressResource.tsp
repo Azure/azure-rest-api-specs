@@ -25,30 +25,34 @@ model SuppressionListAddressResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SuppressionListAddresses {
   /**
    * Get a SuppressionListAddress.
    */
   @summary("Get")
+  @tag("SuppressionLists")
   get is ArmResourceRead<SuppressionListAddressResource>;
 
   /**
    * Create or update a SuppressionListAddress.
    */
   @summary("Create Or Update")
+  @tag("SuppressionLists")
   createOrUpdate is ArmResourceCreateOrReplaceSync<SuppressionListAddressResource>;
 
   /**
    * Operation to delete a single address from a suppression list.
    */
   @summary("Delete")
+  @tag("SuppressionLists")
   delete is ArmResourceDeleteSync<SuppressionListAddressResource>;
 
   /**
    * Get all the addresses in a suppression list.
    */
   @summary("Get")
+  @tag("SuppressionLists")
   list is ArmResourceListByParent<
     SuppressionListAddressResource,
     Response = ArmResponse<SuppressionListAddressResourceCollection>

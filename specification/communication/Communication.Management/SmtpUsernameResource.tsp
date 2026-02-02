@@ -25,30 +25,34 @@ model SmtpUsernameResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SmtpUsernames {
   /**
    * Get a SmtpUsernameResource.
    */
   @summary("Get")
+  @tag("SmtpUsernames")
   get is ArmResourceRead<SmtpUsernameResource>;
 
   /**
    * Create or update an SmtpUsernameResource.
    */
   @summary("Create Or Update")
+  @tag("SmtpUsernames")
   createOrUpdate is ArmResourceCreateOrReplaceSync<SmtpUsernameResource>;
 
   /**
    * Operation to delete a single SmtpUsername resource.
    */
   @summary("Delete")
+  @tag("SmtpUsernames")
   delete is ArmResourceDeleteSync<SmtpUsernameResource>;
 
   /**
    * Get all SmtpUsernameResources for a Communication resource.
    */
   @summary("Get")
+  @tag("SmtpUsernames")
   list is ArmResourceListByParent<
     SmtpUsernameResource,
     Response = ArmResponse<SmtpUsernameResourceCollection>

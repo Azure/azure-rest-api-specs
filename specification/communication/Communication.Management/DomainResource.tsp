@@ -25,18 +25,20 @@ model DomainResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Domains {
   /**
    * Get the Domains resource and its properties.
    */
   @summary("Get")
+  @tag("Domains")
   get is ArmResourceRead<DomainResource>;
 
   /**
    * Add a new Domains resource under the parent EmailService resource or update an existing Domains resource.
    */
   @summary("Create Or Update")
+  @tag("Domains")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DomainResource>;
 
   /**
@@ -44,6 +46,7 @@ interface Domains {
    */
   @patch(#{ implicitOptionality: false })
   @summary("Update")
+  @tag("Domains")
   update is ArmCustomPatchAsync<
     DomainResource,
     PatchModel = UpdateDomainRequestParameters,
@@ -59,6 +62,7 @@ interface Domains {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete")
+  @tag("Domains")
   delete is ArmResourceDeleteWithoutOkAsync<
     DomainResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -68,6 +72,7 @@ interface Domains {
    * Handles requests to list all Domains resources under the parent EmailServices resource.
    */
   @summary("List by EmailService")
+  @tag("Domains")
   listByEmailServiceResource is ArmResourceListByParent<
     DomainResource,
     Response = ArmResponse<DomainResourceList>
@@ -77,6 +82,7 @@ interface Domains {
    * Initiate verification of DNS record.
    */
   @summary("Initiate Verification")
+  @tag("Domains")
   initiateVerification is ArmResourceActionAsyncBase<
     DomainResource,
     VerificationParameter,
@@ -88,6 +94,7 @@ interface Domains {
    * Cancel verification of DNS record.
    */
   @summary("Cancel Verification")
+  @tag("Domains")
   cancelVerification is ArmResourceActionAsyncBase<
     DomainResource,
     VerificationParameter,
