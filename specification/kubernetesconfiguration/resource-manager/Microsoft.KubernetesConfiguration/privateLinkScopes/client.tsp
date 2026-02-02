@@ -40,10 +40,6 @@ using Microsoft.KubernetesConfiguration;
   "Connection",
   "java"
 );
-@@clientName(Azure.ResourceManager.PrivateEndpointConnectionResource,
-  "Connection",
-  "java"
-);
 @@clientName(KubernetesConfigurationPrivateLinkScopes, "Scopes", "java");
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResult,
   "ConnectionListResult",
