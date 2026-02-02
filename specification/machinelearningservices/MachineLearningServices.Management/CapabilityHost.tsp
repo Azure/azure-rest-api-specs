@@ -67,6 +67,12 @@ interface CapabilityHosts {
       timeout: duration;
     }) | ArmDeletedNoContentResponse
   >;
+
+  /**
+   * List capabilityHosts.
+   */
+  @summary("List capabilityHosts.")
+  list is ArmResourceListByParent<CapabilityHost>;
 }
 
 @@doc(CapabilityHost.name, "CapabilityHost name.");

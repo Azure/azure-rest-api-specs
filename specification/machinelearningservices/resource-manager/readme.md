@@ -182,6 +182,30 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: These are list result models and action responses, not ARM resources. They do not require id/name/type properties.
+    where:
+      - $.definitions.AvailableQuota
+      - $.definitions.AvailableQuotaArmPaginatedResult
+      - $.definitions.EndpointModels
+      - $.definitions.ExternalFQDNResponse
+      - $.definitions.ListAmlUserFeatureResult
+      - $.definitions.ListUsagesResult
+      - $.definitions.ListWorkspaceQuotas
+      - $.definitions.SkuResourceArmPaginatedResult
+      - $.definitions.UsageAndQuotaDetailsArmPaginatedResult
+      - $.definitions.VirtualMachineSizeListResult
+  - code: ArmResourcePropertiesBag
+    reason: Pre-existing API contract uses type/name as discriminator properties within the properties bag for polymorphic resources.
+    where:
+      - $.definitions.EndpointDeploymentResourcePropertiesBasicResource
+      - $.definitions.EndpointResourcePropertiesBasicResource
+      - $.definitions.OutboundRuleBasicResource
+      - $.definitions.RaiPolicyPropertiesBasicResource
+  - code: TrackedResourcePatchOperation
+    reason: Pre-existing API uses PUT for updates. PrivateEndpointConnection has location/tags but uses PUT, not PATCH.
+    where:
+      - $.definitions.PrivateEndpointConnection
 ```
 
 ### Tag: package-2025-12-01
@@ -250,6 +274,23 @@ suppressions:
     reason: Pre-existing API behavior.
   - code: ProvisioningStateMustBeReadOnly
     reason: Pre-existing API behavior, provisioningState properties are read-only in the API response.
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: These are list result models and action responses, not ARM resources. They do not require id/name/type properties.
+    where:
+      - $.definitions.ExternalFQDNResponse
+      - $.definitions.ListAmlUserFeatureResult
+      - $.definitions.ListUsagesResult
+      - $.definitions.ListWorkspaceQuotas
+      - $.definitions.SkuResourceArmPaginatedResult
+      - $.definitions.VirtualMachineSizeListResult
+  - code: ArmResourcePropertiesBag
+    reason: Pre-existing API contract uses type as discriminator property within the properties bag for polymorphic resources.
+    where:
+      - $.definitions.OutboundRuleBasicResource
+  - code: TrackedResourcePatchOperation
+    reason: Pre-existing API uses PUT for updates. PrivateEndpointConnection has location/tags but uses PUT, not PATCH.
+    where:
+      - $.definitions.PrivateEndpointConnection
 ```
 
 ### Tag: package-2025-09-01
