@@ -18,7 +18,7 @@ using Microsoft.KubernetesConfiguration;
 );
 @@clientName(Microsoft.KubernetesConfiguration, "ScopeClient", "java");
 @@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScope,
-  "Scope",
+  "PrivateLinkScope",
   "java"
 );
 @@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopes,
