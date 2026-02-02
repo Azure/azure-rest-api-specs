@@ -2156,7 +2156,7 @@ union BreakthroughMode {
 /**
  * Quota report filters. When filtering by quotaType or quotaTarget, both properties must be supplied together. This constraint is enforced by the service/API at runtime, and requests violating this rule will return a validation error. The usageThresholdPercentage filter is independent and can be used alone or in combination with quotaType and quotaTarget to further refine results.
  */
-@added(Versions.v2025_12_15_preview)
+@added(Versions.v2025_12_01)
 model QuotaReportFilterRequest {
   /**
    * Type of quota. If provided, quotaTarget must also be specified. The quotaType and quotaTarget properties are optional, but when filtering by quota type, quotaType and quotaTarget must be supplied together. Service/API will return an error if only one is provided.
@@ -2184,15 +2184,12 @@ model QuotaReportFilterRequest {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
-@removed(Versions.v2025_09_01)
 model ListQuotaReportResponse {
   /**
    * List of quota reports
    */
   @identifiers(#[])
-  value?: QuotaReport[];
+  value?: AnfQuotaReport[];
 }
 
 /**
@@ -2203,10 +2200,7 @@ model ListQuotaReportResponse {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
-@removed(Versions.v2025_12_01)
-@added(Versions.v2025_12_15_preview)
-@removed(Versions.v2025_09_01)
-model QuotaReport {
+model AnfQuotaReport {
   /**
    * Type of quota
    */
@@ -2700,7 +2694,7 @@ interface Volumes {
   /**
    * Get quota report for volume (with filter support)
    */
-  @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2025_12_01)
   @sharedRoute
   listQuotaReport is ArmResourceActionAsync<
     Volume,
