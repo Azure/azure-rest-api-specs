@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "name": "testsite2",
+    "api-version": "2025-05-01",
+    "resourceGroupName": "testrg123",
+    "slot": "staging",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "workflowName": "stateful1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testsite2/stateful1",
+        "type": "Microsoft.Web/sites/workflows",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/testsite2/workflows/stateful1",
+        "kind": "Stateful",
+        "location": "USAAnywhere",
+        "properties": {
+          "files": {
+            "connections.json": {
+              "managedApiConnections": {
+                "office365": {
+                  "api": {
+                    "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/locations/brazilsouth/managedApis/office365"
+                  },
+                  "authentication": {
+                    "type": "Raw",
+                    "parameter": "@appsetting('office365-connectionKey')",
+                    "scheme": "Key"
+                  },
+                  "connection": {
+                    "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/connections/office365-1"
+                  },
+                  "connectionRuntimeUrl": "string"
+                }
+              }
+            },
+            "workflow.json": {
+              "definition": {
+                "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+                "actions": {},
+                "contentVersion": "1.0.0.0",
+                "outputs": {},
+                "parameters": {},
+                "triggers": {}
+              }
+            }
+          },
+          "flowState": "Enabled",
+          "health": {
+            "state": "Healthy"
+          }
+        }
+      },
+      "headers": {}
+    },
+    "404": {}
+  },
+  "operationId": "WebApps_GetWorkflow",
+  "title": "GET a workflow"
+}

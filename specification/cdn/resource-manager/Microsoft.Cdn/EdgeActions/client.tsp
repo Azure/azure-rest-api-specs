@@ -29,4 +29,4 @@ using Microsoft.Cdn;
   "csharp"
 );
 
-@@clientName(EdgeActions, "EdgeActionsMgmtClient", "python");
+@@clientName(Microsoft.Cdn, "EdgeActionsMgmtClient", "python");
