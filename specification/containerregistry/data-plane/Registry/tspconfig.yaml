@@ -1,0 +1,65 @@
+parameters:
+  "service-dir":
+    default: "sdk/containerregistry"
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/containerregistry.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-containerregistry"
+    package-name: "azure-containerregistry"
+    package-pprint-name: "Azure Container Registry"
+    namespace: "azure.containerregistry._generated"
+    package-version: "1.2.0"
+    flavor: "azure"
+    generate-test: false
+    generate-sample: false
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-containers-containerregistry"
+    package-name: "com.azure.containers.containerregistry"
+    package-version: "1.2.19"
+    namespace: "com.azure.containers.containerregistry"
+    generate-test: false
+    generate-sample: false
+    flavor: "azure"
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.Containers.ContainerRegistry"
+    package-name: "Azure.Containers.ContainerRegistry"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-version: "1.1.1"
+    clear-output-folder: true
+    model-namespace: false
+    generate-test: false
+    generate-sample: false
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/container-registry"
+    service-dir: "sdk/containerregistry/"
+    is-modular-library: true
+    package-dir: "container-registry"
+    package-details:
+      name: "@azure/container-registry"
+      version: "1.1.0"
+    generate-test: false
+    generate-sample: false
+    flavor: "azure"
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/containers/azcontainerregistry"
+    emitter-output-dir: "{output-dir}/{service-dir}/azcontainerregistry"
+    module-name: "github.com/Azure/azure-sdk-for-go/sdk/containers/azcontainerregistry"
+    package-name: "azcontainerregistry"
+    package-version: "0.2.4"
+    inject-spans: true
+    generate-test: false
+    generate-sample: false
+    flavor: "azure"
