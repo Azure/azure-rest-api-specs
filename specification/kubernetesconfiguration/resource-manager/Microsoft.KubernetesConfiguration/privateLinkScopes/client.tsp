@@ -12,20 +12,43 @@ using Microsoft.KubernetesConfiguration;
   "ArmPrivateEndpointConnection",
   "python"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
-  "Connection",
-  "java"
-);
 @@clientName(Microsoft.KubernetesConfiguration,
   "PrivateLinkScopesClient",
   "javascript"
 );
-@@clientName(Microsoft.KubernetesConfiguration, "ScopeClient", "java");
+@@clientName(KubernetesConfigurationPrivateLinkScopeProperties,
+  "PrivateLinkScopeProperties",
+  "java"
+);
 @@clientName(KubernetesConfigurationPrivateLinkScope,
   "PrivateLinkScope",
   "java"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
+  "ConnectionProperties",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
+  "ConnectionProvisioningState",
+  "java"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus,
+  "ServiceConnectionStatus",
+  "java"
+);
 @@clientName(KubernetesConfigurationPrivateLinkScopes, "Scopes", "java");
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResult,
+  "ConnectionListResult",
+  "java"
+);
 @@clientName(PrivateEndpointConnections, "Connections", "java");
-@@clientName(PrivateEndpointConnection, "PrivateEndpoint", "java");
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResult,
+  "ResourceListResult",
+  "java"
+);
 @@clientName(PrivateLinkResources, "Resources", "java");
+
+@@clientName(Microsoft.KubernetesConfiguration.PrivateEndpointConnection,
+  "Connection",
+  "java"
+);
