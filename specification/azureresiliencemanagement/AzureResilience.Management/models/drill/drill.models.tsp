@@ -12,6 +12,7 @@ import "../common/Job.tsp";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.AzureResilienceManagement;
@@ -56,9 +57,6 @@ model DrillProperties {
   @doc("ROPlan properties.")
   recoveryPlanProperties: RecoveryPlanPropertiesOfDrill;
 
-  @doc("Properties for internal resources that are created for the Drill.")
-  drillAssetProperties: AssetPropertiesOfDrill;
-
   @doc("Chaos Experiment properties.")
   chaosExperimentProperties: ChaosExperimentPropertiesOfDrill;
 
@@ -98,6 +96,7 @@ model DrillProperties {
   drillType: DrillType;
 
   @doc("Monitoring properties of the Drill.")
+  @added(Versions.v2026_03_01_preview)
   monitoringProperties?: MonitoringPropertiesOfDrill;
 }
 
@@ -204,13 +203,16 @@ model HealthModelPropertiesOfDrill {
  * Model that represents the Monitoring properties of Drill
  */
 @doc("Drill monitoring properties.")
+@added(Versions.v2026_03_01_preview)
 model MonitoringPropertiesOfDrill {
   @doc("Identity to use for Drill monitoring operations.")
+  @added(Versions.v2026_03_01_preview)
   identity: AssociatedIdentity;
 
   @doc("Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.")
   @visibility(Lifecycle.Read)
-  logAnalyticsWorkspaceId: armResourceIdentifier<[
+  @added(Versions.v2026_03_01_preview)
+  logAnalyticsWorkspaceId?: armResourceIdentifier<[
     {
       type: "Microsoft.OperationalInsights/workspaces";
     }
@@ -218,7 +220,8 @@ model MonitoringPropertiesOfDrill {
 
   @doc("Full ARM Id of the Data collection rule created by Resiliency service which will route data for RAW health data for service group resources.")
   @visibility(Lifecycle.Read)
-  rawMetricsDataCollectionRuleId: armResourceIdentifier<[
+  @added(Versions.v2026_03_01_preview)
+  rawMetricsDataCollectionRuleId?: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/datacollectionrules";
     }
@@ -226,7 +229,8 @@ model MonitoringPropertiesOfDrill {
 
   @doc("Full ARM Id of the Data collection rule created by Resiliency service which will route data for Aggregate health data of service group.")
   @visibility(Lifecycle.Read)
-  serviceGroupMetricsDataCollectionRuleId: armResourceIdentifier<[
+  @added(Versions.v2026_03_01_preview)
+  serviceGroupMetricsDataCollectionRuleId?: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/datacollectionrules";
     }
@@ -234,7 +238,8 @@ model MonitoringPropertiesOfDrill {
 
   @doc("Full ARM Id of the Data collection endpoint created by Resiliency service which will route data for service group and its resources.")
   @visibility(Lifecycle.Read)
-  dataCollectionEndpointId: armResourceIdentifier<[
+  @added(Versions.v2026_03_01_preview)
+  dataCollectionEndpointId?: armResourceIdentifier<[
     {
       type: "Microsoft.Insights/dataCollectionEndpoints";
     }
@@ -317,17 +322,6 @@ model ChaosExperimentPropertiesOfDrill {
   faultDurationInMin?: int32;
 }
 
-/**
- * Model that represents the properties for resources that are created for Drill
- */
-@doc("Drill asset properties.")
-model AssetPropertiesOfDrill {
-  @doc("Subscription where Drill's internal resources will be created.")
-  subscription: string;
-
-  @doc("Region where Drill's internal resources will be created.")
-  region: string;
-}
 
 @doc("Reason why the Drill is in NeedsAttention state, and not ready to run.")
 model AttentionReason {
@@ -389,26 +383,29 @@ model AttentionReason {
   includedResourceInDrill?: ExtensionObjectState;
 
   @doc("Drill MSI does not have the necessary RBAC to read the Drill Monitoring resources.")
+  @added(Versions.v2026_03_01_preview)
   drillRbacOnMonitoringResources?: RBACState;
 
   @doc("Errors related to Drill Monitoring resources.")
   @identifiers(#[])
+  @added(Versions.v2026_03_01_preview)
   drillMonitoringErrors?: ErrorDetails[];
 
   @doc("Monitoring Resources created for Drill")
   @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_01_preview)
   drillMonitoringResources?: ExtensionObjectState;
 
   @doc("Monitoring RBAC required by Drill MSI not setup on the target resources.")
+  @added(Versions.v2026_03_01_preview)
   monitoringRbacOnDrillResources?: RBACState;
 
-  @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.")
-  missingRequiredResourceProviders?: string[];
-
   @doc("Permissions needed by the Drill MSI to Upload service group health data for monitoring.")
+  @added(Versions.v2026_03_01_preview)
   rbacNeededForDrillOnDrillMonitoringResources?: string[];
 
   @doc("Permissions needed by the Drill MSI to read health metrics data for resources in service group.")
+  @added(Versions.v2026_03_01_preview)
   rbacNeededForDrillOnDrillResources?: string[];
 }
 
@@ -547,10 +544,8 @@ model DrillPatchProperties {
   @doc("RBAC setup mode.")
   rbacSetupMode?: RBACSetupMode;
 
-  @doc("Properties for internal resources that are created for the Drill.")
-  drillAssetProperties?: AssetPropertiesOfDrill;
-
   @doc("Monitoring properties of the Drill.")
+  @added(Versions.v2026_03_01_preview)
   monitoringProperties?: MonitoringPropertiesOfDrill;
 }
 

@@ -10,6 +10,7 @@ import "./common.tsp";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -98,6 +99,7 @@ model DrillResourceProperties {
 
   @doc("Monitoring RBAC assignment error, if any.")
   @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_01_preview)
   monitoringRbacAssignmentError?: ErrorDetails;
 
   @doc("Provisioning state")
@@ -114,6 +116,7 @@ model DrillResourceAttentionReason {
   runbookFaultRbacOnTargets?: RBACState;
 
   @doc("RBAC required by Drill MSI on the target resource for monitoring.")
+  @added(Versions.v2026_03_01_preview)
   monitoringRbacOnTargets?: RBACState;
 
   @doc("Target extension resource is missing on the resource.")
