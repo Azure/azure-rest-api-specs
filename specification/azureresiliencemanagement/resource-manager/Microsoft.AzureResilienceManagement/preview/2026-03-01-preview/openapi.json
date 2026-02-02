@@ -216,6 +216,9 @@
         "x-ms-examples": {
           "Drills_List_MaximumSet": {
             "$ref": "./examples/Drills_List_MaximumSet_Gen.json"
+          },
+          "Drills_List_MinimumSet": {
+            "$ref": "./examples/Drills_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2083,9 +2086,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/resync": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/resyncAndReadinessCheck": {
       "post": {
-        "operationId": "Drills_Resync",
+        "operationId": "Drills_ResyncAndReadinessCheck",
         "tags": [
           "Drills"
         ],
@@ -2139,8 +2142,8 @@
           }
         },
         "x-ms-examples": {
-          "Drills_Resync_MaximumSet": {
-            "$ref": "./examples/Drills_Resync_MaximumSet_Gen.json"
+          "Drills_ResyncAndReadinessCheck_MaximumSet": {
+            "$ref": "./examples/Drills_ResyncAndReadinessCheck_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5416,6 +5419,13 @@
         "includedResourceInDrill": {
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "Included resource in Drill."
+        },
+        "missingRequiredResourceProviders": {
+          "type": "array",
+          "description": "List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -10787,6 +10797,24 @@
         }
       }
     },
+    "ResourceTypeCategories": {
+      "type": "string",
+      "description": "A state type that indicates qualification of a resource for an operation.",
+      "enum": [
+        "AzureSiteRecoveryVMsPresent"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceTypeCategories",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureSiteRecoveryVMsPresent",
+            "value": "AzureSiteRecoveryVMsPresent",
+            "description": "Indicates that alteast one Azure Site Recovery VMs are present."
+          }
+        ]
+      }
+    },
     "ServiceGroupAndRequestHeadersParameters": {
       "type": "object",
       "description": "ServiceGroup tenant and request headers as parameter",
@@ -10926,11 +10954,11 @@
           "$ref": "#/definitions/InitialConfig",
           "description": "Indicates if the Initial system configuration of the Drill is complete or not."
         },
-        "trackedResourceCategories": {
+        "resourceTypeCategories": {
           "type": "array",
-          "description": "An indication whether a tracked resource is present in drill resource.",
+          "description": "An indication whether a intrested resource type is present in drill resource.",
           "items": {
-            "$ref": "#/definitions/TrackedResourceCategories"
+            "$ref": "#/definitions/ResourceTypeCategories"
           },
           "readOnly": true
         }
@@ -10970,24 +10998,6 @@
             "name": "TestFailoverCleanupPending",
             "value": "TestFailoverCleanupPending",
             "description": "he resource is in test failover cleanup pending state."
-          }
-        ]
-      }
-    },
-    "TrackedResourceCategories": {
-      "type": "string",
-      "description": "A state type that indicates qualification of a resource for an operation.",
-      "enum": [
-        "AzureSiteRecoveryVMsPresent"
-      ],
-      "x-ms-enum": {
-        "name": "TrackedResourceCategories",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureSiteRecoveryVMsPresent",
-            "value": "AzureSiteRecoveryVMsPresent",
-            "description": "Indicates that alteast one Azure Site Recovery VMs are present."
           }
         ]
       }

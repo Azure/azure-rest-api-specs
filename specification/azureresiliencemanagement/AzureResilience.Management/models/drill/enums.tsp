@@ -410,7 +410,7 @@ union DrillResourceNonQualificationReasons {
 
 @doc("A state type that indicates qualification of a resource for an operation.")
 @added(Versions.v2026_03_01_preview)
-union TrackedResourceCategories {
+union ResourceTypeCategories {
   string,
 
   @doc("Indicates that alteast one Azure Site Recovery VMs are present.")

@@ -380,6 +380,10 @@ model AttentionReason {
 
   @doc("Included resource in Drill.")
   includedResourceInDrill?: ExtensionObjectState;
+
+  @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.")
+  @added(Versions.v2026_03_01_preview)
+  missingRequiredResourceProviders?: string[];
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")
@@ -387,10 +391,10 @@ model SystemMetadata {
   @doc("Indicates if the Initial system configuration of the Drill is complete or not.")
   initialConfig: InitialConfig;
 
-  @doc("An indication whether a tracked resource is present in drill resource.")
+  @doc("An indication whether a intrested resource type is present in drill resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  trackedResourceCategories?: TrackedResourceCategories[];
+  resourceTypeCategories?: ResourceTypeCategories[];
 }
 
 @doc("Request body of the Start Action of Drill.")
