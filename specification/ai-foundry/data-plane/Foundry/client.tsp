@@ -1,3 +1,7 @@
+//
+// This file is used for emitting the Python client (package azure-ai-projects) and 
+// the JS client (package @azure/ai-projects).
+//
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
@@ -19,80 +23,56 @@ using Azure.AI.Projects;
 // ------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate Responses. We will use OpenAI client for those
 // ------------------------------------------------------------------------------------------------
-@@scope(Responses.createResponse, "!(csharp, python, java, javascript)");
-@@scope(Responses.createResponseStream, "!(csharp, python, java, javascript)");
-@@scope(Responses.getResponseStream, "!(csharp, python, java, javascript)");
-@@scope(Responses.getResponse, "!(csharp, python, java, javascript)");
-@@scope(Responses.deleteResponse, "!(csharp, python, java, javascript)");
-@@scope(Responses.cancelResponse, "!(csharp, python, java, javascript)");
-@@scope(Responses.listInputItems, "!(csharp, python, java, javascript)");
-@@scope(Responses.listResponses, "!(csharp, python, java, javascript)");
+@@scope(Responses.createResponse, "!(python, javascript)");
+@@scope(Responses.createResponseStream, "!(python, javascript)");
+@@scope(Responses.getResponseStream, "!(python, javascript)");
+@@scope(Responses.getResponse, "!(python, javascript)");
+@@scope(Responses.deleteResponse, "!(python, javascript)");
+@@scope(Responses.cancelResponse, "!(python, javascript)");
+@@scope(Responses.listInputItems, "!(python, javascript)");
+@@scope(Responses.listResponses, "!(python, javascript)");
 
 // ---------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate Conversations. We will use OpenAI client for those
 // ---------------------------------------------------------------------------------------------------
-@@scope(Conversations.createConversation, "!(python, java, javascript)");
-@@scope(Conversations.updateConversation, "!(python, java, javascript)");
-@@scope(Conversations.getConversation, "!(python, java, javascript)");
-@@scope(Conversations.deleteConversation, "!(python, java, javascript)");
-@@scope(Conversations.listConversations, "!(python, java, javascript)");
-@@scope(Conversations.createConversationItems, "!(python, java, javascript)");
-@@scope(Conversations.getConversationItem, "!(python, java, javascript)");
-@@scope(Conversations.deleteConversationItem, "!(python, java, javascript)");
-@@scope(Conversations.listConversationItems, "!(python, java, javascript)");
+@@scope(Conversations.createConversation, "!(python, javascript)");
+@@scope(Conversations.updateConversation, "!(python, javascript)");
+@@scope(Conversations.getConversation, "!(python, javascript)");
+@@scope(Conversations.deleteConversation, "!(python, javascript)");
+@@scope(Conversations.listConversations, "!(python, javascript)");
+@@scope(Conversations.createConversationItems, "!(python, javascript)");
+@@scope(Conversations.getConversationItem, "!(python, javascript)");
+@@scope(Conversations.deleteConversationItem, "!(python, javascript)");
+@@scope(Conversations.listConversationItems, "!(python, javascript)");
 
 // ---------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate Evaluations. We will use OpenAI client for those
 // ---------------------------------------------------------------------------------------------------
-@@scope(OpenAIEvals.listEvals, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.createEval, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.deleteEval, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.getEval, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.updateEval, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.listRuns, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.createEvalRun, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.deleteEvalRun, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.getEvalRun, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.cancelEvalRun, "!(csharp, python, java, javascript)");
-@@scope(OpenAIEvals.getEvalRunOutputItems,
-  "!(csharp, python, java, javascript)"
-);
-@@scope(OpenAIEvals.getEvalRunOutputItem,
-  "!(csharp, python, java, javascript)"
+@@scope(OpenAIEvals.listEvals, "!(python, javascript)");
+@@scope(OpenAIEvals.createEval, "!(python, javascript)");
+@@scope(OpenAIEvals.deleteEval, "!(python, javascript)");
+@@scope(OpenAIEvals.getEval, "!(python, javascript)");
+@@scope(OpenAIEvals.updateEval, "!(python, javascript)");
+@@scope(OpenAIEvals.listRuns, "!(python, javascript)");
+@@scope(OpenAIEvals.createEvalRun, "!(python, javascript)");
+@@scope(OpenAIEvals.deleteEvalRun, "!(python, javascript)");
+@@scope(OpenAIEvals.getEvalRun, "!(python, javascript)");
+@@scope(OpenAIEvals.cancelEvalRun, "!(python, javascript)");
+@@scope(OpenAIEvals.getEvalRunOutputItems, "!(python, javascript)");
+@@scope(OpenAIEvals.getEvalRunOutputItem, "!(python, javascript)"
 );
 
 // ---------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate fine-tuning. We will use OpenAI client for those
 // ---------------------------------------------------------------------------------------------------
-@@scope(FineTuning.createFineTuningJob, "!(csharp, python, java, javascript)");
-@@scope(FineTuning.listPaginatedFineTuningJobs,
-  "!(csharp, python, java, javascript)"
-);
-@@scope(FineTuning.cancelFineTuningJob, "!(csharp, python, java, javascript)");
-@@scope(FineTuning.listFineTuningJobCheckpoints,
-  "!(csharp, python, java, javascript)"
-);
-@@scope(FineTuning.retrieveFineTuningJob,
-  "!(csharp, python, java, javascript)"
-);
-@@scope(FineTuning.pauseFineTuningJob, "!(csharp, python, java, javascript)");
-@@scope(FineTuning.resumeFineTuningJob, "!(csharp, python, java, javascript)");
-@@scope(FineTuning.listFineTuningJobEvents,
-  "!(csharp, python, java, javascript)"
-);
-
-// ---------------------------------------------------------------------------------------------------
-// Operation scope customizations - don't generate container operations *except* for backend C#
-// ---------------------------------------------------------------------------------------------------
-@@scope(Agents.startAgentContainer, "csharp");
-@@scope(Agents.stopAgentContainer, "csharp");
-@@scope(Agents.updateAgentContainer, "csharp");
-@@scope(Agents.deleteAgentContainer, "csharp");
-@@scope(Agents.getAgentContainer, "csharp");
-@@scope(Agents.getAgentContainerOperation, "csharp");
-@@scope(Agents.listAgentContainerOperations, "csharp");
-@@scope(Agents.listAgentVersionContainerOperations, "csharp");
-@@scope(Agents.getAgentContainerOperation, "csharp");
+@@scope(FineTuning.createFineTuningJob, "!(python, javascript)");
+@@scope(FineTuning.listPaginatedFineTuningJobs, "!(python, javascript)");
+@@scope(FineTuning.cancelFineTuningJob, "!(python, javascript)");
+@@scope(FineTuning.listFineTuningJobCheckpoints, "!(python, javascript)");
+@@scope(FineTuning.retrieveFineTuningJob, "!(python, javascript)");
+@@scope(FineTuning.pauseFineTuningJob, "!(python, javascript)");
+@@scope(FineTuning.resumeFineTuningJob, "!(python, javascript)");
+@@scope(FineTuning.listFineTuningJobEvents, "!(python, javascript)");
 
 // --------------------------------------------------------------------------------
 // Agents sub‐client
@@ -125,7 +105,7 @@ using Azure.AI.Projects;
 );
 
 // --------------------------------------------------------------------------------
-// Memories sub‐client
+// Memories sub-client
 // --------------------------------------------------------------------------------
 @@clientName(MemoryStores.createMemoryStore, "create", "python");
 @@clientName(MemoryStores.updateMemoryStore, "update", "python");
@@ -155,11 +135,6 @@ using Azure.AI.Projects;
 @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
 
 // --------------------------------------------------------------------------------
-// Conversations sub‐client
-// --------------------------------------------------------------------------------
-@@clientName(OpenAI.ConversationResource, "AgentConversation", "csharp");
-
-// --------------------------------------------------------------------------------
 // Responses sub‐client
 // --------------------------------------------------------------------------------
 
@@ -171,6 +146,47 @@ using Azure.AI.Projects;
   Record<unknown>,
   "python, javascript"
 );
+
+// --------------------------------------------------------------------------------
+// Datasets sub‐client
+// --------------------------------------------------------------------------------
+
+// Shorter method names for SDK datasets operations
+@@clientName(Datasets.listLatest, "list");
+@@clientName(Datasets.getVersion, "get");
+@@clientName(Datasets.deleteVersion, "delete");
+@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
+@@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+
+// More accurate naming
+@@clientName(AssetCredentialResponse, "DatasetCredential");
+@@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
+
+// --------------------------------------------------------------------------------
+// Indexes sub‐client
+// --------------------------------------------------------------------------------
+
+// Shorter method names for SDK Index operations
+@@clientName(Indexes.listLatest, "list");
+@@clientName(Indexes.getVersion, "get");
+@@clientName(Indexes.deleteVersion, "delete");
+@@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
+
+// --------------------------------------------------------------------------------
+// Connections sub‐client
+// --------------------------------------------------------------------------------
+
+// Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
+// input parameter that calls either on these two.
+@@access(Connections.get, Access.internal);
+@@access(Connections.getWithCredentials, Access.internal);
+
+// --------------------------------------------------------------------------------
+// Deployment sub‐client
+// --------------------------------------------------------------------------------
+
+// Less generic names
+@@clientName(Sku, "ModelDeploymentSku");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -190,85 +206,3 @@ using Azure.AI.Projects;
 
 @@usage(ApiErrorResponse, Usage.output);
 @@access(ApiErrorResponse, Access.public);
-
-// --------------------------------------------------------------------------------
-// Datasets sub‐client
-// --------------------------------------------------------------------------------
-
-// Shorter method names for SDK datasets operations
-@@clientName(Datasets.listLatest, "list");
-@@clientName(Datasets.getVersion, "get");
-@@clientName(Datasets.deleteVersion, "delete");
-@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
-@@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
-
-// More accurate naming
-@@clientName(AssetCredentialResponse, "DatasetCredential");
-
-// --------------------------------------------------------------------------------
-// Indexes sub‐client
-// --------------------------------------------------------------------------------
-
-// Shorter method names for SDK Index operations
-@@clientName(Indexes.listLatest, "list");
-@@clientName(Indexes.getVersion, "get");
-@@clientName(Indexes.deleteVersion, "delete");
-@@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
-
-// Less generic names
-@@clientName(Sku, "ModelDeploymentSku");
-@@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
-
-// Less generic names for C# SDK (avoid one-word class names)
-@@clientName(BlobReference, "AIProjectBlobReference", "csharp");
-@@clientName(Connection, "AIProjectConnection", "csharp");
-@@clientName(Deployment, "AIProjectDeployment", "csharp");
-@@clientName(DeploymentType, "AIProjectDeploymentType", "csharp");
-@@clientName(FieldMapping, "AIProjectIndexFieldMapping", "csharp");
-@@clientName(Index, "AIProjectIndex", "csharp");
-@@clientName(CosmosDBIndex, "AIProjectCosmosDBIndex", "csharp");
-@@clientName(BaseCredentials, "AIProjectConnectionBaseCredential", "csharp");
-@@clientName(ApiKeyCredentials,
-  "AIProjectConnectionApiKeyCredential",
-  "csharp"
-);
-@@clientName(CustomCredential, "AIProjectConnectionCustomCredential", "csharp");
-@@clientName(EntraIDCredentials,
-  "AIProjectConnectionEntraIdCredential",
-  "csharp"
-);
-@@clientName(SASCredentials, "AIProjectConnectionSasCredential", "csharp");
-@@clientName(DatasetVersion, "AIProjectDataset", "csharp");
-@@clientName(FileDatasetVersion, "FileDataset", "csharp");
-@@clientName(FolderDatasetVersion, "FolderDataset", "csharp");
-
-// Do not use terms "request" or "response" in C# class names as these are REST API terms
-@@clientName(PendingUploadRequest, "PendingUploadConfiguration", "csharp");
-@@clientName(PendingUploadResponse, "PendingUploadResult", "csharp");
-
-// Less generic names for C# subclients
-@@clientName(Connections, "AIProjectConnectionsOperations", "csharp");
-@@clientName(Datasets, "AIProjectDatasetsOperations", "csharp");
-@@clientName(Deployments, "AIProjectDeploymentsOperations", "csharp");
-@@clientName(Indexes, "AIProjectIndexesOperations", "csharp");
-
-// Need to explicitly make all get and list methods include the object name for C#
-@@clientName(Connections.get, "getConnection", "csharp");
-@@clientName(Connections.getWithCredentials,
-  "getConnectionWithCredentials",
-  "csharp"
-);
-@@clientName(Connections.list, "listConnections", "csharp");
-@@clientName(Datasets.getVersion, "getDataset", "csharp");
-@@clientName(Datasets.listLatest, "listDatasets", "csharp");
-@@clientName(Datasets.listVersions, "listDatasetVersions", "csharp");
-@@clientName(Deployments.get, "getDeployment", "csharp");
-@@clientName(Deployments.list, "listDeployments", "csharp");
-@@clientName(Indexes.getVersion, "getIndex", "csharp");
-@@clientName(Indexes.listLatest, "listIndexes", "csharp");
-@@clientName(Indexes.listVersions, "listIndexVersions", "csharp");
-
-// Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
-// input parameter that calls either on these two.
-@@access(Connections.get, Access.internal);
-@@access(Connections.getWithCredentials, Access.internal);
