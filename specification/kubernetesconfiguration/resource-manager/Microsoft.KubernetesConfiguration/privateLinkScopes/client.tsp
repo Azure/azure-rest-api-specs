@@ -20,30 +20,3 @@ using Microsoft.KubernetesConfiguration;
   "PrivateLinkScopeProperties",
   "java"
 );
-@@clientName(KubernetesConfigurationPrivateLinkScope,
-  "PrivateLinkScope",
-  "java"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
-  "ConnectionProperties",
-  "java"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
-  "ConnectionProvisioningState",
-  "java"
-);
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus,
-  "ServiceConnectionStatus",
-  "java"
-);
-@@clientName(KubernetesConfigurationPrivateLinkScopes, "Scopes", "java");
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResult,
-  "ConnectionListResult",
-  "java"
-);
-@@clientName(PrivateEndpointConnections, "Connections", "java");
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResult,
-  "ResourceListResult",
-  "java"
-);
-@@clientName(PrivateLinkResources, "Resources", "java");
