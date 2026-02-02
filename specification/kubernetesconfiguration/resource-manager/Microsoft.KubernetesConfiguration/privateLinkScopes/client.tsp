@@ -23,3 +23,7 @@ using Azure.ClientGenerator.Core;
   "Connections",
   "java"
 );
+@@clientName(Microsoft.KubernetesConfiguration.PrivateLinkResources,
+  "Resources",
+  "java"
+);
