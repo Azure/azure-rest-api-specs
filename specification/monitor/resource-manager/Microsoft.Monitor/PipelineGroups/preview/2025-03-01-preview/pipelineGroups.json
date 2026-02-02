@@ -741,10 +741,6 @@
         "azureMonitorWorkspaceLogs": {
           "$ref": "#/definitions/AzureMonitorWorkspaceLogsExporter",
           "description": "Azure Monitor Workspace Logs specific configurations."
-        },
-        "tcp": {
-          "$ref": "#/definitions/TcpExporter",
-          "description": "TCP based exporter. Used for pipelineGroup exporter."
         }
       },
       "required": [
@@ -1302,7 +1298,7 @@
         },
         "otlp": {
           "$ref": "#/definitions/OtlpReceiver",
-          "description": "OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers."
+          "description": "OTLP receiver configurations. This field is mandatory for OTLP receivers."
         },
         "udp": {
           "$ref": "#/definitions/UdpReceiver",
@@ -1319,7 +1315,6 @@
       "description": "The receiver type.",
       "enum": [
         "Syslog",
-        "Ama",
         "OTLP",
         "UDP"
       ],
@@ -1331,11 +1326,6 @@
             "name": "Syslog",
             "value": "Syslog",
             "description": "Linux syslog."
-          },
-          {
-            "name": "Ama",
-            "value": "Ama",
-            "description": "Receives data from azure monitor agent receiver."
           },
           {
             "name": "OTLP",
@@ -1543,20 +1533,6 @@
       },
       "required": [
         "endpoint"
-      ]
-    },
-    "TcpExporter": {
-      "type": "object",
-      "description": "Base exporter using TCP as transport protocol.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "TCP url to export.",
-          "pattern": "^(https?)://[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$"
-        }
-      },
-      "required": [
-        "url"
       ]
     },
     "TlsConfiguration": {

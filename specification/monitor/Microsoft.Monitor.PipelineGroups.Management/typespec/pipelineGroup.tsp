@@ -91,6 +91,12 @@ model Receiver {
   syslog?: SyslogReceiver;
 
   @doc("OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers.")
+  @renamedFrom(Microsoft.Monitor.Versions.v2025_03_01_preview, "otlp")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  otlpv20241001preview?: OtlpReceiver;
+
+  @doc("OTLP receiver configurations. This field is mandatory for OTLP receivers.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   otlp?: OtlpReceiver;
 
   @doc("UDP receiver configurations. This field is mandatory for UDP receivers.")
@@ -105,6 +111,7 @@ union ReceiverType {
   Syslog: "Syslog",
 
   @doc("Receives data from azure monitor agent receiver.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   Ama: "Ama",
 
   @doc("Receives data from another pipeline group.")
@@ -168,6 +175,7 @@ model Exporter {
   azureMonitorWorkspaceLogs?: AzureMonitorWorkspaceLogsExporter;
 
   @doc("TCP based exporter. Used for pipelineGroup exporter.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   tcp?: TcpExporter;
 }
 
