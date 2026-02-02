@@ -3144,7 +3144,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'FreeServices' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/FreeServices"
             }
@@ -3158,6 +3158,11 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "URL for checking the ongoing status of the operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -4215,7 +4220,7 @@
         },
         "balanceVersion": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created.",
           "readOnly": true
         },
@@ -4337,6 +4342,10 @@
               }
             ]
           }
+        },
+        "systemId": {
+          "type": "string",
+          "description": "This is the globally unique identifier of the credit which will not change for its lifetime."
         }
       }
     },
@@ -5257,7 +5266,7 @@
       "properties": {
         "code": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "The reason code for credit.",
           "readOnly": true
         },
@@ -8590,7 +8599,7 @@
         },
         "balanceVersion": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created."
         },
         "systemId": {

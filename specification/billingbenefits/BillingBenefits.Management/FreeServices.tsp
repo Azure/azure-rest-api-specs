@@ -76,13 +76,7 @@ interface FreeServicesOperations {
   /**
    * Create a free service.
    */
-  create is ArmResourceCreateOrReplaceAsync<
-    FreeServices,
-    Response = ArmResponse<FreeServices> | ArmResourceCreatedResponse<
-      FreeServices,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = FreeServices>
-    >
-  >;
+  create is ArmResourceCreateOrReplaceAsync<FreeServices>;
 
   /**
    * Update a free service.

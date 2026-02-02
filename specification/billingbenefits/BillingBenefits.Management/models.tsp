@@ -14,25 +14,6 @@ using TypeSpec.Versioning;
 namespace Microsoft.BillingBenefits;
 
 /**
- * Custom LRO headers without format to match legacy swagger output
- */
-model CustomArmAsyncOperationHeader<FinalResult = void> {
-  @header("Azure-AsyncOperation")
-  @doc("URL for checking the ongoing status of the operation.")
-  azureAsyncOperation?: string;
-}
-
-model CustomArmCombinedLroHeaders<FinalResult = void> {
-  @header("Azure-AsyncOperation")
-  @doc("URL for checking the ongoing status of the operation.")
-  azureAsyncOperation?: string;
-
-  @header("Location")
-  @doc("Location URI to poll for result.")
-  location?: string;
-}
-
-/**
  * Represents the result of listing savings plan models
  */
 model SavingsPlanModelListResult {
@@ -2191,7 +2172,7 @@ model Shortfall {
   /**
    * Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created.
    */
-  balanceVersion?: float64;
+  balanceVersion?: float32;
 
   /**
    * This is an identifier of the shortfall which will not change for its lifetime.
@@ -2556,7 +2537,7 @@ model CreditReason {
    * The reason code for credit.
    */
   @visibility(Lifecycle.Read)
-  code?: float64;
+  code?: float32;
 
   /**
    * The free string description of the credit.
@@ -2966,7 +2947,7 @@ model Award {
    * Points to BalanceVersion document that indicates the remaining commitment balance when the credit was created.
    */
   @visibility(Lifecycle.Read)
-  balanceVersion?: float64;
+  balanceVersion?: float32;
 
   /**
    * Duration for which the benefit is active. Will be in format P{int}M or P{int}Y. Any values representing up to 12 years are valid. Upper limit examples: P144M, P12Y.
@@ -3109,6 +3090,11 @@ model BenefitValidateResponseProperty {
       type: "Microsoft.BillingBenefits/maccs";
     }
   ]>;
+
+  /**
+   * This is the globally unique identifier of the credit which will not change for its lifetime.
+   */
+  systemId?: string;
 }
 
 /**
