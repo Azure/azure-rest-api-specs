@@ -146,3 +146,9 @@ namespace Azure.AI.Projects;
 
 // Evaluators
 @@access(EvaluatorDefinitionType, Access.public);
+
+// --------------------------------------------------------------------------------
+// Schedules sub‐client
+// --------------------------------------------------------------------------------
+
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
