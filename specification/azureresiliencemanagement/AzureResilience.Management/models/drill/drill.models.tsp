@@ -533,7 +533,7 @@ model DrillPatchProperties {
 
 @doc("Additional properties for Failover.")
 @added(Versions.v2026_03_01_preview)
-model ValidateForExecuteProperties {
+model ValidateForExecutionProperties {
   @doc("Physiscal Source locations from where resources to be failed-over or faulted.")
   @added(Versions.v2026_03_01_preview)
   sourceLocations: string[];
@@ -541,10 +541,10 @@ model ValidateForExecuteProperties {
 
 @doc("Request body of the Validate For Execute Action of Drill.")
 @added(Versions.v2026_03_01_preview)
-model ValidateForExecuteRequest {
+model ValidateForExecutionRequest {
   @doc("Additional properties for Validate for execute.")
   @added(Versions.v2026_03_01_preview)
-  validateForExecuteProperties?: ValidateForExecuteProperties;
+  validateForExecutionProperties?: ValidateForExecutionProperties;
 }
 
 @doc("Qualified resource.")
@@ -641,7 +641,7 @@ model ResourceQualificationDetails {
   drillsNotQualifiedReasons?: DrillResourceNonQualificationReasons[];
 }
 
-@doc("Details of qualified resources for validateForExecute operation.")
+@doc("Details of qualified resources for validateForExecution operation.")
 @added(Versions.v2026_03_01_preview)
 model DrillResourceQualification {
   @doc("Drill resource.")
@@ -655,9 +655,9 @@ model DrillResourceQualification {
   resourceQualificationDetails: ResourceQualificationDetails;
 }
 
-@doc("ValidateForExecute post action response.")
+@doc("ValidateForExecution post action response.")
 @added(Versions.v2026_03_01_preview)
-model ValidateForExecuteResponse {
+model ValidateForExecutionResponse {
   @doc("Qualification details of resources for the operation.")
   @added(Versions.v2026_03_01_preview)
   @identifiers(#[])

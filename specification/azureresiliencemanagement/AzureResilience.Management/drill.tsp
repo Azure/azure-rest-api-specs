@@ -55,8 +55,8 @@ interface Drills {
   @doc("This returns eligible resource to be faulted or failed over.")
   validateForExecution is ArmResourceActionAsync<
     Drill,
-    ValidateForExecuteRequest,
-    ValidateForExecuteResponse,
+    ValidateForExecutionRequest,
+    ValidateForExecutionResponse,
     ServiceGroupAndRequestHeadersParameters,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &

@@ -2258,7 +2258,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ValidateForExecuteRequest"
+              "$ref": "#/definitions/ValidateForExecutionRequest"
             }
           }
         ],
@@ -2266,7 +2266,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateForExecuteResponse"
+              "$ref": "#/definitions/ValidateForExecutionResponse"
             }
           },
           "202": {
@@ -6567,7 +6567,7 @@
     },
     "DrillResourceQualification": {
       "type": "object",
-      "description": "Details of qualified resources for validateForExecute operation.",
+      "description": "Details of qualified resources for validateForExecution operation.",
       "properties": {
         "qualifiedResource": {
           "$ref": "#/definitions/QualifiedResource",
@@ -11194,7 +11194,7 @@
         ]
       }
     },
-    "ValidateForExecuteProperties": {
+    "ValidateForExecutionProperties": {
       "type": "object",
       "description": "Additional properties for Failover.",
       "properties": {
@@ -11210,19 +11210,19 @@
         "sourceLocations"
       ]
     },
-    "ValidateForExecuteRequest": {
+    "ValidateForExecutionRequest": {
       "type": "object",
       "description": "Request body of the Validate For Execute Action of Drill.",
       "properties": {
-        "validateForExecuteProperties": {
-          "$ref": "#/definitions/ValidateForExecuteProperties",
+        "validateForExecutionProperties": {
+          "$ref": "#/definitions/ValidateForExecutionProperties",
           "description": "Additional properties for Validate for execute."
         }
       }
     },
-    "ValidateForExecuteResponse": {
+    "ValidateForExecutionResponse": {
       "type": "object",
-      "description": "ValidateForExecute post action response.",
+      "description": "ValidateForExecution post action response.",
       "properties": {
         "drillResourceQualifications": {
           "type": "array",
