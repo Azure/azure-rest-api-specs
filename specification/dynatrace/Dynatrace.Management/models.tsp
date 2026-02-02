@@ -945,6 +945,16 @@ model PlanData {
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   effectiveDate?: utcDateTime;
+
+  /**
+   * offer id as published by Dynatrace
+   */
+  offerId?: string;
+
+  /**
+   * publisher id as published by Dynatrace
+   */
+  publisherId?: string;
 }
 
 /**
@@ -1081,6 +1091,11 @@ model MarketplaceSaaSResourceDetailsResponse {
    * Id of the plan
    */
   planId?: string;
+
+  /**
+   * Id of the offer
+   */
+  offerId?: string;
 
   /**
    * Marketplace subscription status
