@@ -74,6 +74,33 @@ options:
       - where:
           verb: Set
         remove: true
+      - where:
+          subject: Publisher
+        remove: true
+      - where:
+          subject: Offer
+          variant: ^List1$
+        remove: true
+      - where:
+          subject: OfferAccessToken
+          parameter-name: EgeMarketPlaceResourceId
+        set:
+          parameter-name: EdgeMarketplaceResourceId
+      - where:
+          subject: OfferAccessToken
+          parameter-name: EdgeMarketPlaceRegion
+        set:
+          parameter-name: EdgeMarketplaceRegion
+      - where:
+          subject: OfferAccessToken
+          parameter-name: MarketPlaceSku
+        set:
+          parameter-name: MarketplaceSku
+      - where:
+          subject: OfferAccessToken
+          parameter-name: MarketPlaceSkuVersion
+        set:
+          parameter-name: MarketplaceSkuVersion
 
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.EdgeMarketplace"
