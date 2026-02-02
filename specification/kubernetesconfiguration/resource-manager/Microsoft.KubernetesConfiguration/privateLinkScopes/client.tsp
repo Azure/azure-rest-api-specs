@@ -32,3 +32,7 @@ using Azure.ClientGenerator.Core;
   "Scopes",
   "java"
 );
+@@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScope,
+  "Scope",
+  "java"
+);
