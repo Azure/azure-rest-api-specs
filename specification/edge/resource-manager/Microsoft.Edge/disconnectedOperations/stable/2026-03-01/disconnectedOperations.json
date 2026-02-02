@@ -1,0 +1,2105 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "disconnected operations service",
+    "version": "2026-03-01",
+    "description": "Disconnected operations service API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DisconnectedOperations"
+    },
+    {
+      "name": "Images"
+    },
+    {
+      "name": "Artifacts"
+    },
+    {
+      "name": "HardwareSettings"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/disconnectedOperations": {
+      "get": {
+        "operationId": "DisconnectedOperations_ListBySubscription",
+        "tags": [
+          "DisconnectedOperations"
+        ],
+        "description": "List DisconnectedOperation resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DisconnectedOperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DisconnectedOperations_ListBySubscription": {
+            "$ref": "./examples/DisconnectedOperations_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations": {
+      "get": {
+        "operationId": "DisconnectedOperations_ListByResourceGroup",
+        "tags": [
+          "DisconnectedOperations"
+        ],
+        "description": "List DisconnectedOperation resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DisconnectedOperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DisconnectedOperations_ListByResourceGroup": {
+            "$ref": "./examples/DisconnectedOperations_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}": {
+      "get": {
+        "operationId": "DisconnectedOperations_Get",
+        "tags": [
+          "DisconnectedOperations"
+        ],
+        "description": "Get a DisconnectedOperation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DisconnectedOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DisconnectedOperations_Get": {
+            "$ref": "./examples/DisconnectedOperations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DisconnectedOperations_CreateOrUpdate",
+        "tags": [
+          "DisconnectedOperations"
+        ],
+        "description": "Create a DisconnectedOperation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DisconnectedOperation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DisconnectedOperation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DisconnectedOperation"
+            }
+          },
+          "201": {
+            "description": "Resource 'DisconnectedOperation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DisconnectedOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DisconnectedOperations_CreateOrUpdate": {
+            "$ref": "./examples/DisconnectedOperations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DisconnectedOperations_Update",
+        "tags": [
+          "DisconnectedOperations"
+        ],
+        "description": "Update a DisconnectedOperation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DisconnectedOperationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DisconnectedOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DisconnectedOperations_Update": {
+            "$ref": "./examples/DisconnectedOperations_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DisconnectedOperations_Delete",
+        "tags": [
+          "DisconnectedOperations"
+        ],
+        "description": "Delete a DisconnectedOperation",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DisconnectedOperations_Delete": {
+            "$ref": "./examples/DisconnectedOperations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/hardwareSettings": {
+      "get": {
+        "operationId": "HardwareSettings_ListByParent",
+        "tags": [
+          "HardwareSettings"
+        ],
+        "description": "List by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HardwareSettingListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HardwareSettings_ListByParent_MaximumSet": {
+            "$ref": "./examples/HardwareSettings_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/hardwareSettings/{hardwareSettingName}": {
+      "get": {
+        "operationId": "HardwareSettings_Get",
+        "tags": [
+          "HardwareSettings"
+        ],
+        "description": "Get the hardware settings resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "hardwareSettingName",
+            "in": "path",
+            "description": "The name of the HardwareSetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HardwareSetting"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HardwareSettings_Get_MaximumSet": {
+            "$ref": "./examples/HardwareSettings_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HardwareSettings_CreateOrUpdate",
+        "tags": [
+          "HardwareSettings"
+        ],
+        "description": "Create or update hardware settings",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "hardwareSettingName",
+            "in": "path",
+            "description": "The name of the HardwareSetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HardwareSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HardwareSetting' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HardwareSetting"
+            }
+          },
+          "201": {
+            "description": "Resource 'HardwareSetting' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HardwareSetting"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HardwareSettings_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/HardwareSettings_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HardwareSettings_Delete",
+        "tags": [
+          "HardwareSettings"
+        ],
+        "description": "Delete hardware settings",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "hardwareSettingName",
+            "in": "path",
+            "description": "The name of the HardwareSetting",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HardwareSettings_Delete_MaximumSet": {
+            "$ref": "./examples/HardwareSettings_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/images": {
+      "get": {
+        "operationId": "Images_ListAll",
+        "tags": [
+          "Images"
+        ],
+        "description": "List by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipQueryParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImageListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_ListAll": {
+            "$ref": "./examples/Images_ListAll_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/images/{imageName}": {
+      "get": {
+        "operationId": "Images_Get",
+        "tags": [
+          "Images"
+        ],
+        "description": "Get the resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the Image",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_Get": {
+            "$ref": "./examples/Images_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/images/{imageName}/artifacts": {
+      "get": {
+        "operationId": "Artifacts_ListByParent",
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "List by parent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the Image",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_ListByParent": {
+            "$ref": "./examples/Artifact_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/images/{imageName}/artifacts/{artifactName}": {
+      "get": {
+        "operationId": "Artifacts_Get",
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "Get the resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the Image",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "artifactName",
+            "in": "path",
+            "description": "The name of the Artifact",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_Get": {
+            "$ref": "./examples/Artifacts_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/images/{imageName}/artifacts/{artifactName}/listDownloadUri": {
+      "post": {
+        "operationId": "Artifacts_ListDownloadUri",
+        "tags": [
+          "Artifacts"
+        ],
+        "description": "get artifact download link.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the Image",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "artifactName",
+            "in": "path",
+            "description": "The name of the Artifact",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactDownloadResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifacts_ListDownloadUri": {
+            "$ref": "./examples/Artifact_ListDownloadUri_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/images/{imageName}/listDownloadUri": {
+      "post": {
+        "operationId": "Images_ListDownloadUri",
+        "tags": [
+          "Images"
+        ],
+        "description": "get deployment manifest.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "imageName",
+            "in": "path",
+            "description": "The name of the Image",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ImageDownloadResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Images_ListDownloadUri": {
+            "$ref": "./examples/Images_ListDownloadUri_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Edge/disconnectedOperations/{name}/listDeploymentManifest": {
+      "post": {
+        "operationId": "DisconnectedOperations_ListDeploymentManifest",
+        "tags": [
+          "DisconnectedOperations"
+        ],
+        "description": "get deployment manifest.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DisconnectedOperationDeploymentManifest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DisconnectedOperations_ListDeploymentManifest": {
+            "$ref": "./examples/DisconnectedOperations_ListDeploymentManifest_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Artifact": {
+      "type": "object",
+      "description": "Disconnected operations artifact resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArtifactProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ArtifactDownloadResult": {
+      "type": "object",
+      "description": "The artifact download properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state",
+          "readOnly": true
+        },
+        "artifactOrder": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The artifact display order",
+          "readOnly": true
+        },
+        "title": {
+          "type": "string",
+          "description": "The artifact title",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The artifact description",
+          "readOnly": true
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The artifact size in MB",
+          "readOnly": true
+        },
+        "downloadLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The download uri",
+          "readOnly": true
+        },
+        "linkExpiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The download link expiry time",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "artifactOrder",
+        "title",
+        "description",
+        "downloadLink",
+        "linkExpiry"
+      ]
+    },
+    "ArtifactListResult": {
+      "type": "object",
+      "description": "The response of a Artifact list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Artifact items on this page",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ArtifactProperties": {
+      "type": "object",
+      "description": "The artifact properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state",
+          "readOnly": true
+        },
+        "artifactOrder": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The artifact display order",
+          "readOnly": true
+        },
+        "title": {
+          "type": "string",
+          "description": "The artifact title",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The artifact description",
+          "readOnly": true
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The artifact size in MB",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "artifactOrder",
+        "title",
+        "description"
+      ]
+    },
+    "AutoRenew": {
+      "type": "string",
+      "description": "Auto renew status",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AutoRenew",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Auto renew is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Auto renew is disabled."
+          }
+        ]
+      }
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "BenefitPlanStatus": {
+      "type": "string",
+      "description": "Benefit plans status",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "BenefitPlanStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Benefit plan is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Benefit plan is disabled."
+          }
+        ]
+      }
+    },
+    "BenefitPlans": {
+      "type": "object",
+      "description": "The benefit plans",
+      "properties": {
+        "azureHybridWindowsServerBenefit": {
+          "$ref": "#/definitions/BenefitPlanStatus",
+          "description": "Azure Hybrid Windows Server Benefit plan"
+        },
+        "windowsServerVmCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Windows Server VMs to license under the Azure Hybrid Benefit plan",
+          "minimum": 1
+        }
+      }
+    },
+    "BillingConfiguration": {
+      "type": "object",
+      "description": "The billing configuration",
+      "properties": {
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenew",
+          "description": "The auto renew setting"
+        },
+        "billingStatus": {
+          "$ref": "#/definitions/BillingStatus",
+          "description": "The billing status",
+          "readOnly": true
+        },
+        "current": {
+          "$ref": "#/definitions/BillingPeriod",
+          "description": "The current billing configuration"
+        },
+        "upcoming": {
+          "$ref": "#/definitions/BillingPeriod",
+          "description": "The upcoming billing configuration",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "autoRenew",
+        "billingStatus",
+        "current"
+      ]
+    },
+    "BillingConfigurationUpdate": {
+      "type": "object",
+      "description": "The billing configuration",
+      "properties": {
+        "autoRenew": {
+          "$ref": "#/definitions/AutoRenew",
+          "description": "The auto renew setting"
+        },
+        "current": {
+          "$ref": "#/definitions/BillingPeriodUpdate",
+          "description": "The current billing configuration"
+        },
+        "upcoming": {
+          "$ref": "#/definitions/BillingPeriodUpdate",
+          "description": "The upcoming billing configuration",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "BillingModel": {
+      "type": "string",
+      "description": "Billing model",
+      "enum": [
+        "Capacity"
+      ],
+      "x-ms-enum": {
+        "name": "BillingModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Capacity",
+            "value": "Capacity",
+            "description": "Billed on capacity."
+          }
+        ]
+      }
+    },
+    "BillingPeriod": {
+      "type": "object",
+      "description": "The billing period",
+      "properties": {
+        "cores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of cores"
+        },
+        "pricingModel": {
+          "$ref": "#/definitions/PricingModel",
+          "description": "The pricing model"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The billing start date",
+          "readOnly": true
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The billing end date",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "cores",
+        "pricingModel"
+      ]
+    },
+    "BillingPeriodUpdate": {
+      "type": "object",
+      "description": "The billing period",
+      "properties": {
+        "cores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of cores"
+        },
+        "pricingModel": {
+          "$ref": "#/definitions/PricingModel",
+          "description": "The pricing model"
+        }
+      }
+    },
+    "BillingStatus": {
+      "type": "string",
+      "description": "Billing status",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "Stopped"
+      ],
+      "x-ms-enum": {
+        "name": "BillingStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Billing is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Billing is disabled."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "Billing is stopped."
+          }
+        ]
+      }
+    },
+    "ConnectionIntent": {
+      "type": "string",
+      "description": "Connection Intent",
+      "enum": [
+        "Connected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Device is connected to cloud."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Device is disconnected from cloud."
+          }
+        ]
+      }
+    },
+    "ConnectionStatus": {
+      "type": "string",
+      "description": "Connection status",
+      "enum": [
+        "Connected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Connected",
+            "value": "Connected",
+            "description": "Device is connected to cloud."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Device is disconnected from cloud."
+          }
+        ]
+      }
+    },
+    "DisconnectedOperation": {
+      "type": "object",
+      "description": "Disconnected operation resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DisconnectedOperationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DisconnectedOperationDeploymentManifest": {
+      "type": "object",
+      "description": "The disconnected operation manifest",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource Id of the disconnected operations resource",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/disconnectedOperations"
+              }
+            ]
+          }
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The resource name",
+          "readOnly": true
+        },
+        "stampId": {
+          "type": "string",
+          "description": "The unique Id of the stamp",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location",
+          "readOnly": true
+        },
+        "billingModel": {
+          "$ref": "#/definitions/BillingModel",
+          "description": "The billing model",
+          "readOnly": true
+        },
+        "connectionIntent": {
+          "$ref": "#/definitions/ConnectionIntent",
+          "description": "The connection intent",
+          "readOnly": true
+        },
+        "cloud": {
+          "type": "string",
+          "description": "The cloud in which the resource is registered",
+          "readOnly": true
+        },
+        "billingConfiguration": {
+          "$ref": "#/definitions/BillingConfiguration",
+          "description": "The billing configuration",
+          "readOnly": true
+        },
+        "benefitPlans": {
+          "$ref": "#/definitions/BenefitPlans",
+          "description": "The benefit plans",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "resourceId",
+        "resourceName",
+        "stampId",
+        "location",
+        "billingModel",
+        "connectionIntent"
+      ]
+    },
+    "DisconnectedOperationListResult": {
+      "type": "object",
+      "description": "The response of a DisconnectedOperation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DisconnectedOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/DisconnectedOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DisconnectedOperationProperties": {
+      "type": "object",
+      "description": "The disconnected operation properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state",
+          "readOnly": true
+        },
+        "stampId": {
+          "type": "string",
+          "description": "The unique Id of the stamp",
+          "readOnly": true
+        },
+        "billingModel": {
+          "$ref": "#/definitions/BillingModel",
+          "description": "The billing model",
+          "readOnly": true
+        },
+        "connectionIntent": {
+          "$ref": "#/definitions/ConnectionIntent",
+          "description": "The connection intent",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "connectionStatus": {
+          "$ref": "#/definitions/ConnectionStatus",
+          "description": "The connection status",
+          "readOnly": true
+        },
+        "registrationStatus": {
+          "$ref": "#/definitions/RegistrationStatus",
+          "description": "The registration intent",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "deviceVersion": {
+          "type": "string",
+          "description": "The device version",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "billingConfiguration": {
+          "$ref": "#/definitions/BillingConfiguration",
+          "description": "The billing configuration"
+        },
+        "benefitPlans": {
+          "$ref": "#/definitions/BenefitPlans",
+          "description": "The benefit plans"
+        }
+      },
+      "required": [
+        "stampId",
+        "billingModel",
+        "connectionIntent"
+      ]
+    },
+    "DisconnectedOperationUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the DisconnectedOperation.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/DisconnectedOperationUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "DisconnectedOperationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the DisconnectedOperation.",
+      "properties": {
+        "connectionIntent": {
+          "$ref": "#/definitions/ConnectionIntent",
+          "description": "The connection intent",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "registrationStatus": {
+          "$ref": "#/definitions/RegistrationStatus",
+          "description": "The registration intent",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "deviceVersion": {
+          "type": "string",
+          "description": "The device version",
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
+        },
+        "billingConfiguration": {
+          "$ref": "#/definitions/BillingConfigurationUpdate",
+          "description": "The billing configuration"
+        },
+        "benefitPlans": {
+          "$ref": "#/definitions/BenefitPlans",
+          "description": "The benefit plans"
+        }
+      }
+    },
+    "HardwareSetting": {
+      "type": "object",
+      "description": "Hardware settings resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HardwareSettingProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HardwareSettingListResult": {
+      "type": "object",
+      "description": "The response of a HardwareSetting list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HardwareSetting items on this page",
+          "items": {
+            "$ref": "#/definitions/HardwareSetting"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HardwareSettingProperties": {
+      "type": "object",
+      "description": "The hardware setting properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state",
+          "readOnly": true
+        },
+        "totalCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of cores"
+        },
+        "diskSpaceInGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The disk space in GB"
+        },
+        "memoryInGb": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The memory in GB"
+        },
+        "oem": {
+          "type": "string",
+          "description": "The OEM"
+        },
+        "hardwareSku": {
+          "type": "string",
+          "description": "The hardware SKU"
+        },
+        "nodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of nodes"
+        },
+        "versionAtRegistration": {
+          "type": "string",
+          "description": "The active version at registration"
+        },
+        "solutionBuilderExtension": {
+          "type": "string",
+          "description": "The solution builder extension at registration"
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "The unique Id of the device"
+        }
+      },
+      "required": [
+        "totalCores",
+        "diskSpaceInGb",
+        "memoryInGb",
+        "oem",
+        "hardwareSku",
+        "nodes",
+        "versionAtRegistration",
+        "solutionBuilderExtension",
+        "deviceId"
+      ]
+    },
+    "Image": {
+      "type": "object",
+      "description": "Disconnected operations image resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ImageProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ImageDownloadResult": {
+      "type": "object",
+      "description": "The image download properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state",
+          "readOnly": true
+        },
+        "releaseVersion": {
+          "type": "string",
+          "description": "The version of the package in the format 1.1.1",
+          "readOnly": true
+        },
+        "releaseDisplayName": {
+          "type": "string",
+          "description": "The release name",
+          "readOnly": true
+        },
+        "releaseNotes": {
+          "type": "string",
+          "description": "The release notes",
+          "readOnly": true
+        },
+        "releaseDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The release date",
+          "readOnly": true
+        },
+        "releaseType": {
+          "$ref": "#/definitions/ReleaseType",
+          "description": "The release type",
+          "readOnly": true
+        },
+        "compatibleVersions": {
+          "type": "array",
+          "description": "The versions that are compatible for this update package.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "updateProperties": {
+          "$ref": "#/definitions/ImageUpdateProperties",
+          "description": "Image update properties for update release type image.",
+          "readOnly": true
+        },
+        "transactionId": {
+          "type": "string",
+          "description": "The unique Id of the download",
+          "readOnly": true
+        },
+        "downloadLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The download uri",
+          "readOnly": true
+        },
+        "linkExpiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The download link expiry time",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "releaseVersion",
+        "releaseDisplayName",
+        "releaseNotes",
+        "releaseDate",
+        "releaseType",
+        "transactionId",
+        "downloadLink",
+        "linkExpiry"
+      ]
+    },
+    "ImageListResult": {
+      "type": "object",
+      "description": "The response of a Image list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Image items on this page",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ImageProperties": {
+      "type": "object",
+      "description": "The image properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The resource provisioning state",
+          "readOnly": true
+        },
+        "releaseVersion": {
+          "type": "string",
+          "description": "The version of the package in the format 1.1.1",
+          "readOnly": true
+        },
+        "releaseDisplayName": {
+          "type": "string",
+          "description": "The release name",
+          "readOnly": true
+        },
+        "releaseNotes": {
+          "type": "string",
+          "description": "The release notes",
+          "readOnly": true
+        },
+        "releaseDate": {
+          "type": "string",
+          "format": "date",
+          "description": "The release date",
+          "readOnly": true
+        },
+        "releaseType": {
+          "$ref": "#/definitions/ReleaseType",
+          "description": "The release type",
+          "readOnly": true
+        },
+        "compatibleVersions": {
+          "type": "array",
+          "description": "The versions that are compatible for this update package.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "updateProperties": {
+          "$ref": "#/definitions/ImageUpdateProperties",
+          "description": "Image update properties for update release type image.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "releaseVersion",
+        "releaseDisplayName",
+        "releaseNotes",
+        "releaseDate",
+        "releaseType"
+      ]
+    },
+    "ImageUpdateProperties": {
+      "type": "object",
+      "description": "The update properties of the Update Release type Image",
+      "properties": {
+        "systemReboot": {
+          "$ref": "#/definitions/SystemReboot",
+          "description": "Indicates if a system reboot is required after applying the update.",
+          "readOnly": true
+        },
+        "securityUpdates": {
+          "type": "string",
+          "description": "Details of security updates included in this image release.",
+          "readOnly": true
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "The operating system version provided by this image update.",
+          "readOnly": true
+        },
+        "agentVersion": {
+          "type": "string",
+          "description": "The version(s) of the agent software included in this image update.",
+          "readOnly": true
+        },
+        "featureUpdates": {
+          "type": "string",
+          "description": "Details of feature updates included in this image release.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "systemReboot",
+        "securityUpdates",
+        "osVersion",
+        "agentVersion",
+        "featureUpdates"
+      ]
+    },
+    "PricingModel": {
+      "type": "string",
+      "description": "Pricing model",
+      "enum": [
+        "Trial",
+        "Annual"
+      ],
+      "x-ms-enum": {
+        "name": "PricingModel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Trial",
+            "value": "Trial",
+            "description": "Trial pricing model."
+          },
+          {
+            "name": "Annual",
+            "value": "Annual",
+            "description": "Annual pricing model."
+          }
+        ]
+      }
+    },
+    "RegistrationStatus": {
+      "type": "string",
+      "description": "Registration status",
+      "enum": [
+        "Registered",
+        "Unregistered"
+      ],
+      "x-ms-enum": {
+        "name": "RegistrationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Registered",
+            "value": "Registered",
+            "description": "Device is registered to cloud."
+          },
+          {
+            "name": "Unregistered",
+            "value": "Unregistered",
+            "description": "Device is not registered to cloud."
+          }
+        ]
+      }
+    },
+    "ReleaseType": {
+      "type": "string",
+      "description": "Release Type",
+      "enum": [
+        "Install",
+        "Update"
+      ],
+      "x-ms-enum": {
+        "name": "ReleaseType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Install",
+            "value": "Install",
+            "description": "Release is a new install."
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Release is update."
+          }
+        ]
+      }
+    },
+    "SystemReboot": {
+      "type": "string",
+      "description": "System Reboot",
+      "enum": [
+        "Required",
+        "NotRequired"
+      ],
+      "x-ms-enum": {
+        "name": "SystemReboot",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "System reboot is required."
+          },
+          {
+            "name": "NotRequired",
+            "value": "NotRequired",
+            "description": "System reboot is not required."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "FilterQueryParameter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
+    },
+    "SkipQueryParameter": {
+      "name": "$skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skip"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
+    }
+  }
+}
