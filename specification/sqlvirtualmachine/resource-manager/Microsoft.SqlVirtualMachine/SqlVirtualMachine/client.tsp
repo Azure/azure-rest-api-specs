@@ -181,6 +181,7 @@ using Microsoft.SqlVirtualMachine;
   "GetSqlVmsBySqlVmGroup",
   "csharp"
 );
+@@clientName(LeastPrivilegeMode, "SqlVmLeastPrivilegeMode", "csharp");
 @@clientName(SqlVirtualMachine.name, "sqlVmName", "csharp");
 @@clientName(SqlVirtualMachines.update::parameters.properties,
   "patch",
