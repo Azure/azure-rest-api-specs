@@ -29,7 +29,3 @@ using Microsoft.KubernetesConfiguration;
 @@clientName(PrivateEndpointConnections, "Connections", "java");
 @@clientName(PrivateEndpointConnection, "PrivateEndpoint", "java");
 @@clientName(PrivateLinkResources, "Resources", "java");
-
-@@clientName(Microsoft.KubernetesConfiguration, "ScopeClient", "java");
-@@clientName(KubernetesConfigurationPrivateLinkScopes, "ScopesClient", "java");
-@@clientName(PrivateEndpointConnection, "PrivateEndpointConnection", "java");
