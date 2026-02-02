@@ -11,6 +11,11 @@ using Azure.ClientGenerator.Core;
   "PrivateLinkScopesClient",
   "javascript"
 );
+@@clientName(Microsoft.KubernetesConfiguration, "ScopeClient", "java");
+@@clientName(Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopes,
+  "Scopes",
+  "java"
+);
 @@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "python"
