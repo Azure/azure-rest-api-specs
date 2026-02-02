@@ -13,6 +13,20 @@ model ValidationTestRun is ProxyResource<ValidationTestRunProperties> {
   ...ResourceNameParameter<ValidationTestRun>;
 }
 
+@doc("Validation Test Run represents execution instance(s) of a Validation Test instance under execution plan.")
+@added(Versions.v2026_02_01_preview)
+model ValidationTestRunDetails {
+  @doc("The unique identifier for the test run.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("The name of the test run.")
+  name?: string;
+
+  @doc("The properties of the test run.")
+  properties?: ValidationTestRunProperties;
+}
+
 @doc("Validation Test Run properties.")
 model ValidationTestRunProperties {
   @doc("The overall status of the test run.")
@@ -40,7 +54,8 @@ model ValidationTestRunProperties {
   endTimestampInUtc?: utcDateTime;
 
   @doc("Validation test run inputs json")
-  inputsJson: string;
+  @madeOptional(Versions.v2026_02_01_preview)
+  inputsJson?: string;
 
   @doc("Detailed pass information when the test passes.")
   @visibility(Lifecycle.Read)
