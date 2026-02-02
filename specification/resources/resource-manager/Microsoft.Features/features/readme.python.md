@@ -3,6 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
+title: FeatureClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource-features
@@ -16,7 +17,6 @@ modelerfour:
 ```
 
 ``` yaml $(python)
-title: FeatureClient
 namespace: azure.mgmt.resource.features
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource-features/azure/mgmt/resource/features
 ```

@@ -3,6 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
+title: SubscriptionClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource-subscriptions
@@ -16,7 +17,6 @@ modelerfour:
 ```
 
 ``` yaml $(python)
-title: SubscriptionClient
 namespace: azure.mgmt.resource.subscriptions
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource-subscriptions/azure/mgmt/resource/subscriptions
 ```

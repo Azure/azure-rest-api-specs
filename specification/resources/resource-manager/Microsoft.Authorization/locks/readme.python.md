@@ -3,6 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
+title: ManagementLockClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource-locks
@@ -16,7 +17,6 @@ modelerfour:
 ```
 
 ``` yaml $(python)
-title: ManagementLockClient
 namespace: azure.mgmt.resource.locks
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource-locks/azure/mgmt/resource/locks
 ```

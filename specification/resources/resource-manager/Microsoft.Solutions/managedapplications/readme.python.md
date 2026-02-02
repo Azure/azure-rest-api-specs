@@ -3,6 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
+title: ApplicationClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource-managedapplications
@@ -16,7 +17,6 @@ modelerfour:
 ```
 
 ``` yaml $(python)
-title: ApplicationClient
 namespace: azure.mgmt.resource.managedapplications
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource-managedapplications/azure/mgmt/resource/managedapplications
 ```

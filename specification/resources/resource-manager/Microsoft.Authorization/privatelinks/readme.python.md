@@ -3,6 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
+title: ResourcePrivateLinkClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource-privatelinks
@@ -16,7 +17,6 @@ modelerfour:
 ```
 
 ``` yaml $(python)
-title: ResourcePrivateLinkClient
 namespace: azure.mgmt.resource.privatelinks
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource-privatelinks/azure/mgmt/resource/privatelinks
 ```

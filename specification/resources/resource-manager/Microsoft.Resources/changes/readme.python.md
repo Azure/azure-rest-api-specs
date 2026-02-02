@@ -3,6 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
+title: ChangesClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource-changes
@@ -16,7 +17,6 @@ modelerfour:
 ```
 
 ``` yaml $(python)
-title: ChangesClient
 namespace: azure.mgmt.resource.changes
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource-changes/azure/mgmt/resource/changes
 ```

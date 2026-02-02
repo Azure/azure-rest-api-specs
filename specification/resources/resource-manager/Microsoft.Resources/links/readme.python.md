@@ -3,6 +3,7 @@
 These settings apply only when `--python` is specified on the command line.
 
 ``` yaml $(python)
+title: ManagementLinkClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-resource-links
@@ -16,7 +17,6 @@ modelerfour:
 ```
 
 ``` yaml $(python)
-title: ManagementLinkClient
 namespace: azure.mgmt.resource.links
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource-links/azure/mgmt/resource/links
 ```
