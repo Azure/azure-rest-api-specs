@@ -4,28 +4,35 @@ using Azure.ClientGenerator.Core;
 using Microsoft.KubernetesConfiguration;
 
 @@clientLocation(KubernetesConfigurationPrivateLinkScopes.get,
-  "PrivateLinkScopes"
+  "PrivateLinkScopes",
+  "!java"
 );
 @@clientLocation(KubernetesConfigurationPrivateLinkScopes.createOrUpdate,
-  "PrivateLinkScopes"
+  "PrivateLinkScopes",
+  "!java"
 );
 @@clientName(KubernetesConfigurationPrivateLinkScopes.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(KubernetesConfigurationPrivateLinkScopes.updateTags,
-  "PrivateLinkScopes"
+  "PrivateLinkScopes",
+  "!java"
 );
 @@clientName(KubernetesConfigurationPrivateLinkScopes.updateTags::parameters.properties,
-  "PrivateLinkScopeTags"
+  "PrivateLinkScopeTags",
+  "!java"
 );
 @@clientLocation(KubernetesConfigurationPrivateLinkScopes.delete,
-  "PrivateLinkScopes"
+  "PrivateLinkScopes",
+  "!java"
 );
 @@clientLocation(KubernetesConfigurationPrivateLinkScopes.listByResourceGroup,
-  "PrivateLinkScopes"
+  "PrivateLinkScopes",
+  "!java"
 );
 @@clientLocation(KubernetesConfigurationPrivateLinkScopes.list,
-  "PrivateLinkScopes"
+  "PrivateLinkScopes",
+  "!java"
 );
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
