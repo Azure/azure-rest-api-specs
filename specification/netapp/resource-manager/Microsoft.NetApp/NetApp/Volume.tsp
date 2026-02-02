@@ -2189,7 +2189,7 @@ model ListQuotaReportResponse {
    * List of quota reports
    */
   @identifiers(#[])
-  value?: AnfQuotaReport[];
+  value?: QuotaReport[];
 }
 
 /**
@@ -2200,7 +2200,7 @@ model ListQuotaReportResponse {
 @added(Versions.v2025_08_01_preview)
 @removed(Versions.v2025_08_01)
 @added(Versions.v2025_09_01_preview)
-model AnfQuotaReport {
+model QuotaReport {
   /**
    * Type of quota
    */
