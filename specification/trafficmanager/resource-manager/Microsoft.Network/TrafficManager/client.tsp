@@ -57,3 +57,90 @@ op getReplace(
   "TrafficManagerManagementClient",
   "javascript, python"
 );
+
+// csharp configurations
+@@clientName(AlwaysServe, "TrafficManagerEndpointAlwaysServeStatus", "csharp");
+@@clientName(CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
+  "TrafficManagerRelativeDnsNameAvailabilityContent",
+  "csharp"
+);
+@@clientName(EndpointPropertiesCustomHeadersItem,
+  "TrafficManagerEndpointCustomHeaderInfo",
+  "csharp"
+);
+@@clientName(EndpointPropertiesSubnetsItem,
+  "TrafficManagerEndpointSubnetInfo",
+  "csharp"
+);
+@@clientName(HeatMapModel, "TrafficManagerHeatMap", "csharp");
+@@clientName(MonitorConfigCustomHeadersItem,
+  "TrafficManagerMonitorConfigCustomHeaderInfo",
+  "csharp"
+);
+@@clientName(MonitorConfigExpectedStatusCodeRangesItem,
+  "ExpectedStatusCodeRangeInfo",
+  "csharp"
+);
+@@clientName(Microsoft.Network.ProxyResource,
+  "TrafficManagerProxyResourceData",
+  "csharp"
+);
+@@clientName(Microsoft.Network.Resource,
+  "TrafficManagerResourceData",
+  "csharp"
+);
+@@clientName(QueryExperience, "TrafficManagerHeatMapQueryExperience", "csharp");
+@@clientName(TrafficFlow, "TrafficManagerHeatMapTrafficFlow", "csharp");
+@@clientName(Microsoft.Network.TrackedResource,
+  "TrafficManagerTrackedResourceData",
+  "csharp"
+);
+@@clientName(TrafficManagerNameAvailability,
+  "TrafficManagerNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(TrafficManagerNameAvailability.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
+@@clientName(UserMetricsModel, "TrafficManagerUserMetrics", "csharp");
+@@clientName(TrafficManagerNameAvailability.reason,
+  "UnavailableReason",
+  "csharp"
+);
+@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
+  "CheckTrafficManagerRelativeDnsNameAvailability",
+  "csharp"
+);
+@@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
+  "CheckTrafficManagerNameAvailabilityV2",
+  "csharp"
+);
+@@alternateType(TrafficManagerNameAvailability.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(CheckTrafficManagerRelativeDnsNameAvailabilityParameters.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(EndpointProperties.targetResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+// @@clientName(Microsoft.Network.RecordType,
+//   "TrafficManagerProfileRecordType",
+//   "csharp"
+// );
+@@alternateType(Microsoft.Network.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Microsoft.Network.Resource.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(HeatMapEndpoint.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
