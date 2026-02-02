@@ -34,8 +34,6 @@ import "./TableServiceProperties.tsp";
 import "./Table.tsp";
 import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./StorageTaskAssignment.tsp";
-import "./StorageConnector.tsp";
-import "./StorageDataShare.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -61,11 +59,6 @@ enum Versions {
    * The 2025-06-01 API version.
    */
   v2025_06_01: "2025-06-01",
-
-  /**
-   * The 2025-08-01 API version.
-   */
-  v2025_08_01: "2025-08-01",
 }
 
 interface Operations
