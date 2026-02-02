@@ -1,6 +1,6 @@
 {
-  "title": "Drills_ValidateForExecute_MaximumSet",
-  "operationId": "Drills_ValidateForExecute",
+  "title": "Drills_ValidateForExecution_MaximumSet",
+  "operationId": "Drills_ValidateForExecution",
   "parameters": {
     "serviceGroupName": "sampleServiceGroupName",
     "api-version": "2026-03-01-preview",
@@ -9,7 +9,7 @@
     "body": {
       "validateForExecuteProperties": {
         "sourceLocations": [
-          "eastus-az1"
+          "eastus2-az1"
         ]
       }
     }
@@ -20,14 +20,14 @@
         "drillResourceQualifications": [
           {
             "qualifiedResource": {
-              "resourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1",
-              "activeLocation": "eastus-az2",
+              "resourceId": "jciv",
+              "activeLocation": "eastus2-az1",
               "recoveryLocation": [
-                "eastus-az3"
+                "eastus2-az3"
               ],
-              "activePhysicalLocation": "eastus-az1",
+              "activePhysicalLocation": "eastus2-az2",
               "recoveryPhysicalLocation": [
-                "eastus-az1"
+                "eastus2-az1"
               ],
               "drillInclusionState": "Excluded",
               "recoveryInclusionState": "Included",
@@ -38,7 +38,7 @@
                   "protectionSolutionType": "AzureNative",
                   "protectionStatus": "Unknown",
                   "resourceId": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
-                  "activeLocation": "westus",
+                  "activeLocation": "eastus2-az2",
                   "recoveryLocations": [
                     "eastus"
                   ],
@@ -87,7 +87,7 @@
               "drillQualificationState": "Qualified",
               "recoveryQualificationState": "Qualified",
               "recoveryNotQualifiedReasons": [
-                "ltputdkdji"
+                "axgjrfpjizvetwmtrtt"
               ],
               "drillsNotQualifiedReasons": [
                 "ResourceNotIncludedInRecoveryPlan"

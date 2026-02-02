@@ -93,7 +93,7 @@ model DrillProperties {
 
   @doc("Last sync time.")
   @visibility(Lifecycle.Read)
-  lastSyncTime?: utcDateTime;
+  lastResyncAndReadinessCheckTime?: utcDateTime;
 
   @doc("Last resync and readiness check time.")
   @added(Versions.v2026_03_01_preview)

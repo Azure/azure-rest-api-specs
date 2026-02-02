@@ -53,7 +53,7 @@ interface Drills {
   @armResourceAction(Drill)
   @post
   @doc("This returns eligible resource to be faulted or failed over.")
-  validateForExecute is ArmResourceActionAsync<
+  validateForExecution is ArmResourceActionAsync<
     Drill,
     ValidateForExecuteRequest,
     ValidateForExecuteResponse,
