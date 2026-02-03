@@ -347,16 +347,17 @@ describe("command-helpers", () => {
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
       });
 
-      // Expected result should have renames added to additions and deletions, and no renames property
+      // Expected result should have renames returned separately
       const expectedResult = {
-        additions: [...mockResult.additions, ...mockResult.renames.map((rename) => rename.to)],
+        additions: mockResult.additions,
         modifications: mockResult.modifications,
-        deletions: [...mockResult.deletions, ...mockResult.renames.map((rename) => rename.from)],
+        deletions: mockResult.deletions,
+        renames: mockResult.renames,
         total:
           mockResult.additions.length +
           mockResult.modifications.length +
           mockResult.deletions.length +
-          mockResult.renames.length * 2,
+          mockResult.renames.length,
       };
 
       expect(result).toEqual(expectedResult);
@@ -375,6 +376,7 @@ describe("command-helpers", () => {
         additions: [],
         modifications: [],
         deletions: [],
+        renames: [],
         total: 0,
       });
     });
@@ -413,19 +415,18 @@ describe("command-helpers", () => {
 
       const result = await getSwaggerDiffs();
 
-      // Only Swagger files should be returned, with renames added to additions and deletions
+      // Only Swagger files should be returned, with renames returned separately
       expect(result).toEqual({
-        additions: [
-          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
-          TEST_CONSTANTS.SWAGGER_PATHS.BAZ,
-          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from valid rename
-        ],
+        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO, TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
         modifications: [TEST_CONSTANTS.SWAGGER_PATHS.QUX_MGMT],
-        deletions: [
-          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
-          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from valid rename
+        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
+        renames: [
+          {
+            from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
+            to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
+          },
         ],
-        total: 6, // 3 additions + 1 modification + 2 deletions (including rename files)
+        total: 5, // 2 additions + 1 modification + 1 deletion + 1 rename
       });
     });
 
@@ -472,21 +473,92 @@ describe("command-helpers", () => {
 
       const result = await getSwaggerDiffs();
 
-      // Renames should be added to additions and deletions, not returned as renames
+      // Renames should be returned separately, not added to additions and deletions
       expect(result).toEqual({
-        additions: [
-          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
-          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from rename.to
-          "specification/newapi/data-plane/stable/2023-01-01/newapi.json", // from rename.to
-        ],
+        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO],
         modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
-        deletions: [
-          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
-          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from rename.from
-          "specification/oldapi/data-plane/stable/2023-01-01/oldapi.json", // from rename.from
+        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
+        renames: [
+          {
+            from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
+            to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
+          },
+          {
+            from: "specification/oldapi/data-plane/stable/2023-01-01/oldapi.json",
+            to: "specification/newapi/data-plane/stable/2023-01-01/newapi.json",
+          },
         ],
-        total: 7, // 3 additions + 1 modification + 3 deletions (including from renames)
+        total: 5, // 1 addition + 1 modification + 1 deletion + 2 renames
       });
+    });
+
+    it.each([
+      {
+        from: "specification/foo/data-plane/Microsoft.Foo/stable/2024-01-01/from.json",
+        to: "specification/foo/data-plane/Microsoft.Foo/stable/2024-01-01/to.json",
+      },
+      {
+        from: "specification/foo/data-plane/MICROSOFT.FOO/stable/2024-01-01/from.json",
+        to: "specification/foo/data-plane/Microsoft.Foo/stable/2024-01-01/to.json",
+      },
+    ])(
+      "should manually match addition and deletion of single spec from same service (case-insensitive)",
+      async ({ from, to }) => {
+        const mockResult = {
+          additions: [to],
+          modifications: [],
+          deletions: [from],
+          renames: [],
+          total: 2,
+        };
+
+        mockGetChangedFilesStatuses.mockResolvedValue(mockResult);
+
+        const result = await getSwaggerDiffs();
+
+        expect(result).toEqual({
+          additions: [],
+          modifications: [],
+          deletions: [],
+          renames: [
+            {
+              from,
+              to,
+            },
+          ],
+          total: 1,
+        });
+      },
+    );
+
+    it.each([
+      { additions: ["to-a1"], deletions: [] },
+      { additions: ["to-a1"], deletions: ["from-b"] },
+      { additions: ["to-a1"], deletions: ["from-a1", "from-a2"] },
+      { additions: [], deletions: ["from-a1"] },
+      { additions: ["to-b"], deletions: ["from-a1"] },
+      { additions: ["to-a1", "to-a2"], deletions: ["from-a1"] },
+      { additions: ["to-a1", "to-a2"], deletions: ["from-a1", "from-a2"] },
+    ])("should not match zero or multiple additions or deletions", async (data) => {
+      const paths = new Map([
+        ["from-a1", "specification/a/data-plane/a/stable/2024-01-01/from-a1.json"],
+        ["from-a2", "specification/a/data-plane/a/stable/2024-01-01/from-a1.json"],
+        ["to-a1", "specification/a/data-plane/a/stable/2024-01-01/to-a1.json"],
+        ["to-a2", "specification/a/data-plane/a/stable/2024-01-01/to-a2.json"],
+        ["from-b", "specification/b/data-plane/b/stable/2024-01-01/from-b.json"],
+        ["to-b", "specification/b/data-plane/b/stable/2024-01-01/to-b.json"],
+      ]);
+
+      let mockResult = {
+        additions: data.additions.map((a) => paths.get(a) || ""),
+        modifications: [],
+        deletions: data.deletions.map((d) => paths.get(d) || ""),
+        renames: [],
+        total: data.additions.length + data.deletions.length,
+      };
+      mockGetChangedFilesStatuses.mockResolvedValue(mockResult);
+      let result = await getSwaggerDiffs();
+      expect(result).toEqual(mockResult);
     });
   });
 

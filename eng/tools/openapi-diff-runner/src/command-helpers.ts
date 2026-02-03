@@ -131,6 +131,7 @@ export async function getSwaggerDiffs(
   additions: string[];
   modifications: string[];
   deletions: string[];
+  renames: { from: string; to: string }[];
   total: number;
 }> {
   try {
@@ -143,22 +144,60 @@ export async function getSwaggerDiffs(
     });
 
     // Filter each array to only include Swagger files using the swagger filter from changed-files.js
-    const filteredAdditions = result.additions.filter(swagger);
+    let filteredAdditions = result.additions.filter(swagger);
     const filteredModifications = result.modifications.filter(swagger);
-    const filteredDeletions = result.deletions.filter(swagger);
-    const filteredRenames = result.renames.filter(
+    let filteredDeletions = result.deletions.filter(swagger);
+    let filteredRenames = result.renames.filter(
       (rename) => swagger(rename.from) && swagger(rename.to),
     );
 
-    // Add renamed files to the additions array and deletions array
-    filteredAdditions.push(...filteredRenames.map((rename) => rename.to));
-    filteredDeletions.push(...filteredRenames.map((rename) => rename.from));
+    // Try to manually match deletions with additions to form renames
+
+    // Store matches in temp array, to avoid modifying "filteredDeletions" while iterating
+    const matchedRenames: { from: string; to: string }[] = [];
+
+    for (const deletion of filteredDeletions) {
+      const deletionDir = path.dirname(deletion).toLowerCase();
+
+      const deletionMatches = filteredDeletions.filter(
+        (d) => path.dirname(d).toLowerCase() === deletionDir,
+      );
+      if (deletionMatches.length > 1) {
+        // If more than one deletion from same folder, we can't match.
+        // Example would be migrating from "a.json, b.json" to "c.json"
+        continue;
+      }
+
+      const additionMatches = filteredAdditions.filter(
+        (a) => path.dirname(a).toLowerCase() === deletionDir,
+      );
+      if (additionMatches.length !== 1) {
+        // If more than one addition ins same folder, we can't match.
+        // Example would be migrating from "a.json" to "b.json, c.json"
+        continue;
+      }
+
+      // Exactly one matching deletion and addition, so treat it like a "git rename"
+      matchedRenames.push({ from: deletion, to: additionMatches[0] });
+    }
+
+    // Update arrays with matchedRenames (if any)
+    const renamesFrom = matchedRenames.map((r) => r.from);
+    const renamesTo = matchedRenames.map((r) => r.to);
+    filteredAdditions = filteredAdditions.filter((a) => !renamesTo.includes(a));
+    filteredDeletions = filteredDeletions.filter((d) => !renamesFrom.includes(d));
+    filteredRenames = filteredRenames.concat(matchedRenames);
 
     return {
       additions: filteredAdditions,
       modifications: filteredModifications,
       deletions: filteredDeletions,
-      total: filteredAdditions.length + filteredModifications.length + filteredDeletions.length,
+      renames: filteredRenames,
+      total:
+        filteredAdditions.length +
+        filteredModifications.length +
+        filteredDeletions.length +
+        filteredRenames.length,
     };
   } catch (error) {
     logError(`Error getting categorized changed files: ${error}`);
@@ -167,6 +206,7 @@ export async function getSwaggerDiffs(
       additions: [],
       modifications: [],
       deletions: [],
+      renames: [],
       total: 0,
     };
   }
