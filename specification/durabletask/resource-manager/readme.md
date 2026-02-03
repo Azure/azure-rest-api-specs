@@ -43,8 +43,12 @@ suppressions:
     from:
       - durabletask.json
     where:
-      - $.definitions.Scheduler
-      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties
+      - $.definitions.SchedulerUpdate.properties
+      - $.definitions.SchedulerProperties
+      - $.definitions.SchedulerPropertiesUpdate
+      - $.definitions.SchedulerProperties.properties
+      - $.definitions.SchedulerPropertiesUpdate.properties
   - code: XMSSecretInResponse
     reason: publicNetworkAccess is not a secret - it is a network configuration setting that controls public endpoint access.
     from:
@@ -71,8 +75,12 @@ suppressions:
     from:
       - durabletask.json
     where:
-      - $.definitions.Scheduler
-      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties
+      - $.definitions.SchedulerUpdate.properties
+      - $.definitions.SchedulerProperties
+      - $.definitions.SchedulerPropertiesUpdate
+      - $.definitions.SchedulerProperties.properties
+      - $.definitions.SchedulerPropertiesUpdate.properties
   - code: XMSSecretInResponse
     reason: publicNetworkAccess is not a secret - it is a network configuration setting that controls public endpoint access.
     from:
@@ -99,8 +107,12 @@ suppressions:
     from:
       - durabletask.json
     where:
-      - $.definitions.Scheduler
-      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties
+      - $.definitions.SchedulerUpdate.properties
+      - $.definitions.SchedulerProperties
+      - $.definitions.SchedulerPropertiesUpdate
+      - $.definitions.SchedulerProperties.properties
+      - $.definitions.SchedulerPropertiesUpdate.properties
   - code: XMSSecretInResponse
     reason: publicNetworkAccess is not a secret - it is a network configuration setting that controls public endpoint access.
     from:
@@ -127,8 +139,12 @@ suppressions:
     from:
       - durabletask.json
     where:
-      - $.definitions.Scheduler
-      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties
+      - $.definitions.SchedulerUpdate.properties
+      - $.definitions.SchedulerProperties
+      - $.definitions.SchedulerPropertiesUpdate
+      - $.definitions.SchedulerProperties.properties
+      - $.definitions.SchedulerPropertiesUpdate.properties
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -144,8 +160,12 @@ suppressions:
     from:
       - durabletask.json
     where:
-      - $.definitions.Scheduler
-      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties
+      - $.definitions.SchedulerUpdate.properties
+      - $.definitions.SchedulerProperties
+      - $.definitions.SchedulerPropertiesUpdate
+      - $.definitions.SchedulerProperties.properties
+      - $.definitions.SchedulerPropertiesUpdate.properties
 ```
 
 ---
