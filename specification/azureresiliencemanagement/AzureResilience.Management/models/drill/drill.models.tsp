@@ -98,7 +98,7 @@ model DrillProperties {
   @doc("Last resync and readiness check time.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  lastResyncAndReadinessCheckTime?: utcDateTime;
+  lastResyncReadinessCheckTimeTime?: utcDateTime;
 
   @doc("Managed RG v2 properties.")
   @visibility(Lifecycle.Read)

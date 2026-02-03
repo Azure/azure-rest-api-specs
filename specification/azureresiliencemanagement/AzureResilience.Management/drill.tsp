@@ -127,7 +127,7 @@ interface Drills {
   @armResourceAction(Drill)
   @post
   @doc("This triggers detection of any drifts from the desired state of Target and capabilities and RBAC.")
-  resyncAndReadinessCheck is ArmResourceActionNoContentAsync<
+  resyncReadiness is ArmResourceActionNoContentAsync<
     Drill,
     void,
     ServiceGroupAndRequestHeadersParameters,
