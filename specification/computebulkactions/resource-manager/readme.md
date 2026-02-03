@@ -61,9 +61,6 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: computebulkactions.json
     where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
-  - code: BodyTopLevelProperties
-    from: computebulkactions.json
-    where: $.definitions.OperationStatus
 ```
 
 # Code Generation

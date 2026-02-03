@@ -341,45 +341,6 @@ model LocationBasedLaunchBulkInstancesOperation
   ...LaunchBulkInstancesOperation;
 }
 
-// model OperationStatus is OmitProperties<ArmOperationStatus, "name"> {
-//   ...ResourceNameParameter<OperationStatus>;
-// }
-
-@doc("Status of a long-running operation.")
-model OperationStatus {
-  /** The operation status */
-  @Azure.Core.lroStatus
-  status: Azure.ResourceManager.ResourceProvisioningState;
-
-  /** The unique identifier for the operationStatus resource */
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  /** The name of the  operationStatus resource */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /** The type of the  operationStatus resource */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /** Operation start time */
-  @visibility(Lifecycle.Read)
-  startTime?: utcDateTime;
-
-  /** Operation complete time */
-  @visibility(Lifecycle.Read)
-  endTime?: utcDateTime;
-
-  /** The progress made toward completing the operation */
-  @visibility(Lifecycle.Read)
-  percentComplete?: float64;
-
-  /** Errors that occurred if the operation ended with Canceled or Failed status */
-  @visibility(Lifecycle.Read)
-  error?: Azure.ResourceManager.Foundations.ErrorDetail;
-}
-
 // ------------------ Models --------------- //
 @doc("List of LaunchBulkInstancesOperation resources.")
 model LaunchBulkInstancesOperationListResult {
