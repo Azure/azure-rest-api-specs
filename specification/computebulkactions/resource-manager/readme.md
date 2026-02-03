@@ -61,6 +61,10 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: computebulkactions.json
     where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+  - code: BodyTopLevelProperties
+    reason: Operations endpoint here is a subscription level endpoint for getting the status of a long running operation on a launchbulkactions instance, we're retaining the /operations/{id} endpoint to retain backward compatibility.
+    from: computebulkactions.json
+    where: $.definitions.OperationStatus
 ```
 
 # Code Generation
