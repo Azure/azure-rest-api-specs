@@ -457,7 +457,7 @@ model AttentionReason {
   @doc("Permissions needed by the Drill MSI to read health metrics data for resources in service group.")
   @added(Versions.v2026_03_01_preview)
   rbacNeededForDrillOnDrillResources?: string[];
-  
+
   @doc("List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.")
   @added(Versions.v2026_03_01_preview)
   missingRequiredResourceProviders?: string[];
