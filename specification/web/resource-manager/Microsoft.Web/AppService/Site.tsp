@@ -1081,7 +1081,7 @@ interface Sites {
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
       @doc("Receipt body in COSE format")
       @bodyRoot
-      @encode("binary")
+      @encode("bytes")
       body: bytes;
     },
     OverrideErrorType = DefaultErrorResponse
@@ -2315,7 +2315,7 @@ interface WebApps {
       #suppress "@azure-tools/typespec-azure-core/known-encoding" "Temporary fix."
       @doc("Receipt body in COSE format")
       @bodyRoot
-      @encode("binary")
+      @encode("bytes")
       body: bytes;
     },
     OverrideErrorType = DefaultErrorResponse
