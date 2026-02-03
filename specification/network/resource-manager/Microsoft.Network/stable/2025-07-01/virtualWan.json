@@ -7055,8 +7055,8 @@
           }
         },
         "x-ms-examples": {
-          "VwanExpressRouteGatewayStartLinkFailoverSimulation": {
-            "$ref": "./examples/VwanExpressRouteGatewayStartLinkFailoverSimulation.json"
+          "VwanExpressRouteGatewayStartSiteFailoverSimulation": {
+            "$ref": "./examples/VwanExpressRouteGatewayStartSiteFailoverSimulation.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -7127,8 +7127,8 @@
           }
         },
         "x-ms-examples": {
-          "VwanExpressRouteGatewayStopLinkFailoverSimulation": {
-            "$ref": "./examples/VwanExpressRouteGatewayStopLinkFailoverSimulation.json"
+          "VwanExpressRouteGatewayStopSiteFailoverSimulation": {
+            "$ref": "./examples/VwanExpressRouteGatewayStopSiteFailoverSimulation.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -10625,6 +10625,15 @@
         "connectionName": {
           "type": "string",
           "description": "Connection name associated with the circuit"
+        },
+        "nrpResourceUri": {
+          "type": "string",
+          "description": "NRP Resource URI of the circuit",
+          "format": "arm-id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Circuit Name"
         }
       }
     },
@@ -10646,6 +10655,15 @@
         "lastUpdatedTime": {
           "type": "string",
           "description": "Time when the connection was last updated"
+        },
+        "name": {
+          "type": "string",
+          "description": "Connection Name"
+        },
+        "nrpResourceUri": {
+          "type": "string",
+          "description": "NRP Resource URI of the connection",
+          "format": "arm-id"
         }
       }
     },
