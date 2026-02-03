@@ -631,7 +631,7 @@ These settings apply only when `--tag=package-2019-05-searchservice-preview` is 
 
 ``` yaml $(tag) == 'package-2019-05-searchservice-preview'
 input-file:
-- preview/2019-05-06-Preview/searchservice.json
+- preview/2019-05-06-preview/searchservice.json
 ```
 
 ### Tag: package-2019-05-searchindex-preview
@@ -640,7 +640,7 @@ These settings apply only when `--tag=package-2019-05-searchindex-preview` is sp
 
 ``` yaml $(tag) == 'package-2019-05-searchindex-preview'
 input-file:
-- preview/2019-05-06-Preview/searchindex.json
+- preview/2019-05-06-preview/searchindex.json
 ```
 
 ### Tag: package-2019-05-searchservice
