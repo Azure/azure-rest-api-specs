@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.Resources")
 @service(#{ title: "DeploymentScripts Client" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace DeploymentScriptsClient;
 
 /**
@@ -35,21 +35,15 @@ enum Versions {
   /**
    * The 2019-10-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2019_10_01_preview: "2019-10-01-preview",
 
   /**
    * The 2020-10-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2020_10_01: "2020-10-01",
 
   /**
    * The 2023-08-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_08_01: "2023-08-01",
 }
