@@ -121,7 +121,7 @@ union SignalKind {
   PrometheusMetricsQuery: "PrometheusMetricsQuery",
 
   @added(Versions.v2026_01_01_preview)
-  ExternalSignal: "ExternalSignal",
+  ExternalSignal: "External",
 }
 
 @doc("SignalDefinition properties")
