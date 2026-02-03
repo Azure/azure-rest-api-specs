@@ -949,11 +949,13 @@ model PlanData {
   /**
    * offer id as published by Dynatrace
    */
+  @added(Versions.v2026_01_07_preview)
   offerId?: string;
 
   /**
    * publisher id as published by Dynatrace
    */
+  @added(Versions.v2026_01_07_preview)
   publisherId?: string;
 }
 
@@ -1095,6 +1097,7 @@ model MarketplaceSaaSResourceDetailsResponse {
   /**
    * Id of the offer
    */
+  @added(Versions.v2026_01_07_preview)
   offerId?: string;
 
   /**
