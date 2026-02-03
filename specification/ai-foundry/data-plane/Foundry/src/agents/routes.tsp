@@ -48,7 +48,8 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents/{agent_name}")
-  updateAgent is FoundryDataPlaneOperation<
+  updateAgent is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.container_agents_v1_preview | FoundryFeaturesOptInKeys.hosted_agents_v1_preview | FoundryFeaturesOptInKeys.workflow_agents_v1_preview,
     {
       /** The name of the agent to retrieve. */
       @path agent_name: string;
@@ -64,8 +65,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @post
   @route("/agents:import")
-  createAgentFromManifest is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.container_agents_v1_preview | FoundryFeaturesOptInKeys.hosted_agents_v1_preview,
+  createAgentFromManifest is FoundryDataPlaneOperation<
     CreateAgentFromManifestRequest,
     AgentObject
   >;
@@ -183,8 +183,7 @@ interface Agents {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @delete
   @route("/agents/{agent_name}/versions/{agent_version}")
-  deleteAgentVersion is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.container_agents_v1_preview | FoundryFeaturesOptInKeys.hosted_agents_v1_preview,
+  deleteAgentVersion is FoundryDataPlaneOperation<
     {
       /** The name of the agent to delete. */
       @path agent_name: string;

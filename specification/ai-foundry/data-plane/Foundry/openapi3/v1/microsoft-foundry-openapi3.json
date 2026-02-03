@@ -318,6 +318,34 @@
         "description": "Updates the agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "An optional feature flag opt-in, that is required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "ContainerAgents=V1Preview"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "HostedAgents=V1Preview"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "WorkflowAgents=V1Preview"
+                  ]
+                }
+              ]
+            }
+          },
+          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -981,28 +1009,6 @@
         "operationId": "Agents_deleteAgentVersion",
         "description": "Deletes a specific version of an agent.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "An optional feature flag opt-in, that is required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=V1Preview"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=V1Preview"
-                  ]
-                }
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -1847,28 +1853,6 @@
         "operationId": "Agents_createAgentFromManifest",
         "description": "Creates an agent from a manifest.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "An optional feature flag opt-in, that is required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=V1Preview"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=V1Preview"
-                  ]
-                }
-              ]
-            }
-          },
           {
             "name": "api-version",
             "in": "query",
