@@ -305,6 +305,11 @@ suppressions:
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/exportPipelines/{exportPipelineName}"].delete
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/importPipelines/{importPipelineName}"].delete
         - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/pipelineRuns/{pipelineRunName}"].delete
+  - code: ProvisioningStateMustBeReadOnly
+    from: containerregistry.json
+    reason: Previously existing implementation, flagged as part of Typespec conversion
+    where:
+        - $.paths[/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}/resync"].post.responses.200.schema
 
 ```
 
