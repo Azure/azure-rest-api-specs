@@ -21,6 +21,9 @@ namespace Customizations;
 @@clientName(Storage.Blob.BlockBlob, "BlockBlobClient", "rust");
 @@clientName(Storage.Blob.PageBlob, "PageBlobClient", "rust");
 
+@@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
+@@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
+
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
   "PreventEncryptionScopeOverride"
 );
