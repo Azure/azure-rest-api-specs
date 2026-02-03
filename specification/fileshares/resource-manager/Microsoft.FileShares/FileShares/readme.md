@@ -155,6 +155,84 @@ directive:
 
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/fileShareSnapshots/{name}"]
 
+  - suppress: PutInOperationName
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put.operationId
+
+    reason: It's indeed an UPDATE operation, but PUT is required per NRP requirement.
+
+  - suppress: R4009
+
+    where:
+
+      - $.definitions.PrivateEndpointConnection
+
+    reason: The systemData feature is not implemented in preview. To be addressed in GA.
+
+  - suppress: ProvisioningStateSpecifiedForLROPut
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+
+    reason: "RP doesn't support 201 Created pattern for proxy resources in public preview. To be addressed in GA."
+
+  - suppress: PutResponseCodes
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+
+    reason: "RP doesn't support 201 Created pattern for proxy resources in public preview. To be addressed in GA."
+
+  - suppress: R4011
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateEndpointConnections"]
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateLinkResources"]
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateLinkResources/{privateLinkResourceName}"]
+
+    from: fileshares.json
+
+    reason: New paths added for private endpoint connections and private link resources in this API version.
+
+  - suppress: DeleteResponseCodes
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}"].delete
+
+    reason: "RP doesn't support standard LRO delete pattern for proxy resources in public preview. To be addressed in GA."
+
+  - suppress: ResourceNameRestriction
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}/privateLinkResources/{privateLinkResourceName}"].get.parameters[4]
+
+    reason: privateLinkResourceName follows the same pattern as other resource name parameters in this API.
+
+  - suppress: XMSSecretInResponse
+
+    where:
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}"].get.responses.200
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}"].put.responses.200
+
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FileShares/fileShares/{resourceName}"].put.responses.201
+
+    from: fileshares.json
+
+    reason: publicNetworkAccess is not a secret - it's a configuration property that controls whether public network access is enabled or disabled. This is a false positive from the validation rule.
+
 ```
 
 
