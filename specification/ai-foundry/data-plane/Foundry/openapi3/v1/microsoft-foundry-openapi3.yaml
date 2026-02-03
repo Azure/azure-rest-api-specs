@@ -4775,7 +4775,9 @@ paths:
                     tools:
                       $ref: '#/components/schemas/OpenAI.ToolsArray'
                     tool_choice:
-                      $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                     prompt:
                       $ref: '#/components/schemas/OpenAI.Prompt'
                     truncation:
@@ -4899,7 +4901,9 @@ paths:
                     tools:
                       $ref: '#/components/schemas/OpenAI.ToolsArray'
                     tool_choice:
-                      $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                     prompt:
                       $ref: '#/components/schemas/OpenAI.Prompt'
                     truncation:
@@ -5046,6 +5050,32 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Responses
+  /openai/v1/responses/compact:
+    post:
+      operationId: compactResponseConversation
+      description: Produces a compaction of a responses conversation.
+      parameters: []
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.CompactResource'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Responses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CompactResponseMethodPublicBody'
   /openai/v1/responses/{response_id}:
     get:
       operationId: getResponse_getResponseStream
@@ -8965,8 +8995,6 @@ components:
           type: string
           description: The image ID for the agent, applicable to image-based hosted agents.
           example: my-registry.azurecr.io/my-hosted-agent:latest
-      discriminator:
-        propertyName: kind
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
@@ -10256,6 +10284,82 @@ components:
           $ref: '#/components/schemas/OpenAI.FunctionObject'
       description: A function tool that can be used to generate a response.
       title: Function tool
+    OpenAI.ChatModel:
+      type: string
+      enum:
+        - gpt-5.2
+        - gpt-5.2-2025-12-11
+        - gpt-5.2-chat-latest
+        - gpt-5.2-pro
+        - gpt-5.2-pro-2025-12-11
+        - gpt-5.1
+        - gpt-5.1-2025-11-13
+        - gpt-5.1-codex
+        - gpt-5.1-mini
+        - gpt-5.1-chat-latest
+        - gpt-5
+        - gpt-5-mini
+        - gpt-5-nano
+        - gpt-5-2025-08-07
+        - gpt-5-mini-2025-08-07
+        - gpt-5-nano-2025-08-07
+        - gpt-5-chat-latest
+        - gpt-4.1
+        - gpt-4.1-mini
+        - gpt-4.1-nano
+        - gpt-4.1-2025-04-14
+        - gpt-4.1-mini-2025-04-14
+        - gpt-4.1-nano-2025-04-14
+        - o4-mini
+        - o4-mini-2025-04-16
+        - o3
+        - o3-2025-04-16
+        - o3-mini
+        - o3-mini-2025-01-31
+        - o1
+        - o1-2024-12-17
+        - o1-preview
+        - o1-preview-2024-09-12
+        - o1-mini
+        - o1-mini-2024-09-12
+        - gpt-4o
+        - gpt-4o-2024-11-20
+        - gpt-4o-2024-08-06
+        - gpt-4o-2024-05-13
+        - gpt-4o-audio-preview
+        - gpt-4o-audio-preview-2024-10-01
+        - gpt-4o-audio-preview-2024-12-17
+        - gpt-4o-audio-preview-2025-06-03
+        - gpt-4o-mini-audio-preview
+        - gpt-4o-mini-audio-preview-2024-12-17
+        - gpt-4o-search-preview
+        - gpt-4o-mini-search-preview
+        - gpt-4o-search-preview-2025-03-11
+        - gpt-4o-mini-search-preview-2025-03-11
+        - chatgpt-4o-latest
+        - codex-mini-latest
+        - gpt-4o-mini
+        - gpt-4o-mini-2024-07-18
+        - gpt-4-turbo
+        - gpt-4-turbo-2024-04-09
+        - gpt-4-0125-preview
+        - gpt-4-turbo-preview
+        - gpt-4-1106-preview
+        - gpt-4-vision-preview
+        - gpt-4
+        - gpt-4-0314
+        - gpt-4-0613
+        - gpt-4-32k
+        - gpt-4-32k-0314
+        - gpt-4-32k-0613
+        - gpt-3.5-turbo
+        - gpt-3.5-turbo-16k
+        - gpt-3.5-turbo-0301
+        - gpt-3.5-turbo-0613
+        - gpt-3.5-turbo-1106
+        - gpt-3.5-turbo-0125
+        - gpt-3.5-turbo-16k-0613
+      x-stainless-nominal: false
     OpenAI.ClickButtonType:
       type: string
       enum:
@@ -10383,6 +10487,59 @@ components:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that runs Python code to help generate a response to a prompt.
       title: Code interpreter
+    OpenAI.CompactResource:
+      type: object
+      required:
+        - id
+        - object
+        - output
+        - created_at
+        - usage
+      properties:
+        id:
+          type: string
+          description: The unique identifier for the compacted response.
+        object:
+          type: string
+          enum:
+            - response.compaction
+          description: The object type. Always `response.compaction`.
+          x-stainless-const: true
+          default: response.compaction
+        output:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.OutputItem'
+          description: The compacted list of output items. This is a list of all user messages, followed by a single compaction item.
+        created_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (in seconds) when the compacted conversation was created.
+        usage:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ResponseUsage'
+          description: Token accounting for the compaction pass, including cached, reasoning, and total tokens.
+      title: The compacted response object
+    OpenAI.CompactResponseMethodPublicBody:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          $ref: '#/components/schemas/OpenAI.ModelIdsCompaction'
+        input:
+          anyOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.InputItem'
+          nullable: true
+        previous_response_id:
+          type: string
+          nullable: true
+        instructions:
+          type: string
+          nullable: true
     OpenAI.ComparisonFilter:
       type: object
       required:
@@ -11596,6 +11753,8 @@ components:
           x-stainless-const: true
           default: conversation
         metadata:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.Metadata'
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.
               Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters.
@@ -12453,8 +12612,6 @@ components:
       required:
         - code
         - message
-        - param
-        - type
       properties:
         code:
           type: string
@@ -17978,6 +18135,39 @@ components:
         Keys are strings with a maximum length of 64 characters. Values are strings
         with a maximum length of 512 characters.
       x-oaiTypeLabel: map
+    OpenAI.ModelIdsCompaction:
+      anyOf:
+        - allOf:
+            - $ref: '#/components/schemas/OpenAI.ModelIdsResponses'
+          description: Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](https://platform.openai.com/docs/models) to browse and compare available models.
+          nullable: true
+        - type: string
+          description: Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](https://platform.openai.com/docs/models) to browse and compare available models.
+          nullable: true
+      description: Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](https://platform.openai.com/docs/models) to browse and compare available models.
+    OpenAI.ModelIdsResponses:
+      anyOf:
+        - $ref: '#/components/schemas/OpenAI.ModelIdsShared'
+        - type: string
+          enum:
+            - o1-pro
+            - o1-pro-2025-03-19
+            - o3-pro
+            - o3-pro-2025-06-10
+            - o3-deep-research
+            - o3-deep-research-2025-06-26
+            - o4-mini-deep-research
+            - o4-mini-deep-research-2025-06-26
+            - computer-use-preview
+            - computer-use-preview-2025-03-11
+            - gpt-5-codex
+            - gpt-5-pro
+            - gpt-5-pro-2025-10-06
+            - gpt-5.1-codex-max
+    OpenAI.ModelIdsShared:
+      anyOf:
+        - type: string
+        - $ref: '#/components/schemas/OpenAI.ChatModel'
     OpenAI.Move:
       type: object
       required:
@@ -19113,7 +19303,9 @@ components:
         tools:
           $ref: '#/components/schemas/OpenAI.ToolsArray'
         tool_choice:
-          $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+            - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
         prompt:
           $ref: '#/components/schemas/OpenAI.Prompt'
         truncation:
@@ -22225,6 +22417,19 @@ components:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Use this option to force the model to call a specific tool on a remote MCP server.
       title: MCP tool
+    OpenAI.ToolChoiceOptions:
+      type: string
+      enum:
+        - none
+        - auto
+        - required
+      description: |-
+        Controls which (if any) tool is called by the model.
+        `none` means the model will not call any tool and instead generates a message.
+        `auto` means the model can pick between generating a message or calling one or
+        more tools.
+        `required` means the model must call one or more tools.
+      title: Tool choice mode
     OpenAI.ToolChoiceParam:
       type: object
       required:
