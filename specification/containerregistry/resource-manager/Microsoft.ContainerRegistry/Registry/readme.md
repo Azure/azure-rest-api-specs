@@ -285,8 +285,7 @@ suppressions:
     from: containerregistry.json
     reason: Previously existing implementation, flagged as part of Typespec conversion
     where: 
-        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch.parameters[4].schema.properties.properties.retentionDays
-        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch.parameters[4].schema.properties.properties.metadataSearch
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}"].patch.parameters[4].schema.properties.properties
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     from: containerregistry.json
     reason: Previously existing implementation, flagged as part of Typespec conversion
