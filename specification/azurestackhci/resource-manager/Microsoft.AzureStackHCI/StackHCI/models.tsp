@@ -5916,3 +5916,14 @@ model HciConfigureCvmJobProperties extends ClusterJobProperties {
    */
   confidentialVmIntent: ConfidentialVmIntent;
 }
+
+/**
+ * Request body for the check updates action on update summaries.
+ */
+@added(Versions.v2026_02_15_preview)
+model CheckUpdatesRequest {
+  /**
+   * Name of update
+   */
+  updateName?: string;
+}
