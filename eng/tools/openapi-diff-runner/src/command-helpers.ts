@@ -144,10 +144,10 @@ export async function getSwaggerDiffs(
     });
 
     // Filter each array to only include Swagger files using the swagger filter from changed-files.js
-    let filteredAdditions = result.additions.filter(swagger);
+    const filteredAdditions = result.additions.filter(swagger);
     const filteredModifications = result.modifications.filter(swagger);
-    let filteredDeletions = result.deletions.filter(swagger);
-    let filteredRenames = result.renames.filter(
+    const filteredDeletions = result.deletions.filter(swagger);
+    const filteredRenames = result.renames.filter(
       (rename) => swagger(rename.from) && swagger(rename.to),
     );
 
