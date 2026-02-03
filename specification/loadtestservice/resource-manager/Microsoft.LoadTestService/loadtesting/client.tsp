@@ -50,19 +50,101 @@ interface LoadTests {
 @@clientName(type, "LoadTestingCmkIdentityType", "csharp");
 @@clientName(LoadTestResource, "LoadTestingResource", "csharp");
 @@clientName(QuotaResource, "LoadTestingQuota", "csharp");
-@@clientName(EncryptionProperties, "LoadTestingCmkEncryptionProperties", "csharp");
+@@clientName(EncryptionProperties,
+  "LoadTestingCmkEncryptionProperties",
+  "csharp"
+);
 @@clientName(EncryptionPropertiesIdentity, "LoadTestingCmkIdentity", "csharp");
 @@clientName(EndpointDependency, "LoadTestingEndpointDependency", "csharp");
 @@clientName(EndpointDetail, "LoadTestingEndpointDetail", "csharp");
-@@clientName(CheckQuotaAvailabilityResponse, "LoadTestingQuotaAvailabilityResult", "csharp");
 @@clientName(QuotaBucketRequest, "LoadTestingQuotaBucketContent", "csharp");
-@@clientName(QuotaBucketRequestPropertiesDimensions, "LoadTestingQuotaBucketDimensions", "csharp");
+@@clientName(QuotaBucketRequestPropertiesDimensions,
+  "LoadTestingQuotaBucketDimensions",
+  "csharp"
+);
 @@clientName(ResourceState, "LoadTestingProvisioningState", "csharp");
-@@clientName(QuotaBucketRequestPropertiesDimensions, "LoadTestingQuotaBucketDimensions", "csharp");
-@@clientName(OutboundEnvironmentEndpoint, "LoadTestingOutboundEnvironmentEndpoint", "csharp");
+@@clientName(QuotaBucketRequestPropertiesDimensions,
+  "LoadTestingQuotaBucketDimensions",
+  "csharp"
+);
+@@clientName(OutboundEnvironmentEndpoint,
+  "LoadTestingOutboundEnvironmentEndpoint",
+  "csharp"
+);
 
-@@clientName(LoadTests.checkAvailabilityQuota, "CheckLoadTestingQuotaAvailability", "csharp");
+@@clientName(LoadTests.checkAvailabilityQuota,
+  "CheckLoadTestingQuotaAvailability",
+  "csharp"
+);
 @@clientName(LoadTests.outboundNetworkDependenciesEndpoints,
   "GetOutboundNetworkDependenciesEndpoints",
   "csharp"
 );
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty
+(
+QuotaResource.properties,
+"csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty
+(
+LoadTestResource.properties,
+"csharp"
+);
+
+@@usage(QuotaResource, Usage.input | Usage.output, "csharp");
+@@usage(LoadTestResource, Usage.input | Usage.output, "csharp");
+
+
+@@clientName(LoadTestProperties.dataPlaneURI, "dataPlaneUri", "csharp");
+@@alternateType(EncryptionProperties.keyUrl, url, "csharp");
+
+@doc("Check quota availability response object.")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
+model CheckQuotaAvailabilityResponseReplacement 
+  extends Azure.ResourceManager.CommonTypes.Resource {
+
+  ...OmitProperties<
+    CheckQuotaAvailabilityResponse,
+    "id" | "name" | "type"
+  >;
+}
+
+@@alternateType(
+  CheckQuotaAvailabilityResponse,
+  CheckQuotaAvailabilityResponseReplacement,
+  "csharp"
+);
+
+@@clientName(
+  CheckQuotaAvailabilityResponseReplacement,
+  "LoadTestingQuotaAvailabilityResult",
+  "csharp"
+);
+
+@doc("Request object of new quota for a quota bucket.")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
+model QuotaBucketRequestReplacement
+  extends Azure.ResourceManager.CommonTypes.Resource {
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @doc("Request object of new quota for a quota bucket.")
+  properties?: QuotaBucketRequestProperties;
+}
+@@alternateType(
+  QuotaBucketRequest,
+  QuotaBucketRequestReplacement,
+  "csharp"
+);
+
+@@clientName(
+  QuotaBucketRequestReplacement,
+  "LoadTestingQuotaBucketContent",
+  "csharp"
+);
+@@alternateType(QuotaBucketRequestPropertiesDimensions.location, Azure.Core.azureLocation, "csharp");
+
+@@usage(CheckQuotaAvailabilityResponseReplacement, Usage.input | Usage.output, "csharp");

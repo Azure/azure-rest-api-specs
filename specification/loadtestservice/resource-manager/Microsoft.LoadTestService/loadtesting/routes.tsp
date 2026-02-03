@@ -38,7 +38,7 @@ interface LoadTests {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     LoadTestResource,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LoadTestResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -49,8 +49,8 @@ interface LoadTests {
       LoadTestResource,
       LoadTestProperties
     >,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LoadTestResource> &
+      ArmLroLocationHeader<FinalResult = LoadTestResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
