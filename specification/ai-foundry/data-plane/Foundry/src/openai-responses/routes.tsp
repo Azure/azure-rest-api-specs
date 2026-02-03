@@ -152,4 +152,15 @@ interface Responses {
     },
     AgentsPagedResult<OpenAI.Response>
   >;
+
+  /**
+   * Produces a compaction of a responses conversation.
+   */
+  @post
+  @operationId("compactResponseConversation")
+  @route("compact")
+  compactResponseConversation is OpenAIOperation<
+    OpenAI.CompactResponseMethodPublicBody,
+    OpenAI.CompactResource
+  >;
 }

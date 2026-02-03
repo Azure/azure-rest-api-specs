@@ -185,6 +185,12 @@ using Azure.AI.Projects;
 @@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
 
 // --------------------------------------------------------------------------------
+// Schedules sub‐client
+// --------------------------------------------------------------------------------
+
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
+
+// --------------------------------------------------------------------------------
 // Connections sub‐client
 // --------------------------------------------------------------------------------
 
