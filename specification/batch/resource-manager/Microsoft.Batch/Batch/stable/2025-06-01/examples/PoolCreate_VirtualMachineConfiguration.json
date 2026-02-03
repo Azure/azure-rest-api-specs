@@ -11,13 +11,17 @@
                 "caching": "ReadWrite",
                 "diskSizeGB": 30,
                 "lun": 0,
-                "storageAccountType": "Premium_LRS"
+                "managedDisk": {
+                  "storageAccountType": "StandardSSD_LRS"
+                },
               },
               {
                 "caching": "None",
                 "diskSizeGB": 200,
                 "lun": 1,
-                "storageAccountType": "Standard_LRS"
+                "managedDisk": {
+                  "storageAccountType": "Premium_LRS"
+                }
               }
             ],
             "diskEncryptionConfiguration": {
@@ -111,13 +115,17 @@
                   "caching": "ReadWrite",
                   "diskSizeGB": 30,
                   "lun": 0,
-                  "storageAccountType": "Premium_LRS"
+                  "managedDisk": {
+                    "storageAccountType": "StandardSSD_LRS"
+                  } 
                 },
                 {
                   "caching": "None",
                   "diskSizeGB": 200,
                   "lun": 1,
-                  "storageAccountType": "Standard_LRS"
+                  "managedDisk": {
+                    "storageAccountType": "Standard_LRS"
+                  }
                 }
               ],
               "diskEncryptionConfiguration": {
