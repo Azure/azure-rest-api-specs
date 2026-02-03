@@ -21,6 +21,7 @@ using Microsoft.Cache;
 @@clientName(AofFrequency, "PersistenceSettingAofFrequency", "csharp");
 @@clientName(Cluster, "RedisEnterpriseCluster", "csharp");
 @@clientName(ClusteringPolicy, "RedisEnterpriseClusteringPolicy", "csharp");
+@@clientName(ClusteringPolicy.OSSCluster, "OssCluster", "csharp");
 @@clientName(ClusterList, "RedisEnterpriseClusterList", "csharp");
 @@clientName(ClusterPropertiesEncryptionCustomerManagedKeyEncryption,
   "RedisEnterpriseCustomerManagedKeyEncryption",
@@ -42,6 +43,11 @@ using Microsoft.Cache;
   "csharp"
 );
 @@clientName(EvictionPolicy, "RedisEnterpriseEvictionPolicy", "csharp");
+@@clientName(EvictionPolicy.AllKeysLFU, "AllKeysLfu", "csharp");
+@@clientName(EvictionPolicy.AllKeysLRU, "AllKeysLru", "csharp");
+@@clientName(EvictionPolicy.VolatileLRU, "VolatileLfu", "csharp");
+@@clientName(EvictionPolicy.VolatileLFU, "VolatileLru", "csharp");
+@@clientName(EvictionPolicy.VolatileTTL, "VolatileTtl", "csharp");
 @@clientName(ExportClusterParameters,
   "ExportRedisEnterpriseDatabaseContent",
   "csharp"
@@ -62,11 +68,17 @@ using Microsoft.Cache;
 @@clientName(Module, "RedisEnterpriseModule", "csharp");
 @@clientName(OperationStatus, "RedisEnterpriseOperationStatus", "csharp");
 @@clientName(OperationStatus.error, "ErrorResponse", "csharp");
+@@clientName(OperationStatus.startTime, "StartOn", "csharp");
+@@clientName(OperationStatus.endTime, "EndOn", "csharp");
 @@clientName(Persistence.aofEnabled, "IsAofEnabled", "csharp");
 @@clientName(Persistence.rdbEnabled, "IsRdbEnabled", "csharp");
 @@clientName(Persistence, "RedisPersistenceSettings", "csharp");
 @@clientName(PrivateEndpointConnection,
   "RedisEnterprisePrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
   "csharp"
 );
 @@clientName(Protocol.Plaintext, "PlainText", "csharp");
@@ -91,17 +103,14 @@ using Microsoft.Cache;
 @@clientName(SkuDetails, "RedisEnterpriseSkuDetails", "csharp");
 @@clientName(SkuDetailsList, "RedisEnterpriseSkuDetailsList", "csharp");
 @@clientName(TlsVersion, "RedisEnterpriseTlsVersion", "csharp");
-@@clientName(TlsVersion.One0, "Tls1_0", "csharp");
-@@clientName(TlsVersion.One1, "Tls1_1", "csharp");
-@@clientName(TlsVersion.One2, "Tls1_2", "csharp");
 @@clientName(OperationsStatusOperationGroup.get,
   "GetRedisEnterpriseOperationsStatus",
   "csharp"
 );
-// @@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse.error,
-//   "ErrorResponse",
-//   "csharp"
-// );
+@@clientName(Clusters.listByCluster,
+  "GetPrivateLinkResourcesByCluster",
+  "csharp"
+);
 @@alternateType(AccessPolicyAssignmentPropertiesUser.objectId,
   Azure.Core.uuid,
   "csharp"
@@ -112,10 +121,17 @@ using Microsoft.Cache;
 );
 @@alternateType(LinkedDatabase.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(ForceUnlinkParameters.ids,
-  Azure.Core.armResourceIdentifier,
+  Azure.Core.armResourceIdentifier[],
   "csharp"
 );
 @@alternateType(OperationStatus.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(OperationStatus.startTime, utcDateTime, "csharp");
+@@alternateType(OperationStatus.endTime, utcDateTime, "csharp");
+@@alternateType(ExportClusterParameters.sasUri, url, "csharp");
+@@alternateType(ClusterPropertiesEncryptionCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
+  url,
+  "csharp"
+);
 // `RedisEnterprise` configured in `back-compatible` has a namespace name conflict, so it is reconfigured here.
 @@clientLocation(Clusters.get, "RedisEnterpriseCluster", "csharp");
 @@clientLocation(Clusters.create, "RedisEnterpriseCluster", "csharp");
@@ -130,12 +146,3 @@ using Microsoft.Cache;
   "RedisEnterpriseCluster",
   "csharp"
 );
-// Because the generation process prompts the problem of duplicate keys, blocking the content in the west can solve the problem.
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(Cluster.properties, "!csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ClusterUpdate.properties, "!csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(Database.properties, "!csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(DatabaseUpdate.properties, "!csharp");
