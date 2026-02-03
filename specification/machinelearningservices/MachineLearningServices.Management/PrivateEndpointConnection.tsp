@@ -32,7 +32,7 @@ model PrivateEndpointConnection
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
   location?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard ARM resource tags property"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
   tags?: Record<string>;

@@ -21,15 +21,15 @@ alias EndpointResourceListParameters = {
   @query("endpointType")
   endpointType?: EndpointType;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter to include online endpoints"
   @query("includeOnlineEndpoints")
   includeOnlineEndpoints?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter to include serverless endpoints"
   @query("includeServerlessEndpoints")
   includeServerlessEndpoints?: boolean = false;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation not available in original swagger"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Filter to include connections"
   @query("includeConnections")
   includeConnections?: boolean = false;
 
