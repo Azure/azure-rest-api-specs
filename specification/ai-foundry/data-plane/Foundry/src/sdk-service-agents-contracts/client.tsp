@@ -178,4 +178,7 @@ namespace Azure.AI.Projects {
   @@usage(UpdateAgentFromManifestRequest, Usage.input);
   @@access(UpdateAgentRequest, Access.public);
   @@usage(UpdateAgentRequest, Usage.input);
+
+  @@access(OpenAI.OutputItemCustomToolCallOutput, Access.public);
+  @@usage(OpenAI.OutputItemCustomToolCallOutput, Usage.input | Usage.output);
 }

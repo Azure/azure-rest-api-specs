@@ -6035,7 +6035,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/OpenAI.ItemResource"
+                        "$ref": "#/components/schemas/OpenAI.OutputItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -6103,7 +6103,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.ItemResource"
+                  "$ref": "#/components/schemas/OpenAI.OutputItem"
                 }
               }
             }
@@ -14744,7 +14744,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
       },
@@ -23822,6 +23822,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemParam",
             "message": "#/components/schemas/OpenAI.InputMessage",
             "output_message": "#/components/schemas/OpenAI.ItemOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.ItemFileSearchToolCall",
@@ -23845,8 +23846,7 @@
             "mcp_approval_response": "#/components/schemas/OpenAI.ItemMcpApprovalResponse",
             "mcp_call": "#/components/schemas/OpenAI.ItemMcpToolCall",
             "custom_tool_call_output": "#/components/schemas/OpenAI.ItemCustomToolCallOutput",
-            "custom_tool_call": "#/components/schemas/OpenAI.ItemCustomToolCall",
-            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemParam"
+            "custom_tool_call": "#/components/schemas/OpenAI.ItemCustomToolCall"
           }
         },
         "description": "Content item used to generate a response."
@@ -25007,6 +25007,9 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "structured_outputs": "#/components/schemas/StructuredOutputsItemResource",
+            "workflow_preview_action": "#/components/schemas/WorkflowPreviewActionOutputItemResource",
+            "oauth_consent_request": "#/components/schemas/OAuthConsentRequestItemResource",
             "message": "#/components/schemas/OpenAI.InputMessageResource",
             "output_message": "#/components/schemas/OpenAI.ItemResourceOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.ItemResourceFileSearchToolCall",
@@ -25026,11 +25029,7 @@
             "mcp_list_tools": "#/components/schemas/OpenAI.ItemResourceMcpListTools",
             "mcp_approval_request": "#/components/schemas/OpenAI.ItemResourceMcpApprovalRequest",
             "mcp_approval_response": "#/components/schemas/OpenAI.ItemResourceMcpApprovalResponseResource",
-            "mcp_call": "#/components/schemas/OpenAI.ItemResourceMcpToolCall",
-            "structured_outputs": "#/components/schemas/StructuredOutputsItemResource",
-            "workflow_preview_action": "#/components/schemas/WorkflowPreviewActionOutputItemResource",
-            "oauth_consent_request": "#/components/schemas/OAuthConsentRequestItemResource",
-            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource"
+            "mcp_call": "#/components/schemas/OpenAI.ItemResourceMcpToolCall"
           }
         },
         "description": "Content item used to generate a response."
@@ -26837,6 +26836,7 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource",
             "output_message": "#/components/schemas/OpenAI.OutputItemOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.OutputItemFileSearchToolCall",
             "function_call": "#/components/schemas/OpenAI.OutputItemFunctionToolCall",
@@ -31706,18 +31706,6 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
-            "function": "#/components/schemas/OpenAI.FunctionTool",
-            "file_search": "#/components/schemas/OpenAI.FileSearchTool",
-            "computer_use_preview": "#/components/schemas/OpenAI.ComputerUsePreviewTool",
-            "web_search": "#/components/schemas/OpenAI.WebSearchTool",
-            "mcp": "#/components/schemas/OpenAI.MCPTool",
-            "image_generation": "#/components/schemas/OpenAI.ImageGenTool",
-            "local_shell": "#/components/schemas/OpenAI.LocalShellToolParam",
-            "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
-            "custom": "#/components/schemas/OpenAI.CustomToolParam",
-            "web_search_preview": "#/components/schemas/OpenAI.WebSearchPreviewTool",
-            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam",
             "bing_grounding": "#/components/schemas/BingGroundingTool",
             "fabric_dataagent_preview": "#/components/schemas/MicrosoftFabricPreviewTool",
             "sharepoint_grounding_preview": "#/components/schemas/SharepointPreviewTool",
@@ -31729,7 +31717,19 @@
             "capture_structured_outputs": "#/components/schemas/CaptureStructuredOutputsTool",
             "a2a_preview": "#/components/schemas/A2APreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
-            "memory_search": "#/components/schemas/MemorySearchTool"
+            "memory_search": "#/components/schemas/MemorySearchTool",
+            "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
+            "function": "#/components/schemas/OpenAI.FunctionTool",
+            "file_search": "#/components/schemas/OpenAI.FileSearchTool",
+            "computer_use_preview": "#/components/schemas/OpenAI.ComputerUsePreviewTool",
+            "web_search": "#/components/schemas/OpenAI.WebSearchTool",
+            "mcp": "#/components/schemas/OpenAI.MCPTool",
+            "image_generation": "#/components/schemas/OpenAI.ImageGenTool",
+            "local_shell": "#/components/schemas/OpenAI.LocalShellToolParam",
+            "shell": "#/components/schemas/OpenAI.FunctionShellToolParam",
+            "custom": "#/components/schemas/OpenAI.CustomToolParam",
+            "web_search_preview": "#/components/schemas/OpenAI.WebSearchPreviewTool",
+            "apply_patch": "#/components/schemas/OpenAI.ApplyPatchToolParam"
           }
         },
         "description": "A tool that can be used to generate a response."

@@ -3740,7 +3740,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/OpenAI.ItemResource'
+                      $ref: '#/components/schemas/OpenAI.OutputItem'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -3783,7 +3783,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.ItemResource'
+                $ref: '#/components/schemas/OpenAI.OutputItem'
         default:
           description: An unexpected error response.
           content:
@@ -9536,7 +9536,7 @@ components:
           nullable: true
           description: The results returned from the memory search.
       allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemResource'
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
     MemoryStoreDefaultDefinition:
       type: object
       required:
@@ -16947,7 +16947,6 @@ components:
           structured_outputs: '#/components/schemas/StructuredOutputsItemResource'
           workflow_preview_action: '#/components/schemas/WorkflowPreviewActionOutputItemResource'
           oauth_consent_request: '#/components/schemas/OAuthConsentRequestItemResource'
-          memory_search_call: '#/components/schemas/MemorySearchToolCallItemResource'
           message: '#/components/schemas/OpenAI.InputMessageResource'
           output_message: '#/components/schemas/OpenAI.ItemResourceOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.ItemResourceFileSearchToolCall'
@@ -18270,6 +18269,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          memory_search_call: '#/components/schemas/MemorySearchToolCallItemResource'
           output_message: '#/components/schemas/OpenAI.OutputItemOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.OutputItemFileSearchToolCall'
           function_call: '#/components/schemas/OpenAI.OutputItemFunctionToolCall'

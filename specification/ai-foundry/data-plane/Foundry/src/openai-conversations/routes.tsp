@@ -123,7 +123,7 @@ interface Conversations {
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
     },
-    OpenAI.ItemResource
+    OpenAI.OutputItem
   >;
 
   /**
@@ -158,6 +158,6 @@ interface Conversations {
       ...CommonPageQueryParameters;
       ...ItemTypeQueryParameter;
     },
-    AgentsPagedResult<OpenAI.ItemResource>
+    AgentsPagedResult<OpenAI.OutputItem>
   >;
 }
