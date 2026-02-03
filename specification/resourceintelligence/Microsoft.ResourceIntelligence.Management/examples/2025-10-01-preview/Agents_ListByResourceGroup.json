@@ -1,0 +1,44 @@
+{
+  "operationId": "Agents_ListByResourceGroup",
+  "title": "List Agents in a resource group",
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent",
+            "name": "myAgent",
+            "type": "Microsoft.ResourceIntelligence/agents",
+            "location": "eastus",
+            "tags": {
+              "environment": "production"
+            },
+            "properties": {
+              "displayName": "My AI Agent",
+              "description": "An AI agent for Azure resource management",
+              "agentDefinitions": [
+                "definition-001"
+              ],
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/anotherAgent",
+            "name": "anotherAgent",
+            "type": "Microsoft.ResourceIntelligence/agents",
+            "location": "westus2",
+            "properties": {
+              "displayName": "Another Agent",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
