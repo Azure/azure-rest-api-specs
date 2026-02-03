@@ -309,7 +309,7 @@ suppressions:
     from: containerregistry.json
     reason: Previously existing implementation, flagged as part of Typespec conversion
     where:
-        - $.paths[/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}/resync"].post.responses.200.schema
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/connectedRegistries/{connectedRegistryName}/resync"].post.responses.200.schema
 
 ```
 
