@@ -335,7 +335,6 @@ model ChaosExperimentPropertiesOfDrill {
   faultDurationInMin?: int32;
 }
 
-=======
 /**
  * Model that represents the Chaos Resource properties
  */
