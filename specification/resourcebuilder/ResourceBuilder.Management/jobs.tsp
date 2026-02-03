@@ -98,7 +98,7 @@ model JobProperties {
   // ============================================
 
   /** Metric evaluations. Required for DataQualityValidation jobs. */
-  dataQualityMetricEvaluations?: DataQualityMetricEvaluationEntry[];
+  metrics?: DataQualityMetrics;
 
   /** Data quality metric validations. Required for DataQualityValidation jobs. */
   dataQualityMetricValidations?: DataQualityMetricValidationEntry[];
@@ -479,6 +479,15 @@ union AnomalyMode {
   IsNegativeAnomaly: "isNegativeAnomaly",
 
   string,
+}
+
+/** Data quality metrics */
+model DataQualityMetrics {
+  /** Metric evaluations. */
+  evaludations: DataQualityMetricEvaluationEntry[];
+
+  /** Metric validations. */
+  validations: DataQualityMetricValidationEntry[];
 }
 
 /** Data quality metric evaluation entry with name */
