@@ -1016,7 +1016,7 @@ model BatchAccountCreateProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 }
 
@@ -1245,7 +1245,7 @@ model BatchAccountProperties {
   /**
    * The network access type for operating on the resources in the Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Legacy desgin"
   @summary("The network interface type for accessing Azure Batch service and Batch account operations.")
   publicNetworkAccess?: PublicNetworkAccessType | null = PublicNetworkAccessType.Enabled;
@@ -1253,14 +1253,14 @@ model BatchAccountProperties {
   /**
    * The network profile only takes effect when publicNetworkAccess is enabled.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   @summary("Network profile for Batch account, which contains network rule settings for each endpoint.")
   networkProfile?: NetworkProfile | null;
 
   /**
    * List of private endpoint connections associated with the Batch account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[] | null;
 
@@ -1281,7 +1281,7 @@ model BatchAccountProperties {
   /**
    * For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   @visibility(Lifecycle.Read)
   @summary("The dedicated core quota for the Batch account.")
   dedicatedCoreQuota?: int32 | null;
@@ -1289,7 +1289,7 @@ model BatchAccountProperties {
   /**
    * For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   @visibility(Lifecycle.Read)
   @summary("The Spot/low-priority core quota for the Batch account.")
   lowPriorityCoreQuota?: int32 | null;
@@ -1298,7 +1298,7 @@ model BatchAccountProperties {
    * A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
@@ -1329,7 +1329,7 @@ model BatchAccountProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   @visibility(Lifecycle.Read)
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 }
@@ -1550,7 +1550,7 @@ model BatchAccountUpdateProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 
   /**
@@ -2227,7 +2227,7 @@ model PoolProperties {
   /**
    * Determines how a pool communicates with the Batch service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatablity"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "legacy design, needed for compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Legacy desgin"
   @summary("Determines how a pool communicates with the Batch service.")
   @removed(Versions.v2025_06_01)
