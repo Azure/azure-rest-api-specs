@@ -12,7 +12,7 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias EvaluationRuleOperations = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>>;
+alias EvaluationRuleOperations = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>>;
 
 @tag("EvaluationRules")
 interface EvaluationRules {

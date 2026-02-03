@@ -32,7 +32,7 @@ interface Evaluators {
   listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters &
-      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>,
+      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>,
     Azure.Core.Page<EvaluatorVersion>
   >;
 
@@ -43,7 +43,7 @@ interface Evaluators {
   listLatestVersions is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters &
-      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>,
+      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>,
     Azure.Core.Page<EvaluatorVersion>
   >;
 
@@ -56,7 +56,7 @@ interface Evaluators {
   getVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @doc(
         "The specific version id of the {name} to retrieve.",
@@ -79,7 +79,7 @@ interface Evaluators {
   deleteVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @doc("The version of the {name} to delete.", EvaluatorVersion)
       @Rest.segment("versions")
@@ -97,7 +97,7 @@ interface Evaluators {
   createVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @Http.bodyRoot
       evaluatorVersion: EvaluatorVersion;
@@ -113,7 +113,7 @@ interface Evaluators {
   updateVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @doc("The version of the {name} to update.", EvaluatorVersion)
       @Rest.segment("versions")

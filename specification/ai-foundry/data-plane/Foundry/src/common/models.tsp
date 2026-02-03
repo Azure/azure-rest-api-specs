@@ -55,33 +55,31 @@ op FoundryDataPlaneOperation<
   ErrorResponse = ApiErrorResponse
 >(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
 
-enum FoundryPreviewOptInKeys {
-  container_agents_v1: "ContainerAgents=v1",
-  hosted_agents_v1: "HostedAgents=v1",
-  workflow_agents_v1: "WorkflowAgents=v1",
-  evaluations_v1: "Evaluations=v1",
-  red_teams_v1: "RedTeams=v1",
-  insights_v1: "Insights=v1",
-  memory_stores_v1: "MemoryStores=v1",
+enum FoundryFeaturesOptInKeys {
+  container_agents_v1_preview: "ContainerAgents=v1_preview",
+  hosted_agents_v1_preview: "HostedAgents=v1_preview",
+  workflow_agents_v1_preview: "WorkflowAgents=v1_preview",
+  evaluations_v1_preview: "Evaluations=v1_preview",
+  red_teams_v1_preview: "RedTeams=v1_preview",
+  insights_v1_preview: "Insights=v1_preview",
+  memory_stores_v1_preview: "MemoryStores=v1_preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryPreviewOptInKeys> = {
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
   /**
-   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+   * A feature flag opt-in required to use this preview operation.
    */
-  @header("Foundry-Beta")
-  foundry_beta: RequiredPreviewOptInHeader;
+  @header("Foundry-Features")
+  foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<FeatureOptInHeaders> = {
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
   /**
-   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+   * An optional feature flag opt-in, that is required when using preview operations or modifying persisted preview resources.
    */
-  @header("Foundry-Beta")
-  foundry_beta?: FeatureOptInHeaders;
+  @header("Foundry-Features")
+  foundry_features?: OptionalPreviewOptInHeader;
 };
-
-alias FoundryPreviewExtensionKey = "x-ms-foundry-meta";
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""

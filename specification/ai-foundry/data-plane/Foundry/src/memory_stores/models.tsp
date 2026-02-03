@@ -10,7 +10,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const MemoryStoreRequiredPreviews = #{
-  conditional_previews: #[FoundryPreviewOptInKeys.memory_stores_v1],
+  conditional_previews: #[FoundryFeaturesOptInKeys.memory_stores_v1_preview],
 };
 
 @doc("A memory store that can store and retrieve user memories.")

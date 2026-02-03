@@ -11,9 +11,9 @@ namespace Azure.AI.Projects;
 
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
-    FoundryPreviewOptInKeys.hosted_agents_v1,
-    FoundryPreviewOptInKeys.container_agents_v1,
-    FoundryPreviewOptInKeys.workflow_agents_v1
+    FoundryFeaturesOptInKeys.hosted_agents_v1_preview,
+    FoundryFeaturesOptInKeys.container_agents_v1_preview,
+    FoundryFeaturesOptInKeys.workflow_agents_v1_preview
   ],
 };
 
@@ -216,7 +216,7 @@ model PromptAgentDefinitionTextOptions {
 @doc("The workflow agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.workflow_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.workflow_agents_v1_preview] }
 )
 model WorkflowAgentDefinition extends AgentDefinition {
   kind: AgentKind.workflow;
@@ -228,7 +228,7 @@ model WorkflowAgentDefinition extends AgentDefinition {
 @doc("The hosted agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.hosted_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.hosted_agents_v1_preview] }
 )
 model HostedAgentDefinition extends AgentDefinition {
   kind: AgentKind.hosted;
@@ -270,7 +270,7 @@ model HostedAgentDefinition extends AgentDefinition {
 @doc("The container app agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 model ContainerAppAgentDefinition extends AgentDefinition {
   kind: AgentKind.container_app;
@@ -362,7 +362,7 @@ model ToolArgumentBinding {
 @doc("The details of the container of a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 model AgentContainerObject {
   @doc("The object type, which is always 'agent.container'.")
@@ -405,7 +405,7 @@ model AgentContainerObject {
 @doc("Detailed information about the container.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 model ContainerDetails {
   @doc("The provisioning state of the container.")
@@ -430,7 +430,7 @@ model ContainerDetails {
 @doc("Information about a container replica.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 model ContainerReplica {
   @doc("The name of the replica.")
@@ -446,7 +446,7 @@ model ContainerReplica {
 @doc("Status of the container of a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 union AgentContainerStatus {
   @doc("The container is starting.")
@@ -477,7 +477,7 @@ union AgentContainerStatus {
 @doc("The container operation for a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 model AgentContainerOperationObject {
   @doc("The ID of the container operation. This id is unique identifier across the system.")
@@ -502,7 +502,7 @@ model AgentContainerOperationObject {
 @doc("The error details of the container operation, if any.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 model AgentContainerOperationError {
   @doc("The error code of the container operation, if any.")
@@ -518,7 +518,7 @@ model AgentContainerOperationError {
 @doc("Status of the container operation for a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 union AgentContainerOperationStatus {
   @doc("The container operation is not started.")
@@ -536,7 +536,7 @@ union AgentContainerOperationStatus {
 
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 model AcceptedAgentContainerOperation {
   @statusCode
@@ -552,7 +552,7 @@ model AcceptedAgentContainerOperation {
 /** The type of logs to stream from a container. */
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryPreviewOptInKeys.container_agents_v1] }
+  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
 )
 union ContainerLogKind {
   /** Console logs from the container. */

@@ -60,7 +60,7 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // Needs forceful exposition
-@@access(FoundryPreviewOptInKeys, Access.public);
+@@access(FoundryFeaturesOptInKeys, Access.public);
 
 // Default name produces a style violation
 @@clientName(SASCredentials, "SasCredentials", "java");
