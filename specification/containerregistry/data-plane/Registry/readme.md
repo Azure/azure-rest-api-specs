@@ -27,6 +27,20 @@ These are the global settings for the ContainerRegistry API.
 # common
 openapi-type: data-plane
 tag: package-2021-07
+
+suppressions:
+  - code: LroExtension
+    where:
+      - $.paths["/{nextBlobUuidLink}"].patch
+      - $.paths["/acr/v1/{name}"].delete
+      - $.paths["/acr/v1/{name}/_tags/{reference}"].delete
+      - $.paths["/v2/{name}/blobs/{digest}"].delete
+      - $.paths["/v2/{name}/manifests/{reference}"].delete
+    reason: These operations return 202 as an acceptance response per Docker Registry V2 API spec, not as an async LRO. The original swagger did not have x-ms-long-running-operation on these operations.
+  - code: AvoidAnonymousTypes
+    where:
+      - $.definitions["Annotations"].additionalProperties
+    reason: TypeSpec-generated data-plane spec. SDK is generated directly from TypeSpec, not swagger.
 ```
 
 ### Tag: package-2021-07
