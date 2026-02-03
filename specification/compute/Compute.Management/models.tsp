@@ -2031,12 +2031,12 @@ model ExternalHealthPolicy {
   /**
    * Defines how long the health status set by External Health API will last on the VM. If a signal is not received/updated within this time, the VM Health will be marked as "unknown". Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 3 hours (PT3H).
    */
-  expiryDuration?: string;
+  expiryDuration?: duration;
 
   /**
    * Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H).
    */
-  gracePeriod?: string;
+  gracePeriod?: duration;
 }
 
 /**
