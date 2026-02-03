@@ -10,6 +10,7 @@ import "./common.tsp";
 using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
 
@@ -36,6 +37,16 @@ model DrillResourceProperties {
 
   @doc("Type of the Drill resource.")
   resourceType: string;
+
+  @doc("Active location and zones of the Azure resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activeLocation?: string;
+
+  @doc("List of recovery locations and zones of the Azure resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  recoveryLocations?: string[];
 
   @doc("Inclusion State of the Drill resource in Drill")
   inclusionState?: DrillResourceInclusionState;
