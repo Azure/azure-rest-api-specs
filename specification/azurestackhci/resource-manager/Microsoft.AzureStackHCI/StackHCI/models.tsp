@@ -409,7 +409,7 @@ union ConnectivityStatus {
 /**
  * Indicates whether the cluster is under support.
  */
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 union SupportStatus {
   string,
 
@@ -1878,7 +1878,7 @@ model ClusterProperties {
    * Indicates whether the cluster is under support.
    */
   @visibility(Lifecycle.Read)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   supportStatus?: SupportStatus;
 
   /**
@@ -1891,7 +1891,7 @@ model ClusterProperties {
    * The ring to which this cluster belongs to.
    */
   @visibility(Lifecycle.Read)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   ring?: string;
 
   /**
@@ -2017,16 +2017,14 @@ model ClusterProperties {
   /**
    * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
    */
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProperties?: ConfidentialVmProperties;
 
   /**
    * Software Defined Networking Properties of the cluster
    */
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   @visibility(Lifecycle.Read)
   sdnProperties?: ClusterSdnProperties;
 
@@ -2657,14 +2655,14 @@ model SoftwareAssuranceChangeRequestProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model ChangeRingRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ChangeRingRequestProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model ChangeRingRequestProperties {
   /**
    * The target ring for the cluster.
@@ -5412,8 +5410,7 @@ model HciNetworkProfile {
     oftware Defined Networking Properties of the cluster
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   sdnProperties?: SdnProperties;
 }
 
@@ -5855,16 +5852,14 @@ model ReportedProperties {
   /**
    * Most recent edge device sync timestamp in UTC.
    */
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 
   /**
    * CVM support details for edge device.
    */
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
 }
