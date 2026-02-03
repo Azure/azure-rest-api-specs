@@ -37,6 +37,25 @@ These settings apply only when `--tag=package-2026-02-01` is specified on the co
 ```yaml $(tag) == 'package-2026-02-01'
 input-file:
   - Microsoft.DurableTask/stable/2026-02-01/durabletask.json
+suppressions:
+  - code: ArmesourcePropertiesBag
+    reason: Changing this property would constitute a breaking change. Already in prod (see public swagger repo).
+    from:
+      - durabletask.json
+    where:
+      - $.definitions.SchedulerProperties.properties.sku
+      - $.definitions.SchedulerPropertiesUpdate.properties.sku
+  - code: XMSSecretInResponse
+    reason: publicNetworkAccess is not a secret - it is a network configuration setting that controls public endpoint access.
+    from:
+      - durabletask.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].put.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].patch.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
 ```
 
 ### Tag: package-2025-11-01
@@ -46,6 +65,25 @@ These settings apply only when `--tag=package-2025-11-01` is specified on the co
 ```yaml $(tag) == 'package-2025-11-01'
 input-file:
   - Microsoft.DurableTask/stable/2025-11-01/durabletask.json
+suppressions:
+  - code: ArmesourcePropertiesBag
+    reason: Changing this property would constitute a breaking change. Already in prod (see public swagger repo).
+    from:
+      - durabletask.json
+    where:
+      - $.definitions.SchedulerProperties.properties.sku
+      - $.definitions.SchedulerPropertiesUpdate.properties.sku
+  - code: XMSSecretInResponse
+    reason: publicNetworkAccess is not a secret - it is a network configuration setting that controls public endpoint access.
+    from:
+      - durabletask.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].put.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].patch.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
 ```
 
 ### Tag: package-2025-05-04-preview
@@ -55,6 +93,25 @@ These settings apply only when `--tag=package-2025-05-04-preview` is specified o
 ```yaml $(tag) == 'package-2025-05-04-preview'
 input-file:
   - Microsoft.DurableTask/preview/2025-05-04-preview/durabletask.json
+suppressions:
+  - code: ArmesourcePropertiesBag
+    reason: Changing this property would constitute a breaking change. Already in prod (see public swagger repo).
+    from:
+      - durabletask.json
+    where:
+      - $.definitions.SchedulerProperties.properties.sku
+      - $.definitions.SchedulerPropertiesUpdate.properties.sku
+  - code: XMSSecretInResponse
+    reason: publicNetworkAccess is not a secret - it is a network configuration setting that controls public endpoint access.
+    from:
+      - durabletask.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].put.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].patch.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
 ```
 
 ### Tag: package-2025-04-01-preview
@@ -64,6 +121,14 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
   - Microsoft.DurableTask/preview/2025-04-01-preview/durabletask.json
+suppressions:
+- code: ArmesourcePropertiesBag
+  reason: Changing this property would constitute a breaking change. Already in prod (see public swagger repo).
+  from:
+    - durabletask.json
+  where:
+    - $.definitions.SchedulerProperties.properties.sku
+    - $.definitions.SchedulerPropertiesUpdate.properties.sku
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -73,6 +138,14 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
   - Microsoft.DurableTask/preview/2024-10-01-preview/durabletask.json
+suppressions:
+  - code: ArmesourcePropertiesBag
+    reason: Changing this property would constitute a breaking change. Already in prod (see public swagger repo).
+    from:
+      - durabletask.json
+    where:
+      - $.definitions.SchedulerProperties.properties.sku
+      - $.definitions.SchedulerPropertiesUpdate.properties.sku
 ```
 
 ---
