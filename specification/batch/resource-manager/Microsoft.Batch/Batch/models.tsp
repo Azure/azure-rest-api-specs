@@ -292,7 +292,7 @@ enum ResourceIdentityType {
  * The provisioned state of the resource
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
 enum ProvisioningState {
   /**
    * The account is in an invalid state.
@@ -329,7 +329,7 @@ enum ProvisioningState {
  * The provisioning state of the private endpoint connection.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
 enum PrivateEndpointConnectionProvisioningState {
   /**
    * The connection is creating.
@@ -440,7 +440,7 @@ enum NameAvailabilityReason {
  * The current provisioning state of the certificate.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
 @removed(Versions.v2025_06_01)
 enum CertificateProvisioningState {
   /**
@@ -480,7 +480,7 @@ enum CertificateFormat {
  * The current state of the pool.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
 enum PoolProvisioningState {
   /**
    * The pool is available to run tasks subject to the availability of compute nodes.
@@ -1612,7 +1612,7 @@ model ActivateApplicationPackageParameters {
 /**
  * Properties of an application package
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
 model ApplicationPackageProperties {
   /**
    * The current state of the application package.
@@ -1648,7 +1648,7 @@ model ApplicationPackageProperties {
 /**
  * The properties associated with the Application.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
 model ApplicationProperties {
   /**
    * The display name for the application.
@@ -1995,7 +1995,7 @@ model CertificateCreateOrUpdateProperties extends CertificateBaseProperties {
 /**
  * Detector response properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
 model DetectorResponseProperties {
   /**
    * A base64 encoded string that represents the content of a detector.
@@ -2011,7 +2011,7 @@ model ListPrivateLinkResourcesResult is Azure.Core.Page<PrivateLinkResource>;
 /**
  * Private link resource properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Deisgn"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
 model PrivateLinkResourceProperties {
   /**
    * The group id is used to establish the private link connection.
