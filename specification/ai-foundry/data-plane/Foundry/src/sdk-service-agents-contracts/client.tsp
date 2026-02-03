@@ -142,6 +142,13 @@ namespace Azure.AI.Projects {
     }
   );
 
+  // Similarly, propagate "sequence_number" to base of stream events
+  @@copyProperties(OpenAI.ResponseStreamEvent,
+    {
+      sequence_number?: integer,
+    }
+  );
+
   // To avoid conflicts with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
 
@@ -155,4 +162,6 @@ namespace Azure.AI.Projects {
     "created_by"
   );
   @@withoutOmittedProperties(OpenAI.OutputItemApplyPatchToolCall, "created_by");
+
+  // 
 }
