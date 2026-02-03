@@ -354,6 +354,44 @@ model LaunchBulkInstancesOperationListResult {
   nextLink?: string;
 }
 
+// Adding this custom model since the common model expects ID to be an arm-id, however, the identifier for a
+// launchBulkactionsOperation is a GUID, here represented as a string.
+@doc("Status of a long-running operation.")
+model OperationStatus {
+  /** The operation status */
+  @Azure.Core.lroStatus
+  status: Azure.ResourceManager.ResourceProvisioningState;
+
+  /** The unique identifier for the operationStatus resource */
+  @visibility(Lifecycle.Read)
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  id: string;
+
+  /** The name of the  operationStatus resource */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** The type of the  operationStatus resource */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /** Operation start time */
+  @visibility(Lifecycle.Read)
+  startTime?: utcDateTime;
+
+  /** Operation complete time */
+  @visibility(Lifecycle.Read)
+  endTime?: utcDateTime;
+
+  /** The progress made toward completing the operation */
+  @visibility(Lifecycle.Read)
+  percentComplete?: float64;
+
+  /** Errors that occurred if the operation ended with Canceled or Failed status */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+}
+
 @doc("Details of the LaunchBulkInstancesOperation.")
 model LaunchBulkInstancesOperationProperties {
   @visibility(Lifecycle.Read)

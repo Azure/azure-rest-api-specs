@@ -27,7 +27,7 @@ interface BulkActions {
   getOperationStatus is ArmResourceRead<
     Resource = LocationBasedLaunchBulkInstancesOperation,
     Parameters = OperationParameter,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>,
+    Response = ArmResponse<OperationStatus>,
     BaseParameters = SubscriptionParams
   >;
 
