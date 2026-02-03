@@ -162,4 +162,20 @@ namespace Azure.AI.Projects {
     "created_by"
   );
   @@withoutOmittedProperties(OpenAI.OutputItemApplyPatchToolCall, "created_by");
+
+  // Force appearance on some types to ensure they don't emit with strange "1" suffixes
+  @@access(CreateAgentFromManifestRequest, Access.public);
+  @@usage(CreateAgentFromManifestRequest, Usage.input);
+  @@access(CreateAgentRequest, Access.public);
+  @@usage(CreateAgentRequest, Usage.input);
+  @@access(CreateAgentVersionFromManifestRequest, Access.public);
+  @@usage(CreateAgentVersionFromManifestRequest, Usage.input);
+  @@access(CreateAgentVersionRequest, Access.public);
+  @@usage(CreateAgentVersionRequest, Usage.input);
+  @@access(OpenAI.ReasoningEffort, Access.public);
+  @@usage(OpenAI.ReasoningEffort, Usage.input);
+  @@access(UpdateAgentFromManifestRequest, Access.public);
+  @@usage(UpdateAgentFromManifestRequest, Usage.input);
+  @@access(UpdateAgentRequest, Access.public);
+  @@usage(UpdateAgentRequest, Usage.input);
 }
