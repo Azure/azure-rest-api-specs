@@ -1790,6 +1790,16 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the frontend IP configuration resource."
+        },
+        "ddosSettings": {
+          "type": "object",
+          "description": "The Ddos protection settings associated with the frontend IP configuration.",
+          "properties": {
+            "ddosCustomPolicy": {
+              "$ref": "./network.json#/definitions/SubResource",
+              "description": "The reference to the Ddos Custom Policy resource."
+            }
+          }
         }
       },
       "description": "Properties of Frontend IP Configuration of the load balancer."
