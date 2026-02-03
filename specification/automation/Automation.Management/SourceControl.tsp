@@ -25,12 +25,13 @@ model SourceControl
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SourceControls {
   /**
    * Retrieve the source control identified by source control name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControl")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   get is ArmResourceRead<SourceControl>;
 
@@ -38,6 +39,7 @@ interface SourceControls {
    * Create a source control.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControl")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     SourceControl,
@@ -48,6 +50,7 @@ interface SourceControls {
    * Update a source control.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControl")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -60,6 +63,7 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControl")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   delete is ArmResourceDeleteSync<SourceControl, Response = ArmDeletedResponse>;
 
@@ -67,6 +71,7 @@ interface SourceControls {
    * Retrieve a list of source controls.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControl")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontroloperations")
   listByAutomationAccount is ArmResourceListByParent<
     SourceControl,
@@ -83,6 +88,7 @@ interface SourceControls {
    * Creates the sync job for a source control.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControlSyncJob")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @put
   create is ArmResourceRead<
@@ -111,6 +117,7 @@ interface SourceControls {
    * Retrieve the source control sync job identified by job id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControlSyncJob")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @get
   sourceControlSyncJobGet is ArmResourceRead<
@@ -133,6 +140,7 @@ interface SourceControls {
    * Retrieve a list of source control sync jobs.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControlSyncJob")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @list
   @get
@@ -154,6 +162,7 @@ interface SourceControls {
    * Retrieve a list of sync job streams identified by sync job id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControlSyncJobStreams")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @list
   @get
@@ -184,6 +193,7 @@ interface SourceControls {
    * Retrieve a sync job stream identified by stream id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("SourceControlSyncJobStreams")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @get
   sourceControlSyncJobStreamsGet is ArmResourceRead<

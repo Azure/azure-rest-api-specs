@@ -25,7 +25,8 @@ model DscNodeConfiguration
   >;
 }
 
-@armResourceOperations
+@tag("DscNodeConfiguration")
+@armResourceOperations(#{ omitTags: true })
 interface DscNodeConfigurations {
   /**
    * Retrieve the Dsc node configurations by node configuration.

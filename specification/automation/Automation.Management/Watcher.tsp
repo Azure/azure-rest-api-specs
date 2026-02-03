@@ -32,7 +32,8 @@ model Watcher
   etag?: string;
 }
 
-@armResourceOperations
+@tag("Watcher")
+@armResourceOperations(#{ omitTags: true })
 interface Watchers {
   /**
    * Retrieve the watcher identified by watcher name.

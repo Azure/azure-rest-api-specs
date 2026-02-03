@@ -24,7 +24,8 @@ model Webhook is Azure.ResourceManager.ProxyResource<WebhookProperties> {
   >;
 }
 
-@armResourceOperations
+@tag("Webhook")
+@armResourceOperations(#{ omitTags: true })
 interface Webhooks {
   /**
    * Retrieve the webhook identified by webhook name.

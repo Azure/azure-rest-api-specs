@@ -25,7 +25,8 @@ model ConnectionType
   >;
 }
 
-@armResourceOperations
+@tag("ConnectionType")
+@armResourceOperations(#{ omitTags: true })
 interface ConnectionTypes {
   /**
    * Retrieve the connection type identified by connection type name.

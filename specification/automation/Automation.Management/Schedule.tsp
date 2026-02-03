@@ -24,7 +24,8 @@ model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties> {
   >;
 }
 
-@armResourceOperations
+@tag("Schedule")
+@armResourceOperations(#{ omitTags: true })
 interface Schedules {
   /**
    * Retrieve the schedule identified by schedule name.

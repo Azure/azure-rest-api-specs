@@ -24,7 +24,8 @@ model Connection is Azure.ResourceManager.ProxyResource<ConnectionProperties> {
   >;
 }
 
-@armResourceOperations
+@tag("Connection")
+@armResourceOperations(#{ omitTags: true })
 interface Connections {
   /**
    * Retrieve the connection identified by connection name.

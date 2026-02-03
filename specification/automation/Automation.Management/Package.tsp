@@ -24,7 +24,8 @@ model Package is Azure.ResourceManager.TrackedResource<PackageProperties> {
   >;
 }
 
-@armResourceOperations
+@tag("Package")
+@armResourceOperations(#{ omitTags: true })
 interface Packages {
   /**
    * Retrieve the Package identified by Package name.

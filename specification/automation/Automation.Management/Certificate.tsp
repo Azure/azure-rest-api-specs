@@ -25,7 +25,8 @@ model Certificate
   >;
 }
 
-@armResourceOperations
+@tag("Certificate")
+@armResourceOperations(#{ omitTags: true })
 interface Certificates {
   /**
    * Retrieve the certificate identified by certificate name.

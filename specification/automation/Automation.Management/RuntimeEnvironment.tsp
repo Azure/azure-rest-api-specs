@@ -25,7 +25,8 @@ model RuntimeEnvironment
   >;
 }
 
-@armResourceOperations
+@tag("RuntimeEnvironment")
+@armResourceOperations(#{ omitTags: true })
 interface RuntimeEnvironments {
   /**
    * Get information about the Runtime Environment

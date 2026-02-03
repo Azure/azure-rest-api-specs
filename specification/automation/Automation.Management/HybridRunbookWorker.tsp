@@ -25,7 +25,8 @@ model HybridRunbookWorker
   >;
 }
 
-@armResourceOperations
+@tag("HybridRunbookWorker")
+@armResourceOperations(#{ omitTags: true })
 interface HybridRunbookWorkers {
   /**
    * Retrieve a hybrid runbook worker.

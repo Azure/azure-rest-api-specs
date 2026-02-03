@@ -24,7 +24,8 @@ model Variable is Azure.ResourceManager.ProxyResource<VariableProperties> {
   >;
 }
 
-@armResourceOperations
+@tag("Variable")
+@armResourceOperations(#{ omitTags: true })
 interface Variables {
   /**
    * Retrieve the variable identified by variable name.

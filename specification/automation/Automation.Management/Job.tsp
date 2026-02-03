@@ -25,12 +25,13 @@ model Job is Azure.ResourceManager.ProxyResource<JobProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Jobs {
   /**
    * Retrieve the job identified by job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   get is ArmResourceRead<
     Job,
@@ -48,6 +49,7 @@ interface Jobs {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     Job,
@@ -66,6 +68,7 @@ interface Jobs {
    * Retrieve the job output identified by job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get
   @action("output")
@@ -86,6 +89,7 @@ interface Jobs {
    * Retrieve the runbook content of the job identified by job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   @get
   @action("runbookContent")
@@ -106,6 +110,7 @@ interface Jobs {
    * Suspend the job identified by job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   suspend is ArmResourceActionSync<
     Job,
@@ -124,6 +129,7 @@ interface Jobs {
    * Stop the job identified by jobName.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   stop is ArmResourceActionSync<
     Job,
@@ -142,6 +148,7 @@ interface Jobs {
    * Resume the job identified by jobName.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Job")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/joboperations")
   resume is ArmResourceActionSync<
     Job,
@@ -160,6 +167,7 @@ interface Jobs {
    * Retrieve the job stream identified by job stream id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("JobStream")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
   @get
   jobStreamGet is ArmResourceRead<
@@ -186,6 +194,7 @@ interface Jobs {
    * Retrieve a list of jobs streams identified by job name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("JobStream")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
   @list
   @get

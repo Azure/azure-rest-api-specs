@@ -25,7 +25,8 @@ model JobSchedule
   >;
 }
 
-@armResourceOperations
+@tag("JobSchedule")
+@armResourceOperations(#{ omitTags: true })
 interface JobSchedules {
   /**
    * Retrieve the job schedule identified by job schedule name.

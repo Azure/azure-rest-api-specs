@@ -30,7 +30,8 @@ model softwareUpdateConfiguration
   >;
 }
 
-@armResourceOperations
+@tag("Software Update Configuration")
+@armResourceOperations(#{ omitTags: true })
 interface SoftwareUpdateConfigurations {
   /**
    * Get a single software update configuration by name.

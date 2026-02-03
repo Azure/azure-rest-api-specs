@@ -24,7 +24,8 @@ model Credential is Azure.ResourceManager.ProxyResource<CredentialProperties> {
   >;
 }
 
-@armResourceOperations
+@tag("Credential")
+@armResourceOperations(#{ omitTags: true })
 interface Credentials {
   /**
    * Retrieve the credential identified by credential name.

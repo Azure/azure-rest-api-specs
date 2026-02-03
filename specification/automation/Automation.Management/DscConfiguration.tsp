@@ -31,7 +31,8 @@ model DscConfiguration
   etag?: string;
 }
 
-@armResourceOperations
+@tag("DscConfiguration")
+@armResourceOperations(#{ omitTags: true })
 interface DscConfigurations {
   /**
    * Retrieve the configuration identified by configuration name.

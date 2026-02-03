@@ -43,46 +43,97 @@
       "name": "Operations"
     },
     {
-      "name": "SoftwareUpdateConfigurations"
+      "name": "Software Update Configuration"
     },
     {
-      "name": "AutomationAccounts"
+      "name": "AutomationAccount"
     },
     {
-      "name": "DscNodes"
+      "name": "NodeCountInformation"
     },
     {
-      "name": "Certificates"
+      "name": "PrivateLinkResources"
     },
     {
-      "name": "Connections"
+      "name": "AgentRegistrationInformation"
     },
     {
-      "name": "ConnectionTypes"
+      "name": "ListDeletedRunbooks"
     },
     {
-      "name": "Credentials"
+      "name": "Statistics"
     },
     {
-      "name": "DscConfigurations"
+      "name": "Usages"
     },
     {
-      "name": "DscNodeConfigurations"
+      "name": "ListKeys"
     },
     {
-      "name": "HybridRunbookWorkers"
+      "name": "Job"
     },
     {
-      "name": "HybridRunbookWorkerGroups"
+      "name": "LinkedWorkspace"
     },
     {
-      "name": "Jobs"
+      "name": "ObjectDataTypes"
     },
     {
-      "name": "JobSchedules"
+      "name": "Software Update Configuration Machine Run"
     },
     {
-      "name": "Modules"
+      "name": "Software Update Configuration Run"
+    },
+    {
+      "name": "Webhook"
+    },
+    {
+      "name": "DscNode"
+    },
+    {
+      "name": "NodeReports"
+    },
+    {
+      "name": "Certificate"
+    },
+    {
+      "name": "Connection"
+    },
+    {
+      "name": "ConnectionType"
+    },
+    {
+      "name": "Credential"
+    },
+    {
+      "name": "DscConfiguration"
+    },
+    {
+      "name": "DscNodeConfiguration"
+    },
+    {
+      "name": "HybridRunbookWorker"
+    },
+    {
+      "name": "HybridRunbookWorkerGroup"
+    },
+    {
+      "name": "ListAllHybridRunbookWorkerGroupInAutomationAccount"
+    },
+    {
+      "name": "JobStream"
+    },
+    {
+      "name": "JobSchedule"
+    },
+    {
+      "name": "Module"
+    },
+    {
+      "name": "Activity"
+    },
+    {
+      "name": "TypeFields"
     },
     {
       "name": "Python2Package"
@@ -91,31 +142,46 @@
       "name": "Python3Package"
     },
     {
-      "name": "Packages"
+      "name": "Package"
     },
     {
-      "name": "RuntimeEnvironments"
+      "name": "RuntimeEnvironment"
     },
     {
       "name": "PrivateEndpointConnections"
     },
     {
-      "name": "Runbooks"
+      "name": "Runbook"
     },
     {
-      "name": "Schedules"
+      "name": "RunbookDraft"
     },
     {
-      "name": "SourceControls"
+      "name": "TestJobStream"
     },
     {
-      "name": "Variables"
+      "name": "TestJob"
     },
     {
-      "name": "Watchers"
+      "name": "Schedule"
     },
     {
-      "name": "Webhooks"
+      "name": "SourceControl"
+    },
+    {
+      "name": "SourceControlSyncJob"
+    },
+    {
+      "name": "SourceControlSyncJobStreams"
+    },
+    {
+      "name": "Variable"
+    },
+    {
+      "name": "Watcher"
+    },
+    {
+      "name": "DeletedAutomationAccounts"
     }
   ],
   "paths": {
@@ -159,7 +225,7 @@
       "get": {
         "operationId": "AutomationAccount_List",
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
         "summary": "Lists the Automation Accounts within an Azure subscription.",
         "description": "Retrieve a list of accounts within a given subscription.",
@@ -198,6 +264,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Automation/deletedAutomationAccounts": {
       "get": {
         "operationId": "deletedAutomationAccounts_ListBySubscription",
+        "tags": [
+          "DeletedAutomationAccounts"
+        ],
         "description": "Retrieve deleted automation account.",
         "parameters": [
           {
@@ -232,7 +301,7 @@
       "get": {
         "operationId": "AutomationAccount_ListByResourceGroup",
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
         "description": "Retrieve a list of accounts within a given resource group.",
         "externalDocs": {
@@ -277,7 +346,7 @@
       "get": {
         "operationId": "AutomationAccount_Get",
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
         "description": "Get information about an Automation Account.",
         "externalDocs": {
@@ -324,7 +393,7 @@
       "put": {
         "operationId": "AutomationAccount_CreateOrUpdate",
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
         "description": "Create or update automation account.",
         "externalDocs": {
@@ -386,7 +455,7 @@
       "patch": {
         "operationId": "AutomationAccount_Update",
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
         "description": "Update an automation account.",
         "externalDocs": {
@@ -442,7 +511,7 @@
       "delete": {
         "operationId": "AutomationAccount_Delete",
         "tags": [
-          "AutomationAccounts"
+          "AutomationAccount"
         ],
         "description": "Delete an automation account.",
         "externalDocs": {
@@ -491,7 +560,7 @@
       "get": {
         "operationId": "AgentRegistrationInformation_Get",
         "tags": [
-          "AutomationAccounts"
+          "AgentRegistrationInformation"
         ],
         "description": "Retrieve the automation agent registration information.",
         "externalDocs": {
@@ -540,7 +609,7 @@
       "post": {
         "operationId": "AgentRegistrationInformation_RegenerateKey",
         "tags": [
-          "AutomationAccounts"
+          "AgentRegistrationInformation"
         ],
         "description": "Regenerate a primary or secondary agent registration key",
         "externalDocs": {
@@ -598,7 +667,7 @@
       "get": {
         "operationId": "Certificate_ListByAutomationAccount",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "description": "Retrieve a list of certificates.",
         "externalDocs": {
@@ -650,7 +719,7 @@
       "get": {
         "operationId": "Certificate_Get",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "description": "Retrieve the certificate identified by certificate name.",
         "externalDocs": {
@@ -704,7 +773,7 @@
       "put": {
         "operationId": "Certificate_CreateOrUpdate",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "description": "Create a certificate.",
         "externalDocs": {
@@ -773,7 +842,7 @@
       "patch": {
         "operationId": "Certificate_Update",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "description": "Update a certificate.",
         "externalDocs": {
@@ -836,7 +905,7 @@
       "delete": {
         "operationId": "Certificate_Delete",
         "tags": [
-          "Certificates"
+          "Certificate"
         ],
         "description": "Delete the certificate.",
         "externalDocs": {
@@ -889,7 +958,7 @@
       "get": {
         "operationId": "DscConfiguration_ListByAutomationAccount",
         "tags": [
-          "DscConfigurations"
+          "DscConfiguration"
         ],
         "description": "Retrieve a list of configurations.",
         "externalDocs": {
@@ -977,7 +1046,7 @@
       "get": {
         "operationId": "DscConfiguration_Get",
         "tags": [
-          "DscConfigurations"
+          "DscConfiguration"
         ],
         "description": "Retrieve the configuration identified by configuration name.",
         "externalDocs": {
@@ -1031,7 +1100,7 @@
       "put": {
         "operationId": "DscConfiguration_CreateOrUpdate",
         "tags": [
-          "DscConfigurations"
+          "DscConfiguration"
         ],
         "description": "Create the configuration identified by configuration name.",
         "externalDocs": {
@@ -1100,7 +1169,7 @@
       "patch": {
         "operationId": "DscConfiguration_Update",
         "tags": [
-          "DscConfigurations"
+          "DscConfiguration"
         ],
         "description": "Create the configuration identified by configuration name.",
         "externalDocs": {
@@ -1163,7 +1232,7 @@
       "delete": {
         "operationId": "DscConfiguration_Delete",
         "tags": [
-          "DscConfigurations"
+          "DscConfiguration"
         ],
         "description": "Delete the dsc configuration identified by configuration name.",
         "externalDocs": {
@@ -1219,7 +1288,7 @@
       "get": {
         "operationId": "DscConfiguration_GetContent",
         "tags": [
-          "DscConfigurations"
+          "DscConfiguration"
         ],
         "description": "Retrieve the configuration script identified by configuration name.",
         "externalDocs": {
@@ -1279,7 +1348,7 @@
       "get": {
         "operationId": "ConnectionType_ListByAutomationAccount",
         "tags": [
-          "ConnectionTypes"
+          "ConnectionType"
         ],
         "description": "Retrieve a list of connection types.",
         "externalDocs": {
@@ -1334,7 +1403,7 @@
       "get": {
         "operationId": "ConnectionType_Get",
         "tags": [
-          "ConnectionTypes"
+          "ConnectionType"
         ],
         "description": "Retrieve the connection type identified by connection type name.",
         "externalDocs": {
@@ -1388,7 +1457,7 @@
       "put": {
         "operationId": "ConnectionType_CreateOrUpdate",
         "tags": [
-          "ConnectionTypes"
+          "ConnectionType"
         ],
         "description": "Create a connection type.",
         "externalDocs": {
@@ -1451,7 +1520,7 @@
       "delete": {
         "operationId": "ConnectionType_Delete",
         "tags": [
-          "ConnectionTypes"
+          "ConnectionType"
         ],
         "description": "Delete the connection type.",
         "externalDocs": {
@@ -1507,7 +1576,7 @@
       "get": {
         "operationId": "Connection_ListByAutomationAccount",
         "tags": [
-          "Connections"
+          "Connection"
         ],
         "description": "Retrieve a list of connections.",
         "externalDocs": {
@@ -1562,7 +1631,7 @@
       "get": {
         "operationId": "Connection_Get",
         "tags": [
-          "Connections"
+          "Connection"
         ],
         "description": "Retrieve the connection identified by connection name.",
         "externalDocs": {
@@ -1616,7 +1685,7 @@
       "put": {
         "operationId": "Connection_CreateOrUpdate",
         "tags": [
-          "Connections"
+          "Connection"
         ],
         "description": "Create or update a connection.",
         "externalDocs": {
@@ -1685,7 +1754,7 @@
       "patch": {
         "operationId": "Connection_Update",
         "tags": [
-          "Connections"
+          "Connection"
         ],
         "description": "Update a connection.",
         "externalDocs": {
@@ -1748,7 +1817,7 @@
       "delete": {
         "operationId": "Connection_Delete",
         "tags": [
-          "Connections"
+          "Connection"
         ],
         "description": "Delete the connection.",
         "externalDocs": {
@@ -1804,7 +1873,7 @@
       "post": {
         "operationId": "convertGraphRunbookContent",
         "tags": [
-          "AutomationAccounts"
+          "Operations"
         ],
         "description": "Post operation to serialize or deserialize GraphRunbookContent",
         "parameters": [
@@ -1862,7 +1931,7 @@
       "get": {
         "operationId": "Credential_ListByAutomationAccount",
         "tags": [
-          "Credentials"
+          "Credential"
         ],
         "description": "Retrieve a list of credentials.",
         "externalDocs": {
@@ -1917,7 +1986,7 @@
       "get": {
         "operationId": "Credential_Get",
         "tags": [
-          "Credentials"
+          "Credential"
         ],
         "description": "Retrieve the credential identified by credential name.",
         "externalDocs": {
@@ -1971,7 +2040,7 @@
       "put": {
         "operationId": "Credential_CreateOrUpdate",
         "tags": [
-          "Credentials"
+          "Credential"
         ],
         "description": "Create a credential.",
         "externalDocs": {
@@ -2040,7 +2109,7 @@
       "patch": {
         "operationId": "Credential_Update",
         "tags": [
-          "Credentials"
+          "Credential"
         ],
         "description": "Update a credential.",
         "externalDocs": {
@@ -2103,7 +2172,7 @@
       "delete": {
         "operationId": "Credential_Delete",
         "tags": [
-          "Credentials"
+          "Credential"
         ],
         "description": "Delete the credential.",
         "externalDocs": {
@@ -2156,7 +2225,7 @@
       "get": {
         "operationId": "HybridRunbookWorkerGroup_ListByAutomationAccount",
         "tags": [
-          "HybridRunbookWorkerGroups"
+          "HybridRunbookWorkerGroup"
         ],
         "description": "Retrieve a list of hybrid runbook worker groups.",
         "externalDocs": {
@@ -2215,7 +2284,7 @@
       "get": {
         "operationId": "HybridRunbookWorkerGroup_Get",
         "tags": [
-          "HybridRunbookWorkerGroups"
+          "HybridRunbookWorkerGroup"
         ],
         "description": "Retrieve a hybrid runbook worker group.",
         "externalDocs": {
@@ -2269,7 +2338,7 @@
       "put": {
         "operationId": "HybridRunbookWorkerGroup_Create",
         "tags": [
-          "HybridRunbookWorkerGroups"
+          "HybridRunbookWorkerGroup"
         ],
         "description": "Create a hybrid runbook worker group.",
         "externalDocs": {
@@ -2338,7 +2407,7 @@
       "patch": {
         "operationId": "HybridRunbookWorkerGroup_Update",
         "tags": [
-          "HybridRunbookWorkerGroups"
+          "HybridRunbookWorkerGroup"
         ],
         "description": "Update a hybrid runbook worker group.",
         "externalDocs": {
@@ -2401,7 +2470,7 @@
       "delete": {
         "operationId": "HybridRunbookWorkerGroup_Delete",
         "tags": [
-          "HybridRunbookWorkerGroups"
+          "ListAllHybridRunbookWorkerGroupInAutomationAccount"
         ],
         "description": "Delete a hybrid runbook worker group.",
         "externalDocs": {
@@ -2454,7 +2523,7 @@
       "get": {
         "operationId": "HybridRunbookWorkers_ListByHybridRunbookWorkerGroup",
         "tags": [
-          "HybridRunbookWorkers"
+          "HybridRunbookWorker"
         ],
         "description": "Retrieve a list of hybrid runbook workers.",
         "externalDocs": {
@@ -2520,7 +2589,7 @@
       "get": {
         "operationId": "HybridRunbookWorkers_Get",
         "tags": [
-          "HybridRunbookWorkers"
+          "HybridRunbookWorker"
         ],
         "description": "Retrieve a hybrid runbook worker.",
         "externalDocs": {
@@ -2581,7 +2650,7 @@
       "put": {
         "operationId": "HybridRunbookWorkers_Create",
         "tags": [
-          "HybridRunbookWorkers"
+          "HybridRunbookWorker"
         ],
         "description": "Create a hybrid runbook worker.",
         "externalDocs": {
@@ -2657,7 +2726,7 @@
       "patch": {
         "operationId": "HybridRunbookWorkers_Patch",
         "tags": [
-          "HybridRunbookWorkers"
+          "HybridRunbookWorker"
         ],
         "description": "Update a hybrid runbook worker.",
         "externalDocs": {
@@ -2727,7 +2796,7 @@
       "delete": {
         "operationId": "HybridRunbookWorkers_Delete",
         "tags": [
-          "HybridRunbookWorkers"
+          "HybridRunbookWorker"
         ],
         "description": "Delete a hybrid runbook worker.",
         "externalDocs": {
@@ -2790,7 +2859,7 @@
       "post": {
         "operationId": "HybridRunbookWorkers_Move",
         "tags": [
-          "HybridRunbookWorkers"
+          "HybridRunbookWorker"
         ],
         "description": "Move a hybrid worker to a different group.",
         "externalDocs": {
@@ -2859,7 +2928,7 @@
       "get": {
         "operationId": "JobSchedule_ListByAutomationAccount",
         "tags": [
-          "JobSchedules"
+          "JobSchedule"
         ],
         "description": "Retrieve a list of job schedules.",
         "externalDocs": {
@@ -2918,7 +2987,7 @@
       "get": {
         "operationId": "JobSchedule_Get",
         "tags": [
-          "JobSchedules"
+          "JobSchedule"
         ],
         "description": "Retrieve the job schedule identified by job schedule name.",
         "externalDocs": {
@@ -2973,7 +3042,7 @@
       "put": {
         "operationId": "JobSchedule_Create",
         "tags": [
-          "JobSchedules"
+          "JobSchedule"
         ],
         "description": "Create a job schedule.",
         "externalDocs": {
@@ -3037,7 +3106,7 @@
       "delete": {
         "operationId": "JobSchedule_Delete",
         "tags": [
-          "JobSchedules"
+          "JobSchedule"
         ],
         "description": "Delete the job schedule identified by job schedule name.",
         "externalDocs": {
@@ -3091,7 +3160,7 @@
       "get": {
         "operationId": "Job_ListByAutomationAccount",
         "tags": [
-          "AutomationAccounts"
+          "Job"
         ],
         "description": "Retrieve a list of jobs.",
         "externalDocs": {
@@ -3158,7 +3227,7 @@
       "get": {
         "operationId": "Job_Get",
         "tags": [
-          "Jobs"
+          "Job"
         ],
         "description": "Retrieve the job identified by job name.",
         "externalDocs": {
@@ -3220,7 +3289,7 @@
       "put": {
         "operationId": "Job_Create",
         "tags": [
-          "Jobs"
+          "Job"
         ],
         "description": "Create a job of the runbook.",
         "externalDocs": {
@@ -3293,7 +3362,7 @@
       "get": {
         "operationId": "Job_GetOutput",
         "tags": [
-          "Jobs"
+          "Job"
         ],
         "description": "Retrieve the job output identified by job name.",
         "externalDocs": {
@@ -3361,7 +3430,7 @@
       "post": {
         "operationId": "Job_Resume",
         "tags": [
-          "Jobs"
+          "Job"
         ],
         "description": "Resume the job identified by jobName.",
         "externalDocs": {
@@ -3422,7 +3491,7 @@
       "get": {
         "operationId": "Job_GetRunbookContent",
         "tags": [
-          "Jobs"
+          "Job"
         ],
         "description": "Retrieve the runbook content of the job identified by job name.",
         "externalDocs": {
@@ -3490,7 +3559,7 @@
       "post": {
         "operationId": "Job_Stop",
         "tags": [
-          "Jobs"
+          "Job"
         ],
         "description": "Stop the job identified by jobName.",
         "externalDocs": {
@@ -3551,7 +3620,7 @@
       "get": {
         "operationId": "JobStream_ListByJob",
         "tags": [
-          "Jobs"
+          "JobStream"
         ],
         "description": "Retrieve a list of jobs streams identified by job name.",
         "externalDocs": {
@@ -3625,7 +3694,7 @@
       "get": {
         "operationId": "JobStream_Get",
         "tags": [
-          "Jobs"
+          "JobStream"
         ],
         "description": "Retrieve the job stream identified by job stream id.",
         "externalDocs": {
@@ -3696,7 +3765,7 @@
       "post": {
         "operationId": "Job_Suspend",
         "tags": [
-          "Jobs"
+          "Job"
         ],
         "description": "Suspend the job identified by job name.",
         "externalDocs": {
@@ -3757,7 +3826,7 @@
       "get": {
         "operationId": "LinkedWorkspace_Get",
         "tags": [
-          "AutomationAccounts"
+          "LinkedWorkspace"
         ],
         "description": "Retrieve the linked workspace for the account id.",
         "externalDocs": {
@@ -3806,7 +3875,7 @@
       "post": {
         "operationId": "AutomationAccount_ListDeletedRunbooks",
         "tags": [
-          "AutomationAccounts"
+          "ListDeletedRunbooks"
         ],
         "description": "Retrieve the deleted runbooks for an automation account.",
         "parameters": [
@@ -3855,7 +3924,7 @@
       "post": {
         "operationId": "Keys_ListByAutomationAccount",
         "tags": [
-          "AutomationAccounts"
+          "ListKeys"
         ],
         "description": "Retrieve the automation keys for an account.",
         "parameters": [
@@ -3901,7 +3970,7 @@
       "get": {
         "operationId": "Module_ListByAutomationAccount",
         "tags": [
-          "Modules"
+          "Module"
         ],
         "description": "Retrieve a list of modules.",
         "externalDocs": {
@@ -3953,7 +4022,7 @@
       "get": {
         "operationId": "Module_Get",
         "tags": [
-          "Modules"
+          "Module"
         ],
         "description": "Retrieve the module identified by module name.",
         "externalDocs": {
@@ -4007,7 +4076,7 @@
       "put": {
         "operationId": "Module_CreateOrUpdate",
         "tags": [
-          "Modules"
+          "Module"
         ],
         "description": "Create or Update the module identified by module name.",
         "externalDocs": {
@@ -4076,7 +4145,7 @@
       "patch": {
         "operationId": "Module_Update",
         "tags": [
-          "Modules"
+          "Module"
         ],
         "description": "Update the module identified by module name.",
         "externalDocs": {
@@ -4139,7 +4208,7 @@
       "delete": {
         "operationId": "Module_Delete",
         "tags": [
-          "Modules"
+          "Module"
         ],
         "description": "Delete the module by name.",
         "externalDocs": {
@@ -4192,7 +4261,7 @@
       "get": {
         "operationId": "Activity_ListByModule",
         "tags": [
-          "Modules"
+          "Activity"
         ],
         "description": "Retrieve a list of activities in the module identified by module name.",
         "externalDocs": {
@@ -4251,7 +4320,7 @@
       "get": {
         "operationId": "Activity_Get",
         "tags": [
-          "Modules"
+          "Activity"
         ],
         "description": "Retrieve the activity in the module identified by module name and activity name.",
         "externalDocs": {
@@ -4314,7 +4383,7 @@
       "get": {
         "operationId": "ObjectDataTypes_ListFieldsByModuleAndType",
         "tags": [
-          "Modules"
+          "ObjectDataTypes"
         ],
         "description": "Retrieve a list of fields of a given type identified by module name.",
         "externalDocs": {
@@ -4380,7 +4449,7 @@
       "get": {
         "operationId": "Fields_ListByType",
         "tags": [
-          "Modules"
+          "TypeFields"
         ],
         "description": "Retrieve a list of fields of a given type identified by module name.",
         "externalDocs": {
@@ -4446,7 +4515,7 @@
       "get": {
         "operationId": "DscNodeConfiguration_ListByAutomationAccount",
         "tags": [
-          "DscNodeConfigurations"
+          "DscNodeConfiguration"
         ],
         "description": "Retrieve a list of dsc node configurations.",
         "externalDocs": {
@@ -4534,7 +4603,7 @@
       "get": {
         "operationId": "DscNodeConfiguration_Get",
         "tags": [
-          "DscNodeConfigurations"
+          "DscNodeConfiguration"
         ],
         "description": "Retrieve the Dsc node configurations by node configuration.",
         "externalDocs": {
@@ -4588,7 +4657,7 @@
       "put": {
         "operationId": "DscNodeConfiguration_CreateOrUpdate",
         "tags": [
-          "DscNodeConfigurations"
+          "DscNodeConfiguration"
         ],
         "description": "Create the node configuration identified by node configuration name.",
         "externalDocs": {
@@ -4669,7 +4738,7 @@
       "delete": {
         "operationId": "DscNodeConfiguration_Delete",
         "tags": [
-          "DscNodeConfigurations"
+          "DscNodeConfiguration"
         ],
         "description": "Delete the Dsc node configurations by node configuration.",
         "externalDocs": {
@@ -4722,7 +4791,7 @@
       "get": {
         "operationId": "NodeCountInformation_Get",
         "tags": [
-          "AutomationAccounts"
+          "NodeCountInformation"
         ],
         "description": "Retrieve counts for Dsc Nodes.",
         "externalDocs": {
@@ -4801,7 +4870,7 @@
       "get": {
         "operationId": "DscNode_ListByAutomationAccount",
         "tags": [
-          "DscNodes"
+          "DscNode"
         ],
         "description": "Retrieve a list of dsc nodes.",
         "externalDocs": {
@@ -4904,7 +4973,7 @@
       "get": {
         "operationId": "DscNode_Get",
         "tags": [
-          "DscNodes"
+          "DscNode"
         ],
         "description": "Retrieve the dsc node identified by node id.",
         "externalDocs": {
@@ -4958,7 +5027,7 @@
       "patch": {
         "operationId": "DscNode_Update",
         "tags": [
-          "DscNodes"
+          "DscNode"
         ],
         "description": "Update the dsc node.",
         "externalDocs": {
@@ -5021,7 +5090,7 @@
       "delete": {
         "operationId": "DscNode_Delete",
         "tags": [
-          "DscNodes"
+          "DscNode"
         ],
         "description": "Delete the dsc node identified by node id.",
         "externalDocs": {
@@ -5074,7 +5143,7 @@
       "get": {
         "operationId": "NodeReports_ListByNode",
         "tags": [
-          "DscNodes"
+          "NodeReports"
         ],
         "description": "Retrieve the Dsc node report list by node id.",
         "externalDocs": {
@@ -5143,7 +5212,7 @@
       "get": {
         "operationId": "NodeReports_Get",
         "tags": [
-          "DscNodes"
+          "NodeReports"
         ],
         "description": "Retrieve the Dsc node report data by node id and report id.",
         "externalDocs": {
@@ -5206,7 +5275,7 @@
       "get": {
         "operationId": "NodeReports_GetContent",
         "tags": [
-          "DscNodes"
+          "NodeReports"
         ],
         "description": "Retrieve the Dsc node reports by node id and report id.",
         "externalDocs": {
@@ -5267,7 +5336,7 @@
       "get": {
         "operationId": "ObjectDataTypes_ListFieldsByType",
         "tags": [
-          "AutomationAccounts"
+          "ObjectDataTypes"
         ],
         "description": "Retrieve a list of fields of a given type across all accessible modules.",
         "externalDocs": {
@@ -5572,7 +5641,7 @@
       "get": {
         "operationId": "PrivateLinkResources_Automation",
         "tags": [
-          "AutomationAccounts"
+          "PrivateLinkResources"
         ],
         "description": "Gets the private link resources that need to be created for Automation account.",
         "parameters": [
@@ -6206,7 +6275,7 @@
       "get": {
         "operationId": "Runbook_ListByAutomationAccount",
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
         "description": "Retrieve a list of runbooks.",
         "externalDocs": {
@@ -6258,7 +6327,7 @@
       "get": {
         "operationId": "Runbook_Get",
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
         "description": "Retrieve the runbook identified by runbook name.",
         "externalDocs": {
@@ -6313,7 +6382,7 @@
       "put": {
         "operationId": "Runbook_CreateOrUpdate",
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
         "description": "Create the runbook identified by runbook name.",
         "externalDocs": {
@@ -6386,7 +6455,7 @@
       "patch": {
         "operationId": "Runbook_Update",
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
         "description": "Update the runbook identified by runbook name.",
         "externalDocs": {
@@ -6450,7 +6519,7 @@
       "delete": {
         "operationId": "Runbook_Delete",
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
         "description": "Delete the runbook by name.",
         "externalDocs": {
@@ -6507,7 +6576,7 @@
       "get": {
         "operationId": "Runbook_GetContent",
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
         "description": "Retrieve the content of runbook identified by runbook name.",
         "externalDocs": {
@@ -6568,7 +6637,7 @@
       "get": {
         "operationId": "RunbookDraft_Get",
         "tags": [
-          "Runbooks"
+          "RunbookDraft"
         ],
         "description": "Retrieve the runbook draft identified by runbook name.",
         "externalDocs": {
@@ -6625,7 +6694,7 @@
       "get": {
         "operationId": "RunbookDraft_GetContent",
         "tags": [
-          "Runbooks"
+          "RunbookDraft"
         ],
         "description": "Retrieve the content of runbook draft identified by runbook name.",
         "externalDocs": {
@@ -6684,7 +6753,7 @@
       "put": {
         "operationId": "RunbookDraft_ReplaceContent",
         "tags": [
-          "Runbooks"
+          "RunbookDraft"
         ],
         "description": "Replaces the runbook draft content.",
         "externalDocs": {
@@ -6781,7 +6850,7 @@
       "get": {
         "operationId": "TestJob_Get",
         "tags": [
-          "Runbooks"
+          "TestJob"
         ],
         "description": "Retrieve the test job for the specified runbook.",
         "externalDocs": {
@@ -6836,7 +6905,7 @@
       "put": {
         "operationId": "TestJob_Create",
         "tags": [
-          "Runbooks"
+          "TestJob"
         ],
         "description": "Create a test job of the runbook.",
         "externalDocs": {
@@ -6902,7 +6971,7 @@
       "post": {
         "operationId": "TestJob_Resume",
         "tags": [
-          "Runbooks"
+          "TestJob"
         ],
         "description": "Resume the test job.",
         "externalDocs": {
@@ -6956,7 +7025,7 @@
       "post": {
         "operationId": "TestJob_Stop",
         "tags": [
-          "Runbooks"
+          "TestJob"
         ],
         "description": "Stop the test job.",
         "externalDocs": {
@@ -7010,7 +7079,7 @@
       "get": {
         "operationId": "TestJobStreams_ListByTestJob",
         "tags": [
-          "Runbooks"
+          "TestJobStream"
         ],
         "description": "Retrieve a list of test job streams identified by runbook name.",
         "externalDocs": {
@@ -7077,7 +7146,7 @@
       "post": {
         "operationId": "TestJob_Suspend",
         "tags": [
-          "Runbooks"
+          "TestJob"
         ],
         "description": "Suspend the test job.",
         "externalDocs": {
@@ -7131,7 +7200,7 @@
       "post": {
         "operationId": "RunbookDraft_UndoEdit",
         "tags": [
-          "Runbooks"
+          "RunbookDraft"
         ],
         "description": "Undo draft edit to last known published state identified by runbook name.",
         "externalDocs": {
@@ -7188,7 +7257,7 @@
       "post": {
         "operationId": "Runbook_Publish",
         "tags": [
-          "Runbooks"
+          "Runbook"
         ],
         "description": "Publish runbook draft.",
         "externalDocs": {
@@ -7257,7 +7326,7 @@
       "get": {
         "operationId": "RuntimeEnvironments_ListByAutomationAccount",
         "tags": [
-          "RuntimeEnvironments"
+          "RuntimeEnvironment"
         ],
         "description": "Retrieve a list of RuntimeEnvironments.",
         "externalDocs": {
@@ -7309,7 +7378,7 @@
       "get": {
         "operationId": "RuntimeEnvironments_Get",
         "tags": [
-          "RuntimeEnvironments"
+          "RuntimeEnvironment"
         ],
         "description": "Get information about the Runtime Environment",
         "externalDocs": {
@@ -7364,7 +7433,7 @@
       "put": {
         "operationId": "RuntimeEnvironments_Create",
         "tags": [
-          "RuntimeEnvironments"
+          "RuntimeEnvironment"
         ],
         "description": "Create or update Runtime Environment",
         "externalDocs": {
@@ -7434,7 +7503,7 @@
       "patch": {
         "operationId": "RuntimeEnvironments_Update",
         "tags": [
-          "RuntimeEnvironments"
+          "RuntimeEnvironment"
         ],
         "description": "Update an Runtime Environment.",
         "externalDocs": {
@@ -7498,7 +7567,7 @@
       "delete": {
         "operationId": "RuntimeEnvironments_Delete",
         "tags": [
-          "RuntimeEnvironments"
+          "RuntimeEnvironment"
         ],
         "description": "Delete the Runtime Environment.",
         "externalDocs": {
@@ -7555,7 +7624,7 @@
       "get": {
         "operationId": "Package_ListByRuntimeEnvironment",
         "tags": [
-          "Packages"
+          "Package"
         ],
         "description": "Retrieve the a list of Packages",
         "externalDocs": {
@@ -7615,7 +7684,7 @@
       "get": {
         "operationId": "Package_Get",
         "tags": [
-          "Packages"
+          "Package"
         ],
         "description": "Retrieve the Package identified by Package name.",
         "externalDocs": {
@@ -7677,7 +7746,7 @@
       "put": {
         "operationId": "Package_CreateOrUpdate",
         "tags": [
-          "Packages"
+          "Package"
         ],
         "description": "Create or update the package identified by package name.",
         "externalDocs": {
@@ -7754,7 +7823,7 @@
       "patch": {
         "operationId": "Package_Update",
         "tags": [
-          "Packages"
+          "Package"
         ],
         "description": "Update the Package identified by Package name.",
         "externalDocs": {
@@ -7825,7 +7894,7 @@
       "delete": {
         "operationId": "Package_Delete",
         "tags": [
-          "Packages"
+          "Package"
         ],
         "description": "Delete the package by name.",
         "externalDocs": {
@@ -7889,7 +7958,7 @@
       "get": {
         "operationId": "Schedule_ListByAutomationAccount",
         "tags": [
-          "Schedules"
+          "Schedule"
         ],
         "description": "Retrieve a list of schedules.",
         "externalDocs": {
@@ -7944,7 +8013,7 @@
       "get": {
         "operationId": "Schedule_Get",
         "tags": [
-          "Schedules"
+          "Schedule"
         ],
         "description": "Retrieve the schedule identified by schedule name.",
         "externalDocs": {
@@ -7998,7 +8067,7 @@
       "put": {
         "operationId": "Schedule_CreateOrUpdate",
         "tags": [
-          "Schedules"
+          "Schedule"
         ],
         "description": "Create a schedule.",
         "externalDocs": {
@@ -8070,7 +8139,7 @@
       "patch": {
         "operationId": "Schedule_Update",
         "tags": [
-          "Schedules"
+          "Schedule"
         ],
         "description": "Update the schedule identified by schedule name.",
         "externalDocs": {
@@ -8133,7 +8202,7 @@
       "delete": {
         "operationId": "Schedule_Delete",
         "tags": [
-          "Schedules"
+          "Schedule"
         ],
         "description": "Delete the schedule identified by schedule name.",
         "externalDocs": {
@@ -8186,7 +8255,7 @@
       "get": {
         "operationId": "SoftwareUpdateConfigurationMachineRuns_List",
         "tags": [
-          "AutomationAccounts"
+          "Software Update Configuration Machine Run"
         ],
         "description": "Return list of software update configuration machine runs",
         "externalDocs": {
@@ -8267,7 +8336,7 @@
       "get": {
         "operationId": "SoftwareUpdateConfigurationMachineRuns_GetById",
         "tags": [
-          "AutomationAccounts"
+          "Software Update Configuration Machine Run"
         ],
         "description": "Get a single software update configuration machine run by Id.",
         "externalDocs": {
@@ -8332,7 +8401,7 @@
       "get": {
         "operationId": "SoftwareUpdateConfigurationRuns_List",
         "tags": [
-          "AutomationAccounts"
+          "Software Update Configuration Run"
         ],
         "description": "Return list of software update configuration runs",
         "externalDocs": {
@@ -8413,7 +8482,7 @@
       "get": {
         "operationId": "SoftwareUpdateConfigurationRuns_GetById",
         "tags": [
-          "AutomationAccounts"
+          "Software Update Configuration Run"
         ],
         "description": "Get a single software update configuration Run by Id.",
         "externalDocs": {
@@ -8478,7 +8547,7 @@
       "get": {
         "operationId": "SoftwareUpdateConfigurations_List",
         "tags": [
-          "AutomationAccounts"
+          "Software Update Configuration"
         ],
         "description": "Get all software update configurations for the account.",
         "externalDocs": {
@@ -8545,7 +8614,7 @@
       "get": {
         "operationId": "SoftwareUpdateConfigurations_GetByName",
         "tags": [
-          "SoftwareUpdateConfigurations"
+          "Software Update Configuration"
         ],
         "description": "Get a single software update configuration by name.",
         "externalDocs": {
@@ -8607,7 +8676,7 @@
       "put": {
         "operationId": "SoftwareUpdateConfigurations_Create",
         "tags": [
-          "SoftwareUpdateConfigurations"
+          "Software Update Configuration"
         ],
         "description": "Create a new software update configuration with the name given in the URI.",
         "externalDocs": {
@@ -8684,7 +8753,7 @@
       "delete": {
         "operationId": "SoftwareUpdateConfigurations_Delete",
         "tags": [
-          "SoftwareUpdateConfigurations"
+          "Software Update Configuration"
         ],
         "description": "delete a specific software update configuration.",
         "externalDocs": {
@@ -8748,7 +8817,7 @@
       "get": {
         "operationId": "SourceControl_ListByAutomationAccount",
         "tags": [
-          "SourceControls"
+          "SourceControl"
         ],
         "description": "Retrieve a list of source controls.",
         "externalDocs": {
@@ -8807,7 +8876,7 @@
       "get": {
         "operationId": "SourceControl_Get",
         "tags": [
-          "SourceControls"
+          "SourceControl"
         ],
         "description": "Retrieve the source control identified by source control name.",
         "externalDocs": {
@@ -8861,7 +8930,7 @@
       "put": {
         "operationId": "SourceControl_CreateOrUpdate",
         "tags": [
-          "SourceControls"
+          "SourceControl"
         ],
         "description": "Create a source control.",
         "externalDocs": {
@@ -8930,7 +8999,7 @@
       "patch": {
         "operationId": "SourceControl_Update",
         "tags": [
-          "SourceControls"
+          "SourceControl"
         ],
         "description": "Update a source control.",
         "externalDocs": {
@@ -8993,7 +9062,7 @@
       "delete": {
         "operationId": "SourceControl_Delete",
         "tags": [
-          "SourceControls"
+          "SourceControl"
         ],
         "description": "Delete the source control.",
         "externalDocs": {
@@ -9046,7 +9115,7 @@
       "get": {
         "operationId": "SourceControlSyncJob_ListByAutomationAccount",
         "tags": [
-          "SourceControls"
+          "SourceControlSyncJob"
         ],
         "description": "Retrieve a list of source control sync jobs.",
         "externalDocs": {
@@ -9112,7 +9181,7 @@
       "get": {
         "operationId": "SourceControlSyncJob_Get",
         "tags": [
-          "SourceControls"
+          "SourceControlSyncJob"
         ],
         "description": "Retrieve the source control sync job identified by job id.",
         "externalDocs": {
@@ -9174,7 +9243,7 @@
       "put": {
         "operationId": "SourceControlSyncJob_Create",
         "tags": [
-          "SourceControls"
+          "SourceControlSyncJob"
         ],
         "description": "Creates the sync job for a source control.",
         "externalDocs": {
@@ -9247,7 +9316,7 @@
       "get": {
         "operationId": "SourceControlSyncJobStreams_ListBySyncJob",
         "tags": [
-          "SourceControls"
+          "SourceControlSyncJobStreams"
         ],
         "description": "Retrieve a list of sync job streams identified by sync job id.",
         "externalDocs": {
@@ -9321,7 +9390,7 @@
       "get": {
         "operationId": "SourceControlSyncJobStreams_Get",
         "tags": [
-          "SourceControls"
+          "SourceControlSyncJobStreams"
         ],
         "description": "Retrieve a sync job stream identified by stream id.",
         "externalDocs": {
@@ -9392,7 +9461,7 @@
       "get": {
         "operationId": "Statistics_ListByAutomationAccount",
         "tags": [
-          "AutomationAccounts"
+          "Statistics"
         ],
         "description": "Retrieve the statistics for the account.",
         "externalDocs": {
@@ -9451,7 +9520,7 @@
       "get": {
         "operationId": "Usages_ListByAutomationAccount",
         "tags": [
-          "AutomationAccounts"
+          "Usages"
         ],
         "description": "Retrieve the usage for the account id.",
         "externalDocs": {
@@ -9503,7 +9572,7 @@
       "get": {
         "operationId": "Variable_ListByAutomationAccount",
         "tags": [
-          "Variables"
+          "Variable"
         ],
         "description": "Retrieve a list of variables.",
         "externalDocs": {
@@ -9558,7 +9627,7 @@
       "get": {
         "operationId": "Variable_Get",
         "tags": [
-          "Variables"
+          "Variable"
         ],
         "description": "Retrieve the variable identified by variable name.",
         "externalDocs": {
@@ -9612,7 +9681,7 @@
       "put": {
         "operationId": "Variable_CreateOrUpdate",
         "tags": [
-          "Variables"
+          "Variable"
         ],
         "description": "Create a variable.",
         "externalDocs": {
@@ -9681,7 +9750,7 @@
       "patch": {
         "operationId": "Variable_Update",
         "tags": [
-          "Variables"
+          "Variable"
         ],
         "description": "Update a variable.",
         "externalDocs": {
@@ -9744,7 +9813,7 @@
       "delete": {
         "operationId": "Variable_Delete",
         "tags": [
-          "Variables"
+          "Variable"
         ],
         "description": "Delete the variable.",
         "externalDocs": {
@@ -9797,7 +9866,7 @@
       "get": {
         "operationId": "Watcher_ListByAutomationAccount",
         "tags": [
-          "Watchers"
+          "Watcher"
         ],
         "description": "Retrieve a list of watchers.",
         "externalDocs": {
@@ -9856,7 +9925,7 @@
       "get": {
         "operationId": "Watcher_Get",
         "tags": [
-          "Watchers"
+          "Watcher"
         ],
         "description": "Retrieve the watcher identified by watcher name.",
         "externalDocs": {
@@ -9910,7 +9979,7 @@
       "put": {
         "operationId": "Watcher_CreateOrUpdate",
         "tags": [
-          "Watchers"
+          "Watcher"
         ],
         "description": "Create the watcher identified by watcher name.",
         "externalDocs": {
@@ -9979,7 +10048,7 @@
       "patch": {
         "operationId": "Watcher_Update",
         "tags": [
-          "Watchers"
+          "Watcher"
         ],
         "description": "Update the watcher identified by watcher name.",
         "externalDocs": {
@@ -10042,7 +10111,7 @@
       "delete": {
         "operationId": "Watcher_Delete",
         "tags": [
-          "Watchers"
+          "Watcher"
         ],
         "description": "Delete the watcher by name.",
         "externalDocs": {
@@ -10095,7 +10164,7 @@
       "post": {
         "operationId": "Watcher_Start",
         "tags": [
-          "Watchers"
+          "Watcher"
         ],
         "description": "Resume the watcher identified by watcher name.",
         "externalDocs": {
@@ -10148,7 +10217,7 @@
       "post": {
         "operationId": "Watcher_Stop",
         "tags": [
-          "Watchers"
+          "Watcher"
         ],
         "description": "Resume the watcher identified by watcher name.",
         "externalDocs": {
@@ -10201,7 +10270,7 @@
       "get": {
         "operationId": "Webhook_ListByAutomationAccount",
         "tags": [
-          "Webhooks"
+          "Webhook"
         ],
         "description": "Retrieve a list of webhooks.",
         "externalDocs": {
@@ -10260,7 +10329,7 @@
       "get": {
         "operationId": "Webhook_Get",
         "tags": [
-          "Webhooks"
+          "Webhook"
         ],
         "description": "Retrieve the webhook identified by webhook name.",
         "externalDocs": {
@@ -10314,7 +10383,7 @@
       "put": {
         "operationId": "Webhook_CreateOrUpdate",
         "tags": [
-          "Webhooks"
+          "Webhook"
         ],
         "description": "Create the webhook identified by webhook name.",
         "externalDocs": {
@@ -10383,7 +10452,7 @@
       "patch": {
         "operationId": "Webhook_Update",
         "tags": [
-          "Webhooks"
+          "Webhook"
         ],
         "description": "Update the webhook identified by webhook name.",
         "externalDocs": {
@@ -10446,7 +10515,7 @@
       "delete": {
         "operationId": "Webhook_Delete",
         "tags": [
-          "Webhooks"
+          "Webhook"
         ],
         "description": "Delete the webhook by name.",
         "externalDocs": {
@@ -10499,7 +10568,7 @@
       "post": {
         "operationId": "Webhook_GenerateUri",
         "tags": [
-          "AutomationAccounts"
+          "Webhook"
         ],
         "description": "Generates a Uri for use in creating a webhook.",
         "externalDocs": {
@@ -10552,7 +10621,7 @@
       "get": {
         "operationId": "TestJobStreams_Get",
         "tags": [
-          "Runbooks"
+          "TestJobStream"
         ],
         "description": "Retrieve a test job stream of the test job identified by runbook name and stream id.",
         "externalDocs": {
