@@ -7268,14 +7268,7 @@
                         "$ref": "#/components/schemas/OpenAI.ToolsArray"
                       },
                       "tool_choice": {
-                        "anyOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
-                          },
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
-                          }
-                        ]
+                        "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
                       },
                       "prompt": {
                         "$ref": "#/components/schemas/OpenAI.Prompt"
@@ -7460,14 +7453,7 @@
                         "$ref": "#/components/schemas/OpenAI.ToolsArray"
                       },
                       "tool_choice": {
-                        "anyOf": [
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
-                          },
-                          {
-                            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
-                          }
-                        ]
+                        "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
                       },
                       "prompt": {
                         "$ref": "#/components/schemas/OpenAI.Prompt"
@@ -17053,11 +17039,6 @@
             "default": "conversation"
           },
           "metadata": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.Metadata"
-              }
-            ],
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.\n  Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters."
           },
           "created_at": {
@@ -18284,7 +18265,9 @@
         "type": "object",
         "required": [
           "code",
-          "message"
+          "message",
+          "param",
+          "type"
         ],
         "properties": {
           "code": {
@@ -27384,14 +27367,7 @@
             "$ref": "#/components/schemas/OpenAI.ToolsArray"
           },
           "tool_choice": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
-              },
-              {
-                "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
-              }
-            ]
+            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
           },
           "prompt": {
             "$ref": "#/components/schemas/OpenAI.Prompt"
@@ -31071,16 +31047,6 @@
         ],
         "description": "Use this option to force the model to call a specific tool on a remote MCP server.",
         "title": "MCP tool"
-      },
-      "OpenAI.ToolChoiceOptions": {
-        "type": "string",
-        "enum": [
-          "none",
-          "auto",
-          "required"
-        ],
-        "description": "Controls which (if any) tool is called by the model.\n`none` means the model will not call any tool and instead generates a message.\n`auto` means the model can pick between generating a message or calling one or\nmore tools.\n`required` means the model must call one or more tools.",
-        "title": "Tool choice mode"
       },
       "OpenAI.ToolChoiceParam": {
         "type": "object",
