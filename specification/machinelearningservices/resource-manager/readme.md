@@ -216,6 +216,27 @@ These settings apply only when `--tag=package-2025-12-01` is specified on the co
 input-file:
   - Microsoft.MachineLearningServices/stable/2025-12-01/openapi.json
 suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Pre-existing API behavior, these schemas use additionalProperties for dynamic key-value pairs.
+    where:
+      - $.definitions.CustomKeys.properties.keys
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+      - $.definitions.SparkJob.properties.conf
+      - $.definitions.SparkJob.properties.environmentVariables
+      - $.definitions.DiagnoseRequestProperties.properties.applicationInsights
+      - $.definitions.DiagnoseRequestProperties.properties.containerRegistry
+      - $.definitions.DiagnoseRequestProperties.properties.dnsResolution
+      - $.definitions.DiagnoseRequestProperties.properties.keyVault
+      - $.definitions.DiagnoseRequestProperties.properties.nsg
+      - $.definitions.DiagnoseRequestProperties.properties.others
+      - $.definitions.DiagnoseRequestProperties.properties.requiredResourceProviders
+      - $.definitions.DiagnoseRequestProperties.properties.resourceLock
+      - $.definitions.DiagnoseRequestProperties.properties.storageAccount
+      - $.definitions.DiagnoseRequestProperties.properties.udr
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: Pre-existing API behavior, property name uses acronym CMK (Customer Managed Key) which is industry standard.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
   - code: DeleteResponseCodes
     reason: Pre-existing API behavior, LRO delete operations return 200 in addition to 202/204.
     where:

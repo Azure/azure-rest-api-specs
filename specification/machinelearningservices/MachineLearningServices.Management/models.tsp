@@ -2374,7 +2374,7 @@ union JobTier {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "No tier specified"
   Null: "Null",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Spot tier with preemptible compute"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Spot tier using low-priority compute"
   Spot: "Spot",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Basic tier"
   Basic: "Basic",
