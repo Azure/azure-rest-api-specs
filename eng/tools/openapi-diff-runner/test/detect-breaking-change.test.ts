@@ -893,8 +893,10 @@ describe("detect-breaking-change", () => {
       expect(result.errorCnt).toBeDefined();
     });
 
-    it("should process all renamed swaggers", async () => {
-      mockDetectionContext.existingVersionSwaggers = [];
+    it("should detect and process renames in existing version swaggers", async () => {
+      // Set up a scenario where a file in existingVersionSwaggers is also in renamedSwaggers
+      mockDetectionContext.existingVersionSwaggers = ["to.json"];
+      mockDetectionContext.renamedSwaggers = [{ from: "from.json", to: "to.json" }];
 
       const result = await checkBreakingChangeOnSameVersion(mockDetectionContext);
 

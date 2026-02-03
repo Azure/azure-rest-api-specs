@@ -119,30 +119,33 @@ export async function checkBreakingChangeOnSameVersion(
   let aggregateOadViolationsCnt = 0;
   let aggregateErrorCnt = 0;
 
+  // Build a map of renamed files for quick lookup
+  const renameMap = new Map<string, string>();
+  for (const { from, to } of detectionContext.renamedSwaggers) {
+    renameMap.set(to, from); // Map "to" file to "from" file
+  }
+
   for (const swaggerPath of detectionContext.existingVersionSwaggers) {
     logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
+    
+    // Check if this file is a rename target
+    const renameFrom = renameMap.get(swaggerPath);
+    const oldSpecPath = renameFrom
+      ? path.resolve(detectionContext.context.prInfo!.tempRepoFolder, renameFrom)
+      : path.resolve(detectionContext.context.prInfo!.tempRepoFolder, swaggerPath);
+    
+    if (renameFrom) {
+      logMessage(`Detected as rename: ${renameFrom} -> ${swaggerPath}`);
+    }
+    
     const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
       detectionContext,
-      path.resolve(detectionContext.context.prInfo!.tempRepoFolder, swaggerPath),
+      oldSpecPath,
       swaggerPath,
       BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
       specIsPreview(swaggerPath)
         ? ApiVersionLifecycleStage.PREVIEW
         : ApiVersionLifecycleStage.STABLE,
-    );
-    aggregateOadViolationsCnt += oadViolationsCnt;
-    aggregateErrorCnt += errorCnt;
-    logMessage("Processing completed", LogLevel.EndGroup);
-  }
-
-  for (const { from, to } of detectionContext.renamedSwaggers) {
-    logMessage(`Processing rename: ${from} -> ${to}`, LogLevel.Group);
-    const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
-      detectionContext,
-      path.resolve(detectionContext.context.prInfo!.tempRepoFolder, from),
-      to,
-      BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-      specIsPreview(to) ? ApiVersionLifecycleStage.PREVIEW : ApiVersionLifecycleStage.STABLE,
     );
     aggregateOadViolationsCnt += oadViolationsCnt;
     aggregateErrorCnt += errorCnt;

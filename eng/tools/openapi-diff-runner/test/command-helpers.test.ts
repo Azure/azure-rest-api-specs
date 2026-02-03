@@ -347,17 +347,17 @@ describe("command-helpers", () => {
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
       });
 
-      // Expected result should have renames returned separately
+      // Expected result should have renames in both add/delete lists AND the renames list
       const expectedResult = {
-        additions: mockResult.additions,
+        additions: [...mockResult.additions, ...mockResult.renames.map((rename) => rename.to)],
         modifications: mockResult.modifications,
-        deletions: mockResult.deletions,
+        deletions: [...mockResult.deletions, ...mockResult.renames.map((rename) => rename.from)],
         renames: mockResult.renames,
         total:
           mockResult.additions.length +
           mockResult.modifications.length +
           mockResult.deletions.length +
-          mockResult.renames.length,
+          mockResult.renames.length * 2,
       };
 
       expect(result).toEqual(expectedResult);
@@ -415,18 +415,25 @@ describe("command-helpers", () => {
 
       const result = await getSwaggerDiffs();
 
-      // Only Swagger files should be returned, with renames returned separately
+      // Only Swagger files should be returned, with renames in both add/delete AND renames list
       expect(result).toEqual({
-        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO, TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
+        additions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
+          TEST_CONSTANTS.SWAGGER_PATHS.BAZ,
+          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from rename
+        ],
         modifications: [TEST_CONSTANTS.SWAGGER_PATHS.QUX_MGMT],
-        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
+        deletions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from rename
+        ],
         renames: [
           {
             from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
             to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
           },
         ],
-        total: 5, // 2 additions + 1 modification + 1 deletion + 1 rename
+        total: 6, // 3 additions + 1 modification + 2 deletions (including rename as both add and delete)
       });
     });
 
@@ -473,11 +480,19 @@ describe("command-helpers", () => {
 
       const result = await getSwaggerDiffs();
 
-      // Renames should be returned separately, not added to additions and deletions
+      // Renames should be in both additions/deletions AND in the renames list
       expect(result).toEqual({
-        additions: [TEST_CONSTANTS.SWAGGER_PATHS.FOO],
+        additions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.FOO,
+          TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT, // from rename.to
+          "specification/newapi/data-plane/stable/2023-01-01/newapi.json", // from rename.to
+        ],
         modifications: [TEST_CONSTANTS.SWAGGER_PATHS.BAZ],
-        deletions: [TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA],
+        deletions: [
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_DATA,
+          TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT, // from rename.from
+          "specification/oldapi/data-plane/stable/2023-01-01/oldapi.json", // from rename.from
+        ],
         renames: [
           {
             from: TEST_CONSTANTS.SWAGGER_PATHS.OLD_MGMT,
@@ -488,7 +503,7 @@ describe("command-helpers", () => {
             to: "specification/newapi/data-plane/stable/2023-01-01/newapi.json",
           },
         ],
-        total: 5, // 1 addition + 1 modification + 1 deletion + 2 renames
+        total: 7, // 3 additions + 1 modification + 3 deletions (git-detected renames added to both lists)
       });
     });
 
@@ -517,16 +532,16 @@ describe("command-helpers", () => {
         const result = await getSwaggerDiffs();
 
         expect(result).toEqual({
-          additions: [],
+          additions: [to], // Kept in additions list
           modifications: [],
-          deletions: [],
+          deletions: [from], // Kept in deletions list
           renames: [
             {
               from,
               to,
             },
           ],
-          total: 1,
+          total: 2, // Just additions + deletions (renames are already counted in these lists)
         });
       },
     );
