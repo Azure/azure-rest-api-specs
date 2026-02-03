@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2026-02-01` is specified on the co
 input-file:
   - Microsoft.DurableTask/stable/2026-02-01/durabletask.json
 suppressions:
-  - code: ArmesourcePropertiesBag
+  - code: ArmResourcePropertiesBag
     reason: Changing this property would constitute a critical breaking change. SKU property is already in prod (see public swagger repo).
     from:
       - durabletask.json
@@ -70,7 +70,7 @@ These settings apply only when `--tag=package-2025-11-01` is specified on the co
 input-file:
   - Microsoft.DurableTask/stable/2025-11-01/durabletask.json
 suppressions:
-  - code: ArmesourcePropertiesBag
+  - code: ArmResourcePropertiesBag
     reason: Changing this property would constitute a critical breaking change. SKU property is already in prod (see public swagger repo).
     from:
       - durabletask.json
@@ -102,7 +102,7 @@ These settings apply only when `--tag=package-2025-05-04-preview` is specified o
 input-file:
   - Microsoft.DurableTask/preview/2025-05-04-preview/durabletask.json
 suppressions:
-  - code: ArmesourcePropertiesBag
+  - code: ArmResourcePropertiesBag
     reason: Changing this property would constitute a critical breaking change. SKU property is already in prod (see public swagger repo).
     from:
       - durabletask.json
@@ -134,7 +134,7 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 input-file:
   - Microsoft.DurableTask/preview/2025-04-01-preview/durabletask.json
 suppressions:
-  - code: ArmesourcePropertiesBag
+  - code: ArmResourcePropertiesBag
     reason: Changing this property would constitute a critical breaking change. SKU property is already in prod (see public swagger repo).
     from:
       - durabletask.json
@@ -155,7 +155,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 input-file:
   - Microsoft.DurableTask/preview/2024-10-01-preview/durabletask.json
 suppressions:
-  - code: ArmesourcePropertiesBag
+  - code: ArmResourcePropertiesBag
     reason: Changing this property would constitute a critical breaking change. SKU property is already in prod (see public swagger repo).
     from:
       - durabletask.json
