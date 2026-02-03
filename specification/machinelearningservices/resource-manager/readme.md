@@ -36,11 +36,7 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/machineLearningServices.json
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/mfe.json
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/registries.json
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/workspaceFeatures.json
-  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/workspaceRP.json
+  - Microsoft.MachineLearningServices/preview/2025-10-01-preview/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
     reason: This is necessary to allow users to specify custom inference parameters and 
