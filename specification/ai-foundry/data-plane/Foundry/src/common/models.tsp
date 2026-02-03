@@ -56,13 +56,13 @@ op FoundryDataPlaneOperation<
 >(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
 
 enum FoundryFeaturesOptInKeys {
-  container_agents_v1_preview: "ContainerAgents=v1_preview",
-  hosted_agents_v1_preview: "HostedAgents=v1_preview",
-  workflow_agents_v1_preview: "WorkflowAgents=v1_preview",
-  evaluations_v1_preview: "Evaluations=v1_preview",
-  red_teams_v1_preview: "RedTeams=v1_preview",
-  insights_v1_preview: "Insights=v1_preview",
-  memory_stores_v1_preview: "MemoryStores=v1_preview",
+  container_agents_v1_preview: "ContainerAgents=V1Preview",
+  hosted_agents_v1_preview: "HostedAgents=V1Preview",
+  workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
+  evaluations_v1_preview: "Evaluations=V1Preview",
+  red_teams_v1_preview: "RedTeams=V1Preview",
+  insights_v1_preview: "Insights=V1Preview",
+  memory_stores_v1_preview: "MemoryStores=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {

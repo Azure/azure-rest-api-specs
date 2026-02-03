@@ -122,11 +122,11 @@ namespace Azure.AI.Projects {
   }
 
   @@copyVariants(OpenAI.ItemType, _AgentItemType);
-
-  @@copyVariants(OpenAI.ItemResourceType, _AgentItemType);
+  @@copyVariants(OpenAI.ItemResourceType, _AgentItemType); // TODO: Do we need this? 
+  @@copyVariants(OpenAI.OutputItemType, _AgentItemType);
 
   /* created_by conflicts with the property in OpenAI.FunctionShellCall, ApplyPatchToolCall, and ApplyPatchToolCallOutput, to work around it we use a union type here */
-  @@copyProperties(OpenAI.ItemResource,
+  @@copyProperties(OpenAI.OutputItem,
     {
       /** The information about the creator of the item */
       #suppress "@azure-tools/typespec-autorest/union-unsupported" "Temporary suppression to allow union type."
@@ -151,14 +151,14 @@ namespace Azure.AI.Projects {
     response_id?: string;
   }
 
-  model StructuredOutputsItemResource extends OpenAI.ItemResource {
+  model StructuredOutputsOutputItem extends OpenAI.OutputItem {
     type: "structured_outputs";
 
     @doc("The structured output captured during the response.")
     output: unknown;
   }
 
-  model WorkflowPreviewActionOutputItemResource extends OpenAI.ItemResource {
+  model WorkflowPreviewActionOutputItem extends OpenAI.OutputItem {
     type: "workflow_preview_action";
 
     @doc("The kind of CSDL action (e.g., 'SetVariable', 'InvokeAzureAgent').")
@@ -191,7 +191,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("Request from the service for the user to perform OAuth consent.")
-  model OAuthConsentRequestItemResource extends OpenAI.ItemResource {
+  model OAuthConsentRequestOutputItem extends OpenAI.OutputItem {
     id: string;
     type: "oauth_consent_request";
 
