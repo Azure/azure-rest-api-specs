@@ -84,13 +84,13 @@ input-file:
   - preview/2026-03-01-preview/disconnectedOperations.json
 ```
 
-### Tag: disconnectedOperations-package-2026-03-01
+### Tag: disconnectedOperations-package-2026-03-15
  
-These settings apply only when `--tag=disconnectedOperations-package-2026-03-01` is specified on the command line.
+These settings apply only when `--tag=disconnectedOperations-package-2026-03-15` is specified on the command line.
  
-```yaml $(tag) == 'disconnectedOperations-package-2026-03-01'
+```yaml $(tag) == 'disconnectedOperations-package-2026-03-15'
 input-file:
-  - stable/2026-03-01/disconnectedOperations.json
+  - stable/2026-03-15/disconnectedOperations.json
 ```
 
 # Code Generation

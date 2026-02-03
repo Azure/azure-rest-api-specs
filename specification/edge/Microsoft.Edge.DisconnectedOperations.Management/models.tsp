@@ -174,7 +174,7 @@ model BenefitPlans {
   azureHybridWindowsServerBenefit?: BenefitPlanStatus;
 
   @doc("Number of Windows Server VMs to license under the Azure Hybrid Benefit plan")
-  @added(Microsoft.Edge.Versions.v2026_03_01_preview)
+  @added(Microsoft.Edge.Versions.v2026_03_01)
   @minValue(1)
   windowsServerVmCount?: int32;
 }
