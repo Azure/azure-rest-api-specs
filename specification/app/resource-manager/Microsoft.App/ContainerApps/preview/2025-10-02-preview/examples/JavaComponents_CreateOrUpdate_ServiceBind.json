@@ -1,10 +1,8 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
-    "environmentName": "myenvironment",
     "name": "myjavacomponent",
     "api-version": "2025-10-02-preview",
+    "environmentName": "myenvironment",
     "javaComponentEnvelope": {
       "properties": {
         "componentType": "SpringBootAdmin",
@@ -19,8 +17,8 @@
           }
         ],
         "scale": {
-          "minReplicas": 1,
-          "maxReplicas": 1
+          "maxReplicas": 1,
+          "minReplicas": 1
         },
         "serviceBinds": [
           {
@@ -29,18 +27,18 @@
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/myjavacomponent",
         "name": "myjavacomponent",
         "type": "Microsoft.App/managedEnvironments/javaComponents",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/myjavacomponent",
         "properties": {
           "componentType": "SpringBootAdmin",
-          "provisioningState": "Succeeded",
           "configurations": [
             {
               "propertyName": "spring.boot.admin.ui.enable-toasts",
@@ -51,9 +49,10 @@
               "value": "10000ms"
             }
           ],
+          "provisioningState": "Succeeded",
           "scale": {
-            "minReplicas": 1,
-            "maxReplicas": 1
+            "maxReplicas": 1,
+            "minReplicas": 1
           },
           "serviceBinds": [
             {
@@ -62,17 +61,16 @@
             }
           ]
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/myjavacomponent",
         "name": "myjavacomponent",
         "type": "Microsoft.App/managedEnvironments/javaComponents",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/myjavacomponent",
         "properties": {
           "componentType": "SpringBootAdmin",
-          "provisioningState": "InProgress",
           "configurations": [
             {
               "propertyName": "spring.boot.admin.ui.enable-toasts",
@@ -83,9 +81,10 @@
               "value": "10000ms"
             }
           ],
+          "provisioningState": "InProgress",
           "scale": {
-            "minReplicas": 1,
-            "maxReplicas": 1
+            "maxReplicas": 1,
+            "minReplicas": 1
           },
           "serviceBinds": [
             {
@@ -94,7 +93,10 @@
             }
           ]
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "JavaComponents_CreateOrUpdate",
+  "title": "Create or Update Java Component with ServiceBinds"
 }

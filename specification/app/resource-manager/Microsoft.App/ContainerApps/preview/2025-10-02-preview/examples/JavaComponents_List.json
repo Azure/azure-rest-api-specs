@@ -1,21 +1,20 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "environmentName": "myenvironment",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/blueshark",
             "name": "blueshark",
             "type": "Microsoft.App/managedEnvironments/javaComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/blueshark",
             "properties": {
               "componentType": "SpringBootAdmin",
-              "provisioningState": "Succeeded",
               "configurations": [
                 {
                   "propertyName": "spring.boot.admin.ui.enable-toasts",
@@ -26,74 +25,77 @@
                   "value": "10000ms"
                 }
               ],
-              "scale": {
-                "minReplicas": 1,
-                "maxReplicas": 1
-              },
               "ingress": {
                 "fqdn": "myjavacomponent.myenvironment.test.net"
+              },
+              "provisioningState": "Succeeded",
+              "scale": {
+                "maxReplicas": 1,
+                "minReplicas": 1
               }
             }
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/yellowcat",
             "name": "yellowcat",
             "type": "Microsoft.App/managedEnvironments/javaComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/yellowcat",
             "properties": {
               "componentType": "SpringCloudEureka",
-              "provisioningState": "Succeeded",
               "configurations": [
                 {
                   "propertyName": "spring.cloud.config.server.git.uri",
                   "value": "<GIT-URL>"
                 }
               ],
-              "scale": {
-                "minReplicas": 1,
-                "maxReplicas": 1
-              },
               "ingress": {
                 "fqdn": "myjavacomponent.myenvironment.test.net"
+              },
+              "provisioningState": "Succeeded",
+              "scale": {
+                "maxReplicas": 1,
+                "minReplicas": 1
               }
             }
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/reddog",
             "name": "reddog",
             "type": "Microsoft.App/managedEnvironments/javaComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/reddog",
             "properties": {
               "componentType": "SpringCloudGateway",
-              "provisioningState": "Succeeded",
               "configurations": [
                 {
                   "propertyName": "spring.cloud.gateway.enabled",
                   "value": "true"
                 }
               ],
+              "ingress": {
+                "fqdn": "myjavacomponent.myenvironment.test.net"
+              },
+              "provisioningState": "Succeeded",
+              "scale": {
+                "maxReplicas": 1,
+                "minReplicas": 1
+              },
               "springCloudGatewayRoutes": [
                 {
+                  "filters": [
+                    "SetPath=/{path}"
+                  ],
                   "id": "route1",
-                  "uri": "https://otherjavacomponent.myenvironment.test.net",
                   "predicates": [
                     "Path=/v1/{path}",
                     "After=2024-01-20T17:42:47.789-07:00[America/Denver]"
                   ],
-                  "filters": [
-                    "SetPath=/{path}"
-                  ]
+                  "uri": "https://otherjavacomponent.myenvironment.test.net"
                 }
-              ],
-              "scale": {
-                "minReplicas": 1,
-                "maxReplicas": 1
-              },
-              "ingress": {
-                "fqdn": "myjavacomponent.myenvironment.test.net"
-              }
+              ]
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "JavaComponents_List",
+  "title": "List Java Components"
 }

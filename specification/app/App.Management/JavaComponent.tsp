@@ -13,6 +13,7 @@ namespace Microsoft.App;
 /**
  * Java Component.
  */
+@parentResource(ManagedEnvironment)
 model JavaComponent
   is Azure.ResourceManager.ProxyResource<JavaComponentProperties> {
   ...ResourceNameParameter<
@@ -23,33 +24,65 @@ model JavaComponent
   >;
 }
 
+alias JavaComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the managed environment. */
+    @path
+    @segment("managedEnvironments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    environmentName: string;
+  },
+  {
+    /** Name of the Java Component. */
+    @path
+    @segment("javaComponents")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    name: string;
+  }
+>;
+
 @armResourceOperations
 interface JavaComponents {
   /**
    * Get a Java Component.
    */
-  get is ArmResourceRead<JavaComponent>;
+  @summary("Get a Java Component.")
+  get is JavaComponentOps.Read<JavaComponent>;
 
   /**
    * Creates or updates a Java Component in a Managed Environment.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<JavaComponent>;
+  @summary("Creates or updates a Java Component.")
+  createOrUpdate is JavaComponentOps.CreateOrUpdateAsync<JavaComponent>;
 
   /**
    * Patches a Java Component using JSON Merge Patch
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<JavaComponent, PatchModel = JavaComponent>;
+  @summary("Update properties of a Java Component")
+  update is JavaComponentOps.CustomPatchAsync<
+    JavaComponent,
+    PatchModel = JavaComponent
+  >;
 
   /**
    * Delete a Java Component.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<JavaComponent>;
+  @summary("Delete a Java Component.")
+  delete is JavaComponentOps.DeleteWithoutOkAsync<JavaComponent>;
 
   /**
    * Get the Java Components for a managed environment.
    */
-  list is ArmResourceListByParent<
+  @summary("Get the Java Components for a managed environment.")
+  list is JavaComponentOps.List<
     JavaComponent,
     Response = ArmResponse<JavaComponentsCollection>
   >;

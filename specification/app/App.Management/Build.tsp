@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./BuilderResource.tsp";
+import "./Builder.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -25,7 +25,7 @@ model BuildResource is Azure.ResourceManager.ProxyResource<BuildProperties> {
 }
 
 @armResourceOperations
-interface BuildResources {
+interface Builds {
   /**
    * Get a BuildResource
    */
@@ -76,6 +76,6 @@ interface BuildResources {
 @@doc(BuildResource.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(BuildResources.createOrUpdate::parameters.resource,
+@@doc(Builds.createOrUpdate::parameters.resource,
   "Resource create or update parameters."
 );

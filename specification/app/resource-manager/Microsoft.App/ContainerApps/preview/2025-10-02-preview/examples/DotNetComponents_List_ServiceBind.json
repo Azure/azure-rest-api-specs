@@ -1,27 +1,27 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "environmentName": "myenvironment",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/blueshark",
             "name": "blueshark",
             "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/blueshark",
             "properties": {
               "componentType": "AspireDashboard",
-              "provisioningState": "Succeeded",
               "configurations": [
                 {
                   "propertyName": "dashboard-theme",
                   "value": "dark"
                 }
               ],
+              "provisioningState": "Succeeded",
               "serviceBinds": [
                 {
                   "name": "yellowcat",
@@ -31,18 +31,18 @@
             }
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/yellowcat",
             "name": "yellowcat",
             "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/yellowcat",
             "properties": {
               "componentType": "MyOtherDotNetComponentType",
-              "provisioningState": "Succeeded",
               "configurations": [
                 {
                   "propertyName": "timeout-value",
                   "value": "10000ms"
                 }
               ],
+              "provisioningState": "Succeeded",
               "serviceBinds": [
                 {
                   "name": "blueshark",
@@ -54,5 +54,7 @@
         ]
       }
     }
-  }
+  },
+  "operationId": "DotNetComponents_List",
+  "title": "List .NET Components with ServiceBinds"
 }

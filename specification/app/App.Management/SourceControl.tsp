@@ -26,19 +26,21 @@ model SourceControl
 }
 
 @armResourceOperations
-interface SourceControls {
+interface ContainerAppsSourceControls {
   /**
    * Get a SourceControl of a Container App.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsSourceControls_Get")
-  get is ArmResourceRead<SourceControl>;
+  @summary("Get a SourceControl of a Container App.")
+  get is ArmResourceRead<SourceControl, Error = DefaultErrorResponse>;
 
   /**
    * Create or update the SourceControl for a Container App.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsSourceControls_CreateOrUpdate")
+  @summary("Create or update the SourceControl for a Container App.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SourceControl,
     Parameters = {
@@ -49,7 +51,8 @@ interface SourceControls {
       `x-ms-github-auxiliary`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = SourceControl> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -58,6 +61,7 @@ interface SourceControls {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("ContainerAppsSourceControls_Delete")
+  @summary("Delete a Container App SourceControl.")
   delete is ArmResourceDeleteWithoutOkAsync<
     SourceControl,
     Parameters = {
@@ -79,7 +83,8 @@ interface SourceControls {
       @query("deleteWorkflow")
       deleteWorkflow?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -87,14 +92,16 @@ interface SourceControls {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsSourceControls_ListByContainerApp")
+  @summary("Get the Container App SourceControls in a given resource group.")
   listByContainerApp is ArmResourceListByParent<
     SourceControl,
-    Response = ArmResponse<SourceControlCollection>
+    Response = ArmResponse<SourceControlCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 
 @@doc(SourceControl.name, "Name of the Container App SourceControl.");
 @@doc(SourceControl.properties, "SourceControl resource specific properties");
-@@doc(SourceControls.createOrUpdate::parameters.resource,
+@@doc(ContainerAppsSourceControls.createOrUpdate::parameters.resource,
   "Properties used to create a Container App SourceControl"
 );

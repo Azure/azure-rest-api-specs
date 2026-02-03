@@ -14,8 +14,7 @@ namespace Microsoft.App;
 /**
  * A logic app extension resource
  */
-@parentResource(ContainerApp)
-model LogicApp is Azure.ResourceManager.ProxyResource<AnyObject> {
+model LogicApp is Azure.ResourceManager.ProxyResource<{}> {
   ...ResourceNameParameter<
     Resource = LogicApp,
     KeyName = "logicAppName",
@@ -24,28 +23,47 @@ model LogicApp is Azure.ResourceManager.ProxyResource<AnyObject> {
   >;
 }
 
-alias containerAppExternalResource = Extension.ExternalResource<
-  "Microsoft.App",
-  "containerApps",
-  "{containerAppName}"
->;
+alias LogicAppParentParameter = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+
+  @path
+  @segment("providers/microsoft.App/containerApps")
+  @key
+  @pattern("^[-\\w\\._\\(\\)]+$")
+  containerAppName: string;
+};
 
 @armResourceOperations
 interface LogicApps {
   /**
    * Gets a logic app extension resource.
    */
-  get is ArmResourceRead<LogicApp>;
+  @summary("Gets a logic app extension resource.")
+  get is ArmResourceRead<
+    LogicApp,
+    LogicAppParentParameter,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Create or update a Logic App extension resource
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<LogicApp>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    LogicApp,
+    LogicAppParentParameter,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Deletes a Logic App extension resource
    */
-  delete is ArmResourceDeleteSync<LogicApp>;
+  delete is ArmResourceDeleteSync<
+    LogicApp,
+    LogicAppParentParameter,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Creates or updates the artifacts for the logic app
@@ -54,38 +72,73 @@ interface LogicApps {
     LogicApp,
     WorkflowArtifacts,
     OkResponse,
-    OptionalRequestBody = true
+    LogicAppParentParameter,
+    OptionalRequestBody = true,
+    Error = DefaultErrorResponse
   >;
 
   /**
    * Gets logic app's connections.
    */
+  @summary("Gets logic app's connections.")
   listWorkflowsConnections is ArmResourceActionSync<
     LogicApp,
     void,
-    ArmResponse<WorkflowEnvelope>
+    ArmResponse<WorkflowEnvelope>,
+    LogicAppParentParameter,
+    Error = DefaultErrorResponse
   >;
 
   /**
    * Proxies a the API call to the logic app backed by the container app.
    */
+  @summary("Proxies a the API call to the logic app backed by the container app.")
   invoke is ArmResourceActionSync<
     LogicApp,
     void,
-    ArmResponse<AnyObject>,
+    ArmResponse<unknown>,
+    LogicAppParentParameter,
     Parameters = {
       /**
        * The proxy path for the API call
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("x-ms-logicApps-proxy-path")
       `x-ms-logicApps-proxy-path`: string;
 
       /**
        * The proxy method for the API call
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("x-ms-logicApps-proxy-method")
       `x-ms-logicApps-proxy-method`: LogicAppsProxyMethod;
-    }
+    },
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Get workflow information by its name
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LogicApps_GetWorkflow")
+  @summary("Get workflow information by its name")
+  getWorkflow is ArmResourceRead<
+    WorkflowEnvelope,
+    LogicAppParentParameter,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * List the workflows for a logic app.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("LogicApps_ListWorkflows")
+  @summary("List the workflows for a logic app.")
+  listWorkflows is ArmResourceListByParent<
+    WorkflowEnvelope,
+    LogicAppParentParameter,
+    Response = ArmResponse<WorkflowEnvelopeCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 

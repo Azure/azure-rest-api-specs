@@ -1,24 +1,21 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
-    "environmentName": "myenvironment",
-    "componentName": "mydaprcomponent",
     "name": "myresiliencypolicy",
     "api-version": "2025-10-02-preview",
+    "componentName": "mydaprcomponent",
     "daprComponentResiliencyPolicyEnvelope": {
       "properties": {
         "inboundPolicy": {
+          "circuitBreakerPolicy": {
+            "consecutiveErrors": 3,
+            "timeoutInSeconds": 20
+          },
           "httpRetryPolicy": {
             "maxRetries": 5,
             "retryBackOff": {
               "initialDelayInMilliseconds": 2000,
               "maxIntervalInMilliseconds": 5500
             }
-          },
-          "circuitBreakerPolicy": {
-            "consecutiveErrors": 3,
-            "timeoutInSeconds": 20
           }
         },
         "outboundPolicy": {
@@ -27,26 +24,29 @@
           }
         }
       }
-    }
+    },
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprComponents/mydaprcomponent/resiliencyPolicies/myresiliencypolicy",
         "name": "myresiliencypolicy",
         "type": "Microsoft.App/managedEnvironments/daprComponents/resiliencyPolicies",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprComponents/mydaprcomponent/resiliencyPolicies/myresiliencypolicy",
         "properties": {
           "inboundPolicy": {
+            "circuitBreakerPolicy": {
+              "consecutiveErrors": 3,
+              "timeoutInSeconds": 20
+            },
             "httpRetryPolicy": {
               "maxRetries": 5,
               "retryBackOff": {
                 "initialDelayInMilliseconds": 2000,
                 "maxIntervalInMilliseconds": 5500
               }
-            },
-            "circuitBreakerPolicy": {
-              "consecutiveErrors": 3,
-              "timeoutInSeconds": 20
             }
           },
           "outboundPolicy": {
@@ -59,21 +59,21 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprComponents/mydaprcomponent/resiliencyPolicies/myresiliencypolicy",
         "name": "myresiliencypolicy",
         "type": "Microsoft.App/managedEnvironments/daprComponents/resiliencyPolicies",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprComponents/mydaprcomponent/resiliencyPolicies/myresiliencypolicy",
         "properties": {
           "inboundPolicy": {
+            "circuitBreakerPolicy": {
+              "consecutiveErrors": 3,
+              "timeoutInSeconds": 20
+            },
             "httpRetryPolicy": {
               "maxRetries": 5,
               "retryBackOff": {
                 "initialDelayInMilliseconds": 2000,
                 "maxIntervalInMilliseconds": 5500
               }
-            },
-            "circuitBreakerPolicy": {
-              "consecutiveErrors": 3,
-              "timeoutInSeconds": 20
             }
           },
           "outboundPolicy": {
@@ -84,5 +84,7 @@
         }
       }
     }
-  }
+  },
+  "operationId": "DaprComponentResiliencyPolicies_CreateOrUpdate",
+  "title": "Create or update dapr component resiliency policy with sparse options"
 }

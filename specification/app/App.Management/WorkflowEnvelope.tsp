@@ -31,32 +31,6 @@ model WorkflowEnvelope
   kind?: WorkflowKind;
 }
 
-alias containerAppExternalResource = Extension.ExternalResource<
-  "Microsoft.App",
-  "containerApps",
-  "{containerAppName}"
->;
-
-@armResourceOperations
-interface WorkflowEnvelopes {
-  /**
-   * Get workflow information by its name
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LogicApps_GetWorkflow")
-  getWorkflow is ArmResourceRead<WorkflowEnvelope>;
-
-  /**
-   * List the workflows for a logic app.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LogicApps_ListWorkflows")
-  listWorkflows is ArmResourceListByParent<
-    WorkflowEnvelope,
-    Response = ArmResponse<WorkflowEnvelopeCollection>
-  >;
-}
-
 @@maxLength(WorkflowEnvelope.name, 63);
 @@minLength(WorkflowEnvelope.name, 3);
 @@doc(WorkflowEnvelope.name, "Workflow name.");

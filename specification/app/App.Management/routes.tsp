@@ -23,7 +23,9 @@ interface AvailableWorkloadProfilesOperationGroup {
   @operationId("AvailableWorkloadProfiles_Get")
   @autoRoute
   @get
+  @list
   @action("availableManagedEnvironmentsWorkloadProfileTypes")
+  @tag("AvailableWorkloadProfiles")
   get is ArmProviderActionSync<
     Response = AvailableWorkloadProfilesCollection,
     Scope = SubscriptionActionScope,
@@ -42,10 +44,12 @@ interface BillingMetersOperationGroup {
   @autoRoute
   @get
   @action("billingMeters")
+  @tag("BillingMeters")
   get is ArmProviderActionSync<
     Response = BillingMeterCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = DefaultErrorResponse
   >;
 }
 
@@ -54,12 +58,14 @@ interface BillingMetersOperationGroup {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @autoRoute
+@tag("Subscriptions")
 op getCustomDomainVerificationId is ArmProviderActionSync<
   Response = OkResponse & {
     @bodyRoot
     customDomainVerificationId: string;
   },
-  Scope = SubscriptionActionScope
+  Scope = SubscriptionActionScope,
+  Error = DefaultErrorResponse
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -71,11 +77,14 @@ interface UsagesOperationGroup {
   @operationId("Usages_List")
   @autoRoute
   @get
+  @list
   @action("usages")
+  @tag("Usages")
   list is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = DefaultErrorResponse
   >;
 }
 
@@ -88,7 +97,9 @@ interface ManagedEnvironmentUsagesOperationGroup {
   @operationId("ManagedEnvironmentUsages_List")
   @autoRoute
   @get
+  @list
   @action("usages")
+  @tag("Usages")
   list is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = Extension.ResourceGroup,
@@ -100,6 +111,7 @@ interface ManagedEnvironmentUsagesOperationGroup {
       @path
       @segment("managedEnvironments")
       environmentName: string;
-    }
+    },
+    Error = DefaultErrorResponse
   >;
 }

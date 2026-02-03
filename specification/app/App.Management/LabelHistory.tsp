@@ -25,28 +25,56 @@ model LabelHistory
   >;
 }
 
+alias LabelHistoryOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Container App. */
+    @path
+    @segment("containerApps")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    containerAppName: string;
+  },
+  {
+    /** Name of the label. */
+    @path
+    @segment("labelHistory")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    labelName: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
+
 @armResourceOperations
-interface LabelHistories {
+interface ContainerAppsLabelHistory {
   /**
    * Get the history of a label.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsLabelHistory_GetLabelHistory")
-  getLabelHistory is ArmResourceRead<LabelHistory>;
+  @summary("Get the history of a label.")
+  getLabelHistory is LabelHistoryOps.Read<LabelHistory>;
 
   /**
    * Delete the history of a label.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsLabelHistory_DeleteLabelHistory")
-  deleteLabelHistory is ArmResourceDeleteSync<LabelHistory>;
+  @summary("Delete the history of a label.")
+  deleteLabelHistory is LabelHistoryOps.DeleteSync<LabelHistory>;
 
   /**
    * Get the Label History for a given Container App.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsLabelHistory_ListLabelHistory")
-  listLabelHistory is ArmResourceListByParent<
+  @summary("Get the Label History for a given Container App.")
+  listLabelHistory is LabelHistoryOps.List<
     LabelHistory,
     Parameters = {
       /**

@@ -53,16 +53,19 @@ alias ContainerAppsFunctionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @key
     @pattern("^[-\\w\\._\\(\\)]+$")
     functionName: string;
-  }
+  },
+  ErrorType = DefaultErrorResponse
 >;
 
 @armResourceOperations
+@tag("AzureFunctionsOnContainerApps")
 interface ContainerAppsFunctions {
   /**
    * Get a specific function of a Container App Revision.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsRevisionFunctions_Get")
+  @summary("Get a specific function of a Container App Revision.")
   get is ContainerAppsFunctionOps.Read<ContainerAppsFunction>;
 
   /**
@@ -70,11 +73,13 @@ interface ContainerAppsFunctions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsRevisionFunctions_List")
+  @summary("List the functions for a given Container App Revision.")
   list is ContainerAppsFunctionOps.List<
     ContainerAppsFunction,
     Response = ArmResponse<ContainerAppsFunctionCollection>
   >;
 }
+
 alias ContainerAppsFunctionOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -96,22 +101,25 @@ alias ContainerAppsFunctionOperationGroupOps = Azure.ResourceManager.Legacy.Lega
     @key
     @pattern("^[-\\w\\._\\(\\)]+$")
     functionName: string;
-  }
+  },
+  ErrorType = DefaultErrorResponse
 >;
 
 @armResourceOperations
-interface ContainerAppsFunctionOperationGroup {
+interface AzureFunctionsOnContainerApps {
   /**
    * Get a specific function of a Container App from the latest Revision.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsFunctions_Get")
+  @summary("Get a specific function of a Container App from the latest Revision.")
   get is ContainerAppsFunctionOperationGroupOps.Read<ContainerAppsFunction>;
 
   /**
    * List the functions for a given Container App from the latest Revision.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("List the functions for a given Container App from the latest Revision.")
   @operationId("ContainerAppsFunctions_List")
   list is ContainerAppsFunctionOperationGroupOps.List<
     ContainerAppsFunction,

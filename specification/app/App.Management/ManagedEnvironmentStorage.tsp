@@ -26,41 +26,55 @@ model ManagedEnvironmentStorage
 }
 
 @armResourceOperations
-interface ManagedEnvironmentStorages {
+interface ManagedEnvironmentsStorages {
   /**
    * Get storage for a managedEnvironment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedEnvironmentsStorages_Get")
-  get is ArmResourceRead<ManagedEnvironmentStorage>;
+  @summary("Get storage for a managedEnvironment.")
+  get is ArmResourceRead<
+    ManagedEnvironmentStorage,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Create or update storage for a managedEnvironment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedEnvironmentsStorages_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ManagedEnvironmentStorage>;
+  @summary("Create or update storage for a managedEnvironment.")
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    ManagedEnvironmentStorage,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Delete storage for a managedEnvironment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedEnvironmentsStorages_Delete")
-  delete is ArmResourceDeleteSync<ManagedEnvironmentStorage>;
+  @summary("Delete storage for a managedEnvironment.")
+  delete is ArmResourceDeleteSync<
+    ManagedEnvironmentStorage,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Get all storages for a managedEnvironment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedEnvironmentsStorages_List")
+  @summary("Get all storages for a managedEnvironment.")
   list is ArmResourceListByParent<
     ManagedEnvironmentStorage,
-    Response = ArmResponse<ManagedEnvironmentStoragesCollection>
+    Response = ArmResponse<ManagedEnvironmentStoragesCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 
 @@doc(ManagedEnvironmentStorage.name, "Name of the storage.");
 @@doc(ManagedEnvironmentStorage.properties, "Storage properties");
-@@doc(ManagedEnvironmentStorages.createOrUpdate::parameters.resource,
+@@doc(ManagedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "Configuration details of storage."
 );

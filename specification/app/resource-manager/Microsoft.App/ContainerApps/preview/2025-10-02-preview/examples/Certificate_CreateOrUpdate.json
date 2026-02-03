@@ -1,40 +1,42 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "examplerg",
-    "environmentName": "testcontainerenv",
-    "certificateName": "certificate-firendly-name",
     "api-version": "2025-10-02-preview",
     "certificateEnvelope": {
       "location": "East US",
       "properties": {
+        "certificateType": "ImagePullTrustedCA",
         "password": "private key password",
-        "value": "Y2VydA==",
-        "certificateType": "ImagePullTrustedCA"
+        "value": "Y2VydA=="
       }
-    }
+    },
+    "certificateName": "certificate-firendly-name",
+    "environmentName": "testcontainerenv",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-firendly-name",
         "type": "Microsoft.App/ManagedEnvironments/Certificates",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-firendly-name",
         "location": "East US",
         "properties": {
+          "certificateType": "ImagePullTrustedCA",
+          "expirationDate": "2022-11-06T04:00:00Z",
+          "issueDate": "2021-11-06T04:00:00Z",
+          "issuer": "Issuer Name",
           "provisioningState": "Succeeded",
-          "subjectName": "my-subject-name.company.country.net",
           "subjectAlternativeNames": [
             "CN=my-subject-name.com"
           ],
-          "issuer": "Issuer Name",
-          "issueDate": "2021-11-06T04:00:00Z",
-          "expirationDate": "2022-11-06T04:00:00Z",
+          "subjectName": "my-subject-name.company.country.net",
           "thumbprint": "CERTIFICATE_THUMBPRINT",
-          "valid": true,
-          "certificateType": "ImagePullTrustedCA"
+          "valid": true
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Certificates_CreateOrUpdate",
+  "title": "Create or Update Certificate"
 }

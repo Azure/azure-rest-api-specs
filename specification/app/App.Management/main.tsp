@@ -13,10 +13,10 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
-import "./SessionPool.tsp";
+import "./ContainerAppsSessionPool.tsp";
 import "./SourceControl.tsp";
 import "./ContainerApp.tsp";
-import "./ContainerAppsBuildResource.tsp";
+import "./ContainerAppsBuild.tsp";
 import "./ContainerAppsFunction.tsp";
 import "./LabelHistory.tsp";
 import "./ContainerAppsPatchResource.tsp";
@@ -27,13 +27,13 @@ import "./JavaComponent.tsp";
 import "./LogicApp.tsp";
 import "./WorkflowEnvelope.tsp";
 import "./AppResiliency.tsp";
-import "./AuthConfig.tsp";
-import "./BuilderResource.tsp";
-import "./BuildResource.tsp";
+import "./ContainerAppsAuthConfig.tsp";
+import "./Builder.tsp";
+import "./Build.tsp";
 import "./ConnectedEnvironment.tsp";
 import "./Certificate.tsp";
 import "./DaprComponent.tsp";
-import "./ConnectedEnvironmentStorage.tsp";
+import "./ConnectedEnvironmentsStorage.tsp";
 import "./ManagedEnvironment.tsp";
 import "./ManagedCertificate.tsp";
 import "./PrivateEndpointConnection.tsp";
@@ -44,6 +44,7 @@ import "./MaintenanceConfigurationResource.tsp";
 import "./ManagedEnvironmentStorage.tsp";
 import "./Job.tsp";
 import "./JobExecution.tsp";
+import "./Diagnostic.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -71,4 +72,8 @@ enum Versions {
   v2025_10_02_preview: "2025-10-02-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<AvailableOperations>,
+      DefaultErrorResponse
+    > {}

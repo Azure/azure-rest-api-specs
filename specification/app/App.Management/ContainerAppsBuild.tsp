@@ -25,28 +25,54 @@ model ContainerAppsBuildResource
   >;
 }
 
+alias ContainerAppsBuildResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Container App. */
+    @path
+    @segment("containerApps")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    containerAppName: string;
+  },
+  {
+    /** Name of the build. */
+    @path
+    @segment("builds")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    @minLength(2)
+    @maxLength(64)
+    buildName: string;
+  }
+>;
+
 @armResourceOperations
-interface ContainerAppsBuildResources {
+interface ContainerAppsBuilds {
   /**
    * Get a Container Apps Build resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsBuilds_Get")
-  get is ArmResourceRead<ContainerAppsBuildResource>;
+  get is ContainerAppsBuildResourceOps.Read<ContainerAppsBuildResource>;
 
   /**
    * Delete a Container Apps Build resource
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsBuilds_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<ContainerAppsBuildResource>;
+  delete is ContainerAppsBuildResourceOps.DeleteWithoutOkAsync<ContainerAppsBuildResource>;
 
   /**
    * List Container Apps Build resources by Container App
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsBuildsByContainerApp_List")
-  list is ArmResourceListByParent<
+  list is ContainerAppsBuildResourceOps.List<
     ContainerAppsBuildResource,
     Response = ArmResponse<ContainerAppsBuildCollection>
   >;

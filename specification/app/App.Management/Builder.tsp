@@ -25,7 +25,7 @@ model BuilderResource
 }
 
 @armResourceOperations
-interface BuilderResources {
+interface Builders {
   /**
    * Get a BuilderResource
    */

@@ -1,89 +1,83 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "api-version": "2025-10-02-preview",
     "resourceGroupName": "examplerg",
-    "api-version": "2025-10-02-preview"
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1",
             "name": "jlaw-demo1",
             "type": "Microsoft.App/managedEnvironments",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1",
             "location": "North Central US",
-            "tags": {},
             "properties": {
-              "provisioningState": "Succeeded",
-              "deploymentErrors": null,
-              "defaultDomain": "jlaw-demo1.k4apps.io",
-              "staticIp": "20.42.33.145",
               "appLogsConfiguration": null,
-              "zoneRedundant": true,
               "availabilityZones": [
                 "1",
                 "2",
                 "3"
               ],
-              "vnetConfiguration": {
-                "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
-              },
               "customDomainConfiguration": {
                 "customDomainVerificationId": "custom domain verification id",
                 "dnsSuffix": "www.my-name.com",
-                "subjectName": "CN=www.my-name.com",
                 "expirationDate": "2022-11-06T04:00:00Z",
+                "subjectName": "CN=www.my-name.com",
                 "thumbprint": "CERTIFICATE_THUMBPRINT"
               },
+              "defaultDomain": "jlaw-demo1.k4apps.io",
+              "deploymentErrors": null,
               "eventStreamEndpoint": "testEndpoint",
+              "infrastructureResourceGroup": "capp-svc-jlaw-demo1-northcentralus",
+              "ingressConfiguration": {
+                "headerCountLimit": 50,
+                "requestIdleTimeout": null,
+                "terminationGracePeriodSeconds": 600,
+                "workloadProfileName": "My-GP-01"
+              },
+              "provisioningState": "Succeeded",
+              "staticIp": "20.42.33.145",
+              "vnetConfiguration": {
+                "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
+              },
               "workloadProfiles": [
                 {
                   "name": "My-GP-01",
                   "enableFips": true,
-                  "workloadProfileType": "GeneralPurpose",
+                  "maximumCount": 12,
                   "minimumCount": 3,
-                  "maximumCount": 12
+                  "workloadProfileType": "GeneralPurpose"
                 },
                 {
                   "name": "My-MO-01",
-                  "workloadProfileType": "MemoryOptimized",
+                  "maximumCount": 6,
                   "minimumCount": 3,
-                  "maximumCount": 6
+                  "workloadProfileType": "MemoryOptimized"
                 },
                 {
                   "name": "My-CO-01",
-                  "workloadProfileType": "ComputeOptimized",
+                  "maximumCount": 6,
                   "minimumCount": 3,
-                  "maximumCount": 6
+                  "workloadProfileType": "ComputeOptimized"
                 },
                 {
                   "name": "My-consumption-01",
                   "workloadProfileType": "Consumption"
                 }
               ],
-              "ingressConfiguration": {
-                "workloadProfileName": "My-GP-01",
-                "terminationGracePeriodSeconds": 600,
-                "headerCountLimit": 50,
-                "requestIdleTimeout": null
-              },
-              "infrastructureResourceGroup": "capp-svc-jlaw-demo1-northcentralus"
-            }
+              "zoneRedundant": true
+            },
+            "tags": {}
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/demo1",
             "name": "demo1",
             "type": "Microsoft.App/managedEnvironments",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/demo1",
             "location": "North Central US",
-            "tags": {},
             "properties": {
-              "provisioningState": "Succeeded",
-              "deploymentErrors": null,
-              "defaultDomain": "demo1.k4apps.io",
-              "staticIp": "52.142.21.61",
               "appLogsConfiguration": null,
-              "zoneRedundant": true,
               "availabilityZones": [
                 "1",
                 "2",
@@ -92,20 +86,28 @@
               "customDomainConfiguration": {
                 "customDomainVerificationId": "custom domain verification id",
                 "dnsSuffix": "www.my-name2.com",
-                "subjectName": "CN=www.my-name2.com",
                 "expirationDate": "2022-11-06T04:00:00Z",
+                "subjectName": "CN=www.my-name2.com",
                 "thumbprint": "CERTIFICATE_THUMBPRINT"
               },
+              "defaultDomain": "demo1.k4apps.io",
+              "deploymentErrors": null,
               "eventStreamEndpoint": "testEndpoint",
+              "infrastructureResourceGroup": "capp-svc-demo1-northcentralus",
+              "ingressConfiguration": null,
+              "provisioningState": "Succeeded",
+              "staticIp": "52.142.21.61",
               "vnetConfiguration": {
                 "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
               },
-              "ingressConfiguration": null,
-              "infrastructureResourceGroup": "capp-svc-demo1-northcentralus"
-            }
+              "zoneRedundant": true
+            },
+            "tags": {}
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ManagedEnvironments_ListByResourceGroup",
+  "title": "List environments by resource group"
 }

@@ -25,21 +25,55 @@ model HttpRouteConfig
   >;
 }
 
+alias HttpRouteConfigOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the managed environment. */
+    @path
+    @segment("managedEnvironments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    environmentName: string;
+  },
+  {
+    /** Name of the Http Route Config. */
+    @path
+    @segment("httpRouteConfigs")
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    @minLength(3)
+    @maxLength(63)
+    httpRouteName: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
+
 @armResourceOperations
+@tag("HttpRouteConfig")
 interface HttpRouteConfigs {
   /**
    * Get the specified Managed Http Route Config.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HttpRouteConfig_Get")
-  get is ArmResourceRead<HttpRouteConfig>;
+  @summary("Get the specified Managed Http Route Config.")
+  get is HttpRouteConfigOps.Read<HttpRouteConfig>;
 
   /**
    * Create or Update a Http Route Config.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HttpRouteConfig_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<HttpRouteConfig>;
+  @summary("Create or Update a Http Route Config.")
+  @summary("Update tags of a manged http route object")
+  createOrUpdate is HttpRouteConfigOps.CreateOrUpdateSync<
+    HttpRouteConfig,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Patches an http route config resource. Only patching of tags is supported
@@ -47,13 +81,19 @@ interface HttpRouteConfigs {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HttpRouteConfig_Update")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<HttpRouteConfig, PatchModel = HttpRouteConfig>;
+  @summary("Update tags of a manged http route object")
+  update is ArmCustomPatchSync<
+    HttpRouteConfig,
+    PatchModel = HttpRouteConfig,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Deletes the specified Managed Http Route.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HttpRouteConfig_Delete")
+  @summary("Deletes the specified Managed Http Route.")
   delete is ArmResourceDeleteWithoutOkAsync<HttpRouteConfig>;
 
   /**
@@ -61,7 +101,8 @@ interface HttpRouteConfigs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("HttpRouteConfig_List")
-  list is ArmResourceListByParent<
+  @summary("Get the Managed Http Routes in a given managed environment.")
+  list is HttpRouteConfigOps.List<
     HttpRouteConfig,
     Response = ArmResponse<HttpRouteConfigCollection>
   >;

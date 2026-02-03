@@ -1,20 +1,53 @@
 {
   "operationId": "ContainerApps_CreateOrUpdate",
-  "title": "ContainerApps_SourceToCloudApp_CreateOrUpdate",
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "rg",
-    "containerAppName": "testcontainerApp0",
     "api-version": "2025-10-02-preview",
     "containerAppEnvelope": {
       "location": "East US",
       "properties": {
-        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-        "workloadProfileName": "My-GP-01",
         "configuration": {
+          "dapr": {
+            "appPort": 3000,
+            "appProtocol": "http",
+            "enableApiLogging": true,
+            "enabled": true,
+            "httpMaxRequestSize": 10,
+            "httpReadBufferSize": 30,
+            "logLevel": "debug"
+          },
           "ingress": {
-            "external": true,
-            "targetPort": 3000,
+            "additionalPortMappings": [
+              {
+                "external": true,
+                "targetPort": 1234
+              },
+              {
+                "exposedPort": 3456,
+                "external": false,
+                "targetPort": 2345
+              }
+            ],
+            "clientCertificateMode": "accept",
+            "corsPolicy": {
+              "allowCredentials": true,
+              "allowedHeaders": [
+                "HEADER1",
+                "HEADER2"
+              ],
+              "allowedMethods": [
+                "GET",
+                "POST"
+              ],
+              "allowedOrigins": [
+                "https://a.test.com",
+                "https://b.test.com"
+              ],
+              "exposeHeaders": [
+                "HEADER3",
+                "HEADER4"
+              ],
+              "maxAge": 1234
+            },
             "customDomains": [
               {
                 "name": "www.my-name.com",
@@ -27,71 +60,32 @@
                 "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
               }
             ],
-            "traffic": [
-              {
-                "weight": 100,
-                "revisionName": "testcontainerApp0-ab1234",
-                "label": "production"
-              }
-            ],
+            "external": true,
             "ipSecurityRestrictions": [
               {
                 "name": "Allow work IP A subnet",
                 "description": "Allowing all IP's within the subnet below to access containerapp",
-                "ipAddressRange": "192.168.1.1/32",
-                "action": "Allow"
+                "action": "Allow",
+                "ipAddressRange": "192.168.1.1/32"
               },
               {
                 "name": "Allow work IP B subnet",
                 "description": "Allowing all IP's within the subnet below to access containerapp",
-                "ipAddressRange": "192.168.1.1/8",
-                "action": "Allow"
+                "action": "Allow",
+                "ipAddressRange": "192.168.1.1/8"
               }
             ],
             "stickySessions": {
               "affinity": "sticky"
             },
-            "clientCertificateMode": "accept",
-            "corsPolicy": {
-              "allowedOrigins": [
-                "https://a.test.com",
-                "https://b.test.com"
-              ],
-              "allowedMethods": [
-                "GET",
-                "POST"
-              ],
-              "allowedHeaders": [
-                "HEADER1",
-                "HEADER2"
-              ],
-              "exposeHeaders": [
-                "HEADER3",
-                "HEADER4"
-              ],
-              "maxAge": 1234,
-              "allowCredentials": true
-            },
-            "additionalPortMappings": [
+            "targetPort": 3000,
+            "traffic": [
               {
-                "external": true,
-                "targetPort": 1234
-              },
-              {
-                "external": false,
-                "targetPort": 2345,
-                "exposedPort": 3456
+                "label": "production",
+                "revisionName": "testcontainerApp0-ab1234",
+                "weight": 100
               }
             ]
-          },
-          "dapr": {
-            "enabled": true,
-            "appPort": 3000,
-            "appProtocol": "http",
-            "httpReadBufferSize": 30,
-            "httpMaxRequestSize": 10,
-            "logLevel": "debug",
-            "enableApiLogging": true
           },
           "maxInactiveRevisions": 10,
           "revisionTransitionThreshold": 100,
@@ -99,27 +93,28 @@
             "type": "redis"
           }
         },
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
         "patchingConfiguration": {
           "patchingMode": "Automatic"
         },
         "template": {
           "containers": [
             {
+              "name": "testcontainerApp0",
               "image": "",
               "imageType": "CloudBuild",
-              "name": "testcontainerApp0",
               "probes": [
                 {
                   "type": "Liveness",
                   "httpGet": {
                     "path": "/health",
-                    "port": 8080,
                     "httpHeaders": [
                       {
                         "name": "Custom-Header",
                         "value": "Awesome"
                       }
-                    ]
+                    ],
+                    "port": 8080
                   },
                   "initialDelaySeconds": 3,
                   "periodSeconds": 3
@@ -127,39 +122,39 @@
               ],
               "volumeMounts": [
                 {
-                  "volumeName": "azurefile",
                   "mountPath": "/mnt/path1",
-                  "subPath": "subPath1"
+                  "subPath": "subPath1",
+                  "volumeName": "azurefile"
                 },
                 {
-                  "volumeName": "nfsazurefile",
                   "mountPath": "/mnt/path2",
-                  "subPath": "subPath2"
+                  "subPath": "subPath2",
+                  "volumeName": "nfsazurefile"
                 }
               ]
             }
           ],
           "initContainers": [
             {
-              "image": "repo/testcontainerApp0:v4",
               "name": "testinitcontainerApp0",
-              "resources": {
-                "cpu": 0.2,
-                "memory": "100Mi"
-              },
-              "command": [
-                "/bin/sh"
-              ],
               "args": [
                 "-c",
                 "while true; do echo hello; sleep 10;done"
-              ]
+              ],
+              "command": [
+                "/bin/sh"
+              ],
+              "image": "repo/testcontainerApp0:v4",
+              "resources": {
+                "cpu": 0.2,
+                "memory": "100Mi"
+              }
             }
           ],
           "scale": {
-            "minReplicas": 1,
-            "maxReplicas": 5,
             "cooldownPeriod": 350,
+            "maxReplicas": 5,
+            "minReplicas": 1,
             "pollingInterval": 35,
             "rules": [
               {
@@ -175,51 +170,51 @@
           },
           "serviceBinds": [
             {
-              "serviceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/redisService",
               "name": "redisService",
               "clientType": "dotnet",
               "customizedKeys": {
                 "DesiredKey": "defaultKey"
-              }
+              },
+              "serviceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/redisService"
             }
           ],
           "volumes": [
             {
               "name": "azurefile",
-              "storageType": "AzureFile",
-              "storageName": "storage"
+              "storageName": "storage",
+              "storageType": "AzureFile"
             },
             {
               "name": "nfsazurefile",
-              "storageType": "NfsAzureFile",
-              "storageName": "nfsStorage"
+              "storageName": "nfsStorage",
+              "storageType": "NfsAzureFile"
             }
           ]
-        }
+        },
+        "workloadProfileName": "My-GP-01"
       }
-    }
+    },
+    "containerAppName": "testcontainerApp0",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
+  "title": "Create or Update SourceToCloud App",
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
         "name": "testcontainerApp0",
         "type": "Microsoft.App/containerApps",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
         "location": "East US",
         "properties": {
-          "provisioningState": "Succeeded",
-          "runningStatus": "Running",
-          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-          "workloadProfileName": "My-GP-01",
-          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-          "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
           "configuration": {
+            "dapr": {
+              "appPort": 3000,
+              "appProtocol": "http",
+              "enabled": true,
+              "httpReadBufferSize": 30
+            },
             "ingress": {
-              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-              "external": true,
-              "targetPort": 3000,
-              "transport": "auto",
               "customDomains": [
                 {
                   "name": "www.my-name.com",
@@ -232,237 +227,111 @@
                   "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube/certificates/my-certificate-for-my-other-name-dot-com"
                 }
               ],
-              "traffic": [
-                {
-                  "weight": 80,
-                  "revisionName": "testcontainerApp0-ab1234"
-                },
-                {
-                  "weight": 20,
-                  "revisionName": "testcontainerApp0-ab4321",
-                  "label": "staging"
-                }
-              ],
+              "external": true,
+              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "ipSecurityRestrictions": [
                 {
                   "name": "Allow work IP A subnet",
                   "description": "Allowing all IP's within the subnet below to access containerapp",
-                  "ipAddressRange": "192.168.1.1/32",
-                  "action": "Allow"
+                  "action": "Allow",
+                  "ipAddressRange": "192.168.1.1/32"
                 },
                 {
                   "name": "Allow work IP B subnet",
                   "description": "Allowing all IP's within the subnet below to access containerapp",
-                  "ipAddressRange": "192.168.1.1/8",
-                  "action": "Allow"
+                  "action": "Allow",
+                  "ipAddressRange": "192.168.1.1/8"
                 }
               ],
               "stickySessions": {
                 "affinity": "sticky"
               },
-              "targetPortHttpScheme": "http"
-            },
-            "dapr": {
-              "enabled": true,
-              "appPort": 3000,
-              "appProtocol": "http",
-              "httpReadBufferSize": 30
-            }
-          },
-          "patchingConfiguration": {
-            "patchingMode": "Automatic"
-          },
-          "template": {
-            "containers": [
-              {
-                "image": "mcr.microsoft.com/k8se/cloudbuild-waiting-upload:latest",
-                "imageType": "CloudBuild",
-                "name": "testcontainerApp0",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
-                },
-                "probes": [
-                  {
-                    "type": "Liveness",
-                    "httpGet": {
-                      "path": "/health",
-                      "port": 8080,
-                      "httpHeaders": [
-                        {
-                          "name": "Custom-Header",
-                          "value": "Awesome"
-                        }
-                      ]
-                    },
-                    "initialDelaySeconds": 3,
-                    "periodSeconds": 3
-                  }
-                ],
-                "volumeMounts": [
-                  {
-                    "volumeName": "azurefile",
-                    "mountPath": "/mnt/path1",
-                    "subPath": "subPath1"
-                  },
-                  {
-                    "volumeName": "nfsazurefile",
-                    "mountPath": "/mnt/path2",
-                    "subPath": "subPath2"
-                  }
-                ]
-              }
-            ],
-            "initContainers": [
-              {
-                "image": "repo/testcontainerApp0:v4",
-                "name": "testinitcontainerApp0",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
-                },
-                "command": [
-                  "/bin/sh"
-                ],
-                "args": [
-                  "-c",
-                  "while true; do echo hello; sleep 10;done"
-                ]
-              }
-            ],
-            "scale": {
-              "minReplicas": 1,
-              "maxReplicas": 5,
-              "rules": [
-                {
-                  "name": "httpscalingrule",
-                  "http": {
-                    "metadata": {
-                      "concurrentRequests": "50"
-                    }
-                  }
-                }
-              ]
-            },
-            "volumes": [
-              {
-                "name": "azurefile",
-                "storageType": "AzureFile",
-                "storageName": "storage"
-              },
-              {
-                "name": "nfsazurefile",
-                "storageType": "NfsAzureFile",
-                "storageName": "nfsStorage"
-              }
-            ]
-          },
-          "eventStreamEndpoint": "testEndpoint"
-        }
-      }
-    },
-    "201": {
-      "headers": {},
-      "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
-        "name": "testcontainerApp0",
-        "type": "Microsoft.App/containerApps",
-        "location": "East US",
-        "properties": {
-          "provisioningState": "InProgress",
-          "runningStatus": "Progressing",
-          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-          "configuration": {
-            "ingress": {
-              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-              "external": true,
               "targetPort": 3000,
-              "transport": "auto",
+              "targetPortHttpScheme": "http",
               "traffic": [
                 {
-                  "weight": 80,
-                  "revisionName": "testcontainerApp0-ab1234"
+                  "revisionName": "testcontainerApp0-ab1234",
+                  "weight": 80
                 },
                 {
-                  "weight": 20,
+                  "label": "staging",
                   "revisionName": "testcontainerApp0-ab4321",
-                  "label": "staging"
+                  "weight": 20
                 }
               ],
-              "targetPortHttpScheme": "http"
-            },
-            "dapr": {
-              "enabled": true,
-              "appPort": 3000,
-              "appProtocol": "http",
-              "httpReadBufferSize": 30
+              "transport": "auto"
             }
           },
+          "eventStreamEndpoint": "testEndpoint",
+          "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
+          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "patchingConfiguration": {
             "patchingMode": "Automatic"
           },
+          "provisioningState": "Succeeded",
+          "runningStatus": "Running",
           "template": {
             "containers": [
               {
+                "name": "testcontainerApp0",
                 "image": "mcr.microsoft.com/k8se/cloudbuild-waiting-upload:latest",
                 "imageType": "CloudBuild",
-                "name": "testcontainerApp0",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
-                },
                 "probes": [
                   {
                     "type": "Liveness",
                     "httpGet": {
                       "path": "/health",
-                      "port": 8080,
                       "httpHeaders": [
                         {
                           "name": "Custom-Header",
                           "value": "Awesome"
                         }
-                      ]
+                      ],
+                      "port": 8080
                     },
                     "initialDelaySeconds": 3,
                     "periodSeconds": 3
                   }
                 ],
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
                 "volumeMounts": [
                   {
-                    "volumeName": "azurefile",
                     "mountPath": "/mnt/path1",
-                    "subPath": "subPath1"
+                    "subPath": "subPath1",
+                    "volumeName": "azurefile"
                   },
                   {
-                    "volumeName": "nfsazurefile",
                     "mountPath": "/mnt/path2",
-                    "subPath": "subPath2"
+                    "subPath": "subPath2",
+                    "volumeName": "nfsazurefile"
                   }
                 ]
               }
             ],
             "initContainers": [
               {
-                "image": "repo/testcontainerApp0:v4",
                 "name": "testinitcontainerApp0",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
-                },
-                "command": [
-                  "/bin/sh"
-                ],
                 "args": [
                   "-c",
                   "while true; do echo hello; sleep 10;done"
-                ]
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainerApp0:v4",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
               }
             ],
             "scale": {
-              "minReplicas": 1,
               "maxReplicas": 5,
+              "minReplicas": 1,
               "rules": [
                 {
                   "name": "httpscalingrule",
@@ -477,19 +346,150 @@
             "volumes": [
               {
                 "name": "azurefile",
-                "storageType": "AzureFile",
-                "storageName": "storage"
+                "storageName": "storage",
+                "storageType": "AzureFile"
               },
               {
                 "name": "nfsazurefile",
-                "storageType": "NfsAzureFile",
-                "storageName": "nfsStorage"
+                "storageName": "nfsStorage",
+                "storageType": "NfsAzureFile"
               }
             ]
           },
-          "eventStreamEndpoint": "testEndpoint"
+          "workloadProfileName": "My-GP-01"
         }
-      }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "testcontainerApp0",
+        "type": "Microsoft.App/containerApps",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerApp0",
+        "location": "East US",
+        "properties": {
+          "configuration": {
+            "dapr": {
+              "appPort": 3000,
+              "appProtocol": "http",
+              "enabled": true,
+              "httpReadBufferSize": 30
+            },
+            "ingress": {
+              "external": true,
+              "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "targetPort": 3000,
+              "targetPortHttpScheme": "http",
+              "traffic": [
+                {
+                  "revisionName": "testcontainerApp0-ab1234",
+                  "weight": 80
+                },
+                {
+                  "label": "staging",
+                  "revisionName": "testcontainerApp0-ab4321",
+                  "weight": 20
+                }
+              ],
+              "transport": "auto"
+            }
+          },
+          "eventStreamEndpoint": "testEndpoint",
+          "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "patchingConfiguration": {
+            "patchingMode": "Automatic"
+          },
+          "provisioningState": "InProgress",
+          "runningStatus": "Progressing",
+          "template": {
+            "containers": [
+              {
+                "name": "testcontainerApp0",
+                "image": "mcr.microsoft.com/k8se/cloudbuild-waiting-upload:latest",
+                "imageType": "CloudBuild",
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "httpGet": {
+                      "path": "/health",
+                      "httpHeaders": [
+                        {
+                          "name": "Custom-Header",
+                          "value": "Awesome"
+                        }
+                      ],
+                      "port": 8080
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ],
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "volumeMounts": [
+                  {
+                    "mountPath": "/mnt/path1",
+                    "subPath": "subPath1",
+                    "volumeName": "azurefile"
+                  },
+                  {
+                    "mountPath": "/mnt/path2",
+                    "subPath": "subPath2",
+                    "volumeName": "nfsazurefile"
+                  }
+                ]
+              }
+            ],
+            "initContainers": [
+              {
+                "name": "testinitcontainerApp0",
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ],
+                "command": [
+                  "/bin/sh"
+                ],
+                "image": "repo/testcontainerApp0:v4",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
+              }
+            ],
+            "scale": {
+              "maxReplicas": 5,
+              "minReplicas": 1,
+              "rules": [
+                {
+                  "name": "httpscalingrule",
+                  "http": {
+                    "metadata": {
+                      "concurrentRequests": "50"
+                    }
+                  }
+                }
+              ]
+            },
+            "volumes": [
+              {
+                "name": "azurefile",
+                "storageName": "storage",
+                "storageType": "AzureFile"
+              },
+              {
+                "name": "nfsazurefile",
+                "storageName": "nfsStorage",
+                "storageType": "NfsAzureFile"
+              }
+            ]
+          }
+        }
+      },
+      "headers": {}
     }
   }
 }

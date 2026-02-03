@@ -25,28 +25,54 @@ model ContainerAppsPatchResource
   >;
 }
 
+alias ContainerAppsPatchesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Container App. */
+    @path
+    @segment("containerApps")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    containerAppName: string;
+  },
+  {
+    /** Name of the Container Apps Patch. */
+    @path
+    @segment("patches")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    @minLength(2)
+    @maxLength(64)
+    patchName: string;
+  }
+>;
+
 @armResourceOperations
-interface ContainerAppsPatchResources {
+interface ContainerAppsPatches {
   /**
    * Get details for specific Container Apps Patch by patch name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsPatches_Get")
-  get is ArmResourceRead<ContainerAppsPatchResource>;
+  get is ContainerAppsPatchesOps.Read<ContainerAppsPatchResource>;
 
   /**
    * Delete specific Container Apps Patch by patch name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsPatches_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<ContainerAppsPatchResource>;
+  delete is ContainerAppsPatchesOps.DeleteWithoutOkAsync<ContainerAppsPatchResource>;
 
   /**
    * List Container Apps Patch resources by ContainerApp.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsPatches_ListByContainerApp")
-  listByContainerApp is ArmResourceListByParent<
+  listByContainerApp is ContainerAppsPatchesOps.List<
     ContainerAppsPatchResource,
     Parameters = {
       /**
@@ -64,11 +90,10 @@ interface ContainerAppsPatchResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsPatches_SkipConfigure")
   @action("skipConfig")
-  skipConfigure is ArmResourceActionAsyncBase<
+  skipConfigure is ContainerAppsPatchesOps.ActionAsync<
     ContainerAppsPatchResource,
     PatchSkipConfig,
-    ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ContainerAppsPatchResource>
+    ArmAcceptedLroResponse
   >;
 
   /**
@@ -76,11 +101,13 @@ interface ContainerAppsPatchResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsPatches_Apply")
-  apply is ArmResourceActionAsync<
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  apply is ContainerAppsPatchesOps.ActionAsync<
     ContainerAppsPatchResource,
     void,
     ArmResponse<ContainerAppsPatchResource>,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ContainerAppsPatchResource> &
+      ArmLroLocationHeader<FinalResult = ContainerAppsPatchResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }
@@ -91,6 +118,6 @@ interface ContainerAppsPatchResources {
 @@doc(ContainerAppsPatchResource.properties,
   "Properties that describes current states of the patch resource."
 );
-@@doc(ContainerAppsPatchResources.skipConfigure::parameters.body,
+@@doc(ContainerAppsPatches.skipConfigure::parameters.body,
   "Configure patcher to skip a patch or not."
 );

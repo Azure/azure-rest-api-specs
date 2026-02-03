@@ -48,12 +48,15 @@ alias CertificateOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+@tag("ConnectedEnvironments")
+@tag("Certificates")
 interface Certificates {
   /**
    * Get the specified Certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsCertificates_Get")
+  @summary("Get the specified Certificate.")
   get is CertificateOps.Read<Certificate>;
 
   /**
@@ -61,6 +64,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsCertificates_CreateOrUpdate")
+  @summary("Create or Update a Certificate.")
   createOrUpdate is CertificateOps.CreateOrUpdateAsync<Certificate>;
 
   /**
@@ -69,6 +73,7 @@ interface Certificates {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsCertificates_Update")
   @patch(#{ implicitOptionality: false })
+  @summary("Update properties of a certificate")
   update is CertificateOps.CustomPatchAsync<
     Certificate,
     PatchModel = CertificatePatch
@@ -78,6 +83,7 @@ interface Certificates {
    * Deletes the specified Certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Deletes the specified Certificate.")
   @operationId("ConnectedEnvironmentsCertificates_Delete")
   delete is CertificateOps.DeleteWithoutOkAsync<Certificate>;
 
@@ -85,6 +91,7 @@ interface Certificates {
    * Get the Certificates in a given connected environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Get the Certificates in a given connected environment.")
   @operationId("ConnectedEnvironmentsCertificates_List")
   list is CertificateOps.List<
     Certificate,
@@ -114,12 +121,15 @@ alias CertificateOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperatio
 >;
 
 @armResourceOperations
+@tag("ManagedEnvironments")
+@tag("Certificates")
 interface CertificateOperationGroup {
   /**
    * Get the specified Certificate.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificates_Get")
+  @summary("Get the specified Certificate.")
   get is CertificateOperationGroupOps.Read<Certificate>;
 
   /**
@@ -128,6 +138,7 @@ interface CertificateOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Certificates_CreateOrUpdate")
+  @summary("Create or Update a Certificate.")
   createOrUpdate is CertificateOperationGroupOps.CreateOrUpdateSync<
     Certificate,
     Response = ArmResourceUpdatedResponse<Certificate>
@@ -139,6 +150,7 @@ interface CertificateOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificates_Update")
   @patch(#{ implicitOptionality: false })
+  @summary("Update properties of a certificate")
   update is CertificateOperationGroupOps.CustomPatchSync<
     Certificate,
     PatchModel = CertificatePatch
@@ -149,6 +161,7 @@ interface CertificateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificates_Delete")
+  @summary("Deletes the specified Certificate.")
   delete is CertificateOperationGroupOps.DeleteSync<Certificate>;
 
   /**
@@ -156,6 +169,7 @@ interface CertificateOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificates_List")
+  @summary("Get the Certificates in a given managed environment.")
   list is CertificateOperationGroupOps.List<
     Certificate,
     Response = ArmResponse<CertificateCollection>

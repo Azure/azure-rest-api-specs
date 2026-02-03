@@ -1,55 +1,57 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "environmentName": "testcontainerenv",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-firendly-name",
             "name": "certificate-firendly-name",
             "type": "Microsoft.App/ManagedEnvironments/Certificates",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-firendly-name",
             "location": "East US",
             "properties": {
+              "certificateType": "ImagePullTrustedCA",
+              "expirationDate": "2022-11-06T04:00:00Z",
+              "issueDate": "2021-11-06T04:00:00Z",
+              "issuer": "Issuer Name",
               "provisioningState": "Succeeded",
-              "subjectName": "my-subject-name.company.country.net",
               "subjectAlternativeNames": [
                 "CN=my-subject-name.com"
               ],
-              "issuer": "Issuer Name",
-              "issueDate": "2021-11-06T04:00:00Z",
-              "expirationDate": "2022-11-06T04:00:00Z",
+              "subjectName": "my-subject-name.company.country.net",
               "thumbprint": "CERTIFICATE_THUMBPRINT",
-              "valid": true,
-              "certificateType": "ImagePullTrustedCA"
+              "valid": true
             }
           },
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-firendly-name",
             "name": "certificate-firendly-name",
             "type": "Microsoft.App/ManagedEnvironments/Certificates",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-firendly-name",
             "location": "East US",
             "properties": {
+              "certificateType": "ServerSSLCertificate",
+              "expirationDate": "2022-11-06T04:00:00Z",
+              "issueDate": "2021-11-06T04:00:00Z",
+              "issuer": "Issuer Name",
               "provisioningState": "Succeeded",
-              "subjectName": "my-subject-name.company.country.net",
               "subjectAlternativeNames": [
                 "CN=my-subject-name.com"
               ],
-              "issuer": "Issuer Name",
-              "issueDate": "2021-11-06T04:00:00Z",
-              "expirationDate": "2022-11-06T04:00:00Z",
+              "subjectName": "my-subject-name.company.country.net",
               "thumbprint": "CERTIFICATE_THUMBPRINT",
-              "valid": true,
-              "certificateType": "ServerSSLCertificate"
+              "valid": true
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "Certificates_List",
+  "title": "List Certificates by Managed Environment"
 }

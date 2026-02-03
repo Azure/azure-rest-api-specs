@@ -25,35 +25,84 @@ model MaintenanceConfigurationResource
   >;
 }
 
+alias MaintenanceConfigurationResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the managed environment. */
+    @path
+    @segment("managedEnvironments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    environmentName: string;
+  },
+  {
+    /** Name of the Maintenance Configuration. */
+    @path
+    @segment("maintenanceConfigurations")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    configName: string;
+  }
+>;
+
+alias MaintenanceConfigurationResourceCustomErrorOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the managed environment. */
+    @path
+    @segment("managedEnvironments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    environmentName: string;
+  },
+  {
+    /** Name of the Maintenance Configuration. */
+    @path
+    @segment("maintenanceConfigurations")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    configName: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
+
 @armResourceOperations
-interface MaintenanceConfigurationResources {
+interface MaintenanceConfigurations {
   /**
    * Gets the maintenance configuration of a ManagedEnvironment .
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_Get")
-  get is ArmResourceRead<MaintenanceConfigurationResource>;
+  get is MaintenanceConfigurationResourceOps.Read<MaintenanceConfigurationResource>;
 
   /**
    * Create or update the maintenance configuration for Managed Environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<MaintenanceConfigurationResource>;
+  createOrUpdate is MaintenanceConfigurationResourceCustomErrorOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
 
   /**
    * Deletes the maintenance configuration of a ManagedEnvironment .
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_Delete")
-  delete is ArmResourceDeleteSync<MaintenanceConfigurationResource>;
+  delete is MaintenanceConfigurationResourceCustomErrorOps.DeleteSync<MaintenanceConfigurationResource>;
 
   /**
    * Gets all maintenance configurations in the specified Managed Environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MaintenanceConfigurations_List")
-  list is ArmResourceListByParent<
+  list is MaintenanceConfigurationResourceCustomErrorOps.List<
     MaintenanceConfigurationResource,
     Response = ArmResponse<MaintenanceConfigurationCollection>
   >;
@@ -65,6 +114,6 @@ interface MaintenanceConfigurationResources {
 @@doc(MaintenanceConfigurationResource.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(MaintenanceConfigurationResources.createOrUpdate::parameters.resource,
+@@doc(MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "Parameters to set the maintenance configuration for ManagedEnvironment ."
 );

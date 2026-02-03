@@ -1,47 +1,49 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "environmentName": "testcontainerenv",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
         "value": [
           {
+            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name",
-            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
             "location": "East US",
             "properties": {
-              "subjectName": "CN=my-subject-name.company.country.net",
+              "domainControlValidation": "CNAME",
               "provisioningState": "Succeeded",
-              "domainControlValidation": "CNAME"
+              "subjectName": "CN=my-subject-name.company.country.net"
             }
           },
           {
+            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name-root",
-            "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
             "location": "East US",
             "properties": {
-              "subjectName": "CN=company.country.net",
+              "domainControlValidation": "HTTP",
               "provisioningState": "Succeeded",
-              "domainControlValidation": "HTTP"
+              "subjectName": "CN=company.country.net"
             }
           },
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name-txt",
             "type": "Microsoft.App/ManagedEnvironments/managedCertificates",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/managedCertificates/certificate-firendly-name-txt",
             "location": "East US",
             "properties": {
-              "subjectName": "CN=txt.company.country.net",
+              "domainControlValidation": "TXT",
               "provisioningState": "Succeeded",
-              "domainControlValidation": "TXT"
+              "subjectName": "CN=txt.company.country.net"
             }
           }
         ]
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ManagedCertificates_List",
+  "title": "List Managed Certificates by Managed Environment"
 }

@@ -20,52 +20,52 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 
-@@clientLocation(AppResiliencies.get, "AppResiliency");
-@@clientLocation(AppResiliencies.createOrUpdate, "AppResiliency");
+@@clientLocation(AppResiliencies.get, "AppResiliencies");
+@@clientLocation(AppResiliencies.createOrUpdate, "AppResiliencies");
 @@clientName(AppResiliencies.createOrUpdate::parameters.resource,
   "resiliencyEnvelope"
 );
-@@clientLocation(AppResiliencies.update, "AppResiliency");
+@@clientLocation(AppResiliencies.update, "AppResiliencies");
 @@clientName(AppResiliencies.update::parameters.properties,
   "resiliencyEnvelope"
 );
-@@clientLocation(AppResiliencies.delete, "AppResiliency");
-@@clientLocation(AppResiliencies.list, "AppResiliency");
+@@clientLocation(AppResiliencies.delete, "AppResiliencies");
+@@clientLocation(AppResiliencies.list, "AppResiliencies");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AppResiliency.properties);
 
-@@clientLocation(AuthConfigs.get, "ContainerAppsAuthConfigs");
-@@clientLocation(AuthConfigs.createOrUpdate, "ContainerAppsAuthConfigs");
-@@clientName(AuthConfigs.createOrUpdate::parameters.resource,
+@@clientLocation(ContainerAppsAuthConfigs.get, "ContainerAppsAuthConfigs");
+@@clientLocation(ContainerAppsAuthConfigs.createOrUpdate,
+  "ContainerAppsAuthConfigs"
+);
+@@clientName(ContainerAppsAuthConfigs.createOrUpdate::parameters.resource,
   "authConfigEnvelope"
 );
-@@clientLocation(AuthConfigs.delete, "ContainerAppsAuthConfigs");
-@@clientLocation(AuthConfigs.listByContainerApp, "ContainerAppsAuthConfigs");
+@@clientLocation(ContainerAppsAuthConfigs.delete, "ContainerAppsAuthConfigs");
+@@clientLocation(ContainerAppsAuthConfigs.listByContainerApp,
+  "ContainerAppsAuthConfigs"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AuthConfig.properties);
 
-@@clientLocation(BuilderResources.get, "Builders");
-@@clientLocation(BuilderResources.createOrUpdate, "Builders");
-@@clientName(BuilderResources.createOrUpdate::parameters.resource,
-  "builderEnvelope"
-);
-@@clientLocation(BuilderResources.update, "Builders");
-@@clientName(BuilderResources.update::parameters.properties, "builderEnvelope");
-@@clientLocation(BuilderResources.delete, "Builders");
-@@clientLocation(BuilderResources.listByResourceGroup, "Builders");
-@@clientLocation(BuilderResources.listBySubscription, "Builders");
+@@clientLocation(Builders.get, "Builders");
+@@clientLocation(Builders.createOrUpdate, "Builders");
+@@clientName(Builders.createOrUpdate::parameters.resource, "builderEnvelope");
+@@clientLocation(Builders.update, "Builders");
+@@clientName(Builders.update::parameters.properties, "builderEnvelope");
+@@clientLocation(Builders.delete, "Builders");
+@@clientLocation(Builders.listByResourceGroup, "Builders");
+@@clientLocation(Builders.listBySubscription, "Builders");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(BuilderResource.properties);
 
-@@clientLocation(BuildResources.get, "Builds");
-@@clientLocation(BuildResources.createOrUpdate, "Builds");
-@@clientName(BuildResources.createOrUpdate::parameters.resource,
-  "buildEnvelope"
-);
-@@clientLocation(BuildResources.delete, "Builds");
-@@clientLocation(BuildResources.list, "BuildsByBuilderResource");
-@@clientLocation(BuildResources.buildAuthTokenList, "BuildAuthToken");
-@@clientName(BuildResources.buildAuthTokenList, "List");
+@@clientLocation(Builds.get, "Builds");
+@@clientLocation(Builds.createOrUpdate, "Builds");
+@@clientName(Builds.createOrUpdate::parameters.resource, "buildEnvelope");
+@@clientLocation(Builds.delete, "Builds");
+@@clientLocation(Builds.list, "BuildsByBuilderResource");
+@@clientLocation(Builds.buildAuthTokenList, "BuildAuthToken");
+@@clientName(Builds.buildAuthTokenList, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(BuildResource.properties);
 
@@ -127,19 +127,19 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(DaprComponent.properties);
 
-@@clientLocation(ConnectedEnvironmentStorages.get,
+@@clientLocation(ConnectedEnvironmentsStorages.get,
   "ConnectedEnvironmentsStorages"
 );
-@@clientLocation(ConnectedEnvironmentStorages.createOrUpdate,
+@@clientLocation(ConnectedEnvironmentsStorages.createOrUpdate,
   "ConnectedEnvironmentsStorages"
 );
-@@clientName(ConnectedEnvironmentStorages.createOrUpdate::parameters.resource,
+@@clientName(ConnectedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "storageEnvelope"
 );
-@@clientLocation(ConnectedEnvironmentStorages.delete,
+@@clientLocation(ConnectedEnvironmentsStorages.delete,
   "ConnectedEnvironmentsStorages"
 );
-@@clientLocation(ConnectedEnvironmentStorages.list,
+@@clientLocation(ConnectedEnvironmentsStorages.list,
   "ConnectedEnvironmentsStorages"
 );
 
@@ -208,35 +208,31 @@ using Microsoft.App;
 @@clientLocation(HttpRouteConfigs.delete, "HttpRouteConfig");
 @@clientLocation(HttpRouteConfigs.list, "HttpRouteConfig");
 
-@@clientLocation(MaintenanceConfigurationResources.get,
+@@clientLocation(MaintenanceConfigurations.get, "MaintenanceConfigurations");
+@@clientLocation(MaintenanceConfigurations.createOrUpdate,
   "MaintenanceConfigurations"
 );
-@@clientLocation(MaintenanceConfigurationResources.createOrUpdate,
-  "MaintenanceConfigurations"
-);
-@@clientName(MaintenanceConfigurationResources.createOrUpdate::parameters.resource,
+@@clientName(MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "maintenanceConfigurationEnvelope"
 );
-@@clientLocation(MaintenanceConfigurationResources.delete,
-  "MaintenanceConfigurations"
-);
-@@clientLocation(MaintenanceConfigurationResources.list,
-  "MaintenanceConfigurations"
-);
+@@clientLocation(MaintenanceConfigurations.delete, "MaintenanceConfigurations");
+@@clientLocation(MaintenanceConfigurations.list, "MaintenanceConfigurations");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(MaintenanceConfigurationResource.properties);
 
-@@clientLocation(ManagedEnvironmentStorages.get, "ManagedEnvironmentsStorages");
-@@clientLocation(ManagedEnvironmentStorages.createOrUpdate,
+@@clientLocation(ManagedEnvironmentsStorages.get,
   "ManagedEnvironmentsStorages"
 );
-@@clientName(ManagedEnvironmentStorages.createOrUpdate::parameters.resource,
+@@clientLocation(ManagedEnvironmentsStorages.createOrUpdate,
+  "ManagedEnvironmentsStorages"
+);
+@@clientName(ManagedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "storageEnvelope"
 );
-@@clientLocation(ManagedEnvironmentStorages.delete,
+@@clientLocation(ManagedEnvironmentsStorages.delete,
   "ManagedEnvironmentsStorages"
 );
-@@clientLocation(ManagedEnvironmentStorages.list,
+@@clientLocation(ManagedEnvironmentsStorages.list,
   "ManagedEnvironmentsStorages"
 );
 
@@ -246,9 +242,9 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Job.properties);
 
-@@clientLocation(JobExecutions.jobExecution, "");
-@@clientLocation(JobExecutions.list, "JobsExecutions");
-@@clientLocation(JobExecutions.stopExecution, Jobs);
+@@clientLocation(Jobs.jobExecution, "");
+@@clientLocation(Jobs.list, "JobsExecutions");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(JobExecution.properties);
 
@@ -264,32 +260,46 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerAppAuthToken.properties);
 
-@@clientLocation(SessionPools.get, "ContainerAppsSessionPools");
-@@clientLocation(SessionPools.createOrUpdate, "ContainerAppsSessionPools");
-@@clientName(SessionPools.createOrUpdate::parameters.resource,
-  "sessionPoolEnvelope"
-);
-@@clientLocation(SessionPools.update, "ContainerAppsSessionPools");
-@@clientName(SessionPools.update::parameters.properties, "sessionPoolEnvelope");
-@@clientLocation(SessionPools.delete, "ContainerAppsSessionPools");
-@@clientLocation(SessionPools.listByResourceGroup, "ContainerAppsSessionPools");
-@@clientLocation(SessionPools.listBySubscription, "ContainerAppsSessionPools");
-@@clientLocation(SessionPools.fetchMcpServerCredentials,
+@@clientLocation(ContainerAppsSessionPools.get, "ContainerAppsSessionPools");
+@@clientLocation(ContainerAppsSessionPools.createOrUpdate,
   "ContainerAppsSessionPools"
 );
-@@clientLocation(SessionPools.rotateMcpServerCredentials,
+@@clientName(ContainerAppsSessionPools.createOrUpdate::parameters.resource,
+  "sessionPoolEnvelope"
+);
+@@clientLocation(ContainerAppsSessionPools.update, "ContainerAppsSessionPools");
+@@clientName(ContainerAppsSessionPools.update::parameters.properties,
+  "sessionPoolEnvelope"
+);
+@@clientLocation(ContainerAppsSessionPools.delete, "ContainerAppsSessionPools");
+@@clientLocation(ContainerAppsSessionPools.listByResourceGroup,
+  "ContainerAppsSessionPools"
+);
+@@clientLocation(ContainerAppsSessionPools.listBySubscription,
+  "ContainerAppsSessionPools"
+);
+@@clientLocation(ContainerAppsSessionPools.fetchMcpServerCredentials,
+  "ContainerAppsSessionPools"
+);
+@@clientLocation(ContainerAppsSessionPools.rotateMcpServerCredentials,
   "ContainerAppsSessionPools"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(SessionPool.properties);
 
-@@clientLocation(SourceControls.get, "ContainerAppsSourceControls");
-@@clientLocation(SourceControls.createOrUpdate, "ContainerAppsSourceControls");
-@@clientName(SourceControls.createOrUpdate::parameters.resource,
+@@clientLocation(ContainerAppsSourceControls.get,
+  "ContainerAppsSourceControls"
+);
+@@clientLocation(ContainerAppsSourceControls.createOrUpdate,
+  "ContainerAppsSourceControls"
+);
+@@clientName(ContainerAppsSourceControls.createOrUpdate::parameters.resource,
   "sourceControlEnvelope"
 );
-@@clientLocation(SourceControls.delete, "ContainerAppsSourceControls");
-@@clientLocation(SourceControls.listByContainerApp,
+@@clientLocation(ContainerAppsSourceControls.delete,
+  "ContainerAppsSourceControls"
+);
+@@clientLocation(ContainerAppsSourceControls.listByContainerApp,
   "ContainerAppsSourceControls"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
@@ -304,55 +314,63 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerApp.properties);
 
-@@clientLocation(ContainerAppsBuildResources.get, "ContainerAppsBuilds");
-@@clientLocation(ContainerAppsBuildResources.delete, "ContainerAppsBuilds");
-@@clientLocation(ContainerAppsBuildResources.list,
-  "ContainerAppsBuildsByContainerApp"
-);
+@@clientLocation(ContainerAppsBuilds.get, "ContainerAppsBuilds");
+@@clientLocation(ContainerAppsBuilds.delete, "ContainerAppsBuilds");
+@@clientLocation(ContainerAppsBuilds.list, "ContainerAppsBuildsByContainerApp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerAppsBuildResource.properties);
 
 @@clientLocation(ContainerAppsFunctions.get, "ContainerAppsRevisionFunctions");
 @@clientLocation(ContainerAppsFunctions.list, "ContainerAppsRevisionFunctions");
-@@clientLocation(ContainerAppsFunctionOperationGroup.get,
-  ContainerAppsFunctions
-);
-@@clientLocation(ContainerAppsFunctionOperationGroup.list,
-  ContainerAppsFunctions
-);
+@@clientLocation(AzureFunctionsOnContainerApps.get, ContainerAppsFunctions);
+@@clientLocation(AzureFunctionsOnContainerApps.list, ContainerAppsFunctions);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerAppsFunction.properties);
 
-@@clientLocation(LabelHistories.getLabelHistory, "ContainerAppsLabelHistory");
-@@clientLocation(LabelHistories.deleteLabelHistory,
+@@clientLocation(ContainerAppsLabelHistory.getLabelHistory,
   "ContainerAppsLabelHistory"
 );
-@@clientLocation(LabelHistories.listLabelHistory, "ContainerAppsLabelHistory");
+@@clientLocation(ContainerAppsLabelHistory.deleteLabelHistory,
+  "ContainerAppsLabelHistory"
+);
+@@clientLocation(ContainerAppsLabelHistory.listLabelHistory,
+  "ContainerAppsLabelHistory"
+);
 
-@@clientLocation(ContainerAppsPatchResources.get, "ContainerAppsPatches");
-@@clientLocation(ContainerAppsPatchResources.delete, "ContainerAppsPatches");
-@@clientLocation(ContainerAppsPatchResources.listByContainerApp,
+@@clientLocation(ContainerAppsPatches.get, "ContainerAppsPatches");
+@@clientLocation(ContainerAppsPatches.delete, "ContainerAppsPatches");
+@@clientLocation(ContainerAppsPatches.listByContainerApp,
   "ContainerAppsPatches"
 );
-@@clientLocation(ContainerAppsPatchResources.skipConfigure,
-  "ContainerAppsPatches"
-);
-@@clientName(ContainerAppsPatchResources.skipConfigure::parameters.body,
+@@clientLocation(ContainerAppsPatches.skipConfigure, "ContainerAppsPatches");
+@@clientName(ContainerAppsPatches.skipConfigure::parameters.body,
   "patchSkipConfig"
 );
-@@clientLocation(ContainerAppsPatchResources.apply, "ContainerAppsPatches");
+@@clientLocation(ContainerAppsPatches.apply, "ContainerAppsPatches");
 
-@@clientLocation(Revisions.getRevision, "ContainerAppsRevisions");
-@@clientLocation(Revisions.listRevisions, "ContainerAppsRevisions");
-@@clientLocation(Revisions.activateRevision, "ContainerAppsRevisions");
-@@clientLocation(Revisions.deactivateRevision, "ContainerAppsRevisions");
-@@clientLocation(Revisions.restartRevision, "ContainerAppsRevisions");
-@@clientLocation(Revisions.invokeFunctionsHost, "FunctionsExtension");
+@@clientLocation(ContainerAppsRevisions.getRevision, "ContainerAppsRevisions");
+@@clientLocation(ContainerAppsRevisions.listRevisions,
+  "ContainerAppsRevisions"
+);
+@@clientLocation(ContainerAppsRevisions.activateRevision,
+  "ContainerAppsRevisions"
+);
+@@clientLocation(ContainerAppsRevisions.deactivateRevision,
+  "ContainerAppsRevisions"
+);
+@@clientLocation(ContainerAppsRevisions.restartRevision,
+  "ContainerAppsRevisions"
+);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Revision.properties);
 
-@@clientLocation(Replicas.getReplica, "ContainerAppsRevisionReplicas");
-@@clientLocation(Replicas.listReplicas, "ContainerAppsRevisionReplicas");
+@@clientLocation(ContainerAppsRevisionReplicas.getReplica,
+  "ContainerAppsRevisionReplicas"
+);
+@@clientLocation(ContainerAppsRevisionReplicas.listReplicas,
+  "ContainerAppsRevisionReplicas"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Replica.properties);
 
@@ -378,11 +396,13 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(LogicApp.properties);
 
-@@clientLocation(WorkflowEnvelopes.getWorkflow, LogicApps);
-@@clientLocation(WorkflowEnvelopes.listWorkflows, LogicApps);
-
 @@clientLocation(UsagesOperationGroup.list, "Usages");
 
 @@clientLocation(ManagedEnvironmentUsagesOperationGroup.list,
   "ManagedEnvironmentUsages"
 );
+
+@@doc(Operations.list, "Lists all of the available RP operations.");
+@@Azure.ResourceManager.identifiers(AvailableOperations.value, #["name"]);
+@@Azure.ResourceManager.identifiers(ListUsagesResult.value, #["name"]);
+@@clientName(ScheduledEntries.scheduledEntries, "ScheduledEntries");

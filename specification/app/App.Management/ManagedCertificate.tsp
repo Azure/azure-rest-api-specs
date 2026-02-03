@@ -26,21 +26,33 @@ model ManagedCertificate
 }
 
 @armResourceOperations
+@tag("ManagedEnvironments")
+@tag("ManagedCertificates")
 interface ManagedCertificates {
   /**
    * Get the specified Managed Certificate.
    */
+  @summary("Get the specified Managed Certificate.")
   get is ArmResourceRead<ManagedCertificate>;
 
   /**
    * Create or Update a Managed Certificate.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedCertificate>;
+  @summary("Create or Update a Managed Certificate.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ManagedCertificate,
+    Response = ArmResourceUpdatedResponse<ManagedCertificate> | ArmResourceCreatedResponse<
+      ManagedCertificate,
+      ArmAsyncOperationHeader<FinalResult = ManagedCertificate> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ManagedCertificateBadRequestError
+  >;
 
   /**
    * Patches a managed certificate. Oly patching of tags is supported
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update tags of a managed certificate")
   update is ArmCustomPatchSync<
     ManagedCertificate,
     PatchModel = ManagedCertificatePatch
@@ -49,11 +61,13 @@ interface ManagedCertificates {
   /**
    * Deletes the specified Managed Certificate.
    */
+  @summary("Deletes the specified Managed Certificate.")
   delete is ArmResourceDeleteSync<ManagedCertificate>;
 
   /**
    * Get the Managed Certificates in a given managed environment.
    */
+  @summary("Get the Managed Certificates in a given managed environment.")
   list is ArmResourceListByParent<
     ManagedCertificate,
     Response = ArmResponse<ManagedCertificateCollection>

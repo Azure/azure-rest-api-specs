@@ -1,20 +1,20 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "containerAppName": "testcontainerApp0",
     "logicAppName": "testcontainerApp0",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testcontainerApp0/providers/Microsoft.App/logicApps/testcontainerApp0/workflows/a1",
             "name": "testcontainerApp0/a1",
             "type": "Microsoft.App/logicApps/workflows",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testcontainerApp0/providers/Microsoft.App/logicApps/testcontainerApp0/workflows/a1",
             "kind": "Stateful",
             "properties": {
               "flowState": "Enabled",
@@ -24,24 +24,26 @@
             }
           },
           {
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testcontainerApp0/providers/Microsoft.App/logicApps/testcontainerApp0/workflows/stateful2",
             "name": "testcontainerApp0/stateful2",
             "type": "Microsoft.App/logicApps/workflows",
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/containerApps/testcontainerApp0/providers/Microsoft.App/logicApps/testcontainerApp0/workflows/stateful2",
             "kind": "Stateful",
             "properties": {
               "flowState": "Enabled",
               "health": {
-                "state": "Unhealthy",
                 "error": {
                   "code": "InvalidWorkflowJson",
                   "message": "Invalid character after parsing property name. Expected ':' but got: \". Path '', line 2, position 2."
-                }
+                },
+                "state": "Unhealthy"
               }
             }
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "LogicApps_ListWorkflows",
+  "title": "List the workflows"
 }

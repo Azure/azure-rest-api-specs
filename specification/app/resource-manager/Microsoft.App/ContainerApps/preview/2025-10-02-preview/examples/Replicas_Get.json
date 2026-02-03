@@ -1,40 +1,42 @@
 {
   "parameters": {
-    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744",
-    "resourceGroupName": "workerapps-rg-xj",
+    "api-version": "2025-10-02-preview",
     "containerAppName": "myapp",
-    "revisionName": "myapp--0wlqy09",
     "replicaName": "myapp--0wlqy09-5d9774cff-5wnd8",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "workerapps-rg-xj",
+    "revisionName": "myapp--0wlqy09",
+    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/revisions/myapp--0wlqy09/replicas/myapp--0wlqy09-5d9774cff-5wnd8",
         "name": "myapp--0wlqy09-5d9774cff-5wnd8",
         "type": "Microsoft.Web/containerapps/revisions/replicas",
+        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/revisions/myapp--0wlqy09/replicas/myapp--0wlqy09-5d9774cff-5wnd8",
         "properties": {
-          "createdTime": "2022-01-25T19:42:45Z",
-          "runningState": "Running",
-          "runningStateDetails": "testDetail",
           "containers": [
             {
               "name": "hello92",
               "containerId": "containerd://6bac7bb3afed1c704b5fe563c34c0ecf59ac30c766bb73488f7fa552dc42ee54",
+              "debugEndpoint": "wss://eastasia.azurecontainerapps.dev/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/containerApps/myapp/revisions/myapp--0wlqy09/replicas/myapp--0wlqy09-5d9774cff-5wnd8/debug?targetContainer=hello92",
+              "execEndpoint": "testExecEndpoint",
+              "logStreamEndpoint": "testLogStreamEndpoint",
               "ready": true,
-              "started": true,
               "restartCount": 0,
               "runningState": "Running",
               "runningStateDetails": "testDetail",
-              "logStreamEndpoint": "testLogStreamEndpoint",
-              "execEndpoint": "testExecEndpoint",
-              "debugEndpoint": "wss://eastasia.azurecontainerapps.dev/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/containerApps/myapp/revisions/myapp--0wlqy09/replicas/myapp--0wlqy09-5d9774cff-5wnd8/debug?targetContainer=hello92"
+              "started": true
             }
           ],
-          "initContainers": []
+          "createdTime": "2022-01-25T19:42:45Z",
+          "initContainers": [],
+          "runningState": "Running",
+          "runningStateDetails": "testDetail"
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ContainerAppsRevisionReplicas_GetReplica",
+  "title": "Get Container App's revision replica"
 }

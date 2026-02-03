@@ -1,25 +1,27 @@
 {
   "parameters": {
-    "subscriptionId": "12345678-1234-1234-1234-123456789abc",
-    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-10-02-preview",
     "containerAppName": "myContainerApp",
-    "revisionName": "myContainerApp-abc123",
     "functionName": "HttpExample",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "myResourceGroup",
+    "revisionName": "myContainerApp-abc123",
+    "subscriptionId": "12345678-1234-1234-1234-123456789abc"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/HttpExample",
         "name": "myContainerApp/myContainerApp-abc123/HttpExample",
         "type": "Microsoft.App/containerApps/revisions/functions",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.App/containerApps/myContainerApp/revisions/myContainerApp-abc123/functions/HttpExample",
         "properties": {
           "invokeUrlTemplate": "https://mycontainerapp.example-region.azurecontainerapps.io/api/HttpExample",
+          "isDisabled": false,
           "triggerType": "httpTrigger",
-          "language": "dotnet-isolated",
-          "isDisabled": false
+          "language": "dotnet-isolated"
         }
       }
     }
-  }
+  },
+  "operationId": "ContainerAppsRevisionFunctions_Get",
+  "title": "Get Container App Revision's function"
 }

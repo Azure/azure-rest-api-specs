@@ -26,39 +26,7 @@ model JobExecution
 }
 
 @armResourceOperations
-interface JobExecutions {
-  /**
-   * Get details of a single job execution
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("JobExecution")
-  jobExecution is ArmResourceRead<JobExecution>;
-
-  /**
-   * Get a Container Apps Job's executions
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("JobsExecutions_List")
-  list is ArmResourceListByParent<
-    JobExecution,
-    Parameters = {
-      /**
-       * The filter to apply on the operation.
-       */
-      @query("$filter")
-      $filter?: string;
-    },
-    Response = ArmResponse<ContainerAppJobExecutions>
-  >;
-
-  /**
-   * Terminates execution of a running container apps job
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Jobs_StopExecution")
-  @action("stop")
-  stopExecution is ArmResourceActionAsync<JobExecution, void, OkResponse>;
-}
+interface JobExecutions {}
 
 @@doc(JobExecution.name, "Job execution name.");
 @@doc(JobExecution.properties,

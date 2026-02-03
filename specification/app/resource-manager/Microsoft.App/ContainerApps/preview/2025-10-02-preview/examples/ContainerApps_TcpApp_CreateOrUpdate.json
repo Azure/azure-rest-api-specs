@@ -1,48 +1,45 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "rg",
-    "containerAppName": "testcontainerAppTcp",
     "api-version": "2025-10-02-preview",
     "containerAppEnvelope": {
       "location": "East US",
       "properties": {
-        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
         "configuration": {
           "ingress": {
+            "exposedPort": 4000,
             "external": true,
             "targetPort": 3000,
-            "exposedPort": 4000,
-            "transport": "tcp",
             "traffic": [
               {
-                "weight": 100,
-                "revisionName": "testcontainerAppTcp-ab1234"
+                "revisionName": "testcontainerAppTcp-ab1234",
+                "weight": 100
               }
-            ]
+            ],
+            "transport": "tcp"
           }
         },
+        "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
         "template": {
           "containers": [
             {
-              "image": "repo/testcontainerAppTcp:v1",
               "name": "testcontainerAppTcp",
+              "image": "repo/testcontainerAppTcp:v1",
               "probes": [
                 {
                   "type": "Liveness",
+                  "initialDelaySeconds": 3,
+                  "periodSeconds": 3,
                   "tcpSocket": {
                     "port": 8080
-                  },
-                  "initialDelaySeconds": 3,
-                  "periodSeconds": 3
+                  }
                 }
               ]
             }
           ],
           "scale": {
-            "minReplicas": 1,
-            "maxReplicas": 5,
             "cooldownPeriod": 350,
+            "maxReplicas": 5,
+            "minReplicas": 1,
             "pollingInterval": 35,
             "rules": [
               {
@@ -57,66 +54,68 @@
           }
         }
       }
-    }
+    },
+    "containerAppName": "testcontainerAppTcp",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppTcp",
         "name": "testcontainerAppTcp",
         "type": "Microsoft.App/containerApps",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppTcp",
         "location": "East US",
         "properties": {
+          "configuration": {
+            "ingress": {
+              "exposedPort": 4000,
+              "external": true,
+              "fqdn": "testcontainerAppTcp.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "targetPort": 3000,
+              "traffic": [
+                {
+                  "revisionName": "testcontainerAppTcp-ab1234",
+                  "weight": 80
+                },
+                {
+                  "revisionName": "testcontainerAppTcp-ab4321",
+                  "weight": 20
+                }
+              ],
+              "transport": "tcp"
+            }
+          },
+          "latestReadyRevisionName": "testcontainerAppTcp-pjxhsye",
+          "latestRevisionFqdn": "testcontainerAppTcp-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "provisioningState": "Succeeded",
           "runningStatus": "Running",
-          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-          "latestRevisionFqdn": "testcontainerAppTcp-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-          "latestReadyRevisionName": "testcontainerAppTcp-pjxhsye",
-          "configuration": {
-            "ingress": {
-              "fqdn": "testcontainerAppTcp.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-              "external": true,
-              "targetPort": 3000,
-              "exposedPort": 4000,
-              "transport": "tcp",
-              "traffic": [
-                {
-                  "weight": 80,
-                  "revisionName": "testcontainerAppTcp-ab1234"
-                },
-                {
-                  "weight": 20,
-                  "revisionName": "testcontainerAppTcp-ab4321"
-                }
-              ]
-            }
-          },
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerAppTcp:v4",
                 "name": "testcontainerAppTcp",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
-                },
+                "image": "repo/testcontainerAppTcp:v4",
                 "probes": [
                   {
                     "type": "Liveness",
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3,
                     "tcpSocket": {
                       "port": 8080
-                    },
-                    "initialDelaySeconds": 3,
-                    "periodSeconds": 3
+                    }
                   }
-                ]
+                ],
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
               }
             ],
             "scale": {
-              "minReplicas": 1,
-              "maxReplicas": 5,
               "cooldownPeriod": 350,
+              "maxReplicas": 5,
+              "minReplicas": 1,
               "pollingInterval": 35,
               "rules": [
                 {
@@ -131,64 +130,64 @@
             }
           }
         }
-      }
+      },
+      "headers": {}
     },
     "201": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppTcp",
         "name": "testcontainerAppTcp",
         "type": "Microsoft.App/containerApps",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppTcp",
         "location": "East US",
         "properties": {
-          "provisioningState": "InProgress",
-          "runningStatus": "Progressing",
-          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-          "latestRevisionFqdn": "testcontainerAppTcp-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "configuration": {
             "ingress": {
-              "fqdn": "testcontainerAppTcp.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-              "external": true,
-              "targetPort": 3000,
               "exposedPort": 4000,
-              "transport": "tcp",
+              "external": true,
+              "fqdn": "testcontainerAppTcp.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "targetPort": 3000,
               "traffic": [
                 {
-                  "weight": 80,
-                  "revisionName": "testcontainerAppTcp-ab1234"
+                  "revisionName": "testcontainerAppTcp-ab1234",
+                  "weight": 80
                 },
                 {
-                  "weight": 20,
-                  "revisionName": "testcontainerAppTcp-ab4321"
+                  "revisionName": "testcontainerAppTcp-ab4321",
+                  "weight": 20
                 }
-              ]
+              ],
+              "transport": "tcp"
             }
           },
+          "latestRevisionFqdn": "testcontainerAppTcp-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "provisioningState": "InProgress",
+          "runningStatus": "Progressing",
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerAppTcp:v4",
                 "name": "testcontainerAppTcp",
-                "resources": {
-                  "cpu": 0.2,
-                  "memory": "100Mi"
-                },
+                "image": "repo/testcontainerAppTcp:v4",
                 "probes": [
                   {
                     "type": "Liveness",
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3,
                     "tcpSocket": {
                       "port": 8080
-                    },
-                    "initialDelaySeconds": 3,
-                    "periodSeconds": 3
+                    }
                   }
-                ]
+                ],
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                }
               }
             ],
             "scale": {
-              "minReplicas": 1,
-              "maxReplicas": 5,
               "cooldownPeriod": 350,
+              "maxReplicas": 5,
+              "minReplicas": 1,
               "pollingInterval": 35,
               "rules": [
                 {
@@ -203,7 +202,10 @@
             }
           }
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ContainerApps_CreateOrUpdate",
+  "title": "Create or Update Tcp App"
 }

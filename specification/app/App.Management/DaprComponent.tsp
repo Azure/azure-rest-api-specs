@@ -46,6 +46,28 @@ alias DaprComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
     componentName: string;
   }
 >;
+alias DaprComponentCustomErrorOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the connected environment. */
+    @path
+    @segment("connectedEnvironments")
+    @key
+    connectedEnvironmentName: string;
+  },
+  {
+    /** Name of the Dapr Component. */
+    @path
+    @segment("daprComponents")
+    @key
+    componentName: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
 
 @armResourceOperations
 interface DaprComponents {
@@ -54,6 +76,7 @@ interface DaprComponents {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsDaprComponents_Get")
+  @summary("Get a dapr component.")
   get is DaprComponentOps.Read<DaprComponent>;
 
   /**
@@ -61,13 +84,15 @@ interface DaprComponents {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsDaprComponents_CreateOrUpdate")
-  createOrUpdate is DaprComponentOps.CreateOrUpdateAsync<DaprComponent>;
+  @summary("Creates or updates a Dapr Component.")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<DaprComponent>;
 
   /**
    * Delete a Dapr Component from a connected environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsDaprComponents_Delete")
+  @summary("Delete a Dapr Component.")
   delete is DaprComponentOps.DeleteWithoutOkAsync<DaprComponent>;
 
   /**
@@ -75,6 +100,7 @@ interface DaprComponents {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsDaprComponents_List")
+  @summary("Get the Dapr Components for a connected environment.")
   list is DaprComponentOps.List<
     DaprComponent,
     Response = ArmResponse<DaprComponentsCollection>
@@ -86,6 +112,7 @@ interface DaprComponents {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsDaprComponents_ListSecrets")
   @list
+  @summary("List secrets for a dapr component")
   listSecrets is DaprComponentOps.ActionSync<
     DaprComponent,
     void,
@@ -111,16 +138,19 @@ alias DaprComponentOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperat
     @segment("daprComponents")
     @key
     componentName: string;
-  }
+  },
+  ErrorType = DefaultErrorResponse
 >;
 
 @armResourceOperations
+@tag("DaprComponents")
 interface DaprComponentOperationGroup {
   /**
    * Get a dapr component.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DaprComponents_Get")
+  @summary("Get a dapr component.")
   get is DaprComponentOperationGroupOps.Read<DaprComponent>;
 
   /**
@@ -129,6 +159,7 @@ interface DaprComponentOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("DaprComponents_CreateOrUpdate")
+  @summary("Creates or updates a Dapr Component.")
   createOrUpdate is DaprComponentOperationGroupOps.CreateOrUpdateSync<
     DaprComponent,
     Response = ArmResourceUpdatedResponse<DaprComponent>
@@ -139,6 +170,7 @@ interface DaprComponentOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DaprComponents_Delete")
+  @summary("DaprComponents_Delete")
   delete is DaprComponentOperationGroupOps.DeleteSync<DaprComponent>;
 
   /**
@@ -146,6 +178,7 @@ interface DaprComponentOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DaprComponents_List")
+  @summary("Get the Dapr Components for a managed environment.")
   list is DaprComponentOperationGroupOps.List<
     DaprComponent,
     Response = ArmResponse<DaprComponentsCollection>
@@ -157,6 +190,7 @@ interface DaprComponentOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DaprComponents_ListSecrets")
   @list
+  @summary("List secrets for a dapr component")
   listSecrets is DaprComponentOperationGroupOps.ActionSync<
     DaprComponent,
     void,

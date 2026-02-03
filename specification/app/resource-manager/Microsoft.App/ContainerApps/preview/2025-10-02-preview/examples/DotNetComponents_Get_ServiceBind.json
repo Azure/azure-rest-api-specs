@@ -1,27 +1,26 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
-    "environmentName": "myenvironment",
     "name": "mydotnetcomponent",
-    "api-version": "2025-10-02-preview"
+    "api-version": "2025-10-02-preview",
+    "environmentName": "myenvironment",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/mydotnetcomponent",
         "name": "mydotnetcomponent",
         "type": "Microsoft.App/managedEnvironments/dotNetComponents",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/dotNetComponents/mydotnetcomponent",
         "properties": {
           "componentType": "AspireDashboard",
-          "provisioningState": "Succeeded",
           "configurations": [
             {
               "propertyName": "dashboard-theme",
               "value": "dark"
             }
           ],
+          "provisioningState": "Succeeded",
           "serviceBinds": [
             {
               "name": "yellowcat",
@@ -29,7 +28,10 @@
             }
           ]
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "DotNetComponents_Get",
+  "title": "Get .NET Component with ServiceBinds"
 }

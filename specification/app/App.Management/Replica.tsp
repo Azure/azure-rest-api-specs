@@ -25,22 +25,25 @@ model Replica is Azure.ResourceManager.ProxyResource<ReplicaProperties> {
 }
 
 @armResourceOperations
-interface Replicas {
+interface ContainerAppsRevisionReplicas {
   /**
    * Get a replica for a Container App Revision.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsRevisionReplicas_GetReplica")
-  getReplica is ArmResourceRead<Replica>;
+  @summary("Get a replica for a Container App Revision.")
+  getReplica is ArmResourceRead<Replica, Error = DefaultErrorResponse>;
 
   /**
    * List replicas for a Container App Revision.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsRevisionReplicas_ListReplicas")
+  @summary("List replicas for a Container App Revision.")
   listReplicas is ArmResourceListByParent<
     Replica,
-    Response = ArmResponse<ReplicaCollection>
+    Response = ArmResponse<ReplicaCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 

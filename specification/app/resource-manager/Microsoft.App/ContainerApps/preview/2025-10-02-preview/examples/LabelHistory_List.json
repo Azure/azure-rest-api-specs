@@ -1,19 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "resourceGroupName": "rg",
+    "api-version": "2025-10-02-preview",
     "containerAppName": "testContainerApp",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
+        "nextLink": null,
         "value": [
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testContainerApp/labelHistory/dev",
             "name": "dev",
             "type": "Microsoft.App/containerApps/labelHistory",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testContainerApp/labelHistory/dev",
             "properties": {
               "records": [
                 {
@@ -24,30 +24,32 @@
                 {
                   "revision": "testContainerApp--1",
                   "start": "2024-10-15T01:12:56+00:00",
-                  "stop": "2024-10-15T05:45:08+00:00",
-                  "status": "Failed"
+                  "status": "Failed",
+                  "stop": "2024-10-15T05:45:08+00:00"
                 }
               ]
             }
           },
           {
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testContainerApp/labelHistory/prod",
             "name": "prod",
             "type": "Microsoft.App/containerApps/labelHistory",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testContainerApp/labelHistory/prod",
             "properties": {
               "records": [
                 {
                   "revision": "testContainerApp--1",
                   "start": "2024-10-15T05:45:08+00:00",
-                  "stop": "2024-10-15T05:49:47+00:00",
-                  "status": "Succeeded"
+                  "status": "Succeeded",
+                  "stop": "2024-10-15T05:49:47+00:00"
                 }
               ]
             }
           }
-        ],
-        "nextLink": null
-      }
+        ]
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ContainerAppsLabelHistory_ListLabelHistory",
+  "title": "List Container App's all label history"
 }

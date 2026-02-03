@@ -25,27 +25,55 @@ model DaprSubscription
   >;
 }
 
+alias DaprSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the managed environment. */
+    @path
+    @segment("managedEnvironments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    environmentName: string;
+  },
+  {
+    /** Name of the Dapr Subscription. */
+    @path
+    @segment("daprSubscriptions")
+    @key
+    name: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
+
 @armResourceOperations
 interface DaprSubscriptions {
   /**
    * Get a dapr subscription.
    */
-  get is ArmResourceRead<DaprSubscription>;
+  @summary("Get a dapr subscription.")
+  get is DaprSubscriptionOps.Read<DaprSubscription>;
 
   /**
    * Creates or updates a Dapr subscription in a Managed Environment.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<DaprSubscription>;
+  @summary("Creates or updates a Dapr subscription.")
+  createOrUpdate is DaprSubscriptionOps.CreateOrUpdateSync<DaprSubscription>;
 
   /**
    * Delete a Dapr subscription from a Managed Environment.
    */
-  delete is ArmResourceDeleteSync<DaprSubscription>;
+  @summary("Creates or updates a Dapr subscription.")
+  delete is DaprSubscriptionOps.DeleteSync<DaprSubscription>;
 
   /**
    * Get the Dapr subscriptions for a managed environment.
    */
-  list is ArmResourceListByParent<
+  @summary("Get the Dapr subscriptions for a managed environment.")
+  list is DaprSubscriptionOps.List<
     DaprSubscription,
     Response = ArmResponse<DaprSubscriptionsCollection>
   >;

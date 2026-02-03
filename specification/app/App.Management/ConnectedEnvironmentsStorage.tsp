@@ -26,19 +26,24 @@ model ConnectedEnvironmentStorage
 }
 
 @armResourceOperations
-interface ConnectedEnvironmentStorages {
+interface ConnectedEnvironmentsStorages {
   /**
    * Get storage for a connectedEnvironment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsStorages_Get")
-  get is ArmResourceRead<ConnectedEnvironmentStorage>;
+  @summary("Get storage for a connectedEnvironment.")
+  get is ArmResourceRead<
+    ConnectedEnvironmentStorage,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Create or update storage for a connectedEnvironment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsStorages_CreateOrUpdate")
+  @summary("Create or update storage for a connectedEnvironment.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ConnectedEnvironmentStorage>;
 
   /**
@@ -46,6 +51,7 @@ interface ConnectedEnvironmentStorages {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsStorages_Delete")
+  @summary("Delete storage for a connectedEnvironment.")
   delete is ArmResourceDeleteWithoutOkAsync<ConnectedEnvironmentStorage>;
 
   /**
@@ -53,14 +59,16 @@ interface ConnectedEnvironmentStorages {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsStorages_List")
+  @summary("Get all storages for a connectedEnvironment.")
   list is ArmResourceListByParent<
     ConnectedEnvironmentStorage,
-    Response = ArmResponse<ConnectedEnvironmentStoragesCollection>
+    Response = ArmResponse<ConnectedEnvironmentStoragesCollection>,
+    Error = DefaultErrorResponse
   >;
 }
 
 @@doc(ConnectedEnvironmentStorage.name, "Name of the storage.");
 @@doc(ConnectedEnvironmentStorage.properties, "Storage properties");
-@@doc(ConnectedEnvironmentStorages.createOrUpdate::parameters.resource,
+@@doc(ConnectedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "Configuration details of storage."
 );

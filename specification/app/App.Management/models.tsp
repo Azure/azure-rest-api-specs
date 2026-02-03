@@ -792,13 +792,11 @@ model HttpRetryPolicyMatches {
   /**
    * Additional http status codes that can trigger a retry
    */
-  // @identifiers(#[])
   httpStatusCodes?: int32[];
 
   /**
    * Errors that can trigger a retry
    */
-  // @identifiers(#[])
   errors?: string[];
 }
 
@@ -1989,6 +1987,7 @@ model BuildToken {
    * Authentication token.
    */
   @visibility(Lifecycle.Read)
+  @secret
   token?: string;
 
   /**
@@ -2034,6 +2033,8 @@ model ConnectedEnvironmentProperties {
   /**
    * Application Insights connection string used by Dapr to export Service to Service communication telemetry
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @secret
   daprAIConnectionString?: string;
 
   /**
@@ -2066,11 +2067,13 @@ model CustomDomainConfiguration {
   /**
    * PFX or PEM blob
    */
+  @secret
   certificateValue?: bytes;
 
   /**
    * Certificate password
    */
+  @secret
   certificatePassword?: string;
 
   /**
@@ -2156,6 +2159,7 @@ model CertificateProperties {
    * Certificate password.
    */
   @visibility(Lifecycle.Create)
+  @secret
   password?: string;
 
   /**
@@ -2174,6 +2178,7 @@ model CertificateProperties {
    * PFX or PEM blob
    */
   @visibility(Lifecycle.Create)
+  @secret
   value?: bytes;
 
   /**
@@ -2253,7 +2258,7 @@ model DaprComponentProperties {
   /**
    * Boolean describing if the component errors are ignores
    */
-  ignoreErrors?: boolean;
+  ignoreErrors?: boolean = false;
 
   /**
    * Initialization timeout
@@ -2382,6 +2387,7 @@ model DaprSecret {
    * Secret Value.
    */
   @visibility(Lifecycle.Read)
+  @secret
   value?: string;
 }
 
@@ -2435,6 +2441,7 @@ model AzureFileProperties {
   /**
    * Storage account key for azure file.
    */
+  @secret
   accountKey?: string;
 
   /**
@@ -2495,6 +2502,7 @@ model SmbStorage {
   /**
    * The password for the user.
    */
+  @secret
   password?: string;
 
   /**
@@ -2521,11 +2529,15 @@ model ManagedEnvironmentProperties {
   /**
    * Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @secret
   daprAIInstrumentationKey?: string;
 
   /**
    * Application Insights connection string used by Dapr to export Service to Service communication telemetry
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  @secret
   daprAIConnectionString?: string;
 
   /**
@@ -2711,6 +2723,7 @@ model LogAnalyticsConfiguration {
    * Log analytics customer key
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   sharedKey?: string;
 
   /**
@@ -2726,6 +2739,7 @@ model AppInsightsConfiguration {
   /**
    * Application Insights connection string
    */
+  @secret
   connectionString?: string;
 }
 
@@ -2782,6 +2796,7 @@ model DataDogConfiguration {
   /**
    * The data dog api key
    */
+  @secret
   key?: string;
 }
 
@@ -2878,7 +2893,7 @@ model WorkloadProfile {
   /**
    * Whether to use a FIPS-enabled OS. Supported only for dedicated workload profiles.
    */
-  enableFips?: boolean;
+  enableFips?: boolean = false;
 
   /**
    * Workload profile type for the workloads to run on.
@@ -3145,6 +3160,7 @@ model EnvironmentAuthTokenProperties {
    * Auth token value.
    */
   @visibility(Lifecycle.Read)
+  @secret
   token?: string;
 
   /**
@@ -3158,13 +3174,15 @@ model EnvironmentAuthTokenProperties {
 /**
  * Collection of workloadProfileStates
  */
-model WorkloadProfileStatesCollection is Azure.Core.Page<WorkloadProfileStates>;
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+model workloadProfileStatesCollection is Azure.Core.Page<workloadProfileStates>;
 
 /**
  * Collection of all the workload Profile States for a Managed Environment..
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model WorkloadProfileStates
+model workloadProfileStates
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Workload Profile resource specific properties.
@@ -3412,7 +3430,7 @@ model DaprSubscriptionBulkSubscribeOptions {
   /**
    * Enable bulk subscription
    */
-  enabled?: boolean;
+  enabled?: boolean = false;
 
   /**
    * Maximum number of messages to deliver in a bulk message.
@@ -3522,6 +3540,7 @@ model HttpRouteTarget {
   /**
    * Weighted routing
    */
+  @minValue(0)
   @maxValue(100)
   weight?: int32;
 }
@@ -3595,6 +3614,7 @@ model ScheduledEntries {
   /**
    * List of maintenance schedules for a managed environment.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" ""
   @identifiers(#[])
   scheduledEntries: ScheduledEntry[];
 }
@@ -3841,7 +3861,7 @@ model JobScale {
   /**
    * Minimum number of job executions that are created for a trigger, default 0
    */
-  minExecutions?: int32;
+  minExecutions?: int32 = 0;
 
   /**
    * Maximum number of job executions that are created for a trigger, default 100.
@@ -3872,6 +3892,7 @@ model JobScaleRule {
   /**
    * Metadata properties to describe the scale rule.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   metadata?: unknown;
 
   /**
@@ -4397,17 +4418,6 @@ model Template {
  * Diagnostics data collection for a resource.
  */
 model DiagnosticsCollection is Azure.Core.Page<Diagnostics>;
-
-/**
- * Diagnostics data for a resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model Diagnostics extends Azure.ResourceManager.CommonTypes.ProxyResource {
-  /**
-   * Diagnostics resource specific properties
-   */
-  properties?: DiagnosticsProperties;
-}
 
 /**
  * Diagnostics resource specific properties
@@ -5950,6 +5960,7 @@ model SessionPoolSecret {
    * Secret Value.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   value?: string;
 }
 
@@ -6329,7 +6340,7 @@ model ManagedIdentitySetting {
   /**
    * Use to select the lifecycle stages of a Session Pool during which the Managed Identity should be available.
    */
-  lifecycle?: IdentitySettingsLifeCycle;
+  lifecycle?: IdentitySettingsLifeCycle = "None";
 }
 
 /**
@@ -6339,12 +6350,12 @@ model McpServerSettings {
   /**
    * Indicates whether the MCP server is enabled.
    */
-  isMcpServerEnabled?: boolean;
+  isMcpServerEnabled?: boolean = false;
 
   /**
    * Indicates whether the MCP server API key is disabled.
    */
-  isMcpServerApiKeyDisabled?: boolean;
+  isMcpServerApiKeyDisabled?: boolean = false;
 
   /**
    * The endpoint of the MCP server.
@@ -6414,6 +6425,7 @@ model McpServerCredential {
    * The API key for the MCP server.
    */
   @visibility(Lifecycle.Read)
+  @secret
   apiKey?: string;
 }
 
@@ -6479,6 +6491,7 @@ model GithubActionConfiguration {
    * One time Github PAT to configure github environment
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   githubPersonalAccessToken?: string;
 
   /**
@@ -6542,18 +6555,21 @@ model AzureCredentials {
    * Client Id.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   clientId?: string;
 
   /**
    * Client Secret.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   clientSecret?: string;
 
   /**
    * Tenant Id.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   tenantId?: string;
 
   /**
@@ -6861,6 +6877,7 @@ model Secret {
    * Secret Value.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
+  @secret
   value?: string;
 
   /**
@@ -6887,7 +6904,7 @@ model Ingress {
   /**
    * Bool indicating if app exposes an external http endpoint
    */
-  external?: boolean;
+  external?: boolean = false;
 
   /**
    * Target Port in containers for traffic from ingress
@@ -6919,7 +6936,7 @@ model Ingress {
   /**
    * Bool indicating if HTTP connections to is allowed. If set to false HTTP connections are automatically redirected to HTTPS connections
    */
-  allowInsecure?: boolean;
+  allowInsecure?: boolean = false;
 
   /**
    * Rules to restrict incoming IP address.
@@ -6971,7 +6988,7 @@ model TrafficWeight {
   /**
    * Indicates that the traffic weight belongs to a latest stable revision
    */
-  latestRevision?: boolean;
+  latestRevision?: boolean = false;
 
   /**
    * Associates a traffic label with a revision
@@ -7096,7 +7113,7 @@ model Dapr {
   /**
    * Boolean indicating if the Dapr side car is enabled
    */
-  enabled?: boolean;
+  enabled?: boolean = false;
 
   /**
    * Dapr application identifier
@@ -7280,7 +7297,7 @@ model IdentitySettings {
   /**
    * Use to select the lifecycle stages of a Container App during which the Managed Identity should be available.
    */
-  lifecycle?: IdentitySettingsLifeCycle;
+  lifecycle?: IdentitySettingsLifeCycle = "All";
 }
 
 /**
@@ -7729,6 +7746,7 @@ model ContainerAppSecret {
    * Secret Value.
    */
   @visibility(Lifecycle.Read)
+  @secret
   value?: string;
 
   /**
@@ -7764,6 +7782,7 @@ model ContainerAppAuthTokenProperties {
    * Auth token value.
    */
   @visibility(Lifecycle.Read)
+  @secret
   token?: string;
 
   /**
@@ -7956,6 +7975,7 @@ model LabelHistoryProperties {
   /**
    * List of label history records.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @visibility(Lifecycle.Read)
   @identifiers(#["label"])
   records?: LabelHistoryRecordItem[];
@@ -8632,15 +8652,18 @@ model ErrorEntity {
 /**
  * The workflow filter.
  */
+@secret
 model WorkflowArtifacts {
   /**
    * Application settings of the workflow.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   appSettings?: unknown;
 
   /**
    * Files of the app.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   files?: unknown;
 
   /**
@@ -8764,4 +8787,21 @@ model SpringCloudConfigComponent extends JavaComponentProperties {
    * Type of the Java Component.
    */
   componentType: "SpringCloudConfig";
+}
+
+/**
+ * Available operations of the service
+ */
+model AvailableOperations is Azure.Core.Page<OperationDetail>;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@error
+model ContainerAppsNotFoundError {
+  ...NotFoundResponse;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+@error
+model ManagedCertificateBadRequestError {
+  ...BadRequestResponse;
 }

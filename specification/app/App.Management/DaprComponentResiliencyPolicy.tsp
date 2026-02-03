@@ -25,27 +25,67 @@ model DaprComponentResiliencyPolicy
   >;
 }
 
+alias DaprComponentResiliencyPolicyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the managed environment. */
+    @path
+    @segment("managedEnvironments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    environmentName: string;
+
+    /** Name of the Dapr Component. */
+    @path
+    @segment("daprComponents")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    componentName: string;
+  },
+  {
+    /** Name of the Dapr Component Resiliency Policy. */
+    @path
+    @segment("resiliencyPolicies")
+    @key
+    name: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
+
 @armResourceOperations
 interface DaprComponentResiliencyPolicies {
   /**
    * Get a Dapr component resiliency policy.
    */
-  get is ArmResourceRead<DaprComponentResiliencyPolicy>;
+  @summary("Get a Dapr component resiliency policy.")
+  get is DaprComponentResiliencyPolicyOps.Read<DaprComponentResiliencyPolicy>;
 
   /**
    * Creates or updates a resiliency policy for a Dapr component.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<DaprComponentResiliencyPolicy>;
+  @summary("Creates or updates a Dapr component resiliency policy.")
+  createOrUpdate is DaprComponentResiliencyPolicyOps.CreateOrUpdateAsync<
+    DaprComponentResiliencyPolicy,
+    Response = ArmResourceUpdatedResponse<DaprComponentResiliencyPolicy> | (CreatedResponse & {
+      @bodyRoot body: DaprComponentResiliencyPolicy;
+    })
+  >;
 
   /**
    * Delete a resiliency policy for a Dapr component.
    */
-  delete is ArmResourceDeleteSync<DaprComponentResiliencyPolicy>;
+  @summary("Delete a Dapr component resiliency policy.")
+  delete is DaprComponentResiliencyPolicyOps.DeleteSync<DaprComponentResiliencyPolicy>;
 
   /**
    * Get the resiliency policies for a Dapr component.
    */
-  list is ArmResourceListByParent<
+  @summary("Get the resiliency policies for a Dapr component.")
+  list is DaprComponentResiliencyPolicyOps.List<
     DaprComponentResiliencyPolicy,
     Response = ArmResponse<DaprComponentResiliencyPoliciesCollection>
   >;

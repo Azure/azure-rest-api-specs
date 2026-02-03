@@ -45,28 +45,52 @@ model ContainerApp
   kind?: Kind;
 }
 
+alias ContainerAppOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** Name of the Container App. */
+    @path
+    @segment("containerApps")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    containerAppName: string;
+  }
+>;
+
 @armResourceOperations
 interface ContainerApps {
   /**
    * Get the properties of a Container App.
    */
-  get is ArmResourceRead<ContainerApp>;
+  @summary("Get the properties of a Container App.")
+  get is ArmResourceRead<
+    ContainerApp,
+    Response = ArmResponse<ContainerApp> | ContainerAppsNotFoundError
+  >;
 
   /**
    * Create or update a Container App.
    */
+  @summary("Create or update a Container App.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ContainerApp>;
 
   /**
    * Patches a Container App using JSON Merge Patch
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update properties of a Container App")
   update is ArmCustomPatchAsync<ContainerApp, PatchModel = ContainerApp>;
 
   /**
    * Delete a Container App.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete a Container App.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ContainerApp,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -75,6 +99,7 @@ interface ContainerApps {
   /**
    * Get the Container Apps in a given resource group.
    */
+  @summary("Get the Container Apps in a given resource group.")
   listByResourceGroup is ArmResourceListByParent<
     ContainerApp,
     Response = ArmResponse<ContainerAppCollection>
@@ -83,6 +108,7 @@ interface ContainerApps {
   /**
    * Get the Container Apps in a given subscription.
    */
+  @summary("Get the Container Apps in a given subscription.")
   listBySubscription is ArmListBySubscription<
     ContainerApp,
     Response = ArmResponse<ContainerAppCollection>
@@ -91,6 +117,7 @@ interface ContainerApps {
   /**
    * Analyzes a custom hostname for a Container App
    */
+  @summary("Analyzes a custom hostname for a Container App")
   listCustomHostNameAnalysis is ArmResourceActionSync<
     ContainerApp,
     void,
@@ -108,6 +135,7 @@ interface ContainerApps {
    * List secrets for a container app
    */
   @list
+  @summary("List secrets for a container app")
   listSecrets is ArmResourceActionSync<
     ContainerApp,
     void,
@@ -118,16 +146,18 @@ interface ContainerApps {
    * Get auth token for a container app
    */
   @action("getAuthtoken")
+  @summary("Get auth token for a container app")
   getAuthToken is ArmResourceActionSync<
     ContainerApp,
     void,
-    ArmResponse<ContainerAppAuthToken>
+    ArmResponse<ContainerAppAuthToken> | ContainerAppsNotFoundError
   >;
 
   /**
    * Start a container app
    */
-  start is ArmResourceActionAsync<
+  @summary("Start a container app")
+  start is ContainerAppOps.ActionAsync<
     ContainerApp,
     void,
     ArmResponse<ContainerApp>
@@ -136,11 +166,19 @@ interface ContainerApps {
   /**
    * Stop a container app
    */
-  stop is ArmResourceActionAsync<ContainerApp, void, ArmResponse<ContainerApp>>;
+  @summary("Stop a container app")
+  stop is ContainerAppOps.ActionAsync<
+    ContainerApp,
+    void,
+    ArmResponse<ContainerApp>
+  >;
 }
 
 @@doc(ContainerApp.name, "Name of the Container App.");
 @@doc(ContainerApp.properties, "ContainerApp resource specific properties");
+@@doc(ContainerApp.identity,
+  "managed identities for the Container App to interact with other Azure services without maintaining any secrets or credentials in code."
+);
 @@doc(ContainerApps.createOrUpdate::parameters.resource,
   "Properties used to create a container app"
 );

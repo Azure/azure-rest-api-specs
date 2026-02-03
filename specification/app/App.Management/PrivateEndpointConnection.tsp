@@ -25,21 +25,48 @@ model PrivateEndpointConnection
   >;
 }
 
+alias PrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the managed environment. */
+    @path
+    @segment("managedEnvironments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    environmentName: string;
+  },
+  {
+    /** Name of the Private Endpoint Connection. */
+    @path
+    @segment("privateEndpointConnections")
+    @key
+    privateEndpointConnectionName: string;
+  }
+>;
+
 @armResourceOperations
+@tag("ManagedEnvironments")
+@tag("PrivateEndpointConnections")
 interface PrivateEndpointConnections {
   /**
    * Get a private endpoint connection for a given managed environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedEnvironmentPrivateEndpointConnections_Get")
-  get is ArmResourceRead<PrivateEndpointConnection>;
+  @summary("Get a private endpoint connection for a given managed environment.")
+  get is PrivateEndpointConnectionOps.Read<PrivateEndpointConnection>;
 
   /**
    * Update the state of a private endpoint connection for a given managed environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedEnvironmentPrivateEndpointConnections_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  @summary("Update the state of a private endpoint connection for a given managed environment.")
+  createOrUpdate is PrivateEndpointConnectionOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
     LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -50,14 +77,16 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedEnvironmentPrivateEndpointConnections_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
+  @summary("Delete a private endpoint connection for a given managed environment.")
+  delete is PrivateEndpointConnectionOps.DeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**
    * List private endpoint connections for a given managed environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedEnvironmentPrivateEndpointConnections_List")
-  list is ArmResourceListByParent<PrivateEndpointConnection>;
+  @summary("List private endpoint connections for a given managed environment.")
+  list is PrivateEndpointConnectionOps.List<PrivateEndpointConnection>;
 }
 
 @@doc(PrivateEndpointConnection.name,

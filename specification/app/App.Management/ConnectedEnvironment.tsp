@@ -34,30 +34,37 @@ interface ConnectedEnvironments {
   /**
    * Get the properties of an connectedEnvironment.
    */
-  get is ArmResourceRead<ConnectedEnvironment>;
+  get is ArmResourceRead<ConnectedEnvironment, Error = DefaultErrorResponse>;
 
   /**
    * Creates or updates an connectedEnvironment.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ConnectedEnvironment>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ConnectedEnvironment,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Patches a Managed Environment. Only patching of tags is supported currently
    */
+  @summary("Update connected Environment's properties.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     ConnectedEnvironment,
     PatchModel = ConnectedEnvironmentPatchResource,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = DefaultErrorResponse
   >;
 
   /**
    * Delete an connectedEnvironment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete an connectedEnvironment.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedEnvironment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -65,24 +72,29 @@ interface ConnectedEnvironments {
    */
   listByResourceGroup is ArmResourceListByParent<
     ConnectedEnvironment,
-    Response = ArmResponse<ConnectedEnvironmentCollection>
+    Response = ArmResponse<ConnectedEnvironmentCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
    * Get all connectedEnvironments for a subscription.
    */
+  @summary("Get all connectedEnvironments for a subscription.")
   listBySubscription is ArmListBySubscription<
     ConnectedEnvironment,
-    Response = ArmResponse<ConnectedEnvironmentCollection>
+    Response = ArmResponse<ConnectedEnvironmentCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
    * Checks if resource connectedEnvironmentName is available.
    */
+  @summary("Checks the resource connectedEnvironmentName availability.")
   checkNameAvailability is ArmResourceActionSync<
     ConnectedEnvironment,
-    CheckNameAvailabilityRequest,
-    ArmResponse<Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse>
+    Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+    ArmResponse<Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse>,
+    Error = DefaultErrorResponse
   >;
 }
 

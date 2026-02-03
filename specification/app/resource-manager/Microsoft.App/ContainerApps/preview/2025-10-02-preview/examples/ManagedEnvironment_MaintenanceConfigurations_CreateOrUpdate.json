@@ -1,54 +1,56 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "rg1",
-    "environmentName": "managedEnv",
-    "configName": "default",
     "api-version": "2025-10-02-preview",
+    "configName": "default",
+    "environmentName": "managedEnv",
     "maintenanceConfigurationEnvelope": {
       "properties": {
         "scheduledEntries": [
           {
-            "weekDay": "Sunday",
+            "durationHours": 9,
             "startHourUtc": 12,
-            "durationHours": 9
+            "weekDay": "Sunday"
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
         "name": "default",
         "type": "Microsoft.App/ManagedEnvironments/maintenanceConfigurations",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
         "properties": {
           "scheduledEntries": [
             {
-              "weekDay": "Sunday",
+              "durationHours": 9,
               "startHourUtc": 12,
-              "durationHours": 9
+              "weekDay": "Sunday"
             }
           ]
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
         "name": "default",
         "type": "Microsoft.App/ManagedEnvironments/maintenanceConfigurations",
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
         "properties": {
           "scheduledEntries": [
             {
-              "weekDay": "Sunday",
+              "durationHours": 9,
               "startHourUtc": 12,
-              "durationHours": 9
+              "weekDay": "Sunday"
             }
           ]
         }
       }
     }
-  }
+  },
+  "operationId": "MaintenanceConfigurations_CreateOrUpdate",
+  "title": "ManagedEnvironmentMaintenanceConfigurationsCreateOrUpdate"
 }

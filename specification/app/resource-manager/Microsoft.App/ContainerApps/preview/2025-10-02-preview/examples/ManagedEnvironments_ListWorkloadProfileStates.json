@@ -1,36 +1,38 @@
 {
   "parameters": {
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-10-02-preview",
     "environmentName": "jlaw-demo1",
-    "api-version": "2025-10-02-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/55f240e3-3d66-44f6-8358-4e4f3d7a2e51/providers/Microsoft.App/workloadProfileStates/GP1",
             "name": "GP1",
             "type": "/providers/Microsoft.App/workloadProfileStates",
+            "id": "/subscriptions/55f240e3-3d66-44f6-8358-4e4f3d7a2e51/providers/Microsoft.App/workloadProfileStates/GP1",
             "properties": {
-              "minimumCount": 3,
+              "currentCount": 3,
               "maximumCount": 10,
-              "currentCount": 3
+              "minimumCount": 3
             }
           },
           {
-            "id": "/subscriptions/55f240e3-3d66-44f6-8358-4e4f3d7a2e51/providers/Microsoft.App/workloadProfileStates/MO3",
             "name": "MO3",
             "type": "/providers/Microsoft.App/workloadProfileStates",
+            "id": "/subscriptions/55f240e3-3d66-44f6-8358-4e4f3d7a2e51/providers/Microsoft.App/workloadProfileStates/MO3",
             "properties": {
-              "minimumCount": 0,
+              "currentCount": 0,
               "maximumCount": 2,
-              "currentCount": 0
+              "minimumCount": 0
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ManagedEnvironments_ListWorkloadProfileStates",
+  "title": "List environments by subscription"
 }

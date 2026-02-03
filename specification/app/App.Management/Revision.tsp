@@ -25,19 +25,21 @@ model Revision is Azure.ResourceManager.ProxyResource<RevisionProperties> {
 }
 
 @armResourceOperations
-interface Revisions {
+interface ContainerAppsRevisions {
   /**
    * Get a revision of a Container App.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsRevisions_GetRevision")
-  getRevision is ArmResourceRead<Revision>;
+  @summary("Get a revision of a Container App.")
+  getRevision is ArmResourceRead<Revision, Error = DefaultErrorResponse>;
 
   /**
    * Get the Revisions for a given Container App.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsRevisions_ListRevisions")
+  @summary("Get the Revisions for a given Container App.")
   listRevisions is ArmResourceListByParent<
     Revision,
     Parameters = {
@@ -47,7 +49,8 @@ interface Revisions {
       @query("$filter")
       $filter?: string;
     },
-    Response = ArmResponse<RevisionCollection>
+    Response = ArmResponse<RevisionCollection>,
+    Error = DefaultErrorResponse
   >;
 
   /**
@@ -56,7 +59,13 @@ interface Revisions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsRevisions_ActivateRevision")
   @action("activate")
-  activateRevision is ArmResourceActionSync<Revision, void, OkResponse>;
+  @summary("Activates a revision for a Container App")
+  activateRevision is ArmResourceActionSync<
+    Revision,
+    void,
+    OkResponse,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Deactivates a revision for a Container App
@@ -64,7 +73,13 @@ interface Revisions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsRevisions_DeactivateRevision")
   @action("deactivate")
-  deactivateRevision is ArmResourceActionSync<Revision, void, OkResponse>;
+  @summary("Deactivates a revision for a Container App")
+  deactivateRevision is ArmResourceActionSync<
+    Revision,
+    void,
+    OkResponse,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Restarts a revision for a Container App
@@ -72,26 +87,59 @@ interface Revisions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ContainerAppsRevisions_RestartRevision")
   @action("restart")
-  restartRevision is ArmResourceActionSync<Revision, void, OkResponse>;
+  @summary("Restarts a revision for a Container App")
+  restartRevision is ArmResourceActionSync<
+    Revision,
+    void,
+    OkResponse,
+    Error = DefaultErrorResponse
+  >;
+}
 
+alias FunctionExtensionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the Container App. */
+    @path
+    @segment("containerApps")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    containerAppName: string;
+
+    /** Name of the Container App Revision. */
+    @path
+    @segment("revisions")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    revisionName: string;
+  },
+  {
+    /** Name of the Function. */
+    @path
+    @segment("functions")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    functionAppName: string;
+  },
+  ErrorType = DefaultErrorResponse
+>;
+
+@armResourceOperations
+interface FunctionsExtension {
   /**
    * Proxies a Functions host call to the function app backed by the container app.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("FunctionsExtension_InvokeFunctionsHost")
   @action("invoke")
-  invokeFunctionsHost is ArmResourceActionSync<
+  @summary("Proxies a Functions host call to the function app backed by the container app.")
+  invokeFunctionsHost is FunctionExtensionOps.ActionSync<
     Revision,
     void,
-    ArmResponse<string>,
-    Parameters = {
-      /**
-       * Name of the Function App, the extension resource.
-       */
-      @pattern("^[-\\w\\._\\(\\)]+$")
-      @path
-      functionAppName: string;
-    }
+    ArmResponse<string>
   >;
 }
 

@@ -1,14 +1,11 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
-    "containerAppName": "myapp",
-    "authConfigName": "current",
     "api-version": "2025-10-02-preview",
     "authConfigEnvelope": {
       "properties": {
-        "platform": {
-          "enabled": true
+        "encryptionSettings": {
+          "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
+          "containerAppAuthSigningSecretName": "testSigningSecretName"
         },
         "globalValidation": {
           "unauthenticatedClientAction": "AllowAnonymous"
@@ -21,10 +18,6 @@
             }
           }
         },
-        "encryptionSettings": {
-          "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
-          "containerAppAuthSigningSecretName": "testSigningSecretName"
-        },
         "login": {
           "tokenStore": {
             "azureBlobStorage": {
@@ -32,20 +25,27 @@
               "clientId": "00000000-0000-0000-0000-000000000000"
             }
           }
+        },
+        "platform": {
+          "enabled": true
         }
       }
-    }
+    },
+    "authConfigName": "current",
+    "containerAppName": "myapp",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
-      "headers": {},
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.App/containerApps/myapp/authconfigs/current",
         "name": "current",
         "type": "Microsoft.App/containerapps/authconfigs",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.App/containerApps/myapp/authconfigs/current",
         "properties": {
-          "platform": {
-            "enabled": true
+          "encryptionSettings": {
+            "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
+            "containerAppAuthSigningSecretName": "testSigningSecretName"
           },
           "globalValidation": {
             "unauthenticatedClientAction": "AllowAnonymous"
@@ -58,10 +58,6 @@
               }
             }
           },
-          "encryptionSettings": {
-            "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
-            "containerAppAuthSigningSecretName": "testSigningSecretName"
-          },
           "login": {
             "tokenStore": {
               "azureBlobStorage": {
@@ -69,9 +65,15 @@
                 "clientId": "00000000-0000-0000-0000-000000000000"
               }
             }
+          },
+          "platform": {
+            "enabled": true
           }
         }
-      }
+      },
+      "headers": {}
     }
-  }
+  },
+  "operationId": "ContainerAppsAuthConfigs_CreateOrUpdate",
+  "title": "Create or Update Container App AuthConfig with msi clientID blob storage token store"
 }

@@ -13,6 +13,7 @@ namespace Microsoft.App;
 /**
  * .NET Component.
  */
+@parentResource(ManagedEnvironment)
 model DotNetComponent
   is Azure.ResourceManager.ProxyResource<DotNetComponentProperties> {
   ...ResourceNameParameter<
@@ -23,33 +24,65 @@ model DotNetComponent
   >;
 }
 
+alias DotNetComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** Name of the managed environment. */
+    @path
+    @segment("managedEnvironments")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    environmentName: string;
+  },
+  {
+    /** Name of the .NET Component. */
+    @path
+    @segment("dotNetComponents")
+    @key
+    @pattern("^[-\\w\\._\\(\\)]+$")
+    name: string;
+  }
+>;
+
 @armResourceOperations
 interface DotNetComponents {
   /**
    * Get a .NET Component.
    */
-  get is ArmResourceRead<DotNetComponent>;
+  @summary("Get a .NET Component.")
+  get is DotNetComponentOps.Read<DotNetComponent>;
 
   /**
    * Creates or updates a .NET Component in a Managed Environment.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<DotNetComponent>;
+  @summary("Creates or updates a .NET Component.")
+  createOrUpdate is DotNetComponentOps.CreateOrUpdateAsync<DotNetComponent>;
 
   /**
    * Patches a .NET Component using JSON Merge Patch
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<DotNetComponent, PatchModel = DotNetComponent>;
+  @summary("Update properties of a .NET Component")
+  update is DotNetComponentOps.CustomPatchAsync<
+    DotNetComponent,
+    PatchModel = DotNetComponent
+  >;
 
   /**
    * Delete a .NET Component.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<DotNetComponent>;
+  @summary("Update properties of a .NET Component")
+  delete is DotNetComponentOps.DeleteWithoutOkAsync<DotNetComponent>;
 
   /**
    * Get the .NET Components for a managed environment.
    */
-  list is ArmResourceListByParent<
+  @summary("Get the .NET Components for a managed environment.")
+  list is DotNetComponentOps.List<
     DotNetComponent,
     Response = ArmResponse<DotNetComponentsCollection>
   >;

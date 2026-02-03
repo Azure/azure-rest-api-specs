@@ -1,25 +1,27 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "subscriptionId": "subid",
+    "environmentName": "jlaw-demo1",
     "resourceGroupName": "examplerg",
-    "environmentName": "jlaw-demo1"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "currentValue": 0.5,
-            "limit": 10,
             "name": {
               "localizedValue": "Managed Environment Consumption Cores",
               "value": "ManagedEnvironmentConsumptionCores"
             },
+            "currentValue": 0.5,
+            "limit": 10,
             "unit": "Count"
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "ManagedEnvironmentUsages_List",
+  "title": "List managed environment usages"
 }
