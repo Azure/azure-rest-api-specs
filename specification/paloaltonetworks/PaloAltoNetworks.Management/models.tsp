@@ -1245,7 +1245,7 @@ model FirewallDeploymentProperties {
    * Firewall SKU type
    */
   @added(Versions.v2026_01_26_preview)
-  firewallSku?: FirewallSkuType;
+  firewallSku?: FirewallSkuType = "STANDARD";
 
   /**
    * Network settings

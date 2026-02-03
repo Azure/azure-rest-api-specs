@@ -6433,8 +6433,27 @@
           "description": "panEtag info"
         },
         "firewallSku": {
-          "$ref": "#/definitions/FirewallSkuType",
-          "description": "Firewall SKU type"
+          "type": "string",
+          "description": "Firewall SKU type",
+          "default": "STANDARD",
+          "enum": [
+            "STANDARD",
+            "PREMIUM"
+          ],
+          "x-ms-enum": {
+            "name": "FirewallSkuType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "STANDARD",
+                "value": "STANDARD"
+              },
+              {
+                "name": "PREMIUM",
+                "value": "PREMIUM"
+              }
+            ]
+          }
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
@@ -6614,28 +6633,6 @@
           "$ref": "#/definitions/MarketplaceDetails",
           "description": "Marketplace details"
         }
-      }
-    },
-    "FirewallSkuType": {
-      "type": "string",
-      "description": "Firewall SKU type",
-      "enum": [
-        "STANDARD",
-        "PREMIUM"
-      ],
-      "x-ms-enum": {
-        "name": "FirewallSkuType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "STANDARD",
-            "value": "STANDARD"
-          },
-          {
-            "name": "PREMIUM",
-            "value": "PREMIUM"
-          }
-        ]
       }
     },
     "FirewallStatusProperty": {
