@@ -1540,6 +1540,30 @@
         ]
       }
     },
+    "DataQualityMetrics": {
+      "type": "object",
+      "description": "Data quality metrics",
+      "properties": {
+        "evaludations": {
+          "type": "array",
+          "description": "Metric evaluations.",
+          "items": {
+            "$ref": "#/definitions/DataQualityMetricEvaluationEntry"
+          }
+        },
+        "validations": {
+          "type": "array",
+          "description": "Metric validations.",
+          "items": {
+            "$ref": "#/definitions/DataQualityMetricValidationEntry"
+          }
+        }
+      },
+      "required": [
+        "evaludations",
+        "validations"
+      ]
+    },
     "DataQualityValidation": {
       "type": "object",
       "description": "Data quality validation",
@@ -2026,12 +2050,9 @@
           "$ref": "#/definitions/AzureDataExplorerSink",
           "description": "Sink to which data will be published in Azure Data Explorer. Required for AzureDataExplorerPublish jobs."
         },
-        "dataQualityMetricEvaluations": {
-          "type": "array",
-          "description": "Metric evaluations. Required for DataQualityValidation jobs.",
-          "items": {
-            "$ref": "#/definitions/DataQualityMetricEvaluationEntry"
-          }
+        "metrics": {
+          "$ref": "#/definitions/DataQualityMetrics",
+          "description": "Metric evaluations. Required for DataQualityValidation jobs."
         },
         "dataQualityMetricValidations": {
           "type": "array",
