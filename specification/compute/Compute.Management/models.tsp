@@ -1812,6 +1812,12 @@ model VirtualMachineScaleSetProperties {
    */
   @added(Versions.v2025_04_01)
   highSpeedInterconnectPlacement?: HighSpeedInterconnectPlacement;
+
+  /**
+   * Specifies the external health policy for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  externalHealthPolicy?: ExternalHealthPolicy;
 }
 
 /**
@@ -2010,6 +2016,27 @@ model AutomaticRepairsPolicy {
    * Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.
    */
   repairAction?: RepairAction;
+}
+
+/**
+ * Specifies the external health policy for the virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model ExternalHealthPolicy {
+  /**
+   * If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB).
+   */
+  enabled?: boolean;
+
+  /**
+   * Defines how long the health status set by External Health API will last on the VM. If a signal is not received/updated within this time, the VM Health will be marked as "unknown". Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 3 hours (PT3H).
+   */
+  expiryDuration?: string;
+
+  /**
+   * Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H).
+   */
+  gracePeriod?: string;
 }
 
 /**

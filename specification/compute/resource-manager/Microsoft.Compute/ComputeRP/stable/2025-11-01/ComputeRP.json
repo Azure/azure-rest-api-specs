@@ -5599,6 +5599,9 @@
           "Create a scale set with extension time budget.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithExtensionsTimeBudget.json"
           },
+          "Create a scale set with external health policy enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithExternalHealthPolicy.json"
+          },
           "Create a scale set with managed boot diagnostics.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithManagedBootDiagnostics.json"
           },
@@ -14244,6 +14247,24 @@
         ]
       }
     },
+    "ExternalHealthPolicy": {
+      "type": "object",
+      "description": "Specifies the external health policy for the virtual machine scale set.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB)."
+        },
+        "expiryDuration": {
+          "type": "string",
+          "description": "Defines how long the health status set by External Health API will last on the VM. If a signal is not received/updated within this time, the VM Health will be marked as \"unknown\". Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 3 hours (PT3H)."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "description": "Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H)."
+        }
+      }
+    },
     "HardwareProfile": {
       "type": "object",
       "description": "Specifies the hardware settings for the virtual machine.",
@@ -21077,6 +21098,10 @@
         "highSpeedInterconnectPlacement": {
           "$ref": "#/definitions/HighSpeedInterconnectPlacement",
           "description": "Specifies the high speed interconnect placement for the virtual machine scale set."
+        },
+        "externalHealthPolicy": {
+          "$ref": "#/definitions/ExternalHealthPolicy",
+          "description": "Specifies the external health policy for the virtual machine scale set."
         }
       }
     },
