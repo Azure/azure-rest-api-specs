@@ -5863,3 +5863,56 @@ model ReportedProperties {
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
 }
+
+/**
+ * ClusterJob Type supported.
+ */
+@added(Versions.v2026_02_15_preview)
+union HciJobType {
+  string,
+
+  /**
+   * Job to CVM  intent for the cluster.
+   */
+  ConfigureCVM: "ConfigureCVM",
+
+  /**
+   * Job to configure SDN (Software Defined Networking) integration for the cluster.
+   */
+  ConfigureSdnIntegration: "ConfigureSdnIntegration",
+}
+
+/**
+ * Properties for configuring SDN integration intent for the cluster.
+ */
+@added(Versions.v2026_02_15_preview)
+model HciConfigureSdnIntegrationJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureSdnIntegration;
+
+  /**
+   * Defines the customer's intent for configuring SDN integration
+   */
+  sdnIntegrationIntent: SdnIntegrationIntent;
+
+  /**
+   * A string identifier used to construct the Network Controller (NC) REST resource name. This prefix helps group and distinguish SDN-managed network components and must follow specific formatting rules.
+   */
+  @maxLength(8)
+  @pattern("^(?!.*--)(?!.*-$)[A-Za-z0-9-]{1,8}$")
+  sdnPrefix?: string;
+}
+
+/**
+ * Defines the customer's intent for updating confidential VM properties
+ */
+@added(Versions.v2026_02_15_preview)
+model HciConfigureCvmJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureCVM;
+
+  /**
+   * Defines the customer's intent for updating confidential VM properties
+   */
+  confidentialVmIntent: ConfidentialVmIntent;
+}

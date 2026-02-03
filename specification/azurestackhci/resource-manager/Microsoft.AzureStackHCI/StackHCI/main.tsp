@@ -36,6 +36,7 @@ import "./ValidatedSolutionRecipe.tsp";
 import "./edgeMachine.tsp";
 import "./edgeMachineJobs.tsp";
 import "./validateOwnershipVouchers.tsp";
+import "./clusterJobs.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
