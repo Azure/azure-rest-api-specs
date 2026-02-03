@@ -44,7 +44,8 @@ model ExecutionPlanRunProperties {
   @madeOptional(Versions.v2026_01_01_preview)
   @identifiers(#[])
   @maxItems(100)
-  testRuns?: ValidationTestRun[];
+  @typeChangedFrom(Versions.v2026_02_01_preview, ValidationTestRun[])
+  testRuns?: ValidationTestRunDetails[];
 
   @doc("The provisioning state of the execution plan run.")
   @visibility(Lifecycle.Read)
