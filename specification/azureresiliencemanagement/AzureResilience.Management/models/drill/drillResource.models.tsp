@@ -41,7 +41,7 @@ model DrillResourceProperties {
   @doc("Active location and zones of the Azure resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activeLocation?: string;
+  activeLocation?: string[];
 
   @doc("List of recovery locations and zones of the Azure resource.")
   @added(Versions.v2026_03_01_preview)
