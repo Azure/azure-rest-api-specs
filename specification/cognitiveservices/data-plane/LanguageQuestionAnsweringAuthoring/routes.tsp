@@ -36,7 +36,6 @@ interface QuestionAnsweringProjects {
   /**
    * Create or update a project.
    */
-  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   createProject is ResourceCreateOrUpdateWithJsonContentType<
     QuestionAnsweringProjectMetadata,
@@ -265,10 +264,12 @@ interface QuestionAnsweringProjects {
   /**
    * Updates the sources of a project.
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
   @sharedRoute
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
+  @patch
   updateSources is Foundations.LongRunningOperation<
     {
       /**
@@ -294,6 +295,7 @@ interface QuestionAnsweringProjects {
   /**
    * Updates the sources of a project from files.
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "endpoint has already been GA'd"
   #suppress "@azure-tools/typespec-azure-core/byos" "method overload `updateSources` already support byos with fileUri"
   #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "method overload `updateSources` already support byos with fileUri"
@@ -301,6 +303,7 @@ interface QuestionAnsweringProjects {
   @sharedRoute
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
+  @patch
   updateSourcesFromFiles is Foundations.LongRunningOperation<
     {
       @doc("This request has a multi-part body.")
@@ -343,9 +346,11 @@ interface QuestionAnsweringProjects {
   /**
    * Updates the QnAs of a project.
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
   @route("/authoring/query-knowledgebases/projects/{projectName}/qnas")
   @pollingOperation(QuestionAnsweringProjects.getUpdateQnasStatus)
+  @patch
   updateQnas is Foundations.LongRunningOperation<
     {
       /**
