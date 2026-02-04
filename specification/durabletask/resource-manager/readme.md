@@ -43,6 +43,15 @@ suppressions:
     from:
       - durabletask.json
     where:
+      - $.definitions.Scheduler
+      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties.sku
+      - $.definitions.Scheduler.properties.properties.sku
+      - $.definitions.SchedulerUpdate.properties.sku
+      - $.definition.SchedulerUpdate.properties.properties.sku
+      - $.definitions.SchedulerListResult
+      - $.definitions.SchedulerSku
+      - $.definitions.SchedulerSkuUpdate
       - $.definitions.Scheduler.properties
       - $.definitions.SchedulerUpdate.properties
       - $.definitions.SchedulerProperties
@@ -75,6 +84,15 @@ suppressions:
     from:
       - durabletask.json
     where:
+      - $.definitions.Scheduler
+      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties.sku
+      - $.definitions.Scheduler.properties.properties.sku
+      - $.definitions.SchedulerUpdate.properties.sku
+      - $.definition.SchedulerUpdate.properties.properties.sku
+      - $.definitions.SchedulerListResult
+      - $.definitions.SchedulerSku
+      - $.definitions.SchedulerSkuUpdate
       - $.definitions.Scheduler.properties
       - $.definitions.SchedulerUpdate.properties
       - $.definitions.SchedulerProperties
@@ -107,6 +125,15 @@ suppressions:
     from:
       - durabletask.json
     where:
+      - $.definitions.Scheduler
+      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties.sku
+      - $.definitions.Scheduler.properties.properties.sku
+      - $.definitions.SchedulerUpdate.properties.sku
+      - $.definition.SchedulerUpdate.properties.properties.sku
+      - $.definitions.SchedulerListResult
+      - $.definitions.SchedulerSku
+      - $.definitions.SchedulerSkuUpdate
       - $.definitions.Scheduler.properties
       - $.definitions.SchedulerUpdate.properties
       - $.definitions.SchedulerProperties
@@ -139,6 +166,15 @@ suppressions:
     from:
       - durabletask.json
     where:
+      - $.definitions.Scheduler
+      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties.sku
+      - $.definitions.Scheduler.properties.properties.sku
+      - $.definitions.SchedulerUpdate.properties.sku
+      - $.definition.SchedulerUpdate.properties.properties.sku
+      - $.definitions.SchedulerListResult
+      - $.definitions.SchedulerSku
+      - $.definitions.SchedulerSkuUpdate
       - $.definitions.Scheduler.properties
       - $.definitions.SchedulerUpdate.properties
       - $.definitions.SchedulerProperties
@@ -160,6 +196,15 @@ suppressions:
     from:
       - durabletask.json
     where:
+      - $.definitions.Scheduler
+      - $.definitions.SchedulerUpdate
+      - $.definitions.Scheduler.properties.sku
+      - $.definitions.Scheduler.properties.properties.sku
+      - $.definitions.SchedulerUpdate.properties.sku
+      - $.definition.SchedulerUpdate.properties.properties.sku
+      - $.definitions.SchedulerListResult
+      - $.definitions.SchedulerSku
+      - $.definitions.SchedulerSkuUpdate
       - $.definitions.Scheduler.properties
       - $.definitions.SchedulerUpdate.properties
       - $.definitions.SchedulerProperties
