@@ -48,7 +48,7 @@ op FoundryDataPlaneOperation<
   ErrorResponse = ApiErrorResponse
 >(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
 
-union FoundryFeaturesOptInKeys {
+enum FoundryFeaturesOptInKeys {
   container_agents_v1_preview: "ContainerAgents=V1Preview",
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
