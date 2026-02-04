@@ -4538,7 +4538,7 @@ model ManagedClusterSecurityProfileDefenderSecurityGating {
   allowSecretAccess?: boolean;
 }
 
-/** Identity item used by Defender security gating to access container registries. */
+/** Identity information used by Defender security gating to access container registries. */
 @added(Versions.v2025_10_02_preview)
 model ManagedClusterSecurityProfileDefenderSecurityGatingIdentitiesItem {
   /**
@@ -4739,7 +4739,7 @@ model ManagedClusterIngressProfile {
   applicationLoadBalancer?: ManagedClusterIngressProfileApplicationLoadBalancer;
 }
 
-/** Gateway API configuration for the managed cluster ingress profile. */
+/** Configuration for the ingress managed gateway. See https://aka.ms/k8s-gateway-api for more details. */
 @added(Versions.v2025_10_02_preview)
 model ManagedClusterIngressProfileGatewayConfiguration {
   /**
@@ -5333,7 +5333,7 @@ model ManagedClusterPoolUpgradeProfile {
   componentsByReleases?: ComponentsByRelease[];
 }
 
-/** Available upgrade version for a managed cluster pool. */
+/** Available upgrades for an AgentPool. */
 model ManagedClusterPoolUpgradeProfileUpgradesItem {
   /**
    * The Kubernetes version (major.minor.patch).
@@ -5817,7 +5817,7 @@ model AgentPoolUpgradeProfileProperties {
   latestNodeImageVersion?: string;
 }
 
-/** Available upgrade version for an agent pool. */
+/** Available upgrades for an AgentPool. */
 model AgentPoolUpgradeProfilePropertiesUpgradesItem {
   /**
    * The Kubernetes version (major.minor.patch).
