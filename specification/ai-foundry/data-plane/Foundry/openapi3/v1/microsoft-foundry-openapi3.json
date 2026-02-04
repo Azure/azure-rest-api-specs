@@ -25932,7 +25932,7 @@
           "propertyName": "type",
           "mapping": {
             "structured_outputs": "#/components/schemas/StructuredOutputsOutputItem",
-            "workflow_action": "#/components/schemas/WorkflowPreviewActionOutputItem",
+            "workflow_action": "#/components/schemas/WorkflowActionOutputItem",
             "oauth_consent_request": "#/components/schemas/OAuthConsentRequestOutputItem",
             "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource",
             "output_message": "#/components/schemas/OpenAI.OutputItemOutputMessage",
@@ -33697,36 +33697,7 @@
         ],
         "description": "Weekly recurrence schedule."
       },
-      "WorkflowAgentDefinition": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": [
-              "workflow"
-            ]
-          },
-          "workflow": {
-            "type": "string",
-            "description": "The CSDL YAML definition of the workflow."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AgentDefinition"
-          }
-        ],
-        "description": "The workflow agent definition.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "WorkflowAgents=V1Preview"
-          ]
-        }
-      },
-      "WorkflowPreviewActionOutputItem": {
+      "WorkflowActionOutputItem": {
         "type": "object",
         "required": [
           "type",
@@ -33773,6 +33744,35 @@
             "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
+      },
+      "WorkflowAgentDefinition": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "workflow"
+            ]
+          },
+          "workflow": {
+            "type": "string",
+            "description": "The CSDL YAML definition of the workflow."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinition"
+          }
+        ],
+        "description": "The workflow agent definition.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "WorkflowAgents=V1Preview"
+          ]
+        }
       },
       "integer": {
         "type": "integer",

@@ -153,7 +153,7 @@ namespace Azure.AI.Projects {
     output: unknown;
   }
 
-  model WorkflowPreviewActionOutputItem extends OpenAI.OutputItem {
+  model WorkflowActionOutputItem extends OpenAI.OutputItem {
     type: "workflow_action";
 
     @doc("The kind of CSDL action (e.g., 'SetVariable', 'InvokeAzureAgent').")
