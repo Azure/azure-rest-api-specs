@@ -1,7 +1,7 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
 import { readFile } from "fs/promises";
 import { globby } from "globby";
-import path, { basename, dirname } from "path";
+import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
 import stripAnsi from "strip-ansi";
 import { RuleResult } from "../rule-result.js";
