@@ -1,10 +1,10 @@
-import "./supportedmodel.models.tsp";
+import "./supportedagentmodel.models.tsp";
 
 namespace Microsoft.App;
 
 /** Supported AI model properties */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource. No provisioning state provided."
-model SupportedModelProperties {
+model SupportedAgentModelProperties {
   /** The provider name (e.g., MicrosoftFoundry, Anthropic) */
   provider?: string;
 

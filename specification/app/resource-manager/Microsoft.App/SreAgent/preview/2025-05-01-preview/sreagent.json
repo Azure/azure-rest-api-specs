@@ -40,17 +40,17 @@
   },
   "tags": [
     {
-      "name": "SupportedModels"
+      "name": "SupportedAgentModels"
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/supportedModels": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/supportedAgentModels": {
       "get": {
-        "operationId": "SupportedModels_ListByLocation",
+        "operationId": "SupportedAgentModels_ListByLocation",
         "tags": [
-          "SupportedModels"
+          "SupportedAgentModels"
         ],
-        "description": "List SupportedModel resources by SubscriptionLocationResource",
+        "description": "List SupportedAgentModel resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -66,7 +66,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SupportedModelListResult"
+              "$ref": "#/definitions/SupportedAgentModelListResult"
             }
           },
           "default": {
@@ -77,7 +77,7 @@
           }
         },
         "x-ms-examples": {
-          "SupportedModels_ListByLocation": {
+          "SupportedAgentModels_ListByLocation": {
             "$ref": "./examples/SupportedModels_ListByLocation.json"
           }
         },
@@ -88,12 +88,12 @@
     }
   },
   "definitions": {
-    "SupportedModel": {
+    "SupportedAgentModel": {
       "type": "object",
       "description": "Collection of supported AI models",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SupportedModelProperties",
+          "$ref": "#/definitions/SupportedAgentModelProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -103,15 +103,15 @@
         }
       ]
     },
-    "SupportedModelListResult": {
+    "SupportedAgentModelListResult": {
       "type": "object",
-      "description": "The response of a SupportedModel list operation.",
+      "description": "The response of a SupportedAgentModel list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SupportedModel items on this page",
+          "description": "The SupportedAgentModel items on this page",
           "items": {
-            "$ref": "#/definitions/SupportedModel"
+            "$ref": "#/definitions/SupportedAgentModel"
           }
         },
         "nextLink": {
@@ -124,7 +124,7 @@
         "value"
       ]
     },
-    "SupportedModelProperties": {
+    "SupportedAgentModelProperties": {
       "type": "object",
       "description": "Supported AI model properties",
       "properties": {

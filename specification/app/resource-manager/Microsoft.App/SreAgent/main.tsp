@@ -1,6 +1,6 @@
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./supportedmodel.tsp";
+import "./supportedagentmodel.tsp";
 
 using Versioning;
 using Azure.ResourceManager;
