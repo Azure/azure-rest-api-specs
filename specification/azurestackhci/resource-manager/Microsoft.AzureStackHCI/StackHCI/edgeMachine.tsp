@@ -14,6 +14,7 @@ using Azure.Core;
 namespace Microsoft.AzureStackHCI;
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("EdgeMachine details.")
 model EdgeMachine
   is Azure.ResourceManager.TrackedResource<EdgeMachineProperties> {
@@ -27,6 +28,7 @@ model EdgeMachine
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @armResourceOperations
 interface EdgeMachines {
   @doc("Get an edge machine.")
@@ -54,6 +56,7 @@ interface EdgeMachines {
 ////////////////////// models //////////////////////
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Edge Machine Kind.")
 union EdgeMachineKind {
   string,
@@ -66,6 +69,7 @@ union EdgeMachineKind {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Properties for edge machine.")
 model EdgeMachineProperties {
   @doc("Edge Machine type.")
@@ -146,6 +150,7 @@ model EdgeMachineProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Model for patching edge machine.")
 model EdgeMachinePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -156,6 +161,7 @@ model EdgeMachinePatch {
  * Details for device provisioning.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model ProvisioningDetails {
   @doc("Operating system profile.")
   osProfile: OsProvisionProfile;
@@ -170,6 +176,7 @@ model ProvisioningDetails {
  * Details for ownership voucher.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model OwnershipVoucherDetails {
   @doc("Ownership voucher in base64 encoded format")
   @secret
@@ -183,6 +190,7 @@ model OwnershipVoucherDetails {
  * Type of owner key in the voucher
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 union OwnerKeyType {
   string,
 
@@ -191,6 +199,7 @@ union OwnerKeyType {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("operation detail.")
 model OperationDetail {
   @doc("operation name.")
@@ -223,6 +232,7 @@ model OperationDetail {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Overall connectivity status for the machine resource.")
 union EdgeMachineConnectivityStatus {
   string,
@@ -238,6 +248,7 @@ union EdgeMachineConnectivityStatus {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Site Details consists of common configurations.")
 model SiteDetails {
   @doc("Site resource Id to be set during Edge Machine resource creation.")
@@ -248,10 +259,11 @@ model SiteDetails {
   ]>;
 
   @doc("Edge Device configuration received from site common configuration.")
-  deviceConfiguration?: DeviceConfiguration;
+  deviceConfiguration?: TargetDeviceConfiguration;
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("OS State")
 union EdgeMachineState {
   string,
@@ -285,6 +297,7 @@ union EdgeMachineState {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Reported properties for edge machine.")
 model EdgeMachineReportedProperties {
   @doc("Last time data reported.")
@@ -317,6 +330,7 @@ model EdgeMachineReportedProperties {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("NetworkProfile of edge machine.")
 model EdgeMachineNetworkProfile {
   @doc("List of Network Interface Card (NIC) Details of edge machine.")
@@ -331,6 +345,7 @@ model EdgeMachineNetworkProfile {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("Network Interface Card (NIC) Details of edge machine.")
 model EdgeMachineNicDetail {
   /**
@@ -434,6 +449,7 @@ model EdgeMachineNicDetail {
  * OS configurations for HCI device.
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model OsProfile {
   /**
    * The boot type of the device. e.g. UEFI, Legacy etc
@@ -488,6 +504,7 @@ model OsProfile {
  * Hardware profile for the machine
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model HardwareProfile {
   /**
    * Number of cpu cores in the machine
@@ -533,6 +550,7 @@ model HardwareProfile {
 }
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 @doc("StorageProfile of edge machine.")
 model StorageProfile {
   @doc("Number of storage disks in the device with $CanPool as true.")
@@ -543,6 +561,7 @@ model StorageProfile {
  * details of validation failure
  */
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_02_01)
 model ErrorDetailModel {
   /**
    * Exception details while installing extension.

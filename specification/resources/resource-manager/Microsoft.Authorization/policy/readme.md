@@ -26,7 +26,20 @@ These are the global settings for the Resource API.
 title: PolicyClient
 description: Policy Client
 openapi-type: arm
-tag: package-policy-2025-03-stable
+tag: package-policy-2025-11-stable
+```
+
+### Tag: package-policy-2025-11-stable
+
+These settings apply only when `--tag=package-policy-2025-11-stable` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2025-11-stable'
+input-file:
+  - stable/2025-11-01/openapi.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2025-03-stable
@@ -35,12 +48,7 @@ These settings apply only when `--tag=package-policy-2025-03-stable` is specifie
 
 ```yaml $(tag) == 'package-policy-2025-03-stable'
 input-file:
-  - stable/2025-03-01/policyAssignments.json
-  - stable/2025-03-01/policyDefinitions.json
-  - stable/2025-03-01/policyDefinitionVersions.json
-  - stable/2025-03-01/policySetDefinitions.json
-  - stable/2025-03-01/policySetDefinitionVersions.json
-  - stable/2025-03-01/policyTokens.json
+  - stable/2025-03-01/openapi.json
 
 # Needed when there is more than one input file
 override-info:
@@ -457,10 +465,19 @@ directive:
     from: policySetDefinitions.json
     reason: policy set definition under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
+    from: openapi.json
+    reason: policy set definition under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
     from: policyDefinitions.json
     reason: policy definition under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
+    from: openapi.json
+    reason: policy definition under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
     from: policyAssignments.json
+    reason: policy assignment under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: openapi.json
     reason: policy assignment under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
     from: policyExemptions.json
@@ -470,43 +487,86 @@ directive:
     from: policyAssignments.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
+    from: openapi.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
     from: policyDefinitions.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: openapi.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyDefinitionVersions.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
+    from: openapi.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
     from: policySetDefinitions.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: openapi.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policySetDefinitionVersions.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
+    from: openapi.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
     from: policyExemptions.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: openapi.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyVariables.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
+    from: openapi.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
     from: policyVariableValues.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: openapi.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
     from: policyAssignments.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
+    from: openapi.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
     from: policyDefinitions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: openapi.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
     from: policyDefinitionVersions.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
+    from: openapi.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
     from: policySetDefinitions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: openapi.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
     from: policySetDefinitionVersions.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
+    from: openapi.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
     from: policyExemptions.json
+    where: $.definitions.PolicyExemption.properties
+    reason: Currently systemData is not allowed
+  - suppress: BodyTopLevelProperties
+    from: openapi.json
     where: $.definitions.PolicyExemption.properties
     reason: Currently systemData is not allowed
   - suppress: OperationsAPIImplementation
@@ -529,13 +589,25 @@ directive:
     from: policyDefinitions.json
     reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
   - suppress: TopLevelResourcesListByResourceGroup
+    from: openapi.json
+    reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
     from: policyVariables.json
+    reason: Policy variables are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: openapi.json
     reason: Policy variables are a proxy resource that is only usable on subscriptions or management groups
   - suppress: TopLevelResourcesListByResourceGroup
     from: policyVariableValues.json
     reason: Policy variable values are a proxy resource that is only usable on subscriptions or management groups
   - suppress: TopLevelResourcesListByResourceGroup
+    from: openapi.json
+    reason: Policy variable values are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
     from: policySetDefinitions.json
+    reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: openapi.json
     reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
   - suppress: PathForTrackedResourceTypes
     from: policyAssignments.json

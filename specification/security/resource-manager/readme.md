@@ -141,6 +141,8 @@ These settings apply only when `--tag=package-preview-2025-09-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-09-01-preview'
 input-file:
+  - Microsoft.Security/preview/2025-09-01-preview/defenderForStorageSettings.json
+  - Microsoft.Security/preview/2025-09-01-preview/operations.json
   - Microsoft.Security/preview/2025-09-01-preview/privateLinks.json
 ```
 
@@ -664,6 +666,7 @@ input-file:
 - Microsoft.Security/preview/2024-08-01-preview/securityConnectors.json
 - Microsoft.Security/preview/2025-05-04-preview/assessmentMetadata.json
 - Microsoft.Security/preview/2025-05-04-preview/assessments.json
+- Microsoft.Security/preview/2025-09-01-preview/defenderForStorageSettings.json
 - Microsoft.Security/preview/2025-11-01-preview/securityConnectorsDevOps.json
 - Microsoft.Security/preview/2025-10-01-preview/operations.json
 - Microsoft.Security/preview/2025-10-01-preview/operationResults.json
@@ -690,7 +693,6 @@ input-file:
 - Microsoft.Security/stable/2024-08-01/securityStandards.json
 - Microsoft.Security/stable/2024-08-01/standardAssignments.json
 - Microsoft.Security/stable/2024-08-01/customRecommedations.json
-- Microsoft.Security/stable/2025-06-01/defenderForStorageSettings.json
 - Microsoft.Security/stable/2026-01-01/privateLinks.json
 
 # Autorest suppressions
