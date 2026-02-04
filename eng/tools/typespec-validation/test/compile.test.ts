@@ -316,6 +316,45 @@ describe("compile", function () {
     await expect(new CompileRule().execute(mockFolder)).rejects.toThrow("Invalid path");
   });
 
+  it("should handle Windows-style paths with backslashes correctly", async function () {
+    // This test verifies that Windows-style paths (with backslashes) from tsp compile
+    // are handled correctly on all platforms (Windows, Linux, Mac).
+    // The fix uses path.win32.normalize and path.win32.sep to ensure consistent behavior.
+    //
+    // Without the fix (using path.sep on Linux/Mac), this test would fail because:
+    // - path.sep would be "/" not "\"
+    // - The split would fail to separate path components
+    // - The globby pattern would be malformed
+    const windowsStylePath = "data-plane\\Azure.Foo\\preview\\2022-11-01-preview\\foo.json";
+
+    runNpmSpy.mockImplementation(
+      async (): Promise<[Error | null, string, string]> =>
+        Promise.resolve([null, windowsStylePath, ""]),
+    );
+
+    // Track the pattern passed to globby to verify correct path handling
+    let capturedPattern = "";
+    vi.mocked(globby.globby).mockImplementation((pattern) => {
+      capturedPattern = pattern as string;
+      return Promise.resolve([swaggerPath]);
+    });
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    const result = await new CompileRule().execute(mockFolder);
+    
+    // Verify the test passed
+    expect(result.success).toBe(true);
+    
+    // Verify the pattern was created with posix separators (forward slashes)
+    // This proves that path.win32.sep was used to split the Windows path correctly
+    expect(capturedPattern).toContain("/");
+    expect(capturedPattern).not.toContain("\\");
+    expect(capturedPattern).toMatch(/data-plane\/Azure\.Foo\/\*\*\/foo\.json/);
+  });
+
   it("should skip git diff check if compile fails", async function () {
     runNpmSpy.mockImplementation(
       async (args: string[]): Promise<[Error | null, string, string]> => {
