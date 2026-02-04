@@ -36,7 +36,7 @@ alias ServiceGroup = Extension.ExternalResource<
   TargetNamespace = "Microsoft.Management",
   ResourceType = "serviceGroups",
   ResourceParameterName = "servicegroupName",
-  NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$",
+  NamePattern = "^[a-zA-Z0-9\\-_().]{1,90}$",
   Description = "The name of the service group",
   ParentType = "Tenant"
 >;
