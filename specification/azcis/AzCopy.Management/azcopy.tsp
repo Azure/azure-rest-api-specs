@@ -17,20 +17,19 @@ model AzCopyResourceProperties {
   @doc("Specifies the azcopy command to run. Acceptable values: cp, copy. Default: cp.")
   command: CommandType;
 
-  @doc("The SAS token for the source object. This should be the full URL. This can target an account, container, virtual directory, or blob.")
-  source: string;
+  @doc("The storage resource URI for the source object. This can target an account, container, virtual directory, or blob.")
+  source?: string;
 
-  @doc("The SAS token for the destination object. This should be the full URL. This can target an account, container, virtual directory, or blob.")
-  destination: string;
+  @doc("The storage resource URI for the destination object. This can target an account, container, virtual directory, or blob.")
+  destination?: string;
 
-  // New secret properties added for testing in new version so as to not break existing clients.
-  @doc("The SAS token for the source object, marked secret. This should be the full URL. This can target an account, container, virtual directory, or blob.")
+  @doc("The full SAS URI for the source object, marked secret. This can target an account, container, virtual directory, or blob.")
   @secret
-  sourceSas?: string;
+  sourceSasUri?: string;
 
-  @doc("The SAS token for the destination object, marked secret. This should be the full URL. This can target an account, container, virtual directory, or blob.")
+  @doc("The full SAS URI for the destination object, marked secret. This can target an account, container, virtual directory, or blob.")
   @secret
-  destinationSas?: string;
+  destinationSasUri?: string;
 
   @doc("Source and destination combo. Any combination of Blob and/or File side by side (ex. BlobBlob, FileBlob).")
   fromTo: FromToType;
