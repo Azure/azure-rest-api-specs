@@ -344,10 +344,10 @@ describe("compile", function () {
     );
 
     const result = await new CompileRule().execute(mockFolder);
-    
+
     // Verify the test passed
     expect(result.success).toBe(true);
-    
+
     // Verify the pattern was created with posix separators (forward slashes)
     // This proves that path.win32.sep was used to split the Windows path correctly
     expect(capturedPattern).toContain("/");
