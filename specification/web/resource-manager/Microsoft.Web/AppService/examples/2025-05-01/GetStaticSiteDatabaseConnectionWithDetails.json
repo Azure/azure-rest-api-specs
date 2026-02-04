@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "name": "testStaticSite0",
+    "api-version": "2025-05-01",
+    "databaseConnectionName": "default",
+    "resourceGroupName": "rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Web/staticSites/databaseConnections",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0/databaseConnections/default",
+        "properties": {
+          "configurationFiles": [
+            {
+              "type": "configuration",
+              "contents": "base64encodeddatabaseconfiguration",
+              "fileName": "staticwebapp.database.config.json"
+            },
+            {
+              "type": "graphqlschema",
+              "contents": "base64encodeddatabasegraphqlschema",
+              "fileName": "staticwebapp.database.schema.gql"
+            }
+          ],
+          "connectionIdentity": "SystemAssigned",
+          "connectionString": "AccountEndpoint=https://exampleDatabaseName.documents.azure.com:443/;Database=mydb;",
+          "region": "West US 2",
+          "resourceId": "/subscription/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/databaseRG/providers/Microsoft.DocumentDB/databaseAccounts/exampleDatabaseName"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "StaticSites_GetDatabaseConnectionWithDetails",
+  "title": "Get details of database connections for the static site."
+}
