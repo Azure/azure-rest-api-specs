@@ -968,6 +968,9 @@ enum AccessTier {
   Cool,
   Premium,
   Cold,
+
+  @added(Versions.v2025_08_01)
+  Smart,
 }
 
 /**
