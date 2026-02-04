@@ -1242,7 +1242,7 @@ model FirewallDeploymentProperties {
   panEtag?: string;
 
   /**
-   * Firewall SKU type
+   * Firewall SKU type, Default will be STANDARD.
    */
   @added(Versions.v2026_01_26_preview)
   firewallSku?: FirewallSkuType = "STANDARD";
