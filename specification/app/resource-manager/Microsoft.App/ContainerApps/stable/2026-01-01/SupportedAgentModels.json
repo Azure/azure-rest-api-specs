@@ -12,14 +12,14 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/supportedModels": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/supportedAgentModels": {
       "get": {
         "tags": [
-          "SupportedModels"
+          "SupportedAgentModels"
         ],
         "summary": "List supported AI models by location.",
         "description": "Lists supported AI models in a given Azure region.",
-        "operationId": "SupportedModels_Get",
+        "operationId": "SupportedAgentModels_Get",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -35,7 +35,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SupportedModelsCollection"
+              "$ref": "#/definitions/SupportedAgentModelsCollection"
             }
           },
           "default": {
@@ -49,15 +49,15 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SupportedModels_Get": {
-            "$ref": "./examples/SupportedModels_Get.json"
+          "SupportedAgentModels_Get": {
+            "$ref": "./examples/SupportedAgentModels_ListByLocation.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "SupportedModelProperties": {
+    "SupportedAgentModelProperties": {
       "description": "Supported AI model properties.",
       "type": "object",
       "properties": {
@@ -75,7 +75,7 @@
         }
       }
     },
-    "SupportedModel": {
+    "SupportedAgentModel": {
       "description": "A supported AI model in a region.",
       "type": "object",
       "allOf": [
@@ -89,11 +89,11 @@
           "description": "Region of the supported model."
         },
         "properties": {
-          "$ref": "#/definitions/SupportedModelProperties"
+          "$ref": "#/definitions/SupportedAgentModelProperties"
         }
       }
     },
-    "SupportedModelsCollection": {
+    "SupportedAgentModelsCollection": {
       "description": "Collection of supported AI models in the location.",
       "required": [
         "value"
@@ -104,7 +104,7 @@
           "description": "Collection of supported models.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SupportedModel"
+            "$ref": "#/definitions/SupportedAgentModel"
           }
         },
         "nextLink": {
