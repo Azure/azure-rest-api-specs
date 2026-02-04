@@ -2,6 +2,7 @@ import "./common.tsp";
 import "./validationExecutionPlan.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Validate;
@@ -12,11 +13,26 @@ model ValidationTestRun is ProxyResource<ValidationTestRunProperties> {
   ...ResourceNameParameter<ValidationTestRun>;
 }
 
+@doc("Validation Test Run represents execution instance(s) of a Validation Test instance under execution plan.")
+@added(Versions.v2026_02_01_preview)
+model ValidationTestRunDetails {
+  @doc("The unique identifier for the test run.")
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  @doc("The name of the test run.")
+  name?: string;
+
+  @doc("The properties of the test run.")
+  properties?: ValidationTestRunProperties;
+}
+
 @doc("Validation Test Run properties.")
 model ValidationTestRunProperties {
   @doc("The overall status of the test run.")
   @visibility(Lifecycle.Read)
-  status: ValidationTestRunStatus;
+  @madeOptional(Versions.v2026_01_01_preview)
+  status?: ValidationTestRunStatus;
 
   @doc("The state of the test run.")
   @visibility(Lifecycle.Read)
@@ -24,18 +40,22 @@ model ValidationTestRunProperties {
 
   @doc("The start timestamp of the test run.")
   @visibility(Lifecycle.Read)
-  startTimestampInUtc: utcDateTime;
+  @madeOptional(Versions.v2026_01_01_preview)
+  startTimestampInUtc?: utcDateTime;
 
   @doc("The reported timestamp of the test run.")
   @visibility(Lifecycle.Read)
-  reportedTimestampInUtc: utcDateTime;
+  @madeOptional(Versions.v2026_01_01_preview)
+  reportedTimestampInUtc?: utcDateTime;
 
   @doc("The end timestamp of the test run.")
   @visibility(Lifecycle.Read)
-  endTimestampInUtc: utcDateTime;
+  @madeOptional(Versions.v2026_01_01_preview)
+  endTimestampInUtc?: utcDateTime;
 
   @doc("Validation test run inputs json")
-  inputsJson: string;
+  @madeOptional(Versions.v2026_02_01_preview)
+  inputsJson?: string;
 
   @doc("Detailed pass information when the test passes.")
   @visibility(Lifecycle.Read)
@@ -80,11 +100,13 @@ union ValidationTestRunStatus {
 model ValidationTestPassDetails {
   @doc("Result code categorizing the type of pass.")
   @visibility(Lifecycle.Read)
-  resultCode: string;
+  @madeOptional(Versions.v2026_01_01_preview)
+  resultCode?: string;
 
   @doc("test name which passed.")
   @visibility(Lifecycle.Read)
-  testName: string;
+  @madeOptional(Versions.v2026_01_01_preview)
+  testName?: string;
 
   @doc("Detailed information about the passed test.")
   @visibility(Lifecycle.Read)
@@ -95,11 +117,13 @@ model ValidationTestPassDetails {
 model ValidationTestFailureDetails {
   @doc("Error code categorizing the type of failure.")
   @visibility(Lifecycle.Read)
-  errorCode: string;
+  @madeOptional(Versions.v2026_01_01_preview)
+  errorCode?: string;
 
   @doc("Human-readable error message describing the failure.")
   @visibility(Lifecycle.Read)
-  errorMessage: string;
+  @madeOptional(Versions.v2026_01_01_preview)
+  errorMessage?: string;
 
   @doc("Detailed information about the failure.")
   @visibility(Lifecycle.Read)
