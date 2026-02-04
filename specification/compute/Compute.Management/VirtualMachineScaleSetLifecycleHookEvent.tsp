@@ -21,7 +21,7 @@ model VMScaleSetLifecycleHookEvent
   is ProxyResource<VMScaleSetLifecycleHookEventProperties> {
   ...ResourceNameParameter<
     Resource = VMScaleSetLifecycleHookEvent,
-    KeyName = "lifecycleHookEvent",
+    KeyName = "lifecycleHookEventName",
     SegmentName = "lifecycleHookEvents",
     NamePattern = ""
   >;

@@ -6664,7 +6664,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents/{lifecycleHookEvent}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/lifecycleHookEvents/{lifecycleHookEventName}": {
       "get": {
         "operationId": "VirtualMachineScaleSetLifeCycleHookEvents_Get",
         "tags": [
@@ -6689,7 +6689,7 @@
             "type": "string"
           },
           {
-            "name": "lifecycleHookEvent",
+            "name": "lifecycleHookEventName",
             "in": "path",
             "description": "The name of the VMScaleSetLifecycleHookEvent",
             "required": true,
@@ -6740,7 +6740,7 @@
             "type": "string"
           },
           {
-            "name": "lifecycleHookEvent",
+            "name": "lifecycleHookEventName",
             "in": "path",
             "description": "The name of the VMScaleSetLifecycleHookEvent",
             "required": true,
@@ -14987,7 +14987,8 @@
       "type": "string",
       "description": "The action that will be applied to a target resource in the virtual machine scale set lifecycle hook event if the platform does not receive a response from the customer for the target resource before waitUntil.",
       "enum": [
-        "Approve"
+        "Approve",
+        "Reject"
       ],
       "x-ms-enum": {
         "name": "LifecycleHookAction",
@@ -14997,6 +14998,11 @@
             "name": "Approve",
             "value": "Approve",
             "description": "The lifecycle hook of a target resource in a lifecycle hook event will be approved."
+          },
+          {
+            "name": "Reject",
+            "value": "Reject",
+            "description": "The lifecycle hook of a target resource in a lifecycle hook event will be rejected."
           }
         ]
       }
@@ -15006,6 +15012,7 @@
       "description": "Approval status of a target resource in a virtual machine scale set lifecycle hook event.",
       "enum": [
         "Approved",
+        "Rejected",
         "Waiting"
       ],
       "x-ms-enum": {
@@ -15016,6 +15023,11 @@
             "name": "Approved",
             "value": "Approved",
             "description": "The lifecycle hook for the target resource is approved."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The lifecycle hook for the target resource is rejected."
           },
           {
             "name": "Waiting",

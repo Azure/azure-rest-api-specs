@@ -1156,6 +1156,9 @@ union LifecycleHookAction {
 
   /** The lifecycle hook of a target resource in a lifecycle hook event will be approved. */
   Approve: "Approve",
+
+  /** The lifecycle hook of a target resource in a lifecycle hook event will be rejected. */
+  Reject: "Reject",
 }
 
 /**
@@ -1200,6 +1203,9 @@ union LifecycleHookActionState {
 
   /** The lifecycle hook for the target resource is approved. */
   Approved: "Approved",
+
+  /** The lifecycle hook for the target resource is rejected. */
+  Rejected: "Rejected",
 
   /** The lifecycle hook for the target resource is waiting for approval. */
   Waiting: "Waiting",
