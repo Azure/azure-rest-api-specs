@@ -80,6 +80,7 @@ op CreateOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
+@patch
 op UpdateOperation<
   TResource extends TypeSpec.Reflection.Model,
   TResponse
