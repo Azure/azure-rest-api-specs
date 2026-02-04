@@ -268,6 +268,9 @@ suppressions:
     - $.paths["/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/clusters"].get
     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions"].get
     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions"].get
+  
+  - code: ValidFormats
+    reason: duration-constant is an expected format to the .NET SDK generator
 ```
 
 ---
