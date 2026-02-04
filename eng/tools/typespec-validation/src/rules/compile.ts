@@ -89,7 +89,11 @@ export class CompileRule implements Rule {
           // Necessary to handle multi-project specs like keyvault.
           //
           // Globby only accepts patterns like posix paths.
-          const pattern = path.posix.join(...outputFolder.split(path.win32.sep), "**", outputFilename);
+          const pattern = path.posix.join(
+            ...outputFolder.split(path.win32.sep),
+            "**",
+            outputFilename,
+          );
           const allSwaggers = (await globby(pattern, { ignore: ["**/examples/**"] })).map(
             // Globby always returns posix paths
             (p) => normalize(p),
