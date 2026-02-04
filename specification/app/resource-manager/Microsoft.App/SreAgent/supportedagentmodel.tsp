@@ -2,7 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./supportedmodel.models.tsp";
+import "./supportedagentmodel.models.tsp";
 
 using Azure.ResourceManager;
 
@@ -12,15 +12,15 @@ namespace Microsoft.App;
 
 /** Collection of supported AI models */
 @parentResource(SubscriptionLocationResource)
-model SupportedModel is ProxyResource<SupportedModelProperties> {
+model SupportedAgentModel is ProxyResource<SupportedAgentModelProperties> {
   ...ResourceNameParameter<
-    Resource = SupportedModel,
-    KeyName = "supportedModelName",
-    SegmentName = "supportedModels"
+    Resource = SupportedAgentModel,
+    KeyName = "supportedAgentModelName",
+    SegmentName = "supportedAgentModels"
   >;
 }
 
 @armResourceOperations
-interface SupportedModels {
-  listByLocation is ArmResourceListByParent<SupportedModel>;
+interface SupportedAgentModels {
+  listByLocation is ArmResourceListByParent<SupportedAgentModel>;
 }

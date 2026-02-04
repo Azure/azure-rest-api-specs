@@ -5,7 +5,7 @@ import "./agent.tsp";
 import "./agentconnector.tsp";
 import "./agentspace.tsp";
 import "./agentspaceconnector.tsp";
-import "./supportedmodel.tsp";
+import "./supportedagentmodel.tsp";
 
 using Versioning;
 using Azure.ResourceManager;

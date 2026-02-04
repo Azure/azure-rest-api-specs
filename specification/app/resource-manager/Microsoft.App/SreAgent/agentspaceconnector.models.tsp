@@ -10,16 +10,5 @@ model AgentSpaceConnectorProperties {
   ...Connector;
 
   /** The type of the data connector */
-  dataConnectorType?: AgentSpaceConnectorType;
-}
-
-/** Agent Space connector type */
-union AgentSpaceConnectorType {
-  string,
-
-  /** Kusto connector type */
-  Kusto: "Kusto",
-
-  /** ICM connector type */
-  Icm: "Icm",
+  dataConnectorType?: string;
 }

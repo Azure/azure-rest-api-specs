@@ -52,7 +52,7 @@
       "name": "AgentSpacesConnectors"
     },
     {
-      "name": "SupportedModels"
+      "name": "SupportedAgentModels"
     }
   ],
   "paths": {
@@ -134,13 +134,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/supportedModels": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/supportedAgentModels": {
       "get": {
-        "operationId": "SupportedModels_ListByLocation",
+        "operationId": "SupportedAgentModels_ListByLocation",
         "tags": [
-          "SupportedModels"
+          "SupportedAgentModels"
         ],
-        "description": "List SupportedModel resources by SubscriptionLocationResource",
+        "description": "List SupportedAgentModel resources by SubscriptionLocationResource",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -156,7 +156,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SupportedModelListResult"
+              "$ref": "#/definitions/SupportedAgentModelListResult"
             }
           },
           "default": {
@@ -167,8 +167,8 @@
           }
         },
         "x-ms-examples": {
-          "SupportedModels_ListByLocation": {
-            "$ref": "./examples/SupportedModels_ListByLocation.json"
+          "SupportedAgentModels_ListByLocation": {
+            "$ref": "./examples/SupportedAgentModels_ListByLocation.json"
           }
         },
         "x-ms-pageable": {
@@ -2053,18 +2053,6 @@
           "$ref": "#/definitions/IncidentManagementConfiguration",
           "description": "Incident management configurations"
         },
-        "permissions": {
-          "type": "array",
-          "description": "The list of user permissions for the agent",
-          "items": {
-            "$ref": "#/definitions/UserIdentityPermission"
-          },
-          "x-ms-identifiers": [
-            "objectId",
-            "tenantId",
-            "role"
-          ]
-        },
         "upgradeChannel": {
           "$ref": "#/definitions/UpgradeChannel",
           "description": "The upgrade channel of the agent"
@@ -2255,33 +2243,9 @@
           "additionalProperties": {}
         },
         "dataConnectorType": {
-          "$ref": "#/definitions/AgentSpaceConnectorType",
+          "type": "string",
           "description": "The type of the data connector"
         }
-      }
-    },
-    "AgentSpaceConnectorType": {
-      "type": "string",
-      "description": "Agent Space connector type",
-      "enum": [
-        "Kusto",
-        "Icm"
-      ],
-      "x-ms-enum": {
-        "name": "AgentSpaceConnectorType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Kusto",
-            "value": "Kusto",
-            "description": "Kusto connector type"
-          },
-          {
-            "name": "Icm",
-            "value": "Icm",
-            "description": "ICM connector type"
-          }
-        ]
       }
     },
     "AgentSpaceListResult": {
@@ -2767,12 +2731,12 @@
         }
       }
     },
-    "SupportedModel": {
+    "SupportedAgentModel": {
       "type": "object",
       "description": "Collection of supported AI models",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SupportedModelProperties",
+          "$ref": "#/definitions/SupportedAgentModelProperties",
           "description": "The resource-specific properties for this resource."
         }
       },
@@ -2782,15 +2746,15 @@
         }
       ]
     },
-    "SupportedModelListResult": {
+    "SupportedAgentModelListResult": {
       "type": "object",
-      "description": "The response of a SupportedModel list operation.",
+      "description": "The response of a SupportedAgentModel list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The SupportedModel items on this page",
+          "description": "The SupportedAgentModel items on this page",
           "items": {
-            "$ref": "#/definitions/SupportedModel"
+            "$ref": "#/definitions/SupportedAgentModel"
           }
         },
         "nextLink": {
@@ -2803,7 +2767,7 @@
         "value"
       ]
     },
-    "SupportedModelProperties": {
+    "SupportedAgentModelProperties": {
       "type": "object",
       "description": "Supported AI model properties",
       "properties": {
@@ -2811,9 +2775,21 @@
           "type": "string",
           "description": "The provider name (e.g., MicrosoftFoundry, Anthropic)"
         },
+        "providerDisplayName": {
+          "type": "string",
+          "description": "The display name of the provider (e.g., Microsoft Foundry, Anthropic)"
+        },
         "model": {
           "type": "string",
           "description": "The model name (e.g., gpt-5.2, claude-sonnet-4-5)"
+        },
+        "modelDisplayName": {
+          "type": "string",
+          "description": "The display name of the model (e.g., GPT-5.2, Claude Sonnet 4.5)"
+        },
+        "multiplier": {
+          "type": "string",
+          "description": "Billing multiplier for the model (e.g., 1x, 2x)"
         },
         "default": {
           "type": "boolean",
@@ -2899,58 +2875,6 @@
           "type": "string",
           "description": "The localized usage name"
         }
-      }
-    },
-    "UserIdentityPermission": {
-      "type": "object",
-      "description": "User identity permission properties",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the user"
-        },
-        "objectId": {
-          "type": "string",
-          "description": "The object ID of the user identity"
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenant ID of the user identity"
-        },
-        "role": {
-          "$ref": "#/definitions/UserIdentityPermissionRole",
-          "description": "The role assigned to the user"
-        }
-      }
-    },
-    "UserIdentityPermissionRole": {
-      "type": "string",
-      "description": "User identity permission role",
-      "enum": [
-        "Author",
-        "StandardUser",
-        "Reader"
-      ],
-      "x-ms-enum": {
-        "name": "UserIdentityPermissionRole",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Author",
-            "value": "Author",
-            "description": "Author role"
-          },
-          {
-            "name": "StandardUser",
-            "value": "StandardUser",
-            "description": "Standard user role"
-          },
-          {
-            "name": "Reader",
-            "value": "Reader",
-            "description": "Reader role"
-          }
-        ]
       }
     }
   },

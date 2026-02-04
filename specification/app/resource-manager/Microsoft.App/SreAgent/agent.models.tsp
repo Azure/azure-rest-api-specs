@@ -55,10 +55,6 @@ model AgentProperties {
   /** Incident management configurations */
   incidentManagementConfiguration?: IncidentManagementConfiguration;
 
-  /** The list of user permissions for the agent */
-  @identifiers(#["objectId", "tenantId", "role"])
-  permissions?: UserIdentityPermission[];
-
   /** The upgrade channel of the agent */
   upgradeChannel?: UpgradeChannel;
 
@@ -215,35 +211,6 @@ model ApplicationInsightsConfiguration {
   /** The connection string for the Application Insights resource */
   @secret
   connectionString?: string;
-}
-
-/** User identity permission properties */
-model UserIdentityPermission {
-  /** The display name of the user */
-  displayName?: string;
-
-  /** The object ID of the user identity */
-  objectId?: string;
-
-  /** The tenant ID of the user identity */
-  tenantId?: string;
-
-  /** The role assigned to the user */
-  role?: UserIdentityPermissionRole;
-}
-
-/** User identity permission role */
-union UserIdentityPermissionRole {
-  string,
-
-  /** Author role */
-  Author: "Author",
-
-  /** Standard user role */
-  StandardUser: "StandardUser",
-
-  /** Reader role */
-  Reader: "Reader",
 }
 
 /** Collection of usage information */
