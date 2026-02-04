@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./models.common.geojson.tsp";
 import "./models.common.cql.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -686,6 +687,7 @@ model ItemProperties {
   /**
    * Datetime the asset represents in RFC 3339 format.
    */
+  @Azure.ClientGenerator.Core.clientName("datetime_s", "python")
   datetime: string;
 
   /**
