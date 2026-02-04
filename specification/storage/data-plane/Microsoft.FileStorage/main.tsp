@@ -11,13 +11,35 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "./models.tsp";
+import "./routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 /**
- * // (missing-service-description) Add service description
+ * Azure File Storage provides scalable file shares in the cloud using SMB and NFS protocols.
  */
 @service(#{ title: "Azure File Storage" })
+@versioned(Versions)
+@server(
+  "{url}",
+  "Azure File Storage endpoints",
+  {
+    /**
+     * The URL of the service account, share, directory or file that is the target of the desired operation.
+     */
+    url: string,
+  }
+)
 namespace AzureFileStorage;
+
+/**
+ * The available API versions
+ */
+enum Versions {
+  /**
+   * API Version 2026-04-06
+   */
+  v2026_04_06: "2026-04-06",
+}
