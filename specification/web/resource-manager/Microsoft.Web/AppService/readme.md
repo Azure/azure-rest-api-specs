@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2025-03
+tag: package-2025-05
 ```
 
 ### Suppression
@@ -85,6 +85,18 @@ directive:
   - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
     from: Provider.json
     reason: Retroactive addition of missing examples out of scope at this time.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: openapi.json
+    reason: Retroactive addition of missing examples out of scope at this time.
+```
+
+### Tag: package-2025-05
+
+These settings apply only when `--tag=package-2025-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05'
+input-file:
+    - stable/2025-05-01/openapi.json
 ```
 
 ### Tag: package-2025-03
@@ -93,21 +105,7 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-03'
 input-file:
-    - stable/2025-03-01/AppServiceEnvironments.json
-    - stable/2025-03-01/AppServicePlans.json
-    - stable/2025-03-01/Certificates.json
-    - stable/2025-03-01/CommonDefinitions.json
-    - stable/2025-03-01/DeletedWebApps.json
-    - stable/2025-03-01/Diagnostics.json
-    - stable/2025-03-01/Global.json
-    - stable/2025-03-01/KubeEnvironments.json
-    - stable/2025-03-01/Provider.json
-    - stable/2025-03-01/Recommendations.json
-    - stable/2025-03-01/ResourceHealthMetadata.json
-    - stable/2025-03-01/ResourceProvider.json
-    - stable/2025-03-01/SiteCertificates.json
-    - stable/2025-03-01/StaticSites.json
-    - stable/2025-03-01/WebApps.json
+    - stable/2025-03-01/openapi.json
 ```
 
 ### Tag: package-2024-11
