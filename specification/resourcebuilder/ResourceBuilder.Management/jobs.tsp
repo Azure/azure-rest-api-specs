@@ -90,7 +90,7 @@ model JobProperties {
   // DataQualityValidation job specific properties (kind: "DataQualityValidation")
   // ============================================
 
-  /** Metric evaluations. Required for DataQualityValidation jobs. */
+  /** Data quality metrics evaluations and validations. Required for DataQualityValidation jobs. */
   metrics?: DataQualityMetrics;
 
   /** Data quality dataset validation. Required for DataQualityValidation jobs. */
