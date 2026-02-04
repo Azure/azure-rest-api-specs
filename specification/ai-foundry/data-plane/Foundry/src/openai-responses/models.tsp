@@ -113,7 +113,7 @@ namespace Azure.AI.Projects {
     structured_outputs: "structured_outputs",
     oauth_consent_request: "oauth_consent_request",
     memory_search_call: "memory_search_call",
-    workflow_preview_action: "workflow_preview_action",
+    workflow_action: "workflow_action",
   }
 
   @@copyVariants(OpenAI.ItemType, _AgentItemType);
@@ -154,7 +154,7 @@ namespace Azure.AI.Projects {
   }
 
   model WorkflowPreviewActionOutputItem extends OpenAI.OutputItem {
-    type: "workflow_preview_action";
+    type: "workflow_action";
 
     @doc("The kind of CSDL action (e.g., 'SetVariable', 'InvokeAzureAgent').")
     kind: string;
