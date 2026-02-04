@@ -122,7 +122,7 @@ namespace Azure.AI.Projects {
   }
 
   @@copyVariants(OpenAI.ItemType, _AgentItemType);
-  @@copyVariants(OpenAI.ItemResourceType, _AgentItemType); // TODO: Do we need this? 
+  @@copyVariants(OpenAI.ItemResourceType, _AgentItemType);
   @@copyVariants(OpenAI.OutputItemType, _AgentItemType);
 
   /* created_by conflicts with the property in OpenAI.FunctionShellCall, ApplyPatchToolCall, and ApplyPatchToolCallOutput, to work around it we use a union type here */
