@@ -2518,28 +2518,28 @@
         },
         "healthCheckWaitDuration": {
           "type": "string",
-          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
-          "default": "0"
+          "format": "duration-constant",
+          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "healthCheckStableDuration": {
           "type": "string",
-          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
-          "default": "PT0H2M0S"
+          "format": "duration-constant",
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "healthCheckRetryTimeout": {
           "type": "string",
-          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
-          "default": "PT0H10M0S"
+          "format": "duration-constant",
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "upgradeTimeout": {
           "type": "string",
-          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
-          "default": "P10675199DT02H48M05.4775807S"
+          "format": "duration-constant",
+          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         },
         "upgradeDomainTimeout": {
           "type": "string",
-          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
-          "default": "P10675199DT02H48M05.4775807S"
+          "format": "duration-constant",
+          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format \"hh:mm:ss.fff\"."
         }
       }
     },
@@ -3362,22 +3362,27 @@
         },
         "healthCheckWaitDuration": {
           "type": "string",
+          "format": "duration-constant",
           "description": "The length of time to wait after completing an upgrade domain before performing health checks. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "healthCheckStableDuration": {
           "type": "string",
+          "format": "duration-constant",
           "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. The duration can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "healthCheckRetryTimeout": {
           "type": "string",
+          "format": "duration-constant",
           "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "upgradeTimeout": {
           "type": "string",
+          "format": "duration-constant",
           "description": "The amount of time the overall upgrade has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "upgradeDomainTimeout": {
           "type": "string",
+          "format": "duration-constant",
           "description": "The amount of time each upgrade domain has to complete before the upgrade rolls back. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "healthPolicy": {
