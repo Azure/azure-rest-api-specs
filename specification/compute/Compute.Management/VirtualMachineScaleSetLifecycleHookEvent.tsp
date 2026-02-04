@@ -4,10 +4,12 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VirtualMachineScaleSet.tsp";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Compute;
 
@@ -16,6 +18,7 @@ namespace Microsoft.Compute;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
+@added(Versions.v2025_11_01)
 @parentResource(VirtualMachineScaleSet)
 model VMScaleSetLifecycleHookEvent
   is ProxyResource<VMScaleSetLifecycleHookEventProperties> {
@@ -30,6 +33,7 @@ model VMScaleSetLifecycleHookEvent
 /**
  * The List virtual machine scale set lifecycle hook events operation response.
  */
+@added(Versions.v2025_11_01)
 model VMScaleSetLifecycleHookEventListResult
   is Azure.Core.Page<VMScaleSetLifecycleHookEvent>;
 
@@ -43,6 +47,7 @@ model VMScaleSetLifecycleHookEventListResult
 );
 
 @armResourceOperations
+@added(Versions.v2025_11_01)
 interface VirtualMachineScaleSetLifeCycleHookEvents {
   /**
    * Gets a virtual machine scale set lifecycle hook event.
