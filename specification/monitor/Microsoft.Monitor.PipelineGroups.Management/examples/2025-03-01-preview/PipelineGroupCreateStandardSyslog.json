@@ -39,12 +39,12 @@
             "azureMonitorWorkspaceLogs": {
               "api": {
                 "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                "stream": "Microsoft-Syslog",
+                "stream": "Microsoft-Syslog-FullyFormed",
                 "dataCollectionRule": "dcr-00000000000000000000000000000000",
                 "schema": {
                   "recordMap": [
                     {
-                      "from": "time_unix_nano",
+                      "from": "attributes.TimeGenerated",
                       "to": "TimeGenerated"
                     },
                     {
@@ -160,10 +160,59 @@
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Microsoft-Syslog",
+                  "stream": "Microsoft-Syslog-FullyFormed",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
-                    "recordMap": []
+                    "recordMap": [
+                      {
+                        "from": "attributes.TimeGenerated",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "attributes.CollectorHostName",
+                        "to": "CollectorHostName"
+                      },
+                      {
+                        "from": "attributes.Computer",
+                        "to": "Computer"
+                      },
+                      {
+                        "from": "attributes.EventTime",
+                        "to": "EventTime"
+                      },
+                      {
+                        "from": "attributes.Facility",
+                        "to": "Facility"
+                      },
+                      {
+                        "from": "attributes.HostIP",
+                        "to": "HostIP"
+                      },
+                      {
+                        "from": "attributes.HostName",
+                        "to": "HostName"
+                      },
+                      {
+                        "from": "attributes.ProcessID",
+                        "to": "ProcessID"
+                      },
+                      {
+                        "from": "attributes.ProcessName",
+                        "to": "ProcessName"
+                      },
+                      {
+                        "from": "attributes.SeverityLevel",
+                        "to": "SeverityLevel"
+                      },
+                      {
+                        "from": "attributes.SourceSystem",
+                        "to": "SourceSystem"
+                      },
+                      {
+                        "from": "attributes.SyslogMessage",
+                        "to": "SyslogMessage"
+                      }
+                    ]
                   }
                 },
                 "concurrency": {
@@ -239,10 +288,59 @@
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Microsoft-Syslog",
+                  "stream": "Microsoft-Syslog-FullyFormed",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
-                    "recordMap": []
+                    "recordMap": [
+                      {
+                        "from": "attributes.TimeGenerated",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "attributes.CollectorHostName",
+                        "to": "CollectorHostName"
+                      },
+                      {
+                        "from": "attributes.Computer",
+                        "to": "Computer"
+                      },
+                      {
+                        "from": "attributes.EventTime",
+                        "to": "EventTime"
+                      },
+                      {
+                        "from": "attributes.Facility",
+                        "to": "Facility"
+                      },
+                      {
+                        "from": "attributes.HostIP",
+                        "to": "HostIP"
+                      },
+                      {
+                        "from": "attributes.HostName",
+                        "to": "HostName"
+                      },
+                      {
+                        "from": "attributes.ProcessID",
+                        "to": "ProcessID"
+                      },
+                      {
+                        "from": "attributes.ProcessName",
+                        "to": "ProcessName"
+                      },
+                      {
+                        "from": "attributes.SeverityLevel",
+                        "to": "SeverityLevel"
+                      },
+                      {
+                        "from": "attributes.SourceSystem",
+                        "to": "SourceSystem"
+                      },
+                      {
+                        "from": "attributes.SyslogMessage",
+                        "to": "SyslogMessage"
+                      }
+                    ]
                   }
                 },
                 "concurrency": {
