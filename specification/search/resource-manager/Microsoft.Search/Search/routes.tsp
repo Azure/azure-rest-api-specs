@@ -21,6 +21,7 @@ interface ServicesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
   @autoRoute
+  @tag("Services")
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityInput,
     Response = CheckNameAvailabilityOutput,
@@ -54,6 +55,7 @@ interface UsagesOperationGroup {
   @action("usages")
   @externalDocs("https://aka.ms/search-manage")
   @list
+  @tag("Usages")
   listBySubscription is ArmProviderActionSync<
     Request = void,
     Response = QuotaUsagesListResult,
@@ -87,6 +89,7 @@ interface UsagesOperationGroup {
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}")
 @get
 @externalDocs("https://aka.ms/search-manage")
+@tag("Usages")
 op usageBySubscriptionSku(
   ...ApiVersionParameter,
 

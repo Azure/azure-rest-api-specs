@@ -125,13 +125,14 @@ alias QueryKeysDeleteOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface SearchServices {
   /**
    * Gets the search service with the given name in the given resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
+  @tag("Services")
   get is ArmResourceRead<
     SearchService,
     Parameters = {
@@ -156,6 +157,7 @@ interface SearchServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
+  @tag("Services")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SearchService,
     Parameters = {
@@ -183,6 +185,7 @@ interface SearchServices {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @externalDocs("https://aka.ms/search-manage")
+  @tag("Services")
   update is ArmCustomPatchSync<
     SearchService,
     PatchModel = SearchServiceUpdate,
@@ -209,6 +212,7 @@ interface SearchServices {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
+  @tag("Services")
   delete is ArmResourceDeleteSync<
     SearchService,
     Parameters = {
@@ -234,6 +238,7 @@ interface SearchServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
+  @tag("Services")
   listByResourceGroup is ArmResourceListByParent<
     SearchService,
     Parameters = {
@@ -259,6 +264,7 @@ interface SearchServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
+  @tag("Services")
   listBySubscription is ArmListBySubscription<
     SearchService,
     Parameters = {
@@ -285,6 +291,7 @@ interface SearchServices {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listAdminKeys")
   @externalDocs("https://aka.ms/search-manage")
+  @tag("AdminKeys")
   adminKeysGet is ArmResourceActionSync<
     SearchService,
     void,
@@ -311,6 +318,7 @@ interface SearchServices {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://aka.ms/search-manage")
+  @tag("AdminKeys")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}")
   regenerate is AdminKeysOps.ActionSync<
     SearchService,
@@ -339,6 +347,7 @@ interface SearchServices {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @post
   @externalDocs("https://aka.ms/search-manage")
+  @tag("QueryKeys")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/createQueryKey/{name}")
   create is QueryKeysOps.CreateOrUpdateSync<
     SearchService,
@@ -367,6 +376,7 @@ interface SearchServices {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("listQueryKeys")
   @externalDocs("https://aka.ms/search-manage")
+  @tag("QueryKeys")
   @list
   listBySearchService is ArmResourceActionSync<
     SearchService,
@@ -395,6 +405,7 @@ interface SearchServices {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @externalDocs("https://aka.ms/search-manage")
+  @tag("QueryKeys")
   queryKeysDelete is QueryKeysDeleteOps.ActionSync<
     SearchService,
     void,
@@ -419,6 +430,7 @@ interface SearchServices {
   /**
    * Upgrades the Azure AI Search service to the latest version available.
    */
+  @tag("Services")
   upgrade is ArmResourceActionAsync<
     SearchService,
     void,
@@ -435,6 +447,7 @@ interface SearchServices {
   @get
   @action("privateLinkResources")
   @list
+  @tag("PrivateLinkResources")
   listSupported is ArmResourceActionSync<
     SearchService,
     void,

@@ -40,10 +40,22 @@
   },
   "tags": [
     {
+      "name": "Usages"
+    },
+    {
       "name": "Operations"
     },
     {
-      "name": "SearchServices"
+      "name": "Services"
+    },
+    {
+      "name": "AdminKeys"
+    },
+    {
+      "name": "QueryKeys"
+    },
+    {
+      "name": "PrivateLinkResources"
     },
     {
       "name": "PrivateEndpointConnections"
@@ -95,6 +107,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Search/checkNameAvailability": {
       "post": {
         "operationId": "Services_CheckNameAvailability",
+        "tags": [
+          "Services"
+        ],
         "description": "Checks whether or not the given search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -153,6 +168,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages": {
       "get": {
         "operationId": "Usages_ListBySubscription",
+        "tags": [
+          "Usages"
+        ],
         "description": "Get a list of all Azure AI Search quota usages across the subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -208,6 +226,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}": {
       "get": {
         "operationId": "UsageBySubscriptionSku",
+        "tags": [
+          "Usages"
+        ],
         "description": "Gets the quota usage for a search SKU in the given subscription.",
         "externalDocs": {
           "url": "https://aka.ms/search-manage"
@@ -268,7 +289,7 @@
       "get": {
         "operationId": "Services_ListBySubscription",
         "tags": [
-          "SearchServices"
+          "Services"
         ],
         "description": "Gets a list of all Search services in the given subscription.",
         "externalDocs": {
@@ -323,7 +344,7 @@
       "get": {
         "operationId": "Services_ListByResourceGroup",
         "tags": [
-          "SearchServices"
+          "Services"
         ],
         "description": "Gets a list of all Search services in the given resource group.",
         "externalDocs": {
@@ -381,7 +402,7 @@
       "get": {
         "operationId": "Services_Get",
         "tags": [
-          "SearchServices"
+          "Services"
         ],
         "description": "Gets the search service with the given name in the given resource group.",
         "externalDocs": {
@@ -442,7 +463,7 @@
       "put": {
         "operationId": "Services_CreateOrUpdate",
         "tags": [
-          "SearchServices"
+          "Services"
         ],
         "description": "Creates or updates a search service in the given resource group. If the search service already exists, all properties will be updated with the given values.",
         "externalDocs": {
@@ -561,7 +582,7 @@
       "patch": {
         "operationId": "Services_Update",
         "tags": [
-          "SearchServices"
+          "Services"
         ],
         "description": "Updates an existing search service in the given resource group.",
         "externalDocs": {
@@ -661,7 +682,7 @@
       "delete": {
         "operationId": "Services_Delete",
         "tags": [
-          "SearchServices"
+          "Services"
         ],
         "description": "Deletes a search service in the given resource group, along with its associated resources.",
         "externalDocs": {
@@ -727,7 +748,7 @@
       "post": {
         "operationId": "QueryKeys_Create",
         "tags": [
-          "SearchServices"
+          "QueryKeys"
         ],
         "description": "Generates a new query key for the specified search service. You can create up to 50 query keys per service.",
         "externalDocs": {
@@ -797,7 +818,7 @@
       "delete": {
         "operationId": "QueryKeys_Delete",
         "tags": [
-          "SearchServices"
+          "QueryKeys"
         ],
         "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.",
         "externalDocs": {
@@ -870,7 +891,7 @@
       "post": {
         "operationId": "AdminKeys_Get",
         "tags": [
-          "SearchServices"
+          "AdminKeys"
         ],
         "description": "Gets the primary and secondary admin API keys for the specified Azure AI Search service.",
         "externalDocs": {
@@ -933,7 +954,7 @@
       "post": {
         "operationId": "QueryKeys_ListBySearchService",
         "tags": [
-          "SearchServices"
+          "QueryKeys"
         ],
         "description": "Returns the list of query API keys for the given Azure AI Search service.",
         "externalDocs": {
@@ -1454,7 +1475,7 @@
       "get": {
         "operationId": "PrivateLinkResources_ListSupported",
         "tags": [
-          "SearchServices"
+          "PrivateLinkResources"
         ],
         "description": "Gets a list of all supported private link resource types for the given service.",
         "externalDocs": {
@@ -1520,7 +1541,7 @@
       "post": {
         "operationId": "AdminKeys_Regenerate",
         "tags": [
-          "SearchServices"
+          "AdminKeys"
         ],
         "description": "Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.",
         "externalDocs": {
@@ -1923,7 +1944,7 @@
       "post": {
         "operationId": "Services_Upgrade",
         "tags": [
-          "SearchServices"
+          "Services"
         ],
         "description": "Upgrades the Azure AI Search service to the latest version available.",
         "parameters": [
@@ -2649,7 +2670,8 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to get the next set of private link resources, if there are any."
+          "description": "The URL to get the next set of private link resources, if there are any.",
+          "readOnly": true
         }
       },
       "x-ms-external": true
