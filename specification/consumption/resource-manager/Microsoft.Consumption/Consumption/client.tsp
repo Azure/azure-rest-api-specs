@@ -33,3 +33,188 @@ using Azure.ClientGenerator.Core;
   "marketplaceCharges",
   "go"
 );
+
+// csharp configurations
+@@clientName(Budget, "ConsumptionBudget", "csharp");
+@@clientName(CategoryType, "BudgetCategory", "csharp");
+@@clientName(CurrentSpend, "BudgetCurrentSpend", "csharp");
+@@clientName(BudgetFilter, "ConsumptionBudgetFilter", "csharp");
+@@clientName(ForecastSpend, "BudgetForecastSpend", "csharp");
+@@clientName(Notification, "BudgetAssociatedNotification", "csharp");
+@@clientName(Notification.enabled, "IsEnabled", "csharp");
+@@clientName(TimeGrainType, "BudgetTimeGrainType", "csharp");
+@@clientName(Balance, "ConsumptionBalanceResult", "csharp");
+@@clientName(BalanceProperties.priceHidden, "IsPriceHidden", "csharp");
+@@clientName(CreditSummary, "ConsumptionCreditSummary", "csharp");
+@@clientName(EventSummary, "ConsumptionEventSummary", "csharp");
+@@clientName(EventProperties.transactionDate, "TransactOn", "csharp");
+@@clientName(EventType, "ConsumptionEventType", "csharp");
+@@clientName(ManagementGroupAggregatedCostResult,
+  "ConsumptionAggregatedCostResult",
+  "csharp"
+);
+@@clientName(ManagementGroupAggregatedCostProperties.usageStart,
+  "UsageStartOn",
+  "csharp"
+);
+@@clientName(ManagementGroupAggregatedCostProperties.usageEnd,
+  "UsageEndOn",
+  "csharp"
+);
+@@clientName(LotSummary, "ConsumptionLotSummary", "csharp");
+@@clientName(LotSource, "ConsumptionLotSource", "csharp");
+@@clientName(Status, "ConsumptionLotStatus", "csharp");
+@@clientName(ReservationSummary, "ConsumptionReservationSummary", "csharp");
+@@clientName(Datagrain, "ReservationSummaryDataGrain", "csharp");
+@@clientName(ReservationTransaction,
+  "ConsumptionReservationTransaction",
+  "csharp"
+);
+@@clientName(LegacyReservationTransactionProperties.eventDate,
+  "TransactOn",
+  "csharp"
+);
+@@clientName(ModernReservationTransaction,
+  "ConsumptionModernReservationTransaction",
+  "csharp"
+);
+@@clientName(ModernReservationTransactionProperties.eventDate,
+  "TransactOn",
+  "csharp"
+);
+@@clientName(Amount, "ConsumptionAmount", "csharp");
+@@clientName(AmountWithExchangeRate,
+  "ConsumptionAmountWithExchangeRate",
+  "csharp"
+);
+@@clientName(BillingFrequency, "ConsumptionBillingFrequency", "csharp");
+@@clientName(BalancePropertiesAdjustmentDetailsItem,
+  "ConsumptionBalanceAdjustmentDetail",
+  "csharp"
+);
+@@clientName(BalancePropertiesNewPurchasesDetailsItem,
+  "ConsumptionBalanceNewPurchasesDetail",
+  "csharp"
+);
+@@clientName(Reseller, "ConsumptionReseller", "csharp");
+@@clientName(CultureCode, "RecipientNotificationLanguageCode", "csharp");
+@@clientName(CultureCode.`en-us`, "EnglishUnitedStates", "csharp");
+@@clientName(CultureCode.`ja-jp`, "JapaneseJapan", "csharp");
+@@clientName(CultureCode.`zh-cn`, "ChinesePrc", "csharp");
+@@clientName(CultureCode.`de-de`, "GermanGermany", "csharp");
+@@clientName(CultureCode.`es-es`, "SpanishSpain", "csharp");
+@@clientName(CultureCode.`fr-fr`, "FrenchFrance", "csharp");
+@@clientName(CultureCode.`it-it`, "ItalianItaly", "csharp");
+@@clientName(CultureCode.`ko-kr`, "KoreanKorea", "csharp");
+@@clientName(CultureCode.`pt-br`, "PortugueseBrazil", "csharp");
+@@clientName(CultureCode.`ru-ru`, "RussianRussia", "csharp");
+@@clientName(CultureCode.`zh-tw`, "ChineseTaiwan", "csharp");
+@@clientName(CultureCode.`cs-cz`, "CzechCzechRepublic", "csharp");
+@@clientName(CultureCode.`pl-pl`, "PolishPoland", "csharp");
+@@clientName(CultureCode.`tr-tr`, "TurkishTurkey", "csharp");
+@@clientName(CultureCode.`da-dk`, "DanishDenmark", "csharp");
+@@clientName(CultureCode.`en-gb`, "EnglishUnitedKingdom", "csharp");
+@@clientName(CultureCode.`hu-hu`, "HungarianHungary", "csharp");
+@@clientName(CultureCode.`nb-no`, "NorwegianNorway", "csharp");
+@@clientName(CultureCode.`nl-nl`, "DutchNetherlands", "csharp");
+@@clientName(CultureCode.`pt-pt`, "PortuguesePortugal", "csharp");
+@@clientName(CultureCode.`sv-se`, "SwedishSweden", "csharp");
+@@clientName(MeterDetails, "ConsumptionMeterDetails", "csharp");
+@@clientName(OperatorType, "NotificationAlertTriggerType", "csharp");
+@@clientName(ThresholdType, "NotificationThresholdType", "csharp");
+@@clientName(ReservationSummaryProperties.usageDate, "UseOn", "csharp");
+@@clientName(ChargeSummary, "ConsumptionChargeSummary", "csharp");
+@@clientName(Marketplace, "ConsumptionMarketplace", "csharp");
+@@clientName(ReservationRecommendationDetailsModel,
+  "ConsumptionReservationRecommendationDetails",
+  "csharp"
+);
+@@clientName(Scope, "ConsumptionReservationRecommendationScope", "csharp");
+@@clientName(Term, "ConsumptionReservationRecommendationTerm", "csharp");
+@@clientName(LookBackPeriod,
+  "ConsumptionReservationRecommendationLookBackPeriod",
+  "csharp"
+);
+@@clientName(TagsResult, "ConsumptionTagsResult", "csharp");
+@@clientName(UsageDetail, "ConsumptionUsageDetail", "csharp");
+@@clientName(LegacyUsageDetail, "ConsumptionLegacyUsageDetail", "csharp");
+@@clientName(ModernUsageDetail, "ConsumptionModernUsageDetail", "csharp");
+@@clientName(MarketplaceProperties.usageStart, "UsageStartOn", "csharp");
+@@clientName(MarketplaceProperties.usageEnd, "UsageEndOn", "csharp");
+@@clientName(ReservationRecommendationDetailsProperties.resource,
+  "Properties",
+  "csharp"
+);
+@@clientName(LegacyChargeSummary, "ConsumptionLegacyChargeSummary", "csharp");
+@@clientName(ReservationRecommendation,
+  "ConsumptionReservationRecommendation",
+  "csharp"
+);
+@@clientName(LegacyReservationRecommendation,
+  "ConsumptionLegacyReservationRecommendation",
+  "csharp"
+);
+@@clientName(ModernReservationRecommendation,
+  "ConsumptionModernReservationRecommendation",
+  "csharp"
+);
+@@clientName(MeterDetailsResponse, "ConsumptionMeterDetailsInfo", "csharp");
+@@clientName(Metrictype, "ConsumptionMetricType", "csharp");
+@@clientName(ModernChargeSummary, "ConsumptionModernChargeSummary", "csharp");
+@@clientName(PricingModelType, "ConsumptionPricingModelType", "csharp");
+@@clientName(ReservationRecommendationDetailsCalculatedSavingsProperties,
+  "ConsumptionCalculatedSavingsProperties",
+  "csharp"
+);
+@@clientName(ReservationRecommendationDetailsResourceProperties,
+  "ConsumptionResourceProperties",
+  "csharp"
+);
+@@clientName(ReservationRecommendationDetailsSavingsProperties,
+  "ConsumptionSavingsProperties",
+  "csharp"
+);
+@@clientName(ReservationRecommendationDetailsUsageProperties,
+  "ConsumptionUsageProperties",
+  "csharp"
+);
+@@clientName(SkuProperty, "ConsumptionSkuProperty", "csharp");
+@@clientName(Tag, "ConsumptionTag", "csharp");
+@@clientName(BalancesOperationGroup.getByBillingAccount,
+  "GetBalance",
+  "csharp"
+);
+@@clientName(PriceSheet.getByBillingPeriod, "GetPriceSheet", "csharp");
+@@clientName(AggregatedCostOperationGroup.getByManagementGroup,
+  "GetAggregatedCost",
+  "csharp"
+);
+@@clientName(EventsOperationGroup.listByBillingAccount, "GetEvents", "csharp");
+@@alternateType(PriceSheetProperties.billingPeriodId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(EventProperties.billingProfileId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(EventProperties.lotId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ModernReservationTransactionProperties.billingProfileId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ModernReservationTransactionProperties.invoiceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ModernReservationTransactionProperties.invoiceSectionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(Reseller.resellerId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
