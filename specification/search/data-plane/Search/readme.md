@@ -661,6 +661,66 @@ input-file:
 - stable/2019-05-06/searchindex.json
 ```
 
+### Tag: package-2017-11-preview
+
+These settings apply only when `--tag=package-2017-11-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11-preview'
+input-file:
+- preview/2017-11-11-preview/searchindex.json
+- preview/2017-11-11-preview/searchservice.json
+```
+
+### Tag: package-2017-11
+
+These settings apply only when `--tag=package-2017-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-11'
+input-file:
+- preview/2017-11-11/searchindex.json
+- preview/2017-11-11/searchservice.json
+```
+
+### Tag: package-2016-09-preview
+
+These settings apply only when `--tag=package-2016-09-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09-preview'
+input-file:
+- preview/2016-09-01-preview/searchindex.json
+- preview/2016-09-01-preview/searchservice.json
+```
+
+### Tag: package-2016-09
+
+These settings apply only when `--tag=package-2016-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-09'
+input-file:
+- preview/2016-09-01/searchindex.json
+- preview/2016-09-01/searchservice.json
+```
+
+### Tag: package-2015-02-preview
+
+These settings apply only when `--tag=package-2015-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-02-preview'
+input-file:
+- preview/2015-02-28-preview/searchindex.json
+- preview/2015-02-28-preview/searchservice.json
+```
+
+### Tag: package-2015-02
+
+These settings apply only when `--tag=package-2015-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-02'
+input-file:
+- preview/2015-02-28/searchindex.json
+- preview/2015-02-28/searchservice.json
+```
+
 ---
 # Code Generation
 
