@@ -104,7 +104,7 @@ interface Service {
   @get
   @list
   @route("?comp=list")
-  listContainersSegment is StorageOperation<
+  listContainers is StorageOperation<
     {
       ...PrefixParameter;
       ...MarkerParameter;
@@ -558,7 +558,7 @@ interface Container {
   @list
   @sharedRoute
   @route("?restype=container&comp=list")
-  listBlobFlatSegment is StorageOperation<
+  listBlobs is StorageOperation<
     {
       ...PrefixParameter;
       ...MarkerParameter;
