@@ -34,6 +34,7 @@ namespace Storage.Queues {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
+    ...DateResponseHeader;
   }) | TError;
 
   /** Azure Storage Queue basic operation template */
@@ -46,6 +47,7 @@ namespace Storage.Queues {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
+    ...DateResponseHeader;
   }) | TError;
 
   /** Sets properties for a storage account's Queue service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
@@ -82,8 +84,6 @@ namespace Storage.Queues {
   op getStatistics is StorageOperation<
     TimeoutParameter,
     {
-      ...DateResponseHeader;
-
       /** Storage service statistics */
       @bodyRoot
       body: QueueServiceStats;
@@ -104,8 +104,6 @@ namespace Storage.Queues {
       keyInfo: KeyInfo;
     },
     {
-      ...DateResponseHeader;
-
       /** A user delegation key */
       @bodyRoot
       body: UserDelegationKey;
@@ -140,7 +138,6 @@ namespace Storage.Queues {
       @query include?: Array<ListQueuesIncludeType>;
     },
     {
-      ...DateResponseHeader;
       @bodyRoot body: ListQueuesResponse;
     }
   >;
@@ -159,7 +156,6 @@ namespace Storage.Queues {
       },
       {
         @statusCode statusCode: 201;
-        ...DateResponseHeader;
       }
     >;
 
@@ -176,7 +172,6 @@ namespace Storage.Queues {
       {
         ...MetadataHeaders;
         ...ApproximateMessagesCountHeader;
-        ...DateResponseHeader;
       }
     >;
 
@@ -192,7 +187,6 @@ namespace Storage.Queues {
       },
       {
         @statusCode statusCode: 204;
-        ...DateResponseHeader;
       }
     >;
 
@@ -213,7 +207,6 @@ namespace Storage.Queues {
       },
       {
         @statusCode statusCode: 204;
-        ...DateResponseHeader;
       }
     >;
 
@@ -229,7 +222,6 @@ namespace Storage.Queues {
       },
       {
         @bodyRoot body: ListOfSignedIdentifier;
-        ...DateResponseHeader;
       }
     >;
 
@@ -249,9 +241,7 @@ namespace Storage.Queues {
         @bodyRoot
         queueAcl: ListOfSignedIdentifier;
       },
-      {
-        ...DateResponseHeader;
-      }
+      {}
     >;
 
     /**
@@ -281,7 +271,6 @@ namespace Storage.Queues {
         ...TimeoutParameter;
       },
       {
-        ...DateResponseHeader;
         @bodyRoot body: ListOfReceivedMessage;
       }
     >;
@@ -301,7 +290,6 @@ namespace Storage.Queues {
       },
       {
         @statusCode statusCode: 204;
-        ...DateResponseHeader;
       }
     >;
 
@@ -341,7 +329,6 @@ namespace Storage.Queues {
       },
       {
         @statusCode statusCode: 201;
-        ...DateResponseHeader;
         @bodyRoot body: ListOfSentMessage;
       }
     >;
@@ -372,7 +359,6 @@ namespace Storage.Queues {
         ...TimeoutParameter;
       },
       {
-        ...DateResponseHeader;
         @bodyRoot body: ListOfPeekedMessage;
       }
     >;
@@ -405,7 +391,6 @@ namespace Storage.Queues {
       },
       {
         @statusCode statusCode: 204;
-        ...DateResponseHeader;
         ...PopReceiptResponseHeader;
         ...TimeNextVisibleResponseHeader;
       }
@@ -427,7 +412,6 @@ namespace Storage.Queues {
       },
       {
         @statusCode statusCode: 204;
-        ...DateResponseHeader;
       }
     >;
   }
