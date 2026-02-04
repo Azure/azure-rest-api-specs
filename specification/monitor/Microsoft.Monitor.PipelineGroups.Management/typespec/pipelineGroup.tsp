@@ -304,10 +304,10 @@ model TlsConfiguration {
   @doc("The TLS security mode for receivers using this configuration. Default is 'mutualTls'.")
   mode?: TlsMode = TlsMode.MutualTls;
 
-  @doc("TLS certificate and its private key.")
+  @doc("TLS certificate and its private key. If not specified, default TLS certificate is used.")
   tlsCertificate?: CertificateWithKey;
 
-  @doc("Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used. Ignored when mode is 'disabled' or 'serverOnly'.")
+  @doc("Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used.")
   clientCa?: CertificateSource;
 }
 
