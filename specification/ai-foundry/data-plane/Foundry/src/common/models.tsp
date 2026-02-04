@@ -61,7 +61,7 @@ union FoundryFeaturesOptInKeys {
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
   /**
-   * A feature flag opt-in required to use this preview operation.
+   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
   @header("Foundry-Features")
   foundry_features: RequiredPreviewOptInHeader;
@@ -69,7 +69,7 @@ alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends Foundr
 
 alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
   /**
-   * An optional feature flag opt-in, that is required when using preview operations or modifying persisted preview resources.
+   * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
   @header("Foundry-Features")
   foundry_features?: OptionalPreviewOptInHeader;
