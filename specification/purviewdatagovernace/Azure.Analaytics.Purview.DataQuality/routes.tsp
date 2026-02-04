@@ -95,10 +95,12 @@ namespace PurviewDataQuality {
   /**
    * Update a rule
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @patch
   @tag("Rules")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}")
   @doc("Updates an existing rule associated with a data asset.")
@@ -206,11 +208,13 @@ namespace PurviewDataQuality {
   /**
    * Update Asset Metadata Observer
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @route("/data-assets/{dataAssetId}/asset-metadata")
+  @patch
   @tag("AssetMetadata")
   @doc("Updates the asset metadata  associated with a Data Asset.")
   op updateObserver is RpcOperation<
@@ -326,12 +330,14 @@ namespace PurviewDataQuality {
   /**
    * Update Schedule
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @tag("Schedules")
   @doc("Updates the details of an existing schedule under a specific business domain.")
+  @patch
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
   op updateSchedule is RpcOperation<
     {
@@ -736,6 +742,7 @@ namespace PurviewDataQuality {
   /**
    * Update data source
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -748,6 +755,7 @@ namespace PurviewDataQuality {
     #{ DataSource_Update: #{ $ref: "./examples/DataSource_Update.json" } }
   )
   @route("/business-domains/{businessDomainId}/data-sources/{dataSourceId}")
+  @patch
   op updateDataSource is RpcOperation<
     {
       /**
@@ -924,6 +932,7 @@ namespace PurviewDataQuality {
   /**
    * Update scoped asset meta data
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
@@ -931,6 +940,7 @@ namespace PurviewDataQuality {
   @tag("Scoped Asset Metadata")
   @doc("Create or update the scoped asset metadata for a given data asset within a business domain.")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata")
+  @patch
   op updateScopedAssetMetaData is RpcOperation<
     {
       /**
