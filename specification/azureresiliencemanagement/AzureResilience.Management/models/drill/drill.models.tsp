@@ -639,7 +639,7 @@ model DrillsQualifiedResource {
   @doc("Active Resource location and zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activeLocation: string;
+  activeLocation: string[];
 
   @doc("Recovery Resource location and zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
@@ -649,7 +649,7 @@ model DrillsQualifiedResource {
   @doc("Active Resource location and physical zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activePhysicalLocation: string;
+  activePhysicalLocation: string[];
 
   @doc("Recovery Resource location and physical zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)

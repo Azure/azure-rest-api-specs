@@ -6512,13 +6512,32 @@
           "description": "Type of the Drill resource."
         },
         "activeLocation": {
-          "type": "string",
+          "type": "array",
           "description": "Active location and zones of the Azure resource.",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "recoveryLocations": {
           "type": "array",
           "description": "List of recovery locations and zones of the Azure resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "activePhysicalLocation": {
+          "type": "array",
+          "description": "Active Resource location and physical zones of Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "recoveryPhysicalLocation": {
+          "type": "array",
+          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
           "items": {
             "type": "string"
           },
@@ -6614,7 +6633,9 @@
       },
       "required": [
         "resourceId",
-        "resourceType"
+        "resourceType",
+        "activePhysicalLocation",
+        "recoveryPhysicalLocation"
       ]
     },
     "DrillResourceQualification": {
@@ -7241,8 +7262,11 @@
           "readOnly": true
         },
         "activeLocation": {
-          "type": "string",
+          "type": "array",
           "description": "Active Resource location and zones of Azure Resource.",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "recoveryLocation": {
@@ -7254,8 +7278,11 @@
           "readOnly": true
         },
         "activePhysicalLocation": {
-          "type": "string",
+          "type": "array",
           "description": "Active Resource location and physical zones of Azure Resource.",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "recoveryPhysicalLocation": {
