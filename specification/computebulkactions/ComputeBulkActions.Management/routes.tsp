@@ -123,7 +123,6 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesExecuteCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
   @autoRoute
   virtualMachinesExecuteCreate is ArmProviderActionSync<
     Request = ExecuteCreateRequest,
@@ -133,7 +132,6 @@ interface BulkActions {
   >;
 
   /** VirtualMachinesExecuteDelete: Execute delete operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
   @autoRoute
   virtualMachinesExecuteDelete is ArmProviderActionSync<
     Request = ExecuteDeleteRequest,
