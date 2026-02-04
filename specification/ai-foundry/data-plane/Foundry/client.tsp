@@ -30,6 +30,7 @@ using Azure.AI.Projects;
 @@scope(Responses.cancelResponse, "!(python, javascript)");
 @@scope(Responses.listInputItems, "!(python, javascript)");
 @@scope(Responses.listResponses, "!(python, javascript)");
+@@scope(Responses.compactResponseConversation, "!(python, javascript)");
 
 // ---------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate Conversations. We will use OpenAI client for those
