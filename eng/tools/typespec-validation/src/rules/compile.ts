@@ -8,8 +8,6 @@ import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
 import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.js";
 
-const normalize = path.win32.normalize;
-
 export class CompileRule implements Rule {
   readonly name = "Compile";
   readonly description = "Compile TypeSpec";
