@@ -2,8 +2,7 @@ import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { appendFileSync, existsSync, PathLike } from "node:fs";
 import { describe, expect, it, vi } from "vitest";
-import { getSwaggerDiffs } from "../src/command-helpers.js";
-import { validateBreakingChange } from "../src/commands.js";
+import { validateBreakingChange as validateBreakingChangeImpl } from "../src/commands.js";
 import { runOad } from "../src/run-oad.js";
 
 vi.mock("@azure-tools/specs-shared/changed-files", async () => {
@@ -72,64 +71,74 @@ function mockExistsSync(pathsToExist: string[] = []) {
   return mockExistsSyncFn;
 }
 
-describe("getSwaggerDiffs", () => {
-  it("renameToAddDelete", async () => {
-    mockChangedFilesStatuses({
-      renames: [{ from: "data-plane/from.json", to: "data-plane/to.json" }],
-    });
-
-    const diffs = await getSwaggerDiffs();
-    expect(diffs.additions).toEqual(["data-plane/to.json"]);
-    expect(diffs.deletions).toEqual(["data-plane/from.json"]);
-    expect(diffs.modifications).toEqual([]);
+async function validateBreakingChange() {
+  return await validateBreakingChangeImpl({
+    localSpecRepoPath: "",
+    workingFolder: "",
+    logFileFolder: "",
+    swaggerDirs: [],
+    baseBranch: "",
+    headCommit: "",
+    runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+    checkName: "",
+    targetRepo: "",
+    sourceRepo: "",
+    prInfo: {
+      targetBranch: "",
+      sourceBranch: "",
+      baseBranch: "",
+      currentBranch: "",
+      tempRepoFolder: "/tempRepo",
+      checkout: function (branch: string): Promise<void> {
+        console.log("checkout " + branch);
+        return Promise.resolve();
+      },
+    },
+    prNumber: "",
+    prSourceBranch: "",
+    prTargetBranch: "",
+    oadMessageProcessorContext: {
+      logFilePath: "",
+      prUrl: "",
+      messageCache: [],
+    },
+    prUrl: "",
   });
-});
+}
 
 describe("validateBreakingChange", () => {
-  it("test1", async () => {
+  it("runs oad on a modified swagger", async () => {
     mockChangedFilesStatuses({
       modifications: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
     });
 
     mockExistsSync(["/tempRepo/specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"]);
 
-    vi.mocked(runOad).mockResolvedValue([]);
+    const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
 
-    vi.mocked(appendFileSync).mockResolvedValue();
-
-    const statusCode = await validateBreakingChange({
-      localSpecRepoPath: "",
-      workingFolder: "",
-      logFileFolder: "",
-      swaggerDirs: [],
-      baseBranch: "",
-      headCommit: "",
-      runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-      checkName: "",
-      targetRepo: "",
-      sourceRepo: "",
-      prInfo: {
-        targetBranch: "",
-        sourceBranch: "",
-        baseBranch: "",
-        currentBranch: "",
-        tempRepoFolder: "/tempRepo",
-        checkout: function (branch: string): Promise<void> {
-          console.log("checkout " + branch);
-          return Promise.resolve();
-        },
-      },
-      prNumber: "",
-      prSourceBranch: "",
-      prTargetBranch: "",
-      oadMessageProcessorContext: {
-        logFilePath: "",
-        prUrl: "",
-        messageCache: [],
-      },
-      prUrl: "",
+    const logs: string[] = [];
+    vi.mocked(appendFileSync).mockImplementation((_path, data) => {
+      logs.push(data.toString());
     });
 
+    const statusCode = await validateBreakingChange();
+
     expect(statusCode).toEqual(0);
+
+    expect(mockRunOad).toBeCalledWith(
+      "/tempRepo/specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+      "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+    );
+
+    const jsonLog = logs.find((l) => l.startsWith("{"));
+    const markdownLog = JSON.parse(jsonLog || "").message.trim();
+
+    expect(markdownLog).toMatchInlineSnapshot(
+      `
+      "| Compared specs ([vunknown](https://www.npmjs.com/package/@azure/oad/v/unknown)) | new version | base version |
+      |-------|-------------|--------------|
+      | foo.json | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) |"
+    `,
+    );
   });
 });
