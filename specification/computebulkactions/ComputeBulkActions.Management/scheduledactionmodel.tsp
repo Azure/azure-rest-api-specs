@@ -13,25 +13,6 @@ using TypeSpec.Versioning;
 namespace Microsoft.ComputeBulkActions;
 
 // --------------- Request Body Naming ---------------
-
-@@clientName(BulkActions.virtualMachinesSubmitDeallocate::parameters.body,
-  "requestBody"
-);
-@@doc(BulkActions.virtualMachinesSubmitDeallocate::parameters.body,
-  "The request body"
-);
-@@clientName(BulkActions.virtualMachinesSubmitHibernate::parameters.body,
-  "requestBody"
-);
-@@doc(BulkActions.virtualMachinesSubmitHibernate::parameters.body,
-  "The request body"
-);
-@@clientName(BulkActions.virtualMachinesSubmitStart::parameters.body,
-  "requestBody"
-);
-@@doc(BulkActions.virtualMachinesSubmitStart::parameters.body,
-  "The request body"
-);
 @@clientName(BulkActions.virtualMachinesExecuteDeallocate::parameters.body,
   "requestBody"
 );
@@ -72,12 +53,6 @@ namespace Microsoft.ComputeBulkActions;
   "requestBody"
 );
 @@doc(BulkActions.virtualMachinesCancelOperations::parameters.body,
-  "The request body"
-);
-@@clientName(BulkActions.virtualMachinesGetOperationErrors::parameters.body,
-  "requestBody"
-);
-@@doc(BulkActions.virtualMachinesGetOperationErrors::parameters.body,
   "The request body"
 );
 
@@ -334,72 +309,11 @@ model ResourceOperation {
   operation?: ResourceOperationDetails;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `offsetDateTime` when representing a datetime."
-@doc("This defines a list of operation errors associated with a unique operationId")
-model OperationErrorDetails {
-  @doc("The error code of the operation")
-  errorCode: string;
-
-  @doc("The error details of the operation")
-  errorDetails: string;
-
-  @doc("The timestamp of the error occurrence")
-  timestamp?: offsetDateTime;
-
-  @doc("The compute operationid of the Start/Deallocate/Hibernate request")
-  azureOperationName?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `offsetDateTime` when representing a datetime."
-@doc("This is the first level of operation errors from the request when clients get errors per vm operation")
-model OperationErrorsResult {
-  @doc("The operationId identifying a vm operation")
-  operationId?: string;
-
-  @doc("The creation time of the error result, returned in UTC datetimeoffset format")
-  creationTime?: offsetDateTime;
-
-  @doc("The activation time of a Virtual Machine operation, returned in UTC datetimeoffset format")
-  activationTime?: offsetDateTime;
-
-  @doc("The completion time of the operation if the operation was completed, returned in UTC datetimeoffset format")
-  completedAt?: offsetDateTime;
-
-  @identifiers(#[])
-  @doc("A list of errors associated with the operationid")
-  operationErrors?: Array<OperationErrorDetails>;
-
-  @doc("Request level error code")
-  requestErrorCode?: string;
-
-  @doc("Request level error details")
-  requestErrorDetails?: string;
-}
-
 // ------------------ Common Models ---------------
 @doc("The common request model for power operations")
 model ResourceNotificationDetails {
   @doc("Operation context for notification tracking")
   operationContext?: string;
-}
-
-@doc("The submit-type request for power operations")
-model SubmitTypeRequest {
-  @doc("The schedule for the request")
-  schedule: Schedule;
-
-  @doc("The execution parameters for the request")
-  executionParameters: ExecutionParameters;
-
-  @doc("The resources for the request")
-  resources?: Resources;
-
-  @removed(Microsoft.ComputeBulkActions.Versions.`2026-02-01-preview`)
-  @doc("The resources for the request with operation context information needed for notification tracking.")
-  resourcesWithContext?: ResourcesWithContext;
-
-  @doc("CorrelationId item")
-  correlationid: string;
 }
 
 @doc("The execute-type request for power operations")
@@ -435,34 +349,19 @@ model OperationResponse {
   results?: Array<ResourceOperation>;
 }
 
-// ----------- SubmitDeallocate ---------
-@doc("The deallocate request for resources")
-model SubmitDeallocateRequest {
-  ...SubmitTypeRequest;
-}
-
+// ----------- DeallocateResponse ---------
 @doc("The response from a deallocate request")
 model DeallocateResourceOperationResponse {
   ...OperationResponse;
 }
 
-// ----------- SubmitStart ---------
-@doc("This is the request for start")
-model SubmitStartRequest {
-  ...SubmitTypeRequest;
-}
-
+// ----------- StartResponse ---------
 @doc("The response from a start request")
 model StartResourceOperationResponse {
   ...OperationResponse;
 }
 
-// ----------- SubmitHibernate ---------
-@doc("This is the request for hibernate")
-model SubmitHibernateRequest {
-  ...SubmitTypeRequest;
-}
-
+// ----------- HibernateResponse ---------
 @doc("The response from a Hibernate request")
 model HibernateResourceOperationResponse {
   ...OperationResponse;
@@ -546,18 +445,4 @@ model CancelOperationsResponse {
   @identifiers(#["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
-}
-
-// ----------- GetOperationErrors ---------
-@doc("This is the request to get errors per vm operations")
-model GetOperationErrorsRequest {
-  @doc("The list of operation ids to query errors of")
-  operationIds: Array<string>;
-}
-
-@doc("This is the response from a get operations errors request")
-model GetOperationErrorsResponse {
-  @identifiers(#["operationId"])
-  @doc("An array of operationids and their corresponding errors if any")
-  results: Array<OperationErrorsResult>;
 }

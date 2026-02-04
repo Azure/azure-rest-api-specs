@@ -95,33 +95,6 @@ interface BulkActions {
   ): ArmResponse<VirtualMachineListResult> | ErrorResponse;
 
   // ------------------ Scheduledaction endpoints ---------------
-  /** VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future. */
-  @autoRoute
-  virtualMachinesSubmitDeallocate is ArmProviderActionSync<
-    Request = SubmitDeallocateRequest,
-    Response = ArmResponse<DeallocateResourceOperationResponse>,
-    Scope = Extension.Subscription,
-    Parameters = LocationParameter
-  >;
-
-  /** VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future. */
-  @autoRoute
-  virtualMachinesSubmitHibernate is ArmProviderActionSync<
-    Request = SubmitHibernateRequest,
-    Response = ArmResponse<HibernateResourceOperationResponse>,
-    Scope = Extension.Subscription,
-    Parameters = LocationParameter
-  >;
-
-  /** VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future. */
-  @autoRoute
-  virtualMachinesSubmitStart is ArmProviderActionSync<
-    Request = SubmitStartRequest,
-    Response = ArmResponse<StartResourceOperationResponse>,
-    Scope = Extension.Subscription,
-    Parameters = LocationParameter
-  >;
-
   /** VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @autoRoute
   virtualMachinesExecuteDeallocate is ArmProviderActionSync<
@@ -183,15 +156,6 @@ interface BulkActions {
   virtualMachinesCancelOperations is ArmProviderActionSync<
     Request = CancelOperationsRequest,
     Response = ArmResponse<CancelOperationsResponse>,
-    Scope = Extension.Subscription,
-    Parameters = LocationParameter
-  >;
-
-  /** VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist. */
-  @autoRoute
-  virtualMachinesGetOperationErrors is ArmProviderActionSync<
-    Request = GetOperationErrorsRequest,
-    Response = ArmResponse<GetOperationErrorsResponse>,
     Scope = Extension.Subscription,
     Parameters = LocationParameter
   >;
