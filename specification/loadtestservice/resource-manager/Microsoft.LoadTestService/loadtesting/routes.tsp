@@ -42,7 +42,7 @@ interface LoadTests {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
+  @Azure.Core.useFinalStateVia("location")
   update is ArmCustomPatchAsync<
     LoadTestResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

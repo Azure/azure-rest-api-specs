@@ -82,51 +82,40 @@ interface LoadTests {
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty
-(
-QuotaResource.properties,
-"csharp"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaResource.properties,
+  "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty
-(
-LoadTestResource.properties,
-"csharp"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoadTestResource.properties,
+  "csharp"
 );
 
 @@usage(QuotaResource, Usage.input | Usage.output, "csharp");
 @@usage(LoadTestResource, Usage.input | Usage.output, "csharp");
 
-
 @@clientName(LoadTestProperties.dataPlaneURI, "dataPlaneUri", "csharp");
 @@alternateType(EncryptionProperties.keyUrl, url, "csharp");
 
-@doc("Check quota availability response object.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
-model CheckQuotaAvailabilityResponseReplacement 
+@doc("Check quota availability response object.")
+model CheckQuotaAvailabilityResponseReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
-
-  ...OmitProperties<
-    CheckQuotaAvailabilityResponse,
-    "id" | "name" | "type"
-  >;
+  ...OmitProperties<CheckQuotaAvailabilityResponse, "id" | "name" | "type">;
 }
 
-@@alternateType(
-  CheckQuotaAvailabilityResponse,
+@@alternateType(CheckQuotaAvailabilityResponse,
   CheckQuotaAvailabilityResponseReplacement,
   "csharp"
 );
 
-@@clientName(
-  CheckQuotaAvailabilityResponseReplacement,
+@@clientName(CheckQuotaAvailabilityResponseReplacement,
   "LoadTestingQuotaAvailabilityResult",
   "csharp"
 );
 
-@doc("Request object of new quota for a quota bucket.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For csharp backward compatibility"
+@doc("Request object of new quota for a quota bucket.")
 model QuotaBucketRequestReplacement
   extends Azure.ResourceManager.CommonTypes.Resource {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
@@ -134,17 +123,18 @@ model QuotaBucketRequestReplacement
   @doc("Request object of new quota for a quota bucket.")
   properties?: QuotaBucketRequestProperties;
 }
-@@alternateType(
-  QuotaBucketRequest,
-  QuotaBucketRequestReplacement,
-  "csharp"
-);
+@@alternateType(QuotaBucketRequest, QuotaBucketRequestReplacement, "csharp");
 
-@@clientName(
-  QuotaBucketRequestReplacement,
+@@clientName(QuotaBucketRequestReplacement,
   "LoadTestingQuotaBucketContent",
   "csharp"
 );
-@@alternateType(QuotaBucketRequestPropertiesDimensions.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(QuotaBucketRequestPropertiesDimensions.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 
-@@usage(CheckQuotaAvailabilityResponseReplacement, Usage.input | Usage.output, "csharp");
+@@usage(CheckQuotaAvailabilityResponseReplacement,
+  Usage.input | Usage.output,
+  "csharp"
+);
