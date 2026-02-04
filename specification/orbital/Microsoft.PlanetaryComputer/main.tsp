@@ -14,6 +14,7 @@ import "./routes.tiler.items.tsp";
 import "./routes.tiler.map-legends.tsp";
 import "./routes.tiler.mosaics.tsp";
 import "./routes.tiler.tile-matrix-sets.tsp";
+import "./routes.tiler.vector.tsp";
 
 // SAS
 import "./sas.tsp";
