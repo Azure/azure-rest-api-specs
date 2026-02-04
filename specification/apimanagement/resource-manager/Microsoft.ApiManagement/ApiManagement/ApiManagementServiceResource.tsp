@@ -457,8 +457,9 @@ interface ApiManagementServiceResources {
   /**
    * Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @patch(#{ implicitOptionality: true })
+  @patch
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}")
   quotaByCounterKeysUpdate is QuotaCounterKeyOps.ActionSync<
     ApiManagementServiceResource,
