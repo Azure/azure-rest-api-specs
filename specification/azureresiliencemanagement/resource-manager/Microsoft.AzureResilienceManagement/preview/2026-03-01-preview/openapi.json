@@ -6480,6 +6480,22 @@
           },
           "readOnly": true
         },
+        "activePhysicalLocation": {
+          "type": "array",
+          "description": "Active Resource location and physical zones of Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "recoveryPhysicalLocation": {
+          "type": "array",
+          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "inclusionState": {
           "$ref": "#/definitions/DrillResourceInclusionState",
           "description": "Inclusion State of the Drill resource in Drill"
@@ -6565,7 +6581,9 @@
       },
       "required": [
         "resourceId",
-        "resourceType"
+        "resourceType",
+        "activePhysicalLocation",
+        "recoveryPhysicalLocation"
       ]
     },
     "DrillResourceQualification": {

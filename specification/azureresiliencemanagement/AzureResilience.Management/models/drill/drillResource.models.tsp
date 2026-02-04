@@ -48,6 +48,16 @@ model DrillResourceProperties {
   @visibility(Lifecycle.Read)
   recoveryLocations?: string[];
 
+  @doc("Active Resource location and physical zones of Azure Resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activePhysicalLocation: string[];
+
+  @doc("Recovery Resource location and physical zones of HA Azure Resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  recoveryPhysicalLocation: string[];
+
   @doc("Inclusion State of the Drill resource in Drill")
   inclusionState?: DrillResourceInclusionState;
 
