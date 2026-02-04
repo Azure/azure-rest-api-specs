@@ -1172,6 +1172,18 @@ union State {
    * Additional content is required to proceed with the update.
    */
   AdditionalContentRequired: "AdditionalContentRequired",
+
+  /**
+   * The health check has expired and needs to be redone.
+   */
+  @added(Versions.v2026_02_15_preview)
+  HealthCheckExpired: "HealthCheckExpired",
+
+  /**
+   * The update is pending OEM validation before it can proceed.
+   */
+  @added(Versions.v2026_02_15_preview)
+  PendingOEMValidation: "PendingOEMValidation",
 }
 
 /**

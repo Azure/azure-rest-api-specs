@@ -4822,74 +4822,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/checkHealth": {
-      "post": {
-        "operationId": "Updates_CheckHealth",
-        "tags": [
-          "Updates"
-        ],
-        "description": "Check health of Update",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the cluster.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "updateName",
-            "in": "path",
-            "description": "The name of the Update",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Check health of Update": {
-            "$ref": "./examples/Updates_CheckHealth.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/updates/{updateName}/prepare": {
       "post": {
         "operationId": "Updates_Prepare",
@@ -14057,7 +13989,9 @@
         "ReadyToInstall",
         "ScanInProgress",
         "ScanFailed",
-        "AdditionalContentRequired"
+        "AdditionalContentRequired",
+        "HealthCheckExpired",
+        "PendingOEMValidation"
       ],
       "x-ms-enum": {
         "name": "State",
@@ -14157,6 +14091,16 @@
             "name": "AdditionalContentRequired",
             "value": "AdditionalContentRequired",
             "description": "Additional content is required to proceed with the update."
+          },
+          {
+            "name": "HealthCheckExpired",
+            "value": "HealthCheckExpired",
+            "description": "The health check has expired and needs to be redone."
+          },
+          {
+            "name": "PendingOEMValidation",
+            "value": "PendingOEMValidation",
+            "description": "The update is pending OEM validation before it can proceed."
           }
         ]
       }
