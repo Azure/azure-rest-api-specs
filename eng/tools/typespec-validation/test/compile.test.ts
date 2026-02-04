@@ -48,7 +48,7 @@ describe("compile", function () {
       // ensure paths are trimmed
       `\t${swaggerPath} \n` +
       // ensure paths are normalized
-      `${path.normalize(swaggerPath)}\n` +
+      `${path.win32.normalize(swaggerPath)}\n` +
       // ensure filtered to JSON files
       "data-plane/readme.md\n" +
       // ensure examples are skipped
