@@ -36,6 +36,7 @@ interface QuestionAnsweringProjects {
   /**
    * Create or update a project.
    */
+  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   createProject is ResourceCreateOrUpdateWithJsonContentType<
     QuestionAnsweringProjectMetadata,
@@ -267,7 +268,6 @@ interface QuestionAnsweringProjects {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
   @sharedRoute
-  @patch(#{ implicitOptionality: true })
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
   updateSources is Foundations.LongRunningOperation<
     {
@@ -299,7 +299,6 @@ interface QuestionAnsweringProjects {
   #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "method overload `updateSources` already support byos with fileUri"
   @added(Versions.v2025_05_15_preview)
   @sharedRoute
-  @patch(#{ implicitOptionality: true })
   @route("/authoring/query-knowledgebases/projects/{projectName}/sources")
   @pollingOperation(QuestionAnsweringProjects.getUpdateSourcesStatus)
   updateSourcesFromFiles is Foundations.LongRunningOperation<
@@ -346,7 +345,6 @@ interface QuestionAnsweringProjects {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "GA'd method"
   @route("/authoring/query-knowledgebases/projects/{projectName}/qnas")
-  @patch(#{ implicitOptionality: true })
   @pollingOperation(QuestionAnsweringProjects.getUpdateQnasStatus)
   updateQnas is Foundations.LongRunningOperation<
     {
