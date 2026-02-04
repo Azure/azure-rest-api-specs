@@ -43,6 +43,7 @@ using Azure.ClientGenerator.Core;
   "AppConfigurationNameAvailabilityContent",
   "csharp"
 );
+@@clientName(CheckNameAvailabilityParameters.type, "ResourceType", "csharp");
 @@clientName(CreateMode, "AppConfigurationCreateMode", "csharp");
 @@clientName(ConfigurationResourceType,
   "AppConfigurationResourceType",
@@ -90,6 +91,10 @@ using Azure.ClientGenerator.Core;
   "AppConfigurationPrivateEndpointConnection",
   "csharp"
 );
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
 @@clientName(PrivateEndpointConnectionReference,
   "AppConfigurationPrivateEndpointConnectionReference",
   "csharp"
@@ -110,18 +115,37 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(SnapshotStatus, "AppConfigurationSnapshotStatus", "csharp");
 @@clientName(Snapshot, "AppConfigurationSnapshot", "csharp");
+// @@clientName(Azure.ResourceManager.CommonTypes.ProxyResource.type, "SnapshotType", "csharp");
 @@clientName(SnapshotProperties.created, "CreatedOn", "csharp");
 @@clientName(SnapshotProperties.expires, "ExpireOn", "csharp");
 @@clientName(OperationsOperationGroup.checkNameAvailability,
   "CheckAppConfigurationNameAvailability",
   "csharp"
 );
+// @@clientName(ConfigurationStoresOperationGroup.listDeleted, "GetAll", "csharp");
 @@alternateType(DeletedConfigurationStoreProperties.configurationStoreId,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DeletedConfigurationStoreProperties.location,
+  Azure.Core.azureLocation,
   "csharp"
 );
 @@alternateType(ConfigurationStore.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
+@@alternateType(ConfigurationStoreUpdateParameters.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 @@alternateType(Replica.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(KeyValueProperties.eTag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
+@@alternateType(SnapshotProperties.etag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
