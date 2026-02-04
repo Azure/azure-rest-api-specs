@@ -1,3 +1,3 @@
-import "../conversations/routes.tsp";
-import "../responses/routes.tsp";
 import "../agents/models.tsp";
+import "../openai-conversations/routes.tsp";
+import "../openai-responses/routes.tsp";

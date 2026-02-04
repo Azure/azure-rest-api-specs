@@ -1,7 +1,3 @@
-import "@typespec/http";
-import "@typespec/openapi";
-import "@azure-tools/typespec-azure-core";
-
 import "./models.tsp";
 import "../common/models.tsp";
 import "../openai-responses/models.tsp";
@@ -108,7 +104,7 @@ interface Conversations {
       /** The items to add to the conversation. You may add up to 20 items at a time. */
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
       @maxItems(20)
-      items: (OpenAI.Item | OpenAI.EasyInputMessage)[];
+      items: OpenAI.Item[];
     },
     OpenAI.ConversationItemList
   >;
@@ -127,7 +123,7 @@ interface Conversations {
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
     },
-    OpenAI.ItemResource
+    OpenAI.OutputItem
   >;
 
   /**
@@ -162,6 +158,6 @@ interface Conversations {
       ...CommonPageQueryParameters;
       ...ItemTypeQueryParameter;
     },
-    AgentsPagedResult<OpenAI.ItemResource>
+    AgentsPagedResult<OpenAI.OutputItem>
   >;
 }

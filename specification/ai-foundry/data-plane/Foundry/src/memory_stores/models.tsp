@@ -1,6 +1,3 @@
-import "@typespec/http";
-import "@typespec/openapi";
-
 import "../common/service.tsp";
 import "../openai-responses/models.tsp";
 

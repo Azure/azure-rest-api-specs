@@ -59,6 +59,14 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
     file-type: json
     bundleId: azure-ai-agents-v2.json
+imports:
+  - "@azure-tools/typespec-azure-core"
+  - "@azure-tools/typespec-azure-core/experimental"
+  - "@azure-tools/typespec-client-generator-core"
+  # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/models/evals"
+  - "@azure-tools/openai-typespec/models/fine-tuning"
+  - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
@@ -67,7 +75,6 @@ linter:
     "@azure-tools/typespec-azure-core/no-string-discriminator": "Use an extensible union instead of a plain string"
     "@azure-tools/typespec-azure-core/bad-record-type": "We do want to use Record<unknown>, and not Record<string>. But this needs further investigation"
     "@azure-tools/typespec-azure-core/use-standard-names": "PUT operations that return 200 should start with 'replace' or 'createOrReplace'"
-    # The set of rules, disabled because of .external-readonly contains non compliant code.
     "@azure-tools/typespec-azure-core/documentation-required": "Some OpenAI models do not contain docstrings."
     "@azure-tools/typespec-azure-core/no-nullable": "Some OpenAI models still contain <> | null notation."
     "@azure-tools/typespec-azure-core/no-closed-literal-union": "OpenAI incompliance"

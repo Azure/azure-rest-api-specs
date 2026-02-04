@@ -1,6 +1,3 @@
-import "@typespec/rest";
-import "@azure-tools/openai-typespec/models/evals";
-
 import "./models.tsp";
 
 using TypeSpec.Http;

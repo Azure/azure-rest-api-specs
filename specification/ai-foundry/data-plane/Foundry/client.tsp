@@ -2,7 +2,6 @@
 // This file is used for emitting the Python client (package azure-ai-projects) and 
 // the JS client (package @azure/ai-projects).
 //
-import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;

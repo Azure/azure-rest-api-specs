@@ -1,9 +1,3 @@
-import "@typespec/http";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-azure-core";
-
 import "../common/models.tsp";
 import "../insights/models.tsp";
 
@@ -228,7 +222,6 @@ model InsightScheduleTask extends ScheduleTask {
 model Schedule {
   @doc("Identifier of the schedule.")
   @key("id")
-  @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
   id: string;
 

@@ -44,6 +44,12 @@ options:
       - "specification/ai-foundry/data-plane/Foundry/src/conversations/"
       - "specification/ai-foundry/data-plane/Foundry/src/responses/"
       - "specification/ai-foundry/data-plane/Foundry/src/tools/"
+imports:
+  - "@azure-tools/typespec-azure-core"
+  - "@azure-tools/typespec-azure-core/experimental"
+  - "@azure-tools/typespec-client-generator-core"
+  # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
+  - "@azure-tools/openai-typespec/models/responses"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
