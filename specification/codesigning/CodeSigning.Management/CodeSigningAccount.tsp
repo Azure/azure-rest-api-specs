@@ -46,7 +46,7 @@ interface CodeSigningAccounts {
   @doc("Lists artifact signing accounts within a subscription.")
   listBySubscription is ArmListBySubscription<CodeSigningAccount>;
 
-  @doc("Checks that the artifact signing account name is valid and is not already in use.")
+  @doc("Checks if the artifact signing account name is valid and is not already in use.")
   checkNameAvailability is checkGlobalNameAvailability<
     CheckNameAvailability,
     CheckNameAvailabilityResult
