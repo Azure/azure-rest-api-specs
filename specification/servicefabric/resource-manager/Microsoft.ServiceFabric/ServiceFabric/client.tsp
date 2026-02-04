@@ -67,3 +67,11 @@ using Microsoft.ServiceFabric;
 );
 
 @@clientName(ClusterCodeVersions, "ClusterCodeVersionsResult");
+@@clientName(Microsoft.ServiceFabric,
+  "ServiceFabricManagementClient",
+  "javascript"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "ManagedIdentity",
+  "javascript"
+);
