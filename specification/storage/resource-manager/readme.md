@@ -28,7 +28,26 @@ These are the global settings for the Storage API.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-06
+tag: package-2025-08
+```
+
+### Tag: package-2025-08
+
+These settings apply only when `--tag=package-2025-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08'
+input-file:
+  - Microsoft.Storage/stable/2025-08-01/openapi.json
+
+directive:
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/storageTaskAssignments/{storageTaskAssignmentName}"].put
+    suppress: PutResponseCodes
+    reason: This is an existing RP which has the same pattern, 202 response code for async PUT, in stable API version
+    approved-by: "@ramoka178"
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/fileServices/{FileServicesName}/usages"]
 ```
 
 ### Tag: package-2025-06
