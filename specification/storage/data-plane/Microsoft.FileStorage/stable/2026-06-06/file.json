@@ -3456,7 +3456,7 @@
           "file"
         ],
         "operationId": "File_Create",
-        "description": "Creates a new file or replaces a file. Note it only initializes the file with no content.",
+        "description": "Creates a new file or replaces a file. Can also initialize the file with content.",
         "consumes": [
           "application/octet-stream"
         ],
@@ -3550,6 +3550,12 @@
           },
           {
             "$ref": "#/parameters/OptionalBody"
+          },
+          {
+            "$ref": "#/parameters/StructuredBodyPut"
+          },
+          {
+            "$ref": "#/parameters/StructuredContentLength"
           }
         ],
         "responses": {
@@ -3661,6 +3667,11 @@
                 "type": "integer",
                 "format": "int64",
                 "description": "The number of bytes present in the response body."
+              },
+              "x-ms-structured-body": {
+                "x-ms-client-name": "StructuredBodyType",
+                "type": "string",
+                "description": "Indicates the structured message body was accepted and mirrors back the message schema version and properties."
               }
             }
           },
