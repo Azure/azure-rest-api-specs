@@ -41,7 +41,6 @@ interface Credentials {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Credential,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

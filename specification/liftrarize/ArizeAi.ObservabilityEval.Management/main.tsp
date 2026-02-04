@@ -80,7 +80,6 @@ model OrganizationResourceUpdate {
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     OrganizationResource,
     OrganizationResourceUpdate

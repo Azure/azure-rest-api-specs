@@ -204,7 +204,6 @@ interface PersonDirectoryOperations {
   @doc("Update a persisted face's userData field of a person.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   @updatesResource(PersonDirectoryFace)
-  @patch(#{ implicitOptionality: true })
   updatePersonFace is FaceResourceUpdateOperation<
     PersonDirectoryFace,
     FaceUserData
@@ -249,14 +248,12 @@ interface PersonDirectoryOperations {
   @summary(UpdateDynamicPersonGroupSummary)
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
-  @patch(#{ implicitOptionality: true }) // updatesResource have codegen issue
   updateDynamicPersonGroupWithPersonChanges is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
 
   @summary(UpdateDynamicPersonGroupSummary)
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @updatesResource(DynamicPersonGroup)
-  @patch(#{ implicitOptionality: true })
   updateDynamicPersonGroup is DynamicPersonGroupOperation<UserDefinedFieldsForUpdate>;
 
   @summary("List all existing Dynamic Person Groups by dynamicPersonGroupId along with name and userData.")
