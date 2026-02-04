@@ -93,7 +93,8 @@ interface ContainerAppsPatches {
   skipConfigure is ContainerAppsPatchesOps.ActionAsync<
     ContainerAppsPatchResource,
     PatchSkipConfig,
-    ArmAcceptedLroResponse
+    ContainerAppsPatchResource,
+    Response = ArmAcceptedLroResponse<"Updating patch skipping detail. Updating status tracked by location header.">
   >;
 
   /**

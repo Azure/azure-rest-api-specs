@@ -46,6 +46,7 @@ alias DaprComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
     componentName: string;
   }
 >;
+
 alias DaprComponentCustomErrorOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -69,6 +70,7 @@ alias DaprComponentCustomErrorOps = Azure.ResourceManager.Legacy.LegacyOperation
   ErrorType = DefaultErrorResponse
 >;
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
 interface DaprComponents {
   /**
@@ -77,7 +79,7 @@ interface DaprComponents {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsDaprComponents_Get")
   @summary("Get a dapr component.")
-  get is DaprComponentOps.Read<DaprComponent>;
+  get is DaprComponentCustomErrorOps.Read<DaprComponent>;
 
   /**
    * Creates or updates a Dapr Component in a connected environment.
@@ -101,7 +103,7 @@ interface DaprComponents {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectedEnvironmentsDaprComponents_List")
   @summary("Get the Dapr Components for a connected environment.")
-  list is DaprComponentOps.List<
+  list is DaprComponentCustomErrorOps.List<
     DaprComponent,
     Response = ArmResponse<DaprComponentsCollection>
   >;
@@ -113,7 +115,7 @@ interface DaprComponents {
   @operationId("ConnectedEnvironmentsDaprComponents_ListSecrets")
   @list
   @summary("List secrets for a dapr component")
-  listSecrets is DaprComponentOps.ActionSync<
+  listSecrets is DaprComponentCustomErrorOps.ActionSync<
     DaprComponent,
     void,
     ArmResponse<DaprSecretsCollection>
@@ -170,7 +172,7 @@ interface DaprComponentOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DaprComponents_Delete")
-  @summary("DaprComponents_Delete")
+  @summary("Delete a Dapr Component.")
   delete is DaprComponentOperationGroupOps.DeleteSync<DaprComponent>;
 
   /**

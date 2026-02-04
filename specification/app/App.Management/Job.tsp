@@ -53,7 +53,11 @@ interface Jobs {
    */
   @patch(#{ implicitOptionality: false })
   @summary("Update properties of a Container Apps Job")
-  update is ArmCustomPatchAsync<Job, PatchModel = JobPatchProperties>;
+  update is ArmCustomPatchAsync<
+    Job,
+    PatchModel = JobPatchProperties,
+    Error = DefaultErrorResponse
+  >;
 
   /**
    * Delete a Container Apps Job.
@@ -93,7 +97,8 @@ interface Jobs {
   start is ArmResourceActionAsyncBase<
     Job,
     JobExecutionTemplate,
-    ArmResponse<JobExecutionBase>,
+    ArmResponse<JobExecutionBase> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = JobExecutionBase> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     OptionalRequestBody = true,
     Error = DefaultErrorResponse
@@ -107,7 +112,8 @@ interface Jobs {
   stopMultipleExecutions is ArmResourceActionAsyncBase<
     Job,
     void,
-    ArmResponse<ContainerAppJobExecutions>,
+    ArmResponse<ContainerAppJobExecutions> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ContainerAppJobExecutions> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;
@@ -189,7 +195,8 @@ interface Jobs {
   stopExecution is ArmResourceActionAsyncBase<
     JobExecution,
     void,
-    OkResponse,
+    OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
   >;

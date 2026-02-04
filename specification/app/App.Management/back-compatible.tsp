@@ -406,3 +406,14 @@ using Microsoft.App;
 @@Azure.ResourceManager.identifiers(AvailableOperations.value, #["name"]);
 @@Azure.ResourceManager.identifiers(ListUsagesResult.value, #["name"]);
 @@clientName(ScheduledEntries.scheduledEntries, "ScheduledEntries");
+
+@@clientLocation(JobsDiagnostics.proxyGet, "Jobs");
+@@clientLocation(JobsDiagnostics.listDetectors, "Jobs");
+@@clientLocation(JobsDiagnostics.getDetector, "Jobs");
+
+@@clientLocation(ManagedEnvironmentsDiagnostics.listDetectors,
+  "ManagedEnvironmentDiagnostics"
+);
+@@clientLocation(ManagedEnvironmentsDiagnostics.getDetector,
+  "ManagedEnvironmentDiagnostics"
+);

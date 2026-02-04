@@ -66,7 +66,7 @@ interface DaprSubscriptions {
   /**
    * Delete a Dapr subscription from a Managed Environment.
    */
-  @summary("Creates or updates a Dapr subscription.")
+  @summary("Delete a Dapr subscription.")
   delete is DaprSubscriptionOps.DeleteSync<DaprSubscription>;
 
   /**

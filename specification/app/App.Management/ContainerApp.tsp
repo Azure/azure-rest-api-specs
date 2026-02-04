@@ -157,21 +157,13 @@ interface ContainerApps {
    * Start a container app
    */
   @summary("Start a container app")
-  start is ContainerAppOps.ActionAsync<
-    ContainerApp,
-    void,
-    ArmResponse<ContainerApp>
-  >;
+  start is ContainerAppOps.ActionAsync<ContainerApp, void, ContainerApp>;
 
   /**
    * Stop a container app
    */
   @summary("Stop a container app")
-  stop is ContainerAppOps.ActionAsync<
-    ContainerApp,
-    void,
-    ArmResponse<ContainerApp>
-  >;
+  stop is ContainerAppOps.ActionAsync<ContainerApp, void, ContainerApp>;
 }
 
 @@doc(ContainerApp.name, "Name of the Container App.");

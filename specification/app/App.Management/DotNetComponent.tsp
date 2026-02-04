@@ -75,7 +75,7 @@ interface DotNetComponents {
   /**
    * Delete a .NET Component.
    */
-  @summary("Update properties of a .NET Component")
+  @summary("Delete a .NET Component.")
   delete is DotNetComponentOps.DeleteWithoutOkAsync<DotNetComponent>;
 
   /**
