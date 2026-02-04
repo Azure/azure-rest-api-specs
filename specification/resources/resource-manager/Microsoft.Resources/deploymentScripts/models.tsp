@@ -315,6 +315,7 @@ model ContainerConfiguration {
   /**
    * The subnet resource IDs for a container group.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - x-ms-identifiers required for array item identification"
   @added(Versions.v2023_08_01)
   @OpenAPI.extension("x-ms-identifiers", #["id"])
   subnetIds?: ContainerGroupSubnetId[];
@@ -353,6 +354,7 @@ model StorageAccountConfiguration {
    * The storage account access key.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - @secret produces format:password instead of x-ms-secret"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension for backward compatibility"
   @extension("x-ms-secret", true)
   storageAccountKey?: string;
 }
@@ -424,6 +426,7 @@ model ScriptConfigurationBase {
   /**
    * The environment variables to pass over to the script.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - x-ms-identifiers required for array item identification"
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   environmentVariables?: EnvironmentVariable[];
 
