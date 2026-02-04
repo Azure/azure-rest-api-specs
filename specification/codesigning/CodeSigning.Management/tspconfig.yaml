@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/trustedsigning"
+    default: "sdk/artifactsigning"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -11,13 +11,13 @@ options:
     emit-common-types-schema: "never"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/codeSigningAccount.json"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-artifactsigning"
     flavor: "azure"
-    namespace: "com.azure.resourcemanager.trustedsigning"
-    service-name: "Trusted Signing"
+    namespace: "com.azure.resourcemanager.artifactsigning"
+    service-name: "Artifact Signing"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-trustedsigning"
-    namespace: "azure.mgmt.trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-artifactsigning"
+    namespace: "azure.mgmt.artifactsigning"
     flavor: "azure"
     generate-test: true
     generate-sample: true
