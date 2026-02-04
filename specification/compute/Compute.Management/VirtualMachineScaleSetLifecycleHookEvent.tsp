@@ -60,7 +60,7 @@ interface VirtualMachineScaleSetLifeCycleHookEvents {
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchSync<
     VMScaleSetLifecycleHookEvent,
-    VMScaleSetLifecycleHookEvent,
+    VMScaleSetLifecycleHookEventUpdate,
     Response = ArmResponse<VMScaleSetLifecycleHookEvent>
   >;
 

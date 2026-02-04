@@ -1298,6 +1298,20 @@ model VMScaleSetLifecycleHookEventProperties {
 }
 
 /**
+ * Specifies information about the virtual machine scale set lifecycle hook event.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventUpdate extends UpdateResource {
+  /**
+   * virtual machine scale set lifecycle hook event properties.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  properties?: VMScaleSetLifecycleHookEventProperties;
+}
+
+/**
  * VM disk types which are disallowed.
  */
 union VmDiskTypes {

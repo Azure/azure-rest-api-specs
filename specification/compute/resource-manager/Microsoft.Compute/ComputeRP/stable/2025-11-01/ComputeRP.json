@@ -6752,7 +6752,7 @@
             "description": "Parameters supplied to the Update virtual machine scale set lifecycle hook event operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VMScaleSetLifecycleHookEvent"
+              "$ref": "#/definitions/VMScaleSetLifecycleHookEventUpdate"
             }
           }
         ],
@@ -18904,6 +18904,22 @@
           }
         }
       }
+    },
+    "VMScaleSetLifecycleHookEventUpdate": {
+      "type": "object",
+      "description": "Specifies information about the virtual machine scale set lifecycle hook event.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventProperties",
+          "description": "virtual machine scale set lifecycle hook event properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ]
     },
     "VMScaleSetScaleOutInput": {
       "type": "object",
