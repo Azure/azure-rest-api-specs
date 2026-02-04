@@ -14969,7 +14969,7 @@
       "description": "Describes a lifecycle hook.",
       "properties": {
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventType",
           "description": "Specifies the type of the lifecycle hook."
         },
         "waitDuration": {
@@ -18818,7 +18818,7 @@
       "description": "Defines the virtual machine scale set lifecycle hook event properties.",
       "properties": {
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventType",
           "description": "Defines the type or scenario for sending a virtual machine scale set lifecycle hook event to the customer."
         },
         "waitUntil": {
@@ -18903,6 +18903,42 @@
             "type": "string"
           }
         }
+      }
+    },
+    "VMScaleSetLifecycleHookEventType": {
+      "type": "string",
+      "description": "Specifies the scenario for which the customer is interested in receiving virtual machine scale set lifecycle hook events.",
+      "enum": [
+        "UpgradeAutoOSScheduling",
+        "UpgradeAutoOSRollingBatchStarting",
+        "UpgradeAutoOSRollingBatchCompleted",
+        "UpgradeAutoOSCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "VMScaleSetLifecycleHookEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UpgradeAutoOSScheduling",
+            "value": "UpgradeAutoOSScheduling",
+            "description": "Lifecycle hook event sent to the customer before an Auto OS Upgrade operation starts on the virtual machine scale set."
+          },
+          {
+            "name": "UpgradeAutoOSRollingBatchStarting",
+            "value": "UpgradeAutoOSRollingBatchStarting",
+            "description": "Lifecycle hook event sent to the customer before upgrade starts on a batch of virtual machines belonging to a virtual machine scale set during an Auto OS Upgrade operation."
+          },
+          {
+            "name": "UpgradeAutoOSRollingBatchCompleted",
+            "value": "UpgradeAutoOSRollingBatchCompleted",
+            "description": "Lifecycle hook event sent to the customer after upgrade is completed on a batch of virtual machines belonging to a virtual machine scale set during an Auto OS Upgrade operation."
+          },
+          {
+            "name": "UpgradeAutoOSCompleted",
+            "value": "UpgradeAutoOSCompleted",
+            "description": "Lifecycle hook event sent to the customer after an Auto OS Upgrade operation is completed on the virtual machine scale set."
+          }
+        ]
       }
     },
     "VMScaleSetLifecycleHookEventUpdate": {

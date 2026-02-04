@@ -1169,7 +1169,7 @@ model LifecycleHook {
   /**
    * Specifies the type of the lifecycle hook.
    */
-  type?: string;
+  type?: VMScaleSetLifecycleHookEventType;
 
   /**
    * Specifies the time duration a virtual machine scale set lifecycle hook event sent to the customer waits for a response from the customer. It should be in ISO 8601 format.
@@ -1257,7 +1257,7 @@ model VMScaleSetLifecycleHookEventProperties {
    * Defines the type or scenario for sending a virtual machine scale set lifecycle hook event to the customer.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "backcompat"
-  type?: string;
+  type?: VMScaleSetLifecycleHookEventType;
 
   /**
    * Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the defaultAction for the event.
@@ -1295,6 +1295,26 @@ model VMScaleSetLifecycleHookEventProperties {
    * Specifies the state of the virtual machine scale set lifecycle hook event.
    */
   state?: VMScaleSetLifecycleHookEventState;
+}
+
+/**
+ * Specifies the scenario for which the customer is interested in receiving virtual machine scale set lifecycle hook events.
+ */
+@added(Versions.v2025_11_01)
+union VMScaleSetLifecycleHookEventType {
+  string,
+
+  /** Lifecycle hook event sent to the customer before an Auto OS Upgrade operation starts on the virtual machine scale set. */
+  UpgradeAutoOSScheduling: "UpgradeAutoOSScheduling",
+
+  /** Lifecycle hook event sent to the customer before upgrade starts on a batch of virtual machines belonging to a virtual machine scale set during an Auto OS Upgrade operation. */
+  UpgradeAutoOSRollingBatchStarting: "UpgradeAutoOSRollingBatchStarting",
+
+  /** Lifecycle hook event sent to the customer after upgrade is completed on a batch of virtual machines belonging to a virtual machine scale set during an Auto OS Upgrade operation. */
+  UpgradeAutoOSRollingBatchCompleted: "UpgradeAutoOSRollingBatchCompleted",
+
+  /** Lifecycle hook event sent to the customer after an Auto OS Upgrade operation is completed on the virtual machine scale set. */
+  UpgradeAutoOSCompleted: "UpgradeAutoOSCompleted",
 }
 
 /**
