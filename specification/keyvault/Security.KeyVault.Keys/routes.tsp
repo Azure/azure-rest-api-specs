@@ -114,7 +114,6 @@ op deleteKey is KeyVaultOperation<
 #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.")
 @route("/keys/{key-name}/{key-version}")
-@patch(#{ implicitOptionality: true })
 op updateKey is KeyVaultOperation<
   {
     /**

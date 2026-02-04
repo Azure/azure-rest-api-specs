@@ -22,7 +22,6 @@ using KeyVault;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified attributes associated with the given certificate.")
 @route("/certificates/{certificate-name}/{certificate-version}")
-@patch(#{ implicitOptionality: true })
 op updateCertificate is KeyVaultOperation<
   {
     /**
