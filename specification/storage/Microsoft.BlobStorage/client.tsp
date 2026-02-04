@@ -24,6 +24,14 @@ namespace Customizations;
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
 
+@@clientName(Storage.Blob.Container.create, "create_container", "rust");
+@@clientName(Storage.Blob.Container.delete, "delete_container", "rust");
+@@clientName(Storage.Blob.Container.listBlobFlatSegment, "list_blobs", "rust");
+@@clientName(Storage.Blob.Service.listContainersSegment,
+  "list_containers",
+  "rust"
+);
+
 @@clientName(ContainerProperties.denyEncryptionScopeOverride,
   "PreventEncryptionScopeOverride"
 );
