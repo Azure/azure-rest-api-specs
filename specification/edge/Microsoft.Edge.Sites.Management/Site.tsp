@@ -18,19 +18,40 @@ model Site is ExtensionResource<SiteProperties> {
 }
 
 @doc("Site operations as base operations which will be extended for each scopes")
-interface SiteOps<Scope extends Azure.ResourceManager.Foundations.SimpleResource, ResourceName extends valueof string = ""> {
-  list is Extension.ListByTarget<Scope, Site, OverrideResourceName = ResourceName>;
+interface SiteOps<
+  Scope extends Azure.ResourceManager.Foundations.SimpleResource,
+  ResourceName extends valueof string = ""
+> {
+  list is Extension.ListByTarget<
+    Scope,
+    Site,
+    OverrideResourceName = ResourceName
+  >;
   get is Extension.Read<Scope, Site, OverrideResourceName = ResourceName>;
-  createOrUpdate is Extension.CreateOrUpdateAsync<Scope, Site, OverrideResourceName = ResourceName>;
-  update is Extension.CustomPatchSync<Scope, Site, SiteUpdate, OverrideResourceName = ResourceName>;
-  delete is Extension.DeleteSync<Scope, Site, OverrideResourceName = ResourceName>;
+  createOrUpdate is Extension.CreateOrUpdateAsync<
+    Scope,
+    Site,
+    OverrideResourceName = ResourceName
+  >;
+  update is Extension.CustomPatchSync<
+    Scope,
+    Site,
+    SiteUpdate,
+    OverrideResourceName = ResourceName
+  >;
+  delete is Extension.DeleteSync<
+    Scope,
+    Site,
+    OverrideResourceName = ResourceName
+  >;
 }
 
 @armResourceOperations
 interface Sites extends SiteOps<Extension.ResourceGroup> {}
 
 @armResourceOperations(#{ omitTags: true })
-interface SitesBySubscription extends SiteOps<Extension.Subscription, "SubscriptionEdgeSite"> {}
+interface SitesBySubscription
+  extends SiteOps<Extension.Subscription, "SubscriptionEdgeSite"> {}
 
 alias ServiceGroup = Extension.ExternalResource<
   TargetNamespace = "Microsoft.Management",
@@ -44,4 +65,5 @@ alias ServiceGroup = Extension.ExternalResource<
 @armResourceOperations(#{ omitTags: true })
 @added(Versions.v2025_03_01_preview)
 @added(Versions.v2025_06_01)
-interface SitesByServiceGroup extends SiteOps<ServiceGroup, "ServiceGroupEdgeSite"> {}
+interface SitesByServiceGroup
+  extends SiteOps<ServiceGroup, "ServiceGroupEdgeSite"> {}
