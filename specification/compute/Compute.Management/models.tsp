@@ -2024,7 +2024,7 @@ model AutomaticRepairsPolicy {
 @added(Versions.v2025_11_01)
 model ExternalHealthPolicy {
   /**
-   * If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB).
+   * If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB). Defaults to false.
    */
   enabled?: boolean;
 
