@@ -355,15 +355,6 @@ input-file:
   - preview/2025-12-01-preview/hci.json
 ```
 
-### Tag: package-preview-2025-11-01-preview
-
-These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2025-11-01-preview'
-input-file:
-  - preview/2025-11-01-preview/hci.json
-```
-
 ### Tag: package-2025-10-01
 
 These settings apply only when `--tag=package-2025-10-01` is specified on the command line.

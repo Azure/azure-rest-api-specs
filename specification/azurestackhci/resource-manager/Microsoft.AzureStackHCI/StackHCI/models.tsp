@@ -407,29 +407,6 @@ union ConnectivityStatus {
 }
 
 /**
- * Indicates whether the cluster is under support.
- */
-@added(Versions.v2026_02_15_preview)
-union SupportStatus {
-  string,
-
-  /**
-   * The cluster is under support.
-   */
-  InSupport: "InSupport",
-
-  /**
-   * The cluster is out of support.
-   */
-  OutOfSupport: "OutOfSupport",
-
-  /**
-   * The support status is not specified.
-   */
-  NotSpecified: "NotSpecified",
-}
-
-/**
  * Status of the Software Assurance for the cluster.
  */
 union SoftwareAssuranceStatus {
@@ -1873,13 +1850,6 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   connectivityStatus?: ConnectivityStatus;
-
-  /**
-   * Indicates whether the cluster is under support.
-   */
-  @visibility(Lifecycle.Read)
-  @added(Versions.v2026_02_15_preview)
-  supportStatus?: SupportStatus;
 
   /**
    * Unique, immutable resource id.

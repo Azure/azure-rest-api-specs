@@ -6796,11 +6796,6 @@
           "description": "Overall connectivity status for the cluster resource. Indicates whether the cluster is connected to Azure, partially connected, or has not recently communicated.",
           "readOnly": true
         },
-        "supportStatus": {
-          "$ref": "#/definitions/SupportStatus",
-          "description": "Indicates whether the cluster is under support.",
-          "readOnly": true
-        },
         "cloudId": {
           "type": "string",
           "description": "Unique, immutable resource id.",
@@ -14362,36 +14357,6 @@
           "description": "Number of storage disks in the device with $CanPool as true.",
           "readOnly": true
         }
-      }
-    },
-    "SupportStatus": {
-      "type": "string",
-      "description": "Indicates whether the cluster is under support.",
-      "enum": [
-        "InSupport",
-        "OutOfSupport",
-        "NotSpecified"
-      ],
-      "x-ms-enum": {
-        "name": "SupportStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InSupport",
-            "value": "InSupport",
-            "description": "The cluster is under support."
-          },
-          {
-            "name": "OutOfSupport",
-            "value": "OutOfSupport",
-            "description": "The cluster is out of support."
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "The support status is not specified."
-          }
-        ]
       }
     },
     "SwitchDetail": {
