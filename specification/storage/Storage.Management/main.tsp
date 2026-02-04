@@ -34,6 +34,8 @@ import "./TableServiceProperties.tsp";
 import "./Table.tsp";
 import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./StorageTaskAssignment.tsp";
+import "./StorageConnector.tsp";
+import "./StorageDataShare.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;

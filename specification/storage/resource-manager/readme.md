@@ -66,6 +66,12 @@ directive:
     - $.definitions.StorageAccount
     suppress: BodyTopLevelProperties
     reason: The 'placement' property is already a top-level property in Microsoft.Compute/virtualMachines, so the schema should stay consistent here.
+
+  - where:
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/connectors/{connectorName}"].patch.parameters[5].schema.properties.properties
+    - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/dataShares/{dataShareName}"].patch.parameters[5].schema.properties.properties
+    suppress: PatchBodyParametersSchema
+    reason: We have used kind property as discriminator to support polymorphic resource and during patch also need to pass discriminator to allow patch on certain polymorphic resource type property.
 ```
 
 ### Tag: package-2025-06
