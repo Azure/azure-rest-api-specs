@@ -1,7 +1,3 @@
-import "@typespec/rest";
-import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-azure-core";
-
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -45,7 +41,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   create is Azure.Core.Foundations.Operation<
     {
-      ...WithConditionalFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+      ...WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @doc("The name of the evaluation taxonomy.")
       @path
@@ -63,7 +59,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   update is Azure.Core.Foundations.Operation<
     {
-      ...WithConditionalFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>;
+      ...WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @doc("The name of the evaluation taxonomy.")
       @path

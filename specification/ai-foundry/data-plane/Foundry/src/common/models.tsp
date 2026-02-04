@@ -1,10 +1,3 @@
-import "@typespec/http";
-import "@typespec/openapi";
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
-
 namespace Azure.AI.Projects;
 
 using Azure.Core.Experimental;
@@ -55,38 +48,36 @@ op FoundryDataPlaneOperation<
   ErrorResponse = ApiErrorResponse
 >(...Params, ...FoundryDataPlaneApiVersionParameter): Response | ErrorResponse;
 
-enum FoundryPreviewOptInKeys {
-  container_agents_v1: "ContainerAgents=v1",
-  hosted_agents_v1: "HostedAgents=v1",
-  workflow_agents_v1: "WorkflowAgents=v1",
-  evaluations_v1: "Evaluations=v1",
-  red_teams_v1: "RedTeams=v1",
-  insights_v1: "Insights=v1",
-  memory_stores_v1: "MemoryStores=v1",
+enum FoundryFeaturesOptInKeys {
+  container_agents_v1_preview: "ContainerAgents=V1Preview",
+  hosted_agents_v1_preview: "HostedAgents=V1Preview",
+  workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
+  evaluations_v1_preview: "Evaluations=V1Preview",
+  red_teams_v1_preview: "RedTeams=V1Preview",
+  insights_v1_preview: "Insights=V1Preview",
+  memory_stores_v1_preview: "MemoryStores=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryPreviewOptInKeys> = {
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
-  @header("Foundry-Beta")
-  foundry_beta: RequiredPreviewOptInHeader;
+  @header("Foundry-Features")
+  foundry_features: RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<FeatureOptInHeaders> = {
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
-  @header("Foundry-Beta")
-  foundry_beta?: FeatureOptInHeaders;
+  @header("Foundry-Features")
+  foundry_features?: OptionalPreviewOptInHeader;
 };
-
-alias FoundryPreviewExtensionKey = "x-ms-foundry-meta";
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""
 #suppress "@azure-tools/typespec-azure-core/no-response-body" ""
 op FoundryDataPlanePreviewOperation<
-  AreaPreviewLabel,
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys,
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
@@ -110,7 +101,7 @@ op OpenAIOperation<
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 op OpenAIOperationWithPreview<
-  AreaPreviewLabel,
+  AreaPreviewLabel extends FoundryFeaturesOptInKeys,
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse

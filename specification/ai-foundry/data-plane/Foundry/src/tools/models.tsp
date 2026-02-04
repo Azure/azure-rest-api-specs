@@ -1,8 +1,3 @@
-import "@typespec/http";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core/experimental";
-import "@azure-tools/openai-typespec/models/responses";
-
 import "../memory_stores/models.tsp";
 
 using Azure.Core.Experimental;
@@ -775,7 +770,7 @@ namespace Azure.AI.Projects {
     ...MemorySearchToolCallItemBase;
   }
 
-  model MemorySearchToolCallItemResource extends OpenAI.ItemResource {
+  model MemorySearchToolCallItemResource extends OpenAI.OutputItem {
     type: "memory_search_call";
 
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."

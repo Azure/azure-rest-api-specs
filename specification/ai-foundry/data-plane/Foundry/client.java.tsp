@@ -1,5 +1,3 @@
-import "@azure-tools/typespec-client-generator-core";
-
 import "./src/common/service.tsp";
 
 import "./src/connections/routes.tsp";
@@ -54,12 +52,13 @@ namespace Azure.AI.Projects;
 @@clientName(EvalRunResultComparison, "EvaluationRunResultComparison");
 @@clientName(EvalRunResultSummary, "EvaluationRunResultSummary");
 
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
 
 // Needs forceful exposition
-@@access(FoundryPreviewOptInKeys, Access.public);
+@@access(FoundryFeaturesOptInKeys, Access.public);
 
 // Default name produces a style violation
 @@clientName(SASCredentials, "SasCredentials", "java");

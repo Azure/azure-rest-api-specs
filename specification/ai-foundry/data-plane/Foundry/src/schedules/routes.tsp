@@ -1,7 +1,3 @@
-import "@typespec/rest";
-import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-azure-core";
-
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -24,7 +20,7 @@ alias SchedulesFilterQueryParams = {
   enabled?: boolean;
 };
 
-alias ScheduleOps = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.insights_v1>>;
+alias ScheduleOps = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.insights_v1_preview>>;
 
 @tag("Schedules")
 interface Schedules {
@@ -56,7 +52,7 @@ interface Schedules {
       @doc("The unique identifier of the schedule run.")
       run_id: string;
 
-      ...WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.insights_v1>;
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.insights_v1_preview>;
     },
     OkResponse<ScheduleRun>
   >;
@@ -66,6 +62,6 @@ interface Schedules {
   listRuns is ScheduleRunOperations.ResourceList<
     ScheduleRun,
     SchedulesFilterQueryParams &
-      WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.insights_v1>
+      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.insights_v1_preview>
   >;
 }

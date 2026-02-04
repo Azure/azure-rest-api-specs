@@ -1,8 +1,3 @@
-import "@typespec/http";
-import "@typespec/rest";
-import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-azure-core";
-
 import "../common/models.tsp";
 import "../servicepatterns.tsp";
 import "./models.tsp";
@@ -12,7 +7,7 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias EvaluationRuleOperations = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryPreviewOptInKeys.evaluations_v1>>;
+alias EvaluationRuleOperations = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>>;
 
 @tag("EvaluationRules")
 interface EvaluationRules {

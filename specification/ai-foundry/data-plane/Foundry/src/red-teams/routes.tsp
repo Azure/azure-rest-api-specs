@@ -1,14 +1,10 @@
-import "@typespec/rest";
-import "@azure-tools/typespec-autorest";
-import "@azure-tools/typespec-azure-core";
-
 import "./models.tsp";
 
 using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
-alias RedTeamOps = FoundryAzureOperations<WithConditionalFoundryPreviewHeader<FoundryPreviewOptInKeys.red_teams_v1>>;
+alias RedTeamOps = FoundryAzureOperations<WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.red_teams_v1_preview>>;
 
 @route("redTeams")
 @tag("Redteams")
@@ -25,7 +21,7 @@ interface RedTeams {
   @post
   create is FoundryDataPlaneOperation<
     {
-      ...WithConditionalFoundryPreviewHeader<FoundryPreviewOptInKeys.red_teams_v1>;
+      ...WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.red_teams_v1_preview>;
 
       @doc("Redteam to be run")
       @body

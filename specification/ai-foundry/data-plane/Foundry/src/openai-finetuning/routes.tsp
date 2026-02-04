@@ -1,11 +1,3 @@
-import "@typespec/http";
-import "@typespec/openapi";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-
-// import "../.external-readonly/openai.external.typespec/finetuning/custom.tsp";
-import "@azure-tools/openai-typespec/models/fine-tuning";
-
 import "../common/models.tsp";
 
 using TypeSpec.Http;

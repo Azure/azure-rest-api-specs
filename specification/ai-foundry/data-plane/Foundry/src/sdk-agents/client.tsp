@@ -1,5 +1,3 @@
-import "@azure-tools/typespec-client-generator-core";
-import "@azure-tools/typespec-azure-core/experimental";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -57,7 +55,7 @@ using Azure.AI.Projects;
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
-@@access(FoundryPreviewOptInKeys, Access.public);
+@@access(FoundryFeaturesOptInKeys, Access.public);
 
 @@usage(OpenAI.IncludeEnum, Usage.input);
 @@access(OpenAI.IncludeEnum, Access.public);

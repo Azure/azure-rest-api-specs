@@ -61,7 +61,7 @@
         "description": "Creates the agent.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
@@ -70,19 +70,19 @@
                 {
                   "type": "string",
                   "enum": [
-                    "ContainerAgents=v1"
+                    "ContainerAgents=V1Preview"
                   ]
                 },
                 {
                   "type": "string",
                   "enum": [
-                    "HostedAgents=v1"
+                    "HostedAgents=V1Preview"
                   ]
                 },
                 {
                   "type": "string",
                   "enum": [
-                    "WorkflowAgents=v1"
+                    "WorkflowAgents=V1Preview"
                   ]
                 }
               ]
@@ -136,9 +136,9 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "HostedAgents=v1",
-            "ContainerAgents=v1",
-            "WorkflowAgents=v1"
+            "HostedAgents=V1Preview",
+            "ContainerAgents=V1Preview",
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -318,6 +318,34 @@
         "description": "Updates the agent by adding a new version if there are any changes to the agent definition.\nIf no changes, returns the existing agent version.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "ContainerAgents=V1Preview"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "HostedAgents=V1Preview"
+                  ]
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "WorkflowAgents=V1Preview"
+                  ]
+                }
+              ]
+            }
+          },
+          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -492,14 +520,14 @@
         "description": "List container operations for an agent.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "ContainerAgents=v1"
+                "ContainerAgents=V1Preview"
               ]
             }
           },
@@ -618,7 +646,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       }
@@ -629,14 +657,14 @@
         "description": "Get the status of a container operation for an agent.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "ContainerAgents=v1"
+                "ContainerAgents=V1Preview"
               ]
             }
           },
@@ -696,7 +724,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       }
@@ -707,7 +735,7 @@
         "description": "Create a new agent version.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
@@ -716,19 +744,19 @@
                 {
                   "type": "string",
                   "enum": [
-                    "ContainerAgents=v1"
+                    "ContainerAgents=V1Preview"
                   ]
                 },
                 {
                   "type": "string",
                   "enum": [
-                    "HostedAgents=v1"
+                    "HostedAgents=V1Preview"
                   ]
                 },
                 {
                   "type": "string",
                   "enum": [
-                    "WorkflowAgents=v1"
+                    "WorkflowAgents=V1Preview"
                   ]
                 }
               ]
@@ -792,9 +820,9 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "HostedAgents=v1",
-            "ContainerAgents=v1",
-            "WorkflowAgents=v1"
+            "HostedAgents=V1Preview",
+            "ContainerAgents=V1Preview",
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -982,28 +1010,6 @@
         "description": "Deletes a specific version of an agent.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=v1"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=v1"
-                  ]
-                }
-              ]
-            }
-          },
-          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -1065,14 +1071,14 @@
         "description": "Get a container for a specific version of an agent.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "ContainerAgents=v1"
+                "ContainerAgents=V1Preview"
               ]
             }
           },
@@ -1132,7 +1138,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       }
@@ -1143,14 +1149,14 @@
         "description": "List container operations for a specific version of an agent.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "ContainerAgents=v1"
+                "ContainerAgents=V1Preview"
               ]
             }
           },
@@ -1278,7 +1284,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       }
@@ -1289,14 +1295,14 @@
         "description": "Delete a container for a specific version of an agent. If the container doesn't exist, the operation will be no-op.\nThe operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "ContainerAgents=v1"
+                "ContainerAgents=V1Preview"
               ]
             }
           },
@@ -1365,7 +1371,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       }
@@ -1376,14 +1382,14 @@
         "description": "Container log entry streamed from the container as text chunks.\nEach chunk is a UTF-8 string that may be either a plain text log line\nor a JSON-formatted log entry, depending on the type of container log being streamed.\nClients should treat each chunk as opaque text and, if needed, attempt\nto parse it as JSON based on their logging requirements.\n\nFor system logs, the format is JSON with the following structure:\n{\"TimeStamp\":\"2025-12-15T16:51:33Z\",\"Type\":\"Normal\",\"ContainerAppName\":null,\"RevisionName\":null,\"ReplicaName\":null,\"Msg\":\"Connecting to the events collector...\",\"Reason\":\"StartingGettingEvents\",\"EventSource\":\"ContainerAppController\",\"Count\":1}\n{\"TimeStamp\":\"2025-12-15T16:51:34Z\",\"Type\":\"Normal\",\"ContainerAppName\":null,\"RevisionName\":null,\"ReplicaName\":null,\"Msg\":\"Successfully connected to events server\",\"Reason\":\"ConnectedToEventsServer\",\"EventSource\":\"ContainerAppController\",\"Count\":1}\n\nFor console logs, the format is plain text as emitted by the container's stdout/stderr.\n2025-12-15T08:43:48.72656  Connecting to the container 'agent-container'...\n2025-12-15T08:43:48.75451  Successfully Connected to container: 'agent-container' [Revision: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b', Replica: 'je90fe655aa742ef9a188b9fd14d6764--7tca06b-6898b9c89f-mpkjc']\n2025-12-15T08:33:59.0671054Z stdout F INFO:     127.0.0.1:42588 - \"GET /readiness HTTP/1.1\" 200 OK\n2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - \"GET /readiness HTTP/1.1\" 200 OK\n2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - \"GET /readiness HTTP/1.1\" 200 OK",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "ContainerAgents=v1"
+                "ContainerAgents=V1Preview"
               ]
             }
           },
@@ -1467,7 +1473,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       }
@@ -1478,14 +1484,14 @@
         "description": "Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.\nThe operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "ContainerAgents=v1"
+                "ContainerAgents=V1Preview"
               ]
             }
           },
@@ -1578,7 +1584,7 @@
         },
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       }
@@ -1589,14 +1595,14 @@
         "description": "Stop a container for a specific version of an agent. If the container is not running, or already stopped, the operation will be no-op.\nThe operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "ContainerAgents=v1"
+                "ContainerAgents=V1Preview"
               ]
             }
           },
@@ -1665,7 +1671,7 @@
         ],
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       }
@@ -1676,14 +1682,14 @@
         "description": "Update a container for a specific version of an agent. If the container is not running, the operation will be no-op.\nThe operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.\nhttps://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "ContainerAgents=v1"
+                "ContainerAgents=V1Preview"
               ]
             }
           },
@@ -1774,7 +1780,7 @@
         },
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       }
@@ -1847,28 +1853,6 @@
         "operationId": "Agents_createAgentFromManifest",
         "description": "Creates an agent from a manifest.",
         "parameters": [
-          {
-            "name": "Foundry-Beta",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "enum": [
-                    "ContainerAgents=v1"
-                  ]
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "HostedAgents=v1"
-                  ]
-                }
-              ]
-            }
-          },
           {
             "name": "api-version",
             "in": "query",
@@ -3204,14 +3188,14 @@
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Evaluations=v1"
+                "Evaluations=V1Preview"
               ]
             }
           },
@@ -3289,14 +3273,14 @@
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Evaluations=v1"
+                "Evaluations=V1Preview"
               ]
             }
           },
@@ -3398,14 +3382,14 @@
             "explode": false
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Evaluations=v1"
+                "Evaluations=V1Preview"
               ]
             }
           }
@@ -3496,14 +3480,14 @@
             "explode": false
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Evaluations=v1"
+                "Evaluations=V1Preview"
               ]
             }
           }
@@ -3560,14 +3544,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Evaluations=v1"
+                "Evaluations=V1Preview"
               ]
             }
           }
@@ -3636,14 +3620,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Evaluations=v1"
+                "Evaluations=V1Preview"
               ]
             }
           },
@@ -3709,14 +3693,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Evaluations=v1"
+                "Evaluations=V1Preview"
               ]
             }
           },
@@ -3775,14 +3759,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Evaluations=v1"
+                "Evaluations=V1Preview"
               ]
             }
           },
@@ -4150,14 +4134,14 @@
             "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Insights=v1"
+                "Insights=V1Preview"
               ]
             }
           },
@@ -4415,14 +4399,14 @@
         "description": "Create a memory store.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "MemoryStores=v1"
+                "MemoryStores=V1Preview"
               ]
             }
           },
@@ -4505,7 +4489,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -4556,14 +4540,14 @@
             "explode": false
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "MemoryStores=v1"
+                "MemoryStores=V1Preview"
               ]
             }
           },
@@ -4631,7 +4615,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       }
@@ -4651,14 +4635,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "MemoryStores=v1"
+                "MemoryStores=V1Preview"
               ]
             }
           },
@@ -4724,7 +4708,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -4742,14 +4726,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "MemoryStores=v1"
+                "MemoryStores=V1Preview"
               ]
             }
           },
@@ -4791,7 +4775,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -4809,14 +4793,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "MemoryStores=v1"
+                "MemoryStores=V1Preview"
               ]
             }
           },
@@ -4858,7 +4842,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       }
@@ -4887,14 +4871,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "MemoryStores=v1"
+                "MemoryStores=V1Preview"
               ]
             }
           },
@@ -4936,7 +4920,7 @@
         ],
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       }
@@ -4956,14 +4940,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "MemoryStores=v1"
+                "MemoryStores=V1Preview"
               ]
             }
           },
@@ -5024,7 +5008,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       }
@@ -5044,14 +5028,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "MemoryStores=v1"
+                "MemoryStores=V1Preview"
               ]
             }
           },
@@ -5131,7 +5115,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       }
@@ -5151,14 +5135,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "MemoryStores=v1"
+                "MemoryStores=V1Preview"
               ]
             }
           },
@@ -5246,7 +5230,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       }
@@ -5607,14 +5591,7 @@
                   "items": {
                     "type": "array",
                     "items": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/components/schemas/OpenAI.Item"
-                        },
-                        {
-                          "$ref": "#/components/schemas/OpenAI.EasyInputMessage"
-                        }
-                      ]
+                      "$ref": "#/components/schemas/OpenAI.Item"
                     },
                     "maxItems": 20,
                     "description": "The items to add to the conversation. You may add up to 20 items at a time."
@@ -5709,7 +5686,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/OpenAI.ItemResource"
+                        "$ref": "#/components/schemas/OpenAI.OutputItem"
                       },
                       "description": "The requested list of items."
                     },
@@ -5777,7 +5754,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/OpenAI.ItemResource"
+                  "$ref": "#/components/schemas/OpenAI.OutputItem"
                 }
               }
             }
@@ -7663,6 +7640,48 @@
         ]
       }
     },
+    "/openai/v1/responses/compact": {
+      "post": {
+        "operationId": "compactResponseConversation",
+        "description": "Produces a compaction of a responses conversation.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.CompactResource"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Responses"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpenAI.CompactResponseMethodPublicBody"
+              }
+            }
+          }
+        }
+      }
+    },
     "/openai/v1/responses/{response_id}": {
       "get": {
         "operationId": "getResponse_getResponseStream",
@@ -8072,14 +8091,14 @@
         "description": "Creates a redteam run.",
         "parameters": [
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": false,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "RedTeams=v1"
+                "RedTeams=V1Preview"
               ]
             }
           },
@@ -8496,14 +8515,14 @@
             }
           },
           {
-            "name": "Foundry-Beta",
+            "name": "Foundry-Features",
             "in": "header",
             "required": true,
             "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
             "schema": {
               "type": "string",
               "enum": [
-                "Insights=v1"
+                "Insights=V1Preview"
               ]
             }
           },
@@ -8778,7 +8797,7 @@
         "description": "The details of the container of a specific version of an agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       },
@@ -8806,7 +8825,7 @@
         "description": "The error details of the container operation, if any.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       },
@@ -8859,7 +8878,7 @@
         "description": "The container operation for a specific version of an agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       },
@@ -8874,7 +8893,7 @@
         "description": "Status of the container operation for a specific version of an agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       },
@@ -8893,7 +8912,7 @@
         "description": "Status of the container of a specific version of an agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       },
@@ -8926,9 +8945,9 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "HostedAgents=v1",
-            "ContainerAgents=v1",
-            "WorkflowAgents=v1"
+            "HostedAgents=V1Preview",
+            "ContainerAgents=V1Preview",
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -10184,7 +10203,7 @@
         "description": "A memory item containing a summary extracted from conversations.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -10434,7 +10453,7 @@
         "description": "The container app agent definition.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       },
@@ -10480,7 +10499,7 @@
         "description": "Detailed information about the container.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       },
@@ -10493,7 +10512,7 @@
         "description": "The type of logs to stream from a container.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       },
@@ -10521,7 +10540,7 @@
         "description": "Information about a container replica.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "ContainerAgents=v1"
+            "ContainerAgents=V1Preview"
           ]
         }
       },
@@ -10668,18 +10687,18 @@
             "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
-                "HostedAgents=v1",
-                "ContainerAgents=v1",
-                "WorkflowAgents=v1"
+                "HostedAgents=V1Preview",
+                "ContainerAgents=V1Preview",
+                "WorkflowAgents=V1Preview"
               ]
             }
           }
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "HostedAgents=v1",
-            "ContainerAgents=v1",
-            "WorkflowAgents=v1"
+            "HostedAgents=V1Preview",
+            "ContainerAgents=V1Preview",
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -10742,18 +10761,18 @@
             "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
-                "HostedAgents=v1",
-                "ContainerAgents=v1",
-                "WorkflowAgents=v1"
+                "HostedAgents=V1Preview",
+                "ContainerAgents=V1Preview",
+                "WorkflowAgents=V1Preview"
               ]
             }
           }
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "HostedAgents=v1",
-            "ContainerAgents=v1",
-            "WorkflowAgents=v1"
+            "HostedAgents=V1Preview",
+            "ContainerAgents=V1Preview",
+            "WorkflowAgents=V1Preview"
           ]
         }
       },
@@ -11268,7 +11287,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -13051,7 +13070,7 @@
         "description": "The hosted agent definition.",
         "x-ms-foundry-meta": {
           "required_previews": [
-            "HostedAgents=v1"
+            "HostedAgents=V1Preview"
           ]
         }
       },
@@ -13646,7 +13665,7 @@
         "description": "A single memory item stored in the memory store, containing content and metadata.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -13666,7 +13685,7 @@
         "description": "Memory item kind.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -13697,7 +13716,7 @@
         "description": "Represents a single memory operation (create, update, or delete) performed on a memory item.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -13718,7 +13737,7 @@
         "description": "Memory operation kind.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -13740,7 +13759,7 @@
         "description": "A retrieved memory item from memory search.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -13756,7 +13775,7 @@
         "description": "Memory search options.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -13867,7 +13886,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
       },
@@ -13911,7 +13930,7 @@
         "description": "Default memory store implementation.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -13940,7 +13959,7 @@
         "description": "Default memory store configurations.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -13968,7 +13987,7 @@
         "description": "Base definition for memory store configurations.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -14004,7 +14023,7 @@
         "description": "Response for deleting memories from a scope.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -14023,7 +14042,7 @@
         "description": "The type of memory store implementation to use.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -14088,7 +14107,7 @@
         "description": "A memory store that can store and retrieve user memories.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -14152,7 +14171,7 @@
         "description": "Usage statistics of a memory store operation.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -14187,7 +14206,7 @@
         "description": "Memory search response.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -14217,7 +14236,7 @@
         "description": "Memory update result.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -14264,7 +14283,7 @@
         "description": "Provides the status of a memory store update operation.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -14280,7 +14299,7 @@
         "description": "Status of a memory store update operation.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -14487,7 +14506,7 @@
         ],
         "description": "Credentials that do not require authentication"
       },
-      "OAuthConsentRequestItemResource": {
+      "OAuthConsentRequestOutputItem": {
         "type": "object",
         "required": [
           "id",
@@ -14516,7 +14535,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ],
         "description": "Request from the service for the user to perform OAuth consent."
@@ -15071,6 +15090,84 @@
         "description": "A function tool that can be used to generate a response.",
         "title": "Function tool"
       },
+      "OpenAI.ChatModel": {
+        "type": "string",
+        "enum": [
+          "gpt-5.2",
+          "gpt-5.2-2025-12-11",
+          "gpt-5.2-chat-latest",
+          "gpt-5.2-pro",
+          "gpt-5.2-pro-2025-12-11",
+          "gpt-5.1",
+          "gpt-5.1-2025-11-13",
+          "gpt-5.1-codex",
+          "gpt-5.1-mini",
+          "gpt-5.1-chat-latest",
+          "gpt-5",
+          "gpt-5-mini",
+          "gpt-5-nano",
+          "gpt-5-2025-08-07",
+          "gpt-5-mini-2025-08-07",
+          "gpt-5-nano-2025-08-07",
+          "gpt-5-chat-latest",
+          "gpt-4.1",
+          "gpt-4.1-mini",
+          "gpt-4.1-nano",
+          "gpt-4.1-2025-04-14",
+          "gpt-4.1-mini-2025-04-14",
+          "gpt-4.1-nano-2025-04-14",
+          "o4-mini",
+          "o4-mini-2025-04-16",
+          "o3",
+          "o3-2025-04-16",
+          "o3-mini",
+          "o3-mini-2025-01-31",
+          "o1",
+          "o1-2024-12-17",
+          "o1-preview",
+          "o1-preview-2024-09-12",
+          "o1-mini",
+          "o1-mini-2024-09-12",
+          "gpt-4o",
+          "gpt-4o-2024-11-20",
+          "gpt-4o-2024-08-06",
+          "gpt-4o-2024-05-13",
+          "gpt-4o-audio-preview",
+          "gpt-4o-audio-preview-2024-10-01",
+          "gpt-4o-audio-preview-2024-12-17",
+          "gpt-4o-audio-preview-2025-06-03",
+          "gpt-4o-mini-audio-preview",
+          "gpt-4o-mini-audio-preview-2024-12-17",
+          "gpt-4o-search-preview",
+          "gpt-4o-mini-search-preview",
+          "gpt-4o-search-preview-2025-03-11",
+          "gpt-4o-mini-search-preview-2025-03-11",
+          "chatgpt-4o-latest",
+          "codex-mini-latest",
+          "gpt-4o-mini",
+          "gpt-4o-mini-2024-07-18",
+          "gpt-4-turbo",
+          "gpt-4-turbo-2024-04-09",
+          "gpt-4-0125-preview",
+          "gpt-4-turbo-preview",
+          "gpt-4-1106-preview",
+          "gpt-4-vision-preview",
+          "gpt-4",
+          "gpt-4-0314",
+          "gpt-4-0613",
+          "gpt-4-32k",
+          "gpt-4-32k-0314",
+          "gpt-4-32k-0613",
+          "gpt-3.5-turbo",
+          "gpt-3.5-turbo-16k",
+          "gpt-3.5-turbo-0301",
+          "gpt-3.5-turbo-0613",
+          "gpt-3.5-turbo-1106",
+          "gpt-3.5-turbo-0125",
+          "gpt-3.5-turbo-16k-0613"
+        ],
+        "x-stainless-nominal": false
+      },
       "OpenAI.ClickButtonType": {
         "type": "string",
         "enum": [
@@ -15253,6 +15350,85 @@
         ],
         "description": "A tool that runs Python code to help generate a response to a prompt.",
         "title": "Code interpreter"
+      },
+      "OpenAI.CompactResource": {
+        "type": "object",
+        "required": [
+          "id",
+          "object",
+          "output",
+          "created_at",
+          "usage"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier for the compacted response."
+          },
+          "object": {
+            "type": "string",
+            "enum": [
+              "response.compaction"
+            ],
+            "description": "The object type. Always `response.compaction`.",
+            "x-stainless-const": true,
+            "default": "response.compaction"
+          },
+          "output": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.OutputItem"
+            },
+            "description": "The compacted list of output items. This is a list of all user messages, followed by a single compaction item."
+          },
+          "created_at": {
+            "type": "integer",
+            "format": "unixtime",
+            "description": "Unix timestamp (in seconds) when the compacted conversation was created."
+          },
+          "usage": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ResponseUsage"
+              }
+            ],
+            "description": "Token accounting for the compaction pass, including cached, reasoning, and total tokens."
+          }
+        },
+        "title": "The compacted response object"
+      },
+      "OpenAI.CompactResponseMethodPublicBody": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "model": {
+            "$ref": "#/components/schemas/OpenAI.ModelIdsCompaction"
+          },
+          "input": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/OpenAI.InputItem"
+                }
+              }
+            ],
+            "nullable": true
+          },
+          "previous_response_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "instructions": {
+            "type": "string",
+            "nullable": true
+          }
+        }
       },
       "OpenAI.CompactionSummaryItemParam": {
         "type": "object",
@@ -22653,27 +22829,11 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.ItemResourceType"
-          },
-          "agent_reference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentReference"
-              }
-            ],
-            "description": "The agent that created the item."
-          },
-          "response_id": {
-            "type": "string",
-            "description": "The response on which the item is created."
           }
         },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "structured_outputs": "#/components/schemas/StructuredOutputsItemResource",
-            "workflow_preview_action": "#/components/schemas/WorkflowPreviewActionOutputItemResource",
-            "oauth_consent_request": "#/components/schemas/OAuthConsentRequestItemResource",
-            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource",
             "message": "#/components/schemas/OpenAI.InputMessageResource",
             "output_message": "#/components/schemas/OpenAI.ItemResourceOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.ItemResourceFileSearchToolCall",
@@ -23660,7 +23820,7 @@
               "structured_outputs",
               "oauth_consent_request",
               "memory_search_call",
-              "workflow_preview_action"
+              "workflow_action"
             ]
           }
         ]
@@ -23754,7 +23914,7 @@
               "structured_outputs",
               "oauth_consent_request",
               "memory_search_call",
-              "workflow_preview_action"
+              "workflow_action"
             ]
           }
         ]
@@ -24306,6 +24466,61 @@
         "description": "Set of 16 key-value pairs that can be attached to an object. This can be\nuseful for storing additional information about the object in a structured\nformat, and querying for objects via API or the dashboard.\nKeys are strings with a maximum length of 64 characters. Values are strings\nwith a maximum length of 512 characters.",
         "x-oaiTypeLabel": "map"
       },
+      "OpenAI.ModelIdsCompaction": {
+        "anyOf": [
+          {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ModelIdsResponses"
+              }
+            ],
+            "description": "Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](https://platform.openai.com/docs/models) to browse and compare available models.",
+            "nullable": true
+          },
+          {
+            "type": "string",
+            "description": "Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](https://platform.openai.com/docs/models) to browse and compare available models.",
+            "nullable": true
+          }
+        ],
+        "description": "Model ID used to generate the response, like `gpt-5` or `o3`. OpenAI offers a wide range of models with different capabilities, performance characteristics, and price points. Refer to the [model guide](https://platform.openai.com/docs/models) to browse and compare available models."
+      },
+      "OpenAI.ModelIdsResponses": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ModelIdsShared"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "o1-pro",
+              "o1-pro-2025-03-19",
+              "o3-pro",
+              "o3-pro-2025-06-10",
+              "o3-deep-research",
+              "o3-deep-research-2025-06-26",
+              "o4-mini-deep-research",
+              "o4-mini-deep-research-2025-06-26",
+              "computer-use-preview",
+              "computer-use-preview-2025-03-11",
+              "gpt-5-codex",
+              "gpt-5-pro",
+              "gpt-5-pro-2025-10-06",
+              "gpt-5.1-codex-max"
+            ]
+          }
+        ]
+      },
+      "OpenAI.ModelIdsShared": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "$ref": "#/components/schemas/OpenAI.ChatModel"
+          }
+        ]
+      },
       "OpenAI.Move": {
         "type": "object",
         "required": [
@@ -24461,11 +24676,27 @@
         "properties": {
           "type": {
             "$ref": "#/components/schemas/OpenAI.OutputItemType"
+          },
+          "agent_reference": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentReference"
+              }
+            ],
+            "description": "The agent that created the item."
+          },
+          "response_id": {
+            "type": "string",
+            "description": "The response on which the item is created."
           }
         },
         "discriminator": {
           "propertyName": "type",
           "mapping": {
+            "structured_outputs": "#/components/schemas/StructuredOutputsOutputItem",
+            "workflow_action": "#/components/schemas/WorkflowActionOutputItem",
+            "oauth_consent_request": "#/components/schemas/OAuthConsentRequestOutputItem",
+            "memory_search_call": "#/components/schemas/MemorySearchToolCallItemResource",
             "output_message": "#/components/schemas/OpenAI.OutputItemOutputMessage",
             "file_search_call": "#/components/schemas/OpenAI.OutputItemFileSearchToolCall",
             "function_call": "#/components/schemas/OpenAI.OutputItemFunctionToolCall",
@@ -25392,7 +25623,11 @@
               "mcp_call",
               "mcp_list_tools",
               "mcp_approval_request",
-              "custom_tool_call"
+              "custom_tool_call",
+              "structured_outputs",
+              "oauth_consent_request",
+              "memory_search_call",
+              "workflow_action"
             ]
           }
         ]
@@ -31603,7 +31838,7 @@
         },
         "description": "A structured output that can be produced by the agent."
       },
-      "StructuredOutputsItemResource": {
+      "StructuredOutputsOutputItem": {
         "type": "object",
         "required": [
           "type",
@@ -31622,7 +31857,7 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
       },
@@ -32118,9 +32353,9 @@
             "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
-                "HostedAgents=v1",
-                "ContainerAgents=v1",
-                "WorkflowAgents=v1"
+                "HostedAgents=V1Preview",
+                "ContainerAgents=V1Preview",
+                "WorkflowAgents=V1Preview"
               ]
             }
           }
@@ -32172,7 +32407,7 @@
         "description": "A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "MemoryStores=v1"
+            "MemoryStores=V1Preview"
           ]
         }
       },
@@ -32223,36 +32458,7 @@
         ],
         "description": "Weekly recurrence schedule."
       },
-      "WorkflowAgentDefinition": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": [
-              "workflow"
-            ]
-          },
-          "workflow": {
-            "type": "string",
-            "description": "The CSDL YAML definition of the workflow."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/AgentDefinition"
-          }
-        ],
-        "description": "The workflow agent definition.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "WorkflowAgents=v1"
-          ]
-        }
-      },
-      "WorkflowPreviewActionOutputItemResource": {
+      "WorkflowActionOutputItem": {
         "type": "object",
         "required": [
           "type",
@@ -32264,7 +32470,7 @@
           "type": {
             "type": "string",
             "enum": [
-              "workflow_preview_action"
+              "workflow_action"
             ]
           },
           "kind": {
@@ -32296,9 +32502,38 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/OpenAI.ItemResource"
+            "$ref": "#/components/schemas/OpenAI.OutputItem"
           }
         ]
+      },
+      "WorkflowAgentDefinition": {
+        "type": "object",
+        "required": [
+          "kind"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "workflow"
+            ]
+          },
+          "workflow": {
+            "type": "string",
+            "description": "The CSDL YAML definition of the workflow."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AgentDefinition"
+          }
+        ],
+        "description": "The workflow agent definition.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "WorkflowAgents=V1Preview"
+          ]
+        }
       },
       "integer": {
         "type": "integer",

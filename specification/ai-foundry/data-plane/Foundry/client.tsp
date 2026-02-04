@@ -1,8 +1,7 @@
 //
-// This file is used for emitting the Python client (package azure-ai-projects) and 
+// This file is used for emitting the Python client (package azure-ai-projects) and
 // the JS client (package @azure/ai-projects).
 //
-import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -31,6 +30,7 @@ using Azure.AI.Projects;
 @@scope(Responses.cancelResponse, "!(python, javascript)");
 @@scope(Responses.listInputItems, "!(python, javascript)");
 @@scope(Responses.listResponses, "!(python, javascript)");
+@@scope(Responses.compactResponseConversation, "!(python, javascript)");
 
 // ---------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate Conversations. We will use OpenAI client for those
@@ -59,8 +59,7 @@ using Azure.AI.Projects;
 @@scope(OpenAIEvals.getEvalRun, "!(python, javascript)");
 @@scope(OpenAIEvals.cancelEvalRun, "!(python, javascript)");
 @@scope(OpenAIEvals.getEvalRunOutputItems, "!(python, javascript)");
-@@scope(OpenAIEvals.getEvalRunOutputItem, "!(python, javascript)"
-);
+@@scope(OpenAIEvals.getEvalRunOutputItem, "!(python, javascript)");
 
 // ---------------------------------------------------------------------------------------------------
 // Operation scope customizations - don't generate fine-tuning. We will use OpenAI client for those
@@ -184,6 +183,12 @@ using Azure.AI.Projects;
 @@clientName(Indexes.getVersion, "get");
 @@clientName(Indexes.deleteVersion, "delete");
 @@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
+
+// --------------------------------------------------------------------------------
+// Schedules sub‐client
+// --------------------------------------------------------------------------------
+
+@@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
 
 // --------------------------------------------------------------------------------
 // Connections sub‐client
