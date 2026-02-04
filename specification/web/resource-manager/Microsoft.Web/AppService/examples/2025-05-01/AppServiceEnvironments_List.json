@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "test-ase",
+            "type": "Microsoft.Web/hostingEnvironments",
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase",
+            "kind": "ASEV3",
+            "location": "South Central US",
+            "properties": {
+              "clusterSettings": null,
+              "dedicatedHostCount": 0,
+              "dnsSuffix": "test-ase.p.azurewebsites.net",
+              "frontEndScaleFactor": 15,
+              "hasLinuxWorkers": true,
+              "internalLoadBalancingMode": "None",
+              "ipsslAddressCount": 0,
+              "maximumNumberOfMachines": 250,
+              "multiRoleCount": null,
+              "multiSize": "Standard_D2d_v4",
+              "networkingConfiguration": {
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/configurations/networking",
+                "properties": {
+                  "allowNewPrivateEndpointConnections": false,
+                  "externalInboundIpAddresses": [
+                    "52.153.248.36"
+                  ],
+                  "ftpEnabled": false,
+                  "inboundIpAddressOverride": null,
+                  "internalInboundIpAddresses": [],
+                  "linuxOutboundIpAddresses": [
+                    "20.88.241.56",
+                    "20.88.241.9"
+                  ],
+                  "remoteDebugEnabled": false,
+                  "windowsOutboundIpAddresses": [
+                    "20.88.241.56",
+                    "20.88.241.9"
+                  ]
+                }
+              },
+              "provisioningState": "Succeeded",
+              "status": "Ready",
+              "suspended": false,
+              "userWhitelistedIpRanges": null,
+              "virtualNetwork": {
+                "name": "delegated",
+                "type": "Microsoft.Network/virtualNetworks/subnets",
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Network/virtualNetworks/test-subnet/subnets/delegated",
+                "subnet": ""
+              },
+              "zoneRedundant": false
+            },
+            "tags": {}
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AppServiceEnvironments_List",
+  "title": "Get all App Service Environments for a subscription."
+}

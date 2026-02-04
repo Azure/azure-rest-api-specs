@@ -30,6 +30,62 @@ openapi-subtype: rpaas
 tag: package-2024-04-24
 ```
 
+### Tag: package-2025-11-03-preview
+
+These settings apply only when `--tag=package-2025-11-03-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-03-preview'
+input-file:
+  - Dynatrace.Observability/preview/2025-11-03-preview/dynatrace.json
+suppressions:
+    - code: ProvisioningStateMustBeReadOnly
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: UnSupportedPatchProperties
+      from: dynatrace.json
+      reason: 1. Issue in LintDiff tool. 2. All of the provisioningStates are marked as readOnly, we believe this is a false positive.  Related issue:https://github.com/Azure/azure-openapi-validator/issues/637
+    - code: BodyTopLevelProperties
+      from: dynatrace.json
+      where:
+        - $.definitions.DynatraceSingleSignOnResource.properties.properties
+        - $.definitions.MonitorResource.properties.properties
+        - $.definitions.TagRule.properties.properties
+        - $.definitions.CreateResourceSupportedResponse
+        - $.definitions.CreateResourceSupportedProperties.properties.creationSupported
+      reason: Existing service design behavior. Fixing this causes breaking changes.
+    - code: OperationIdNounVerb
+      from: dynatrace.json
+      where:
+        - $.paths["/subscriptions/{subscriptionId}/providers/Dynatrace.Observability/getCreationSupported"].post.operationId
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listMonitoredComputeResources"].post.operationId
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/listMonitoredResources"].post.operationId
+      reason: Existing service design behavior. Fixing this causes breaking changes.
+    - code: PatchBodyParametersSchema
+      from: dynatrace.json
+      where:
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}"].patch.parameters[?(@.name == 'body')]
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/monitoredSubscriptions/{configurationName}"].patch.parameters[?(@.name == 'body')]
+      reason: Empty object can still be passed, properties are not mandatory for the update schema.
+    - code: RequiredPropertiesMissingInResourceModel
+      from: dynatrace.json
+      where:
+        - $.definitions.DynatraceSingleSignOnResource
+        - $.definitions.MonitorResource
+        - $.definitions.TagRule
+        - $.definitions.CreateResourceSupportedResponse
+      reason: It is similar to any other model. We believe this is a false positive.
+    - code: PostResponseCodes
+      from: dynatrace.json
+      where:
+        - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Dynatrace.Observability/monitors/{monitorName}/upgradePlan"].post
+      reason: By design - operation returns only 202 for async plan upgrade processing. No final response schema is required as the upgrade status is reflected in the monitor resource state.
+    - code: SECRET_PROPERTY
+      from: dynatrace.json
+      where:
+        - $.definitions.EnvironmentInfo.properties.ingestionKey
+      reason: By design - ingestionKey must be returned in Monitor resource responses to enable customers to configure Dynatrace agents for sending telemetry data to the Dynatrace environment.
+```
+
 ### Tag: package-2024-04-24
 
 These settings apply only when `--tag=package-2024-04-24` is specified on the command line.

@@ -4770,11 +4770,7 @@
         },
         "searchFields": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names to consider when querying for auto-completed terms. Target fields must be included in the specified suggester."
         },
         "suggesterName": {
           "type": "string",
@@ -7047,190 +7043,6 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.EntityLinkingSkill"
-    },
-    "EntityRecognitionSkill": {
-      "type": "object",
-      "description": "This skill is deprecated. Use the V3.EntityRecognitionSkill instead.",
-      "properties": {
-        "categories": {
-          "type": "array",
-          "description": "A list of entity categories that should be extracted.",
-          "items": {
-            "$ref": "#/definitions/EntityCategory"
-          }
-        },
-        "defaultLanguageCode": {
-          "$ref": "#/definitions/EntityRecognitionSkillLanguage",
-          "description": "A value indicating which language code to use. Default is `en`."
-        },
-        "includeTypelessEntities": {
-          "type": "boolean",
-          "description": "Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced.",
-          "x-nullable": true
-        },
-        "minimumPrecision": {
-          "type": "number",
-          "format": "double",
-          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.",
-          "x-nullable": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchIndexerSkill"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.EntityRecognitionSkill"
-    },
-    "EntityRecognitionSkillLanguage": {
-      "type": "string",
-      "description": "Deprecated. The language codes supported for input text by EntityRecognitionSkill.",
-      "enum": [
-        "ar",
-        "cs",
-        "zh-Hans",
-        "zh-Hant",
-        "da",
-        "nl",
-        "en",
-        "fi",
-        "fr",
-        "de",
-        "el",
-        "hu",
-        "it",
-        "ja",
-        "ko",
-        "no",
-        "pl",
-        "pt-PT",
-        "pt-BR",
-        "ru",
-        "es",
-        "sv",
-        "tr"
-      ],
-      "x-ms-enum": {
-        "name": "EntityRecognitionSkillLanguage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ar",
-            "value": "ar",
-            "description": "Arabic"
-          },
-          {
-            "name": "cs",
-            "value": "cs",
-            "description": "Czech"
-          },
-          {
-            "name": "zh-Hans",
-            "value": "zh-Hans",
-            "description": "Chinese-Simplified"
-          },
-          {
-            "name": "zh-Hant",
-            "value": "zh-Hant",
-            "description": "Chinese-Traditional"
-          },
-          {
-            "name": "da",
-            "value": "da",
-            "description": "Danish"
-          },
-          {
-            "name": "nl",
-            "value": "nl",
-            "description": "Dutch"
-          },
-          {
-            "name": "en",
-            "value": "en",
-            "description": "English"
-          },
-          {
-            "name": "fi",
-            "value": "fi",
-            "description": "Finnish"
-          },
-          {
-            "name": "fr",
-            "value": "fr",
-            "description": "French"
-          },
-          {
-            "name": "de",
-            "value": "de",
-            "description": "German"
-          },
-          {
-            "name": "el",
-            "value": "el",
-            "description": "Greek"
-          },
-          {
-            "name": "hu",
-            "value": "hu",
-            "description": "Hungarian"
-          },
-          {
-            "name": "it",
-            "value": "it",
-            "description": "Italian"
-          },
-          {
-            "name": "ja",
-            "value": "ja",
-            "description": "Japanese"
-          },
-          {
-            "name": "ko",
-            "value": "ko",
-            "description": "Korean"
-          },
-          {
-            "name": "no",
-            "value": "no",
-            "description": "Norwegian (Bokmaal)"
-          },
-          {
-            "name": "pl",
-            "value": "pl",
-            "description": "Polish"
-          },
-          {
-            "name": "pt-PT",
-            "value": "pt-PT",
-            "description": "Portuguese (Portugal)"
-          },
-          {
-            "name": "pt-BR",
-            "value": "pt-BR",
-            "description": "Portuguese (Brazil)"
-          },
-          {
-            "name": "ru",
-            "value": "ru",
-            "description": "Russian"
-          },
-          {
-            "name": "es",
-            "value": "es",
-            "description": "Spanish"
-          },
-          {
-            "name": "sv",
-            "value": "sv",
-            "description": "Swedish"
-          },
-          {
-            "name": "tr",
-            "value": "tr",
-            "description": "Turkish"
-          }
-        ]
-      }
     },
     "EntityRecognitionSkillV3": {
       "type": "object",
@@ -12712,17 +12524,17 @@
           {
             "name": "CarriageReturn",
             "value": "carriageReturn",
-            "description": "Lines are separated by a carriage return ('\r') character."
+            "description": "Lines are separated by a carriage return ('\\r') character."
           },
           {
             "name": "LineFeed",
             "value": "lineFeed",
-            "description": "Lines are separated by a single line feed ('\n') character."
+            "description": "Lines are separated by a single line feed ('\\n') character."
           },
           {
             "name": "CarriageReturnLineFeed",
             "value": "carriageReturnLineFeed",
-            "description": "Lines are separated by a carriage return and a line feed ('\r\n') character."
+            "description": "Lines are separated by a carriage return and a line feed ('\\r\\n') character."
           }
         ]
       }
@@ -13933,11 +13745,7 @@
         },
         "flags": {
           "type": "string",
-          "format": "ArrayEncoding.pipeDelimited",
-          "description": "Regular expression flags.",
-          "items": {
-            "$ref": "#/definitions/RegexFlags"
-          }
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
         },
         "stopwords": {
           "type": "array",
@@ -13983,7 +13791,7 @@
     },
     "PatternReplaceCharFilter": {
       "type": "object",
-      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This character filter is implemented using Apache Lucene.",
+      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This character filter is implemented using Apache Lucene.",
       "properties": {
         "pattern": {
           "type": "string",
@@ -14007,7 +13815,7 @@
     },
     "PatternReplaceTokenFilter": {
       "type": "object",
-      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This token filter is implemented using Apache Lucene.",
+      "description": "A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text \"aa bb aa bb\", pattern \"(aa)\\\\s+(bb)\", and replacement \"$1#$2\", the result would be \"aa#bb aa#bb\". This token filter is implemented using Apache Lucene.",
       "properties": {
         "pattern": {
           "type": "string",
@@ -14039,8 +13847,8 @@
           "default": "\\W+"
         },
         "flags": {
-          "$ref": "#/definitions/RegexFlags",
-          "description": "Regular expression flags."
+          "type": "string",
+          "description": "Regular expression flags, specified as a '|' separated string of RegexFlags values."
         },
         "group": {
           "type": "integer",
@@ -14918,7 +14726,7 @@
         },
         "vectors": {
           "type": "array",
-          "description": "The vector similarity and @search.score values for each vector query.",
+          "description": "The vector similarity and",
           "items": {
             "type": "object",
             "additionalProperties": {
@@ -15077,7 +14885,7 @@
     },
     "RegexFlags": {
       "type": "string",
-      "description": "Defines flags that can be combined to control how regular expressions are used in the pattern analyzer and pattern tokenizer.",
+      "description": "Defines a regular expression flag that can be used in the pattern analyzer and pattern tokenizer.",
       "enum": [
         "CANON_EQ",
         "CASE_INSENSITIVE",
@@ -15519,7 +15327,7 @@
         },
         "@search.nextPageParameters": {
           "$ref": "#/definitions/SearchRequest",
-          "description": "Continuation JSON payload returned when the query can't return all the requested results in a single response. You can use this JSON along with @odata.nextLink to formulate another POST Search request to get the next part of the search response.",
+          "description": "Continuation JSON payload returned when the query can't return all the requested results in a single response. You can use this JSON along with",
           "readOnly": true,
           "x-ms-client-name": "nextPageParameters"
         },
@@ -16784,11 +16592,7 @@
         },
         "highlight": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting."
         },
         "highlightPostTag": {
           "type": "string",
@@ -16805,11 +16609,7 @@
         },
         "orderby": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
         },
         "queryType": {
           "$ref": "#/definitions/QueryType",
@@ -16844,11 +16644,7 @@
         },
         "searchFields": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter."
         },
         "searchMode": {
           "$ref": "#/definitions/SearchMode",
@@ -16864,11 +16660,7 @@
         },
         "select": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included."
         },
         "skip": {
           "type": "integer",
@@ -16912,11 +16704,7 @@
         },
         "semanticFields": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names used for semantic ranking.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names used for semantic ranking."
         },
         "vectorQueries": {
           "type": "array",
@@ -17031,12 +16819,12 @@
     },
     "SearchScoreThreshold": {
       "type": "object",
-      "description": "The results of the vector query will filter based on the '@search.score' value. Note this is the @search.score returned as part of the search response. The threshold direction will be chosen for higher @search.score.",
+      "description": "The results of the vector query will filter based on the '",
       "properties": {
         "value": {
           "type": "number",
           "format": "double",
-          "description": "The threshold will filter based on the '@search.score' value. Note this is the @search.score returned as part of the search response. The threshold direction will be chosen for higher @search.score."
+          "description": "The threshold will filter based on the '"
         }
       },
       "required": [
@@ -17439,124 +17227,6 @@
         ]
       }
     },
-    "SentimentSkill": {
-      "type": "object",
-      "description": "This skill is deprecated. Use the V3.SentimentSkill instead.",
-      "properties": {
-        "defaultLanguageCode": {
-          "$ref": "#/definitions/SentimentSkillLanguage",
-          "description": "A value indicating which language code to use. Default is `en`."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/SearchIndexerSkill"
-        }
-      ],
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill"
-    },
-    "SentimentSkillLanguage": {
-      "type": "string",
-      "description": "Deprecated. The language codes supported for input text by SentimentSkill.",
-      "enum": [
-        "da",
-        "nl",
-        "en",
-        "fi",
-        "fr",
-        "de",
-        "el",
-        "it",
-        "no",
-        "pl",
-        "pt-PT",
-        "ru",
-        "es",
-        "sv",
-        "tr"
-      ],
-      "x-ms-enum": {
-        "name": "SentimentSkillLanguage",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "da",
-            "value": "da",
-            "description": "Danish"
-          },
-          {
-            "name": "nl",
-            "value": "nl",
-            "description": "Dutch"
-          },
-          {
-            "name": "en",
-            "value": "en",
-            "description": "English"
-          },
-          {
-            "name": "fi",
-            "value": "fi",
-            "description": "Finnish"
-          },
-          {
-            "name": "fr",
-            "value": "fr",
-            "description": "French"
-          },
-          {
-            "name": "de",
-            "value": "de",
-            "description": "German"
-          },
-          {
-            "name": "el",
-            "value": "el",
-            "description": "Greek"
-          },
-          {
-            "name": "it",
-            "value": "it",
-            "description": "Italian"
-          },
-          {
-            "name": "no",
-            "value": "no",
-            "description": "Norwegian (Bokmaal)"
-          },
-          {
-            "name": "pl",
-            "value": "pl",
-            "description": "Polish"
-          },
-          {
-            "name": "pt-PT",
-            "value": "pt-PT",
-            "description": "Portuguese (Portugal)"
-          },
-          {
-            "name": "ru",
-            "value": "ru",
-            "description": "Russian"
-          },
-          {
-            "name": "es",
-            "value": "es",
-            "description": "Spanish"
-          },
-          {
-            "name": "sv",
-            "value": "sv",
-            "description": "Swedish"
-          },
-          {
-            "name": "tr",
-            "value": "tr",
-            "description": "Turkish"
-          }
-        ]
-      }
-    },
     "SentimentSkillV3": {
       "type": "object",
       "description": "Using the Text Analytics API, evaluates unstructured text and for each record, provides sentiment labels (such as \"negative\", \"neutral\" and \"positive\") based on the highest confidence score found by the service at a sentence and document-level.",
@@ -17719,12 +17389,12 @@
     },
     "SingleVectorFieldResult": {
       "type": "object",
-      "description": "A single vector field result. Both @search.score and vector similarity values are returned. Vector similarity is related to @search.score by an equation.",
+      "description": "A single vector field result. Both",
       "properties": {
         "searchScore": {
           "type": "number",
           "format": "double",
-          "description": "The @search.score value that is calculated from the vector similarity score. This is the score that's visible in a pure single-field single-vector query.",
+          "description": "The",
           "readOnly": true
         },
         "vectorSimilarity": {
@@ -19132,11 +18802,7 @@
         },
         "orderby": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of OData $orderby expressions by which to sort the results. Each expression can be either a field name or a call to either the geo.distance() or the search.score() functions. Each expression can be followed by asc to indicate ascending, or desc to indicate descending. The default is ascending order. Ties will be broken by the match scores of documents. If no $orderby is specified, the default sort order is descending by document match score. There can be at most 32 $orderby clauses."
         },
         "search": {
           "type": "string",
@@ -19144,19 +18810,11 @@
         },
         "searchFields": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester."
         },
         "select": {
           "type": "string",
-          "format": "ArrayEncoding.commaDelimited",
-          "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results.",
-          "items": {
-            "type": "string"
-          }
+          "description": "The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results."
         },
         "suggesterName": {
           "type": "string",
@@ -19241,11 +18899,7 @@
         },
         "synonyms": {
           "type": "string",
-          "format": "ArrayEncoding.newlineDelimited",
-          "description": "A series of synonym rules in the specified synonym map format. The rules must be separated by newlines.",
-          "items": {
-            "type": "string"
-          }
+          "description": "A series of synonym rules in the specified synonym map format. The rules must be separated by newlines."
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",

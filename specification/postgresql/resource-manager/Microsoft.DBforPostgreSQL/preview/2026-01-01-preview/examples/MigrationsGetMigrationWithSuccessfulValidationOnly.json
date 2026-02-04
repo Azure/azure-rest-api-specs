@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "migrationName": "examplemigration",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examplemigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "location": "eastus",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "Completed",
+              "dbDetails": {},
+              "validationDetails": {
+                "dbLevelValidationDetails": [
+                  {
+                    "databaseName": "UnknownCollationTest",
+                    "endedOn": "2025-06-01T20:30:22.123456Z",
+                    "startedOn": "2025-06-01T18:30:22.123456Z",
+                    "summary": [
+                      {
+                        "type": "SchemaValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "ExtensionsValidation",
+                        "state": "Succeeded"
+                      },
+                      {
+                        "type": "CollationsValidation",
+                        "state": "Succeeded"
+                      }
+                    ]
+                  }
+                ],
+                "serverLevelValidationDetails": [
+                  {
+                    "type": "AuthenticationAndConnectivityValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "SourceVersionValidation",
+                    "state": "Succeeded"
+                  },
+                  {
+                    "type": "ServerParametersValidation",
+                    "state": "Succeeded"
+                  }
+                ],
+                "status": "Succeeded",
+                "validationEndTimeInUtc": "2025-06-01T20:30:22.123456Z",
+                "validationStartTimeInUtc": "2025-06-01T18:30:22.123456Z"
+              }
+            },
+            "state": "Succeeded"
+          },
+          "dbsToMigrate": [
+            "UnknownCollationTest"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "77840327-7be8-44b8-adc0-af0ccccfeb36",
+          "migrationMode": "Offline",
+          "migrationOption": "Validate",
+          "migrationWindowEndTimeInUtc": "2025-06-01T20:30:22.123456Z",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "True",
+          "sourceDbServerResourceId": "20.228.214.65:5432@postgres",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "triggerCutover": "True"
+        }
+      }
+    }
+  },
+  "operationId": "Migrations_Get",
+  "title": "Get information about a migration with successful validation only."
+}
