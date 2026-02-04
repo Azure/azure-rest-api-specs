@@ -62,6 +62,7 @@ interface FaceListOperations {
   @returnsDoc("A successful call returns the Face List's information.")
   getFaceList is FaceResourceReadOperationWithReturnRecognitionModelOptions<FaceList>;
 
+  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update information of a Face List, including name and userData.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updateFaceList is FaceResourceUpdateOperation<FaceList>;
@@ -123,6 +124,7 @@ interface FaceListOperations {
   @returnsDoc("A successful call returns the Large Face List's information.")
   getLargeFaceList is FaceResourceReadOperationWithReturnRecognitionModelOptions<LargeFaceList>;
 
+  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update information of a Large Face List, including name and userData.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updateLargeFaceList is FaceResourceUpdateOperation<LargeFaceList>;
@@ -179,6 +181,7 @@ interface FaceListOperations {
   @returnsDoc("A successful call returns target persisted face's information (persistedFaceId and userData).")
   getLargeFaceListFace is FaceResourceReadOperation<LargeFaceListFace>;
 
+  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update a specified face's userData field in a Large Face List by its persistedFaceId.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updateLargeFaceListFace is FaceResourceUpdateOperation<
