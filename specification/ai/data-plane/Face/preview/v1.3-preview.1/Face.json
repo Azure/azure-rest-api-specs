@@ -3648,7 +3648,7 @@
             "description": "Body parameter.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Settings"
+              "$ref": "#/definitions/SettingsUpdate"
             }
           }
         ],
@@ -6438,6 +6438,16 @@
         "enabled"
       ]
     },
+    "LivenessAbuseMonitoringSettingUpdate": {
+      "type": "object",
+      "description": "Settings for liveness abuse monitoring.",
+      "properties": {
+        "enabled": {
+          "type": "object",
+          "description": "Whether liveness abuse monitoring is enabled"
+        }
+      }
+    },
     "LivenessColorDecisionTarget": {
       "type": "object",
       "description": "The target from color image used for liveness classification.",
@@ -7207,6 +7217,16 @@
       "required": [
         "livenessAbuseMonitoring"
       ]
+    },
+    "SettingsUpdate": {
+      "type": "object",
+      "description": "Response model for settings.",
+      "properties": {
+        "livenessAbuseMonitoring": {
+          "$ref": "#/definitions/LivenessAbuseMonitoringSettingUpdate",
+          "description": "Liveness abuse monitoring settings"
+        }
+      }
     },
     "TrainingResult": {
       "type": "object",
