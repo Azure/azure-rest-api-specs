@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "accountName": "sto4445",
+    "api-version": "2025-06-01",
+    "resourceGroupName": "res4228",
+    "storageTaskAssignmentName": "myassignment1",
+    "subscriptionId": "1f31ba14-ce16-4281-b9b4-3e78da6e1616"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myassignment1",
+        "type": "Microsoft.Storage/storageAccounts/storageTaskAssignments",
+        "id": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.Storage/storageAccounts/sto4445/storageTaskAssignments/myassignment1",
+        "properties": {
+          "description": "My Storage task assignment",
+          "enabled": true,
+          "executionContext": {
+            "target": {
+              "excludePrefix": [],
+              "prefix": [
+                "prefix1",
+                "prefix2"
+              ]
+            },
+            "trigger": {
+              "type": "RunOnce",
+              "parameters": {
+                "startOn": "2022-11-15T21:52:47.8145095Z"
+              }
+            }
+          },
+          "provisioningState": "Succeeded",
+          "report": {
+            "prefix": "container1"
+          },
+          "taskId": "/subscriptions/1f31ba14-ce16-4281-b9b4-3e78da6e1616/resourceGroups/res4228/providers/Microsoft.StorageActions/storageTasks/mytask1"
+        }
+      }
+    }
+  },
+  "operationId": "StorageTaskAssignments_Get",
+  "title": "GetStorageTaskAssignment"
+}
