@@ -12,22 +12,26 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     package-dir: "Azure.ResourceManager.Resources.DeploymentScripts"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Resources.DeploymentScripts"
   "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-deploymentscripts"
     package-dir: "azure-mgmt-resource-deploymentscripts"
     namespace: "azure.mgmt.resource.deploymentscripts"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources-deploymentscripts"
     package-dir: "azure-resourcemanager-resources-deploymentscripts"
     namespace: "com.azure.resourcemanager.resources.deploymentscripts"
     service-name: "Deployment Scripts"
     flavor: azure
   "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcesdeploymentscripts"
     package-dir: "arm-resourcesdeploymentscripts"
     flavor: azure
     experimental-extensible-enums: true
@@ -35,6 +39,7 @@ options:
       name: "@azure/arm-resourcesdeploymentscripts"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdeploymentscripts"
     package-dir: "armdeploymentscripts"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
