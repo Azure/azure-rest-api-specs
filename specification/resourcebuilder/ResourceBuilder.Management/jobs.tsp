@@ -93,9 +93,6 @@ model JobProperties {
   /** Metric evaluations. Required for DataQualityValidation jobs. */
   metrics?: DataQualityMetrics;
 
-  /** Data quality metric validations. Required for DataQualityValidation jobs. */
-  dataQualityMetricValidations?: DataQualityMetricValidationEntry[];
-
   /** Data quality dataset validation. Required for DataQualityValidation jobs. */
   dataQualityValidation?: DataQualityValidation;
 
