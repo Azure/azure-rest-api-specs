@@ -1044,7 +1044,6 @@ model PrivateLinkResourcesResult {
    * The URL to get the next set of private link resources, if there are any.
    */
   @nextLink
-  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 
