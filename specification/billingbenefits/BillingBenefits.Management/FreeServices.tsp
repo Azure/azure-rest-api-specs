@@ -69,17 +69,17 @@ model FreeServices
 @armResourceOperations
 interface FreeServicesOperations {
   /**
-   * Get a free service.
+   * This operation retrieves properties for free services.
    */
   get is ArmResourceRead<FreeServices>;
 
   /**
-   * Create a free service.
+   * This operation creates or updates free services in Azure
    */
   create is ArmResourceCreateOrReplaceAsync<FreeServices>;
 
   /**
-   * Update a free service.
+   * This operation updates free services in Azure.
    */
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -91,7 +91,7 @@ interface FreeServicesOperations {
   >;
 
   /**
-   * Delete a free service.
+   * This operation deletes free services from the subscription. Only free services that are in an expired or cancelled states can be deleted.
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     FreeServices,
@@ -101,7 +101,7 @@ interface FreeServicesOperations {
   >;
 
   /**
-   * List free services under a resource group.
+   * This operation lists the free services that are available under the specified resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     FreeServices,
@@ -109,7 +109,7 @@ interface FreeServicesOperations {
   >;
 
   /**
-   * List free services under a subscription.
+   * This operation lists free services that are available under the specified subscription.
    */
   listBySubscription is ArmListBySubscription<
     FreeServices,
