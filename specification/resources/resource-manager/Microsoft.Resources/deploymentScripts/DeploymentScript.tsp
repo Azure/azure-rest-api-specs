@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "./ScriptLog.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -37,16 +38,10 @@ model DeploymentScript is TrackedResource<DeploymentScriptPropertiesBase> {
 @armResourceOperations
 interface DeploymentScripts {
   /**
-   * Gets a deployment script with a given name.
-   */
-  get is ArmResourceRead<DeploymentScript>;
-
-  /**
    * Creates a deployment script.
    */
   create is ArmResourceCreateOrReplaceAsync<
     DeploymentScript,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -57,9 +52,13 @@ interface DeploymentScripts {
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     DeploymentScript,
     PatchModel = DeploymentScriptUpdateParameter,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     OptionalRequestBody = true
   >;
+
+  /**
+   * Gets a deployment script with a given name.
+   */
+  get is ArmResourceRead<DeploymentScript>;
 
   /**
    * Deletes a deployment script. When operation completes, status code 200 returned without content.
@@ -75,6 +74,28 @@ interface DeploymentScripts {
    * Lists all deployment scripts for a given subscription.
    */
   listBySubscription is ArmListBySubscription<DeploymentScript>;
+
+  /**
+   * Gets deployment script logs for a given deployment script name.
+   */
+  getLogs is ArmResourceListByParent<
+    ScriptLog,
+    Response = ArmResponse<ScriptLogsList>
+  >;
+
+  /**
+   * Gets deployment script logs for a given deployment script name.
+   */
+  getLogsDefault is ArmResourceRead<
+    ScriptLog,
+    Parameters = {
+      /**
+       * The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If 'tail' is not provided, all available logs are shown up to container instance log capacity of 4mb.
+       */
+      @query("tail")
+      tail?: int32;
+    }
+  >;
 }
 
 @@maxLength(DeploymentScript.name, 90);

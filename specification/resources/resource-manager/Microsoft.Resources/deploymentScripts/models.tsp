@@ -1,6 +1,7 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
@@ -238,6 +239,8 @@ model AzurePowerShellScript extends DeploymentScript {
   /**
    * Properties of the Azure PowerShell script object.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten for SDK compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: AzurePowerShellScriptProperties;
 
   /**
@@ -349,7 +352,7 @@ model StorageAccountConfiguration {
   /**
    * The storage account access key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy - @secret produces format:password instead of x-ms-secret"
   @extension("x-ms-secret", true)
   storageAccountKey?: string;
 }
@@ -469,6 +472,8 @@ model AzureCliScript extends DeploymentScript {
   /**
    * Properties of the Azure CLI script object.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten for SDK compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: AzureCliScriptProperties;
 
   /**
