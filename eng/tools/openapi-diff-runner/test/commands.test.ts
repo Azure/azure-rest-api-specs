@@ -204,3 +204,54 @@ describe("validateBreakingChange", () => {
     // );
   });
 });
+
+describe("validateBreakingChange - cross-version", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  const crossVersionContext = {
+    ...context,
+    runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+  };
+
+  it("should execute cross-version breaking change detection", async () => {
+    mockChangedFilesStatuses({
+      additions: ["specification/foo/data-plane/Foo/stable/2026-02-01/foo.json"],
+    });
+
+    mockExistsSync([]);
+
+    vi.mocked(runOad).mockResolvedValue([]);
+
+    const statusCode = await validateBreakingChange(crossVersionContext);
+
+    // Cross-version logic will skip processing if getSpecModel returns null
+    // (which happens for new RPs or when readme folder can't be determined)
+    // This test just verifies the cross-version code path executes without errors
+    expect(statusCode).toEqual(0);
+  });
+
+  it("should handle renames in cross-version context", async () => {
+    mockChangedFilesStatuses({
+      renames: [
+        {
+          from: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
+          to: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
+        },
+      ],
+    });
+
+    mockExistsSync([
+      path.join(crossVersionContext.prInfo.tempRepoFolder, "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json"),
+    ]);
+
+    vi.mocked(runOad).mockResolvedValue([]);
+
+    const statusCode = await validateBreakingChange(crossVersionContext);
+
+    // Renamed files in same version are handled by same-version check, not cross-version
+    // This test verifies cross-version code executes without errors when renames are present
+    expect(statusCode).toEqual(0);
+  });
+});
