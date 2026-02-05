@@ -132,6 +132,7 @@ interface Watchers {
     Watcher,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Watcher,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

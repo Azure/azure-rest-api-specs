@@ -241,6 +241,7 @@ model MoboBrokerResource {
 interface AgriService {
   get is ArmResourceRead<AgriServiceResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AgriServiceResource>;
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AgriServiceResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

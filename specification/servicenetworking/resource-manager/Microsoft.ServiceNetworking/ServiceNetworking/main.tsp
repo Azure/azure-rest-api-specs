@@ -318,6 +318,7 @@ interface AssociationsInterface {
     Association,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
   listByTrafficController is ArmResourceListByParent<Association>;
@@ -332,6 +333,7 @@ interface FrontendsInterface {
     Frontend,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Frontend,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -353,6 +355,7 @@ interface SecurityPoliciesInterface {
     SecurityPolicy,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SecurityPolicy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -373,6 +376,7 @@ interface TrafficControllerInterface {
     TrafficController,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     TrafficController,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

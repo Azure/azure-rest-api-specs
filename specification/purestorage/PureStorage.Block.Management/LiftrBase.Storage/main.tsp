@@ -50,6 +50,7 @@ interface Reservations<
   @doc("Create a reservation")
   create is ArmResourceCreateOrUpdateAsync<TReservation>;
   @doc("Update a reservation")
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     TReservation,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

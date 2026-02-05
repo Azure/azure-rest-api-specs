@@ -157,6 +157,7 @@ interface Policies {
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<Policy>;
   @sharedRoute
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Policy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -191,6 +192,7 @@ interface PoliciesV1 {
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
   @sharedRoute
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PolicyV1,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

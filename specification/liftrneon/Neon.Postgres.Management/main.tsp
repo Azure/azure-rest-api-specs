@@ -68,6 +68,7 @@ model OrganizationResource is TrackedResource<OrganizationProperties> {
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<OrganizationResource>;
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OrganizationResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
