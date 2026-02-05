@@ -36,7 +36,6 @@ interface QuestionAnsweringProjects {
   /**
    * Create or update a project.
    */
-  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   createProject is ResourceCreateOrUpdateWithJsonContentType<
     QuestionAnsweringProjectMetadata,

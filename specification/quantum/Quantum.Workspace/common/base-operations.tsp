@@ -62,6 +62,7 @@ namespace Quantum.Workspace.Services {
     See https://github.com/Azure/typespec-azure/issues/475
     """
   @updatesResource(Resource)
+  @patch(#{ implicitOptionality: false })
   op PatchOperationOld<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
     Resource,
     {
