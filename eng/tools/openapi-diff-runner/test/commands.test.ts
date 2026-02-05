@@ -118,6 +118,7 @@ describe("validateBreakingChange", () => {
 
   it.each([
     {
+      name: "modify one file",
       changedFiles: {
         modifications: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
       },
@@ -130,6 +131,7 @@ describe("validateBreakingChange", () => {
       ],
     },
     {
+      name: "change case folder, rename file",
       changedFiles: {
         additions: [
           "specification/nginx/resource-manager/Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json",
@@ -155,44 +157,43 @@ describe("validateBreakingChange", () => {
         },
       ],
     },
-  ])(
-    "runs oad on a modified swagger",
-    async ({ changedFiles, existingFiles, expectedOadCalls }) => {
-      mockChangedFilesStatuses(changedFiles);
+  ])("$name", async ({ changedFiles, existingFiles, expectedOadCalls }) => {
+    mockChangedFilesStatuses(changedFiles);
 
-      mockExistsSync(existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f)));
+    mockExistsSync(existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f)));
 
-      const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
+    const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
 
-      const logs: string[] = [];
-      vi.mocked(appendFileSync).mockImplementation((_path, data) => {
-        logs.push(data.toString());
-      });
+    const logs: string[] = [];
+    vi.mocked(appendFileSync).mockImplementation((_path, data) => {
+      logs.push(data.toString());
+    });
 
-      const statusCode = await validateBreakingChange(context);
+    const statusCode = await validateBreakingChange(context);
 
-      expect(statusCode).toEqual(0);
+    expect(statusCode).toEqual(0);
 
-      for (const expected of expectedOadCalls) {
-        expect(mockRunOad).toBeCalledWith(
-          path.join(context.prInfo.tempRepoFolder, expected.old),
-          expected.new,
-        );
-      }
+    for (const expected of expectedOadCalls) {
+      expect(mockRunOad).toBeCalledWith(
+        path.join(context.prInfo.tempRepoFolder, expected.old),
+        expected.new,
+      );
+    }
 
-      // Ensure no extra calls
-      expect(mockRunOad).toBeCalledTimes(expectedOadCalls.length);
+    // Ensure no extra calls
+    expect(mockRunOad).toBeCalledTimes(expectedOadCalls.length);
 
-      // const jsonLog = logs.find((l) => l.startsWith("{"));
-      // const markdownLog = JSON.parse(jsonLog || "").message.trim();
+    // Useful for debugging the markdown log
 
-      // expect(markdownLog).toMatchInlineSnapshot(
-      //   `
-      //   "| Compared specs ([vunknown](https://www.npmjs.com/package/@azure/oad/v/unknown)) | new version | base version |
-      //   |-------|-------------|--------------|
-      //   | foo.json | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) |"
-      // `,
-      // );
-    },
-  );
+    // const jsonLog = logs.find((l) => l.startsWith("{"));
+    // const markdownLog = JSON.parse(jsonLog || "").message.trim();
+
+    // expect(markdownLog).toMatchInlineSnapshot(
+    //   `
+    //   "| Compared specs ([vunknown](https://www.npmjs.com/package/@azure/oad/v/unknown)) | new version | base version |
+    //   |-------|-------------|--------------|
+    //   | foo.json | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) |"
+    // `,
+    // );
+  });
 });
