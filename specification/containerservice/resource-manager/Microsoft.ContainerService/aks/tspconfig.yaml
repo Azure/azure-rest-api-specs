@@ -41,6 +41,11 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservice"
     package-details:
       name: "@azure/arm-containerservice"
+  "@azure-typespec/http-client-csharp-mgmt":
+    # use-legacy-resource-detection: false
+    namespace: "Azure.ResourceManager.ContainerService"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    enable-wire-path-attribute: true
 
 linter:
   extends:
