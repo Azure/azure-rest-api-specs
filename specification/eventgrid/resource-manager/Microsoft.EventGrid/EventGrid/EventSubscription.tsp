@@ -436,7 +436,6 @@ interface DomainEventSubscriptions {
    * Get all delivery attributes for an event subscription for domain.
    */
   @summary("Get delivery attributes for an event subscription for domain.")
-  @list
   getDeliveryAttributes is DomainEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
