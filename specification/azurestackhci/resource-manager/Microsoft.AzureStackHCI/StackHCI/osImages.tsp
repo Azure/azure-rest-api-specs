@@ -14,7 +14,7 @@ namespace Microsoft.AzureStackHCI;
 
 @doc("Represents a os image resource.")
 @parentResource(SubscriptionLocationResource)
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
   ...ResourceNameParameter<
     Resource = OsImage,
@@ -23,7 +23,7 @@ model OsImage is Azure.ResourceManager.ProxyResource<OsImageProperties> {
 }
 
 @armResourceOperations
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 interface OsImages {
   @doc("Get a os image.")
   get is ArmResourceRead<OsImage>;
@@ -34,7 +34,7 @@ interface OsImages {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Represents properties of a os image resource.")
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model OsImageProperties {
   @doc("Represents validated solution recipe version of a os image.")
   validatedSolutionRecipeVersion?: string;

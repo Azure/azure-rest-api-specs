@@ -105,8 +105,15 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
     labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOff) ||
     labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP) ||
     labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest);
+
+  // Track if ARMSignedOff was auto-added (IncrementalTSP present) vs manually added
+  const hasAutoAddedArmSignedOff =
+    // need to consider the legacy label
+    labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOff) ||
+    labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP);
   core.info(`Labels: ${inspect(labelNames)}`);
   core.info(`Has auto signed-off labels: ${hasAutoSignedOffLabels}`);
+  core.info(`Has auto-added ARMSignedOff: ${hasAutoAddedArmSignedOff}`);
 
   // permissions: { actions: read }
   /** @type {WorkflowRun[]} */
@@ -136,12 +143,18 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
       return noneResult;
     }
 
+    // Only remove ARMSignedOff if it was auto-added (IncrementalTSP present)
+    // Preserve manually-added ARMSignedOff labels
     return {
       ...noneResult,
       labelActions: {
         ...noneLabelActions,
-        [ArmAutoSignoffLabel.ArmSignedOff]: LabelAction.Remove,
-        [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: LabelAction.Remove,
+        [ArmAutoSignoffLabel.ArmSignedOff]: hasAutoAddedArmSignedOff
+          ? LabelAction.Remove
+          : LabelAction.None,
+        [ArmAutoSignoffLabel.ArmAutoSignedOffIncrementalTSP]: hasAutoAddedArmSignedOff
+          ? LabelAction.Remove
+          : LabelAction.None,
         [ArmAutoSignoffLabel.ArmAutoSignedOffTrivialTest]: LabelAction.Remove,
       },
     };
@@ -221,9 +234,11 @@ export async function getLabelActionImpl({ owner, repo, issue_number, head_sha, 
 
     // Add ARMSignOff label only when the PR is identified as an incremental typespec
     // As the trivial changes sign-off is being released in test mode
+    // Only remove ARMSignedOff if it was auto-added (IncrementalTSP present)
+    // Preserve manually-added ARMSignedOff labels
     const armSignOffAction = autoIncrementalTSP
       ? LabelAction.Add
-      : hasAutoSignedOffLabels
+      : hasAutoAddedArmSignedOff
         ? LabelAction.Remove
         : LabelAction.None;
     const autoIncrementalTSPAction = autoIncrementalTSP ? LabelAction.Add : LabelAction.Remove;
