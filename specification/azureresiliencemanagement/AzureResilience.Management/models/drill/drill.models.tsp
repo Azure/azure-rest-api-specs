@@ -639,22 +639,22 @@ model DrillsQualifiedResource {
   @doc("Active Resource location and zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activeLocation?: string[];
+  activeLocations?: string[];
 
   @doc("Recovery Resource location and zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  recoveryLocation?: string[];
+  recoveryLocations?: string[];
 
   @doc("Active Resource location and physical zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activePhysicalLocation?: string[];
+  activePhysicalLocations?: string[];
 
   @doc("Recovery Resource location and physical zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  recoveryPhysicalLocation?: string[];
+  recoveryPhysicalLocations?: string[];
 
   @doc("Inclusion State of the Drill resource in Drill")
   @added(Versions.v2026_03_01_preview)
