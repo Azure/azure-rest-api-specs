@@ -558,27 +558,27 @@ model DrillsQualifiedResource {
   @doc("Active Resource location and zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activeLocation: string[];
+  activeLocation?: string[];
 
   @doc("Recovery Resource location and zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  recoveryLocation: string[];
+  recoveryLocation?: string[];
 
   @doc("Active Resource location and physical zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activePhysicalLocation: string[];
+  activePhysicalLocation?: string[];
 
   @doc("Recovery Resource location and physical zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  recoveryPhysicalLocation: string[];
+  recoveryPhysicalLocation?: string[];
 
   @doc("Inclusion State of the Drill resource in Drill")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  drillInclusionState: DrillResourceInclusionState;
+  drillInclusionState?: DrillResourceInclusionState;
 
   @doc("A state that indicates the resource status with respect to the recovery orchestration plan.")
   @added(Versions.v2026_03_01_preview)
@@ -588,18 +588,18 @@ model DrillsQualifiedResource {
   @doc("A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  protectionStatus: ResourceProtectionStatus;
+  protectionStatus?: ResourceProtectionStatus;
 
   @doc("A setting that indicates the protection solution selected.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  selectedProtectionSolutionType: ResourceProtectionSolutionType;
+  selectedProtectionSolutionType?: ResourceProtectionSolutionType;
 
   @doc("A list of ResourceProtectionSolutions with which the recovery orchestration resource is protected.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  resourceProtectionSolutions: ResourceProtectionSolutionSettings[];
+  resourceProtectionSolutions?: ResourceProtectionSolutionSettings[];
 
   @doc("Resource protection solution settings of the protection solutions recovery orchestration resource is protected with.")
   @added(Versions.v2026_03_01_preview)
@@ -609,12 +609,12 @@ model DrillsQualifiedResource {
   @doc("Fault State of the Drill resource")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  faultState: DrillResourceFaultState;
+  faultState?: DrillResourceFaultState;
 
   @doc("Fault Properties")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  faultProperties: FaultProperties;
+  faultProperties?: FaultProperties;
 }
 
 @doc("Details of qualification for an operation.")
