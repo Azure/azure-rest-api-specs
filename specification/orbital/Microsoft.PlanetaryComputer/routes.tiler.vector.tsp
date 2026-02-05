@@ -11,12 +11,12 @@ using TypeSpec.Versioning;
 namespace Microsoft.PlanetaryComputer;
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
-@added(Versions.v2025_04_30_Preview)
 interface VectorTilesBase {
   /**
    * Retrieve the OGC API landing page for this service.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve the OGC API landing page for this service.")
   @tag("Landing Page")
   @route("/data/vector/")
@@ -36,6 +36,7 @@ interface VectorTilesBase {
    * Retrieve the set of OGC API conformance classes that are supported by this service.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve the set of OGC API conformance classes that are supported by this service.")
   @tag("Conformance")
   @route("/data/vector/conformance")
@@ -53,12 +54,12 @@ interface VectorTilesBase {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
-@added(Versions.v2025_04_30_Preview)
 interface VectorStyles {
   /**
    * Retrieve the list of dataset styles available from this API implementation & deployment.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve the list of available dataset styles.")
   @tag("Styles")
   @route("/data/vector/styles")
@@ -78,6 +79,7 @@ interface VectorStyles {
    * Create a new style
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Create a new style")
   @tag("Styles")
   @route("/data/vector/styles")
@@ -96,6 +98,7 @@ interface VectorStyles {
    * Retrieve a style
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve a style")
   @tag("Styles")
   @route("/data/vector/styles/{styleId}")
@@ -115,6 +118,7 @@ interface VectorStyles {
    * Update or create a style
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Update or create a style")
   @tag("Styles")
   @route("/data/vector/styles/{styleId}")
@@ -139,6 +143,7 @@ interface VectorStyles {
    * Delete a style
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Delete a style")
   @tag("Styles")
   @route("/data/vector/styles/{styleId}")
@@ -156,12 +161,12 @@ interface VectorStyles {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
-@added(Versions.v2025_04_30_Preview)
 interface VectorTileMatrixSets {
   /**
    * Retrieve the list of available tiling schemes (tile matrix sets)
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve the list of available tiling schemes (tile matrix sets)")
   @tag("Tiling Schemes")
   @route("/data/vector/tileMatrixSets")
@@ -181,6 +186,7 @@ interface VectorTileMatrixSets {
    * Retrieve the definition of the specified tiling scheme (tile matrix set)
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve the definition of the specified tiling scheme (tile matrix set)")
   @tag("Tiling Schemes")
   @route("/data/vector/tileMatrixSets/{tileMatrixSetId}")
@@ -204,12 +210,12 @@ interface VectorTileMatrixSets {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
-@added(Versions.v2025_04_30_Preview)
 interface VectorTilesOperations {
   /**
    * Retrieve a list of available vector tilesets for the specified collection.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve a list of available vector tilesets for the specified collection.")
   @tag("Vector Tiles")
   @route("/data/vector/collections/{collectionId}/tiles")
@@ -235,6 +241,7 @@ interface VectorTilesOperations {
    * Retrieve the vector tileset metadata for the specified collection and tiling scheme (tile matrix set)
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve the vector tileset metadata.")
   @tag("Vector Tiles")
   @route("/data/vector/collections/{collectionId}/tiles/{tileMatrixSetId}")
@@ -266,6 +273,7 @@ interface VectorTilesOperations {
    * Retrieve a vector tile from a collection.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve a vector tile from a collection.")
   @tag("Vector Tiles")
   @route("/data/vector/collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}")
@@ -315,12 +323,12 @@ interface VectorTilesOperations {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
-@added(Versions.v2025_04_30_Preview)
 interface VectorSearchTilesOperations {
   /**
    * Retrieve a list of available vector tilesets for the specified search.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve a list of available vector tilesets for the specified search.")
   @tag("Vector Tiles")
   @route("/data/vector/{searchId}/tiles")
@@ -346,6 +354,7 @@ interface VectorSearchTilesOperations {
    * Retrieve the vector tileset metadata for the specified search and tiling scheme (tile matrix set)
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve the vector tileset metadata.")
   @tag("Vector Tiles")
   @route("/data/vector/{searchId}/tiles/{tileMatrixSetId}")
@@ -377,6 +386,7 @@ interface VectorSearchTilesOperations {
    * Retrieve a vector tile from a search.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @added(Versions.v2025_04_30_Preview)
   @summary("Retrieve a vector tile from a search.")
   @tag("Vector Tiles")
   @route("/data/vector/{searchId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}")
