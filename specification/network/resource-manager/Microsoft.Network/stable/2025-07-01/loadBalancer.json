@@ -124,8 +124,8 @@
             "type": "string",
             "description": "Expands referenced resources."
           },
-          { 
-            "$ref": "#/parameters/DetailLevelParameter" 
+          {
+            "$ref": "#/parameters/DetailLevelParameter"
           }
         ],
         "responses": {
@@ -150,7 +150,7 @@
             "$ref": "./examples/LoadBalancerGetInboundNatRulePortMapping.json"
           },
           "Get load balancer reduced": {
-              "$ref": "./examples/LoadBalancerGetReduced.json"
+            "$ref": "./examples/LoadBalancerGetReduced.json"
           }
         }
       },
@@ -2920,7 +2920,9 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "enum": ["reduced"],
+      "enum": [
+        "reduced"
+      ],
       "description": "Controls verbosity of the returned load balancer resource. When set to 'reduced', read-only reference collections may be omitted.",
       "x-ms-enum": {
         "name": "LoadBalancerDetailLevel",
