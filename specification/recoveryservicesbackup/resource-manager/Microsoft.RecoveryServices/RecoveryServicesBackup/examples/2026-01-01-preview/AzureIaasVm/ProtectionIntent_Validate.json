@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "azureRegion": "southeastasia",
+    "parameters": {
+      "properties": "",
+      "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/arunaupgrade/providers/Microsoft.Compute/VirtualMachines/upgrade1",
+      "resourceType": "VM",
+      "vaultId": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.RecoveryServices/Vaults/myVault"
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "containerName": "iaasvmcontainer;iaasvmcontainerv2;arunaupgrade;upgrade1",
+        "errorCode": "VirtualMachineAlreadyProtected",
+        "errorMessage": "Virtual machine with same name and same resource group is already protected. Please select `Disable' choice above for backup and go to backup item corresponding to this VM in the vault",
+        "protectedItemName": "vm;iaasvmcontainerv2;arunaupgrade;upgrade1",
+        "recommendation": "Please do not enable protection again.",
+        "status": "Failed"
+      }
+    }
+  },
+  "operationId": "ProtectionIntent_Validate",
+  "title": "Validate Enable Protection on Azure Vm"
+}
