@@ -90,7 +90,6 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   const newExistingVersionSwaggers = newSwaggers.filter((f: string) =>
     newExistingVersionDirs.includes(path.dirname(f)),
   );
-
   const needCompareDeletedSwaggers: string[] = deletedSwaggers.filter((f: string) =>
     existsSync(path.join(context.prInfo!.tempRepoFolder, f)),
   );
