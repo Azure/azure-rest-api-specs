@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance with a large batch timeout",
+  "title": "Create a PipelineGroup instance using an otlp receiver with a custom TransformLanguage manipulation exporting to a custom table",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -28,10 +28,10 @@
         ],
         "processors": [
           {
-            "type": "Batch",
-            "name": "batch-processor1",
-            "batch": {
-              "timeout": 300000
+            "type": "TransformLanguage",
+            "name": "transform1",
+            "transformLanguage": {
+              "transformStatement": "source | extend FooColumn = 'bar'"
             }
           }
         ],
@@ -47,8 +47,8 @@
                 "schema": {
                   "recordMap": [
                     {
-                      "from": "severity_text",
-                      "to": "SeverityText"
+                      "from": "attributes.FooColumn",
+                      "to": "FooColumn"
                     },
                     {
                       "from": "body",
@@ -60,10 +60,6 @@
                     }
                   ]
                 }
-              },
-              "concurrency": {
-                "workerCount": 4,
-                "batchQueueSize": 100
               }
             }
           }
@@ -77,7 +73,7 @@
                 "otlp-receiver1"
               ],
               "processors": [
-                "batch-processor1"
+                "transform1"
               ],
               "exporters": [
                 "otlp-exporter1"
@@ -116,10 +112,10 @@
           ],
           "processors": [
             {
-              "type": "Batch",
-              "name": "batch-processor1",
-              "batch": {
-                "timeout": 300000
+              "type": "TransformLanguage",
+              "name": "transform1",
+              "transformLanguage": {
+                "transformStatement": "source | extend FooColumn = 'bar'"
               }
             }
           ],
@@ -135,8 +131,8 @@
                   "schema": {
                     "recordMap": [
                       {
-                        "from": "severity_text",
-                        "to": "SeverityText"
+                        "from": "attributes.FooColumn",
+                        "to": "FooColumn"
                       },
                       {
                         "from": "body",
@@ -148,10 +144,6 @@
                       }
                     ]
                   }
-                },
-                "concurrency": {
-                  "workerCount": 4,
-                  "batchQueueSize": 100
                 }
               }
             }
@@ -165,7 +157,7 @@
                   "otlp-receiver1"
                 ],
                 "processors": [
-                  "batch-processor1"
+                  "transform1"
                 ],
                 "exporters": [
                   "otlp-exporter1"
@@ -211,10 +203,10 @@
           ],
           "processors": [
             {
-              "type": "Batch",
-              "name": "batch-processor1",
-              "batch": {
-                "timeout": 300000
+              "type": "TransformLanguage",
+              "name": "transform1",
+              "transformLanguage": {
+                "transformStatement": "source | extend FooColumn = 'bar'"
               }
             }
           ],
@@ -230,8 +222,8 @@
                   "schema": {
                     "recordMap": [
                       {
-                        "from": "severity_text",
-                        "to": "SeverityText"
+                        "from": "attributes.FooColumn",
+                        "to": "FooColumn"
                       },
                       {
                         "from": "body",
@@ -243,10 +235,6 @@
                       }
                     ]
                   }
-                },
-                "concurrency": {
-                  "workerCount": 4,
-                  "batchQueueSize": 100
                 }
               }
             }
@@ -260,7 +248,7 @@
                   "otlp-receiver1"
                 ],
                 "processors": [
-                  "batch-processor1"
+                  "transform1"
                 ],
                 "exporters": [
                   "otlp-exporter1"

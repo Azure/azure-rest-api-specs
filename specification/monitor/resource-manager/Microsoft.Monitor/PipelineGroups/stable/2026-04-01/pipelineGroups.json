@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Monitor Pipelines Control Plane API",
-    "version": "2025-03-01-preview",
+    "version": "2026-04-01",
     "description": "Provides operations for working with Azure Monitor Pipelines",
     "x-typespec-generated": [
       {
@@ -246,17 +246,11 @@
           "Create a PipelineGroup instance using OTLP receiver with Bring Your Own Certificate mutual TLS configuration": {
             "$ref": "./examples/PipelineGroupCreateWithBYOCTls.json"
           },
-          "Create a PipelineGroup instance using UDP receiver": {
-            "$ref": "./examples/PipelineGroupCreateUdp.json"
-          },
-          "Create a PipelineGroup instance using a UDP receiver with json array mapper": {
-            "$ref": "./examples/PipelineGroupCreateUdpWithJsonArrayMapper.json"
-          },
           "Create a PipelineGroup instance using a syslog receiver": {
             "$ref": "./examples/PipelineGroupCreateSyslogs.json"
           },
           "Create a PipelineGroup instance using a syslog receiver and cache.": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithCache.json"
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithBackfill.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to a custom table": {
             "$ref": "./examples/PipelineGroupCreateStandardCEFWithTransformToCustomTable.json"
@@ -277,7 +271,7 @@
             "$ref": "./examples/PipelineGroupCreateStandardSyslog.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with udp as its transport protocol and pri header skip turned on": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithUdpAndAllowSkipPri.json"
+            "$ref": "./examples/PipelineGroupCreateSyslogsWithUdp.json"
           },
           "Create a PipelineGroup instance using an otlp receiver with a custom TransformLanguage manipulation exporting to a custom table": {
             "$ref": "./examples/PipelineGroupCreateOtlpWithTransform.json"
@@ -532,18 +526,30 @@
           "$ref": "#/definitions/AzureMonitorWorkspaceLogsApiConfig",
           "description": "API configurations for Azure Monitor workspace exporter."
         },
-        "concurrency": {
-          "$ref": "#/definitions/ConcurrencyConfiguration",
-          "description": "Concurrency configuration for the exporter."
-        },
         "backfill": {
-          "$ref": "#/definitions/CacheConfiguration",
-          "description": "Cache configurations."
+          "$ref": "#/definitions/BackfillConfiguration",
+          "description": "Backfill configurations."
         }
       },
       "required": [
         "api"
       ]
+    },
+    "BackfillConfiguration": {
+      "type": "object",
+      "description": "Backfill configurations.",
+      "properties": {
+        "maxStorageUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Max storage usage in megabytes."
+        },
+        "retentionPeriod": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retention period in minutes."
+        }
+      }
     },
     "BatchProcessor": {
       "type": "object",
@@ -564,22 +570,6 @@
           "default": 200,
           "minimum": 10,
           "maximum": 300000
-        }
-      }
-    },
-    "CacheConfiguration": {
-      "type": "object",
-      "description": "Cache configurations.",
-      "properties": {
-        "maxStorageUsage": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max storage usage in megabytes."
-        },
-        "retentionPeriod": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Retention period in minutes."
         }
       }
     },
@@ -684,24 +674,6 @@
         "privateKey"
       ]
     },
-    "ConcurrencyConfiguration": {
-      "type": "object",
-      "description": "Concurrent publishing configuration.",
-      "properties": {
-        "workerCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of parallel workers processing the log queues.",
-          "default": 4
-        },
-        "batchQueueSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Size of the queue for log batches.",
-          "default": 100
-        }
-      }
-    },
     "DistributionPolicy": {
       "type": "object",
       "description": "Distribution policy for spreading instances across compute units.",
@@ -770,75 +742,6 @@
             "description": "Export logs to Azure Monitor Workspace."
           }
         ]
-      }
-    },
-    "JsonArrayMapper": {
-      "type": "object",
-      "description": "A component that allows parsing a value from sourceField as a json array, match a key to each parsed value from keys, and output the key-value map to destinationField field.",
-      "properties": {
-        "sourceField": {
-          "$ref": "#/definitions/JsonMapperSourceField",
-          "description": "Define a source field from which a json array will be read and parsed to it's elements. The number of elements in the json array is expected to be the same as the length of keys."
-        },
-        "destinationField": {
-          "$ref": "#/definitions/JsonMapperDestinationField",
-          "description": "Define a destination field to which the parsed output will be written. The output is a map, it's keys is the given keys array and the matching values are the parsed json array elements."
-        },
-        "keys": {
-          "type": "array",
-          "description": "Define the names of the keys in the resulting map. The input json array elements are mapped in order, one for every key.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "keys"
-      ]
-    },
-    "JsonMapperDestinationField": {
-      "type": "object",
-      "description": "JsonArrayMapper destination field used to describe the field to which the parsed output will be written.",
-      "properties": {
-        "destination": {
-          "type": "string",
-          "description": "Define the destination's element. The element is the body or the attributes of the message, to which the json array mapper will write the output map.",
-          "default": "attributes",
-          "enum": [
-            "body",
-            "attributes"
-          ],
-          "x-ms-enum": {
-            "name": "JsonMapperElement",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Body",
-                "value": "body",
-                "description": "Read or write the json array from or to the body of the message."
-              },
-              {
-                "name": "Attributes",
-                "value": "attributes",
-                "description": "Read or write the json array from or to the attributes of the message."
-              }
-            ]
-          }
-        },
-        "fieldName": {
-          "type": "string",
-          "description": "Define a destination field name under the given element. Leaving this empty, means the root of the element. In case element=attributes and fieldName is empty, the object's attributes themselves will contain the key value output pairs."
-        }
-      }
-    },
-    "JsonMapperSourceField": {
-      "type": "object",
-      "description": "JsonArrayMapper source field used to describe the field from which the json array will be read.",
-      "properties": {
-        "fieldName": {
-          "type": "string",
-          "description": "Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself."
-        }
       }
     },
     "OtlpReceiver": {
@@ -1305,10 +1208,6 @@
         "otlp": {
           "$ref": "#/definitions/OtlpReceiver",
           "description": "OTLP receiver configurations. This field is mandatory for OTLP receivers."
-        },
-        "udp": {
-          "$ref": "#/definitions/UdpReceiver",
-          "description": "UDP receiver configurations. This field is mandatory for UDP receivers."
         }
       },
       "required": [
@@ -1321,8 +1220,7 @@
       "description": "The receiver type.",
       "enum": [
         "Syslog",
-        "OTLP",
-        "UDP"
+        "OTLP"
       ],
       "x-ms-enum": {
         "name": "ReceiverType",
@@ -1337,11 +1235,6 @@
             "name": "OTLP",
             "value": "OTLP",
             "description": "Receives data from a OTLP collector."
-          },
-          {
-            "name": "UDP",
-            "value": "UDP",
-            "description": "Receives data from an UDP collector."
           }
         ]
       }
@@ -1481,31 +1374,6 @@
           "description": "Syslog receiver endpoint definition. Example: 0.0.0.0:<port>.",
           "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
         },
-        "protocol": {
-          "type": "string",
-          "description": "Protocol to parse syslog messages. Default rfc3164",
-          "default": "rfc3164",
-          "enum": [
-            "rfc3164",
-            "rfc5424"
-          ],
-          "x-ms-enum": {
-            "name": "SyslogProtocol",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "rfc3164",
-                "value": "rfc3164",
-                "description": "rfc3164 protocol."
-              },
-              {
-                "name": "rfc5424",
-                "value": "rfc5424",
-                "description": "rfc5424 protocol."
-              }
-            ]
-          }
-        },
         "transportProtocol": {
           "type": "string",
           "description": "Transport protocol. Default tcp.",
@@ -1530,11 +1398,6 @@
               }
             ]
           }
-        },
-        "allowSkipPriHeader": {
-          "type": "boolean",
-          "description": "Configure the receiver to allow parsing of messages without the PRI header. Default false.",
-          "default": false
         }
       },
       "required": [
@@ -1607,81 +1470,6 @@
       },
       "required": [
         "transformStatement"
-      ]
-    },
-    "UdpReceiver": {
-      "type": "object",
-      "description": "Receiver using UDP as transport protocol.",
-      "properties": {
-        "endpoint": {
-          "type": "string",
-          "description": "TCP endpoint definition. Example: 0.0.0.0:<port>.",
-          "pattern": "^[a-zA-Z0-9-\\.]+:[0-9]+$"
-        },
-        "encoding": {
-          "type": "string",
-          "description": "The encoding of the stream being received.",
-          "default": "nop",
-          "enum": [
-            "nop",
-            "utf-8",
-            "utf-16le",
-            "utf-16be",
-            "ascii",
-            "big5"
-          ],
-          "x-ms-enum": {
-            "name": "StreamEncodingType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "nop",
-                "value": "nop",
-                "description": "No encoding validation. Treats the file as a stream of raw bytes."
-              },
-              {
-                "name": "utf_8",
-                "value": "utf-8",
-                "description": "UTF-8 encoding."
-              },
-              {
-                "name": "utf_16le",
-                "value": "utf-16le",
-                "description": "UTF-16 encoding with little-endian byte order."
-              },
-              {
-                "name": "utf_16be",
-                "value": "utf-16be",
-                "description": "UTF-16 encoding with little-endian byte order."
-              },
-              {
-                "name": "ascii",
-                "value": "ascii",
-                "description": "ASCII encoding."
-              },
-              {
-                "name": "big5",
-                "value": "big5",
-                "description": "The Big5 Chinese character encoding."
-              }
-            ]
-          }
-        },
-        "readQueueLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Max read queue length.",
-          "default": 1000,
-          "minimum": 100,
-          "maximum": 100000
-        },
-        "jsonArrayMapper": {
-          "$ref": "#/definitions/JsonArrayMapper",
-          "description": "Json array mapper - allows this udp receiver to parse a value from a given source field as a json array, match a key to each parsed value and output the key-value map to a given output field."
-        }
-      },
-      "required": [
-        "endpoint"
       ]
     }
   },

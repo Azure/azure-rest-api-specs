@@ -1,10 +1,10 @@
 {
-  "title": "Create a PipelineGroup instance with a large batch timeout",
+  "title": "Create a PipelineGroup instance with execution placement for hero customer use case (node labeling + pod isolation)",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "pipelineGroupName": "plGroup1",
+    "pipelineGroupName": "plGroup-hero-customer",
     "api-version": "2026-04-01",
     "resource": {
       "location": "eastus2",
@@ -13,10 +13,11 @@
         "type": "CustomLocation"
       },
       "tags": {
-        "tag1": "A",
-        "tag2": "B"
+        "pipeline": "high-throughput-logs",
+        "isolation": "strict"
       },
       "properties": {
+        "replicas": 3,
         "receivers": [
           {
             "type": "OTLP",
@@ -29,30 +30,27 @@
         "processors": [
           {
             "type": "Batch",
-            "name": "batch-processor1",
-            "batch": {
-              "timeout": 300000
-            }
+            "name": "batch-processor1"
           }
         ],
         "exporters": [
           {
             "type": "AzureMonitorWorkspaceLogs",
-            "name": "otlp-exporter1",
+            "name": "my-workspace-logs-exporter1",
             "azureMonitorWorkspaceLogs": {
               "api": {
                 "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                "stream": "Custom-OTLPTable_CL",
+                "stream": "Custom-MyTableRawData_CL",
                 "dataCollectionRule": "dcr-00000000000000000000000000000000",
                 "schema": {
                   "recordMap": [
                     {
-                      "from": "severity_text",
-                      "to": "SeverityText"
-                    },
-                    {
                       "from": "body",
                       "to": "Body"
+                    },
+                    {
+                      "from": "severity_text",
+                      "to": "SeverityText"
                     },
                     {
                       "from": "time_unix_nano",
@@ -60,10 +58,6 @@
                     }
                   ]
                 }
-              },
-              "concurrency": {
-                "workerCount": 4,
-                "batchQueueSize": 100
               }
             }
           }
@@ -71,7 +65,7 @@
         "service": {
           "pipelines": [
             {
-              "name": "MyPipelineForLogs1",
+              "name": "HighThroughputPipeline",
               "type": "Logs",
               "receivers": [
                 "otlp-receiver1"
@@ -80,10 +74,32 @@
                 "batch-processor1"
               ],
               "exporters": [
-                "otlp-exporter1"
+                "my-workspace-logs-exporter1"
               ]
             }
           ]
+        },
+        "executionPlacement": {
+          "constraints": [
+            {
+              "capability": "pipeline",
+              "operator": "In",
+              "values": [
+                "high-throughput-logs"
+              ]
+            },
+            {
+              "capability": "node-type",
+              "operator": "In",
+              "values": [
+                "high-cpu",
+                "dedicated"
+              ]
+            }
+          ],
+          "distribution": {
+            "maxInstancesPerHost": 1
+          }
         }
       }
     }
@@ -91,8 +107,8 @@
   "responses": {
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
-        "name": "plGroup1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup-hero-customer",
+        "name": "plGroup-hero-customer",
         "type": "Microsoft.Monitor/pipelineGroup",
         "location": "eastus2",
         "extendedLocation": {
@@ -100,11 +116,12 @@
           "type": "CustomLocation"
         },
         "tags": {
-          "tag1": "A",
-          "tag2": "B"
+          "pipeline": "high-throughput-logs",
+          "isolation": "strict"
         },
         "properties": {
           "provisioningState": "Accepted",
+          "replicas": 3,
           "receivers": [
             {
               "type": "OTLP",
@@ -117,30 +134,27 @@
           "processors": [
             {
               "type": "Batch",
-              "name": "batch-processor1",
-              "batch": {
-                "timeout": 300000
-              }
+              "name": "batch-processor1"
             }
           ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
-              "name": "otlp-exporter1",
+              "name": "my-workspace-logs-exporter1",
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-OTLPTable_CL",
+                  "stream": "Custom-MyTableRawData_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
                       {
-                        "from": "severity_text",
-                        "to": "SeverityText"
-                      },
-                      {
                         "from": "body",
                         "to": "Body"
+                      },
+                      {
+                        "from": "severity_text",
+                        "to": "SeverityText"
                       },
                       {
                         "from": "time_unix_nano",
@@ -148,10 +162,6 @@
                       }
                     ]
                   }
-                },
-                "concurrency": {
-                  "workerCount": 4,
-                  "batchQueueSize": 100
                 }
               }
             }
@@ -159,7 +169,7 @@
           "service": {
             "pipelines": [
               {
-                "name": "MyPipelineForLogs1",
+                "name": "HighThroughputPipeline",
                 "type": "Logs",
                 "receivers": [
                   "otlp-receiver1"
@@ -168,10 +178,32 @@
                   "batch-processor1"
                 ],
                 "exporters": [
-                  "otlp-exporter1"
+                  "my-workspace-logs-exporter1"
                 ]
               }
             ]
+          },
+          "executionPlacement": {
+            "constraints": [
+              {
+                "capability": "pipeline",
+                "operator": "In",
+                "values": [
+                  "high-throughput-logs"
+                ]
+              },
+              {
+                "capability": "node-type",
+                "operator": "In",
+                "values": [
+                  "high-cpu",
+                  "dedicated"
+                ]
+              }
+            ],
+            "distribution": {
+              "maxInstancesPerHost": 1
+            }
           }
         },
         "systemData": {
@@ -186,8 +218,8 @@
     },
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
-        "name": "plGroup1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup-hero-customer",
+        "name": "plGroup-hero-customer",
         "type": "Microsoft.Monitor/pipelineGroup",
         "location": "eastus2",
         "extendedLocation": {
@@ -195,11 +227,12 @@
           "type": "CustomLocation"
         },
         "tags": {
-          "tag1": "A",
-          "tag2": "B"
+          "pipeline": "high-throughput-logs",
+          "isolation": "strict"
         },
         "properties": {
           "provisioningState": "Succeeded",
+          "replicas": 3,
           "receivers": [
             {
               "type": "OTLP",
@@ -212,30 +245,27 @@
           "processors": [
             {
               "type": "Batch",
-              "name": "batch-processor1",
-              "batch": {
-                "timeout": 300000
-              }
+              "name": "batch-processor1"
             }
           ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
-              "name": "otlp-exporter1",
+              "name": "my-workspace-logs-exporter1",
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-OTLPTable_CL",
+                  "stream": "Custom-MyTableRawData_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
                       {
-                        "from": "severity_text",
-                        "to": "SeverityText"
-                      },
-                      {
                         "from": "body",
                         "to": "Body"
+                      },
+                      {
+                        "from": "severity_text",
+                        "to": "SeverityText"
                       },
                       {
                         "from": "time_unix_nano",
@@ -243,10 +273,6 @@
                       }
                     ]
                   }
-                },
-                "concurrency": {
-                  "workerCount": 4,
-                  "batchQueueSize": 100
                 }
               }
             }
@@ -254,7 +280,7 @@
           "service": {
             "pipelines": [
               {
-                "name": "MyPipelineForLogs1",
+                "name": "HighThroughputPipeline",
                 "type": "Logs",
                 "receivers": [
                   "otlp-receiver1"
@@ -263,10 +289,32 @@
                   "batch-processor1"
                 ],
                 "exporters": [
-                  "otlp-exporter1"
+                  "my-workspace-logs-exporter1"
                 ]
               }
             ]
+          },
+          "executionPlacement": {
+            "constraints": [
+              {
+                "capability": "pipeline",
+                "operator": "In",
+                "values": [
+                  "high-throughput-logs"
+                ]
+              },
+              {
+                "capability": "node-type",
+                "operator": "In",
+                "values": [
+                  "high-cpu",
+                  "dedicated"
+                ]
+              }
+            ],
+            "distribution": {
+              "maxInstancesPerHost": 1
+            }
           }
         },
         "systemData": {
