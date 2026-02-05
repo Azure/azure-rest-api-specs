@@ -218,6 +218,30 @@ union ProvisioningState {
   Deleting: "Deleting",
 }
 
+@doc("ManagedOps model for update operations")
+model ManagedOpUpdate {
+  @doc("Updatable properties in the ManagedOps resource.")
+  properties?: ManagedOpUpdateProperties;
+}
+
+@doc("Updatable properties in the ManagedOps resource.")
+model ManagedOpUpdateProperties {
+  @doc("Desired configuration input by the user.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  desiredConfiguration: DesiredConfigurationUpdate;
+}
+
+@doc("Updatable parameters in the Desired configuration input.")
+model DesiredConfigurationUpdate {
+  @doc("Desired enablement state of the Defender For Servers service.")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  defenderForServers?: desiredEnablementState;
+
+  @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  defenderCspm?: desiredEnablementState;
+}
+
 /** The operations that can be performed on our resource */
 @armResourceOperations(ManagedOp)
 interface ManagedOps {
@@ -234,10 +258,7 @@ interface ManagedOps {
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ManagedOp,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      ManagedOp,
-      ManagedOpsProperties
-    >
+    ManagedOpUpdate,
   >;
 
   @doc("Deletes the ManagedOps instance.")
