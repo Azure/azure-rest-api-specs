@@ -127,17 +127,17 @@ export async function checkBreakingChangeOnSameVersion(
 
   for (const swaggerPath of detectionContext.existingVersionSwaggers) {
     logMessage(`Processing swaggerPath: ${swaggerPath}`, LogLevel.Group);
-    
+
     // Check if this file is a rename target
     const renameFrom = renameMap.get(swaggerPath);
     const oldSpecPath = renameFrom
       ? path.resolve(detectionContext.context.prInfo!.tempRepoFolder, renameFrom)
       : path.resolve(detectionContext.context.prInfo!.tempRepoFolder, swaggerPath);
-    
+
     if (renameFrom) {
       logMessage(`Detected as rename: ${renameFrom} -> ${swaggerPath}`);
     }
-    
+
     const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
       detectionContext,
       oldSpecPath,
