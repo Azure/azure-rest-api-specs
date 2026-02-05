@@ -373,6 +373,7 @@ interface ElasticVolumes {
 
   /** Patch the specified elastic volume */
   @added(Versions.v2025_09_01_preview)
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ElasticVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

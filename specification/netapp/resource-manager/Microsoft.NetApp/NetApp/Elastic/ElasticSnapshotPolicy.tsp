@@ -203,6 +203,7 @@ interface ElasticSnapshotPolicies {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ElasticSnapshotPolicy>;
 
   @added(Versions.v2025_09_01_preview)
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ElasticSnapshotPolicy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

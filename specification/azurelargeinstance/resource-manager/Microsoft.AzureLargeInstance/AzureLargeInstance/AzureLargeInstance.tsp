@@ -51,6 +51,7 @@ interface AzureLargeInstances {
     Patches the Tags field of an Azure Large Instance for the specified
     subscription, resource group, and instance name.
     """)
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<AzureLargeInstance>;
 
   @doc("""

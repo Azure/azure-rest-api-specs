@@ -20,6 +20,7 @@ interface AutonomousDatabaseBackups
     "./examples/autonomousDatabaseBackup_patch.json",
     "Patch Autonomous Database Backup."
   )
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AutonomousDatabaseBackup,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

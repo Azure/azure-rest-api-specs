@@ -219,6 +219,7 @@ interface Fleets {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
   @sharedRoute
   @removed(Versions.v2023_06_15_preview)
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Fleet,
     FleetPatch,
@@ -234,6 +235,7 @@ interface Fleets {
     #{ `final-state-via`: "original-uri" }
   )
   @sharedRoute
+  @patch(#{ implicitOptionality: false })
   updateAsync is ArmCustomPatchAsync<
     Fleet,
     FleetPatch,
