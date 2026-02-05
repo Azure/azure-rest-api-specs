@@ -597,44 +597,6 @@
         "userAssignedManagedIdentityId"
       ]
     },
-    "DesiredConfigurationUpdate": {
-      "type": "object",
-      "description": "Desired configuration input by the user.",
-      "properties": {
-        "defenderForServers": {
-          "type": "string",
-          "description": "Desired enablement state of the Defender For Servers service.",
-          "enum": [
-            "Enable",
-            "Disable"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "defenderCspm": {
-          "type": "string",
-          "description": "Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.",
-          "enum": [
-            "Enable",
-            "Disable"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      }
-    },
     "GuestConfigurationInformation": {
       "type": "object",
       "description": "Azure Policy and Machine Configuration service information.",
@@ -708,7 +670,7 @@
       "description": "The updatable properties of the ManagedOp.",
       "properties": {
         "desiredConfiguration": {
-          "$ref": "#/definitions/DesiredConfigurationUpdate",
+          "$ref": "#/definitions/DesiredConfiguration",
           "description": "Desired configuration input by the user.",
           "x-ms-mutability": [
             "read",

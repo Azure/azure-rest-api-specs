@@ -3319,7 +3319,10 @@
           "$ref": "#/definitions/RequestMetadataUpdatableProperties",
           "description": "Request metadata for the approval request."
         }
-      }
+      },
+      "required": [
+        "requestMetadata"
+      ]
     },
     "ApprovalProperties": {
       "type": "object",
@@ -3418,24 +3421,6 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
-    },
     "CheckAddressSpaceAvailabilityRequest": {
       "type": "object",
       "description": "Request to the action call to check address space availability.",
@@ -3533,7 +3518,10 @@
           "type": "boolean",
           "description": "Whether approval is needed for the connection (True or False)."
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "CommunityEndpointProperties": {
       "type": "object",
@@ -3682,7 +3670,7 @@
           }
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       }
@@ -4224,7 +4212,10 @@
           "type": "boolean",
           "description": "Whether approval is needed for the connection (True or False)."
         }
-      }
+      },
+      "required": [
+        "ruleCollection"
+      ]
     },
     "EnclaveEndpointProperties": {
       "type": "object",
@@ -4610,7 +4601,10 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "required": [
+        "mode"
+      ]
     },
     "ManagedResourceGroupConfiguration": {
       "type": "object",
@@ -4791,7 +4785,10 @@
           "$ref": "#/definitions/ApprovalStatus",
           "description": "Status of the approval. Uses ApprovalStatus enum."
         }
-      }
+      },
+      "required": [
+        "resourceAction"
+      ]
     },
     "ServiceIdentifier": {
       "type": "string",
@@ -5174,7 +5171,7 @@
           "description": "Virtual Enclave Patch properties"
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -5206,7 +5203,10 @@
           "$ref": "#/definitions/MaintenanceModeConfigurationPatchModel",
           "description": "Maintenance Mode configuration."
         }
-      }
+      },
+      "required": [
+        "enclaveVirtualNetwork"
+      ]
     },
     "VirtualEnclaveProperties": {
       "type": "object",

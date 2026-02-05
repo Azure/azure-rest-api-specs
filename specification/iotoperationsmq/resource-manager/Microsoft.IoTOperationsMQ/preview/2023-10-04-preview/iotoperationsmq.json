@@ -4205,42 +4205,6 @@
         "issuerRef"
       ]
     },
-    "AutomaticCertMethodUpdate": {
-      "type": "object",
-      "description": "Automatic TLS server certificate management with cert-manager",
-      "properties": {
-        "duration": {
-          "type": "string",
-          "description": "Lifetime of automatically-managed certificate.",
-          "default": "720h"
-        },
-        "issuerRef": {
-          "$ref": "#/definitions/CertManagerIssuerRefUpdate",
-          "description": "cert-manager issuerRef."
-        },
-        "privateKey": {
-          "$ref": "#/definitions/CertManagerPrivateKeyUpdate",
-          "description": "Cert Manager private key."
-        },
-        "renewBefore": {
-          "type": "string",
-          "description": "When to begin renewing automatically-managed certificate.",
-          "default": "240h"
-        },
-        "san": {
-          "$ref": "#/definitions/SanForCertUpdate",
-          "description": "Additional SANs to include in the certificate."
-        },
-        "secretName": {
-          "type": "string",
-          "description": "Secret for storing server certificate. Any existing data will be overwritten."
-        },
-        "secretNamespace": {
-          "type": "string",
-          "description": "Certificate K8S namespace. Omit to use default namespace."
-        }
-      }
-    },
     "BackendChain": {
       "type": "object",
       "description": "Desired properties of the Frontend Instances of the DMQTT Broker",
@@ -4301,63 +4265,6 @@
         "partitions",
         "redundancyFactor"
       ]
-    },
-    "BackendChainUpdate": {
-      "type": "object",
-      "description": "Desired properties of the Frontend Instances of the DMQTT Broker",
-      "properties": {
-        "partitions": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Partitions is desired number of physical backend chains of the given distributed MQTT broker.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "redundancyFactor": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Redundancy Factor is desired numbers of broker instances in one chain.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "temporaryDiskTransferEnabled": {
-          "type": "boolean",
-          "description": "Defines whether disk transfer is enabled or not."
-        },
-        "temporaryDiskTransferHighWatermarkPercent": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Defines the percentage usage of buffer pool above which disk transfer will start.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "temporaryDiskTransferLowWatermarkPercent": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Defines the percentage usage of buffer pool below which disk transfer will stop.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "temporaryMaxBackendMemUsagePercent": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Defines the limits for memory usage percent of the backend instances of the MQTT broker.",
-          "minimum": 0,
-          "maximum": 100
-        },
-        "temporaryResourceLimits": {
-          "$ref": "#/definitions/TemporaryResourceLimitsConfigUpdate",
-          "description": "Defines the limits for resources of the backend instances of the MQTT broker."
-        },
-        "workers": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of logical backend workers per pod.",
-          "default": 1,
-          "minimum": 0,
-          "maximum": 65535
-        }
-      }
     },
     "BrokerAuthenticationProperties": {
       "type": "object",
@@ -5065,7 +4972,7 @@
           }
         },
         "tls": {
-          "$ref": "#/definitions/TlsCertMethodUpdate",
+          "$ref": "#/definitions/TlsCertMethod",
           "description": "Defines configuration of a TLS server certificate. NOTE Enum - Only one TLS Cert method is supported"
         }
       }
@@ -5276,19 +5183,19 @@
       "description": "The updatable properties of the BrokerResource.",
       "properties": {
         "authImage": {
-          "$ref": "#/definitions/ContainerImageUpdate",
+          "$ref": "#/definitions/ContainerImage",
           "description": "The details of Authentication Docker Image."
         },
         "brokerImage": {
-          "$ref": "#/definitions/ContainerImageUpdate",
+          "$ref": "#/definitions/ContainerImage",
           "description": "The details of Broker Docker Image."
         },
         "brokerNodeTolerations": {
-          "$ref": "#/definitions/NodeTolerationsUpdate",
+          "$ref": "#/definitions/NodeTolerations",
           "description": "The details of Node Tolerations for Broker Pods."
         },
         "cardinality": {
-          "$ref": "#/definitions/CardinalityUpdate",
+          "$ref": "#/definitions/Cardinality",
           "description": "The cardinality details of the broker."
         },
         "diagnostics": {
@@ -5296,7 +5203,7 @@
           "description": "The diagnostic details of the broker deployment."
         },
         "diskBackedMessageBufferSettings": {
-          "$ref": "#/definitions/DiskBackedMessageBufferSettingsUpdate",
+          "$ref": "#/definitions/DiskBackedMessageBufferSettings",
           "description": "The settings of the disk-backed message buffer."
         },
         "encryptInternalTraffic": {
@@ -5305,15 +5212,15 @@
           "default": true
         },
         "healthManagerImage": {
-          "$ref": "#/definitions/ContainerImageUpdate",
+          "$ref": "#/definitions/ContainerImage",
           "description": "The details of Health Manager Docker Image."
         },
         "healthManagerNodeTolerations": {
-          "$ref": "#/definitions/NodeTolerationsUpdate",
+          "$ref": "#/definitions/NodeTolerations",
           "description": "The details of Node Tolerations for Health Manager Pods."
         },
         "internalCerts": {
-          "$ref": "#/definitions/CertManagerCertOptionsUpdate",
+          "$ref": "#/definitions/CertManagerCertOptions",
           "description": "Details of the internal CA cert that will be used to secure communication between pods."
         },
         "memoryProfile": {
@@ -5377,20 +5284,6 @@
         "frontend"
       ]
     },
-    "CardinalityUpdate": {
-      "type": "object",
-      "description": "Cardinality properties",
-      "properties": {
-        "backendChain": {
-          "$ref": "#/definitions/BackendChainUpdate",
-          "description": "The backend broker desired properties"
-        },
-        "frontend": {
-          "$ref": "#/definitions/FrontendUpdate",
-          "description": "The frontend broker desired properties"
-        }
-      }
-    },
     "CertManagerCertOptions": {
       "type": "object",
       "description": "Cert Manager CA Cert properties",
@@ -5416,26 +5309,6 @@
         "renewBefore"
       ]
     },
-    "CertManagerCertOptionsUpdate": {
-      "type": "object",
-      "description": "Cert Manager CA Cert properties",
-      "properties": {
-        "duration": {
-          "type": "string",
-          "description": "Duration of CA cert.",
-          "default": "720h"
-        },
-        "privateKey": {
-          "$ref": "#/definitions/CertManagerPrivateKeyUpdate",
-          "description": "Cert Manager private key."
-        },
-        "renewBefore": {
-          "type": "string",
-          "description": "Renew before time of CA cert.",
-          "default": "240h"
-        }
-      }
-    },
     "CertManagerIssuerRef": {
       "type": "object",
       "description": "Cert-Manager issuerRef properties",
@@ -5459,25 +5332,6 @@
         "kind",
         "name"
       ]
-    },
-    "CertManagerIssuerRefUpdate": {
-      "type": "object",
-      "description": "Cert-Manager issuerRef properties",
-      "properties": {
-        "group": {
-          "type": "string",
-          "description": "group of issuer.",
-          "default": "cert-manager.io"
-        },
-        "kind": {
-          "type": "string",
-          "description": "kind of issuer (Issuer or ClusterIssuer)."
-        },
-        "name": {
-          "type": "string",
-          "description": "name of issuer."
-        }
-      }
     },
     "CertManagerPrivateKey": {
       "type": "object",
@@ -5508,30 +5362,6 @@
         "size"
       ]
     },
-    "CertManagerPrivateKeyUpdate": {
-      "type": "object",
-      "description": "Cert Manager private key properties",
-      "properties": {
-        "algorithm": {
-          "type": "string",
-          "description": "algorithm for private key.",
-          "default": "ECDSA"
-        },
-        "rotationPolicy": {
-          "type": "string",
-          "description": "cert-manager rotationPolicy.",
-          "default": "Always"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int32",
-          "description": "size of private key.",
-          "default": 256,
-          "minimum": 0,
-          "maximum": 65535
-        }
-      }
-    },
     "ContainerImage": {
       "type": "object",
       "description": "Defines the Docker image details",
@@ -5557,28 +5387,6 @@
         "repository",
         "tag"
       ]
-    },
-    "ContainerImageUpdate": {
-      "type": "object",
-      "description": "Defines the Docker image details",
-      "properties": {
-        "pullPolicy": {
-          "type": "string",
-          "description": "Image pull policy."
-        },
-        "pullSecrets": {
-          "type": "string",
-          "description": "Image pull secrets."
-        },
-        "repository": {
-          "type": "string",
-          "description": "The Docker image name."
-        },
-        "tag": {
-          "type": "string",
-          "description": "The Docker  image tag."
-        }
-      }
     },
     "DataLakeConnectorMap": {
       "type": "object",
@@ -5631,50 +5439,6 @@
         "mqttSourceTopic",
         "table"
       ]
-    },
-    "DataLakeConnectorMapUpdate": {
-      "type": "object",
-      "description": "DataLake connector map route properties",
-      "properties": {
-        "allowedLatencySecs": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Allowed latency for transferring data.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "clientId": {
-          "type": "string",
-          "description": "Client Id to use."
-        },
-        "maxMessagesPerBatch": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum messages to send per Batch.",
-          "minimum": 0,
-          "maximum": 4294967295
-        },
-        "messagePayloadType": {
-          "type": "string",
-          "description": "Message payload type."
-        },
-        "mqttSourceTopic": {
-          "type": "string",
-          "description": "Mqtt source topic."
-        },
-        "qos": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Quality of Service.",
-          "default": 1,
-          "minimum": 0,
-          "maximum": 2
-        },
-        "table": {
-          "$ref": "#/definitions/DeltaTableUpdate",
-          "description": "Delta table properties to use."
-        }
-      }
     },
     "DataLakeConnectorProperties": {
       "type": "object",
@@ -5803,7 +5567,7 @@
           "description": "DataLake database format to use."
         },
         "image": {
-          "$ref": "#/definitions/ContainerImageUpdate",
+          "$ref": "#/definitions/ContainerImage",
           "description": "The details of DataLakeConnector Docker Image."
         },
         "instances": {
@@ -5814,7 +5578,7 @@
           "maximum": 65535
         },
         "localBrokerConnection": {
-          "$ref": "#/definitions/LocalBrokerConnectionSpecUpdate",
+          "$ref": "#/definitions/LocalBrokerConnectionSpec",
           "description": "The details for connecting with Local Broker."
         },
         "logLevel": {
@@ -5822,7 +5586,7 @@
           "description": "The log level of the DataLake Connector instances."
         },
         "nodeTolerations": {
-          "$ref": "#/definitions/NodeTolerationsUpdate",
+          "$ref": "#/definitions/NodeTolerations",
           "description": "The Node Tolerations for the DataLake Connector pods."
         },
         "protocol": {
@@ -5830,7 +5594,7 @@
           "description": "The protocol to use for connecting with Brokers."
         },
         "target": {
-          "$ref": "#/definitions/DataLakeTargetStorageUpdate",
+          "$ref": "#/definitions/DataLakeTargetStorage",
           "description": "The protocol to use for connecting with Brokers. NOTE - Enum only storage is supported at at time."
         }
       }
@@ -5926,42 +5690,6 @@
         "systemAssignedManagedIdentity"
       ]
     },
-    "DataLakeFabricStorageAuthenticationUpdate": {
-      "type": "object",
-      "description": "DataLake Fabric Storage authentication details.",
-      "properties": {
-        "systemAssignedManagedIdentity": {
-          "$ref": "#/definitions/ManagedIdentityAuthenticationUpdate",
-          "description": "Configuration for managed identity authentication."
-        }
-      }
-    },
-    "DataLakeFabricStorageUpdate": {
-      "type": "object",
-      "description": "DataLake Fabric Storage details.",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/DataLakeFabricStorageAuthenticationUpdate",
-          "description": "DataLake fabric storage authentication details."
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "DataLake fabric storage endpoint to use."
-        },
-        "fabricPath": {
-          "$ref": "#/definitions/FabricPathType",
-          "description": "Fabric path type to use."
-        },
-        "guids": {
-          "$ref": "#/definitions/FabricGuidsUpdate",
-          "description": "Fabric one lake Guids."
-        },
-        "names": {
-          "$ref": "#/definitions/FabricNamesUpdate",
-          "description": "Fabric one lake Names."
-        }
-      }
-    },
     "DataLakeLocalStorage": {
       "type": "object",
       "description": "DataLake Local Storage details.",
@@ -5974,16 +5702,6 @@
       "required": [
         "volumeName"
       ]
-    },
-    "DataLakeLocalStorageUpdate": {
-      "type": "object",
-      "description": "DataLake Local Storage details.",
-      "properties": {
-        "volumeName": {
-          "type": "string",
-          "description": "Volume name to write to."
-        }
-      }
     },
     "DataLakeServiceStorage": {
       "type": "object",
@@ -6017,34 +5735,6 @@
         }
       }
     },
-    "DataLakeServiceStorageAuthenticationUpdate": {
-      "type": "object",
-      "description": "DataLake Service Storage authentication details. NOTE - Enum only one method is supported.",
-      "properties": {
-        "accessTokenSecretName": {
-          "type": "string",
-          "description": "Access token secret name."
-        },
-        "systemAssignedManagedIdentity": {
-          "$ref": "#/definitions/ManagedIdentityAuthenticationUpdate",
-          "description": "Configuration for managed identity authentication."
-        }
-      }
-    },
-    "DataLakeServiceStorageUpdate": {
-      "type": "object",
-      "description": "DataLake Service Storage details.",
-      "properties": {
-        "endpoint": {
-          "type": "string",
-          "description": "DataLake service storage endpoint to use."
-        },
-        "authentication": {
-          "$ref": "#/definitions/DataLakeServiceStorageAuthenticationUpdate",
-          "description": "DataLake service storage authentication details. NOTE - Enum only one method is supported."
-        }
-      }
-    },
     "DataLakeTargetStorage": {
       "type": "object",
       "description": "Target storage for the DataLake. NOTE - Enum only storage is supported at a time.",
@@ -6059,24 +5749,6 @@
         },
         "fabricOneLake": {
           "$ref": "#/definitions/DataLakeFabricStorage",
-          "description": "Fabric one lake storage details."
-        }
-      }
-    },
-    "DataLakeTargetStorageUpdate": {
-      "type": "object",
-      "description": "Target storage for the DataLake. NOTE - Enum only storage is supported at a time.",
-      "properties": {
-        "datalakeStorage": {
-          "$ref": "#/definitions/DataLakeServiceStorageUpdate",
-          "description": "DataLake service storage details."
-        },
-        "localStorage": {
-          "$ref": "#/definitions/DataLakeLocalStorageUpdate",
-          "description": "Local storage details."
-        },
-        "fabricOneLake": {
-          "$ref": "#/definitions/DataLakeFabricStorageUpdate",
           "description": "Fabric one lake storage details."
         }
       }
@@ -6156,7 +5828,7 @@
           "description": "DataLake Connector CRD to use."
         },
         "mapping": {
-          "$ref": "#/definitions/DataLakeConnectorMapUpdate",
+          "$ref": "#/definitions/DataLakeConnectorMap",
           "description": "TopicMap for DataLake connector."
         }
       }
@@ -6317,28 +5989,6 @@
         "optional"
       ]
     },
-    "DeltaTableUpdate": {
-      "type": "object",
-      "description": "Delta table properties",
-      "properties": {
-        "schema": {
-          "type": "array",
-          "description": "Schema list supported.",
-          "items": {
-            "$ref": "#/definitions/DeltaTableSchema"
-          },
-          "x-ms-identifiers": []
-        },
-        "tableName": {
-          "type": "string",
-          "description": "Delta table name."
-        },
-        "tablePath": {
-          "type": "string",
-          "description": "Delta table path."
-        }
-      }
-    },
     "DiagnosticServiceProperties": {
       "type": "object",
       "description": "MQ Diagnostic Services Resource properties",
@@ -6482,7 +6132,7 @@
           "maximum": 65535
         },
         "image": {
-          "$ref": "#/definitions/ContainerImageUpdate",
+          "$ref": "#/definitions/ContainerImage",
           "description": "The details of Diagnostic Service Docker Image."
         },
         "logFormat": {
@@ -6546,24 +6196,6 @@
         "maxSize"
       ]
     },
-    "DiskBackedMessageBufferSettingsUpdate": {
-      "type": "object",
-      "description": "DiskBackedMessageBufferSettings properties",
-      "properties": {
-        "ephemeralVolumeClaimSpec": {
-          "$ref": "#/definitions/VolumeClaimSpecUpdate",
-          "description": "Use the specified persistent volume claim template to mount a \"generic ephemeral volume\" for the message buffer. See <https://kubernetes.io/docs/concepts/storage/ephemeral-volumes/#generic-ephemeral-volumes> for details."
-        },
-        "maxSize": {
-          "type": "string",
-          "description": "The max size of the message buffer on disk. If a PVC template is specified using one of ephemeralVolumeClaimSpec or persistentVolumeClaimSpec, then this size is used as the request and limit sizes of that template. If neither ephemeralVolumeClaimSpec nor persistentVolumeClaimSpec are specified, then an emptyDir volume is mounted with this size as its limit. See <https://kubernetes.io/docs/concepts/storage/volumes/#emptydir> for details."
-        },
-        "persistentVolumeClaimSpec": {
-          "$ref": "#/definitions/VolumeClaimSpecUpdate",
-          "description": "Use the specified persistent volume claim template to mount a persistent volume for the message buffer."
-        }
-      }
-    },
     "ExtendedLocationProperty": {
       "type": "object",
       "description": "ExtendedLocation properties",
@@ -6618,20 +6250,6 @@
         "workspaceGuid"
       ]
     },
-    "FabricGuidsUpdate": {
-      "type": "object",
-      "description": "Fabric one lake guids.",
-      "properties": {
-        "lakehouseGuid": {
-          "type": "string",
-          "description": "Fabric one lake house guid."
-        },
-        "workspaceGuid": {
-          "type": "string",
-          "description": "Fabric one lake workspace guid."
-        }
-      }
-    },
     "FabricNames": {
       "type": "object",
       "description": "Fabric one lake names.",
@@ -6649,20 +6267,6 @@
         "lakehouseName",
         "workspaceName"
       ]
-    },
-    "FabricNamesUpdate": {
-      "type": "object",
-      "description": "Fabric one lake names.",
-      "properties": {
-        "lakehouseName": {
-          "type": "string",
-          "description": "Fabric one lake house name."
-        },
-        "workspaceName": {
-          "type": "string",
-          "description": "Fabric one lake workspace name."
-        }
-      }
     },
     "FabricPathType": {
       "type": "string",
@@ -6715,31 +6319,6 @@
       "required": [
         "replicas"
       ]
-    },
-    "FrontendUpdate": {
-      "type": "object",
-      "description": "Desired properties of the Frontend Instances of the DMQTT Broker",
-      "properties": {
-        "replicas": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Replicas is desired number of frontend replicas of the given distributed MQTT broker.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "temporaryResourceLimits": {
-          "$ref": "#/definitions/TemporaryResourceLimitsConfigUpdate",
-          "description": "Defines the limits for resources of the frontend instances of the MQTT broker."
-        },
-        "workers": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of logical frontend workers per pod.",
-          "default": 2,
-          "minimum": 0,
-          "maximum": 65535
-        }
-      }
     },
     "KafkaAcks": {
       "type": "string",
@@ -6892,7 +6471,7 @@
           "description": "The client id prefix of the dynamically generated client ids."
         },
         "image": {
-          "$ref": "#/definitions/ContainerImageUpdate",
+          "$ref": "#/definitions/ContainerImage",
           "description": "The details of KafkaConnector Docker Image."
         },
         "instances": {
@@ -6903,11 +6482,11 @@
           "maximum": 65535
         },
         "kafkaConnection": {
-          "$ref": "#/definitions/KafkaRemoteBrokerConnectionSpecUpdate",
+          "$ref": "#/definitions/KafkaRemoteBrokerConnectionSpec",
           "description": "The details for connecting with Remote Kafka Broker."
         },
         "localBrokerConnection": {
-          "$ref": "#/definitions/LocalBrokerConnectionSpecUpdate",
+          "$ref": "#/definitions/LocalBrokerConnectionSpec",
           "description": "The details for connecting with Local Broker."
         },
         "logLevel": {
@@ -6916,7 +6495,7 @@
           "default": "info"
         },
         "nodeTolerations": {
-          "$ref": "#/definitions/NodeTolerationsUpdate",
+          "$ref": "#/definitions/NodeTolerations",
           "description": "The Node Tolerations for the Bridge Connector pods."
         }
       }
@@ -7010,20 +6589,6 @@
         "enabled"
       ]
     },
-    "KafkaRemoteBrokerAuthenticationPropertiesUpdate": {
-      "type": "object",
-      "description": "Kafka RemoteBrokerConnection Authentication methods",
-      "properties": {
-        "authType": {
-          "$ref": "#/definitions/KafkaRemoteBrokerAuthenticationTypesUpdate",
-          "description": "The type of authentication to use for Kafka remote broker."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "If authentication is enabled for Kafka remote broker."
-        }
-      }
-    },
     "KafkaRemoteBrokerAuthenticationTypes": {
       "type": "object",
       "description": "Kafka RemoteBrokerConnection Authentication types. NOTE - Enum only one method is allowed to be passed.",
@@ -7038,24 +6603,6 @@
         },
         "x509": {
           "$ref": "#/definitions/KafkaX509Authentication",
-          "description": "X509 remote broker authentication method."
-        }
-      }
-    },
-    "KafkaRemoteBrokerAuthenticationTypesUpdate": {
-      "type": "object",
-      "description": "Kafka RemoteBrokerConnection Authentication types. NOTE - Enum only one method is allowed to be passed.",
-      "properties": {
-        "sasl": {
-          "$ref": "#/definitions/SaslRemoteBrokerBasicAuthenticationUpdate",
-          "description": "Sasl remote broker authentication method."
-        },
-        "systemAssignedManagedIdentity": {
-          "$ref": "#/definitions/ManagedIdentityAuthenticationUpdate",
-          "description": "Managed identity remote broker authentication method."
-        },
-        "x509": {
-          "$ref": "#/definitions/KafkaX509AuthenticationUpdate",
           "description": "X509 remote broker authentication method."
         }
       }
@@ -7083,24 +6630,6 @@
         "tls"
       ]
     },
-    "KafkaRemoteBrokerConnectionSpecUpdate": {
-      "type": "object",
-      "description": "Kafka RemoteBrokerConnectionSpec details",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/KafkaRemoteBrokerAuthenticationPropertiesUpdate",
-          "description": "The remote broker authentication methods."
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "The endpoint of remote broker to connect to."
-        },
-        "tls": {
-          "$ref": "#/definitions/KafkaRemoteBrokerConnectionTlsUpdate",
-          "description": "TLS details for Remote broker Connection."
-        }
-      }
-    },
     "KafkaRemoteBrokerConnectionTls": {
       "type": "object",
       "description": "Kafka RemoteBrokerConnection TLS details",
@@ -7117,20 +6646,6 @@
       "required": [
         "tlsEnabled"
       ]
-    },
-    "KafkaRemoteBrokerConnectionTlsUpdate": {
-      "type": "object",
-      "description": "Kafka RemoteBrokerConnection TLS details",
-      "properties": {
-        "tlsEnabled": {
-          "type": "boolean",
-          "description": "Tls Enabled on Remote Broker Connection."
-        },
-        "trustedCaCertificateConfigMap": {
-          "type": "string",
-          "description": "Trusted CA certificate name for Remote Broker."
-        }
-      }
     },
     "KafkaRoutes": {
       "type": "object",
@@ -7253,24 +6768,6 @@
         "vault",
         "vaultSecret"
       ]
-    },
-    "KafkaTokenKeyVaultPropertiesUpdate": {
-      "type": "object",
-      "description": "Kafka Token KeyVault properties.",
-      "properties": {
-        "username": {
-          "type": "string",
-          "description": "Username to connect with."
-        },
-        "vault": {
-          "$ref": "#/definitions/KeyVaultConnectionPropertiesUpdate",
-          "description": "KeyVault properties."
-        },
-        "vaultSecret": {
-          "$ref": "#/definitions/KeyVaultSecretObjectUpdate",
-          "description": "KeyVault secret details."
-        }
-      }
     },
     "KafkaTopicMapBatching": {
       "type": "object",
@@ -7604,20 +7101,6 @@
         }
       }
     },
-    "KafkaX509AuthenticationUpdate": {
-      "type": "object",
-      "description": "Kafka RemoteBrokerConnection X509 Authentication properties.",
-      "properties": {
-        "keyVault": {
-          "$ref": "#/definitions/KeyVaultCertificatePropertiesUpdate",
-          "description": "Keyvault X509 secret properties."
-        },
-        "secretName": {
-          "type": "string",
-          "description": "Secret where cert details are stored."
-        }
-      }
-    },
     "KeyVaultCertificateProperties": {
       "type": "object",
       "description": "KeyVault certificate properties",
@@ -7639,24 +7122,6 @@
         "vault",
         "vaultCert"
       ]
-    },
-    "KeyVaultCertificatePropertiesUpdate": {
-      "type": "object",
-      "description": "KeyVault certificate properties",
-      "properties": {
-        "vault": {
-          "$ref": "#/definitions/KeyVaultConnectionPropertiesUpdate",
-          "description": "KeyVault properties."
-        },
-        "vaultCaChainSecret": {
-          "$ref": "#/definitions/KeyVaultSecretObjectUpdate",
-          "description": "KeyVault CA chain secret details."
-        },
-        "vaultCert": {
-          "$ref": "#/definitions/KeyVaultSecretObjectUpdate",
-          "description": "KeyVault Cert secret details."
-        }
-      }
     },
     "KeyVaultConnectionProperties": {
       "type": "object",
@@ -7681,24 +7146,6 @@
         "name"
       ]
     },
-    "KeyVaultConnectionPropertiesUpdate": {
-      "type": "object",
-      "description": "KeyVault properties",
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/KeyVaultCredentialsPropertiesUpdate",
-          "description": "KeyVault credentials."
-        },
-        "directoryId": {
-          "type": "string",
-          "description": "KeyVault directoryId."
-        },
-        "name": {
-          "type": "string",
-          "description": "KeyVault name."
-        }
-      }
-    },
     "KeyVaultCredentialsProperties": {
       "type": "object",
       "description": "KeyVault credentials properties. NOTE - Future this will be ENUM.",
@@ -7711,16 +7158,6 @@
       "required": [
         "servicePrincipalLocalSecretName"
       ]
-    },
-    "KeyVaultCredentialsPropertiesUpdate": {
-      "type": "object",
-      "description": "KeyVault credentials properties. NOTE - Future this will be ENUM.",
-      "properties": {
-        "servicePrincipalLocalSecretName": {
-          "type": "string",
-          "description": "KeyVault service principal local secret name."
-        }
-      }
     },
     "KeyVaultSecretObject": {
       "type": "object",
@@ -7738,20 +7175,6 @@
       "required": [
         "name"
       ]
-    },
-    "KeyVaultSecretObjectUpdate": {
-      "type": "object",
-      "description": "KeyVault secret object properties",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "KeyVault secret name."
-        },
-        "version": {
-          "type": "string",
-          "description": "KeyVault secret version."
-        }
-      }
     },
     "KeyVaultSecretProperties": {
       "type": "object",
@@ -7784,41 +7207,12 @@
         "kubernetes"
       ]
     },
-    "LocalBrokerAuthenticationMethodsUpdate": {
-      "type": "object",
-      "description": "Mqtt Local Broker Authentication details. Only one method at a time is supported. Default - kubernetes authentication",
-      "properties": {
-        "kubernetes": {
-          "$ref": "#/definitions/LocalBrokerKubernetesAuthentication",
-          "description": "Kubernetes local broker authentication method."
-        }
-      }
-    },
     "LocalBrokerConnectionSpec": {
       "type": "object",
       "description": "Mqtt Local Broker ConnectionSpec details",
       "properties": {
         "authentication": {
           "$ref": "#/definitions/LocalBrokerAuthenticationMethods",
-          "description": "The authentication methods for LocalBroker connection. NOTE - Enum only one method at a time is supported."
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "The endpoint of local broker to connect to.",
-          "default": "aio-mq-dmqtt-frontend:1883"
-        },
-        "tls": {
-          "$ref": "#/definitions/LocalBrokerConnectionTls",
-          "description": "TLS details for Local broker Connection."
-        }
-      }
-    },
-    "LocalBrokerConnectionSpecUpdate": {
-      "type": "object",
-      "description": "Mqtt Local Broker ConnectionSpec details",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/LocalBrokerAuthenticationMethodsUpdate",
           "description": "The authentication methods for LocalBroker connection. NOTE - Enum only one method at a time is supported."
         },
         "endpoint": {
@@ -7880,20 +7274,6 @@
         "audience"
       ]
     },
-    "ManagedIdentityAuthenticationUpdate": {
-      "type": "object",
-      "description": "Managed identity authentication details.",
-      "properties": {
-        "audience": {
-          "type": "string",
-          "description": "Token audience."
-        },
-        "extensionName": {
-          "type": "string",
-          "description": "Arc Extension name."
-        }
-      }
-    },
     "ManualCertMethod": {
       "type": "object",
       "description": "Manual TLS server certificate management through a defined secret",
@@ -7910,20 +7290,6 @@
       "required": [
         "secretName"
       ]
-    },
-    "ManualCertMethodUpdate": {
-      "type": "object",
-      "description": "Manual TLS server certificate management through a defined secret",
-      "properties": {
-        "secretName": {
-          "type": "string",
-          "description": "secret containing TLS cert."
-        },
-        "secretNamespace": {
-          "type": "string",
-          "description": "namespace of secret; omit to use default namespace."
-        }
-      }
     },
     "MqProperties": {
       "type": "object",
@@ -8130,11 +7496,11 @@
           "description": "The client id prefix of the dynamically generated client ids."
         },
         "image": {
-          "$ref": "#/definitions/ContainerImageUpdate",
+          "$ref": "#/definitions/ContainerImage",
           "description": "The details of MqttBridge Docker Image."
         },
         "localBrokerConnection": {
-          "$ref": "#/definitions/LocalBrokerConnectionSpecUpdate",
+          "$ref": "#/definitions/LocalBrokerConnectionSpec",
           "description": "The details for connecting with Local Broker."
         },
         "logLevel": {
@@ -8142,7 +7508,7 @@
           "description": "The log level of the Bridge Connector instances."
         },
         "nodeTolerations": {
-          "$ref": "#/definitions/NodeTolerationsUpdate",
+          "$ref": "#/definitions/NodeTolerations",
           "description": "The Node Tolerations for the Bridge Connector pods."
         },
         "protocol": {
@@ -8150,7 +7516,7 @@
           "description": "The protocol to use for connecting with Brokers."
         },
         "remoteBrokerConnection": {
-          "$ref": "#/definitions/MqttBridgeRemoteBrokerConnectionSpecUpdate",
+          "$ref": "#/definitions/MqttBridgeRemoteBrokerConnectionSpec",
           "description": "The details for connecting with Remote Broker."
         }
       }
@@ -8165,20 +7531,6 @@
         },
         "systemAssignedManagedIdentity": {
           "$ref": "#/definitions/ManagedIdentityAuthentication",
-          "description": "Managed identity remote broker authentication method."
-        }
-      }
-    },
-    "MqttBridgeRemoteBrokerAuthenticationMethodsUpdate": {
-      "type": "object",
-      "description": "MqttBridge RemoteBrokerConnection Authentication methods. NOTE - Enum only one is allowed to be passed.",
-      "properties": {
-        "x509": {
-          "$ref": "#/definitions/MqttBridgeRemoteBrokerX509AuthenticationUpdate",
-          "description": "X509 remote broker authentication method."
-        },
-        "systemAssignedManagedIdentity": {
-          "$ref": "#/definitions/ManagedIdentityAuthenticationUpdate",
           "description": "Managed identity remote broker authentication method."
         }
       }
@@ -8231,49 +7583,6 @@
         "tls"
       ]
     },
-    "MqttBridgeRemoteBrokerConnectionSpecUpdate": {
-      "type": "object",
-      "description": "MqttBridge RemoteBrokerConnectionSpec details",
-      "properties": {
-        "authentication": {
-          "$ref": "#/definitions/MqttBridgeRemoteBrokerAuthenticationMethodsUpdate",
-          "description": "The remote broker authentication methods. NOTE - Enum only one method is allowed to be passed."
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "The endpoint of remote broker to connect to."
-        },
-        "protocol": {
-          "type": "string",
-          "description": "Protocol for remote connection.",
-          "default": "mqtt",
-          "enum": [
-            "mqtt",
-            "webSocket"
-          ],
-          "x-ms-enum": {
-            "name": "MqttBridgeRemoteBrokerProtocol",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "mqtt",
-                "value": "mqtt",
-                "description": "MQTT protocol."
-              },
-              {
-                "name": "webSocket",
-                "value": "webSocket",
-                "description": "MQTT over WebSocket protocol."
-              }
-            ]
-          }
-        },
-        "tls": {
-          "$ref": "#/definitions/MqttBridgeRemoteBrokerConnectionTlsUpdate",
-          "description": "TLS details for Remote broker Connection."
-        }
-      }
-    },
     "MqttBridgeRemoteBrokerConnectionTls": {
       "type": "object",
       "description": "MqttBridge RemoteBrokerConnection TLS details",
@@ -8290,20 +7599,6 @@
       "required": [
         "tlsEnabled"
       ]
-    },
-    "MqttBridgeRemoteBrokerConnectionTlsUpdate": {
-      "type": "object",
-      "description": "MqttBridge RemoteBrokerConnection TLS details",
-      "properties": {
-        "tlsEnabled": {
-          "type": "boolean",
-          "description": "Tls Enabled on Remote Broker Connection."
-        },
-        "trustedCaCertificateConfigMap": {
-          "type": "string",
-          "description": "Trusted CA certificate name for Remote Broker."
-        }
-      }
     },
     "MqttBridgeRemoteBrokerProtocol": {
       "type": "string",
@@ -8335,20 +7630,6 @@
       "properties": {
         "keyVault": {
           "$ref": "#/definitions/KeyVaultCertificateProperties",
-          "description": "Keyvault X509 secret properties."
-        },
-        "secretName": {
-          "type": "string",
-          "description": "Secret where cert details are stored."
-        }
-      }
-    },
-    "MqttBridgeRemoteBrokerX509AuthenticationUpdate": {
-      "type": "object",
-      "description": "MqttBridge RemoteBroker X509 Authentication properties.",
-      "properties": {
-        "keyVault": {
-          "$ref": "#/definitions/KeyVaultCertificatePropertiesUpdate",
           "description": "Keyvault X509 secret properties."
         },
         "secretName": {
@@ -8643,28 +7924,6 @@
         "value"
       ]
     },
-    "NodeTolerationsUpdate": {
-      "type": "object",
-      "description": "Defines the Node Tolerations details",
-      "properties": {
-        "effect": {
-          "type": "string",
-          "description": "Toleration effect."
-        },
-        "key": {
-          "type": "string",
-          "description": "Toleration key."
-        },
-        "operator": {
-          "type": "string",
-          "description": "Toleration operator like 'Exists', 'Equal' etc."
-        },
-        "value": {
-          "type": "string",
-          "description": "Toleration Value."
-        }
-      }
-    },
     "PrincipalDefinition": {
       "type": "object",
       "description": "PrincipalDefinition properties of Basic Rule",
@@ -8851,28 +8110,6 @@
         "ip"
       ]
     },
-    "SanForCertUpdate": {
-      "type": "object",
-      "description": "SANs for certificate.",
-      "properties": {
-        "dns": {
-          "type": "array",
-          "description": "DNS SANs.",
-          "default": [],
-          "items": {
-            "type": "string"
-          }
-        },
-        "ip": {
-          "type": "array",
-          "description": "IP address SANs.",
-          "default": [],
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "SaslRemoteBrokerBasicAuthentication": {
       "type": "object",
       "description": "Kafka RemoteBrokerConnection Sasl Authentication properties.",
@@ -8902,34 +8139,6 @@
         "secretName": {
           "type": "string",
           "description": "Secret where cert details are stored."
-        }
-      }
-    },
-    "SaslRemoteBrokerBasicAuthenticationTokenUpdate": {
-      "type": "object",
-      "description": "Kafka RemoteBrokerConnection Sasl Authentication token properties. NOTE - Enum only one method is allowed to be passed.",
-      "properties": {
-        "keyVault": {
-          "$ref": "#/definitions/KafkaTokenKeyVaultPropertiesUpdate",
-          "description": "Keyvault token keyvault secret properties."
-        },
-        "secretName": {
-          "type": "string",
-          "description": "Secret where cert details are stored."
-        }
-      }
-    },
-    "SaslRemoteBrokerBasicAuthenticationUpdate": {
-      "type": "object",
-      "description": "Kafka RemoteBrokerConnection Sasl Authentication properties.",
-      "properties": {
-        "saslType": {
-          "$ref": "#/definitions/KafkaSaslType",
-          "description": "Sasl Mechanism for remote broker authentication."
-        },
-        "token": {
-          "$ref": "#/definitions/SaslRemoteBrokerBasicAuthenticationTokenUpdate",
-          "description": "Sasl token for remote broker authentication."
         }
       }
     },
@@ -9026,61 +8235,6 @@
         "maxSessionExpirySecs"
       ]
     },
-    "TemporaryResourceLimitsConfigUpdate": {
-      "type": "object",
-      "description": "Internal knobs of Resource Limits for FE and BE",
-      "properties": {
-        "maxInflightMessages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of messages a client can have inflight.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "maxInflightPatches": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of patch inflight per node.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "maxInflightPatchesPerClient": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Maximum number of patch a client can have in flight.",
-          "minimum": 0,
-          "maximum": 65535
-        },
-        "maxMessageExpirySecs": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum message expiry interval, in seconds.",
-          "minimum": 0,
-          "maximum": 4294967295
-        },
-        "maxQueuedMessages": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum receive for external clients.",
-          "minimum": 0,
-          "maximum": 9223372036854000000
-        },
-        "maxQueuedQos0Messages": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum receive QoS0 for external clients.",
-          "minimum": 0,
-          "maximum": 9223372036854000000
-        },
-        "maxSessionExpirySecs": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Maximum session expiry interval, in seconds.",
-          "minimum": 0,
-          "maximum": 4294967295
-        }
-      }
-    },
     "TlsCertMethod": {
       "type": "object",
       "description": "Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported",
@@ -9095,24 +8249,6 @@
         },
         "keyVault": {
           "$ref": "#/definitions/KeyVaultCertificateProperties",
-          "description": "Option 3 - TLS server certificate retrieved from Key Vault.."
-        }
-      }
-    },
-    "TlsCertMethodUpdate": {
-      "type": "object",
-      "description": "Collection of different TLS types, NOTE- Enum at a time only one of them needs to be supported",
-      "properties": {
-        "automatic": {
-          "$ref": "#/definitions/AutomaticCertMethodUpdate",
-          "description": "Option 1 - Automatic TLS server certificate management with cert-manager."
-        },
-        "manual": {
-          "$ref": "#/definitions/ManualCertMethodUpdate",
-          "description": "Option 2 - Manual TLS server certificate management through a defined secret."
-        },
-        "keyVault": {
-          "$ref": "#/definitions/KeyVaultCertificatePropertiesUpdate",
           "description": "Option 3 - TLS server certificate retrieved from Key Vault.."
         }
       }
@@ -9160,42 +8296,6 @@
         "kind",
         "name"
       ]
-    },
-    "VolumeClaimDataSourceRefUpdate": {
-      "type": "object",
-      "description": "VolumeClaimDataSourceRef properties",
-      "properties": {
-        "apiGroup": {
-          "type": "string",
-          "description": "APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind is the type of resource being referenced"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name is the name of resource being referenced"
-        }
-      }
-    },
-    "VolumeClaimDataSourceUpdate": {
-      "type": "object",
-      "description": "VolumeClaimDataSource properties",
-      "properties": {
-        "apiGroup": {
-          "type": "string",
-          "description": "APIGroup is the group for the resource being referenced. If APIGroup is not specified, the specified Kind must be in the core API group. For any other third-party types, APIGroup is required."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind is the type of resource being referenced"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name is the name of resource being referenced"
-        }
-      }
     },
     "VolumeClaimResourceRequirements": {
       "type": "object",
@@ -9303,47 +8403,6 @@
         "key",
         "operator"
       ]
-    },
-    "VolumeClaimSpecUpdate": {
-      "type": "object",
-      "description": "VolumeClaimSpec properties",
-      "properties": {
-        "accessModes": {
-          "type": "array",
-          "description": "AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1",
-          "items": {
-            "type": "string"
-          }
-        },
-        "dataSource": {
-          "$ref": "#/definitions/VolumeClaimDataSourceUpdate",
-          "description": "This field can be used to specify either: * An existing VolumeSnapshot object (snapshot.storage.k8s.io/VolumeSnapshot) * An existing PVC (PersistentVolumeClaim) If the provisioner or an external controller can support the specified data source, it will create a new volume based on the contents of the specified data source. If the AnyVolumeDataSource feature gate is enabled, this field will always have the same contents as the DataSourceRef field."
-        },
-        "dataSourceRef": {
-          "$ref": "#/definitions/VolumeClaimDataSourceRefUpdate",
-          "description": "Specifies the object from which to populate the volume with data, if a non-empty volume is desired. This may be any local object from a non-empty API group (non core object) or a PersistentVolumeClaim object. When this field is specified, volume binding will only succeed if the type of the specified object matches some installed volume populator or dynamic provisioner. This field will replace the functionality of the DataSource field and as such if both fields are non-empty, they must have the same value. For backwards compatibility, both fields (DataSource and DataSourceRef) will be set to the same value automatically if one of them is empty and the other is non-empty. There are two important differences between DataSource and DataSourceRef: * While DataSource only allows two specific types of objects, DataSourceRef allows any non-core object, as well as PersistentVolumeClaim objects. * While DataSource ignores disallowed values (dropping them), DataSourceRef preserves all values, and generates an error if a disallowed value is specified. (Alpha) Using this field requires the AnyVolumeDataSource feature gate to be enabled."
-        },
-        "resources": {
-          "$ref": "#/definitions/VolumeClaimResourceRequirements",
-          "description": "Resources represents the minimum resources the volume should have. If RecoverVolumeExpansionFailure feature is enabled users are allowed to specify resource requirements that are lower than previous value but must still be higher than capacity recorded in the status field of the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#resources"
-        },
-        "selector": {
-          "$ref": "#/definitions/VolumeClaimSpecSelector",
-          "description": "A label query over volumes to consider for binding."
-        },
-        "storageClassName": {
-          "type": "string",
-          "description": "Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1"
-        },
-        "volumeMode": {
-          "type": "string",
-          "description": "volumeMode defines what type of volume is required by the claim. Value of Filesystem is implied when not included in claim spec. This is a beta feature."
-        },
-        "volumeName": {
-          "type": "string",
-          "description": "VolumeName is the binding reference to the PersistentVolume backing this claim."
-        }
-      }
     }
   },
   "parameters": {}
