@@ -35,6 +35,8 @@ input-file:
   - preview/2026-01-01-preview/resilience.json
 suppressions:
   - code: PathResourceProviderNamePascalCase
+    from: resilience.json
+    reason: Microsoft.AAD is the correct provider name for legacy reasons.
 ```
 
 ---
