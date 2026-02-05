@@ -138,3 +138,9 @@ model QuotaBucketRequestReplacement
   Usage.input | Usage.output,
   "csharp"
 );
+
+@@alternateType(EncryptionPropertiesIdentity.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(EncryptionPropertiesIdentity.type, "IdentityType", "csharp");
