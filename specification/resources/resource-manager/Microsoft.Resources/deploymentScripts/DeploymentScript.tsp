@@ -15,8 +15,10 @@ namespace DeploymentScriptsClient;
 /**
  * Deployment script object.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing API uses discriminator pattern for backward compatibility"
 @discriminator("kind")
-model DeploymentScript is TrackedResource<DeploymentScriptPropertiesBase> {
+model DeploymentScript
+  is Azure.ResourceManager.Legacy.DiscriminatedTrackedResource<ScriptType> {
   ...ResourceNameParameter<
     Resource = DeploymentScript,
     KeyName = "scriptName",
@@ -29,12 +31,6 @@ model DeploymentScript is TrackedResource<DeploymentScriptPropertiesBase> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: ManagedServiceIdentity;
-
-  /**
-   * Type of the script.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  kind: ScriptType;
 }
 
 @@clientName(DeploymentScripts.create::parameters.resource, "deploymentScript");

@@ -581,17 +581,18 @@
       "type": "object",
       "description": "Deployment script object.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/DeploymentScriptPropertiesBase",
-          "description": "The resource-specific properties for this resource."
+        "kind": {
+          "$ref": "#/definitions/ScriptType",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
           "description": "Optional property. Managed identity to be used for this deployment script. Currently, only user-assigned MSI is supported."
-        },
-        "kind": {
-          "$ref": "#/definitions/ScriptType",
-          "description": "Type of the script."
         }
       },
       "discriminator": "kind",
