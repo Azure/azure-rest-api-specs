@@ -299,6 +299,7 @@ op createSnapshot is Foundations.LongRunningOperation<
   {},
   Error
 >;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Updates the state of a key-value snapshot.")
 @doc("Updates the state of a key-value snapshot.")

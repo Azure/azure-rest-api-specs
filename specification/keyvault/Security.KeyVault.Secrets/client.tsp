@@ -19,11 +19,10 @@ using KeyVault;
 /**
  * The UPDATE operation changes specified attributes of an existing stored secret. Attributes that are not specified in the request are left unchanged. The value of a secret itself cannot be changed. This operation requires the secrets/set permission.
  */
-#suppress "@typespec/http/patch-implicit-optional" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the attributes associated with a specified secret in a given key vault.")
 @route("/secrets/{secret-name}/{secret-version}")
-@patch
+@patch(#{ implicitOptionality: false })
 op updateSecret is KeyVaultOperation<
   {
     /**
