@@ -36,6 +36,7 @@ import "./ValidatedSolutionRecipe.tsp";
 import "./edgeMachine.tsp";
 import "./edgeMachineJobs.tsp";
 import "./validateOwnershipVouchers.tsp";
+import "./clusterJobs.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -58,17 +59,12 @@ namespace Microsoft.AzureStackHCI;
  */
 enum Versions {
   /**
-   * The 2025-11-01-preview API version.
-   */
-  v2025_11_01_preview: "2025-11-01-preview",
-
-  /**
-   * The 2025-12-01-preview API version.
-   */
-  v2025_12_01_preview: "2025-12-01-preview",
-
-  /**
    * The 2026-02-01 API version.
    */
   v2026_02_01: "2026-02-01",
+
+  /**
+   * The 2026-02-15-preview API version.
+   */
+  v2026_02_15_preview: "2026-02-15-preview",
 }
