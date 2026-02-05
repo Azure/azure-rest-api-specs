@@ -4617,7 +4617,7 @@
           "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
         },
         "authentication": {
-          "$ref": "#/definitions/AuthenticationUpdate",
+          "$ref": "#/definitions/Authentication",
           "description": "Defines the client authentication mechanism to the server."
         },
         "additionalConfiguration": {
@@ -4955,7 +4955,7 @@
           "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
         },
         "defaultTopic": {
-          "$ref": "#/definitions/TopicUpdate",
+          "$ref": "#/definitions/Topic",
           "description": "Object that describes the default topic information for the asset."
         },
         "datasets": {
@@ -5052,51 +5052,6 @@
             "description": "The user authentication method is a username and password."
           }
         ]
-      }
-    },
-    "AuthenticationUpdate": {
-      "type": "object",
-      "description": "Definition of the client authentication mechanism to the server.",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "Defines the method to authenticate the user of the client at the server.",
-          "default": "Certificate",
-          "enum": [
-            "Anonymous",
-            "Certificate",
-            "UsernamePassword"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationMethod",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Anonymous",
-                "value": "Anonymous",
-                "description": "The user authentication method is anonymous."
-              },
-              {
-                "name": "Certificate",
-                "value": "Certificate",
-                "description": "The user authentication method is an x509 certificate."
-              },
-              {
-                "name": "UsernamePassword",
-                "value": "UsernamePassword",
-                "description": "The user authentication method is a username and password."
-              }
-            ]
-          }
-        },
-        "usernamePasswordCredentials": {
-          "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
-          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
-        },
-        "x509Credentials": {
-          "$ref": "#/definitions/X509CredentialsUpdate",
-          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
-        }
       }
     },
     "BillingContainer": {
@@ -5199,10 +5154,6 @@
         "keyType"
       ]
     },
-    "CertificateAuthorityConfigurationUpdate": {
-      "type": "object",
-      "description": "The configuration to set up an ICA."
-    },
     "CertificateConfiguration": {
       "type": "object",
       "description": "The certificate configuration.",
@@ -5220,20 +5171,6 @@
         "certificateAuthorityConfiguration",
         "leafCertificateConfiguration"
       ]
-    },
-    "CertificateConfigurationUpdate": {
-      "type": "object",
-      "description": "The certificate configuration.",
-      "properties": {
-        "certificateAuthorityConfiguration": {
-          "$ref": "#/definitions/CertificateAuthorityConfigurationUpdate",
-          "description": "The configuration to set up an ICA."
-        },
-        "leafCertificateConfiguration": {
-          "$ref": "#/definitions/LeafCertificateConfigurationUpdate",
-          "description": "The leaf certificate configuration."
-        }
-      }
     },
     "Credential": {
       "type": "object",
@@ -5537,20 +5474,6 @@
         "address"
       ]
     },
-    "DeviceMessagingEndpointUpdate": {
-      "type": "object",
-      "description": "Device messaging endpoint model.",
-      "properties": {
-        "endpointType": {
-          "type": "string",
-          "description": "Type of connection used for the messaging endpoint."
-        },
-        "address": {
-          "type": "string",
-          "description": "The endpoint address to connect to."
-        }
-      }
-    },
     "DeviceRef": {
       "type": "object",
       "description": "Defines which device and endpoint to use for this asset",
@@ -5568,20 +5491,6 @@
         "deviceName",
         "endpointName"
       ]
-    },
-    "DeviceRefUpdate": {
-      "type": "object",
-      "description": "Defines which device and endpoint to use for this asset",
-      "properties": {
-        "deviceName": {
-          "type": "string",
-          "description": "Name of the device resource"
-        },
-        "endpointName": {
-          "type": "string",
-          "description": "The name of endpoint to use"
-        }
-      }
     },
     "DeviceStatus": {
       "type": "object",
@@ -5662,40 +5571,6 @@
         "address"
       ]
     },
-    "DiscoveredInboundEndpointsUpdate": {
-      "type": "object",
-      "description": "An endpoint to connect to the device.",
-      "properties": {
-        "endpointType": {
-          "type": "string",
-          "description": "Type of connection endpoint."
-        },
-        "address": {
-          "type": "string",
-          "description": "The endpoint address & port. This can be either an IP address (e.g., 192.168.1.1) or a fully qualified domain name (FQDN, e.g., server.example.com)."
-        },
-        "version": {
-          "type": "string",
-          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
-        },
-        "supportedAuthenticationMethods": {
-          "type": "array",
-          "description": "List of supported authentication methods supported by device for Inbound connections.",
-          "items": {
-            "$ref": "#/definitions/AuthenticationMethod"
-          }
-        },
-        "additionalConfiguration": {
-          "type": "string",
-          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
-        },
-        "lastUpdatedOn": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp (in UTC) when the endpoint was discovered."
-        }
-      }
-    },
     "DiscoveredMessagingEndpoints": {
       "type": "object",
       "description": "Connection endpoint URL a device can use to connect to a service.",
@@ -5709,23 +5584,6 @@
         },
         "outbound": {
           "$ref": "#/definitions/DiscoveredOutboundEndpoints",
-          "description": "Set of endpoints a device can connect to."
-        }
-      }
-    },
-    "DiscoveredMessagingEndpointsUpdate": {
-      "type": "object",
-      "description": "Connection endpoint URL a device can use to connect to a service.",
-      "properties": {
-        "inbound": {
-          "type": "object",
-          "description": "Set of endpoints to connect to the device.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DiscoveredInboundEndpointsUpdate"
-          }
-        },
-        "outbound": {
-          "$ref": "#/definitions/DiscoveredOutboundEndpointsUpdate",
           "description": "Set of endpoints a device can connect to."
         }
       }
@@ -5745,19 +5603,6 @@
       "required": [
         "assigned"
       ]
-    },
-    "DiscoveredOutboundEndpointsUpdate": {
-      "type": "object",
-      "description": "Property bag contains the device's outbound endpoints",
-      "properties": {
-        "assigned": {
-          "type": "object",
-          "description": "Endpoints the device can connect to.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DeviceMessagingEndpointUpdate"
-          }
-        }
-      }
     },
     "Error": {
       "type": "object",
@@ -6038,51 +5883,6 @@
         "method"
       ]
     },
-    "HostAuthenticationUpdate": {
-      "type": "object",
-      "description": "Definition of the client authentication mechanism to the host.",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "Defines the method to authenticate the user of the client at the server.",
-          "default": "Certificate",
-          "enum": [
-            "Anonymous",
-            "Certificate",
-            "UsernamePassword"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationMethod",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Anonymous",
-                "value": "Anonymous",
-                "description": "The user authentication method is anonymous."
-              },
-              {
-                "name": "Certificate",
-                "value": "Certificate",
-                "description": "The user authentication method is an x509 certificate."
-              },
-              {
-                "name": "UsernamePassword",
-                "value": "UsernamePassword",
-                "description": "The user authentication method is a username and password."
-              }
-            ]
-          }
-        },
-        "usernamePasswordCredentials": {
-          "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
-          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
-        },
-        "x509Credentials": {
-          "$ref": "#/definitions/X509CertificateCredentialsUpdate",
-          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
-        }
-      }
-    },
     "InboundEndpoints": {
       "type": "object",
       "description": "An endpoint to connect to the device.",
@@ -6117,36 +5917,6 @@
         "address"
       ]
     },
-    "InboundEndpointsUpdate": {
-      "type": "object",
-      "description": "An endpoint to connect to the device.",
-      "properties": {
-        "endpointType": {
-          "type": "string",
-          "description": "Type of connection endpoint."
-        },
-        "address": {
-          "type": "string",
-          "description": "The endpoint address & port. This can be either an IP address (e.g., 192.168.1.1) or a fully qualified domain name (FQDN, e.g., server.example.com)."
-        },
-        "version": {
-          "type": "string",
-          "description": "Protocol version associated with the endpoint e.g. 1 or 2 for endpointType Microsoft.HTTP, and 3.5 or 5.0 for endpointType Microsoft.Mqtt etc."
-        },
-        "authentication": {
-          "$ref": "#/definitions/HostAuthenticationUpdate",
-          "description": "Defines the client authentication mechanism to the server."
-        },
-        "trustSettings": {
-          "$ref": "#/definitions/TrustSettings",
-          "description": "Defines server trust settings for the endpoint."
-        },
-        "additionalConfiguration": {
-          "type": "string",
-          "description": "Stringified JSON that contains configuration to be used by the connector (e.g., OPC UA, ONVIF)."
-        }
-      }
-    },
     "LeafCertificateConfiguration": {
       "type": "object",
       "description": "The leaf certificate configuration.",
@@ -6162,19 +5932,6 @@
       "required": [
         "validityPeriodInDays"
       ]
-    },
-    "LeafCertificateConfigurationUpdate": {
-      "type": "object",
-      "description": "The leaf certificate configuration.",
-      "properties": {
-        "validityPeriodInDays": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The validity period in days.",
-          "minimum": 7,
-          "maximum": 90
-        }
-      }
     },
     "ManagementAction": {
       "type": "object",
@@ -6358,23 +6115,6 @@
         },
         "outbound": {
           "$ref": "#/definitions/OutboundEndpoints",
-          "description": "Set of endpoints a device can connect to."
-        }
-      }
-    },
-    "MessagingEndpointsUpdate": {
-      "type": "object",
-      "description": "Connection endpoint URL a device can use to connect to a service.",
-      "properties": {
-        "inbound": {
-          "type": "object",
-          "description": "Set of endpoints to connect to the device.",
-          "additionalProperties": {
-            "$ref": "#/definitions/InboundEndpointsUpdate"
-          }
-        },
-        "outbound": {
-          "$ref": "#/definitions/OutboundEndpointsUpdate",
           "description": "Set of endpoints a device can connect to."
         }
       }
@@ -7334,7 +7074,7 @@
           "description": "Device operating system version."
         },
         "endpoints": {
-          "$ref": "#/definitions/MessagingEndpointsUpdate",
+          "$ref": "#/definitions/MessagingEndpoints",
           "description": "Property bag containing the device's unassigned and assigned endpoints."
         },
         "attributes": {
@@ -7584,7 +7324,7 @@
       "description": "The updatable properties of the NamespaceDiscoveredAsset.",
       "properties": {
         "deviceRef": {
-          "$ref": "#/definitions/DeviceRefUpdate",
+          "$ref": "#/definitions/DeviceRef",
           "description": "Reference to the device that provides data for this asset. Must provide device name & endpoint on the device to use."
         },
         "displayName": {
@@ -7939,7 +7679,7 @@
           "description": "A device ID that represents the device in a system external to Azure. Unique within scope of an Azure tenant."
         },
         "endpoints": {
-          "$ref": "#/definitions/DiscoveredMessagingEndpointsUpdate",
+          "$ref": "#/definitions/DiscoveredMessagingEndpoints",
           "description": "Endpoints for discovered devices."
         },
         "operatingSystemVersion": {
@@ -8452,26 +8192,6 @@
         "assigned"
       ]
     },
-    "OutboundEndpointsUpdate": {
-      "type": "object",
-      "description": "Property bag contains the device's outbound endpoints",
-      "properties": {
-        "assigned": {
-          "type": "object",
-          "description": "Endpoints the device can connect to.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DeviceMessagingEndpointUpdate"
-          }
-        },
-        "unassigned": {
-          "type": "object",
-          "description": "Set of most recently removed endpoints.",
-          "additionalProperties": {
-            "$ref": "#/definitions/DeviceMessagingEndpointUpdate"
-          }
-        }
-      }
-    },
     "Policy": {
       "type": "object",
       "description": "A Credential Policy",
@@ -8546,7 +8266,7 @@
       "description": "The updatable properties of the Policy.",
       "properties": {
         "certificate": {
-          "$ref": "#/definitions/CertificateConfigurationUpdate",
+          "$ref": "#/definitions/CertificateConfiguration",
           "description": "The certificate configuration."
         }
       }
@@ -9107,41 +8827,6 @@
         "path"
       ]
     },
-    "TopicUpdate": {
-      "type": "object",
-      "description": "Object that describes the topic information.",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The topic path for messages published to an MQTT broker."
-        },
-        "retain": {
-          "type": "string",
-          "description": "When set to 'Keep', messages published to an MQTT broker will have the retain flag set. Default: 'Never'.",
-          "default": "Never",
-          "enum": [
-            "Keep",
-            "Never"
-          ],
-          "x-ms-enum": {
-            "name": "TopicRetainType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Keep",
-                "value": "Keep",
-                "description": "Retain the messages."
-              },
-              {
-                "name": "Never",
-                "value": "Never",
-                "description": "Never retain messages."
-              }
-            ]
-          }
-        }
-      }
-    },
     "TrustSettings": {
       "type": "object",
       "description": "Defines server trust settings for an endpoint.",
@@ -9170,20 +8855,6 @@
         "passwordSecretName"
       ]
     },
-    "UsernamePasswordCredentialsUpdate": {
-      "type": "object",
-      "description": "The credentials for authentication mode UsernamePassword.",
-      "properties": {
-        "usernameSecretName": {
-          "type": "string",
-          "description": "The name of the secret containing the username."
-        },
-        "passwordSecretName": {
-          "type": "string",
-          "description": "The name of the secret containing the password."
-        }
-      }
-    },
     "X509CertificateCredentials": {
       "type": "object",
       "description": "The x509 certificate for authentication mode Certificate.",
@@ -9205,24 +8876,6 @@
         "certificateSecretName"
       ]
     },
-    "X509CertificateCredentialsUpdate": {
-      "type": "object",
-      "description": "The x509 certificate for authentication mode Certificate.",
-      "properties": {
-        "certificateSecretName": {
-          "type": "string",
-          "description": "The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
-        },
-        "keySecretName": {
-          "type": "string",
-          "description": "The name of the secret containing the certificate private key in PEM or DER format."
-        },
-        "intermediateCertificatesSecretName": {
-          "type": "string",
-          "description": "The name of the secret containing the combined intermediate certificates in PEM format."
-        }
-      }
-    },
     "X509Credentials": {
       "type": "object",
       "description": "The x509 certificate for authentication mode Certificate.",
@@ -9235,16 +8888,6 @@
       "required": [
         "certificateSecretName"
       ]
-    },
-    "X509CredentialsUpdate": {
-      "type": "object",
-      "description": "The x509 certificate for authentication mode Certificate.",
-      "properties": {
-        "certificateSecretName": {
-          "type": "string",
-          "description": "The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
-        }
-      }
     }
   },
   "parameters": {}

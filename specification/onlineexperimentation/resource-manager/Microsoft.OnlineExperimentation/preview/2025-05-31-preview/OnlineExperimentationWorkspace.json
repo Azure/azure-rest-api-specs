@@ -431,24 +431,6 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -587,7 +569,7 @@
       "description": "Partial update of an online experimentation workspace resource.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -598,7 +580,7 @@
           }
         },
         "sku": {
-          "$ref": "#/definitions/OnlineExperimentationWorkspaceSkuUpdate",
+          "$ref": "#/definitions/OnlineExperimentationWorkspaceSku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
         },
         "properties": {
@@ -796,16 +778,6 @@
             "description": "The Developer service tier."
           }
         ]
-      }
-    },
-    "OnlineExperimentationWorkspaceSkuUpdate": {
-      "type": "object",
-      "description": "The SKU (Stock Keeping Unit) assigned to this resource.",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/OnlineExperimentationWorkspaceSkuName",
-          "description": "The name of the SKU. Ex - F0, P0. It is typically a letter+number code"
-        }
       }
     },
     "ResourceEncryptionConfiguration": {

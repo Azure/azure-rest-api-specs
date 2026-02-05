@@ -3818,7 +3818,7 @@
           "description": "The time when the scheduled action is supposed to stop scheduling"
         },
         "schedule": {
-          "$ref": "#/definitions/ScheduledActionsScheduleUpdate",
+          "$ref": "#/definitions/ScheduledActionsSchedule",
           "description": "The schedule the scheduled action is supposed to follow"
         },
         "notificationSettings": {
@@ -3966,50 +3966,6 @@
         "requestedMonths",
         "requestedDaysOfTheMonth"
       ]
-    },
-    "ScheduledActionsScheduleUpdate": {
-      "type": "object",
-      "description": "Specify the schedule in which the scheduled action is supposed to follow",
-      "properties": {
-        "scheduledTime": {
-          "type": "string",
-          "format": "time",
-          "description": "The time the scheduled action is supposed to run on"
-        },
-        "timeZone": {
-          "type": "string",
-          "description": "The timezone the scheduled time is specified on"
-        },
-        "requestedWeekDays": {
-          "type": "array",
-          "description": "The week days the scheduled action is supposed to run on",
-          "items": {
-            "$ref": "#/definitions/WeekDay"
-          }
-        },
-        "requestedMonths": {
-          "type": "array",
-          "description": "The months the scheduled action is supposed to run on",
-          "items": {
-            "$ref": "#/definitions/Month"
-          }
-        },
-        "requestedDaysOfTheMonth": {
-          "type": "array",
-          "description": "The days of the month the scheduled action is supposed to run on. If empty, it means it will run on every day of the month.",
-          "items": {
-            "$ref": "#/definitions/DayOfTheMonth"
-          }
-        },
-        "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters the scheduled action is supposed to follow"
-        },
-        "deadlineType": {
-          "$ref": "#/definitions/DeadlineType",
-          "description": "The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt."
-        }
-      }
     },
     "StartResourceOperationResponse": {
       "type": "object",

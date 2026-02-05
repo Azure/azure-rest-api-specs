@@ -2678,7 +2678,7 @@
           "description": "Defines the configuration for the connector type that is being used with the endpoint profile."
         },
         "authentication": {
-          "$ref": "#/definitions/AuthenticationUpdate",
+          "$ref": "#/definitions/Authentication",
           "description": "Defines the client authentication mechanism to the server."
         },
         "additionalConfiguration": {
@@ -3016,7 +3016,7 @@
           "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
         },
         "defaultTopic": {
-          "$ref": "#/definitions/TopicUpdate",
+          "$ref": "#/definitions/Topic",
           "description": "Object that describes the default topic information for the asset."
         },
         "datasets": {
@@ -3113,51 +3113,6 @@
             "description": "The user authentication method is a username and password."
           }
         ]
-      }
-    },
-    "AuthenticationUpdate": {
-      "type": "object",
-      "description": "Definition of the client authentication mechanism to the server.",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "Defines the method to authenticate the user of the client at the server.",
-          "default": "Certificate",
-          "enum": [
-            "Anonymous",
-            "Certificate",
-            "UsernamePassword"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationMethod",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Anonymous",
-                "value": "Anonymous",
-                "description": "The user authentication method is anonymous."
-              },
-              {
-                "name": "Certificate",
-                "value": "Certificate",
-                "description": "The user authentication method is an x509 certificate."
-              },
-              {
-                "name": "UsernamePassword",
-                "value": "UsernamePassword",
-                "description": "The user authentication method is a username and password."
-              }
-            ]
-          }
-        },
-        "usernamePasswordCredentials": {
-          "$ref": "#/definitions/UsernamePasswordCredentialsUpdate",
-          "description": "Defines the username and password references when UsernamePassword user authentication mode is selected."
-        },
-        "x509Credentials": {
-          "$ref": "#/definitions/X509CredentialsUpdate",
-          "description": "Defines the certificate reference when Certificate user authentication mode is selected."
-        }
       }
     },
     "BillingContainer": {
@@ -3678,7 +3633,7 @@
           "description": "Stringified JSON that contains connector-specific default configuration for all events. Each event can have its own configuration that overrides the default settings here."
         },
         "defaultTopic": {
-          "$ref": "#/definitions/TopicUpdate",
+          "$ref": "#/definitions/Topic",
           "description": "Object that describes the default topic information for the asset."
         },
         "datasets": {
@@ -4299,41 +4254,6 @@
         "path"
       ]
     },
-    "TopicUpdate": {
-      "type": "object",
-      "description": "Object that describes the topic information.",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The topic path for messages published to an MQTT broker."
-        },
-        "retain": {
-          "type": "string",
-          "description": "When set to 'Keep', messages published to an MQTT broker will have the retain flag set. Default: 'Never'.",
-          "default": "Never",
-          "enum": [
-            "Keep",
-            "Never"
-          ],
-          "x-ms-enum": {
-            "name": "TopicRetainType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Keep",
-                "value": "Keep",
-                "description": "Retain the messages."
-              },
-              {
-                "name": "Never",
-                "value": "Never",
-                "description": "Never retain messages."
-              }
-            ]
-          }
-        }
-      }
-    },
     "UsernamePasswordCredentials": {
       "type": "object",
       "description": "The credentials for authentication mode UsernamePassword.",
@@ -4352,20 +4272,6 @@
         "passwordSecretName"
       ]
     },
-    "UsernamePasswordCredentialsUpdate": {
-      "type": "object",
-      "description": "The credentials for authentication mode UsernamePassword.",
-      "properties": {
-        "usernameSecretName": {
-          "type": "string",
-          "description": "The name of the secret containing the username."
-        },
-        "passwordSecretName": {
-          "type": "string",
-          "description": "The name of the secret containing the password."
-        }
-      }
-    },
     "X509Credentials": {
       "type": "object",
       "description": "The x509 certificate for authentication mode Certificate.",
@@ -4378,16 +4284,6 @@
       "required": [
         "certificateSecretName"
       ]
-    },
-    "X509CredentialsUpdate": {
-      "type": "object",
-      "description": "The x509 certificate for authentication mode Certificate.",
-      "properties": {
-        "certificateSecretName": {
-          "type": "string",
-          "description": "The name of the secret containing the certificate and private key (e.g. stored as .der/.pem or .der/.pfx)."
-        }
-      }
     }
   },
   "parameters": {}

@@ -9466,28 +9466,6 @@
         "poolLifetimeOption"
       ]
     },
-    "BatchAutoPoolSpecificationUpdate": {
-      "type": "object",
-      "description": "Specifies characteristics for a temporary 'auto pool'. The Batch service will\ncreate this auto Pool when the Job is submitted.",
-      "properties": {
-        "autoPoolIdPrefix": {
-          "type": "string",
-          "description": "A prefix to be added to the unique identifier when a Pool is automatically created. The Batch service assigns each auto Pool a unique identifier on creation. To distinguish between Pools created for different purposes, you can specify this element to add a prefix to the ID that is assigned. The prefix can be up to 20 characters long."
-        },
-        "poolLifetimeOption": {
-          "$ref": "#/definitions/BatchPoolLifetimeOption",
-          "description": "The minimum lifetime of created auto Pools, and how multiple Jobs on a schedule are assigned to Pools."
-        },
-        "keepAlive": {
-          "type": "boolean",
-          "description": "Whether to keep an auto Pool alive after its lifetime expires. If false, the Batch service deletes the Pool once its lifetime (as determined by the poolLifetimeOption setting) expires; that is, when the Job or Job Schedule completes. If true, the Batch service does not delete the Pool automatically. It is up to the user to delete auto Pools created with this option."
-        },
-        "pool": {
-          "$ref": "#/definitions/BatchPoolSpecificationUpdate",
-          "description": "The Pool specification for the auto Pool."
-        }
-      }
-    },
     "BatchContainerConfiguration": {
       "type": "object",
       "description": "The configuration for container-enabled Pools.",
@@ -9514,30 +9492,6 @@
       "required": [
         "type"
       ]
-    },
-    "BatchContainerConfigurationUpdate": {
-      "type": "object",
-      "description": "The configuration for container-enabled Pools.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ContainerType",
-          "description": "The container technology to be used."
-        },
-        "containerImageNames": {
-          "type": "array",
-          "description": "The collection of container Image names. This is the full Image reference, as would be specified to \"docker pull\". An Image will be sourced from the default Docker registry unless the Image is fully qualified with an alternative registry.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "containerRegistries": {
-          "type": "array",
-          "description": "Additional private registries from which containers can be pulled. If any Images must be downloaded from a private registry which requires credentials, then those credentials must be provided here.",
-          "items": {
-            "$ref": "#/definitions/ContainerRegistryReference"
-          }
-        }
-      }
     },
     "BatchCreateTaskCollectionResult": {
       "type": "object",
@@ -10136,85 +10090,6 @@
         "commandLine"
       ]
     },
-    "BatchJobManagerTaskUpdate": {
-      "type": "object",
-      "description": "Specifies details of a Job Manager Task.\nThe Job Manager Task is automatically started when the Job is created. The\nBatch service tries to schedule the Job Manager Task before any other Tasks in\nthe Job. When shrinking a Pool, the Batch service tries to preserve Nodes where\nJob Manager Tasks are running for as long as possible (that is, Compute Nodes\nrunning 'normal' Tasks are removed before Compute Nodes running Job Manager\nTasks). When a Job Manager Task fails and needs to be restarted, the system\ntries to schedule it at the highest priority. If there are no idle Compute\nNodes available, the system may terminate one of the running Tasks in the Pool\nand return it to the queue in order to make room for the Job Manager Task to\nrestart. Note that a Job Manager Task in one Job does not have priority over\nTasks in other Jobs. Across Jobs, only Job level priorities are observed. For\nexample, if a Job Manager in a priority 0 Job needs to be restarted, it will\nnot displace Tasks of a priority 1 Job. Batch will retry Tasks when a recovery\noperation is triggered on a Node. Examples of recovery operations include (but\nare not limited to) when an unhealthy Node is rebooted or a Compute Node\ndisappeared due to host failure. Retries due to recovery operations are\nindependent of and are not counted against the maxTaskRetryCount. Even if the\nmaxTaskRetryCount is 0, an internal retry due to a recovery operation may\noccur. Because of this, all Tasks should be idempotent. This means Tasks need\nto tolerate being interrupted and restarted without causing any corruption or\nduplicate data. The best practice for long running Tasks is to use some form of\ncheckpointing.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A string that uniquely identifies the Job Manager Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the Job Manager Task. It need not be unique and can contain any Unicode characters up to a maximum length of 1024."
-        },
-        "commandLine": {
-          "type": "string",
-          "description": "The command line of the Job Manager Task. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
-        },
-        "containerSettings": {
-          "$ref": "#/definitions/BatchTaskContainerSettingsUpdate",
-          "description": "The settings for the container under which the Job Manager Task runs. If the Pool that will run this Task has containerConfiguration set, this must be set as well. If the Pool that will run this Task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
-        },
-        "resourceFiles": {
-          "type": "array",
-          "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
-          "items": {
-            "$ref": "#/definitions/ResourceFile"
-          }
-        },
-        "outputFiles": {
-          "type": "array",
-          "description": "A list of files that the Batch service will upload from the Compute Node after running the command line. For multi-instance Tasks, the files will only be uploaded from the Compute Node on which the primary Task is executed.",
-          "items": {
-            "$ref": "#/definitions/OutputFile"
-          }
-        },
-        "environmentSettings": {
-          "type": "array",
-          "description": "A list of environment variable settings for the Job Manager Task.",
-          "items": {
-            "$ref": "#/definitions/EnvironmentSetting"
-          }
-        },
-        "constraints": {
-          "$ref": "#/definitions/BatchTaskConstraints",
-          "description": "Constraints that apply to the Job Manager Task."
-        },
-        "requiredSlots": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of scheduling slots that the Task requires to run. The default is 1. A Task can only be scheduled to run on a compute node if the node has enough free scheduling slots available. For multi-instance Tasks, this property is not supported and must not be specified."
-        },
-        "killJobOnCompletion": {
-          "type": "boolean",
-          "description": "Whether completion of the Job Manager Task signifies completion of the entire Job. If true, when the Job Manager Task completes, the Batch service marks the Job as complete. If any Tasks are still running at this time (other than Job Release), those Tasks are terminated. If false, the completion of the Job Manager Task does not affect the Job status. In this case, you should either use the onAllTasksComplete attribute to terminate the Job, or have a client or user terminate the Job explicitly. An example of this is if the Job Manager creates a set of Tasks but then takes no further role in their execution. The default value is true. If you are using the onAllTasksComplete and onTaskFailure attributes to control Job lifetime, and using the Job Manager Task only to create the Tasks for the Job (not to monitor progress), then it is important to set killJobOnCompletion to false."
-        },
-        "userIdentity": {
-          "$ref": "#/definitions/UserIdentity",
-          "description": "The user identity under which the Job Manager Task runs. If omitted, the Task runs as a non-administrative user unique to the Task."
-        },
-        "runExclusive": {
-          "type": "boolean",
-          "description": "Whether the Job Manager Task requires exclusive use of the Compute Node where it runs. If true, no other Tasks will run on the same Node for as long as the Job Manager is running. If false, other Tasks can run simultaneously with the Job Manager on a Compute Node. The Job Manager Task counts normally against the Compute Node's concurrent Task limit, so this is only relevant if the Compute Node allows multiple concurrent Tasks. The default value is true."
-        },
-        "applicationPackageReferences": {
-          "type": "array",
-          "description": "A list of Application Packages that the Batch service will deploy to the\nCompute Node before running the command line.Application Packages are\ndownloaded and deployed to a shared directory, not the Task working\ndirectory. Therefore, if a referenced Application Package is already\non the Compute Node, and is up to date, then it is not re-downloaded;\nthe existing copy on the Compute Node is used. If a referenced Application\nPackage cannot be installed, for example because the package has been deleted\nor because download failed, the Task fails.",
-          "items": {
-            "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
-        },
-        "authenticationTokenSettings": {
-          "$ref": "#/definitions/AuthenticationTokenSettings",
-          "description": "The settings for an authentication token that the Task can use to perform Batch service operations. If this property is set, the Batch service provides the Task with an authentication token which can be used to authenticate Batch service operations without requiring an Account access key. The token is provided via the AZ_BATCH_AUTHENTICATION_TOKEN environment variable. The operations that the Task can carry out using the token depend on the settings. For example, a Task can request Job permissions in order to add other Tasks to the Job, or check the status of the Job or of other Tasks under the Job."
-        },
-        "allowLowPriorityNode": {
-          "type": "boolean",
-          "description": "Whether the Job Manager Task may run on a Spot/Low-priority Compute Node. The default value is true."
-        }
-      }
-    },
     "BatchJobNetworkConfiguration": {
       "type": "object",
       "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job.",
@@ -10232,21 +10107,6 @@
       "required": [
         "subnetId"
       ]
-    },
-    "BatchJobNetworkConfigurationUpdate": {
-      "type": "object",
-      "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job.",
-      "properties": {
-        "subnetId": {
-          "type": "string",
-          "description": "The ARM resource identifier of the virtual network subnet which Compute Nodes running Tasks from the Job will join for the duration of the Task. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes which will run Tasks from the Job. This can be up to the number of Compute Nodes in the Pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication from the Azure Batch service. For Pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://learn.microsoft.com/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
-        },
-        "skipWithdrawFromVNet": {
-          "type": "boolean",
-          "description": "Whether to withdraw Compute Nodes from the virtual network to DNC when the job is terminated or deleted.  If true, nodes will remain joined to the virtual network to DNC. If false, nodes will automatically withdraw when the job ends. Defaults to false.",
-          "x-ms-client-name": "skipWithdrawFromVnet"
-        }
-      }
     },
     "BatchJobPreparationAndReleaseTaskStatus": {
       "type": "object",
@@ -10429,54 +10289,6 @@
         ]
       }
     },
-    "BatchJobPreparationTaskUpdate": {
-      "type": "object",
-      "description": "A Job Preparation Task to run before any Tasks of the Job on any given Compute Node.\nYou can use Job Preparation to prepare a Node to run Tasks for the Job.\nActivities commonly performed in Job Preparation include: Downloading common\nresource files used by all the Tasks in the Job. The Job Preparation Task can\ndownload these common resource files to the shared location on the Node.\n(AZ_BATCH_NODE_ROOT_DIR\\shared), or starting a local service on the Node so\nthat all Tasks of that Job can communicate with it. If the Job Preparation Task\nfails (that is, exhausts its retry count before exiting with exit code 0),\nBatch will not run Tasks of this Job on the Node. The Compute Node remains\nineligible to run Tasks of this Job until it is reimaged. The Compute Node\nremains active and can be used for other Jobs. The Job Preparation Task can run\nmultiple times on the same Node. Therefore, you should write the Job\nPreparation Task to handle re-execution. If the Node is rebooted, the Job\nPreparation Task is run again on the Compute Node before scheduling any other\nTask of the Job, if rerunOnNodeRebootAfterSuccess is true or if the Job\nPreparation Task did not previously complete. If the Node is reimaged, the Job\nPreparation Task is run again before scheduling any Task of the Job. Batch will\nretry Tasks when a recovery operation is triggered on a Node. Examples of\nrecovery operations include (but are not limited to) when an unhealthy Node is\nrebooted or a Compute Node disappeared due to host failure. Retries due to\nrecovery operations are independent of and are not counted against the\nmaxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal retry due to\na recovery operation may occur. Because of this, all Tasks should be\nidempotent. This means Tasks need to tolerate being interrupted and restarted\nwithout causing any corruption or duplicate data. The best practice for long\nrunning Tasks is to use some form of checkpointing.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A string that uniquely identifies the Job Preparation Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobpreparation'. No other Task in the Job can have the same ID as the Job Preparation Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobPreparationTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
-        },
-        "commandLine": {
-          "type": "string",
-          "description": "The command line of the Job Preparation Task. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
-        },
-        "containerSettings": {
-          "$ref": "#/definitions/BatchTaskContainerSettingsUpdate",
-          "description": "The settings for the container under which the Job Preparation Task runs. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
-        },
-        "resourceFiles": {
-          "type": "array",
-          "description": "A list of files that the Batch service will download to the Compute Node before running the command line. Files listed under this element are located in the Task's working directory.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
-          "items": {
-            "$ref": "#/definitions/ResourceFile"
-          }
-        },
-        "environmentSettings": {
-          "type": "array",
-          "description": "A list of environment variable settings for the Job Preparation Task.",
-          "items": {
-            "$ref": "#/definitions/EnvironmentSetting"
-          }
-        },
-        "constraints": {
-          "$ref": "#/definitions/BatchTaskConstraints",
-          "description": "Constraints that apply to the Job Preparation Task."
-        },
-        "waitForSuccess": {
-          "type": "boolean",
-          "description": "Whether the Batch service should wait for the Job Preparation Task to complete successfully before scheduling any other Tasks of the Job on the Compute Node. A Job Preparation Task has completed successfully if it exits with exit code 0. If true and the Job Preparation Task fails on a Node, the Batch service retries the Job Preparation Task up to its maximum retry count (as specified in the constraints element). If the Task has still not completed successfully after all retries, then the Batch service will not schedule Tasks of the Job to the Node. The Node remains active and eligible to run Tasks of other Jobs. If false, the Batch service will not wait for the Job Preparation Task to complete. In this case, other Tasks of the Job can start executing on the Compute Node while the Job Preparation Task is still running; and even if the Job Preparation Task fails, new Tasks will continue to be scheduled on the Compute Node. The default value is true."
-        },
-        "userIdentity": {
-          "$ref": "#/definitions/UserIdentity",
-          "description": "The user identity under which the Job Preparation Task runs. If omitted, the Task runs as a non-administrative user unique to the Task on Windows Compute Nodes, or a non-administrative user unique to the Pool on Linux Compute Nodes."
-        },
-        "rerunOnNodeRebootAfterSuccess": {
-          "type": "boolean",
-          "description": "Whether the Batch service should rerun the Job Preparation Task after a Compute Node reboots. The Job Preparation Task is always rerun if a Compute Node is reimaged, or if the Job Preparation Task did not complete (e.g. because the reboot occurred while the Task was running). Therefore, you should always write a Job Preparation Task to be idempotent and to behave correctly if run multiple times. The default value is true."
-        }
-      }
-    },
     "BatchJobReleaseTask": {
       "type": "object",
       "description": "A Job Release Task to run on Job completion on any Compute Node where the Job has run.\nThe Job Release Task runs when the Job ends, because of one of the following:\nThe user calls the Terminate Job API, or the Delete Job API while the Job is\nstill active, the Job's maximum wall clock time constraint is reached, and the\nJob is still active, or the Job's Job Manager Task completed, and the Job is\nconfigured to terminate when the Job Manager completes. The Job Release Task\nruns on each Node where Tasks of the Job have run and the Job Preparation Task\nran and completed. If you reimage a Node after it has run the Job Preparation\nTask, and the Job ends without any further Tasks of the Job running on that\nNode (and hence the Job Preparation Task does not re-run), then the Job Release\nTask does not run on that Compute Node. If a Node reboots while the Job Release\nTask is still running, the Job Release Task runs again when the Compute Node\nstarts up. The Job is not marked as complete until all Job Release Tasks have\ncompleted. The Job Release Task runs in the background. It does not occupy a\nscheduling slot; that is, it does not count towards the taskSlotsPerNode limit\nspecified on the Pool.",
@@ -10598,52 +10410,6 @@
             "description": "The Task has exited with exit code 0, or the Task has exhausted its retry limit, or the Batch service was unable to start the Task due to Task preparation errors (such as resource file download failures)."
           }
         ]
-      }
-    },
-    "BatchJobReleaseTaskUpdate": {
-      "type": "object",
-      "description": "A Job Release Task to run on Job completion on any Compute Node where the Job has run.\nThe Job Release Task runs when the Job ends, because of one of the following:\nThe user calls the Terminate Job API, or the Delete Job API while the Job is\nstill active, the Job's maximum wall clock time constraint is reached, and the\nJob is still active, or the Job's Job Manager Task completed, and the Job is\nconfigured to terminate when the Job Manager completes. The Job Release Task\nruns on each Node where Tasks of the Job have run and the Job Preparation Task\nran and completed. If you reimage a Node after it has run the Job Preparation\nTask, and the Job ends without any further Tasks of the Job running on that\nNode (and hence the Job Preparation Task does not re-run), then the Job Release\nTask does not run on that Compute Node. If a Node reboots while the Job Release\nTask is still running, the Job Release Task runs again when the Compute Node\nstarts up. The Job is not marked as complete until all Job Release Tasks have\ncompleted. The Job Release Task runs in the background. It does not occupy a\nscheduling slot; that is, it does not count towards the taskSlotsPerNode limit\nspecified on the Pool.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "A string that uniquely identifies the Job Release Task within the Job. The ID can contain any combination of alphanumeric characters including hyphens and underscores and cannot contain more than 64 characters. If you do not specify this property, the Batch service assigns a default value of 'jobrelease'. No other Task in the Job can have the same ID as the Job Release Task. If you try to submit a Task with the same id, the Batch service rejects the request with error code TaskIdSameAsJobReleaseTask; if you are calling the REST API directly, the HTTP status code is 409 (Conflict)."
-        },
-        "commandLine": {
-          "type": "string",
-          "description": "The command line of the Job Release Task. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
-        },
-        "containerSettings": {
-          "$ref": "#/definitions/BatchTaskContainerSettingsUpdate",
-          "description": "The settings for the container under which the Job Release Task runs. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
-        },
-        "resourceFiles": {
-          "type": "array",
-          "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
-          "items": {
-            "$ref": "#/definitions/ResourceFile"
-          }
-        },
-        "environmentSettings": {
-          "type": "array",
-          "description": "A list of environment variable settings for the Job Release Task.",
-          "items": {
-            "$ref": "#/definitions/EnvironmentSetting"
-          }
-        },
-        "maxWallClockTime": {
-          "type": "string",
-          "format": "duration",
-          "description": "The maximum elapsed time that the Job Release Task may run on a given Compute Node, measured from the time the Task starts. If the Task does not complete within the time limit, the Batch service terminates it. The default value is 15 minutes. You may not specify a timeout longer than 15 minutes. If you do, the Batch service rejects it with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
-        },
-        "retentionTime": {
-          "type": "string",
-          "format": "duration",
-          "description": "The minimum time to retain the Task directory for the Job Release Task on the Compute Node. After this time, the Batch service may delete the Task directory and all its contents. The default is 7 days, i.e. the Task directory will be retained for 7 days unless the Compute Node is removed or the Job is deleted."
-        },
-        "userIdentity": {
-          "$ref": "#/definitions/UserIdentity",
-          "description": "The user identity under which the Job Release Task runs. If omitted, the Task runs as a non-administrative user unique to the Task."
-        }
       }
     },
     "BatchJobSchedule": {
@@ -10994,7 +10760,7 @@
           "description": "The schedule according to which Jobs will be created. All times are fixed respective to UTC and are not impacted by daylight saving time. If you do not specify this element, the existing schedule is left unchanged."
         },
         "jobSpecification": {
-          "$ref": "#/definitions/BatchJobSpecificationUpdate",
+          "$ref": "#/definitions/BatchJobSpecification",
           "description": "The details of the Jobs to be created on this schedule. Updates affect only Jobs that are started after the update has taken place. Any currently active Job continues with the older specification."
         },
         "metadata": {
@@ -11112,82 +10878,6 @@
       "required": [
         "poolInfo"
       ]
-    },
-    "BatchJobSpecificationUpdate": {
-      "type": "object",
-      "description": "Specifies details of the Jobs to be created on a schedule.",
-      "properties": {
-        "priority": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The priority of Jobs created under this schedule. Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a Job's priority after it has been created using by using the update Job API."
-        },
-        "allowTaskPreemption": {
-          "type": "boolean",
-          "description": "Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API."
-        },
-        "maxParallelTasks": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name for Jobs created under this schedule. The name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
-        },
-        "usesTaskDependencies": {
-          "type": "boolean",
-          "description": "Whether Tasks in the Job can define dependencies on each other. The default is false."
-        },
-        "onAllTasksComplete": {
-          "$ref": "#/definitions/BatchAllTasksCompleteMode",
-          "description": "The action the Batch service should take when all Tasks in a Job created under this schedule are in the completed state. Note that if a Job contains no Tasks, then all Tasks are considered complete. This option is therefore most commonly used with a Job Manager task; if you want to use automatic Job termination without a Job Manager, you should initially set onAllTasksComplete to noaction and update the Job properties to set onAllTasksComplete to terminatejob once you have finished adding Tasks. The default is noaction.",
-          "x-ms-client-name": "allTasksCompleteMode"
-        },
-        "onTaskFailure": {
-          "$ref": "#/definitions/BatchTaskFailureMode",
-          "description": "The action the Batch service should take when any Task fails in a Job created under this schedule. A Task is considered to have failed if it have failed if has a failureInfo. A failureInfo is set if the Task completes with a non-zero exit code after exhausting its retry count, or if there was an error starting the Task, for example due to a resource file download error. The default is noaction.",
-          "x-ms-client-name": "taskFailureMode"
-        },
-        "networkConfiguration": {
-          "$ref": "#/definitions/BatchJobNetworkConfigurationUpdate",
-          "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job."
-        },
-        "constraints": {
-          "$ref": "#/definitions/BatchJobConstraints",
-          "description": "The execution constraints for Jobs created under this schedule."
-        },
-        "jobManagerTask": {
-          "$ref": "#/definitions/BatchJobManagerTaskUpdate",
-          "description": "The details of a Job Manager Task to be launched when a Job is started under this schedule. If the Job does not specify a Job Manager Task, the user must explicitly add Tasks to the Job using the Task API. If the Job does specify a Job Manager Task, the Batch service creates the Job Manager Task when the Job is created, and will try to schedule the Job Manager Task before scheduling other Tasks in the Job."
-        },
-        "jobPreparationTask": {
-          "$ref": "#/definitions/BatchJobPreparationTaskUpdate",
-          "description": "The Job Preparation Task for Jobs created under this schedule. If a Job has a Job Preparation Task, the Batch service will run the Job Preparation Task on a Node before starting any Tasks of that Job on that Compute Node."
-        },
-        "jobReleaseTask": {
-          "$ref": "#/definitions/BatchJobReleaseTaskUpdate",
-          "description": "The Job Release Task for Jobs created under this schedule. The primary purpose of the Job Release Task is to undo changes to Nodes made by the Job Preparation Task. Example activities include deleting local files, or shutting down services that were started as part of Job preparation. A Job Release Task cannot be specified without also specifying a Job Preparation Task for the Job. The Batch service runs the Job Release Task on the Compute Nodes that have run the Job Preparation Task."
-        },
-        "commonEnvironmentSettings": {
-          "type": "array",
-          "description": "A list of common environment variable settings. These environment variables are set for all Tasks in Jobs created under this schedule (including the Job Manager, Job Preparation and Job Release Tasks). Individual Tasks can override an environment setting specified here by specifying the same setting name with a different value.",
-          "items": {
-            "$ref": "#/definitions/EnvironmentSetting"
-          }
-        },
-        "poolInfo": {
-          "$ref": "#/definitions/BatchPoolInfoUpdate",
-          "description": "The Pool on which the Batch service runs the Tasks of Jobs created under this schedule."
-        },
-        "metadata": {
-          "type": "array",
-          "description": "A list of name-value pairs associated with each Job created under this schedule as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
-          "items": {
-            "$ref": "#/definitions/BatchMetadataItem"
-          }
-        }
-      }
     },
     "BatchJobState": {
       "type": "string",
@@ -11378,7 +11068,7 @@
           "description": "The execution constraints for the Job. If omitted, the existing execution constraints are left unchanged."
         },
         "poolInfo": {
-          "$ref": "#/definitions/BatchPoolInfoUpdate",
+          "$ref": "#/definitions/BatchPoolInfo",
           "description": "The Pool on which the Batch service runs the Job's Tasks. You may change the Pool for a Job only when the Job is disabled. The Patch Job call will fail if you include the poolInfo element and the Job is not disabled. If you specify an autoPoolSpecification in the poolInfo, only the keepAlive property of the autoPoolSpecification can be updated, and then only if the autoPoolSpecification has a poolLifetimeOption of Job (other job properties can be updated as normal). If omitted, the Job continues to run on its current Pool."
         },
         "onAllTasksComplete": {
@@ -11394,7 +11084,7 @@
           }
         },
         "networkConfiguration": {
-          "$ref": "#/definitions/BatchJobNetworkConfigurationUpdate",
+          "$ref": "#/definitions/BatchJobNetworkConfiguration",
           "description": "(This property is not available by default. Please contact support for more information) The network configuration for the Job."
         }
       }
@@ -12741,20 +12431,6 @@
         "inboundNATPools"
       ]
     },
-    "BatchPoolEndpointConfigurationUpdate": {
-      "type": "object",
-      "description": "The endpoint configuration for a Pool.",
-      "properties": {
-        "inboundNATPools": {
-          "type": "array",
-          "description": "A list of inbound NAT Pools that can be used to address specific ports on an individual Compute Node externally. The maximum number of inbound NAT Pools per Batch Pool is 5. If the maximum number of inbound NAT Pools is exceeded the request fails with HTTP status code 400. This cannot be specified if the IPAddressProvisioningType is NoPublicIPAddresses.",
-          "items": {
-            "$ref": "#/definitions/BatchInboundNatPool"
-          },
-          "x-ms-client-name": "inboundNatPools"
-        }
-      }
-    },
     "BatchPoolEvaluateAutoScaleOptions": {
       "type": "object",
       "description": "Parameters for evaluating an automatic scaling formula on an Azure Batch Pool.",
@@ -12833,20 +12509,6 @@
         },
         "autoPoolSpecification": {
           "$ref": "#/definitions/BatchAutoPoolSpecification",
-          "description": "Characteristics for a temporary 'auto pool'. The Batch service will create this auto Pool when the Job is submitted. If auto Pool creation fails, the Batch service moves the Job to a completed state, and the Pool creation error is set in the Job's scheduling error property. The Batch service manages the lifetime (both creation and, unless keepAlive is specified, deletion) of the auto Pool. Any user actions that affect the lifetime of the auto Pool while the Job is active will result in unexpected behavior. You must specify either the Pool ID or the auto Pool specification, but not both."
-        }
-      }
-    },
-    "BatchPoolInfoUpdate": {
-      "type": "object",
-      "description": "Specifies how a Job should be assigned to a Pool.",
-      "properties": {
-        "poolId": {
-          "type": "string",
-          "description": "The ID of an existing Pool. All the Tasks of the Job will run on the specified Pool. You must ensure that the Pool referenced by this property exists. If the Pool does not exist at the time the Batch service tries to schedule a Job, no Tasks for the Job will run until you create a Pool with that id. Note that the Batch service will not reject the Job request; it will simply not run Tasks until the Pool exists. You must specify either the Pool ID or the auto Pool specification, but not both."
-        },
-        "autoPoolSpecification": {
-          "$ref": "#/definitions/BatchAutoPoolSpecificationUpdate",
           "description": "Characteristics for a temporary 'auto pool'. The Batch service will create this auto Pool when the Job is submitted. If auto Pool creation fails, the Batch service moves the Job to a completed state, and the Pool creation error is set in the Job's scheduling error property. The Batch service manages the lifetime (both creation and, unless keepAlive is specified, deletion) of the auto Pool. Any user actions that affect the lifetime of the auto Pool while the Job is active will result in unexpected behavior. You must specify either the Pool ID or the auto Pool specification, but not both."
         }
       }
@@ -13194,105 +12856,6 @@
         "vmSize"
       ]
     },
-    "BatchPoolSpecificationUpdate": {
-      "type": "object",
-      "description": "Specification for creating a new Pool.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The display name for the Pool. The display name need not be unique and can contain any Unicode characters up to a maximum length of 1024."
-        },
-        "vmSize": {
-          "type": "string",
-          "description": "The size of the virtual machines in the Pool. All virtual machines in a Pool are the same size. For information about available sizes of virtual machines in Pools, see Choose a VM size for Compute Nodes in an Azure Batch Pool (https://learn.microsoft.com/azure/batch/batch-pool-vm-sizes)."
-        },
-        "virtualMachineConfiguration": {
-          "$ref": "#/definitions/VirtualMachineConfigurationUpdate",
-          "description": "The virtual machine configuration for the Pool. This property must be specified."
-        },
-        "taskSlotsPerNode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256."
-        },
-        "taskSchedulingPolicy": {
-          "$ref": "#/definitions/BatchTaskSchedulingPolicyUpdate",
-          "description": "How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread."
-        },
-        "resizeTimeout": {
-          "type": "string",
-          "format": "duration",
-          "description": "The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service rejects the request with an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
-        },
-        "targetDedicatedNodes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The desired number of dedicated Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
-        },
-        "targetLowPriorityNodes": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The desired number of Spot/Low-priority Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to true. If enableAutoScale is set to false, then you must set either targetDedicatedNodes, targetLowPriorityNodes, or both."
-        },
-        "enableAutoScale": {
-          "type": "boolean",
-          "description": "Whether the Pool size should automatically adjust over time. If false, at least one of targetDedicatedNodes and targetLowPriorityNodes must be specified. If true, the autoScaleFormula element is required. The Pool automatically resizes according to the formula. The default value is false."
-        },
-        "autoScaleFormula": {
-          "type": "string",
-          "description": "The formula for the desired number of Compute Nodes in the Pool. This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information."
-        },
-        "autoScaleEvaluationInterval": {
-          "type": "string",
-          "format": "duration",
-          "description": "The time interval at which to automatically adjust the Pool size according to the autoscale formula. The default value is 15 minutes. The minimum and maximum value are 5 minutes and 168 hours respectively. If you specify a value less than 5 minutes or greater than 168 hours, the Batch service rejects the request with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request)."
-        },
-        "enableInterNodeCommunication": {
-          "type": "boolean",
-          "description": "Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false."
-        },
-        "networkConfiguration": {
-          "$ref": "#/definitions/NetworkConfigurationUpdate",
-          "description": "The network configuration for the Pool."
-        },
-        "startTask": {
-          "$ref": "#/definitions/BatchStartTaskUpdate",
-          "description": "A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted."
-        },
-        "applicationPackageReferences": {
-          "type": "array",
-          "description": "The list of Packages to be installed on each Compute Node in the Pool. When creating a pool, the package's application ID must be fully qualified (/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Batch/batchAccounts/{accountName}/applications/{applicationName}). Changes to Package references affect all new Nodes joining the Pool, but do not affect Compute Nodes that are already in the Pool until they are rebooted or reimaged. There is a maximum of 10 Package references on any given Pool.",
-          "items": {
-            "$ref": "#/definitions/BatchApplicationPackageReference"
-          }
-        },
-        "userAccounts": {
-          "type": "array",
-          "description": "The list of user Accounts to be created on each Compute Node in the Pool.",
-          "items": {
-            "$ref": "#/definitions/UserAccount"
-          }
-        },
-        "metadata": {
-          "type": "array",
-          "description": "A list of name-value pairs associated with the Pool as metadata. The Batch service does not assign any meaning to metadata; it is solely for the use of user code.",
-          "items": {
-            "$ref": "#/definitions/BatchMetadataItem"
-          }
-        },
-        "mountConfiguration": {
-          "type": "array",
-          "description": "A list of file systems to mount on each node in the pool. This supports Azure Files, NFS, CIFS/SMB, and Blobfuse.",
-          "items": {
-            "$ref": "#/definitions/MountConfiguration"
-          }
-        },
-        "upgradePolicy": {
-          "$ref": "#/definitions/UpgradePolicyUpdate",
-          "description": "The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling."
-        }
-      }
-    },
     "BatchPoolState": {
       "type": "string",
       "description": "BatchPoolState enums",
@@ -13370,7 +12933,7 @@
           "description": "Whether the Pool permits direct communication between Compute Nodes. Enabling inter-node communication limits the maximum size of the Pool due to deployment restrictions on the Compute Nodes of the Pool. This may result in the Pool not reaching its desired size. The default value is false.<br /><br />This field can be updated only when the pool is empty."
         },
         "startTask": {
-          "$ref": "#/definitions/BatchStartTaskUpdate",
+          "$ref": "#/definitions/BatchStartTask",
           "description": "A Task to run on each Compute Node as it joins the Pool. The Task runs when the Compute Node is added to the Pool or when the Compute Node is restarted. If this element is present, it overwrites any existing StartTask. If omitted, any existing StartTask is left unchanged."
         },
         "applicationPackageReferences": {
@@ -13388,7 +12951,7 @@
           }
         },
         "virtualMachineConfiguration": {
-          "$ref": "#/definitions/VirtualMachineConfigurationUpdate",
+          "$ref": "#/definitions/VirtualMachineConfiguration",
           "description": "The virtual machine configuration for the Pool. This property must be specified.<br /><br />This field can be updated only when the pool is empty."
         },
         "taskSlotsPerNode": {
@@ -13397,11 +12960,11 @@
           "description": "The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty."
         },
         "taskSchedulingPolicy": {
-          "$ref": "#/definitions/BatchTaskSchedulingPolicyUpdate",
+          "$ref": "#/definitions/BatchTaskSchedulingPolicy",
           "description": "How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread.<br /><br />This field can be updated only when the pool is empty."
         },
         "networkConfiguration": {
-          "$ref": "#/definitions/NetworkConfigurationUpdate",
+          "$ref": "#/definitions/NetworkConfiguration",
           "description": "The network configuration for the Pool. This field can be updated only when the pool is empty."
         },
         "userAccounts": {
@@ -13419,7 +12982,7 @@
           }
         },
         "upgradePolicy": {
-          "$ref": "#/definitions/UpgradePolicyUpdate",
+          "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy for the Pool. Describes an upgrade policy - automatic, manual, or rolling.<br /><br />This field can be updated only when the pool is empty."
         }
       }
@@ -13638,47 +13201,6 @@
             "description": "The StartTask has exited with exit code 0, or the StartTask has failed and the retry limit has reached, or the StartTask process did not run due to Task preparation errors (such as resource file download failures)."
           }
         ]
-      }
-    },
-    "BatchStartTaskUpdate": {
-      "type": "object",
-      "description": "Batch will retry Tasks when a recovery operation is triggered on a Node.\nExamples of recovery operations include (but are not limited to) when an\nunhealthy Node is rebooted or a Compute Node disappeared due to host failure.\nRetries due to recovery operations are independent of and are not counted\nagainst the maxTaskRetryCount. Even if the maxTaskRetryCount is 0, an internal\nretry due to a recovery operation may occur. Because of this, all Tasks should\nbe idempotent. This means Tasks need to tolerate being interrupted and\nrestarted without causing any corruption or duplicate data. The best practice\nfor long running Tasks is to use some form of checkpointing. In some cases the\nStartTask may be re-run even though the Compute Node was not rebooted. Special\ncare should be taken to avoid StartTasks which create breakaway process or\ninstall/launch services from the StartTask working directory, as this will\nblock Batch from being able to re-run the StartTask.",
-      "properties": {
-        "commandLine": {
-          "type": "string",
-          "description": "The command line of the StartTask. The command line does not run under a shell, and therefore cannot take advantage of shell features such as environment variable expansion. If you want to take advantage of such features, you should invoke the shell in the command line, for example using \"cmd /c MyCommand\" in Windows or \"/bin/sh -c MyCommand\" in Linux. If the command line refers to file paths, it should use a relative path (relative to the Task working directory), or use the Batch provided environment variable (https://learn.microsoft.com/azure/batch/batch-compute-node-environment-variables)."
-        },
-        "containerSettings": {
-          "$ref": "#/definitions/BatchTaskContainerSettingsUpdate",
-          "description": "The settings for the container under which the StartTask runs. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all Task environment variables are mapped into the container, and the Task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
-        },
-        "resourceFiles": {
-          "type": "array",
-          "description": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files. When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers. Files listed under this element are located in the Task's working directory.",
-          "items": {
-            "$ref": "#/definitions/ResourceFile"
-          }
-        },
-        "environmentSettings": {
-          "type": "array",
-          "description": "A list of environment variable settings for the StartTask.",
-          "items": {
-            "$ref": "#/definitions/EnvironmentSetting"
-          }
-        },
-        "userIdentity": {
-          "$ref": "#/definitions/UserIdentity",
-          "description": "The user identity under which the StartTask runs. If omitted, the Task runs as a non-administrative user unique to the Task."
-        },
-        "maxTaskRetryCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of times the Task may be retried. The Batch service retries a Task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the Task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the Task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the Task. If the maximum retry count is -1, the Batch service retries the Task without limit, however this is not recommended for a start task or any task. The default value is 0 (no retries)."
-        },
-        "waitForSuccess": {
-          "type": "boolean",
-          "description": "Whether the Batch service should wait for the StartTask to complete successfully (that is, to exit with exit code 0) before scheduling any Tasks on the Compute Node. If true and the StartTask fails on a Node, the Batch service retries the StartTask up to its maximum retry count (maxTaskRetryCount). If the Task has still not completed successfully after all retries, then the Batch service marks the Node unusable, and will not schedule Tasks to it. This condition can be detected via the Compute Node state and failure info details. If false, the Batch service will not wait for the StartTask to complete. In this case, other Tasks can start executing on the Compute Node while the StartTask is still running; and even if the StartTask fails, new Tasks will continue to be scheduled on the Compute Node. The default is true."
-        }
       }
     },
     "BatchSubtask": {
@@ -14081,35 +13603,6 @@
       "required": [
         "imageName"
       ]
-    },
-    "BatchTaskContainerSettingsUpdate": {
-      "type": "object",
-      "description": "The container settings for a Task.",
-      "properties": {
-        "containerRunOptions": {
-          "type": "string",
-          "description": "Additional options to the container create command. These additional options are supplied as arguments to the \"docker create\" command, in addition to those controlled by the Batch Service."
-        },
-        "imageName": {
-          "type": "string",
-          "description": "The Image to use to create the container in which the Task will run. This is the full Image reference, as would be specified to \"docker pull\". If no tag is provided as part of the Image name, the tag \":latest\" is used as a default."
-        },
-        "registry": {
-          "$ref": "#/definitions/ContainerRegistryReference",
-          "description": "The private registry which contains the container Image. This setting can be omitted if was already provided at Pool creation."
-        },
-        "workingDirectory": {
-          "$ref": "#/definitions/ContainerWorkingDirectory",
-          "description": "The location of the container Task working directory. The default is 'taskWorkingDirectory'."
-        },
-        "containerHostBatchBindMounts": {
-          "type": "array",
-          "description": "The paths you want to mounted to container task. If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty.",
-          "items": {
-            "$ref": "#/definitions/ContainerHostBatchBindMountEntry"
-          }
-        }
-      }
     },
     "BatchTaskCounts": {
       "type": "object",
@@ -14587,41 +14080,6 @@
       "required": [
         "nodeFillType"
       ]
-    },
-    "BatchTaskSchedulingPolicyUpdate": {
-      "type": "object",
-      "description": "Specifies how Tasks should be distributed across Compute Nodes.",
-      "properties": {
-        "jobDefaultOrder": {
-          "type": "string",
-          "description": "The order for scheduling tasks from different jobs with the same priority. If not specified, the default is none.",
-          "default": "none",
-          "enum": [
-            "none",
-            "creationtime"
-          ],
-          "x-ms-enum": {
-            "name": "BatchJobDefaultOrder",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "None",
-                "value": "none",
-                "description": "Tasks should be scheduled uniformly from all equal-priority jobs for the pool."
-              },
-              {
-                "name": "CreationTime",
-                "value": "creationtime",
-                "description": "If jobs have equal priority, tasks from jobs that were created earlier should be scheduled first."
-              }
-            ]
-          }
-        },
-        "nodeFillType": {
-          "$ref": "#/definitions/BatchNodeFillType",
-          "description": "How Tasks are distributed across Compute Nodes in a Pool. If not specified, the default is spread."
-        }
-      }
     },
     "BatchTaskSlotCounts": {
       "type": "object",
@@ -15800,34 +15258,6 @@
         }
       }
     },
-    "NetworkConfigurationUpdate": {
-      "type": "object",
-      "description": "The network configuration for a Pool.",
-      "properties": {
-        "subnetId": {
-          "type": "string",
-          "description": "The ARM resource identifier of the virtual network subnet which the Compute Nodes of the Pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. The virtual network must be in the same region and subscription as the Azure Batch Account. The specified subnet should have enough free IP addresses to accommodate the number of Compute Nodes in the Pool. If the subnet doesn't have enough free IP addresses, the Pool will partially allocate Nodes and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule Tasks on the Nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the Nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the Compute Nodes to unusable. Only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication, including ports 29876 and 29877. Also enable outbound connections to Azure Storage on port 443. For more details see: https://learn.microsoft.com/azure/batch/nodes-and-pools#virtual-network-vnet-and-firewall-configuration"
-        },
-        "dynamicVNetAssignmentScope": {
-          "$ref": "#/definitions/DynamicVNetAssignmentScope",
-          "description": "The scope of dynamic vnet assignment.",
-          "x-ms-client-name": "dynamicVnetAssignmentScope"
-        },
-        "endpointConfiguration": {
-          "$ref": "#/definitions/BatchPoolEndpointConfigurationUpdate",
-          "description": "The configuration for endpoints on Compute Nodes in the Batch Pool."
-        },
-        "publicIPAddressConfiguration": {
-          "$ref": "#/definitions/BatchPublicIpAddressConfiguration",
-          "description": "The Public IPAddress configuration for Compute Nodes in the Batch Pool.",
-          "x-ms-client-name": "publicIpAddressConfiguration"
-        },
-        "enableAcceleratedNetworking": {
-          "type": "boolean",
-          "description": "Whether this pool should enable accelerated networking. Accelerated networking enables single root I/O virtualization (SR-IOV) to a VM, which may lead to improved networking performance. For more details, see: https://learn.microsoft.com/azure/virtual-network/accelerated-networking-overview."
-        }
-      }
-    },
     "NetworkSecurityGroupRule": {
       "type": "object",
       "description": "A network security group rule to apply to an inbound endpoint.",
@@ -16292,16 +15722,6 @@
         "id"
       ]
     },
-    "ServiceArtifactReferenceUpdate": {
-      "type": "object",
-      "description": "Specifies the service artifact reference id used to set same image version\nfor all virtual machines in the scale set when using 'latest' image version.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The service artifact reference id of ServiceArtifactReference. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
-        }
-      }
-    },
     "StatusLevelTypes": {
       "type": "string",
       "description": "Level code.",
@@ -16413,25 +15833,6 @@
       "required": [
         "mode"
       ]
-    },
-    "UpgradePolicyUpdate": {
-      "type": "object",
-      "description": "Describes an upgrade policy - automatic, manual, or rolling.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/UpgradeMode",
-          "description": "Specifies the mode of an upgrade to virtual machines in the scale set.<br /><br /> Possible values are:<br /><br /> **Manual** - You  control the application of updates to virtual machines in the scale set. You do this by using the manualUpgrade action.<br /><br /> **Automatic** - All virtual machines in the scale set are automatically updated at the same time.<br /><br /> **Rolling** - Scale set performs updates in batches with an optional pause time in between."
-        },
-        "automaticOSUpgradePolicy": {
-          "$ref": "#/definitions/AutomaticOsUpgradePolicy",
-          "description": "Configuration parameters used for performing automatic OS Upgrade. The configuration parameters used for performing automatic OS upgrade.",
-          "x-ms-client-name": "automaticOsUpgradePolicy"
-        },
-        "rollingUpgradePolicy": {
-          "$ref": "#/definitions/RollingUpgradePolicy",
-          "description": "The configuration parameters used while performing a rolling upgrade."
-        }
-      }
     },
     "UploadBatchServiceLogsOptions": {
       "type": "object",
@@ -16672,68 +16073,6 @@
         "imageReference",
         "nodeAgentSKUId"
       ]
-    },
-    "VirtualMachineConfigurationUpdate": {
-      "type": "object",
-      "description": "The configuration for Compute Nodes in a Pool based on the Azure Virtual\nMachines infrastructure.",
-      "properties": {
-        "imageReference": {
-          "$ref": "#/definitions/BatchVmImageReference",
-          "description": "A reference to the Azure Virtual Machines Marketplace Image or the custom Virtual Machine Image to use."
-        },
-        "nodeAgentSKUId": {
-          "type": "string",
-          "description": "The SKU of the Batch Compute Node agent to be provisioned on Compute Nodes in the Pool. The Batch Compute Node agent is a program that runs on each Compute Node in the Pool, and provides the command-and-control interface between the Compute Node and the Batch service. There are different implementations of the Compute Node agent, known as SKUs, for different operating systems. You must specify a Compute Node agent SKU which matches the selected Image reference. To get the list of supported Compute Node agent SKUs along with their list of verified Image references, see the 'List supported Compute Node agent SKUs' operation.",
-          "x-ms-client-name": "nodeAgentSkuId"
-        },
-        "windowsConfiguration": {
-          "$ref": "#/definitions/WindowsConfiguration",
-          "description": "Windows operating system settings on the virtual machine. This property must not be specified if the imageReference property specifies a Linux OS Image."
-        },
-        "dataDisks": {
-          "type": "array",
-          "description": "The configuration for data disks attached to the Compute Nodes in the Pool. This property must be specified if the Compute Nodes in the Pool need to have empty data disks attached to them. This cannot be updated. Each Compute Node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the Compute Node is removed from the Pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://learn.microsoft.com/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://learn.microsoft.com/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine.",
-          "items": {
-            "$ref": "#/definitions/DataDisk"
-          }
-        },
-        "licenseType": {
-          "type": "string",
-          "description": "This only applies to Images that contain the Windows operating system, and\nshould only be used when you hold valid on-premises licenses for the Compute\nNodes which will be deployed. If omitted, no on-premises licensing discount is\napplied. Values are:\n\n Windows_Server - The on-premises license is for Windows\nServer.\n Windows_Client - The on-premises license is for Windows Client.\n"
-        },
-        "containerConfiguration": {
-          "$ref": "#/definitions/BatchContainerConfigurationUpdate",
-          "description": "The container configuration for the Pool. If specified, setup is performed on each Compute Node in the Pool to allow Tasks to run in containers. All regular Tasks and Job manager Tasks run on this Pool must specify the containerSettings property, and all other Tasks may specify it."
-        },
-        "diskEncryptionConfiguration": {
-          "$ref": "#/definitions/DiskEncryptionConfiguration",
-          "description": "The disk encryption configuration for the pool. If specified, encryption is performed on each node in the pool during node provisioning."
-        },
-        "nodePlacementConfiguration": {
-          "$ref": "#/definitions/BatchNodePlacementConfiguration",
-          "description": "The node placement configuration for the pool. This configuration will specify rules on how nodes in the pool will be physically allocated."
-        },
-        "extensions": {
-          "type": "array",
-          "description": "The virtual machine extension for the pool. If specified, the extensions mentioned in this configuration will be installed on each node.",
-          "items": {
-            "$ref": "#/definitions/VMExtension"
-          }
-        },
-        "osDisk": {
-          "$ref": "#/definitions/BatchOsDisk",
-          "description": "Settings for the operating system disk of the Virtual Machine.",
-          "x-ms-client-name": "OsDisk"
-        },
-        "securityProfile": {
-          "$ref": "#/definitions/SecurityProfile",
-          "description": "Specifies the security profile settings for the virtual machine or virtual machine scale set."
-        },
-        "serviceArtifactReference": {
-          "$ref": "#/definitions/ServiceArtifactReferenceUpdate",
-          "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. The service artifact reference id in the form of /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/serviceArtifacts/{serviceArtifactName}/vmArtifactsProfiles/{vmArtifactsProfilesName}"
-        }
-      }
     },
     "VirtualMachineInfo": {
       "type": "object",

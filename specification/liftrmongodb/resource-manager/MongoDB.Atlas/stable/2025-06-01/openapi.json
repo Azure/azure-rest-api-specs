@@ -436,24 +436,6 @@
     }
   },
   "definitions": {
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
-    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -687,7 +669,7 @@
       "description": "The type used for update operations of the OrganizationResource.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -708,11 +690,11 @@
       "description": "The updatable properties of the OrganizationResource.",
       "properties": {
         "user": {
-          "$ref": "#/definitions/UserDetailsUpdate",
+          "$ref": "#/definitions/UserDetails",
           "description": "Details of the user."
         },
         "partnerProperties": {
-          "$ref": "#/definitions/PartnerPropertiesUpdate",
+          "$ref": "#/definitions/PartnerProperties",
           "description": "MongoDB properties"
         }
       }
@@ -740,27 +722,6 @@
       "required": [
         "organizationName"
       ]
-    },
-    "PartnerPropertiesUpdate": {
-      "type": "object",
-      "description": "MongoDB specific Properties",
-      "properties": {
-        "organizationId": {
-          "type": "string",
-          "description": "Organization Id in MongoDB system"
-        },
-        "redirectUrl": {
-          "type": "string",
-          "description": "Redirect URL for the MongoDB"
-        },
-        "organizationName": {
-          "type": "string",
-          "description": "Organization name in MongoDB system",
-          "minLength": 1,
-          "maxLength": 64,
-          "pattern": "^[a-zA-Z0-9 _\\-().,:@+&',]{1,64}$"
-        }
-      }
     },
     "UserDetails": {
       "type": "object",
@@ -796,36 +757,6 @@
         "lastName",
         "emailAddress"
       ]
-    },
-    "UserDetailsUpdate": {
-      "type": "object",
-      "description": "User details for an organization",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "description": "First name of the user"
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name of the user"
-        },
-        "emailAddress": {
-          "$ref": "#/definitions/LiftrBase.email",
-          "description": "Email address of the user"
-        },
-        "upn": {
-          "type": "string",
-          "description": "User's principal name"
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "User's phone number"
-        },
-        "companyName": {
-          "type": "string",
-          "description": "Company Name"
-        }
-      }
     }
   },
   "parameters": {}

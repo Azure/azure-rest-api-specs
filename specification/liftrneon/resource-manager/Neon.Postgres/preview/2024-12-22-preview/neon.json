@@ -550,27 +550,6 @@
         "organizationName"
       ]
     },
-    "LiftrBase.Data.PartnerOrganizationPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties specific to Partner's organization",
-      "properties": {
-        "organizationId": {
-          "type": "string",
-          "description": "Organization Id in partner's system"
-        },
-        "organizationName": {
-          "type": "string",
-          "description": "Organization name in partner's system",
-          "minLength": 1,
-          "maxLength": 50,
-          "pattern": "^\\S.{0,62}\\S$|^\\S$"
-        },
-        "singleSignOnProperties": {
-          "$ref": "#/definitions/LiftrBase.SingleSignOnProperties",
-          "description": "Single Sign On properties for the organization"
-        }
-      }
-    },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
       "description": "Marketplace details for an organization",
@@ -591,24 +570,6 @@
       "required": [
         "offerDetails"
       ]
-    },
-    "LiftrBase.MarketplaceDetailsUpdate": {
-      "type": "object",
-      "description": "Marketplace details for an organization",
-      "properties": {
-        "subscriptionId": {
-          "type": "string",
-          "description": "SaaS subscription id for the the marketplace offer"
-        },
-        "subscriptionStatus": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceSubscriptionStatus",
-          "description": "Marketplace subscription status"
-        },
-        "offerDetails": {
-          "$ref": "#/definitions/LiftrBase.OfferDetailsUpdate",
-          "description": "Offer details for the marketplace that is selected by the user"
-        }
-      }
     },
     "LiftrBase.MarketplaceSubscriptionStatus": {
       "type": "string",
@@ -680,36 +641,6 @@
         "offerId",
         "planId"
       ]
-    },
-    "LiftrBase.OfferDetailsUpdate": {
-      "type": "object",
-      "description": "Offer details for the marketplace that is selected by the user",
-      "properties": {
-        "publisherId": {
-          "type": "string",
-          "description": "Publisher Id for the marketplace offer"
-        },
-        "offerId": {
-          "type": "string",
-          "description": "Offer Id for the marketplace offer"
-        },
-        "planId": {
-          "type": "string",
-          "description": "Plan Id for the marketplace offer"
-        },
-        "planName": {
-          "type": "string",
-          "description": "Plan Name for the marketplace offer"
-        },
-        "termUnit": {
-          "type": "string",
-          "description": "Term Name for the marketplace offer"
-        },
-        "termId": {
-          "type": "string",
-          "description": "Term Id for the marketplace offer"
-        }
-      }
     },
     "LiftrBase.SingleSignOnProperties": {
       "type": "object",
@@ -859,7 +790,7 @@
       "description": "The updatable properties of the OrganizationResource.",
       "properties": {
         "marketplaceDetails": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetails",
           "description": "Marketplace details of the resource.",
           "x-ms-mutability": [
             "read",
@@ -876,7 +807,7 @@
           "description": "Details of the company."
         },
         "partnerOrganizationProperties": {
-          "$ref": "#/definitions/LiftrBase.Data.PartnerOrganizationPropertiesUpdate",
+          "$ref": "#/definitions/LiftrBase.Data.PartnerOrganizationProperties",
           "description": "Neon Organization properties"
         }
       }
