@@ -47,6 +47,7 @@ namespace Ingestions {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Update an existing ingestion")
+  @patch(#{ implicitOptionality: false })
   op update(
     @doc("Content type for PATCH request")
     @header
@@ -440,6 +441,7 @@ namespace StacItems {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Update a STAC item in a collection")
+  @patch(#{ implicitOptionality: false })
   @pollingOperation(IngestionOperations.get)
   op update(
     @header

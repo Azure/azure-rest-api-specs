@@ -40,6 +40,7 @@ interface AzureLargeStorageInstances {
     Patches the Tags field of a Azure Large Storage Instance for the specified
     subscription, resource group, and instance name.
     """)
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AzureLargeStorageInstance,
     AzureLargeStorageInstanceTagsUpdate
