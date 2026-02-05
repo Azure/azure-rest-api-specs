@@ -299,12 +299,11 @@ op createSnapshot is Foundations.LongRunningOperation<
   {},
   Error
 >;
-#suppress "@typespec/http/patch-implicit-optional" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Updates the state of a key-value snapshot.")
 @doc("Updates the state of a key-value snapshot.")
 @route("/snapshots/{name}")
-@patch
+@patch(#{ implicitOptionality: false })
 op updateSnapshot is AppConfigOperation<
   {
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"

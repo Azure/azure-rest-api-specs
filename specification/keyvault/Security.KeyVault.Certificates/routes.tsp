@@ -145,11 +145,10 @@ op setCertificateIssuer is KeyVaultOperation<
 /**
  * The UpdateCertificateIssuer operation performs an update on the specified certificate issuer entity. This operation requires the certificates/setissuers permission.
  */
-#suppress "@typespec/http/patch-implicit-optional" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the specified certificate issuer.")
 @route("/certificates/issuers/{issuer-name}")
-@patch
+@patch(#{ implicitOptionality: false })
 op updateCertificateIssuer is KeyVaultOperation<
   {
     /**
@@ -315,11 +314,10 @@ op getCertificatePolicy is KeyVaultOperation<
 /**
  * Set specified members in the certificate policy. Leave others as null. This operation requires the certificates/update permission.
  */
-#suppress "@typespec/http/patch-implicit-optional" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 @summary("Updates the policy for a certificate.")
 @route("/certificates/{certificate-name}/policy")
-@patch
+@patch(#{ implicitOptionality: false })
 op updateCertificatePolicy is KeyVaultOperation<
   {
     /**
@@ -340,12 +338,11 @@ op updateCertificatePolicy is KeyVaultOperation<
 /**
  * The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.
  */
-#suppress "@typespec/http/patch-implicit-optional" ""
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
 #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "Intentionally optional"
 @summary("Updates the specified attributes associated with the given certificate.")
 @route("/certificates/{certificate-name}/{certificate-version}")
-@patch
+@patch(#{ implicitOptionality: false })
 op updateCertificate is KeyVaultOperation<
   {
     /**

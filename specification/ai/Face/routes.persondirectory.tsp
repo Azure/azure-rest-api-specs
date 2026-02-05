@@ -139,7 +139,6 @@ interface PersonDirectoryOperations {
   @returnsDoc("A successful call returns the person's information.")
   getPerson is FaceResourceReadOperation<PersonDirectoryPerson>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update name or userData of a person.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updatePerson is FaceResourceUpdateOperation<PersonDirectoryPerson>;
@@ -202,11 +201,10 @@ interface PersonDirectoryOperations {
   @returnsDoc("A successful call returns target persisted face's information (persistedFaceId and userData).")
   getPersonFace is FaceResourceReadOperation<PersonDirectoryFace>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update a persisted face's userData field of a person.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   @updatesResource(PersonDirectoryFace)
-  @patch
+  @patch(#{ implicitOptionality: false })
   updatePersonFace is FaceResourceUpdateOperation<
     PersonDirectoryFace,
     FaceUserData
@@ -248,19 +246,17 @@ interface PersonDirectoryOperations {
   @returnsDoc("A successful call returns the Dynamic Person Group's information.")
   getDynamicPersonGroup is FaceResourceReadOperation<DynamicPersonGroup>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @summary(UpdateDynamicPersonGroupSummary)
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
-  @patch // updatesResource have codegen issue
+  @patch(#{ implicitOptionality: false }) // updatesResource have codegen issue
   updateDynamicPersonGroupWithPersonChanges is DynamicPersonGroupLongRunningOperation<UpdateDynamicPersonGroupOptions>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @summary(UpdateDynamicPersonGroupSummary)
   @doc(UpdateDynamicPersonGroupDescription)
   @returnsDoc(DynamicPersonGroupModificationAccepted)
   @updatesResource(DynamicPersonGroup)
-  @patch
+  @patch(#{ implicitOptionality: false })
   updateDynamicPersonGroup is DynamicPersonGroupOperation<UserDefinedFieldsForUpdate>;
 
   @summary("List all existing Dynamic Person Groups by dynamicPersonGroupId along with name and userData.")

@@ -200,10 +200,9 @@ interface ContainerRegistry {
    * Update the attribute identified by `name` where `reference` is the name of the
    * repository.
    */
-  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}")
-  @patch
+  @patch(#{ implicitOptionality: false })
   updateProperties is AcrOperation<
     {
       /**
@@ -296,10 +295,9 @@ interface ContainerRegistry {
   /**
    * Update tag attributes
    */
-  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags/{reference}")
-  @patch
+  @patch(#{ implicitOptionality: false })
   updateTagAttributes is AcrOperation<
     {
       /**
@@ -417,10 +415,9 @@ interface ContainerRegistry {
   /**
    * Update properties of a manifest
    */
-  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_manifests/{digest}")
-  @patch
+  @patch(#{ implicitOptionality: false })
   updateManifestProperties is AcrOperation<
     {
       /**
@@ -628,11 +625,10 @@ interface ContainerRegistryBlob {
   /**
    * Upload a stream of data without completing the upload.
    */
-  #suppress "@typespec/http/patch-implicit-optional" ""
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @route("/{+nextBlobUuidLink}")
-  @patch
+  @patch(#{ implicitOptionality: false })
   uploadChunk is AcrOperation<
     {
       /**

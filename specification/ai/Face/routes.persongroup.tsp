@@ -66,7 +66,6 @@ interface PersonGroupOperations {
   @returnsDoc("A successful call returns the Person Group's information.")
   getPersonGroup is FaceResourceReadOperationWithReturnRecognitionModelOptions<PersonGroup>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update an existing Person Group's name and userData. The properties keep unchanged if they are not in request body.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updatePersonGroup is FaceResourceUpdateOperation<PersonGroup>;
@@ -122,7 +121,6 @@ interface PersonGroupOperations {
   @returnsDoc(GetPersonSuccess)
   getPersonGroupPerson is FaceResourceReadOperation<PersonGroupPerson>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update name or userData of a person.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updatePersonGroupPerson is FaceResourceUpdateOperation<PersonGroupPerson>;
@@ -157,7 +155,6 @@ interface PersonGroupOperations {
   @returnsDoc(GetPersonFaceSuccess)
   getPersonGroupPersonFace is FaceResourceReadOperation<PersonGroupPersonFace>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update a person persisted face's userData field.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updatePersonGroupPersonFace is FaceResourceUpdateOperation<
@@ -192,7 +189,6 @@ interface PersonGroupOperations {
   @returnsDoc("A successful call returns the Large Person Group's information.")
   getLargePersonGroup is FaceResourceReadOperationWithReturnRecognitionModelOptions<LargePersonGroup>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update an existing Large Person Group's name and userData. The properties keep unchanged if they are not in request body.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updateLargePersonGroup is FaceResourceUpdateOperation<LargePersonGroup>;
@@ -251,7 +247,6 @@ interface PersonGroupOperations {
   @returnsDoc(GetPersonSuccess)
   getLargePersonGroupPerson is FaceResourceReadOperation<LargePersonGroupPerson>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update name or userData of a person.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updateLargePersonGroupPerson is FaceResourceUpdateOperation<LargePersonGroupPerson>;
@@ -286,7 +281,6 @@ interface PersonGroupOperations {
   @returnsDoc(GetPersonFaceSuccess)
   getLargePersonGroupPersonFace is FaceResourceReadOperation<LargePersonGroupPersonFace>;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @doc("Update a person persisted face's userData field.")
   @returnsDoc(SuccessfulCallWithEmptyBody)
   updateLargePersonGroupPersonFace is FaceResourceUpdateOperation<
