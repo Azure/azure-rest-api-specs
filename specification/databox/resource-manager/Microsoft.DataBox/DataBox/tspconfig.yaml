@@ -13,11 +13,8 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
 
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: true
     namespace: "Azure.ResourceManager.DataBox"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-databox"
@@ -40,7 +37,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/databox"
     emitter-output-dir: "{output-dir}/{service-dir}/armdatabox"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatabox"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatabox/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
