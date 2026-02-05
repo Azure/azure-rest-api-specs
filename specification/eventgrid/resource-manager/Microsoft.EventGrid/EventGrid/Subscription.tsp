@@ -92,7 +92,6 @@ interface Subscriptions {
    * Get all delivery attributes for an event subscription of a namespace topic.
    */
   @summary("Get delivery attributes for an event subscription of a namespace topic.")
-  @list
   getDeliveryAttributes is ArmResourceActionSync<
     Subscription,
     void,

@@ -177,7 +177,6 @@ interface EventSubscriptions {
    * Get all delivery attributes for an event subscription for domain topic.
    */
   @summary("Get delivery attributes for an event subscription for domain topic.")
-  @list
   getDeliveryAttributes is EventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
@@ -329,7 +328,6 @@ interface TopicEventSubscriptions {
    * Get all delivery attributes for an event subscription for topic.
    */
   @summary("Get delivery attributes for an event subscription for topic.")
-  @list
   getDeliveryAttributes is TopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
@@ -571,7 +569,6 @@ interface EventSubscriptionOperationGroup {
    * Get all delivery attributes for an event subscription.
    */
   @summary("Get delivery attributes for an event subscription.")
-  @list
   getDeliveryAttributes is EventSubscriptionOperationGroupOps.ActionSync<
     Extension.ScopeParameter,
     void,
@@ -681,7 +678,6 @@ interface SystemTopicEventSubscriptions {
    * Get all delivery attributes for an event subscription.
    */
   @summary("Get delivery attributes for an event subscription.")
-  @list
   getDeliveryAttributes is SystemTopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
@@ -798,7 +794,6 @@ interface PartnerTopicEventSubscriptions {
    * Get all delivery attributes for an event subscription of a partner topic.
    */
   @summary("Get delivery attributes for an event subscription of a partner topic.")
-  @list
   getDeliveryAttributes is PartnerTopicEventSubscriptionOps.ActionSync<
     EventSubscription,
     void,
