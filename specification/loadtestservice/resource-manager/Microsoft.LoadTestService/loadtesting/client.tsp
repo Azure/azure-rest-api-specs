@@ -144,3 +144,8 @@ model QuotaBucketRequestReplacement
   "csharp"
 );
 @@clientName(EncryptionPropertiesIdentity.type, "IdentityType", "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoadTestResourceUpdate.properties,
+  "csharp"
+);

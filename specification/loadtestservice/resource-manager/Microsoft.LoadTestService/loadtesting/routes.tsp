@@ -45,10 +45,7 @@ interface LoadTests {
   @Azure.Core.useFinalStateVia("location")
   update is ArmCustomPatchAsync<
     LoadTestResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      LoadTestResource,
-      LoadTestProperties
-    >,
+    LoadTestResourceUpdate,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = LoadTestResource> &
       ArmLroLocationHeader<FinalResult = LoadTestResource> &
       Azure.Core.Foundations.RetryAfterHeader
