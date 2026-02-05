@@ -42,6 +42,66 @@ options:
     namespace: com.azure.resourcemanager.edgemarketplace #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
     service-name: Edge Marketplace #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
 
+  "@azure-tools/typespec-powershell":
+    service-dir: "src"
+    package-dir: "EdgeMarketplace/EdgeMarketplace.Autorest"
+    clear-output-folder: true
+    azure: true
+    module-version: 0.1.0
+    prefix: "Az"
+    subject-prefix: "EdgeMarketplace"
+    service-name: "EdgeMarketplace"
+    module-name: "{prefix}.{service-name}"
+    output-folder: "{output-dir}"
+    exclude-tableview-properties:
+      - Id
+      - Type
+    directive:
+      - where:
+          subject: Operation
+        hide: true
+      - where:
+          parameter-name: SubscriptionId
+        set:
+          default:
+            script: "(Get-AzContext).Subscription.Id"
+      - where:
+          variant: ^(Create|Update)(?!.*?(Expanded|ViaJsonString|ViaJsonFilePath))
+        remove: true
+      - where:
+          variant: ^CreateViaIdentity$|^CreateViaIdentityExpanded$
+        remove: true
+      - where:
+          verb: Set
+        remove: true
+      - where:
+          subject: Publisher
+        remove: true
+      - where:
+          subject: Offer
+          variant: ^List1$
+        remove: true
+      - where:
+          subject: OfferAccessToken
+          parameter-name: EgeMarketPlaceResourceId
+        set:
+          parameter-name: EdgeMarketplaceResourceId
+      - where:
+          subject: OfferAccessToken
+          parameter-name: EdgeMarketPlaceRegion
+        set:
+          parameter-name: EdgeMarketplaceRegion
+      - where:
+          subject: OfferAccessToken
+          parameter-name: MarketPlaceSku
+        set:
+          parameter-name: MarketplaceSku
+      - where:
+          subject: OfferAccessToken
+          parameter-name: MarketPlaceSkuVersion
+        set:
+          parameter-name: MarketplaceSkuVersion
+
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.EdgeMarketplace"
     emitter-output-dir: "{output-dir}/sdk/edgemarketplace/{namespace}"
