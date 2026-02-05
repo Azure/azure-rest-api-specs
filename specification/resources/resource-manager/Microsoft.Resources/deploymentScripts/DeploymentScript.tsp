@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ScriptLog.tsp";
 
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -34,6 +36,11 @@ model DeploymentScript is TrackedResource<DeploymentScriptPropertiesBase> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind: ScriptType;
 }
+
+@@clientName(DeploymentScripts.create::parameters.resource, "deploymentScript");
+@@clientName(DeploymentScripts.update::parameters.properties,
+  "deploymentScript"
+);
 
 @armResourceOperations
 interface DeploymentScripts {
