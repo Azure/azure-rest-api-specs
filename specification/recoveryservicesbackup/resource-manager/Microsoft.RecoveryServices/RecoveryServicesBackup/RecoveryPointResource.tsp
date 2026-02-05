@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.RecoveryServices;
 /**
@@ -70,6 +71,18 @@ interface RecoveryPoints {
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPointResource>
   >;
+
+  /**
+   * UpdateRecoveryPoint to update recovery point for given RecoveryPointID.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Recovery point updates use UpdateRecoveryPointRequest model which does not include tags property"
+  @added(Versions.v2026_01_01_preview)
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchSync<
+    RecoveryPointResource,
+    PatchModel = UpdateRecoveryPointRequest,
+    Response = ArmResponse<RecoveryPointResource>
+  >;
 }
 
 @armResourceOperations
@@ -129,6 +142,9 @@ interface ItemLevelRecoveryConnections {
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(RecoveryPoints.moveRecoveryPoint::parameters.body,
   "Move Resource Across Tiers Request"
+);
+@@doc(RecoveryPoints.update::parameters.properties,
+  "Request body for operation"
 );
 @@doc(Restores.trigger::parameters.body, "resource restore request");
 @@doc(ItemLevelRecoveryConnections.provision::parameters.body,
