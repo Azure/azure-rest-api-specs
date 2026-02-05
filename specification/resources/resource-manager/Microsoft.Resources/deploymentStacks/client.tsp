@@ -107,6 +107,7 @@ namespace Microsoft.Resources.DeploymentStacks {
 @@alternateType(DeploymentStackProperties.duration, duration, "csharp");
 @@alternateType(DeploymentStackProperties.outputs, unknown, "csharp");
 @@alternateType(DeploymentStack.location, azureLocation, "csharp");
+@@alternateType(DeploymentStacksWhatIfResult.location, azureLocation, "csharp");
 @@alternateType(DeploymentStackSharedProperties.template, unknown, "csharp");
 @@alternateType(DeploymentStacksParametersLink.uri, url, "csharp");
 @@alternateType(DeploymentStacksTemplateLink.uri, url, "csharp");
@@ -140,6 +141,14 @@ namespace Microsoft.Resources.DeploymentStacks {
 @@clientName(DenyStatusMode, "DeploymentStackDenyStatusMode", "csharp");
 @@clientName(Azure.ResourceManager.Foundations.ErrorAdditionalInfo,
   "DeploymentStackAdditionalErrorInfo",
+  "csharp"
+);
+@@clientName(DeploymentStacksDeleteDetachEnum,
+  "DeploymentStacksDeleteDetachMode",
+  "csharp"
+);
+@@clientName(DeploymentStacksResourcesWithoutDeleteSupportEnum,
+  "DeploymentStacksResourcesWithoutDeleteSupportMode",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
