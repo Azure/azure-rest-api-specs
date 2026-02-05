@@ -1,16 +1,20 @@
 // Vector Tiles models
 import "@azure-tools/typespec-azure-core";
 import "@typespec/http";
+import "@typespec/versioning";
 import "./models.stac.spec.tsp";
 import "./models.tiler.tile-matrix-sets.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
 /**
  * Landing page for vector tiles.
  */
+@added(Versions.v2025_04_30_Preview)
 model VectorLandingPage {
   /**
    * Title of the API.
@@ -36,6 +40,7 @@ model VectorLandingPage {
 /**
  * Conformance declaration.
  */
+@added(Versions.v2025_04_30_Preview)
 model Conformance {
   /**
    * List of conformance classes.
@@ -46,6 +51,7 @@ model Conformance {
 /**
  * Mapbox Style definition.
  */
+@added(Versions.v2025_04_30_Preview)
 model MapboxStyle {
   /**
    * Style identifier.
@@ -109,6 +115,7 @@ model MapboxStyle {
 /**
  * Mapbox Source definition.
  */
+@added(Versions.v2025_04_30_Preview)
 model MapboxSource {
   /**
    * Source type.
@@ -134,6 +141,7 @@ model MapboxSource {
 /**
  * Mapbox Layer definition.
  */
+@added(Versions.v2025_04_30_Preview)
 model MapboxLayer {
   /**
    * Layer identifier.
@@ -170,6 +178,7 @@ model MapboxLayer {
 /**
  * List of Mapbox styles.
  */
+@added(Versions.v2025_04_30_Preview)
 model MapboxStylesList {
   /**
    * List of styles.
@@ -180,6 +189,7 @@ model MapboxStylesList {
 /**
  * List of available tilesets.
  */
+@added(Versions.v2025_04_30_Preview)
 model TileSetsList {
   /**
    * Links to related resources.
@@ -195,6 +205,7 @@ model TileSetsList {
 /**
  * Summary information about a tileset.
  */
+@added(Versions.v2025_04_30_Preview)
 model TileSetItem {
   /**
    * Title of the tileset.
@@ -231,6 +242,7 @@ model TileSetItem {
 /**
  * Detailed information about a tileset.
  */
+@added(Versions.v2025_04_30_Preview)
 model TileSet {
   /**
    * Title of the tileset.
@@ -307,6 +319,7 @@ model TileSet {
 /**
  * Vector tile response.
  */
+@added(Versions.v2025_04_30_Preview)
 model VectorTile {
   /**
    * Content type header.
@@ -322,6 +335,7 @@ model VectorTile {
 /**
  * List of available TileMatrixSets.
  */
+@added(Versions.v2025_04_30_Preview)
 model TileMatrixSetsList {
   /**
    * List of TileMatrixSet items.
@@ -332,6 +346,7 @@ model TileMatrixSetsList {
 /**
  * Summary information about a TileMatrixSet.
  */
+@added(Versions.v2025_04_30_Preview)
 model TileMatrixSetItem {
   /**
    * Identifier of the TileMatrixSet.
@@ -363,6 +378,7 @@ model TileMatrixSetItem {
  * Coordinate Reference System definition.
  */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" "This is defined in the OGC API - Tiles spec"
+@added(Versions.v2025_04_30_Preview)
 union Crs {
   /**
    * CRS Identifier, e.g. http://www.opengis.net/def/crs/EPSG/0/4326
@@ -375,6 +391,7 @@ union Crs {
 /**
  * Coordinate Reference System object.
  */
+@added(Versions.v2025_04_30_Preview)
 model CrsObject {
   /**
    * CRS Identifier.

@@ -6,10 +6,12 @@ import "./models.tiler.vector.tsp";
 import "./models.common.versions.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
+@added(Versions.v2025_04_30_Preview)
 interface VectorTilesBase {
   /**
    * Retrieve the OGC API landing page for this service.
@@ -51,6 +53,7 @@ interface VectorTilesBase {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
+@added(Versions.v2025_04_30_Preview)
 interface VectorStyles {
   /**
    * Retrieve the list of dataset styles available from this API implementation & deployment.
@@ -153,6 +156,7 @@ interface VectorStyles {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
+@added(Versions.v2025_04_30_Preview)
 interface VectorTileMatrixSets {
   /**
    * Retrieve the list of available tiling schemes (tile matrix sets)
@@ -200,6 +204,7 @@ interface VectorTileMatrixSets {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
+@added(Versions.v2025_04_30_Preview)
 interface VectorTilesOperations {
   /**
    * Retrieve a list of available vector tilesets for the specified collection.
@@ -310,6 +315,7 @@ interface VectorTilesOperations {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
+@added(Versions.v2025_04_30_Preview)
 interface VectorSearchTilesOperations {
   /**
    * Retrieve a list of available vector tilesets for the specified search.
