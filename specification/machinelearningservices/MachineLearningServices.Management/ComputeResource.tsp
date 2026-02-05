@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -10,6 +11,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 // FIXME: ComputeResource has no properties property
@@ -115,7 +117,9 @@ interface ComputeResources {
 
   /**
    * Updates the custom services list. The list of custom services provided shall be overwritten
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   @action("customServices")
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
@@ -146,7 +150,9 @@ interface ComputeResources {
 
   /**
    * Update Data Mounts of a Machine Learning compute.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   @summary("Update Data Mounts of a Machine Learning compute.")
   updateDataMounts is ArmResourceActionSync<
     ComputeResource,
@@ -188,7 +194,9 @@ interface ComputeResources {
 
   /**
    * Updates the idle shutdown setting of a compute instance.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,
@@ -199,8 +207,10 @@ interface ComputeResources {
 
   /**
    * Returns supported virtual machine sizes for resize
+   * Preview-only operation.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_12_01)
   @operationId("Compute_getAllowedResizeSizes")
   @action("getAllowedVmSizesForResize")
   getAllowedResizeSizes is ArmResourceActionSync<
@@ -211,7 +221,9 @@ interface ComputeResources {
 
   /**
    * Updates the size of a Compute Instance.
+   * Preview-only operation.
    */
+  @removed(Versions.v2025_12_01)
   resize is ArmResourceActionAsyncBase<
     ComputeResource,
     ResizeSchema,

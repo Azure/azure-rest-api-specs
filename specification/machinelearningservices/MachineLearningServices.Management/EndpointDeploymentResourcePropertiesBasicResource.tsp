@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./WorkspaceConnectionPropertiesV2BasicResource.tsp";
 
@@ -9,9 +10,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * EndpointDeploymentResourcePropertiesBasicResource is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model EndpointDeploymentResourcePropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<
@@ -26,6 +32,10 @@ model EndpointDeploymentResourcePropertiesBasicResource
   >;
 }
 
+/**
+ * EndpointDeploymentResourcePropertiesBasicResourceOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -59,6 +69,10 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
       }
     > {}
 
+/**
+ * EndpointDeploymentResourcePropertiesBasicResources is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
@@ -74,7 +88,12 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   createOrUpdateDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = EndpointDeploymentResourcePropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -87,7 +106,12 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   deleteDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -98,11 +122,21 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
   listDeployments is EndpointDeploymentResourcePropertiesBasicResourceOps.List<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult>
   >;
 }
+
+/**
+ * EndpointDeploymentOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface EndpointDeploymentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -136,6 +170,10 @@ interface EndpointDeploymentOps
       }
     > {}
 
+/**
+ * EndpointDeployment is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface EndpointDeployment {
   /**
@@ -162,7 +200,12 @@ interface EndpointDeployment {
   delete is EndpointDeploymentOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 

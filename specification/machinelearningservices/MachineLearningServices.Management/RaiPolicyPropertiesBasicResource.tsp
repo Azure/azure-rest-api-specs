@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./WorkspaceConnectionPropertiesV2BasicResource.tsp";
 
@@ -9,11 +10,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 /**
- * Azure OpenAI Content Filters resource.
+ * Azure OpenAI Content Filters resource. Preview-only.
  */
+@removed(Versions.v2025_12_01)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiPolicyPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiPolicyProperties, false> {
@@ -25,6 +28,10 @@ model RaiPolicyPropertiesBasicResource
   >;
 }
 
+/**
+ * RaiPolicyPropertiesBasicResourceOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -58,6 +65,10 @@ interface RaiPolicyPropertiesBasicResourceOps
       }
     > {}
 
+/**
+ * RaiPolicyPropertiesBasicResources is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResources {
   /**
@@ -73,7 +84,12 @@ interface RaiPolicyPropertiesBasicResources {
   create is RaiPolicyPropertiesBasicResourceOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiPolicyPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -86,7 +102,12 @@ interface RaiPolicyPropertiesBasicResources {
   delete is RaiPolicyPropertiesBasicResourceOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -97,11 +118,21 @@ interface RaiPolicyPropertiesBasicResources {
   list is RaiPolicyPropertiesBasicResourceOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>
   >;
 }
+
+/**
+ * RaiPolicyOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface RaiPolicyOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -135,6 +166,10 @@ interface RaiPolicyOps
       }
     > {}
 
+/**
+ * RaiPolicy is preview-only.
+ */
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface RaiPolicy {
   /**
@@ -150,7 +185,12 @@ interface RaiPolicy {
   create is RaiPolicyOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = RaiPolicyPropertiesBasicResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -163,7 +203,12 @@ interface RaiPolicy {
   delete is RaiPolicyOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     }
   >;
 
@@ -174,7 +219,12 @@ interface RaiPolicy {
   list is RaiPolicyOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
-      ...ProxyApiVersion;
+      /**
+       * Api version used by proxy call
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @query("proxy-api-version")
+      `proxy-api-version`?: string;
     },
     Response = ArmResponse<RaiPolicyPropertiesBasicResourceArmPaginatedResult>
   >;

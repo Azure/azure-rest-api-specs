@@ -94,7 +94,7 @@ interface DataContainers {
     DataContainer,
     Response = ArmResourceUpdatedResponse<DataContainer> | (ArmResourceCreatedResponse<
       DataContainer,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = DataContainer> &
+      LroHeaders = ArmAsyncOperationHeader<FinalResult = CodeContainer> &
         Azure.Core.Foundations.RetryAfterHeader
     > & {
       /**
