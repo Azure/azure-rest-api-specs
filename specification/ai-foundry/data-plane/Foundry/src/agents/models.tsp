@@ -75,9 +75,17 @@ model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }
 
+union AgentObjectType {
+  agent: "agent",
+  agentVersion: "agent.version",
+  agentDeleted: "agent.deleted",
+  agentVersionDeleted: "agent.version.deleted",
+  agentContainer: "agent.container",
+}
+
 model AgentObject {
   @doc("The object type, which is always 'agent'.")
-  object: "agent";
+  object: AgentObjectType.agent;
 
   @doc("The unique identifier of the agent.")
   id: string;
@@ -96,7 +104,7 @@ model AgentVersionObject {
   ...MetadataPropertyForResponse;
 
   @doc("The object type, which is always 'agent.version'.")
-  object: "agent.version";
+  object: AgentObjectType.agentVersion;
 
   @doc("The unique identifier of the agent version.")
   id: string;
@@ -188,7 +196,7 @@ model PromptAgentDefinition extends AgentDefinition {
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @doc("""
-    How the model should select which tool (or tools) to use when generating a response. 
+    How the model should select which tool (or tools) to use when generating a response.
     See the `tools` parameter to see how to specify which tools the model can call.
     """)
   tool_choice?: string | OpenAI.ToolChoiceParam;
@@ -266,7 +274,9 @@ model HostedAgentDefinition extends AgentDefinition {
 @doc("The container app agent definition.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 model ContainerAppAgentDefinition extends AgentDefinition {
   kind: AgentKind.container_app;
@@ -308,7 +318,7 @@ alias ListAgentQueryParameters = {
 @doc("A deleted agent Object")
 model DeleteAgentResponse {
   @doc("The object type. Always 'agent.deleted'.")
-  object: "agent.deleted";
+  object: AgentObjectType.agentDeleted;
 
   @doc("The name of the agent.")
   name: string;
@@ -319,8 +329,8 @@ model DeleteAgentResponse {
 
 @doc("A deleted agent version Object")
 model DeleteAgentVersionResponse {
-  @doc("The object type. Always 'agent.deleted'.")
-  object: "agent.version.deleted";
+  @doc("The object type. Always 'agent.version.deleted'.")
+  object: AgentObjectType.agentVersionDeleted;
 
   @doc("The name of the agent.")
   name: string;
@@ -358,12 +368,14 @@ model ToolArgumentBinding {
 @doc("The details of the container of a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 model AgentContainerObject {
   @doc("The object type, which is always 'agent.container'.")
   @visibility(Lifecycle.Read)
-  object: "agent.container";
+  object: AgentObjectType.agentContainer;
 
   @doc("The identifier of the container.")
   @visibility(Lifecycle.Read)
@@ -401,7 +413,9 @@ model AgentContainerObject {
 @doc("Detailed information about the container.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 model ContainerDetails {
   @doc("The provisioning state of the container.")
@@ -426,7 +440,9 @@ model ContainerDetails {
 @doc("Information about a container replica.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 model ContainerReplica {
   @doc("The name of the replica.")
@@ -442,7 +458,9 @@ model ContainerReplica {
 @doc("Status of the container of a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 union AgentContainerStatus {
   @doc("The container is starting.")
@@ -473,7 +491,9 @@ union AgentContainerStatus {
 @doc("The container operation for a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 model AgentContainerOperationObject {
   @doc("The ID of the container operation. This id is unique identifier across the system.")
@@ -498,7 +518,9 @@ model AgentContainerOperationObject {
 @doc("The error details of the container operation, if any.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 model AgentContainerOperationError {
   @doc("The error code of the container operation, if any.")
@@ -514,7 +536,9 @@ model AgentContainerOperationError {
 @doc("Status of the container operation for a specific version of an agent.")
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 union AgentContainerOperationStatus {
   @doc("The container operation is not started.")
@@ -532,7 +556,9 @@ union AgentContainerOperationStatus {
 
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 model AcceptedAgentContainerOperation {
   @statusCode
@@ -548,7 +574,9 @@ model AcceptedAgentContainerOperation {
 /** The type of logs to stream from a container. */
 @extension(
   "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview] }
+  #{
+    required_previews: #[FoundryFeaturesOptInKeys.container_agents_v1_preview],
+  }
 )
 union ContainerLogKind {
   /** Console logs from the container. */

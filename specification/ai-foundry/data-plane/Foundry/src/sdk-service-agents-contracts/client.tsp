@@ -3,6 +3,10 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
+namespace OpenAI {
+  alias ItemResourceType = OutputItemType;
+}
+
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" ""
 @clientNamespace("Azure.AI.Agents.Contracts.V2")
 namespace Azure.AI.Projects {
