@@ -91,6 +91,12 @@ model Receiver {
   syslog?: SyslogReceiver;
 
   @doc("OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers.")
+  @renamedFrom(Microsoft.Monitor.Versions.v2025_03_01_preview, "otlp")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  otlpv20241001preview?: OtlpReceiver;
+
+  @doc("OTLP receiver configurations. This field is mandatory for OTLP receivers.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   otlp?: OtlpReceiver;
 
   @doc("UDP receiver configurations. This field is mandatory for UDP receivers.")
@@ -105,6 +111,7 @@ union ReceiverType {
   Syslog: "Syslog",
 
   @doc("Receives data from azure monitor agent receiver.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   Ama: "Ama",
 
   @doc("Receives data from another pipeline group.")
@@ -168,6 +175,7 @@ model Exporter {
   azureMonitorWorkspaceLogs?: AzureMonitorWorkspaceLogsExporter;
 
   @doc("TCP based exporter. Used for pipelineGroup exporter.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   tcp?: TcpExporter;
 }
 
@@ -296,10 +304,10 @@ model TlsConfiguration {
   @doc("The TLS security mode for receivers using this configuration. Default is 'mutualTls'.")
   mode?: TlsMode = TlsMode.MutualTls;
 
-  @doc("TLS certificate and its private key.")
+  @doc("TLS certificate and its private key. If not specified, default TLS certificate is used.")
   tlsCertificate?: CertificateWithKey;
 
-  @doc("Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used. Ignored when mode is 'disabled' or 'serverOnly'.")
+  @doc("Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used.")
   clientCa?: CertificateSource;
 }
 

@@ -1,5 +1,5 @@
 {
-  "title": "Create a PipelineGroup instance using an otlp receiver with a custom TransformLanguage manipulation exporting to a custom table",
+  "title": "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage manipulation exporting to a custom table",
   "operationId": "PipelineGroups_CreateOrUpdate",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
@@ -19,44 +19,48 @@
       "properties": {
         "receivers": [
           {
-            "type": "OTLP",
-            "name": "otlp-receiver1",
-            "otlp": {
-              "endpoint": "0.0.0.0:4317"
+            "type": "Syslog",
+            "name": "syslog-receiver1",
+            "syslog": {
+              "endpoint": "0.0.0.0:514"
             }
           }
         ],
         "processors": [
           {
+            "type": "Microsoft-Syslog",
+            "name": "microsoft-syslog-transform1"
+          },
+          {
             "type": "TransformLanguage",
-            "name": "transform1",
+            "name": "additional-transform1",
             "transformLanguage": {
-              "transformStatement": "source | extend FooColumn = 'bar'"
+              "transformStatement": "source | where Facility == 'daemon' | extend FooColumn = 'bar'"
             }
           }
         ],
         "exporters": [
           {
             "type": "AzureMonitorWorkspaceLogs",
-            "name": "otlp-exporter1",
+            "name": "custom-syslog-exporter1",
             "azureMonitorWorkspaceLogs": {
               "api": {
                 "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                "stream": "Custom-OTLPTable_CL",
+                "stream": "Custom-SyslogTable_CL",
                 "dataCollectionRule": "dcr-00000000000000000000000000000000",
                 "schema": {
                   "recordMap": [
                     {
+                      "from": "attributes.TimeGenerated",
+                      "to": "TimeGenerated"
+                    },
+                    {
+                      "from": "attributes.Facility",
+                      "to": "Facility"
+                    },
+                    {
                       "from": "attributes.FooColumn",
                       "to": "FooColumn"
-                    },
-                    {
-                      "from": "body",
-                      "to": "Body"
-                    },
-                    {
-                      "from": "time_unix_nano",
-                      "to": "TimeGenerated"
                     }
                   ]
                 }
@@ -74,13 +78,14 @@
               "name": "MyPipelineForLogs1",
               "type": "Logs",
               "receivers": [
-                "otlp-receiver1"
+                "syslog-receiver1"
               ],
               "processors": [
-                "transform1"
+                "microsoft-syslog-transform1",
+                "additional-transform1"
               ],
               "exporters": [
-                "otlp-exporter1"
+                "custom-syslog-exporter1"
               ]
             }
           ]
@@ -107,44 +112,48 @@
           "provisioningState": "Accepted",
           "receivers": [
             {
-              "type": "OTLP",
-              "name": "otlp-receiver1",
-              "otlp": {
-                "endpoint": "0.0.0.0:4317"
+              "type": "Syslog",
+              "name": "syslog-receiver1",
+              "syslog": {
+                "endpoint": "0.0.0.0:514"
               }
             }
           ],
           "processors": [
             {
+              "type": "Microsoft-Syslog",
+              "name": "microsoft-syslog-transform1"
+            },
+            {
               "type": "TransformLanguage",
-              "name": "transform1",
+              "name": "additional-transform1",
               "transformLanguage": {
-                "transformStatement": "source | extend FooColumn = 'bar'"
+                "transformStatement": "source | where Facility == 'daemon' | extend FooColumn = 'bar'"
               }
             }
           ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
-              "name": "otlp-exporter1",
+              "name": "custom-syslog-exporter1",
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-OTLPTable_CL",
+                  "stream": "Custom-SyslogTable_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
                       {
+                        "from": "attributes.TimeGenerated",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "attributes.Facility",
+                        "to": "Facility"
+                      },
+                      {
                         "from": "attributes.FooColumn",
                         "to": "FooColumn"
-                      },
-                      {
-                        "from": "body",
-                        "to": "Body"
-                      },
-                      {
-                        "from": "time_unix_nano",
-                        "to": "TimeGenerated"
                       }
                     ]
                   }
@@ -162,13 +171,14 @@
                 "name": "MyPipelineForLogs1",
                 "type": "Logs",
                 "receivers": [
-                  "otlp-receiver1"
+                  "syslog-receiver1"
                 ],
                 "processors": [
-                  "transform1"
+                  "microsoft-syslog-transform1",
+                  "additional-transform1"
                 ],
                 "exporters": [
-                  "otlp-exporter1"
+                  "custom-syslog-exporter1"
                 ]
               }
             ]
@@ -202,44 +212,48 @@
           "provisioningState": "Succeeded",
           "receivers": [
             {
-              "type": "OTLP",
-              "name": "otlp-receiver1",
-              "otlp": {
-                "endpoint": "0.0.0.0:4317"
+              "type": "Syslog",
+              "name": "syslog-receiver1",
+              "syslog": {
+                "endpoint": "0.0.0.0:514"
               }
             }
           ],
           "processors": [
             {
+              "type": "Microsoft-Syslog",
+              "name": "microsoft-syslog-transform1"
+            },
+            {
               "type": "TransformLanguage",
-              "name": "transform1",
+              "name": "additional-transform1",
               "transformLanguage": {
-                "transformStatement": "source | extend FooColumn = 'bar'"
+                "transformStatement": "source | where Facility == 'daemon' | extend FooColumn = 'bar'"
               }
             }
           ],
           "exporters": [
             {
               "type": "AzureMonitorWorkspaceLogs",
-              "name": "otlp-exporter1",
+              "name": "custom-syslog-exporter1",
               "azureMonitorWorkspaceLogs": {
                 "api": {
                   "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
-                  "stream": "Custom-OTLPTable_CL",
+                  "stream": "Custom-SyslogTable_CL",
                   "dataCollectionRule": "dcr-00000000000000000000000000000000",
                   "schema": {
                     "recordMap": [
                       {
+                        "from": "attributes.TimeGenerated",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "attributes.Facility",
+                        "to": "Facility"
+                      },
+                      {
                         "from": "attributes.FooColumn",
                         "to": "FooColumn"
-                      },
-                      {
-                        "from": "body",
-                        "to": "Body"
-                      },
-                      {
-                        "from": "time_unix_nano",
-                        "to": "TimeGenerated"
                       }
                     ]
                   }
@@ -257,13 +271,14 @@
                 "name": "MyPipelineForLogs1",
                 "type": "Logs",
                 "receivers": [
-                  "otlp-receiver1"
+                  "syslog-receiver1"
                 ],
                 "processors": [
-                  "transform1"
+                  "microsoft-syslog-transform1",
+                  "additional-transform1"
                 ],
                 "exporters": [
-                  "otlp-exporter1"
+                  "custom-syslog-exporter1"
                 ]
               }
             ]
