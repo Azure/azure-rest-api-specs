@@ -1898,6 +1898,19 @@
           "type": "string",
           "description": "Initial sponsor group ID (required for agent identity)"
         }
+      },
+      "required": [
+        "initialSponsorGroupId"
+      ]
+    },
+    "AgentIdentityPatch": {
+      "type": "object",
+      "description": "Agent identity configuration for PATCH requests",
+      "properties": {
+        "initialSponsorGroupId": {
+          "type": "string",
+          "description": "Initial sponsor group ID (required for PUT but optional for PATCH)"
+        }
       }
     },
     "AgentListResult": {
@@ -1972,8 +1985,54 @@
           "description": "The managed service identities assigned to this resource."
         },
         "properties": {
-          "$ref": "#/definitions/AgentProperties",
+          "$ref": "#/definitions/AgentPatchProperties",
           "description": "Agent specific properties"
+        }
+      }
+    },
+    "AgentPatchProperties": {
+      "type": "object",
+      "description": "Agent specific properties for PATCH requests.\n\nPATCH request bodies must not include required properties and should not include read-only properties.",
+      "properties": {
+        "agentSpaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The agent space ID referenced by the agent",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.App/agentSpaces"
+              }
+            ]
+          }
+        },
+        "knowledgeGraphConfiguration": {
+          "$ref": "#/definitions/KnowledgeGraphConfiguration",
+          "description": "Knowledge graph configuration for agent"
+        },
+        "actionConfiguration": {
+          "$ref": "#/definitions/ActionConfiguration",
+          "description": "Configuration for action"
+        },
+        "logConfiguration": {
+          "$ref": "#/definitions/LogConfiguration",
+          "description": "Log configurations"
+        },
+        "incidentManagementConfiguration": {
+          "$ref": "#/definitions/IncidentManagementConfiguration",
+          "description": "Incident management configurations"
+        },
+        "upgradeChannel": {
+          "$ref": "#/definitions/UpgradeChannel",
+          "description": "The upgrade channel of the agent"
+        },
+        "agentIdentity": {
+          "$ref": "#/definitions/AgentIdentityPatch",
+          "description": "Agent identity configuration for accessing resources"
+        },
+        "defaultModel": {
+          "$ref": "#/definitions/DefaultModel",
+          "description": "Default AI model configuration for the agent"
         }
       }
     },
@@ -2135,21 +2194,27 @@
       "properties": {
         "isCompliant": {
           "type": "boolean",
-          "description": "Indicates whether the Agent Space is compliant"
+          "description": "Indicates whether the Agent Space is compliant",
+          "readOnly": true
         },
         "complianceIssues": {
           "type": "array",
           "description": "List of compliance issues found in the Agent Space",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         },
         "lastComplianceCheck": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of the last compliance check"
+          "description": "Timestamp of the last compliance check",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "isCompliant"
+      ]
     },
     "AgentSpaceConnector": {
       "type": "object",
@@ -2290,8 +2355,31 @@
           "description": "The managed service identities assigned to this resource."
         },
         "properties": {
-          "$ref": "#/definitions/AgentSpaceProperties",
+          "$ref": "#/definitions/AgentSpacePatchProperties",
           "description": "Agent Space specific properties"
+        }
+      }
+    },
+    "AgentSpacePatchProperties": {
+      "type": "object",
+      "description": "Agent Space specific properties for PATCH requests.\n\nPATCH request bodies must not include required properties and should not include read-only properties.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the Agent Space"
+        },
+        "policies": {
+          "$ref": "#/definitions/AgentSpacePoliciesPatch",
+          "description": "Policy configurations for the Agent Space"
+        },
+        "maxAgentCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of agents allowed in the Agent Space"
+        },
+        "serviceTreeId": {
+          "type": "string",
+          "description": "Universal unique ID (UUID) of the Service Tree associated with this Agent Space"
         }
       }
     },
@@ -2301,6 +2389,16 @@
       "properties": {
         "genevaActionsConfiguration": {
           "$ref": "#/definitions/GenevaActionsPolicy",
+          "description": "Configuration for Geneva Actions policy"
+        }
+      }
+    },
+    "AgentSpacePoliciesPatch": {
+      "type": "object",
+      "description": "Policy configurations for an Agent Space (PATCH request model)",
+      "properties": {
+        "genevaActionsConfiguration": {
+          "$ref": "#/definitions/GenevaActionsPolicyPatch",
           "description": "Configuration for Geneva Actions policy"
         }
       }
@@ -2651,7 +2749,48 @@
         },
         "certificateSubjectAlternativeName": {
           "type": "string",
-          "description": "Subject alternative name of the certificate used for authentication"
+          "description": "Subject alternative name of the certificate used for authentication",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "extensionName"
+      ]
+    },
+    "GenevaActionsPolicyPatch": {
+      "type": "object",
+      "description": "Geneva Actions policy configuration for Agent Space (PATCH request model)",
+      "properties": {
+        "acisEndpoint": {
+          "type": "string",
+          "description": "ACIS (Azure Container Instance Service) endpoint URL"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID for authentication"
+        },
+        "certificateSubjectName": {
+          "type": "string",
+          "description": "Subject name of the certificate used for authentication"
+        },
+        "authenticationMode": {
+          "$ref": "#/definitions/GenevaActionAuthenticationMode",
+          "description": "Authentication mode for Geneva Actions"
+        },
+        "extensionName": {
+          "type": "string",
+          "description": "Name of the Geneva extension"
+        },
+        "allowedActions": {
+          "type": "array",
+          "description": "Collection of allowed Geneva actions",
+          "items": {
+            "$ref": "#/definitions/GenevaActionConfig"
+          },
+          "x-ms-identifiers": [
+            "actionName",
+            "extension"
+          ]
         }
       }
     },
@@ -2795,7 +2934,12 @@
           "type": "boolean",
           "description": "Indicates whether this is the default model"
         }
-      }
+      },
+      "required": [
+        "provider",
+        "model",
+        "default"
+      ]
     },
     "UpgradeChannel": {
       "type": "string",

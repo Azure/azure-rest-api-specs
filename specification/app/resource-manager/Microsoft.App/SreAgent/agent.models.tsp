@@ -15,7 +15,42 @@ model AgentPatch {
   ...ManagedServiceIdentityProperty;
 
   /** Agent specific properties */
-  properties?: AgentProperties;
+  properties?: AgentPatchProperties;
+}
+
+/**
+ * Agent specific properties for PATCH requests.
+ *
+ * PATCH request bodies must not include required properties and should not include read-only properties.
+ */
+model AgentPatchProperties {
+  /** The agent space ID referenced by the agent */
+  agentSpaceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.App/agentSpaces";
+    }
+  ]>;
+
+  /** Knowledge graph configuration for agent */
+  knowledgeGraphConfiguration?: KnowledgeGraphConfiguration;
+
+  /** Configuration for action */
+  actionConfiguration?: ActionConfiguration;
+
+  /** Log configurations */
+  logConfiguration?: LogConfiguration;
+
+  /** Incident management configurations */
+  incidentManagementConfiguration?: IncidentManagementConfiguration;
+
+  /** The upgrade channel of the agent */
+  upgradeChannel?: UpgradeChannel;
+
+  /** Agent identity configuration for accessing resources */
+  agentIdentity?: AgentIdentityPatch;
+
+  /** Default AI model configuration for the agent */
+  defaultModel?: DefaultModel;
 }
 
 /** Properties of the Agent */
@@ -120,6 +155,12 @@ model AgentIdentity {
   clientId?: string;
 
   /** Initial sponsor group ID (required for agent identity) */
+  initialSponsorGroupId: string;
+}
+
+/** Agent identity configuration for PATCH requests */
+model AgentIdentityPatch {
+  /** Initial sponsor group ID (required for PUT but optional for PATCH) */
   initialSponsorGroupId?: string;
 }
 

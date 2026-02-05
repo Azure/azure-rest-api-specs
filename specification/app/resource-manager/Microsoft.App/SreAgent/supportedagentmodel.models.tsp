@@ -6,13 +6,13 @@ namespace Microsoft.App;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only resource. No provisioning state provided."
 model SupportedAgentModelProperties {
   /** The provider name (e.g., MicrosoftFoundry, Anthropic) */
-  provider?: string;
+  provider: string;
 
   /** The display name of the provider (e.g., Microsoft Foundry, Anthropic) */
   providerDisplayName?: string;
 
   /** The model name (e.g., gpt-5.2, claude-sonnet-4-5) */
-  `model`?: string;
+  `model`: string;
 
   /** The display name of the model (e.g., GPT-5.2, Claude Sonnet 4.5) */
   modelDisplayName?: string;
@@ -21,5 +21,5 @@ model SupportedAgentModelProperties {
   multiplier?: string;
 
   /** Indicates whether this is the default model */
-  default?: boolean;
+  default: boolean;
 }

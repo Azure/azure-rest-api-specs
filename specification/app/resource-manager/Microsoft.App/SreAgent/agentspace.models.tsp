@@ -15,7 +15,26 @@ model AgentSpacePatch {
   ...ManagedServiceIdentityProperty;
 
   /** Agent Space specific properties */
-  properties?: AgentSpaceProperties;
+  properties?: AgentSpacePatchProperties;
+}
+
+/**
+ * Agent Space specific properties for PATCH requests.
+ *
+ * PATCH request bodies must not include required properties and should not include read-only properties.
+ */
+model AgentSpacePatchProperties {
+  /** Description of the Agent Space */
+  description?: string;
+
+  /** Policy configurations for the Agent Space */
+  policies?: AgentSpacePoliciesPatch;
+
+  /** Maximum number of agents allowed in the Agent Space */
+  maxAgentCount?: int32;
+
+  /** Universal unique ID (UUID) of the Service Tree associated with this Agent Space */
+  serviceTreeId?: string;
 }
 
 /** Agent Space specific properties */
@@ -78,12 +97,15 @@ union AgentSpaceProvisioningState {
 /** Compliance status of the Agent Space */
 model AgentSpaceComplianceStatus {
   /** Indicates whether the Agent Space is compliant */
-  isCompliant?: boolean;
+  @visibility(Lifecycle.Read)
+  isCompliant: boolean;
 
   /** List of compliance issues found in the Agent Space */
+  @visibility(Lifecycle.Read)
   complianceIssues?: string[];
 
   /** Timestamp of the last compliance check */
+  @visibility(Lifecycle.Read)
   lastComplianceCheck?: utcDateTime;
 }
 
@@ -93,8 +115,40 @@ model AgentSpacePolicies {
   genevaActionsConfiguration?: GenevaActionsPolicy;
 }
 
+/** Policy configurations for an Agent Space (PATCH request model) */
+model AgentSpacePoliciesPatch {
+  /** Configuration for Geneva Actions policy */
+  genevaActionsConfiguration?: GenevaActionsPolicyPatch;
+}
+
 /** Geneva Actions policy configuration for Agent Space */
 model GenevaActionsPolicy {
+  /** ACIS (Azure Container Instance Service) endpoint URL */
+  acisEndpoint?: string;
+
+  /** Client ID for authentication */
+  clientId?: string;
+
+  /** Subject name of the certificate used for authentication */
+  certificateSubjectName?: string;
+
+  /** Authentication mode for Geneva Actions */
+  authenticationMode?: GenevaActionAuthenticationMode;
+
+  /** Name of the Geneva extension */
+  extensionName: string;
+
+  /** Collection of allowed Geneva actions */
+  @identifiers(#["actionName", "extension"])
+  allowedActions?: GenevaActionConfig[];
+
+  /** Subject alternative name of the certificate used for authentication */
+  @visibility(Lifecycle.Read)
+  certificateSubjectAlternativeName?: string;
+}
+
+/** Geneva Actions policy configuration for Agent Space (PATCH request model) */
+model GenevaActionsPolicyPatch {
   /** ACIS (Azure Container Instance Service) endpoint URL */
   acisEndpoint?: string;
 
@@ -113,9 +167,6 @@ model GenevaActionsPolicy {
   /** Collection of allowed Geneva actions */
   @identifiers(#["actionName", "extension"])
   allowedActions?: GenevaActionConfig[];
-
-  /** Subject alternative name of the certificate used for authentication */
-  certificateSubjectAlternativeName?: string;
 }
 
 /** Geneva Action authentication mode */
