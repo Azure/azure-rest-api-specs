@@ -113,7 +113,7 @@ describe("Utils", () => {
     });
 
     test("handles empty Map", () => {
-      const map = new Map();
+      const map = new Map<string, string>();
       const result = mapToObject(map);
       expect(result).toEqual({});
     });
@@ -145,7 +145,6 @@ describe("Utils", () => {
 
     test("normalizePath in Windows", () => {
       vi.spyOn(process, "platform", "get").mockReturnValue("win32");
-      /* eslint-disable unicorn/prefer-string-raw */
       const path = "specification\\contosowidgetmanager\\Contoso.WidgetManager.Shared\\main.tsp";
       const convertPath =
         "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/main.tsp";

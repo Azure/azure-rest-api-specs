@@ -33,6 +33,11 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v1_stable)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v1_stable: "2024-11-01",
+
+  @doc("Version 3 preview with Azure native VM support.")
+  @useDependency(LiftrBase.Versions.v2026_01_01_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v2026_01_01_preview: "2026-01-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -911,4 +916,206 @@ interface AvsVmVolumes {
 model AzureProperties {
   @doc("Azure Volume Group ID assigned to the volume.")
   volumeGroupInternalId: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Volume Group resource")
+@parentResource(StoragePool)
+model VolumeGroup is TrackedResource<VolumeGroupProperties> {
+  @doc("Name of the volume group")
+  @segment("volumeGroups")
+  @key("volumeGroupName")
+  @visibility(Lifecycle.Read)
+  @path
+  @minLength(2)
+  @maxLength(40)
+  @pattern("^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$")
+  name: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Properties of a volume group")
+model VolumeGroupProperties {
+  @doc("Pure Storage's internal ID of the storage pool")
+  @visibility(Lifecycle.Read)
+  storagePoolInternalId?: string;
+
+  @doc("Pure Storage's internal ID of the volume group")
+  @visibility(Lifecycle.Read)
+  volumeGroupInternalId?: string;
+
+  @doc("Azure resource ID of the source volume group for cloning")
+  @visibility(Lifecycle.Create)
+  sourceVolumeGroupResourceId?: string;
+
+  @doc("Performance parameters for the volume group")
+  performanceParameters: PerformanceParameters;
+
+  @doc("Protection parameters for the volume group")
+  protectionParameters: ProtectionParameters;
+
+  @doc("Provisioning state of the resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Performance parameters for volume group")
+model PerformanceParameters {
+  @doc("Bandwidth limit in MB per second")
+  bandwidthLimitMbPerSec?: int64;
+
+  @doc("IOPS limit")
+  iopsLimit?: int64;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Protection parameters for volume group")
+model ProtectionParameters {
+  @doc("Retention period for snapshots in ISO 8601 duration format")
+  retention?: string;
+
+  @doc("Snapshot frequency in ISO 8601 duration format")
+  frequency?: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("ISCSI connection endpoint details")
+model IscsiEndpoint {
+  @doc("IP address of the endpoint")
+  ip: string;
+
+  @doc("Port number of the endpoint")
+  port: int32;
+
+  @doc("IQN (iSCSI Qualified Name) of the endpoint")
+  iqn: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("ISCSI connection parameters")
+model IscsiConnectionParameters {
+  @doc("List of ISCSI endpoints for connection")
+  @identifiers(#[])
+  endpoints: IscsiEndpoint[];
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Connection parameters response")
+model ConnectionParametersResponse {
+  @doc("ISCSI connection parameters")
+  iscsi: IscsiConnectionParameters;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Volume group status information")
+model VolumeGroupStatus {
+  @doc("Storage space usage for the volume group")
+  space: Space;
+
+  @doc("Number of hosts currently connected to the volume group")
+  connectedHostCount: int32;
+}
+
+@added(Versions.v2026_01_01_preview)
+@armResourceOperations
+interface VolumeGroups {
+  @doc("Get a volume group")
+  get is ArmResourceRead<VolumeGroup>;
+  @doc("Create a volume group")
+  create is ArmResourceCreateOrUpdateAsync<VolumeGroup>;
+  @doc("Update a volume group")
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    VolumeGroup,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      VolumeGroup,
+      VolumeGroupProperties
+    >
+  >;
+  @doc("Delete a volume group")
+  delete is ArmResourceDeleteWithoutOkAsync<VolumeGroup>;
+  @doc("List volume groups by storage pool")
+  listByStoragePool is ArmResourceListByParent<VolumeGroup>;
+
+  @doc("Get connection parameters for ISCSI connection to the volume group")
+  @armResourceAction(VolumeGroup)
+  @action("getConnectionParameters")
+  @post
+  getConnectionParameters(
+    ...ResourceInstanceParameters<VolumeGroup>,
+  ): ArmResponse<ConnectionParametersResponse> | ErrorResponse;
+
+  @doc("Get current status and space information of the volume group")
+  @armResourceAction(VolumeGroup)
+  @action("getStatus")
+  @post
+  getStatus(
+    ...ResourceInstanceParameters<VolumeGroup>,
+  ): ArmResponse<VolumeGroupStatus> | ErrorResponse;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Azure Volume resource")
+@parentResource(VolumeGroup)
+model Volume is ProxyResource<AzureVolumeProperties> {
+  @doc("Name of the volume")
+  @segment("volumes")
+  @key("volumeName")
+  @visibility(Lifecycle.Read)
+  @path
+  @minLength(2)
+  @maxLength(40)
+  @pattern("^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$")
+  name: string;
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Properties of an Azure volume")
+model AzureVolumeProperties {
+  @doc("Storage space usage for the volume")
+  @visibility(Lifecycle.Read)
+  space?: Space;
+
+  @doc("Currently provisioned size of the volume, in bytes")
+  @minValue(1048576)
+  provisionedSize?: int64;
+
+  @doc("Serial number of the volume")
+  @visibility(Lifecycle.Read)
+  serialNumber?: string;
+
+  @doc("Volume creation date, as an RFC 3339 timestamp")
+  @visibility(Lifecycle.Read)
+  createdAt?: string;
+
+  @doc("Azure resource ID of the source volume for cloning")
+  @visibility(Lifecycle.Create)
+  sourceVolumeResourceId?: string;
+
+  @doc("Provisioning state of the resource")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_01_01_preview)
+@armResourceOperations
+interface Volumes {
+  @doc("Get a volume")
+  get is ArmResourceRead<Volume>;
+  @doc("Create a volume")
+  create is ArmResourceCreateOrUpdateAsync<Volume>;
+  @doc("Update a volume")
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    Volume,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Volume,
+      AzureVolumeProperties
+    >
+  >;
+  @doc("Delete a volume")
+  delete is ArmResourceDeleteWithoutOkAsync<Volume>;
+  @doc("List volumes by volume group")
+  listByVolumeGroup is ArmResourceListByParent<Volume>;
 }

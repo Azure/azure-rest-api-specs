@@ -3905,6 +3905,12 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
    * The virtual machine scale set zones.
    */
   zones?: string[];
+
+  /**
+   * User-defined constraints for virtual machine scale set hardware placement.
+   */
+  @added(Versions.v2025_11_01)
+  placement?: Placement;
 }
 
 /**
@@ -5175,7 +5181,7 @@ model VirtualMachineScaleSetVMInstanceView {
   placementGroupId?: string;
 
   /**
-   * Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).
+   * Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://learn.microsoft.com/previous-versions/azure/virtual-machines/linux/infrastructure-example?toc=%2Fazure%2Fvirtual-machines%2Flinux%2Ftoc.json#1-naming-conventions).
    */
   computerName?: string;
 
@@ -5421,7 +5427,7 @@ model HardwareProfile {
   vmSizeProperties?: VMSizeProperties;
 
   /**
-   * Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified, but not both.
+   * Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified in the request, but not both. When vmSizePolicy is used, the allocated VM size will be returned in the vmSize property in the response.
    */
   @added(Versions.v2025_11_01)
   vmSizePolicy?: VMSizePolicy;
@@ -5456,6 +5462,28 @@ model StorageProfile {
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
   alignRegionalDisksToVMZone?: boolean;
+}
+
+/**
+ * Describes zone movement configuration. This allows VM to be moved across availability zones during an outage.
+ */
+@added(Versions.v2025_11_01)
+model ZoneMovement {
+  /**
+   * Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another.
+   */
+  isEnabled?: boolean;
+}
+
+/**
+ * Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.
+ */
+@added(Versions.v2025_11_01)
+model ResiliencyProfile {
+  /**
+   * Zone movement configuration.
+   */
+  zoneMovement?: ZoneMovement;
 }
 
 /**
@@ -6469,6 +6497,12 @@ model VirtualMachineProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Resiliency profile for the virtual machine.
+   */
+  @added(Versions.v2025_11_01)
+  resiliencyProfile?: ResiliencyProfile;
 }
 
 /**

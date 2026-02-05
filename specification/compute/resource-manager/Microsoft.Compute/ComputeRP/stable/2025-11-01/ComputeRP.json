@@ -2682,6 +2682,31 @@
             "description": "The name of the capacity reservation group.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "virtualMachineScaleSetVMs/$ref",
+              "virtualMachines/$ref"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypesForGetCapacityReservationGroups",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "virtualMachineScaleSetVMs/$ref",
+                  "value": "virtualMachineScaleSetVMs/$ref"
+                },
+                {
+                  "name": "virtualMachines/$ref",
+                  "value": "virtualMachines/$ref"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -10287,6 +10312,9 @@
           "Create a vm with premium storage.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPremiumStorage.json"
           },
+          "Create a vm with resiliency profile and zone movement enabled.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithZoneMovementEnabled.json"
+          },
           "Create a vm with ssh authentication.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSshAuthentication.json"
           },
@@ -10769,6 +10797,13 @@
             "description": "Optional parameter to hibernate a virtual machine.",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "forceDeallocate",
+            "in": "query",
+            "description": "Optional parameter to force deallocate a virtual machine. Default is false.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -10797,11 +10832,14 @@
           }
         },
         "x-ms-examples": {
-          "VirtualMachine_Deallocate_MaximumSet_Gen": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Deallocate_MaximumSet_Gen.json"
-          },
           "VirtualMachine_Deallocate_MinimumSet_Gen": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Deallocate_MinimumSet_Gen.json"
+          },
+          "VirtualMachine_Deallocate_WithForceDeallocate": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Deallocate_WithForceDeallocate.json"
+          },
+          "VirtualMachine_Deallocate_WithHibernation": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Deallocate_WithHibernation.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14388,7 +14426,7 @@
         },
         "vmSizePolicy": {
           "$ref": "#/definitions/VMSizePolicy",
-          "description": "Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified, but not both."
+          "description": "Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified in the request, but not both. When vmSizePolicy is used, the allocated VM size will be returned in the vmSize property in the response."
         }
       }
     },
@@ -16647,6 +16685,16 @@
         "zoneAllocationPolicy": {
           "$ref": "#/definitions/ZoneAllocationPolicy",
           "description": "The configuration parameters used while performing zone allocation."
+        }
+      }
+    },
+    "ResiliencyProfile": {
+      "type": "object",
+      "description": "Gets resiliency solutions enabled on the VM. This includes backup or disaster recovery solutions.",
+      "properties": {
+        "zoneMovement": {
+          "$ref": "#/definitions/ZoneMovement",
+          "description": "Zone movement configuration."
         }
       }
     },
@@ -20261,6 +20309,10 @@
           "format": "date-time",
           "description": "Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01.",
           "readOnly": true
+        },
+        "resiliencyProfile": {
+          "$ref": "#/definitions/ResiliencyProfile",
+          "description": "Resiliency profile for the virtual machine."
         }
       }
     },
@@ -20611,7 +20663,7 @@
         },
         "placement": {
           "$ref": "#/definitions/Placement",
-          "description": "Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. This property cannot be changed once VMSS is provisioned. Minimum api-version: 2025-04-01."
+          "description": "Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. Minimum api-version: 2025-04-01."
         }
       },
       "allOf": [
@@ -21716,6 +21768,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "placement": {
+          "$ref": "#/definitions/Placement",
+          "description": "User-defined constraints for virtual machine scale set hardware placement."
         }
       },
       "allOf": [
@@ -22415,7 +22471,7 @@
         },
         "computerName": {
           "type": "string",
-          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
+          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://learn.microsoft.com/previous-versions/azure/virtual-machines/linux/infrastructure-example?toc=%2Fazure%2Fvirtual-machines%2Flinux%2Ftoc.json#1-naming-conventions)."
         },
         "osName": {
           "type": "string",
@@ -23963,6 +24019,16 @@
         "maxInstancePercentPerZonePolicy": {
           "$ref": "#/definitions/MaxInstancePercentPerZonePolicy",
           "description": "The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set."
+        }
+      }
+    },
+    "ZoneMovement": {
+      "type": "object",
+      "description": "Describes zone movement configuration. This allows VM to be moved across availability zones during an outage.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates if zone movement is enabled. By default isEnabled is set to false i.e VM can't be moved from one zone to another."
         }
       }
     },
