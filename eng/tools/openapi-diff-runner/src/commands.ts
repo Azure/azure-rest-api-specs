@@ -79,11 +79,11 @@ export async function validateBreakingChange(context: Context): Promise<number> 
 
   const newExistingVersionDirs: string[] = [];
 
-  const addedVersionDirs = [...new Set(newSwaggers.map((f: string) => path.dirname(f)))];
+  const addedVersionDirs = [...newSwaggers.map((f: string) => path.dirname(f))];
 
-  for (const dir of addedVersionDirs) {
-    if (existsSync(path.join(context.prInfo!.tempRepoFolder, dir))) {
-      newExistingVersionDirs.push(dir);
+  for (const f of addedVersionDirs) {
+    if (existsSync(path.join(context.prInfo!.tempRepoFolder, f))) {
+      newExistingVersionDirs.push(f);
     }
   }
   // new swaggers in the existing version folder
@@ -91,11 +91,8 @@ export async function validateBreakingChange(context: Context): Promise<number> 
     newExistingVersionDirs.includes(path.dirname(f)),
   );
 
-  // Filter out deletions that are part of a rename (they'll be handled via the rename logic)
-  const renameFromFiles = new Set(renamedSwaggers.map((r) => r.from));
-  const needCompareDeletedSwaggers: string[] = deletedSwaggers.filter(
-    (f: string) =>
-      existsSync(path.join(context.prInfo!.tempRepoFolder, f)) && !renameFromFiles.has(f),
+  const needCompareDeletedSwaggers: string[] = deletedSwaggers.filter((f: string) =>
+    existsSync(path.join(context.prInfo!.tempRepoFolder, f)),
   );
 
   // new swaggers in the new version folder
