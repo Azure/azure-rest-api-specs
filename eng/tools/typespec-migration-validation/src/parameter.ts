@@ -109,5 +109,7 @@ export function getOriginalParameter(refPath: string, originalDocument?: OpenAPI
     const parameterName = refPath.substring(refPath.indexOf("#/parameters/") + "#/parameters/".length);
     return originalDocument?.parameters?.[parameterName];
   }
-  else return undefined;
+  else {
+    return undefined;
+  }
 }
