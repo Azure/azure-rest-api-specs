@@ -54,19 +54,28 @@ union ProvisioningState {
   string,
 }
 
+/** The response containing the policies enforced in the tenant where the resilience service resides */
+model ResilienceServicePolicyResponse {
+  /** The list of policies */
+  policies: Policy[];
+}
+
 /** A policy enforced in the tenant where the resilience service resides */
 model Policy {
   /** The unique identifier of the policy */
   id: string;
 
+  /** The type of the policy */
+  type: PolicyType;
+
   /** The definitions of the policy */
   definition: string[];
 
   /** The description of the policy */
-  description: string;
+  description?: string;
 
   /** The display name of the policy */
-  displayName: string;
+  displayName?: string;
 
   /** Indicates if the policy is the organization default */
   isOrganizationDefault: boolean;
@@ -75,19 +84,21 @@ model Policy {
   deletedDateTime?: utcDateTime;
 }
 
-/** The response containing the policies enforced in the tenant where the resilience service resides */
-model ResilienceServicePolicyResponse {
-  /** The list of multi conditional access policies */
-  multiConditionalAccessPolicies: Policy[];
+/** The type of policy */
+union PolicyType {
+  /** Conditional Access policy */
+  ConditionalAccess: "ConditionalAccess",
 
-  /** The list of user credential policies */
-  userCredentialPolicies: Policy[];
+  /** Authentication Strength policy */
+  AuthenticationStrength: "AuthenticationStrength",
 
-  /** The list of security risk policies */
-  securityRiskPolicies: Policy[];
+  /** Security Risk policy */
+  SecurityRisk: "SecurityRisk",
 
-  /** The list of authentication strength policies */
-  authenticationStrengthPolicies: Policy[];
+  /** User Credential policy */
+  UserCredential: "UserCredential",
+
+  string,
 }
 
 @armResourceOperations

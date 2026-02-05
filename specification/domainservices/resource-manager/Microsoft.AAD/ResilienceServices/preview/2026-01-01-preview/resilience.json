@@ -466,6 +466,10 @@
           "type": "string",
           "description": "The unique identifier of the policy"
         },
+        "type": {
+          "$ref": "#/definitions/PolicyType",
+          "description": "The type of the policy"
+        },
         "definition": {
           "type": "array",
           "description": "The definitions of the policy",
@@ -493,11 +497,46 @@
       },
       "required": [
         "id",
+        "type",
         "definition",
-        "description",
-        "displayName",
         "isOrganizationDefault"
       ]
+    },
+    "PolicyType": {
+      "type": "string",
+      "description": "The type of policy",
+      "enum": [
+        "ConditionalAccess",
+        "AuthenticationStrength",
+        "SecurityRisk",
+        "UserCredential"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ConditionalAccess",
+            "value": "ConditionalAccess",
+            "description": "Conditional Access policy"
+          },
+          {
+            "name": "AuthenticationStrength",
+            "value": "AuthenticationStrength",
+            "description": "Authentication Strength policy"
+          },
+          {
+            "name": "SecurityRisk",
+            "value": "SecurityRisk",
+            "description": "Security Risk policy"
+          },
+          {
+            "name": "UserCredential",
+            "value": "UserCredential",
+            "description": "User Credential policy"
+          }
+        ]
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -629,40 +668,16 @@
       "type": "object",
       "description": "The response containing the policies enforced in the tenant where the resilience service resides",
       "properties": {
-        "multiConditionalAccessPolicies": {
+        "policies": {
           "type": "array",
-          "description": "The list of multi conditional access policies",
-          "items": {
-            "$ref": "#/definitions/Policy"
-          }
-        },
-        "userCredentialPolicies": {
-          "type": "array",
-          "description": "The list of user credential policies",
-          "items": {
-            "$ref": "#/definitions/Policy"
-          }
-        },
-        "securityRiskPolicies": {
-          "type": "array",
-          "description": "The list of security risk policies",
-          "items": {
-            "$ref": "#/definitions/Policy"
-          }
-        },
-        "authenticationStrengthPolicies": {
-          "type": "array",
-          "description": "The list of authentication strength policies",
+          "description": "The list of policies",
           "items": {
             "$ref": "#/definitions/Policy"
           }
         }
       },
       "required": [
-        "multiConditionalAccessPolicies",
-        "userCredentialPolicies",
-        "securityRiskPolicies",
-        "authenticationStrengthPolicies"
+        "policies"
       ]
     },
     "ResilienceServiceUpdate": {
