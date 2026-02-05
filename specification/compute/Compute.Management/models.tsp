@@ -1239,12 +1239,6 @@ model VMScaleSetLifecycleHookEventTargetResource {
    * State of the lifecycle hook for the target resource. The customer can patch this property to move the lifecycle hook to a terminal state.
    */
   actionState?: LifecycleHookActionState;
-
-  /**
-   * Additional key-value pairs set for the target resource that gives customer some useful context/data.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  additionalContext?: Record<string>;
 }
 
 /**
@@ -1289,12 +1283,23 @@ model VMScaleSetLifecycleHookEventProperties {
    * Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  additionalContext?: Record<string>;
+  additionalContext?: VMScaleSetLifecycleHookEventAdditionalContext;
 
   /**
    * Specifies the state of the virtual machine scale set lifecycle hook event.
    */
   state?: VMScaleSetLifecycleHookEventState;
+}
+
+/**
+ * Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.
+ */
+@added(Versions.v2025_11_01)
+model VMScaleSetLifecycleHookEventAdditionalContext {
+  /**
+   * Denotes the priority of the virtual machine scale set lifecycle hook event.
+   */
+  priority?: string;
 }
 
 /**
@@ -1321,6 +1326,7 @@ union VMScaleSetLifecycleHookEventType {
  * Specifies information about the virtual machine scale set lifecycle hook event.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
 @added(Versions.v2025_11_01)
 model VMScaleSetLifecycleHookEventUpdate extends UpdateResource {
   /**

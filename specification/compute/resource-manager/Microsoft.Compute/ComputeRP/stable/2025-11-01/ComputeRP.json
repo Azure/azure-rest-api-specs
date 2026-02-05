@@ -18788,6 +18788,16 @@
         }
       ]
     },
+    "VMScaleSetLifecycleHookEventAdditionalContext": {
+      "type": "object",
+      "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.",
+      "properties": {
+        "priority": {
+          "type": "string",
+          "description": "Denotes the priority of the virtual machine scale set lifecycle hook event."
+        }
+      }
+    },
     "VMScaleSetLifecycleHookEventListResult": {
       "type": "object",
       "description": "The List virtual machine scale set lifecycle hook events operation response.",
@@ -18848,11 +18858,8 @@
           ]
         },
         "additionalContext": {
-          "type": "object",
-          "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventAdditionalContext",
+          "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data."
         },
         "state": {
           "$ref": "#/definitions/VMScaleSetLifecycleHookEventState",
@@ -18895,13 +18902,6 @@
         "actionState": {
           "$ref": "#/definitions/LifecycleHookActionState",
           "description": "State of the lifecycle hook for the target resource. The customer can patch this property to move the lifecycle hook to a terminal state."
-        },
-        "additionalContext": {
-          "type": "object",
-          "description": "Additional key-value pairs set for the target resource that gives customer some useful context/data.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },

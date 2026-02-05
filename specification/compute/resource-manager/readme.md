@@ -289,6 +289,11 @@ directive:
   - suppress: ResourceNameRestriction
     from: availabilitySet.json
     reason: there is no availability set naming requirement. It only follows ARM resource naming requirement.
+  - suppress: ArmResourcePropertiesBag
+    reason: Lifecycle Hook Event is a notification event, created by the platform. The customer does not create/delete the resource. The "type" property is a defined enum with specified possible values.
+    from: ComputeRP.json
+    where:
+      - $.definitions.VMScaleSetLifecycleHookEvent
 
 suppressions:
   - code: OperationsAPIImplementation
