@@ -123,6 +123,9 @@
             "required": false,
             "type": "string",
             "description": "Expands referenced resources."
+          },
+          { 
+            "$ref": "#/parameters/DetailLevelParameter" 
           }
         ],
         "responses": {
@@ -145,6 +148,9 @@
           },
           "Get load balancer with inbound NAT rule port mapping": {
             "$ref": "./examples/LoadBalancerGetInboundNatRulePortMapping.json"
+          },
+          "Get load balancer reduced": {
+              "$ref": "./examples/LoadBalancerGetReduced.json"
           }
         }
       },
@@ -2906,6 +2912,21 @@
         }
       },
       "description": "The response for a migrateToIpBased API."
+    }
+  },
+  "parameters": {
+    "DetailLevelParameter": {
+      "name": "detailLevel",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "enum": ["reduced"],
+      "description": "Controls verbosity of the returned load balancer resource. When set to 'reduced', read-only reference collections may be omitted.",
+      "x-ms-enum": {
+        "name": "LoadBalancerDetailLevel",
+        "modelAsString": true
+      },
+      "x-ms-client-name": "DetailLevel"
     }
   }
 }
