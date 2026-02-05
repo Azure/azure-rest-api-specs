@@ -113,7 +113,7 @@ namespace Microsoft.Resources.DeploymentStacks {
 @@alternateType(DeploymentStacksTemplateLink.uri, url, "csharp");
 @@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
 @@alternateType(ResourceReference.type, armResourceType, "csharp");
-@@alternateType(ResourceReference.identifiers, armResourceIdentifier, "csharp");
+@@alternateType(ResourceReference.identifiers, unknown, "csharp");
 @@clientName(DeploymentStacksWhatIfResultProperties.deploymentStackLastModified,
   "DeploymentStackLastModifiedOn",
   "csharp"
@@ -133,8 +133,16 @@ namespace Microsoft.Resources.DeploymentStacks {
   "csharp"
 );
 @@usage(ManagedResourceReference, Usage.input | Usage.output, "csharp");
-@@usage(ResourceReference, Usage.input | Usage.output, "csharp");
 @@usage(ResourceReferenceExtended, Usage.input | Usage.output, "csharp");
+@@clientName(ResourceReference, "DeploymentStackResourceReference", "csharp");
+@@clientName(ManagedResourceReference,
+  "DeploymentStackManagedResourceReference",
+  "csharp"
+);
+@@clientName(ResourceReferenceExtended,
+  "DeploymentStackResourceReferenceExtended",
+  "csharp"
+);
 @@clientName(ValidationLevel, "DeploymentStackValidationLevel", "csharp");
 @@clientName(DenySettings, "DeploymentStackDenySettings", "csharp");
 @@clientName(DenySettingsMode, "DeploymentStackDenySettingsMode", "csharp");
@@ -143,33 +151,8 @@ namespace Microsoft.Resources.DeploymentStacks {
   "DeploymentStackAdditionalErrorInfo",
   "csharp"
 );
-@@clientName(DeploymentStacksDeleteDetachEnum,
-  "DeploymentStacksDeleteDetachMode",
-  "csharp"
-);
-@@clientName(DeploymentStacksResourcesWithoutDeleteSupportEnum,
-  "DeploymentStacksResourcesWithoutDeleteSupportMode",
-  "csharp"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "update base model for SDK backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DeploymentStackValidateResult,
   Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
-
-// We add this model in this namespace in order to replace some models with this model via alternateType decorator
-namespace Azure.ResourceManager.Models {
-  /** represents a reference to an existing resource by its id */
-  model SubResource {
-    /** the id */
-    id?: armResourceIdentifier;
-  }
-}
-@@alternateType(DeploymentStackProperties.deletedResources,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(DeploymentStackProperties.detachedResources,
-  Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
