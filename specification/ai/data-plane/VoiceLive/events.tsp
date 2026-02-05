@@ -86,12 +86,6 @@ union ServerEventType {
   response_mcp_call_arguments_done: "response.mcp_call_arguments.done",
 
   @added(Versions.v2026_01_01_preview)
-  mcp_approval_request: "mcp_approval_request",
-
-  @added(Versions.v2026_01_01_preview)
-  mcp_approval_response: "mcp_approval_response",
-
-  @added(Versions.v2026_01_01_preview)
   response_mcp_call_in_progress: "response.mcp_call.in_progress",
 
   @added(Versions.v2026_01_01_preview)
