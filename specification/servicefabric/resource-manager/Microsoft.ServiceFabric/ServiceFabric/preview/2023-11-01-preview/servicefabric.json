@@ -2751,24 +2751,17 @@
       "type": "object",
       "description": "The result of the Service Fabric runtime versions",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The identification of the result"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the result"
-        },
-        "type": {
-          "type": "string",
-          "description": "The result resource type"
-        },
         "properties": {
           "$ref": "#/definitions/ClusterVersionDetails",
-          "description": "The detail of the Service Fabric runtime version result",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ClusterEnvironment": {
       "type": "string",
@@ -4717,25 +4710,14 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VMSize",
-          "description": "VM Size properties.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "string",
-          "description": "VM Size id.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "VM Size name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "VM Size type.",
-          "readOnly": true
+          "description": "VM Size properties."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "VMSizesResult": {
       "type": "object",

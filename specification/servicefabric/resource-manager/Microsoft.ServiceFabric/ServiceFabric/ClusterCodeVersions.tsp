@@ -95,26 +95,9 @@ interface ClusterVersionsOperationGroup {
 /**
  * The result of the Service Fabric runtime versions
  */
-model ClusterCodeVersions {
-  /**
-   * The identification of the result
-   */
-  id?: string;
-
-  /**
-   * The name of the result
-   */
-  name?: string;
-
-  /**
-   * The result resource type
-   */
-  type?: string;
-
-  /**
-   * The detail of the Service Fabric runtime version result
-   */
-  properties?: ClusterVersionDetails;
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility with existing API."
+model ClusterCodeVersions is ProxyResource<ClusterVersionDetails> {
+  ...ResourceNameParameter<ClusterCodeVersions>;
 }
 
 /**
@@ -132,4 +115,25 @@ union ClusterVersionsEnvironment {
    * Linux operating system
    */
   Linux: "Linux",
+}
+
+/**
+ * The detail of the Service Fabric runtime version result
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Brownfield resource that cannot be created/updated, no provisioning state"
+model ClusterVersionDetails {
+  /**
+   * The Service Fabric runtime version of the cluster.
+   */
+  codeVersion?: string;
+
+  /**
+   * The date of expiry of support of the version.
+   */
+  supportExpiryUtc?: string;
+
+  /**
+   * Indicates if this version is for Windows or Linux operating system.
+   */
+  environment?: ClusterEnvironment;
 }

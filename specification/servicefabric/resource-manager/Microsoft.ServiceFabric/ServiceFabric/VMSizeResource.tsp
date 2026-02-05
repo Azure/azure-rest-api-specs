@@ -15,30 +15,8 @@ namespace Microsoft.ServiceFabric;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation. Backwards compatibility with existing API."
 @subscriptionResource
-model VMSizeResource {
-  /**
-   * Describes a VM Sizes.
-   */
-  @visibility(Lifecycle.Read)
-  properties?: VMSize;
-
-  /**
-   * VM Size id.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Vm Size name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * VM Size type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
+model VMSizeResource is ProxyResource<VMSize> {
+  ...ResourceNameParameter<VMSizeResource>;
 }
 
 /**
@@ -50,6 +28,7 @@ model VMSizesResult is Azure.Core.Page<VMSizeResource>;
 /**
  * VM Sizes properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Brownfield resource that cannot be created/updated, no provisioning state"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation. Backwards compatibility with existing API."
 model VMSize {
   /**

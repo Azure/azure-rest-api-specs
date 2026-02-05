@@ -599,26 +599,6 @@ union ClusterUpgradeCadence {
 }
 
 /**
- * The detail of the Service Fabric runtime version result
- */
-model ClusterVersionDetails {
-  /**
-   * The Service Fabric runtime version of the cluster.
-   */
-  codeVersion?: string;
-
-  /**
-   * The date of expiry of support of the version.
-   */
-  supportExpiryUtc?: string;
-
-  /**
-   * Indicates if this version is for Windows or Linux operating system.
-   */
-  environment?: ClusterEnvironment;
-}
-
-/**
  * The settings to enable AAD authentication on the cluster.
  */
 model AzureActiveDirectory {

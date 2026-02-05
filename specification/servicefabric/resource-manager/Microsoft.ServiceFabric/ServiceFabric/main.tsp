@@ -18,7 +18,7 @@ import "./ApplicationTypeResource.tsp";
 import "./ApplicationTypeVersionResource.tsp";
 import "./ApplicationResource.tsp";
 import "./ServiceResource.tsp";
-import "./routes.tsp";
+import "./ClusterCodeVersions.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;
