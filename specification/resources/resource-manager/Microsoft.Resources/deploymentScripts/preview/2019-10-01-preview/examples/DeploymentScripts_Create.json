@@ -14,7 +14,7 @@
         "arguments": "-Location 'westus' -Name \"*rg2\"",
         "azPowerShellVersion": "1.7.0",
         "cleanupPreference": "Always",
-        "retentionInterval": "PT7D",
+        "retentionInterval": "P7D",
         "scriptContent": "Param([string]$Location,[string]$Name) $deploymentScriptOutputs['test'] = 'value' Get-AzResourceGroup -Location $Location -Name $Name",
         "supportingScriptUris": [
           "https://uri1.to.supporting.script",
@@ -30,6 +30,7 @@
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/script-rg/providers/Microsoft.Resources/deployments/MyDeploymentScript",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -65,6 +66,7 @@
     },
     "201": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/script-rg/providers/Microsoft.Resources/deployments/MyDeploymentScript",
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
