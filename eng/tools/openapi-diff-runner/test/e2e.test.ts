@@ -1,9 +1,9 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { appendFileSync, existsSync, PathLike } from "node:fs";
-import { resolve } from "node:path";
-import { describe, expect, it, vi } from "vitest";
-import { validateBreakingChange as validateBreakingChangeImpl } from "../src/commands.js";
+import path from "node:path";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { validateBreakingChange } from "../src/commands.js";
 import { runOad } from "../src/run-oad.js";
 
 vi.mock("@azure-tools/specs-shared/changed-files", async () => {
@@ -18,6 +18,8 @@ vi.mock("node:fs", async () => {
   const actual = await vi.importActual("node:fs");
   const mockAppendFileSync = vi.fn();
   const mockExistsSync = vi.fn();
+  const mockReadFileSync = vi.fn().mockReturnValue("{}");
+  const mockWriteFileSync = vi.fn();
 
   return {
     ...actual,
@@ -26,10 +28,14 @@ vi.mock("node:fs", async () => {
       ...(actual.default as any),
       appendFileSync: mockAppendFileSync,
       existsSync: mockExistsSync,
+      readFileSync: mockReadFileSync,
+      writeFileSync: mockWriteFileSync,
     },
     // Also mock named exports (for `import { appendFileSync } from "node:fs"`)
     appendFileSync: mockAppendFileSync,
     existsSync: mockExistsSync,
+    readFileSync: mockReadFileSync,
+    writeFileSync: mockWriteFileSync,
   };
 });
 
@@ -72,74 +78,121 @@ function mockExistsSync(pathsToExist: string[] = []) {
   return mockExistsSyncFn;
 }
 
-async function validateBreakingChange() {
-  return await validateBreakingChangeImpl({
-    localSpecRepoPath: "",
-    workingFolder: "",
-    logFileFolder: "",
-    swaggerDirs: [],
+const context = {
+  localSpecRepoPath: "",
+  workingFolder: "",
+  logFileFolder: "",
+  swaggerDirs: [],
+  baseBranch: "",
+  headCommit: "",
+  runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+  checkName: "",
+  targetRepo: "",
+  sourceRepo: "",
+  prInfo: {
+    targetBranch: "",
+    sourceBranch: "",
     baseBranch: "",
-    headCommit: "",
-    runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-    checkName: "",
-    targetRepo: "",
-    sourceRepo: "",
-    prInfo: {
-      targetBranch: "",
-      sourceBranch: "",
-      baseBranch: "",
-      currentBranch: "",
-      tempRepoFolder: "/tempRepo",
-      checkout: function (branch: string): Promise<void> {
-        console.log("checkout " + branch);
-        return Promise.resolve();
-      },
+    currentBranch: "",
+    tempRepoFolder: "/tempRepo",
+    checkout: function (branch: string): Promise<void> {
+      console.log("checkout " + branch);
+      return Promise.resolve();
     },
-    prNumber: "",
-    prSourceBranch: "",
-    prTargetBranch: "",
-    oadMessageProcessorContext: {
-      logFilePath: "",
-      prUrl: "",
-      messageCache: [],
-    },
+  },
+  prNumber: "",
+  prSourceBranch: "",
+  prTargetBranch: "",
+  oadMessageProcessorContext: {
+    logFilePath: "",
     prUrl: "",
-  });
-}
+    messageCache: [],
+  },
+  prUrl: "",
+};
 
 describe("validateBreakingChange", () => {
-  it("runs oad on a modified swagger", async () => {
-    mockChangedFilesStatuses({
-      modifications: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
-    });
-
-    mockExistsSync(["/tempRepo/specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"]);
-
-    const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
-
-    const logs: string[] = [];
-    vi.mocked(appendFileSync).mockImplementation((_path, data) => {
-      logs.push(data.toString());
-    });
-
-    const statusCode = await validateBreakingChange();
-
-    expect(statusCode).toEqual(0);
-
-    expect(mockRunOad).toBeCalledWith(
-      resolve("/tempRepo/specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"),
-      resolve("specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"),
-    );
-
-    // const jsonLog = logs.find((l) => l.startsWith("{"));
-    // const markdownLog = JSON.parse(jsonLog || "").message.trim();
-
-    // expect(markdownLog).toMatchInlineSnapshot(
-    //   `
-    //   "| Compared specs ([vunknown](https://www.npmjs.com/package/@azure/oad/v/unknown)) | new version | base version |
-    //   |-------|-------------|--------------|
-    //   | foo.json | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) |"
-    // `,
-    // );
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
+
+  it.each([
+    {
+      changedFiles: {
+        modifications: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
+      },
+      existingFiles: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
+      expectedOadCalls: [
+        {
+          old: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+        },
+      ],
+    },
+    {
+      changedFiles: {
+        additions: [
+          "specification/nginx/resource-manager/Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json",
+        ],
+        deletions: [
+          "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
+        ],
+        renames: [
+          {
+            from: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
+            to: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
+          },
+        ],
+      },
+      existingFiles: [
+        "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
+        "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
+      ],
+      expectedOadCalls: [
+        {
+          old: "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
+          new: "specification/nginx/resource-manager/Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json",
+        },
+      ],
+    },
+  ])(
+    "runs oad on a modified swagger",
+    async ({ changedFiles, existingFiles, expectedOadCalls }) => {
+      mockChangedFilesStatuses(changedFiles);
+
+      mockExistsSync(existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f)));
+
+      const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
+
+      const logs: string[] = [];
+      vi.mocked(appendFileSync).mockImplementation((_path, data) => {
+        logs.push(data.toString());
+      });
+
+      const statusCode = await validateBreakingChange(context);
+
+      expect(statusCode).toEqual(0);
+
+      for (const expected of expectedOadCalls) {
+        expect(mockRunOad).toBeCalledWith(
+          path.join(context.prInfo.tempRepoFolder, expected.old),
+          expected.new,
+        );
+      }
+
+      // Ensure no extra calls
+      expect(mockRunOad).toBeCalledTimes(expectedOadCalls.length);
+
+      // const jsonLog = logs.find((l) => l.startsWith("{"));
+      // const markdownLog = JSON.parse(jsonLog || "").message.trim();
+
+      // expect(markdownLog).toMatchInlineSnapshot(
+      //   `
+      //   "| Compared specs ([vunknown](https://www.npmjs.com/package/@azure/oad/v/unknown)) | new version | base version |
+      //   |-------|-------------|--------------|
+      //   | foo.json | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) |"
+      // `,
+      // );
+    },
+  );
 });
