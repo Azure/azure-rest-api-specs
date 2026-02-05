@@ -597,6 +597,44 @@
         "userAssignedManagedIdentityId"
       ]
     },
+    "DesiredConfigurationUpdate": {
+      "type": "object",
+      "description": "Updatable parameters in the Desired configuration input.",
+      "properties": {
+        "defenderForServers": {
+          "type": "string",
+          "description": "Desired enablement state of the Defender For Servers service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "defenderCspm": {
+          "type": "string",
+          "description": "Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
     "GuestConfigurationInformation": {
       "type": "object",
       "description": "Azure Policy and Machine Configuration service information.",
@@ -657,20 +695,20 @@
     },
     "ManagedOpUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the ManagedOp.",
+      "description": "ManagedOps model for update operations",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedOpUpdateProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "Updatable properties in the ManagedOps resource."
         }
       }
     },
     "ManagedOpUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the ManagedOp.",
+      "description": "Updatable properties in the ManagedOps resource.",
       "properties": {
         "desiredConfiguration": {
-          "$ref": "#/definitions/DesiredConfiguration",
+          "$ref": "#/definitions/DesiredConfigurationUpdate",
           "description": "Desired configuration input by the user.",
           "x-ms-mutability": [
             "read",
