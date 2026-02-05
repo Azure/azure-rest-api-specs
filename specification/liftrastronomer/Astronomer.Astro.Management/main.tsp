@@ -67,6 +67,7 @@ interface Organizations {
     OrganizationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OrganizationResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -202,6 +202,7 @@ interface ContainerRegistry {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}")
+  @patch(#{ implicitOptionality: true })
   updateProperties is AcrOperation<
     {
       /**
@@ -296,6 +297,7 @@ interface ContainerRegistry {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_tags/{reference}")
+  @patch(#{ implicitOptionality: true })
   updateTagAttributes is AcrOperation<
     {
       /**
@@ -415,6 +417,7 @@ interface ContainerRegistry {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   @route("/acr/v1/{name}/_manifests/{digest}")
+  @patch(#{ implicitOptionality: true })
   updateManifestProperties is AcrOperation<
     {
       /**
@@ -625,6 +628,7 @@ interface ContainerRegistryBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
   @route("/{+nextBlobUuidLink}")
+  @patch(#{ implicitOptionality: true })
   uploadChunk is AcrOperation<
     {
       /**
