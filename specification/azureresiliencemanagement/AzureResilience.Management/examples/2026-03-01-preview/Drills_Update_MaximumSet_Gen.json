@@ -6,10 +6,6 @@
     "api-version": "2026-03-01-preview",
     "drillName": "drill1",
     "properties": {
-      "identity": {
-        "type": "None",
-        "userAssignedIdentities": {}
-      },
       "properties": {
         "metricsProperties": {
           "identity": {
@@ -50,6 +46,12 @@
           },
           "healthModelId": "/subscriptions/ef4ab5a7-c2c0-4304-af80-af49f48af3d1/resourceGroups/DeleteDemoRG/providers/Microsoft.CloudHealth/healthmodels/ahm-demo"
         },
+        "monitoringProperties": {
+          "identity": {
+            "type": "UserAssigned",
+            "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+          }
+        },
         "chaosResourceProperties": {
           "identity": {
             "type": "UserAssigned",
@@ -59,6 +61,12 @@
             "type": "UserAssigned",
             "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
           }
+        }
+      },
+      "identity": {
+        "type": "None",
+        "userAssignedIdentities": {
+          "key9276": {}
         }
       }
     }
@@ -126,6 +134,21 @@
             ],
             "runbookFaultRbacOnTargets": "Set",
             "includedResourceInDrill": "Exists",
+            "drillRbacOnMonitoringResources": "NotSet",
+            "drillMonitoringErrors": [
+              {
+                "code": "f",
+                "message": "dztysoxb"
+              }
+            ],
+            "drillMonitoringResources": "Exists",
+            "monitoringRbacOnDrillResources": "Set",
+            "rbacNeededForDrillOnDrillMonitoringResources": [
+              "lyffvljvuhwvxcuzyzlyo"
+            ],
+            "rbacNeededForDrillOnDrillResources": [
+              "sajsgcweakvzfunxfzzxe"
+            ],
             "missingRequiredResourceProviders": [
               "Microsoft.Chaos",
               "Microsoft.Automation"
@@ -167,6 +190,16 @@
             "recoveryPlanId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName/providers/Microsoft.AzureResilienceManagement/recoveryPlans/rePlan1",
             "recoveryPlanResourceExcludedCount": 29
           },
+          "monitoringProperties": {
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentity": "/subscriptions/4e88bed3-114f-443d-9975-28f64122ec5e/resourcegroups/resourceGroup1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/uami1"
+            },
+            "logAnalyticsWorkspaceId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/AzureResilienceManagementDrills/providers/microsoft.operationalinsights/workspaces/default-law-cid",
+            "rawMetricsDataCollectionRuleId": "/subscriptions/2427679b-6638-48e5-8774-6096cd849451/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Insights/dataCollectionRules/DataCollectionRuleHealthName",
+            "serviceGroupMetricsDataCollectionRuleId": "/subscriptions/2427679b-6638-48e5-8774-6096cd849451/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Insights/dataCollectionRules/DataCollectionRawRuleHealthName",
+            "dataCollectionEndpointId": "/subscriptions/191973cd-9c54-41e0-ac19-25dd9a92d5a8/resourceGroups/AzureResilienceManagementDrills/providers/Microsoft.Insights/dataCollectionEndpoints/DrillDataCollectionEndpoint"
+          },
           "drillAssetProperties": {
             "subscription": "4e88bed3-114f-443d-9975-28f64122ec5e",
             "region": "westus"
@@ -185,7 +218,7 @@
           },
           "provisioningState": "Succeeded",
           "serviceGroupId": "/providers/Microsoft.Management/serviceGroups/sampleServiceGroupName",
-          "lastSyncTime": "2026-02-02T10:45:16.574Z",
+          "lastSyncTime": "2026-02-02T10:45:16.573Z",
           "lastResyncReadinessCheckTime": "2026-02-02T10:29:02.037Z"
         },
         "identity": {
