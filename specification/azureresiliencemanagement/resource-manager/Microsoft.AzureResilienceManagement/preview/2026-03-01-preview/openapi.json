@@ -5417,6 +5417,41 @@
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "Included resource in Drill."
         },
+        "drillRbacOnMonitoringResources": {
+          "$ref": "#/definitions/RBACState",
+          "description": "Drill MSI does not have the necessary RBAC to read the Drill Monitoring resources."
+        },
+        "drillMonitoringErrors": {
+          "type": "array",
+          "description": "Errors related to Drill Monitoring resources.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "drillMonitoringResources": {
+          "$ref": "#/definitions/ExtensionObjectState",
+          "description": "Monitoring Resources created for Drill",
+          "readOnly": true
+        },
+        "monitoringRbacOnDrillResources": {
+          "$ref": "#/definitions/RBACState",
+          "description": "Monitoring RBAC required by Drill MSI not setup on the target resources."
+        },
+        "rbacNeededForDrillOnDrillMonitoringResources": {
+          "type": "array",
+          "description": "Permissions needed by the Drill MSI to Upload service group health data for monitoring.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rbacNeededForDrillOnDrillResources": {
+          "type": "array",
+          "description": "Permissions needed by the Drill MSI to read health metrics data for resources in service group.",
+          "items": {
+            "type": "string"
+          }
+        },
         "missingRequiredResourceProviders": {
           "type": "array",
           "description": "List of required required Azure resource providers that are not registered in the subscription specified for chaos experiment.",
@@ -6182,6 +6217,10 @@
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
+        },
+        "monitoringProperties": {
+          "$ref": "#/definitions/MonitoringPropertiesOfDrill",
+          "description": "Monitoring properties of the Drill."
         }
       },
       "required": [
@@ -6286,6 +6325,10 @@
           "x-ms-mutability": [
             "create"
           ]
+        },
+        "monitoringProperties": {
+          "$ref": "#/definitions/MonitoringPropertiesOfDrill",
+          "description": "Monitoring properties of the Drill."
         }
       },
       "discriminator": "drillType",
@@ -6323,6 +6366,10 @@
         "runbookFaultRbacOnTargets": {
           "$ref": "#/definitions/RBACState",
           "description": "RBAC required by AutomationAccount for runbook MSI not setup on the target resources."
+        },
+        "monitoringRbacOnTargets": {
+          "$ref": "#/definitions/RBACState",
+          "description": "RBAC required by Drill MSI on the target resource for monitoring."
         },
         "target": {
           "$ref": "#/definitions/ExtensionObjectState",
@@ -6571,6 +6618,11 @@
         "rbacAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
           "description": "Last RBAC assignment error, if any.",
+          "readOnly": true
+        },
+        "monitoringRbacAssignmentError": {
+          "$ref": "#/definitions/ErrorDetails",
+          "description": "Monitoring RBAC assignment error, if any.",
           "readOnly": true
         },
         "provisioningState": {
@@ -7192,6 +7244,10 @@
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
+        },
+        "monitoringProperties": {
+          "$ref": "#/definitions/MonitoringPropertiesOfDrillUpdate",
+          "description": "Monitoring properties of the Drill."
         }
       }
     },
@@ -9033,6 +9089,81 @@
           "type": "string",
           "description": "The fully qualified resource ID of the MoboBroker resource.\nExample: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`",
           "readOnly": true
+        }
+      }
+    },
+    "MonitoringPropertiesOfDrill": {
+      "type": "object",
+      "description": "Drill monitoring properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentity",
+          "description": "Identity to use for Drill monitoring operations."
+        },
+        "logAnalyticsWorkspaceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          }
+        },
+        "rawMetricsDataCollectionRuleId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Data collection rule created by Resiliency service which will route data for RAW health data for service group resources.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/datacollectionrules"
+              }
+            ]
+          }
+        },
+        "serviceGroupMetricsDataCollectionRuleId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Data collection rule created by Resiliency service which will route data for Aggregate health data of service group.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/datacollectionrules"
+              }
+            ]
+          }
+        },
+        "dataCollectionEndpointId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Data collection endpoint created by Resiliency service which will route data for service group and its resources.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Insights/dataCollectionEndpoints"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "identity"
+      ]
+    },
+    "MonitoringPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "Drill monitoring properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to use for Drill monitoring operations."
         }
       }
     },
