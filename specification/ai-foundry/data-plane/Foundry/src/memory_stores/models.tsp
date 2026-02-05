@@ -10,11 +10,17 @@ const MemoryStoreRequiredPreviews = #{
   conditional_previews: #[FoundryFeaturesOptInKeys.memory_stores_v1_preview],
 };
 
+union MemoryStoreObjectType {
+  memoryStore: "memory_store",
+  memoryStoreDeleted: "memory_store.deleted",
+  memoryStoreScopeDeleted: "memory_store.scope.deleted",
+}
+
 @doc("A memory store that can store and retrieve user memories.")
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreObject {
   @doc("The object type, which is always 'memory_store'.")
-  object: "memory_store";
+  object: MemoryStoreObjectType.memoryStore;
 
   @doc("The unique identifier of the memory store.")
   id: string;
@@ -45,7 +51,7 @@ model MemoryStoreObject {
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model DeleteMemoryStoreResponse {
   @doc("The object type. Always 'memory_store.deleted'.")
-  object: "memory_store.deleted";
+  object: MemoryStoreObjectType.memoryStoreDeleted;
 
   @doc("The name of the memory store.")
   name: string;
@@ -265,7 +271,7 @@ model ChatSummaryMemoryItem extends MemoryItem {
 @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 model MemoryStoreDeleteScopeResponse {
   @doc("The object type. Always 'memory_store.scope.deleted'.")
-  object: "memory_store.scope.deleted";
+  object: MemoryStoreObjectType.memoryStoreScopeDeleted;
 
   @doc("The name of the memory store.")
   name: string;

@@ -5,10 +5,14 @@ using Azure.Core.Experimental;
 
 namespace Azure.AI.Projects;
 
+union EvalObjectType {
+  evalDeleted: "eval.deleted",
+}
+
 /** A deleted evaluation Object */
 model DeleteEvalResponse {
   @doc("The object type. Always 'eval.deleted'.")
-  object: "eval.deleted";
+  object: EvalObjectType.evalDeleted;
 
   @doc("id of the eval.")
   eval_id: string;

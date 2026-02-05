@@ -173,13 +173,17 @@ namespace Azure.AI.Projects {
     status: "completed" | "failed" | "in_progress" | "cancelled";
   }
 
+  union ResponseObjectType {
+    response: "response",
+  }
+
   @doc("The result of a delete response operation.")
   model DeleteResponseResult {
     @doc("The operation ID.")
     id: string;
 
     @doc("Always return 'response'.")
-    object: "response";
+    object: ResponseObjectType.response;
 
     @doc("Always return true")
     deleted: true;

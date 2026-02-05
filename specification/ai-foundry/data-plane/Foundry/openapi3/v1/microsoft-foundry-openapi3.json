@@ -7443,7 +7443,14 @@
                         "$ref": "#/components/schemas/OpenAI.ToolsArray"
                       },
                       "tool_choice": {
-                        "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                        "anyOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+                          },
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                          }
+                        ]
                       },
                       "prompt": {
                         "$ref": "#/components/schemas/OpenAI.Prompt"
@@ -7628,7 +7635,14 @@
                         "$ref": "#/components/schemas/OpenAI.ToolsArray"
                       },
                       "tool_choice": {
-                        "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                        "anyOf": [
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+                          },
+                          {
+                            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+                          }
+                        ]
                       },
                       "prompt": {
                         "$ref": "#/components/schemas/OpenAI.Prompt"
@@ -11409,7 +11423,7 @@
             "enum": [
               "agent.version.deleted"
             ],
-            "description": "The object type. Always 'agent.deleted'."
+            "description": "The object type. Always 'agent.version.deleted'."
           },
           "name": {
             "type": "string",
@@ -15743,6 +15757,11 @@
             "nullable": true
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.MessageContent"
+          }
+        ],
         "description": "A screenshot of a computer.",
         "title": "Computer screenshot"
       },
@@ -16981,35 +17000,7 @@
           "content": {
             "type": "array",
             "items": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/OpenAI.InputTextContent"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.OutputTextContent"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.TextContent"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.SummaryTextContent"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.ReasoningTextContent"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.RefusalContent"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.InputImageContent"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.ComputerScreenshotContent"
-                },
-                {
-                  "$ref": "#/components/schemas/OpenAI.InputFileContent"
-                }
-              ]
+              "$ref": "#/components/schemas/OpenAI.MessageContent"
             },
             "description": "The content of the message"
           }
@@ -17228,6 +17219,11 @@
             "default": "conversation"
           },
           "metadata": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Metadata"
+              }
+            ],
             "description": "Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.\n  Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters."
           },
           "created_at": {
@@ -18454,9 +18450,7 @@
         "type": "object",
         "required": [
           "code",
-          "message",
-          "param",
-          "type"
+          "message"
         ],
         "properties": {
           "code": {
@@ -25887,6 +25881,266 @@
           }
         }
       },
+      "OpenAI.MessageContent": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.MessageContentType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/OpenAI.TextContent",
+            "summary_text": "#/components/schemas/OpenAI.SummaryTextContent",
+            "computer_screenshot": "#/components/schemas/OpenAI.ComputerScreenshotContent",
+            "input_text": "#/components/schemas/OpenAI.MessageContentInputTextContent",
+            "output_text": "#/components/schemas/OpenAI.MessageContentOutputTextContent",
+            "reasoning_text": "#/components/schemas/OpenAI.MessageContentReasoningTextContent",
+            "refusal": "#/components/schemas/OpenAI.MessageContentRefusalContent",
+            "input_image": "#/components/schemas/OpenAI.MessageContentInputImageContent",
+            "input_file": "#/components/schemas/OpenAI.MessageContentInputFileContent"
+          }
+        },
+        "description": "A content part that makes up an input or output item."
+      },
+      "OpenAI.MessageContentInputFileContent": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_file"
+            ],
+            "description": "The type of the input item. Always `input_file`.",
+            "x-stainless-const": true,
+            "default": "input_file"
+          },
+          "file_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "filename": {
+            "type": "string",
+            "description": "The name of the file to be sent to the model."
+          },
+          "file_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL of the file to be sent to the model."
+          },
+          "file_data": {
+            "type": "string",
+            "description": "The content of the file to be sent to the model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.MessageContent"
+          }
+        ],
+        "description": "A file input to the model.",
+        "title": "Input file"
+      },
+      "OpenAI.MessageContentInputImageContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "detail"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_image"
+            ],
+            "description": "The type of the input item. Always `input_image`.",
+            "x-stainless-const": true,
+            "default": "input_image"
+          },
+          "image_url": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "file_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "detail": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ImageDetail"
+              }
+            ],
+            "description": "The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.MessageContent"
+          }
+        ],
+        "description": "An image input to the model. Learn about [image inputs](https://platform.openai.com/docs/guides/vision).",
+        "title": "Input image"
+      },
+      "OpenAI.MessageContentInputTextContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "input_text"
+            ],
+            "description": "The type of the input item. Always `input_text`.",
+            "x-stainless-const": true,
+            "default": "input_text"
+          },
+          "text": {
+            "type": "string",
+            "description": "The text input to the model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.MessageContent"
+          }
+        ],
+        "description": "A text input to the model.",
+        "title": "Input text"
+      },
+      "OpenAI.MessageContentOutputTextContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "text",
+          "annotations"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "output_text"
+            ],
+            "description": "The type of the output text. Always `output_text`.",
+            "x-stainless-const": true,
+            "default": "output_text"
+          },
+          "text": {
+            "type": "string",
+            "description": "The text output from the model."
+          },
+          "annotations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.Annotation"
+            },
+            "description": "The annotations of the text output."
+          },
+          "logprobs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpenAI.LogProb"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.MessageContent"
+          }
+        ],
+        "description": "A text output from the model.",
+        "title": "Output text"
+      },
+      "OpenAI.MessageContentReasoningTextContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "reasoning_text"
+            ],
+            "description": "The type of the reasoning text. Always `reasoning_text`.",
+            "x-stainless-const": true,
+            "default": "reasoning_text"
+          },
+          "text": {
+            "type": "string",
+            "description": "The reasoning text from the model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.MessageContent"
+          }
+        ],
+        "description": "Reasoning text from the model.",
+        "title": "ReasoningTextContent"
+      },
+      "OpenAI.MessageContentRefusalContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "refusal"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "refusal"
+            ],
+            "description": "The type of the refusal. Always `refusal`.",
+            "x-stainless-const": true,
+            "default": "refusal"
+          },
+          "refusal": {
+            "type": "string",
+            "description": "The refusal explanation from the model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.MessageContent"
+          }
+        ],
+        "description": "A refusal from the model.",
+        "title": "Refusal"
+      },
+      "OpenAI.MessageContentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "input_text",
+              "output_text",
+              "text",
+              "summary_text",
+              "reasoning_text",
+              "refusal",
+              "input_image",
+              "computer_screenshot",
+              "input_file"
+            ]
+          }
+        ]
+      },
       "OpenAI.MessageRole": {
         "type": "string",
         "enum": [
@@ -26027,7 +26281,8 @@
           "propertyName": "type",
           "mapping": {
             "output_text": "#/components/schemas/OpenAI.OutputContentOutputTextContent",
-            "refusal": "#/components/schemas/OpenAI.OutputContentRefusalContent"
+            "refusal": "#/components/schemas/OpenAI.OutputContentRefusalContent",
+            "reasoning_text": "#/components/schemas/OpenAI.OutputContentReasoningTextContent"
           }
         }
       },
@@ -26073,6 +26328,35 @@
         ],
         "description": "A text output from the model.",
         "title": "Output text"
+      },
+      "OpenAI.OutputContentReasoningTextContent": {
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "reasoning_text"
+            ],
+            "description": "The type of the reasoning text. Always `reasoning_text`.",
+            "x-stainless-const": true,
+            "default": "reasoning_text"
+          },
+          "text": {
+            "type": "string",
+            "description": "The reasoning text from the model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.OutputContent"
+          }
+        ],
+        "description": "Reasoning text from the model.",
+        "title": "ReasoningTextContent"
       },
       "OpenAI.OutputContentRefusalContent": {
         "type": "object",
@@ -27240,44 +27524,6 @@
           }
         ]
       },
-      "OpenAI.OutputTextContent": {
-        "type": "object",
-        "required": [
-          "type",
-          "text",
-          "annotations"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "output_text"
-            ],
-            "description": "The type of the output text. Always `output_text`.",
-            "x-stainless-const": true,
-            "default": "output_text"
-          },
-          "text": {
-            "type": "string",
-            "description": "The text output from the model."
-          },
-          "annotations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.Annotation"
-            },
-            "description": "The annotations of the text output."
-          },
-          "logprobs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.LogProb"
-            }
-          }
-        },
-        "description": "A text output from the model.",
-        "title": "Output text"
-      },
       "OpenAI.Prompt": {
         "type": "object",
         "required": [
@@ -27402,37 +27648,8 @@
             "description": "The reasoning text from the model."
           }
         },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/OpenAI.OutputContent"
-          }
-        ],
         "description": "Reasoning text from the model.",
         "title": "ReasoningTextContent"
-      },
-      "OpenAI.RefusalContent": {
-        "type": "object",
-        "required": [
-          "type",
-          "refusal"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "refusal"
-            ],
-            "description": "The type of the refusal. Always `refusal`.",
-            "x-stainless-const": true,
-            "default": "refusal"
-          },
-          "refusal": {
-            "type": "string",
-            "description": "The refusal explanation from the model."
-          }
-        },
-        "description": "A refusal from the model.",
-        "title": "Refusal"
       },
       "OpenAI.Response": {
         "type": "object",
@@ -27556,7 +27773,14 @@
             "$ref": "#/components/schemas/OpenAI.ToolsArray"
           },
           "tool_choice": {
-            "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ToolChoiceOptions"
+              },
+              {
+                "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
+              }
+            ]
           },
           "prompt": {
             "$ref": "#/components/schemas/OpenAI.Prompt"
@@ -30842,6 +31066,11 @@
             "description": "A summary of the reasoning output from the model so far."
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.MessageContent"
+          }
+        ],
         "description": "A summary text from the model.",
         "title": "Summary text"
       },
@@ -30864,6 +31093,11 @@
             "type": "string"
           }
         },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.MessageContent"
+          }
+        ],
         "description": "A text content.",
         "title": "Text Content"
       },
@@ -31236,6 +31470,16 @@
         ],
         "description": "Use this option to force the model to call a specific tool on a remote MCP server.",
         "title": "MCP tool"
+      },
+      "OpenAI.ToolChoiceOptions": {
+        "type": "string",
+        "enum": [
+          "none",
+          "auto",
+          "required"
+        ],
+        "description": "Controls which (if any) tool is called by the model.\n`none` means the model will not call any tool and instead generates a message.\n`auto` means the model can pick between generating a message or calling one or\nmore tools.\n`required` means the model must call one or more tools.",
+        "title": "Tool choice mode"
       },
       "OpenAI.ToolChoiceParam": {
         "type": "object",
@@ -32417,7 +32661,7 @@
                 "$ref": "#/components/schemas/OpenAI.ToolChoiceParam"
               }
             ],
-            "description": "How the model should select which tool (or tools) to use when generating a response. \nSee the `tools` parameter to see how to specify which tools the model can call."
+            "description": "How the model should select which tool (or tools) to use when generating a response.\nSee the `tools` parameter to see how to specify which tools the model can call."
           },
           "text": {
             "allOf": [

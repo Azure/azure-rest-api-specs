@@ -25,21 +25,22 @@ paths:
       operationId: Agents_createAgent
       description: Creates the agent.
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             anyOf:
               - type: string
-                enum:
-                  - ContainerAgents=v1
               - type: string
                 enum:
-                  - HostedAgents=v1
+                  - ContainerAgents=V1Preview
               - type: string
                 enum:
-                  - WorkflowAgents=v1
+                  - HostedAgents=V1Preview
+              - type: string
+                enum:
+                  - WorkflowAgents=V1Preview
         - name: api-version
           in: query
           required: true
@@ -70,9 +71,9 @@ paths:
               $ref: '#/components/schemas/CreateAgentRequest'
       x-ms-foundry-meta:
         conditional_previews:
-          - HostedAgents=v1
-          - ContainerAgents=v1
-          - WorkflowAgents=v1
+          - HostedAgents=V1Preview
+          - ContainerAgents=V1Preview
+          - WorkflowAgents=V1Preview
     get:
       operationId: Agents_listAgents
       description: Returns the list of all agents.
@@ -204,6 +205,22 @@ paths:
         Updates the agent by adding a new version if there are any changes to the agent definition.
         If no changes, returns the existing agent version.
       parameters:
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
+              - type: string
+                enum:
+                  - HostedAgents=V1Preview
+              - type: string
+                enum:
+                  - WorkflowAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -316,14 +333,16 @@ paths:
       operationId: Agents_listAgentContainerOperations
       description: List container operations for an agent.
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - ContainerAgents=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -413,20 +432,22 @@ paths:
         - Agents
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
   /agents/{agent_name}/operations/{operation_id}:
     get:
       operationId: Agents_getAgentContainerOperation
       description: Get the status of a container operation for an agent.
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - ContainerAgents=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -463,27 +484,28 @@ paths:
         - Agents
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions:
     post:
       operationId: Agents_createAgentVersion
       description: Create a new agent version.
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             anyOf:
               - type: string
-                enum:
-                  - ContainerAgents=v1
               - type: string
                 enum:
-                  - HostedAgents=v1
+                  - ContainerAgents=V1Preview
               - type: string
                 enum:
-                  - WorkflowAgents=v1
+                  - HostedAgents=V1Preview
+              - type: string
+                enum:
+                  - WorkflowAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -525,9 +547,9 @@ paths:
               $ref: '#/components/schemas/CreateAgentVersionRequest'
       x-ms-foundry-meta:
         conditional_previews:
-          - HostedAgents=v1
-          - ContainerAgents=v1
-          - WorkflowAgents=v1
+          - HostedAgents=V1Preview
+          - ContainerAgents=V1Preview
+          - WorkflowAgents=V1Preview
     get:
       operationId: Agents_listAgentVersions
       description: Returns the list of versions of an agent.
@@ -662,18 +684,6 @@ paths:
       operationId: Agents_deleteAgentVersion
       description: Deletes a specific version of an agent.
       parameters:
-        - name: Foundry-Beta
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            anyOf:
-              - type: string
-                enum:
-                  - ContainerAgents=v1
-              - type: string
-                enum:
-                  - HostedAgents=v1
         - name: agent_name
           in: path
           required: true
@@ -713,14 +723,16 @@ paths:
       operationId: Agents_getAgentContainer
       description: Get a container for a specific version of an agent.
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - ContainerAgents=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -757,20 +769,22 @@ paths:
         - Agents
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default/operations:
     get:
       operationId: Agents_listAgentVersionContainerOperations
       description: List container operations for a specific version of an agent.
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - ContainerAgents=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -866,7 +880,7 @@ paths:
         - Agents
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:delete:
     post:
       operationId: Agents_deleteAgentContainer
@@ -875,14 +889,16 @@ paths:
         The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
         https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - ContainerAgents=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -925,7 +941,7 @@ paths:
         - Agents
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:logstream:
     post:
       operationId: Agents_streamAgentContainerLogs
@@ -947,14 +963,16 @@ paths:
         2025-12-15T08:34:29.0649033Z stdout F INFO:     127.0.0.1:60246 - "GET /readiness HTTP/1.1" 200 OK
         2025-12-15T08:34:59.0644467Z stdout F INFO:     127.0.0.1:43994 - "GET /readiness HTTP/1.1" 200 OK
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - ContainerAgents=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1009,7 +1027,7 @@ paths:
         - Agents
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:start:
     post:
       operationId: Agents_startAgentContainer
@@ -1018,14 +1036,16 @@ paths:
         The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
         https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - ContainerAgents=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1085,7 +1105,7 @@ paths:
                   default: 1
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:stop:
     post:
       operationId: Agents_stopAgentContainer
@@ -1094,14 +1114,16 @@ paths:
         The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
         https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - ContainerAgents=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1144,7 +1166,7 @@ paths:
         - Agents
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:update:
     post:
       operationId: Agents_updateAgentContainer
@@ -1153,14 +1175,16 @@ paths:
         The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
         https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#action-operations
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - ContainerAgents=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1218,7 +1242,7 @@ paths:
                   description: The maximum number of replicas.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
   /agents/{agent_name}/versions:import:
     post:
       operationId: Agents_createAgentVersionFromManifest
@@ -1268,18 +1292,6 @@ paths:
       operationId: Agents_createAgentFromManifest
       description: Creates an agent from a manifest.
       parameters:
-        - name: Foundry-Beta
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            anyOf:
-              - type: string
-                enum:
-                  - ContainerAgents=v1
-              - type: string
-                enum:
-                  - HostedAgents=v1
         - name: api-version
           in: query
           required: true
@@ -2304,14 +2316,16 @@ paths:
       description: Create an evaluation taxonomy.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Evaluations=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -2357,14 +2371,16 @@ paths:
       description: Update an evaluation taxonomy.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Evaluations=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -2425,14 +2441,16 @@ paths:
             format: int32
             default: 20
           explode: false
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Evaluations=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Evaluations=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -2486,14 +2504,16 @@ paths:
             format: int32
             default: 20
           explode: false
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Evaluations=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Evaluations=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -2526,14 +2546,16 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Evaluations=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Evaluations=V1Preview
       responses:
         '201':
           description: The request has succeeded and a new resource has been created as a result.
@@ -2573,14 +2595,16 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Evaluations=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Evaluations=V1Preview
         - name: version
           in: path
           required: true
@@ -2619,14 +2643,16 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Evaluations=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Evaluations=V1Preview
         - name: version
           in: path
           required: true
@@ -2661,14 +2687,16 @@ paths:
           description: The name of the resource
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Evaluations=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Evaluations=V1Preview
         - name: version
           in: path
           required: true
@@ -2893,14 +2921,16 @@ paths:
       description: Generate Insights
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Insights=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Insights=V1Preview
         - name: Repeatability-Request-ID
           in: header
           required: false
@@ -3062,14 +3092,16 @@ paths:
       operationId: createMemoryStore
       description: Create a memory store.
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - MemoryStores=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3121,7 +3153,7 @@ paths:
                 - definition
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     get:
       operationId: listMemoryStores
       description: List all memory stores.
@@ -3166,14 +3198,16 @@ paths:
           schema:
             type: string
           explode: false
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - MemoryStores=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3217,7 +3251,7 @@ paths:
         - Memory Stores
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
   /memory_stores/{name}:
     post:
       operationId: updateMemoryStore
@@ -3229,14 +3263,16 @@ paths:
           description: The name of the memory store to update.
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - MemoryStores=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3277,7 +3313,7 @@ paths:
                   description: Arbitrary key-value metadata to associate with the memory store.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     get:
       operationId: getMemoryStore
       description: Retrieve a memory store.
@@ -3288,14 +3324,16 @@ paths:
           description: The name of the memory store to retrieve.
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - MemoryStores=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3320,7 +3358,7 @@ paths:
         - Memory Stores
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     delete:
       operationId: deleteMemoryStore
       description: Delete a memory store.
@@ -3331,14 +3369,16 @@ paths:
           description: The name of the memory store to delete.
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - MemoryStores=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3363,7 +3403,7 @@ paths:
         - Memory Stores
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
   /memory_stores/{name}/updates/{update_id}:
     get:
       operationId: getUpdateResult
@@ -3381,14 +3421,16 @@ paths:
           description: The ID of the memory update operation.
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - MemoryStores=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3413,7 +3455,7 @@ paths:
         - Memory Stores
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
   /memory_stores/{name}:delete_scope:
     post:
       operationId: deleteScopeMemories
@@ -3425,14 +3467,16 @@ paths:
           description: The name of the memory store.
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - MemoryStores=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3469,7 +3513,7 @@ paths:
                 - scope
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
   /memory_stores/{name}:search_memories:
     post:
       operationId: searchMemories
@@ -3481,14 +3525,16 @@ paths:
           description: The name of the memory store to search.
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - MemoryStores=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3537,7 +3583,7 @@ paths:
                 - scope
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
   /memory_stores/{name}:update_memories:
     post:
       operationId: updateMemories
@@ -3549,14 +3595,16 @@ paths:
           description: The name of the memory store to update.
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - MemoryStores=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3617,7 +3665,7 @@ paths:
                 - scope
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
   /openai/v1/conversations:
     post:
       operationId: createConversation
@@ -5558,14 +5606,16 @@ paths:
       operationId: RedTeams_create
       description: Creates a redteam run.
       parameters:
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - RedTeams=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - RedTeams=V1Preview
         - name: api-version
           in: query
           required: true
@@ -5819,14 +5869,16 @@ paths:
           description: The unique identifier of the schedule run.
           schema:
             type: string
-        - name: Foundry-Beta
+        - name: Foundry-Features
           in: header
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            type: string
-            enum:
-              - Insights=v1
+            anyOf:
+              - type: string
+              - type: string
+                enum:
+                  - Insights=V1Preview
         - name: api-version
           in: query
           required: true
@@ -6014,7 +6066,7 @@ components:
       description: The details of the container of a specific version of an agent.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
     AgentContainerOperationError:
       type: object
       required:
@@ -6034,7 +6086,7 @@ components:
       description: The error details of the container operation, if any.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
     AgentContainerOperationObject:
       type: object
       required:
@@ -6067,7 +6119,7 @@ components:
       description: The container operation for a specific version of an agent.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
     AgentContainerOperationStatus:
       type: string
       enum:
@@ -6078,7 +6130,7 @@ components:
       description: Status of the container operation for a specific version of an agent.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
     AgentContainerStatus:
       type: string
       enum:
@@ -6093,7 +6145,7 @@ components:
       description: Status of the container of a specific version of an agent.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
     AgentDefinition:
       type: object
       required:
@@ -6114,9 +6166,9 @@ components:
           container_app: '#/components/schemas/ContainerAppAgentDefinition'
       x-ms-foundry-meta:
         conditional_previews:
-          - HostedAgents=v1
-          - ContainerAgents=v1
-          - WorkflowAgents=v1
+          - HostedAgents=V1Preview
+          - ContainerAgents=V1Preview
+          - WorkflowAgents=V1Preview
     AgentEvaluation:
       type: object
       required:
@@ -7113,7 +7165,7 @@ components:
       description: A memory item containing a summary extracted from conversations.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     ClusterInsightResult:
       type: object
       required:
@@ -7302,7 +7354,7 @@ components:
       description: The container app agent definition.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
     ContainerDetails:
       type: object
       required:
@@ -7336,7 +7388,7 @@ components:
       description: Detailed information about the container.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
     ContainerLogKind:
       type: string
       enum:
@@ -7345,7 +7397,7 @@ components:
       description: The type of logs to stream from a container.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
     ContainerReplica:
       type: object
       required:
@@ -7365,7 +7417,7 @@ components:
       description: Information about a container replica.
       x-ms-foundry-meta:
         required_previews:
-          - ContainerAgents=v1
+          - ContainerAgents=V1Preview
     ContinuousEvaluationRuleAction:
       type: object
       required:
@@ -7486,14 +7538,14 @@ components:
           description: The agent definition. This can be a workflow, hosted agent, or a simple agent definition.
           x-ms-foundry-meta:
             conditional_previews:
-              - HostedAgents=v1
-              - ContainerAgents=v1
-              - WorkflowAgents=v1
+              - HostedAgents=V1Preview
+              - ContainerAgents=V1Preview
+              - WorkflowAgents=V1Preview
       x-ms-foundry-meta:
         conditional_previews:
-          - HostedAgents=v1
-          - ContainerAgents=v1
-          - WorkflowAgents=v1
+          - HostedAgents=V1Preview
+          - ContainerAgents=V1Preview
+          - WorkflowAgents=V1Preview
     CreateAgentVersionFromManifestRequest:
       type: object
       required:
@@ -7550,14 +7602,14 @@ components:
           description: The agent definition. This can be a workflow, hosted agent, or a simple agent definition.
           x-ms-foundry-meta:
             conditional_previews:
-              - HostedAgents=v1
-              - ContainerAgents=v1
-              - WorkflowAgents=v1
+              - HostedAgents=V1Preview
+              - ContainerAgents=V1Preview
+              - WorkflowAgents=V1Preview
       x-ms-foundry-meta:
         conditional_previews:
-          - HostedAgents=v1
-          - ContainerAgents=v1
-          - WorkflowAgents=v1
+          - HostedAgents=V1Preview
+          - ContainerAgents=V1Preview
+          - WorkflowAgents=V1Preview
     CreateEvalRequest:
       type: object
       required:
@@ -7844,7 +7896,7 @@ components:
           type: string
           enum:
             - agent.version.deleted
-          description: The object type. Always 'agent.deleted'.
+          description: The object type. Always 'agent.version.deleted'.
         name:
           type: string
           description: The name of the agent.
@@ -7909,7 +7961,7 @@ components:
           description: Whether the memory store was successfully deleted.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     DeleteResponseResult:
       type: object
       required:
@@ -9477,7 +9529,7 @@ components:
       description: The hosted agent definition.
       x-ms-foundry-meta:
         required_previews:
-          - HostedAgents=v1
+          - HostedAgents=V1Preview
     HourlyRecurrenceSchedule:
       type: object
       required:
@@ -9900,7 +9952,7 @@ components:
       description: A single memory item stored in the memory store, containing content and metadata.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryItemKind:
       anyOf:
         - type: string
@@ -9911,7 +9963,7 @@ components:
       description: Memory item kind.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryOperation:
       type: object
       required:
@@ -9929,7 +9981,7 @@ components:
       description: Represents a single memory operation (create, update, or delete) performed on a memory item.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryOperationKind:
       anyOf:
         - type: string
@@ -9941,7 +9993,7 @@ components:
       description: Memory operation kind.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemorySearchItem:
       type: object
       required:
@@ -9954,7 +10006,7 @@ components:
       description: A retrieved memory item from memory search.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemorySearchOptions:
       type: object
       properties:
@@ -9965,7 +10017,7 @@ components:
       description: Memory search options.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemorySearchPreviewTool:
       type: object
       required:
@@ -10105,7 +10157,7 @@ components:
       description: Default memory store implementation.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreDefaultOptions:
       type: object
       required:
@@ -10126,7 +10178,7 @@ components:
       description: Default memory store configurations.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreDefinition:
       type: object
       required:
@@ -10143,7 +10195,7 @@ components:
       description: Base definition for memory store configurations.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreDeleteScopeResponse:
       type: object
       required:
@@ -10169,7 +10221,7 @@ components:
       description: Response for deleting memories from a scope.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreKind:
       anyOf:
         - type: string
@@ -10179,7 +10231,7 @@ components:
       description: The type of memory store implementation to use.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreObject:
       type: object
       required:
@@ -10226,7 +10278,7 @@ components:
       description: A memory store that can store and retrieve user memories.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreOperationUsage:
       type: object
       required:
@@ -10264,7 +10316,7 @@ components:
       description: Usage statistics of a memory store operation.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreSearchResponse:
       type: object
       required:
@@ -10287,7 +10339,7 @@ components:
       description: Memory search response.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreUpdateCompletedResult:
       type: object
       required:
@@ -10306,7 +10358,7 @@ components:
       description: Memory update result.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreUpdateResponse:
       type: object
       required:
@@ -10334,7 +10386,7 @@ components:
       description: Provides the status of a memory store update operation.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     MemoryStoreUpdateStatus:
       type: string
       enum:
@@ -10346,7 +10398,7 @@ components:
       description: Status of a memory store update operation.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     Message:
       type: object
       required:
@@ -10512,7 +10564,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Credentials that do not require authentication
-    OAuthConsentRequestItemResource:
+    OAuthConsentRequestOutputItem:
       type: object
       required:
         - id
@@ -10533,7 +10585,7 @@ components:
           type: string
           description: The server label for the OAuth consent request.
       allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemResource'
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: Request from the service for the user to perform OAuth consent.
     OneTimeTrigger:
       type: object
@@ -17501,9 +17553,6 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          structured_outputs: '#/components/schemas/StructuredOutputsItemResource'
-          workflow_preview_action: '#/components/schemas/WorkflowPreviewActionOutputItemResource'
-          oauth_consent_request: '#/components/schemas/OAuthConsentRequestItemResource'
           message: '#/components/schemas/OpenAI.InputMessageResource'
           output_message: '#/components/schemas/OpenAI.ItemResourceOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.ItemResourceFileSearchToolCall'
@@ -18226,6 +18275,10 @@ components:
             - mcp_approval_request
             - mcp_approval_response
             - mcp_call
+            - structured_outputs
+            - oauth_consent_request
+            - memory_search_call
+            - workflow_action
     OpenAI.ItemResourceWebSearchToolCall:
       type: object
       required:
@@ -18297,7 +18350,7 @@ components:
             - structured_outputs
             - oauth_consent_request
             - memory_search_call
-            - workflow_preview_action
+            - workflow_action
     OpenAI.ItemWebSearchToolCall:
       type: object
       required:
@@ -19033,6 +19086,9 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          structured_outputs: '#/components/schemas/StructuredOutputsOutputItem'
+          workflow_action: '#/components/schemas/WorkflowActionOutputItem'
+          oauth_consent_request: '#/components/schemas/OAuthConsentRequestOutputItem'
           memory_search_call: '#/components/schemas/MemorySearchToolCallItemResource'
           output_message: '#/components/schemas/OpenAI.OutputItemOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.OutputItemFileSearchToolCall'
@@ -19720,7 +19776,7 @@ components:
             - structured_outputs
             - oauth_consent_request
             - memory_search_call
-            - workflow_preview_action
+            - workflow_action
     OpenAI.OutputItemWebSearchToolCall:
       type: object
       required:
@@ -24036,7 +24092,7 @@ components:
             - type: string
             - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
           description: |-
-            How the model should select which tool (or tools) to use when generating a response. 
+            How the model should select which tool (or tools) to use when generating a response.
             See the `tools` parameter to see how to specify which tools the model can call.
         text:
           allOf:
@@ -24622,7 +24678,7 @@ components:
           nullable: true
           description: Whether to enforce strict validation. Default `true`.
       description: A structured output that can be produced by the agent.
-    StructuredOutputsItemResource:
+    StructuredOutputsOutputItem:
       type: object
       required:
         - type
@@ -24635,7 +24691,7 @@ components:
         output:
           description: The structured output captured during the response.
       allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemResource'
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
     SyntheticDataGenerationPreviewEvalRunDataSource:
       type: object
       required:
@@ -24999,9 +25055,9 @@ components:
           description: The agent definition. This can be a workflow, hosted agent, or a simple agent definition.
           x-ms-foundry-meta:
             conditional_previews:
-              - HostedAgents=v1
-              - ContainerAgents=v1
-              - WorkflowAgents=v1
+              - HostedAgents=V1Preview
+              - ContainerAgents=V1Preview
+              - WorkflowAgents=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -25051,7 +25107,7 @@ components:
       description: A memory item specifically containing user profile information extracted from conversations, such as preferences, interests, and personal details.
       x-ms-foundry-meta:
         conditional_previews:
-          - MemoryStores=v1
+          - MemoryStores=V1Preview
     WebSearchConfiguration:
       type: object
       required:
@@ -25084,25 +25140,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Weekly recurrence schedule.
-    WorkflowAgentDefinition:
-      type: object
-      required:
-        - kind
-      properties:
-        kind:
-          type: string
-          enum:
-            - workflow
-        workflow:
-          type: string
-          description: The CSDL YAML definition of the workflow.
-      allOf:
-        - $ref: '#/components/schemas/AgentDefinition'
-      description: The workflow agent definition.
-      x-ms-foundry-meta:
-        required_previews:
-          - WorkflowAgents=v1
-    WorkflowPreviewActionOutputItemResource:
+    WorkflowActionOutputItem:
       type: object
       required:
         - type
@@ -25113,7 +25151,7 @@ components:
         type:
           type: string
           enum:
-            - workflow_preview_action
+            - workflow_action
         kind:
           type: string
           description: The kind of CSDL action (e.g., 'SetVariable', 'InvokeAzureAgent').
@@ -25135,7 +25173,25 @@ components:
             - cancelled
           description: Status of the action (e.g., 'in_progress', 'completed', 'failed', 'cancelled').
       allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemResource'
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+    WorkflowAgentDefinition:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - workflow
+        workflow:
+          type: string
+          description: The CSDL YAML definition of the workflow.
+      allOf:
+        - $ref: '#/components/schemas/AgentDefinition'
+      description: The workflow agent definition.
+      x-ms-foundry-meta:
+        required_previews:
+          - WorkflowAgents=V1Preview
     integer:
       type: integer
       format: int64
