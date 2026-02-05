@@ -1325,10 +1325,8 @@ union VMScaleSetLifecycleHookEventType {
 /**
  * Specifies information about the virtual machine scale set lifecycle hook event.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope"
 @added(Versions.v2025_11_01)
-model VMScaleSetLifecycleHookEventUpdate extends UpdateResource {
+model VMScaleSetLifecycleHookEventUpdate {
   /**
    * virtual machine scale set lifecycle hook event properties.
    */
