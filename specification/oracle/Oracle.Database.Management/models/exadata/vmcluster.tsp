@@ -207,7 +207,7 @@ model CloudVmClusterProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   zoneId?: Ocid;
 
-  @doc("The hostname for the cloud VM cluster.")
+  @doc("The hostname for the cloud VM cluster. Hostname and domain combined length cannot exceed 112 characters.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(23)
@@ -378,6 +378,11 @@ model CloudVmClusterProperties {
   @doc("Specifies whether the type of storage management for the VM cluster is ASM or Exascale.")
   @visibility(Lifecycle.Read)
   storageManagementType?: ExadataVmClusterStorageManagementType;
+
+  @added(Versions.v20251201_preview)
+  @doc("Indicates if the Accelerated Networking feature is enabled or disabled for provisioning an Exadata VM cluster. The default value is: false.")
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  isAcceleratedNetworkEnabled?: boolean = false;
 }
 
 @doc("Add/Remove (Virtual Machine) DbNode model")
