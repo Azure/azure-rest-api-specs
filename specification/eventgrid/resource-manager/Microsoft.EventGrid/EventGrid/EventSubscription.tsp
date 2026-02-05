@@ -394,7 +394,7 @@ interface DomainEventSubscriptions {
     PatchModel = EventSubscriptionUpdateParameters,
     Response = ArmResourceCreatedResponse<
       EventSubscription,
-      LroHeaders = ArmLroLocationHeader
+      LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription>
     >
   >;
 
