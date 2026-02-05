@@ -58,20 +58,22 @@ enum FoundryFeaturesOptInKeys {
   memory_stores_v1_preview: "MemoryStores=V1Preview",
 }
 
-alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Union with template parameter cannot be named"
+alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
   @header("Foundry-Features")
-  foundry_features: RequiredPreviewOptInHeader;
+  foundry_features: string | RequiredPreviewOptInHeader;
 };
 
-alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader extends FoundryFeaturesOptInKeys> = {
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Union with template parameter cannot be named"
+alias WithConditionalFoundryPreviewHeader<OptionalPreviewOptInHeader> = {
   /**
    * A feature flag opt-in required when using preview operations or modifying persisted preview resources.
    */
   @header("Foundry-Features")
-  foundry_features?: OptionalPreviewOptInHeader;
+  foundry_features?: string | OptionalPreviewOptInHeader;
 };
 
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" ""

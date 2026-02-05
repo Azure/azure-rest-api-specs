@@ -77,11 +77,11 @@ using Azure.AI.Projects;
 // Operation scope customizations - don't generate container operations *except* for backend C#
 // ---------------------------------------------------------------------------------------------------
 @@scope(Agents.startAgentContainer, "!(python, javascript)");
-@@scope(Agents.stopAgentContainer, "!(python, javascript)");
 @@scope(Agents.updateAgentContainer, "!(python, javascript)");
+@@scope(Agents.stopAgentContainer, "!(python, javascript)");
 @@scope(Agents.deleteAgentContainer, "!(python, javascript)");
 @@scope(Agents.getAgentContainer, "!(python, javascript)");
-@@scope(Agents.getAgentContainerOperation, "!(python, javascript)");
+@@scope(Agents.streamAgentContainerLogs, "!(python, javascript)");
 @@scope(Agents.listAgentContainerOperations, "!(python, javascript)");
 @@scope(Agents.listAgentVersionContainerOperations, "!(python, javascript)");
 @@scope(Agents.getAgentContainerOperation, "!(python, javascript)");
