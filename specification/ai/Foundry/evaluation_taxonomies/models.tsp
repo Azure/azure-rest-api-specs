@@ -40,6 +40,9 @@ union EvaluationTaxonomyInputType {
 
   @doc("Policy.")
   policy: "policy",
+
+  @doc("Behavior-based taxonomy input for custom behavior definitions")
+  behavior: "behavior",
 }
 
 @added(Versions.v2025_11_15_preview)
@@ -63,6 +66,22 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
 
   @doc("List of risk categories to evaluate against.")
   riskCategories: RiskCategory[];
+}
+
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+@doc("Input configuration for the evaluation taxonomy when the input type is behavior.")
+model BehaviorTaxonomyInput extends EvaluationTaxonomyInput {
+  @doc("Input type of the evaluation taxonomy.")
+  type: EvaluationTaxonomyInputType.behavior;
+
+  @doc("Name of the behavior to evaluate")
+  behavior_name: string;
+
+  @doc("Detailed definition of the behavior (10-2000 characters)")
+  @minLength(10)
+  @maxLength(2000)
+  behavior_definition: string;
 }
 
 @added(Versions.v2025_11_15_preview)
@@ -101,8 +120,11 @@ model TaxonomySubCategory {
   @doc("Description of the taxonomy sub-category.")
   description?: string;
 
-  @doc("List of taxonomy items under this sub-category.")
+  @doc("Whether this sub-category is enabled for evaluation.")
   enabled: boolean;
+
+  @doc("List of subtopics for this sub-category.")
+  subtopics?: string[];
 
   @doc("Additional properties for the taxonomy sub-category.")
   properties?: Record<string>;
