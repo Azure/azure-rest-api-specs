@@ -71,7 +71,3 @@ using Microsoft.ServiceFabric;
   "ServiceFabricManagementClient",
   "javascript"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "ManagedIdentity",
-  "javascript"
-);
