@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Service Fabric.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ServiceFabricManagementClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,9 +19,8 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ServiceFabricManagementClient API.
 
 ``` yaml
