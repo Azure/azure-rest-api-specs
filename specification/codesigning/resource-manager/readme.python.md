@@ -6,15 +6,15 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-trustedsigning
-namespace: azure.mgmt.trustedsigning
+package-name: azure-mgmt-artifactsigning
+namespace: azure.mgmt.artifactsigning
 package-version: 1.0.0b2
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/trustedsigning/azure-mgmt-trustedsigning/azure/mgmt/trustedsigning
+output-folder: $(python-sdks-folder)/artifactsigning/azure-mgmt-artifactsigning/azure/mgmt/artifactsigning
 ```
 
 ``` yaml $(python)
