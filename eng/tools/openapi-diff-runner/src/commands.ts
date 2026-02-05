@@ -79,31 +79,10 @@ export async function validateBreakingChange(context: Context): Promise<number> 
 
   const newExistingVersionDirs: string[] = [];
 
-  // Build a map of renames to check the base directory for renamed files
-  const renameToMap = new Map(renamedSwaggers.map((r) => [r.to, r.from]));
-
   const addedVersionDirs = [...new Set(newSwaggers.map((f: string) => path.dirname(f)))];
 
   for (const dir of addedVersionDirs) {
-    // Check if any file in this directory is a rename
-    const filesInThisDir = newSwaggers.filter((swagger) => path.dirname(swagger) === dir);
-    let dirExists = existsSync(path.join(context.prInfo!.tempRepoFolder, dir));
-
-    // If the directory doesn't exist in the base, check if any file in this dir is a rename
-    if (!dirExists) {
-      for (const file of filesInThisDir) {
-        const renameFrom = renameToMap.get(file);
-        if (renameFrom) {
-          // Check if the "from" file exists in the base
-          if (existsSync(path.join(context.prInfo!.tempRepoFolder, renameFrom))) {
-            dirExists = true;
-            break;
-          }
-        }
-      }
-    }
-
-    if (dirExists) {
+    if (existsSync(path.join(context.prInfo!.tempRepoFolder, dir))) {
       newExistingVersionDirs.push(dir);
     }
   }

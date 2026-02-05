@@ -184,18 +184,23 @@ export async function getSwaggerDiffs(
     // Combine git-detected renames with manually matched renames
     const allRenames = filteredRenames.concat(matchedRenames);
 
-    // Add ONLY git-detected renames to the additions array and deletions array
-    // Manually matched renames are already in additions/deletions, so we don't add them again
-    // This ensures backward compatibility with code that expects renames in these lists
-    filteredAdditions.push(...filteredRenames.map((rename) => rename.to));
-    filteredDeletions.push(...filteredRenames.map((rename) => rename.from));
+    // Remove renamed files from additions and deletions lists
+    // They will be tracked separately in the renames list
+    const renameToFiles = new Set(allRenames.map((r) => r.to));
+    const renameFromFiles = new Set(allRenames.map((r) => r.from));
+    const finalAdditions = filteredAdditions.filter((a) => !renameToFiles.has(a));
+    const finalDeletions = filteredDeletions.filter((d) => !renameFromFiles.has(d));
 
     return {
-      additions: filteredAdditions,
+      additions: finalAdditions,
       modifications: filteredModifications,
-      deletions: filteredDeletions,
+      deletions: finalDeletions,
       renames: allRenames,
-      total: filteredAdditions.length + filteredModifications.length + filteredDeletions.length,
+      total:
+        finalAdditions.length +
+        filteredModifications.length +
+        finalDeletions.length +
+        allRenames.length,
     };
   } catch (error) {
     logError(`Error getting categorized changed files: ${error}`);
