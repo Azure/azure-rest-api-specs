@@ -25,15 +25,15 @@ function buildLeasePath(repoRoot, serviceName, resourceProvider, serviceGroup = 
  * @param {string} serviceName - Service name
  * @param {string} resourceProvider - Resource provider namespace
  * @param {string} serviceGroup - Optional service group
- * @returns {boolean} True if lease exists and is valid, false otherwise
+ * @returns {{ exists: boolean, valid: boolean, leasePath: string }} Lease status
  */
-export function checkLease(serviceName, resourceProvider, serviceGroup = '') {
-  try {
-    const repoRoot = process.env.TEST_REPO_ROOT || execSync('git rev-parse --show-toplevel', { encoding: 'utf-8' }).trim();
-    const leasePath = buildLeasePath(repoRoot, serviceName, resourceProvider, serviceGroup);
+function getLeaseStatus(serviceName, resourceProvider, serviceGroup = '') {
+  const repoRoot = process.env.TEST_REPO_ROOT || execSync('git rev-parse --show-toplevel', { encoding: 'utf-8' }).trim();
+  const leasePath = buildLeasePath(repoRoot, serviceName, resourceProvider, serviceGroup);
 
+  try {
     if (!existsSync(leasePath)) {
-      return false;
+      return { exists: false, valid: false, leasePath };
     }
 
     const content = readFileSync(leasePath, 'utf-8');
@@ -52,10 +52,21 @@ export function checkLease(serviceName, resourceProvider, serviceGroup = '') {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    return today <= endDate;
+    return { exists: true, valid: today <= endDate, leasePath };
   } catch (error) {
-    return false;
+    return { exists: existsSync(leasePath), valid: false, leasePath };
   }
+}
+
+/**
+ * Check if ARM lease exists and is valid
+ * @param {string} serviceName - Service name
+ * @param {string} resourceProvider - Resource provider namespace
+ * @param {string} serviceGroup - Optional service group
+ * @returns {boolean} True if lease exists and is valid, false otherwise
+ */
+export function checkLease(serviceName, resourceProvider, serviceGroup = '') {
+  return getLeaseStatus(serviceName, resourceProvider, serviceGroup).valid;
 }
 
 function main() {
@@ -64,21 +75,15 @@ function main() {
   const serviceGroup = process.argv[4] || '';
 
   if (!serviceName || !resourceProvider) {
-    console.error('Usage: node detect-arm-leases.js <service-name> <resource-provider-name> [service-group]');
+    console.error(`Missing arguments: serviceName="${serviceName}", resourceProviderName="${resourceProvider}"`);
     process.exit(1);
   }
 
-  const result = checkLease(serviceName, resourceProvider, serviceGroup);
+  const status = getLeaseStatus(serviceName, resourceProvider, serviceGroup);
 
-  if (!result) {
-    const repoRoot = execSync('git rev-parse --show-toplevel', { encoding: 'utf-8' }).trim();
-    const leasePath = buildLeasePath(repoRoot, serviceName, resourceProvider, serviceGroup);
-    
-    if (!existsSync(leasePath)) {
-      console.log('No lease file found');
-    } else {
-      console.error('Lease has expired');
-    }
+  if (!status.valid) {
+    const message = status.exists ? 'Lease has expired' : 'No lease file found';
+    console.log(message);
     process.exit(1);
   }
 

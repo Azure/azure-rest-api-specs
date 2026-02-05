@@ -10,7 +10,6 @@ describe('detect-new-resource-provider', () => {
     mockGithub = {
       rest: {
         issues: {
-          addLabels: vi.fn().mockResolvedValue({}),
           createComment: vi.fn().mockResolvedValue({})
         }
       }
@@ -41,9 +40,8 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(result).toBe('no-changes');
+      expect(result.status).toBe('no-changes');
       expect(mockCore.setFailed).not.toHaveBeenCalled();
-      expect(mockGithub.rest.issues.addLabels).not.toHaveBeenCalled();
       expect(mockGithub.rest.issues.createComment).not.toHaveBeenCalled();
     });
   });
@@ -57,7 +55,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
     it('should work with different baseBranch values', async () => {
@@ -68,7 +66,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
   });
 
@@ -81,7 +79,6 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(mockGithub.rest.issues.addLabels).not.toHaveBeenCalled();
       expect(mockGithub.rest.issues.createComment).not.toHaveBeenCalled();
     });
 
@@ -89,7 +86,6 @@ describe('detect-new-resource-provider', () => {
       const errorGithub = {
         rest: {
           issues: {
-            addLabels: vi.fn().mockRejectedValue(new Error('API Error')),
             createComment: vi.fn().mockRejectedValue(new Error('API Error'))
           }
         }
@@ -102,7 +98,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
   });
 
@@ -115,7 +111,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
   });
 
@@ -133,7 +129,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
   });
 
@@ -151,7 +147,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
     it('should handle very large issue numbers', async () => {
@@ -167,7 +163,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
     it('should handle empty string repo owner', async () => {
@@ -183,7 +179,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
     it('should handle empty string repo name', async () => {
@@ -199,15 +195,14 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
-    it('should handle addLabels throwing network timeout', async () => {
+    it('should handle createComment throwing network timeout', async () => {
       const timeoutGithub = {
         rest: {
           issues: {
-            addLabels: vi.fn().mockRejectedValue(new Error('Network timeout')),
-            createComment: vi.fn().mockResolvedValue({})
+            createComment: vi.fn().mockRejectedValue(new Error('Network timeout'))
           }
         }
       };
@@ -219,14 +214,13 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
     it('should handle createComment throwing permission error', async () => {
       const permissionGithub = {
         rest: {
           issues: {
-            addLabels: vi.fn().mockResolvedValue({}),
             createComment: vi.fn().mockRejectedValue(new Error('Permission denied'))
           }
         }
@@ -239,14 +233,13 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
-    it('should handle both GitHub API methods failing', async () => {
+    it('should handle GitHub API methods failing', async () => {
       const failingGithub = {
         rest: {
           issues: {
-            addLabels: vi.fn().mockRejectedValue(new Error('Service unavailable')),
             createComment: vi.fn().mockRejectedValue(new Error('Service unavailable'))
           }
         }
@@ -259,7 +252,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
     it('should handle core.setFailed as undefined', async () => {
@@ -272,7 +265,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
     it('should handle multiple concurrent calls', async () => {
@@ -288,7 +281,7 @@ describe('detect-new-resource-provider', () => {
       const results = await Promise.all(calls);
 
       results.forEach(result => {
-        expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+        expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
       });
     });
 
@@ -307,14 +300,13 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
 
     it('should not throw when GitHub methods return null', async () => {
       const nullGithub = {
         rest: {
           issues: {
-            addLabels: vi.fn().mockResolvedValue(null),
             createComment: vi.fn().mockResolvedValue(null)
           }
         }
@@ -327,7 +319,7 @@ describe('detect-new-resource-provider', () => {
         baseBranch: 'main'
       });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result);
+      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
     });
   });
 });

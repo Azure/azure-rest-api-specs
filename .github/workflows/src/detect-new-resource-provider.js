@@ -4,7 +4,7 @@ import { execSync } from 'child_process';
 import { readdirSync, existsSync, statSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { simpleGit } from 'simple-git';
-import { getChangedFiles, swagger, example } from '../../shared/src/changed-files.js';
+import { getChangedFiles, swagger, example, resourceManager } from '../../shared/src/changed-files.js';
 import { checkLease } from './detect-arm-leases.js';
 
 // ============================================
@@ -18,8 +18,27 @@ const RESOURCE_MANAGER_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\
 // ServiceGroup folder name should not start with "stable" or "preview"
 const RESOURCE_MANAGER_WITH_GROUP_PATTERN = /^specification\/[^\/]+\/resource-manager\/([^\/]+)\/(?!stable|preview)([^\/]+)\//;
 
-// Labels to add when new resource providers are detected
-const NEW_RP_LABELS = ['ARMModelingReviewRequired', 'NotReadyForARMReview'];
+/**
+ * New resource provider label names.
+ * @readonly
+ * @enum {string}
+ */
+const NewRpLabel = Object.freeze({
+  ArmModelingReviewRequired: 'ARMModelingReviewRequired',
+  NotReadyForArmReview: 'NotReadyForARMReview'
+});
+
+// Label action values used by update-labels workflow
+const LABEL_ACTIONS = Object.freeze({
+  add: 'add',
+  remove: 'remove',
+  none: 'none'
+});
+
+const DEFAULT_LABEL_ACTIONS = Object.freeze({
+  [NewRpLabel.ArmModelingReviewRequired]: LABEL_ACTIONS.none,
+  [NewRpLabel.NotReadyForArmReview]: LABEL_ACTIONS.none
+});
 
 // ============================================
 // Utility Functions
@@ -58,25 +77,25 @@ function resourceProviderExists(specPath, namespace) {
   return false;
 }
 
-/**
- * Add labels to the PR for new resource providers
- * @param {Object} github - GitHub API client from github-script
- * @param {Object} context - GitHub context from github-script
- * @returns {Promise<void>}
- */
-async function addNewResourceProviderLabels(github, context) {
-  try {
-    await github.rest.issues.addLabels({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      issue_number: context.issue.number,
-      labels: NEW_RP_LABELS
-    });
-
-    console.log(`Successfully added labels: ${NEW_RP_LABELS.join(', ')}`);
-  } catch (error) {
-    console.log(`[FAILED] Failed to add labels: ${error.message}`);
+function getLabelActions(hasNewResourceProviders) {
+  if (!hasNewResourceProviders) {
+    return {
+      [NewRpLabel.ArmModelingReviewRequired]: LABEL_ACTIONS.remove,
+      [NewRpLabel.NotReadyForArmReview]: LABEL_ACTIONS.remove
+    };
   }
+
+  return {
+    [NewRpLabel.ArmModelingReviewRequired]: LABEL_ACTIONS.add,
+    [NewRpLabel.NotReadyForArmReview]: LABEL_ACTIONS.add
+  };
+}
+
+function getContextOutput(context) {
+  const headSha = context?.payload?.pull_request?.head?.sha || '';
+  const issueNumber = Number(context?.issue?.number || context?.payload?.pull_request?.number || 0);
+
+  return { headSha, issueNumber };
 }
 
 /**
@@ -140,13 +159,15 @@ export default async function detectNewResourceProvider({ github, context, core,
     headCommitish: 'HEAD'
   });
 
-  const rmFiles = allFiles.filter(file => 
-    file.includes('/resource-manager/') && file.startsWith('specification/')
-  );
+  const rmFiles = allFiles.filter((file) => resourceManager(file) && file.startsWith('specification/'));
 
   if (rmFiles.length === 0) {
     console.log('No resource-manager files changed');
-    return 'no-changes';
+    return {
+      status: 'no-changes',
+      labelActions: DEFAULT_LABEL_ACTIONS,
+      ...getContextOutput(context)
+    };
   }
 
   // Extract resource providers from changed files
@@ -174,7 +195,7 @@ export default async function detectNewResourceProvider({ github, context, core,
         
         const specRmSwaggerFilesBaseBranch = specFilesBaseBranch
           .split('\n')
-          .filter((file) => file.includes('/resource-manager/') && swagger(file));
+          .filter((file) => resourceManager(file) && swagger(file));
 
         if (specRmSwaggerFilesBaseBranch.length === 0) {
           hasAtLeastOneBrandNewRP = true;
@@ -188,7 +209,11 @@ export default async function detectNewResourceProvider({ github, context, core,
     if (!hasAtLeastOneBrandNewRP) {
       console.log('No brand new resource providers detected, spec directories exist in base branch.');
       console.log('Skipping workflow.\n');
-      return 'no-new-rp';
+      return {
+        status: 'no-new-rp',
+        labelActions: getLabelActions(false),
+        ...getContextOutput(context)
+      };
     }
   }
 
@@ -210,7 +235,7 @@ export default async function detectNewResourceProvider({ github, context, core,
   const leaseCheckResults = [];
   
   if (newResourceProviders.length > 0) {
-    console.log(`\n🆕 Detected ${newResourceProviders.length} new resource provider(s)\n`);
+    console.log(`\nDetected ${newResourceProviders.length} new resource provider(s)\n`);
     
     for (const rp of newResourceProviders) {
       const leaseValid = checkLease(rp.serviceName, rp.namespace, rp.serviceGroup || '');
@@ -223,15 +248,14 @@ export default async function detectNewResourceProvider({ github, context, core,
         leaseMessage: leaseValid ? 'Lease is valid' : 'No lease file found or lease has expired'
       });
       
-      console.log(`  - ${rp.namespace}: ${leaseValid ? '[OK]' : '[FAILED]'} Lease ${leaseValid ? 'valid' : 'invalid'}`);
+      const leaseStatus = leaseValid ? 'Lease valid' : 'Lease invalid';
+      console.log(`  - ${rp.namespace}: ${leaseStatus}`);
     }
     
     writeFileSync(
       join(repoRoot, '.github', 'new-rp-output.json'),
       JSON.stringify({ newResourceProviders: leaseCheckResults }, null, 2)
     );
-    
-    await addNewResourceProviderLabels(github, context);
     
     // Create PR comment with detected resource providers
     const rpList = leaseCheckResults
@@ -262,10 +286,18 @@ export default async function detectNewResourceProvider({ github, context, core,
     
     // Set the action as failed to indicate new RPs were detected
     core.setFailed('New resource providers detected');
-    return 'new-rp-detected';
+    return {
+      status: 'new-rp-detected',
+      labelActions: getLabelActions(true),
+      ...getContextOutput(context)
+    };
   } else {
     console.log('No new resource providers detected.\n');
-    return 'no-new-rp';
+    return {
+      status: 'no-new-rp',
+      labelActions: getLabelActions(false),
+      ...getContextOutput(context)
+    };
   }
 }
 
