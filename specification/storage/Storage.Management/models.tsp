@@ -1067,6 +1067,10 @@ union TriggerType {
   RunOnce: "RunOnce",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OnSchedule: "OnSchedule",
+
+  /** Run the task as a mock for testing */
+  @added(Versions.v2025_08_01)
+  MockRun: "MockRun",
 }
 
 /**

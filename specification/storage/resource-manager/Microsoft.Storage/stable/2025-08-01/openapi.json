@@ -6908,6 +6908,9 @@
           "PutStorageTaskAssignment": {
             "$ref": "./examples/storageTaskAssignmentsCrud/PutStorageTaskAssignment.json"
           },
+          "PutStorageTaskAssignmentMockRun": {
+            "$ref": "./examples/storageTaskAssignmentsCrud/PutStorageTaskAssignmentMockRun.json"
+          },
           "PutStorageTaskAssignmentRequiredProperties": {
             "$ref": "./examples/storageTaskAssignmentsCrud/PutStorageTaskAssignmentRequiredProperties.json"
           }
@@ -15642,7 +15645,8 @@
       "description": "The trigger type of the storage task assignment execution",
       "enum": [
         "RunOnce",
-        "OnSchedule"
+        "OnSchedule",
+        "MockRun"
       ],
       "x-ms-enum": {
         "name": "TriggerType",
@@ -15655,6 +15659,11 @@
           {
             "name": "OnSchedule",
             "value": "OnSchedule"
+          },
+          {
+            "name": "MockRun",
+            "value": "MockRun",
+            "description": "Run the task as a mock for testing"
           }
         ]
       }
