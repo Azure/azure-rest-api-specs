@@ -408,9 +408,97 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/resilienceServices/{resilienceServiceName}/syncPolicies": {
+      "post": {
+        "operationId": "ResilienceServices_SyncPolicies",
+        "tags": [
+          "ResilienceServices"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resilienceServiceName",
+            "in": "path",
+            "description": "The name of the ResilienceService",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ResilienceServicePolicyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResilienceServices_SyncPolicies_MaximumSet_Gen": {
+            "$ref": "./examples/ResilienceServices_SyncPolicies_MaximumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "Policy": {
+      "type": "object",
+      "description": "A policy enforced in the tenant where the resilience service resides",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the policy"
+        },
+        "definition": {
+          "type": "array",
+          "description": "The definitions of the policy",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the policy"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy"
+        },
+        "isOrganizationDefault": {
+          "type": "boolean",
+          "description": "Indicates if the policy is the organization default"
+        },
+        "deletedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the policy was deleted"
+        }
+      },
+      "required": [
+        "id",
+        "definition",
+        "description",
+        "displayName",
+        "isOrganizationDefault"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The resource provisioning state.",
@@ -470,6 +558,21 @@
       "type": "object",
       "description": "Resilience properties",
       "properties": {
+        "arcResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource Manager (ARM) resource ID of the Azure Arc instance linked to the resilience service",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/machines",
+                "scopes": [
+                  "Tenant"
+                ]
+              }
+            ]
+          }
+        },
         "tenantId": {
           "type": "string",
           "description": "Tenant ID",
@@ -482,6 +585,7 @@
         }
       },
       "required": [
+        "arcResourceId",
         "tenantId"
       ]
     },
@@ -521,6 +625,46 @@
         "value"
       ]
     },
+    "ResilienceServicePolicyResponse": {
+      "type": "object",
+      "description": "The response containing the policies enforced in the tenant where the resilience service resides",
+      "properties": {
+        "multiConditionalAccessPolicies": {
+          "type": "array",
+          "description": "The list of multi conditional access policies",
+          "items": {
+            "$ref": "#/definitions/Policy"
+          }
+        },
+        "userCredentialPolicies": {
+          "type": "array",
+          "description": "The list of user credential policies",
+          "items": {
+            "$ref": "#/definitions/Policy"
+          }
+        },
+        "securityRiskPolicies": {
+          "type": "array",
+          "description": "The list of security risk policies",
+          "items": {
+            "$ref": "#/definitions/Policy"
+          }
+        },
+        "authenticationStrengthPolicies": {
+          "type": "array",
+          "description": "The list of authentication strength policies",
+          "items": {
+            "$ref": "#/definitions/Policy"
+          }
+        }
+      },
+      "required": [
+        "multiConditionalAccessPolicies",
+        "userCredentialPolicies",
+        "securityRiskPolicies",
+        "authenticationStrengthPolicies"
+      ]
+    },
     "ResilienceServiceUpdate": {
       "type": "object",
       "description": "The type used for update operations of the ResilienceService.",
@@ -530,6 +674,31 @@
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ResilienceServiceUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ResilienceServiceUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ResilienceService.",
+      "properties": {
+        "arcResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource Manager (ARM) resource ID of the Azure Arc instance linked to the resilience service",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.HybridCompute/machines",
+                "scopes": [
+                  "Tenant"
+                ]
+              }
+            ]
           }
         }
       }

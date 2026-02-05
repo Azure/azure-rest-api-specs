@@ -17,6 +17,14 @@ model ResilienceService is TrackedResource<ResilienceProperties> {
 
 /** Resilience properties */
 model ResilienceProperties {
+  /** The Azure Resource Manager (ARM) resource ID of the Azure Arc instance linked to the resilience service */
+  arcResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.HybridCompute/machines";
+      scopes: ["Tenant"];
+    }
+  ]>;
+
   /** Tenant ID */
   @visibility(Lifecycle.Read)
   tenantId: string;
@@ -46,6 +54,42 @@ union ProvisioningState {
   string,
 }
 
+/** A policy enforced in the tenant where the resilience service resides */
+model Policy {
+  /** The unique identifier of the policy */
+  id: string;
+
+  /** The definitions of the policy */
+  definition: string[];
+
+  /** The description of the policy */
+  description: string;
+
+  /** The display name of the policy */
+  displayName: string;
+
+  /** Indicates if the policy is the organization default */
+  isOrganizationDefault: boolean;
+
+  /** The date and time when the policy was deleted */
+  deletedDateTime?: utcDateTime;
+}
+
+/** The response containing the policies enforced in the tenant where the resilience service resides */
+model ResilienceServicePolicyResponse {
+  /** The list of multi conditional access policies */
+  multiConditionalAccessPolicies: Policy[];
+
+  /** The list of user credential policies */
+  userCredentialPolicies: Policy[];
+
+  /** The list of security risk policies */
+  securityRiskPolicies: Policy[];
+
+  /** The list of authentication strength policies */
+  authenticationStrengthPolicies: Policy[];
+}
+
 @armResourceOperations
 interface ResilienceServices {
   get is ArmResourceRead<ResilienceService>;
@@ -60,4 +104,9 @@ interface ResilienceServices {
   delete is ArmResourceDeleteWithoutOkAsync<ResilienceService>;
   listByResourceGroup is ArmResourceListByParent<ResilienceService>;
   listBySubscription is ArmListBySubscription<ResilienceService>;
+  syncPolicies is ArmResourceActionSync<
+    ResilienceService,
+    void,
+    ResilienceServicePolicyResponse
+  >;
 }
