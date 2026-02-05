@@ -72,3 +72,12 @@ using Microsoft.Authorization;
   "PolicyTokens"
 );
 @@clientName(PolicyTokensOperationGroup.acquire::parameters.body, "parameters");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DataPolicyManifest.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+@@Legacy.flattenProperty(DataPolicyManifestProperties.resourceFunctions);
+
+// #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property custom azure resource for SDK backward compatibility."
+// @@Azure.ResourceManager.Legacy.customAzureResource(DataPolicyManifest);

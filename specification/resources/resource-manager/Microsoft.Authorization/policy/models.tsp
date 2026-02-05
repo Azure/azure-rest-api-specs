@@ -248,6 +248,7 @@ union PolicyAction {
 
   /**
    * The effective outcome of policy evaluation is to allow the request.
+   */
   Allow: "Allow",
 
   /**
@@ -1259,4 +1260,162 @@ model PolicyLogInfo {
    * An array of policy exemption Ids.
    */
   policyExemptionIds?: string[];
+}
+
+/**
+ * The custom resource function definition.
+ */
+model DataManifestCustomResourceFunctionDefinition {
+  /**
+   * The function name as it will appear in the policy rule. eg - 'vault'.
+   */
+  name?: string;
+
+  /**
+   * The fully qualified control plane resource type that this function represents. eg - 'Microsoft.KeyVault/vaults'.
+   */
+  fullyQualifiedResourceType?: string;
+
+  /**
+   * The top-level properties that can be selected on the function's output. eg - [ \"name\", \"location\" ] if vault().name and vault().location are supported.
+   */
+  defaultProperties?: string[];
+
+  /**
+   * A value indicating whether the custom properties within the property bag are allowed. Needs api-version to be specified in the policy rule eg - vault('2019-06-01').
+   */
+  allowCustomProperties?: boolean;
+}
+
+/**
+ * The resource functions supported by a manifest.
+ */
+model DataManifestResourceFunctionsDefinition {
+  /**
+   * The standard resource functions (subscription and/or resourceGroup).
+   */
+  standard?: string[];
+
+  /**
+   * An array of data manifest custom resource definitions.
+   */
+  @identifiers(#["name", "fullyQualifiedResourceType"])
+  custom?: DataManifestCustomResourceFunctionDefinition[];
+}
+
+/**
+ * The data effect definition.
+ */
+model DataEffect {
+  /**
+   * The data effect name.
+   */
+  name?: string;
+
+  /**
+   * The data effect details schema.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  detailsSchema?: unknown;
+}
+
+/**
+ * The resource type aliases definition.
+ */
+model ResourceTypeAliases {
+  /**
+   * The resource type name.
+   */
+  resourceType?: string;
+
+  /**
+   * The aliases for property names.
+   */
+  aliases?: unknown[];
+}
+
+/**
+ * The properties of the data policy manifest.
+ */
+model DataPolicyManifestProperties {
+  /**
+   * The list of namespaces for the data policy manifest.
+   */
+  namespaces?: string[];
+
+  /**
+   * The policy mode of the data policy manifest.
+   */
+  policyMode?: string;
+
+  /**
+   * A value indicating whether policy mode is allowed only in built-in definitions.
+   */
+  isBuiltInOnly?: boolean;
+
+  /**
+   * An array of resource type aliases.
+   */
+  @identifiers(#["resourceType"])
+  resourceTypeAliases?: ResourceTypeAliases[];
+
+  /**
+   * The effect definition.
+   */
+  @identifiers(#["name"])
+  effects?: DataEffect[];
+
+  /**
+   * The non-alias field accessor values that can be used in the policy rule.
+   */
+  fieldValues?: string[];
+
+  /**
+   * The resource functions definition specified in the data manifest.
+   */
+  resourceFunctions?: DataManifestResourceFunctionsDefinition;
+}
+
+/**
+ * The data policy manifest.
+ */
+model DataPolicyManifest {
+  /**
+   * The data policy manifest properties.
+   */
+  properties?: DataPolicyManifestProperties;
+
+  /**
+   * The ID of the data policy manifest.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the data policy manifest (it's the same as the Policy Mode).
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource (Microsoft.Authorization/dataPolicyManifests).
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * List of data policy manifests.
+ */
+//
+model DataPolicyManifestListResult {
+  /**
+   * An array of data policy manifests.
+   */
+  value?: DataPolicyManifest[];
+
+  /**
+   * The URL to use for getting the next set of results.
+   */
+  nextLink?: string;
 }
