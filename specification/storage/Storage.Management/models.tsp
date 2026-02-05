@@ -351,6 +351,10 @@ union AllowedCopyScope {
   PrivateLink: "PrivateLink",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AAD: "AAD",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_08_01)
+  All: "All",
 }
 
 /**
@@ -1233,6 +1237,12 @@ model BlobServicePropertiesProperties {
   deleteRetentionPolicy?: DeleteRetentionPolicy;
 
   /**
+   * The static website properties for blob storage.
+   */
+  @added(Versions.v2025_08_01)
+  staticWebsite?: StaticWebsite;
+
+  /**
    * Versioning is enabled if set to true.
    */
   isVersioningEnabled?: boolean;
@@ -1325,6 +1335,32 @@ model DeleteRetentionPolicy {
    * This property when set to true allows deletion of the soft deleted blob versions and snapshots. This property cannot be used blob restore policy. This property only applies to blob service and does not apply to containers or file share.
    */
   allowPermanentDelete?: boolean;
+}
+
+/**
+ * The static website properties for blob storage.
+ */
+@added(Versions.v2025_08_01)
+model StaticWebsite {
+  /**
+   * Indicates whether static website support is enabled for the specified account.
+   */
+  enabled: boolean;
+
+  /**
+   * The webpage that Azure Storage serves for requests to the root of a website or any subfolder (for example, index.html). The value is case-sensitive.
+   */
+  indexDocument?: string;
+
+  /**
+   * The absolute path where the default index file is present. This absolute path is mutually exclusive to "indexDocument" and it is case-sensitive.
+   */
+  defaultIndexDocumentPath?: string;
+
+  /**
+   * The absolute path to a webpage that Azure Storage serves for requests that don't correspond to an existing file. The contents of the page are returned with HTTP 404 Not Found. Only a single custom 404 page is supported in each static website.
+   */
+  errorDocument404Path?: string;
 }
 
 /**
@@ -3122,6 +3158,12 @@ model StorageAccountPropertiesCreateParameters {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * Indicate shared key access properties at service level
+   */
+  @added(Versions.v2025_08_01)
+  allowSharedKeyAccessForServices?: StorageAccountSharedKeyAccessProperties;
 }
 
 /**
@@ -3535,6 +3577,43 @@ model AccountImmutabilityPolicyProperties {
 }
 
 /**
+ * Defines shared key access settings for an individual storage service.
+ */
+@added(Versions.v2025_08_01)
+model ServiceSharedKeyAccessProperties {
+  /**
+   * Indicates whether shared key access is enabled for the service.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * Defines shared key access properties for a storage account.
+ */
+@added(Versions.v2025_08_01)
+model StorageAccountSharedKeyAccessProperties {
+  /**
+   * Shared key access settings for Blob service.
+   */
+  blob?: ServiceSharedKeyAccessProperties;
+
+  /**
+   * Shared key access settings for File service.
+   */
+  file?: ServiceSharedKeyAccessProperties;
+
+  /**
+   * Shared key access settings for Table service.
+   */
+  table?: ServiceSharedKeyAccessProperties;
+
+  /**
+   * Shared key access settings for Queue service.
+   */
+  queue?: ServiceSharedKeyAccessProperties;
+}
+
+/**
  * Properties of the storage account.
  */
 model StorageAccountProperties {
@@ -3777,6 +3856,12 @@ model StorageAccountProperties {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * Indicate shared key access properties at service level
+   */
+  @added(Versions.v2025_08_01)
+  allowSharedKeyAccessForServices?: StorageAccountSharedKeyAccessProperties;
 }
 
 /**
@@ -4318,6 +4403,12 @@ model StorageAccountPropertiesUpdateParameters {
    * Status indicating whether Geo Priority Replication is enabled for the account.
    */
   geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
+
+  /**
+   * Indicate shared key access properties at service level
+   */
+  @added(Versions.v2025_08_01)
+  allowSharedKeyAccessForServices?: StorageAccountSharedKeyAccessProperties;
 }
 
 /**

@@ -7911,7 +7911,8 @@
       "description": "Restrict copy to and from Storage Accounts within an AAD tenant or with Private Links to the same VNet.",
       "enum": [
         "PrivateLink",
-        "AAD"
+        "AAD",
+        "All"
       ],
       "x-ms-enum": {
         "name": "AllowedCopyScope",
@@ -7924,6 +7925,10 @@
           {
             "name": "AAD",
             "value": "AAD"
+          },
+          {
+            "name": "All",
+            "value": "All"
           }
         ]
       }
@@ -8404,6 +8409,10 @@
         "deleteRetentionPolicy": {
           "$ref": "#/definitions/DeleteRetentionPolicy",
           "description": "The blob service properties for blob soft delete."
+        },
+        "staticWebsite": {
+          "$ref": "#/definitions/StaticWebsite",
+          "description": "The static website properties for blob storage."
         },
         "isVersioningEnabled": {
           "type": "boolean",
@@ -13216,6 +13225,16 @@
         "canonicalizedResource"
       ]
     },
+    "ServiceSharedKeyAccessProperties": {
+      "type": "object",
+      "description": "Defines shared key access settings for an individual storage service.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether shared key access is enabled for the service."
+        }
+      }
+    },
     "ServiceSpecification": {
       "type": "object",
       "description": "One property of operation, include metric specifications.",
@@ -13694,6 +13713,31 @@
         ]
       },
       "readOnly": true
+    },
+    "StaticWebsite": {
+      "type": "object",
+      "description": "The static website properties for blob storage.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether static website support is enabled for the specified account."
+        },
+        "indexDocument": {
+          "type": "string",
+          "description": "The webpage that Azure Storage serves for requests to the root of a website or any subfolder (for example, index.html). The value is case-sensitive."
+        },
+        "defaultIndexDocumentPath": {
+          "type": "string",
+          "description": "The absolute path where the default index file is present. This absolute path is mutually exclusive to \"indexDocument\" and it is case-sensitive."
+        },
+        "errorDocument404Path": {
+          "type": "string",
+          "description": "The absolute path to a webpage that Azure Storage serves for requests that don't correspond to an existing file. The contents of the page are returned with HTTP 404 Not Found. Only a single custom 404 page is supported in each static website."
+        }
+      },
+      "required": [
+        "enabled"
+      ]
     },
     "StorageAccount": {
       "type": "object",
@@ -14253,6 +14297,10 @@
         "geoPriorityReplicationStatus": {
           "$ref": "#/definitions/GeoPriorityReplicationStatus",
           "description": "Status indicating whether Geo Priority Replication is enabled for the account."
+        },
+        "allowSharedKeyAccessForServices": {
+          "$ref": "#/definitions/StorageAccountSharedKeyAccessProperties",
+          "description": "Indicate shared key access properties at service level"
         }
       }
     },
@@ -14373,6 +14421,10 @@
         "geoPriorityReplicationStatus": {
           "$ref": "#/definitions/GeoPriorityReplicationStatus",
           "description": "Status indicating whether Geo Priority Replication is enabled for the account."
+        },
+        "allowSharedKeyAccessForServices": {
+          "$ref": "#/definitions/StorageAccountSharedKeyAccessProperties",
+          "description": "Indicate shared key access properties at service level"
         }
       }
     },
@@ -14483,6 +14535,10 @@
         "geoPriorityReplicationStatus": {
           "$ref": "#/definitions/GeoPriorityReplicationStatus",
           "description": "Status indicating whether Geo Priority Replication is enabled for the account."
+        },
+        "allowSharedKeyAccessForServices": {
+          "$ref": "#/definitions/StorageAccountSharedKeyAccessProperties",
+          "description": "Indicate shared key access properties at service level"
         }
       }
     },
@@ -14498,6 +14554,28 @@
       "required": [
         "keyName"
       ]
+    },
+    "StorageAccountSharedKeyAccessProperties": {
+      "type": "object",
+      "description": "Defines shared key access properties for a storage account.",
+      "properties": {
+        "blob": {
+          "$ref": "#/definitions/ServiceSharedKeyAccessProperties",
+          "description": "Shared key access settings for Blob service."
+        },
+        "file": {
+          "$ref": "#/definitions/ServiceSharedKeyAccessProperties",
+          "description": "Shared key access settings for File service."
+        },
+        "table": {
+          "$ref": "#/definitions/ServiceSharedKeyAccessProperties",
+          "description": "Shared key access settings for Table service."
+        },
+        "queue": {
+          "$ref": "#/definitions/ServiceSharedKeyAccessProperties",
+          "description": "Shared key access settings for Queue service."
+        }
+      }
     },
     "StorageAccountSkuConversionStatus": {
       "type": "object",
