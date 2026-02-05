@@ -1,0 +1,85 @@
+{
+  "operationId": "FlowProfiles_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-05-30-preview",
+    "pipelineName": "testPipeline",
+    "resource": {
+      "location": "East US",
+      "properties": {
+        "replicationScenario": "Files",
+        "status": "Enabled",
+        "description": "Hello world description",
+        "rulesets": {
+          "mimeFilters": {
+            "type": "Allow",
+            "filters": [
+              {
+                "media": "application/json",
+                "extensions": [
+                  ".json",
+                  ".app",
+                  ".js"
+                ]
+              }
+            ]
+          },
+          "textMatching": {
+            "deny": [
+              {
+                "text": "hello world",
+                "matchType": "Partial",
+                "caseSensitivity": "Insensitive"
+              },
+              {
+                "text": "hello",
+                "matchType": "Complete",
+                "caseSensitivity": "Sensitive"
+              }
+            ]
+          },
+          "antivirus": {
+            "avSolutions": [
+              "Defender",
+              "ClamAv"
+            ]
+          },
+          "archives": {
+            "minimumSizeForExpansion": 1,
+            "maximumExpansionSizeLimit": 123456,
+            "maximumDepthLimit": 12,
+            "maximumCompressionRatioLimit": 123
+          },
+          "dataSize": {
+            "maximum": 123456789,
+            "minimum": 1
+          },
+          "xmlFilters": {
+            "defaultNamespace": "testnamespace",
+            "reference": "Inline",
+            "schema": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?> <xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"></xs:schema>"
+          }
+        }
+      }
+    },
+    "flowProfileName": "testFlowProfile",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Creates or updates the FlowPRofile resource",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/pipelines/flowprofiles",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/pipelines/testPipeline/flowProfiles/testFlowProfile",
+        "location": "East US"
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/pipelines/flowprofiles",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/pipelines/testPipeline/flowProfiles/testFlowProfile",
+        "location": "East US"
+      }
+    }
+  }
+}

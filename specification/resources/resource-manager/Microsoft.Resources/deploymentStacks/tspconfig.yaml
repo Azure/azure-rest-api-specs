@@ -1,0 +1,53 @@
+parameters:
+  "service-dir":
+    default: "sdk/resources"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/deploymentStacks.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+    use-read-only-status-schema: true # https://azure.github.io/typespec-azure/docs/troubleshoot/status-read-only-error/
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.Resources.DeploymentStacks"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-deploymentstacks"
+    namespace: "azure.mgmt.resource.deploymentstacks"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resources-deploymentstacks"
+    namespace: "com.azure.resourcemanager.resources.deploymentstacks"
+    service-name: "Deployment Stacks"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcesdeploymentstacks"
+    service-dir: "sdk/resourcesdeploymentstacks"
+    flavor: azure
+    compatibility-lro: true
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-resourcesdeploymentstacks"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/resources"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdeploymentstacks"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdeploymentstacks"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

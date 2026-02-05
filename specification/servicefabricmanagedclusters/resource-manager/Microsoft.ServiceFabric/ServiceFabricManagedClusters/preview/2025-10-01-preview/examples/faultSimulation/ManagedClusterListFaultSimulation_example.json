@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "clusterName": "myCluster",
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "endTime": "0001-01-01T00:00:00",
+            "simulationId": "1bb61ba9-8a41-4d73-b5f0-7fc93b1edfe3",
+            "startTime": "2024-11-21T21:27:55.4452675Z",
+            "status": "Active",
+            "details": {
+              "operationId": "b7997d2f-1f07-4245-b197-137b196ecaf3",
+              "clusterId": "dd65fb6d-753b-4664-8798-4f077d4a2e18",
+              "nodeTypeFaultSimulation": [
+                {
+                  "operationId": "bff10003-af96-465c-b849-99c18e1f4af6",
+                  "nodeTypeName": "BE",
+                  "operationStatus": "Succeeded",
+                  "status": "Active"
+                },
+                {
+                  "operationId": "6021d3c9-6def-4e9e-b133-d58ac1c3a4cc",
+                  "nodeTypeName": "FE",
+                  "operationStatus": "Succeeded",
+                  "status": "Active"
+                }
+              ],
+              "parameters": {
+                "constraints": {
+                  "expirationTime": "0001-01-01T00:00:00"
+                },
+                "faultKind": "Zone",
+                "force": false,
+                "zones": [
+                  "3"
+                ]
+              }
+            }
+          },
+          {
+            "endTime": "2024-11-21T21:24:13.082339Z",
+            "simulationId": "aec13cc2-1d39-4ba6-a1a8-2fc35b00643c",
+            "startTime": "2024-11-21T18:11:11.3471742Z",
+            "status": "Done",
+            "details": {
+              "operationId": "3e22a9a7-13c1-450b-af5e-2c739b963bdf",
+              "clusterId": "dd65fb6d-753b-4664-8798-4f077d4a2e18",
+              "nodeTypeFaultSimulation": [
+                {
+                  "operationId": "391d0003-0d46-474c-9839-cbc345938704",
+                  "nodeTypeName": "BE",
+                  "operationStatus": "Succeeded",
+                  "status": "Done"
+                },
+                {
+                  "operationId": "cf4ac1d7-e588-491e-9e6f-ce15a17bf389",
+                  "nodeTypeName": "FE",
+                  "operationStatus": "Succeeded",
+                  "status": "Done"
+                }
+              ],
+              "parameters": {
+                "constraints": {
+                  "expirationTime": "0001-01-01T00:00:00"
+                },
+                "faultKind": "Zone",
+                "force": false,
+                "zones": [
+                  "2"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedClusters_ListFaultSimulation",
+  "title": "List Managed Cluster Fault Simulation"
+}

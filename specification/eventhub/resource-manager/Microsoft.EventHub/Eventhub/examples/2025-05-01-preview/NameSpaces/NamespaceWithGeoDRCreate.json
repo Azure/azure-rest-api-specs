@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "namespaceName": "NamespaceGeoDRCreateSample",
+    "parameters": {
+      "location": "East US",
+      "properties": {
+        "geoDataReplication": {
+          "locations": [
+            {
+              "locationName": "eastus",
+              "roleType": "Primary"
+            },
+            {
+              "locationName": "westus",
+              "roleType": "Secondary"
+            },
+            {
+              "locationName": "centralus",
+              "roleType": "Secondary"
+            }
+          ],
+          "maxReplicationLagDurationInSeconds": 60
+        }
+      }
+    },
+    "resourceGroupName": "ResurceGroupSample",
+    "subscriptionId": "SampleSubscription"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "NamespaceGeoDRCreateSample",
+        "type": "Microsoft.EventHub/Namespaces",
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceGeoDRCreateSample",
+        "location": "East US",
+        "properties": {
+          "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test",
+          "createdAt": "2021-02-16T22:36:06.107Z",
+          "disableLocalAuth": false,
+          "geoDataReplication": {
+            "locations": [
+              {
+                "locationName": "eastus",
+                "replicaState": "Active",
+                "roleType": "Primary"
+              },
+              {
+                "locationName": "westus",
+                "replicaState": "Active",
+                "roleType": "Secondary"
+              },
+              {
+                "locationName": "centralus",
+                "replicaState": "Creating",
+                "roleType": "Secondary"
+              }
+            ],
+            "maxReplicationLagDurationInSeconds": 60
+          },
+          "isAutoInflateEnabled": false,
+          "kafkaEnabled": false,
+          "maximumThroughputUnits": 0,
+          "metricId": "MetricGUID:NamespaceGeoDRCreateSample",
+          "minimumTlsVersion": "1.2",
+          "provisioningState": "Succeeded",
+          "serviceBusEndpoint": "https://NamespaceGeoDRCreateSample.servicebus.windows-int.net:443/",
+          "updatedAt": "2021-02-16T22:37:42.29Z",
+          "zoneRedundant": false
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "tags": {}
+      }
+    },
+    "201": {
+      "body": {
+        "name": "NamespaceGeoDRCreateSample",
+        "type": "Microsoft.EventHub/Namespaces",
+        "id": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/namespaces/NamespaceGeoDRCreateSample",
+        "location": "East US",
+        "properties": {
+          "clusterArmId": "/subscriptions/SampleSubscription/resourceGroups/ResurceGroupSample/providers/Microsoft.EventHub/clusters/enc-test",
+          "createdAt": "2021-02-16T22:36:06.107Z",
+          "disableLocalAuth": false,
+          "geoDataReplication": {
+            "locations": [
+              {
+                "locationName": "eastus",
+                "replicaState": "Active",
+                "roleType": "Primary"
+              },
+              {
+                "locationName": "westus",
+                "replicaState": "Active",
+                "roleType": "Secondary"
+              },
+              {
+                "locationName": "centralus",
+                "replicaState": "Creating",
+                "roleType": "Secondary"
+              }
+            ],
+            "maxReplicationLagDurationInSeconds": 60
+          },
+          "isAutoInflateEnabled": false,
+          "kafkaEnabled": false,
+          "maximumThroughputUnits": 0,
+          "metricId": "MetricGUID:NamespaceGeoDRCreateSample",
+          "minimumTlsVersion": "1.2",
+          "provisioningState": "Succeeded",
+          "serviceBusEndpoint": "https://NamespaceGeoDRCreateSample.servicebus.windows-int.net:443/",
+          "updatedAt": "2021-02-16T22:37:42.29Z",
+          "zoneRedundant": false
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1,
+          "tier": "Standard"
+        },
+        "tags": {}
+      }
+    },
+    "202": {}
+  },
+  "operationId": "Namespaces_CreateOrUpdate",
+  "title": "NamespaceWithGeoDRCreate"
+}

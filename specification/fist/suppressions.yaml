@@ -1,0 +1,10 @@
+- tool: TypeSpecValidation
+  paths:
+    # Specify the path to the tspconfig.yaml file where suppression should apply
+    - IotFirmwareDefense.Management/tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration. 
+    Comment: SDK is defined in OpenAPI file, not in TypeSpec.

@@ -1,4 +1,4 @@
-# Azure Rest API, SDK development process with TypeSpec
+# Azure REST API, SDK development process with TypeSpec
 
 ## Table Of Content
 
@@ -10,7 +10,7 @@
 
 ### 1. Introduction
 
-This document describes the processes of developing Azure Rest APIs and SDKs with TypeSpec language. The steps below
+This document describes the processes of developing Azure REST APIs and SDKs with TypeSpec language. The steps below
  assumes that you are developing TypeSpec API specifications in the `azure-rest-api-specs` and `azure-rest-api-specs-pr`repos.
 
 If you are developing within your own ADO repo first and then submitting into `azure-rest-api-specs` repos for review and
@@ -18,7 +18,7 @@ If you are developing within your own ADO repo first and then submitting into `a
 
 ### 2. Repo setup & prerequisites
 
-- The main repos for Azure rest-api are [azure-rest-api-specs](https://github.com/azure/azure-rest-api-specs) and [azure-rest-api-specs-pr](https://github.com/azure/azure-rest-api-specs-pr)
+- The main repos for Azure REST APIs are [azure-rest-api-specs](https://github.com/azure/azure-rest-api-specs) and [azure-rest-api-specs-pr](https://github.com/azure/azure-rest-api-specs-pr)
  repos. The `-pr` repo contains `RPSaaSMaster` and `RPSaaSDev` branches for ProviderHub based ARM service specs.
 
 #### 2.1 With local machine development
@@ -43,7 +43,7 @@ If you are developing within your own ADO repo first and then submitting into `a
      npx tsp --version
   ```
 
-- One-time set up: Install TypeSpec VisualStudio or VSCode extensions to get syntex highlighting, tool tips in IDE:
+- One-time set up: Install TypeSpec VisualStudio or VS Code extensions to get syntex highlighting, tool tips in IDE:
   
   ```npm
     npx tsp code install
@@ -55,22 +55,22 @@ If you are developing within your own ADO repo first and then submitting into `a
       npx tsp vs install
     ```
 
-#### 2.2  VSCode with local docker .devcontainer
+#### 2.2  VS Code with local docker .devcontainer
 
 All prerequisites have been installed in the dev container. You should to have `Docker Desktop` and `WSL2` running if
  you are on Windows machine.
 
 To start, you just need to install `Dev Containers` VS code extension, then open the repo path.
 
-- VSCode will detect the .devcontainer and prompt you to reopen the workspace.
+- VS Code will detect the .devcontainer and prompt you to reopen the workspace.
 
 - Alternatively, you can use Command Palette -> Dev Containers: Reopen in Container.
   
-Once VSCode reopened in Container, you can run any of the program below in the VSCode integrated terminal.
+Once VS Code reopened in Container, you can run any of the program below in the VS Code integrated terminal.
 
-#### 2.2 VSCode in browser via github codespaces
+#### 2.2 VS Code in browser via GitHub codespaces
 
-Github codespaces leverage the same dev container in the repo. The difference is it is hosted in cloud with VSCode in
+GitHub codespaces leverage the same dev container in the repo. The difference is it is hosted in cloud with VS Code in
  browser.
 
 To start, you just need to browse to the `azure-rest-api-specs` repo, select `<> Code` drop down and follow `Codespaces`
@@ -78,27 +78,26 @@ To start, you just need to browse to the `azure-rest-api-specs` repo, select `<>
 
 ### 3. Creating a new TypeSpec project
 
-Please first review recommended folder structure detailed in [this document](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md).
+Please first review recommended folder structure detailed in [this document](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/directory-structure.md).
 
-1. Under `[reporoot]\specifications`, create service folder directly.
-2. Create your service component folder under the service folder. For example, `Sphere.Management` or `Azure.OpenAI`.
-3. Create a new TypeSpec project based on Azure template with command:
+1. Under `[reporoot]\specification`, create service folder directly.
+   - Select `(rest-api-spec repo) ARM` or `(rest-api-spec repo) Data-plane` and answer appropriate naming questions.
+   - If it's ARM service, the service folder would be `specification/{organization}/resource-manager/<RPNS>/{service}`.
+   - If it's Data Plane service, the service folder would be `specification/{organization}/data-plane/{service}`
+2. Create a new TypeSpec project based on Azure template with command:
 
     ```cli
        npx tsp init https://aka.ms/typespec/azure-init
     ```
-
-4. Select `(rest-api-spec repo) ARM` or `(rest-api-spec repo) Data-plane` and answer appropriate naming questions.
-5. Compile the generated TypeSpec project with command:
+3. Compile the generated TypeSpec project with command:
 
     ```cli
       npx tsp compile .
     ```
 
-    The generated swagger files should be correctly placed in `data-plane` or `resource-manager` folders following the
-     naming conventions.
+    The generated OpenAPI files should be correctly placed in the `{service}`folders following the naming conventions.
 
-6. Now the project has been set up. You can modify the sample and develop your own APIs with TypeSpec.
+4. Now the project has been set up. You can modify the sample and develop your own APIs with TypeSpec.
 
 ### 4. Prepare and submit a Pull Request for reviewing
 
@@ -108,7 +107,7 @@ Please first review recommended folder structure detailed in [this document](htt
 
 3. Add or update 'examples' files for each operation of your OpenAPI file.
 
-   The [oav](https://github.com/Azure/oav) provides two ways to generate Swagger examples:
+   The [oav](https://github.com/Azure/oav) provides two ways to generate OpenAPI examples:
 
    1. Generating basic examples and then manually modify the values. It will generate two examples for each operation:
     one contains minimal properties set, the other contains the maximal properties set. Since the auto-generated
@@ -121,15 +120,13 @@ Please first review recommended folder structure detailed in [this document](htt
     Note, latest OAV tool should automatically generate the following. However, if you are generating the examples manually,
      please ensure you have:
     - include `title` field and make sure it is descriptive and unique for each operation.
-    - include `operationId`. This is used to match with declared operations in TypeSpec and correctly output in swagger.
+    - include `operationId`. This is used to match with declared operations in TypeSpec and correctly output in OpenAPI.
 
-4. Add/update the `readme.md` file in either the 'resource-manager' or 'data-plane' folder to specify the version and
- location of the OpenAPI files. The `readme.md` is needed for both management-plane and data-plane services for
-  REST API Docs generation.
+4. Add/update the `readme.md` file in the `{service}` folder to specify the version and location of the OpenAPI files. The `readme.md` is needed for both management-plane and data-plane services for REST API Docs generation.
 
-   Example:[sample-readme](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/samplefiles/samplereadme.md)
+   Example:[sample-readme](https://github.com/Azure/azure-rest-api-specs/blob/main/specification/widget/resource-manager/Microsoft.Widget/Widget/readme.md)
 
-5. Generate swagger files:
+5. Generate OpenAPI files:
    - sync with the target branch in the azure-rest-api-specs repo
 
       ```git
@@ -137,10 +134,9 @@ Please first review recommended folder structure detailed in [this document](htt
       ```
 
    - in the root directory, run `npm install`
-   - in the project directory, `npx tsp compile`. This will generate swagger files under `resource-manager` or
-    `data-plane` folders.
+   - in the project directory, `npx tsp compile`. This will generate OpenAPI files under `{service}` folders.
 
-6. Ensure all generated files under `resource-manager` or `data-plane` have been added to PR.
+6. Ensure all generated files under `{service}` have been added to PR.
 
 7. Send a pull request .
 

@@ -1,0 +1,55 @@
+parameters:
+  "service-dir":
+    default: "sdk/appconfiguration"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/appconfiguration.json"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-appconfiguration"
+    namespace: "azure.mgmt.appconfiguration"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.AppConfiguration"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.ResourceManager.AppConfiguration
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-appconfiguration"
+    package-details:
+      name: "@azure/arm-appconfiguration"
+    flavor: azure
+    experimental-extensible-enums: true
+    compatibility-lro: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appconfiguration"
+    namespace: com.azure.resourcemanager.appconfiguration
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/appconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/armappconfiguration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappconfiguration/v3"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true

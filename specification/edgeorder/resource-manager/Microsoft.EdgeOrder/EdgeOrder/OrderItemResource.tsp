@@ -52,8 +52,8 @@ interface OrderItemResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     OrderItemResource,
-    Response = ArmResourceUpdatedResponse<OrderItemResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<OrderItemResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OrderItemResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -161,7 +161,11 @@ interface OrderItemResources {
   returnOrderItem is ArmResourceActionAsync<
     OrderItemResource,
     ReturnOrderItemDetails,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 }
 

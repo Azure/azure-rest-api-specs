@@ -5,7 +5,7 @@ import { parseMarkdown } from "@azure-tools/openapi-tools-common";
 import * as amd from "@azure/openapi-markdown";
 
 import { example, readme, swagger, typespec } from "@azure-tools/specs-shared/changed-files";
-import { includesFolder } from "@azure-tools/specs-shared/path";
+import { includesSegment } from "@azure-tools/specs-shared/path";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 
@@ -163,7 +163,7 @@ export class PRContext {
         if (visitedFolder.has(dir)) {
           return;
         }
-        while (includesFolder(dir, "specification")) {
+        while (includesSegment(dir, "specification")) {
           if (visitedFolder.has(dir)) {
             break;
           }

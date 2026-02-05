@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "outgoingMessageId": "abc123-message-id",
+    "api-version": "2025-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "deliveryStatus": "Delivered",
+        "deliveryStatusDetails": "2000: No Error",
+        "deliveryAttempts": [
+          {
+            "timestamp": "2025-08-12T14:40:00Z",
+            "segmentsSucceeded": 2,
+            "segmentsFailed": 0
+          },
+          {
+            "timestamp": "2025-08-12T14:35:00Z",
+            "segmentsSucceeded": 1,
+            "segmentsFailed": 1
+          }
+        ],
+        "receivedTimestamp": "2025-08-12T14:40:00Z",
+        "tag": "customer-tag",
+        "messageId": "abc123-message-id",
+        "from": "+1234567890",
+        "to": "+0987654321"
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+        "title": "Not Found",
+        "status": 404,
+        "traceId": "00-2af30328cf055ed1e74ed7c8004cafd2-450fe826b51b7bfe-00"
+      }
+    }
+  }
+}

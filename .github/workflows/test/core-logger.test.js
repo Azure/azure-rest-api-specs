@@ -3,7 +3,7 @@ import { CoreLogger } from "../src/core-logger.js";
 import { createMockCore } from "./mocks.js";
 
 describe("CoreLogger", () => {
-  it("debug", async () => {
+  it("debug", () => {
     const core = createMockCore();
     const logger = new CoreLogger(core);
 
@@ -12,7 +12,7 @@ describe("CoreLogger", () => {
     expect(core.debug).toBeCalledWith("test debug");
   });
 
-  it("error", async () => {
+  it("error", () => {
     const core = createMockCore();
     const logger = new CoreLogger(core);
 
@@ -21,7 +21,7 @@ describe("CoreLogger", () => {
     expect(core.error).toBeCalledWith("test error");
   });
 
-  it("info", async () => {
+  it("info", () => {
     const core = createMockCore();
     const logger = new CoreLogger(core);
 
@@ -30,7 +30,7 @@ describe("CoreLogger", () => {
     expect(core.info).toBeCalledWith("test info");
   });
 
-  it("isDebug", async () => {
+  it("isDebug", () => {
     const core = createMockCore();
     core.isDebug.mockReturnValue(true);
 
@@ -39,5 +39,14 @@ describe("CoreLogger", () => {
     expect(logger.isDebug()).toBe(true);
 
     expect(core.isDebug).toBeCalled();
+  });
+
+  it("warning", () => {
+    const core = createMockCore();
+    const logger = new CoreLogger(core);
+
+    logger.warning("test warning");
+
+    expect(core.warning).toBeCalledWith("test warning");
   });
 });

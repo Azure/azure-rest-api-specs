@@ -1,6 +1,14 @@
 name: TypeSpec Validation
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
 
 permissions:
   contents: read
@@ -11,7 +19,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 2
 

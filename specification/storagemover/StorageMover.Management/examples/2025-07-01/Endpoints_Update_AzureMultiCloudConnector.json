@@ -1,0 +1,33 @@
+{
+  "title": "Endpoints_Update_AzureMultiCloudConnector",
+  "operationId": "Endpoints_Update",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "endpointName": "examples-endpointName",
+    "endpoint": {
+      "properties": {
+        "endpointType": "AzureMultiCloudConnector",
+        "description": "Updated Endpoint Description"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-endpointName",
+        "name": "examples-endpointName",
+        "type": "Microsoft.StorageMover/storageMovers/endpoints",
+        "properties": {
+          "endpointType": "AzureMultiCloudConnector",
+          "multiCloudConnectorId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.HybridConnectivity/publicCloudConnectors/TestConnector",
+          "awsS3BucketId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.AwsConnector/s3Buckets/testBucket",
+          "description": "Example multi cloud connector resource id",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

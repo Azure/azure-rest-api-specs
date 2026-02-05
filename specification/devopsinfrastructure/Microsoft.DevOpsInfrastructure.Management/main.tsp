@@ -1,4 +1,5 @@
 import "@typespec/http";
+import "./back-compatible.tsp";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
@@ -11,18 +12,20 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
-@armCommonTypesVersion(CommonTypes.Versions.v5)
 @armProviderNamespace
 @service(#{ title: "Managed DevOps Infrastructure" })
-@versioned(Versions)
+@versioned(Microsoft.DevOpsInfrastructure.Versions)
 namespace Microsoft.DevOpsInfrastructure;
 
 /** Api versions */
 enum Versions {
   /** 2025-01-21 version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  `2025-01-21`,
+  @armCommonTypesVersion(CommonTypes.Versions.v5)
+  v2025_01_21: "2025-01-21",
+
+  /** 2025-09-20 version */
+  @armCommonTypesVersion(CommonTypes.Versions.v6)
+  v2025_09_20: "2025-09-20",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -58,6 +61,10 @@ model PoolProperties {
 
   @doc("The resource id of the DevCenter Project the pool belongs to.")
   devCenterProjectResourceId: string;
+
+  @doc("The runtime configuration of the pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  runtimeConfiguration?: RuntimeConfiguration;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -95,6 +102,10 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
 
   @doc("The type of permission which determines which accounts are admins on the Azure DevOps pool.")
   permissionProfile?: AzureDevOpsPermissionProfile;
+
+  @doc("An alias to reference the Azure DevOps pool name.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  `alias`?: string;
 }
 
 @doc("Defines an Azure DevOps organization.")
@@ -110,6 +121,10 @@ model Organization {
 
   @doc("Determines if the pool should have open access to all projects in this organization.")
   openAccess?: boolean;
+
+  @doc("An alias to reference the Azure DevOps pool name.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  `alias`?: string;
 }
 @doc("Defines the type of Azure DevOps pool permission.")
 model AzureDevOpsPermissionProfile {
@@ -141,6 +156,7 @@ union AzureDevOpsPermissionType {
 @doc("Defines the type of fabric the agent will run on.")
 @discriminator("kind")
 model FabricProfile {}
+
 @doc("The agents will run on Virtual Machine Scale Sets.")
 model VmssFabricProfile extends FabricProfile {
   @doc("Virtual Machine Scale Sets")
@@ -161,6 +177,13 @@ model VmssFabricProfile extends FabricProfile {
 
   @doc("The network profile of the machines in the pool.")
   networkProfile?: NetworkProfile;
+}
+
+@doc("The runtime configuration of the pool.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+model RuntimeConfiguration {
+  @doc("The target work folder of the task agent on the machine.")
+  workFolder?: string;
 }
 
 @doc("The Azure SKU of the machines in the pool.")
@@ -272,6 +295,11 @@ model PoolImage {
 
   @doc("The ephemeral type of the image.")
   ephemeralType?: EphemeralType;
+
+  @doc("Read only. Determines if the image is ephemeral.")
+  @visibility(Lifecycle.Read)
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  isEphemeral?: boolean;
 }
 
 @doc("The OS profile of the machines in the pool.")
@@ -323,7 +351,17 @@ union LogonType {
 @doc("The network profile of the machines in the pool.")
 model NetworkProfile {
   @doc("The subnet id on which to put all machines created in the pool.")
-  subnetId: string;
+  @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  subnetId?: string;
+
+  @doc("The number of static public IP addresses for outgoing connections assigned to the pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  staticIpAddressCount?: int32;
+
+  @doc("Read only. The list of static public IP addresses for outgoing connections assigned to the pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  @visibility(Lifecycle.Read)
+  ipAddresses?: string[];
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
@@ -460,6 +498,15 @@ interface Pools {
     CheckNameAvailability,
     CheckNameAvailabilityResult
   >;
+
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+  @action("resources")
+  @post
+  deleteResources is ArmResourceActionSync<
+    Pool,
+    DeleteResourcesDetails,
+    ArmDeletedResponse | ErrorResponse
+  >;
 }
 
 @parentResource(Pool)
@@ -530,6 +577,13 @@ interface ResourceDetails {
   listByPool is ArmResourceListByParent<ResourceDetailsObject>;
 }
 
+@doc("Request body for deleting many resources by their IDs.")
+@added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
+model DeleteResourcesDetails {
+  @doc("List of resource IDs to delete.")
+  resourceIds: string[];
+}
+
 /** Represents how SKU capacity scales. */
 union ResourceSkuCapacityScaleType {
   string,
@@ -537,7 +591,7 @@ union ResourceSkuCapacityScaleType {
   /** Capacity scales automatically. */
   "Automatic",
 
-  /** Capactiy scales manually. */
+  /** Capacity scales manually. */
   "Manual",
 
   /** Capacity does not scale. */

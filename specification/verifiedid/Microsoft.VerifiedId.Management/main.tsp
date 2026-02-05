@@ -4,6 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+import "./back-compatible.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -24,7 +26,6 @@ enum Versions {
   /**
    * The 2024-01-26-preview version of the Microsoft.VerifiedId resource provider.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_01_26_preview: "2024-01-26-preview",
 }
 

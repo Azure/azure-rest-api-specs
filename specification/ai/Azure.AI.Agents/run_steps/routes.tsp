@@ -6,9 +6,7 @@ import "./models.tsp";
 import "../common/models.tsp";
 import "../servicepatterns.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.Core.Foundations;
 
 namespace Azure.AI.Agents {

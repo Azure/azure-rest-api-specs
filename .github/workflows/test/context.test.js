@@ -1,8 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.js";
 import { fullGitSha } from "../../shared/test/examples.js";
-import { extractInputs } from "../src/context.js";
+import { extractInputs as extractInputsImpl } from "../src/context.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
+
+/**
+ *
+ * @param {import("./mocks.js").GitHub} github
+ * @param {unknown} context
+ * @param {import("./mocks.js").Core} core
+ */
+function extractInputs(github, context, core) {
+  return extractInputsImpl(github, /** @type {import("./mocks.js").Context} */ (context), core);
+}
 
 describe("extractInputs", () => {
   it("unsupported_event", async () => {
@@ -13,7 +23,11 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
+    await expect(
+      extractInputs(createMockGithub(), context, createMockCore()),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Context 'unsupported_event:unsupported_action' is not yet supported.]`,
+    );
   });
 
   it("pull_request", async () => {
@@ -99,7 +113,11 @@ describe("extractInputs", () => {
 
     // Action not yet supported
     context.payload.action = "assigned";
-    await expect(extractInputs(github, context, createMockCore())).rejects.toThrow();
+    await expect(
+      extractInputs(github, context, createMockCore()),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Context 'pull_request_target:assigned' is not yet supported.]`,
+    );
   });
 
   it("issue_comment:edited", async () => {
@@ -169,7 +187,11 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(createMockGithub(), context, createMockCore())).rejects.toThrow();
+    await expect(
+      extractInputs(createMockGithub(), context, createMockCore()),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Context 'workflow_run:unsupported_action' is not yet supported.]`,
+    );
   });
 
   it("workflow_run:completed:pull_request (same repo)", async () => {
@@ -231,9 +253,9 @@ describe("extractInputs", () => {
       };
 
       const github = createMockGithub();
-      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation(async (args) => {
+      github.rest.repos.listPullRequestsAssociatedWithCommit.mockImplementation((args) => {
         console.log(JSON.stringify(args));
-        return {
+        return Promise.resolve({
           data: [
             {
               base: {
@@ -256,7 +278,7 @@ describe("extractInputs", () => {
               number: 124,
             },
           ].slice(0, numPullRequests),
-        };
+        });
       });
 
       if (numPullRequests === 0) {
@@ -426,7 +448,11 @@ describe("extractInputs", () => {
       },
     };
 
-    await expect(extractInputs(null, context, createMockCore())).rejects.toThrow();
+    await expect(
+      extractInputs(createMockGithub(), context, createMockCore()),
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: Context 'workflow_run:completed' with 'workflow_run.event=unsupported is not yet supported.]`,
+    );
   });
 
   it("workflow_run:completed:check_run", async () => {

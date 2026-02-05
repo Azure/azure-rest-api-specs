@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2025-08-15-preview",
+    "startCallRecording": {
+      "recordingStateCallbackUri": "https://contoso.communications.azure.com/callback",
+      "recordingContentType": null,
+      "recordingChannelType": null,
+      "recordingFormatType": null,
+      "pauseOnStart": true,
+      "externalStorage": {
+        "recordingStorageKind": "azureBlobStorage",
+        "recordingDestinationContainerUrl": "https://contoso.blob.core.windows.net/recordings"
+      },
+      "callLocator": {
+        "serverCallId": "aHR0cHM6Ly9za3lwZS5uZXQvYXBpL3YyL2NwL3NreXBlLm5ldC9jb252LzFQd3ZKMTcxZFI/aT0wJmU9NzU3NzA4NzU3OQ==",
+        "kind": "serverCallLocator"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "recordingId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI4YjlkYmFkMS0xOGFiLTRmODYtYWQ0Yy1jNzVmODA5ODA3NmUiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiI4YjlkYmFkMS0xOGFiLTRmODYtYWQ0Yy1jNzVmODA5ODA3NmUifQ==",
+        "recordingState": "inactive",
+        "recordingKind": "teamsCompliance"
+      }
+    },
+    "202": {
+      "body": {
+        "recordingId": "eyJQbGF0Zm9ybUVuZHBvaW50SWQiOiI4YjlkYmFkMS0xOGFiLTRmODYtYWQ0Yy1jNzVmODA5ODA3NmUiLCJSZXNvdXJjZVNwZWNpZmljSWQiOiI4YjlkYmFkMS0xOGFiLTRmODYtYWQ0Yy1jNzVmODA5ODA3NmUifQ==",
+        "recordingState": "inactive",
+        "recordingKind": "azureCommunicationServices"
+      }
+    }
+  }
+}

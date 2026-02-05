@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/trustedsigning"
+    default: "sdk/artifactsigning"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -9,36 +9,37 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/codeSigningAccount.json"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-artifactsigning"
     flavor: "azure"
-    namespace: "com.azure.resourcemanager.trustedsigning"
-    service-name: "Trusted Signing"
+    namespace: "com.azure.resourcemanager.artifactsigning"
+    service-name: "Artifact Signing"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-trustedsigning"
-    namespace: "azure.mgmt.trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-artifactsigning"
+    namespace: "azure.mgmt.artifactsigning"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-artifactsigning"
     flavor: azure
     package-details:
-      name: "@azure/arm-trustedsigning"
+      name: "@azure/arm-artifactsigning"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/trustedsigning"
-    package-dir: "armtrustedsigning"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    service-dir: "sdk/resourcemanager/artifactsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/armartifactsigning"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armartifactsigning"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ArtifactSigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

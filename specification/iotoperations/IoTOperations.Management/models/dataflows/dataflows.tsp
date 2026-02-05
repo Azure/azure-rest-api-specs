@@ -50,6 +50,8 @@ model DataflowProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 @doc("Dataflow Operation properties. NOTE - One only method is allowed to be used for one entry.")
@@ -109,6 +111,7 @@ model DataflowBuiltInTransformationSettings {
 
 @doc("Dataflow BuiltIn Transformation dataset properties")
 model DataflowBuiltInTransformationDataset {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The key of the dataset.")
   @maxLength(64)
   key: string;
@@ -219,6 +222,76 @@ model DataflowDestinationOperationSettings {
 
   @doc("Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription.")
   dataDestination: NonEmptyString;
+
+  @doc("Headers for the output data.")
+  @identifiers(#["actionType"])
+  @added(Versions.`2025-10-01`)
+  headers?: DataflowDestinationHeaderAction[];
+}
+
+@added(Versions.`2025-10-01`)
+@doc("Dataflow Destination Header Action properties")
+@discriminator("actionType")
+model DataflowDestinationHeaderAction {
+  @doc("The type of header operation to perform.")
+  actionType: DataflowHeaderActionType;
+}
+
+@added(Versions.`2025-10-01`)
+@doc("Dataflow Destination Header Action Types")
+union DataflowHeaderActionType {
+  string,
+
+  @doc("Add if not present type")
+  AddIfNotPresent,
+
+  @doc("Remove type")
+  Remove,
+
+  @doc("Add or Replace type")
+  AddOrReplace,
+}
+
+@added(Versions.`2025-10-01`)
+@doc("Dataflow Destination Add if not present HeaderAction properties")
+model DataflowDestinationAddIfNotPresentHeaderAction
+  extends DataflowDestinationHeaderAction {
+  @doc("The type of header operation to perform.")
+  actionType: AddIfNotPresent;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @doc("The name of the header to add.")
+  key: string;
+
+  @doc("The value of the header to add.")
+  value: string;
+}
+
+@added(Versions.`2025-10-01`)
+@doc("Dataflow Destination Remove HeaderAction properties")
+model DataflowDestinationRemoveHeaderAction
+  extends DataflowDestinationHeaderAction {
+  @doc("The type of header operation to perform.")
+  actionType: Remove;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @doc("The name of the header to remove.")
+  key: string;
+}
+
+@added(Versions.`2025-10-01`)
+@doc("Dataflow Destination Add or Replace HeaderAction properties")
+model DataflowDestinationAddOrReplaceHeaderAction
+  extends DataflowDestinationHeaderAction {
+  @doc("The type of header operation to perform.")
+  actionType: AddOrReplace;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  @doc("The name of the header to add or replace.")
+  key: string;
+
+  @doc("The value of the header to add or replace.")
+  value: string;
 }
 
 @doc("Dataflow Source Operation properties")

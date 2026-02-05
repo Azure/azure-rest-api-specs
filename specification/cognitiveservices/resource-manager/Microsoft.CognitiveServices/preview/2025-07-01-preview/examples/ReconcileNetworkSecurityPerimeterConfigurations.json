@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "nspConfigurationName": "NSPConfigurationName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/networkSecurityPerimeterConfigurations/config1",
+        "name": "networkSecurityPerimeterConfigurationName",
+        "type": "Microsoft.CognitiveServices/accounts/networkSecurityPerimeterConfigurations",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "networkSecurityPerimeter": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/networkSecurityPerimeters/perimeter",
+            "perimeterGuid": "00000000-0000-0000-0000-000000000000",
+            "location": "East US"
+          },
+          "resourceAssociation": {
+            "name": "associationName",
+            "accessMode": "Enforced"
+          },
+          "profile": {
+            "name": "profileName",
+            "accessRulesVersion": 1,
+            "accessRules": [
+              {
+                "name": "ruleName",
+                "properties": {
+                  "direction": "Inbound",
+                  "addressPrefixes": [
+                    "148.0.0.0/8",
+                    "152.4.6.0/24"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
+  }
+}

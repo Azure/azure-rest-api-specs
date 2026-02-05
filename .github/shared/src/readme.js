@@ -1,21 +1,48 @@
-// @ts-check
-
 import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
-import { dirname, normalize, relative, resolve } from "path";
+import { dirname, normalize, relative } from "path";
+import { inspect } from "util";
+import * as z from "zod";
 import { mapAsync } from "./array.js";
+import { resolvePairCached } from "./path.js";
+import { SpecModelError } from "./spec-model-error.js";
+import { embedError } from "./spec-model.js";
 import { Tag } from "./tag.js";
 
 /**
+ * @typedef {import('./spec-model.js').ErrorJSON} ErrorJSON
  * @typedef {import('./spec-model.js').SpecModel} SpecModel
  * @typedef {import('./spec-model.js').ToJSONOptions} ToJSONOptions
+ * @typedef {import('./tag.js').TagJSON} TagJSON
+ */
+
+/**
+ * @typedef {Object} ReadmeJSON
+ * @property {string} path
+ * @property {Object} globalConfig
+ * @property {(TagJSON|ErrorJSON)[]} tags
  */
 
 /**
  * Regex to match tag names in readme.md yaml code blocks
  */
 export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?(["'])(.*?)\1/;
+
+// Example: "foo.json"
+const jsonFileSchema = z.string().regex(/\.json$/i);
+
+// Examples:
+// {}
+// {"input-file": "foo.json"}
+// {"input-file": ["foo.json", "bar.json"]}
+const inputFileSchema = z.object({
+  "input-file": z
+    // May be undefined, a single json filename, or an array of json filenames
+    .optional(z.union([jsonFileSchema, z.array(jsonFileSchema)]))
+    // Normalize single string to array of string.  Don't change 'undefined'.
+    .transform((value) => (typeof value === "string" ? [value] : value)),
+});
 
 export class Readme {
   /**
@@ -27,7 +54,7 @@ export class Readme {
    */
   #content;
 
-  /** @type {{globalConfig: Object, tags: Map<string, Tag>} | undefined} */
+  /** @type {{globalConfig: Record<string, any>, tags: Map<string, Tag>} | undefined} */
   #data;
 
   /** @type {import('./logger.js').ILogger | undefined} */
@@ -52,12 +79,14 @@ export class Readme {
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
    */
-  constructor(path, options) {
-    this.#path = resolve(options?.specModel?.folder ?? "", path);
+  constructor(path, options = {}) {
+    const { content, logger, specModel } = options;
 
-    this.#content = options?.content;
-    this.#logger = options?.logger;
-    this.#specModel = options?.specModel;
+    this.#path = resolvePairCached(specModel?.folder ?? "", path);
+
+    this.#content = content;
+    this.#logger = logger;
+    this.#specModel = specModel;
   }
 
   /**
@@ -126,11 +155,31 @@ export class Readme {
         const obj = /** @type {any} */ (yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA }));
 
         if (!obj) {
-          this.#logger?.debug(`No yaml object found for tag ${tagName} in ${this.#path}`);
+          this.#logger?.debug(`No YAML object found for tag ${tagName} in ${this.#path}`);
           continue;
         }
 
-        if (!obj["input-file"]) {
+        let parsedObj;
+        try {
+          parsedObj = inputFileSchema.parse(obj);
+        } catch (error) {
+          if (error instanceof z.ZodError) {
+            throw new SpecModelError(
+              `Unable to parse input-file YAML for tag ${tagName} in ${this.#path}`,
+              {
+                source: this.#path,
+                readme: this.#path,
+                tag: tagName,
+                cause: error,
+              },
+            );
+          } /* v8 ignore start: defensive rethrow */ else {
+            throw error;
+          }
+          /* v8 ignore stop */
+        }
+
+        if (!parsedObj["input-file"]) {
           // The yaml block does not contain an input-file key
           continue;
         }
@@ -148,14 +197,11 @@ export class Readme {
           throw new Error(message);
         }
 
-        // It's possible for input-file to be a string or an array
-        const inputFilePaths = Array.isArray(obj["input-file"])
-          ? obj["input-file"]
-          : [obj["input-file"]];
+        const inputFilePaths = parsedObj["input-file"];
 
         const swaggerPathsResolved = inputFilePaths
           .map((p) => Readme.#normalizeSwaggerPath(p))
-          .map((p) => resolve(dirname(this.#path), p));
+          .map((p) => resolvePairCached(dirname(this.#path), p));
 
         const tag = new Tag(tagName, swaggerPathsResolved, {
           logger: this.#logger,
@@ -175,7 +221,7 @@ export class Readme {
   }
 
   /**
-   * @returns {Promise<Object>}
+   * @returns {Promise<Record<string, any>>}
    */
   async getGlobalConfig() {
     return (await this.#getData()).globalConfig;
@@ -204,28 +250,32 @@ export class Readme {
 
   /**
    * @param {ToJSONOptions} [options]
-   * @returns {Promise<Object>}
+   * @returns {Promise<ReadmeJSON|ErrorJSON>}
    */
-  async toJSONAsync(options) {
-    const tags = await mapAsync(
-      [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
-      async (t) => await t.toJSONAsync(options),
-    );
+  async toJSONAsync(options = {}) {
+    const { relativePaths } = options;
 
-    return {
-      path:
-        options?.relativePaths && this.#specModel
-          ? relative(this.#specModel.folder, this.#path)
-          : this.#path,
-      globalConfig: await this.getGlobalConfig(),
-      tags,
-    };
+    return await embedError(async () => {
+      const tags = await mapAsync(
+        [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
+        async (t) => await t.toJSONAsync(options),
+      );
+
+      return {
+        path:
+          relativePaths && this.#specModel
+            ? relative(this.#specModel.folder, this.#path)
+            : this.#path,
+        globalConfig: await this.getGlobalConfig(),
+        tags,
+      };
+    }, options);
   }
 
   /**
    * @returns {string}
    */
   toString() {
-    return `Readme(${this.#path}, {logger: ${this.#logger}})`;
+    return `Readme(${this.#path}, {logger: ${inspect(this.#logger)}})`;
   }
 }

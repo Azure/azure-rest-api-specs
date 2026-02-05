@@ -1,0 +1,200 @@
+{
+  "parameters": {
+    "$expand": "details",
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "api-version": "2025-07-01",
+    "jobName": "TestJobName1",
+    "resourceGroupName": "YourResourceGroupName",
+    "subscriptionId": "YourSubscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestJobName1",
+        "type": "Microsoft.DataBox/jobs",
+        "id": "/subscriptions/YourSubscriptionId/resourceGroups/YourResourceGroupName/providers/Microsoft.DataBox/jobs/TestJobName1",
+        "identity": {
+          "type": "None"
+        },
+        "location": "westus",
+        "properties": {
+          "deliveryType": "NonScheduled",
+          "isCancellable": false,
+          "isCancellableWithoutFee": false,
+          "isDeletable": true,
+          "isPrepareToShipEnabled": true,
+          "isShippingAddressEditable": false,
+          "startTime": "2021-03-05T12:56:12.6384315+05:30",
+          "status": "CompletedWithWarnings",
+          "transferType": "ImportToAzure",
+          "details": {
+            "actions": [],
+            "contactDetails": {
+              "contactName": "XXXX XXXX",
+              "emailList": [
+                "xxxx@xxxx.xxx"
+              ],
+              "notificationPreference": [
+                {
+                  "sendNotification": true,
+                  "stageName": "DevicePrepared"
+                },
+                {
+                  "sendNotification": true,
+                  "stageName": "Dispatched"
+                },
+                {
+                  "sendNotification": true,
+                  "stageName": "Delivered"
+                },
+                {
+                  "sendNotification": true,
+                  "stageName": "PickedUp"
+                },
+                {
+                  "sendNotification": true,
+                  "stageName": "AtAzureDC"
+                },
+                {
+                  "sendNotification": true,
+                  "stageName": "DataCopy"
+                }
+              ],
+              "phone": "0000000000",
+              "phoneExtension": ""
+            },
+            "copyLogDetails": [
+              {
+                "accountName": "YourStorageAccountName",
+                "copyLogDetailsType": "DataBox",
+                "copyLogLink": "databoxcopylog/xxx.xml"
+              }
+            ],
+            "copyProgress": [
+              {
+                "accountId": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName",
+                "bytesProcessed": 2000,
+                "dataAccountType": "StorageAccount",
+                "directoriesErroredOut": 0,
+                "filesErroredOut": 0,
+                "filesProcessed": 100,
+                "invalidDirectoriesProcessed": 0,
+                "invalidFileBytesUploaded": 10,
+                "invalidFilesProcessed": 10,
+                "isEnumerationInProgress": false,
+                "renamedContainerCount": 60,
+                "storageAccountName": "YourStorageAccountName",
+                "totalBytesToProcess": 2000,
+                "totalFilesToProcess": 110,
+                "transferType": "ImportToAzure"
+              }
+            ],
+            "dataImportDetails": [
+              {
+                "accountDetails": {
+                  "dataAccountType": "StorageAccount",
+                  "storageAccountId": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName"
+                }
+              }
+            ],
+            "deliveryPackage": {
+              "carrierName": "Ups",
+              "trackingId": "5fb6965e-0b80-4f38-b21a-32673fed2d84",
+              "trackingUrl": "https://xxx.xxx.xx"
+            },
+            "expectedDataSizeInTeraBytes": 0,
+            "jobDetailsType": "DataBox",
+            "jobStages": [
+              {
+                "displayName": "Ordered",
+                "stageName": "DeviceOrdered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T12:56:25.3911023+05:30"
+              },
+              {
+                "displayName": "Processed",
+                "stageName": "DevicePrepared",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T13:07:49.676421+05:30"
+              },
+              {
+                "displayName": "Dispatched",
+                "stageName": "Dispatched",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T02:21:06+05:30"
+              },
+              {
+                "displayName": "Delivered",
+                "stageName": "Delivered",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T02:21:13+05:30"
+              },
+              {
+                "displayName": "Picked up",
+                "stageName": "PickedUp",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T02:23:10+05:30"
+              },
+              {
+                "displayName": "Received",
+                "stageName": "AtAzureDC",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T02:23:17+05:30"
+              },
+              {
+                "displayName": "Data copy in progress",
+                "stageName": "DataCopy",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T13:34:20.1497635+05:30"
+              },
+              {
+                "stageName": "CompletedWithWarnings",
+                "stageStatus": "Succeeded",
+                "stageTime": "2021-03-05T14:08:38.250614+05:30"
+              }
+            ],
+            "keyEncryptionKey": {
+              "kekType": "MicrosoftManaged"
+            },
+            "lastMitigationActionOnJob": {
+              "actionDateTimeInUtc": "2021-03-05T08:28:18.8107951Z",
+              "customerResolution": "MoveToCleanUpDevice",
+              "isPerformedByCustomer": true
+            },
+            "preferences": {},
+            "returnPackage": {
+              "carrierName": "Ups",
+              "trackingId": "b3875a34-aad6-4dbe-83a9-3f39cb21b0e8",
+              "trackingUrl": "https://xxx.xxx.xx"
+            },
+            "reverseShipmentLabelSasKey": "http://xxx.xxx.xxx",
+            "shippingAddress": {
+              "addressType": "None",
+              "city": "XXXX XXXX",
+              "companyName": "XXXX XXXX",
+              "country": "XX",
+              "postalCode": "00000",
+              "stateOrProvince": "XX",
+              "streetAddress1": "164 TOWNSEND ST",
+              "streetAddress2": "XXXX XXXX"
+            }
+          }
+        },
+        "sku": {
+          "name": "DataBox",
+          "model": "DataBox"
+        },
+        "tags": {
+          "defaultTagsKey": "defaultTagsValue"
+        }
+      }
+    }
+  },
+  "operationId": "Jobs_Get",
+  "title": "JobsGetCopyStuck"
+}

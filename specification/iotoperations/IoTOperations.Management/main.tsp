@@ -3,7 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
+import "@typespec/openapi";
 import "./models/base.tsp";
 import "./models/common/aliases.tsp";
 import "./models/instance.tsp";
@@ -35,18 +35,19 @@ namespace Microsoft.IoTOperations;
 enum Versions {
   /** 2024-11-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-11-01`,
 
   /** 2025-04-01 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-04-01`,
 
   /** 2025-07-01-preview */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2025-07-01-preview`,
+
+  /** 2025-10-01 */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2025-10-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

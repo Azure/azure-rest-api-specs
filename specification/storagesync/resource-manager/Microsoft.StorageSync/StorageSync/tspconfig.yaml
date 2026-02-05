@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/storagesync"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/storagesync.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storagesync"
+    namespace: "azure.mgmt.storagesync"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storagesync"
+    namespace: "com.azure.resourcemanager.storagesync"
+    service-name: "StorageSync" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-storagesync"
+    flavor: azure
+    typespec-title-map:
+      StorageSyncClient: "MicrosoftStorageSync"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-storagesync"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/storagesync"
+    emitter-output-dir: "{output-dir}/{service-dir}/armstoragesync"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstoragesync"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.StorageSync"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

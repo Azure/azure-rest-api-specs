@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "agentPoolName": "agentpool1",
+    "api-version": "2025-10-02-preview",
+    "parameters": {
+      "properties": {
+        "count": 3,
+        "hostGroupID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1",
+        "orchestratorVersion": "",
+        "osType": "Linux",
+        "vmSize": "Standard_DS2_v2"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "properties": {
+          "count": 3,
+          "currentOrchestratorVersion": "1.19.6",
+          "hostGroupID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1",
+          "maxPods": 110,
+          "orchestratorVersion": "1.19.6",
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "vmSize": "Standard_DS2_v2"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "properties": {
+          "count": 3,
+          "currentOrchestratorVersion": "1.19.6",
+          "hostGroupID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg/providers/Microsoft.Compute/hostGroups/hostgroup1",
+          "maxPods": 110,
+          "orchestratorVersion": "1.19.6",
+          "osType": "Linux",
+          "provisioningState": "Creating",
+          "vmSize": "Standard_DS2_v2"
+        }
+      }
+    }
+  },
+  "operationId": "AgentPools_CreateOrUpdate",
+  "title": "Create Agent Pool with Dedicated Host Group"
+}

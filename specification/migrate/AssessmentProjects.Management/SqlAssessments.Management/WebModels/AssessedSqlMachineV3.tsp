@@ -1,4 +1,4 @@
-import "../../Common/StandardizedContracts/CommonEnums.tsp";
+import "../Normalized Contract/StandardizedContracts/CommonEnums.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -62,12 +62,12 @@ model SqlMachineExtendedDetails {
 
   @doc("Gets the list of data disks that were assessed as part of this assessment.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   disks?: AssessedSqlDiskDataV3[];
 
   @doc("Gets the list of network adapters that were assessed as part of this assessment.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkAdapters?: AssessedSqlNetworkAdaptersV3[];
 
   @doc("Boot type of machine discovered in private data center.")
@@ -128,7 +128,7 @@ model SqlMachineRecommendations
   > {
   @doc("Gets the list of migration guidelines applicable to this target.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   migrationGuidelines?: SqlMigrationGuideline[];
 }
 

@@ -9,8 +9,6 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azuresphere.json"
   "@azure-tools/cadl-python":
     "basic-setup-py": true
@@ -23,16 +21,31 @@ options:
     model-namespace: false
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-sphere"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-sphere"
     flavor: azure
     package-details:
       name: "@azure/arm-sphere"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-sphere"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sphere"
     namespace: "azure.mgmt.sphere"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sphere"
+    namespace: "com.azure.resourcemanager.sphere"
+    service-name: "Azure Sphere"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/sphere"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsphere"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsphere"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

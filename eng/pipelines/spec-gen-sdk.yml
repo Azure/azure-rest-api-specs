@@ -1,8 +1,8 @@
 parameters:
-  - name: SdkRepoCommit
+  - name: SdkRepoBranch
     type: string
     default: 'main'
-    displayName: 'SDK repository commit'
+    displayName: 'SDK repository branch'
   - name: ConfigType
     type: string
     values:
@@ -29,6 +29,14 @@ parameters:
     type: boolean
     default: false
     displayName: 'Create SDK pull request'
+  - name: ForceCreateEvenWithFailures
+    type: boolean
+    default: false
+    displayName: 'Force create SDK pull request even with failures ("Create SDK Pull Request" must be checked)'
+  - name: ReleasePlanWorkItemId
+    type: number
+    default: 0
+    displayName: 'Release plan work item id'
 
 trigger: none
 
@@ -37,9 +45,11 @@ extends:
   parameters:
     SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
     SdkRepoUrl: $(SdkRepoUrl)
-    SdkRepoCommit: ${{ parameters.SdkRepoCommit }}
+    SdkRepoBranch: ${{ parameters.SdkRepoBranch }}
     ConfigType: ${{ parameters.ConfigType }}
     ConfigPath: ${{ parameters.ConfigPath }}
     ApiVersion: ${{ parameters.ApiVersion }}
     SdkReleaseType: ${{ parameters.SdkReleaseType }}
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
+    ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
+    ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}

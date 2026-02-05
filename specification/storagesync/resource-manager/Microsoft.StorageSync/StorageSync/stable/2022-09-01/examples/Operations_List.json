@@ -1,0 +1,876 @@
+{
+  "parameters": {
+    "api-version": "2022-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/example-rg/providers/Microsoft.StorageActions/storageTasks/example-task/reports?api-version=2023-01-01&monitor=true&$skiptoken=fake-continuation-token-12345",
+        "value": [
+          {
+            "name": "microsoft.storagesync/register/action",
+            "display": {
+              "description": "Registers the subscription for the Storage Sync Provider",
+              "operation": "Registers the Storage Sync Provider",
+              "provider": "microsoft.storagesync",
+              "resource": "Storage Sync Provider"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/unregister/action",
+            "display": {
+              "description": "Unregisters the subscription for the Storage Sync Provider",
+              "operation": "Unregisters the Storage Sync Provider",
+              "provider": "microsoft.storagesync",
+              "resource": "Storage Sync Provider"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/operations/read",
+            "display": {
+              "description": "Gets a list of the Supported Operations",
+              "operation": "Gets the Supported Operations",
+              "provider": "microsoft.storagesync",
+              "resource": "Supported Operations"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/read",
+            "display": {
+              "description": "Read any Storage Sync Services",
+              "operation": "Read Storage Sync Services",
+              "provider": "microsoft.storagesync",
+              "resource": "Storage Sync Services"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/write",
+            "display": {
+              "description": "Create or Update any Storage Sync Services",
+              "operation": "Create or Update Storage Sync Services",
+              "provider": "microsoft.storagesync",
+              "resource": "Storage Sync Services"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/delete",
+            "display": {
+              "description": "Delete any Storage Sync Services",
+              "operation": "Delete Storage Sync Services",
+              "provider": "microsoft.storagesync",
+              "resource": "Storage Sync Services"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "description": "Gets the available metrics for Storage Sync Services",
+              "operation": "Read Storage Sync Services metric definitions",
+              "provider": "microsoft.storagesync",
+              "resource": "Storage Sync Metrics"
+            },
+            "origin": "System",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "ServerSyncSessionResult",
+                    "aggregationType": "Average",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Metric that logs a value of 1 each time the Server Endpoint successfully completes a Sync Session with the Cloud Endpoint",
+                    "displayName": "Sync Session Result",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "StorageSyncSyncSessionAppliedFilesCount",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Count of Files synced",
+                    "displayName": "Files Synced",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "StorageSyncSyncSessionPerItemErrorsCount",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Count of files failed to sync",
+                    "displayName": "Files not syncing",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "StorageSyncBatchTransferredFileBytes",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total file size transferred for Sync Sessions",
+                    "displayName": "Bytes synced",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Bytes"
+                  },
+                  {
+                    "name": "StorageSyncServerHeartbeat",
+                    "aggregationType": "Maximum",
+                    "dimensions": [
+                      {
+                        "name": "ServerName",
+                        "displayName": "Server Name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Metric that logs a value of 1 each time the resigtered server successfully records a heartbeat with the Cloud Endpoint",
+                    "displayName": "Server Online Status",
+                    "fillGapWithZero": true,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "StorageSyncRecallIOTotalSizeBytes",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "ServerName",
+                        "displayName": "Server Name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total size of data recalled by the server",
+                    "displayName": "Cloud tiering recall",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Bytes"
+                  },
+                  {
+                    "name": "StorageSyncRecalledTotalNetworkBytes",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerName",
+                        "displayName": "Server Name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Size of data recalled",
+                    "displayName": "Cloud tiering recall size",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Bytes"
+                  },
+                  {
+                    "name": "StorageSyncRecallThroughputBytesPerSecond",
+                    "aggregationType": "Average",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerName",
+                        "displayName": "Server Name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Size of data recall throughput",
+                    "displayName": "Cloud tiering recall throughput",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "BytesPerSecond"
+                  },
+                  {
+                    "name": "StorageSyncRecalledNetworkBytesByApplication",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerName",
+                        "displayName": "Server Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ApplicationName",
+                        "displayName": "Application Name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Size of data recalled by application",
+                    "displayName": "Cloud tiering recall size by application",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Bytes"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/privateLinkResources/read",
+            "display": {
+              "description": "Read any Private Link Resources",
+              "operation": "Read Private Link Resources",
+              "provider": "microsoft.storagesync",
+              "resource": "Private Link Resources"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/privateEndpointConnections/read",
+            "display": {
+              "description": "Read any Private Endpoint Connections",
+              "operation": "Read Private Endpoint Connections",
+              "provider": "microsoft.storagesync",
+              "resource": "Private Endpoint Connections"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/privateEndpointConnections/write",
+            "display": {
+              "description": "Create or Update any Private Endpoint Connections",
+              "operation": "Create or Update Private Endpoint Connections",
+              "provider": "microsoft.storagesync",
+              "resource": "Private Endpoint Connections"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/privateEndpointConnections/delete",
+            "display": {
+              "description": "Delete any Private Endpoint Connections",
+              "operation": "Delete Private Endpoint Connections",
+              "provider": "microsoft.storagesync",
+              "resource": "Private Endpoint Connections"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/privateEndpointConnectionProxies/validate/action",
+            "display": {
+              "description": "Validate any Private Endpoint ConnectionProxies",
+              "operation": "Validate Private Endpoint ConnectionProxies",
+              "provider": "microsoft.storagesync",
+              "resource": "Private Endpoint ConnectionProxies"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/privateEndpointConnectionProxies/read",
+            "display": {
+              "description": "Read any Private Endpoint ConnectionProxies",
+              "operation": "Read Private Endpoint ConnectionProxies",
+              "provider": "microsoft.storagesync",
+              "resource": "Private Endpoint ConnectionProxies"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/privateEndpointConnectionProxies/write",
+            "display": {
+              "description": "Create or Update any Private Endpoint ConnectionProxies",
+              "operation": "Create or Update Private Endpoint ConnectionProxies",
+              "provider": "microsoft.storagesync",
+              "resource": "Private Endpoint ConnectionProxies"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/privateEndpointConnectionProxies/delete",
+            "display": {
+              "description": "Delete any Private Endpoint ConnectionProxies",
+              "operation": "Delete Private Endpoint ConnectionProxies",
+              "provider": "microsoft.storagesync",
+              "resource": "Private Endpoint ConnectionProxies"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/read",
+            "display": {
+              "description": "Read any Sync Groups",
+              "operation": "Read Sync Groups",
+              "provider": "microsoft.storagesync",
+              "resource": "Sync Groups"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/write",
+            "display": {
+              "description": "Create or Update any Sync Groups",
+              "operation": "Create or Update Sync Groups",
+              "provider": "microsoft.storagesync",
+              "resource": "Sync Groups"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/delete",
+            "display": {
+              "description": "Delete any Sync Groups",
+              "operation": "Delete Sync Groups",
+              "provider": "microsoft.storagesync",
+              "resource": "Sync Groups"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "description": "Gets the available metrics for Sync Groups",
+              "operation": "Read Sync Groups metric definitions",
+              "provider": "microsoft.storagesync",
+              "resource": "Sync Group Metrics"
+            },
+            "origin": "System",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "SyncGroupSyncSessionAppliedFilesCount",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Count of Files synced",
+                    "displayName": "Files Synced",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "SyncGroupSyncSessionPerItemErrorsCount",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Count of files failed to sync",
+                    "displayName": "Files not syncing",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "SyncGroupBatchTransferredFileBytes",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "SyncGroupName",
+                        "displayName": "Sync Group Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total file size transferred for Sync Sessions",
+                    "displayName": "Bytes synced",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Bytes"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/read",
+            "display": {
+              "description": "Read any Cloud Endpoints",
+              "operation": "Read Cloud Endpoints",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/write",
+            "display": {
+              "description": "Create or Update any Cloud Endpoints",
+              "operation": "Create or Update Cloud Endpoints",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/delete",
+            "display": {
+              "description": "Delete any Cloud Endpoints",
+              "operation": "Delete Cloud Endpoints",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/prebackup/action",
+            "display": {
+              "description": "Call this action before backup",
+              "operation": "prebackup",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/postbackup/action",
+            "display": {
+              "description": "Call this action after backup",
+              "operation": "postbackup",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/prerestore/action",
+            "display": {
+              "description": "Call this action before restore",
+              "operation": "prerestore",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/postrestore/action",
+            "display": {
+              "description": "Call this action after restore",
+              "operation": "postrestore",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/restoreheartbeat/action",
+            "display": {
+              "description": "Restore heartbeat",
+              "operation": "restoreheartbeat",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/operationresults/read",
+            "display": {
+              "description": "Gets the status of an asynchronous backup/restore operation",
+              "operation": "Read cloudEndpoints/operationresults",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/cloudEndpoints/triggerChangeDetection/action",
+            "display": {
+              "description": "Call this action to trigger detection of changes on a cloud endpoint's file share",
+              "operation": "triggerChangeDetection",
+              "provider": "microsoft.storagesync",
+              "resource": "Cloud Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/serverEndpoints/read",
+            "display": {
+              "description": "Read any Server Endpoints",
+              "operation": "Read Server Endpoints",
+              "provider": "microsoft.storagesync",
+              "resource": "Server Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/serverEndpoints/write",
+            "display": {
+              "description": "Create or Update any Server Endpoints",
+              "operation": "Create or Update Server Endpoints",
+              "provider": "microsoft.storagesync",
+              "resource": "Server Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/serverEndpoints/delete",
+            "display": {
+              "description": "Delete any Server Endpoints",
+              "operation": "Delete Server Endpoints",
+              "provider": "microsoft.storagesync",
+              "resource": "Server Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/serverEndpoints/recallAction/action",
+            "display": {
+              "description": "Call this action to recall files to a server",
+              "operation": "recallAction",
+              "provider": "microsoft.storagesync",
+              "resource": "Server Endpoints"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/syncGroups/serverEndpoints/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "description": "Gets the available metrics for Server Endpoints",
+              "operation": "Read Server Endpoints metric definitions",
+              "provider": "microsoft.storagesync",
+              "resource": "Server Endpoint Metrics"
+            },
+            "origin": "System",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "ServerEndpointSyncSessionAppliedFilesCount",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Count of Files synced",
+                    "displayName": "Files Synced",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "ServerEndpointSyncSessionPerItemErrorsCount",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Count of files failed to sync",
+                    "displayName": "Files not syncing",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "ServerEndpointBatchTransferredFileBytes",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "ServerEndpointName",
+                        "displayName": "Server Endpoint Name",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "SyncDirection",
+                        "displayName": "Sync Direction",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total file size transferred for Sync Sessions",
+                    "displayName": "Bytes synced",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Bytes"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/registeredServers/read",
+            "display": {
+              "description": "Read any Registered Server",
+              "operation": "Read Registered Server",
+              "provider": "microsoft.storagesync",
+              "resource": "Registered Server"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/registeredServers/write",
+            "display": {
+              "description": "Create or Update any Registered Server",
+              "operation": "Create or Update Registered Server",
+              "provider": "microsoft.storagesync",
+              "resource": "Registered Server"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/registeredServers/delete",
+            "display": {
+              "description": "Delete any Registered Server",
+              "operation": "Delete Registered Server",
+              "provider": "microsoft.storagesync",
+              "resource": "Registered Server"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/registeredServers/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "description": "Gets the available metrics for Registered Server",
+              "operation": "Read Registered Server metric definitions",
+              "provider": "microsoft.storagesync",
+              "resource": "Registered Server Metrics"
+            },
+            "origin": "System",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "ServerHeartbeat",
+                    "aggregationType": "Maximum",
+                    "dimensions": [
+                      {
+                        "name": "ServerResourceId",
+                        "displayName": "Registered Server Id",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerName",
+                        "displayName": "Server Name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Metric that logs a value of 1 each time the resigtered server successfully records a heartbeat with the Cloud Endpoint",
+                    "displayName": "Server Online Status",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "ServerRecallIOTotalSizeBytes",
+                    "aggregationType": "Total",
+                    "dimensions": [
+                      {
+                        "name": "ServerResourceId",
+                        "displayName": "Registered Server Id",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "ServerName",
+                        "displayName": "Server Name",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total size of data recalled by the server",
+                    "displayName": "Cloud tiering recall",
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Average",
+                    "unit": "Bytes"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/workflows/read",
+            "display": {
+              "description": "Read Workflows",
+              "operation": "Read Workflows",
+              "provider": "microsoft.storagesync",
+              "resource": "Workflow"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/workflows/operationresults/read",
+            "display": {
+              "description": "Gets the status of an asynchronous operation",
+              "operation": "Read workflows/operationresults",
+              "provider": "microsoft.storagesync",
+              "resource": "Workflow"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/storageSyncServices/workflows/operations/read",
+            "display": {
+              "description": "Gets the status of an asynchronous operation",
+              "operation": "Read workflows/operations",
+              "provider": "microsoft.storagesync",
+              "resource": "Workflow"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/locations/checkNameAvailability/action",
+            "display": {
+              "description": "Checks that storage sync service name is valid and is not in use.",
+              "operation": "Check Name Availability",
+              "provider": "microsoft.storagesync",
+              "resource": "Name Availability"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/locations/workflows/operations/read",
+            "display": {
+              "description": "Gets the status of an asynchronous operation",
+              "operation": "Read locations/workflows/operations",
+              "provider": "microsoft.storagesync",
+              "resource": "Workflow"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/locations/operationresults/read",
+            "display": {
+              "description": "Gets the result for an asynchronous operation",
+              "operation": "Read locations/operationresults",
+              "provider": "microsoft.storagesync",
+              "resource": "operationresults"
+            },
+            "origin": "User"
+          },
+          {
+            "name": "microsoft.storagesync/locations/operations/read",
+            "display": {
+              "description": "Gets the status for an azure asynchronous operation",
+              "operation": "Read locations/operations",
+              "provider": "microsoft.storagesync",
+              "resource": "operations"
+            },
+            "origin": "User"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "Operations_List"
+}

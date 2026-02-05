@@ -105,7 +105,7 @@ model ApprovalSettings {
   notificationOnApprovalDeletion?: ApprovalPolicy;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
+  @identifiers(#["approverEntraId"])
   @doc("List of mandatory approvers for the approval request")
   mandatoryApprovers?: MandatoryApprover[];
 
@@ -156,16 +156,17 @@ model CommunityBaseModel {
   managedOnBehalfOfConfiguration?: CommonTypes.ManagedOnBehalfOfConfiguration;
 
   @doc("List of services governed by a community.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   governedServiceList?: GovernedServiceItem[];
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility - Existing union"
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
   policyOverride?: "Enclave" | "None" | string;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   communityRoleAssignments?: RoleAssignmentItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)

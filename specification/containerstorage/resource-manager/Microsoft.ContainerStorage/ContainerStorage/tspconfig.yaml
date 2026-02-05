@@ -1,0 +1,14 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+    emit-common-types-schema: "never"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/containerstorage.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"

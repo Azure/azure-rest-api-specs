@@ -10,7 +10,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.AppComplianceAutomation;
 /**
@@ -36,8 +35,6 @@ model ReportResource extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Report property.
    */
-  #suppress "deprecated" "Legacy flatten"
-  @Azure.ClientGenerator.Core.flattenProperty
   properties: ReportProperties;
 }
 

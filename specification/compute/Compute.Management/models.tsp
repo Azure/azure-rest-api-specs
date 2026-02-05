@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -465,6 +467,12 @@ union OrchestrationServiceNames {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   AutomaticRepairs: "AutomaticRepairs",
+
+  /**
+   * AutomaticZoneRebalancing orchestration service.
+   */
+  @added(Versions.v2025_04_01)
+  AutomaticZoneRebalancing: "AutomaticZoneRebalancing",
 }
 
 /**
@@ -489,6 +497,24 @@ union OrchestrationServiceStateAction {
   Resume: "Resume",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Suspend: "Suspend",
+}
+
+/**
+ * The latest operation status of the service.
+ */
+@added(Versions.v2025_04_01)
+union OrchestrationServiceOperationStatus {
+  string,
+
+  /**
+   * InProgress orchestration service operation status.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Completed orchestration service operation status.
+   */
+  Completed: "Completed",
 }
 
 /**
@@ -927,12 +953,18 @@ union PatchOperationStatus {
 }
 
 /**
- * Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.
+ * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
  */
 union ZonePlacementPolicyType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Any: "Any",
+
+  /**
+   * Automatic zone placement in a Virtual Machine Scale Set.
+   */
+  @added(Versions.v2025_04_01)
+  Auto: "Auto",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1070,6 +1102,20 @@ union HyperVGenerationTypes {
 }
 
 /**
+ * Specifies the high speed interconnect placement for the virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+union HighSpeedInterconnectPlacement {
+  string,
+
+  /** No high speed interconnect placement */
+  None: "None",
+
+  /** Trunk high speed interconnect placement */
+  Trunk: "Trunk",
+}
+
+/**
  * VM disk types which are disallowed.
  */
 union VmDiskTypes {
@@ -1199,6 +1245,39 @@ union RestorePointExpandOptions {
   instanceView: "instanceView",
 }
 
+/**
+ * The state of snapshot which determines the access availability of the snapshot.
+ */
+@added(Versions.v2025_04_01)
+union SnapshotAccessState {
+  string,
+
+  /**
+   * Default value.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * The snapshot cannot be used for restore, copy or download to offline.
+   */
+  Pending: "Pending",
+
+  /**
+   * The snapshot can be used for restore, copy to different region, and download to offline.
+   */
+  Available: "Available",
+
+  /**
+   * The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded.
+   */
+  InstantAccess: "InstantAccess",
+
+  /**
+   * The snapshot can be used for restoring disks with fast performance, copied and downloaded.
+   */
+  AvailableWithInstantAccess: "AvailableWithInstantAccess",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetCapacityReservationGroups {
   string,
@@ -1252,6 +1331,24 @@ union ExecutionState {
   TimedOut: "TimedOut",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Canceled: "Canceled",
+}
+
+/**
+ * Script shell types.
+ */
+@added(Versions.v2025_04_01)
+union ScriptShellTypes {
+  string,
+
+  /**
+   * Default script shell type.
+   */
+  Default: "Default",
+
+  /**
+   * Powershell7 script shell type.
+   */
+  Powershell7: "Powershell7",
 }
 
 /**
@@ -1677,6 +1774,12 @@ model VirtualMachineScaleSetProperties {
    * Specifies the sku profile for the virtual machine scale set.
    */
   skuProfile?: SkuProfile;
+
+  /**
+   * Specifies the high speed interconnect placement for the virtual machine scale set.
+   */
+  @added(Versions.v2025_04_01)
+  highSpeedInterconnectPlacement?: HighSpeedInterconnectPlacement;
 }
 
 /**
@@ -1792,6 +1895,12 @@ model ScheduledEventsPolicy {
    * The configuration parameters used while publishing scheduledEventsAdditionalPublishingTargets.
    */
   scheduledEventsAdditionalPublishingTargets?: ScheduledEventsAdditionalPublishingTargets;
+
+  /**
+   * The configuration parameters used while creating AllInstancesDown scheduled event setting creation.
+   */
+  @added(Versions.v2025_04_01)
+  allInstancesDown?: AllInstancesDown;
 }
 
 /**
@@ -1830,6 +1939,25 @@ model EventGridAndResourceGraph {
    * Specifies if event grid and resource graph is enabled for Scheduled event related configurations.
    */
   enable?: boolean;
+
+  /**
+   * Specifies the api-version to determine which Scheduled Events configuration schema version will be delivered.
+   */
+  @added(Versions.v2025_04_01)
+  scheduledEventsApiVersion?: string;
+}
+
+/**
+ * Specifies if Scheduled Events should be auto-approved when all instances are down.
+ */
+@added(Versions.v2025_04_01)
+model AllInstancesDown {
+  /**
+   * Specifies if Scheduled Events should be auto-approved when all instances are down.
+   * its default value is true
+   */
+  @added(Versions.v2025_04_01)
+  automaticallyApprove?: boolean;
 }
 
 /**
@@ -2563,9 +2691,16 @@ model VirtualMachineScaleSetNetworkConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetNetworkConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -2651,8 +2786,8 @@ model VirtualMachineScaleSetIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetIPConfigurationProperties;
 }
 
@@ -2713,14 +2848,21 @@ model VirtualMachineScaleSetPublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetPublicIPAddressConfigurationProperties;
 
   /**
    * Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.
    */
   sku?: PublicIPAddressSku;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -2887,6 +3029,12 @@ model ProxyAgentSettings {
    * Specifies the IMDS endpoint settings while creating the virtual machine or virtual machine scale set. Minimum api-version: 2024-03-01.
    */
   imds?: HostEndpointSettings;
+
+  /**
+   * Specify whether to implicitly install the ProxyAgent Extension. This option is currently applicable only for Linux Os.
+   */
+  @added(Versions.v2025_04_01)
+  addProxyAgentExtension?: boolean;
 }
 
 /**
@@ -3203,6 +3351,12 @@ model AdditionalCapabilities {
    * The flag that enables or disables hibernation capability on the VM.
    */
   hibernationEnabled?: boolean;
+
+  /**
+   * The flag enables the usage of FIPS 140-3 compliant cryptography on the protectedSettings of an extension. Learn more at: https://aka.ms/linuxagentfipssupport.
+   */
+  @added(Versions.v2025_04_01)
+  enableFips1403Encryption?: boolean;
 }
 
 /**
@@ -3274,6 +3428,12 @@ model ResiliencyPolicy {
    * The configuration parameters used while performing automatic AZ balancing.
    */
   automaticZoneRebalancingPolicy?: AutomaticZoneRebalancingPolicy;
+
+  /**
+   * The configuration parameters used while performing zone allocation.
+   */
+  @added(Versions.v2025_04_01)
+  zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
 /**
@@ -3297,6 +3457,22 @@ model ResilientVMDeletionPolicy {
 }
 
 /**
+ * The configuration parameters for zone allocation of a virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+model ZoneAllocationPolicy {
+  /**
+   * The maximum number of availability zones to use if the ZonePlacementPolicy is 'Auto'. If not specified, all availability zones will be used.
+   */
+  maxZoneCount?: int32;
+
+  /**
+   * The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set.
+   */
+  maxInstancePercentPerZonePolicy?: MaxInstancePercentPerZonePolicy;
+}
+
+/**
  * The configuration parameters used while performing automatic AZ balancing.
  */
 model AutomaticZoneRebalancingPolicy {
@@ -3314,6 +3490,23 @@ model AutomaticZoneRebalancingPolicy {
    * Type of rebalance behavior that will be used for recreating virtual machines in the scale set across availability zones. Default and only supported value for now is CreateBeforeDelete.
    */
   rebalanceBehavior?: RebalanceBehavior;
+}
+
+/**
+ * The configuration parameters used to limit the number of virtual machines per availability zone in the virtual machine scale set.
+ */
+@added(Versions.v2025_04_01)
+model MaxInstancePercentPerZonePolicy {
+  /**
+   * Specifies whether maxInstancePercentPerZonePolicy should be enabled on the virtual machine scale set.
+   */
+  enabled?: boolean;
+
+  /**
+   * Limit on the number of instances in each zone as a percentage of the total capacity of the virtual machine scale set.
+   */
+  @maxValue(100)
+  value?: int32;
 }
 
 /**
@@ -3420,8 +3613,8 @@ model VirtualMachineScaleSetUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Scale Set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetUpdateProperties;
 
   /**
@@ -3706,9 +3899,16 @@ model VirtualMachineScaleSetUpdateNetworkConfiguration {
   /**
    * Describes a virtual machine scale set updatable network profile's IP configuration.Use this object for updating network profile's IP Configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetUpdateNetworkConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -3784,8 +3984,8 @@ model VirtualMachineScaleSetUpdateIPConfiguration {
   /**
    * Describes a virtual machine scale set network profile's IP configuration properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetUpdateIPConfigurationProperties;
 }
 
@@ -3846,9 +4046,16 @@ model VirtualMachineScaleSetUpdatePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -3970,8 +4177,8 @@ model VirtualMachineScaleSetExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Scale Set Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineScaleSetExtensionProperties;
 }
 
@@ -4115,6 +4322,20 @@ model OrchestrationServiceSummary {
    */
   @visibility(Lifecycle.Read)
   serviceState?: OrchestrationServiceState;
+
+  /**
+   * The latest operation status of the service. Minimum API version for this property is 2025-04-01.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_04_01)
+  latestOperationStatus?: OrchestrationServiceOperationStatus;
+
+  /**
+   * The last UTC time when the operation status changed. Minimum API version for this property is 2025-04-01.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_04_01)
+  lastStatusChangeTime?: utcDateTime;
 }
 
 @@identifiers(VirtualMachineScaleSetListOSUpgradeHistory.value,
@@ -4663,7 +4884,7 @@ model VirtualMachineScaleSetVMInstanceView {
   placementGroupId?: string;
 
   /**
-   * Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions).
+   * Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://learn.microsoft.com/previous-versions/azure/virtual-machines/linux/infrastructure-example?toc=%2Fazure%2Fvirtual-machines%2Flinux%2Ftoc.json#1-naming-conventions).
    */
   computerName?: string;
 
@@ -5082,13 +5303,29 @@ model DataDisk {
   /**
    * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
+  @renamedFrom(Versions.v2025_04_01, "diskIOPSReadWrite")
+  @removed(Versions.v2025_04_01)
   @visibility(Lifecycle.Read)
+  DiskIOPSReadWrite?: int64;
+
+  /**
+   * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS.
+   */
+  @added(Versions.v2025_04_01)
   diskIOPSReadWrite?: int64;
 
   /**
    * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
+  @renamedFrom(Versions.v2025_04_01, "diskMBpsReadWrite")
+  @removed(Versions.v2025_04_01)
   @visibility(Lifecycle.Read)
+  DiskMBpsReadWrite?: int64;
+
+  /**
+   * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS.
+   */
+  @added(Versions.v2025_04_01)
   diskMBpsReadWrite?: int64;
 
   /**
@@ -5181,8 +5418,8 @@ model NetworkInterfaceReference extends SubResource {
   /**
    * Describes a network interface reference properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkInterfaceReferenceProperties;
 }
 
@@ -5213,9 +5450,16 @@ model VirtualMachineNetworkInterfaceConfiguration {
   /**
    * Describes a virtual machine network profile's IP configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineNetworkInterfaceConfigurationProperties;
+
+  /**
+   * Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -5304,8 +5548,8 @@ model VirtualMachineNetworkInterfaceIPConfiguration {
   /**
    * Describes a virtual machine network interface IP configuration properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineNetworkInterfaceIPConfigurationProperties;
 }
 
@@ -5361,14 +5605,21 @@ model VirtualMachinePublicIPAddressConfiguration {
   /**
    * Describes a virtual machines IP Configuration's PublicIPAddress configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachinePublicIPAddressConfigurationProperties;
 
   /**
    * Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible.
    */
   sku?: PublicIPAddressSku;
+
+  /**
+   * Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @added(Versions.v2025_04_01)
+  tags?: Record<string>;
 }
 
 /**
@@ -5603,8 +5854,8 @@ model VirtualMachineScaleSetVMExtensionUpdate extends SubResourceReadOnly {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -6148,21 +6399,21 @@ model LastPatchInstallationSummary {
 }
 
 /**
- * Describes the user-defined constraints for virtual machine hardware placement.
+ * Describes the user-defined constraints for resource hardware placement.
  */
 model Placement {
   /**
-   * Specifies the policy for virtual machine's placement in availability zone. Possible values are: **Any** - An availability zone will be automatically picked by system as part of virtual machine creation.
+   * Specifies the policy for resource's placement in availability zone. Possible values are: **Any** (used for Virtual Machines), **Auto** (used for Virtual Machine Scale Sets) - An availability zone will be automatically picked by system as part of resource creation.
    */
   zonePlacementPolicy?: ZonePlacementPolicyType;
 
   /**
-   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must be present in the list of availability zones passed with 'includeZones'. If 'includeZones' is not provided, all availability zones in region will be considered for selection.
    */
   includeZones?: string[];
 
   /**
-   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.
+   * This property supplements the 'zonePlacementPolicy' property. If 'zonePlacementPolicy' is set to 'Any'/'Auto', availability zone selected by the system must not be present in the list of availability zones passed with 'excludeZones'. If 'excludeZones' is not provided, all availability zones in region will be considered for selection.
    */
   excludeZones?: string[];
 }
@@ -6181,8 +6432,8 @@ model VirtualMachineUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineProperties;
 
   /**
@@ -6386,8 +6637,8 @@ model VirtualMachineExtensionUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine Extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineExtensionUpdateProperties;
 }
 
@@ -6444,6 +6695,18 @@ model WindowsParameters {
    * This is used to install patches that were published on or before this given max published date.
    */
   maxPatchPublishDate?: utcDateTime;
+
+  /**
+   * This is used to include patches that match the given patch name masks. Alphanumeric strings and wildcard expressions consisting of * and ? are only supported as input values in the list. Null, empty and only whitespaces strings as inputs values are not supported.
+   */
+  @added(Versions.v2025_04_01)
+  patchNameMasksToInclude?: string[];
+
+  /**
+   * This is used to exclude patches that match the given patch name masks. Alphanumeric strings and wildcard expressions consisting of * and ? are only supported as input values in the list. Null, empty and only whitespaces strings as inputs values are not supported.
+   */
+  @added(Versions.v2025_04_01)
+  patchNameMasksToExclude?: string[];
 }
 
 /**
@@ -6645,8 +6908,8 @@ model VirtualMachineImage extends VirtualMachineImageResource {
   /**
    * Describes the properties of a Virtual Machine Image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineImageProperties;
 }
 
@@ -6972,8 +7235,8 @@ model AvailabilitySetUpdate extends UpdateResource {
   /**
    * The instance view of a resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AvailabilitySetProperties;
 
   /**
@@ -7192,8 +7455,8 @@ model DedicatedHostGroupUpdate extends UpdateResource {
   /**
    * Dedicated Host Group Properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DedicatedHostGroupProperties;
 
   /**
@@ -7277,8 +7540,8 @@ model DedicatedHostUpdate extends UpdateResource {
   /**
    * Properties of the dedicated host.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: DedicatedHostProperties;
 
   /**
@@ -7333,8 +7596,8 @@ model SshPublicKeyUpdateResource extends UpdateResource {
   /**
    * Properties of the SSH public key.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SshPublicKeyResourceProperties;
 }
 
@@ -7355,6 +7618,7 @@ model SshPublicKeyGenerateKeyPairResult {
   /**
    * Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   privateKey: string;
 
   /**
@@ -7501,8 +7765,8 @@ model ImageUpdate extends UpdateResource {
   /**
    * Describes the properties of an Image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ImageProperties;
 }
 
@@ -7546,6 +7810,12 @@ model RestorePointCollectionProperties {
    */
   @visibility(Lifecycle.Read)
   restorePoints?: RestorePoint[];
+
+  /**
+   * This property determines whether instant access snapshot is enabled for restore points created under this restore point collection for Premium SSD v2 or Ultra disk. Instant access snapshot for Premium SSD v2 or Ultra disk is instantaneously available for restoring disk with fast restore performance.
+   */
+  @added(Versions.v2025_04_01)
+  instantAccess?: boolean;
 }
 
 /**
@@ -7605,6 +7875,12 @@ model RestorePointProperties {
    */
   @visibility(Lifecycle.Read)
   instanceView?: RestorePointInstanceView;
+
+  /**
+   * This property determines the time in minutes the snapshot is retained as instant access for restoring Premium SSD v2 or Ultra disk with fast restore performance in this restore point.
+   */
+  @added(Versions.v2025_04_01)
+  instantAccessDurationMinutes?: int32;
 }
 
 /**
@@ -7846,6 +8122,12 @@ model DiskRestorePointInstanceView {
   id?: string;
 
   /**
+   * The state of snapshot which determines the access availability of the snapshot.
+   */
+  @added(Versions.v2025_04_01)
+  snapshotAccessState?: SnapshotAccessState;
+
+  /**
    * The disk restore point replication status information.
    */
   replicationStatus?: DiskRestorePointReplicationStatus;
@@ -7874,8 +8156,8 @@ model RestorePointCollectionUpdate extends UpdateResource {
   /**
    * The restore point collection properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RestorePointCollectionProperties;
 }
 
@@ -7915,9 +8197,15 @@ model CapacityReservationGroupProperties {
   instanceView?: CapacityReservationGroupInstanceView;
 
   /**
-   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. Pls. keep in mind the capacity reservation group resource generally can be shared across subscriptions belonging to a single azure AAD tenant or cross AAD tenant if there is a trust relationship established between the AAD tenants. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies the settings to enable sharing across subscriptions for the capacity reservation group resource. The capacity reservation group resource can generally be shared across subscriptions belonging to a single Azure AAD tenant or across AAD tenants if there is a trust relationship established between the tenants.  Block capacity reservation does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   sharingProfile?: ResourceSharingProfile;
+
+  /**
+   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+   */
+  @added(Versions.v2025_04_01)
+  reservationType?: ReservationType;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7967,6 +8255,22 @@ model CapacityReservationInstanceView {
 }
 
 /**
+ * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+ */
+@added(Versions.v2025_04_01)
+model ScheduleProfile {
+  /**
+   * The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27.
+   */
+  start?: string;
+
+  /**
+   * The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28.
+   */
+  end?: string;
+}
+
+/**
  * Represents the capacity reservation utilization in terms of resources allocated.
  */
 model CapacityReservationUtilization {
@@ -7986,9 +8290,30 @@ model CapacityReservationUtilization {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ResourceSharingProfile {
   /**
-   * Specifies an array of subscription resource IDs that capacity reservation group is shared with. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
+   * Specifies an array of subscription resource IDs that capacity reservation group is shared with. Block Capacity Reservations does not support sharing across subscriptions. **Note:** Minimum api-version: 2023-09-01. Please refer to https://aka.ms/computereservationsharing for more details.
    */
   subscriptionIds?: SubResource[];
+}
+
+/**
+ * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+ */
+@added(Versions.v2025_04_01)
+union ReservationType {
+  /**
+   * Custom reservation type value.
+   */
+  string,
+
+  /**
+   * To consume on demand allocated capacity reservation when a capacity reservation group is provided.
+   */
+  Targeted: "Targeted",
+
+  /**
+   * To consume scheduled allocated block capacity reservation when a capacity reservation group is provided.
+   */
+  Block: "Block",
 }
 
 /**
@@ -7999,8 +8324,8 @@ model CapacityReservationGroupUpdate extends UpdateResource {
   /**
    * capacity reservation group Properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CapacityReservationGroupProperties;
 }
 
@@ -8062,22 +8387,28 @@ model CapacityReservationProperties {
    */
   @visibility(Lifecycle.Read)
   timeCreated?: utcDateTime;
+
+  /**
+   * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+   */
+  @added(Versions.v2025_04_01)
+  scheduleProfile?: ScheduleProfile;
 }
 
 /**
- * Specifies information about the capacity reservation. Only tags and sku.capacity can be updated.
+ * Specifies information about the capacity reservation. sku.capacity cannot be updated for Block Capacity Reservation. Tags can be update for all Capacity Reservation Types.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model CapacityReservationUpdate extends UpdateResource {
   /**
    * Properties of the Capacity reservation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CapacityReservationProperties;
 
   /**
-   * SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values.
+   * SKU of the resource for which capacity needs be reserved. The SKU name and capacity is required to be set. Currently VM Skus with the capability called 'CapacityReservationSupported' set to true are supported. When 'CapacityReservationSupported' is true, the SKU capability also specifies the 'SupportedCapacityReservationTypes', which lists the types of capacity reservations (such as Targeted or Block) that the SKU supports. Refer to List Microsoft.Compute SKUs in a region (https://docs.microsoft.com/rest/api/compute/resourceskus/list) for supported values. **Note:** The SKU name and capacity cannot be updated for Block capacity reservations.
    */
   sku?: Sku;
 }
@@ -8295,6 +8626,7 @@ model VirtualMachineRunCommandProperties {
   /**
    * Specifies the user account password on the VM when executing the run command.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   runAsPassword?: string;
 
   /**
@@ -8342,7 +8674,7 @@ model VirtualMachineRunCommandProperties {
 }
 
 /**
- * Describes the script sources for run command. Use only one of script, scriptUri, commandId.
+ * Describes the script sources for run command. Use only one of these script sources: script, scriptUri, commandId, galleryScriptReferenceId.
  */
 model VirtualMachineRunCommandScriptSource {
   /**
@@ -8356,7 +8688,7 @@ model VirtualMachineRunCommandScriptSource {
   scriptUri?: string;
 
   /**
-   * Specifies a commandId of predefined built-in script.
+   * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
    */
   commandId?: string;
 
@@ -8364,6 +8696,18 @@ model VirtualMachineRunCommandScriptSource {
    * User-assigned managed identity that has access to scriptUri in case of Azure storage blob. Use an empty object in case of system-assigned identity. Make sure the Azure storage blob exists, and managed identity has been given access to blob's container with 'Storage Blob Data Reader' role assignment. In case of user-assigned identity, make sure you add it under VM's identity. For more info on managed identity and Run Command, refer https://aka.ms/ManagedIdentity and https://aka.ms/RunCommandManaged.
    */
   scriptUriManagedIdentity?: RunCommandManagedIdentity;
+
+  /**
+   * Optional. Specify which shell to use for running the script. These values must match those expected by the extension. Currently supported only for Windows VMs, script uses Powershell 7 when specified. Powershell 7 must be already installed on the machine to use Powershell7 parameter value.
+   */
+  @added(Versions.v2025_04_01)
+  scriptShell?: ScriptShellTypes;
+
+  /**
+   * The resource ID of a Gallery Script version that needs to be executed. Example ID looks like /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/galleries/{galleryName}/scripts/{scriptName}/versions/{version}.
+   */
+  @added(Versions.v2025_04_01)
+  galleryScriptReferenceId?: string;
 }
 
 /**
@@ -8450,8 +8794,8 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
   /**
    * Describes the properties of a Virtual Machine run command.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineRunCommandProperties;
 }
 
@@ -8460,7 +8804,7 @@ model VirtualMachineRunCommandUpdate extends UpdateResource {
  */
 model RunCommandInput {
   /**
-   * The run command id.
+   * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
    */
   commandId: string;
 
@@ -8483,4 +8827,31 @@ model RunCommandResult {
    */
   @identifiers(#[])
   value?: InstanceViewStatus[];
+}
+
+/**
+ * The input for ScaleOut
+ */
+@added(Versions.v2025_04_01)
+model VMScaleSetScaleOutInput {
+  /**
+   * Specifies the number of virtual machines in the scale set.
+   */
+  capacity: int64;
+
+  /**
+   * The input properties for ScaleOut
+   */
+  properties?: VMScaleSetScaleOutInputProperties;
+}
+
+/**
+ * The input properties for ScaleOut
+ */
+@added(Versions.v2025_04_01)
+model VMScaleSetScaleOutInputProperties {
+  /**
+   * The zone in which the scale out is requested for the virtual machine scale set.
+   */
+  zone?: string;
 }

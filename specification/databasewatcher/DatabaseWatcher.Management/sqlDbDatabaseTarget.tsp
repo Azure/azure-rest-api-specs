@@ -9,7 +9,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 @doc("The properties specific to a database in Azure SQL Database.")
 model SqlDbSingleDatabaseTargetProperties extends TargetProperties {

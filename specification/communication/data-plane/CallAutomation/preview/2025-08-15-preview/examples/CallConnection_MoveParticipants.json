@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2025-08-15-preview",
+    "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+    "moveParticipantRequest": {
+      "targetParticipants": [
+        {
+          "kind": "communicationUser",
+          "communicationUser": {
+            "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_ae9e3307-f56e-44be-8934-80a63f080538"
+          }
+        }
+      ],
+      "operationContext": "moveing participant",
+      "operationCallbackUri": "https://app.contoso.com/callback",
+      "fromCall": "28dea47f-b081-4107-9a5c-4300819d2c6c"
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "operationContext": "moveing participant",
+        "participants": [
+          {
+            "identifier": {
+              "kind": "communicationUser",
+              "communicationUser": {
+                "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_ae9e3307-f56e-44be-8934-80a63f080538"
+              }
+            },
+            "isMuted": false
+          }
+        ],
+        "fromCall": "28dea47f-b081-4107-9a5c-4300819d2c6c"
+      }
+    }
+  }
+}

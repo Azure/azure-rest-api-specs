@@ -1,0 +1,51 @@
+parameters:
+  "service-dir":
+    default: "sdk/fabric"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-common-types-schema: "never"
+    output-file: "{version-status}/{version}/fabric.json"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "Azure.ResourceManager.Fabric"
+    api-version: "2023-11-01"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-fabric"
+    flavor: "azure"
+    namespace: "azure.mgmt.fabric"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-fabric"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-fabric"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-fabric"
+    flavor: azure
+    namespace: "com.azure.resourcemanager.fabric"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/fabric"
+    emitter-output-dir: "{output-dir}/{service-dir}/armfabric"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfabric"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Fabric"
+    emitter-output-dir: "{output-dir}/sdk/fabric/{namespace}"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

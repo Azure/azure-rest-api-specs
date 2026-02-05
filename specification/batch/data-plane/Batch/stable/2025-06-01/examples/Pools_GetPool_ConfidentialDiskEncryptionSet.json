@@ -1,0 +1,81 @@
+{
+  "operationId": "Pools_GetPool",
+  "title": "Pool get with confidential disk encryption set for user subscription accounts",
+  "parameters": {
+    "batchUrl": "account.region.batch.azure.com",
+    "api-version": "2025-06-01",
+    "poolId": "pool",
+    "client-request-id": "00000000-0000-0000-0000-000000000000",
+    "ocp-date": "Fri, 17 Feb 2025 00:00:00 GMT"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "pool",
+        "url": "https://account.region.batch.azure.com/pools/pool",
+        "eTag": "0x8DDB7C351BD9078",
+        "lastModified": "2025-06-30T10:46:07.4361976Z",
+        "creationTime": "2025-06-30T10:46:07.4361956Z",
+        "state": "active",
+        "stateTransitionTime": "2025-06-30T10:46:07.4361956Z",
+        "allocationState": "steady",
+        "allocationStateTransitionTime": "2025-06-30T10:46:49.4152394Z",
+        "vmSize": "standard_dc2as_v5",
+        "resizeTimeout": "PT15M",
+        "currentDedicatedNodes": 1,
+        "targetDedicatedNodes": 1,
+        "currentLowPriorityNodes": 0,
+        "targetLowPriorityNodes": 0,
+        "enableAutoScale": false,
+        "enableInterNodeCommunication": false,
+        "taskSlotsPerNode": 1,
+        "taskSchedulingPolicy": {
+          "nodeFillType": "spread",
+          "jobDefaultOrder": "none"
+        },
+        "virtualMachineConfiguration": {
+          "imageReference": {
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "2019-datacenter-core-g2",
+            "version": "latest"
+          },
+          "osDisk": {
+            "ephemeralOSDiskSettings": {},
+            "managedDisk": {
+              "storageAccountType": "standard_lrs",
+              "securityProfile": {
+                "securityEncryptionType": "DiskWithVMGuestState"
+              },
+              "diskEncryptionSet": {
+                "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+              }
+            },
+            "caching": "none"
+          },
+          "nodeAgentSKUId": "batch.node.windows amd64",
+          "dataDisks": [
+            {
+              "lun": 0,
+              "caching": "none",
+              "diskSizeGB": 1024,
+              "managedDisk": {
+                "storageAccountType": "standard_lrs",
+                "diskEncryptionSet": {
+                  "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Compute/diskEncryptionSets/DiskEncryptionSetId"
+                }
+              }
+            }
+          ],
+          "securityProfile": {
+            "securityType": "confidentialvm",
+            "uefiSettings": {
+              "secureBootEnabled": true,
+              "vTpmEnabled": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

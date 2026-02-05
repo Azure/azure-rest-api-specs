@@ -386,7 +386,7 @@ namespace StacItems {
      * This union allows the request body to accept either a single Item or a collection of Items.
      */
     #suppress "@azure-tools/typespec-autorest/union-unsupported" ""
-    #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backcompatibility with existing clients"
     @body
     body: StacItem | ItemCollection,
   ): {

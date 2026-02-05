@@ -1,10 +1,9 @@
-// @ts-check
-
 /**
  * @typedef {Object} ILogger
  * @property {(message:string) => void} debug
  * @property {(message:string) => void} error
  * @property {(message:string) => void} info
+ * @property {(message:string) => void} warning
  * @property {() => boolean} isDebug
  */
 
@@ -50,6 +49,13 @@ export class ConsoleLogger {
    */
   isDebug() {
     return this.#isDebug;
+  }
+
+  /**
+   * @param {string} message
+   */
+  warning(message) {
+    console.warn(message);
   }
 }
 

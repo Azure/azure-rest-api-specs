@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "cacheName": "cacheTest01",
+    "resourceGroupName": "rgtest01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "redisCache",
+            "type": "Microsoft.Cache/Redis/privateLinkResources",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgtest01/providers/Microsoft.Cache/Redis/cacheTest01/privateLinkResources/redisCache",
+            "properties": {
+              "groupId": "redisCache",
+              "requiredMembers": [
+                "redisCache"
+              ],
+              "requiredZoneNames": [
+                "privatelink.redis.cache.windows.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_ListByRedisCache",
+  "title": "StorageAccountListPrivateLinkResources"
+}

@@ -376,6 +376,10 @@ union DevBoxActionType {
   @doc("The action will stop the Dev Box.")
   Stop: "Stop",
 
+  @added(APIVersions.v2025_08_01_preview)
+  @doc("The action will delete the Dev Box.")
+  Delete: "Delete",
+
   string,
 }
 
@@ -387,6 +391,14 @@ union DevBoxActionSourceType {
 
   @doc("The action was triggered by a Dev Box schedule.")
   Schedule: "Schedule",
+
+  @added(APIVersions.v2025_08_01_preview)
+  @doc("The action was triggered by a Dev Box admin.")
+  Admin: "Admin",
+
+  @added(APIVersions.v2025_08_01_preview)
+  @doc("The action was triggered by a Project.")
+  Project: "Project",
 
   string,
 }
@@ -540,6 +552,22 @@ model HardwareProfile {
   @doc("The amount of memory available for the Dev Box.")
   @visibility(Lifecycle.Read)
   memoryGB?: int32;
+
+  /** The CPU architecture type of the dev box. */
+  @added(APIVersions.v2026_01_01_preview)
+  @visibility(Lifecycle.Read)
+  architecture?: ArchitectureType;
+}
+
+/** Architecture Types. */
+union ArchitectureType {
+  string,
+
+  /** x64 architecture */
+  x64: "x64",
+
+  /** ARM64 architecture */
+  Arm64: "Arm64",
 }
 
 @doc("Storage settings for the Dev Box's disks.")

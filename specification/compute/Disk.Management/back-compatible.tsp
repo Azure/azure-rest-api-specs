@@ -4,49 +4,63 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskUpdate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskEncryptionSetUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskEncryptionSetUpdate.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SnapshotUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SnapshotUpdate.properties);
 
 @@clientName(Disks.update, "Disks.update::parameters.properties", "disk");
 @@clientName(Disks.grantAccess,
   "Disks.grantAccess::parameters.body",
   "grantAccessData"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Disk.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Disk.properties);
 
 @@clientName(DiskAccesses.update,
   "DiskAccesses.update::parameters.properties",
   "diskAccess"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskAccess.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskAccess.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientName(DiskEncryptionSets.update,
   "DiskEncryptionSets.update::parameters.properties",
   "diskEncryptionSet"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskEncryptionSet.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskEncryptionSet.properties
+);
 
 @@clientName(DiskRestorePoints.grantAccess,
   "DiskRestorePoints.grantAccess::parameters.body",
   "grantAccessData"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiskRestorePoint.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskRestorePoint.properties
+);
 
 @@clientName(Snapshots.update,
   "Snapshots.update::parameters.properties",
@@ -56,8 +70,9 @@ using Microsoft.Compute;
   "Snapshots.grantAccess::parameters.body",
   "grantAccessData"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Snapshot.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties);
 
 @@clientName(DiskAccesses.createOrUpdate::parameters.resource, "diskAccess");
 @@clientName(DiskAccesses.update::parameters.properties, "diskAccess");
@@ -77,3 +92,28 @@ using Microsoft.Compute;
 @@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
 @@clientName(Snapshots.update::parameters.properties, "snapshot");
 @@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");
+
+@@clientLocation(DiskRestorePoints.get, "DiskRestorePoint", "!csharp");
+@@clientLocation(DiskRestorePoints.listByRestorePoint,
+  "DiskRestorePoint",
+  "!csharp"
+);
+@@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint", "!csharp");
+@@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint", "!csharp");
+
+@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.updateAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
+  DiskAccesses,
+  "!csharp"
+);

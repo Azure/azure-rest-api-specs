@@ -4,7 +4,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Oracle.Database;
 
@@ -81,6 +80,17 @@ model ExascaleDbStorageVaultProperties {
   @doc("HTTPS link to OCI resources exposed to Azure Customer via Azure Interface.")
   @visibility(Lifecycle.Read)
   ociUrl?: url;
+
+  @added(Versions.v20250801_preview)
+  @doc("Cloud Exadata infrastructure ID")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  exadataInfrastructureId?: CloudExadataInfrastructureId;
+
+  @added(Versions.v20250801_preview)
+  @doc("The shapeAttribute of the Exadata VM cluster(s) associated with the Exadata Database Storage Vault.")
+  @visibility(Lifecycle.Read)
+  @maxItems(2)
+  attachedShapeAttributes?: ShapeAttribute[];
 }
 
 @added(Versions.v20241201_preview)

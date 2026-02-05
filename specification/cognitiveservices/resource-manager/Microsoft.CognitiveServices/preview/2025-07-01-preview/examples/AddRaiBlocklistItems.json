@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "raiBlocklistName": "myblocklist",
+    "raiBlocklistItems": [
+      {
+        "name": "myblocklistitem1",
+        "properties": {
+          "pattern": "^[a-z0-9_-]{2,16}$",
+          "isRegex": true
+        }
+      },
+      {
+        "name": "myblocklistitem2",
+        "properties": {
+          "pattern": "blockwords",
+          "isRegex": false
+        }
+      }
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myblocklist",
+        "properties": {
+          "description": "Brief description of the blocklist"
+        },
+        "etag": "\"00000000-0000-0000-0000-000000000000\""
+      }
+    }
+  }
+}

@@ -1,0 +1,547 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Chaos Management",
+    "description": "Azure Chaos Resource Provider REST API",
+    "version": "2023-11-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/experiments": {
+      "get": {
+        "description": "Get a list of Experiment resources in a subscription.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_ListAll",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/runningFilter"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Experiment resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experimentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Experiments in a subscription.": {
+            "$ref": "./examples/ListExperimentsInASubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments": {
+      "get": {
+        "description": "Get a list of Experiment resources in a resource group.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_List",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/runningFilter"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Experiment resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experimentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Experiments in a resource group.": {
+            "$ref": "./examples/ListExperimentsInAResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}": {
+      "delete": {
+        "description": "Delete a Experiment resource.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_Delete",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Asynchronous delete operation."
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete a Experiment in a resource group.": {
+            "$ref": "./examples/DeleteExperiment.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Get a Experiment resource.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_Get",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Experiment resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experiment"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Experiment in a resource group.": {
+            "$ref": "./examples/GetExperiment.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update a Experiment resource.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          },
+          {
+            "name": "experiment",
+            "description": "Experiment resource to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experiment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Long running create experiment operation.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experiment"
+            }
+          },
+          "200": {
+            "description": "Long running replace experiment operation.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experiment"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create/update a Experiment in a resource group.": {
+            "$ref": "./examples/CreateUpdateExperiment.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "The operation to update an experiment.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_Update",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          },
+          {
+            "name": "experiment",
+            "in": "body",
+            "required": true,
+            "description": "Parameters supplied to the Update experiment operation.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experimentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Long running update operation.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experiment"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update an Experiment in a resource group.": {
+            "$ref": "./examples/UpdateExperiment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/cancel": {
+      "post": {
+        "description": "Cancel a running Experiment resource.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_Cancel",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Long running cancel operation."
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Cancel a running Experiment.": {
+            "$ref": "./examples/CancelExperiment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/start": {
+      "post": {
+        "description": "Start a Experiment resource.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_Start",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Long running start experiment operation."
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Start a Experiment.": {
+            "$ref": "./examples/StartExperiment.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions": {
+      "get": {
+        "description": "Get a list of executions of an Experiment resource.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_ListAllExecutions",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of executions returned if request was successful.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experimentExecutionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all executions of an Experiment.": {
+            "$ref": "./examples/ListExperimentExecutions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}": {
+      "get": {
+        "description": "Get an execution of an Experiment resource.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_GetExecution",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/executionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution returned if request was successful.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experimentExecution"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the execution of a Experiment.": {
+            "$ref": "./examples/GetExperimentExecution.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/executions/{executionId}/getExecutionDetails": {
+      "post": {
+        "description": "Execution details of an experiment resource.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_ExecutionDetails",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/executionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get experiment execution details.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experimentExecutionDetails"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get experiment execution details.": {
+            "$ref": "./examples/DetailsExperiment.json"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+parameters:
+  service-dir:
+    default: "sdk/confidentialledger"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/identityservice.json"
+  "@azure-tools/typespec-python":
+    "package-version": "1.0.0b1"
+    "package-name": "azure-confidentialledger-certificate"
+    "emitter-output-dir": "{output-dir}/{service-dir}/azure-confidentialledger-certificate"
+    "namespace": "azure.confidentialledger.certificate"
+    "flavor": "azure"
+    "generate-test": false
+    "generate-sample": false
+    "package-pprint-name": "Confidential Ledger Certificate"
+  "@azure-tools/typespec-csharp":
+    "namespace": "Azure.ConfidentialLedger.Certificate"
+    "emitter-output-dir": "{output-dir}/{service-dir}/Azure.ConfidentialLedger.Certificate"
+    "flavor": "azure"
+    clear-output-folder: true
+  "@azure-tools/typespec-java":
+    "emitter-output-dir": "{output-dir}/{service-dir}/azure-confidentialledger-certificate"
+    "namespace": "com.azure.confidentialledger.certificate"
+    "flavor": "azure"
+  "@azure-tools/typespec-ts":
+    "emitter-output-dir": "{output-dir}/{service-dir}/confidentialledger-certificate-rest"
+    "package-details":
+      "name": "@azure-rest/azure-confidentialledger-certificate"
+      description: "Microsoft Confidential Ledger Certificate"
+    "flavor": "azure"
+    is-modular-library: false
+    generate-metadata: true
+    generate-sample-project: false

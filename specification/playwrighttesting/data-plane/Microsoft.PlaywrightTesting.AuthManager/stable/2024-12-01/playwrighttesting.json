@@ -35,11 +35,22 @@
     {
       "OAuth2Auth": [
         "https://playwright.microsoft.com/.default"
+      ],
+      "OAuth2Auth_": [
+        "https://playwright.microsoft.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
     "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://playwright.microsoft.com/.default": ""
+      }
+    },
+    "OAuth2Auth_": {
       "type": "oauth2",
       "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",

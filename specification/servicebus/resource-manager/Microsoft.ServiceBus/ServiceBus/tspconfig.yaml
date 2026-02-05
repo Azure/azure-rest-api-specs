@@ -1,0 +1,51 @@
+parameters:
+  "service-dir":
+    default: "sdk/servicebus"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    output-file: "{version-status}/{version}/servicebus.json"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-servicebus"
+    namespace: "azure.mgmt.servicebus"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicebus"
+    namespace: "com.azure.resourcemanager.servicebus"
+    service-name: "Service Bus"
+    premium: true
+    enable-sync-stack: false
+    rename-model:
+      EncryptionKeySource: KeySource
+    use-object-for-unknown: true
+    client-side-validations: true
+    customization-class: customization/src/main/java/ServiceBusCustomization.java
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-servicebus"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-servicebus"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/servicebus"
+    emitter-output-dir: "{output-dir}/{service-dir}/armservicebus"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armservicebus"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

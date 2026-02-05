@@ -3,7 +3,10 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.IoTFirmwareDefense, "IoTFirmwareDefenseMgmt", "python");
+@@clientName(Microsoft.IoTFirmwareDefense,
+  "IoTFirmwareDefenseMgmtClient",
+  "python"
+);
 
 @@clientName(Microsoft.IoTFirmwareDefense,
   "IoTFirmwareDefenseMgmtClient",
@@ -11,51 +14,63 @@ using Azure.ClientGenerator.Core;
 );
 
 // flatten
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.TrackedResource.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.TrackedResource.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Microsoft.IoTFirmwareDefense.BinaryHardeningResource.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.IoTFirmwareDefense.BinaryHardeningResource.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Microsoft.IoTFirmwareDefense.CryptoCertificateResource.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.IoTFirmwareDefense.CryptoCertificateResource.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Microsoft.IoTFirmwareDefense.CryptoKeyResource.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.IoTFirmwareDefense.CryptoKeyResource.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Microsoft.IoTFirmwareDefense.CveResource.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.IoTFirmwareDefense.CveResource.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Microsoft.IoTFirmwareDefense.Firmware.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.IoTFirmwareDefense.Firmware.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Microsoft.IoTFirmwareDefense.PasswordHashResource.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.IoTFirmwareDefense.PasswordHashResource.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Microsoft.IoTFirmwareDefense.SbomComponentResource.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.IoTFirmwareDefense.SbomComponentResource.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Microsoft.IoTFirmwareDefense.UsageMetric.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.IoTFirmwareDefense.UsageMetric.properties,
   "java,python"
 );
-#suppress "deprecated" "property flatten for SDK backward compatibility"
-@@flattenProperty(Microsoft.IoTFirmwareDefense.FirmwareUpdateDefinition.properties,
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.IoTFirmwareDefense.FirmwareUpdateDefinition.properties,
   "java,python"
 );

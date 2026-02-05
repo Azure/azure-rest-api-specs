@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Oracle.Database;
 
-@@clientName(Oracle.Database, "OracleDatabaseMgmt", "python");
+@@clientName(Oracle.Database, "OracleDatabaseMgmtClient", "python");
 @@clientName(Oracle.Database, "OracleDatabaseManagementClient", "javascript");
 
 // CSharp
@@ -69,6 +69,7 @@ using Oracle.Database;
   "CloudVmClusterVirtualNetworkAddressProperties",
   "csharp"
 );
+@@clientName(VirtualNetworkAddressProperties.ipAddress, "IPAddress", "csharp");
 @@clientName(ActivationLinks, "CloudAccountActivationLinks", "csharp");
 @@clientName(AllConnectionStringType,
   "AutonomousDatabaseConnectionStringType",
@@ -174,6 +175,14 @@ using Oracle.Database;
 );
 @@clientName(AutonomousDatabaseBaseProperties.peerDbIds, "PeerDBIds", "csharp");
 @@clientName(AutonomousDatabaseBaseProperties.peerDbId, "peerDBId", "csharp");
+@@clientName(AutonomousDatabaseBaseProperties.privateEndpointIp,
+  "PrivateEndpointIP",
+  "csharp"
+);
+@@clientName(AutonomousDatabaseBaseProperties.whitelistedIps,
+  "WhitelistedIPs",
+  "csharp"
+);
 @@clientName(AutonomousDatabaseCloneProperties.timeUntilReconnectCloneEnabled,
   "ReconnectCloneEnabledOn",
   "csharp"
@@ -239,6 +248,7 @@ using Oracle.Database;
   "ExascaleDBStorageVaultId",
   "csharp"
 );
+@@clientName(ExadbVmClusterProperties.scanIpIds, "ScanIPIds", "csharp");
 @@clientName(VirtualNetworkAddressProperties.timeAssigned,
   "AssignedOn",
   "csharp"
@@ -293,6 +303,7 @@ using Oracle.Database;
 @@clientName(DnsPrivateZoneProperties.timeCreated, "CreatedOn", "csharp");
 @@clientName(GenerateType, "WalletGenerateType", "csharp");
 @@clientName(HostFormatType, "ConnectionHostFormatType", "csharp");
+@@clientName(HostFormatType.Ip, "IP", "csharp");
 @@clientName(Intent, "OracleSubscriptionUpdateIntent", "csharp");
 @@clientName(LicenseModel, "OracleLicenseModel", "csharp");
 @@clientName(LongTermBackUpScheduleDetails.timeOfBackup, "BackupOn", "csharp");
@@ -314,6 +325,7 @@ using Oracle.Database;
 @@clientName(Preference, "MaintenancePreference", "csharp");
 @@clientName(PrivateIpAddressesFilter, "PrivateIPAddressesContent", "csharp");
 @@clientName(PrivateIpAddressProperties, "PrivateIPAddressResult", "csharp");
+@@clientName(PrivateIpAddressProperties.ipAddress, "IPAddress", "csharp");
 @@clientName(ProtocolType, "ConnectionProtocolType", "csharp");
 @@clientName(ProtocolType.TCP, "Tcp", "csharp");
 @@clientName(ProtocolType.TCPS, "Tcps", "csharp");
@@ -461,6 +473,10 @@ using Oracle.Database;
   "csharp"
 );
 @@clientName(AutonomousDatabaseUpdateProperties.peerDbId, "peerDBId", "csharp");
+@@clientName(AutonomousDatabaseUpdateProperties.whitelistedIps,
+  "WhitelistedIPs",
+  "csharp"
+);
 
 @@usage(AutonomousDatabaseCharacterSetProperties,
   Usage.input | Usage.output,
@@ -529,6 +545,11 @@ using Oracle.Database;
   "ClusterSubnetOcid",
   "csharp"
 );
+@@clientName(CloudVmClusterProperties.exascaleDbStorageVaultId,
+  "ExascaleDBStorageVaultOcid",
+  "csharp"
+);
+@@clientName(CloudVmClusterProperties.scanIpIds, "ScanIPIds", "csharp");
 @@clientName(VirtualNetworkAddressProperties.vmOcid, "VipVmOcid", "csharp");
 @@clientName(VirtualNetworkAddressProperties.ocid, "VipOcid", "csharp");
 @@clientName(DbServerProperties.ocid, "DBServerOcid", "csharp");
@@ -554,6 +575,12 @@ using Oracle.Database;
   "CloudAccountOcid",
   "csharp"
 );
+/*
+@@alternateType(OracleSubscription.plan,
+  Azure.ResourceManager.CommonTypes.Plan,
+  "csharp"
+);
+*/
 @@clientName(PrivateIpAddressesFilter.vnicId, "VnicOcid", "csharp");
 @@clientName(PrivateIpAddressesFilter.subnetId, "SubnetOcid", "csharp");
 @@clientName(PrivateIpAddressProperties.ocid,
@@ -567,6 +594,70 @@ using Oracle.Database;
   "csharp"
 );
 @@clientName(AutonomousDatabaseBaseProperties.ocid, "DatabaseOcid", "csharp");
+@@clientName(DbSystem, "OracleDBSystem", "csharp");
+@@clientName(DbSystemProperties, "OracleDBSystemProperties", "csharp");
+@@clientName(DbSystemProperties.dbVersion, "DBVersion", "csharp");
+@@clientName(DbSystemProperties.pdbName, "PluggableDatabaseName", "csharp");
+@@clientName(DbSystemBaseProperties, "OracleDBSystemBaseProperties", "csharp");
+@@clientName(DbSystemBaseProperties.scanIps, "ScanIPs", "csharp");
+@@clientName(DbVersion, "OracleDBVersion", "csharp");
+@@clientName(DbVersionProperties, "OracleDBVersionProperties", "csharp");
+@@clientName(DbVersionProperties.supportsPdb,
+  "DoesSupportPluggableDatabase",
+  "csharp"
+);
+@@clientName(NetworkAnchor, "OracleNetworkAnchor", "csharp");
+@@clientName(NetworkAnchorProperties,
+  "OracleNetworkAnchorProperties",
+  "csharp"
+);
+@@clientName(NetworkAnchorProperties.dnsForwardingEndpointIpAddress,
+  "DnsForwardingEndpointIPAddress",
+  "csharp"
+);
+@@clientName(NetworkAnchorProperties.dnsListeningEndpointIpAddress,
+  "DnsListeningEndpointIPAddress",
+  "csharp"
+);
+@@alternateType(NetworkAnchorProperties.dnsForwardingRulesUrl, url, "csharp");
+@@alternateType(NetworkAnchorProperties.dnsListeningEndpointNsgRulesUrl,
+  url,
+  "csharp"
+);
+@@alternateType(NetworkAnchorProperties.dnsForwardingEndpointNsgRulesUrl,
+  url,
+  "csharp"
+);
+@@clientName(ResourceAnchor, "OracleResourceAnchor", "csharp");
+@@clientName(ResourceAnchorProperties,
+  "OracleResourceAnchorProperties",
+  "csharp"
+);
+@@clientName(BaseDbSystemShapes, "OracleBaseDbSystemShape", "csharp");
+@@clientName(BaseDbSystemShapes.VMStandardX86, "VmStandardX86", "csharp");
+@@clientName(DbSystemOptions, "OracleDBSystemOptions", "csharp");
+@@clientName(DbSystemDatabaseEditionType,
+  "DBSystemDatabaseEditionType",
+  "csharp"
+);
+@@clientName(DbSystemLifecycleState, "DBSystemLifecycleState", "csharp");
+@@clientName(DbSystemSourceType, "DBSystemSourceType", "csharp");
+@@clientName(DiskRedundancyType, "DBSystemDiskRedundancyType", "csharp");
+@@clientName(DnsForwardingRule, "NetworkAnchorDnsForwardingRule", "csharp");
+@@clientName(DnsForwardingRule.forwardingIpAddress,
+  "ForwardingIPAddress",
+  "csharp"
+);
+@@clientName(ExadataVmClusterStorageManagementType.ASM, "Asm", "csharp");
+@@clientName(ShapeAttribute, "ExascaleStorageShapeAttribute", "csharp");
+@@clientName(ShapeAttribute.SMART_STORAGE, "SmartStorage", "csharp");
+@@clientName(ShapeAttribute.BLOCK_STORAGE, "BlockStorage", "csharp");
+@@clientName(StorageManagementType.LVM, "Lvm", "csharp");
+@@clientName(ShapeFamilyType.ExadbXs, "ExadbXS", "csharp");
+@@clientName(CloudVmClusters.listPrivateIpAddresses,
+  "GetPrivateIPAddresses",
+  "csharp"
+);
 
 // Java
 @@clientName(AutonomousDatabaseBackups.listByParent,

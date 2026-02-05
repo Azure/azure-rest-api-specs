@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "namespaceName": "sdk-Namespace-6019",
+    "resourceGroupName": "ResourceGroup",
+    "subscriptionId": "Subscription"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.EventHub/Namespaces/NetworkRuleSet",
+        "id": "/subscriptions/subscriptionid/resourceGroups/resourcegroupid/providers/Microsoft.EventHub/namespaces/sdk-Namespace-9659/networkruleset/default",
+        "properties": {
+          "defaultAction": "Deny",
+          "ipRules": [
+            {
+              "action": "Allow",
+              "ipMask": "1.1.1.1"
+            },
+            {
+              "action": "Allow",
+              "ipMask": "1.1.1.2"
+            },
+            {
+              "action": "Allow",
+              "ipMask": "1.1.1.3"
+            },
+            {
+              "action": "Allow",
+              "ipMask": "1.1.1.4"
+            },
+            {
+              "action": "Allow",
+              "ipMask": "1.1.1.5"
+            }
+          ],
+          "virtualNetworkRules": [
+            {
+              "ignoreMissingVnetServiceEndpoint": true,
+              "subnet": {
+                "id": "/subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet2"
+              }
+            },
+            {
+              "ignoreMissingVnetServiceEndpoint": false,
+              "subnet": {
+                "id": "/subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet3"
+              }
+            },
+            {
+              "ignoreMissingVnetServiceEndpoint": false,
+              "subnet": {
+                "id": "/subscriptions/subscriptionid/resourcegroups/resourcegroupid/providers/Microsoft.Network/virtualNetworks/myvn/subnets/subnet6"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Namespaces_GetNetworkRuleSet",
+  "title": "NameSpaceNetworkRuleSetGet"
+}

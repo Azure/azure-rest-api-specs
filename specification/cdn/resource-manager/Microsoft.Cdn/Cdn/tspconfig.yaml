@@ -1,0 +1,49 @@
+parameters:
+  "service-dir":
+    default: "sdk/cdn"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/openapi.json"
+    examples-dir: "{project-root}/examples"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-cdn"
+    namespace: "azure.mgmt.cdn"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cdn"
+    namespace: "com.azure.resourcemanager.cdn"
+    service-name: "Cdn" # human-readable service name, whitespace allowed
+    premium: true
+    service-dir: "sdk/cdn"
+    enable-sync-stack: false
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/cdn
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-cdn"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-cdn"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/cdn"
+    emitter-output-dir: "{output-dir}/{service-dir}/armcdn"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcdn/v2"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

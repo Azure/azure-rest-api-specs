@@ -25,7 +25,7 @@ export function outputAnnotatedErrors(errors: ReportableOavError[]) {
 }
 
 export function outputSuccessSummary(swaggerFiles: string[], reportName: string) {
-  let builtLines: string[] = [];
+  const builtLines: string[] = [];
 
   builtLines.push(`## All specifications passed ${reportName}`);
   builtLines.push("| File | Status |");
@@ -44,7 +44,7 @@ export function outputSuccessSummary(swaggerFiles: string[], reportName: string)
 }
 
 export function outputErrorSummary(errors: ReportableOavError[], reportName: string) {
-  let builtLines: string[] = [];
+  const builtLines: string[] = [];
   let checkName: string = "";
 
   builtLines.push(`## Error Summary - ${reportName}`);
@@ -56,17 +56,12 @@ export function outputErrorSummary(errors: ReportableOavError[], reportName: str
     checkName = "validate-example";
   }
 
-  builtLines.push(`⚠️ This check is testing a new version of '${reportName}'. ⚠️`);
-  builtLines.push(
-    "Failures are expected, and should be completely ignored by spec authors and reviewers.",
-  );
-  builtLines.push(`Meaningful results for this PR are in required check '${reportName}'.`);
   builtLines.push("| File | Line#Column | Code | Message |");
   builtLines.push("| --- | --- | --- | --- |");
 
   // sort the errors by file name then by error code
   errors.sort((a, b) => {
-    const nameCompare = a.file.localeCompare(b.file);
+    const nameCompare = (a.file || "").localeCompare(b.file || "");
     if (nameCompare !== 0) {
       return nameCompare;
     }

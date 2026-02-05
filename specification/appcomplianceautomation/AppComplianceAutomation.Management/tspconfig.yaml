@@ -11,27 +11,37 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/appcomplianceautomation.json"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     flavor: azure
-    package-dir: "arm-appcomplianceautomation"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-appcomplianceautomation"
     package-details:
       name: "@azure/arm-appcomplianceautomation"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-appcomplianceautomation"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-appcomplianceautomation"
     namespace: "azure.mgmt.appcomplianceautomation"
     flavor: "azure"
     generate-test: true
     generate-sample: true
-  # "@azure-tools/typespec-java":
-  #   flavor: azure
-  #   package-dir: "azure-resourcemanager-appcomplianceautomation"
-  #   namespace: "com.azure.resourcemanager.appcomplianceautomation"
-  #   service-name: "App Compliance Automation"
-  #   examples-directory: "{project-root}/examples"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appcomplianceautomation"
+    namespace: "com.azure.resourcemanager.appcomplianceautomation"
+    service-name: "App Compliance Automation"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/appcomplianceautomation"
+    emitter-output-dir: "{output-dir}/{service-dir}/armappcomplianceautomation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappcomplianceautomation"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.AppComplianceAutomation"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

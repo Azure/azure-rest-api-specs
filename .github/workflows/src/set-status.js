@@ -1,5 +1,4 @@
-// @ts-check
-
+import { inspect } from "util";
 import { isFullGitSha } from "../../shared/src/git.js";
 import {
   CheckConclusion,
@@ -7,6 +6,7 @@ import {
   CommitStatusState,
   PER_PAGE_MAX,
 } from "../../shared/src/github.js";
+import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
 
 // TODO: Add tests
@@ -91,7 +91,7 @@ export async function setStatusImpl({
   });
   const prLabels = labels.map((label) => label.name);
 
-  core.info(`Labels: ${prLabels}`);
+  core.info(`Labels: ${inspect(prLabels)}`);
 
   // Parse overriding labels (comma-separated string to array)
   const overridingLabelsArray = overridingLabel
@@ -138,9 +138,13 @@ export async function setStatusImpl({
   });
 
   const targetRuns = workflowRuns
-    .filter((wf) => wf.name == monitoredWorkflowName)
+    .filter(
+      (wf) =>
+        // Match both old and new names, to handle the rename more gracefully
+        wf.name === monitoredWorkflowName || wf.name === `[TEST-IGNORE] ${monitoredWorkflowName}`,
+    )
     // Sort by "updated_at" descending
-    .sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+    .sort(invert(byDate((r) => r.updated_at)));
 
   // Sorted by "updated_at" descending, so most recent run is at index 0.
   // If "targetRuns.length === 0", run will be "undefined", which the following
@@ -148,7 +152,9 @@ export async function setStatusImpl({
   const run = targetRuns[0];
 
   if (!run) {
-    console.log(`No workflow runs found for '${monitoredWorkflowName}'.`);
+    console.log(
+      `No workflow runs found for '${monitoredWorkflowName}' or '[TEST-IGNORE] ${monitoredWorkflowName}'.`,
+    );
   }
 
   if (run) {
@@ -219,7 +225,8 @@ export async function setStatusImpl({
     });
   } else {
     core.info(
-      `No workflow runs found for '${monitoredWorkflowName}'. Setting status to ${CommitStatusState.PENDING} for required status: ${requiredStatusName}.`,
+      `No workflow runs found for '${monitoredWorkflowName}' or '[TEST-IGNORE] ${monitoredWorkflowName}'.` +
+        ` Setting status to ${CommitStatusState.PENDING} for required status: ${requiredStatusName}.`,
     );
     // Run was not found (not started), or not completed
     await github.rest.repos.createCommitStatus({

@@ -1,0 +1,44 @@
+{
+  "title": "Occurrences_Delay_MaximumSet",
+  "operationId": "Occurrences_Delay",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "067DEB5E-4E15-4A54-B546-DA48FCED4531",
+    "resourceGroupName": "rgcomputeschedule",
+    "scheduledActionName": "scheduledaction-test",
+    "occurrenceId": "12345678-1234-1234-1234-123456789012",
+    "body": {
+      "delay": "2025-12-10T14:39:56.329Z",
+      "resourceIds": [
+        "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/vm-test"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalResources": 27,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg-test/providers/Microsoft.Compute/virtualMachines/vm-test",
+            "status": "Succeeded",
+            "error": {
+              "code": "nqxotublbaaqnbvgkrqbajtwo",
+              "message": "ght",
+              "target": "bsxjdzkenjxkgyyagxykzlfeueoac",
+              "details": [],
+              "innererror": {
+                "code": "mfetjmmhbkqdbkuvbtblslrgw"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

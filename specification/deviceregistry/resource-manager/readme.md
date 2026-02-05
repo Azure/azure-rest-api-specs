@@ -22,15 +22,183 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the Azure Device Registry.
 
-``` yaml
+```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-07
+tag: package-preview-2026-03
 ```
 
-``` yaml
+```yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-preview-2026-03
+
+These settings apply only when `--tag=package-preview-2026-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2026-03-01-preview/deviceregistry.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.NamespaceAssetProperties.properties.eventGroups
+      - $.definitions.NamespaceAssetUpdateProperties.properties.eventGroups
+      - $.definitions.NamespaceDiscoveredAssetProperties.properties.eventGroups
+      - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.eventGroups
+    reason: These are customer defined properties with variables keys but well defined value structure.
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.NamespaceAssetProperties.properties.attributes
+      - $.definitions.NamespaceAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredAssetProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes
+    reason: attributes is a customer-defined property of any shape and custom keys for other properties
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.MessagingEndpoints.properties.inbound
+      - $.definitions.MessagingEndpointsUpdate.properties.inbound
+      - $.definitions.OutboundEndpoints.properties.assigned
+      - $.definitions.OutboundEndpointsUpdate.properties.assigned
+      - $.definitions.OutboundEndpoints.properties.unassigned
+      - $.definitions.OutboundEndpointsUpdate.properties.unassigned
+      - $.definitions.NamespaceDiscoveredDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredDeviceUpdateProperties.properties.attributes
+      - $.definitions.DiscoveredMessagingEndpoints.properties.inbound
+      - $.definitions.DiscoveredMessagingEndpointsUpdate.properties.inbound
+      - $.definitions.DiscoveredOutboundEndpoints.properties.assigned
+      - $.definitions.DiscoveredOutboundEndpointsUpdate.properties.assigned
+      - $.definitions.DeviceStatusEndpoints.properties.inbound
+    reason: These are customer defined properties with variables keys but well defined value structure.
+  - code: OperationIdNounVerb
+    from:
+      - deviceregistry.json
+    reason: An existing resource type is called 'schemas'
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
+```
+
+### Tag: package-preview-2025-11
+
+These settings apply only when `--tag=package-preview-2025-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-11'
+input-file:
+  - Microsoft.DeviceRegistry/preview/2025-11-01-preview/deviceregistry.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.NamespaceAssetProperties.properties.eventGroups
+      - $.definitions.NamespaceAssetUpdateProperties.properties.eventGroups
+      - $.definitions.NamespaceDiscoveredAssetProperties.properties.eventGroups
+      - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.eventGroups
+    reason: These are customer defined properties with variables keys but well defined value structure.
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.NamespaceAssetProperties.properties.attributes
+      - $.definitions.NamespaceAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredAssetProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes
+    reason: attributes is a customer-defined property of any shape and custom keys for other properties
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.MessagingEndpoints.properties.inbound
+      - $.definitions.MessagingEndpointsUpdate.properties.inbound
+      - $.definitions.OutboundEndpoints.properties.assigned
+      - $.definitions.OutboundEndpointsUpdate.properties.assigned
+      - $.definitions.OutboundEndpoints.properties.unassigned
+      - $.definitions.OutboundEndpointsUpdate.properties.unassigned
+      - $.definitions.NamespaceDiscoveredDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredDeviceUpdateProperties.properties.attributes
+      - $.definitions.DiscoveredMessagingEndpoints.properties.inbound
+      - $.definitions.DiscoveredMessagingEndpointsUpdate.properties.inbound
+      - $.definitions.DiscoveredOutboundEndpoints.properties.assigned
+      - $.definitions.DiscoveredOutboundEndpointsUpdate.properties.assigned
+      - $.definitions.DeviceStatusEndpoints.properties.inbound
+    reason: These are customer defined properties with variables keys but well defined value structure.
+  - code: OperationIdNounVerb
+    from:
+      - deviceregistry.json
+    reason: An existing resource type is called 'schemas'
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
+```
+
+### Tag: package-2025-10
+
+These settings apply only when `--tag=package-2025-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10'
+input-file:
+  - Microsoft.DeviceRegistry/stable/2025-10-01/deviceregistry.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.NamespaceAssetProperties.properties.eventGroups
+      - $.definitions.NamespaceAssetUpdateProperties.properties.eventGroups
+      - $.definitions.NamespaceDiscoveredAssetProperties.properties.eventGroups
+      - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.eventGroups
+    reason: These are customer defined properties with variables keys but well defined value structure.
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.NamespaceAssetProperties.properties.attributes
+      - $.definitions.NamespaceAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredAssetProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredAssetUpdateProperties.properties.attributes
+      - $.definitions.NamespaceDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDeviceUpdateProperties.properties.attributes
+    reason: attributes is a customer-defined property of any shape and custom keys for other properties
+  - code: AvoidAdditionalProperties
+    from:
+      - deviceregistry.json
+    where:
+      - $.definitions.Messaging.properties.endpoints
+      - $.definitions.MessagingEndpoints.properties.inbound
+      - $.definitions.MessagingEndpointsUpdate.properties.inbound
+      - $.definitions.OutboundEndpoints.properties.assigned
+      - $.definitions.OutboundEndpointsUpdate.properties.assigned
+      - $.definitions.OutboundEndpoints.properties.unassigned
+      - $.definitions.OutboundEndpointsUpdate.properties.unassigned
+      - $.definitions.NamespaceDiscoveredDeviceProperties.properties.attributes
+      - $.definitions.NamespaceDiscoveredDeviceUpdateProperties.properties.attributes
+      - $.definitions.DiscoveredMessagingEndpoints.properties.inbound
+      - $.definitions.DiscoveredMessagingEndpointsUpdate.properties.inbound
+      - $.definitions.DiscoveredOutboundEndpoints.properties.assigned
+      - $.definitions.DiscoveredOutboundEndpointsUpdate.properties.assigned
+      - $.definitions.DeviceStatusEndpoints.properties.inbound
+    reason: These are customer defined properties with variables keys but well defined value structure.
+  - code: OperationIdNounVerb
+    from:
+      - deviceregistry.json
+    reason: An existing resource type is called 'schemas'
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/schemaRegistries/{schemaRegistryName}/schemas"].get.operationId
 ```
 
 ### Tag: package-preview-2025-07
@@ -109,7 +277,10 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
 ```

@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01",
+    "managedPrivateEndpointName": "myMPEName",
+    "requestBodyParameters": {
+      "tags": {
+        "Environment": "Dev 2"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMPEName",
+        "type": "Microsoft.Dashboard/grafana/managedPrivateEndpoint",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Dashboard/grafana/myWorkspace/managedPrivateEndpoints/myPrivateEndpointName",
+        "location": "West US",
+        "properties": {
+          "groupIds": [
+            "grafana"
+          ],
+          "privateLinkResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-000000000000/resourceGroups/xx-rg/providers/Microsoft.Kusto/Clusters/sampleKustoResource",
+          "privateLinkResourceRegion": "West US",
+          "privateLinkServicePrivateIP": "10.0.0.5",
+          "privateLinkServiceUrl": "my-self-hosted-influxdb.westus.mydomain.com",
+          "provisioningState": "Succeeded",
+          "requestMessage": "Example Request Message"
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myMPEName",
+        "type": "Microsoft.Dashboard/grafana/managedPrivateEndpoint",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Dashboard/grafana/myWorkspace/managedPrivateEndpoints/myPrivateEndpointName",
+        "location": "West US",
+        "properties": {
+          "groupIds": [
+            "grafana"
+          ],
+          "privateLinkResourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-000000000000/resourceGroups/xx-rg/providers/Microsoft.Kusto/Clusters/sampleKustoResource",
+          "privateLinkResourceRegion": "West US",
+          "privateLinkServicePrivateIP": "10.0.0.5",
+          "privateLinkServiceUrl": "my-self-hosted-influxdb.westus.mydomain.com",
+          "provisioningState": "Accepted",
+          "requestMessage": "Example Request Message"
+        },
+        "systemData": {
+          "createdAt": "2020-02-03T01:01:01.1075056Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-02-04T02:03:01.1974346Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Dashboard/locations/eastus2/operationStatuses/sample-op-status?api-version=2025-08-01"
+      }
+    }
+  },
+  "operationId": "ManagedPrivateEndpoints_Update",
+  "title": "ManagedPrivateEndpoints_Patch"
+}
