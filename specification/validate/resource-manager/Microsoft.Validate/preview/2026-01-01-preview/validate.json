@@ -1,0 +1,1986 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Validate management service",
+    "version": "2026-01-01-preview",
+    "description": "Microsoft.Validate Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operation Status Interfaces"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Cloud Validation Interfaces"
+    },
+    {
+      "name": "Validation Test Execution Plan Interfaces"
+    },
+    {
+      "name": "Validation Execution Plan Run Interfaces"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Validate/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Validate/cloudValidations": {
+      "get": {
+        "operationId": "CloudValidations_ListBySubscription",
+        "tags": [
+          "Cloud Validation Interfaces"
+        ],
+        "description": "List cloud validations by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudValidationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudValidations_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/CloudValidations_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Validate/cloudValidations/{cloudValidationName}/validationExecutionPlans": {
+      "get": {
+        "operationId": "ValidationExecutionPlans_ListBySubscription",
+        "tags": [
+          "Validation Test Execution Plan Interfaces"
+        ],
+        "description": "List validation test execution plans by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationExecutionPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlans_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlans_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Validate/locations/{location}/operationStatuses/{operationId}": {
+      "get": {
+        "operationId": "OperationStatus_Get",
+        "tags": [
+          "Operation Status Interfaces"
+        ],
+        "description": "Returns the current status of an async operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationStatus_Get_MaximumSet": {
+            "$ref": "./examples/OperationStatus_Get_MaximumSet_Gen.json"
+          },
+          "OperationStatus_Get_MinimumSet": {
+            "$ref": "./examples/OperationStatus_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Validate/cloudValidations": {
+      "get": {
+        "operationId": "CloudValidations_ListByResourceGroup",
+        "tags": [
+          "Cloud Validation Interfaces"
+        ],
+        "description": "List cloud validations by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudValidationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudValidations_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/CloudValidations_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Validate/cloudValidations/{cloudValidationName}": {
+      "get": {
+        "operationId": "CloudValidations_Get",
+        "tags": [
+          "Cloud Validation Interfaces"
+        ],
+        "description": "Get a cloud validation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudValidation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudValidations_Get_MaximumSet": {
+            "$ref": "./examples/CloudValidations_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CloudValidations_CreateOrUpdate",
+        "tags": [
+          "Cloud Validation Interfaces"
+        ],
+        "description": "Create or update a cloud validation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudValidation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CloudValidation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudValidation"
+            }
+          },
+          "201": {
+            "description": "Resource 'CloudValidation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CloudValidation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudValidations_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/CloudValidations_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "CloudValidations_Update",
+        "tags": [
+          "Cloud Validation Interfaces"
+        ],
+        "description": "Update a cloud validation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloudValidationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CloudValidation"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudValidations_Update_MaximumSet": {
+            "$ref": "./examples/CloudValidations_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CloudValidations_Delete",
+        "tags": [
+          "Cloud Validation Interfaces"
+        ],
+        "description": "Delete a cloud validation",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CloudValidations_Delete_MaximumSet": {
+            "$ref": "./examples/CloudValidations_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Validate/cloudValidations/{cloudValidationName}/validationExecutionPlans": {
+      "get": {
+        "operationId": "ValidationExecutionPlans_ListByResourceGroup",
+        "tags": [
+          "Validation Test Execution Plan Interfaces"
+        ],
+        "description": "List validation test execution plans by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationExecutionPlanListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlans_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlans_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Validate/cloudValidations/{cloudValidationName}/validationExecutionPlans/{validationExecutionPlanName}": {
+      "get": {
+        "operationId": "ValidationExecutionPlans_Get",
+        "tags": [
+          "Validation Test Execution Plan Interfaces"
+        ],
+        "description": "Get a validation test execution plan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "validationExecutionPlanName",
+            "in": "path",
+            "description": "The name of the ValidationExecutionPlan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationExecutionPlan"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlans_Get_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlans_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ValidationExecutionPlans_CreateOrUpdate",
+        "tags": [
+          "Validation Test Execution Plan Interfaces"
+        ],
+        "description": "Create or update a validation test execution plan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "validationExecutionPlanName",
+            "in": "path",
+            "description": "The name of the ValidationExecutionPlan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidationExecutionPlan"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ValidationExecutionPlan' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ValidationExecutionPlan"
+            }
+          },
+          "201": {
+            "description": "Resource 'ValidationExecutionPlan' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ValidationExecutionPlan"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlans_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlans_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ValidationExecutionPlans_Update",
+        "tags": [
+          "Validation Test Execution Plan Interfaces"
+        ],
+        "description": "Update a validation test execution plan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "validationExecutionPlanName",
+            "in": "path",
+            "description": "The name of the ValidationExecutionPlan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidationExecutionPlanUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationExecutionPlan"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlans_Update_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlans_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ValidationExecutionPlans_Delete",
+        "tags": [
+          "Validation Test Execution Plan Interfaces"
+        ],
+        "description": "Delete a validation test execution plan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "validationExecutionPlanName",
+            "in": "path",
+            "description": "The name of the ValidationExecutionPlan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlans_Delete_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlans_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Validate/cloudValidations/{cloudValidationName}/validationExecutionPlans/{validationExecutionPlanName}/executionPlanRuns": {
+      "get": {
+        "operationId": "ValidationExecutionPlanRuns_ListByExecutionPlan",
+        "tags": [
+          "Validation Execution Plan Run Interfaces"
+        ],
+        "description": "List Validation test execution plan runs for an execution plan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "validationExecutionPlanName",
+            "in": "path",
+            "description": "The name of the ValidationExecutionPlan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlanRunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlanRuns_ListByExecutionPlan_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlanRuns_ListByExecutionPlan_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Validate/cloudValidations/{cloudValidationName}/validationExecutionPlans/{validationExecutionPlanName}/executionPlanRuns/{executionPlanRunName}": {
+      "get": {
+        "operationId": "ValidationExecutionPlanRuns_Get",
+        "tags": [
+          "Validation Execution Plan Run Interfaces"
+        ],
+        "description": "Get a Validation test execution plan run details",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "validationExecutionPlanName",
+            "in": "path",
+            "description": "The name of the ValidationExecutionPlan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "executionPlanRunName",
+            "in": "path",
+            "description": "The name of the ExecutionPlanRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlanRun"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlanRuns_Get_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlanRuns_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ValidationExecutionPlanRuns_CreateOrUpdate",
+        "tags": [
+          "Validation Execution Plan Run Interfaces"
+        ],
+        "description": "Create or update a validation test execution plan",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "validationExecutionPlanName",
+            "in": "path",
+            "description": "The name of the ValidationExecutionPlan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "executionPlanRunName",
+            "in": "path",
+            "description": "The name of the ExecutionPlanRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlanRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExecutionPlanRun' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlanRun"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExecutionPlanRun' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExecutionPlanRun"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlanRuns_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlanRuns_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ValidationExecutionPlanRuns_Delete",
+        "tags": [
+          "Validation Execution Plan Run Interfaces"
+        ],
+        "description": "Delete a validation test execution plan run resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "cloudValidationName",
+            "in": "path",
+            "description": "The name of the CloudValidation",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "validationExecutionPlanName",
+            "in": "path",
+            "description": "The name of the ValidationExecutionPlan",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "executionPlanRunName",
+            "in": "path",
+            "description": "The name of the ExecutionPlanRun",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ValidationExecutionPlanRuns_Delete_MaximumSet": {
+            "$ref": "./examples/ValidationExecutionPlanRuns_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "CloudValidation": {
+      "type": "object",
+      "description": "Cloud Validation Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudValidationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "CloudValidationListResult": {
+      "type": "object",
+      "description": "The response of a CloudValidation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CloudValidation items on this page",
+          "items": {
+            "$ref": "#/definitions/CloudValidation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CloudValidationOverallState": {
+      "type": "string",
+      "description": "The Overall states of the validation resource.",
+      "enum": [
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "CloudValidationOverallState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The resource is in enabled state."
+          }
+        ]
+      }
+    },
+    "CloudValidationProperties": {
+      "type": "object",
+      "description": "Cloud Validation properties",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "overallState": {
+          "$ref": "#/definitions/CloudValidationOverallState",
+          "description": "The overall state of the resource."
+        },
+        "managedOnBehalfOfConfiguration": {
+          "$ref": "../../../../../common-types/resource-management/v6/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
+          "description": "Managed On Behalf Of Configuration.",
+          "readOnly": true
+        }
+      }
+    },
+    "CloudValidationUpdate": {
+      "type": "object",
+      "description": "Cloud Validation Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudValidationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ExecutionPlanRun": {
+      "type": "object",
+      "description": "The properties of the execution plan run.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExecutionPlanRunProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExecutionPlanRunListResult": {
+      "type": "object",
+      "description": "The response of a ExecutionPlanRun list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExecutionPlanRun items on this page",
+          "items": {
+            "$ref": "#/definitions/ExecutionPlanRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExecutionPlanRunProperties": {
+      "type": "object",
+      "description": "The properties of the execution plan run.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        },
+        "status": {
+          "$ref": "#/definitions/ExecutionPlanRunStatus",
+          "description": "The status of the execution plan run.",
+          "readOnly": true
+        },
+        "startTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the execution plan run.",
+          "readOnly": true
+        },
+        "endTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the execution plan run.",
+          "readOnly": true
+        },
+        "reportedTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The reported timestamp of the execution plan run.",
+          "readOnly": true
+        },
+        "testRuns": {
+          "type": "array",
+          "description": "The test runs under this execution plan run.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/ValidationTestRun"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the execution plan run.",
+          "readOnly": true
+        }
+      }
+    },
+    "ExecutionPlanRunStatus": {
+      "type": "string",
+      "description": "The status of the execution plan run.",
+      "enum": [
+        "Succeeded",
+        "Running",
+        "Canceled",
+        "Failed",
+        "Waiting",
+        "Skipped",
+        "Paused",
+        "Suspended",
+        "TimedOut",
+        "Aborted",
+        "Ignored",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionPlanRunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The execution plan run is succeeded."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The execution plan run is running."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The execution plan run is canceled."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The execution plan run is failed."
+          },
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The execution plan run is waiting."
+          },
+          {
+            "name": "Skipped",
+            "value": "Skipped",
+            "description": "The execution plan run is skipped."
+          },
+          {
+            "name": "Paused",
+            "value": "Paused",
+            "description": "The execution plan run is paused."
+          },
+          {
+            "name": "Suspended",
+            "value": "Suspended",
+            "description": "The execution plan run is suspended."
+          },
+          {
+            "name": "TimedOut",
+            "value": "TimedOut",
+            "description": "The execution plan run is timed out."
+          },
+          {
+            "name": "Aborted",
+            "value": "Aborted",
+            "description": "The execution plan run is aborted."
+          },
+          {
+            "name": "Ignored",
+            "value": "Ignored",
+            "description": "The execution plan run is ignored."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The execution plan run is unknown."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The resource provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Disabling",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating."
+          },
+          {
+            "name": "Disabling",
+            "value": "Disabling",
+            "description": "The resource is being disabled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The resource create request has been accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ValidationExecutionPlan": {
+      "type": "object",
+      "description": "Validation Test Execution Plan",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ValidationExecutionPlanProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ValidationExecutionPlanListResult": {
+      "type": "object",
+      "description": "The response of a ValidationExecutionPlan list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ValidationExecutionPlan items on this page",
+          "items": {
+            "$ref": "#/definitions/ValidationExecutionPlan"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ValidationExecutionPlanOverallState": {
+      "type": "string",
+      "description": "The Overall states of the validation execution plan.",
+      "enum": [
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationExecutionPlanOverallState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The resource is in enabled state."
+          }
+        ]
+      }
+    },
+    "ValidationExecutionPlanProperties": {
+      "type": "object",
+      "description": "Validation Test Execution Plan properties",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of the resource."
+        },
+        "planConfigurationUri": {
+          "type": "string",
+          "description": "URI where the configuration of the execution plan is defined."
+        },
+        "planConfigurationJson": {
+          "type": "string",
+          "description": "Entire execution plan configuration/manifest json.\nEither of URI or this property is mandatory while creating.\nIn get, always return the entire json configuration."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ValidationExecutionPlanProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "overallState": {
+          "$ref": "#/definitions/ValidationExecutionPlanOverallState",
+          "description": "The overall state of the resource."
+        }
+      }
+    },
+    "ValidationExecutionPlanProvisioningState": {
+      "type": "string",
+      "description": "The execution plan resource provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Disabling",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationExecutionPlanProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is updating."
+          },
+          {
+            "name": "Disabling",
+            "value": "Disabling",
+            "description": "The resource is being disabled."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ValidationExecutionPlanUpdate": {
+      "type": "object",
+      "description": "Validation Test Execution Plan",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ValidationExecutionPlanProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "ValidationTestFailureDetails": {
+      "type": "object",
+      "description": "Detailed information about test failure.",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "Error code categorizing the type of failure.",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Human-readable error message describing the failure.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "string",
+          "description": "Detailed information about the failure.",
+          "readOnly": true
+        },
+        "diagnosticInfo": {
+          "type": "string",
+          "description": "Additional diagnostic information.",
+          "readOnly": true
+        },
+        "recommendedActions": {
+          "type": "array",
+          "description": "Suggested remediation steps for the customer.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ValidationTestPassDetails": {
+      "type": "object",
+      "description": "Detailed information about test pass.",
+      "properties": {
+        "resultCode": {
+          "type": "string",
+          "description": "Result code categorizing the type of pass.",
+          "readOnly": true
+        },
+        "testName": {
+          "type": "string",
+          "description": "test name which passed.",
+          "readOnly": true
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "Detailed information about the passed test.",
+          "readOnly": true
+        }
+      }
+    },
+    "ValidationTestRun": {
+      "type": "object",
+      "description": "Validation Test Run represents execution instance(s) of a Validation Test instance under execution plan.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ValidationTestRunProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ValidationTestRunProperties": {
+      "type": "object",
+      "description": "Validation Test Run properties.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ValidationTestRunStatus",
+          "description": "The overall status of the test run.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The state of the test run.",
+          "readOnly": true
+        },
+        "startTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start timestamp of the test run.",
+          "readOnly": true
+        },
+        "reportedTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The reported timestamp of the test run.",
+          "readOnly": true
+        },
+        "endTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end timestamp of the test run.",
+          "readOnly": true
+        },
+        "inputsJson": {
+          "type": "string",
+          "description": "Validation test run inputs json"
+        },
+        "passDetails": {
+          "type": "array",
+          "description": "Detailed pass information when the test passes.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/ValidationTestPassDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "failureDetails": {
+          "type": "array",
+          "description": "Detailed failure information when the test fails.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/ValidationTestFailureDetails"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "inputsJson"
+      ]
+    },
+    "ValidationTestRunStatus": {
+      "type": "string",
+      "description": "The overall status of the test run.",
+      "enum": [
+        "NotRunning",
+        "Scheduled",
+        "Ready",
+        "Running",
+        "Completed",
+        "Stopped",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ValidationTestRunStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotRunning",
+            "value": "NotRunning",
+            "description": "The test run is not running."
+          },
+          {
+            "name": "Scheduled",
+            "value": "Scheduled",
+            "description": "The test run is scheduled."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The test run is ready."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The test run is running."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The test run is completed."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "The test run is stopped."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "The test run is errored out."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.FilterQueryParameter": {
+      "name": "filter",
+      "in": "query",
+      "description": "Filter the result list using the given expression.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.OrderByQueryParameter": {
+      "name": "orderby",
+      "in": "query",
+      "description": "Expressions that specify the order of returned results.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

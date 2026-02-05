@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-12-12-preview",
+    "resourceGroupName": "rgName",
+    "servicesHubConnectorName": "ServicesHubConnectorName1",
+    "subscriptionId": "550e8400-e29b-41d4-a716-446655440000",
+    "body": {
+      "properties": {
+        "logAnalyticsWorkspaceId": "e0566fa0-d57d-4d6a-99f6-224dd1015783",
+        "surveyId": "survey-123"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "result-123",
+            "surveyId": "survey-123",
+            "surveyResponseId": "response-456",
+            "surveyAnalyzerId": "analyzer-789",
+            "userId": "2w24wtwqfdgterdeg3er3dtwd35r3dvvd7657",
+            "currentResult": {
+              "analyzerId": "analyzer-789",
+              "analysisResult": 1,
+              "contentId": "content-001"
+            },
+            "lastUpdated": "2025-12-16T10:00:00Z"
+          },
+          {
+            "id": "result-124",
+            "surveyId": "survey-123",
+            "surveyResponseId": "response-456",
+            "surveyAnalyzerId": "analyzer-790",
+            "userId": "2w24wtwqfdgterdeg3er3dtwd35r3dvvd7657",
+            "currentResult": {
+              "analyzerId": "analyzer-790",
+              "analysisResult": 0,
+              "contentId": "content-002"
+            },
+            "lastUpdated": "2025-12-16T10:00:00Z"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Get_SurveyAnalyzedResults",
+  "title": "Get Survey Analyzer Results"
+}

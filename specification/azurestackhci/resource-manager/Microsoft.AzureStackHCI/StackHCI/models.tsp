@@ -1777,6 +1777,10 @@ model ArcSettingsPatch {
    * ArcSettings properties.
    */
   properties?: ArcSettingsPatchProperties;
+
+  @removed(Versions.v2025_12_01_preview)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 /**
@@ -5857,4 +5861,15 @@ model ReportedProperties {
   @added(Versions.v2025_12_01_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
+}
+
+/**
+ * Request body for the check updates action on update summaries.
+ */
+@removed(Versions.v2025_12_01_preview)
+model CheckUpdatesRequest {
+  /**
+   * Name of update
+   */
+  updateName?: string;
 }
