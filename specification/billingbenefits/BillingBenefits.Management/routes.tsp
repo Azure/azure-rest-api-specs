@@ -84,7 +84,7 @@ interface DiscountsOperationGroup {
     scope: string,
   ): ArmResponse<DiscountList> | ErrorResponse;
 }
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BenefitOperationGroup {
   /**
    * Validate savings plan purchase.
@@ -98,12 +98,12 @@ interface BenefitOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ContributorsOperationGroup {
   /**
    * List contributors under applicable MACCs for a given billing account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
   @action("providers/microsoft.BillingBenefits/applicableContributors")
@@ -138,7 +138,7 @@ interface ContributorsOperationGroup {
   ): ContributorList | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface SellerResourceOperationGroup {
   /**
    * List maccs by billing account
@@ -151,12 +151,12 @@ interface SellerResourceOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ApplicableMaccsOperationGroup {
   /**
    * List maccs that are applicable for a given billing account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
   @action("applicableMaccs")
@@ -183,7 +183,7 @@ interface ApplicableMaccsOperationGroup {
   ): ApplicableMaccList | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface CreditsOperationGroup {
   /**
    * List applicable credits for the provided scope. Currently supported scopes: BillingAccountResourceId
@@ -202,7 +202,7 @@ interface CreditsOperationGroup {
   ): ArmResponse<CreditsList> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ConditionalCreditsOperationGroup {
   /**
    * List conditional credits that are applicable for a given scope. Currently supported scopes: billing accounts
@@ -221,12 +221,12 @@ interface ConditionalCreditsOperationGroup {
   ): ArmResponse<ConditionalCreditList> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ConditionalCreditContributorsOperationGroup {
   /**
    * List contributors under applicable conditional credits for a given billing account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
   @action("providers/microsoft.BillingBenefits/applicableContributors")
