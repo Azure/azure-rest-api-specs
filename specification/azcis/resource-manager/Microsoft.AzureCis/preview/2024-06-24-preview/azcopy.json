@@ -371,22 +371,22 @@
         },
         "source": {
           "type": "string",
-          "description": "The SAS token for the source object. This should be the full URL. This can target an account, container, virtual directory, or blob."
+          "description": "The storage resource URI for the source object. This can target an account, container, virtual directory, or blob."
         },
         "destination": {
           "type": "string",
-          "description": "The SAS token for the destination object. This should be the full URL. This can target an account, container, virtual directory, or blob."
+          "description": "The storage resource URI for the destination object. This can target an account, container, virtual directory, or blob."
         },
-        "sourceSas": {
+        "sourceSasUri": {
           "type": "string",
           "format": "password",
-          "description": "The SAS token for the source object, marked secret. This should be the full URL. This can target an account, container, virtual directory, or blob.",
+          "description": "The full SAS URI for the source object, marked secret. This can target an account, container, virtual directory, or blob.",
           "x-ms-secret": true
         },
-        "destinationSas": {
+        "destinationSasUri": {
           "type": "string",
           "format": "password",
-          "description": "The SAS token for the destination object, marked secret. This should be the full URL. This can target an account, container, virtual directory, or blob.",
+          "description": "The full SAS URI for the destination object, marked secret. This can target an account, container, virtual directory, or blob.",
           "x-ms-secret": true
         },
         "fromTo": {
@@ -422,8 +422,6 @@
       },
       "required": [
         "command",
-        "source",
-        "destination",
         "fromTo",
         "blobType"
       ]

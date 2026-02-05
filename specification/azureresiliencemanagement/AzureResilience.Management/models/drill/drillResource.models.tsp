@@ -117,6 +117,11 @@ model DrillResourceProperties {
   @visibility(Lifecycle.Read)
   rbacAssignmentError?: ErrorDetails;
 
+  @doc("Monitoring RBAC assignment error, if any.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_01_preview)
+  monitoringRbacAssignmentError?: ErrorDetails;
+
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -129,6 +134,10 @@ model DrillResourceAttentionReason {
 
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;
+
+  @doc("RBAC required by Drill MSI on the target resource for monitoring.")
+  @added(Versions.v2026_03_01_preview)
+  monitoringRbacOnTargets?: RBACState;
 
   @doc("Target extension resource is missing on the resource.")
   target?: ExtensionObjectState;
