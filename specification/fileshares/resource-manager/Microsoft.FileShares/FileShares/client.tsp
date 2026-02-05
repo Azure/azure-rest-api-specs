@@ -93,7 +93,12 @@ using Microsoft.FileShares;
   "FileSharePrivateEndpointConnection",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.PrivateLinkResource,
-  "FileSharesPrivateLinkResource",
+@@clientName(PrivateLinkResource, "FileSharePrivateLinkResource", "csharp");
+@@clientName(PrivateLinkResourceProperties,
+  "FileSharePrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
+  "FileSharePrivateEndpointConnection",
   "csharp"
 );
