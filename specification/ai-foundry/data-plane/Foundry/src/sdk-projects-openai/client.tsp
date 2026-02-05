@@ -70,7 +70,7 @@ namespace Azure.AI.Projects;
 @@clientName(MemorySearchToolCallItemResource,
   "MemorySearchToolCallResponseItem"
 );
-@@clientName(OAuthConsentRequestItemResource,
+@@clientName(OAuthConsentRequestOutputItem,
   "OAuthConsentRequestResponseItem"
 );
 @@clientName(OpenAI.OutputItemType, "AgentResponseItemKind");
@@ -199,9 +199,9 @@ namespace Azure.AI.Projects;
 @@access(OpenAI.OutputItemMcpToolCall, Access.internal);
 @@clientName(OpenAI.OutputItemMcpToolCall, "InternalOutputItemMcpToolCall");
 
-@@access(OpenAI.OutputItemMcpApprovalResponseResource, Access.internal);
-@@clientName(OpenAI.OutputItemMcpApprovalResponseResource,
-  "InternalOutputItemMcpApprovalResponseResource"
+@@access(OpenAI.ItemResourceMcpApprovalResponseResource, Access.internal);
+@@clientName(OpenAI.ItemResourceMcpApprovalResponseResource,
+  "InternalItemResourceMcpApprovalResponseResource"
 );
 
 @@access(OpenAI.OutputItemMcpApprovalRequest, Access.internal);
@@ -219,9 +219,9 @@ namespace Azure.AI.Projects;
   "InternalOutputItemFunctionShellCall"
 );
 
-@@access(OpenAI.OutputItemLocalShellToolCallOutput, Access.internal);
-@@clientName(OpenAI.OutputItemLocalShellToolCallOutput,
-  "InternalOutputItemLocalShellToolCallOutput"
+@@access(OpenAI.ItemLocalShellToolCallOutput, Access.internal);
+@@clientName(OpenAI.ItemLocalShellToolCallOutput,
+  "InternalItemLocalShellToolCallOutput"
 );
 
 @@access(OpenAI.OutputItemLocalShellToolCall, Access.internal);
@@ -234,9 +234,9 @@ namespace Azure.AI.Projects;
   "InternalOutputItemImageGenToolCall"
 );
 
-@@access(OpenAI.OutputItemFunctionToolCallOutputResource, Access.internal);
-@@clientName(OpenAI.OutputItemFunctionToolCallOutputResource,
-  "InternalOutputItemFunctionToolCallOutputResource"
+@@access(OpenAI.ItemResourceFunctionToolCallOutputResource, Access.internal);
+@@clientName(OpenAI.ItemResourceFunctionToolCallOutputResource,
+  "InternalItemResourceFunctionToolCallOutputResource"
 );
 
 @@access(OpenAI.OutputItemFunctionToolCall, Access.internal);
@@ -249,8 +249,8 @@ namespace Azure.AI.Projects;
   "InternalOutputItemWebSearchToolCall"
 );
 
-@@access(OpenAI.OutputItemComputerToolCallOutputResource, Access.internal);
-@@clientName(OpenAI.OutputItemComputerToolCallOutputResource,
+@@access(OpenAI.ItemResourceComputerToolCallOutputResource, Access.internal);
+@@clientName(OpenAI.ItemResourceComputerToolCallOutputResource,
   "InternalOutputItemComputerToolCallOutputResource"
 );
 
