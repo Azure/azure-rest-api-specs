@@ -282,10 +282,9 @@ interface LivenessSessionOperations {
     FaceErrorResponse
   >;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @added(Versions.v1_3_preview_1)
   @doc(PatchLivenessSessionSettingDescription)
-  @patch
+  @patch(#{ implicitOptionality: false })
   @route("settings")
   patchSettings is Azure.Core.RpcOperation<
     BodyParameter<Settings>,

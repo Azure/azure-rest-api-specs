@@ -154,7 +154,6 @@ interface Pools {
     BatchPool
   >;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @summary("Updates the properties of the specified Pool.")
   @doc("""
     This only replaces the Pool properties specified in the request. For example,
@@ -355,7 +354,6 @@ interface Jobs {
     BatchJob
   >;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @summary("Updates the properties of the specified Job.")
   @doc("""
     This replaces only the Job properties specified in the request. For example, if
@@ -585,7 +583,6 @@ interface JobSchedules {
     BatchJobSchedule
   >;
 
-  #suppress "@typespec/http/patch-implicit-optional" ""
   @summary("Updates the properties of the specified Job Schedule.")
   @doc("""
     This replaces only the Job Schedule properties specified in the request. For
