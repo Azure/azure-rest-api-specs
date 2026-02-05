@@ -84,7 +84,7 @@ interface MonitoringMetricConfigurationsListOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.ProviderNamespace<MonitoringMetricConfiguration>,
 
         /**
          * The name of the device.
@@ -117,7 +117,7 @@ interface MonitoringMetricConfigurationsNonListOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.ProviderNamespace<MonitoringMetricConfiguration>,
 
         /**
          * The name of the device.

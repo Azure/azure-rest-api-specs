@@ -10,10 +10,9 @@ using Microsoft.ContainerRegistry;
 );
 
 @@clientName(Architecture.`386`, "ThreeHundredEightySix", "javascript");
+@@clientName(Architecture.`386`, "X86_386", "java");
 
 @@clientName(Microsoft.ContainerRegistry,
   "ContainerRegistryTasksMgmtClient",
   "python"
 );
-
-@@clientName(Architecture.`386`, "THREE_HUNDRED_EIGHTY_SIX", "python");

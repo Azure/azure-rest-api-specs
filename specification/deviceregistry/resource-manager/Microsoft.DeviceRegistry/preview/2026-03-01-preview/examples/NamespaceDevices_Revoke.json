@@ -1,0 +1,29 @@
+{
+  "title": "NamespaceDevices_Revoke",
+  "operationId": "NamespaceDevices_Revoke",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgdeviceregistry",
+    "namespaceName": "mynamespace",
+    "deviceName": "device1",
+    "body": {
+      "disable": true
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    },
+    "200": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "result": "Succeeded"
+      }
+    }
+  }
+}

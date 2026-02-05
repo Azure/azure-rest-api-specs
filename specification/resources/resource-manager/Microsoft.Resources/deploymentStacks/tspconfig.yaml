@@ -19,8 +19,8 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.Resources.DeploymentStacks"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resources-deploymentstacks"
-    namespace: "azure.mgmt.resources.deploymentstacks"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-deploymentstacks"
+    namespace: "azure.mgmt.resource.deploymentstacks"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -29,10 +29,12 @@ options:
     namespace: "com.azure.resourcemanager.resources.deploymentstacks"
     service-name: "Deployment Stacks"
     flavor: azure
+    use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcesdeploymentstacks"
     service-dir: "sdk/resourcesdeploymentstacks"
     flavor: azure
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-resourcesdeploymentstacks"
