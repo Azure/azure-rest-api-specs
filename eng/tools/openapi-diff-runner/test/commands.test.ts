@@ -157,7 +157,7 @@ const cases = [
     },
   },
   {
-    name: "add new stable",
+    name: "add new stable, one file",
     changedFiles: {
       additions: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
     },
@@ -171,6 +171,36 @@ const cases = [
         {
           old: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
           new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "add new stable, multiple files",
+    changedFiles: {
+      additions: [
+        "specification/bar/data-plane/Bar/stable/2026-01-01/bar.json",
+        "specification/bar/data-plane/Bar/stable/2026-01-01/baz.json",
+      ],
+    },
+    expectedOadCalls: {
+      sameVersion: [],
+      crossVersion: [
+        {
+          old: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/bar.json",
+          new: "specification/bar/data-plane/Bar/stable/2026-01-01/bar.json",
+        },
+        {
+          old: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/baz.json",
+          new: "specification/bar/data-plane/Bar/stable/2026-01-01/baz.json",
+        },
+        {
+          old: "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
+          new: "specification/bar/data-plane/Bar/stable/2026-01-01/bar.json",
+        },
+        {
+          old: "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
+          new: "specification/bar/data-plane/Bar/stable/2026-01-01/baz.json",
         },
       ],
     },
