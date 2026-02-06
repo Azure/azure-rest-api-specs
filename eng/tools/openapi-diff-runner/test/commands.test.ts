@@ -83,7 +83,7 @@ const context = {
 
 const cases = [
   {
-    name: "modify one file",
+    name: "modify one file, one version",
     changedFiles: {
       modifications: ["specification/foo/data-plane/Foo/stable/2025-01-01/foo.json"],
     },
@@ -98,7 +98,7 @@ const cases = [
     },
   },
   {
-    name: "modify multiple files",
+    name: "modify multiple files, one version",
     changedFiles: {
       modifications: [
         "specification/foo/data-plane/Foo/preview/2025-02-01-preview/foo.json",
