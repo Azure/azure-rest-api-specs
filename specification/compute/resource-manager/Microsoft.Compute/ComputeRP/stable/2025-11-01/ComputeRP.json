@@ -15049,14 +15049,19 @@
       "type": "string",
       "description": "Approval status of a target resource in a virtual machine scale set lifecycle hook event.",
       "enum": [
+        "Waiting",
         "Approved",
-        "Rejected",
-        "Waiting"
+        "Rejected"
       ],
       "x-ms-enum": {
         "name": "LifecycleHookActionState",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The lifecycle hook for the target resource is waiting for approval."
+          },
           {
             "name": "Approved",
             "value": "Approved",
@@ -15066,11 +15071,6 @@
             "name": "Rejected",
             "value": "Rejected",
             "description": "The lifecycle hook for the target resource is rejected."
-          },
-          {
-            "name": "Waiting",
-            "value": "Waiting",
-            "description": "The lifecycle hook for the target resource is waiting for approval."
           }
         ]
       }

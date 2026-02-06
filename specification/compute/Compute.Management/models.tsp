@@ -1201,14 +1201,14 @@ model LifecycleHooksProfile {
 union LifecycleHookActionState {
   string,
 
+  /** The lifecycle hook for the target resource is waiting for approval. */
+  Waiting: "Waiting",
+
   /** The lifecycle hook for the target resource is approved. */
   Approved: "Approved",
 
   /** The lifecycle hook for the target resource is rejected. */
   Rejected: "Rejected",
-
-  /** The lifecycle hook for the target resource is waiting for approval. */
-  Waiting: "Waiting",
 }
 
 /**
