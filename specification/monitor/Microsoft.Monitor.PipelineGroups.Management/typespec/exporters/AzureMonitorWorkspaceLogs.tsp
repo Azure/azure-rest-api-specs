@@ -108,7 +108,7 @@ model CacheConfiguration {
 @doc("Backfill configurations.")
 @added(Microsoft.Monitor.Versions.v2026_04_01)
 model BackfillConfiguration {
-  @doc("Max storage usage in megabytes.")
+  @doc("Max storage usage in gigabytes.")
   @minValue(1)
   maxStorageUsage?: int32;
 
