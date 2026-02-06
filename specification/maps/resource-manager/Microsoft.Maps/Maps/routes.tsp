@@ -19,6 +19,7 @@ interface OperationResultOperationGroup {
    * Get the result of a long running azure asynchronous operation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("AsyncOperations")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Maps/locations/{location}/operationResults/{operationId}")
   @get
   get(
@@ -40,6 +41,7 @@ interface OperationStatusOperationGroup {
   /**
    * Get the status of a long running azure asynchronous operation.
    */
+  @tag("AsyncOperations")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Maps/locations/{location}/operationStatuses/{operationId}")
   @get
   get(

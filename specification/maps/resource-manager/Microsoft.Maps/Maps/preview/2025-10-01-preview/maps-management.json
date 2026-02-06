@@ -53,6 +53,9 @@
     },
     {
       "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "AsyncOperations"
     }
   ],
   "paths": {
@@ -134,6 +137,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/locations/{location}/operationResults/{operationId}": {
       "get": {
         "operationId": "OperationResult_Get",
+        "tags": [
+          "AsyncOperations"
+        ],
         "description": "Get the result of a long running azure asynchronous operation.",
         "parameters": [
           {
@@ -189,6 +195,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Maps/locations/{location}/operationStatuses/{operationId}": {
       "get": {
         "operationId": "OperationStatus_Get",
+        "tags": [
+          "AsyncOperations"
+        ],
         "description": "Get the status of a long running azure asynchronous operation.",
         "parameters": [
           {
@@ -1051,9 +1060,9 @@
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1075,7 +1084,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
         },
         "x-ms-long-running-operation": true
