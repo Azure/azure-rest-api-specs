@@ -210,6 +210,24 @@ model DeploymentScriptUpdateParameter extends AzureResourceBase {
 }
 
 /**
+ * List of deployment scripts.
+ */
+model DeploymentScriptListResult {
+  /**
+   * An array of deployment scripts.
+   */
+  @pageItems
+  value?: DeploymentScript[];
+
+  /**
+   * The URL to use for getting the next set of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: url;
+}
+
+/**
  * Deployment script execution logs.
  */
 model ScriptLogsList {
@@ -443,7 +461,7 @@ model ScriptConfigurationBase {
   /**
    * Maximum allowed script execution time specified in ISO 8601 format. Default value is P1D
    */
-  timeout?: duration;
+  timeout?: duration = duration.fromISO("P1D");
 }
 
 /**

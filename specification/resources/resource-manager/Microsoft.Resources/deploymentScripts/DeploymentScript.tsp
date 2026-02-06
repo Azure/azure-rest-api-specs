@@ -9,6 +9,7 @@ import "./ScriptLog.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace DeploymentScriptsClient;
 
@@ -16,9 +17,14 @@ namespace DeploymentScriptsClient;
  * Deployment script object.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing API uses discriminator pattern for backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Custom kind property for backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Using extends to match original spec structure"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for ARM resource registration"
 @discriminator("kind")
+@Azure.ResourceManager.Private.armResourceInternal({})
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model DeploymentScript
-  is Azure.ResourceManager.Legacy.DiscriminatedTrackedResource<ScriptType> {
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = DeploymentScript,
     KeyName = "scriptName",
@@ -27,9 +33,14 @@ model DeploymentScript
   >;
 
   /**
+   * Type of the script.
+   */
+  kind: ScriptType;
+
+  /**
    * Optional property. Managed identity to be used for this deployment script. Currently, only user-assigned MSI is supported.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  @madeOptional(Versions.v2020_10_01)
   identity?: ManagedServiceIdentity;
 }
 
@@ -43,10 +54,7 @@ interface DeploymentScripts {
   /**
    * Creates a deployment script.
    */
-  create is ArmResourceCreateOrReplaceAsync<
-    DeploymentScript,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-  >;
+  create is ArmResourceCreateOrReplaceAsync<DeploymentScript, LroHeaders = {}>;
 
   /**
    * Updates deployment script tags with specified values.
@@ -71,12 +79,18 @@ interface DeploymentScripts {
   /**
    * Lists deployments scripts.
    */
-  listByResourceGroup is ArmResourceListByParent<DeploymentScript>;
+  listByResourceGroup is ArmResourceListByParent<
+    DeploymentScript,
+    Response = ArmResponse<DeploymentScriptListResult>
+  >;
 
   /**
    * Lists all deployment scripts for a given subscription.
    */
-  listBySubscription is ArmListBySubscription<DeploymentScript>;
+  listBySubscription is ArmListBySubscription<
+    DeploymentScript,
+    Response = ArmResponse<DeploymentScriptListResult>
+  >;
 
   /**
    * Gets deployment script logs for a given deployment script name.
