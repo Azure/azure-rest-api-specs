@@ -1,5 +1,6 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { devNull } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -73,7 +74,7 @@ const context = {
   prSourceBranch: "",
   prTargetBranch: "",
   oadMessageProcessorContext: {
-    logFilePath: "/tmp/openapi-diff-runner.log",
+    logFilePath: devNull,
     prUrl: "",
     messageCache: [],
   },
