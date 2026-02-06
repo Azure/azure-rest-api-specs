@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.AzureSphere;
 
 @@clientName(Microsoft.AzureSphere, "AzureSphereMgmtClient", "python");
 
@@ -10,107 +11,86 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-@@alternateType(Microsoft.AzureSphere.CatalogProperties.tenantId,
-  Azure.Core.uuid,
-  "csharp"
-);
-@@alternateType(Microsoft.AzureSphere.ImageProperties.uri, url, "csharp");
+@@alternateType(CatalogProperties.tenantId, Azure.Core.uuid, "csharp");
+@@alternateType(ImageProperties.uri, url, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.AzureSphere.Catalog.properties
-);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Catalog.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.AzureSphere.Certificate.properties
-);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Certificate.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.AzureSphere.Deployment.properties
-);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Deployment.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.AzureSphere.Device.properties
-);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Device.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.AzureSphere.DeviceGroup.properties
-);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeviceGroup.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.AzureSphere.Image.properties
-);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Image.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.AzureSphere.Product.properties
-);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Product.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Device.properties);
 
 // Client name mappings
-@@clientName(Microsoft.AzureSphere.Catalog, "SphereCatalog", "csharp");
-@@clientName(Microsoft.AzureSphere.ProvisioningState,
-  "SphereProvisioningState",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.Certificate, "SphereCertificate", "csharp");
-@@clientName(Microsoft.AzureSphere.CertificateStatus,
-  "SphereCertificateStatus",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.CertificateProperties,
-  "SphereCertificateProperties",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.Deployment, "SphereDeployment", "csharp");
-@@clientName(Microsoft.AzureSphere.Device, "SphereDevice", "csharp");
-@@clientName(Microsoft.AzureSphere.DeviceGroup, "SphereDeviceGroup", "csharp");
-@@clientName(Microsoft.AzureSphere.Image, "SphereImage", "csharp");
-@@clientName(Microsoft.AzureSphere.Product, "SphereProduct", "csharp");
-@@clientName(Microsoft.AzureSphere.AllowCrashDumpCollection,
+@@clientName(Catalog, "SphereCatalog", "csharp");
+@@clientName(ProvisioningState, "SphereProvisioningState", "csharp");
+@@clientName(Certificate, "SphereCertificate", "csharp");
+@@clientName(CertificateStatus, "SphereCertificateStatus", "csharp");
+@@clientName(CertificateProperties, "SphereCertificateProperties", "csharp");
+@@clientName(Deployment, "SphereDeployment", "csharp");
+@@clientName(Device, "SphereDevice", "csharp");
+@@clientName(DeviceGroup, "SphereDeviceGroup", "csharp");
+@@clientName(Image, "SphereImage", "csharp");
+@@clientName(Product, "SphereProduct", "csharp");
+@@clientName(AllowCrashDumpCollection,
   "SphereAllowCrashDumpCollectionStatus",
   "csharp"
 );
-@@clientName(Microsoft.AzureSphere.CapabilityType,
-  "SphereCapabilityType",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.CertificateChainResponse,
+@@clientName(CapabilityType, "SphereCapabilityType", "csharp");
+@@clientName(CertificateChainResponse,
   "SphereCertificateChainResult",
   "csharp"
 );
-@@clientName(Microsoft.AzureSphere.CountDeviceResponse,
-  "CountDeviceResult",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.CountElementsResponse,
-  "CountElementsResult",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.DeviceInsight,
-  "SphereDeviceInsight",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.ImageType, "SphereImageType", "csharp");
-@@clientName(Microsoft.AzureSphere.OSFeedType, "SphereOSFeedType", "csharp");
-@@clientName(Microsoft.AzureSphere.UpdatePolicy,
-  "SphereUpdatePolicy",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.ClaimDevicesRequest,
-  "ClaimSphereDevicesContent",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.ListDeviceGroupsRequest,
+@@clientName(CountDeviceResponse, "CountDeviceResult", "csharp");
+@@clientName(CountElementsResponse, "CountElementsResult", "csharp");
+@@clientName(DeviceInsight, "SphereDeviceInsight", "csharp");
+@@clientName(ImageType, "SphereImageType", "csharp");
+@@clientName(OSFeedType, "SphereOSFeedType", "csharp");
+@@clientName(UpdatePolicy, "SphereUpdatePolicy", "csharp");
+@@clientName(ClaimDevicesRequest, "ClaimSphereDevicesContent", "csharp");
+@@clientName(ListDeviceGroupsRequest,
   "ListSphereDeviceGroupsContent",
   "csharp"
 );
-@@clientName(Microsoft.AzureSphere.CountDevicesResponse,
-  "CountDevicesResult",
-  "csharp"
-);
-@@clientName(Microsoft.AzureSphere.ProofOfPossessionNonceRequest,
+@@clientName(CountDevicesResponse, "CountDevicesResult", "csharp");
+@@clientName(ProofOfPossessionNonceRequest,
   "ProofOfPossessionNonceContent",
   "csharp"
 );
-@@clientName(Microsoft.AzureSphere.GenerateCapabilityImageRequest,
+@@clientName(GenerateCapabilityImageRequest,
   "GenerateCapabilityImageContent",
+  "csharp"
+);
+
+@@clientName(DeviceProperties.lastOsUpdateUtc, "lastOSUpdateUtc", "csharp");
+@@clientName(DeviceProperties.lastInstalledOsVersion,
+  "lastInstalledOSVersion",
+  "csharp"
+);
+@@clientName(DeviceProperties.lastAvailableOsVersion,
+  "lastAvailableOSVersion",
+  "csharp"
+);
+@@clientName(DeviceGroupProperties.osFeedType, "OSFeedType", "csharp");
+@@clientName(DeviceGroupUpdateProperties.osFeedType, "OSFeedType", "csharp");
+@@clientName(UpdatePolicy.No3rdPartyAppUpdates,
+  "No3RdPartyAppUpdates",
   "csharp"
 );
