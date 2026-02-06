@@ -30,7 +30,7 @@ interface PrivateEndpointConnections {
   create is PrivateEndpointOperations.CreateOrReplaceAsync<
     MapsAccount,
     PrivateEndpointConnection,
-    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
