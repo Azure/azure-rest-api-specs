@@ -14,7 +14,7 @@ using Microsoft.Attestation;
 // csharp configurations
 @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   armResourceIdentifier,
-  "csharp";
+  "csharp"
 );
 @@alternateType(Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
   armResourceIdentifier,
