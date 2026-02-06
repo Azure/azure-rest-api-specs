@@ -1265,8 +1265,8 @@ model PolicyLogInfo {
 /**
  * The type of the alias.
  */
-@added(Versions.v2025_11_01)
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+@added(Versions.v2025_11_01)
 enum AliasType {
   /**
    * Alias type is unknown (same as not providing alias type).
@@ -1281,14 +1281,14 @@ enum AliasType {
   /**
    * Alias value is secret.
    */
-  Mask
+  Mask,
 }
 
 /**
  * The type of alias pattern.
  */
-@added(Versions.v2025_11_01)
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+@added(Versions.v2025_11_01)
 enum AliasPatternType {
   /**
    * NotSpecified is not allowed.
@@ -1298,7 +1298,7 @@ enum AliasPatternType {
   /**
    * Extract is the only allowed value.
    */
-  Extract
+  Extract,
 }
 
 /**
@@ -1317,6 +1317,7 @@ union AliasPathTokenType {
    * The token type can be anything.
    */
   Any: "Any",
+
   /**
    * The token type is string.
    */
@@ -1345,7 +1346,7 @@ union AliasPathTokenType {
   /**
    * The token type is boolean.
    */
-  Boolean: "Boolean"
+  Boolean: "Boolean",
 }
 
 /**
@@ -1363,7 +1364,7 @@ union AliasPathAttributes {
   /**
    * The token that the alias path is referring to is modifiable by policies with 'modify' effect.
    */
-  Modifiable: "Modifiable"
+  Modifiable: "Modifiable",
 }
 
 /**
@@ -1374,12 +1375,12 @@ model AliasPattern {
   /**
    * The alias pattern phrase.
    */
-  phrase?: string,
+  phrase?: string;
 
   /**
    * The alias pattern variable.
    */
-  variable?: string,
+  variable?: string;
 
   /**
    * The pattern for an alias path.
@@ -1395,12 +1396,12 @@ model AliasPathMetadata {
   /**
    * The type of the token that the alias path is referring to.
    */
-  type?: AliasPathTokenType,
+  type?: AliasPathTokenType;
 
   /**
    * The attributes of the token that the alias path is referring to.
    */
-  attributes?: AliasPathAttributes,
+  attributes?: AliasPathAttributes;
 }
 
 /**
