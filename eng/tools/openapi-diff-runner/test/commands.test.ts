@@ -133,7 +133,11 @@ const cases = [
       sameVersion: [],
       crossVersion: [
         {
-          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          old: "specification/foo/data-plane/Foo/preview/2025-04-01-preview/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+        },
+        {
+          old: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
           new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
         },
       ],
@@ -209,6 +213,8 @@ describe("validateBreakingChange", () => {
           expected.new,
         );
       }
+
+      expect(mockRunOad).toBeCalledTimes(data.expectedOadCalls.length);
     }
   });
 });
