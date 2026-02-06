@@ -98,10 +98,10 @@ const cases = [
     },
   },
   {
-    name: "modify multiple files, one version",
+    name: "modify one file, multiple versions",
     changedFiles: {
       modifications: [
-        "specification/foo/data-plane/Foo/preview/2025-02-01-preview/foo.json",
+        "specification/foo/data-plane/Foo/preview/2025-04-01-preview/foo.json",
         "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
         "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
       ],
@@ -109,8 +109,8 @@ const cases = [
     expectedOadCalls: {
       sameVersion: [
         {
-          old: "specification/foo/data-plane/Foo/preview/2025-02-01-preview/foo.json",
-          new: "specification/foo/data-plane/Foo/preview/2025-02-01-preview/foo.json",
+          old: "specification/foo/data-plane/Foo/preview/2025-04-01-preview/foo.json",
+          new: "specification/foo/data-plane/Foo/preview/2025-04-01-preview/foo.json",
         },
         {
           old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
@@ -119,6 +119,38 @@ const cases = [
         {
           old: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
           new: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
+        },
+      ],
+      crossVersion: [],
+    },
+  },
+  {
+    name: "modify multiple files, multiple versions",
+    changedFiles: {
+      modifications: [
+        "specification/bar/data-plane/Bar/preview/2025-04-01-preview/bar.json",
+        "specification/bar/data-plane/Bar/preview/2025-04-01-preview/baz.json",
+        "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
+        "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
+      ],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/bar.json",
+          new: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/bar.json",
+        },
+        {
+          old: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/baz.json",
+          new: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/baz.json",
+        },
+        {
+          old: "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
+          new: "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
+        },
+        {
+          old: "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
+          new: "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
         },
       ],
       crossVersion: [],
