@@ -114,7 +114,7 @@ const context = {
   prUrl: "",
 };
 
-describe("validateBreakingChange - same-version", () => {
+describe("validateBreakingChange", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -164,7 +164,7 @@ describe("validateBreakingChange - same-version", () => {
         },
       ],
     },
-  ])("$name", async ({ changedFiles, existingFiles, expectedOadCalls }) => {
+  ])("same-version: $name", async ({ changedFiles, existingFiles, expectedOadCalls }) => {
     mockChangedFilesStatuses(changedFiles);
 
     mockExistsSync(existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f)));
@@ -188,17 +188,6 @@ describe("validateBreakingChange - same-version", () => {
     // Ensure no extra calls
     expect(mockRunOad).toBeCalledTimes(expectedOadCalls.length);
   });
-});
-
-describe("validateBreakingChange - cross-version", () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
-  const crossVersionContext = {
-    ...context,
-    runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
-  };
 
   it.each([
     {
@@ -222,16 +211,17 @@ describe("validateBreakingChange - cross-version", () => {
         "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
       ],
     },
-  ])("$name", async ({ changedFiles, existingFiles }) => {
+  ])("cross-version: $name", async ({ changedFiles, existingFiles }) => {
     mockChangedFilesStatuses(changedFiles);
 
-    mockExistsSync(
-      existingFiles.map((f) => path.join(crossVersionContext.prInfo.tempRepoFolder, f)),
-    );
+    mockExistsSync(existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f)));
 
     vi.mocked(runOad).mockResolvedValue([]);
 
-    const statusCode = await validateBreakingChange(crossVersionContext);
+    const statusCode = await validateBreakingChange({
+      ...context,
+      runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+    });
 
     // Cross-version logic will skip processing if getSpecModel returns null
     // (which happens for new RPs or when readme folder can't be determined)
