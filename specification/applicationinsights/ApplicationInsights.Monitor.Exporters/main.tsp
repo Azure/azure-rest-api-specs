@@ -1,30 +1,24 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using Azure.Core;
 
 /**
  * OpenTelemetry Exporter for Azure Monitor
  */
-#suppress "@azure-tools/typespec-autorest/unsupported-auth" "NoAuth is supported"
-@useAuth(
-  NoAuth | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      scopes: ["https://monitor.azure.com/.default"],
-    }
-  ]>
-)
+@useAuth(NoAuth | AadOauth2Auth<["https://monitor.azure.com/.default"]>)
 @service(#{ title: "Azure Monitor Exporter" })
 @versioned(Versions)
 @server(
   "{host}/{apiVersion}",
   "Azure Monitor OpenTelemetry Exporter Service",
   {
-    /** Application Insights' Breeze endpoint. */
+    /** Application Insights' Breeze host. */
     host: url = "https://dc.services.visualstudio.com",
 
     /** The service API version. */

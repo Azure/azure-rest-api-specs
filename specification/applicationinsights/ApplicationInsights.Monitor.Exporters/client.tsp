@@ -4,10 +4,12 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using AzureMonitorExporter;
 
-@@clientName(AzureMonitorExporter, "ApplicationInsightsClient", "javascript");
+@@clientName(AzureMonitorExporter, "ApplicationInsightsClient");
+@@clientName(AzureMonitorExporter, "AzureMonitorClient", "python");
 
 @@clientName(Base, "MonitorBase");
 @@clientName(Domain, "MonitorDomain");
+@@clientName(DomainKind, "MonitorDomainKind");
 @@clientName(EventData, "TelemetryEventData");
 @@clientName(DataPoint, "MetricDataPoint");
 @@clientName(ExceptionData, "TelemetryExceptionData");
@@ -35,6 +37,9 @@ using AzureMonitorExporter;
 @@usage(Domain, Usage.output | Usage.json);
 @@access(Domain, Access.public);
 
+@@usage(DomainKind, Usage.output | Usage.json);
+@@access(DomainKind, Access.public);
+
 @@usage(RemoteDependencyData, Usage.output | Usage.json);
 @@access(RemoteDependencyData, Access.public);
 
@@ -52,6 +57,9 @@ using AzureMonitorExporter;
 
 @@usage(PageViewPerfData, Usage.output | Usage.json);
 @@access(PageViewPerfData, Access.public);
+
+@@usage(AvailabilityData, Usage.output | Usage.json);
+@@access(AvailabilityData, Access.public);
 
 @@usage(DataPoint, Usage.output | Usage.json);
 @@access(DataPoint, Access.public);
