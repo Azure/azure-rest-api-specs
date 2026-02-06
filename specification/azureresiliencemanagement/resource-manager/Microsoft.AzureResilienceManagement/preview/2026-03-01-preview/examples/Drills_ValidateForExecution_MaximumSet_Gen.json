@@ -5,7 +5,7 @@
     "serviceGroupName": "sampleServiceGroupName",
     "api-version": "2026-03-01-preview",
     "operation-id": "qmn",
-    "drillName": "drill1",
+    "drillName": "Replace this value with a string matching RegExp ^[a-zA-Z0-9-]{3,24}$",
     "body": {
       "validateForExecutionProperties": {
         "sourceLocations": [
@@ -22,15 +22,15 @@
             "drillsQualifiedResource": {
               "resourceId": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
               "activeLocations": [
-                "eastus-az2"
+                "eastus-zone2"
               ],
               "recoveryLocations": [
-                "eastus2-az3"
+                "eastus-zone3"
               ],
-              "activePhysicalLocations": [
+              "activePhysicalZones": [
                 "eastus2-az2"
               ],
-              "recoveryPhysicalLocations": [
+              "recoveryPhysicalZones": [
                 "eastus2-az1"
               ],
               "drillInclusionState": "Excluded",
@@ -44,7 +44,7 @@
                   "resourceId": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
                   "activeLocation": "eastus2",
                   "recoveryLocations": [
-                    "eastus"
+                    "eastus-zone3"
                   ],
                   "replicationRole": "Unknown",
                   "primaryResource": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
@@ -55,7 +55,13 @@
                   "failoverState": "None",
                   "testFailoverState": "None",
                   "physicalZones": [
-                    "1"
+                    "eastus2-az3"
+                  ],
+                  "activeLocations": [
+                    "eastus2-zone2"
+                  ],
+                  "activePhysicalZones": [
+                    "eastus2-az3"
                   ]
                 }
               ],

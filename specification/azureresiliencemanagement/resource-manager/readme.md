@@ -66,4 +66,11 @@ suppressions:
     - code: TenantLevelAPIsNotAllowed
       from: openapi.json
       reason: Resiliency scenarios are modelled around a SG (Service Group), which is a Tenant level resource.
+
+    - code: LongRunningResponseStatusCodeDataPlaneSemantics
+      from: openapi.json
+      reason: These operations return 204 on completion via location header polling, which is the correct pattern for no-content LRO operations.
+      where:
+        - $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/refreshReadinessState"].post
+        - $.paths["/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.AzureResilienceManagement/drills/{drillName}/resyncReadinessCheck"].post
 ```

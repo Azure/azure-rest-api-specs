@@ -6330,9 +6330,6 @@
       },
       "discriminator": "drillType",
       "required": [
-        "recoveryPlanProperties",
-        "drillAssetProperties",
-        "chaosResourceProperties",
         "chaosExperimentProperties",
         "drillType"
       ]
@@ -6524,7 +6521,7 @@
           },
           "readOnly": true
         },
-        "activePhysicalLocations": {
+        "activePhysicalZones": {
           "type": "array",
           "description": "Active Resource location and physical zones of Azure Resource.",
           "items": {
@@ -6532,7 +6529,7 @@
           },
           "readOnly": true
         },
-        "recoveryPhysicalLocations": {
+        "recoveryPhysicalZones": {
           "type": "array",
           "description": "Recovery Resource location and physical zones of HA Azure Resource.",
           "items": {
@@ -7272,7 +7269,7 @@
           },
           "readOnly": true
         },
-        "activePhysicalLocations": {
+        "activePhysicalZones": {
           "type": "array",
           "description": "Active Resource location and physical zones of Azure Resource.",
           "items": {
@@ -7280,7 +7277,7 @@
           },
           "readOnly": true
         },
-        "recoveryPhysicalLocations": {
+        "recoveryPhysicalZones": {
           "type": "array",
           "description": "Recovery Resource location and physical zones of HA Azure Resource.",
           "items": {
@@ -10673,6 +10670,22 @@
         "activeLocation": {
           "type": "string",
           "description": "Active location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
+          "readOnly": true
+        },
+        "activeLocations": {
+          "type": "array",
+          "description": "Active locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "activePhysicalZones": {
+          "type": "array",
+          "description": "Active Resource location and physical zones of Azure Resource.",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "recoveryLocations": {
