@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 title: PolicyClient
 description: Policy Client
 openapi-type: arm
-tag: package-policy-python
+tag: package-policy-2025-11-stable
 ```
 
 ### Tag: package-policy-2025-11-stable
@@ -76,7 +76,7 @@ directive:
     transform: delete $.CloudError;
 
   # Add missing operations of PolicyAssignments.json from tag 'package-policy-2023-04' that are not in openapi.json to keep compatibility for Python SDK
-  - from: swagger-document
+  - from: openapi.json
     where: $.paths
     transform: |
       $["/{policyAssignmentId}"] = {
