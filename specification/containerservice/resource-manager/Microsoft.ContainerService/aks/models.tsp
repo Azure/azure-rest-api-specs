@@ -1386,25 +1386,25 @@ union Format {
 union WeekDay {
   string,
 
-  /** Sunday */
+  /** Represents Sunday. */
   Sunday: "Sunday",
 
-  /** Monday */
+  /** Represents Monday. */
   Monday: "Monday",
 
-  /** Tuesday */
+  /** Represents Tuesday. */
   Tuesday: "Tuesday",
 
-  /** Wednesday */
+  /** Represents Wednesday. */
   Wednesday: "Wednesday",
 
-  /** Thursday */
+  /** Represents Thursday. */
   Thursday: "Thursday",
 
-  /** Friday */
+  /** Represents Friday. */
   Friday: "Friday",
 
-  /** Saturday */
+  /** Represents Saturday. */
   Saturday: "Saturday",
 }
 
