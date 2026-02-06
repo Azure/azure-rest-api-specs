@@ -3,8 +3,13 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
 
+@clientNamespace("Azure.AI.Agents.Contracts.V2.Models")
+namespace OpenAI {
+  alias ItemResourceType = OutputItemType;
+}
+
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" ""
-@clientNamespace("Azure.AI.Agents.Contracts.V2")
+@clientNamespace("Azure.AI.Agents.Contracts.V2.Models")
 namespace Azure.AI.Projects {
   union _AdditionalToolTypes {
     remote_tool: "remote_tool",

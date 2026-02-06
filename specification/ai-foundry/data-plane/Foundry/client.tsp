@@ -206,21 +206,3 @@ using Azure.AI.Projects;
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
 
-// --------------------------------------------------------------------------------
-// Usage / Public accessibility overrides
-// --------------------------------------------------------------------------------
-
-@@usage(OpenAI.ItemResource, Usage.json);
-@@usage(OpenAI.CreateResponseStreamingResponse, Usage.json);
-
-@@usage(AgentId, Usage.output);
-@@access(AgentId, Access.public);
-
-@@usage(AgentReference, Usage.input);
-@@access(AgentReference, Access.public);
-
-@@usage(ApiError, Usage.output);
-@@access(ApiError, Access.public);
-
-@@usage(ApiErrorResponse, Usage.output);
-@@access(ApiErrorResponse, Access.public);
