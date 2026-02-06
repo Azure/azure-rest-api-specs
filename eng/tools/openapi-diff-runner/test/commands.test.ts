@@ -108,7 +108,8 @@ const cases = [
         },
       ],
     },
-  }, // Currently failing, code needs better support for renames
+  },
+  // Currently failing, code needs better support for renames
   //
   // {
   //   name: "change case folder, rename file",
@@ -150,13 +151,6 @@ describe("validateBreakingChange", () => {
 
   it.each(cases)("$name", async ({ changedFiles, expectedOadCalls }) => {
     mockChangedFilesStatuses(changedFiles);
-
-    // const tempRepoPaths = existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f));
-    // const workingTreePaths = [
-    //   ...(changedFiles.additions ?? []),
-    //   ...(changedFiles.modifications ?? []),
-    // ].map((f) => path.resolve(f));
-    // mockExistsSync([...tempRepoPaths, ...workingTreePaths]);
 
     const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
 
