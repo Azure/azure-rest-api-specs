@@ -30,6 +30,21 @@ openapi-subtype: rpaas
 tag: package-2024-11-01
 ```
 
+### Tag: package-2026-01-01-preview
+
+These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01-preview'
+input-file:
+  - PureStorage.Block/preview/2026-01-01-preview/purestorage.json
+
+suppressions:
+ - code: PathContainsResourceType
+   reason: The resource provider name 'PureStorage.Block' cannot have 'Microsoft' in it as it is a Azure Native ISV service`.
+ - code: OperationIdNounVerb
+   reason: Volumes and VolumeGroups have parent child relationship so this is expected. It is False positive.
+```
+
 ### Tag: package-2024-11-01
 
 These settings apply only when `--tag=package-2024-11-01` is specified on the command line.
