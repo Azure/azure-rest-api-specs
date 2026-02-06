@@ -110,8 +110,7 @@ interface PrivateEndpointConnections {
       @path
       privateEndpointConnectionName: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
