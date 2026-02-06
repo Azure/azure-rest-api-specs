@@ -1263,6 +1263,211 @@ model PolicyLogInfo {
 }
 
 /**
+ * The type of the alias.
+ */
+@added(Versions.v2025_11_01)
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum AliasType {
+  /**
+   * Alias type is unknown (same as not providing alias type).
+   */
+  NotSpecified,
+
+  /**
+   * Alias value is not secret.
+   */
+  PlainText,
+
+  /**
+   * Alias value is secret.
+   */
+  Mask
+}
+
+/**
+ * The type of alias pattern.
+ */
+@added(Versions.v2025_11_01)
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+enum AliasPatternType {
+  /**
+   * NotSpecified is not allowed.
+   */
+  NotSpecified,
+
+  /**
+   * Extract is the only allowed value.
+   */
+  Extract
+}
+
+/**
+ * The type of the token that the alias path is referring to.
+ */
+@added(Versions.v2025_11_01)
+union AliasPathTokenType {
+  string,
+
+  /**
+   * The token type is not specified.
+   */
+  NotSpecified: "NotSpecified",
+
+  /**
+   * The token type can be anything.
+   */
+  Any: "Any",
+  /**
+   * The token type is string.
+   */
+  String: "String",
+
+  /**
+   * The token type is object.
+   */
+  Object: "Object",
+
+  /**
+   * The token type is array.
+   */
+  Array: "Array",
+
+  /**
+   * The token type is integer.
+   */
+  Integer: "Integer",
+
+  /**
+   * The token type is number.
+   */
+  Number: "Number",
+
+  /**
+   * The token type is boolean.
+   */
+  Boolean: "Boolean"
+}
+
+/**
+ * The attributes of the token that the alias path is referring to.
+ */
+@added(Versions.v2025_11_01)
+union AliasPathAttributes {
+  string,
+
+  /**
+   * The token that the alias path is referring to has no attributes.
+   */
+  None: "None",
+
+  /**
+   * The token that the alias path is referring to is modifiable by policies with 'modify' effect.
+   */
+  Modifiable: "Modifiable"
+}
+
+/**
+ * The type of the pattern for an alias path.
+ */
+@added(Versions.v2025_11_01)
+model AliasPattern {
+  /**
+   * The alias pattern phrase.
+   */
+  phrase?: string,
+
+  /**
+   * The alias pattern variable.
+   */
+  variable?: string,
+
+  /**
+   * The pattern for an alias path.
+   */
+  type?: AliasPatternType;
+}
+
+/**
+ * The alias path metadata.
+ */
+@added(Versions.v2025_11_01)
+model AliasPathMetadata {
+  /**
+   * The type of the token that the alias path is referring to.
+   */
+  type?: AliasPathTokenType,
+
+  /**
+   * The attributes of the token that the alias path is referring to.
+   */
+  attributes?: AliasPathAttributes,
+}
+
+/**
+ * The type of the paths for alias.
+ */
+@added(Versions.v2025_11_01)
+model AliasPath {
+  /**
+   * The path of an alias.
+   */
+  path?: string;
+
+  /**
+   * The API versions.
+   */
+  apiVersions?: string[];
+
+  /**
+   * The pattern for an alias path.
+   */
+  pattern?: AliasPattern;
+
+  /**
+   * The metadata of the alias path. If missing, fall back to the default metadata of the alias.
+   */
+  @visibility(Lifecycle.Read)
+  metadata?: AliasPathMetadata;
+}
+
+/**
+ * The alias type.
+ */
+@added(Versions.v2025_11_01)
+model Alias {
+  /**
+   * The alias name.
+   */
+  name?: string;
+
+  /**
+   * The paths for an alias.
+   */
+  @identifiers(#[])
+  paths?: AliasPath[];
+
+  /**
+   * The type of the alias.
+   */
+  type?: AliasType;
+
+  /**
+   * The default path for an alias.
+   */
+  defaultPath?: string;
+
+  /**
+   * The default pattern for an alias.
+   */
+  defaultPattern?: AliasPattern;
+
+  /**
+   * The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata.
+   */
+  defaultMetadata?: AliasPathMetadata;
+}
+
+/**
  * The custom resource function definition.
  */
 @added(Versions.v2025_11_01)
@@ -1335,7 +1540,8 @@ model ResourceTypeAliases {
   /**
    * The aliases for property names.
    */
-  aliases?: unknown[];
+  @identifiers(#["name"])
+  aliases?: Alias[];
 }
 
 /**
