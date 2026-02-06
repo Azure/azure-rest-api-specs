@@ -98,6 +98,33 @@ const cases = [
     },
   },
   {
+    name: "modify multiple files",
+    changedFiles: {
+      modifications: [
+        "specification/foo/data-plane/Foo/preview/2025-02-01-preview/foo.json",
+        "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+        "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
+      ],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "specification/foo/data-plane/Foo/preview/2025-02-01-preview/foo.json",
+          new: "specification/foo/data-plane/Foo/preview/2025-02-01-preview/foo.json",
+        },
+        {
+          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+        },
+        {
+          old: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
+        },
+      ],
+      crossVersion: [],
+    },
+  },
+  {
     name: "add new stable",
     changedFiles: {
       additions: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
