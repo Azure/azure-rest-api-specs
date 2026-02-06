@@ -1,9 +1,10 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { devNull } from "node:os";
-import path from "node:path";
+import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { createDummySwagger } from "../src/command-helpers.js";
 import { validateBreakingChange } from "../src/commands.js";
 import { runOad } from "../src/run-oad.js";
 
@@ -18,6 +19,14 @@ vi.mock("@azure-tools/specs-shared/changed-files", async () => {
 vi.mock("../src/run-oad.js", () => ({
   runOad: vi.fn(),
 }));
+
+vi.mock("../src/command-helpers.js", async () => {
+  const actual = await vi.importActual("../src/command-helpers.js");
+  return {
+    ...actual,
+    createDummySwagger: vi.fn(),
+  };
+});
 
 function mockChangedFilesStatuses(
   partial: Partial<{
@@ -85,13 +94,17 @@ const cases = [
   {
     name: "modify one file, one version",
     changedFiles: {
-      modifications: ["specification/foo/data-plane/Foo/stable/2025-01-01/foo.json"],
+      modifications: ["specification/foo/data-plane/Foo/stable/2025-03-01/foo.json"],
+    },
+    expectedCreateDummySwaggers: {
+      old: [],
+      new: [],
     },
     expectedOadCalls: {
       sameVersion: [
         {
-          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          old: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
         },
       ],
       crossVersion: [],
@@ -105,6 +118,10 @@ const cases = [
         "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
         "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
       ],
+    },
+    expectedCreateDummySwaggers: {
+      old: [],
+      new: [],
     },
     expectedOadCalls: {
       sameVersion: [
@@ -134,6 +151,10 @@ const cases = [
         "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
       ],
     },
+    expectedCreateDummySwaggers: {
+      old: [],
+      new: [],
+    },
     expectedOadCalls: {
       sameVersion: [
         {
@@ -161,6 +182,10 @@ const cases = [
     changedFiles: {
       additions: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
     },
+    expectedCreateDummySwaggers: {
+      old: [],
+      new: [],
+    },
     expectedOadCalls: {
       sameVersion: [],
       crossVersion: [
@@ -182,6 +207,10 @@ const cases = [
         "specification/bar/data-plane/Bar/stable/2026-01-01/bar.json",
         "specification/bar/data-plane/Bar/stable/2026-01-01/baz.json",
       ],
+    },
+    expectedCreateDummySwaggers: {
+      old: [],
+      new: [],
     },
     expectedOadCalls: {
       sameVersion: [],
@@ -205,6 +234,59 @@ const cases = [
       ],
     },
   },
+  {
+    name: "rename one file, one version",
+    changedFiles: {
+      renames: [
+        {
+          from: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          to: "specification/foo/data-plane/Foo/stable/2025-01-01/openapi.json",
+        },
+      ],
+    },
+    // TODO: After code is fixed, should not create *any* dummy swaggers
+    expectedCreateDummySwaggers: {
+      old: ["specification/foo/data-plane/Foo/stable/2025-01-01/openapi.json"],
+      new: ["specification/foo/data-plane/Foo/stable/2025-01-01/foo.json"],
+    },
+    // TODO: After code is fixed, should only compare before and after renamed file
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+        },
+        {
+          old: "specification/foo/data-plane/Foo/stable/2025-01-01/openapi.json",
+          new: "specification/foo/data-plane/Foo/stable/2025-01-01/openapi.json",
+        },
+      ],
+      crossVersion: [],
+    },
+  },
+  {
+    name: "rename one file, change case of service",
+    changedFiles: {
+      addtions: ["specification/foo/data-plane/foo/stable/2025-01-01/openapi.json"],
+      deletions: ["specification/foo/data-plane/Foo/stable/2025-01-01/foo.json"],
+    },
+    // TODO: After code is fixed, should not create *any* dummy swaggers
+    expectedCreateDummySwaggers: {
+      old: [],
+      new: ["specification/foo/data-plane/Foo/stable/2025-01-01/foo.json"],
+    },
+    // TODO: After code is fixed, should only compare before and after renamed file
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+        },
+      ],
+      crossVersion: [],
+    },
+  },
+
   // Currently failing, code needs better support for renames
   //
   // {
@@ -245,38 +327,58 @@ describe("validateBreakingChange", () => {
     vi.clearAllMocks();
   });
 
-  it.each(cases)("$name", async ({ changedFiles, expectedOadCalls }) => {
-    mockChangedFilesStatuses(changedFiles);
+  it.each(cases)(
+    "$name",
+    async ({ changedFiles, expectedCreateDummySwaggers, expectedOadCalls }) => {
+      mockChangedFilesStatuses(changedFiles);
 
-    const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
+      const mockCreateDummySwagger = vi.mocked(createDummySwagger);
 
-    for (const data of [
-      {
-        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-        expectedOadCalls: expectedOadCalls.sameVersion,
-      },
-      {
-        runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
-        expectedOadCalls: expectedOadCalls.crossVersion,
-      },
-    ]) {
-      mockRunOad.mockClear();
+      const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
 
-      const statusCodeSame = await validateBreakingChange({
-        ...context,
-        runType: data.runType,
-      });
+      for (const data of [
+        {
+          runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+          expectedOadCalls: expectedOadCalls.sameVersion,
+        },
+        {
+          runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+          expectedOadCalls: expectedOadCalls.crossVersion,
+        },
+      ]) {
+        mockRunOad.mockClear();
 
-      expect(statusCodeSame).toEqual(0);
+        const statusCodeSame = await validateBreakingChange({
+          ...context,
+          runType: data.runType,
+        });
 
-      for (const expected of data.expectedOadCalls) {
-        expect(mockRunOad).toBeCalledWith(
-          path.join(context.prInfo.tempRepoFolder, expected.old),
-          expected.new,
+        expect(statusCodeSame).toEqual(0);
+
+        for (const expected of expectedCreateDummySwaggers.old) {
+          expect(mockCreateDummySwagger).toBeCalledWith(
+            expect.anything(),
+            resolve(context.prInfo.tempRepoFolder, expected),
+          );
+        }
+
+        for (const expected of expectedCreateDummySwaggers.new) {
+          expect(mockCreateDummySwagger).toBeCalledWith(expect.anything(), resolve(expected));
+        }
+
+        expect(mockCreateDummySwagger).toBeCalledTimes(
+          expectedCreateDummySwaggers.old.length + expectedCreateDummySwaggers.new.length,
         );
-      }
 
-      expect(mockRunOad).toBeCalledTimes(data.expectedOadCalls.length);
-    }
-  });
+        for (const expected of data.expectedOadCalls) {
+          expect(mockRunOad).toBeCalledWith(
+            path.join(context.prInfo.tempRepoFolder, expected.old),
+            expected.new,
+          );
+        }
+
+        expect(mockRunOad).toBeCalledTimes(data.expectedOadCalls.length);
+      }
+    },
+  );
 });
