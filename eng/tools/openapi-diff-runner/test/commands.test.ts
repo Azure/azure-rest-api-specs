@@ -14,15 +14,41 @@ vi.mock("@azure-tools/specs-shared/changed-files", async () => {
   };
 });
 
-vi.mock("node:fs", async () => {
-  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
-
+vi.hoisted(async () => {
+  const { vol } = await vi.importActual<typeof import("memfs")>("memfs");
   // Read by `oad-types.ts` at module load
   vol.fromJSON({ "/home/mharder/specs/eng/tools/package.json": "{}" }, "/");
+});
 
+vi.mock("node:fs", async () => {
+  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
   return {
     ...fs,
     default: fs,
+  };
+});
+
+vi.mock("fs", async () => {
+  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
+  return {
+    ...fs,
+    default: fs,
+  };
+});
+
+vi.mock("node:fs/promises", async () => {
+  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
+  return {
+    ...fs.promises,
+    default: fs.promises,
+  };
+});
+
+vi.mock("fs/promises", async () => {
+  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
+  return {
+    ...fs.promises,
+    default: fs.promises,
   };
 });
 
@@ -99,60 +125,86 @@ const context = {
   prUrl: "",
 };
 
+const cases = [
+  {
+    name: "modify one file",
+    changedFiles: {
+      additions: [],
+      modifications: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
+    },
+    existingFiles: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+        },
+      ],
+      crossVersion: [],
+    },
+  },
+  {
+    name: "add new stable",
+    changedFiles: {
+      additions: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
+      modifications: [],
+    },
+    existingFiles: [
+      // TODO: Add mock content for readme.md, to return previous files
+      "specification/foo/data-plane/Foo/readme.md",
+      "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+    ],
+    expectedOadCalls: {
+      sameVersion: [],
+      crossVersion: [
+        {
+          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+        },
+      ],
+    },
+  }, // Currently failing, code needs better support for renames
+  //
+  // {
+  //   name: "change case folder, rename file",
+  //   changedFiles: {
+  //     additions: [
+  //       "specification/nginx/resource-manager/Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json",
+  //     ],
+  //     deletions: [
+  //       "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
+  //     ],
+  //     renames: [
+  //       {
+  //         from: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
+  //         to: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
+  //       },
+  //     ],
+  //   },
+  //   existingFiles: [
+  //     "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
+  //     "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
+  //   ],
+  //   expectedOadCalls: [
+  //     {
+  //       old: "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
+  //       new: "specification/nginx/resource-manager/Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json",
+  //     },
+  //     {
+  //       old: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
+  //       new: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
+  //     },
+  //   ],
+  // },
+];
+
 describe("validateBreakingChange", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vol.reset();
   });
 
-  it.each([
-    {
-      name: "modify one file",
-      changedFiles: {
-        modifications: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
-      },
-      existingFiles: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
-      expectedOadCalls: [
-        {
-          old: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
-        },
-      ],
-    },
-    // Currently failing, code needs better support for renames
-    //
-    // {
-    //   name: "change case folder, rename file",
-    //   changedFiles: {
-    //     additions: [
-    //       "specification/nginx/resource-manager/Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json",
-    //     ],
-    //     deletions: [
-    //       "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
-    //     ],
-    //     renames: [
-    //       {
-    //         from: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-    //         to: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
-    //       },
-    //     ],
-    //   },
-    //   existingFiles: [
-    //     "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-    //     "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
-    //   ],
-    //   expectedOadCalls: [
-    //     {
-    //       old: "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
-    //       new: "specification/nginx/resource-manager/Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json",
-    //     },
-    //     {
-    //       old: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-    //       new: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
-    //     },
-    //   ],
-    // },
-  ])("same-version: $name", async ({ changedFiles, existingFiles, expectedOadCalls }) => {
+  it.each(cases)("$name", async ({ changedFiles, existingFiles, expectedOadCalls }) => {
     mockChangedFilesStatuses(changedFiles);
 
     const tempRepoPaths = existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f));
@@ -164,71 +216,31 @@ describe("validateBreakingChange", () => {
 
     const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
 
-    const statusCode = await validateBreakingChange({
-      ...context,
-      runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-    });
-
-    expect(statusCode).toEqual(0);
-
-    for (const expected of expectedOadCalls) {
-      expect(mockRunOad).toBeCalledWith(
-        path.join(context.prInfo.tempRepoFolder, expected.old),
-        expected.new,
-      );
-    }
-
-    // Ensure no extra calls
-    expect(mockRunOad).toBeCalledTimes(expectedOadCalls.length);
-  });
-
-  it.each([
-    {
-      name: "execute cross-version breaking change detection",
-      changedFiles: {
-        additions: ["specification/foo/data-plane/Foo/stable/2026-02-01/foo.json"],
+    for (const data of [
+      {
+        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+        expectedOadCalls: expectedOadCalls.sameVersion,
       },
-      existingFiles: [],
-    },
-    // TODO
-    //
-    // {
-    //   name: "handle renames in cross-version context",
-    //   changedFiles: {
-    //     modifications: [],
-    //     renames: [
-    //       {
-    //         from: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-    //         to: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
-    //       },
-    //     ],
-    //   },
-    //   existingFiles: [
-    //     "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-    //   ],
-    // },
-  ])("cross-version: $name", async ({ changedFiles, existingFiles }) => {
-    mockChangedFilesStatuses(changedFiles);
+      {
+        runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
+        expectedOadCalls: expectedOadCalls.crossVersion,
+      },
+    ]) {
+      mockRunOad.mockClear();
 
-    const tempRepoPaths = existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f));
-    const workingTreePaths = [
-      ...(changedFiles.additions ?? []),
-      ...(changedFiles.modifications ?? []),
-    ].map((f) => path.resolve(f));
-    mockExistsSync([...tempRepoPaths, ...workingTreePaths]);
+      const statusCodeSame = await validateBreakingChange({
+        ...context,
+        runType: data.runType,
+      });
 
-    vi.mocked(runOad).mockResolvedValue([]);
+      expect(statusCodeSame).toEqual(0);
 
-    const statusCode = await validateBreakingChange({
-      ...context,
-      runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
-    });
-
-    // Cross-version logic will skip processing if getSpecModel returns null
-    // (which happens for new RPs or when readme folder can't be determined)
-    // This test just verifies the cross-version code path executes without errors
-    // Renamed files in same version are handled by same-version check, not cross-version
-    // This test verifies cross-version code executes without errors when renames are present
-    expect(statusCode).toEqual(0);
+      for (const expected of data.expectedOadCalls) {
+        expect(mockRunOad).toBeCalledWith(
+          path.join(context.prInfo.tempRepoFolder, expected.old),
+          expected.new,
+        );
+      }
+    }
   });
 });
