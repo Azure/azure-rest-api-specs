@@ -1,6 +1,5 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { vol } from "memfs";
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { validateBreakingChange } from "../src/commands.js";
@@ -11,44 +10,6 @@ vi.mock("@azure-tools/specs-shared/changed-files", async () => {
   return {
     ...actual,
     getChangedFilesStatuses: vi.fn(),
-  };
-});
-
-vi.hoisted(async () => {
-  const { vol } = await vi.importActual<typeof import("memfs")>("memfs");
-  // Read by `oad-types.ts` at module load
-  vol.fromJSON({ "/home/mharder/specs/eng/tools/package.json": "{}" }, "/");
-});
-
-vi.mock("node:fs", async () => {
-  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
-  return {
-    ...fs,
-    default: fs,
-  };
-});
-
-vi.mock("fs", async () => {
-  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
-  return {
-    ...fs,
-    default: fs,
-  };
-});
-
-vi.mock("node:fs/promises", async () => {
-  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
-  return {
-    ...fs.promises,
-    default: fs.promises,
-  };
-});
-
-vi.mock("fs/promises", async () => {
-  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
-  return {
-    ...fs.promises,
-    default: fs.promises,
   };
 });
 
@@ -83,15 +44,6 @@ function mockChangedFilesStatuses(
   return vi.mocked(getChangedFilesStatuses).mockResolvedValue(result);
 }
 
-function mockExistsSync(pathsToExist: string[] = []) {
-  vol.reset();
-  if (pathsToExist.length === 0) {
-    return;
-  }
-  const fileMap = Object.fromEntries(pathsToExist.map((filePath) => [filePath, "{}"]));
-  vol.fromJSON(fileMap, "/");
-}
-
 const context = {
   localSpecRepoPath: "",
   workingFolder: "",
@@ -108,7 +60,8 @@ const context = {
     sourceBranch: "",
     baseBranch: "",
     currentBranch: "",
-    tempRepoFolder: "/tempRepo",
+    // TODO: resolve relative path
+    tempRepoFolder: "/home/mharder/specs/eng/tools/openapi-diff-runner/test/fixtures",
     checkout: function (branch: string): Promise<void> {
       console.log("checkout " + branch);
       return Promise.resolve();
@@ -118,7 +71,7 @@ const context = {
   prSourceBranch: "",
   prTargetBranch: "",
   oadMessageProcessorContext: {
-    logFilePath: "/openapi-diff-runner.log",
+    logFilePath: "/tmp/openapi-diff-runner.log",
     prUrl: "",
     messageCache: [],
   },
@@ -129,15 +82,13 @@ const cases = [
   {
     name: "modify one file",
     changedFiles: {
-      additions: [],
-      modifications: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
+      modifications: ["specification/foo/data-plane/Foo/stable/2025-01-01/foo.json"],
     },
-    existingFiles: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
     expectedOadCalls: {
       sameVersion: [
         {
-          old: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          new: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
         },
       ],
       crossVersion: [],
@@ -147,13 +98,7 @@ const cases = [
     name: "add new stable",
     changedFiles: {
       additions: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
-      modifications: [],
     },
-    existingFiles: [
-      // TODO: Add mock content for readme.md, to return previous files
-      "specification/foo/data-plane/Foo/readme.md",
-      "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
-    ],
     expectedOadCalls: {
       sameVersion: [],
       crossVersion: [
@@ -201,18 +146,17 @@ const cases = [
 describe("validateBreakingChange", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    vol.reset();
   });
 
-  it.each(cases)("$name", async ({ changedFiles, existingFiles, expectedOadCalls }) => {
+  it.each(cases)("$name", async ({ changedFiles, expectedOadCalls }) => {
     mockChangedFilesStatuses(changedFiles);
 
-    const tempRepoPaths = existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f));
-    const workingTreePaths = [
-      ...(changedFiles.additions ?? []),
-      ...(changedFiles.modifications ?? []),
-    ].map((f) => path.resolve(f));
-    mockExistsSync([...tempRepoPaths, ...workingTreePaths]);
+    // const tempRepoPaths = existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f));
+    // const workingTreePaths = [
+    //   ...(changedFiles.additions ?? []),
+    //   ...(changedFiles.modifications ?? []),
+    // ].map((f) => path.resolve(f));
+    // mockExistsSync([...tempRepoPaths, ...workingTreePaths]);
 
     const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
 
