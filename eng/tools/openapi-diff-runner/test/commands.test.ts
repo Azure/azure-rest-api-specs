@@ -1,6 +1,7 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { validateBreakingChange } from "../src/commands.js";
 import { runOad } from "../src/run-oad.js";
@@ -44,6 +45,8 @@ function mockChangedFilesStatuses(
   return vi.mocked(getChangedFilesStatuses).mockResolvedValue(result);
 }
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 const context = {
   localSpecRepoPath: "",
   workingFolder: "",
@@ -60,8 +63,7 @@ const context = {
     sourceBranch: "",
     baseBranch: "",
     currentBranch: "",
-    // TODO: resolve relative path
-    tempRepoFolder: "/home/mharder/specs/eng/tools/openapi-diff-runner/test/fixtures",
+    tempRepoFolder: path.resolve(__dirname, "fixtures"),
     checkout: function (branch: string): Promise<void> {
       console.log("checkout " + branch);
       return Promise.resolve();
