@@ -336,9 +336,9 @@ interface PrivateEndpointConnections {
   /** Get a specific private endpoint connection */
   get is ArmResourceRead<PrivateEndpointConnectionResource>;
   /** Create a private endpoint connection */
-  create is ArmResourceCreateOrReplaceSync<PrivateEndpointConnectionResource>;
+  create is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnectionResource>;
   /** Delete the private endpoint connection */
-  delete is ArmResourceDeleteSync<PrivateEndpointConnectionResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnectionResource>;
 }
 
 /** Operations for private link resources on Scheduler */
