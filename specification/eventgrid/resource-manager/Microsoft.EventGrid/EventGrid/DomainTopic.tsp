@@ -43,7 +43,8 @@ interface DomainTopics {
     Request = void,
     Response = ArmResourceCreatedResponse<
       DomainTopic,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = DomainTopic> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 

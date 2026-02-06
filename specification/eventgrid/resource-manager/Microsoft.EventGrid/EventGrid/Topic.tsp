@@ -63,7 +63,8 @@ interface Topics {
     Topic,
     Response = ArmResourceCreatedResponse<
       Topic,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = Topic> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 

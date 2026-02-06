@@ -288,7 +288,8 @@ interface TopicEventSubscriptions {
     PatchModel = EventSubscriptionUpdateParameters,
     Response = ArmResourceCreatedResponse<
       EventSubscription,
-      LroHeaders = ArmLroLocationHeader
+      LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
@@ -493,7 +494,8 @@ interface EventSubscriptionOperationGroup {
     EventSubscription,
     Response = ArmResourceCreatedResponse<
       EventSubscription,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = EventSubscription> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
@@ -624,7 +626,8 @@ interface SystemTopicEventSubscriptions {
     EventSubscription,
     Response = ArmResourceCreatedResponse<
       EventSubscription,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = EventSubscription> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
@@ -638,7 +641,8 @@ interface SystemTopicEventSubscriptions {
     PatchModel = EventSubscriptionUpdateParameters,
     Response = ArmResourceCreatedResponse<
       EventSubscription,
-      LroHeaders = ArmLroLocationHeader
+      LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
@@ -744,7 +748,8 @@ interface PartnerTopicEventSubscriptions {
     PatchModel = EventSubscriptionUpdateParameters,
     Response = ArmResourceCreatedResponse<
       EventSubscription,
-      LroHeaders = ArmLroLocationHeader
+      LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 

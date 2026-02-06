@@ -51,7 +51,8 @@ interface Domains {
     Domain,
     Response = ArmResourceCreatedResponse<
       Domain,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = Domain> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
@@ -68,7 +69,7 @@ interface Domains {
       @body body: void;
     } | ArmResourceCreatedResponse<
       Domain,
-      LroHeaders = ArmLroLocationHeader &
+      LroHeaders = ArmLroLocationHeader<FinalResult = Domain> &
         Azure.Core.Foundations.RetryAfterHeader
     >
   >;

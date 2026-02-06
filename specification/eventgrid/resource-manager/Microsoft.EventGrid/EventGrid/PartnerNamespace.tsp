@@ -40,7 +40,8 @@ interface PartnerNamespaces {
     PartnerNamespace,
     Response = ArmResourceCreatedResponse<
       PartnerNamespace,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = PartnerNamespace> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 
@@ -55,7 +56,7 @@ interface PartnerNamespaces {
     PatchModel = PartnerNamespaceUpdateParameters,
     Response = OkResponse | ArmResourceCreatedResponse<
       PartnerNamespace,
-      LroHeaders = ArmLroLocationHeader &
+      LroHeaders = ArmLroLocationHeader<FinalResult = PartnerNamespace> &
         Azure.Core.Foundations.RetryAfterHeader
     >
   >;

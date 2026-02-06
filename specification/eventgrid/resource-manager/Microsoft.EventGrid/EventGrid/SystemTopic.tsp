@@ -57,7 +57,8 @@ interface SystemTopics {
     PatchModel = SystemTopicUpdateParameters,
     Response = ArmResponse<SystemTopic> | ArmResourceCreatedResponse<
       SystemTopic,
-      LroHeaders = ArmLroLocationHeader
+      LroHeaders = ArmLroLocationHeader<FinalResult = SystemTopic> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 

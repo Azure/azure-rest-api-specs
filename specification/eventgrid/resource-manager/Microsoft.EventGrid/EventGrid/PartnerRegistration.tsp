@@ -39,7 +39,8 @@ interface PartnerRegistrations {
   @summary("Create a partner registration.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PartnerRegistration,
-    Response = ArmResourceUpdatedResponse<PartnerRegistration> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<PartnerRegistration> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: PartnerRegistration;
     }),
@@ -60,7 +61,7 @@ interface PartnerRegistrations {
       @body body: void;
     } | ArmResourceCreatedResponse<
       PartnerRegistration,
-      LroHeaders = ArmLroLocationHeader &
+      LroHeaders = ArmLroLocationHeader<FinalResult = PartnerRegistration> &
         Azure.Core.Foundations.RetryAfterHeader
     >
   >;
