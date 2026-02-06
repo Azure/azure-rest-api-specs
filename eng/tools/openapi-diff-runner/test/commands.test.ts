@@ -88,7 +88,7 @@ const context = {
   swaggerDirs: [],
   baseBranch: "",
   headCommit: "",
-  runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+  runType: "",
   checkName: "",
   targetRepo: "",
   sourceRepo: "",
@@ -114,7 +114,7 @@ const context = {
   prUrl: "",
 };
 
-describe("validateBreakingChange", () => {
+describe("validateBreakingChange - same-version", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
@@ -176,7 +176,10 @@ describe("validateBreakingChange", () => {
       logs.push(data.toString());
     });
 
-    const statusCode = await validateBreakingChange(context);
+    const statusCode = await validateBreakingChange({
+      ...context,
+      runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+    });
 
     expect(statusCode).toEqual(0);
 
@@ -243,7 +246,10 @@ describe("validateBreakingChange - cross-version", () => {
     });
 
     mockExistsSync([
-      path.join(crossVersionContext.prInfo.tempRepoFolder, "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json"),
+      path.join(
+        crossVersionContext.prInfo.tempRepoFolder,
+        "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
+      ),
     ]);
 
     vi.mocked(runOad).mockResolvedValue([]);
