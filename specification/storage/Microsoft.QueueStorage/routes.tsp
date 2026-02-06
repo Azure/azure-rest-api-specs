@@ -4,52 +4,55 @@ import "./models.tsp";
 import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 
+namespace Storage.Queues;
+
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
-namespace Storage.Queues {
-  /** Azure Storage Queue basic operation template */
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-  op StorageOperation<
-    TParams extends TypeSpec.Reflection.Model | void,
-    TResponse extends TypeSpec.Reflection.Model | void,
-    RequestMediaType extends string = "application/xml",
-    ResponseMediaType extends string = "application/xml",
-    TError = StorageError
-  >(
-    /** Content-Type header */
-    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-    @header("Content-Type")
-    contentType: RequestMediaType,
+/** Azure Storage Queue basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+op StorageOperation<
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  RequestMediaType extends string = "application/xml",
+  ResponseMediaType extends string = "application/xml",
+  TError = StorageError
+>(
+  /** Content-Type header */
+  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+  @header("Content-Type")
+  contentType: RequestMediaType,
 
-    ...ApiVersionHeader,
-    ...ClientRequestIdHeader,
-    ...TParams,
-  ): (TResponse & {
-    /** Content-Type header */
-    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-    @header("Content-Type")
-    contentType: ResponseMediaType;
+  ...ApiVersionHeader,
+  ...ClientRequestIdHeader,
+  ...TParams,
+): (TResponse & {
+  /** Content-Type header */
+  #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+  @header("Content-Type")
+  contentType: ResponseMediaType;
 
-    ...ApiVersionHeader;
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-    ...DateResponseHeader;
-  }) | TError;
+  ...ApiVersionHeader;
+  ...RequestIdResponseHeader;
+  ...ClientRequestIdHeader;
+  ...DateResponseHeader;
+}) | TError;
 
-  /** Azure Storage Queue basic operation template */
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-  op StorageOperationNoBody<
-    TParams extends TypeSpec.Reflection.Model | void,
-    TResponse extends TypeSpec.Reflection.Model | void,
-    TError = StorageError
-  >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
-    ...ApiVersionHeader;
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-    ...DateResponseHeader;
-  }) | TError;
+/** Azure Storage Queue basic operation template */
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+op StorageOperationNoBody<
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  TError = StorageError
+>(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
+  ...ApiVersionHeader;
+  ...RequestIdResponseHeader;
+  ...ClientRequestIdHeader;
+  ...DateResponseHeader;
+}) | TError;
 
+@client({name: "QueueServiceClient"})
+interface Service {
   /** Sets properties for a storage account's Queue service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -141,278 +144,265 @@ namespace Storage.Queues {
       @bodyRoot body: ListQueuesResponse;
     }
   >;
+}
 
-  namespace Queue {
-    /** Creates a new queue under the specified account. If the queue with the same name already exists, the operation fails. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @put
-    @route("{queueName}")
-    op create is StorageOperationNoBody<
-      {
-        ...QueueNamePathParameter;
-        ...TimeoutParameter;
-        ...MetadataHeaders;
-      },
-      {
-        @statusCode statusCode: 201;
-      }
-    >;
+@client({name: "QueueClient"})
+interface Queue {
+  /** Creates a new queue under the specified account. If the queue with the same name already exists, the operation fails. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  @put
+  op create is StorageOperationNoBody<
+    {
+      ...TimeoutParameter;
+      ...MetadataHeaders;
+    },
+    {
+      @statusCode statusCode: 201;
+    }
+  >;
 
-    /** returns all user-defined metadata and system properties for the specified queue. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @get
-    @route("{queueName}?comp=metadata")
-    op getMetadata is StorageOperationNoBody<
-      {
-        ...QueueNamePathParameter;
-        ...TimeoutParameter;
-      },
-      {
-        ...MetadataHeaders;
-        ...ApproximateMessagesCountHeader;
-      }
-    >;
+  /** returns all user-defined metadata and system properties for the specified queue. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  @get
+  @route("?comp=metadata")
+  op getMetadata is StorageOperationNoBody<
+    {
+      ...TimeoutParameter;
+    },
+    {
+      ...MetadataHeaders;
+      ...ApproximateMessagesCountHeader;
+    }
+  >;
 
-    /** operation permanently deletes the specified queue */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @delete
-    @route("{queueName}")
-    op delete is StorageOperationNoBody<
-      {
-        ...QueueNamePathParameter;
-        ...TimeoutParameter;
-      },
-      {
-        @statusCode statusCode: 204;
-      }
-    >;
+  /** operation permanently deletes the specified queue */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  @delete
+  op delete is StorageOperationNoBody<
+    {
+      ...TimeoutParameter;
+    },
+    {
+      @statusCode statusCode: 204;
+    }
+  >;
 
-    /** operation sets one or more user-defined name-value pairs for the specified queue. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @put
-    @route("{queueName}?comp=metadata")
-    op setMetadata is StorageOperationNoBody<
-      {
-        ...QueueNamePathParameter;
-        ...TimeoutParameter;
+  /** operation sets one or more user-defined name-value pairs for the specified queue. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  @put
+  @route("?comp=metadata")
+  op setMetadata is StorageOperationNoBody<
+    {
+      ...TimeoutParameter;
 
-        /** The metadata headers. */
-        @alternateType(Record<string>, "rust")
-        @header("x-ms-meta")
-        metadata: string;
-      },
-      {
-        @statusCode statusCode: 204;
-      }
-    >;
+      /** The metadata headers. */
+      @alternateType(Record<string>, "rust")
+      @header("x-ms-meta")
+      metadata: string;
+    },
+    {
+      @statusCode statusCode: 204;
+    }
+  >;
 
-    /** gets the permissions for the specified queue. The permissions indicate whether queue data may be accessed publicly. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @get
-    @route("{queueName}?comp=acl")
-    op getAccessPolicy is StorageOperation<
-      {
-        ...QueueNamePathParameter;
-        ...TimeoutParameter;
-      },
-      {
-        @bodyRoot body: ListOfSignedIdentifier;
-      }
-    >;
+  /** gets the permissions for the specified queue. The permissions indicate whether queue data may be accessed publicly. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  @get
+  @route("?comp=acl")
+  op getAccessPolicy is StorageOperation<
+    {
+      ...TimeoutParameter;
+    },
+    {
+      @bodyRoot body: ListOfSignedIdentifier;
+    }
+  >;
 
-    /** sets the permissions for the specified queue. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-    @put
-    @route("{queueName}?comp=acl")
-    op setAccessPolicy is StorageOperation<
-      {
-        ...QueueNamePathParameter;
-        ...TimeoutParameter;
+  /** sets the permissions for the specified queue. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @put
+  @route("?comp=acl")
+  op setAccessPolicy is StorageOperation<
+    {
+      ...TimeoutParameter;
 
-        /** The access control list for the queue. */
-        #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
-        @bodyRoot
-        queueAcl: ListOfSignedIdentifier;
-      },
-      {}
-    >;
+      /** The access control list for the queue. */
+      #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
+      @bodyRoot
+      queueAcl: ListOfSignedIdentifier;
+    },
+    {}
+  >;
 
-    /**
-     * The Dequeue operation retrieves one or more messages from the front of the
-     * queue.
-     */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-    @get
-    @route("{queueName}/messages")
-    op receiveMessages is StorageOperation<
-      {
-        ...QueueNamePathParameter;
+  /**
+   * The Dequeue operation retrieves one or more messages from the front of the
+   * queue.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @get
+  @route("messages")
+  op receiveMessages is StorageOperation<
+    {
 
-        /**
-         * Optional. A nonzero integer value that specifies the number of messages to
-         * retrieve from the queue, up to a maximum of 32. If fewer are visible, the
-         * visible messages are returned. By default, a single message is retrieved from
-         * the queue with this operation.
-         */
-        @minValue(1)
-        @query("numofmessages")
-        numberOfMessages?: int32;
+      /**
+       * Optional. A nonzero integer value that specifies the number of messages to
+       * retrieve from the queue, up to a maximum of 32. If fewer are visible, the
+       * visible messages are returned. By default, a single message is retrieved from
+       * the queue with this operation.
+       */
+      @minValue(1)
+      @query("numofmessages")
+      numberOfMessages?: int32;
 
-        ...VisibilityTimeoutParameter;
-        ...TimeoutParameter;
-      },
-      {
-        @bodyRoot body: ListOfReceivedMessage;
-      }
-    >;
+      ...VisibilityTimeoutParameter;
+      ...TimeoutParameter;
+    },
+    {
+      @bodyRoot body: ListOfReceivedMessage;
+    }
+  >;
 
-    /**
-     * The Clear operation deletes all messages from the specified queue.
-     */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-    @delete
-    @route("{queueName}/messages")
-    op clear is StorageOperationNoBody<
-      {
-        ...QueueNamePathParameter;
-        ...TimeoutParameter;
-      },
-      {
-        @statusCode statusCode: 204;
-      }
-    >;
+  /**
+   * The Clear operation deletes all messages from the specified queue.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @delete
+  @route("messages")
+  op clear is StorageOperationNoBody<
+    {
+      ...TimeoutParameter;
+    },
+    {
+      @statusCode statusCode: 204;
+    }
+  >;
 
-    /**
-     * The Enqueue operation adds a new message to the back of the message queue. A
-     * visibility timeout can also be specified to make the message invisible until
-     * the visibility timeout expires. A message must be in a format that can be
-     * included in an XML request with UTF-8 encoding. The encoded message can be up
-     * to 64 KB in size for versions 2011-08-18 and newer, or 8 KB in size for
-     * previous versions.
-     */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @post
-    @route("{queueName}/messages")
-    op sendMessage is StorageOperation<
-      {
-        ...QueueNamePathParameter;
-        ...VisibilityTimeoutParameter;
+  /**
+   * The Enqueue operation adds a new message to the back of the message queue. A
+   * visibility timeout can also be specified to make the message invisible until
+   * the visibility timeout expires. A message must be in a format that can be
+   * included in an XML request with UTF-8 encoding. The encoded message can be up
+   * to 64 KB in size for versions 2011-08-18 and newer, or 8 KB in size for
+   * previous versions.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  @post
+  @route("messages")
+  op sendMessage is StorageOperation<
+    {
+      ...VisibilityTimeoutParameter;
 
-        /**
-         * Optional. Specifies the time-to-live interval for the message, in seconds.
-         * Prior to version 2017-07-29, the maximum time-to-live allowed is 7 days. For
-         * version 2017-07-29 or later, the maximum time-to-live can be any positive
-         * number, as well as -1 indicating that the message does not expire. If this
-         * parameter is omitted, the default time-to-live is 7 days.
-         */
-        @minValue(-1)
-        @query("messageTtl")
-        messageTimeToLive?: int32;
+      /**
+       * Optional. Specifies the time-to-live interval for the message, in seconds.
+       * Prior to version 2017-07-29, the maximum time-to-live allowed is 7 days. For
+       * version 2017-07-29 or later, the maximum time-to-live can be any positive
+       * number, as well as -1 indicating that the message does not expire. If this
+       * parameter is omitted, the default time-to-live is 7 days.
+       */
+      @minValue(-1)
+      @query("messageTtl")
+      messageTimeToLive?: int32;
 
-        ...TimeoutParameter;
+      ...TimeoutParameter;
 
-        /** A Message object which can be stored in a Queue */
-        @bodyRoot
-        queueMessage: QueueMessage;
-      },
-      {
-        @statusCode statusCode: 201;
-        @bodyRoot body: ListOfSentMessage;
-      }
-    >;
+      /** A Message object which can be stored in a Queue */
+      @bodyRoot
+      queueMessage: QueueMessage;
+    },
+    {
+      @statusCode statusCode: 201;
+      @bodyRoot body: ListOfSentMessage;
+    }
+  >;
 
-    /**
-     * The Peek operation retrieves one or more messages from the front of the queue,
-     * but does not alter the visibility of the message.
-     */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-    @get
-    @route("{queueName}/messages?peekonly=true")
-    op peekMessages is StorageOperation<
-      {
-        ...QueueNamePathParameter;
+  /**
+   * The Peek operation retrieves one or more messages from the front of the queue,
+   * but does not alter the visibility of the message.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @get
+  @route("messages?peekonly=true")
+  op peekMessages is StorageOperation<
+    {
 
-        /**
-         * Optional. A nonzero integer value that specifies the number of messages to
-         * retrieve from the queue, up to a maximum of 32. If fewer are visible, the
-         * visible messages are returned. By default, a single message is retrieved from
-         * the queue with this operation.
-         */
-        @minValue(1)
-        @query("numofmessages")
-        numberOfMessages?: int32;
+      /**
+       * Optional. A nonzero integer value that specifies the number of messages to
+       * retrieve from the queue, up to a maximum of 32. If fewer are visible, the
+       * visible messages are returned. By default, a single message is retrieved from
+       * the queue with this operation.
+       */
+      @minValue(1)
+      @query("numofmessages")
+      numberOfMessages?: int32;
 
-        ...TimeoutParameter;
-      },
-      {
-        @bodyRoot body: ListOfPeekedMessage;
-      }
-    >;
+      ...TimeoutParameter;
+    },
+    {
+      @bodyRoot body: ListOfPeekedMessage;
+    }
+  >;
 
-    /**
-     * The Update operation was introduced with version 2011-08-18 of the Queue
-     * service API. The Update Message operation updates the visibility timeout of a
-     * message. You can also use this operation to update the contents of a message. A
-     * message must be in a format that can be included in an XML request with UTF-8
-     * encoding, and the encoded message can be up to 64KB in size.
-     */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-    @put
-    @route("{queueName}/messages/{messageId}")
-    op update is StorageOperation<
-      {
-        ...QueueNamePathParameter;
-        ...MessageIdPathParameter;
-        ...PopReceiptQueryParameter;
+  /**
+   * The Update operation was introduced with version 2011-08-18 of the Queue
+   * service API. The Update Message operation updates the visibility timeout of a
+   * message. You can also use this operation to update the contents of a message. A
+   * message must be in a format that can be included in an XML request with UTF-8
+   * encoding, and the encoded message can be up to 64KB in size.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  @put
+  @route("messages/{messageId}")
+  op update is StorageOperation<
+    {
+      ...MessageIdPathParameter;
+      ...PopReceiptQueryParameter;
 
-        @doc("Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time.")
-        @maxValue(604800)
-        @query("visibilityTimeout")
-        visibilityTimeout: int32;
+      @doc("Specifies the new visibility timeout value, in seconds, relative to server time. The default value is 30 seconds. A specified value must be larger than or equal to 1 second, and cannot be larger than 7 days, or larger than 2 hours on REST protocol versions prior to version 2011-08-18. The visibility timeout of a message can be set to a value later than the expiry time.")
+      @maxValue(604800)
+      @query("visibilityTimeout")
+      visibilityTimeout: int32;
 
-        ...TimeoutParameter;
-        ...QueueMessageBodyParameter;
-      },
-      {
-        @statusCode statusCode: 204;
-        ...PopReceiptResponseHeader;
-        ...TimeNextVisibleResponseHeader;
-      }
-    >;
+      ...TimeoutParameter;
+      ...QueueMessageBodyParameter;
+    },
+    {
+      @statusCode statusCode: 204;
+      ...PopReceiptResponseHeader;
+      ...TimeNextVisibleResponseHeader;
+    }
+  >;
 
-    /**
-     * The Delete operation deletes the specified message.
-     */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-    #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-    @delete
-    @route("{queueName}/messages/{messageId}")
-    op deleteMessage is StorageOperationNoBody<
-      {
-        ...QueueNamePathParameter;
-        ...MessageIdPathParameter;
-        ...PopReceiptQueryParameter;
-        ...TimeoutParameter;
-      },
-      {
-        @statusCode statusCode: 204;
-      }
-    >;
-  }
+  /**
+   * The Delete operation deletes the specified message.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+  @delete
+  @route("messages/{messageId}")
+  op deleteMessage is StorageOperationNoBody<
+    {
+      ...MessageIdPathParameter;
+      ...PopReceiptQueryParameter;
+      ...TimeoutParameter;
+    },
+    {
+      @statusCode statusCode: 204;
+    }
+  >;
 }

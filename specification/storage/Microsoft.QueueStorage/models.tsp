@@ -657,13 +657,6 @@ alias TimeNextVisibleResponseHeader = {
   timeNextVisible: utcDateTime;
 };
 
-/** The queue name path parameter */
-alias QueueNamePathParameter = {
-  /** The name of the queue. */
-  @path
-  queueName: string;
-};
-
 /** The metadata headers. */
 alias MetadataHeaders = {
   /** The metadata headers. */
