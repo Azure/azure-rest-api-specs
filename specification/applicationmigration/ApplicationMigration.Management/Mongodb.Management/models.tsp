@@ -349,6 +349,16 @@ model MongoHostMachineProperties {
    * The sockets count.
    */
   sockets?: int64;
+
+  /**
+   * Support Status.
+   */
+  supportStatus?: string;
+
+  /**
+   * Time when mongo instance version support end.
+   */
+  endOfSupportDate?: string;
 }
 
 /**
