@@ -13,8 +13,6 @@ no-namespace-folders: true
 reformat-next-link: false
 combine-operation-files: true
 clear-output-folder: true
-modelerfour:
-  lenient-model-deduplication: true
 ```
 
 ``` yaml $(python)
@@ -22,8 +20,13 @@ namespace: azure.mgmt.resource.policy
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource-policy/azure/mgmt/resource/policy
 ```
 
-``` yaml $(python)
+``` yaml $(python) && $(tag) == 'package-policy-python'
 directive:
+  # Update ErrorResponse reference from common-types v1 to v5 in dataPolicyManifests.json
+  - from: dataPolicyManifests.json
+    where: $.definitions.CloudError.properties.error
+    transform: $["$ref"] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse";
+
   # Add missing operations of PolicyAssignments.json from tag 'package-policy-2023-04' that are not in openapi.json to keep compatibility for Python SDK
   - from: swagger-document
     where: $.paths

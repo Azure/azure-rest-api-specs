@@ -26,7 +26,7 @@ These are the global settings for the Resource API.
 title: PolicyClient
 description: Policy Client
 openapi-type: arm
-tag: package-policy-2025-11-stable
+tag: package-policy-python
 ```
 
 ### Tag: package-policy-2025-11-stable
@@ -63,9 +63,6 @@ These settings apply only when `--tag=package-policy-python` is specified on the
 input-file:
   - stable/2025-03-01/openapi.json
   - stable/2020-09-01/dataPolicyManifests.json
-  - preview/2022-07-01-preview/policyExemptions.json
-  - preview/2022-08-01-preview/policyVariables.json
-  - preview/2022-08-01-preview/policyVariableValues.json
 ```
 
 ### Tag: package-policy-2025-01
