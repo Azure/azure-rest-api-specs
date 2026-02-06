@@ -16,11 +16,11 @@ model AzureMonitorWorkspaceLogsExporter {
   concurrency?: ConcurrencyConfiguration;
 
   @doc("Cache configurations.")
-  @renamedFrom(Microsoft.Monitor.Versions.v2026_04_01, "backfill")
   @removed(Microsoft.Monitor.Versions.v2026_04_01)
   cache?: CacheConfiguration;
 
   @doc("Backfill configurations.")
+  @renamedFrom(Microsoft.Monitor.Versions.v2026_04_01, "cache")
   @added(Microsoft.Monitor.Versions.v2026_04_01)
   backfill?: BackfillConfiguration;
 }
