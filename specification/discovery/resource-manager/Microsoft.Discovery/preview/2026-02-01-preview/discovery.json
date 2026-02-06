@@ -5447,22 +5447,6 @@
             ]
           }
         },
-        "privateLinkSubnetId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Private Link subnet ID associated with inbound connectivity to the AKS apiserver. Must be delegated to Microsoft.ContainerService/managedClusters.\n    It should have connectivity to the management subnet.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks/subnets"
-              }
-            ]
-          }
-        },
         "outboundType": {
           "type": "string",
           "description": "Network egress type provisioned for the supercomputer workloads.\n    Defaults to LoadBalancer if not specified.\n    If None is specified, the customer is responsible for providing outbound connectivity for Supercomputer functionality.",

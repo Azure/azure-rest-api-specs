@@ -74,14 +74,6 @@ model SupercomputerProperties {
   managementSubnetId?: Microsoft.Discovery.Shared.SubnetId;
 
   /**
-    Private Link subnet ID associated with inbound connectivity to the AKS apiserver. Must be delegated to Microsoft.ContainerService/managedClusters.
-    It should have connectivity to the management subnet.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  @added(Versions.v2026_02_01_preview)
-  privateLinkSubnetId?: Microsoft.Discovery.Shared.SubnetId;
-
-  /**
     Network egress type provisioned for the supercomputer workloads.
     Defaults to LoadBalancer if not specified.
     If None is specified, the customer is responsible for providing outbound connectivity for Supercomputer functionality.
