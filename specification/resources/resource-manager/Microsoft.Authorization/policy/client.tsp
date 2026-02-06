@@ -87,5 +87,4 @@ namespace Microsoft.Authorization {
     ...Azure.Core.Foundations.ApiVersionParameter,
   ): PolicyAssignment | ArmDeletedNoContentResponse | ErrorResponse;
 }
-@@clientName(Microsoft.Authorization, "PolicyClient", "javascript,python");
-@@clientName(Microsoft.Authorization, "AssignmentsClient", "go");
+@@clientName(Microsoft.Authorization, "PolicyClient", "javascript,python,go");
