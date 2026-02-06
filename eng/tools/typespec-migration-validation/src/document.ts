@@ -44,6 +44,9 @@ export function processDocument(document: OpenAPI2Document): OpenAPI2Document {
   if (document.securityDefinitions) {
     delete newDocument.securityDefinitions;
   }
+  if (document.tags) {
+    delete newDocument.tags;
+  }
   if (document.info && document.info["x-typespec-generated"]) {
     delete newDocument.info["x-typespec-generated"];
   }
