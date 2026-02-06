@@ -137,7 +137,8 @@ interface EventSubscriptions {
     PatchModel = EventSubscriptionUpdateParameters,
     Response = ArmResourceCreatedResponse<
       EventSubscription,
-      LroHeaders = ArmLroLocationHeader
+      LroHeaders = ArmLroLocationHeader<FinalResult = EventSubscription> &
+        Azure.Core.Foundations.RetryAfterHeader
     >
   >;
 

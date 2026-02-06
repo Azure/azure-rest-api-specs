@@ -79,7 +79,11 @@ interface Topics {
     PatchModel = TopicUpdateParameters,
     Response = {
       @body body: void;
-    } | ArmResourceCreatedResponse<Topic, LroHeaders = ArmLroLocationHeader>
+    } | ArmResourceCreatedResponse<
+      Topic,
+      LroHeaders = ArmLroLocationHeader<FinalResult = Topic> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
