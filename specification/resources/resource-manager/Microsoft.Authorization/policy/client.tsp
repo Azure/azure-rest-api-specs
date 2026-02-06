@@ -88,3 +88,4 @@ namespace Microsoft.Authorization {
   ): PolicyAssignment | ArmDeletedNoContentResponse | ErrorResponse;
 }
 @@clientName(Microsoft.Authorization, "PolicyClient", "javascript,python");
+@@clientName(Microsoft.Authorization, "AssignmentsClient", "go");
