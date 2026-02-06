@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -30,6 +32,36 @@ model EmployeeProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /** Employee department. Added in version 2022-01-01-preview. */
+  @added(Versions.v2022_01_01_preview)
+  department?: string;
+
+  /** Employee role. Added in version 2022-02-01. */
+  @added(Versions.v2022_02_01)
+  role?: EmployeeRole;
+
+  /** Employee email. Added in version 2022-02-01. */
+  @added(Versions.v2022_02_01)
+  email?: string;
+}
+
+/** Employee role. */
+@added(Versions.v2022_02_01)
+union EmployeeRole {
+  string,
+
+  /** Manager role */
+  Manager: "Manager",
+
+  /** Developer role */
+  Developer: "Developer",
+
+  /** Designer role */
+  Designer: "Designer",
+
+  /** Analyst role */
+  Analyst: "Analyst",
 }
 
 /** The resource provisioning state. */
@@ -60,4 +92,34 @@ interface Employees {
   delete is ArmResourceDeleteWithoutOkAsync<Employee>;
   listByResourceGroup is ArmResourceListByParent<Employee>;
   listBySubscription is ArmListBySubscription<Employee>;
+
+  /** Get employee statistics. Added in version 2022-01-01-preview. */
+  @added(Versions.v2022_01_01_preview)
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Widget/employees/{employeeName}/statistics")
+  @get
+  op getStatistics(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    @doc("The employee name.")
+    @path
+    employeeName: string,
+  ): EmployeeStatistics;
+}
+
+/** Employee statistics. */
+@added(Versions.v2022_01_01_preview)
+model EmployeeStatistics {
+  /** Employee name */
+  employeeName: string;
+
+  /** Total projects */
+  totalProjects: int32;
+
+  /** Years of service */
+  yearsOfService: int32;
+
+  /** Last activity date */
+  lastActivityDate: utcDateTime;
 }

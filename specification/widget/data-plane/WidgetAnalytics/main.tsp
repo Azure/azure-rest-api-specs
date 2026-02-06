@@ -21,6 +21,12 @@ enum Versions {
 
   @doc("The 2022-12-01 version.")
   v2022_12_01: "2022-12-01",
+
+  @doc("The 2023-01-01-preview version.")
+  v2023_01_01_Preview: "2023-01-01-preview",
+
+  @doc("The 2023-02-01 version.")
+  v2023_02_01: "2023-02-01",
 }
 
 @doc("A widget.")
@@ -36,6 +42,29 @@ model WidgetSuite {
 
   @doc("The faked shared model.")
   sharedModel?: FakedSharedModel;
+
+  @doc("The widget description. Added in version 2023-01-01-preview.")
+  @added(Versions.v2023_01_01_Preview)
+  description?: string;
+
+  @doc("The widget status. Added in version 2023-02-01.")
+  @added(Versions.v2023_02_01)
+  status?: WidgetStatus;
+}
+
+@doc("The status of a widget.")
+@added(Versions.v2023_02_01)
+union WidgetStatus {
+  string,
+
+  @doc("Widget is active.")
+  Active: "Active",
+
+  @doc("Widget is inactive.")
+  Inactive: "Inactive",
+
+  @doc("Widget is under maintenance.")
+  Maintenance: "Maintenance",
 }
 
 interface Widgets {
@@ -60,4 +89,31 @@ interface Widgets {
       parameters: StandardListQueryParameters;
     }
   >;
+
+  @doc("Get widget analytics summary. Added in version 2023-01-01-preview.")
+  @added(Versions.v2023_01_01_Preview)
+  @route("/widgets/{widgetName}/analytics")
+  @get
+  op getWidgetAnalytics(
+    @doc("The widget name.")
+    @path
+    widgetName: string,
+
+    @doc("The API version to use for this operation.")
+    @query("api-version")
+    apiVersion: string,
+  ): WidgetAnalyticsSummary;
+}
+
+@doc("Widget analytics summary.")
+@added(Versions.v2023_01_01_Preview)
+model WidgetAnalyticsSummary {
+  @doc("The widget name.")
+  widgetName: string;
+
+  @doc("Total number of operations.")
+  totalOperations: int32;
+
+  @doc("Last updated timestamp.")
+  lastUpdated: utcDateTime;
 }
