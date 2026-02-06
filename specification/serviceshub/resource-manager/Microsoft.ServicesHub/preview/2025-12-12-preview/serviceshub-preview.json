@@ -1693,6 +1693,11 @@
           "type": "string",
           "description": "File Location for DCR to pick logs from."
         },
+        "connectorSubscriptionId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Connector subscriptionId."
+        },
         "connectedMachine": {
           "type": "object",
           "description": "Details of Connected Machine.",
@@ -2080,12 +2085,32 @@
       "properties": {
         "logAnalyticsWorkspaceId": {
           "type": "string",
-          "format": "arm-id",
           "description": "Defines the loganalytics workspace Id."
         },
-        "assessmentId": {
+        "logAnalyticsSubscriptionId": {
           "type": "string",
-          "description": "Defines Assessment Id."
+          "description": "Defines the loganalytics subscription Id."
+        },
+        "logAnalyticsResourceGroupName": {
+          "type": "string",
+          "description": "Defines the loganalytics resource group name."
+        },
+        "logAnalyticsWorkspaceName": {
+          "type": "string",
+          "description": "Defines the loganalytics workspace name."
+        },
+        "token": {
+          "type": "string",
+          "description": "Defines the token.",
+          "x-ms-secret": true
+        },
+        "solutionDisplayName": {
+          "type": "string",
+          "description": "Defines the solution display name."
+        },
+        "solutionName": {
+          "type": "string",
+          "description": "Defines the solution name."
         },
         "culture": {
           "type": "string",
@@ -2098,7 +2123,14 @@
       },
       "required": [
         "logAnalyticsWorkspaceId",
-        "assessmentId"
+        "logAnalyticsSubscriptionId",
+        "logAnalyticsResourceGroupName",
+        "logAnalyticsWorkspaceName",
+        "token",
+        "solutionDisplayName",
+        "solutionName",
+        "culture",
+        "reportType"
       ]
     },
     "DownloadResult": {
@@ -2119,9 +2151,9 @@
           "type": "string",
           "description": "Defines the name of the file."
         },
-        "blobUrl": {
+        "content": {
           "type": "string",
-          "description": "Defines the blob url of the file."
+          "description": "Base64 encoded content of the file."
         }
       }
     },
@@ -2187,7 +2219,7 @@
       "properties": {
         "logAnalyticsWorkspaceId": {
           "type": "string",
-          "format": "arm-id",
+          "format": "uuid",
           "description": "Defines the loganalytics workspace Id."
         },
         "surveyId": {
@@ -2212,12 +2244,19 @@
       "properties": {
         "logAnalyticsWorkspaceId": {
           "type": "string",
-          "format": "arm-id",
           "description": "Defines the loganalytics workspace Id."
         },
         "surveyId": {
           "type": "string",
           "description": "Defines Survey Id."
+        },
+        "solutionDisplayName": {
+          "type": "string",
+          "description": "Defines the solution display name."
+        },
+        "solutionName": {
+          "type": "string",
+          "description": "Defines the solution name."
         },
         "culture": {
           "type": "string",
@@ -2230,7 +2269,11 @@
       },
       "required": [
         "logAnalyticsWorkspaceId",
-        "surveyId"
+        "surveyId",
+        "solutionDisplayName",
+        "solutionName",
+        "culture",
+        "reportType"
       ]
     },
     "SurveyResult": {

@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
 import "./discoveryHub.tsp";
 
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ApplicationMigration;
 
@@ -37,6 +39,15 @@ model ApplicationProperties {
 
   @doc("The complexity of the application.")
   complexity?: Complexity;
+
+  @doc("The entity that manages the application.")
+  @added(Microsoft.ApplicationMigration.Versions.v2026_01_01_preview)
+  managedBy?: ManagedBy;
+
+  @doc("The confidence score for the application (used in autoAppDiscovery).")
+  @added(Microsoft.ApplicationMigration.Versions.v2026_01_01_preview)
+  @visibility(Lifecycle.Read)
+  confidenceScore?: float32;
 
   @doc("The provisioning status of Application.")
   @visibility(Lifecycle.Read)
@@ -94,6 +105,18 @@ union Complexity {
   string,
 }
 
+@doc("The enum defining the entity that manages the application.")
+@added(Microsoft.ApplicationMigration.Versions.v2026_01_01_preview)
+union ManagedBy {
+  @doc("The application is managed by the system.")
+  System: "System",
+
+  @doc("The application is managed by a user.")
+  User: "User",
+
+  string,
+}
+
 @doc("Model representing the result of the fetch SAS URI operation.")
 model FetchSasUriResult {
   @doc("The SAS URI to upload the import applications csv.")
@@ -105,7 +128,7 @@ model FetchSasUriResult {
 
 @doc("Model representing the request to import applications.")
 model ImportApplicationsRequest {
-  @doc("The name of the CSV file to be imported.")
+  @doc("The SAS URI of the CSV file to be imported.")
   importApplicationsSasUri: string;
 }
 
@@ -129,7 +152,7 @@ model ImportApplicationsOperationStatusResult {
   @doc("Contains error details if status is Failed/Canceled.")
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 
-  @doc("Additional properties applicable for SAP Discovery import entities operation status result")
+  @doc("Additional properties applicable for import applications operation status result")
   properties?: ImportOperationStatusProperties;
 }
 

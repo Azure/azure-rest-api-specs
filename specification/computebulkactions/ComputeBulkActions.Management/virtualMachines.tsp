@@ -57,6 +57,12 @@ union VMOperationStatus {
 
   @doc("Indicates that the virtual machine operation completed successfully.")
   Succeeded: "Succeeded",
+
+  @doc("Indicates that the virtual machine is being deleted.")
+  Deleting: "Deleting",
+
+  @doc("Indicates that the virtual machine operation is being cancelled.")
+  Cancelling: "Cancelling",
 }
 
 @doc("The response of a virtual machine list operation.")

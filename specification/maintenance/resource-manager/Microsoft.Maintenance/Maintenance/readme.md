@@ -165,7 +165,7 @@ See configuration in [readme.java.md](./readme.java.md)
 directive:
   - suppress: PathForPutOperation
     from: maintenance.json
-    reason: False postive. ConfigurationAssignments is proxy resource.
+    reason: False positive. ConfigurationAssignments is proxy resource.
   - suppress: DeleteResponseBodyEmpty
     from: maintenance.json
     reason: Suppression warning to avoid breaking changes

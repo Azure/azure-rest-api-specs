@@ -58,7 +58,6 @@ model ServiceInformation {
   changeTrackingAndInventory?: ChangeTrackingInformation;
 
   @doc("Azure Monitor Insights service information.")
-  @added(Versions.v2025_07_28_preview)
   @visibility(Lifecycle.Read)
   azureMonitorInsights?: AzureMonitorInformation;
 
@@ -111,7 +110,6 @@ model ChangeTrackingInformation {
 }
 
 @doc("Azure Monitor Insights service information.")
-@added(Versions.v2025_07_28_preview)
 model AzureMonitorInformation {
   @doc("ID of Data Collection Rule (DCR) associated with this service.")
   dcrId: armResourceIdentifier<[
@@ -164,7 +162,6 @@ model DesiredConfiguration {
   changeTrackingAndInventory: ChangeTrackingConfiguration;
 
   @doc("Configuration for the Azure Monitor Insights service.")
-  @added(Versions.v2025_07_28_preview)
   @visibility(Lifecycle.Create, Lifecycle.Read)
   azureMonitorInsights: AzureMonitorConfiguration;
 
@@ -199,7 +196,6 @@ model ChangeTrackingConfiguration {
 }
 
 @doc("Configuration for the Azure Monitor Insights service.")
-@added(Versions.v2025_07_28_preview)
 model AzureMonitorConfiguration {
   @doc("Azure monitor workspace resource ID used by the service.")
   azureMonitorWorkspaceId: armResourceIdentifier<[
@@ -222,6 +218,30 @@ union ProvisioningState {
   Deleting: "Deleting",
 }
 
+@doc("ManagedOps model for update operations")
+model ManagedOpUpdate {
+  @doc("Updatable properties in the ManagedOps resource.")
+  properties?: ManagedOpUpdateProperties;
+}
+
+@doc("Updatable properties in the ManagedOps resource.")
+model ManagedOpUpdateProperties {
+  @doc("Desired configuration input by the user.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  desiredConfiguration: DesiredConfigurationUpdate;
+}
+
+@doc("Updatable parameters in the Desired configuration input.")
+model DesiredConfigurationUpdate {
+  @doc("Desired enablement state of the Defender For Servers service.")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  defenderForServers?: desiredEnablementState;
+
+  @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  defenderCspm?: desiredEnablementState;
+}
+
 /** The operations that can be performed on our resource */
 @armResourceOperations(ManagedOp)
 interface ManagedOps {
@@ -232,18 +252,11 @@ interface ManagedOps {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ManagedOp>;
 
   @doc("List all ManagedOps instances in the subscription.")
-  @added(Versions.v2025_07_28_preview)
   list is ArmListBySubscription<ManagedOp>;
 
   @doc("Updates the ManagedOps instance with the supplied fields.")
   @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<
-    ManagedOp,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      ManagedOp,
-      ManagedOpsProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<ManagedOp, ManagedOpUpdate>;
 
   @doc("Deletes the ManagedOps instance.")
   delete is ArmResourceDeleteWithoutOkAsync<ManagedOp>;

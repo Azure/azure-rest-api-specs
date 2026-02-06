@@ -258,16 +258,19 @@
           "Create a PipelineGroup instance using a syslog receiver and cache.": {
             "$ref": "./examples/PipelineGroupCreateSyslogsWithCache.json"
           },
-          "Create a PipelineGroup instance using a syslog receiver and networking configurations.": {
-            "$ref": "./examples/PipelineGroupCreateSyslogsWithNetworking.json"
-          },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to a custom table": {
+            "$ref": "./examples/PipelineGroupCreateStandardCEFWithTransformToCustomTable.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to the standard CommonSecurityLog table": {
             "$ref": "./examples/PipelineGroupCreateStandardCEFWithTransform.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform exporting to the standard CommonSecurityLog table": {
             "$ref": "./examples/PipelineGroupCreateStandardCEF.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage manipulation exporting to a custom table": {
+            "$ref": "./examples/PipelineGroupCreateStandardSyslogWithTransformToCustomTable.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage manipulation exporting to the standard Syslog table": {
             "$ref": "./examples/PipelineGroupCreateStandardSyslogWithTransform.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform exporting to the standard Syslog table": {
@@ -425,62 +428,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/pipelineGroups/{pipelineGroupName}/executeTransform": {
-      "post": {
-        "operationId": "PipelineGroups_ExecuteTransform",
-        "tags": [
-          "PipelineGroups"
-        ],
-        "description": "This method is used to execute a transform configuration to be used in a pipeline group.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "pipelineGroupName",
-            "in": "path",
-            "description": "The name of pipeline group. The name is case insensitive.",
-            "required": true,
-            "type": "string",
-            "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteTransformRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ExecuteTransformResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Response when executing a transform": {
-            "$ref": "./examples/PipelineGroupExecuteTransform.json"
-          }
-        }
       }
     }
   },
@@ -766,48 +713,6 @@
         }
       }
     },
-    "ExecuteTransformRequest": {
-      "type": "object",
-      "description": "Request to execute a transform.",
-      "properties": {
-        "transformStatement": {
-          "type": "string",
-          "description": "Transform statement to execute.",
-          "minLength": 1,
-          "maxLength": 10000
-        }
-      },
-      "required": [
-        "transformStatement"
-      ]
-    },
-    "ExecuteTransformResponse": {
-      "type": "object",
-      "description": "Response for the execute transform request.",
-      "properties": {
-        "validation": {
-          "$ref": "#/definitions/ExecuteTransformResponseValidation",
-          "description": "Validation information for the execute transform response."
-        }
-      },
-      "required": [
-        "validation"
-      ]
-    },
-    "ExecuteTransformResponseValidation": {
-      "type": "object",
-      "description": "Validation information for the execute transform response.",
-      "properties": {
-        "duration": {
-          "type": "number",
-          "format": "float",
-          "description": "Duration of validation portion of the transform execution in seconds."
-        }
-      },
-      "required": [
-        "duration"
-      ]
-    },
     "ExecutionPlacement": {
       "type": "object",
       "description": "Constraints for guiding the execution environment of the pipeline group.",
@@ -842,10 +747,6 @@
         "azureMonitorWorkspaceLogs": {
           "$ref": "#/definitions/AzureMonitorWorkspaceLogsExporter",
           "description": "Azure Monitor Workspace Logs specific configurations."
-        },
-        "tcp": {
-          "$ref": "#/definitions/TcpExporter",
-          "description": "TCP based exporter. Used for pipelineGroup exporter."
         }
       },
       "required": [
@@ -867,24 +768,6 @@
             "name": "AzureMonitorWorkspaceLogs",
             "value": "AzureMonitorWorkspaceLogs",
             "description": "Export logs to Azure Monitor Workspace."
-          }
-        ]
-      }
-    },
-    "ExternalNetworkingMode": {
-      "type": "string",
-      "description": "The mode of the external networking.",
-      "enum": [
-        "LoadBalancerOnly"
-      ],
-      "x-ms-enum": {
-        "name": "ExternalNetworkingMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LoadBalancerOnly",
-            "value": "LoadBalancerOnly",
-            "description": "Load balancer only."
           }
         ]
       }
@@ -957,64 +840,6 @@
           "description": "Define a source field name from which the json array mapper will read the json array. Leaving this empty, means reading the body of the message itself."
         }
       }
-    },
-    "NetworkingConfiguration": {
-      "type": "object",
-      "description": "Networking configuration for the pipeline group instance.",
-      "properties": {
-        "externalNetworkingMode": {
-          "$ref": "#/definitions/ExternalNetworkingMode",
-          "description": "External networking mode."
-        },
-        "host": {
-          "type": "string",
-          "description": "The address exposed on the cluster. Example: azuremonitorpipeline.contoso.com.",
-          "pattern": "^[a-zA-Z0-9-\\.]+$"
-        },
-        "routes": {
-          "type": "array",
-          "description": "Networking routes configuration.",
-          "items": {
-            "$ref": "#/definitions/NetworkingRoute"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "externalNetworkingMode",
-        "routes"
-      ]
-    },
-    "NetworkingRoute": {
-      "type": "object",
-      "description": "Networking route configuration.",
-      "properties": {
-        "receiver": {
-          "type": "string",
-          "description": "The name of the previously defined receiver.",
-          "pattern": "^(?!-)[a-zA-Z0-9-]{3,32}[^-]$"
-        },
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The port that will be configured externally. If not specified, it will use the port from the receiver definition.",
-          "minimum": 1,
-          "maximum": 65535
-        },
-        "path": {
-          "type": "string",
-          "description": "Route path.",
-          "pattern": "^[a-zA-Z0-9-/\\.]+$"
-        },
-        "subdomain": {
-          "type": "string",
-          "description": "Route subdomain.",
-          "pattern": "^[a-zA-Z0-9-\\.]+$"
-        }
-      },
-      "required": [
-        "receiver"
-      ]
     },
     "OtlpReceiver": {
       "type": "object",
@@ -1175,14 +1000,6 @@
           "$ref": "#/definitions/Service",
           "description": "The service section for a given pipeline group instance."
         },
-        "networkingConfigurations": {
-          "type": "array",
-          "description": "Networking configurations for the pipeline group instance.",
-          "items": {
-            "$ref": "#/definitions/NetworkingConfiguration"
-          },
-          "x-ms-identifiers": []
-        },
         "executionPlacement": {
           "$ref": "#/definitions/ExecutionPlacement",
           "description": "Constraints for guiding the execution environment of the pipeline group."
@@ -1244,14 +1061,6 @@
         "service": {
           "$ref": "#/definitions/ServiceUpdate",
           "description": "The service section for a given pipeline group instance."
-        },
-        "networkingConfigurations": {
-          "type": "array",
-          "description": "Networking configurations for the pipeline group instance.",
-          "items": {
-            "$ref": "#/definitions/NetworkingConfiguration"
-          },
-          "x-ms-identifiers": []
         },
         "executionPlacement": {
           "$ref": "#/definitions/ExecutionPlacement",
@@ -1495,7 +1304,7 @@
         },
         "otlp": {
           "$ref": "#/definitions/OtlpReceiver",
-          "description": "OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers."
+          "description": "OTLP receiver configurations. This field is mandatory for OTLP receivers."
         },
         "udp": {
           "$ref": "#/definitions/UdpReceiver",
@@ -1512,7 +1321,6 @@
       "description": "The receiver type.",
       "enum": [
         "Syslog",
-        "Ama",
         "OTLP",
         "UDP"
       ],
@@ -1524,11 +1332,6 @@
             "name": "Syslog",
             "value": "Syslog",
             "description": "Linux syslog."
-          },
-          {
-            "name": "Ama",
-            "value": "Ama",
-            "description": "Receives data from azure monitor agent receiver."
           },
           {
             "name": "OTLP",
@@ -1738,20 +1541,6 @@
         "endpoint"
       ]
     },
-    "TcpExporter": {
-      "type": "object",
-      "description": "Base exporter using TCP as transport protocol.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "TCP url to export.",
-          "pattern": "^(https?)://[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$"
-        }
-      },
-      "required": [
-        "url"
-      ]
-    },
     "TlsConfiguration": {
       "type": "object",
       "description": "TLS configuration that can be referenced by receivers.",
@@ -1794,11 +1583,11 @@
         },
         "tlsCertificate": {
           "$ref": "#/definitions/CertificateWithKey",
-          "description": "TLS certificate and its private key."
+          "description": "TLS certificate and its private key. If not specified, default TLS certificate is used."
         },
         "clientCa": {
           "$ref": "#/definitions/CertificateSource",
-          "description": "Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used. Ignored when mode is 'disabled' or 'serverOnly'."
+          "description": "Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used."
         }
       },
       "required": [

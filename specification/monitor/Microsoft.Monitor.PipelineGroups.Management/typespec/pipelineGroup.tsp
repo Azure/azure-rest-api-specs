@@ -11,7 +11,6 @@ import "./receivers/OtlpReceiver.tsp";
 import "./receivers/SyslogReceiver.tsp";
 import "./processors/BatchProcessor.tsp";
 import "./processors/TransformLanguageProcessor.tsp";
-import "./actions/executeTransform.tsp";
 import "./ExecutionPlacement.tsp";
 
 using TypeSpec.Http;
@@ -58,6 +57,7 @@ model PipelineGroupProperties {
 
   @doc("Networking configurations for the pipeline group instance.")
   @Azure.ResourceManager.identifiers(#[])
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   networkingConfigurations?: NetworkingConfiguration[];
 
   @doc("Constraints for guiding the execution environment of the pipeline group.")
@@ -91,6 +91,12 @@ model Receiver {
   syslog?: SyslogReceiver;
 
   @doc("OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers.")
+  @renamedFrom(Microsoft.Monitor.Versions.v2025_03_01_preview, "otlp")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  otlpv20241001preview?: OtlpReceiver;
+
+  @doc("OTLP receiver configurations. This field is mandatory for OTLP receivers.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
   otlp?: OtlpReceiver;
 
   @doc("UDP receiver configurations. This field is mandatory for UDP receivers.")
@@ -105,6 +111,7 @@ union ReceiverType {
   Syslog: "Syslog",
 
   @doc("Receives data from azure monitor agent receiver.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   Ama: "Ama",
 
   @doc("Receives data from another pipeline group.")
@@ -168,6 +175,7 @@ model Exporter {
   azureMonitorWorkspaceLogs?: AzureMonitorWorkspaceLogsExporter;
 
   @doc("TCP based exporter. Used for pipelineGroup exporter.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   tcp?: TcpExporter;
 }
 
@@ -221,6 +229,7 @@ union PipelineType {
 }
 
 @doc("Networking configuration for the pipeline group instance.")
+@removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
 model NetworkingConfiguration {
   @doc("External networking mode.")
   externalNetworkingMode: ExternalNetworkingMode;
@@ -235,6 +244,7 @@ model NetworkingConfiguration {
 }
 
 @doc("The mode of the external networking.")
+@removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
 union ExternalNetworkingMode {
   string,
 
@@ -243,6 +253,7 @@ union ExternalNetworkingMode {
 }
 
 @doc("Networking route configuration.")
+@removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
 model NetworkingRoute {
   @doc("The name of the previously defined receiver.")
   @pattern("^(?!-)[a-zA-Z0-9-]{3,32}[^-]$")
@@ -293,10 +304,10 @@ model TlsConfiguration {
   @doc("The TLS security mode for receivers using this configuration. Default is 'mutualTls'.")
   mode?: TlsMode = TlsMode.MutualTls;
 
-  @doc("TLS certificate and its private key.")
+  @doc("TLS certificate and its private key. If not specified, default TLS certificate is used.")
   tlsCertificate?: CertificateWithKey;
 
-  @doc("Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used. Ignored when mode is 'disabled' or 'serverOnly'.")
+  @doc("Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used.")
   clientCa?: CertificateSource;
 }
 
@@ -376,12 +387,4 @@ interface PipelineGroups {
 
   @doc("Lists all workspaces in the specified subscription")
   listBySubscription is ArmListBySubscription<PipelineGroup>;
-
-  @doc("This method is used to execute a transform configuration to be used in a pipeline group.")
-  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
-  executeTransform is ArmResourceActionSync<
-    PipelineGroup,
-    ExecuteTransformRequest,
-    ExecuteTransformResponse
-  >;
 }

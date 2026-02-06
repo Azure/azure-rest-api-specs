@@ -185,6 +185,16 @@ interface MonitorResources {
     LinkableEnvironmentRequest,
     ArmResponse<LinkableEnvironmentListResponse>
   >;
+
+  /**
+   * Get the latest SaaS linked to the dynatrace account of the underlying monitor.
+   */
+  @added(Dynatrace.Observability.Versions.v2026_01_07_preview)
+  latestLinkedSaaS is ArmResourceActionSync<
+    MonitorResource,
+    void,
+    ArmResponse<LatestLinkedSaaSResponse>
+  >;
 }
 
 @@doc(MonitorResource.name, "Monitor resource name");
