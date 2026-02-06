@@ -1,6 +1,6 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { appendFileSync, existsSync, PathLike } from "node:fs";
+import { existsSync, PathLike } from "node:fs";
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { validateBreakingChange } from "../src/commands.js";
@@ -171,11 +171,6 @@ describe("validateBreakingChange - same-version", () => {
 
     const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
 
-    const logs: string[] = [];
-    vi.mocked(appendFileSync).mockImplementation((_path, data) => {
-      logs.push(data.toString());
-    });
-
     const statusCode = await validateBreakingChange({
       ...context,
       runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
@@ -192,19 +187,6 @@ describe("validateBreakingChange - same-version", () => {
 
     // Ensure no extra calls
     expect(mockRunOad).toBeCalledTimes(expectedOadCalls.length);
-
-    // Useful for debugging the markdown log
-
-    // const jsonLog = logs.find((l) => l.startsWith("{"));
-    // const markdownLog = JSON.parse(jsonLog || "").message.trim();
-
-    // expect(markdownLog).toMatchInlineSnapshot(
-    //   `
-    //   "| Compared specs ([vunknown](https://www.npmjs.com/package/@azure/oad/v/unknown)) | new version | base version |
-    //   |-------|-------------|--------------|
-    //   | foo.json | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) | 2026-01-01 ([](https://github.com//blob//specification/foo/data-plane/Foo/stable/2026-01-01/foo.json)) |"
-    // `,
-    // );
   });
 });
 
@@ -218,12 +200,34 @@ describe("validateBreakingChange - cross-version", () => {
     runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
   };
 
-  it("should execute cross-version breaking change detection", async () => {
-    mockChangedFilesStatuses({
-      additions: ["specification/foo/data-plane/Foo/stable/2026-02-01/foo.json"],
-    });
+  it.each([
+    {
+      name: "execute cross-version breaking change detection",
+      changedFiles: {
+        additions: ["specification/foo/data-plane/Foo/stable/2026-02-01/foo.json"],
+      },
+      existingFiles: [],
+    },
+    {
+      name: "handle renames in cross-version context",
+      changedFiles: {
+        renames: [
+          {
+            from: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
+            to: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
+          },
+        ],
+      },
+      existingFiles: [
+        "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
+      ],
+    },
+  ])("$name", async ({ changedFiles, existingFiles }) => {
+    mockChangedFilesStatuses(changedFiles);
 
-    mockExistsSync([]);
+    mockExistsSync(
+      existingFiles.map((f) => path.join(crossVersionContext.prInfo.tempRepoFolder, f)),
+    );
 
     vi.mocked(runOad).mockResolvedValue([]);
 
@@ -232,30 +236,6 @@ describe("validateBreakingChange - cross-version", () => {
     // Cross-version logic will skip processing if getSpecModel returns null
     // (which happens for new RPs or when readme folder can't be determined)
     // This test just verifies the cross-version code path executes without errors
-    expect(statusCode).toEqual(0);
-  });
-
-  it("should handle renames in cross-version context", async () => {
-    mockChangedFilesStatuses({
-      renames: [
-        {
-          from: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-          to: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
-        },
-      ],
-    });
-
-    mockExistsSync([
-      path.join(
-        crossVersionContext.prInfo.tempRepoFolder,
-        "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-      ),
-    ]);
-
-    vi.mocked(runOad).mockResolvedValue([]);
-
-    const statusCode = await validateBreakingChange(crossVersionContext);
-
     // Renamed files in same version are handled by same-version check, not cross-version
     // This test verifies cross-version code executes without errors when renames are present
     expect(statusCode).toEqual(0);
