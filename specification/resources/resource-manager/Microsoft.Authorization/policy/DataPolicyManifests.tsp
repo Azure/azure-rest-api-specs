@@ -1,16 +1,27 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Authorization;
+/**
+ * The data policy manifest.
+ */
+model DataPolicyManifest
+  is Azure.ResourceManager.ProxyResource<DataPolicyManifestProperties> {
+  ...ResourceNameParameter<
+    Resource = DataPolicyManifest,
+    KeyName = "policyMode",
+    SegmentName = "dataPolicyManifests",
+  >;
+}
 
 /**
  * Parameters for listing/manifests with a $filter.
@@ -46,6 +57,7 @@ alias DataPolicyManifestTenantOps = Azure.ResourceManager.Legacy.ExtensionOperat
 /**
  * Operations for DataPolicyManifest at tenant scope.
  */
+@added(Versions.v2025_11_01)
 @armResourceOperations
 interface DataPolicyManifests {
   /**

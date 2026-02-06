@@ -325,43 +325,7 @@
         }
       }
     },
-    "/providers/Microsoft.Authorization/dataPolicyManifests/{policyMode}": {
-      "get": {
-        "operationId": "DataPolicyManifests_GetByPolicyMode",
-        "tags": [
-          "DataPolicyManifests"
-        ],
-        "summary": "Retrieves a data policy manifest.",
-        "description": "This operation retrieves the data policy manifest with the given policy mode.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "policyMode",
-            "in": "path",
-            "description": "provider namespace",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DataPolicyManifest"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Authorization/dataPolicyManifests/{_policyMode}": {
+    "/providers/Microsoft.Authorization/dataPolicyManifests": {
       "get": {
         "operationId": "DataPolicyManifests_List",
         "tags": [
@@ -372,13 +336,6 @@
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "_policyMode",
-            "in": "path",
-            "description": "provider namespace",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/DataPolicyManifestsFilterParameter"
@@ -400,6 +357,42 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Authorization/dataPolicyManifests/{policyMode}": {
+      "get": {
+        "operationId": "DataPolicyManifests_GetByPolicyMode",
+        "tags": [
+          "DataPolicyManifests"
+        ],
+        "summary": "Retrieves a data policy manifest.",
+        "description": "This operation retrieves the data policy manifest with the given policy mode.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "policyMode",
+            "in": "path",
+            "description": "The policy mode of the data policy manifest to get.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataPolicyManifest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -3292,25 +3285,15 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DataPolicyManifestProperties",
-          "description": "The data policy manifest properties.",
+          "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "description": "The ID of the data policy manifest.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the data policy manifest (it's the same as the Policy Mode).",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource (Microsoft.Authorization/dataPolicyManifests).",
-          "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "DataPolicyManifestListResult": {
       "type": "object",

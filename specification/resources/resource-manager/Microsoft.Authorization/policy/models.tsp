@@ -1265,6 +1265,7 @@ model PolicyLogInfo {
 /**
  * The custom resource function definition.
  */
+@added(Versions.v2025_11_01)
 model DataManifestCustomResourceFunctionDefinition {
   /**
    * The function name as it will appear in the policy rule. eg - 'vault'.
@@ -1290,6 +1291,7 @@ model DataManifestCustomResourceFunctionDefinition {
 /**
  * The resource functions supported by a manifest.
  */
+@added(Versions.v2025_11_01)
 model DataManifestResourceFunctionsDefinition {
   /**
    * The standard resource functions (subscription and/or resourceGroup).
@@ -1306,6 +1308,7 @@ model DataManifestResourceFunctionsDefinition {
 /**
  * The data effect definition.
  */
+@added(Versions.v2025_11_01)
 model DataEffect {
   /**
    * The data effect name.
@@ -1322,6 +1325,7 @@ model DataEffect {
 /**
  * The resource type aliases definition.
  */
+@added(Versions.v2025_11_01)
 model ResourceTypeAliases {
   /**
    * The resource type name.
@@ -1337,6 +1341,8 @@ model ResourceTypeAliases {
 /**
  * The properties of the data policy manifest.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_11_01)
 model DataPolicyManifestProperties {
   /**
    * The list of namespaces for the data policy manifest.
@@ -1376,38 +1382,39 @@ model DataPolicyManifestProperties {
   resourceFunctions?: DataManifestResourceFunctionsDefinition;
 }
 
-/**
- * The data policy manifest.
- */
-model DataPolicyManifest {
-  /**
-   * The data policy manifest properties.
-   */
-  properties?: DataPolicyManifestProperties;
+// /**
+//  * The data policy manifest.
+//  */
+// @added(Versions.v2025_11_01)
+// model DataPolicyManifest {
+//   /**
+//    * The data policy manifest properties.
+//    */
+//   properties?: DataPolicyManifestProperties;
 
-  /**
-   * The ID of the data policy manifest.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
+//   /**
+//    * The ID of the data policy manifest.
+//    */
+//   @visibility(Lifecycle.Read)
+//   id?: string;
 
-  /**
-   * The name of the data policy manifest (it's the same as the Policy Mode).
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
+//   /**
+//    * The name of the data policy manifest (it's the same as the Policy Mode).
+//    */
+//   @visibility(Lifecycle.Read)
+//   name?: string;
 
-  /**
-   * The type of the resource (Microsoft.Authorization/dataPolicyManifests).
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
+//   /**
+//    * The type of the resource (Microsoft.Authorization/dataPolicyManifests).
+//    */
+//   @visibility(Lifecycle.Read)
+//   type?: string;
+// }
 
 /**
  * List of data policy manifests.
  */
-//
+@added(Versions.v2025_11_01)
 model DataPolicyManifestListResult {
   /**
    * An array of data policy manifests.
