@@ -67,7 +67,7 @@ union CreatedByType {
 /**
  * The clean up preference when the script execution gets in a terminal state. Default setting is 'Always'.
  */
-union CleanupOptions {
+union cleanupOptions {
   string,
 
   /**
@@ -186,17 +186,6 @@ model AzureResourceBase {
 }
 
 /**
- * Deployment scripts error response.
- */
-@error
-model DeploymentScriptsError {
-  /**
-   * Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)
-   */
-  error?: Azure.ResourceManager.CommonTypes.ErrorResponse;
-}
-
-/**
  * Deployment script parameters to be updated.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -297,7 +286,7 @@ model DeploymentScriptPropertiesBase {
   /**
    * The clean up preference when the script execution gets in a terminal state. Default setting is 'Always'.
    */
-  cleanupPreference?: CleanupOptions = CleanupOptions.Always;
+  cleanupPreference?: cleanupOptions = cleanupOptions.Always;
 
   /**
    * State of the script execution. This only appears in the response.
@@ -434,6 +423,7 @@ model ScriptConfigurationBase {
   /**
    * Script body.
    */
+  @maxLength(32000)
   scriptContent?: string;
 
   /**
