@@ -41,12 +41,22 @@ model DrillResourceProperties {
   @doc("Active location and zones of the Azure resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activeLocation?: string;
+  activeLocations?: string[];
 
   @doc("List of recovery locations and zones of the Azure resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   recoveryLocations?: string[];
+
+  @doc("Active Resource location and physical zones of Azure Resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activePhysicalZones?: string[];
+
+  @doc("Recovery Resource location and physical zones of HA Azure Resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  recoveryPhysicalZones?: string[];
 
   @doc("Inclusion State of the Drill resource in Drill")
   inclusionState?: DrillResourceInclusionState;
@@ -107,6 +117,11 @@ model DrillResourceProperties {
   @visibility(Lifecycle.Read)
   rbacAssignmentError?: ErrorDetails;
 
+  @doc("Monitoring RBAC assignment error, if any.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_01_preview)
+  monitoringRbacAssignmentError?: ErrorDetails;
+
   @doc("Provisioning state")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -119,6 +134,10 @@ model DrillResourceAttentionReason {
 
   @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
   runbookFaultRbacOnTargets?: RBACState;
+
+  @doc("RBAC required by Drill MSI on the target resource for monitoring.")
+  @added(Versions.v2026_03_01_preview)
+  monitoringRbacOnTargets?: RBACState;
 
   @doc("Target extension resource is missing on the resource.")
   target?: ExtensionObjectState;
