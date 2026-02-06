@@ -23,17 +23,6 @@ model DataPolicyManifest
   >;
 }
 
-/**
- * Parameters for listing/manifests with a $filter.
- */
-model DataPolicyManifestsFilterParameter {
-  /**
-   * The filter to apply on the operation. Valid values for $filter are: \"namespace eq '{value}'\". If $filter is not provided, no filtering is performed. If $filter=namespace eq '{value}' is provided, the returned list only includes all data policy manifests that have a namespace matching the provided value.
-   */
-  @query("$filter")
-  $filter?: string;
-}
-
 alias DataPolicyManifestTenantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
@@ -72,6 +61,12 @@ interface DataPolicyManifests {
   @summary("Retrieves data policy manifests.")
   list is DataPolicyManifestTenantOps.List<
     DataPolicyManifest,
-    Parameters = DataPolicyManifestsFilterParameter
+    Parameters = {
+      /**
+      * The filter to apply on the operation. Valid values for $filter are: \"namespace eq '{value}'\". If $filter is not provided, no filtering is performed. If $filter=namespace eq '{value}' is provided, the returned list only includes all data policy manifests that have a namespace matching the provided value.
+      */
+      @query("$filter")
+      $filter?: string;
+    }
   >;
 }
