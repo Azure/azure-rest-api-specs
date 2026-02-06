@@ -263,6 +263,10 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   "CheckSignalRNameAvailability",
   "csharp"
 );
+@@clientName(SignalROperationGroup.checkNameAvailability::parameters.body,
+  "content",
+  "csharp"
+);
 @@alternateType(SignalROperationGroup.checkNameAvailability::parameters.location,
   azureLocation,
   "csharp"
@@ -321,7 +325,6 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(PrivateLinkResource, "SignalRPrivateLinkResource", "csharp");
 @@clientName(SignalRResources.list, "GetSignalRPrivateLinkResources", "csharp");
 @@clientName(RegenerateKeyParameters, "SignalRRegenerateKeyContent", "csharp");
-
 @@usage(ShareablePrivateLinkResourceProperties,
   Usage.input | Usage.output,
   "csharp"
@@ -333,14 +336,54 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   "csharp"
 );
 @@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
-@@alternateType(SignalRResource.identity, Azure.ResourceManager.CommonTypes.ManagedServiceIdentity, "csharp");
+@@alternateType(SignalRResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
-@@clientName(ApplicationFirewallSettings, "SignalRApplicationFirewallSettings", "csharp");
-@@clientName(ClientConnectionCountRule, "SignalRClientConnectionCountRule", "csharp");
-@@clientName(ApplicationFirewallSettings, "SignalRClientTrafficControlRule", "csharp");
+@@clientName(ApplicationFirewallSettings,
+  "SignalRApplicationFirewallSettings",
+  "csharp"
+);
+@@clientName(ClientConnectionCountRule,
+  "SignalRClientConnectionCountRule",
+  "csharp"
+);
 @@clientName(IPRule, "SignalRIPRule", "csharp");
 @@clientName(RouteSettings, "SignalRRouteSettings", "csharp");
 @@clientName(ServerlessSettings, "SignalRServerlessSettings", "csharp");
+@@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
+@@clientName(SignalRResources.regenerateKey::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ClientTrafficControlRule,
+  "SignalRClientTrafficControlRule",
+  "csharp"
+);
+@@clientName(ThrottleByJwtCustomClaimRule,
+  "SignalRThrottleByJwtCustomClaimRule",
+  "csharp"
+);
+@@clientName(ThrottleByJwtSignatureRule,
+  "SignalRThrottleByJwtSignatureRule",
+  "csharp"
+);
+@@clientName(ThrottleByUserIdRule, "SignalRThrottleByUserIdRule", "csharp");
+@@clientName(TrafficThrottleByJwtCustomClaimRule,
+  "SignalRTrafficThrottleByJwtCustomClaimRule",
+  "csharp"
+);
+@@clientName(TrafficThrottleByJwtSignatureRule,
+  "SignalRTrafficThrottleByJwtSignatureRule",
+  "csharp"
+);
+@@clientName(TrafficThrottleByUserIdRule,
+  "SignalRTrafficThrottleByUserIdRule",
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@markAsPageable(Replicas.listReplicaSkus, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(SignalRResources.listSkus, "csharp");

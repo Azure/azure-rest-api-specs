@@ -117,7 +117,10 @@ using Microsoft.SignalRService;
   "SignalRReplicaSharedPrivateLinkResources",
   "!csharp"
 );
-@@clientLocation(SignalROperationGroup.checkNameAvailability, "SignalR", "!csharp");
+@@clientLocation(SignalROperationGroup.checkNameAvailability,
+  "SignalR",
+  "!csharp"
+);
 @@clientLocation(SignalRResources.get, "SignalR", "!csharp");
 @@clientLocation(SignalRResources.createOrUpdate, "SignalR", "!csharp");
 @@clientLocation(SignalRResources.update, "SignalR", "!csharp");
