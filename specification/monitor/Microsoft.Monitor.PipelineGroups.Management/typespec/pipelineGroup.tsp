@@ -39,7 +39,13 @@ model PipelineGroup is TrackedResource<PipelineGroupProperties> {
 @doc("Properties that need to be specified to create a new pipeline group instance.")
 model PipelineGroupProperties {
   @doc("Defines the amount of replicas of the pipeline group instance.")
+  @renamedFrom(Microsoft.Monitor.Versions.v2026_04_01, "replicas")
+  @removed(Microsoft.Monitor.Versions.v2026_04_01)
+  replicasWithoutMinimum?: int32;
+
+  @doc("Defines the amount of replicas of the pipeline group instance.")
   @minValue(1)
+  @added(Microsoft.Monitor.Versions.v2026_04_01)
   replicas?: int32;
 
   @doc("The receivers specified for a pipeline group instance.")
