@@ -71,7 +71,10 @@ using Microsoft.ContainerService;
   "csharp"
 );
 @@clientName(Snapshot, "AgentPoolSnapshot", "csharp");
-// @@clientName(SnapshotListResult, "AgentPoolSnapshotListResult", "csharp");
+@@clientName(SnapshotProperties.osType, "OSType", "csharp");
+@@clientName(SnapshotProperties.osSku, "OSSku", "csharp");
+@@clientName(SnapshotProperties.enableFIPS, "EnableFips", "csharp");
+@@clientName(AgentPoolUpgradeProfileProperties.osType, "OSType", "csharp");
 @@clientName(PrivateLinkResource,
   "ContainerServicePrivateLinkResourceData",
   "csharp"
@@ -314,6 +317,20 @@ using Microsoft.ContainerService;
 @@clientName(LocalDNSMode, "LocalDnsMode", "csharp");
 @@clientName(LocalDNSState, "LocalDnsState", "csharp");
 @@clientName(LocalDNSOverride, "LocalDnsOverride", "csharp");
+@@clientName(LocalDNSForwardDestination,
+  "LocalDnsForwardDestination",
+  "csharp"
+);
+@@clientName(LocalDNSForwardPolicy, "LocalDnsForwardPolicy", "csharp");
+@@clientName(LocalDNSProtocol, "LocalDnsProtocol", "csharp");
+@@clientName(LocalDNSQueryLogging, "LocalDnsQueryLogging", "csharp");
+@@clientName(LocalDNSServeStale, "LocalDnsServeStale", "csharp");
+@@clientName(ManagedClusterNATGatewayProfile,
+  "ManagedClusterNatGatewayProfile",
+  "csharp"
+);
+@@clientName(ManagedClusterSKUName, "ManagedClusterSkuName", "csharp");
+@@clientName(ManagedClusterSKUTier, "ManagedClusterSkuTier", "csharp");
 @@clientName(AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem,
   "AgentPoolAvailableVersion",
   "csharp"
@@ -377,14 +394,6 @@ using Microsoft.ContainerService;
   "GetPrivateLinkResourcesList",
   "csharp"
 );
-@@clientName(ManagedClusters.operationStatusResultGet,
-  "GetOperationStatusResult",
-  "csharp"
-);
-@@clientName(AgentPools.getByAgentPool,
-  "GetOperationStatusByAgentPool",
-  "csharp"
-);
 @@alternateType(PrivateLinkResource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -420,3 +429,5 @@ using Microsoft.ContainerService;
   "ContainerServices",
   "csharp"
 );
+@@scope(AgentPools.getByAgentPool, "!csharp");
+@@scope(ManagedClusters.operationStatusResultGet, "!csharp");
