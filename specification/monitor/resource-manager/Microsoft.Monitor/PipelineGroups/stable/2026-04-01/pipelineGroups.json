@@ -542,12 +542,14 @@
         "maxStorageUsage": {
           "type": "integer",
           "format": "int32",
-          "description": "Max storage usage in megabytes."
+          "description": "Max storage usage in megabytes.",
+          "minimum": 1
         },
         "retentionPeriod": {
           "type": "integer",
           "format": "int32",
-          "description": "Retention period in minutes."
+          "description": "Retention period in minutes.",
+          "minimum": 1
         }
       }
     },
@@ -681,7 +683,8 @@
         "maxInstancesPerHost": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of instances allowed per compute unit (node/VM). If not specified, default scheduling applies."
+          "description": "Maximum number of instances allowed per compute unit (node/VM). If not specified, default scheduling applies.",
+          "minimum": 1
         }
       }
     },
@@ -873,7 +876,8 @@
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "Defines the amount of replicas of the pipeline group instance."
+          "description": "Defines the amount of replicas of the pipeline group instance.",
+          "minimum": 1
         },
         "receivers": {
           "type": "array",
@@ -935,7 +939,8 @@
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "Defines the amount of replicas of the pipeline group instance."
+          "description": "Defines the amount of replicas of the pipeline group instance.",
+          "minimum": 1
         },
         "receivers": {
           "type": "array",
