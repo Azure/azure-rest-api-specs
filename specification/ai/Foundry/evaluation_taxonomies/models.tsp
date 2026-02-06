@@ -40,6 +40,9 @@ union EvaluationTaxonomyInputType {
 
   @doc("Policy.")
   policy: "policy",
+
+  @doc("Behavior definition.")
+  behavior: "behavior",
 }
 
 @added(Versions.v2025_11_15_preview)
@@ -63,6 +66,25 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
 
   @doc("List of risk categories to evaluate against.")
   riskCategories: RiskCategory[];
+}
+
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+@doc("Input configuration for the evaluation taxonomy when the input type is behavior.")
+model BehaviorTaxonomyInput extends EvaluationTaxonomyInput {
+  @doc("Input type of the evaluation taxonomy.")
+  type: EvaluationTaxonomyInputType.behavior;
+
+  @doc("Name of the behavior to evaluate (e.g., 'Gaslighting').")
+  behaviorName: string;
+
+  @doc("Detailed definition of the behavior in natural language (10-2000 characters).")
+  @minLength(10)
+  @maxLength(2000)
+  behaviorDefinition: string;
+
+  @doc("Description of the target application to condition seed prompt generation (e.g., 'GitHub Copilot for enterprise software engineers').")
+  applicationScenario?: string;
 }
 
 @added(Versions.v2025_11_15_preview)

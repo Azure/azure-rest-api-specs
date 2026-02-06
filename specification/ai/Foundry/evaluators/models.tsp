@@ -60,6 +60,9 @@ union EvaluatorDefinitionType {
 
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
+
+  @doc("Behavior-based evaluator with auto-generated taxonomy")
+  behavior: "behavior",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
@@ -99,6 +102,29 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 
   @doc("The prompt text used for evaluation")
   prompt_text: string;
+}
+
+@doc("Behavior-based evaluator definition that auto-creates a linked taxonomy from a natural language behavior description.")
+@added(Versions.v2025_11_15_preview)
+@removed(Versions.v1)
+model BehaviorBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.behavior;
+
+  @doc("Name of the behavior to evaluate (e.g., 'Gaslighting').")
+  behaviorName: string;
+
+  @doc("Detailed definition of the behavior in natural language (10-2000 characters).")
+  @minLength(10)
+  @maxLength(2000)
+  behaviorDefinition: string;
+
+  @doc("Identifier of the auto-created taxonomy linked to this evaluator. Set by the service.")
+  @visibility(Lifecycle.Read)
+  taxonomyId?: string;
+
+  @doc("Version of the linked taxonomy. The evaluator uses the latest taxonomy version by default.")
+  @visibility(Lifecycle.Read)
+  taxonomyVersion?: string;
 }
 
 @doc("Evaluator Definition")
