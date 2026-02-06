@@ -1,6 +1,6 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { existsSync, PathLike } from "node:fs";
+import { vol } from "memfs";
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { validateBreakingChange } from "../src/commands.js";
@@ -15,30 +15,10 @@ vi.mock("@azure-tools/specs-shared/changed-files", async () => {
 });
 
 vi.mock("node:fs", async () => {
-  const actual = await vi.importActual("node:fs");
-  const mockAppendFileSync = vi.fn();
-  const mockExistsSync = vi.fn();
-  const mockMkdirSync = vi.fn();
-  const mockReadFileSync = vi.fn().mockReturnValue("{}");
-  const mockWriteFileSync = vi.fn();
-
+  const { fs } = await vi.importActual<typeof import("memfs")>("memfs");
   return {
-    ...actual,
-    // Mock the default export (for `import fs from "node:fs"`)
-    default: {
-      ...(actual.default as any),
-      appendFileSync: mockAppendFileSync,
-      existsSync: mockExistsSync,
-      mkdirSync: mockMkdirSync,
-      readFileSync: mockReadFileSync,
-      writeFileSync: mockWriteFileSync,
-    },
-    // Also mock named exports (for `import { appendFileSync } from "node:fs"`)
-    appendFileSync: mockAppendFileSync,
-    existsSync: mockExistsSync,
-    mkdirSync: mockMkdirSync,
-    readFileSync: mockReadFileSync,
-    writeFileSync: mockWriteFileSync,
+    ...fs,
+    default: fs,
   };
 });
 
@@ -74,11 +54,12 @@ function mockChangedFilesStatuses(
 }
 
 function mockExistsSync(pathsToExist: string[] = []) {
-  const mockExistsSyncFn = vi.mocked(existsSync);
-  mockExistsSyncFn.mockImplementation((path: PathLike) => {
-    return pathsToExist.includes(path.toString());
-  });
-  return mockExistsSyncFn;
+  vol.reset();
+  if (pathsToExist.length === 0) {
+    return;
+  }
+  const fileMap = Object.fromEntries(pathsToExist.map((filePath) => [filePath, "{}"]));
+  vol.fromJSON(fileMap, "/");
 }
 
 const context = {
@@ -107,7 +88,7 @@ const context = {
   prSourceBranch: "",
   prTargetBranch: "",
   oadMessageProcessorContext: {
-    logFilePath: "",
+    logFilePath: "/openapi-diff-runner.log",
     prUrl: "",
     messageCache: [],
   },
@@ -117,6 +98,7 @@ const context = {
 describe("validateBreakingChange", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    vol.reset();
   });
 
   it.each([
@@ -167,7 +149,12 @@ describe("validateBreakingChange", () => {
   ])("same-version: $name", async ({ changedFiles, existingFiles, expectedOadCalls }) => {
     mockChangedFilesStatuses(changedFiles);
 
-    mockExistsSync(existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f)));
+    const tempRepoPaths = existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f));
+    const workingTreePaths = [
+      ...(changedFiles.additions ?? []),
+      ...(changedFiles.modifications ?? []),
+    ].map((f) => path.resolve(f));
+    mockExistsSync([...tempRepoPaths, ...workingTreePaths]);
 
     const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
 
@@ -200,6 +187,7 @@ describe("validateBreakingChange", () => {
     {
       name: "handle renames in cross-version context",
       changedFiles: {
+        modifications: [],
         renames: [
           {
             from: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
@@ -214,7 +202,12 @@ describe("validateBreakingChange", () => {
   ])("cross-version: $name", async ({ changedFiles, existingFiles }) => {
     mockChangedFilesStatuses(changedFiles);
 
-    mockExistsSync(existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f)));
+    const tempRepoPaths = existingFiles.map((f) => path.join(context.prInfo.tempRepoFolder, f));
+    const workingTreePaths = [
+      ...(changedFiles.additions ?? []),
+      ...(changedFiles.modifications ?? []),
+    ].map((f) => path.resolve(f));
+    mockExistsSync([...tempRepoPaths, ...workingTreePaths]);
 
     vi.mocked(runOad).mockResolvedValue([]);
 
