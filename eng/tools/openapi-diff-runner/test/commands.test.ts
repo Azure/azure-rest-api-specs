@@ -348,12 +348,12 @@ describe("validateBreakingChange", () => {
       ]) {
         mockRunOad.mockClear();
 
-        const statusCodeSame = await validateBreakingChange({
+        const statusCode = await validateBreakingChange({
           ...context,
           runType: data.runType,
         });
 
-        expect(statusCodeSame).toEqual(0);
+        expect(statusCode).toEqual(0);
 
         for (const expected of expectedCreateDummySwaggers.old) {
           expect(mockCreateDummySwagger).toBeCalledWith(
