@@ -8,3 +8,52 @@ using Azure.ClientGenerator.Core;
   "Enum0",
   "go, javascript"
 );
+
+
+@@clientName(Microsoft.Peering.PeeringPropertiesDirect,
+  "DirectPeeringProperties ",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.PeeringPropertiesExchange,
+  "ExchangePeeringProperties ",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.DirectConnection,
+  "PeeringDirectConnection ",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.ExchangeConnection,
+  "PeeringExchangeConnection ",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.PeeringLocationPropertiesDirect,
+  "DirectPeeringLocationProperties",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.LogAnalyticsWorkspaceProperties,
+  "PeeringLogAnalyticsWorkspaceProperties",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.ProvisioningState,
+  "PeeringProvisioningState",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.PeeringLocationProperties.peeringLocation,
+  "MyLocation",
+  "csharp"
+);
+
+//PeeringLocationProperties
+
+//PeeringLogAnalyticsWorkspaceProperties'
+
+//PeeringPropertiesExchange
+
+//ProvisioningState
