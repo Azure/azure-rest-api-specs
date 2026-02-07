@@ -51,6 +51,8 @@ op StorageOperationNoBody<
   ...DateResponseHeader;
 }) | TError;
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+@client
 interface Service {
   /** Sets properties for a storage account's Queue service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -142,6 +144,8 @@ interface Service {
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
+@client
 interface Queue {
   /** Creates a new queue under the specified account. If the queue with the same name already exists, the operation fails. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
