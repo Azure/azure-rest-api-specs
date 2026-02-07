@@ -73,7 +73,8 @@ union ManagedClusterSKUTier {
  */
 union ExtendedLocationTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Azure Edge Zone extended location type. */
   EdgeZone: "EdgeZone",
 }
 
@@ -426,15 +427,20 @@ union SeccompDefault {
  */
 union GPUInstanceProfile {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** MIG 1g GPU instance profile. */
   MIG1g: "MIG1g",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** MIG 2g GPU instance profile. */
   MIG2g: "MIG2g",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** MIG 3g GPU instance profile. */
   MIG3g: "MIG3g",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** MIG 4g GPU instance profile. */
   MIG4g: "MIG4g",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** MIG 7g GPU instance profile. */
   MIG7g: "MIG7g",
 }
 
@@ -669,17 +675,23 @@ union LicenseType {
  */
 union ManagedClusterPodIdentityProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Pod identity is assigned. */
   Assigned: "Assigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Pod identity assignment was canceled. */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Pod identity is being deleted. */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Pod identity assignment failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Pod identity assignment succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Pod identity is being updated. */
   Updating: "Updating",
 }
 
@@ -890,13 +902,11 @@ union IPFamily {
   /**
    * IPv4 family
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   IPv4: "IPv4",
 
   /**
    * IPv6 family
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   IPv6: "IPv6",
 }
 
@@ -1104,9 +1114,11 @@ union Expander {
  */
 union KeyVaultNetworkAccessTypes {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Key vault allows public access from all networks. */
   Public: "Public",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Key vault disables public access and enables private link. */
   Private: "Private",
 }
 
@@ -1339,17 +1351,21 @@ union SchedulerConfigMode {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Created by a user. */
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Created by an application. */
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Created by a managed identity. */
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Created by a key. */
   Key: "Key",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** The format of the kubeconfig credential. */
 union Format {
   string,
 
@@ -1369,19 +1385,26 @@ union Format {
  */
 union WeekDay {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Represents Sunday. */
   Sunday: "Sunday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Represents Monday. */
   Monday: "Monday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Represents Tuesday. */
   Tuesday: "Tuesday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Represents Wednesday. */
   Wednesday: "Wednesday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Represents Thursday. */
   Thursday: "Thursday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Represents Friday. */
   Friday: "Friday",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Represents Saturday. */
   Saturday: "Saturday",
 }
 
@@ -1422,17 +1445,23 @@ union Type {
  */
 union NamespaceProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** The namespace is being updated. */
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** The namespace is being deleted. */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** The namespace is being created. */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** The namespace provisioning succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** The namespace provisioning failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** The namespace provisioning was canceled. */
   Canceled: "Canceled",
 }
 
@@ -1537,15 +1566,20 @@ union VmState {
  */
 union PrivateEndpointConnectionProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Private endpoint connection provisioning was canceled. */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Private endpoint connection is being created. */
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Private endpoint connection is being deleted. */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Private endpoint connection provisioning failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Private endpoint connection provisioning succeeded. */
   Succeeded: "Succeeded",
 }
 
@@ -1554,13 +1588,17 @@ union PrivateEndpointConnectionProvisioningState {
  */
 union ConnectionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Connection is pending approval. */
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Connection is approved. */
   Approved: "Approved",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Connection is rejected. */
   Rejected: "Rejected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Connection is disconnected. */
   Disconnected: "Disconnected",
 }
 
@@ -1587,15 +1625,20 @@ union SnapshotType {
  */
 union TrustedAccessRoleBindingProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Trusted access role binding provisioning was canceled. */
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Trusted access role binding is being deleted. */
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Trusted access role binding provisioning failed. */
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Trusted access role binding provisioning succeeded. */
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Trusted access role binding is being updated. */
   Updating: "Updating",
 }
 
@@ -1895,7 +1938,7 @@ model KubernetesVersion {
  * Capabilities on this Kubernetes version.
  */
 model KubernetesVersionCapabilities {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Kubernetes support plans available for this version. */
   supportPlan?: KubernetesSupportPlan[];
 }
 
@@ -2006,7 +2049,7 @@ model ManagedClusterIdentity {
   userAssignedIdentities?: Record<ManagedServiceIdentityUserAssignedIdentitiesValue>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** User assigned identity properties. */
 model ManagedServiceIdentityUserAssignedIdentitiesValue {
   /**
    * The principal id of user assigned identity.
@@ -3153,7 +3196,7 @@ model AgentPoolGatewayProfile {
   publicIPPrefixSize?: int32 = 31;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Artifact streaming profile for the agent pool. */
 @added(Versions.v2025_10_02_preview)
 model AgentPoolArtifactStreamingProfile {
   /**
@@ -3556,12 +3599,12 @@ model ManagedClusterPodIdentity {
   @visibility(Lifecycle.Read)
   provisioningState?: ManagedClusterPodIdentityProvisioningState;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** The provisioning information for the pod identity. */
   @visibility(Lifecycle.Read)
   provisioningInfo?: ManagedClusterPodIdentityProvisioningInfo;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Pod identity provisioning information. */
 model ManagedClusterPodIdentityProvisioningInfo {
   /**
    * Pod identity assignment error (if any).
@@ -4495,7 +4538,7 @@ model ManagedClusterSecurityProfileDefenderSecurityGating {
   allowSecretAccess?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Identity information used by Defender security gating to access container registries. */
 @added(Versions.v2025_10_02_preview)
 model ManagedClusterSecurityProfileDefenderSecurityGatingIdentitiesItem {
   /**
@@ -4696,7 +4739,7 @@ model ManagedClusterIngressProfile {
   applicationLoadBalancer?: ManagedClusterIngressProfileApplicationLoadBalancer;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Configuration for the ingress managed gateway. See https://aka.ms/k8s-gateway-api for more details. */
 @added(Versions.v2025_10_02_preview)
 model ManagedClusterIngressProfileGatewayConfiguration {
   /**
@@ -4745,7 +4788,7 @@ model ManagedClusterIngressProfileWebAppRouting {
   defaultDomain?: ManagedClusterIngressDefaultDomainProfile;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Nginx ingress controller configuration for the managed cluster ingress profile. */
 model ManagedClusterIngressProfileNginx {
   /**
    * Ingress type for the default NginxIngressController custom resource
@@ -4753,7 +4796,7 @@ model ManagedClusterIngressProfileNginx {
   defaultIngressControllerType?: NginxIngressControllerType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Default domain profile for the managed cluster ingress profile. */
 @added(Versions.v2025_10_02_preview)
 model ManagedClusterIngressDefaultDomainProfile {
   /**
@@ -5142,7 +5185,7 @@ model ManagedClusterCostAnalysis {
   enabled?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Node provisioning profile for the managed cluster. */
 model ManagedClusterNodeProvisioningProfile {
   /**
    * The node provisioning mode. If not specified, the default is Manual.
@@ -5290,7 +5333,7 @@ model ManagedClusterPoolUpgradeProfile {
   componentsByReleases?: ComponentsByRelease[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Available upgrades for an AgentPool. */
 model ManagedClusterPoolUpgradeProfileUpgradesItem {
   /**
    * The Kubernetes version (major.minor.patch).
@@ -5326,7 +5369,7 @@ model ComponentsByRelease {
   components?: Component[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Component information for a Kubernetes version. */
 @added(Versions.v2025_10_02_preview)
 model Component {
   /**
@@ -5774,7 +5817,7 @@ model AgentPoolUpgradeProfileProperties {
   latestNodeImageVersion?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Available upgrades for an AgentPool. */
 model AgentPoolUpgradeProfilePropertiesUpgradesItem {
   /**
    * The Kubernetes version (major.minor.patch).
@@ -6049,7 +6092,7 @@ model AgentPoolAvailableVersionsProperties {
   agentPoolVersions?: AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Available version information for an agent pool. */
 model AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem {
   /**
    * Whether this version is the default agent pool version.
@@ -6422,7 +6465,7 @@ model NetworkProfileForSnapshot {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_02_preview)
 model GuardrailsAvailableVersionsProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Whether this is the default version. */
   @visibility(Lifecycle.Read)
   isDefaultVersion?: boolean;
 
@@ -6446,7 +6489,7 @@ model GuardrailsAvailableVersionsList
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_10_02_preview)
 model SafeguardsAvailableVersionsProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Whether this is the default version. */
   @visibility(Lifecycle.Read)
   isDefaultVersion?: boolean;
 
@@ -6474,7 +6517,7 @@ model MeshRevisionProfileList is Azure.Core.Page<MeshRevisionProfile>;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MeshRevisionProfileProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Available mesh revisions. */
   @identifiers(#[])
   meshRevisions?: MeshRevision[];
 }
@@ -6797,7 +6840,7 @@ model MachineIpAddress {
   ip?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Properties for a load balancer resource. */
 @added(Versions.v2025_10_02_preview)
 model LoadBalancerProperties {
   /**
