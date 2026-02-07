@@ -380,8 +380,8 @@ interface Queue {
     },
     {
       @statusCode statusCode: 204;
-      ...PopReceiptResponseHeader;
-      ...TimeNextVisibleResponseHeader;
+      ...PopReceiptResponseHeaderPrivate;
+      ...TimeNextVisibleResponseHeaderPrivate;
     }
   >;
 

@@ -657,6 +657,24 @@ alias TimeNextVisibleResponseHeader = {
   timeNextVisible: utcDateTime;
 };
 
+/** The private pop receipt response header */
+alias PopReceiptResponseHeaderPrivate = {
+  /** The pop receipt of the queue message. */
+  @access(Access.internal)
+  @header("x-ms-popreceipt")
+  popReceipt: string;
+};
+
+/** The private time next visible response header */
+alias TimeNextVisibleResponseHeaderPrivate = {
+  /** A UTC date/time value that represents when the message will be visible on the queue. */
+  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+  @access(Access.internal)
+  @encode("rfc7231")
+  @header("x-ms-time-next-visible")
+  timeNextVisible: utcDateTime;
+};
+
 /** The metadata headers. */
 alias MetadataHeaders = {
   /** The metadata headers. */
