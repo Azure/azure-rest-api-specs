@@ -52,7 +52,7 @@
   },
   "tags": [],
   "paths": {
-    "/{queueName}": {
+    "/": {
       "put": {
         "operationId": "Queue_Create",
         "description": "Creates a new queue under the specified account. If the queue with the same name already exists, the operation fails.",
@@ -73,13 +73,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "timeout",
@@ -169,13 +162,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>",
@@ -234,7 +220,7 @@
         }
       }
     },
-    "/{queueName}/messages": {
+    "/messages": {
       "get": {
         "operationId": "Queue_ReceiveMessages",
         "description": "The Dequeue operation retrieves one or more messages from the front of the\nqueue.",
@@ -255,13 +241,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "numofmessages",
@@ -363,13 +342,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "visibilityTimeout",
@@ -482,13 +454,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>",
@@ -547,7 +512,7 @@
         }
       }
     },
-    "/{queueName}/messages/{messageId}": {
+    "/messages/{messageId}": {
       "put": {
         "operationId": "Queue_Update",
         "description": "The Update operation was introduced with version 2011-08-18 of the Queue\nservice API. The Update Message operation updates the visibility timeout of a\nmessage. You can also use this operation to update the contents of a message. A\nmessage must be in a format that can be included in an XML request with UTF-8\nencoding, and the encoded message can be up to 64KB in size.",
@@ -568,13 +533,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "messageId",
@@ -697,13 +655,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "messageId",
             "in": "path",
             "description": "The id of the queue message.",
@@ -778,200 +729,7 @@
     }
   },
   "x-ms-paths": {
-    "/{queueName}?comp=metadata": {
-      "get": {
-        "operationId": "Queue_GetMetadata",
-        "description": "returns all user-defined metadata and system properties for the specified queue.",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-approximate-messages-count": {
-                "type": "integer",
-                "format": "int64",
-                "description": "The approximate number of messages in the queue. This number is not lower than the actual number of messages in the queue, but could be higher."
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-meta": {
-                "type": "string",
-                "description": "The metadata headers."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{queueName}?comp=metadata&_overload=setMetadata": {
-      "put": {
-        "operationId": "Queue_SetMetadata",
-        "description": "operation sets one or more user-defined name-value pairs for the specified queue.",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "name": "x-ms-meta",
-            "in": "header",
-            "description": "The metadata headers.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "metadata"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/{queueName}?comp=acl": {
+    "/?comp=acl": {
       "get": {
         "operationId": "Queue_GetAccessPolicy",
         "description": "gets the permissions for the specified queue. The permissions indicate whether queue data may be accessed publicly.",
@@ -992,13 +750,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "timeout",
@@ -1062,7 +813,7 @@
         }
       }
     },
-    "/{queueName}?comp=acl&_overload=setAccessPolicy": {
+    "/?comp=acl&_overload=setAccessPolicy": {
       "put": {
         "operationId": "Queue_SetAccessPolicy",
         "description": "sets the permissions for the specified queue.",
@@ -1083,13 +834,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "timeout",
@@ -1159,110 +903,9 @@
         }
       }
     },
-    "/{queueName}/messages?peekonly=true": {
-      "get": {
-        "operationId": "Queue_PeekMessages",
-        "description": "The Peek operation retrieves one or more messages from the front of the queue,\nbut does not alter the visibility of the message.",
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "Specifies the version of the operation to use for this request.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "version"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "queueName",
-            "in": "path",
-            "description": "The name of the queue.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "numofmessages",
-            "in": "query",
-            "description": "Optional. A nonzero integer value that specifies the number of messages to\nretrieve from the queue, up to a maximum of 32. If fewer are visible, the\nvisible messages are returned. By default, a single message is retrieved from\nthe queue with this operation.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "x-ms-client-name": "numberOfMessages"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ListOfPeekedMessage"
-            },
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "Specifies the version of the operation to use for this request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/StorageError"
-            },
-            "headers": {
-              "x-ms-copy-source-error-code": {
-                "type": "string",
-                "description": "The error code for the copy source."
-              },
-              "x-ms-copy-source-status-code": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The status code for the copy source."
-              },
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
     "/?comp=list": {
       "get": {
-        "operationId": "GetQueues",
+        "operationId": "Service_GetQueues",
         "description": "returns a list of the queues under the specified account",
         "parameters": [
           {
@@ -1392,9 +1035,188 @@
         }
       }
     },
+    "/?comp=metadata": {
+      "get": {
+        "operationId": "Queue_GetMetadata",
+        "description": "returns all user-defined metadata and system properties for the specified queue.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-approximate-messages-count": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The approximate number of messages in the queue. This number is not lower than the actual number of messages in the queue, but could be higher."
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-meta": {
+                "type": "string",
+                "description": "The metadata headers."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/?comp=metadata&_overload=setMetadata": {
+      "put": {
+        "operationId": "Queue_SetMetadata",
+        "description": "operation sets one or more user-defined name-value pairs for the specified queue.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "x-ms-meta",
+            "in": "header",
+            "description": "The metadata headers.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "metadata"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
     "/?restype=service&comp=properties": {
       "put": {
-        "operationId": "SetProperties",
+        "operationId": "Service_SetProperties",
         "description": "Sets properties for a storage account's Queue service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules",
         "parameters": [
           {
@@ -1484,7 +1306,7 @@
     },
     "/?restype=service&comp=properties&_overload=getProperties": {
       "get": {
-        "operationId": "GetProperties",
+        "operationId": "Service_GetProperties",
         "description": "Retrieves properties of a storage account's Queue service, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules.",
         "parameters": [
           {
@@ -1568,7 +1390,7 @@
     },
     "/?restype=service&comp=stats": {
       "get": {
-        "operationId": "GetStatistics",
+        "operationId": "Service_GetStatistics",
         "description": "Retrieves statistics related to replication for the Queue service. It is only available on the secondary location endpoint when read-access geo-redundant replication is enabled for the storage account.",
         "parameters": [
           {
@@ -1652,7 +1474,7 @@
     },
     "/?restype=service&comp=userdelegationkey": {
       "post": {
-        "operationId": "GetUserDelegationKey",
+        "operationId": "Service_GetUserDelegationKey",
         "description": "Retrieves a user delegation key for the Queue service. This is only a valid operation when using bearer token authentication.",
         "parameters": [
           {
@@ -1696,6 +1518,100 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/UserDelegationKey"
+            },
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "Specifies the version of the operation to use for this request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            },
+            "headers": {
+              "x-ms-copy-source-error-code": {
+                "type": "string",
+                "description": "The error code for the copy source."
+              },
+              "x-ms-copy-source-status-code": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The status code for the copy source."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/messages?peekonly=true": {
+      "get": {
+        "operationId": "Queue_PeekMessages",
+        "description": "The Peek operation retrieves one or more messages from the front of the queue,\nbut does not alter the visibility of the message.",
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "Specifies the version of the operation to use for this request.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "numofmessages",
+            "in": "query",
+            "description": "Optional. A nonzero integer value that specifies the number of messages to\nretrieve from the queue, up to a maximum of 32. If fewer are visible, the\nvisible messages are returned. By default, a single message is retrieved from\nthe queue with this operation.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "x-ms-client-name": "numberOfMessages"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://learn.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations\">Setting Timeouts for Queue Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ListOfPeekedMessage"
             },
             "headers": {
               "Date": {
