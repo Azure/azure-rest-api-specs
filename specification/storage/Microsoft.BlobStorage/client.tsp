@@ -7,6 +7,54 @@ using Storage.Blob;
 
 namespace Customizations;
 
+@client(
+  {
+    service: Storage.Blob,
+  },
+  "rust"
+)
+interface BlobServiceClient extends Storage.Blob.Service {}
+
+@client(
+  {
+    service: Storage.Blob,
+  },
+  "rust"
+)
+interface BlobContainerClient extends Storage.Blob.Container {}
+
+@client(
+  {
+    service: Storage.Blob,
+  },
+  "rust"
+)
+interface BlobClient extends Storage.Blob.Blob {}
+
+@client(
+  {
+    service: Storage.Blob,
+  },
+  "rust"
+)
+interface AppendBlobClient extends Storage.Blob.AppendBlob {}
+
+@client(
+  {
+    service: Storage.Blob,
+  },
+  "rust"
+)
+interface BlockBlobClient extends Storage.Blob.BlockBlob {}
+
+@client(
+  {
+    service: Storage.Blob,
+  },
+  "rust"
+)
+interface PageBlobClient extends Storage.Blob.PageBlob {}
+
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs");
@@ -14,12 +62,12 @@ namespace Customizations;
 @@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs");
 
-@@clientName(Storage.Blob.Service, "BlobServiceClient", "rust");
-@@clientName(Storage.Blob.Container, "BlobContainerClient", "rust");
-@@clientName(Storage.Blob.Blob, "BlobClient", "rust");
-@@clientName(Storage.Blob.AppendBlob, "AppendBlobClient", "rust");
-@@clientName(Storage.Blob.BlockBlob, "BlockBlobClient", "rust");
-@@clientName(Storage.Blob.PageBlob, "PageBlobClient", "rust");
+// @@clientName(Storage.Blob.Service, "BlobServiceClient", "rust");
+// @@clientName(Storage.Blob.Container, "BlobContainerClient", "rust");
+// @@clientName(Storage.Blob.Blob, "BlobClient", "rust");
+// @@clientName(Storage.Blob.AppendBlob, "AppendBlobClient", "rust");
+// @@clientName(Storage.Blob.BlockBlob, "BlockBlobClient", "rust");
+// @@clientName(Storage.Blob.PageBlob, "PageBlobClient", "rust");
 
 @@clientName(Storage.Blob.BlockBlob.upload, "upload_internal", "rust");
 @@clientName(Storage.Blob.Blob.download, "download_internal", "rust");
