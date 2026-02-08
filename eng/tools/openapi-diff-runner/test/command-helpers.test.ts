@@ -426,7 +426,7 @@ describe("command-helpers", () => {
             to: TEST_CONSTANTS.SWAGGER_PATHS.NEW_MGMT,
           },
         ],
-        total: 5, // 3 additions + 1 modification + 2 deletions (including rename files)
+        total: 5, // 2 additions + 1 modification + 1 deletion + 1 rename
       });
     });
 
@@ -488,7 +488,7 @@ describe("command-helpers", () => {
             to: "specification/newapi/data-plane/stable/2023-01-01/newapi.json",
           },
         ],
-        total: 5, // 1 additions + 1 modification + 1 deletions + 2 renames
+        total: 5, // 1 addition + 1 modification + 1 deletion + 2 renames
       });
     });
   });
