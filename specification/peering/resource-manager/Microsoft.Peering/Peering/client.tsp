@@ -40,7 +40,7 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(Microsoft.Peering.PeeringLocationProperties.peeringLocation,
-  "MyLocation",
+  "PeeringLocationValue",
   "csharp"
 );
 
@@ -194,6 +194,11 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
+@@alternateType(Microsoft.Peering.ExchangeConnection.connectionIdentifier,
+  Azure.Core.uuid,
+  "csharp"
+);
+
 @@alternateType(Microsoft.Peering.PeeringLocationProperties.azureRegion,
   Azure.Core.azureLocation,
   "csharp"
@@ -220,6 +225,13 @@ using Azure.ClientGenerator.Core;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+@@alternateType(Microsoft.Peering.LookingGlassOutput.command,
+  Microsoft.Peering.LookingGlassCommand,
+  "csharp"
+);
+
+//LookingGlassOutput
 
 // @@format(Microsoft.Peering.ExchangeConnection.connectionIdentifier,
 //   uuid,
@@ -268,3 +280,39 @@ using Azure.ClientGenerator.Core;
   Usage.input | Usage.output,
   "csharp"
 );
+@@usage(Microsoft.Peering.PeeringProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(Microsoft.Peering.PeeringPropertiesExchange,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(Microsoft.Peering.PeeringBandwidthOffer,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(Microsoft.Peering.ExchangePeeringFacility,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(Microsoft.Peering.DirectPeeringFacility,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(Microsoft.Peering.ExchangeConnection,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(Microsoft.Peering.PeeringLocation,
+  Usage.input | Usage.output,
+  "csharp"
+);
+
+//PeeringLocation
+//PeeringExchangeConnection
+//PeeringExchangeConnection
+//DirectPeeringFacility
+//ExchangePeeringFacility
+//BandwidthOffer
+//PeeringProperties
