@@ -12,12 +12,9 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
     use-read-only-status-schema: true # https://azure.github.io/typespec-azure/docs/troubleshoot/status-read-only-error/
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Resources.DeploymentStacks"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-deploymentstacks"
     namespace: "azure.mgmt.resource.deploymentstacks"

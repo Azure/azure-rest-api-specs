@@ -4422,6 +4422,7 @@
     },
     "AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem": {
       "type": "object",
+      "description": "Available version information for an agent pool.",
       "properties": {
         "default": {
           "type": "boolean",
@@ -4711,6 +4712,7 @@
     },
     "AgentPoolUpgradeProfilePropertiesUpgradesItem": {
       "type": "object",
+      "description": "Available upgrades for an AgentPool.",
       "properties": {
         "kubernetesVersion": {
           "type": "string",
@@ -4790,11 +4792,13 @@
             "values": [
               {
                 "name": "Public",
-                "value": "Public"
+                "value": "Public",
+                "description": "Key vault allows public access from all networks."
               },
               {
                 "name": "Private",
-                "value": "Private"
+                "value": "Private",
+                "description": "Key vault disables public access and enables private link."
               }
             ]
           }
@@ -4922,19 +4926,23 @@
         "values": [
           {
             "name": "Pending",
-            "value": "Pending"
+            "value": "Pending",
+            "description": "Connection is pending approval."
           },
           {
             "name": "Approved",
-            "value": "Approved"
+            "value": "Approved",
+            "description": "Connection is approved."
           },
           {
             "name": "Rejected",
-            "value": "Rejected"
+            "value": "Rejected",
+            "description": "Connection is rejected."
           },
           {
             "name": "Disconnected",
-            "value": "Disconnected"
+            "value": "Disconnected",
+            "description": "Connection is disconnected."
           }
         ]
       }
@@ -5322,7 +5330,8 @@
         "values": [
           {
             "name": "EdgeZone",
-            "value": "EdgeZone"
+            "value": "EdgeZone",
+            "description": "Azure Edge Zone extended location type."
           }
         ]
       }
@@ -5367,23 +5376,28 @@
         "values": [
           {
             "name": "MIG1g",
-            "value": "MIG1g"
+            "value": "MIG1g",
+            "description": "MIG 1g GPU instance profile."
           },
           {
             "name": "MIG2g",
-            "value": "MIG2g"
+            "value": "MIG2g",
+            "description": "MIG 2g GPU instance profile."
           },
           {
             "name": "MIG3g",
-            "value": "MIG3g"
+            "value": "MIG3g",
+            "description": "MIG 3g GPU instance profile."
           },
           {
             "name": "MIG4g",
-            "value": "MIG4g"
+            "value": "MIG4g",
+            "description": "MIG 4g GPU instance profile."
           },
           {
             "name": "MIG7g",
-            "value": "MIG7g"
+            "value": "MIG7g",
+            "description": "MIG 7g GPU instance profile."
           }
         ]
       }
@@ -5756,6 +5770,7 @@
       "properties": {
         "supportPlan": {
           "type": "array",
+          "description": "Kubernetes support plans available for this version.",
           "items": {
             "$ref": "#/definitions/KubernetesSupportPlan"
           }
@@ -7038,6 +7053,7 @@
     },
     "ManagedClusterIngressProfileNginx": {
       "type": "object",
+      "description": "Nginx ingress controller configuration for the managed cluster ingress profile.",
       "properties": {
         "defaultIngressControllerType": {
           "$ref": "#/definitions/NginxIngressControllerType",
@@ -7276,6 +7292,7 @@
     },
     "ManagedClusterNodeProvisioningProfile": {
       "type": "object",
+      "description": "Node provisioning profile for the managed cluster.",
       "properties": {
         "mode": {
           "$ref": "#/definitions/NodeProvisioningMode",
@@ -7360,6 +7377,7 @@
         },
         "provisioningInfo": {
           "$ref": "#/definitions/ManagedClusterPodIdentityProvisioningInfo",
+          "description": "The provisioning information for the pod identity.",
           "readOnly": true
         }
       },
@@ -7463,6 +7481,7 @@
     },
     "ManagedClusterPodIdentityProvisioningInfo": {
       "type": "object",
+      "description": "Pod identity provisioning information.",
       "properties": {
         "error": {
           "$ref": "#/definitions/ManagedClusterPodIdentityProvisioningError",
@@ -7487,27 +7506,33 @@
         "values": [
           {
             "name": "Assigned",
-            "value": "Assigned"
+            "value": "Assigned",
+            "description": "Pod identity is assigned."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Pod identity assignment was canceled."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Pod identity is being deleted."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Pod identity assignment failed."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Pod identity assignment succeeded."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Pod identity is being updated."
           }
         ]
       }
@@ -7565,6 +7590,7 @@
     },
     "ManagedClusterPoolUpgradeProfileUpgradesItem": {
       "type": "object",
+      "description": "Available upgrades for an AgentPool.",
       "properties": {
         "kubernetesVersion": {
           "type": "string",
@@ -8323,6 +8349,7 @@
     },
     "ManagedServiceIdentityUserAssignedIdentitiesValue": {
       "type": "object",
+      "description": "User assigned identity properties.",
       "properties": {
         "principalId": {
           "type": "string",
@@ -8418,6 +8445,7 @@
       "properties": {
         "meshRevisions": {
           "type": "array",
+          "description": "Available mesh revisions.",
           "items": {
             "$ref": "#/definitions/MeshRevision"
           },
@@ -8537,27 +8565,33 @@
         "values": [
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "The namespace is being updated."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "The namespace is being deleted."
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "The namespace is being created."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "The namespace provisioning succeeded."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "The namespace provisioning failed."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "The namespace provisioning was canceled."
           }
         ]
       }
@@ -9184,23 +9218,28 @@
         "values": [
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Private endpoint connection provisioning was canceled."
           },
           {
             "name": "Creating",
-            "value": "Creating"
+            "value": "Creating",
+            "description": "Private endpoint connection is being created."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Private endpoint connection is being deleted."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Private endpoint connection provisioning failed."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Private endpoint connection provisioning succeeded."
           }
         ]
       }
@@ -9990,23 +10029,28 @@
         "values": [
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Trusted access role binding provisioning was canceled."
           },
           {
             "name": "Deleting",
-            "value": "Deleting"
+            "value": "Deleting",
+            "description": "Trusted access role binding is being deleted."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Trusted access role binding provisioning failed."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Trusted access role binding provisioning succeeded."
           },
           {
             "name": "Updating",
-            "value": "Updating"
+            "value": "Updating",
+            "description": "Trusted access role binding is being updated."
           }
         ]
       }
@@ -10270,31 +10314,38 @@
         "values": [
           {
             "name": "Sunday",
-            "value": "Sunday"
+            "value": "Sunday",
+            "description": "Represents Sunday."
           },
           {
             "name": "Monday",
-            "value": "Monday"
+            "value": "Monday",
+            "description": "Represents Monday."
           },
           {
             "name": "Tuesday",
-            "value": "Tuesday"
+            "value": "Tuesday",
+            "description": "Represents Tuesday."
           },
           {
             "name": "Wednesday",
-            "value": "Wednesday"
+            "value": "Wednesday",
+            "description": "Represents Wednesday."
           },
           {
             "name": "Thursday",
-            "value": "Thursday"
+            "value": "Thursday",
+            "description": "Represents Thursday."
           },
           {
             "name": "Friday",
-            "value": "Friday"
+            "value": "Friday",
+            "description": "Represents Friday."
           },
           {
             "name": "Saturday",
-            "value": "Saturday"
+            "value": "Saturday",
+            "description": "Represents Saturday."
           }
         ]
       }
