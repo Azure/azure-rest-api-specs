@@ -7,6 +7,7 @@ using Azure.Core;
 
 namespace Azure.AI.Projects.Beta;
 
+@Azure.ClientGenerator.Core.clientNamespace("beta", "python, javascript")
 @tag("Memory Stores")
 interface MemoryStores {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"

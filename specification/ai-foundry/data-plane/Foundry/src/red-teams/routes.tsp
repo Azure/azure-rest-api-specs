@@ -2,7 +2,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 
-namespace Azure.AI.Projects.Beta;
+namespace Azure.AI.Projects;
 
 alias RedTeamOps = FoundryAzureOperations<WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.red_teams_v1_preview>>;
 
