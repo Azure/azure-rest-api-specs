@@ -120,15 +120,15 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
-@@clientName(Beta.MemoryStores.createMemoryStore, "create", "python");
-@@clientName(Beta.MemoryStores.updateMemoryStore, "update", "python");
-@@clientName(Beta.MemoryStores.getMemoryStore, "get", "python");
-@@clientName(Beta.MemoryStores.listMemoryStores, "list", "python");
-@@clientName(Beta.MemoryStores.deleteMemoryStore, "delete", "python");
+@@clientName(MemoryStores.createMemoryStore, "create", "python");
+@@clientName(MemoryStores.updateMemoryStore, "update", "python");
+@@clientName(MemoryStores.getMemoryStore, "get", "python");
+@@clientName(MemoryStores.listMemoryStores, "list", "python");
+@@clientName(MemoryStores.deleteMemoryStore, "delete", "python");
 
 // The SDK will have custom code to handle LRO memory updates.
-@@access(Beta.MemoryStores.updateMemories, Access.internal, "python");
-@@scope(Beta.MemoryStores.getUpdateResult, "!(python)");
+@@access(MemoryStores.updateMemories, Access.internal, "python");
+@@scope(MemoryStores.getUpdateResult, "!(python)");
 
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
