@@ -347,4 +347,6 @@ interface PrivateEndpointConnections {
 interface PrivateLinkResources {
   /** list private link resources on the given resource */
   list is ArmResourceListByParent<PrivateLinkResource>;
+  /** Get a specific private link resource */
+  get is ArmResourceRead<PrivateLinkResource>;
 }
