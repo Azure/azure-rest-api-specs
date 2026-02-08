@@ -5,7 +5,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
-namespace Azure.AI.Projects.Beta;
+namespace Azure.AI.Projects;
 
 @Azure.ClientGenerator.Core.clientNamespace("beta", "python, javascript")
 @tag("Memory Stores")
