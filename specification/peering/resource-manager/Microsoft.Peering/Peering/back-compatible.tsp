@@ -83,20 +83,22 @@ using Microsoft.Peering;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PeeringService.properties);
 
-@@clientLocation(CdnPeeringPrefixesOperationGroup.list, "CdnPeeringPrefixes");
+@@clientLocation(CdnPeeringPrefixesOperationGroup.list,
+  "listCdnPeeringPrefixes"
+);
 
-@@clientLocation(LegacyPeeringsOperationGroup.list, "LegacyPeerings");
+@@clientLocation(LegacyPeeringsOperationGroup.list, "listLegacyPeerings");
 
 @@clientLocation(LookingGlassOperationGroup.invoke, "LookingGlass");
 
-@@clientLocation(PeeringLocationsOperationGroup.list, "PeeringLocations");
+@@clientLocation(PeeringLocationsOperationGroup.list, "listPeeringLocations");
 
 @@clientLocation(PeeringServiceCountriesOperationGroup.list,
-  "PeeringServiceCountries"
+  "listPeeringServiceCountries"
 );
 
 @@clientLocation(PeeringServiceLocationsOperationGroup.list,
-  "PeeringServiceLocations"
+  "listPeeringServiceLocations"
 );
 
 @@clientLocation(PeeringServiceProvidersOperationGroup.list,

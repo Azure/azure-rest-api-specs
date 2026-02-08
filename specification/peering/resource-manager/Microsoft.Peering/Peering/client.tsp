@@ -9,14 +9,8 @@ using Azure.ClientGenerator.Core;
   "go, javascript"
 );
 
-
 @@clientName(Microsoft.Peering.PeeringPropertiesDirect,
   "DirectPeeringProperties ",
-  "csharp"
-);
-
-@@clientName(Microsoft.Peering.PeeringPropertiesExchange,
-  "ExchangePeeringProperties ",
   "csharp"
 );
 
@@ -50,10 +44,227 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-//PeeringLocationProperties
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
-//PeeringLogAnalyticsWorkspaceProperties'
+@@clientName(Microsoft.Peering.PeeringServiceLocationsOperationGroup.list,
+  "listPeeringServiceLocations",
+  "csharp"
+);
 
-//PeeringPropertiesExchange
+@@clientName(Microsoft.Peering.PeeringServiceCountriesOperationGroup.list,
+  "listPeeringServiceCountries",
+  "csharp"
+);
 
-//ProvisioningState
+@@clientName(Microsoft.Peering.PeeringServiceProvidersOperationGroup.list,
+  "listPeeringServiceProviders",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.SessionAddressProvider,
+  "PeeringSessionAddressProvider",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.SessionStateV4,
+  "PeeringSessionStateV4",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.SessionStateV6,
+  "PeeringSessionStateV6",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.Tier, "PeeringTier", "csharp");
+
+@@clientName(Microsoft.Peering.RpUnbilledPrefix,
+  "RoutingPreferenceUnbilledPrefix",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.Size, "PeeringSize", "csharp");
+
+@@clientName(Microsoft.Peering.Family, "PeeringFamily", "csharp");
+
+@@clientName(Microsoft.Peering.Role, "PeeringRole", "csharp");
+
+@@clientName(Microsoft.Peering.ContactDetail, "PeerAsnContactDetail", "csharp");
+
+@@clientName(Microsoft.Peering.CheckServiceProviderAvailabilityResponse,
+  "PeeringServiceProviderAvailability",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.PrefixValidationState,
+  "PeeringPrefixValidationState",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.LearnedType, "PeeringLearnedType", "csharp");
+
+@@clientName(Microsoft.Peering.ValidationState,
+  "PeeringValidationState",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.CheckServiceProviderAvailabilityInput,
+  "CheckPeeringServiceProviderAvailabilityContent",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.PeeringServicesOperationGroup.initializeConnectionMonitor,
+  "initializePeeringServiceConnectionMonitor",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.LookingGlassOperationGroup.invoke,
+  "invokeLookingGlass",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.checkServiceProviderAvailability,
+  "CheckPeeringServiceProviderAvailability",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.BgpSession, "PeeringBgpSession", "csharp");
+
+@@clientName(Microsoft.Peering.ValidationState,
+  "PeerAsnValidationState",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.PeeringPropertiesExchange,
+  "ExchangePeeringProperties",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.PeeringPropertiesExchange.peerAsn,
+  "peerAsnId",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.ConnectionState,
+  "PeeringConnectionState",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.ResourceTags,
+  "PeeringResourceTagsPatch",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.PeeringPropertiesDirect.peerAsn,
+  "peerAsnId",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.LogAnalyticsWorkspaceProperties.workspaceID,
+  "workspaceId",
+  "csharp"
+);
+
+//LogAnalyticsWorkspaceProperties
+
+//PeeringPropertiesDirect
+
+// @@clientName(Microsoft.Peering.Command, "aaa",
+//   "csharp"
+// );
+//  Command: LookingGlassCommand
+
+//  ResourceTags: PeeringResourceTagsPatch
+
+//  ConnectionState: PeeringConnectionState
+
+//  PeeringPropertiesExchange: ExchangePeeringProperties
+
+//BgpSession
+//LookingGlassOperationGroup.invoke
+//CheckServiceProviderAvailabilityInput
+//PeeringServicesOperationGroup.initializeConnectionMonitor
+//CdnPeeringPrefixesOperationGroup
+
+@@alternateType(Microsoft.Peering.PeeringServiceLocationProperties.azureRegion,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@alternateType(Microsoft.Peering.PeeringLocationProperties.azureRegion,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@alternateType(Microsoft.Peering.CdnPeeringPrefixProperties.azureRegion,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+//CdnPeeringPrefixProperties
+@@alternateType(Microsoft.Peering.RpUnbilledPrefix.azureRegion,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+//RpUnbilledPrefix
+
+@@alternateType(Microsoft.Peering.PeeringPropertiesDirect.peerAsn,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(Microsoft.Peering.PeeringPropertiesExchange.peerAsn,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// @@format(Microsoft.Peering.ExchangeConnection.connectionIdentifier,
+//   uuid,
+//   "csharp"
+// );
+
+@@alternateType(Microsoft.Peering.ExchangePeeringFacility.microsoftIPv4Address,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+
+@@alternateType(Microsoft.Peering.ExchangePeeringFacility.microsoftIPv6Address,
+  Azure.Core.ipV6Address,
+  "csharp"
+);
+
+@@alternateType(Microsoft.Peering.BgpSession.microsoftSessionIPv4Address,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+
+@@alternateType(Microsoft.Peering.BgpSession.microsoftSessionIPv6Address,
+  Azure.Core.ipV6Address,
+  "csharp"
+);
+
+@@alternateType(Microsoft.Peering.BgpSession.peerSessionIPv4Address,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+
+@@alternateType(Microsoft.Peering.BgpSession.peerSessionIPv6Address,
+  Azure.Core.ipV6Address,
+  "csharp"
+);
+
+@@usage(Microsoft.Peering.PeeringServiceLocation,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(Microsoft.Peering.PeeringServiceProvider,
+  Usage.input | Usage.output,
+  "csharp"
+);
+@@usage(Microsoft.Peering.LogAnalyticsWorkspaceProperties,
+  Usage.input | Usage.output,
+  "csharp"
+);
