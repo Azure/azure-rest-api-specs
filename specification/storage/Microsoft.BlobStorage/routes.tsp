@@ -2131,7 +2131,8 @@ interface BlockBlob {
   @sharedRoute
   stageBlock is StorageOperation<
     {
-      ...StageBlockQueryParameters;
+      ...CompBlockParameter;
+      ...BlockIdParameter;
       ...ContentLengthParameter;
       ...ContentMd5Parameter;
       ...ContentCrc64Parameter;
@@ -2165,7 +2166,8 @@ interface BlockBlob {
   @sharedRoute
   stageBlockFromUrl is StorageOperation<
     {
-      ...StageBlockQueryParameters;
+      ...CompBlockParameter;
+      ...BlockIdParameter;
       ...ContentLengthParameter;
       ...SourceUrlParameter;
       ...SourceRangeParameter;

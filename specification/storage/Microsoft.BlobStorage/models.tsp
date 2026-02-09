@@ -2886,12 +2886,6 @@ alias CompPropertiesParameter = {
   comp: "properties";
 };
 
-/** Stage block query parameters with correct ordering (comp before blockid). */
-alias StageBlockQueryParameters = {
-  ...CompBlockParameter;
-  ...BlockIdParameter;
-};
-
 /** The comp=list query parameter for list operations. */
 alias CompListParameter = {
   /** Specifies the list operation type. */
