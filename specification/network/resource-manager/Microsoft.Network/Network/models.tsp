@@ -9130,6 +9130,8 @@ model PrivateEndpointConnectionProperties {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServicePropertiesVisibility extends ResourceSet {}
 
 /**
@@ -9149,6 +9151,8 @@ model ResourceSet {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 model PrivateLinkServicePropertiesAutoApproval extends ResourceSet {}
 
 /**
