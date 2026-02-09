@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
 /**
@@ -50,33 +51,40 @@ interface ServiceGateways {
   /**
    * Gets the specified service gateway.
    */
-  get is ArmResourceRead<ServiceGateway>;
+  get is ArmResourceRead<ServiceGateway, Error = CloudError>;
 
   /**
    * Creates or updates a service gateway.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ServiceGateway>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ServiceGateway,
+    Error = CloudError
+  >;
 
   /**
    * Updates a service gateway tags.
    */
   @patch(#{ implicitOptionality: false })
-  updateTags is ArmCustomPatchSync<ServiceGateway, PatchModel = TagsObject>;
+  updateTags is ArmCustomPatchSync<
+    ServiceGateway,
+    PatchModel = TagsObject,
+    Error = CloudError
+  >;
 
   /**
    * Deletes the specified service gateway.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ServiceGateway>;
+  delete is ArmResourceDeleteWithoutOkAsync<ServiceGateway, Error = CloudError>;
 
   /**
    * Gets all the service gateways in a resource group.
    */
-  list is ArmResourceListByParent<ServiceGateway>;
+  list is ArmResourceListByParent<ServiceGateway, Error = CloudError>;
 
   /**
    * Gets all the service gateways in a subscription.
    */
-  listAll is ArmListBySubscription<ServiceGateway>;
+  listAll is ArmListBySubscription<ServiceGateway, Error = CloudError>;
 
   /**
    * Creates or updates address locations within the service gateway.
@@ -94,7 +102,8 @@ interface ServiceGateways {
   updateAddressLocations is ArmResourceActionAsync<
     ServiceGateway,
     ServiceGatewayUpdateAddressLocationsRequest,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -107,7 +116,8 @@ interface ServiceGateways {
   updateServices is ArmResourceActionAsync<
     ServiceGateway,
     ServiceGatewayUpdateServicesRequest,
-    NoContentResponse
+    NoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -119,7 +129,8 @@ interface ServiceGateways {
   getAddressLocations is ArmResourceActionSync<
     ServiceGateway,
     void,
-    ArmResponse<GetServiceGatewayAddressLocationsResult>
+    ArmResponse<GetServiceGatewayAddressLocationsResult>,
+    Error = CloudError
   >;
 
   /**
@@ -131,7 +142,8 @@ interface ServiceGateways {
   getServices is ArmResourceActionSync<
     ServiceGateway,
     void,
-    ArmResponse<GetServiceGatewayServicesResult>
+    ArmResponse<GetServiceGatewayServicesResult>,
+    Error = CloudError
   >;
 }
 
@@ -149,3 +161,9 @@ interface ServiceGateways {
 @@doc(ServiceGateways.updateServices::parameters.body,
   "Parameters supplied to the create or updates services in service gateway operation."
 );
+@@clientName(ServiceGateways.createOrUpdate::parameters.resource, "parameters");
+@@clientName(ServiceGateways.updateTags::parameters.properties, "parameters");
+@@clientName(ServiceGateways.updateAddressLocations::parameters.body,
+  "parameters"
+);
+@@clientName(ServiceGateways.updateServices::parameters.body, "parameters");

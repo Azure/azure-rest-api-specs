@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Network;
 /**
@@ -40,12 +41,15 @@ interface VirtualNetworkAppliances {
   /**
    * Gets information about the specified virtual network appliance.
    */
-  get is ArmResourceRead<VirtualNetworkAppliance>;
+  get is ArmResourceRead<VirtualNetworkAppliance, Error = CloudError>;
 
   /**
    * Creates or updates a virtual network appliance.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<VirtualNetworkAppliance>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    VirtualNetworkAppliance,
+    Error = CloudError
+  >;
 
   /**
    * Updates a virtual network appliance tags.
@@ -53,23 +57,27 @@ interface VirtualNetworkAppliances {
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     VirtualNetworkAppliance,
-    PatchModel = TagsObject
+    PatchModel = TagsObject,
+    Error = CloudError
   >;
 
   /**
    * Deletes the specified virtual network appliance.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualNetworkAppliance>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualNetworkAppliance,
+    Error = CloudError
+  >;
 
   /**
    * Gets all virtual network appliances in a resource group.
    */
-  list is ArmResourceListByParent<VirtualNetworkAppliance>;
+  list is ArmResourceListByParent<VirtualNetworkAppliance, Error = CloudError>;
 
   /**
    * Gets all virtual network appliances in a subscription.
    */
-  listAll is ArmListBySubscription<VirtualNetworkAppliance>;
+  listAll is ArmListBySubscription<VirtualNetworkAppliance, Error = CloudError>;
 }
 
 @@doc(VirtualNetworkAppliance.name,
@@ -83,4 +91,10 @@ interface VirtualNetworkAppliances {
 );
 @@doc(VirtualNetworkAppliances.updateTags::parameters.properties,
   "Parameters supplied to update virtual network appliance tags."
+);
+@@clientName(VirtualNetworkAppliances.createOrUpdate::parameters.resource,
+  "parameters"
+);
+@@clientName(VirtualNetworkAppliances.updateTags::parameters.properties,
+  "parameters"
 );
