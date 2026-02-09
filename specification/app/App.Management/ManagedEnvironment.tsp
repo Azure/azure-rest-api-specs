@@ -89,7 +89,7 @@ interface ManagedEnvironments {
   /**
    * Get all the Managed Environments in a resource group.
    */
-  @summary("Get all the Managed Environments in a resource group.")
+  @summary("Get all the Environments in a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     ManagedEnvironment,
     Response = ArmResponse<ManagedEnvironmentsCollection>

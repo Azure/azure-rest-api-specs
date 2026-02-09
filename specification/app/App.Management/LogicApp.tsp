@@ -30,7 +30,7 @@ alias LogicAppParentParameter = {
 
   /** Name of the Container App. */
   @path
-  @segment("providers/microsoft.App/containerApps")
+  @segment("providers/Microsoft.App/containerApps")
   @key
   @pattern("^[-\\w\\._\\(\\)]+$")
   containerAppName: string;

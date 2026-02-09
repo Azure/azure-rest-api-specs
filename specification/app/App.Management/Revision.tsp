@@ -110,7 +110,7 @@ alias FunctionExtensionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     /** Name of the Function. */
     @path
-    @segment("functions")
+    @segment("providers/Microsoft.App/functions")
     @key
     @pattern("^[-\\w\\._\\(\\)]+$")
     functionAppName: string;

@@ -62,7 +62,10 @@ interface Certificates {
    */
   @tag("ConnectedEnvironments")
   @summary("Create or Update a Certificate.")
-  createOrUpdate is CertificateOps.CreateOrUpdateAsync<Certificate>;
+  createOrUpdate is CertificateOps.CreateOrUpdateAsync<
+    Certificate,
+    OptionalRequestBody = true
+  >;
 
   /**
    * Patches a certificate. Currently only patching of tags is supported
@@ -107,7 +110,8 @@ interface Certificates {
   @summary("Create or Update a Certificate.")
   createOrUpdateCertificates is CertificateOperationGroupOps.CreateOrUpdateSync<
     Certificate,
-    Response = ArmResourceUpdatedResponse<Certificate>
+    Response = ArmResourceUpdatedResponse<Certificate>,
+    OptionalRequestBody = true
   >;
 
   /**
