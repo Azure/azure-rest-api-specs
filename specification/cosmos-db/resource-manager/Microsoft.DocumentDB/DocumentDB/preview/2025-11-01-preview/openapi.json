@@ -175,7 +175,7 @@
       "name": "NetworkSecurityPerimeterConfigurations"
     },
     {
-      "name": "NotebookWorkspaces"
+      "name": "NotebookWorkspacesResource"
     },
     {
       "name": "PrivateEndpointConnections"
@@ -187,10 +187,19 @@
       "name": "RestorableDatabaseAccountGetResults"
     },
     {
-      "name": "ServiceResources"
+      "name": "DataTransfer"
     },
     {
-      "name": "ThroughputPoolResources"
+      "name": "SqlDedicatedGateway"
+    },
+    {
+      "name": "GraphAPICompute"
+    },
+    {
+      "name": "MaterializedViewsBuilder"
+    },
+    {
+      "name": "ThroughputPools"
     },
     {
       "name": "ThroughputPoolAccountResources"
@@ -202,7 +211,7 @@
       "name": "MongoMIRoleAssignmentResources"
     },
     {
-      "name": "FleetResources"
+      "name": "Fleets"
     },
     {
       "name": "FleetAnalyticsResources"
@@ -373,7 +382,7 @@
       "get": {
         "operationId": "Fleet_List",
         "tags": [
-          "FleetResources"
+          "Fleets"
         ],
         "description": "Lists all the fleets under the subscription.",
         "parameters": [
@@ -1381,7 +1390,7 @@
       "get": {
         "operationId": "ThroughputPools_List",
         "tags": [
-          "ThroughputPoolResources"
+          "ThroughputPools"
         ],
         "description": "Lists all the Azure Cosmos DB Throughput Pools available under the subscription.",
         "parameters": [
@@ -12380,7 +12389,7 @@
       "get": {
         "operationId": "NotebookWorkspaces_ListByDatabaseAccount",
         "tags": [
-          "NotebookWorkspaces"
+          "NotebookWorkspacesResource"
         ],
         "description": "Gets the notebook workspace resources of an existing Cosmos DB account.",
         "parameters": [
@@ -12432,7 +12441,7 @@
       "get": {
         "operationId": "NotebookWorkspaces_Get",
         "tags": [
-          "NotebookWorkspaces"
+          "NotebookWorkspacesResource"
         ],
         "description": "Gets the notebook workspace for a Cosmos DB account.",
         "parameters": [
@@ -12499,7 +12508,7 @@
       "put": {
         "operationId": "NotebookWorkspaces_CreateOrUpdate",
         "tags": [
-          "NotebookWorkspaces"
+          "NotebookWorkspacesResource"
         ],
         "description": "Creates the notebook workspace for a Cosmos DB account.",
         "parameters": [
@@ -12586,7 +12595,7 @@
       "delete": {
         "operationId": "NotebookWorkspaces_Delete",
         "tags": [
-          "NotebookWorkspaces"
+          "NotebookWorkspacesResource"
         ],
         "description": "Deletes the notebook workspace for a Cosmos DB account.",
         "parameters": [
@@ -12670,7 +12679,7 @@
       "post": {
         "operationId": "NotebookWorkspaces_ListConnectionInfo",
         "tags": [
-          "NotebookWorkspaces"
+          "NotebookWorkspacesResource"
         ],
         "description": "Retrieves the connection info for the notebook workspace",
         "parameters": [
@@ -12739,7 +12748,7 @@
       "post": {
         "operationId": "NotebookWorkspaces_RegenerateAuthToken",
         "tags": [
-          "NotebookWorkspaces"
+          "NotebookWorkspacesResource"
         ],
         "description": "Regenerates the auth token for the notebook workspace",
         "parameters": [
@@ -12823,7 +12832,7 @@
       "post": {
         "operationId": "NotebookWorkspaces_Start",
         "tags": [
-          "NotebookWorkspaces"
+          "NotebookWorkspacesResource"
         ],
         "description": "Starts the notebook workspace",
         "parameters": [
@@ -13981,7 +13990,10 @@
       "get": {
         "operationId": "Service_List",
         "tags": [
-          "ServiceResources"
+          "DataTransfer",
+          "SqlDedicatedGateway",
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
         ],
         "description": "Gets the status of service.",
         "parameters": [
@@ -14033,7 +14045,10 @@
       "get": {
         "operationId": "Service_Get",
         "tags": [
-          "ServiceResources"
+          "DataTransfer",
+          "SqlDedicatedGateway",
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
         ],
         "description": "Gets the status of service.",
         "parameters": [
@@ -14098,7 +14113,10 @@
       "put": {
         "operationId": "Service_Create",
         "tags": [
-          "ServiceResources"
+          "DataTransfer",
+          "SqlDedicatedGateway",
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
         ],
         "description": "Creates a service.",
         "parameters": [
@@ -14191,7 +14209,10 @@
       "delete": {
         "operationId": "Service_Delete",
         "tags": [
-          "ServiceResources"
+          "DataTransfer",
+          "SqlDedicatedGateway",
+          "GraphAPICompute",
+          "MaterializedViewsBuilder"
         ],
         "description": "Deletes service with the given serviceName.",
         "parameters": [
@@ -19177,7 +19198,7 @@
       "get": {
         "operationId": "Fleet_ListByResourceGroup",
         "tags": [
-          "FleetResources"
+          "Fleets"
         ],
         "description": "Lists all the fleets under the specified subscription and resource group.",
         "parameters": [
@@ -19219,7 +19240,7 @@
       "get": {
         "operationId": "Fleet_Get",
         "tags": [
-          "FleetResources"
+          "Fleets"
         ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB fleet under a subscription",
         "parameters": [
@@ -19266,7 +19287,7 @@
       "put": {
         "operationId": "Fleet_Create",
         "tags": [
-          "FleetResources"
+          "Fleets"
         ],
         "description": "Creates an Azure Cosmos DB fleet under a subscription.",
         "parameters": [
@@ -19328,7 +19349,7 @@
       "patch": {
         "operationId": "Fleet_Update",
         "tags": [
-          "FleetResources"
+          "Fleets"
         ],
         "description": "Updates the properties of an existing Azure Cosmos DB Fleet.",
         "parameters": [
@@ -19384,7 +19405,7 @@
       "delete": {
         "operationId": "Fleet_Delete",
         "tags": [
-          "FleetResources"
+          "Fleets"
         ],
         "description": "Deletes an existing Azure Cosmos DB Fleet.",
         "parameters": [
@@ -20711,7 +20732,7 @@
       "get": {
         "operationId": "ThroughputPools_ListByResourceGroup",
         "tags": [
-          "ThroughputPoolResources"
+          "ThroughputPools"
         ],
         "description": "List all the ThroughputPools in a given resource group.",
         "parameters": [
@@ -20753,7 +20774,7 @@
       "get": {
         "operationId": "ThroughputPool_Get",
         "tags": [
-          "ThroughputPoolResources"
+          "ThroughputPools"
         ],
         "description": "Retrieves the properties of an existing Azure Cosmos DB Throughput Pool",
         "parameters": [
@@ -20800,7 +20821,7 @@
       "put": {
         "operationId": "ThroughputPool_CreateOrUpdate",
         "tags": [
-          "ThroughputPoolResources"
+          "ThroughputPools"
         ],
         "description": "Creates or updates an Azure Cosmos DB ThroughputPool account. The \"Update\" method is preferred when performing updates on an account.",
         "parameters": [
@@ -20878,7 +20899,7 @@
       "patch": {
         "operationId": "ThroughputPool_Update",
         "tags": [
-          "ThroughputPoolResources"
+          "ThroughputPools"
         ],
         "description": "Updates the properties of an existing Azure Cosmos DB Throughput Pool.",
         "parameters": [
@@ -20958,7 +20979,7 @@
       "delete": {
         "operationId": "ThroughputPool_Delete",
         "tags": [
-          "ThroughputPoolResources"
+          "ThroughputPools"
         ],
         "description": "Deletes an existing Azure Cosmos DB Throughput Pool.",
         "parameters": [

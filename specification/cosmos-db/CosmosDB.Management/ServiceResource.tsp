@@ -25,17 +25,25 @@ model ServiceResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ServiceResources {
   /**
    * Gets the status of service.
    */
+  @tag("DataTransfer")
+  @tag("SqlDedicatedGateway")
+  @tag("GraphAPICompute")
+  @tag("MaterializedViewsBuilder")
   get is ArmResourceRead<ServiceResource, Error = CloudError>;
 
   /**
    * Creates a service.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("DataTransfer")
+  @tag("SqlDedicatedGateway")
+  @tag("GraphAPICompute")
+  @tag("MaterializedViewsBuilder")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ServiceResource,
     Request = ServiceResourceCreateUpdateParameters,
@@ -48,6 +56,10 @@ interface ServiceResources {
    * Deletes service with the given serviceName.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("DataTransfer")
+  @tag("SqlDedicatedGateway")
+  @tag("GraphAPICompute")
+  @tag("MaterializedViewsBuilder")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse,
@@ -57,6 +69,10 @@ interface ServiceResources {
   /**
    * Gets the status of service.
    */
+  @tag("DataTransfer")
+  @tag("SqlDedicatedGateway")
+  @tag("GraphAPICompute")
+  @tag("MaterializedViewsBuilder")
   list is ArmResourceListByParent<
     ServiceResource,
     Response = ArmResponse<ServiceResourceListResult>,

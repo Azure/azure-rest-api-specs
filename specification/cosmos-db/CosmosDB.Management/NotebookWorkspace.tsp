@@ -26,17 +26,19 @@ model NotebookWorkspace
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface NotebookWorkspaces {
   /**
    * Gets the notebook workspace for a Cosmos DB account.
    */
+  @tag("NotebookWorkspacesResource")
   get is ArmResourceRead<NotebookWorkspace>;
 
   /**
    * Creates the notebook workspace for a Cosmos DB account.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NotebookWorkspacesResource")
   @put
   createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<NotebookWorkspace>,
@@ -49,11 +51,13 @@ interface NotebookWorkspaces {
   /**
    * Deletes the notebook workspace for a Cosmos DB account.
    */
+  @tag("NotebookWorkspacesResource")
   delete is ArmResourceDeleteWithoutOkAsync<NotebookWorkspace>;
 
   /**
    * Gets the notebook workspace resources of an existing Cosmos DB account.
    */
+  @tag("NotebookWorkspacesResource")
   listByDatabaseAccount is ArmResourceListByParent<
     NotebookWorkspace,
     Response = ArmResponse<NotebookWorkspaceListResult>
@@ -62,6 +66,7 @@ interface NotebookWorkspaces {
   /**
    * Retrieves the connection info for the notebook workspace
    */
+  @tag("NotebookWorkspacesResource")
   listConnectionInfo is ArmResourceActionSync<
     NotebookWorkspace,
     void,
@@ -71,6 +76,7 @@ interface NotebookWorkspaces {
   /**
    * Regenerates the auth token for the notebook workspace
    */
+  @tag("NotebookWorkspacesResource")
   regenerateAuthToken is ArmResourceActionAsync<
     NotebookWorkspace,
     void,
@@ -84,6 +90,7 @@ interface NotebookWorkspaces {
   /**
    * Starts the notebook workspace
    */
+  @tag("NotebookWorkspacesResource")
   start is ArmResourceActionAsync<
     NotebookWorkspace,
     void,
