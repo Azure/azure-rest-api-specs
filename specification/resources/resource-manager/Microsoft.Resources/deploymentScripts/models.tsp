@@ -213,7 +213,7 @@ model DeploymentScriptListResult {
    */
   @nextLink
   @visibility(Lifecycle.Read)
-  nextLink?: url;
+  nextLink?: string;
 }
 
 /**

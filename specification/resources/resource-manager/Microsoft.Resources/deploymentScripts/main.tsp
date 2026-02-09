@@ -25,7 +25,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.Resources")
 @service(#{ title: "DeploymentScripts Client" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
 namespace DeploymentScriptsClient;
 
 /**

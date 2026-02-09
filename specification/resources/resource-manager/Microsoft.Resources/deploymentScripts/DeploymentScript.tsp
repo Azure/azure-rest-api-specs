@@ -54,7 +54,10 @@ interface DeploymentScripts {
   /**
    * Creates a deployment script.
    */
-  create is ArmResourceCreateOrReplaceAsync<DeploymentScript, LroHeaders = {}>;
+  create is ArmResourceCreateOrReplaceAsync<
+    DeploymentScript,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Updates deployment script tags with specified values.
