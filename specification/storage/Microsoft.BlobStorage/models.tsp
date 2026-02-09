@@ -2779,3 +2779,315 @@ alias ListBlobsStartFrom = {
   @query
   startFrom?: string;
 };
+
+/** Copy operation abort query parameters. */
+alias AbortCopyQueryParameters = {
+  ...TimeoutParameter;
+
+  /** The copy identifier provided in the x-ms-copy-id header of the original Copy Blob operation. */
+  @clientName("copyId")
+  @query
+  copyid: string;
+};
+
+/** Block list query parameters. */
+alias BlockListQueryParameters = {
+  ...SnapshotParameter;
+
+  /** Specifies whether to return the list of committed blocks, the list of uncommitted blocks, or both lists together. */
+  @query
+  @clientName("listType")
+  blocklisttype: BlockListType;
+
+  ...TimeoutParameter;
+};
+
+/** The comp=block query parameter for block operations. */
+alias CompBlockParameter = {
+  /** Specifies the block operation type. */
+  @query
+  comp: "block";
+};
+
+/** The comp=blocklist query parameter for block list operations. */
+alias CompBlockListParameter = {
+  /** Specifies the blocklist operation type. */
+  @query
+  comp: "blocklist";
+};
+
+/** The comp=copy query parameter for copy operations. */
+alias CompCopyParameter = {
+  /** Specifies the copy operation type. */
+  @query
+  comp: "copy";
+};
+
+/** The comp=page query parameter for page operations. */
+alias CompPageParameter = {
+  /** Specifies the page operation type. */
+  @query
+  comp: "page";
+};
+
+/** The comp=pagelist query parameter for page list operations. */
+alias CompPageListParameter = {
+  /** Specifies the pagelist operation type. */
+  @query
+  comp: "pagelist";
+};
+
+/** The comp=appendblock query parameter for append block operations. */
+alias CompAppendBlockParameter = {
+  /** Specifies the appendblock operation type. */
+  @query
+  comp: "appendblock";
+};
+
+/** The comp=tags query parameter for tag operations. */
+alias CompTagsParameter = {
+  /** Specifies the tags operation type. */
+  @query
+  comp: "tags";
+};
+
+/** The comp=tier query parameter for tier operations. */
+alias CompTierParameter = {
+  /** Specifies the tier operation type. */
+  @query
+  comp: "tier";
+};
+
+/** The comp=lease query parameter for lease operations. */
+alias CompLeaseParameter = {
+  /** Specifies the lease operation type. */
+  @query
+  comp: "lease";
+};
+
+/** The comp=snapshot query parameter for snapshot operations. */
+alias CompSnapshotParameter = {
+  /** Specifies the snapshot operation type. */
+  @query
+  comp: "snapshot";
+};
+
+/** The comp=metadata query parameter for metadata operations. */
+alias CompMetadataParameter = {
+  /** Specifies the metadata operation type. */
+  @query
+  comp: "metadata";
+};
+
+/** The comp=properties query parameter for properties operations. */
+alias CompPropertiesParameter = {
+  /** Specifies the properties operation type. */
+  @query
+  comp: "properties";
+};
+
+/** Stage block query parameters with correct ordering (comp before blockid). */
+alias StageBlockQueryParameters = {
+  ...CompBlockParameter;
+  ...BlockIdParameter;
+};
+
+/** The comp=list query parameter for list operations. */
+alias CompListParameter = {
+  /** Specifies the list operation type. */
+  @query
+  comp: "list";
+};
+
+/** The comp=blobs query parameter for blobs operations. */
+alias CompBlobsParameter = {
+  /** Specifies the blobs operation type. */
+  @query
+  comp: "blobs";
+};
+
+/** The comp=batch query parameter for batch operations. */
+alias CompBatchParameter = {
+  /** Specifies the batch operation type. */
+  @query
+  comp: "batch";
+};
+
+/** The comp=undelete query parameter for undelete operations. */
+alias CompUndeleteParameter = {
+  /** Specifies the undelete operation type. */
+  @query
+  comp: "undelete";
+};
+
+/** The comp=expiry query parameter for expiry operations. */
+alias CompExpiryParameter = {
+  /** Specifies the expiry operation type. */
+  @query
+  comp: "expiry";
+};
+
+/** The comp=immutabilityPolicies query parameter. */
+alias CompImmutabilityPoliciesParameter = {
+  /** Specifies the immutabilityPolicies operation type. */
+  @query
+  comp: "immutabilityPolicies";
+};
+
+/** The comp=legalhold query parameter for legal hold operations. */
+alias CompLegalHoldParameter = {
+  /** Specifies the legalhold operation type. */
+  @query
+  comp: "legalhold";
+};
+
+/** The comp=acl query parameter for ACL operations. */
+alias CompAclParameter = {
+  /** Specifies the acl operation type. */
+  @query
+  comp: "acl";
+};
+
+/** The comp=rename query parameter for rename operations. */
+alias CompRenameParameter = {
+  /** Specifies the rename operation type. */
+  @query
+  comp: "rename";
+};
+
+/** The comp=incrementalcopy query parameter for incremental copy operations. */
+alias CompIncrementalCopyParameter = {
+  /** Specifies the incrementalcopy operation type. */
+  @query
+  comp: "incrementalcopy";
+};
+
+/** The comp=seal query parameter for seal operations. */
+alias CompSealParameter = {
+  /** Specifies the seal operation type. */
+  @query
+  comp: "seal";
+};
+
+/** The comp=query query parameter for query operations. */
+alias CompQueryParameter = {
+  /** Specifies the query operation type. */
+  @query
+  comp: "query";
+};
+
+/** The comp=stats query parameter for stats operations. */
+alias CompStatsParameter = {
+  /** Specifies the stats operation type. */
+  @query
+  comp: "stats";
+};
+
+/** The comp=userdelegationkey query parameter. */
+alias CompUserDelegationKeyParameter = {
+  /** Specifies the userdelegationkey operation type. */
+  @query
+  comp: "userdelegationkey";
+};
+
+// Restype parameter aliases
+
+/** The restype=service query parameter. */
+alias RestypeServiceParameter = {
+  /** Specifies the service resource type. */
+  @query
+  restype: "service";
+};
+
+/** The restype=container query parameter. */
+alias RestypeContainerParameter = {
+  /** Specifies the container resource type. */
+  @query
+  restype: "container";
+};
+
+/** The restype=account query parameter. */
+alias RestypeAccountParameter = {
+  /** Specifies the account resource type. */
+  @query
+  restype: "account";
+};
+
+// Combined restype + comp parameter aliases for common patterns
+
+/** Service properties query parameters (restype=service&comp=properties). */
+alias ServicePropertiesQueryParameters = {
+  ...RestypeServiceParameter;
+  ...CompPropertiesParameter;
+};
+
+/** Service stats query parameters (restype=service&comp=stats). */
+alias ServiceStatsQueryParameters = {
+  ...RestypeServiceParameter;
+  ...CompStatsParameter;
+};
+
+/** Service user delegation key query parameters (restype=service&comp=userdelegationkey). */
+alias ServiceUserDelegationKeyQueryParameters = {
+  ...RestypeServiceParameter;
+  ...CompUserDelegationKeyParameter;
+};
+
+/** Account properties query parameters (restype=account&comp=properties). */
+alias AccountPropertiesQueryParameters = {
+  ...RestypeAccountParameter;
+  ...CompPropertiesParameter;
+};
+
+/** Container query parameters (restype=container). */
+alias ContainerQueryParameters = {
+  ...RestypeContainerParameter;
+};
+
+/** Container metadata query parameters (restype=container&comp=metadata). */
+alias ContainerMetadataQueryParameters = {
+  ...RestypeContainerParameter;
+  ...CompMetadataParameter;
+};
+
+/** Container ACL query parameters (restype=container&comp=acl). */
+alias ContainerAclQueryParameters = {
+  ...RestypeContainerParameter;
+  ...CompAclParameter;
+};
+
+/** Container undelete query parameters (restype=container&comp=undelete). */
+alias ContainerUndeleteQueryParameters = {
+  ...RestypeContainerParameter;
+  ...CompUndeleteParameter;
+};
+
+/** Container rename query parameters (restype=container&comp=rename). */
+alias ContainerRenameQueryParameters = {
+  ...RestypeContainerParameter;
+  ...CompRenameParameter;
+};
+
+/** Container batch query parameters (restype=container&comp=batch). */
+alias ContainerBatchQueryParameters = {
+  ...RestypeContainerParameter;
+  ...CompBatchParameter;
+};
+
+/** Container blobs query parameters (restype=container&comp=blobs). */
+alias ContainerBlobsQueryParameters = {
+  ...RestypeContainerParameter;
+  ...CompBlobsParameter;
+};
+
+/** Container lease query parameters (comp=lease&restype=container). */
+alias ContainerLeaseQueryParameters = {
+  ...CompLeaseParameter;
+  ...RestypeContainerParameter;
+};
+
+/** Container list query parameters (restype=container&comp=list). */
+alias ContainerListQueryParameters = {
+  ...RestypeContainerParameter;
+  ...CompListParameter;
+};
