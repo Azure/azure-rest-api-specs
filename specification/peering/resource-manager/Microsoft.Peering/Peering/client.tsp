@@ -178,26 +178,20 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-//LogAnalyticsWorkspaceProperties
+@@clientName(Microsoft.Peering.LegacyPeeringsOperationGroup.list,
+  "listPeeringsByLegacyPeering",
+  "csharp"
+);
 
-//PeeringPropertiesDirect
+@@clientName(Microsoft.Peering.PeeringLocationsOperationGroup.list,
+  "listPeeringLocations",
+  "csharp"
+);
 
-// @@clientName(Microsoft.Peering.Command, "aaa",
-//   "csharp"
-// );
-//  Command: LookingGlassCommand
-
-//  ResourceTags: PeeringResourceTagsPatch
-
-//  ConnectionState: PeeringConnectionState
-
-//  PeeringPropertiesExchange: ExchangePeeringProperties
-
-//BgpSession
-//LookingGlassOperationGroup.invoke
-//CheckServiceProviderAvailabilityInput
-//PeeringServicesOperationGroup.initializeConnectionMonitor
-//CdnPeeringPrefixesOperationGroup
+@@clientName(Microsoft.Peering.CdnPeeringPrefixesOperationGroup.list,
+  "listCdnPeeringPrefixes",
+  "csharp"
+);
 
 @@alternateType(Microsoft.Peering.PeeringServiceLocationProperties.azureRegion,
   Azure.Core.azureLocation,
