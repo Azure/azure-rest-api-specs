@@ -750,7 +750,10 @@
             "in": "path",
             "description": "The name of the private link associated with the Azure resource.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9-._]{1,64}$"
           }
         ],
         "responses": {
