@@ -16,6 +16,11 @@ using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
 
 // --------------------------------------------------------------------------------
+// Don't use Beta sub-client for beta operations
+// --------------------------------------------------------------------------------
+@@clientNamespace(Azure.AI.Projects.Beta, "Azure.AI.Projects");
+
+// --------------------------------------------------------------------------------
 // Fix the xref.
 // --------------------------------------------------------------------------------
 @@clientNamespace(OpenAI, "Azure.AI.Projects", "csharp");
