@@ -308,6 +308,10 @@ interface Entity {
       @doc("The name of the classification.")
       @path
       classificationName: string;
+
+      @doc("To prevent classification changes from being overridden during regular scans, set this parameter to true. The default value is false.")
+      @query
+      suppressDeletedClassification?: boolean;
     },
     void,
     {}
