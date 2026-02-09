@@ -20,7 +20,7 @@
       {
         "name": "host",
         "in": "path",
-        "description": "Application Insights' Breeze endpoint.",
+        "description": "Application Insights' Breeze host.",
         "required": true,
         "type": "string",
         "format": "uri",
@@ -58,19 +58,21 @@
   ],
   "security": [
     {
-      "OAuth2Auth": [
+      "AadOauth2Auth": [
         "https://monitor.azure.com/.default"
       ]
     }
   ],
   "securityDefinitions": {
-    "OAuth2Auth": {
+    "AadOauth2Auth": {
       "type": "oauth2",
-      "flow": "implicit",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
         "https://monitor.azure.com/.default": ""
-      }
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
     }
   },
   "tags": [],
@@ -210,7 +212,8 @@
         {
           "$ref": "#/definitions/Domain"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "AvailabilityData"
     },
     "Base": {
       "type": "object",
@@ -308,12 +311,85 @@
           "format": "int32",
           "description": "Schema version",
           "default": 2
+        },
+        "kind": {
+          "$ref": "#/definitions/DomainKind",
+          "description": "Discriminator property to identify the specific telemetry data type.",
+          "readOnly": true
         }
       },
+      "discriminator": "kind",
       "required": [
-        "ver"
+        "ver",
+        "kind"
       ],
       "additionalProperties": {}
+    },
+    "DomainKind": {
+      "type": "string",
+      "description": "Identifies the specific telemetry data type.",
+      "enum": [
+        "AvailabilityData",
+        "EventData",
+        "ExceptionData",
+        "MessageData",
+        "MetricsData",
+        "PageViewData",
+        "PageViewPerfData",
+        "RemoteDependencyData",
+        "RequestData"
+      ],
+      "x-ms-enum": {
+        "name": "DomainKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AvailabilityData",
+            "value": "AvailabilityData",
+            "description": "AvailabilityData type."
+          },
+          {
+            "name": "EventData",
+            "value": "EventData",
+            "description": "EventData type."
+          },
+          {
+            "name": "ExceptionData",
+            "value": "ExceptionData",
+            "description": "ExceptionData type."
+          },
+          {
+            "name": "MessageData",
+            "value": "MessageData",
+            "description": "MessageData type."
+          },
+          {
+            "name": "MetricsData",
+            "value": "MetricsData",
+            "description": "MetricsData type."
+          },
+          {
+            "name": "PageViewData",
+            "value": "PageViewData",
+            "description": "PageViewData type."
+          },
+          {
+            "name": "PageViewPerfData",
+            "value": "PageViewPerfData",
+            "description": "PageViewPerfData type."
+          },
+          {
+            "name": "RemoteDependencyData",
+            "value": "RemoteDependencyData",
+            "description": "RemoteDependencyData type."
+          },
+          {
+            "name": "RequestData",
+            "value": "RequestData",
+            "description": "RequestData type."
+          }
+        ]
+      }
     },
     "ErrorDetails": {
       "type": "object",
@@ -367,7 +443,8 @@
         {
           "$ref": "#/definitions/Domain"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "EventData"
     },
     "ExceptionData": {
       "type": "object",
@@ -412,7 +489,8 @@
         {
           "$ref": "#/definitions/Domain"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "ExceptionData"
     },
     "ExceptionDetails": {
       "type": "object",
@@ -496,7 +574,8 @@
         {
           "$ref": "#/definitions/Domain"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "MessageData"
     },
     "MetricsData": {
       "type": "object",
@@ -524,7 +603,8 @@
         {
           "$ref": "#/definitions/Domain"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "MetricsData"
     },
     "PageViewData": {
       "type": "object",
@@ -578,7 +658,8 @@
         {
           "$ref": "#/definitions/Domain"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "PageViewData"
     },
     "PageViewPerfData": {
       "type": "object",
@@ -647,7 +728,8 @@
         {
           "$ref": "#/definitions/Domain"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "PageViewPerfData"
     },
     "RemoteDependencyData": {
       "type": "object",
@@ -716,7 +798,8 @@
         {
           "$ref": "#/definitions/Domain"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "RemoteDependencyData"
     },
     "RequestData": {
       "type": "object",
@@ -782,7 +865,8 @@
         {
           "$ref": "#/definitions/Domain"
         }
-      ]
+      ],
+      "x-ms-discriminator-value": "RequestData"
     },
     "SeverityLevel": {
       "type": "string",

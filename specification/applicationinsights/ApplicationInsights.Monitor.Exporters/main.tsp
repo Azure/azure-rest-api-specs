@@ -2,7 +2,6 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
-import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -11,6 +10,7 @@ using Azure.Core;
 /**
  * OpenTelemetry Exporter for Azure Monitor
  */
+#suppress "@azure-tools/typespec-autorest/unsupported-auth" "NoAuth used by clients, but not supported by openapi3 emitter"
 @useAuth(NoAuth | AadOauth2Auth<["https://monitor.azure.com/.default"]>)
 @service(#{ title: "Azure Monitor Exporter" })
 @versioned(Versions)
