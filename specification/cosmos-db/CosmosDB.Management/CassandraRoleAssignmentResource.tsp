@@ -54,7 +54,10 @@ interface CassandraRoleAssignmentResources {
   /**
    * Retrieves the list of all Azure Cosmos DB Cassandra Role Assignments.
    */
-  listCassandraRoleAssignments is ArmResourceListByParent<CassandraRoleAssignmentResource>;
+  listCassandraRoleAssignments is ArmResourceListByParent<
+    CassandraRoleAssignmentResource,
+    Response = ArmResponse<CassandraRoleAssignmentListResult>
+  >;
 }
 
 @@doc(CassandraRoleAssignmentResource.name,

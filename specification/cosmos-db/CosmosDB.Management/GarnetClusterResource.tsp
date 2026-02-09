@@ -19,7 +19,7 @@ model GarnetClusterResource
     Resource = GarnetClusterResource,
     KeyName = "clusterName",
     SegmentName = "garnetClusters",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
   >;
 
   /**
@@ -57,7 +57,9 @@ interface GarnetClusters {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     GarnetClusterResource,
-    PatchModel = GarnetClusterResourcePatch
+    PatchModel = GarnetClusterResourcePatch,
+    Response = ArmResponse<GarnetClusterResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GarnetClusterResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -65,7 +67,11 @@ interface GarnetClusters {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GarnetClusters_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<GarnetClusterResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    GarnetClusterResource,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List all Garnet clusters in this resource group.
@@ -87,3 +93,6 @@ interface GarnetClusters {
     Response = ArmResponse<ListGarnetClusters>
   >;
 }
+
+@@maxLength(GarnetClusterResource.name, 100);
+@@minLength(GarnetClusterResource.name, 1);

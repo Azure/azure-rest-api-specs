@@ -60,7 +60,10 @@ interface MongoMIRoleAssignmentResources {
    * Retrieves the list of all Azure Cosmos DB MongoMI Role Assignments.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  listMongoMIRoleAssignments is ArmResourceListByParent<MongoMIRoleAssignmentResource>;
+  listMongoMIRoleAssignments is ArmResourceListByParent<
+    MongoMIRoleAssignmentResource,
+    Response = ArmResponse<MongoMIRoleAssignmentListResult>
+  >;
 }
 
 @@doc(MongoMIRoleAssignmentResource.name, "The GUID for the Role Assignment.");

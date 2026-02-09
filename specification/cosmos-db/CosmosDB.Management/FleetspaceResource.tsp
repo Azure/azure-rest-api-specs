@@ -64,7 +64,10 @@ interface FleetspaceResources {
   /**
    * Lists all the fleetspaces under a fleet.
    */
-  list is ArmResourceListByParent<FleetspaceResource>;
+  list is ArmResourceListByParent<
+    FleetspaceResource,
+    Response = ArmResponse<FleetspaceListResult>
+  >;
 }
 
 @@maxLength(FleetspaceResource.name, 50);

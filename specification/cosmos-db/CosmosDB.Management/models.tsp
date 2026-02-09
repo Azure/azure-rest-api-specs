@@ -10,6 +10,26 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DocumentDB;
+model FleetspaceAccountListResult
+  is ResourceListResult<FleetspaceAccountResource>;
+
+model FleetspaceListResult is ResourceListResult<FleetspaceResource>;
+model MongoMIRoleDefinitionListResult
+  is ResourceListResult<MongoMIRoleDefinitionResource>;
+model MongoMIRoleAssignmentListResult
+  is ResourceListResult<MongoMIRoleAssignmentResource>;
+
+model GremlinRoleDefinitionListResult
+  is ResourceListResult<GremlinRoleDefinitionResource>;
+
+model GremlinRoleAssignmentListResult
+  is ResourceListResult<GremlinRoleAssignmentResource>;
+
+model CassandraRoleDefinitionListResult
+  is ResourceListResult<CassandraRoleDefinitionResource>;
+
+model CassandraRoleAssignmentListResult
+  is ResourceListResult<CassandraRoleAssignmentResource>;
 
 /** Properties of a Garnet cache cluster. */
 model GarnetClusterProperties {
@@ -17,9 +37,9 @@ model GarnetClusterProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: GarnetCacheProvisioningState;
 
-  /** Resource id of a subnet that this cluster's management service should have its network interface attached to. The subnet must be routable to all subnets that will be delegated to data centers. */
+  /** Resource id of a subnet that this cluster's management service should have its network interface attached to. The subnet must be routable to all subnets that will be delegated to data centers. The resource id must be of the form '/subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.Network/virtualNetworks/<virtual network>/subnets/<subnet>' */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  subnetId?: string;
+  subnetId?: Azure.Core.armResourceIdentifier[];
 
   /** Endpoints for clients to connect to the cluster. */
   @visibility(Lifecycle.Read)
@@ -1255,7 +1275,7 @@ enum RoleDefinitionType {
 /**
  * Chaos Fault List Response.
  */
-model ChaosFaultListResponse is Azure.Core.Page<ChaosFaultResource>;
+model chaosFaultListResponse is Azure.Core.Page<chaosFaultResource>;
 
 /**
  * A request object to enable/disable the chaos fault.
@@ -1634,6 +1654,12 @@ model DatabaseAccountGetProperties {
   customerManagedKeyStatus?: string;
 
   /**
+   * The version of the Customer Managed Key currently being used by the account
+   */
+  @visibility(Lifecycle.Read)
+  keyVaultKeyUriVersion?: string;
+
+  /**
    * Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account
    */
   enablePriorityBasedExecution?: boolean;
@@ -1652,6 +1678,16 @@ model DatabaseAccountGetProperties {
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
   enableAllVersionsAndDeletesChangeFeed?: boolean;
+
+  /**
+   * Total dedicated throughput (RU/s) for database account. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY.
+   */
+  throughputPoolDedicatedRUs?: int64;
+
+  /**
+   * When this account is part of a fleetspace with throughput pooling enabled, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers in the account for 1 region.  READ ONLY.
+   */
+  throughputPoolMaxConsumableRUs?: int64;
 }
 
 /**
@@ -2604,7 +2640,6 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.
    */
-  @visibility(Lifecycle.Read)
   keysMetadata?: DatabaseAccountKeysMetadata;
 
   /**
@@ -7013,7 +7048,6 @@ model BackupInformation {
   /**
    * Information about the status of continuous backups.
    */
-  @visibility(Lifecycle.Read)
   continuousBackupInformation?: ContinuousBackupInformation;
 }
 

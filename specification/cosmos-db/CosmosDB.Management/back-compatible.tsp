@@ -119,7 +119,7 @@ using Microsoft.DocumentDB;
 );
 @@clientLocation(ChaosFaultResources.list, "ChaosFault");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ChaosFaultResource.properties);
+@@Legacy.flattenProperty(chaosFaultResource.properties);
 
 @@clientName(CopyJobs.create::parameters.resource, "jobCreateParameters");
 
@@ -651,8 +651,10 @@ using Microsoft.DocumentDB;
 @@clientLocation(ClusterResources.get, "CassandraClusters");
 @@clientLocation(ClusterResources.createUpdate, "CassandraClusters");
 @@clientName(ClusterResources.createUpdate::parameters.resource, "body");
+@@clientName(GarnetClusters.createUpdate::parameters.resource, "body");
 @@clientLocation(ClusterResources.update, "CassandraClusters");
 @@clientName(ClusterResources.update::parameters.properties, "body");
+@@clientName(GarnetClusters.update::parameters.properties, "body");
 @@clientLocation(ClusterResources.delete, "CassandraClusters");
 @@clientLocation(ClusterResources.listByResourceGroup, "CassandraClusters");
 @@clientLocation(ClusterResources.listBySubscription, "CassandraClusters");

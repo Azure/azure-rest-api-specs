@@ -4786,7 +4786,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CassandraRoleAssignmentResourceListResult"
+              "$ref": "#/definitions/CassandraRoleAssignmentListResult"
             }
           },
           "default": {
@@ -5053,7 +5053,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CassandraRoleDefinitionResourceListResult"
+              "$ref": "#/definitions/CassandraRoleDefinitionListResult"
             }
           },
           "default": {
@@ -5320,7 +5320,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ChaosFaultListResponse"
+              "$ref": "#/definitions/chaosFaultListResponse"
             }
           },
           "default": {
@@ -5379,7 +5379,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ChaosFaultResource"
+              "$ref": "#/definitions/chaosFaultResource"
             }
           },
           "default": {
@@ -5434,21 +5434,21 @@
             "description": "A request object to enable/disable the chaos fault.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ChaosFaultResource"
+              "$ref": "#/definitions/chaosFaultResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ChaosFaultResource' update operation succeeded",
+            "description": "Resource 'chaosFaultResource' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ChaosFaultResource"
+              "$ref": "#/definitions/chaosFaultResource"
             }
           },
           "201": {
-            "description": "Resource 'ChaosFaultResource' create operation succeeded",
+            "description": "Resource 'chaosFaultResource' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ChaosFaultResource"
+              "$ref": "#/definitions/chaosFaultResource"
             },
             "headers": {
               "Location": {
@@ -5476,7 +5476,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/ChaosFaultResource"
+          "final-state-schema": "#/definitions/chaosFaultResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -8583,7 +8583,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GremlinRoleAssignmentResourceListResult"
+              "$ref": "#/definitions/GremlinRoleAssignmentListResult"
             }
           },
           "default": {
@@ -8850,7 +8850,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GremlinRoleDefinitionResourceListResult"
+              "$ref": "#/definitions/GremlinRoleDefinitionListResult"
             }
           },
           "default": {
@@ -9330,7 +9330,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleAssignmentResourceListResult"
+              "$ref": "#/definitions/MongoMIRoleAssignmentListResult"
             }
           },
           "default": {
@@ -9597,7 +9597,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoMIRoleDefinitionResourceListResult"
+              "$ref": "#/definitions/MongoMIRoleDefinitionListResult"
             }
           },
           "default": {
@@ -19741,7 +19741,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FleetspaceResourceListResult"
+              "$ref": "#/definitions/FleetspaceListResult"
             }
           },
           "default": {
@@ -20117,7 +20117,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FleetspaceAccountResourceListResult"
+              "$ref": "#/definitions/FleetspaceAccountListResult"
             }
           },
           "default": {
@@ -20455,7 +20455,10 @@
             "in": "path",
             "description": "The name of the GarnetClusterResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
           }
         ],
         "responses": {
@@ -20499,10 +20502,13 @@
             "in": "path",
             "description": "The name of the GarnetClusterResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "description": "Resource create parameters.",
             "required": true,
@@ -20574,10 +20580,13 @@
             "in": "path",
             "description": "The name of the GarnetClusterResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "description": "The resource properties to be updated.",
             "required": true,
@@ -20594,8 +20603,13 @@
             }
           },
           "202": {
-            "description": "Resource update request accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -20612,6 +20626,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGarnetClusterPatch": {
+            "$ref": "./examples/CosmosDBGarnetClusterPatch.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -20641,13 +20660,21 @@
             "in": "path",
             "description": "The name of the GarnetClusterResource",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
           }
         ],
         "responses": {
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -21657,8 +21684,7 @@
       "properties": {
         "continuousBackupInformation": {
           "$ref": "#/definitions/ContinuousBackupInformation",
-          "description": "Information about the status of continuous backups.",
-          "readOnly": true
+          "description": "Information about the status of continuous backups."
         }
       }
     },
@@ -22451,23 +22477,7 @@
         }
       ]
     },
-    "CassandraRoleAssignmentResource": {
-      "type": "object",
-      "description": "Parameters to create and update an Azure Cosmos DB Cassandra Role Assignment.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CassandraRoleAssignmentResourceProperties",
-          "description": "Properties to create and update an Azure Cosmos DB Cassandra Role Assignment.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "CassandraRoleAssignmentResourceListResult": {
+    "CassandraRoleAssignmentListResult": {
       "type": "object",
       "description": "The response of a CassandraRoleAssignmentResource list operation.",
       "properties": {
@@ -22486,6 +22496,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "CassandraRoleAssignmentResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Cassandra Role Assignment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CassandraRoleAssignmentResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Cassandra Role Assignment.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "CassandraRoleAssignmentResourceProperties": {
@@ -22511,23 +22537,7 @@
         }
       }
     },
-    "CassandraRoleDefinitionResource": {
-      "type": "object",
-      "description": "Parameters to create and update an Azure Cosmos DB Cassandra Role Definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/CassandraRoleDefinitionResourceProperties",
-          "description": "Properties to create and update an Azure Cosmos DB Cassandra Role Definition.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "CassandraRoleDefinitionResourceListResult": {
+    "CassandraRoleDefinitionListResult": {
       "type": "object",
       "description": "The response of a CassandraRoleDefinitionResource list operation.",
       "properties": {
@@ -22546,6 +22556,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "CassandraRoleDefinitionResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Cassandra Role Definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CassandraRoleDefinitionResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Cassandra Role Definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "CassandraRoleDefinitionResourceProperties": {
@@ -22952,27 +22978,6 @@
         }
       }
     },
-    "ChaosFaultListResponse": {
-      "type": "object",
-      "description": "Chaos Fault List Response.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ChaosFaultResource items on this page",
-          "items": {
-            "$ref": "#/definitions/ChaosFaultResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ChaosFaultProperties": {
       "type": "object",
       "description": "A request object to enable/disable the chaos fault.",
@@ -22999,22 +23004,6 @@
           "readOnly": true
         }
       }
-    },
-    "ChaosFaultResource": {
-      "type": "object",
-      "description": "A request object to enable/disable the chaos fault",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ChaosFaultProperties",
-          "description": "A request object to enable/disable the chaos fault.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
     },
     "ClientEncryptionIncludedPath": {
       "type": "object",
@@ -25082,8 +25071,7 @@
         },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
-          "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
-          "readOnly": true
+          "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account."
         },
         "enablePartitionMerge": {
           "type": "boolean",
@@ -25368,6 +25356,11 @@
           "type": "string",
           "description": "Indicates the status of the Customer Managed Key feature on the account. In case there are errors, the property provides troubleshooting guidance."
         },
+        "keyVaultKeyUriVersion": {
+          "type": "string",
+          "description": "The version of the Customer Managed Key currently being used by the account",
+          "readOnly": true
+        },
         "enablePriorityBasedExecution": {
           "type": "boolean",
           "description": "Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account"
@@ -25383,6 +25376,16 @@
         "enableAllVersionsAndDeletesChangeFeed": {
           "type": "boolean",
           "description": "Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account"
+        },
+        "throughputPoolDedicatedRUs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total dedicated throughput (RU/s) for database account. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY."
+        },
+        "throughputPoolMaxConsumableRUs": {
+          "type": "integer",
+          "format": "int64",
+          "description": "When this account is part of a fleetspace with throughput pooling enabled, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers in the account for 1 region.  READ ONLY."
         }
       }
     },
@@ -26076,6 +26079,27 @@
         }
       }
     },
+    "FleetspaceAccountListResult": {
+      "type": "object",
+      "description": "The response of a FleetspaceAccountResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FleetspaceAccountResource items on this page",
+          "items": {
+            "$ref": "#/definitions/FleetspaceAccountResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "FleetspaceAccountProperties": {
       "type": "object",
       "description": "An Azure Cosmos DB Global Database Account which is part of a Fleetspace Account.",
@@ -26121,15 +26145,15 @@
         }
       ]
     },
-    "FleetspaceAccountResourceListResult": {
+    "FleetspaceListResult": {
       "type": "object",
-      "description": "The response of a FleetspaceAccountResource list operation.",
+      "description": "The response of a FleetspaceResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The FleetspaceAccountResource items on this page",
+          "description": "The FleetspaceResource items on this page",
           "items": {
-            "$ref": "#/definitions/FleetspaceAccountResource"
+            "$ref": "#/definitions/FleetspaceResource"
           }
         },
         "nextLink": {
@@ -26252,27 +26276,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "FleetspaceResourceListResult": {
-      "type": "object",
-      "description": "The response of a FleetspaceResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FleetspaceResource items on this page",
-          "items": {
-            "$ref": "#/definitions/FleetspaceResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "FleetspaceUpdate": {
@@ -26407,8 +26410,13 @@
           "readOnly": true
         },
         "subnetId": {
-          "type": "string",
-          "description": "Resource id of a subnet that this cluster's management service should have its network interface attached to. The subnet must be routable to all subnets that will be delegated to data centers.",
+          "type": "array",
+          "description": "Resource id of a subnet that this cluster's management service should have its network interface attached to. The subnet must be routable to all subnets that will be delegated to data centers. The resource id must be of the form '/subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.Network/virtualNetworks/<virtual network>/subnets/<subnet>'",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -27161,23 +27169,7 @@
         "id"
       ]
     },
-    "GremlinRoleAssignmentResource": {
-      "type": "object",
-      "description": "Parameters to create and update an Azure Cosmos DB Gremlin Role Assignment.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/GremlinRoleAssignmentResourceProperties",
-          "description": "Properties to create and update an Azure Cosmos DB Gremlin Role Assignment.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "GremlinRoleAssignmentResourceListResult": {
+    "GremlinRoleAssignmentListResult": {
       "type": "object",
       "description": "The response of a GremlinRoleAssignmentResource list operation.",
       "properties": {
@@ -27196,6 +27188,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "GremlinRoleAssignmentResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Gremlin Role Assignment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GremlinRoleAssignmentResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Gremlin Role Assignment.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "GremlinRoleAssignmentResourceProperties": {
@@ -27221,23 +27229,7 @@
         }
       }
     },
-    "GremlinRoleDefinitionResource": {
-      "type": "object",
-      "description": "Parameters to create and update an Azure Cosmos DB Gremlin Role Definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/GremlinRoleDefinitionResourceProperties",
-          "description": "Properties to create and update an Azure Cosmos DB Gremlin Role Definition.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "GremlinRoleDefinitionResourceListResult": {
+    "GremlinRoleDefinitionListResult": {
       "type": "object",
       "description": "The response of a GremlinRoleDefinitionResource list operation.",
       "properties": {
@@ -27256,6 +27248,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "GremlinRoleDefinitionResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Gremlin Role Definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GremlinRoleDefinitionResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Gremlin Role Definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "GremlinRoleDefinitionResourceProperties": {
@@ -28702,23 +28710,7 @@
         }
       }
     },
-    "MongoMIRoleAssignmentResource": {
-      "type": "object",
-      "description": "Parameters to create and update an Azure Cosmos DB MongoMI Role Assignment.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MongoMIRoleAssignmentResourceProperties",
-          "description": "Properties to create and update an Azure Cosmos DB MongoMI Role Assignment.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "MongoMIRoleAssignmentResourceListResult": {
+    "MongoMIRoleAssignmentListResult": {
       "type": "object",
       "description": "The response of a MongoMIRoleAssignmentResource list operation.",
       "properties": {
@@ -28737,6 +28729,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "MongoMIRoleAssignmentResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB MongoMI Role Assignment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MongoMIRoleAssignmentResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB MongoMI Role Assignment.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "MongoMIRoleAssignmentResourceProperties": {
@@ -28762,23 +28770,7 @@
         }
       }
     },
-    "MongoMIRoleDefinitionResource": {
-      "type": "object",
-      "description": "Parameters to create and update an Azure Cosmos DB MongoMI Role Definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MongoMIRoleDefinitionResourceProperties",
-          "description": "Properties to create and update an Azure Cosmos DB MongoMI Role Definition.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "MongoMIRoleDefinitionResourceListResult": {
+    "MongoMIRoleDefinitionListResult": {
       "type": "object",
       "description": "The response of a MongoMIRoleDefinitionResource list operation.",
       "properties": {
@@ -28797,6 +28789,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "MongoMIRoleDefinitionResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB MongoMI Role Definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MongoMIRoleDefinitionResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB MongoMI Role Definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "MongoMIRoleDefinitionResourceProperties": {
@@ -34165,6 +34173,43 @@
           "description": "Create firewall rule before the virtual network has vnet service endpoint enabled."
         }
       }
+    },
+    "chaosFaultListResponse": {
+      "type": "object",
+      "description": "Chaos Fault List Response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The chaosFaultResource items on this page",
+          "items": {
+            "$ref": "#/definitions/chaosFaultResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "chaosFaultResource": {
+      "type": "object",
+      "description": "A request object to enable/disable the chaos fault",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ChaosFaultProperties",
+          "description": "A request object to enable/disable the chaos fault.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "physicalPartitionStorageInfo": {
       "type": "object",

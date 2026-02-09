@@ -54,7 +54,10 @@ interface CassandraRoleDefinitionResources {
   /**
    * Retrieves the list of all Azure Cosmos DB Cassandra Role Definitions.
    */
-  listCassandraRoleDefinitions is ArmResourceListByParent<CassandraRoleDefinitionResource>;
+  listCassandraRoleDefinitions is ArmResourceListByParent<
+    CassandraRoleDefinitionResource,
+    Response = ArmResponse<CassandraRoleDefinitionListResult>
+  >;
 }
 
 @@doc(CassandraRoleDefinitionResource.name,

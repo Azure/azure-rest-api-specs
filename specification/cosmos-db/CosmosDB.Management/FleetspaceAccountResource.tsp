@@ -50,7 +50,10 @@ interface FleetspaceAccountResources {
   /**
    * Lists all the fleetspaces accounts  under a fleetspace.
    */
-  list is ArmResourceListByParent<FleetspaceAccountResource>;
+  list is ArmResourceListByParent<
+    FleetspaceAccountResource,
+    Response = ArmResponse<FleetspaceAccountListResult>
+  >;
 }
 
 @@maxLength(FleetspaceAccountResource.name, 50);

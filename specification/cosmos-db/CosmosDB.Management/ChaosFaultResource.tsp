@@ -15,10 +15,10 @@ namespace Microsoft.DocumentDB;
  * A request object to enable/disable the chaos fault
  */
 @parentResource(DatabaseAccountGetResults)
-model ChaosFaultResource
+model chaosFaultResource
   is Azure.ResourceManager.ProxyResource<ChaosFaultProperties> {
   ...ResourceNameParameter<
-    Resource = ChaosFaultResource,
+    Resource = chaosFaultResource,
     KeyName = "chaosFault",
     SegmentName = "chaosFaults",
     NamePattern = ""
@@ -31,14 +31,14 @@ interface ChaosFaultResources {
   /**
    * Get Chaos Fault for a CosmosdB account for a particular Chaos Fault.
    */
-  get is ArmResourceRead<ChaosFaultResource>;
+  get is ArmResourceRead<chaosFaultResource>;
 
   /**
    * Enable, disable Chaos Fault in a CosmosDB account.
    */
   enableDisable is ArmResourceCreateOrReplaceAsync<
-    ChaosFaultResource,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ChaosFaultResource> &
+    chaosFaultResource,
+    LroHeaders = ArmLroLocationHeader<FinalResult = chaosFaultResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -46,13 +46,13 @@ interface ChaosFaultResources {
    * List Chaos Faults for CosmosDB account.
    */
   list is ArmResourceListByParent<
-    ChaosFaultResource,
-    Response = ArmResponse<ChaosFaultListResponse>
+    chaosFaultResource,
+    Response = ArmResponse<chaosFaultListResponse>
   >;
 }
 
-@@doc(ChaosFaultResource.name, "The name of the ChaosFault.");
-@@doc(ChaosFaultResource.properties,
+@@doc(chaosFaultResource.name, "The name of the ChaosFault.");
+@@doc(chaosFaultResource.properties,
   "A request object to enable/disable the chaos fault."
 );
 @@doc(ChaosFaultResources.enableDisable::parameters.resource,

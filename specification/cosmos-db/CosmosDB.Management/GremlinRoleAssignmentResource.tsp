@@ -54,7 +54,10 @@ interface GremlinRoleAssignmentResources {
   /**
    * Retrieves the list of all Azure Cosmos DB Gremlin Role Assignments.
    */
-  listGremlinRoleAssignments is ArmResourceListByParent<GremlinRoleAssignmentResource>;
+  listGremlinRoleAssignments is ArmResourceListByParent<
+    GremlinRoleAssignmentResource,
+    Response = ArmResponse<GremlinRoleAssignmentListResult>
+  >;
 }
 
 @@doc(GremlinRoleAssignmentResource.name, "The GUID for the Role Assignment.");

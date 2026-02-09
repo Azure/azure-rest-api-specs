@@ -54,7 +54,10 @@ interface GremlinRoleDefinitionResources {
   /**
    * Retrieves the list of all Azure Cosmos DB Gremlin Role Definitions.
    */
-  listGremlinRoleDefinitions is ArmResourceListByParent<GremlinRoleDefinitionResource>;
+  listGremlinRoleDefinitions is ArmResourceListByParent<
+    GremlinRoleDefinitionResource,
+    Response = ArmResponse<GremlinRoleDefinitionListResult>
+  >;
 }
 
 @@doc(GremlinRoleDefinitionResource.name, "The GUID for the Role Definition.");

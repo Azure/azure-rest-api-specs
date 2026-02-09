@@ -60,7 +60,10 @@ interface MongoMIRoleDefinitionResources {
    * Retrieves the list of all Azure Cosmos DB MongoMI Role Definitions.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  listMongoMIRoleDefinitions is ArmResourceListByParent<MongoMIRoleDefinitionResource>;
+  listMongoMIRoleDefinitions is ArmResourceListByParent<
+    MongoMIRoleDefinitionResource,
+    Response = ArmResponse<MongoMIRoleDefinitionListResult>
+  >;
 }
 
 @@doc(MongoMIRoleDefinitionResource.name, "The GUID for the Role Definition.");
