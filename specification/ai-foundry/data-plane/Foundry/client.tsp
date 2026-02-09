@@ -82,11 +82,15 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
-@@clientName(MemoryStores.createMemoryStore, "create", "python");
-@@clientName(MemoryStores.updateMemoryStore, "update", "python");
-@@clientName(MemoryStores.getMemoryStore, "get", "python");
-@@clientName(MemoryStores.listMemoryStores, "list", "python");
-@@clientName(MemoryStores.deleteMemoryStore, "delete", "python");
+@@clientName(Beta.MemoryStores.createMemoryStore, "create", "python");
+@@clientName(Beta.MemoryStores.updateMemoryStore, "update", "python");
+@@clientName(Beta.MemoryStores.getMemoryStore, "get", "python");
+@@clientName(Beta.MemoryStores.listMemoryStores, "list", "python");
+@@clientName(Beta.MemoryStores.deleteMemoryStore, "delete", "python");
+
+// The SDK will have custom code to handle LRO memory updates.
+@@access(Beta.MemoryStores.updateMemories, Access.internal, "python");
+@@scope(Beta.MemoryStores.getUpdateResult, "!(python)");
 
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
@@ -95,10 +99,6 @@ using Azure.AI.Projects;
   "MemoryStoreDeleteScopeResult",
   "python"
 );
-
-// The SDK will have custom code to handle LRO memory updates.
-@@access(MemoryStores.updateMemories, Access.internal, "python");
-@@scope(MemoryStores.getUpdateResult, "!(python)");
 
 // Hand written code still needs the below classes. Make sure they are emitted.
 @@usage(MemoryStoreUpdateCompletedResult, Usage.output);
