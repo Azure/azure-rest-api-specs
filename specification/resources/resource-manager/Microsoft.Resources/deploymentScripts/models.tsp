@@ -423,7 +423,6 @@ model ScriptConfigurationBase {
   /**
    * Script body.
    */
-  @maxLength(32000)
   scriptContent?: string;
 
   /**
