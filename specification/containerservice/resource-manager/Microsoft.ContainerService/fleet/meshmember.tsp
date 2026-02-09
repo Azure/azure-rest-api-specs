@@ -28,7 +28,6 @@ model MeshProperties {
   clusterMeshProfileResourceId: ClusterMeshProfileResourceId;
 }
 
-
 @added(Versions.v2026_03_02_preview)
 @doc("The Cilium specific properties of the member cluster.")
 model CiliumProperties {
@@ -40,7 +39,6 @@ model CiliumProperties {
   @visibility(Lifecycle.Read)
   name: string;
 }
-
 
 @added(Versions.v2026_03_02_preview)
 @doc("Mesh member state.")
@@ -62,7 +60,6 @@ union MeshMemberState {
   @doc("The member failed to connect due to an error.")
   Failed: "Failed",
 }
-
 
 @added(Versions.v2026_03_02_preview)
 @doc("Status of the mesh member.")

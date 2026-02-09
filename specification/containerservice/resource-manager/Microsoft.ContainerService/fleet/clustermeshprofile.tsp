@@ -12,7 +12,8 @@ namespace Microsoft.ContainerService;
 @added(Versions.v2026_03_02_preview)
 @resource("clusterMeshProfiles")
 @parentResource(Fleet)
-model ClusterMeshProfile is Azure.ResourceManager.ProxyResource<ClusterMeshProfileProperties> {
+model ClusterMeshProfile
+  is Azure.ResourceManager.ProxyResource<ClusterMeshProfileProperties> {
   @doc("The name of the ClusterMeshProfile resource.")
   @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
   @minLength(1)
@@ -117,7 +118,6 @@ interface ClusterMeshProfiles {
     ClusterMeshProfile,
     void,
     ClusterMeshProfile,
-    BaseParameters<ClusterMeshProfile> &
-      IfMatchParameters<ClusterMeshProfile>
+    BaseParameters<ClusterMeshProfile> & IfMatchParameters<ClusterMeshProfile>
   >;
 }
