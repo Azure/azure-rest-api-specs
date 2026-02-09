@@ -157,7 +157,7 @@ interface LoadTestAdministration {
   @summary("Add an app component to a test.")
   @doc("Add an app component to a test by providing the resource Id, name and type.")
   @route("/tests/{testId}/app-components")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header
@@ -205,7 +205,7 @@ interface LoadTestAdministration {
   @summary("Configure server metrics for a test")
   @doc("Configure server metrics for a test")
   @route("/tests/{testId}/server-metrics-config")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header
@@ -303,7 +303,7 @@ interface LoadTestRun {
   @doc("Update the latest insights for the test run.")
   @added(APIVersions.v2025_11_01_preview)
   @route("/test-runs/{testRunId}/insights/latest")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   updateLatestInsights is Azure.Core.Foundations.Operation<
     {
       @header
@@ -413,7 +413,7 @@ interface LoadTestRun {
   @summary("Add an app component to a test run.")
   @doc("Add an app component to a test run by providing the resource Id, name and type.")
   @route("/test-runs/{testRunId}/app-components")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   createOrUpdateAppComponents is Azure.Core.Foundations.Operation<
     {
       @header
@@ -451,7 +451,7 @@ interface LoadTestRun {
   @summary("Configure server metrics for a test run")
   @doc("Configure server metrics for a test run")
   @route("/test-runs/{testRunId}/server-metrics-config")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   createOrUpdateServerMetricsConfig is Azure.Core.Foundations.Operation<
     {
       @header
