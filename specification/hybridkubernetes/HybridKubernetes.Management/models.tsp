@@ -252,7 +252,7 @@ model ConnectedClusterProperties {
   connectivityStatus?: ConnectivityStatus;
 
   /**
-   * Time representing the last instance when inbound connectivity was established with the cluster
+   * Timestamp representing the lastinbound connectivity health check.
    */
   @added(Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read)
@@ -260,11 +260,18 @@ model ConnectedClusterProperties {
   lastInboundConnectivityTime?: utcDateTime;
 
   /**
-   * Represents the inbound connectivity status of the connected cluster.
+   * Represents the health status inbound connectivity (relay connection and Kubernetes API).
    */
   @added(Versions.v2026_02_01_preview)
   @visibility(Lifecycle.Read)
   inboundConnectivityStatus?: InboundConnectivityStatus;
+
+  /**
+   * Represents the full JSON response fom ConnectedProxyAgent health endpoint including component-level health details
+   */
+  @added(Versions.v2026_02_01_preview)
+  @visibility(Lifecycle.Read)
+  inboundConnectivityDetails?: string;
 
   /**
    * Property which describes the state of private link on a connected cluster resource.

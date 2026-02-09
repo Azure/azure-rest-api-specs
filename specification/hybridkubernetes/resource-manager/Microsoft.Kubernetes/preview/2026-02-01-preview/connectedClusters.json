@@ -902,12 +902,17 @@
         "lastInboundConnectivityTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Time representing the last instance when inbound connectivity was established with the cluster",
+          "description": "Timestamp representing the lastinbound connectivity health check.",
           "readOnly": true
         },
         "inboundConnectivityStatus": {
           "$ref": "#/definitions/InboundConnectivityStatus",
-          "description": "Represents the inbound connectivity status of the connected cluster.",
+          "description": "Represents the health status inbound connectivity (relay connection and Kubernetes API).",
+          "readOnly": true
+        },
+        "inboundConnectivityDetails": {
+          "type": "string",
+          "description": "Represents the full JSON response fom ConnectedProxyAgent health endpoint including component-level health details",
           "readOnly": true
         },
         "privateLinkState": {
