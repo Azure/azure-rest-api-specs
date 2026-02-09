@@ -8153,8 +8153,9 @@
           "description": "Name of the Active Directory domain"
         },
         "dns": {
-          "$ref": "#/definitions/Azure.Core.ipV4Address",
-          "description": "Comma separated list of DNS server IP addresses (IPv4 only) for the Active Directory domain"
+          "type": "string",
+          "description": "Comma separated list of DNS server IP addresses (IPv4 only) for the Active Directory domain",
+          "pattern": "^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)((, ?)(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$"
         },
         "status": {
           "$ref": "#/definitions/ActiveDirectoryStatus",
@@ -8360,10 +8361,6 @@
           "description": "Resource id of the remote volume"
         }
       }
-    },
-    "Azure.Core.ipV4Address": {
-      "type": "string",
-      "description": "Represent an IP V4 address serialized as a string.\n\nIt is formatted as four 8-bit fields separated by periods."
     },
     "Backup": {
       "type": "object",

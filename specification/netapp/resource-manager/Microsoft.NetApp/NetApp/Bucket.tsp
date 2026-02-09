@@ -57,6 +57,7 @@ model BucketProperties {
   /**
    * The volume path mounted inside the bucket. The default is the root path '/' if no value is provided when the bucket is created.
    */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   path?: string = "/";
 
   /**
@@ -344,11 +345,6 @@ model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model BucketPatchProperties {
-  /**
-   * The volume path mounted inside the bucket.
-   */
-  path?: string;
-
   /**
    * File System user having access to volume data. For Unix, this is the user's uid and gid. For Windows, this is the user's username. Note that the Unix and Windows user details are mutually exclusive, meaning one or other must be supplied, but not both.
    */
