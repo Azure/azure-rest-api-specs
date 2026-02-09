@@ -114,6 +114,5 @@ model BackfillConfiguration {
 
   @doc("Retention period in minutes.")
   @minValue(1)
-  @maxValue(2880)
   retentionPeriod?: int32;
 }
