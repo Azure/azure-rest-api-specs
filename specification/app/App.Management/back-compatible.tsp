@@ -288,3 +288,10 @@ using Microsoft.App;
 @@clientLocation(AppResiliencies.list, "AppResiliency");
 @@clientLocation(AppResiliencies.delete, "AppResiliency");
 @@clientLocation(AppResiliencies.get, "AppResiliency");
+
+@@clientName(ConnectedEnvironmentsDaprComponents.createOrUpdate::parameters.resource,
+  "daprComponentEnvelope"
+);
+@@clientName(ContainerAppsSourceControls.createOrUpdate::parameters.resource,
+  "sourceControlEnvelope"
+);
