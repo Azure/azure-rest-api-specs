@@ -11,6 +11,126 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DocumentDB;
 
+/** Properties of a Garnet cache cluster. */
+model GarnetClusterProperties {
+  /** The provisioning state of the resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: GarnetCacheProvisioningState;
+
+  /** Resource id of a subnet that this cluster's management service should have its network interface attached to. The subnet must be routable to all subnets that will be delegated to data centers. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  subnetId?: string;
+
+  /** Endpoints for clients to connect to the cluster. */
+  @visibility(Lifecycle.Read)
+  endPoints?: GarnetClusterEndpoint[];
+
+  /** Number of copies of data maintained by the cluster. */
+  replicationFactor?: int32;
+
+  /** Number of nodes. */
+  nodeCount?: int32;
+
+  /** Virtual Machine SKU used for clusters. Default value is Standard_DS14_v2. */
+  nodeSku?: string;
+
+  /** If the data center has Availability Zone support, apply it to the Virtual Machine ScaleSet that host the garnet cluster virtual machines. */
+  availabilityZone?: boolean;
+
+  /** Allocation state of the cluster and data center resources. Active implies the virtual machines of the cluster are allocated, deallocated implies virtual machines and resources are deallocated. */
+  allocationState?: AllocationState;
+
+  /** Type of the cluster. If set to Production, some operations might not be permitted on cluster. */
+  clusterType?: ClusterType;
+
+  /** Error related to resource provisioning. */
+  provisionError?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /** Extensions to be added or updated on cluster. */
+  extensions?: string[];
+}
+
+/** Endpoint for clients to connect to the cluster. */
+model GarnetClusterEndpoint {
+  /** Ipv4 address of the endpoint. */
+  ipAddress?: string;
+
+  /** Port number. */
+  port?: int32;
+}
+
+/** Allocation state of the cluster and data center resources. */
+union AllocationState {
+  string,
+
+  /** Active implies the virtual machines of the cluster are allocated. */
+  Active: "Active",
+
+  /** Deallocated implies virtual machines and resources are deallocated. */
+  Deallocated: "Deallocated",
+}
+/**
+ * The status of the resource at the time the operation was called.
+ */
+union GarnetCacheProvisioningState {
+  string,
+
+  /**
+   * Creating
+   */
+  Creating: "Creating",
+
+  /**
+   * Updating
+   */
+  Updating: "Updating",
+
+  /**
+   * Deleting
+   */
+  Deleting: "Deleting",
+
+  /**
+   * Succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Canceled
+   */
+  Canceled: "Canceled",
+}
+
+/**
+ * Representation of a Garnet cache cluster for updates.
+ */
+model ClusterResourcePatch {
+  /**
+   * Properties of a Garnet cache cluster for updates.
+   */
+  properties?: ClusterResourcePatchProperties;
+}
+
+/**
+ * Properties of a Garnet cache cluster for updates.
+ */
+model ClusterResourcePatchProperties {
+  /**
+   * Type of the cluster. If set to Production, some operations might not be permitted on cluster.
+   */
+  clusterType?: ClusterType;
+
+  /**
+   * Extensions to be added or updated on cluster.
+   */
+  extensions?: string[];
+}
+
 /**
  * Represents the full text index path.
  */
