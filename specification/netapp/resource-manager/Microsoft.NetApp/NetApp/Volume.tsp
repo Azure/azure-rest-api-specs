@@ -1579,7 +1579,7 @@ model Replication {
   /**
    * The resource ID of the remote volume.
    */
-  remoteVolumeResourceId: string;
+  remoteVolumeResourceId?: string;
 
   /**
    * The remote region for the other end of the Volume Replication.
