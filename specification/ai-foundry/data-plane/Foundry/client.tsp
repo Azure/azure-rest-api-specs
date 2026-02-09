@@ -37,7 +37,7 @@ using Azure.AI.Projects;
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
 // ---------------------------------------------------------------------------------------------------
-// Operation scope customizations - don't generate container operations *except* for backend C#
+// Operation scope customizations - don't generate container operations
 // ---------------------------------------------------------------------------------------------------
 @@scope(Agents.startAgentContainer, "!(python, javascript)");
 @@scope(Agents.updateAgentContainer, "!(python, javascript)");
