@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApplicationFirewallManagement",
-    "version": "2025-03-01",
+    "version": "2025-05-01",
     "description": "APIs to manage web application firewall rules."
   },
   "produces": [
@@ -11,10 +11,21 @@
   "consumes": [
     "application/json"
   ],
+  "tags": [
+    {
+      "name": "AzureFirewalls"
+    },
+    {
+      "name": "AzureFirewallFqdnTags"
+    }
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewallFqdnTags": {
       "get": {
         "operationId": "AzureFirewallFqdnTags_ListAll",
+        "tags": [
+          "AzureFirewallFqdnTags"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -26,7 +37,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -43,6 +54,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewalls": {
       "get": {
         "operationId": "AzureFirewalls_ListAll",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -54,7 +68,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -71,6 +85,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls": {
       "get": {
         "operationId": "AzureFirewalls_List",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -82,7 +99,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -99,6 +116,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}": {
       "get": {
         "operationId": "AzureFirewalls_Get",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -117,7 +137,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -141,6 +161,9 @@
       },
       "put": {
         "operationId": "AzureFirewalls_CreateOrUpdate",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -179,7 +202,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -211,6 +234,9 @@
       },
       "patch": {
         "operationId": "AzureFirewalls_UpdateTags",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -223,7 +249,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./common.json/definitions/TagsObject"
+              "$ref": "./common.json#/definitions/TagsObject"
             }
           }
         ],
@@ -246,7 +272,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -263,6 +289,9 @@
       },
       "delete": {
         "operationId": "AzureFirewalls_Delete",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -290,7 +319,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -332,7 +361,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -347,6 +376,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture": {
       "post": {
         "operationId": "AzureFirewalls_PacketCapture",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -376,7 +408,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -391,6 +423,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCaptureOperation": {
       "post": {
         "operationId": "AzureFirewalls_PacketCaptureOperation",
+        "tags": [
+          "AzureFirewalls"
+        ],
         "parameters": [
           {
             "name": "azureFirewallName",
@@ -426,7 +461,7 @@
           "default": {
             "description": "ignore",
             "schema": {
-              "$ref": "./common.json/definitions/CloudError"
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
         },
@@ -448,7 +483,7 @@
           "x-ms-client-flatten": true
         },
         "extendedLocation": {
-          "$ref": "./common.json/definitions/ExtendedLocation"
+          "$ref": "./common.json#/definitions/ExtendedLocation"
         },
         "zones": {
           "type": "array",
@@ -463,7 +498,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/Resource"
+          "$ref": "./common.json#/definitions/Resource"
         }
       ]
     },
@@ -525,7 +560,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         }
       ]
     },
@@ -548,7 +583,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "readOnly": true
         }
       }
@@ -557,7 +592,7 @@
       "type": "object",
       "properties": {
         "protocolType": {
-          "$ref": "./common.json/definitions/AzureFirewallApplicationRuleProtocolType"
+          "$ref": "./common.json#/definitions/AzureFirewallApplicationRuleProtocolType"
         },
         "port": {
           "type": "integer",
@@ -598,7 +633,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/Resource"
+          "$ref": "./common.json#/definitions/Resource"
         }
       ]
     },
@@ -627,7 +662,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "readOnly": true
         },
         "fqdnTagName": {
@@ -657,7 +692,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         }
       ]
     },
@@ -669,13 +704,13 @@
           "readOnly": true
         },
         "subnet": {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         },
         "publicIPAddress": {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "readOnly": true
         }
       }
@@ -718,7 +753,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/AzureFirewallNatRCActionType"
+          "$ref": "./common.json#/definitions/AzureFirewallNatRCActionType"
         }
       }
     },
@@ -752,7 +787,7 @@
         "protocols": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
+            "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol"
           }
         },
         "translatedAddress": {
@@ -789,7 +824,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         }
       ]
     },
@@ -812,7 +847,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "readOnly": true
         }
       }
@@ -829,7 +864,7 @@
         "protocols": {
           "type": "array",
           "items": {
-            "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
+            "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol"
           }
         },
         "sourceAddresses": {
@@ -887,7 +922,7 @@
       },
       "allOf": [
         {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         }
       ]
     },
@@ -910,7 +945,7 @@
           }
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "readOnly": true
         }
       }
@@ -919,7 +954,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/AzureFirewallPacketCaptureFlagsType"
+          "$ref": "./common.json#/definitions/AzureFirewallPacketCaptureFlagsType"
         }
       }
     },
@@ -927,7 +962,7 @@
       "type": "object",
       "properties": {
         "statusCode": {
-          "$ref": "./common.json/definitions/AzureFirewallPacketCaptureResponseCode"
+          "$ref": "./common.json#/definitions/AzureFirewallPacketCaptureResponseCode"
         },
         "message": {
           "type": "string"
@@ -988,17 +1023,17 @@
           "$ref": "#/definitions/AzureFirewallIPConfiguration"
         },
         "provisioningState": {
-          "$ref": "./common.json/definitions/NetworkProvisioningState",
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
           "readOnly": true
         },
         "threatIntelMode": {
-          "$ref": "./common.json/definitions/AzureFirewallThreatIntelMode"
+          "$ref": "./common.json#/definitions/AzureFirewallThreatIntelMode"
         },
         "virtualHub": {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         },
         "firewallPolicy": {
-          "$ref": "./common.json/definitions/SubResource"
+          "$ref": "./common.json#/definitions/SubResource"
         },
         "hubIPAddresses": {
           "$ref": "#/definitions/HubIPAddresses"
@@ -1036,7 +1071,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "./common.json/definitions/AzureFirewallRCActionType"
+          "$ref": "./common.json#/definitions/AzureFirewallRCActionType"
         }
       }
     },
@@ -1044,10 +1079,10 @@
       "type": "object",
       "properties": {
         "name": {
-          "$ref": "./common.json/definitions/AzureFirewallSkuName"
+          "$ref": "./common.json#/definitions/AzureFirewallSkuName"
         },
         "tier": {
-          "$ref": "./common.json/definitions/AzureFirewallSkuTier"
+          "$ref": "./common.json#/definitions/AzureFirewallSkuTier"
         }
       }
     },
@@ -1075,7 +1110,7 @@
           "type": "string"
         },
         "protocol": {
-          "$ref": "./common.json/definitions/AzureFirewallNetworkRuleProtocol"
+          "$ref": "./common.json#/definitions/AzureFirewallNetworkRuleProtocol"
         },
         "flags": {
           "type": "array",

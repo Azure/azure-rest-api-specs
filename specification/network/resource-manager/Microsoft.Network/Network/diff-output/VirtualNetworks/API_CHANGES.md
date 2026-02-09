@@ -1,28 +1,345 @@
+## Changed Paths
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/routeFilters
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/serviceEndpointPolicies
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/serviceGateways
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkAppliances
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkTaps
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/virtualRouters
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/publicipaddresses
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses/{publicIpAddressName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/addressLocations
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/services
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/updateAddressLocations
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/updateServices
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkAppliances
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkAppliances/{virtualNetworkApplianceName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}
+Change Type: deleted
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}
+Change Type: added
+
 ## Swagger Changes
 
 ### Changes for `tags`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DdosProtectionPlan.properties.tags__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"}}` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.tags__deleted` | deleted | `["PrivateLinkServices"]` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.tags__deleted` | deleted | `["PrivateLinkServices"]` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/usages'].get.tags__deleted` | deleted | `["Usages"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/cloudServices/{cloudServiceName}/networkInterfaces'].get.tags__deleted` | deleted | `["NetworkInterfaces"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses'].get.tags__added` | added | `["PublicIPAddresses"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses/{publicIpAddressName}'].get.tags__added` | added | `["PublicIPAddresses"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.tags__deleted` | deleted | `["PrivateLinkServices"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/locations/{location}/checkPrivateLinkServiceVisibility'].post.tags__deleted` | deleted | `["PrivateLinkServices"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/inboundSecurityRules/{ruleCollectionName}'].get.tags__added` | added | `["InboundSecurityRuleOperationGroup"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/inboundSecurityRules/{ruleCollectionName}'].put.tags__added` | added | `["InboundSecurityRuleOperationGroup"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/checkIPAddressAvailability'].get.tags__added` | added | `["VirtualNetworks"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/ddosProtectionStatus'].post.tags__added` | added | `["VirtualNetworks"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/prepareNetworkPolicies'].post.tags__added` | added | `["Subnets"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/resourceNavigationLinks'].get.tags__added` | added | `["Subnets"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/serviceAssociationLinks'].get.tags__added` | added | `["Subnets"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/unprepareNetworkPolicies'].post.tags__added` | added | `["Subnets"]` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/usages'].get.tags__added` | added | `["VirtualNetworks"]` |
-| `tags__added` | added | `[{"name":"ApplicationSecurityGroups"},{"name":"BastionHosts"},{"name":"NetworkInterfaces"},{"name":"...` |
+| `tags__added` | added | `[{"name":"ApplicationSecurityGroups"},{"name":"applicationSecurityGroups"},{"name":"BastionHosts"},{...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities__deleted']` | deleted | `{"get":{"operationId":"BgpServiceCommunities_List","tags":["BgpServiceCommunities"],"parameters":[],...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/routeFilters`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/routeFilters__deleted']` | deleted | `{"get":{"operationId":"RouteFilters_List","tags":["RouteFilters"],"parameters":[],"responses":{"200"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/serviceEndpointPolicies`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/serviceEndpointPolicies__deleted']` | deleted | `{"get":{"operationId":"ServiceEndpointPolicies_List","tags":["ServiceEndpointPolicies"],"parameters"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/serviceGateways`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/serviceGateways__deleted']` | deleted | `{"get":{"operationId":"ServiceGateways_ListAll","tags":["ServiceGateways"],"parameters":[],"response...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkAppliances`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkAppliances__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkAppliances_ListAll","tags":["VirtualNetworkAppliances"],"parame...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkTaps`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkTaps__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkTaps_ListAll","tags":["VirtualNetworkTaps"],"parameters":[],"re...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/networkInterfaces__deleted']` | deleted | `{"get":{"operationId":"NetworkInterfaces_ListVirtualMachineScaleSetNetworkInterfaces","tags":["Netwo...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/publicipaddresses`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/publicipaddresses__deleted']` | deleted | `{"get":{"operationId":"PublicIPAddresses_ListVirtualMachineScaleSetPublicIPAddresses","parameters":[...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces__deleted']` | deleted | `{"get":{"operationId":"NetworkInterfaces_ListVirtualMachineScaleSetVMNetworkInterfaces","tags":["Net...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}__deleted']` | deleted | `{"get":{"operationId":"NetworkInterfaces_GetVirtualMachineScaleSetNetworkInterface","tags":["Network...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations__deleted']` | deleted | `{"get":{"operationId":"NetworkInterfaces_ListVirtualMachineScaleSetIpConfigurations","tags":["Networ...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}__deleted']` | deleted | `{"get":{"operationId":"NetworkInterfaces_GetVirtualMachineScaleSetIpConfiguration","tags":["NetworkI...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses__deleted']` | deleted | `{"get":{"operationId":"PublicIPAddresses_ListVirtualMachineScaleSetVMPublicIPAddresses","parameters"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses/{publicIpAddressName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipconfigurations/{ipConfigurationName}/publicipaddresses/{publicIpAddressName}__deleted']` | deleted | `{"get":{"operationId":"PublicIPAddresses_GetVirtualMachineScaleSetPublicIPAddress","parameters":[{"n...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters__deleted']` | deleted | `{"get":{"operationId":"RouteFilters_ListByResourceGroup","tags":["RouteFilters"],"parameters":[],"re...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}__deleted']` | deleted | `{"get":{"operationId":"RouteFilters_Get","tags":["RouteFilters"],"parameters":[{"name":"routeFilterN...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules__deleted']` | deleted | `{"get":{"operationId":"RouteFilterRules_ListByRouteFilter","tags":["RouteFilterRules"],"parameters":...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}__deleted']` | deleted | `{"get":{"operationId":"RouteFilterRules_Get","tags":["RouteFilterRules"],"parameters":[{"name":"rout...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies__deleted']` | deleted | `{"get":{"operationId":"ServiceEndpointPolicies_ListByResourceGroup","tags":["ServiceEndpointPolicies...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}__deleted']` | deleted | `{"get":{"operationId":"ServiceEndpointPolicies_Get","tags":["ServiceEndpointPolicies"],"parameters":...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions__deleted']` | deleted | `{"get":{"operationId":"ServiceEndpointPolicyDefinitions_ListByResourceGroup","tags":["ServiceEndpoin...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}__deleted']` | deleted | `{"get":{"operationId":"ServiceEndpointPolicyDefinitions_Get","tags":["serviceEndpointPolicyDefinitio...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways__deleted']` | deleted | `{"get":{"operationId":"ServiceGateways_List","tags":["ServiceGateways"],"parameters":[],"responses":...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}__deleted']` | deleted | `{"get":{"operationId":"ServiceGateways_Get","tags":["ServiceGateways"],"parameters":[{"name":"servic...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/addressLocations`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/addressLocations__deleted']` | deleted | `{"get":{"operationId":"ServiceGateways_GetAddressLocations","tags":["ServiceGateways"],"parameters":...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/services`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/services__deleted']` | deleted | `{"get":{"operationId":"ServiceGateways_GetServices","tags":["ServiceGateways"],"parameters":[{"name"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/updateAddressLocations`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/updateAddressLocations__deleted']` | deleted | `{"post":{"operationId":"ServiceGateways_UpdateAddressLocations","tags":["ServiceGateways"],"paramete...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/updateServices`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceGateways/{serviceGatewayName}/updateServices__deleted']` | deleted | `{"post":{"operationId":"ServiceGateways_UpdateServices","tags":["ServiceGateways"],"parameters":[{"n...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkAppliances`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkAppliances__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkAppliances_List","tags":["VirtualNetworkAppliances"],"parameter...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkAppliances/{virtualNetworkApplianceName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkAppliances/{virtualNetworkApplianceName}__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkAppliances_Get","tags":["VirtualNetworkAppliances"],"parameters...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkTaps_ListByResourceGroup","tags":["VirtualNetworkTaps"],"parame...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}__deleted']` | deleted | `{"get":{"operationId":"VirtualNetworkTaps_Get","tags":["VirtualNetworkTap"],"parameters":[{"name":"t...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualRouters`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualRouters__added']` | added | `{"get":{"operationId":"VirtualRouters_List","tags":["VirtualRouters"],"parameters":[],"responses":{"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters__added']` | added | `{"get":{"operationId":"VirtualRouters_ListByResourceGroup","tags":["VirtualRouters"],"parameters":[]...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}__added']` | added | `{"get":{"operationId":"VirtualRouters_Get","tags":["VirtualRouters"],"parameters":[{"name":"virtualR...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings__added']` | added | `{"get":{"operationId":"VirtualRouterPeerings_List","tags":["VirtualRouterPeerings"],"parameters":[{"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}__added']` | added | `{"get":{"operationId":"VirtualRouterPeerings_Get","tags":["VirtualRouterPeerings"],"parameters":[{"n...` |
 
 ### Changes for `name`
 
@@ -39,7 +356,6 @@
 | `definitions.SwapResource.properties.name__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.VirtualApplianceSite.properties.name__deleted` | deleted | `{"type":"string"}` |
 | `definitions.VirtualNetworkPeering.properties.name__deleted` | deleted | `{"type":"string"}` |
-| `definitions.VirtualRouterPeering.properties.name__deleted` | deleted | `{"type":"string"}` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].name__deleted` | deleted | `location` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].name__deleted` | deleted | `location` |
@@ -132,8 +448,6 @@
 | `definitions.VirtualNetworkListResult.required__added` | added | `["value"]` |
 | `definitions.VirtualNetworkListUsageResult.required__added` | added | `["value"]` |
 | `definitions.VirtualNetworkPeeringListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualRouterListResult.required__added` | added | `["value"]` |
-| `definitions.VirtualRouterPeeringListResult.required__added` | added | `["value"]` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].required__deleted` | deleted | `true` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].required__deleted` | deleted | `true` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availablePrivateEndpointTypes'].get.parameters[0].required__deleted` | deleted | `true` |
@@ -224,7 +538,6 @@
 | `definitions.VirtualNetworkPeeringPropertiesFormat.properties.peeringState.type__deleted` | deleted | `string` |
 | `definitions.VirtualNetworkPeeringPropertiesFormat.properties.peeringSyncLevel.type__deleted` | deleted | `string` |
 | `definitions.VirtualNetworkPropertiesFormat.properties.privateEndpointVNetPolicies.type__deleted` | deleted | `string` |
-| `definitions.VirtualRouterPeering.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.VM.type__added` | added | `object` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices'].get.parameters[0].type__deleted` | deleted | `string` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/availableDelegations'].get.parameters[0].type__deleted` | deleted | `string` |
@@ -274,8 +587,8 @@
 | `definitions.NetworkVirtualAppliancePropertiesFormat.properties.nvaInterfaceConfigurations.$ref__deleted` | deleted | `#/definitions/NvaInterfaceConfigurations` |
 | `definitions.NvaInterfaceConfigurationsProperties.properties.type.items.$ref__added` | added | `./common.json#/definitions/NvaNicType` |
 | `definitions.PrivateLinkServiceProperties.properties.accessMode.$ref__added` | added | `./common.json#/definitions/AccessMode` |
-| `definitions.PrivateLinkServiceProperties.properties.autoApproval.$ref__added` | added | `./common.json#/definitions/PrivateLinkServicePropertiesAutoApproval` |
-| `definitions.PrivateLinkServiceProperties.properties.visibility.$ref__added` | added | `./common.json#/definitions/PrivateLinkServicePropertiesVisibility` |
+| `definitions.PrivateLinkServiceProperties.properties.autoApproval.$ref__added` | added | `#/definitions/PrivateLinkServicePropertiesAutoApproval` |
+| `definitions.PrivateLinkServiceProperties.properties.visibility.$ref__added` | added | `#/definitions/PrivateLinkServicePropertiesVisibility` |
 | `definitions.PublicIPAddressDnsSettings.properties.domainNameLabelScope.$ref__added` | added | `./common.json#/definitions/PublicIpAddressDnsSettingsDomainNameLabelScope` |
 | `definitions.PublicIPAddressPropertiesFormat.properties.deleteOption.$ref__added` | added | `./common.json#/definitions/DeleteOptions` |
 | `definitions.PublicIPAddressPropertiesFormat.properties.migrationPhase.$ref__added` | added | `./common.json#/definitions/PublicIPAddressMigrationPhase` |
@@ -387,10 +700,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/unprepareNetworkPolicies'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 
 ### Changes for `pattern`
 
@@ -432,8 +741,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/VirtualNetwork` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/Subnet` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/VirtualNetworkPeering` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/VirtualRouter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/VirtualRouterPeering` |
 
 ### Changes for `description`
 
@@ -475,11 +782,257 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/disassociateCloudServiceReservedPublicIp'].post.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/publicIPAddresses/{publicIpAddressName}/reserveCloudServicePublicIpAddress'].post.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
 
+### Changes for `BGPCommunity`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BGPCommunity__deleted` | deleted | `{"type":"object","properties":{"serviceSupportedRegion":{"type":"string"},"communityName":{"type":"s...` |
+
+### Changes for `BgpServiceCommunity`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BgpServiceCommunity__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/BgpServiceCommunityPropertiesForm...` |
+
+### Changes for `BgpServiceCommunityListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BgpServiceCommunityListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `BgpServiceCommunityPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BgpServiceCommunityPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"serviceName":{"type":"string"},"bgpCommunities":{"type":"array","ite...` |
+
+### Changes for `GetServiceGatewayAddressLocationsResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.GetServiceGatewayAddressLocationsResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `GetServiceGatewayServicesResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.GetServiceGatewayServicesResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
 ### Changes for `NvaInterfaceConfigurations`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.NvaInterfaceConfigurations__deleted` | deleted | `{"type":"array","maxItems":3,"items":{"$ref":"#/definitions/NvaInterfaceConfigurationsProperties"},"...` |
+
+### Changes for `PatchRouteFilter`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PatchRouteFilter__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteFilterPropertiesFormat","x-m...` |
+
+### Changes for `PatchRouteFilterRule`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PatchRouteFilterRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteFilterRulePropertiesFormat",...` |
+
+### Changes for `RouteFilter`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilter__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteFilterPropertiesFormat","x-m...` |
+
+### Changes for `RouteFilterListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `RouteFilterPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"rules":{"type":"array","items":{"$ref":"#/definitions/RouteFilterRul...` |
+
+### Changes for `RouteFilterRule`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterRule__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteFilterRulePropertiesFormat",...` |
+
+### Changes for `RouteFilterRuleListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterRuleListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `RouteFilterRulePropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterRulePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"access":{"$ref":"./network.json#/definitions/Access"},"routeFilterRu...` |
+
+### Changes for `RouteTargetAddressPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteTargetAddressPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"subnet":{"$ref":"./virtualNetwork.json#/definitions/Subnet"},"privat...` |
+
+### Changes for `ServiceEndpointPolicy`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicy__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ServiceEndpointPolicyPropertiesFo...` |
+
+### Changes for `ServiceEndpointPolicyDefinition`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyDefinition__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ServiceEndpointPolicyDefinitionPr...` |
+
+### Changes for `ServiceEndpointPolicyDefinitionListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyDefinitionListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `ServiceEndpointPolicyDefinitionPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyDefinitionPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"description":{"type":"string"},"service":{"type":"string"},"serviceR...` |
+
+### Changes for `ServiceEndpointPolicyListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `ServiceEndpointPolicyPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"serviceEndpointPolicyDefinitions":{"type":"array","items":{"$ref":"#...` |
+
+### Changes for `ServiceGateway`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGateway__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ServiceGatewayPropertiesFormat","...` |
+
+### Changes for `ServiceGatewayAddress`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayAddress__deleted` | deleted | `{"type":"object","properties":{"address":{"type":"string"},"services":{"type":"array","items":{"type...` |
+
+### Changes for `ServiceGatewayAddressLocation`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayAddressLocation__deleted` | deleted | `{"type":"object","properties":{"addressLocation":{"type":"string"},"addressUpdateAction":{"type":"st...` |
+
+### Changes for `ServiceGatewayAddressLocationResponse`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayAddressLocationResponse__deleted` | deleted | `{"type":"object","properties":{"addressLocation":{"type":"string"},"addresses":{"type":"array","item...` |
+
+### Changes for `ServiceGatewayListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `ServiceGatewayPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"virtualNetwork":{"$ref":"./virtualNetwork.json#/definitions/VirtualN...` |
+
+### Changes for `ServiceGatewayService`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayService__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string"},"properties":{"$ref":"#/definitions/ServiceG...` |
+
+### Changes for `ServiceGatewayServicePropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayServicePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"serviceType":{"type":"string","enum":["Inbound","Outbound","InboundO...` |
+
+### Changes for `ServiceGatewayServiceRequest`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayServiceRequest__deleted` | deleted | `{"type":"object","properties":{"isDelete":{"type":"boolean"},"service":{"$ref":"#/definitions/Servic...` |
+
+### Changes for `ServiceGatewaySku`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewaySku__deleted` | deleted | `{"type":"object","properties":{"name":{"type":"string","enum":["Standard"],"x-ms-enum":{"name":"Serv...` |
+
+### Changes for `ServiceGatewayUpdateAddressLocationsRequest`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayUpdateAddressLocationsRequest__deleted` | deleted | `{"type":"object","properties":{"action":{"type":"string","enum":["FullUpdate","PartialUpdate"],"x-ms...` |
+
+### Changes for `ServiceGatewayUpdateServicesRequest`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceGatewayUpdateServicesRequest__deleted` | deleted | `{"type":"object","properties":{"action":{"type":"string","enum":["FullUpdate","PartialUpdate"],"x-ms...` |
+
+### Changes for `VirtualNetworkAppliance`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualNetworkAppliance__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualNetworkApplianceProperties...` |
+
+### Changes for `VirtualNetworkApplianceIpConfiguration`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualNetworkApplianceIpConfiguration__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualNetworkApplianceIpConfigur...` |
+
+### Changes for `VirtualNetworkApplianceIpConfigurationProperties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualNetworkApplianceIpConfigurationProperties__deleted` | deleted | `{"type":"object","properties":{"privateIPAddress":{"type":"string"},"privateIPAllocationMethod":{"$r...` |
+
+### Changes for `VirtualNetworkApplianceListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualNetworkApplianceListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `VirtualNetworkAppliancePropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualNetworkAppliancePropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"bandwidthInGbps":{"type":"string"},"ipConfigurations":{"type":"array...` |
+
+### Changes for `VirtualNetworkTap`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualNetworkTap__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualNetworkTapPropertiesFormat...` |
+
+### Changes for `VirtualNetworkTapListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualNetworkTapListResult__deleted` | deleted | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `VirtualNetworkTapPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualNetworkTapPropertiesFormat__deleted` | deleted | `{"type":"object","properties":{"networkInterfaceTapConfigurations":{"type":"array","items":{"$ref":"...` |
 
 ### Changes for `BastionHostPropertiesFormatNetworkAcls`
 
@@ -498,6 +1051,54 @@
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.NetworkVirtualAppliancePropertiesFormatNetworkProfile__added` | added | `{"type":"object","properties":{"networkInterfaceConfigurations":{"type":"array","items":{"$ref":"#/d...` |
+
+### Changes for `PrivateLinkServicePropertiesAutoApproval`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PrivateLinkServicePropertiesAutoApproval__added` | added | `{"type":"object","allOf":[{"$ref":"#/definitions/ResourceSet"}]}` |
+
+### Changes for `PrivateLinkServicePropertiesVisibility`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PrivateLinkServicePropertiesVisibility__added` | added | `{"type":"object","allOf":[{"$ref":"#/definitions/ResourceSet"}]}` |
+
+### Changes for `VirtualRouter`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualRouter__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualRouterPropertiesFormat","x...` |
+
+### Changes for `VirtualRouterListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualRouterListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `VirtualRouterPeering`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualRouterPeering__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/VirtualRouterPeeringProperties","...` |
+
+### Changes for `VirtualRouterPeeringListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualRouterPeeringListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `VirtualRouterPeeringProperties`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualRouterPeeringProperties__added` | added | `{"type":"object","properties":{"peerAsn":{"type":"integer","format":"int64","minimum":0,"maximum":42...` |
+
+### Changes for `VirtualRouterPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.VirtualRouterPropertiesFormat__added` | added | `{"type":"object","properties":{"virtualRouterAsn":{"type":"integer","format":"int64","minimum":0,"ma...` |
 
 ### Changes for `enum`
 
@@ -665,12 +1266,6 @@
 | `definitions.VirtualApplianceSkuProperties.properties.marketPlaceVersion.readOnly__deleted` | deleted | `false` |
 | `definitions.VirtualApplianceSkuProperties.properties.vendor.readOnly__deleted` | deleted | `false` |
 | `definitions.VirtualNetworkPropertiesFormat.properties.privateEndpointVNetPolicies.readOnly__deleted` | deleted | `false` |
-| `definitions.VirtualRouterPeeringProperties.properties.peerAsn.readOnly__deleted` | deleted | `false` |
-| `definitions.VirtualRouterPeeringProperties.properties.peerIp.readOnly__deleted` | deleted | `false` |
-| `definitions.VirtualRouterPropertiesFormat.properties.hostedGateway.readOnly__deleted` | deleted | `false` |
-| `definitions.VirtualRouterPropertiesFormat.properties.hostedSubnet.readOnly__deleted` | deleted | `false` |
-| `definitions.VirtualRouterPropertiesFormat.properties.virtualRouterAsn.readOnly__deleted` | deleted | `false` |
-| `definitions.VirtualRouterPropertiesFormat.properties.virtualRouterIps.readOnly__deleted` | deleted | `false` |
 
 ### Changes for `allOf`
 
@@ -792,6 +1387,7 @@
 | `definitions.NatGatewayPropertiesFormat.properties.publicIpAddressesV6.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.NatGatewayPropertiesFormat.properties.publicIpPrefixes.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.NatGatewayPropertiesFormat.properties.publicIpPrefixesV6.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.NatGatewayPropertiesFormat.properties.serviceGateway.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.NatGatewayPropertiesFormat.properties.sourceVirtualNetwork.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.NatGatewayPropertiesFormat.properties.subnets.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.NetworkIntentPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
@@ -903,6 +1499,7 @@
 | `definitions.SubnetPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
 | `definitions.SubnetPropertiesFormat.properties.routeTable.$ref` | `./routeTable.json#/definitions/RouteTable` | `#/definitions/RouteTable` |
 | `definitions.SubnetPropertiesFormat.properties.serviceEndpointPolicies.items.$ref` | `./serviceEndpointPolicy.json#/definitions/ServiceEndpointPolicy` | `./expressRoute.json#/definitions/ServiceEndpointPolicy` |
+| `definitions.SubnetPropertiesFormat.properties.serviceGateway.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.VerifierWorkspace.allOf[0].$ref` | `./network.json#/definitions/CommonTrackedResource` | `./common.json#/definitions/CommonTrackedResource` |
 | `definitions.VerifierWorkspace.properties.systemData.$ref` | `./network.json#/definitions/SystemData` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData` |
 | `definitions.VirtualApplianceSite.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
@@ -917,16 +1514,10 @@
 | `definitions.VirtualNetworkPropertiesFormat.properties.defaultPublicNatGateway.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.VirtualNetworkPropertiesFormat.properties.ipAllocations.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.VirtualNetworkPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.VirtualRouter.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
-| `definitions.VirtualRouterPeering.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
-| `definitions.VirtualRouterPeeringProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.VirtualRouterPropertiesFormat.properties.hostedGateway.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
-| `definitions.VirtualRouterPropertiesFormat.properties.hostedSubnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
-| `definitions.VirtualRouterPropertiesFormat.properties.peerings.items.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
-| `definitions.VirtualRouterPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
 | `definitions.VM.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
 | `info.description` | `The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.` | `APIs to manage web application firewall rules.` |
 | `info.title` | `NetworkManagementClient` | `WebApplicationFirewallManagement` |
+| `info.version` | `2018-10-01` | `2025-05-01` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/applicationSecurityGroups'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bastionHosts'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/customIpPrefixes'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
@@ -958,7 +1549,6 @@
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/routeTables'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/securityPartnerProviders'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworks'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualRouters'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Compute/cloudServices/{resourceName}/providers/microsoft.Network/cloudServiceSlots'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Compute/cloudServices/{resourceName}/providers/microsoft.Network/cloudServiceSlots/{singletonResource}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Compute/cloudServices/{resourceName}/providers/microsoft.Network/cloudServiceSlots/{singletonResource}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
@@ -1204,12 +1794,4 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworks/{virtualNetworkName}/virtualNetworkPeerings/{virtualNetworkPeeringName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/Error` | `./common.json#/definitions/Error` |
 

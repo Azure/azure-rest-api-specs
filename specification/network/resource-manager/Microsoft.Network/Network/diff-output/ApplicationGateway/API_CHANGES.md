@@ -4,8 +4,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests'].get.tags__added` | added | `["ApplicationGateways"]` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests/dafault'].get.tags__added` | added | `["ApplicationGateways"]` |
 | `tags__added` | added | `[{"name":"ApplicationGateways"},{"name":"ApplicationGatewayPrivateLinkResources"},{"name":"Applicati...` |
 
 ### Changes for `$ref`
@@ -265,7 +263,7 @@
 | `definitions.ExceptionEntry.properties.selectorMatchOperator.enum__deleted` | deleted | `["Equals","Contains","StartsWith","EndsWith"]` |
 | `definitions.ExceptionEntry.properties.valueMatchOperator.enum__deleted` | deleted | `["Equals","Contains","StartsWith","EndsWith","IPMatch"]` |
 | `definitions.GroupByVariable.properties.variableName.enum__deleted` | deleted | `["ClientAddr","GeoLocation","None","ClientAddrXFFHeader","GeoLocationXFFHeader"]` |
-| `definitions.ManagedRuleOverride.properties.action.enum__deleted` | deleted | `["AnomalyScoring","Allow","Block","Log","JSChallenge"]` |
+| `definitions.ManagedRuleOverride.properties.action.enum__deleted` | deleted | `["AnomalyScoring","Allow","Block","Log","JSChallenge","CAPTCHA"]` |
 | `definitions.ManagedRuleOverride.properties.sensitivity.enum__deleted` | deleted | `["Low","Medium","High"]` |
 | `definitions.ManagedRuleOverride.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |
 | `definitions.MatchCondition.properties.operator.enum__deleted` | deleted | `["IPMatch","Equal","Contains","LessThan","GreaterThan","LessThanOrEqual","GreaterThanOrEqual","Begin...` |
@@ -275,7 +273,7 @@
 | `definitions.OwaspCrsExclusionEntry.properties.selectorMatchOperator.enum__deleted` | deleted | `["Equals","Contains","StartsWith","EndsWith","EqualsAny"]` |
 | `definitions.PolicySettings.properties.mode.enum__deleted` | deleted | `["Prevention","Detection"]` |
 | `definitions.PolicySettings.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |
-| `definitions.WebApplicationFirewallCustomRule.properties.action.enum__deleted` | deleted | `["Allow","Block","Log","JSChallenge"]` |
+| `definitions.WebApplicationFirewallCustomRule.properties.action.enum__deleted` | deleted | `["Allow","Block","Log","JSChallenge","CAPTCHA"]` |
 | `definitions.WebApplicationFirewallCustomRule.properties.rateLimitDuration.enum__deleted` | deleted | `["OneMin","FiveMins"]` |
 | `definitions.WebApplicationFirewallCustomRule.properties.ruleType.enum__deleted` | deleted | `["MatchRule","RateLimitRule","Invalid"]` |
 | `definitions.WebApplicationFirewallCustomRule.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |

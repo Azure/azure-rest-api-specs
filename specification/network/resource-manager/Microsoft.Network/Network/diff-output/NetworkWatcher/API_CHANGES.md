@@ -4,8 +4,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ConnectionMonitorResult.properties.tags__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"}}` |
-| `tags__added` | added | `[{"name":"NetworkWatchers"},{"name":"ConnectionMonitorResults"},{"name":"FlowLogs"}]` |
+| `tags__added` | added | `[{"name":"NetworkWatchers"},{"name":"PacketCaptures"},{"name":"ConnectionMonitors"},{"name":"FlowLog...` |
 
 ### Changes for `headers`
 

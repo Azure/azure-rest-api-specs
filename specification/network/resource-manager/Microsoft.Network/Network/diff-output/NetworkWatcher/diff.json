@@ -4,7 +4,10 @@
       "name": "NetworkWatchers"
     },
     {
-      "name": "ConnectionMonitorResults"
+      "name": "PacketCaptures"
+    },
+    {
+      "name": "ConnectionMonitors"
     },
     {
       "name": "FlowLogs"
@@ -106,16 +109,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "ConnectionMonitors"
-          ],
-          [
-            "+",
-            "ConnectionMonitorResults"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -130,16 +123,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "ConnectionMonitors"
-          ],
-          [
-            "+",
-            "ConnectionMonitorResults"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -152,16 +135,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "ConnectionMonitors"
-          ],
-          [
-            "+",
-            "ConnectionMonitorResults"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -212,16 +185,6 @@
         }
       },
       "patch": {
-        "tags": [
-          [
-            "-",
-            "ConnectionMonitors"
-          ],
-          [
-            "+",
-            "ConnectionMonitorResults"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -253,16 +216,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "ConnectionMonitors"
-          ],
-          [
-            "+",
-            "ConnectionMonitorResults"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -285,16 +238,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/stop": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "ConnectionMonitors"
-          ],
-          [
-            "+",
-            "ConnectionMonitorResults"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -449,12 +392,11 @@
       "get": {
         "tags": [
           [
-            "-",
-            "PacketCaptures"
-          ],
-          [
             "+",
             "NetworkWatchers"
+          ],
+          [
+            " "
           ]
         ]
       }
@@ -463,24 +405,22 @@
       "get": {
         "tags": [
           [
-            "-",
-            "PacketCaptures"
-          ],
-          [
             "+",
             "NetworkWatchers"
+          ],
+          [
+            " "
           ]
         ]
       },
       "put": {
         "tags": [
           [
-            "-",
-            "PacketCaptures"
-          ],
-          [
             "+",
             "NetworkWatchers"
+          ],
+          [
+            " "
           ]
         ],
         "responses": {
@@ -500,12 +440,11 @@
       "delete": {
         "tags": [
           [
-            "-",
-            "PacketCaptures"
-          ],
-          [
             "+",
             "NetworkWatchers"
+          ],
+          [
+            " "
           ]
         ],
         "responses": {
@@ -524,12 +463,11 @@
       "post": {
         "tags": [
           [
-            "-",
-            "PacketCaptures"
-          ],
-          [
             "+",
             "NetworkWatchers"
+          ],
+          [
+            " "
           ]
         ],
         "responses": {
@@ -548,12 +486,11 @@
       "post": {
         "tags": [
           [
-            "-",
-            "PacketCaptures"
-          ],
-          [
             "+",
             "NetworkWatchers"
+          ],
+          [
+            " "
           ]
         ],
         "responses": {
@@ -876,12 +813,6 @@
         },
         "location__deleted": {
           "type": "string"
-        },
-        "tags__deleted": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },

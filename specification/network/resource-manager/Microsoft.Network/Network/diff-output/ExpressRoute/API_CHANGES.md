@@ -1,12 +1,111 @@
+## Changed Paths
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/routeFilters
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/providers/microsoft.Network/serviceEndpointPolicies
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions
+Change Type: added
+
+Path: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}
+Change Type: added
+
 ## Swagger Changes
 
 ### Changes for `tags`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities'].get.tags__deleted` | deleted | `["BgpServiceCommunities"]` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders'].get.tags__deleted` | deleted | `["ExpressRouteServiceProviders"]` |
 | `tags__added` | added | `[{"name":"ExpressRouteProviderPorts"},{"name":"ExpressRouteCircuitAuthorizations"},{"name":"ExpressR...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities__added']` | added | `{"get":{"operationId":"BgpServiceCommunities_List","tags":["BgpServiceCommunities"],"parameters":[],...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/routeFilters`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/routeFilters__added']` | added | `{"get":{"operationId":"RouteFilters_List","tags":["RouteFilters"],"parameters":[],"responses":{"200"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/providers/microsoft.Network/serviceEndpointPolicies`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/serviceEndpointPolicies__added']` | added | `{"get":{"operationId":"ServiceEndpointPolicies_List","tags":["ServiceEndpointPolicies"],"parameters"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters__added']` | added | `{"get":{"operationId":"RouteFilters_ListByResourceGroup","tags":["RouteFilters"],"parameters":[],"re...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}__added']` | added | `{"get":{"operationId":"RouteFilters_Get","tags":["RouteFilters"],"parameters":[{"name":"routeFilterN...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules__added']` | added | `{"get":{"operationId":"RouteFilterRules_ListByRouteFilter","tags":["RouteFilters","RouteFilterRules"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}__added']` | added | `{"get":{"operationId":"RouteFilterRules_Get","tags":["RouteFilters","RouteFilterRules"],"parameters"...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies__added']` | added | `{"get":{"operationId":"ServiceEndpointPolicies_ListByResourceGroup","tags":["ServiceEndpointPolicies...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}__added']` | added | `{"get":{"operationId":"ServiceEndpointPolicies_Get","tags":["ServiceEndpointPolicies"],"parameters":...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions__added']` | added | `{"get":{"operationId":"ServiceEndpointPolicyDefinitions_ListByResourceGroup","tags":["ServiceEndpoin...` |
+
+### Changes for `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}__added']` | added | `{"get":{"operationId":"ServiceEndpointPolicyDefinitions_Get","tags":["ServiceEndpointPolicyDefinitio...` |
 
 ### Changes for `headers`
 
@@ -31,12 +130,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}/routeTablesSummary/{devicePath}'].post.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}'].delete.responses.202.headers__added` | added | `{"Location":{"type":"string","description":"The Location header contains the URL where the status of...` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}'].put.responses.201.headers__added` | added | `{"Azure-AsyncOperation":{"type":"string","description":"A link to the status monitor"}}` |
 
 ### Changes for `final-state-schema`
 
@@ -50,10 +143,6 @@
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRouteCrossConnectionPeering` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRoutePort` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ExpressRoutePortAuthorization` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/RouteFilter` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/RouteFilterRule` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ServiceEndpointPolicy` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}'].put['x-ms-long-running-operation-options']['final-state-schema__added']` | added | `#/definitions/ServiceEndpointPolicyDefinition` |
 
 ### Changes for `format`
 
@@ -66,8 +155,114 @@
 | `definitions.ExpressRoutePortsLocationBandwidths.properties.valueInGbps.format__added` | added | `int32` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/authorizations/{authorizationName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
+
+### Changes for `BGPCommunity`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BGPCommunity__added` | added | `{"type":"object","properties":{"serviceSupportedRegion":{"type":"string"},"communityName":{"type":"s...` |
+
+### Changes for `BgpServiceCommunity`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BgpServiceCommunity__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/BgpServiceCommunityPropertiesForm...` |
+
+### Changes for `BgpServiceCommunityListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BgpServiceCommunityListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `BgpServiceCommunityPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.BgpServiceCommunityPropertiesFormat__added` | added | `{"type":"object","properties":{"serviceName":{"type":"string"},"bgpCommunities":{"type":"array","ite...` |
+
+### Changes for `PatchRouteFilter`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PatchRouteFilter__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteFilterPropertiesFormat","x-m...` |
+
+### Changes for `PatchRouteFilterRule`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.PatchRouteFilterRule__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteFilterRulePropertiesFormat",...` |
+
+### Changes for `RouteFilter`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilter__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteFilterPropertiesFormat","x-m...` |
+
+### Changes for `RouteFilterListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `RouteFilterPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterPropertiesFormat__added` | added | `{"type":"object","properties":{"rules":{"type":"array","items":{"$ref":"#/definitions/RouteFilterRul...` |
+
+### Changes for `RouteFilterRule`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterRule__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/RouteFilterRulePropertiesFormat",...` |
+
+### Changes for `RouteFilterRuleListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterRuleListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `RouteFilterRulePropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.RouteFilterRulePropertiesFormat__added` | added | `{"type":"object","properties":{"access":{"$ref":"./common.json#/definitions/Access"},"routeFilterRul...` |
+
+### Changes for `ServiceEndpointPolicy`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicy__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ServiceEndpointPolicyPropertiesFo...` |
+
+### Changes for `ServiceEndpointPolicyDefinition`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyDefinition__added` | added | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ServiceEndpointPolicyDefinitionPr...` |
+
+### Changes for `ServiceEndpointPolicyDefinitionListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyDefinitionListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `ServiceEndpointPolicyDefinitionPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyDefinitionPropertiesFormat__added` | added | `{"type":"object","properties":{"description":{"type":"string"},"service":{"type":"string"},"serviceR...` |
+
+### Changes for `ServiceEndpointPolicyListResult`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyListResult__added` | added | `{"type":"object","description":"[Placeholder] Discription for page model","properties":{"value":{"ty...` |
+
+### Changes for `ServiceEndpointPolicyPropertiesFormat`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ServiceEndpointPolicyPropertiesFormat__added` | added | `{"type":"object","properties":{"serviceEndpointPolicyDefinitions":{"type":"array","items":{"$ref":"#...` |
 
 ### Changes for `type`
 
@@ -98,8 +293,6 @@
 | `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.state.type__deleted` | deleted | `string` |
 | `definitions.PeerExpressRouteCircuitConnection.properties.type__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus.type__deleted` | deleted | `string` |
-| `definitions.RouteFilterRulePropertiesFormat.properties.routeFilterRuleType.type__deleted` | deleted | `string` |
-| `definitions.ServiceEndpointPolicyDefinition.properties.type__deleted` | deleted | `{"type":"string"}` |
 
 ### Changes for `enum`
 
@@ -124,7 +317,6 @@
 | `definitions.Ipv6CircuitConnectionConfig.properties.circuitConnectionStatus.enum__deleted` | deleted | `["Connected","Connecting","Disconnected"]` |
 | `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.state.enum__deleted` | deleted | `["Disabled","Enabled"]` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus.enum__deleted` | deleted | `["Connected","Connecting","Disconnected"]` |
-| `definitions.RouteFilterRulePropertiesFormat.properties.routeFilterRuleType.enum__deleted` | deleted | `["Community"]` |
 
 ### Changes for `x-ms-enum`
 
@@ -149,7 +341,6 @@
 | `definitions.Ipv6CircuitConnectionConfig.properties.circuitConnectionStatus['x-ms-enum__deleted']` | deleted | `{"name":"CircuitConnectionStatus","modelAsString":true}` |
 | `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.state['x-ms-enum__deleted']` | deleted | `{"name":"ExpressRouteCircuitPeeringState","modelAsString":true}` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus['x-ms-enum__deleted']` | deleted | `{"name":"CircuitConnectionStatus","modelAsString":true}` |
-| `definitions.RouteFilterRulePropertiesFormat.properties.routeFilterRuleType['x-ms-enum__deleted']` | deleted | `{"name":"RouteFilterRuleType","modelAsString":true}` |
 
 ### Changes for `$ref`
 
@@ -174,14 +365,12 @@
 | `definitions.Ipv6CircuitConnectionConfig.properties.circuitConnectionStatus.$ref__added` | added | `./common.json#/definitions/CircuitConnectionStatus` |
 | `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.state.$ref__added` | added | `./common.json#/definitions/ExpressRouteCircuitPeeringState` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.circuitConnectionStatus.$ref__added` | added | `./common.json#/definitions/CircuitConnectionStatus` |
-| `definitions.RouteFilterRulePropertiesFormat.properties.routeFilterRuleType.$ref__added` | added | `./common.json#/definitions/RouteFilterRuleType` |
 
 ### Changes for `required`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AuthorizationListResult.required__added` | added | `["value"]` |
-| `definitions.BgpServiceCommunityListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCircuitListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteCircuitPeeringListResult.required__added` | added | `["value"]` |
@@ -198,11 +387,6 @@
 | `definitions.ExpressRouteProviderPortListResult.required__added` | added | `["value"]` |
 | `definitions.ExpressRouteServiceProviderListResult.required__added` | added | `["value"]` |
 | `definitions.PeerExpressRouteCircuitConnectionListResult.required__added` | added | `["value"]` |
-| `definitions.RouteFilter.required__deleted` | deleted | `["location"]` |
-| `definitions.RouteFilterListResult.required__added` | added | `["value"]` |
-| `definitions.RouteFilterRuleListResult.required__added` | added | `["value"]` |
-| `definitions.ServiceEndpointPolicyDefinitionListResult.required__added` | added | `["value"]` |
-| `definitions.ServiceEndpointPolicyListResult.required__added` | added | `["value"]` |
 
 ### Changes for `name`
 
@@ -214,7 +398,6 @@
 | `definitions.ExpressRoutePortAuthorization.properties.name__deleted` | deleted | `{"type":"string"}` |
 | `definitions.ExpressRouteProviderPort.properties.name__deleted` | deleted | `{"type":"string","readOnly":true}` |
 | `definitions.PeerExpressRouteCircuitConnection.properties.name__deleted` | deleted | `{"type":"string"}` |
-| `definitions.ServiceEndpointPolicyDefinition.properties.name__deleted` | deleted | `{"type":"string"}` |
 
 ### Changes for `readOnly`
 
@@ -233,7 +416,6 @@
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.AuthorizationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.BgpServiceCommunity.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
 | `definitions.ExpressRouteCircuit.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
 | `definitions.ExpressRouteCircuitAuthorization.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
 | `definitions.ExpressRouteCircuitConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
@@ -268,26 +450,12 @@
 | `definitions.ExpressRouteServiceProvider.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
 | `definitions.ExpressRouteServiceProviderPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
 | `definitions.Ipv6ExpressRouteCircuitPeeringConfig.properties.routeFilter.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
-| `definitions.PatchRouteFilter.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
-| `definitions.PatchRouteFilterRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.PeerExpressRouteCircuitConnection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.expressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.peerExpressRouteCircuitPeering.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `definitions.PeerExpressRouteCircuitConnectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.RouteFilter.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/ResourceWithRequiredLocation` |
-| `definitions.RouteFilterPropertiesFormat.properties.ipv6Peerings.items.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering` | `#/definitions/ExpressRouteCircuitPeering` |
-| `definitions.RouteFilterPropertiesFormat.properties.peerings.items.$ref` | `./expressRouteCircuit.json#/definitions/ExpressRouteCircuitPeering` | `#/definitions/ExpressRouteCircuitPeering` |
-| `definitions.RouteFilterPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.RouteFilterRule.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
-| `definitions.RouteFilterRulePropertiesFormat.properties.access.$ref` | `./network.json#/definitions/Access` | `./common.json#/definitions/Access` |
-| `definitions.RouteFilterRulePropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.ServiceEndpointPolicy.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
-| `definitions.ServiceEndpointPolicyDefinition.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResourceModel` |
-| `definitions.ServiceEndpointPolicyDefinitionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
-| `definitions.ServiceEndpointPolicyPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
 | `info.description` | `The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.` | `APIs to manage web application firewall rules.` |
 | `info.title` | `NetworkManagementClient` | `WebApplicationFirewallManagement` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/bgpServiceCommunities'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteCircuits'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteCrossConnections'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRoutePorts'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
@@ -296,8 +464,6 @@
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteProviderPorts/{providerport}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteServiceProviders'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/routeFilters'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/serviceEndpointPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRouteCircuits/{circuitName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
@@ -366,40 +532,4 @@ For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/generateLoa'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/links'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/expressRoutePorts/{expressRoutePortName}/links/{linkName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers.Location.description` | `URL for determining when an operation has completed. Send a GET request to the URL in Location header.
-The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.
-
-For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers` | `The Location header contains the URL where the status of the long running operation can be checked.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `URL for checking the ongoing status of the operation.
-To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.
-
-For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations` | `A link to the status monitor` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json#/definitions/TagsObject` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202.headers.Location.description` | `URL for determining when an operation has completed. Send a GET request to the URL in Location header.
-The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state.
-
-For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers` | `The Location header contains the URL where the status of the long running operation can be checked.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.202.headers['Azure-AsyncOperation'].description` | `URL for checking the ongoing status of the operation.
-To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.
-
-For more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations` | `A link to the status monitor` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json#/definitions/TagsObject` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/serviceEndpointPolicies/{serviceEndpointPolicyName}/serviceEndpointPolicyDefinitions/{serviceEndpointPolicyDefinitionName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 

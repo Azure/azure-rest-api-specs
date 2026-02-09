@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApplicationFirewallManagement",
-    "version": "2025-03-01",
+    "version": "2025-05-01",
     "description": "APIs to manage web application firewall rules."
   },
   "produces": [
@@ -22,7 +22,7 @@
       "name": "LocalNetworkGateways"
     },
     {
-      "name": "VirtualNetworkGatewayNatRules"
+      "name": "VirtualNetworkTap"
     },
     {
       "name": "VirtualNetworkTaps"
@@ -1106,9 +1106,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokeAbortMigration",
-        "tags": [
-          "VirtualNetworkGateways"
-        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1145,9 +1142,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokeCommitMigration",
-        "tags": [
-          "VirtualNetworkGateways"
-        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1272,9 +1266,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokeExecuteMigration",
-        "tags": [
-          "VirtualNetworkGateways"
-        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1950,9 +1941,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules": {
       "get": {
         "operationId": "VirtualNetworkGatewayNatRules_ListByVirtualNetworkGateway",
-        "tags": [
-          "VirtualNetworkGatewayNatRules"
-        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -1988,9 +1976,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules/{natRuleName}": {
       "get": {
         "operationId": "VirtualNetworkGatewayNatRules_Get",
-        "tags": [
-          "VirtualNetworkGatewayNatRules"
-        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -2027,9 +2012,6 @@
       },
       "put": {
         "operationId": "VirtualNetworkGatewayNatRules_CreateOrUpdate",
-        "tags": [
-          "VirtualNetworkGatewayNatRules"
-        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -2091,9 +2073,6 @@
       },
       "delete": {
         "operationId": "VirtualNetworkGatewayNatRules_Delete",
-        "tags": [
-          "VirtualNetworkGatewayNatRules"
-        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -2142,9 +2121,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration": {
       "post": {
         "operationId": "VirtualNetworkGateways_InvokePrepareMigration",
-        "tags": [
-          "VirtualNetworkGateways"
-        ],
         "parameters": [
           {
             "name": "virtualNetworkGatewayName",
@@ -2613,7 +2589,7 @@
       "get": {
         "operationId": "VirtualNetworkTaps_Get",
         "tags": [
-          "VirtualNetworkTaps"
+          "VirtualNetworkTap"
         ],
         "parameters": [
           {
@@ -2646,7 +2622,7 @@
       "put": {
         "operationId": "VirtualNetworkTaps_CreateOrUpdate",
         "tags": [
-          "VirtualNetworkTaps"
+          "VirtualNetworkTap"
         ],
         "parameters": [
           {
@@ -2704,7 +2680,7 @@
       "patch": {
         "operationId": "VirtualNetworkTaps_UpdateTags",
         "tags": [
-          "VirtualNetworkTaps"
+          "VirtualNetworkTap"
         ],
         "parameters": [
           {
@@ -2745,7 +2721,7 @@
       "delete": {
         "operationId": "VirtualNetworkTaps_Delete",
         "tags": [
-          "VirtualNetworkTaps"
+          "VirtualNetworkTap"
         ],
         "parameters": [
           {

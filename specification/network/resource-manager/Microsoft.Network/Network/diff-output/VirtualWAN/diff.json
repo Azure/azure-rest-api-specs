@@ -1,40 +1,19 @@
 {
   "tags__added": [
     {
-      "name": "NetworkVirtualApplianceConnections"
-    },
-    {
-      "name": "VirtualWANS"
+      "name": "VirtualWANs"
     },
     {
       "name": "VpnSites"
     },
     {
-      "name": "VpnSiteLinks"
-    },
-    {
       "name": "VpnServerConfigurations"
-    },
-    {
-      "name": "VpnServerConfigurationPolicyGroups"
-    },
-    {
-      "name": "VirtualHubs"
-    },
-    {
-      "name": "RouteMaps"
     },
     {
       "name": "VpnGateways"
     },
     {
-      "name": "ConnectionSharedKeyResults"
-    },
-    {
-      "name": "VpnSiteLinkConnections"
-    },
-    {
-      "name": "VpnGatewayNatRules"
+      "name": "vpnLinkConnections"
     },
     {
       "name": "P2SVpnGateways"
@@ -43,16 +22,7 @@
       "name": "ExpressRouteGateways"
     },
     {
-      "name": "BgpConnections"
-    },
-    {
-      "name": "HubIpConfigurations"
-    },
-    {
-      "name": "HubRouteTables"
-    },
-    {
-      "name": "RoutingIntents"
+      "name": "ExpressRouteConnections"
     }
   ],
   "info": {
@@ -66,6 +36,375 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualRouters__deleted": {
+      "get": {
+        "operationId": "VirtualRouters_List",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Virtual Routers for a given subscription": {
+            "$ref": "./examples/VirtualRouterListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters__deleted": {
+      "get": {
+        "operationId": "VirtualRouters_ListByResourceGroup",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Virtual Router for a given resource group": {
+            "$ref": "./examples/VirtualRouterListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}__deleted": {
+      "get": {
+        "operationId": "VirtualRouters_Get",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouter"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VirtualRouter": {
+            "$ref": "./examples/VirtualRouterGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualRouters_CreateOrUpdate",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualRouter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouter"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouter"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create VirtualRouter": {
+            "$ref": "./examples/VirtualRouterPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualRouters_Delete",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete VirtualRouter": {
+            "$ref": "./examples/VirtualRouterDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings__deleted": {
+      "get": {
+        "operationId": "VirtualRouterPeerings_List",
+        "tags": [
+          "VirtualRouterPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeeringListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Virtual Router Peerings for a given Virtual Router": {
+            "$ref": "./examples/VirtualRouterPeeringList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}__deleted": {
+      "get": {
+        "operationId": "VirtualRouterPeerings_Get",
+        "tags": [
+          "VirtualRouterPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeering"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Virtual Router Peering": {
+            "$ref": "./examples/VirtualRouterPeeringGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualRouterPeerings_CreateOrUpdate",
+        "tags": [
+          "VirtualRouterPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeering"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeering"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeering"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Virtual Router Peering": {
+            "$ref": "./examples/VirtualRouterPeeringPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualRouterPeerings_Delete",
+        "tags": [
+          "VirtualRouterPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete VirtualRouterPeering": {
+            "$ref": "./examples/VirtualRouterPeeringDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/expressRouteGateways": {
       "get": {
         "responses": {
@@ -82,9 +421,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/p2svpnGateways": {
       "get": {
-        "tags__added": [
-          "P2SVpnGateways"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -99,9 +435,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualHubs": {
       "get": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -116,9 +449,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualWans": {
       "get": {
-        "tags__added": [
-          "VirtualWANS"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -133,9 +463,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/vpnGateways": {
       "get": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -150,9 +477,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/vpnServerConfigurations": {
       "get": {
-        "tags__added": [
-          "VpnServerConfigurations"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -167,9 +491,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/vpnSites": {
       "get": {
-        "tags__added": [
-          "VpnSites"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -296,12 +617,11 @@
       "get": {
         "tags": [
           [
-            "-",
-            "ExpressRouteConnections"
-          ],
-          [
             "+",
             "ExpressRouteGateways"
+          ],
+          [
+            " "
           ]
         ],
         "responses": {
@@ -320,12 +640,11 @@
       "get": {
         "tags": [
           [
-            "-",
-            "ExpressRouteConnections"
-          ],
-          [
             "+",
             "ExpressRouteGateways"
+          ],
+          [
+            " "
           ]
         ],
         "responses": {
@@ -342,12 +661,11 @@
       "put": {
         "tags": [
           [
-            "-",
-            "ExpressRouteConnections"
-          ],
-          [
             "+",
             "ExpressRouteGateways"
+          ],
+          [
+            " "
           ]
         ],
         "responses": {
@@ -375,12 +693,11 @@
       "delete": {
         "tags": [
           [
-            "-",
-            "ExpressRouteConnections"
-          ],
-          [
             "+",
             "ExpressRouteGateways"
+          ],
+          [
+            " "
           ]
         ],
         "responses": {
@@ -405,9 +722,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections": {
       "get": {
-        "tags__added": [
-          "NetworkVirtualApplianceConnections"
-        ],
         "parameters": [
           [
             "~",
@@ -430,9 +744,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}": {
       "get": {
-        "tags__added": [
-          "NetworkVirtualApplianceConnections"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -445,9 +756,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "NetworkVirtualApplianceConnections"
-        ],
         "parameters": [
           [
             "~",
@@ -488,9 +796,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "NetworkVirtualApplianceConnections"
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -517,9 +822,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways": {
       "get": {
-        "tags__added": [
-          "P2SVpnGateways"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -534,9 +836,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/p2svpnGateways/{gatewayName}": {
       "get": {
-        "tags__added": [
-          "P2SVpnGateways"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -549,9 +848,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "P2SVpnGateways"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -614,9 +910,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "P2SVpnGateways"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -749,9 +1042,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs": {
       "get": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -766,9 +1056,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}": {
       "get": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -781,9 +1068,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -807,16 +1091,6 @@
         }
       },
       "patch": {
-        "tags": [
-          [
-            "-",
-            "VirtualWANs"
-          ],
-          [
-            "+",
-            "VirtualHubs"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -845,9 +1119,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -870,9 +1141,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections": {
       "get": {
-        "tags__added": [
-          "BgpConnections"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -887,9 +1155,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections/{connectionName}": {
       "get": {
-        "tags__added": [
-          "BgpConnections"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -902,9 +1167,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "BgpConnections"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -928,9 +1190,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "BgpConnections"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -953,9 +1212,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/advertisedRoutes": {
       "post": {
-        "tags__added": [
-          "BgpConnections"
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -990,9 +1246,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{hubName}/bgpConnections/{connectionName}/learnedRoutes": {
       "post": {
-        "tags__added": [
-          "BgpConnections"
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -1027,9 +1280,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/effectiveRoutes": {
       "post": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1052,9 +1302,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables": {
       "get": {
-        "tags__added": [
-          "HubRouteTables"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1069,9 +1316,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubRouteTables/{routeTableName}": {
       "get": {
-        "tags__added": [
-          "HubRouteTables"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1084,9 +1328,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "HubRouteTables"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1110,9 +1351,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "HubRouteTables"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1135,9 +1373,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections": {
       "get": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1152,9 +1387,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}": {
       "get": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1167,9 +1399,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1193,9 +1422,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1218,9 +1444,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/inboundRoutes": {
       "post": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1243,9 +1466,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations": {
       "get": {
-        "tags__added": [
-          "HubIpConfigurations"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1260,9 +1480,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/ipConfigurations/{ipConfigName}": {
       "get": {
-        "tags__added": [
-          "HubIpConfigurations"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1275,9 +1492,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "HubIpConfigurations"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1301,9 +1515,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "HubIpConfigurations"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1326,9 +1537,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/outboundRoutes": {
       "post": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1351,9 +1559,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeMaps": {
       "get": {
-        "tags__added": [
-          "RouteMaps"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1368,9 +1573,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeMaps/{routeMapName}": {
       "get": {
-        "tags__added": [
-          "RouteMaps"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1383,9 +1585,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "RouteMaps"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1409,9 +1608,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "RouteMaps"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1434,9 +1630,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables": {
       "get": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1451,9 +1644,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}": {
       "get": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1466,9 +1656,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1492,9 +1679,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VirtualHubs"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1517,9 +1701,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent": {
       "get": {
-        "tags__added": [
-          "RoutingIntents"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1534,9 +1715,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualHubs/{virtualHubName}/routingIntent/{routingIntentName}": {
       "get": {
-        "tags__added": [
-          "RoutingIntents"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1549,9 +1727,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "RoutingIntents"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1575,9 +1750,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "RoutingIntents"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1600,9 +1772,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans": {
       "get": {
-        "tags__added": [
-          "VirtualWANS"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1617,9 +1786,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{VirtualWANName}": {
       "get": {
-        "tags__added": [
-          "VirtualWANS"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1632,9 +1798,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VirtualWANS"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1658,16 +1821,6 @@
         }
       },
       "patch": {
-        "tags": [
-          [
-            "-",
-            "VirtualWANs"
-          ],
-          [
-            "+",
-            "VirtualWANS"
-          ]
-        ],
         "parameters": [
           [
             " "
@@ -1696,9 +1849,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VirtualWANS"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1721,9 +1871,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile": {
       "post": {
-        "tags__added": [
-          "VirtualWANS"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1746,9 +1893,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders": {
       "get": {
-        "tags__added": [
-          "VirtualWANS"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1763,9 +1907,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
       "post": {
-        "tags__added": [
-          "VirtualWANS"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1788,9 +1929,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations": {
       "post": {
-        "tags__added": [
-          "VirtualWANS"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1813,9 +1951,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways": {
       "get": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1830,9 +1965,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}": {
       "get": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1845,9 +1977,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1910,9 +2039,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1935,9 +2061,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/natRules": {
       "get": {
-        "tags__added": [
-          "VpnGatewayNatRules"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1952,9 +2075,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/natRules/{natRuleName}": {
       "get": {
-        "tags__added": [
-          "VpnGatewayNatRules"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1967,9 +2087,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VpnGatewayNatRules"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1993,9 +2110,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VpnGatewayNatRules"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -2096,9 +2210,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections": {
       "get": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2113,9 +2224,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}": {
       "get": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2128,9 +2236,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -2154,9 +2259,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -2179,9 +2281,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/startpacketcapture": {
       "post": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -2210,9 +2309,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{vpnConnectionName}/stoppacketcapture": {
       "post": {
-        "tags__added": [
-          "VpnGateways"
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -2241,9 +2337,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections": {
       "get": {
-        "tags__added": [
-          "VpnSiteLinkConnections"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2258,9 +2351,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}": {
       "get": {
-        "tags__added": [
-          "VpnSiteLinkConnections"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2275,9 +2365,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/getikesas": {
       "post": {
-        "tags__added": [
-          "VpnSiteLinkConnections"
-        ],
         "responses": {
           "200": {
             "schema": {
@@ -2298,16 +2385,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/resetconnection": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "vpnLinkConnections"
-          ],
-          [
-            "+",
-            "VpnSiteLinkConnections"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -2322,9 +2399,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys": {
       "get": {
-        "tags__added": [
-          "ConnectionSharedKeyResults"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2339,9 +2413,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default": {
       "get": {
-        "tags__added": [
-          "ConnectionSharedKeyResults"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2354,9 +2425,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "ConnectionSharedKeyResults"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -2382,9 +2450,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}/vpnLinkConnections/{linkConnectionName}/sharedKeys/default/listSharedKey": {
       "post": {
-        "tags__added": [
-          "ConnectionSharedKeyResults"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2399,9 +2464,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations": {
       "get": {
-        "tags__added": [
-          "VpnServerConfigurations"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2416,9 +2478,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}": {
       "get": {
-        "tags__added": [
-          "VpnServerConfigurations"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2431,9 +2490,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VpnServerConfigurations"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -2485,9 +2541,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VpnServerConfigurations"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -2510,9 +2563,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/configurationPolicyGroups": {
       "get": {
-        "tags__added": [
-          "VpnServerConfigurationPolicyGroups"
-        ],
+        "operationId": {
+          "__old": "ConfigurationPolicyGroups_ListByVpnServerConfiguration",
+          "__new": "configurationPolicyGroups_ListByVpnServerConfiguration"
+        },
         "responses": {
           "default": {
             "schema": {
@@ -2527,9 +2581,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/configurationPolicyGroups/{configurationPolicyGroupName}": {
       "get": {
-        "tags__added": [
-          "VpnServerConfigurationPolicyGroups"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2542,9 +2593,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VpnServerConfigurationPolicyGroups"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -2568,9 +2616,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VpnServerConfigurationPolicyGroups"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -2623,9 +2668,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites": {
       "get": {
-        "tags__added": [
-          "VpnSites"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2640,9 +2682,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites/{vpnSiteName}": {
       "get": {
-        "tags__added": [
-          "VpnSites"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2655,9 +2694,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VpnSites"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -2709,9 +2745,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VpnSites"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -2734,9 +2767,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites/{vpnSiteName}/vpnSiteLinks": {
       "get": {
-        "tags__added": [
-          "VpnSiteLinks"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2751,9 +2781,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnSites/{vpnSiteName}/vpnSiteLinks/{vpnSiteLinkName}": {
       "get": {
-        "tags__added": [
-          "VpnSiteLinks"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -2777,6 +2804,143 @@
         },
         "type": "array",
         "x-ms-identifiers": []
+      }
+    },
+    "VirtualRouter__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualRouterPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
+    "VirtualRouterListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VirtualRouter"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "VirtualRouterPeering__deleted": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualRouterPeeringProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "VirtualRouterPeeringListResult__deleted": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VirtualRouterPeering"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "VirtualRouterPeeringProperties__deleted": {
+      "type": "object",
+      "properties": {
+        "peerAsn": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "readOnly": false
+        },
+        "peerIp": {
+          "type": "string",
+          "readOnly": false
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualRouterPropertiesFormat__deleted": {
+      "type": "object",
+      "properties": {
+        "virtualRouterAsn": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "readOnly": false
+        },
+        "virtualRouterIps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": false
+        },
+        "hostedSubnet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "readOnly": false
+        },
+        "hostedGateway": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "readOnly": false
+        },
+        "peerings": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
       }
     },
     "VpnSiteId__deleted": {

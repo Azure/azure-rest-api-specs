@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "VirtualWANAsAServiceManagementClient",
-    "version": "2025-03-01",
+    "version": "2025-05-01",
     "description": "REST API for Azure VirtualWAN As a Service."
   },
   "produces": [
@@ -89,6 +89,37 @@
         "x-ms-examples": {
           "VirtualHubList": {
             "$ref": "./examples/VirtualHubList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualRouters": {
+      "get": {
+        "operationId": "VirtualRouters_List",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Virtual Routers for a given subscription": {
+            "$ref": "./examples/VirtualRouterListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -2738,6 +2769,344 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters": {
+      "get": {
+        "operationId": "VirtualRouters_ListByResourceGroup",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Virtual Router for a given resource group": {
+            "$ref": "./examples/VirtualRouterListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}": {
+      "get": {
+        "operationId": "VirtualRouters_Get",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouter"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get VirtualRouter": {
+            "$ref": "./examples/VirtualRouterGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualRouters_CreateOrUpdate",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualRouter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouter"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouter"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create VirtualRouter": {
+            "$ref": "./examples/VirtualRouterPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualRouters_Delete",
+        "tags": [
+          "VirtualRouters"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete VirtualRouter": {
+            "$ref": "./examples/VirtualRouterDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings": {
+      "get": {
+        "operationId": "VirtualRouterPeerings_List",
+        "tags": [
+          "VirtualRouterPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeeringListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all Virtual Router Peerings for a given Virtual Router": {
+            "$ref": "./examples/VirtualRouterPeeringList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualRouters/{virtualRouterName}/peerings/{peeringName}": {
+      "get": {
+        "operationId": "VirtualRouterPeerings_Get",
+        "tags": [
+          "VirtualRouterPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeering"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Virtual Router Peering": {
+            "$ref": "./examples/VirtualRouterPeeringGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualRouterPeerings_CreateOrUpdate",
+        "tags": [
+          "VirtualRouterPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeering"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeering"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualRouterPeering"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Virtual Router Peering": {
+            "$ref": "./examples/VirtualRouterPeeringPut.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualRouterPeerings_Delete",
+        "tags": [
+          "VirtualRouterPeerings"
+        ],
+        "parameters": [
+          {
+            "name": "virtualRouterName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "peeringName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore"
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete VirtualRouterPeering": {
+            "$ref": "./examples/VirtualRouterPeeringDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualWans": {
       "get": {
         "operationId": "VirtualWans_ListByResourceGroup",
@@ -4396,7 +4765,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}/configurationPolicyGroups": {
       "get": {
-        "operationId": "configurationPolicyGroups_ListByVpnServerConfiguration",
+        "operationId": "ConfigurationPolicyGroups_ListByVpnServerConfiguration",
         "parameters": [
           {
             "name": "vpnServerConfigurationName",
@@ -6632,6 +7001,24 @@
         }
       }
     },
+    "VirtualRouter": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualRouterPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ]
+    },
     "VirtualRouterAutoScaleConfiguration": {
       "type": "object",
       "properties": {
@@ -6639,6 +7026,125 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
+        }
+      }
+    },
+    "VirtualRouterListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VirtualRouter"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "VirtualRouterPeering": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualRouterPeeringProperties",
+          "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "VirtualRouterPeeringListResult": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VirtualRouterPeering"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      }
+    },
+    "VirtualRouterPeeringProperties": {
+      "type": "object",
+      "properties": {
+        "peerAsn": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "readOnly": false
+        },
+        "peerIp": {
+          "type": "string",
+          "readOnly": false
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualRouterPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "virtualRouterAsn": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "readOnly": false
+        },
+        "virtualRouterIps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": false
+        },
+        "hostedSubnet": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "readOnly": false
+        },
+        "hostedGateway": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "readOnly": false
+        },
+        "peerings": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true
         }
       }
     },

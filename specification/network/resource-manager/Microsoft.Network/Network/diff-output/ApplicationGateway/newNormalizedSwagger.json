@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApplicationFirewallManagement",
-    "version": "2025-03-01",
+    "version": "2025-05-01",
     "description": "APIs to manage web application firewall rules."
   },
   "produces": [
@@ -306,9 +306,6 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests": {
       "get": {
         "operationId": "ApplicationGatewayWafDynamicManifests_Get",
-        "tags": [
-          "ApplicationGateways"
-        ],
         "parameters": [
           {
             "name": "location",
@@ -344,9 +341,6 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests/dafault": {
       "get": {
         "operationId": "ApplicationGatewayWafDynamicManifestsDefault_Get",
-        "tags": [
-          "ApplicationGateways"
-        ],
         "parameters": [
           {
             "name": "location",
@@ -3903,6 +3897,12 @@
           "$ref": "#/definitions/PolicySettingsLogScrubbing"
         },
         "jsChallengeCookieExpirationInMins": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5,
+          "maximum": 1440
+        },
+        "captchaCookieExpirationInMins": {
           "type": "integer",
           "format": "int32",
           "minimum": 5,

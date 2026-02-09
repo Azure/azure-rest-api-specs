@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApplicationFirewallManagement",
-    "version": "2025-03-01",
+    "version": "2025-05-01",
     "description": "APIs to manage web application firewall rules."
   },
   "produces": [
@@ -16,7 +16,10 @@
       "name": "NetworkWatchers"
     },
     {
-      "name": "ConnectionMonitorResults"
+      "name": "PacketCaptures"
+    },
+    {
+      "name": "ConnectionMonitors"
     },
     {
       "name": "FlowLogs"
@@ -420,7 +423,7 @@
       "get": {
         "operationId": "ConnectionMonitors_List",
         "tags": [
-          "ConnectionMonitorResults"
+          "ConnectionMonitors"
         ],
         "parameters": [
           {
@@ -458,7 +461,7 @@
       "get": {
         "operationId": "ConnectionMonitors_Get",
         "tags": [
-          "ConnectionMonitorResults"
+          "ConnectionMonitors"
         ],
         "parameters": [
           {
@@ -497,7 +500,7 @@
       "put": {
         "operationId": "ConnectionMonitors_CreateOrUpdate",
         "tags": [
-          "ConnectionMonitorResults"
+          "ConnectionMonitors"
         ],
         "parameters": [
           {
@@ -572,7 +575,7 @@
       "patch": {
         "operationId": "ConnectionMonitors_UpdateTags",
         "tags": [
-          "ConnectionMonitorResults"
+          "ConnectionMonitors"
         ],
         "parameters": [
           {
@@ -619,7 +622,7 @@
       "delete": {
         "operationId": "ConnectionMonitors_Delete",
         "tags": [
-          "ConnectionMonitorResults"
+          "ConnectionMonitors"
         ],
         "parameters": [
           {
@@ -667,7 +670,7 @@
       "post": {
         "operationId": "ConnectionMonitors_Stop",
         "tags": [
-          "ConnectionMonitorResults"
+          "ConnectionMonitors"
         ],
         "parameters": [
           {
@@ -1175,7 +1178,8 @@
       "get": {
         "operationId": "PacketCaptures_List",
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "PacketCaptures"
         ],
         "parameters": [
           {
@@ -1213,7 +1217,8 @@
       "get": {
         "operationId": "PacketCaptures_Get",
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "PacketCaptures"
         ],
         "parameters": [
           {
@@ -1252,7 +1257,8 @@
       "put": {
         "operationId": "PacketCaptures_Create",
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "PacketCaptures"
         ],
         "parameters": [
           {
@@ -1310,7 +1316,8 @@
       "delete": {
         "operationId": "PacketCaptures_Delete",
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "PacketCaptures"
         ],
         "parameters": [
           {
@@ -1358,7 +1365,8 @@
       "post": {
         "operationId": "PacketCaptures_GetStatus",
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "PacketCaptures"
         ],
         "parameters": [
           {
@@ -1412,7 +1420,8 @@
       "post": {
         "operationId": "PacketCaptures_Stop",
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "PacketCaptures"
         ],
         "parameters": [
           {
@@ -2172,6 +2181,12 @@
         "properties": {
           "$ref": "#/definitions/ConnectionMonitorResultProperties",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [

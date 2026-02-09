@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApplicationFirewallManagement",
-    "version": "2025-03-01",
+    "version": "2025-05-01",
     "description": "APIs to manage web application firewall rules."
   },
   "produces": [
@@ -16,28 +16,40 @@
       "name": "NetworkSecurityPerimeters"
     },
     {
-      "name": "NspProfiles"
+      "name": "NetworkSecurityPerimeterProfiles"
     },
     {
-      "name": "NspAccessRules"
+      "name": "NetworkSecurityPerimeterAccessRules"
     },
     {
-      "name": "NspAssociations"
+      "name": "NetworkSecurityPerimeterAssociations"
     },
     {
-      "name": "NspLinks"
+      "name": "NetworkSecurityPerimeterLinks"
     },
     {
-      "name": "NspLinkReferences"
+      "name": "NetworkSecurityPerimeterLinkReferences"
     },
     {
-      "name": "NspLoggingConfigurations"
+      "name": "NetworkSecurityPerimeterLoggingConfigurations"
+    },
+    {
+      "name": "NetworkSecurityPerimeterAssociableResourceTypes"
+    },
+    {
+      "name": "NetworkSecurityPerimeterOperationStatuses"
+    },
+    {
+      "name": "NetworkSecurityPerimeterServiceTags"
     }
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}/subscriptions/{subscriptionId}/locations/{location}/{operationId}": {
       "get": {
         "operationId": "NetworkSecurityPerimeterOperationStatuses_Get",
+        "tags": [
+          "NetworkSecurityPerimeterOperationStatuses"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
@@ -73,6 +85,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags": {
       "get": {
         "operationId": "NetworkSecurityPerimeterServiceTags_List",
+        "tags": [
+          "NetworkSecurityPerimeterServiceTags"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
@@ -105,6 +120,9 @@
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
       "get": {
         "operationId": "NetworkSecurityPerimeterAssociableResourceTypes_List",
+        "tags": [
+          "NetworkSecurityPerimeterAssociableResourceTypes"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
@@ -410,7 +428,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterLinkReferences_List",
         "tags": [
-          "NspLinkReferences"
+          "NetworkSecurityPerimeterLinkReferences"
         ],
         "parameters": [
           {
@@ -463,7 +481,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterLinkReferences_Get",
         "tags": [
-          "NspLinkReferences"
+          "NetworkSecurityPerimeterLinkReferences"
         ],
         "parameters": [
           {
@@ -506,7 +524,7 @@
       "delete": {
         "operationId": "NetworkSecurityPerimeterLinkReferences_Delete",
         "tags": [
-          "NspLinkReferences"
+          "NetworkSecurityPerimeterLinkReferences"
         ],
         "parameters": [
           {
@@ -561,7 +579,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterLinks_List",
         "tags": [
-          "NspLinks"
+          "NetworkSecurityPerimeterLinks"
         ],
         "parameters": [
           {
@@ -614,7 +632,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterLinks_Get",
         "tags": [
-          "NspLinks"
+          "NetworkSecurityPerimeterLinks"
         ],
         "parameters": [
           {
@@ -657,7 +675,7 @@
       "put": {
         "operationId": "NetworkSecurityPerimeterLinks_CreateOrUpdate",
         "tags": [
-          "NspLinks"
+          "NetworkSecurityPerimeterLinks"
         ],
         "parameters": [
           {
@@ -714,7 +732,7 @@
       "delete": {
         "operationId": "NetworkSecurityPerimeterLinks_Delete",
         "tags": [
-          "NspLinks"
+          "NetworkSecurityPerimeterLinks"
         ],
         "parameters": [
           {
@@ -769,7 +787,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterLoggingConfigurations_List",
         "tags": [
-          "NspLoggingConfigurations"
+          "NetworkSecurityPerimeterLoggingConfigurations"
         ],
         "parameters": [
           {
@@ -809,7 +827,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterLoggingConfigurations_Get",
         "tags": [
-          "NspLoggingConfigurations"
+          "NetworkSecurityPerimeterLoggingConfigurations"
         ],
         "parameters": [
           {
@@ -852,7 +870,7 @@
       "put": {
         "operationId": "NetworkSecurityPerimeterLoggingConfigurations_CreateOrUpdate",
         "tags": [
-          "NspLoggingConfigurations"
+          "NetworkSecurityPerimeterLoggingConfigurations"
         ],
         "parameters": [
           {
@@ -909,7 +927,7 @@
       "delete": {
         "operationId": "NetworkSecurityPerimeterLoggingConfigurations_Delete",
         "tags": [
-          "NspLoggingConfigurations"
+          "NetworkSecurityPerimeterLoggingConfigurations"
         ],
         "parameters": [
           {
@@ -954,7 +972,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterProfiles_List",
         "tags": [
-          "NspProfiles"
+          "NetworkSecurityPerimeterProfiles"
         ],
         "parameters": [
           {
@@ -1007,7 +1025,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterProfiles_Get",
         "tags": [
-          "NspProfiles"
+          "NetworkSecurityPerimeterProfiles"
         ],
         "parameters": [
           {
@@ -1050,7 +1068,7 @@
       "put": {
         "operationId": "NetworkSecurityPerimeterProfiles_CreateOrUpdate",
         "tags": [
-          "NspProfiles"
+          "NetworkSecurityPerimeterProfiles"
         ],
         "parameters": [
           {
@@ -1107,7 +1125,7 @@
       "delete": {
         "operationId": "NetworkSecurityPerimeterProfiles_Delete",
         "tags": [
-          "NspProfiles"
+          "NetworkSecurityPerimeterProfiles"
         ],
         "parameters": [
           {
@@ -1152,7 +1170,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterAccessRules_List",
         "tags": [
-          "NspAccessRules"
+          "NetworkSecurityPerimeterAccessRules"
         ],
         "parameters": [
           {
@@ -1213,7 +1231,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterAccessRules_Get",
         "tags": [
-          "NspAccessRules"
+          "NetworkSecurityPerimeterAccessRules"
         ],
         "parameters": [
           {
@@ -1264,7 +1282,7 @@
       "put": {
         "operationId": "NetworkSecurityPerimeterAccessRules_CreateOrUpdate",
         "tags": [
-          "NspAccessRules"
+          "NetworkSecurityPerimeterAccessRules"
         ],
         "parameters": [
           {
@@ -1329,7 +1347,7 @@
       "delete": {
         "operationId": "NetworkSecurityPerimeterAccessRules_Delete",
         "tags": [
-          "NspAccessRules"
+          "NetworkSecurityPerimeterAccessRules"
         ],
         "parameters": [
           {
@@ -1382,7 +1400,7 @@
       "post": {
         "operationId": "NetworkSecurityPerimeterAccessRules_Reconcile",
         "tags": [
-          "NspAccessRules"
+          "NetworkSecurityPerimeterAccessRules"
         ],
         "parameters": [
           {
@@ -1439,7 +1457,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterAssociations_List",
         "tags": [
-          "NspAssociations"
+          "NetworkSecurityPerimeterAssociations"
         ],
         "parameters": [
           {
@@ -1492,7 +1510,7 @@
       "get": {
         "operationId": "NetworkSecurityPerimeterAssociations_Get",
         "tags": [
-          "NspAssociations"
+          "NetworkSecurityPerimeterAssociations"
         ],
         "parameters": [
           {
@@ -1535,7 +1553,7 @@
       "put": {
         "operationId": "NetworkSecurityPerimeterAssociations_CreateOrUpdate",
         "tags": [
-          "NspAssociations"
+          "NetworkSecurityPerimeterAssociations"
         ],
         "parameters": [
           {
@@ -1609,7 +1627,7 @@
       "delete": {
         "operationId": "NetworkSecurityPerimeterAssociations_Delete",
         "tags": [
-          "NspAssociations"
+          "NetworkSecurityPerimeterAssociations"
         ],
         "parameters": [
           {
@@ -1667,7 +1685,7 @@
       "post": {
         "operationId": "NetworkSecurityPerimeterAssociations_Reconcile",
         "tags": [
-          "NspAssociations"
+          "NetworkSecurityPerimeterAssociations"
         ],
         "parameters": [
           {

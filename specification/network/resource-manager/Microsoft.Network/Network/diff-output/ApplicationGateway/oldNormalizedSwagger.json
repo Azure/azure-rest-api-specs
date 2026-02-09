@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApplicationFirewallManagement",
-    "version": "2025-03-01",
+    "version": "2025-05-01",
     "description": "APIs to manage web application firewall rules."
   },
   "produces": [
@@ -4150,7 +4150,8 @@
             "Allow",
             "Block",
             "Log",
-            "JSChallenge"
+            "JSChallenge",
+            "CAPTCHA"
           ],
           "x-ms-enum": {
             "name": "ActionType",
@@ -4481,6 +4482,12 @@
           "format": "int32",
           "minimum": 5,
           "maximum": 1440
+        },
+        "captchaCookieExpirationInMins": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 5,
+          "maximum": 1440
         }
       }
     },
@@ -4554,7 +4561,8 @@
             "Allow",
             "Block",
             "Log",
-            "JSChallenge"
+            "JSChallenge",
+            "CAPTCHA"
           ],
           "x-ms-enum": {
             "name": "WebApplicationFirewallAction",

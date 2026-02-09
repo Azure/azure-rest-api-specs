@@ -1,5 +1,11 @@
 ## Swagger Changes
 
+### Changes for `tags`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `tags__added` | added | `[{"name":"AzureFirewalls"},{"name":"AzureFirewallFqdnTags"}]` |
+
 ### Changes for `minLength`
 
 | Path | Change Type | Value |
@@ -132,19 +138,19 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AzureFirewallApplicationRuleProtocol.properties.protocolType.$ref__added` | added | `./common.json/definitions/AzureFirewallApplicationRuleProtocolType` |
-| `definitions.AzureFirewallNatRCAction.properties.type.$ref__added` | added | `./common.json/definitions/AzureFirewallNatRCActionType` |
-| `definitions.AzureFirewallNatRule.properties.protocols.items.$ref__added` | added | `./common.json/definitions/AzureFirewallNetworkRuleProtocol` |
-| `definitions.AzureFirewallNetworkRule.properties.protocols.items.$ref__added` | added | `./common.json/definitions/AzureFirewallNetworkRuleProtocol` |
-| `definitions.AzureFirewallPacketCaptureFlags.properties.type.$ref__added` | added | `./common.json/definitions/AzureFirewallPacketCaptureFlagsType` |
-| `definitions.AzureFirewallPacketCaptureResponse.properties.statusCode.$ref__added` | added | `./common.json/definitions/AzureFirewallPacketCaptureResponseCode` |
+| `definitions.AzureFirewallApplicationRuleProtocol.properties.protocolType.$ref__added` | added | `./common.json#/definitions/AzureFirewallApplicationRuleProtocolType` |
+| `definitions.AzureFirewallNatRCAction.properties.type.$ref__added` | added | `./common.json#/definitions/AzureFirewallNatRCActionType` |
+| `definitions.AzureFirewallNatRule.properties.protocols.items.$ref__added` | added | `./common.json#/definitions/AzureFirewallNetworkRuleProtocol` |
+| `definitions.AzureFirewallNetworkRule.properties.protocols.items.$ref__added` | added | `./common.json#/definitions/AzureFirewallNetworkRuleProtocol` |
+| `definitions.AzureFirewallPacketCaptureFlags.properties.type.$ref__added` | added | `./common.json#/definitions/AzureFirewallPacketCaptureFlagsType` |
+| `definitions.AzureFirewallPacketCaptureResponse.properties.statusCode.$ref__added` | added | `./common.json#/definitions/AzureFirewallPacketCaptureResponseCode` |
 | `definitions.AzureFirewallPropertiesFormat.properties.additionalProperties.$ref__deleted` | deleted | `#/definitions/AzureFirewallAdditionalProperties` |
 | `definitions.AzureFirewallPropertiesFormat.properties.ipGroups.$ref__deleted` | deleted | `#/definitions/IpGroups` |
-| `definitions.AzureFirewallPropertiesFormat.properties.threatIntelMode.$ref__added` | added | `./common.json/definitions/AzureFirewallThreatIntelMode` |
-| `definitions.AzureFirewallRCAction.properties.type.$ref__added` | added | `./common.json/definitions/AzureFirewallRCActionType` |
-| `definitions.AzureFirewallSku.properties.name.$ref__added` | added | `./common.json/definitions/AzureFirewallSkuName` |
-| `definitions.AzureFirewallSku.properties.tier.$ref__added` | added | `./common.json/definitions/AzureFirewallSkuTier` |
-| `definitions.FirewallPacketCaptureParameters.properties.protocol.$ref__added` | added | `./common.json/definitions/AzureFirewallNetworkRuleProtocol` |
+| `definitions.AzureFirewallPropertiesFormat.properties.threatIntelMode.$ref__added` | added | `./common.json#/definitions/AzureFirewallThreatIntelMode` |
+| `definitions.AzureFirewallRCAction.properties.type.$ref__added` | added | `./common.json#/definitions/AzureFirewallRCActionType` |
+| `definitions.AzureFirewallSku.properties.name.$ref__added` | added | `./common.json#/definitions/AzureFirewallSkuName` |
+| `definitions.AzureFirewallSku.properties.tier.$ref__added` | added | `./common.json#/definitions/AzureFirewallSkuTier` |
+| `definitions.FirewallPacketCaptureParameters.properties.protocol.$ref__added` | added | `./common.json#/definitions/AzureFirewallNetworkRuleProtocol` |
 
 ### Changes for `required`
 
@@ -169,34 +175,34 @@
 
 | Path | Old Value | New Value |
 |------|-----------|----------|
-| `definitions.AzureFirewall.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.AzureFirewall.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `./common.json/definitions/ExtendedLocation` |
-| `definitions.AzureFirewallApplicationRuleCollection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.AzureFirewallApplicationRuleCollectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
-| `definitions.AzureFirewallFqdnTag.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json/definitions/Resource` |
-| `definitions.AzureFirewallFqdnTagPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
-| `definitions.AzureFirewallIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
-| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.AzureFirewallNatRuleCollection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.AzureFirewallNatRuleCollectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
-| `definitions.AzureFirewallNetworkRuleCollection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.AzureFirewallNetworkRuleCollectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
-| `definitions.AzureFirewallPropertiesFormat.properties.firewallPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
-| `definitions.AzureFirewallPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json/definitions/NetworkProvisioningState` |
-| `definitions.AzureFirewallPropertiesFormat.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `./common.json/definitions/SubResource` |
+| `definitions.AzureFirewall.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
+| `definitions.AzureFirewall.properties.extendedLocation.$ref` | `./network.json#/definitions/ExtendedLocation` | `./common.json#/definitions/ExtendedLocation` |
+| `definitions.AzureFirewallApplicationRuleCollection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.AzureFirewallApplicationRuleCollectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.AzureFirewallFqdnTag.allOf[0].$ref` | `./network.json#/definitions/Resource` | `./common.json#/definitions/Resource` |
+| `definitions.AzureFirewallFqdnTagPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.AzureFirewallIPConfiguration.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.publicIPAddress.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.AzureFirewallIPConfigurationPropertiesFormat.properties.subnet.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.AzureFirewallNatRuleCollection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.AzureFirewallNatRuleCollectionProperties.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.AzureFirewallNetworkRuleCollection.allOf[0].$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.AzureFirewallNetworkRuleCollectionPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.AzureFirewallPropertiesFormat.properties.firewallPolicy.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
+| `definitions.AzureFirewallPropertiesFormat.properties.provisioningState.$ref` | `./network.json#/definitions/ProvisioningState` | `./common.json#/definitions/NetworkProvisioningState` |
+| `definitions.AzureFirewallPropertiesFormat.properties.virtualHub.$ref` | `./network.json#/definitions/SubResource` | `./common.json#/definitions/SubResource` |
 | `info.description` | `The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.` | `APIs to manage web application firewall rules.` |
 | `info.title` | `NetworkManagementClient` | `WebApplicationFirewallManagement` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewallFqdnTags'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewalls'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json/definitions/TagsObject` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/learnedIPPrefixes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCaptureOperation'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewallFqdnTags'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.Network/azureFirewalls'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].delete.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].get.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].patch.parameters[1].schema.$ref` | `./network.json#/definitions/TagsObject` | `./common.json#/definitions/TagsObject` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].patch.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}'].put.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/learnedIPPrefixes'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCapture'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/azureFirewalls/{azureFirewallName}/packetCaptureOperation'].post.responses.default.schema.$ref` | `./network.json#/definitions/CloudError` | `./common.json#/definitions/CloudError` |
 

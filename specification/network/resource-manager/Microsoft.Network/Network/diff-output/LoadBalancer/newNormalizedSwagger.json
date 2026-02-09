@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApplicationFirewallManagement",
-    "version": "2025-03-01",
+    "version": "2025-05-01",
     "description": "APIs to manage web application firewall rules."
   },
   "produces": [
@@ -14,24 +14,6 @@
   "tags": [
     {
       "name": "LoadBalancers"
-    },
-    {
-      "name": "BackendAddressPools"
-    },
-    {
-      "name": "FrontendIPConfigurations"
-    },
-    {
-      "name": "InboundNatRules"
-    },
-    {
-      "name": "LoadBalancingRules"
-    },
-    {
-      "name": "OutboundRules"
-    },
-    {
-      "name": "Probes"
     }
   ],
   "paths": {
@@ -66,9 +48,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses/subscriptions/{subscriptionId}/locations/{location}": {
       "post": {
         "operationId": "LoadBalancers_SwapPublicIpAddresses",
+        "tags": [
+          "LoadBalancers"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
@@ -357,7 +342,7 @@
       "get": {
         "operationId": "LoadBalancerBackendAddressPools_List",
         "tags": [
-          "BackendAddressPools"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -398,7 +383,7 @@
       "get": {
         "operationId": "LoadBalancerBackendAddressPools_Get",
         "tags": [
-          "BackendAddressPools"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -440,7 +425,7 @@
       "put": {
         "operationId": "LoadBalancerBackendAddressPools_CreateOrUpdate",
         "tags": [
-          "BackendAddressPools"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -504,7 +489,7 @@
       "delete": {
         "operationId": "LoadBalancerBackendAddressPools_Delete",
         "tags": [
-          "BackendAddressPools"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -555,7 +540,7 @@
       "post": {
         "operationId": "LoadBalancers_ListInboundNatRulePortMappings",
         "tags": [
-          "BackendAddressPools"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -623,7 +608,7 @@
       "get": {
         "operationId": "LoadBalancerFrontendIPConfigurations_List",
         "tags": [
-          "FrontendIPConfigurations"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -661,7 +646,7 @@
       "get": {
         "operationId": "LoadBalancerFrontendIPConfigurations_Get",
         "tags": [
-          "FrontendIPConfigurations"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -702,7 +687,7 @@
       "get": {
         "operationId": "InboundNatRules_List",
         "tags": [
-          "InboundNatRules"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -740,7 +725,7 @@
       "get": {
         "operationId": "InboundNatRules_Get",
         "tags": [
-          "InboundNatRules"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -784,7 +769,7 @@
       "put": {
         "operationId": "InboundNatRules_CreateOrUpdate",
         "tags": [
-          "InboundNatRules"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -848,7 +833,7 @@
       "delete": {
         "operationId": "InboundNatRules_Delete",
         "tags": [
-          "InboundNatRules"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -899,7 +884,7 @@
       "get": {
         "operationId": "LoadBalancerLoadBalancingRules_List",
         "tags": [
-          "LoadBalancingRules"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -937,7 +922,7 @@
       "get": {
         "operationId": "LoadBalancerLoadBalancingRules_Get",
         "tags": [
-          "LoadBalancingRules"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -978,7 +963,7 @@
       "post": {
         "operationId": "LoadBalancerLoadBalancingRules_Health",
         "tags": [
-          "LoadBalancingRules"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -1129,7 +1114,7 @@
       "get": {
         "operationId": "LoadBalancerOutboundRules_List",
         "tags": [
-          "OutboundRules"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -1167,7 +1152,7 @@
       "get": {
         "operationId": "LoadBalancerOutboundRules_Get",
         "tags": [
-          "OutboundRules"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -1208,7 +1193,7 @@
       "get": {
         "operationId": "LoadBalancerProbes_List",
         "tags": [
-          "Probes"
+          "LoadBalancers"
         ],
         "parameters": [
           {
@@ -1246,7 +1231,7 @@
       "get": {
         "operationId": "LoadBalancerProbes_Get",
         "tags": [
-          "Probes"
+          "LoadBalancers"
         ],
         "parameters": [
           {

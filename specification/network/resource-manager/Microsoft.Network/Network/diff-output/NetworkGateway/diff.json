@@ -10,7 +10,7 @@
       "name": "LocalNetworkGateways"
     },
     {
-      "name": "VirtualNetworkGatewayNatRules"
+      "name": "VirtualNetworkTap"
     },
     {
       "name": "VirtualNetworkTaps"
@@ -27,18 +27,243 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkTaps": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/virtualNetworkTaps__added": {
       "get": {
+        "operationId": "VirtualNetworkTaps_ListAll",
+        "tags": [
+          "VirtualNetworkTaps"
+        ],
+        "parameters": [],
         "responses": {
-          "default": {
+          "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json#/definitions/CloudError"
-              }
+              "$ref": "#/definitions/VirtualNetworkTapListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-examples": {
+          "List all virtual network taps": {
+            "$ref": "./examples/VirtualNetworkTapListAll.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps__added": {
+      "get": {
+        "operationId": "VirtualNetworkTaps_ListByResourceGroup",
+        "tags": [
+          "VirtualNetworkTaps"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkTapListResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List virtual network taps in resource group": {
+            "$ref": "./examples/VirtualNetworkTapList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}__added": {
+      "get": {
+        "operationId": "VirtualNetworkTaps_Get",
+        "tags": [
+          "VirtualNetworkTap"
+        ],
+        "parameters": [
+          {
+            "name": "tapName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkTap"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Virtual Network Tap": {
+            "$ref": "./examples/VirtualNetworkTapGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworkTaps_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworkTap"
+        ],
+        "parameters": [
+          {
+            "name": "tapName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkTap"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkTap"
+            }
+          },
+          "201": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkTap"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              }
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create Virtual Network Tap": {
+            "$ref": "./examples/VirtualNetworkTapCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/VirtualNetworkTap"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualNetworkTaps_UpdateTags",
+        "tags": [
+          "VirtualNetworkTap"
+        ],
+        "parameters": [
+          {
+            "name": "tapName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tapParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./common.json#/definitions/TagsObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkTap"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update virtual network tap tags": {
+            "$ref": "./examples/VirtualNetworkTapUpdateTags.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VirtualNetworkTaps_Delete",
+        "tags": [
+          "VirtualNetworkTap"
+        ],
+        "parameters": [
+          {
+            "name": "tapName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Virtual Network Tap resource": {
+            "$ref": "./examples/VirtualNetworkTapDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/connections": {
@@ -541,9 +766,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/abortMigration": {
       "post": {
-        "tags__added": [
-          "VirtualNetworkGateways"
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -569,9 +791,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/commitMigration": {
       "post": {
-        "tags__added": [
-          "VirtualNetworkGateways"
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -633,9 +852,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/executeMigration": {
       "post": {
-        "tags__added": [
-          "VirtualNetworkGateways"
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -987,9 +1203,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules": {
       "get": {
-        "tags__added": [
-          "VirtualNetworkGatewayNatRules"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1004,9 +1217,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/natRules/{natRuleName}": {
       "get": {
-        "tags__added": [
-          "VirtualNetworkGatewayNatRules"
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1019,9 +1229,6 @@
         }
       },
       "put": {
-        "tags__added": [
-          "VirtualNetworkGatewayNatRules"
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -1045,9 +1252,6 @@
         }
       },
       "delete": {
-        "tags__added": [
-          "VirtualNetworkGatewayNatRules"
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -1070,9 +1274,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/prepareMigration": {
       "post": {
-        "tags__added": [
-          "VirtualNetworkGateways"
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -1299,145 +1500,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps": {
-      "get": {
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json#/definitions/CloudError"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/virtualNetworkTaps/{tapName}": {
-      "get": {
-        "tags": [
-          [
-            "-",
-            "VirtualNetworkTap"
-          ],
-          [
-            "+",
-            "VirtualNetworkTaps"
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json#/definitions/CloudError"
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          [
-            "-",
-            "VirtualNetworkTap"
-          ],
-          [
-            "+",
-            "VirtualNetworkTaps"
-          ]
-        ],
-        "responses": {
-          "201": {
-            "headers__added": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              }
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json#/definitions/CloudError"
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-schema__added": "#/definitions/VirtualNetworkTap"
-        }
-      },
-      "patch": {
-        "tags": [
-          [
-            "-",
-            "VirtualNetworkTap"
-          ],
-          [
-            "+",
-            "VirtualNetworkTaps"
-          ]
-        ],
-        "parameters": [
-          [
-            " "
-          ],
-          [
-            "~",
-            {
-              "schema": {
-                "$ref": {
-                  "__old": "./network.json#/definitions/TagsObject",
-                  "__new": "./common.json#/definitions/TagsObject"
-                }
-              }
-            }
-          ]
-        ],
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json#/definitions/CloudError"
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          [
-            "-",
-            "VirtualNetworkTap"
-          ],
-          [
-            "+",
-            "VirtualNetworkTaps"
-          ]
-        ],
-        "responses": {
-          "202": {
-            "headers__added": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              }
-            }
-          },
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json#/definitions/CloudError"
-              }
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1451,6 +1513,75 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
+      }
+    },
+    "VirtualNetworkTap__added": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkTapPropertiesFormat",
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/Resource"
+        }
+      ]
+    },
+    "VirtualNetworkTapListResult__added": {
+      "type": "object",
+      "description": "[Placeholder] Discription for page model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "[Placeholder] Discription for value property",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkTap"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "[Placeholder] Discription for nextLink property"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualNetworkTapPropertiesFormat__added": {
+      "type": "object",
+      "properties": {
+        "networkInterfaceTapConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
+          },
+          "readOnly": true
+        },
+        "resourceGuid": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/NetworkProvisioningState",
+          "readOnly": true
+        },
+        "destinationNetworkInterfaceIPConfiguration": {
+          "$ref": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
+        },
+        "destinationLoadBalancerFrontEndIPConfiguration": {
+          "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration"
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int32"
+        }
       }
     },
     "BgpPeerStatus": {
@@ -2318,51 +2449,6 @@
             "modelAsString": true
           },
           "$ref__added": "./common.json#/definitions/VirtualNetworkGatewaySkuTier"
-        }
-      }
-    },
-    "VirtualNetworkTap": {
-      "allOf": [
-        [
-          "~",
-          {
-            "$ref": {
-              "__old": "./network.json#/definitions/Resource",
-              "__new": "./common.json#/definitions/Resource"
-            }
-          }
-        ]
-      ]
-    },
-    "VirtualNetworkTapListResult": {
-      "required__added": [
-        "value"
-      ]
-    },
-    "VirtualNetworkTapPropertiesFormat": {
-      "properties": {
-        "networkInterfaceTapConfigurations": {
-          "items": {
-            "$ref": {
-              "__old": "./networkInterface.json#/definitions/NetworkInterfaceTapConfiguration",
-              "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceTapConfiguration"
-            }
-          }
-        },
-        "provisioningState": {
-          "$ref": {
-            "__old": "./network.json#/definitions/ProvisioningState",
-            "__new": "./common.json#/definitions/NetworkProvisioningState"
-          }
-        },
-        "destinationNetworkInterfaceIPConfiguration": {
-          "$ref": {
-            "__old": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
-            "__new": "./virtualNetwork.json#/definitions/NetworkInterfaceIPConfiguration"
-          }
-        },
-        "destinationPort": {
-          "format__added": "int32"
         }
       }
     },

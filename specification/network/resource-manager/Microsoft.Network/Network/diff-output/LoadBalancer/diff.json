@@ -2,24 +2,6 @@
   "tags__added": [
     {
       "name": "LoadBalancers"
-    },
-    {
-      "name": "BackendAddressPools"
-    },
-    {
-      "name": "FrontendIPConfigurations"
-    },
-    {
-      "name": "InboundNatRules"
-    },
-    {
-      "name": "LoadBalancingRules"
-    },
-    {
-      "name": "OutboundRules"
-    },
-    {
-      "name": "Probes"
     }
   ],
   "info": {
@@ -33,49 +15,100 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.Network/loadBalancers": {
-      "get": {
-        "responses": {
-          "default": {
-            "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json#/definitions/CloudError"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses": {
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses__deleted": {
       "post": {
-        "tags__deleted": [
+        "operationId": "LoadBalancers_SwapPublicIpAddresses",
+        "tags": [
           "LoadBalancers"
         ],
         "parameters": [
-          [
-            "~",
-            {
-              "name__deleted": "location",
-              "in__deleted": "path",
-              "required__deleted": true,
-              "type__deleted": "string",
-              "$ref__added": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerVipSwapRequest"
             }
-          ],
-          [
-            " "
-          ]
+          }
         ],
         "responses": {
+          "200": {
+            "description": "ignore"
+          },
           "202": {
-            "headers__added": {
+            "description": "ignore"
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Swap VIPs between two load balancers.": {
+            "$ref": "./examples/LoadBalancersSwapPublicIpAddresses.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/setLoadBalancerFrontendPublicIpAddresses/subscriptions/{subscriptionId}/locations/{location}__added": {
+      "post": {
+        "operationId": "LoadBalancers_SwapPublicIpAddresses",
+        "tags": [
+          "LoadBalancers"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoadBalancerVipSwapRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore"
+          },
+          "202": {
+            "description": "ignore",
+            "headers": {
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Swap VIPs between two load balancers.": {
+            "$ref": "./examples/LoadBalancersSwapPublicIpAddresses.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/loadBalancers": {
+      "get": {
+        "responses": {
           "default": {
             "schema": {
               "$ref": {
@@ -188,16 +221,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "BackendAddressPools"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -212,16 +235,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendAddressPoolName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "BackendAddressPools"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -234,16 +247,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "BackendAddressPools"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -267,16 +270,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "BackendAddressPools"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -299,16 +292,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/backendAddressPools/{backendPoolName}/queryInboundNatRulePortMapping": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "BackendAddressPools"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -331,16 +314,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "FrontendIPConfigurations"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -355,16 +328,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/frontendIPConfigurations/{frontendIPConfigurationName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "FrontendIPConfigurations"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -379,16 +342,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "InboundNatRules"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -403,16 +356,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/inboundNatRules/{inboundNatRuleName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "InboundNatRules"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -425,16 +368,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "InboundNatRules"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -458,16 +391,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "InboundNatRules"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -490,16 +413,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "LoadBalancingRules"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -514,16 +427,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "LoadBalancingRules"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -538,16 +441,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/loadBalancingRules/{loadBalancingRuleName}/health": {
       "post": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "LoadBalancingRules"
-          ]
-        ],
         "responses": {
           "202": {
             "headers": {
@@ -608,16 +501,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "OutboundRules"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -632,16 +515,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/outboundRules/{outboundRuleName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "OutboundRules"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -656,16 +529,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "Probes"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -680,16 +543,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "LoadBalancers"
-          ],
-          [
-            "+",
-            "Probes"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {

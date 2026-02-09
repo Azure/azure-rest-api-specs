@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApplicationFirewallManagement",
-    "version": "2025-03-01",
+    "version": "2025-05-01",
     "description": "APIs to manage web application firewall rules."
   },
   "produces": [
@@ -17,9 +17,6 @@
     },
     {
       "name": "NetworkManagerConnections"
-    },
-    {
-      "name": "ManagementGroupNetworkManagerConnections"
     },
     {
       "name": "ConnectivityConfigurations"
@@ -49,7 +46,7 @@
       "name": "AdminRuleCollections"
     },
     {
-      "name": "BaseAdminRules"
+      "name": "AdminRules"
     },
     {
       "name": "SecurityUserConfigurations"
@@ -61,7 +58,10 @@
       "name": "SecurityUserRules"
     },
     {
-      "name": "EffectiveConfigurations"
+      "name": "NetworkManagerEffectiveConnectivityConfiguration"
+    },
+    {
+      "name": "NetworkManagerEffectiveSecurityAdminRules"
     }
   ],
   "paths": {
@@ -69,7 +69,7 @@
       "get": {
         "operationId": "ManagementGroupNetworkManagerConnections_List",
         "tags": [
-          "ManagementGroupNetworkManagerConnections"
+          "NetworkManagerConnections"
         ],
         "parameters": [
           {
@@ -121,7 +121,7 @@
       "get": {
         "operationId": "ManagementGroupNetworkManagerConnections_Get",
         "tags": [
-          "ManagementGroupNetworkManagerConnections"
+          "NetworkManagerConnections"
         ],
         "parameters": [
           {
@@ -161,7 +161,7 @@
       "put": {
         "operationId": "ManagementGroupNetworkManagerConnections_CreateOrUpdate",
         "tags": [
-          "ManagementGroupNetworkManagerConnections"
+          "NetworkManagerConnections"
         ],
         "parameters": [
           {
@@ -215,7 +215,7 @@
       "delete": {
         "operationId": "ManagementGroupNetworkManagerConnections_Delete",
         "tags": [
-          "ManagementGroupNetworkManagerConnections"
+          "NetworkManagerConnections"
         ],
         "parameters": [
           {
@@ -2854,7 +2854,7 @@
       "get": {
         "operationId": "AdminRules_List",
         "tags": [
-          "BaseAdminRules"
+          "AdminRules"
         ],
         "parameters": [
           {
@@ -2918,7 +2918,7 @@
       "get": {
         "operationId": "AdminRules_Get",
         "tags": [
-          "BaseAdminRules"
+          "AdminRules"
         ],
         "parameters": [
           {
@@ -2973,7 +2973,7 @@
       "put": {
         "operationId": "AdminRules_CreateOrUpdate",
         "tags": [
-          "BaseAdminRules"
+          "AdminRules"
         ],
         "parameters": [
           {
@@ -3042,7 +3042,7 @@
       "delete": {
         "operationId": "AdminRules_Delete",
         "tags": [
-          "BaseAdminRules"
+          "AdminRules"
         ],
         "parameters": [
           {
@@ -3813,7 +3813,7 @@
       "post": {
         "operationId": "ListNetworkManagerEffectiveConnectivityConfigurations",
         "tags": [
-          "EffectiveConfigurations"
+          "NetworkManagerEffectiveConnectivityConfiguration"
         ],
         "parameters": [
           {
@@ -3864,7 +3864,7 @@
       "post": {
         "operationId": "ListNetworkManagerEffectiveSecurityAdminRules",
         "tags": [
-          "EffectiveConfigurations"
+          "NetworkManagerEffectiveSecurityAdminRules"
         ],
         "parameters": [
           {
@@ -4143,7 +4143,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -4227,7 +4227,7 @@
       "type": "object",
       "properties": {
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         },
         "kind": {
@@ -5036,7 +5036,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -5054,7 +5054,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -5392,7 +5392,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -5410,7 +5410,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         }
       },
@@ -5554,7 +5554,7 @@
           "x-ms-client-flatten": true
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "readOnly": true
         }
       },

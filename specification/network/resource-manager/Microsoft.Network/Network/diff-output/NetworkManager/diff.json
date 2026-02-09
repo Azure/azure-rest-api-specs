@@ -7,9 +7,6 @@
       "name": "NetworkManagerConnections"
     },
     {
-      "name": "ManagementGroupNetworkManagerConnections"
-    },
-    {
       "name": "ConnectivityConfigurations"
     },
     {
@@ -37,7 +34,7 @@
       "name": "AdminRuleCollections"
     },
     {
-      "name": "BaseAdminRules"
+      "name": "AdminRules"
     },
     {
       "name": "SecurityUserConfigurations"
@@ -49,7 +46,10 @@
       "name": "SecurityUserRules"
     },
     {
-      "name": "EffectiveConfigurations"
+      "name": "NetworkManagerEffectiveConnectivityConfiguration"
+    },
+    {
+      "name": "NetworkManagerEffectiveSecurityAdminRules"
     }
   ],
   "info": {
@@ -62,16 +62,6 @@
   "paths": {
     "/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Network/networkManagerConnections": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkManagerConnections"
-          ],
-          [
-            "+",
-            "ManagementGroupNetworkManagerConnections"
-          ]
-        ],
         "parameters": [
           [
             "~",
@@ -131,36 +121,20 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkManagerConnections"
-          ],
-          [
-            "+",
-            "ManagementGroupNetworkManagerConnections"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "managementGroupId",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "minLength": 1
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "networkManagerConnectionName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "networkManagerConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -174,16 +148,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "NetworkManagerConnections"
-          ],
-          [
-            "+",
-            "ManagementGroupNetworkManagerConnections"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -220,36 +184,20 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "NetworkManagerConnections"
-          ],
-          [
-            "+",
-            "ManagementGroupNetworkManagerConnections"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "managementGroupId",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "minLength": 1
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "networkManagerConnectionName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "networkManagerConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -313,16 +261,13 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerConnectionName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -362,16 +307,13 @@
         }
       },
       "delete": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerConnectionName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -429,17 +371,14 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
         ],
         "responses": {
           "default": {
@@ -630,26 +569,20 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -969,26 +902,20 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "networkGroupName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "networkGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -1138,35 +1065,26 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "networkGroupName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "staticMemberName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "networkGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticMemberName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -1225,35 +1143,26 @@
         }
       },
       "delete": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "networkGroupName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "staticMemberName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "networkGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "staticMemberName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -1300,27 +1209,21 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
         ],
         "responses": {
           "default": {
@@ -1435,13 +1338,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}": {
       "parameters__deleted": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -1454,37 +1357,28 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleCollectionName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
         ],
         "responses": {
           "default": {
@@ -1605,13 +1499,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules": {
       "parameters__deleted": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -1630,56 +1524,41 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleCollectionName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "$top",
-              "in": "query",
-              "type": "integer",
-              "format": "int32",
-              "minimum": 1,
-              "maximum": 20
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "$skipToken",
-              "in": "query",
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -1696,13 +1575,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}": {
       "parameters__deleted": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -1718,47 +1597,35 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleCollectionName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
         ],
         "responses": {
           "default": {
@@ -1968,26 +1835,20 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "scopeConnectionName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "scopeConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -2037,26 +1898,20 @@
         }
       },
       "delete": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "scopeConnectionName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "scopeConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -2127,26 +1982,20 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -2305,35 +2154,26 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleCollectionName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -2475,64 +2315,39 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "AdminRules"
-          ],
-          [
-            "+",
-            "BaseAdminRules"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleCollectionName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "$top",
-              "in": "query",
-              "type": "integer",
-              "format": "int32",
-              "minimum": 1,
-              "maximum": 20
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "$skipToken",
-              "in": "query",
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -2571,54 +2386,32 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "AdminRules"
-          ],
-          [
-            "+",
-            "BaseAdminRules"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleCollectionName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -2632,16 +2425,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "AdminRules"
-          ],
-          [
-            "+",
-            "BaseAdminRules"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -2696,16 +2479,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "AdminRules"
-          ],
-          [
-            "+",
-            "BaseAdminRules"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -2803,27 +2576,21 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
         ],
         "responses": {
           "default": {
@@ -2968,13 +2735,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}": {
       "parameters__deleted": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -2987,37 +2754,28 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleCollectionName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
         ],
         "responses": {
           "default": {
@@ -3138,13 +2896,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules": {
       "parameters__deleted": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -3163,56 +2921,41 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleCollectionName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "$top",
-              "in": "query",
-              "type": "integer",
-              "format": "int32",
-              "minimum": 1,
-              "maximum": 20
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "$skipToken",
-              "in": "query",
-              "type": "string"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 20
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "type": "string"
+          }
         ],
         "responses": {
           "default": {
@@ -3229,13 +2972,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}": {
       "parameters__deleted": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -3251,47 +2994,35 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkManagerName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "configurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleCollectionName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "ruleName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9_.-]*$"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkManagerName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "ruleCollectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_.-]*$"
+          }
         ],
         "responses": {
           "default": {
@@ -3448,16 +3179,6 @@
         }
       ],
       "post": {
-        "tags": [
-          [
-            "-",
-            "NetworkManagerEffectiveConnectivityConfiguration"
-          ],
-          [
-            "+",
-            "EffectiveConfigurations"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -3522,16 +3243,6 @@
         }
       ],
       "post": {
-        "tags": [
-          [
-            "-",
-            "NetworkManagerEffectiveSecurityAdminRules"
-          ],
-          [
-            "+",
-            "EffectiveConfigurations"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -3797,7 +3508,7 @@
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
-            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+            "__new": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
           }
         }
       },
@@ -3860,7 +3571,7 @@
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
-            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+            "__new": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
           }
         }
       },
@@ -4434,7 +4145,7 @@
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
-            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+            "__new": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
           }
         }
       },
@@ -4455,7 +4166,7 @@
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
-            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+            "__new": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
           }
         }
       },
@@ -4707,7 +4418,7 @@
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
-            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+            "__new": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
           }
         }
       },
@@ -4728,7 +4439,7 @@
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
-            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+            "__new": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
           }
         }
       },
@@ -4808,7 +4519,7 @@
         "systemData": {
           "$ref": {
             "__old": "./network.json#/definitions/SystemData",
-            "__new": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
+            "__new": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
           }
         }
       },

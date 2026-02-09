@@ -4,22 +4,31 @@
       "name": "NetworkSecurityPerimeters"
     },
     {
-      "name": "NspProfiles"
+      "name": "NetworkSecurityPerimeterProfiles"
     },
     {
-      "name": "NspAccessRules"
+      "name": "NetworkSecurityPerimeterAccessRules"
     },
     {
-      "name": "NspAssociations"
+      "name": "NetworkSecurityPerimeterAssociations"
     },
     {
-      "name": "NspLinks"
+      "name": "NetworkSecurityPerimeterLinks"
     },
     {
-      "name": "NspLinkReferences"
+      "name": "NetworkSecurityPerimeterLinkReferences"
     },
     {
-      "name": "NspLoggingConfigurations"
+      "name": "NetworkSecurityPerimeterLoggingConfigurations"
+    },
+    {
+      "name": "NetworkSecurityPerimeterAssociableResourceTypes"
+    },
+    {
+      "name": "NetworkSecurityPerimeterOperationStatuses"
+    },
+    {
+      "name": "NetworkSecurityPerimeterServiceTags"
     }
   ],
   "info": {
@@ -33,8 +42,8 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}": {
-      "parameters__deleted": [
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}__deleted": {
+      "parameters": [
         {
           "$ref": "./network.json#/parameters/SubscriptionIdParameter"
         },
@@ -49,51 +58,71 @@
         }
       ],
       "get": {
-        "tags__deleted": [
+        "operationId": "NetworkSecurityPerimeterOperationStatuses_Get",
+        "tags": [
           "NetworkSecurityPerimeterOperationStatuses"
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "operationId",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            }
-          ]
         ],
         "responses": {
           "200": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult",
-                "__new": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
-              }
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
+            "description": "ignore",
             "schema": {
-              "$ref": {
-                "__old": "./network.json#/definitions/CloudError",
-                "__new": "./common.json#/definitions/CloudError"
-              }
+              "$ref": "./network.json#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "NspOperationStatusGet": {
+            "$ref": "./examples/NspOperationStatusGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}/subscriptions/{subscriptionId}/locations/{location}/{operationId}__added": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterOperationStatuses_Get",
+        "tags": [
+          "NetworkSecurityPerimeterOperationStatuses"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "ignore",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NspOperationStatusGet": {
+            "$ref": "./examples/NspOperationStatusGet.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/nspServiceTags": {
       "get": {
-        "tags__deleted": [
-          "NetworkSecurityPerimeterServiceTags"
-        ],
         "parameters": [
           [
             "~",
@@ -120,9 +149,6 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
       "get": {
-        "tags__deleted": [
-          "NetworkSecurityPerimeterAssociableResourceTypes"
-        ],
         "parameters": [
           [
             "~",
@@ -191,18 +217,15 @@
         }
       ],
       "get": {
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -312,16 +335,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/linkReferences": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLinkReferences"
-          ],
-          [
-            "+",
-            "NspLinkReferences"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -353,39 +366,23 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLinkReferences"
-          ],
-          [
-            "+",
-            "NspLinkReferences"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "linkReferenceName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "linkReferenceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -399,39 +396,23 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLinkReferences"
-          ],
-          [
-            "+",
-            "NspLinkReferences"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "linkReferenceName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "linkReferenceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "202": {
@@ -459,16 +440,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/links": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLinks"
-          ],
-          [
-            "+",
-            "NspLinks"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -500,39 +471,23 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLinks"
-          ],
-          [
-            "+",
-            "NspLinks"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "linkName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -546,16 +501,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLinks"
-          ],
-          [
-            "+",
-            "NspLinks"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -595,39 +540,23 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLinks"
-          ],
-          [
-            "+",
-            "NspLinks"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "linkName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "linkName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "202": {
@@ -669,28 +598,15 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLoggingConfigurations"
-          ],
-          [
-            "+",
-            "NspLoggingConfigurations"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -723,39 +639,23 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLoggingConfigurations"
-          ],
-          [
-            "+",
-            "NspLoggingConfigurations"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "loggingConfigurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "loggingConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -769,16 +669,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLoggingConfigurations"
-          ],
-          [
-            "+",
-            "NspLoggingConfigurations"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -818,39 +708,23 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterLoggingConfigurations"
-          ],
-          [
-            "+",
-            "NspLoggingConfigurations"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "loggingConfigurationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "loggingConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -866,16 +740,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterProfiles"
-          ],
-          [
-            "+",
-            "NspProfiles"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -907,39 +771,23 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterProfiles"
-          ],
-          [
-            "+",
-            "NspProfiles"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "profileName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -953,16 +801,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterProfiles"
-          ],
-          [
-            "+",
-            "NspProfiles"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -1002,39 +840,23 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterProfiles"
-          ],
-          [
-            "+",
-            "NspProfiles"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "profileName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -1050,16 +872,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAccessRules"
-          ],
-          [
-            "+",
-            "NspAccessRules"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1094,50 +906,31 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAccessRules"
-          ],
-          [
-            "+",
-            "NspAccessRules"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "profileName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "accessRuleName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "accessRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -1151,16 +944,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAccessRules"
-          ],
-          [
-            "+",
-            "NspAccessRules"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -1211,50 +994,31 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAccessRules"
-          ],
-          [
-            "+",
-            "NspAccessRules"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "profileName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "accessRuleName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "accessRuleName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -1290,16 +1054,6 @@
         }
       ],
       "post": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAccessRules"
-          ],
-          [
-            "+",
-            "NspAccessRules"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -1362,16 +1116,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAssociations"
-          ],
-          [
-            "+",
-            "NspAssociations"
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -1403,39 +1147,23 @@
         }
       ],
       "get": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAssociations"
-          ],
-          [
-            "+",
-            "NspAssociations"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "associationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "associationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "default": {
@@ -1449,16 +1177,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAssociations"
-          ],
-          [
-            "+",
-            "NspAssociations"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -1511,39 +1229,23 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAssociations"
-          ],
-          [
-            "+",
-            "NspAssociations"
-          ]
-        ],
-        "parameters": [
-          [
-            "+",
-            {
-              "name": "networkSecurityPerimeterName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ],
-          [
-            "+",
-            {
-              "name": "associationName",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "maxLength": 80,
-              "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
-            }
-          ]
+        "parameters__added": [
+          {
+            "name": "networkSecurityPerimeterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          },
+          {
+            "name": "associationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "(^[a-zA-Z0-9]+[a-zA-Z0-9_.-]*[a-zA-Z0-9_]+$)|(^[a-zA-Z0-9]$)"
+          }
         ],
         "responses": {
           "202": {
@@ -1586,16 +1288,6 @@
         }
       ],
       "post": {
-        "tags": [
-          [
-            "-",
-            "NetworkSecurityPerimeterAssociations"
-          ],
-          [
-            "+",
-            "NspAssociations"
-          ]
-        ],
         "parameters": [
           [
             "+",
@@ -1661,7 +1353,7 @@
           "~",
           {
             "$ref": {
-              "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource",
+              "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource",
               "__new": "./common.json#/definitions/CommonTrackedResource"
             }
           }
@@ -1699,7 +1391,7 @@
           "~",
           {
             "$ref": {
-              "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
+              "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
               "__new": "./common.json#/definitions/CommonProxyResource"
             }
           }
@@ -1761,7 +1453,7 @@
           "~",
           {
             "$ref": {
-              "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
+              "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
               "__new": "./common.json#/definitions/CommonProxyResource"
             }
           }
@@ -1824,7 +1516,7 @@
           "~",
           {
             "$ref": {
-              "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
+              "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
               "__new": "./common.json#/definitions/CommonProxyResource"
             }
           }
@@ -1877,7 +1569,7 @@
           "~",
           {
             "$ref": {
-              "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
+              "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
               "__new": "./common.json#/definitions/CommonProxyResource"
             }
           }
@@ -1930,7 +1622,7 @@
           "~",
           {
             "$ref": {
-              "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
+              "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
               "__new": "./common.json#/definitions/CommonProxyResource"
             }
           }
@@ -1948,7 +1640,7 @@
           "~",
           {
             "$ref": {
-              "__old": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
+              "__old": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource",
               "__new": "./common.json#/definitions/CommonProxyResource"
             }
           }
