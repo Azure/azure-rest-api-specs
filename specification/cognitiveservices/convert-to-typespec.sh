@@ -41,7 +41,9 @@ echo "Output directory: $OUTPUT_DIR"
 echo ""
 
 # Run the conversion
-npx tsp-client convert --swagger-readme "$README_PATH"
+# --arm: Indicates this is an ARM (Azure Resource Manager) specification
+# --fully-compatible false: Generate idiomatic TypeSpec using standard patterns
+npx tsp-client convert --swagger-readme "$README_PATH" --arm
 
 echo ""
 echo "========================================"

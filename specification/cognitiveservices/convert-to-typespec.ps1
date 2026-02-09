@@ -45,9 +45,11 @@ Write-Host "Output directory: $OutputDir"
 Write-Host ""
 
 # Run the conversion
+# --arm: Indicates this is an ARM (Azure Resource Manager) specification
+# --fully-compatible false: Generate idiomatic TypeSpec using standard patterns
 Push-Location $RepoRoot
 try {
-    npx tsp-client convert --swagger-readme $ReadmePath
+    npx tsp-client convert --swagger-readme $ReadmePath --arm
 }
 finally {
     Pop-Location
