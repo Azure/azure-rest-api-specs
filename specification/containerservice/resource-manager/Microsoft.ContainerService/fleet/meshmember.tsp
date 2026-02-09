@@ -5,7 +5,14 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerService;
 
-@added(Versions.v2025_08_02_clustermesh)
+scalar ClusterMeshProfileResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/fleets/clusterMeshProfiles",
+    }
+  ]>;
+
+@added(Versions.v2026_03_02_preview)
 @doc("The Mesh Member data for a Fleet Member resource.")
 model MeshProperties {
   @doc("The Cilium cluster properties.")
@@ -18,11 +25,11 @@ model MeshProperties {
 
   @doc("Resource id of the cluster mesh profile associated with this mesh member.")
   @visibility(Lifecycle.Read)
-  clusterMeshProfileResourceId: string;
+  clusterMeshProfileResourceId: ClusterMeshProfileResourceId;
 }
 
 
-@added(Versions.v2025_08_02_clustermesh)
+@added(Versions.v2026_03_02_preview)
 @doc("The Cilium specific properties of the member cluster.")
 model CiliumProperties {
   @doc("The Cilium clusterId")
@@ -35,7 +42,7 @@ model CiliumProperties {
 }
 
 
-@added(Versions.v2025_08_02_clustermesh)
+@added(Versions.v2026_03_02_preview)
 @doc("Mesh member state.")
 union MeshMemberState {
   string,
@@ -57,15 +64,22 @@ union MeshMemberState {
 }
 
 
-@added(Versions.v2025_08_02_clustermesh)
+@added(Versions.v2026_03_02_preview)
 @doc("Status of the mesh member.")
 model MeshMemberStatus {
   @doc("The mesh member state.")
+  @visibility(Lifecycle.Read)
   state: MeshMemberState;
 
   @doc("When the status was last updated.")
+  @visibility(Lifecycle.Read)
   lastUpdatedAt?: utcDateTime;
 
-  @doc("The error(s) reported by the cluster mesh agent.")
-  clusterMeshError?: Azure.ResourceManager.Foundations.ErrorDetail;
+  @doc("The last operation ID that affected the mesh properties of the fleet member")
+  @visibility(Lifecycle.Read)
+  lastOperationId?: string;
+
+  @doc("The error affecting this member.")
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
