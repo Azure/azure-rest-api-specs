@@ -26410,17 +26410,20 @@
           "readOnly": true
         },
         "subnetId": {
-          "type": "array",
+          "type": "string",
+          "format": "arm-id",
           "description": "Resource id of a subnet that this cluster's management service should have its network interface attached to. The subnet must be routable to all subnets that will be delegated to data centers. The resource id must be of the form '/subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.Network/virtualNetworks/<virtual network>/subnets/<subnet>'",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          },
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
         },
         "endPoints": {
           "type": "array",
@@ -26471,7 +26474,7 @@
     },
     "GarnetClusterResource": {
       "type": "object",
-      "description": "Representation of a managed Cassandra cluster.",
+      "description": "Representation of a Garnet cache cluster.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/GarnetClusterProperties",

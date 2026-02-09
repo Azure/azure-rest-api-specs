@@ -39,7 +39,11 @@ model GarnetClusterProperties {
 
   /** Resource id of a subnet that this cluster's management service should have its network interface attached to. The subnet must be routable to all subnets that will be delegated to data centers. The resource id must be of the form '/subscriptions/<subscription id>/resourceGroups/<resource group>/providers/Microsoft.Network/virtualNetworks/<virtual network>/subnets/<subnet>' */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  subnetId?: Azure.Core.armResourceIdentifier[];
+  subnetId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
 
   /** Endpoints for clients to connect to the cluster. */
   @visibility(Lifecycle.Read)

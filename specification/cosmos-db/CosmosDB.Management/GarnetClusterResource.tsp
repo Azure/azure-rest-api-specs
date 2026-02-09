@@ -11,7 +11,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.DocumentDB;
 /**
- * Representation of a managed Cassandra cluster.
+ * Representation of a Garnet cache cluster.
  */
 model GarnetClusterResource
   is Azure.ResourceManager.TrackedResource<GarnetClusterProperties> {
