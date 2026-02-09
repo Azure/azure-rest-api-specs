@@ -161,6 +161,13 @@ namespace Azure.AI.Projects {
     }
   );
 
+  // To allow in/out use of merged conversation message item, make id and status optional
+  @@withoutOmittedProperties(OpenAI.Message, "id" | "status");
+  @@copyProperties(OpenAI.Message, {
+    id?: string,
+    status?: OpenAI.MessageStatus,
+  });
+
   // To avoid conflicts with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
 
