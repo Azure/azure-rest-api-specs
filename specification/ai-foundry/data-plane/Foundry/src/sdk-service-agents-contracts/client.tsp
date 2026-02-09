@@ -154,7 +154,7 @@ namespace Azure.AI.Projects {
   // Propagate "id" to base of output items, not every union variant
   @@copyProperties(OpenAI.OutputItem,
     {
-      id: string,
+      id?: string,
     }
   );
 
