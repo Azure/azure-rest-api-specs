@@ -55,11 +55,11 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // Use short form method names
-@@clientName(Agents.getAgent, "get", "python");
-@@clientName(Agents.createAgent, "create", "python");
-@@clientName(Agents.updateAgent, "update", "python");
-@@clientName(Agents.deleteAgent, "delete", "python");
-@@clientName(Agents.listAgents, "list", "python");
+@@clientName(Agents.getAgent, "get");
+@@clientName(Agents.createAgent, "create");
+@@clientName(Agents.updateAgent, "update");
+@@clientName(Agents.deleteAgent, "delete");
+@@clientName(Agents.listAgents, "list");
 @@clientName(Agents.createAgentVersion, "create_version", "python");
 @@clientName(Agents.getAgentVersion, "get_version", "python");
 @@clientName(Agents.deleteAgentVersion, "delete_version", "python");
@@ -71,6 +71,11 @@ using Azure.AI.Projects;
 );
 @@clientName(Agents.updateAgentFromManifest, "update_from_manifest", "python");
 
+@@clientName(Agents.createAgentVersion, "createVersion", "javascript");
+@@clientName(Agents.getAgentVersion, "getVersion", "javascript");
+@@clientName(Agents.deleteAgentVersion, "deleteVersion", "javascript");
+@@clientName(Agents.listAgentVersions, "listVersions", "javascript");
+
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
 @@clientName(AgentVersionObject, "AgentVersionDetails", "python");
@@ -80,14 +85,17 @@ using Azure.AI.Projects;
   "python"
 );
 
+@@clientName(AgentObject, "Agent", "javascript");
+@@clientName(AgentVersionObject, "AgentVersion", "javascript");
+
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
-@@clientName(MemoryStores.createMemoryStore, "create", "python");
-@@clientName(MemoryStores.updateMemoryStore, "update", "python");
-@@clientName(MemoryStores.getMemoryStore, "get", "python");
-@@clientName(MemoryStores.listMemoryStores, "list", "python");
-@@clientName(MemoryStores.deleteMemoryStore, "delete", "python");
+@@clientName(MemoryStores.createMemoryStore, "create");
+@@clientName(MemoryStores.updateMemoryStore, "update");
+@@clientName(MemoryStores.getMemoryStore, "get");
+@@clientName(MemoryStores.listMemoryStores, "list");
+@@clientName(MemoryStores.deleteMemoryStore, "delete");
 
 // The SDK will have custom code to handle LRO memory updates.
 @@access(MemoryStores.updateMemories, Access.internal, "python");
@@ -109,6 +117,8 @@ using Azure.AI.Projects;
 
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
+
+@@clientName(MemoryStoreObject, "MemoryStore", "javascript");
 
 // --------------------------------------------------------------------------------
 // Responses sub‐client
