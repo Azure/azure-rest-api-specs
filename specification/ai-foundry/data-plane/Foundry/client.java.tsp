@@ -22,11 +22,6 @@ namespace Azure.AI.Projects;
 @@clientName(Azure.AI.Projects, "AIProjectClient");
 
 // --------------------------------------------------------------------------------
-// Don't use Beta sub-client for beta operations
-// --------------------------------------------------------------------------------
-@@clientNamespace(Azure.AI.Projects.Beta, "Azure.AI.Projects");
-
-// --------------------------------------------------------------------------------
 // Renames
 // --------------------------------------------------------------------------------
 @@clientName(Connections.list, "listConnections");
