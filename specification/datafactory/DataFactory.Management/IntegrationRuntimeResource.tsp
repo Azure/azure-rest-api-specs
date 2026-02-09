@@ -205,6 +205,8 @@ interface IntegrationRuntimeResources {
     {
       @body body: void;
     },
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
