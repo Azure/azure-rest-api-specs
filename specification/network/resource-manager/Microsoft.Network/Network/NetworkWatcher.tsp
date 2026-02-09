@@ -60,17 +60,19 @@ alias PacketCaptureOps = Azure.ResourceManager.Legacy.RoutedOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface NetworkWatchers {
   /**
    * Gets the specified network watcher by resource group.
    */
+  @tag("NetworkWatchers")
   @autoRoute
   get is ArmResourceRead<NetworkWatcher, Error = ErrorResponse>;
 
   /**
    * Creates or updates a network watcher in the specified resource group.
    */
+  @tag("NetworkWatchers")
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NetworkWatcher,
@@ -80,6 +82,7 @@ interface NetworkWatchers {
   /**
    * Updates a network watcher tags.
    */
+  @tag("NetworkWatchers")
   @autoRoute
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
@@ -91,6 +94,7 @@ interface NetworkWatchers {
   /**
    * Deletes the specified network watcher resource.
    */
+  @tag("NetworkWatchers")
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkWatcher,
@@ -100,6 +104,7 @@ interface NetworkWatchers {
   /**
    * Gets all network watchers by resource group.
    */
+  @tag("NetworkWatchers")
   @autoRoute
   list is ArmResourceListByParent<
     NetworkWatcher,
@@ -110,6 +115,7 @@ interface NetworkWatchers {
   /**
    * Gets all network watchers by subscription.
    */
+  @tag("NetworkWatchers")
   @autoRoute
   listAll is ArmListBySubscription<
     NetworkWatcher,
@@ -120,6 +126,7 @@ interface NetworkWatchers {
   /**
    * Gets the current network topology by resource group.
    */
+  @tag("NetworkWatchers")
   @autoRoute
   @action("topology")
   getTopology is ArmResourceActionSync<
@@ -134,6 +141,7 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("ipFlowVerify")
   verifyIPFlow is ArmResourceActionAsyncBase<
@@ -152,6 +160,7 @@ interface NetworkWatchers {
    * Gets the next hop from the specified VM.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("nextHop")
   getNextHop is ArmResourceActionAsyncBase<
@@ -171,6 +180,7 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("securityGroupView")
   getVMSecurityRules is ArmResourceActionAsyncBase<
@@ -189,6 +199,7 @@ interface NetworkWatchers {
    * Initiate troubleshooting on a specified resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("troubleshoot")
   getTroubleshooting is ArmResourceActionAsyncBase<
@@ -207,6 +218,7 @@ interface NetworkWatchers {
    * Get the last completed troubleshooting result on a specified resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("queryTroubleshootResult")
   getTroubleshootingResult is ArmResourceActionAsyncBase<
@@ -226,6 +238,7 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkWatchers")
+  @tag("TrafficAnalytics")
   @autoRoute
   @action("configureFlowLog")
   setFlowLogConfiguration is ArmResourceActionAsyncBase<
@@ -245,6 +258,7 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkWatchers")
+  @tag("TrafficAnalytics")
   @autoRoute
   @action("queryFlowLogStatus")
   getFlowLogStatus is ArmResourceActionAsyncBase<
@@ -263,6 +277,7 @@ interface NetworkWatchers {
    * Verifies the possibility of establishing a direct TCP connection from a virtual machine to a given endpoint including another VM or an arbitrary remote server.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("connectivityCheck")
   checkConnectivity is ArmResourceActionAsyncBase<
@@ -281,6 +296,7 @@ interface NetworkWatchers {
    * NOTE: This feature is currently in preview and still being tested for stability. Gets the relative latency score for internet service providers from a specified location to Azure regions.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("azureReachabilityReport")
   getAzureReachabilityReport is ArmResourceActionAsyncBase<
@@ -299,6 +315,7 @@ interface NetworkWatchers {
    * NOTE: This feature is currently in preview and still being tested for stability. Lists all available internet service providers for a specified Azure region.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("availableProvidersList")
   listAvailableProviders is ArmResourceActionAsyncBase<
@@ -317,6 +334,7 @@ interface NetworkWatchers {
    * Gets Network Configuration Diagnostic data to help customers understand and debug network behavior. It provides detailed information on what security rules were applied to a specified traffic flow and the result of evaluating these rules. Customers must provide details of a flow like source, destination, protocol, etc. The API returns whether traffic was allowed or denied, the rules evaluated for the specified flow and the evaluation results.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("networkConfigurationDiagnostic")
   getNetworkConfigurationDiagnostic is ArmResourceActionAsyncBase<
@@ -336,7 +354,6 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkWatchers")
   @tag("PacketCaptures")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("PacketCaptures_Create")
@@ -358,7 +375,6 @@ interface NetworkWatchers {
    * Gets a packet capture session by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkWatchers")
   @tag("PacketCaptures")
   @operationId("PacketCaptures_Get")
   @get
@@ -374,7 +390,6 @@ interface NetworkWatchers {
    * Deletes the specified packet capture session.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkWatchers")
   @tag("PacketCaptures")
   @operationId("PacketCaptures_Delete")
   @delete
@@ -391,7 +406,6 @@ interface NetworkWatchers {
    * Stops a specified packet capture session.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkWatchers")
   @tag("PacketCaptures")
   @operationId("PacketCaptures_Stop")
   @action("stop")
@@ -411,7 +425,6 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkWatchers")
   @tag("PacketCaptures")
   @operationId("PacketCaptures_GetStatus")
   @action("queryStatus")
@@ -432,7 +445,6 @@ interface NetworkWatchers {
    * Lists all packet capture sessions within the specified resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkWatchers")
   @tag("PacketCaptures")
   @operationId("PacketCaptures_List")
   @list

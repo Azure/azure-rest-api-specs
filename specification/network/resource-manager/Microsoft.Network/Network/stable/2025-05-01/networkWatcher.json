@@ -43,6 +43,9 @@
       "name": "NetworkWatchers"
     },
     {
+      "name": "TrafficAnalytics"
+    },
+    {
       "name": "PacketCaptures"
     },
     {
@@ -509,7 +512,8 @@
       "post": {
         "operationId": "NetworkWatchers_SetFlowLogConfiguration",
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "TrafficAnalytics"
         ],
         "description": "Configures flow log and traffic analytics (optional) on a specified resource.",
         "parameters": [
@@ -1595,7 +1599,6 @@
       "get": {
         "operationId": "PacketCaptures_List",
         "tags": [
-          "NetworkWatchers",
           "PacketCaptures"
         ],
         "description": "Lists all packet capture sessions within the specified resource group.",
@@ -1645,7 +1648,6 @@
       "get": {
         "operationId": "PacketCaptures_Get",
         "tags": [
-          "NetworkWatchers",
           "PacketCaptures"
         ],
         "description": "Gets a packet capture session by name.",
@@ -1697,7 +1699,6 @@
       "put": {
         "operationId": "PacketCaptures_Create",
         "tags": [
-          "NetworkWatchers",
           "PacketCaptures"
         ],
         "description": "Create and start a packet capture on the specified VM.",
@@ -1774,7 +1775,6 @@
       "delete": {
         "operationId": "PacketCaptures_Delete",
         "tags": [
-          "NetworkWatchers",
           "PacketCaptures"
         ],
         "description": "Deletes the specified packet capture session.",
@@ -1843,7 +1843,6 @@
       "post": {
         "operationId": "PacketCaptures_GetStatus",
         "tags": [
-          "NetworkWatchers",
           "PacketCaptures"
         ],
         "description": "Query the status of a running packet capture session.",
@@ -1919,7 +1918,6 @@
       "post": {
         "operationId": "PacketCaptures_Stop",
         "tags": [
-          "NetworkWatchers",
           "PacketCaptures"
         ],
         "description": "Stops a specified packet capture session.",
@@ -1988,7 +1986,8 @@
       "post": {
         "operationId": "NetworkWatchers_GetFlowLogStatus",
         "tags": [
-          "NetworkWatchers"
+          "NetworkWatchers",
+          "TrafficAnalytics"
         ],
         "description": "Queries status of flow log and traffic analytics (optional) on a specified resource.",
         "parameters": [

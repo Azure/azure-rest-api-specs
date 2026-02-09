@@ -52,7 +52,7 @@ interface ReachabilityAnalysisIntents {
    * Get the Reachability Analysis Intent.
    */
   @summary("Get the Reachability Analysis Intent.")
-  @tag("ReachabilityAnalysisIntent")
+  @tag("ReachabilityAnalysisIntents")
   get is ArmResourceRead<
     ReachabilityAnalysisIntent,
     Error = CommonErrorResponse
@@ -62,7 +62,7 @@ interface ReachabilityAnalysisIntents {
    * Creates Reachability Analysis Intent.
    */
   @summary("Creates Reachability Analysis Intent.")
-  @tag("ReachabilityAnalysisIntent")
+  @tag("ReachabilityAnalysisIntents")
   create is ArmResourceCreateOrReplaceSync<
     ReachabilityAnalysisIntent,
     Error = CommonErrorResponse
@@ -72,7 +72,7 @@ interface ReachabilityAnalysisIntents {
    * Deletes Reachability Analysis Intent.
    */
   @summary("Deletes Reachability Analysis Intent.")
-  @tag("ReachabilityAnalysisIntent")
+  @tag("ReachabilityAnalysisIntents")
   delete is ArmResourceDeleteSync<
     ReachabilityAnalysisIntent,
     Error = CommonErrorResponse
@@ -82,7 +82,7 @@ interface ReachabilityAnalysisIntents {
    * Gets list of Reachability Analysis Intents .
    */
   @summary("Gets list of Reachability Analysis Intents .")
-  @tag("ReachabilityAnalysisIntent")
+  @tag("ReachabilityAnalysisIntents")
   list is ArmResourceListByParent<
     ReachabilityAnalysisIntent,
     Parameters = {

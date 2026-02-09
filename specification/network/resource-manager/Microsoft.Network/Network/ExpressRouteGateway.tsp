@@ -60,17 +60,19 @@ alias ExpressRouteConnectionOps = Azure.ResourceManager.Legacy.RoutedOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRouteGateways {
   /**
    * Fetches the details of a ExpressRoute gateway in a resource group.
    */
+  @tag("ExpressRouteGateways")
   @autoRoute
   get is ArmResourceRead<ExpressRouteGateway, Error = CloudError>;
 
   /**
    * Creates or updates a ExpressRoute gateway in a specified resource group.
    */
+  @tag("ExpressRouteGateways")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRouteGateway,
     Error = CloudError
@@ -80,6 +82,7 @@ interface ExpressRouteGateways {
    * Updates express route gateway tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteGateways")
   @patch(#{ implicitOptionality: false })
   @autoRoute
   updateTags is ArmCustomPatchAsync<
@@ -94,6 +97,7 @@ interface ExpressRouteGateways {
    * Deletes the specified ExpressRoute gateway in a resource group. An ExpressRoute gateway resource can only be deleted when there are no connection subresources.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteGateways")
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteGateway,
@@ -104,6 +108,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRoute gateways in a given resource group.
    */
+  @tag("ExpressRouteGateways")
   @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     ExpressRouteGateway,
@@ -114,6 +119,7 @@ interface ExpressRouteGateways {
   /**
    * Lists ExpressRoute gateways under a given subscription.
    */
+  @tag("ExpressRouteGateways")
   @autoRoute
   listBySubscription is ArmListBySubscription<
     ExpressRouteGateway,

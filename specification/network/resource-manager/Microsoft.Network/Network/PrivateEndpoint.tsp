@@ -68,11 +68,12 @@ alias PrivateDnsZoneGroupOps = Azure.ResourceManager.Legacy.RoutedOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface PrivateEndpoints {
   /**
    * Gets the specified private endpoint by resource group.
    */
+  @tag("PrivateEndpoints")
   @autoRoute
   get is ArmResourceRead<
     PrivateEndpoint,
@@ -89,6 +90,7 @@ interface PrivateEndpoints {
   /**
    * Creates or updates an private endpoint in the specified resource group.
    */
+  @tag("PrivateEndpoints")
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateEndpoint,
@@ -99,6 +101,7 @@ interface PrivateEndpoints {
    * Deletes the specified private endpoint.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateEndpoints")
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpoint,
@@ -109,12 +112,14 @@ interface PrivateEndpoints {
   /**
    * Gets all private endpoints in a resource group.
    */
+  @tag("PrivateEndpoints")
   @autoRoute
   list is ArmResourceListByParent<PrivateEndpoint, Error = Error>;
 
   /**
    * Gets all private endpoints in a subscription.
    */
+  @tag("PrivateEndpoints")
   @autoRoute
   listBySubscription is ArmListBySubscription<PrivateEndpoint, Error = Error>;
 
@@ -199,4 +204,3 @@ interface PrivateEndpoints {
 @@doc(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update private dns zone group operation."
 );
-

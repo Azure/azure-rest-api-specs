@@ -141,7 +141,7 @@ interface NetworkManagers {
    * Lists active connectivity configurations in a network manager.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkManagers")
+  @tag("NetworkManagerActiveConnectivityConfigurations")
   @operationId("ListActiveConnectivityConfigurations")
   @list
   listActiveConnectivityConfigurations is ArmResourceActionSync<
@@ -164,7 +164,7 @@ interface NetworkManagers {
    * Lists active security admin rules in a network manager.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkManagers")
+  @tag("NetworkManagerActiveConfigurations")
   @operationId("ListActiveSecurityAdminRules")
   @list
   listActiveSecurityAdminRules is ArmResourceActionSync<
