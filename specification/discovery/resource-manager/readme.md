@@ -80,6 +80,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].put.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
+  - code: ResourceNameRestriction
+    reason: The privateLinkResourceName parameter is determined by the service and does not require a pattern restriction.
+    from:
+      - discovery.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/bookshelves/{bookshelfName}/privateLinkResources/{privateLinkResourceName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}/privateLinkResources/{privateLinkResourceName}"]
 ```
 
 ### Tag: package-2025-12-01-preview
