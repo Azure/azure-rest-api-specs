@@ -54,24 +54,18 @@ interface AppResiliencies {
   /**
    * Get container app resiliency policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppResiliency_Get")
   @summary("Get an application's resiliency policy.")
   get is AppResiliencyOps.Read<AppResiliency>;
 
   /**
    * Create or update container app resiliency policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppResiliency_CreateOrUpdate")
   @summary("Create or update an application's resiliency policy.")
   createOrUpdate is AppResiliencyOps.CreateOrUpdateSync<AppResiliency>;
 
   /**
    * Update container app resiliency policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppResiliency_Update")
   @patch(#{ implicitOptionality: false })
   @summary("Update an application's resiliency policy.")
   update is AppResiliencyOps.CustomPatchSync<
@@ -82,16 +76,12 @@ interface AppResiliencies {
   /**
    * Delete container app resiliency policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppResiliency_Delete")
   @summary("Delete an application's resiliency policy.")
   delete is AppResiliencyOps.DeleteSync<AppResiliency>;
 
   /**
    * List container app resiliency policies.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AppResiliency_List")
   @summary("List an application's resiliency policies.")
   list is AppResiliencyOps.List<
     AppResiliency,

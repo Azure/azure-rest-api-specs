@@ -18,9 +18,7 @@ interface AvailableWorkloadProfilesOperationGroup {
   /**
    * Get all available workload profiles for a location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get available workload profiles by location.")
-  @operationId("AvailableWorkloadProfiles_Get")
   @autoRoute
   @get
   @list
@@ -38,9 +36,7 @@ interface BillingMetersOperationGroup {
   /**
    * Get all billingMeters for a location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get billing meters by location.")
-  @operationId("BillingMeters_Get")
   @autoRoute
   @get
   @action("billingMeters")
@@ -62,7 +58,7 @@ interface BillingMetersOperationGroup {
 op getCustomDomainVerificationId is ArmProviderActionSync<
   Response = OkResponse & {
     @bodyRoot
-    customDomainVerificationId: string;
+    customDomainVerificationId: CustomDomainVerificationId;
   },
   Scope = SubscriptionActionScope,
   Error = DefaultErrorResponse
@@ -73,8 +69,6 @@ interface UsagesOperationGroup {
   /**
    * Gets, for the specified location, the current resource usage information as well as the limits under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Usages_List")
   @autoRoute
   @get
   @list
@@ -93,8 +87,6 @@ interface ManagedEnvironmentUsagesOperationGroup {
   /**
    * Gets the current usage information as well as the limits for environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentUsages_List")
   @autoRoute
   @get
   @list

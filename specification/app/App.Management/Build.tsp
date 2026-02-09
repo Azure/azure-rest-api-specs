@@ -29,29 +29,21 @@ interface Builds {
   /**
    * Get a BuildResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Builds_Get")
   get is ArmResourceRead<BuildResource>;
 
   /**
    * Create a BuildResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Builds_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<BuildResource>;
 
   /**
    * Delete a BuildResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Builds_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<BuildResource>;
 
   /**
    * List BuildResource resources by BuilderResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BuildsByBuilderResource_List")
   list is ArmResourceListByParent<
     BuildResource,
     Response = ArmResponse<BuildCollection>
@@ -60,8 +52,6 @@ interface Builds {
   /**
    * Gets the token used to connect to the endpoint where source code can be uploaded for a build.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BuildAuthToken_List")
   @action("listAuthToken")
   buildAuthTokenList is ArmResourceActionSync<
     BuildResource,

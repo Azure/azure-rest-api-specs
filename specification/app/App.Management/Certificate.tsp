@@ -48,30 +48,26 @@ alias CertificateOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
-@tag("ConnectedEnvironments")
 @tag("Certificates")
 interface Certificates {
   /**
    * Get the specified Certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsCertificates_Get")
+  @tag("ConnectedEnvironments")
   @summary("Get the specified Certificate.")
   get is CertificateOps.Read<Certificate>;
 
   /**
    * Create or Update a Certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsCertificates_CreateOrUpdate")
+  @tag("ConnectedEnvironments")
   @summary("Create or Update a Certificate.")
   createOrUpdate is CertificateOps.CreateOrUpdateAsync<Certificate>;
 
   /**
    * Patches a certificate. Currently only patching of tags is supported
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsCertificates_Update")
+  @tag("ConnectedEnvironments")
   @patch(#{ implicitOptionality: false })
   @summary("Update properties of a certificate")
   update is CertificateOps.CustomPatchAsync<
@@ -82,22 +78,67 @@ interface Certificates {
   /**
    * Deletes the specified Certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ConnectedEnvironments")
   @summary("Deletes the specified Certificate.")
-  @operationId("ConnectedEnvironmentsCertificates_Delete")
   delete is CertificateOps.DeleteWithoutOkAsync<Certificate>;
 
   /**
    * Get the Certificates in a given connected environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @tag("ConnectedEnvironments")
   @summary("Get the Certificates in a given connected environment.")
-  @operationId("ConnectedEnvironmentsCertificates_List")
   list is CertificateOps.List<
     Certificate,
     Response = ArmResponse<CertificateCollection>
   >;
+
+  /**
+   * Get the specified Certificate.
+   */
+  @tag("ManagedEnvironments")
+  @summary("Get the specified Certificate.")
+  getCertificates is CertificateOperationGroupOps.Read<Certificate>;
+
+  /**
+   * Create or Update a Certificate.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @tag("ManagedEnvironments")
+  @summary("Create or Update a Certificate.")
+  createOrUpdateCertificates is CertificateOperationGroupOps.CreateOrUpdateSync<
+    Certificate,
+    Response = ArmResourceUpdatedResponse<Certificate>
+  >;
+
+  /**
+   * Patches a certificate. Currently only patching of tags is supported
+   */
+  @tag("ManagedEnvironments")
+  @patch(#{ implicitOptionality: false })
+  @summary("Update properties of a certificate")
+  updateCertificates is CertificateOperationGroupOps.CustomPatchSync<
+    Certificate,
+    PatchModel = CertificatePatch
+  >;
+
+  /**
+   * Deletes the specified Certificate.
+   */
+  @tag("ManagedEnvironments")
+  @summary("Deletes the specified Certificate.")
+  deleteCertificates is CertificateOperationGroupOps.DeleteSync<Certificate>;
+
+  /**
+   * Get the Certificates in a given managed environment.
+   */
+  @tag("ManagedEnvironments")
+  @summary("Get the Certificates in a given managed environment.")
+  listCertificates is CertificateOperationGroupOps.List<
+    Certificate,
+    Response = ArmResponse<CertificateCollection>
+  >;
 }
+
 alias CertificateOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -120,62 +161,6 @@ alias CertificateOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperatio
   }
 >;
 
-@armResourceOperations
-@tag("ManagedEnvironments")
-@tag("Certificates")
-interface CertificateOperationGroup {
-  /**
-   * Get the specified Certificate.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificates_Get")
-  @summary("Get the specified Certificate.")
-  get is CertificateOperationGroupOps.Read<Certificate>;
-
-  /**
-   * Create or Update a Certificate.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Certificates_CreateOrUpdate")
-  @summary("Create or Update a Certificate.")
-  createOrUpdate is CertificateOperationGroupOps.CreateOrUpdateSync<
-    Certificate,
-    Response = ArmResourceUpdatedResponse<Certificate>
-  >;
-
-  /**
-   * Patches a certificate. Currently only patching of tags is supported
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificates_Update")
-  @patch(#{ implicitOptionality: false })
-  @summary("Update properties of a certificate")
-  update is CertificateOperationGroupOps.CustomPatchSync<
-    Certificate,
-    PatchModel = CertificatePatch
-  >;
-
-  /**
-   * Deletes the specified Certificate.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificates_Delete")
-  @summary("Deletes the specified Certificate.")
-  delete is CertificateOperationGroupOps.DeleteSync<Certificate>;
-
-  /**
-   * Get the Certificates in a given managed environment.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificates_List")
-  @summary("Get the Certificates in a given managed environment.")
-  list is CertificateOperationGroupOps.List<
-    Certificate,
-    Response = ArmResponse<CertificateCollection>
-  >;
-}
-
 @@doc(Certificate.name, "Name of the Certificate.");
 @@doc(Certificate.properties, "Certificate resource specific properties");
 @@doc(Certificates.createOrUpdate::parameters.resource,
@@ -184,9 +169,9 @@ interface CertificateOperationGroup {
 @@doc(Certificates.update::parameters.properties,
   "Properties of a certificate that need to be updated"
 );
-@@doc(CertificateOperationGroup.createOrUpdate::parameters.resource,
+@@doc(Certificates.createOrUpdateCertificates::parameters.resource,
   "Certificate to be created or updated"
 );
-@@doc(CertificateOperationGroup.update::parameters.properties,
+@@doc(Certificates.updateCertificates::parameters.properties,
   "Properties of a certificate that need to be updated"
 );

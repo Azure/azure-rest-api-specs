@@ -131,8 +131,6 @@ interface ManagedEnvironments {
   /**
    * Checks if resource name is available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Namespaces_CheckNameAvailability")
   @summary("Checks the resource name availability.")
   checkNameAvailability is ArmResourceActionSync<
     ManagedEnvironment,
@@ -143,8 +141,6 @@ interface ManagedEnvironments {
   /**
    * List private link resources for a given managed environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentPrivateLinkResources_List")
   @list
   @get
   @action("privateLinkResources")

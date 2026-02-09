@@ -29,24 +29,19 @@ interface ContainerAppsSessionPools {
   /**
    * Get the properties of a session pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSessionPools_Get")
   @summary("Get the properties of a session pool.")
   get is ArmResourceRead<SessionPool>;
 
   /**
    * Create or update a session pool with the given properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSessionPools_CreateOrUpdate")
   @summary("Create or update a session pool.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SessionPool>;
 
   /**
    * Patches a session pool using JSON merge patch
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSessionPools_Update")
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" ""
   @patch(#{ implicitOptionality: false })
   @summary("Update properties of a session pool")
   update is ArmCustomPatchAsync<
@@ -59,16 +54,12 @@ interface ContainerAppsSessionPools {
   /**
    * Delete the session pool with the given name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSessionPools_Delete")
   @summary("Delete a session pool.")
   delete is ArmResourceDeleteWithoutOkAsync<SessionPool>;
 
   /**
    * Get the session pools in a given resource group of a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSessionPools_ListByResourceGroup")
   @summary("Get the session pools in a given resource group of a subscription.")
   listByResourceGroup is ArmResourceListByParent<
     SessionPool,
@@ -78,8 +69,6 @@ interface ContainerAppsSessionPools {
   /**
    * Get the session pools in a given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSessionPools_ListBySubscription")
   @summary("Get the session pools in a given subscription.")
   listBySubscription is ArmListBySubscription<
     SessionPool,
@@ -89,8 +78,6 @@ interface ContainerAppsSessionPools {
   /**
    * Fetch the MCP server credentials of a session pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSessionPools_FetchMcpServerCredentials")
   @summary("Fetch the MCP server credentials of a session pool.")
   fetchMcpServerCredentials is ArmResourceActionSync<
     SessionPool,
@@ -101,8 +88,6 @@ interface ContainerAppsSessionPools {
   /**
    * Rotate and fetch the rotated MCP server credentials of a session pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSessionPools_RotateMcpServerCredentials")
   @summary("Rotate and fetch the rotated MCP server credentials of a session pool.")
   rotateMcpServerCredentials is ArmResourceActionSync<
     SessionPool,

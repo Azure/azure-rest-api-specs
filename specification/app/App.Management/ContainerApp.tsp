@@ -145,6 +145,7 @@ interface ContainerApps {
   /**
    * Get auth token for a container app
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
   @action("getAuthtoken")
   @summary("Get auth token for a container app")
   getAuthToken is ArmResourceActionSync<

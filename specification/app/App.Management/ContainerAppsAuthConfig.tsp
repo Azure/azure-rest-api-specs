@@ -28,17 +28,13 @@ interface ContainerAppsAuthConfigs {
   /**
    * Get a AuthConfig of a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsAuthConfigs_Get")
   @summary("Get a AuthConfig of a Container App.")
   get is ArmResourceRead<AuthConfig, Error = DefaultErrorResponse>;
 
   /**
    * Create or update the AuthConfig for a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("ContainerAppsAuthConfigs_CreateOrUpdate")
   @summary("Create or update the AuthConfig for a Container App.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthConfig,
@@ -49,16 +45,12 @@ interface ContainerAppsAuthConfigs {
   /**
    * Delete a Container App AuthConfig.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsAuthConfigs_Delete")
   @summary("Delete a Container App AuthConfig.")
   delete is ArmResourceDeleteSync<AuthConfig, Error = DefaultErrorResponse>;
 
   /**
    * Get the Container App AuthConfigs in a given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsAuthConfigs_ListByContainerApp")
   @get
   @list
   @action("authConfigs")

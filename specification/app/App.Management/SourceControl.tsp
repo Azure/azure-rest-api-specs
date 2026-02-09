@@ -30,16 +30,12 @@ interface ContainerAppsSourceControls {
   /**
    * Get a SourceControl of a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSourceControls_Get")
   @summary("Get a SourceControl of a Container App.")
   get is ArmResourceRead<SourceControl, Error = DefaultErrorResponse>;
 
   /**
    * Create or update the SourceControl for a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSourceControls_CreateOrUpdate")
   @summary("Create or update the SourceControl for a Container App.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SourceControl,
@@ -47,6 +43,7 @@ interface ContainerAppsSourceControls {
       /**
        * Github personal access token used for SourceControl.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
       @header
       `x-ms-github-auxiliary`?: string;
     },
@@ -58,9 +55,7 @@ interface ContainerAppsSourceControls {
   /**
    * Delete a Container App SourceControl.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("ContainerAppsSourceControls_Delete")
   @summary("Delete a Container App SourceControl.")
   delete is ArmResourceDeleteWithoutOkAsync<
     SourceControl,
@@ -68,6 +63,7 @@ interface ContainerAppsSourceControls {
       /**
        * Github personal access token used for SourceControl.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
       @header
       `x-ms-github-auxiliary`?: string;
 
@@ -90,8 +86,6 @@ interface ContainerAppsSourceControls {
   /**
    * Get the Container App SourceControls in a given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsSourceControls_ListByContainerApp")
   @summary("Get the Container App SourceControls in a given resource group.")
   listByContainerApp is ArmResourceListByParent<
     SourceControl,

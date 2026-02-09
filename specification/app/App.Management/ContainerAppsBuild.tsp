@@ -56,22 +56,16 @@ interface ContainerAppsBuilds {
   /**
    * Get a Container Apps Build resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsBuilds_Get")
   get is ContainerAppsBuildResourceOps.Read<ContainerAppsBuildResource>;
 
   /**
    * Delete a Container Apps Build resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsBuilds_Delete")
   delete is ContainerAppsBuildResourceOps.DeleteWithoutOkAsync<ContainerAppsBuildResource>;
 
   /**
    * List Container Apps Build resources by Container App
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsBuildsByContainerApp_List")
   list is ContainerAppsBuildResourceOps.List<
     ContainerAppsBuildResource,
     Response = ArmResponse<ContainerAppsBuildCollection>

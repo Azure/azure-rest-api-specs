@@ -29,16 +29,12 @@ interface ContainerAppsRevisions {
   /**
    * Get a revision of a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsRevisions_GetRevision")
   @summary("Get a revision of a Container App.")
   getRevision is ArmResourceRead<Revision, Error = DefaultErrorResponse>;
 
   /**
    * Get the Revisions for a given Container App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsRevisions_ListRevisions")
   @summary("Get the Revisions for a given Container App.")
   listRevisions is ArmResourceListByParent<
     Revision,
@@ -56,8 +52,6 @@ interface ContainerAppsRevisions {
   /**
    * Activates a revision for a Container App
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsRevisions_ActivateRevision")
   @action("activate")
   @summary("Activates a revision for a Container App")
   activateRevision is ArmResourceActionSync<
@@ -70,8 +64,6 @@ interface ContainerAppsRevisions {
   /**
    * Deactivates a revision for a Container App
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsRevisions_DeactivateRevision")
   @action("deactivate")
   @summary("Deactivates a revision for a Container App")
   deactivateRevision is ArmResourceActionSync<
@@ -84,8 +76,6 @@ interface ContainerAppsRevisions {
   /**
    * Restarts a revision for a Container App
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsRevisions_RestartRevision")
   @action("restart")
   @summary("Restarts a revision for a Container App")
   restartRevision is ArmResourceActionSync<
@@ -133,7 +123,6 @@ interface FunctionsExtension {
   /**
    * Proxies a Functions host call to the function app backed by the container app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @action("invoke")
   @summary("Proxies a Functions host call to the function app backed by the container app.")
   invokeFunctionsHost is FunctionExtensionOps.ActionSync<

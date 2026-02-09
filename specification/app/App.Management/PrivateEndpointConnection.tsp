@@ -55,16 +55,12 @@ interface PrivateEndpointConnections {
   /**
    * Get a private endpoint connection for a given managed environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentPrivateEndpointConnections_Get")
   @summary("Get a private endpoint connection for a given managed environment.")
   get is PrivateEndpointConnectionOps.Read<PrivateEndpointConnection>;
 
   /**
    * Update the state of a private endpoint connection for a given managed environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentPrivateEndpointConnections_CreateOrUpdate")
   @summary("Update the state of a private endpoint connection for a given managed environment.")
   createOrUpdate is PrivateEndpointConnectionOps.CreateOrUpdateAsync<
     PrivateEndpointConnection,
@@ -75,16 +71,12 @@ interface PrivateEndpointConnections {
   /**
    * Delete a private endpoint connection for a given managed environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentPrivateEndpointConnections_Delete")
   @summary("Delete a private endpoint connection for a given managed environment.")
   delete is PrivateEndpointConnectionOps.DeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**
    * List private endpoint connections for a given managed environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentPrivateEndpointConnections_List")
   @summary("List private endpoint connections for a given managed environment.")
   list is PrivateEndpointConnectionOps.List<PrivateEndpointConnection>;
 }

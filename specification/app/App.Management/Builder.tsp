@@ -29,22 +29,16 @@ interface Builders {
   /**
    * Get a BuilderResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Builders_Get")
   get is ArmResourceRead<BuilderResource>;
 
   /**
    * Create or update a BuilderResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Builders_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<BuilderResource>;
 
   /**
    * Update a BuilderResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Builders_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     BuilderResource,
@@ -54,15 +48,11 @@ interface Builders {
   /**
    * Delete a BuilderResource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Builders_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<BuilderResource>;
 
   /**
    * List BuilderResource resources by resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Builders_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     BuilderResource,
     Response = ArmResponse<BuilderCollection>
@@ -71,8 +61,6 @@ interface Builders {
   /**
    * List BuilderResource resources by subscription ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Builders_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     BuilderResource,
     Response = ArmResponse<BuilderCollection>

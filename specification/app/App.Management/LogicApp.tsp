@@ -14,7 +14,7 @@ namespace Microsoft.App;
 /**
  * A logic app extension resource
  */
-model LogicApp is Azure.ResourceManager.ProxyResource<{}> {
+model LogicApp is Azure.ResourceManager.ProxyResource<LogicAppProperties> {
   ...ResourceNameParameter<
     Resource = LogicApp,
     KeyName = "logicAppName",
@@ -28,6 +28,7 @@ alias LogicAppParentParameter = {
   ...SubscriptionIdParameter;
   ...ResourceGroupParameter;
 
+  /** Name of the Container App. */
   @path
   @segment("providers/microsoft.App/containerApps")
   @key
@@ -96,7 +97,7 @@ interface LogicApps {
   invoke is ArmResourceActionSync<
     LogicApp,
     void,
-    ArmResponse<unknown>,
+    ArmResponse<Object>,
     LogicAppParentParameter,
     Parameters = {
       /**
@@ -119,8 +120,6 @@ interface LogicApps {
   /**
    * Get workflow information by its name
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LogicApps_GetWorkflow")
   @summary("Get workflow information by its name")
   getWorkflow is ArmResourceRead<
     WorkflowEnvelope,
@@ -131,8 +130,6 @@ interface LogicApps {
   /**
    * List the workflows for a logic app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LogicApps_ListWorkflows")
   @summary("List the workflows for a logic app.")
   listWorkflows is ArmResourceListByParent<
     WorkflowEnvelope,

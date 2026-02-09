@@ -57,29 +57,6 @@ alias ContainerAppsFunctionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ErrorType = DefaultErrorResponse
 >;
 
-@armResourceOperations
-@tag("AzureFunctionsOnContainerApps")
-interface ContainerAppsFunctions {
-  /**
-   * Get a specific function of a Container App Revision.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsRevisionFunctions_Get")
-  @summary("Get a specific function of a Container App Revision.")
-  get is ContainerAppsFunctionOps.Read<ContainerAppsFunction>;
-
-  /**
-   * List the functions for a given Container App Revision.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsRevisionFunctions_List")
-  @summary("List the functions for a given Container App Revision.")
-  list is ContainerAppsFunctionOps.List<
-    ContainerAppsFunction,
-    Response = ArmResponse<ContainerAppsFunctionCollection>
-  >;
-}
-
 alias ContainerAppsFunctionOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
@@ -106,22 +83,34 @@ alias ContainerAppsFunctionOperationGroupOps = Azure.ResourceManager.Legacy.Lega
 >;
 
 @armResourceOperations
-interface AzureFunctionsOnContainerApps {
+@tag("AzureFunctionsOnContainerApps")
+interface ContainerAppsFunctions {
+  /**
+   * Get a specific function of a Container App Revision.
+   */
+  @summary("Get a specific function of a Container App Revision.")
+  get is ContainerAppsFunctionOps.Read<ContainerAppsFunction>;
+
+  /**
+   * List the functions for a given Container App Revision.
+   */
+  @summary("List the functions for a given Container App Revision.")
+  list is ContainerAppsFunctionOps.List<
+    ContainerAppsFunction,
+    Response = ArmResponse<ContainerAppsFunctionCollection>
+  >;
+
   /**
    * Get a specific function of a Container App from the latest Revision.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsFunctions_Get")
   @summary("Get a specific function of a Container App from the latest Revision.")
-  get is ContainerAppsFunctionOperationGroupOps.Read<ContainerAppsFunction>;
+  getAzureFunctionsOnContainerApps is ContainerAppsFunctionOperationGroupOps.Read<ContainerAppsFunction>;
 
   /**
    * List the functions for a given Container App from the latest Revision.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("List the functions for a given Container App from the latest Revision.")
-  @operationId("ContainerAppsFunctions_List")
-  list is ContainerAppsFunctionOperationGroupOps.List<
+  listAzureFunctionsOnContainerApps is ContainerAppsFunctionOperationGroupOps.List<
     ContainerAppsFunction,
     Response = ArmResponse<ContainerAppsFunctionCollection>
   >;

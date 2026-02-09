@@ -79,29 +79,21 @@ interface MaintenanceConfigurations {
   /**
    * Gets the maintenance configuration of a ManagedEnvironment .
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MaintenanceConfigurations_Get")
   get is MaintenanceConfigurationResourceOps.Read<MaintenanceConfigurationResource>;
 
   /**
    * Create or update the maintenance configuration for Managed Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MaintenanceConfigurations_CreateOrUpdate")
   createOrUpdate is MaintenanceConfigurationResourceCustomErrorOps.CreateOrUpdateSync<MaintenanceConfigurationResource>;
 
   /**
    * Deletes the maintenance configuration of a ManagedEnvironment .
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MaintenanceConfigurations_Delete")
   delete is MaintenanceConfigurationResourceCustomErrorOps.DeleteSync<MaintenanceConfigurationResource>;
 
   /**
    * Gets all maintenance configurations in the specified Managed Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("MaintenanceConfigurations_List")
   list is MaintenanceConfigurationResourceCustomErrorOps.List<
     MaintenanceConfigurationResource,
     Response = ArmResponse<MaintenanceConfigurationCollection>

@@ -29,16 +29,12 @@ interface ContainerAppsRevisionReplicas {
   /**
    * Get a replica for a Container App Revision.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsRevisionReplicas_GetReplica")
   @summary("Get a replica for a Container App Revision.")
   getReplica is ArmResourceRead<Replica, Error = DefaultErrorResponse>;
 
   /**
    * List replicas for a Container App Revision.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsRevisionReplicas_ListReplicas")
   @summary("List replicas for a Container App Revision.")
   listReplicas is ArmResourceListByParent<
     Replica,

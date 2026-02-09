@@ -12,6 +12,17 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.App;
 
 /**
+ * Logic App call response object.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+model Object {}
+
+/**
+ * Custom domain verification Id of a subscription
+ */
+scalar CustomDomainVerificationId extends string;
+
+/**
  * indicates whether the profile is default for the location.
  */
 union Applicability {
@@ -1150,6 +1161,7 @@ model AzureActiveDirectoryLogin {
   /**
    * <code>true</code> if the www-authenticate provider should be omitted from the request; otherwise, <code>false</code>.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   disableWWWAuthenticate?: boolean;
 }
 
@@ -1362,6 +1374,7 @@ model TwitterRegistration {
    * This setting is required for enabling Twitter Sign-In.
    * Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" ""
   consumerKey?: string;
 
   /**
@@ -2115,6 +2128,7 @@ model CertificateKeyVaultProperties {
  * Connected environment patch properties
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
 model ConnectedEnvironmentPatchResource extends ResourceTags {}
 
 /**
@@ -2691,6 +2705,7 @@ model VnetConfiguration {
   /**
    *  An IP address from the IP range defined by platformReservedCidr that will be reserved for the internal DNS server.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read, Lifecycle.Create)
   platformReservedDnsIP?: string;
 }
@@ -3120,6 +3135,7 @@ model ManagedCertificateProperties {
   /**
    * A TXT token used for DNS TXT domain control validation when issuing this type of managed certificates.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" ""
   @visibility(Lifecycle.Read)
   validationToken?: string;
 }
@@ -3456,6 +3472,7 @@ model HttpRouteConfigProperties {
   /**
    * List of errors when trying to reconcile http routes
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @visibility(Lifecycle.Read)
   provisioningErrors?: HttpRouteProvisioningErrors[];
 
@@ -3474,6 +3491,7 @@ model HttpRouteConfigProperties {
   /**
    * Routing Rules for http route resource.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @identifiers(#["name"])
   rules?: HttpRouteRule[];
 }
@@ -3503,12 +3521,14 @@ model HttpRouteRule {
   /**
    * Targets- container apps, revisions, labels
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @identifiers(#["name"])
   targets?: HttpRouteTarget[];
 
   /**
    * Routing configuration that will allow matches on specific paths/headers.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   @identifiers(#["name"])
   routes?: HttpRoute[];
 
@@ -3898,6 +3918,7 @@ model JobScaleRule {
   /**
    * Authentication secrets for the scale rule.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
   auth?: ScaleRuleAuth[];
 
   /**
@@ -4422,6 +4443,7 @@ model DiagnosticsCollection is Azure.Core.Page<Diagnostics>;
 /**
  * Diagnostics resource specific properties
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 model DiagnosticsProperties {
   /**
    * Metadata of the diagnostics response.
@@ -6543,6 +6565,7 @@ model RegistryInfo {
   /**
    * registry secret.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" ""
   @visibility(Lifecycle.Create, Lifecycle.Update)
   registryPassword?: string;
 }
@@ -7304,6 +7327,7 @@ model IdentitySettings {
  * Container App init container definition
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
 model InitContainer extends BaseContainer {}
 
 /**
@@ -7660,6 +7684,7 @@ model CustomHostnameAnalysisResult {
   /**
    * Alternate CName records visible for this hostname.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   alternateCNameRecords?: string[];
 
   /**
@@ -8567,6 +8592,13 @@ model JavaComponentServiceBind {
 model WorkflowEnvelopeCollection is Azure.Core.Page<WorkflowEnvelope>;
 
 /**
+ * Logic App properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+model LogicAppProperties {}
+
+/**
  * Additional workflow properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
@@ -8574,6 +8606,7 @@ model WorkflowEnvelopeProperties {
   /**
    * Gets or sets the files.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
   files?: unknown;
 
   /**

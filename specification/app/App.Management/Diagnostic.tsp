@@ -157,46 +157,6 @@ alias JobsDiagnosticsDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations
   ErrorType = DefaultErrorResponse
 >;
 
-@armResourceOperations
-@tag("Jobs")
-@tag("Diagnostics")
-interface JobsDiagnostics {
-  /**
-   * Get the properties of a Container App Job.
-   */
-  @summary("Get the properties for a given Container App Job.")
-  proxyGet is ArmResourceRead<
-    Job,
-    Parameters = {
-      /** Proxy API Name for Container App Job. */
-      @path
-      @segment("detectorProperties")
-      @key
-      @pattern("^[-\\w\\._]+$")
-      apiName: string;
-    },
-    Error = DefaultErrorResponse
-  >;
-
-  /**
-   * Get the list of diagnostics for a Container App Job.
-   */
-  @summary("Get the list of diagnostics for a given Container App Job.")
-  listDetectors is JobsDiagnosticsDetectorOps.List<
-    Diagnostics,
-    Response = ArmResponse<DiagnosticsCollection>
-  >;
-
-  /**
-   * Get the diagnostics data for a Container App Job.
-   */
-  @summary("Get the diagnostics data for a given Container App Job.")
-  getDetector is JobsDiagnosticsDetectorOps.Read<
-    Diagnostics,
-    Response = ArmResponse<Diagnostics>
-  >;
-}
-
 alias ManagedEnvironmentDetectorOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;

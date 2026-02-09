@@ -72,36 +72,29 @@ alias DaprComponentCustomErrorOps = Azure.ResourceManager.Legacy.LegacyOperation
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
 @armResourceOperations
-interface DaprComponents {
+@tag("DaprComponents")
+interface ConnectedEnvironmentsDaprComponents {
   /**
    * Get a dapr component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsDaprComponents_Get")
   @summary("Get a dapr component.")
   get is DaprComponentCustomErrorOps.Read<DaprComponent>;
 
   /**
    * Creates or updates a Dapr Component in a connected environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsDaprComponents_CreateOrUpdate")
   @summary("Creates or updates a Dapr Component.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<DaprComponent>;
 
   /**
    * Delete a Dapr Component from a connected environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsDaprComponents_Delete")
   @summary("Delete a Dapr Component.")
   delete is DaprComponentOps.DeleteWithoutOkAsync<DaprComponent>;
 
   /**
    * Get the Dapr Components for a connected environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsDaprComponents_List")
   @summary("Get the Dapr Components for a connected environment.")
   list is DaprComponentCustomErrorOps.List<
     DaprComponent,
@@ -111,8 +104,6 @@ interface DaprComponents {
   /**
    * List secrets for a dapr component
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsDaprComponents_ListSecrets")
   @list
   @summary("List secrets for a dapr component")
   listSecrets is DaprComponentCustomErrorOps.ActionSync<
@@ -146,21 +137,17 @@ alias DaprComponentOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperat
 
 @armResourceOperations
 @tag("DaprComponents")
-interface DaprComponentOperationGroup {
+interface DaprComponents {
   /**
    * Get a dapr component.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DaprComponents_Get")
   @summary("Get a dapr component.")
   get is DaprComponentOperationGroupOps.Read<DaprComponent>;
 
   /**
    * Creates or updates a Dapr Component in a Managed Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("DaprComponents_CreateOrUpdate")
   @summary("Creates or updates a Dapr Component.")
   createOrUpdate is DaprComponentOperationGroupOps.CreateOrUpdateSync<
     DaprComponent,
@@ -170,16 +157,12 @@ interface DaprComponentOperationGroup {
   /**
    * Delete a Dapr Component from a Managed Environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DaprComponents_Delete")
   @summary("Delete a Dapr Component.")
   delete is DaprComponentOperationGroupOps.DeleteSync<DaprComponent>;
 
   /**
    * Get the Dapr Components for a managed environment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DaprComponents_List")
   @summary("Get the Dapr Components for a managed environment.")
   list is DaprComponentOperationGroupOps.List<
     DaprComponent,
@@ -189,8 +172,6 @@ interface DaprComponentOperationGroup {
   /**
    * List secrets for a dapr component
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DaprComponents_ListSecrets")
   @list
   @summary("List secrets for a dapr component")
   listSecrets is DaprComponentOperationGroupOps.ActionSync<
@@ -202,9 +183,9 @@ interface DaprComponentOperationGroup {
 
 @@doc(DaprComponent.name, "Name of the Dapr Component.");
 @@doc(DaprComponent.properties, "Dapr Component resource specific properties");
-@@doc(DaprComponents.createOrUpdate::parameters.resource,
+@@doc(ConnectedEnvironmentsDaprComponents.createOrUpdate::parameters.resource,
   "Configuration details of the Dapr Component."
 );
-@@doc(DaprComponentOperationGroup.createOrUpdate::parameters.resource,
+@@doc(DaprComponents.createOrUpdate::parameters.resource,
   "Configuration details of the Dapr Component."
 );

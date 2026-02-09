@@ -20,49 +20,30 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 
-@@clientLocation(AppResiliencies.get, "AppResiliencies");
-@@clientLocation(AppResiliencies.createOrUpdate, "AppResiliencies");
 @@clientName(AppResiliencies.createOrUpdate::parameters.resource,
   "resiliencyEnvelope"
 );
-@@clientLocation(AppResiliencies.update, "AppResiliencies");
 @@clientName(AppResiliencies.update::parameters.properties,
   "resiliencyEnvelope"
 );
-@@clientLocation(AppResiliencies.delete, "AppResiliencies");
-@@clientLocation(AppResiliencies.list, "AppResiliencies");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AppResiliency.properties);
 
-@@clientLocation(ContainerAppsAuthConfigs.get, "ContainerAppsAuthConfigs");
-@@clientLocation(ContainerAppsAuthConfigs.createOrUpdate,
-  "ContainerAppsAuthConfigs"
-);
 @@clientName(ContainerAppsAuthConfigs.createOrUpdate::parameters.resource,
   "authConfigEnvelope"
 );
-@@clientLocation(ContainerAppsAuthConfigs.delete, "ContainerAppsAuthConfigs");
-@@clientLocation(ContainerAppsAuthConfigs.listByContainerApp,
-  "ContainerAppsAuthConfigs"
-);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(AuthConfig.properties);
 
-@@clientLocation(Builders.get, "Builders");
-@@clientLocation(Builders.createOrUpdate, "Builders");
 @@clientName(Builders.createOrUpdate::parameters.resource, "builderEnvelope");
-@@clientLocation(Builders.update, "Builders");
+
 @@clientName(Builders.update::parameters.properties, "builderEnvelope");
-@@clientLocation(Builders.delete, "Builders");
-@@clientLocation(Builders.listByResourceGroup, "Builders");
-@@clientLocation(Builders.listBySubscription, "Builders");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(BuilderResource.properties);
 
-@@clientLocation(Builds.get, "Builds");
-@@clientLocation(Builds.createOrUpdate, "Builds");
 @@clientName(Builds.createOrUpdate::parameters.resource, "buildEnvelope");
-@@clientLocation(Builds.delete, "Builds");
 @@clientLocation(Builds.list, "BuildsByBuilderResource");
 @@clientLocation(Builds.buildAuthTokenList, "BuildAuthToken");
 @@clientName(Builds.buildAuthTokenList, "List");
@@ -92,55 +73,28 @@ using Microsoft.App;
 @@clientName(Certificates.update::parameters.properties, "certificateEnvelope");
 @@clientLocation(Certificates.delete, "ConnectedEnvironmentsCertificates");
 @@clientLocation(Certificates.list, "ConnectedEnvironmentsCertificates");
-@@clientLocation(CertificateOperationGroup.get, Certificates);
-@@clientLocation(CertificateOperationGroup.createOrUpdate, Certificates);
-@@clientName(CertificateOperationGroup.createOrUpdate::parameters.resource,
-  "certificateEnvelope"
-);
-@@clientLocation(CertificateOperationGroup.update, Certificates);
-@@clientName(CertificateOperationGroup.update::parameters.properties,
-  "certificateEnvelope"
-);
-@@clientLocation(CertificateOperationGroup.delete, Certificates);
-@@clientLocation(CertificateOperationGroup.list, Certificates);
 
-@@clientLocation(DaprComponents.get, "ConnectedEnvironmentsDaprComponents");
-@@clientLocation(DaprComponents.createOrUpdate,
-  "ConnectedEnvironmentsDaprComponents"
+@@clientName(Certificates.getCertificates, "Get");
+@@clientName(Certificates.listCertificates, "List");
+@@clientName(Certificates.deleteCertificates, "Delete");
+@@clientName(Certificates.createOrUpdateCertificates, "CreateOrUpdate");
+@@clientName(Certificates.updateCertificates, "Update");
+@@clientName(Certificates.createOrUpdateCertificates::parameters.resource,
+  "certificateEnvelope"
 );
+@@clientName(Certificates.updateCertificates::parameters.properties,
+  "certificateEnvelope"
+);
+
 @@clientName(DaprComponents.createOrUpdate::parameters.resource,
   "daprComponentEnvelope"
 );
-@@clientLocation(DaprComponents.delete, "ConnectedEnvironmentsDaprComponents");
-@@clientLocation(DaprComponents.list, "ConnectedEnvironmentsDaprComponents");
-@@clientLocation(DaprComponents.listSecrets,
-  "ConnectedEnvironmentsDaprComponents"
-);
-@@clientLocation(DaprComponentOperationGroup.get, DaprComponents);
-@@clientLocation(DaprComponentOperationGroup.createOrUpdate, DaprComponents);
-@@clientName(DaprComponentOperationGroup.createOrUpdate::parameters.resource,
-  "daprComponentEnvelope"
-);
-@@clientLocation(DaprComponentOperationGroup.delete, DaprComponents);
-@@clientLocation(DaprComponentOperationGroup.list, DaprComponents);
-@@clientLocation(DaprComponentOperationGroup.listSecrets, DaprComponents);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(DaprComponent.properties);
 
-@@clientLocation(ConnectedEnvironmentsStorages.get,
-  "ConnectedEnvironmentsStorages"
-);
-@@clientLocation(ConnectedEnvironmentsStorages.createOrUpdate,
-  "ConnectedEnvironmentsStorages"
-);
 @@clientName(ConnectedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "storageEnvelope"
-);
-@@clientLocation(ConnectedEnvironmentsStorages.delete,
-  "ConnectedEnvironmentsStorages"
-);
-@@clientLocation(ConnectedEnvironmentsStorages.list,
-  "ConnectedEnvironmentsStorages"
 );
 
 @@clientName(ManagedEnvironments.createOrUpdate::parameters.resource,
@@ -208,32 +162,15 @@ using Microsoft.App;
 @@clientLocation(HttpRouteConfigs.delete, "HttpRouteConfig");
 @@clientLocation(HttpRouteConfigs.list, "HttpRouteConfig");
 
-@@clientLocation(MaintenanceConfigurations.get, "MaintenanceConfigurations");
-@@clientLocation(MaintenanceConfigurations.createOrUpdate,
-  "MaintenanceConfigurations"
-);
 @@clientName(MaintenanceConfigurations.createOrUpdate::parameters.resource,
   "maintenanceConfigurationEnvelope"
 );
-@@clientLocation(MaintenanceConfigurations.delete, "MaintenanceConfigurations");
-@@clientLocation(MaintenanceConfigurations.list, "MaintenanceConfigurations");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(MaintenanceConfigurationResource.properties);
 
-@@clientLocation(ManagedEnvironmentsStorages.get,
-  "ManagedEnvironmentsStorages"
-);
-@@clientLocation(ManagedEnvironmentsStorages.createOrUpdate,
-  "ManagedEnvironmentsStorages"
-);
 @@clientName(ManagedEnvironmentsStorages.createOrUpdate::parameters.resource,
   "storageEnvelope"
-);
-@@clientLocation(ManagedEnvironmentsStorages.delete,
-  "ManagedEnvironmentsStorages"
-);
-@@clientLocation(ManagedEnvironmentsStorages.list,
-  "ManagedEnvironmentsStorages"
 );
 
 @@clientName(Jobs.createOrUpdate::parameters.resource, "JobEnvelope");
@@ -260,48 +197,17 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerAppAuthToken.properties);
 
-@@clientLocation(ContainerAppsSessionPools.get, "ContainerAppsSessionPools");
-@@clientLocation(ContainerAppsSessionPools.createOrUpdate,
-  "ContainerAppsSessionPools"
-);
 @@clientName(ContainerAppsSessionPools.createOrUpdate::parameters.resource,
   "sessionPoolEnvelope"
 );
-@@clientLocation(ContainerAppsSessionPools.update, "ContainerAppsSessionPools");
+
 @@clientName(ContainerAppsSessionPools.update::parameters.properties,
   "sessionPoolEnvelope"
 );
-@@clientLocation(ContainerAppsSessionPools.delete, "ContainerAppsSessionPools");
-@@clientLocation(ContainerAppsSessionPools.listByResourceGroup,
-  "ContainerAppsSessionPools"
-);
-@@clientLocation(ContainerAppsSessionPools.listBySubscription,
-  "ContainerAppsSessionPools"
-);
-@@clientLocation(ContainerAppsSessionPools.fetchMcpServerCredentials,
-  "ContainerAppsSessionPools"
-);
-@@clientLocation(ContainerAppsSessionPools.rotateMcpServerCredentials,
-  "ContainerAppsSessionPools"
-);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(SessionPool.properties);
 
-@@clientLocation(ContainerAppsSourceControls.get,
-  "ContainerAppsSourceControls"
-);
-@@clientLocation(ContainerAppsSourceControls.createOrUpdate,
-  "ContainerAppsSourceControls"
-);
-@@clientName(ContainerAppsSourceControls.createOrUpdate::parameters.resource,
-  "sourceControlEnvelope"
-);
-@@clientLocation(ContainerAppsSourceControls.delete,
-  "ContainerAppsSourceControls"
-);
-@@clientLocation(ContainerAppsSourceControls.listByContainerApp,
-  "ContainerAppsSourceControls"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(SourceControl.properties);
 
@@ -314,63 +220,26 @@ using Microsoft.App;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerApp.properties);
 
-@@clientLocation(ContainerAppsBuilds.get, "ContainerAppsBuilds");
-@@clientLocation(ContainerAppsBuilds.delete, "ContainerAppsBuilds");
 @@clientLocation(ContainerAppsBuilds.list, "ContainerAppsBuildsByContainerApp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerAppsBuildResource.properties);
 
 @@clientLocation(ContainerAppsFunctions.get, "ContainerAppsRevisionFunctions");
 @@clientLocation(ContainerAppsFunctions.list, "ContainerAppsRevisionFunctions");
-@@clientLocation(AzureFunctionsOnContainerApps.get, ContainerAppsFunctions);
-@@clientLocation(AzureFunctionsOnContainerApps.list, ContainerAppsFunctions);
+
+@@clientName(ContainerAppsFunctions.getAzureFunctionsOnContainerApps, "get");
+@@clientName(ContainerAppsFunctions.listAzureFunctionsOnContainerApps, "list");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ContainerAppsFunction.properties);
 
-@@clientLocation(ContainerAppsLabelHistory.getLabelHistory,
-  "ContainerAppsLabelHistory"
-);
-@@clientLocation(ContainerAppsLabelHistory.deleteLabelHistory,
-  "ContainerAppsLabelHistory"
-);
-@@clientLocation(ContainerAppsLabelHistory.listLabelHistory,
-  "ContainerAppsLabelHistory"
-);
-
-@@clientLocation(ContainerAppsPatches.get, "ContainerAppsPatches");
-@@clientLocation(ContainerAppsPatches.delete, "ContainerAppsPatches");
-@@clientLocation(ContainerAppsPatches.listByContainerApp,
-  "ContainerAppsPatches"
-);
-@@clientLocation(ContainerAppsPatches.skipConfigure, "ContainerAppsPatches");
 @@clientName(ContainerAppsPatches.skipConfigure::parameters.body,
   "patchSkipConfig"
-);
-@@clientLocation(ContainerAppsPatches.apply, "ContainerAppsPatches");
-
-@@clientLocation(ContainerAppsRevisions.getRevision, "ContainerAppsRevisions");
-@@clientLocation(ContainerAppsRevisions.listRevisions,
-  "ContainerAppsRevisions"
-);
-@@clientLocation(ContainerAppsRevisions.activateRevision,
-  "ContainerAppsRevisions"
-);
-@@clientLocation(ContainerAppsRevisions.deactivateRevision,
-  "ContainerAppsRevisions"
-);
-@@clientLocation(ContainerAppsRevisions.restartRevision,
-  "ContainerAppsRevisions"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Revision.properties);
 
-@@clientLocation(ContainerAppsRevisionReplicas.getReplica,
-  "ContainerAppsRevisionReplicas"
-);
-@@clientLocation(ContainerAppsRevisionReplicas.listReplicas,
-  "ContainerAppsRevisionReplicas"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(Replica.properties);
 
@@ -407,13 +276,15 @@ using Microsoft.App;
 @@Azure.ResourceManager.identifiers(ListUsagesResult.value, #["name"]);
 @@clientName(ScheduledEntries.scheduledEntries, "ScheduledEntries");
 
-@@clientLocation(JobsDiagnostics.proxyGet, "Jobs");
-@@clientLocation(JobsDiagnostics.listDetectors, "Jobs");
-@@clientLocation(JobsDiagnostics.getDetector, "Jobs");
-
 @@clientLocation(ManagedEnvironmentsDiagnostics.listDetectors,
   "ManagedEnvironmentDiagnostics"
 );
 @@clientLocation(ManagedEnvironmentsDiagnostics.getDetector,
   "ManagedEnvironmentDiagnostics"
 );
+
+@@clientLocation(AppResiliencies.createOrUpdate, "AppResiliency");
+@@clientLocation(AppResiliencies.update, "AppResiliency");
+@@clientLocation(AppResiliencies.list, "AppResiliency");
+@@clientLocation(AppResiliencies.delete, "AppResiliency");
+@@clientLocation(AppResiliencies.get, "AppResiliency");

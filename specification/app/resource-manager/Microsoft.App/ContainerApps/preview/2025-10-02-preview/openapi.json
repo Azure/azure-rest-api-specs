@@ -330,7 +330,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/CustomDomainVerificationId"
             }
           },
           "default": {
@@ -1515,8 +1515,8 @@
       "get": {
         "operationId": "ConnectedEnvironmentsCertificates_List",
         "tags": [
-          "ConnectedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ConnectedEnvironments"
         ],
         "summary": "Get the Certificates in a given connected environment.",
         "description": "Get the Certificates in a given connected environment.",
@@ -1566,8 +1566,8 @@
       "get": {
         "operationId": "ConnectedEnvironmentsCertificates_Get",
         "tags": [
-          "ConnectedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ConnectedEnvironments"
         ],
         "summary": "Get the specified Certificate.",
         "description": "Get the specified Certificate.",
@@ -1619,8 +1619,8 @@
       "put": {
         "operationId": "ConnectedEnvironmentsCertificates_CreateOrUpdate",
         "tags": [
-          "ConnectedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ConnectedEnvironments"
         ],
         "summary": "Create or Update a Certificate.",
         "description": "Create or Update a Certificate.",
@@ -1703,8 +1703,8 @@
       "patch": {
         "operationId": "ConnectedEnvironmentsCertificates_Update",
         "tags": [
-          "ConnectedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ConnectedEnvironments"
         ],
         "summary": "Update properties of a certificate",
         "description": "Patches a certificate. Currently only patching of tags is supported",
@@ -1784,8 +1784,8 @@
       "delete": {
         "operationId": "ConnectedEnvironmentsCertificates_Delete",
         "tags": [
-          "ConnectedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ConnectedEnvironments"
         ],
         "summary": "Deletes the specified Certificate.",
         "description": "Deletes the specified Certificate.",
@@ -2041,7 +2041,7 @@
             "type": "string"
           },
           {
-            "name": "daprComponentEnvelope",
+            "name": "resource",
             "in": "body",
             "description": "Configuration details of the Dapr Component.",
             "required": true,
@@ -5234,7 +5234,7 @@
             "type": "string"
           },
           {
-            "name": "sourceControlEnvelope",
+            "name": "resource",
             "in": "body",
             "description": "Properties used to create a Container App SourceControl",
             "required": true,
@@ -6816,8 +6816,8 @@
       "get": {
         "operationId": "Certificates_List",
         "tags": [
-          "ManagedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ManagedEnvironments"
         ],
         "summary": "Get the Certificates in a given managed environment.",
         "description": "Get the Certificates in a given managed environment.",
@@ -6867,8 +6867,8 @@
       "get": {
         "operationId": "Certificates_Get",
         "tags": [
-          "ManagedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ManagedEnvironments"
         ],
         "summary": "Get the specified Certificate.",
         "description": "Get the specified Certificate.",
@@ -6920,8 +6920,8 @@
       "put": {
         "operationId": "Certificates_CreateOrUpdate",
         "tags": [
-          "ManagedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ManagedEnvironments"
         ],
         "summary": "Create or Update a Certificate.",
         "description": "Create or Update a Certificate.",
@@ -6985,8 +6985,8 @@
       "patch": {
         "operationId": "Certificates_Update",
         "tags": [
-          "ManagedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ManagedEnvironments"
         ],
         "summary": "Update properties of a certificate",
         "description": "Patches a certificate. Currently only patching of tags is supported",
@@ -7047,8 +7047,8 @@
       "delete": {
         "operationId": "Certificates_Delete",
         "tags": [
-          "ManagedEnvironments",
-          "Certificates"
+          "Certificates",
+          "ManagedEnvironments"
         ],
         "summary": "Deletes the specified Certificate.",
         "description": "Deletes the specified Certificate.",
@@ -10782,6 +10782,7 @@
           {
             "name": "containerAppName",
             "in": "path",
+            "description": "Name of the Container App.",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._\\(\\)]+$"
@@ -10834,6 +10835,7 @@
           {
             "name": "containerAppName",
             "in": "path",
+            "description": "Name of the Container App.",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._\\(\\)]+$"
@@ -10901,6 +10903,7 @@
           {
             "name": "containerAppName",
             "in": "path",
+            "description": "Name of the Container App.",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._\\(\\)]+$"
@@ -10955,6 +10958,7 @@
           {
             "name": "containerAppName",
             "in": "path",
+            "description": "Name of the Container App.",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._\\(\\)]+$"
@@ -11019,6 +11023,7 @@
           {
             "name": "containerAppName",
             "in": "path",
+            "description": "Name of the Container App.",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._\\(\\)]+$"
@@ -11069,7 +11074,9 @@
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -11106,6 +11113,7 @@
           {
             "name": "containerAppName",
             "in": "path",
+            "description": "Name of the Container App.",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._\\(\\)]+$"
@@ -11161,6 +11169,7 @@
           {
             "name": "containerAppName",
             "in": "path",
+            "description": "Name of the Container App.",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._\\(\\)]+$"
@@ -11219,6 +11228,7 @@
           {
             "name": "containerAppName",
             "in": "path",
+            "description": "Name of the Container App.",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._\\(\\)]+$"
@@ -14039,6 +14049,10 @@
           "readOnly": true
         }
       }
+    },
+    "CustomDomainVerificationId": {
+      "type": "string",
+      "description": "Custom domain verification Id of a subscription"
     },
     "CustomHostnameAnalysisResult": {
       "type": "object",
@@ -18027,7 +18041,7 @@
       "description": "A logic app extension resource",
       "properties": {
         "properties": {
-          "type": "object",
+          "$ref": "#/definitions/LogicAppProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true
         }
@@ -18037,6 +18051,10 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "LogicAppProperties": {
+      "type": "object",
+      "description": "Logic App properties."
     },
     "Login": {
       "type": "object",
@@ -18668,6 +18686,10 @@
           "description": "The time after the request is made when the nonce should expire."
         }
       }
+    },
+    "Object": {
+      "type": "object",
+      "description": "Logic App call response object."
     },
     "OpenIdConnectClientCredential": {
       "type": "object",

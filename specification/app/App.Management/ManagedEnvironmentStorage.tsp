@@ -30,8 +30,6 @@ interface ManagedEnvironmentsStorages {
   /**
    * Get storage for a managedEnvironment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentsStorages_Get")
   @summary("Get storage for a managedEnvironment.")
   get is ArmResourceRead<
     ManagedEnvironmentStorage,
@@ -41,8 +39,6 @@ interface ManagedEnvironmentsStorages {
   /**
    * Create or update storage for a managedEnvironment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentsStorages_CreateOrUpdate")
   @summary("Create or update storage for a managedEnvironment.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ManagedEnvironmentStorage,
@@ -52,8 +48,6 @@ interface ManagedEnvironmentsStorages {
   /**
    * Delete storage for a managedEnvironment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentsStorages_Delete")
   @summary("Delete storage for a managedEnvironment.")
   delete is ArmResourceDeleteSync<
     ManagedEnvironmentStorage,
@@ -63,8 +57,6 @@ interface ManagedEnvironmentsStorages {
   /**
    * Get all storages for a managedEnvironment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ManagedEnvironmentsStorages_List")
   @summary("Get all storages for a managedEnvironment.")
   list is ArmResourceListByParent<
     ManagedEnvironmentStorage,

@@ -55,24 +55,18 @@ interface ContainerAppsLabelHistory {
   /**
    * Get the history of a label.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsLabelHistory_GetLabelHistory")
   @summary("Get the history of a label.")
   getLabelHistory is LabelHistoryOps.Read<LabelHistory>;
 
   /**
    * Delete the history of a label.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsLabelHistory_DeleteLabelHistory")
   @summary("Delete the history of a label.")
   deleteLabelHistory is LabelHistoryOps.DeleteSync<LabelHistory>;
 
   /**
    * Get the Label History for a given Container App.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsLabelHistory_ListLabelHistory")
   @summary("Get the Label History for a given Container App.")
   listLabelHistory is LabelHistoryOps.List<
     LabelHistory,

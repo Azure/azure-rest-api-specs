@@ -31,17 +31,19 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Jobs {
   /**
    * Get the properties of a Container Apps Job.
    */
+  @tag("Jobs")
   @summary("Get the properties of a Container Apps Job.")
   get is ArmResourceRead<Job, Error = DefaultErrorResponse>;
 
   /**
    * Create or Update a Container Apps Job.
    */
+  @tag("Jobs")
   @summary("Create or Update a Container Apps Job.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Job,
@@ -51,6 +53,7 @@ interface Jobs {
   /**
    * Patches a Container Apps Job using JSON Merge Patch
    */
+  @tag("Jobs")
   @patch(#{ implicitOptionality: false })
   @summary("Update properties of a Container Apps Job")
   update is ArmCustomPatchAsync<
@@ -63,6 +66,7 @@ interface Jobs {
    * Delete a Container Apps Job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @tag("Jobs")
   @summary("Delete a Container Apps Job.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Job,
@@ -73,6 +77,7 @@ interface Jobs {
   /**
    * Get the Container Apps Jobs in a given resource group.
    */
+  @tag("Jobs")
   @summary("Get the Container Apps Jobs in a given resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Job,
@@ -83,6 +88,7 @@ interface Jobs {
   /**
    * Get the Container Apps Jobs in a given subscription.
    */
+  @tag("Jobs")
   @summary("Get the Container Apps Jobs in a given subscription.")
   listBySubscription is ArmListBySubscription<
     Job,
@@ -93,6 +99,7 @@ interface Jobs {
   /**
    * Start a Container Apps Job
    */
+  @tag("Jobs")
   @summary("Start a Container Apps Job")
   start is ArmResourceActionAsyncBase<
     Job,
@@ -107,6 +114,7 @@ interface Jobs {
   /**
    * Terminates execution of a running container apps job
    */
+  @tag("Jobs")
   @action("stop")
   @summary("Terminates execution of a running container apps job")
   stopMultipleExecutions is ArmResourceActionAsyncBase<
@@ -121,6 +129,7 @@ interface Jobs {
   /**
    * List secrets for a container apps job
    */
+  @tag("Jobs")
   @list
   @summary("List secrets for a container apps job")
   listSecrets is ArmResourceActionSync<
@@ -133,6 +142,7 @@ interface Jobs {
   /**
    * Resumes a suspended job
    */
+  @tag("Jobs")
   @summary("Resumes a suspended job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   resume is ArmResourceActionAsyncBase<
@@ -147,6 +157,7 @@ interface Jobs {
   /**
    * Suspends a job
    */
+  @tag("Jobs")
   @summary("Suspends a job")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   suspend is ArmResourceActionAsyncBase<
@@ -161,16 +172,16 @@ interface Jobs {
   /**
    * Get details of a single job execution
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
   @operationId("JobExecution")
+  @tag("Jobs")
   @summary("Get details of a single job execution")
   jobExecution is ArmResourceRead<JobExecution, Error = DefaultErrorResponse>;
 
   /**
    * Get a Container Apps Job's executions
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("JobsExecutions_List")
+  @tag("Jobs")
   @summary("Get a Container Apps Job's executions")
   list is ArmResourceListByParent<
     JobExecution,
@@ -188,8 +199,7 @@ interface Jobs {
   /**
    * Terminates execution of a running container apps job
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Jobs_StopExecution")
+  @tag("Jobs")
   @action("stop")
   @summary("Terminates execution of a running container apps job")
   stopExecution is ArmResourceActionAsyncBase<
@@ -199,6 +209,47 @@ interface Jobs {
       Azure.Core.Foundations.RetryAfterHeader>,
     DefaultBaseParameters<Job>,
     Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Get the properties of a Container App Job.
+   */
+  @tag("Jobs")
+  @tag("Diagnostics")
+  @summary("Get the properties for a given Container App Job.")
+  proxyGet is ArmResourceRead<
+    Job,
+    Parameters = {
+      /** Proxy API Name for Container App Job. */
+      @path
+      @segment("detectorProperties")
+      @key
+      @pattern("^[-\\w\\._]+$")
+      apiName: string;
+    },
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Get the list of diagnostics for a Container App Job.
+   */
+  @tag("Jobs")
+  @tag("Diagnostics")
+  @summary("Get the list of diagnostics for a given Container App Job.")
+  listDetectors is JobsDiagnosticsDetectorOps.List<
+    Diagnostics,
+    Response = ArmResponse<DiagnosticsCollection>
+  >;
+
+  /**
+   * Get the diagnostics data for a Container App Job.
+   */
+  @tag("Jobs")
+  @tag("Diagnostics")
+  @summary("Get the diagnostics data for a given Container App Job.")
+  getDetector is JobsDiagnosticsDetectorOps.Read<
+    Diagnostics,
+    Response = ArmResponse<Diagnostics>
   >;
 }
 

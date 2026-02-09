@@ -30,8 +30,6 @@ interface ConnectedEnvironmentsStorages {
   /**
    * Get storage for a connectedEnvironment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsStorages_Get")
   @summary("Get storage for a connectedEnvironment.")
   get is ArmResourceRead<
     ConnectedEnvironmentStorage,
@@ -41,24 +39,18 @@ interface ConnectedEnvironmentsStorages {
   /**
    * Create or update storage for a connectedEnvironment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsStorages_CreateOrUpdate")
   @summary("Create or update storage for a connectedEnvironment.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ConnectedEnvironmentStorage>;
 
   /**
    * Delete storage for a connectedEnvironment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsStorages_Delete")
   @summary("Delete storage for a connectedEnvironment.")
   delete is ArmResourceDeleteWithoutOkAsync<ConnectedEnvironmentStorage>;
 
   /**
    * Get all storages for a connectedEnvironment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ConnectedEnvironmentsStorages_List")
   @summary("Get all storages for a connectedEnvironment.")
   list is ArmResourceListByParent<
     ConnectedEnvironmentStorage,

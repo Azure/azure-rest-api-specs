@@ -56,22 +56,16 @@ interface ContainerAppsPatches {
   /**
    * Get details for specific Container Apps Patch by patch name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsPatches_Get")
   get is ContainerAppsPatchesOps.Read<ContainerAppsPatchResource>;
 
   /**
    * Delete specific Container Apps Patch by patch name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsPatches_Delete")
   delete is ContainerAppsPatchesOps.DeleteWithoutOkAsync<ContainerAppsPatchResource>;
 
   /**
    * List Container Apps Patch resources by ContainerApp.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsPatches_ListByContainerApp")
   listByContainerApp is ContainerAppsPatchesOps.List<
     ContainerAppsPatchResource,
     Parameters = {
@@ -87,8 +81,6 @@ interface ContainerAppsPatches {
   /**
    * Configure the Container Apps Patch skip option by patch name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsPatches_SkipConfigure")
   @action("skipConfig")
   skipConfigure is ContainerAppsPatchesOps.ActionAsync<
     ContainerAppsPatchResource,
@@ -100,8 +92,6 @@ interface ContainerAppsPatches {
   /**
    * Apply a Container Apps Patch resource with patch name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContainerAppsPatches_Apply")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   apply is ContainerAppsPatchesOps.ActionAsync<
     ContainerAppsPatchResource,
