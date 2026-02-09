@@ -26,10 +26,10 @@ model AccessControlList
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated: AccessControlListProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("The Access ControlList properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: AccessControlListProperties;
 }
 
@@ -82,11 +82,25 @@ interface AccessControlLists {
     CommonPostActionResponseForStateUpdate
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Implements the operation to the underlying resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    AccessControlList,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   @doc("Implements the operation to the underlying resources.")
   validateConfiguration is ArmResourceActionAsync<
     AccessControlList,
     void,
-    ValidateConfigurationResponse
+    ValidateConfigurationResponseV2
   >;
 }
 
@@ -98,5 +112,11 @@ interface AccessControlLists {
   "Request payload."
 );
 @@doc(AccessControlLists.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(AccessControlLists.validateConfigurationDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(AccessControlLists.validateConfiguration::parameters.body,
   "Request payload."
 );

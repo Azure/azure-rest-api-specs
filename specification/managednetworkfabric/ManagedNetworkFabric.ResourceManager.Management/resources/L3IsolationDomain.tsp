@@ -30,10 +30,10 @@ model L3IsolationDomain
   propertiesDeprecated: L3IsolationDomainProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("The L3 Isolation Domain Properties")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: L3IsolationDomainProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
@@ -84,11 +84,25 @@ interface L3IsolationDomains {
     UpdateAdministrativeStateResponse
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Validates the configuration of the resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    L3IsolationDomain,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   @doc("Validates the configuration of the resources.")
   validateConfiguration is ArmResourceActionAsync<
     L3IsolationDomain,
     void,
-    ValidateConfigurationResponse
+    ValidateConfigurationResponseV2
   >;
 
   @doc("Commits the configuration of the given resources.")
@@ -107,5 +121,11 @@ interface L3IsolationDomains {
   "Request payload."
 );
 @@doc(L3IsolationDomains.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(L3IsolationDomains.validateConfigurationDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(L3IsolationDomains.validateConfiguration::parameters.body,
   "Request payload."
 );

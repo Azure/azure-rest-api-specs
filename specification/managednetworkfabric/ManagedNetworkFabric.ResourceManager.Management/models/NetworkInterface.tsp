@@ -69,6 +69,11 @@ model NetworkInterfaceProperties {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @doc("Operational state of networkInterface indicating if the interface is reachable")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
 }
 
 @doc("The NetworkInterfacePatch resource definition.")
@@ -78,10 +83,10 @@ model NetworkInterfacePatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: NetworkInterfacePatchProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Network Interface Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: NetworkInterfacePatchProperties;
 
   @added(Versions.v2025_07_15)

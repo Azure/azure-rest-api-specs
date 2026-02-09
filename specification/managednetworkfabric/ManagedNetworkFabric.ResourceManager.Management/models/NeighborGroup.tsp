@@ -51,6 +51,11 @@ model NeighborGroupProperties {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @added(Versions.v2026_01_15_preview)
+  @doc("Administrative state of the resource.")
+  @visibility(Lifecycle.Read)
+  administrativeState?: AdministrativeState;
 }
 
 @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
@@ -76,10 +81,10 @@ model NeighborGroupPatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: NeighborGroupPatchProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Neighbor Group Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: NeighborGroupPatchProperties;
 
   @added(Versions.v2025_07_15)

@@ -24,10 +24,10 @@ model IpCommunity extends Azure.ResourceManager.Foundations.TrackedResource {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated: IpCommunityProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("The IP Community Properties")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: IpCommunityProperties;
 }
 

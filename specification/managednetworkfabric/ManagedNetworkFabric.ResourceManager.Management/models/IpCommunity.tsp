@@ -72,10 +72,10 @@ model IpCommunityPatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: IpCommunityPatchableProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("IP Community patchable properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: IpCommunityPatchableProperties;
 }
 

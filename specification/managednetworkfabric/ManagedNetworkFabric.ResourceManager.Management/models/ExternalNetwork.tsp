@@ -213,10 +213,10 @@ model ExternalNetworkPatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: ExternalNetworkPatchProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("External Network Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ExternalNetworkPatchProperties;
 }
 

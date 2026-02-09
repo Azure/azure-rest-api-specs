@@ -24,9 +24,9 @@ model NetworkTapRule extends Azure.ResourceManager.Foundations.TrackedResource {
   propertiesDeprecated: NetworkTapRuleProperties;
 
   /** The NetworkTapRule Properties */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: NetworkTapRuleProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
@@ -84,11 +84,25 @@ interface NetworkTapRules {
     NetworkTapRuleResyncResponse
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
+  @doc("Implements the operation to the underlying resources.")
+  validateConfigurationDeprecated is ArmResourceActionAsync<
+    NetworkTapRule,
+    void,
+    ValidateConfigurationResponse
+  >;
+
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
   @doc("Implements the operation to the underlying resources.")
   validateConfiguration is ArmResourceActionAsync<
     NetworkTapRule,
     void,
-    ValidateConfigurationResponse
+    ValidateConfigurationResponseV2
   >;
 }
 
@@ -98,4 +112,10 @@ interface NetworkTapRules {
 );
 @@doc(NetworkTapRules.updateAdministrativeState::parameters.body,
   "Request payload."
+);
+@@doc(NetworkTapRules.validateConfigurationDeprecated::parameters.body,
+   "Validate configuration properties."
+);
+@@doc(NetworkTapRules.validateConfiguration::parameters.body,
+   "Validate configuration properties."
 );

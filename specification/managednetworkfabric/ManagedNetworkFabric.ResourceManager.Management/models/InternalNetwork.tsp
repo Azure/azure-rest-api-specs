@@ -306,10 +306,10 @@ model InternalNetworkPatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: InternalNetworkPatchProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("InternalNetwork Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: InternalNetworkPatchProperties;
 }
 

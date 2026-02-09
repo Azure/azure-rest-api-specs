@@ -25,10 +25,10 @@ model RoutePolicy extends Azure.ResourceManager.Foundations.TrackedResource {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated: RoutePolicyProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("The RoutePolicy properties")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: RoutePolicyProperties;
 }
 
@@ -74,13 +74,26 @@ interface RoutePolicies {
     UpdateAdministrativeStateResponse
   >;
 
+  @action("validateConfiguration")
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
+  @sharedRoute
   @doc("Validates the configuration of the resources.")
-  validateConfiguration is ArmResourceActionAsync<
+  validateConfigurationDeprecated is ArmResourceActionAsync<
     RoutePolicy,
     void,
     ValidateConfigurationResponse
   >;
 
+  @action("validateConfiguration")
+  @added(Versions.v2026_01_15_preview)
+  @sharedRoute
+  @doc("Validates the configuration of the resources.")
+  validateConfiguration is ArmResourceActionAsync<
+    RoutePolicy,
+    void,
+    ValidateConfigurationResponseV2
+  >;
   @doc("Commits the configuration of the given resources.")
   commitConfiguration is ArmResourceActionAsync<
     RoutePolicy,
@@ -98,4 +111,10 @@ interface RoutePolicies {
 );
 @@doc(RoutePolicies.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
+);
+@@doc(RoutePolicies.validateConfigurationDeprecated::parameters.body,
+   "Validate configuration properties."
+);
+@@doc(RoutePolicies.validateConfiguration::parameters.body,
+   "Validate configuration properties."
 );

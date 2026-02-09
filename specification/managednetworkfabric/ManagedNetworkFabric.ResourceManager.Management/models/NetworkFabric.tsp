@@ -2,6 +2,7 @@ import "./common.tsp";
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
 @doc("Network Fabric Properties defines the properties of the resource.")
@@ -49,16 +50,16 @@ model NetworkFabricProperties {
   ]>;
 
   @doc("Number of compute racks associated to Network Fabric.")
-  @maxValue(8)
-  @minValue(1)
   @removed(Versions.v2026_01_15_preview)
   @renamedFrom(Versions.v2026_01_15_preview, "rackCount")
+  @maxValue(8)
+  @minValue(1)
   rackCountDeprecated?: int32;
 
   @doc("Number of compute racks associated to Network Fabric.")
+  @added(Versions.v2026_01_15_preview)
   @maxValue(16)
   @minValue(1)
-  @added(Versions.v2026_01_15_preview)
   rackCount?: int32;
 
   @doc("Number of servers.Possible values are from 1-16.")
@@ -79,6 +80,15 @@ model NetworkFabricProperties {
   @maxValue(4294967295)
   @minValue(1)
   fabricASN: int64;
+
+  @doc("Azure resource ID for the NetworkBootstrapDevice belonging to this Network Fabric.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  networkBootstrapDeviceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/networkBootstrapDevices";
+    }
+  ]>;
 
   @doc("Network and credentials configuration currently applied to terminal server.")
   terminalServerConfiguration: TerminalServerConfiguration;
@@ -174,9 +184,23 @@ model NetworkFabricProperties {
   @visibility(Lifecycle.Read)
   administrativeState?: AdministrativeState;
 
+  @doc("Operational state of networkFabric indicating if the resources of the fabric are reachable and services are available.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
+
   @doc("NetworkFabric QoS Configuration")
   @added(Versions.v2025_07_15)
   qosConfiguration?: QosProperties;
+
+  @doc("The settings for a customer secret archive that may be used to hold copies of credentials for the Network Fabric.")
+  @added(Versions.v2026_01_15_preview)
+  secretArchiveSettings?: SecretArchiveSettings;
+
+  @doc("The upgrade profile to be used by devices in the network fabric during device operations")
+  @Azure.ResourceManager.identifiers(#["preUpgradeProfile", "postUpgradeProfile"])
+  @added(Versions.v2026_01_15_preview)
+  upgradeProfile?: UpgradeProfileProperties[];
 }
 
 @doc("Network and credentials configuration currently applied to terminal server.")
@@ -305,10 +329,10 @@ model NetworkFabricPatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: NetworkFabricPatchProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Network Fabric Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: NetworkFabricPatchProperties;
 
   @added(Versions.v2024_06_15_preview)
@@ -392,6 +416,15 @@ model NetworkFabricPatchProperties {
   @doc("Authorized transciever configuration for NetworkFabric.")
   @added(Versions.v2025_07_15)
   authorizedTransceiver?: AuthorizedTransceiverPatchProperties;
+
+  @doc("The settings for a customer secret archive that may be used to hold copies of credentials for the Network Fabric.")
+  @added(Versions.v2026_01_15_preview)
+  secretArchiveSettings?: SecretArchivePatchSettings;
+
+  @doc("The upgrade profile to be used by devices in the network fabric during device operations")
+  @Azure.ResourceManager.identifiers(#["preUpgradeProfile", "postUpgradeProfile"])
+  @added(Versions.v2026_01_15_preview)
+  upgradeProfile?: UpgradeProfilePropertiesPatchProperties[];
 }
 
 @doc("Network and credentials configuration already applied to terminal server.")
@@ -815,6 +848,85 @@ model CommitBatchDetails {
   failedDevices?: string[];
 }
 
+@doc("Represents the settings for a secret archive used to hold credentials for the Network Fabric.")
+@added(Versions.v2026_01_15_preview)
+model SecretArchiveSettings {
+  @doc("The selection of the managed identity to use with this vault URI. The identity type must be either system assigned or user assigned.")
+  @added(Versions.v2026_01_15_preview)
+  associatedIdentity: IdentitySelector;
+
+  @doc("The URI for the key vault used as the secret archive.")
+  @added(Versions.v2026_01_15_preview)
+  vaultUri: url;
+}
+
+@doc("Represents the settings for a secret archive used to hold credentials for the Network Fabric.")
+@added(Versions.v2026_01_15_preview)
+model SecretArchivePatchSettings {
+  @doc("The selection of the managed identity to use with this vault URI. The identity type must be either system assigned or user assigned.")
+  @added(Versions.v2026_01_15_preview)
+  associatedIdentity?: IdentitySelectorPatch;
+
+  @doc("The URI for the key vault used as the secret archive.")
+  @added(Versions.v2026_01_15_preview)
+  vaultUri?: url;
+}
+
+
+@doc("The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
+@added(Versions.v2026_01_15_preview)
+model PreUpgradeProfileProperties {
+  @doc("Maximum wait time in seconds for during the pre-upgrade process for devices in the network fabric to successfully move into maintenance mode.")
+  maxEnteringMaintenanceTimeoutInSeconds?: int32;
+}
+
+@doc("The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
+@added(Versions.v2026_01_15_preview)
+model PreUpgradeProfilePatchProperties {
+  @doc("Maximum wait time in seconds for during the pre-upgrade process for devices in the network fabric to successfully move into maintenance mode.")
+  maxEnteringMaintenanceTimeoutInSeconds?: int32;
+}
+
+@doc("The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
+@added(Versions.v2026_01_15_preview)
+model PostUpgradeProfileProperties {
+  @doc("Maximum wait time in seconds for during the post-upgrade process for devices in the network fabric to successfully move out of maintenance mode.")
+  maxExitingMaintenanceTimeoutInSeconds?: int32;
+
+  @doc("Maximum time in seconds to wait for MLAG reload delay on devices in the network fabric.")
+  mlagReloadDelayTimeoutInSeconds?: int32;
+}
+
+@doc("The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
+@added(Versions.v2026_01_15_preview)
+model PostUpgradeProfilePatchProperties {
+  @doc("Maximum wait time in seconds for during the post-upgrade process for devices in the network fabric to successfully move out of maintenance mode.")
+  maxExitingMaintenanceTimeoutInSeconds?: int32;
+
+  @doc("Maximum time in seconds to wait for MLAG reload delay on devices in the network fabric.")
+  mlagReloadDelayTimeoutInSeconds?: int32;
+}
+
+@doc("The upgrade profile to be used by devices in the network fabric during device upgrade operations")
+@added(Versions.v2026_01_15_preview)
+model UpgradeProfileProperties {
+  @doc("The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
+  preUpgradeProfile? : PreUpgradeProfileProperties;
+
+  @doc("The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
+  postUpgradeProfile? : PostUpgradeProfileProperties;
+}
+
+@doc("The upgrade profile patch parameters that can be patched which are used by devices in the network fabric during device upgrade operations")
+@added(Versions.v2026_01_15_preview)
+model UpgradeProfilePropertiesPatchProperties {
+  @doc("The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
+  preUpgradeProfile? : PreUpgradeProfilePatchProperties;
+
+  @doc("The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
+  postUpgradeProfile? : PostUpgradeProfilePatchProperties;
+}
+
 @doc("Response body for a RotatePasswords request on a Network Fabric.")
 @added(Versions.v2025_07_15)
 model NetworkFabricRotatePasswordsResponse {
@@ -930,7 +1042,6 @@ model AuthorizedTransceiverProperties {
   @doc("Vendor of the transceiver.")
   vendor?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Key that must be configured on the fabric.")
   key?: string;
 }
@@ -943,4 +1054,21 @@ model AuthorizedTransceiverPatchProperties {
 
   @doc("Key that must be configured on the fabric.")
   key?: string;
+}
+
+
+@doc("Refresh configuration request properties.")
+@added(Versions.v2026_01_15_preview)
+model RefreshConfigurationRequestProperties {
+  @doc("Indicates if base configuration needs to be generated afresh.")
+  @added(Versions.v2026_01_15_preview)
+  shouldGenerateBaseConfiguration: boolean;
+
+  @doc("Type of configuration regeneration to be performed.")
+  @added(Versions.v2026_01_15_preview)
+  configurationRegenerationType: ConfigurationRegenerationType;
+
+  @doc("The types of devices for which the configuration needs to be refreshed. If not provided, configuration will be refreshed for all device types.")
+  @added(Versions.v2026_01_15_preview)
+  deviceTypes?: NetworkFabricRefreshDeviceTypes[];
 }

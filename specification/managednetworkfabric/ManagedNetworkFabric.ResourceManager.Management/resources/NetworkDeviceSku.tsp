@@ -26,10 +26,10 @@ model NetworkDeviceSku extends Azure.ResourceManager.Foundations.ProxyResource {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated: NetworkDeviceSkuProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("The Network Device SKU properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: NetworkDeviceSkuProperties;
 }
 

@@ -14,9 +14,7 @@
           "annotation": "annotation",
           "networkFabricSku": "M4-A400-A100-C16-aa",
           "fabricVersion": "version1",
-          "routerIds": [
-            "routerId"
-          ],
+          "routerIds": ["routerId"],
           "storageAccountConfiguration": {
             "storageAccountId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Storage/storageAccounts/nfStorage",
             "storageAccountIdentity": {
@@ -37,6 +35,7 @@
           "ipv4Prefix": "10.18.0.0/19",
           "ipv6Prefix": "3FFE:FFFF:0:CD40::/59",
           "fabricASN": 29249,
+          "networkBootstrapDeviceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkBootstrapDevices/example-bootstrapDevice",
           "terminalServerConfiguration": {
             "username": "username",
             "serialNumber": "123456",
@@ -65,25 +64,13 @@
               "administrativeState": "Enabled",
               "peeringOption": "OptionA",
               "optionBProperties": {
-                "importRouteTargets": [
-                  "65046:10050"
-                ],
-                "exportRouteTargets": [
-                  "65046:10050"
-                ],
+                "importRouteTargets": ["65046:10050"],
+                "exportRouteTargets": ["65046:10050"],
                 "routeTargets": {
-                  "importIpv4RouteTargets": [
-                    "65046:10050"
-                  ],
-                  "importIpv6RouteTargets": [
-                    "65046:10050"
-                  ],
-                  "exportIpv4RouteTargets": [
-                    "65046:10050"
-                  ],
-                  "exportIpv6RouteTargets": [
-                    "65046:10050"
-                  ]
+                  "importIpv4RouteTargets": ["65046:10050"],
+                  "importIpv6RouteTargets": ["65046:10050"],
+                  "exportIpv4RouteTargets": ["65046:10050"],
+                  "exportIpv6RouteTargets": ["65046:10050"]
                 }
               },
               "optionAProperties": {
@@ -106,25 +93,13 @@
               "administrativeState": "Enabled",
               "peeringOption": "OptionA",
               "optionBProperties": {
-                "importRouteTargets": [
-                  "65046:10050"
-                ],
-                "exportRouteTargets": [
-                  "65046:10050"
-                ],
+                "importRouteTargets": ["65046:10050"],
+                "exportRouteTargets": ["65046:10050"],
                 "routeTargets": {
-                  "importIpv4RouteTargets": [
-                    "65046:10050"
-                  ],
-                  "importIpv6RouteTargets": [
-                    "65046:10050"
-                  ],
-                  "exportIpv4RouteTargets": [
-                    "65046:10050"
-                  ],
-                  "exportIpv6RouteTargets": [
-                    "65046:10050"
-                  ]
+                  "importIpv4RouteTargets": ["65046:10050"],
+                  "importIpv6RouteTargets": ["65046:10050"],
+                  "exportIpv4RouteTargets": ["65046:10050"],
+                  "exportIpv6RouteTargets": ["65046:10050"]
                 }
               },
               "optionAProperties": {
@@ -167,14 +142,10 @@
           ],
           "uniqueRdConfiguration": {
             "uniqueRdConfigurationState": "Enabled",
-            "uniqueRds": [
-              "unique-rd-1"
-            ],
+            "uniqueRds": ["unique-rd-1"],
             "nniDerivedUniqueRdConfigurationState": "Enabled"
           },
-          "activeCommitBatches": [
-            "batch-id-1"
-          ],
+          "activeCommitBatches": ["batch-id-1"],
           "secretRotationSummary": {
             "activePasswordSetCount": 1
           },
@@ -187,7 +158,18 @@
           },
           "configurationState": "Succeeded",
           "provisioningState": "Accepted",
-          "administrativeState": "Enabled"
+          "administrativeState": "Enabled",
+          "upgradeProfile": [
+            {
+              "preUpgradeProfile": {
+                "maxEnteringMaintenanceTimeoutInSeconds": 300
+              },
+              "postUpgradeProfile": {
+                "maxExitingMaintenanceTimeoutInSeconds": 3000,
+                "mlagReloadDelayTimeoutInSeconds": 900
+              }
+            }
+          ]
         },
         "identity": {
           "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",

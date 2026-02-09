@@ -32,10 +32,10 @@ model NetworkToNetworkInterconnect
   propertiesDeprecated: NetworkToNetworkInterconnectProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("The NetworkToNetworkInterconnect Properties")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties: NetworkToNetworkInterconnectProperties;
 }
 

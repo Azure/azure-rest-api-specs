@@ -242,10 +242,10 @@ model AccessControlListPatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: AccessControlListPatchProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Access Control Lists patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: AccessControlListPatchProperties;
 }
 
@@ -345,6 +345,10 @@ union DeviceRole {
 
   @doc("Device Role Management Switch")
   ManagementSwitch: "ManagementSwitch",
+
+  @doc("Device Role Terminal Server (NetworkBootstrapDevice)")
+  @added(Versions.v2026_01_15_preview)
+  TerminalServer: "TerminalServer",
 
   string,
 }
