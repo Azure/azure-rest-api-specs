@@ -1,4 +1,5 @@
 import "../agents/routes.tsp";
+import "../agents-containers/routes.tsp";
 import "../common/models.tsp";
 import "../common/service.tsp";
 import "../memory_stores/routes.tsp";

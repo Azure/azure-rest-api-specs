@@ -9,7 +9,7 @@ namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
 @tag("Agents")
-interface Agents {
+interface AgentContainers {
 
   /**
    * Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.

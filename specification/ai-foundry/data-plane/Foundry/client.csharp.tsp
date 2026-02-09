@@ -44,16 +44,6 @@ namespace Azure.AI.Projects;
 
 @@clientName(MemorySearchOptions, "MemorySearchResultOptions");
 
-@@scope(Agents.startAgentContainer, "!csharp");
-@@scope(Agents.stopAgentContainer, "!csharp");
-@@scope(Agents.updateAgentContainer, "!csharp");
-@@scope(Agents.deleteAgentContainer, "!csharp");
-@@scope(Agents.getAgentContainer, "!csharp");
-@@scope(Agents.getAgentContainerOperation, "!csharp");
-@@scope(Agents.listAgentContainerOperations, "!csharp");
-@@scope(Agents.listAgentVersionContainerOperations, "!csharp");
-@@scope(Agents.getAgentContainerOperation, "!csharp");
-
 // Shorter method names for SDK datasets operations
 @@clientName(Datasets.listLatest, "list");
 @@clientName(Datasets.getVersion, "get");
