@@ -1,9 +1,9 @@
 {
   "parameters": {
+    "subscriptionId": "subid",
     "api-version": "2025-03-01",
-    "expressRoutePortName": "portName",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "expressRoutePortName": "portName"
   },
   "responses": {
     "200": {
@@ -11,36 +11,34 @@
         "value": [
           {
             "name": "link1",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link1",
             "properties": {
-              "adminState": "Disabled",
-              "coloLocation": "coloLocation1",
-              "connectorType": "LC",
+              "provisioningState": "Succeeded",
+              "routerName": "router1",
               "interfaceName": "Ethernet 0/0",
               "patchPanelId": "patchPanelId1",
-              "provisioningState": "Succeeded",
               "rackId": "rackId1",
-              "routerName": "router1"
+              "coloLocation": "coloLocation1",
+              "connectorType": "LC",
+              "adminState": "Disabled"
             }
           },
           {
             "name": "link2",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRoutePorts/portName/links/link2",
             "properties": {
-              "adminState": "Disabled",
-              "coloLocation": "coloLocation2",
-              "connectorType": "LC",
+              "provisioningState": "Succeeded",
+              "routerName": "router2",
               "interfaceName": "Ethernet 0/0",
               "patchPanelId": "patchPanelId2",
-              "provisioningState": "Succeeded",
               "rackId": "rackId2",
-              "routerName": "router2"
+              "coloLocation": "coloLocation2",
+              "connectorType": "LC",
+              "adminState": "Disabled"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "ExpressRouteLinks_List",
-  "title": "ExpressRouteLinkGet"
+  }
 }

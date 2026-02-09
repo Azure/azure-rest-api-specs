@@ -1,43 +1,41 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "resourceGroupName": "peerTest",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "virtualNetworkPeeringName": "peer",
     "virtualNetworkName": "vnet1",
-    "virtualNetworkPeeringName": "peer"
+    "resourceGroupName": "peerTest",
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peer",
         "name": "peer",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet1/virtualNetworkPeerings/peer",
         "properties": {
+          "allowVirtualNetworkAccess": true,
           "allowForwardedTraffic": true,
           "allowGatewayTransit": false,
-          "allowVirtualNetworkAccess": true,
-          "peeringState": "Initiated",
-          "provisioningState": "Succeeded",
+          "useRemoteGateways": false,
+          "remoteVirtualNetwork": {
+            "id": "/subscriptions/subid/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
+          },
           "remoteAddressSpace": {
             "addressPrefixes": [
               "12.0.0.0/8"
             ]
           },
           "remoteBgpCommunities": {
-            "regionalCommunity": "12076:50004",
-            "virtualNetworkCommunity": "12076:20002"
-          },
-          "remoteVirtualNetwork": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/peerTest/providers/Microsoft.Network/virtualNetworks/vnet2"
+            "virtualNetworkCommunity": "12076:20002",
+            "regionalCommunity": "12076:50004"
           },
           "remoteVirtualNetworkEncryption": {
             "enabled": true,
             "enforcement": "AllowUnencrypted"
           },
-          "useRemoteGateways": false
+          "peeringState": "Initiated",
+          "provisioningState": "Succeeded"
         }
       }
     }
-  },
-  "operationId": "VirtualNetworkPeerings_Get",
-  "title": "Get peering with remote virtual network encryption"
+  }
 }

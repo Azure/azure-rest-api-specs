@@ -1,15 +1,12 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "resourceGroupName": "rg1",
     "routeTableName": "virtualHubRouteTable1a",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid",
     "virtualHubName": "virtualHub1",
     "virtualHubRouteTableV2Parameters": {
       "properties": {
-        "attachedConnections": [
-          "All_Vnets"
-        ],
         "routes": [
           {
             "destinationType": "CIDR",
@@ -32,6 +29,9 @@
               "10.0.0.68"
             ]
           }
+        ],
+        "attachedConnections": [
+          "All_Vnets"
         ]
       }
     }
@@ -39,13 +39,10 @@
   "responses": {
     "200": {
       "body": {
-        "name": "virtualHubRouteTable1a",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
+        "name": "virtualHubRouteTable1a",
         "properties": {
-          "attachedConnections": [
-            "All_Vnets"
-          ],
           "provisioningState": "Succeeded",
           "routes": [
             {
@@ -69,19 +66,19 @@
                 "10.0.0.68"
               ]
             }
+          ],
+          "attachedConnections": [
+            "All_Vnets"
           ]
         }
       }
     },
     "201": {
       "body": {
-        "name": "virtualHubRouteTable1a",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeTables/virtualHubRouteTable1a",
+        "name": "virtualHubRouteTable1a",
         "properties": {
-          "attachedConnections": [
-            "All_Vnets"
-          ],
           "provisioningState": "Succeeded",
           "routes": [
             {
@@ -105,11 +102,12 @@
                 "10.0.0.68"
               ]
             }
+          ],
+          "attachedConnections": [
+            "All_Vnets"
           ]
         }
       }
     }
-  },
-  "operationId": "VirtualHubRouteTableV2s_CreateOrUpdate",
-  "title": "VirtualHubRouteTableV2Put"
+  }
 }

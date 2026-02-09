@@ -1,25 +1,23 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
     "gatewayName": "p2sVpnGateway1",
     "parameters": {
       "authenticationMethod": "EAPTLS"
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
-    "200": {
-      "body": {
-        "profileUrl": "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
-      }
-    },
     "202": {
       "headers": {
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
       }
+    },
+    "200": {
+      "body": {
+        "profileUrl": "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
     }
-  },
-  "operationId": "P2sVpnGateways_GenerateVpnProfile",
-  "title": "GenerateP2SVpnGatewayVPNProfile"
+  }
 }

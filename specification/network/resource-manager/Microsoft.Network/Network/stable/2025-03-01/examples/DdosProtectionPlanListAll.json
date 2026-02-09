@@ -1,54 +1,54 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosProtectionPlans/plan1",
             "name": "plan1",
             "type": "Microsoft.Network/ddosProtectionPlans",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosProtectionPlans/plan1",
             "location": "westus",
             "properties": {
               "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
               "publicIPAddresses": [
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-pip"
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-pip"
                 }
               ],
-              "resourceGuid": "00000000-0000-0000-0000-000000000000",
               "virtualNetworks": [
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet1"
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet1"
                 }
               ]
             }
           },
           {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ddosProtectionPlans/plan2",
             "name": "plan2",
             "type": "Microsoft.Network/ddosProtectionPlans",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ddosProtectionPlans/plan2",
             "location": "westus",
             "properties": {
               "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
               "publicIPAddresses": [
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-pip2"
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-pip2"
                 },
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-pip3"
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-pip3"
                 }
               ],
-              "resourceGuid": "00000000-0000-0000-0000-000000000000",
               "virtualNetworks": [
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet2"
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet2"
                 },
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet3"
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet3"
                 }
               ]
             }
@@ -56,7 +56,5 @@
         ]
       }
     }
-  },
-  "operationId": "DdosProtectionPlans_List",
-  "title": "List all DDoS protection plans"
+  }
 }

@@ -1,60 +1,58 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
     "networkInterfaceName": "test-nic",
     "parameters": {
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-nic",
-        "type": "Microsoft.Network/networkInterfaces",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic",
         "location": "eastus",
-        "properties": {
-          "disableTcpStateTracking": true,
-          "dnsSettings": {
-            "appliedDnsServers": [],
-            "dnsServers": []
-          },
-          "enableAcceleratedNetworking": true,
-          "enableIPForwarding": false,
-          "ipConfigurations": [
-            {
-              "name": "ipconfig1",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig1",
-              "properties": {
-                "primary": true,
-                "privateIPAddress": "172.20.2.4",
-                "privateIPAddressVersion": "IPv4",
-                "privateIPAllocationMethod": "Dynamic",
-                "provisioningState": "Succeeded",
-                "publicIPAddress": {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip"
-                },
-                "subnet": {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default"
-                }
-              }
-            }
-          ],
-          "provisioningState": "Succeeded",
-          "vnetEncryptionSupported": false
-        },
         "tags": {
           "tag1": "value1",
           "tag2": "value2"
-        }
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/test-nic/ipConfigurations/ipconfig1",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateIPAddress": "172.20.2.4",
+                "privateIPAllocationMethod": "Dynamic",
+                "publicIPAddress": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/test-ip"
+                },
+                "subnet": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default"
+                },
+                "primary": true,
+                "privateIPAddressVersion": "IPv4"
+              }
+            }
+          ],
+          "dnsSettings": {
+            "dnsServers": [],
+            "appliedDnsServers": []
+          },
+          "enableAcceleratedNetworking": true,
+          "disableTcpStateTracking": true,
+          "enableIPForwarding": false,
+          "vnetEncryptionSupported": false
+        },
+        "type": "Microsoft.Network/networkInterfaces"
       }
     }
-  },
-  "operationId": "NetworkInterfaces_UpdateTags",
-  "title": "Update network interface tags"
+  }
 }

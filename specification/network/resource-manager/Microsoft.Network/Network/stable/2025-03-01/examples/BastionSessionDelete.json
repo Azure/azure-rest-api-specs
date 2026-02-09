@@ -1,38 +1,36 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "bastionHostName": "bastionhosttenant",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
+    "bastionHostName": "bastionhosttenant",
     "sessionIds": [
       "session1",
       "session2",
       "session3"
-    ],
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    ]
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "message": "session session1 invalidated!",
             "sessionId": "session1",
+            "message": "session session1 invalidated!",
             "state": "Disconnected"
           },
           {
-            "message": "session session2 could not be disconnected!",
             "sessionId": "session2",
+            "message": "session session2 could not be disconnected!",
             "state": "Failed"
           },
           {
-            "message": "session session3 not found!",
             "sessionId": "session3",
+            "message": "session session3 not found!",
             "state": "NotFound"
           }
         ]
       }
     }
-  },
-  "operationId": "DisconnectActiveSessions",
-  "title": "Deletes the specified active session"
+  }
 }

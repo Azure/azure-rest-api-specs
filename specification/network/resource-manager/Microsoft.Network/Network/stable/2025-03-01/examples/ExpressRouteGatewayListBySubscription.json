@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -9,67 +9,65 @@
         "value": [
           {
             "name": "expressRouteGatewayName",
-            "type": "Microsoft.Network/expressRouteGateways",
+            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName",
             "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName",
             "location": "westus",
+            "type": "Microsoft.Network/expressRouteGateways",
             "properties": {
-              "allowNonVirtualWanTraffic": false,
+              "provisioningState": "Succeeded",
+              "virtualHub": {
+                "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
+              },
               "autoScaleConfiguration": {
                 "bounds": {
                   "min": 2
                 }
               },
+              "allowNonVirtualWanTraffic": false,
               "expressRouteConnections": [
                 {
                   "name": "connectionName",
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName",
+                  "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/expressRouteGatewayName/expressRouteConnections/connectionName",
                   "properties": {
-                    "authorizationKey": "f28e9c99-78d8-4248-a855-c54cf6beb99d",
-                    "enableInternetSecurity": false,
-                    "expressRouteCircuitPeering": {
-                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
-                    },
                     "provisioningState": "Provisioned",
+                    "expressRouteCircuitPeering": {
+                      "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteCircuits/circuitName/peerings/AzurePrivatePeering"
+                    },
+                    "authorizationKey": "f28e9c99-78d8-4248-a855-c54cf6beb99d",
+                    "routingWeight": 1,
+                    "enableInternetSecurity": false,
                     "routingConfiguration": {
                       "associatedRouteTable": {
-                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName/hubRouteTables/hubRouteTable1"
+                        "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName/hubRouteTables/hubRouteTable1"
                       },
                       "propagatedRouteTables": {
-                        "ids": [
-                          {
-                            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName/hubRouteTables/hubRouteTable1"
-                          },
-                          {
-                            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName/hubRouteTables/hubRouteTable2"
-                          },
-                          {
-                            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hvirtualHubNameub1/hubRouteTables/hubRouteTable3"
-                          }
-                        ],
                         "labels": [
                           "label1",
                           "label2"
+                        ],
+                        "ids": [
+                          {
+                            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName/hubRouteTables/hubRouteTable1"
+                          },
+                          {
+                            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName/hubRouteTables/hubRouteTable2"
+                          },
+                          {
+                            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/hvirtualHubNameub1/hubRouteTables/hubRouteTable3"
+                          }
                         ]
                       },
                       "vnetRoutes": {
                         "staticRoutes": []
                       }
-                    },
-                    "routingWeight": 1
+                    }
                   }
                 }
-              ],
-              "provisioningState": "Succeeded",
-              "virtualHub": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
-              }
+              ]
             }
           }
         ]
       }
     }
-  },
-  "operationId": "ExpressRouteGateways_ListBySubscription",
-  "title": "ExpressRouteGatewayListBySubscription"
+  }
 }

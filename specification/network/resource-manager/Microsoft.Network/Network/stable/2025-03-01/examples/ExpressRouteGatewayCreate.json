@@ -1,68 +1,66 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
     "expressRouteGatewayName": "gateway-2",
+    "subscriptionId": "subid",
+    "resourceGroupName": "resourceGroupName",
+    "api-version": "2025-03-01",
     "putExpressRouteGatewayParameters": {
       "location": "westus",
       "properties": {
-        "allowNonVirtualWanTraffic": false,
+        "virtualHub": {
+          "id": "/subscriptions/subid/resourceGroups/resourceGroupId/providers/Microsoft.Network/virtualHubs/virtualHubName"
+        },
         "autoScaleConfiguration": {
           "bounds": {
             "min": 3
           }
         },
-        "virtualHub": {
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupId/providers/Microsoft.Network/virtualHubs/virtualHubName"
-        }
-      }
-    },
-    "resourceGroupName": "resourceGroupName",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
-  },
-  "responses": {
-    "200": {
-      "body": {
-        "name": "gateway-2",
-        "type": "Microsoft.Network/expressRouteGateways",
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/gateway-2",
-        "location": "westus",
-        "properties": {
-          "allowNonVirtualWanTraffic": false,
-          "autoScaleConfiguration": {
-            "bounds": {
-              "min": 3
-            }
-          },
-          "provisioningState": "Succeeded",
-          "virtualHub": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
-          }
-        }
-      }
-    },
-    "201": {
-      "body": {
-        "name": "gateway-2",
-        "type": "Microsoft.Network/expressRouteGateways",
-        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/gateway-2",
-        "location": "westus",
-        "properties": {
-          "allowNonVirtualWanTraffic": false,
-          "autoScaleConfiguration": {
-            "bounds": {
-              "min": 3
-            }
-          },
-          "provisioningState": "Succeeded",
-          "virtualHub": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
-          }
-        }
+        "allowNonVirtualWanTraffic": false
       }
     }
   },
-  "operationId": "ExpressRouteGateways_CreateOrUpdate",
-  "title": "ExpressRouteGatewayCreate"
+  "responses": {
+    "201": {
+      "body": {
+        "name": "gateway-2",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/gateway-2",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "location": "westus",
+        "type": "Microsoft.Network/expressRouteGateways",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
+          },
+          "autoScaleConfiguration": {
+            "bounds": {
+              "min": 3
+            }
+          },
+          "allowNonVirtualWanTraffic": false
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "gateway-2",
+        "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/expressRouteGateways/gateway-2",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "location": "westus",
+        "type": "Microsoft.Network/expressRouteGateways",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualHubs/virtualHubName"
+          },
+          "autoScaleConfiguration": {
+            "bounds": {
+              "min": 3
+            }
+          },
+          "allowNonVirtualWanTraffic": false
+        }
+      }
+    }
+  }
 }

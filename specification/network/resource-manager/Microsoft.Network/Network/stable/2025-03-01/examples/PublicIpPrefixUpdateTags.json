@@ -1,42 +1,40 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "publicIpPrefixName": "test-ipprefix",
     "parameters": {
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
       }
-    },
-    "publicIpPrefixName": "test-ipprefix",
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-ipprefix",
-        "type": "Microsoft.Network/publicIPPrefixes",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
         "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPPrefixes/test-ipprefix",
         "location": "westus",
         "properties": {
-          "ipPrefix": "40.85.154.247/30",
-          "ipTags": [],
-          "prefixLength": 30,
           "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-00000000",
           "publicIPAddressVersion": "IPv4",
-          "resourceGuid": "00000000-0000-0000-0000-00000000"
-        },
-        "sku": {
-          "name": "Standard"
+          "ipPrefix": "40.85.154.247/30",
+          "prefixLength": 30,
+          "ipTags": []
         },
         "tags": {
           "tag1": "value1",
           "tag2": "value2"
-        }
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "type": "Microsoft.Network/publicIPPrefixes"
       }
     }
-  },
-  "operationId": "PublicIPPrefixes_UpdateTags",
-  "title": "Update public IP prefix tags"
+  }
 }

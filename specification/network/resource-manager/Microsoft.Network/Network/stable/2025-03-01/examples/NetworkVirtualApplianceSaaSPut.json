@@ -1,88 +1,86 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
     "networkVirtualApplianceName": "nva",
     "parameters": {
-      "location": "West US",
-      "properties": {
-        "delegation": {
-          "serviceName": "PaloAltoNetworks.Cloudngfw/firewalls"
-        },
-        "virtualHub": {
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
-        }
-      },
       "tags": {
         "key1": "value1"
+      },
+      "location": "West US",
+      "properties": {
+        "virtualHub": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+        },
+        "delegation": {
+          "serviceName": "PaloAltoNetworks.Cloudngfw/firewalls"
+        }
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "nva",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
         "type": "Microsoft.Network/networkVirtualAppliances",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
         "location": "West US",
+        "tags": {
+          "key1": "value1"
+        },
         "properties": {
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+          },
           "delegation": {
-            "provisioningState": "Succeeded",
-            "serviceName": "PaloAltoNetworks.Cloudngfw/firewalls"
+            "serviceName": "PaloAltoNetworks.Cloudngfw/firewalls",
+            "provisioningState": "Succeeded"
           },
           "deploymentType": "PartnerManaged",
           "partnerManagedResource": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Lifter/firewalls/paloAltoFirewall",
-            "internalLoadBalancerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/trustILB",
-            "standardLoadBalancerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/trustSLB"
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Lifter/firewalls/paloAltoFirewall",
+            "internalLoadBalancerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/trustILB",
+            "standardLoadBalancerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/trustSLB"
           },
-          "provisioningState": "Succeeded",
-          "virtualHub": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
-          }
-        },
-        "tags": {
-          "key1": "value1"
+          "provisioningState": "Succeeded"
         }
       }
     },
     "201": {
       "body": {
         "name": "nva",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
         "type": "Microsoft.Network/networkVirtualAppliances",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva",
+        "location": "West US",
+        "tags": {
+          "key1": "value1"
+        },
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
-            "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
           }
         },
-        "location": "West US",
         "properties": {
+          "virtualHub": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
+          },
           "delegation": {
-            "provisioningState": "Succeeded",
-            "serviceName": "PaloAltoNetworks.Cloudngfw/firewalls"
+            "serviceName": "PaloAltoNetworks.Cloudngfw/firewalls",
+            "provisioningState": "Succeeded"
           },
           "deploymentType": "PartnerManaged",
           "partnerManagedResource": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Lifter/firewalls/paloAltoFirewall",
-            "internalLoadBalancerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/trustILB",
-            "standardLoadBalancerId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/trustSLB"
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Lifter/firewalls/paloAltoFirewall",
+            "internalLoadBalancerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/trustILB",
+            "standardLoadBalancerId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/trustSLB"
           },
-          "provisioningState": "Succeeded",
-          "virtualHub": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1"
-          }
-        },
-        "tags": {
-          "key1": "value1"
+          "provisioningState": "Succeeded"
         }
       }
     }
-  },
-  "operationId": "NetworkVirtualAppliances_CreateOrUpdate",
-  "title": "Create SaaS NetworkVirtualAppliance"
+  }
 }

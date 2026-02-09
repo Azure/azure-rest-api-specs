@@ -1,48 +1,46 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
     "customIpPrefixName": "test-customipprefix",
+    "zones": [
+      "1"
+    ],
     "parameters": {
       "tags": {
         "tag1": "value1",
         "tag2": "value2"
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "zones": [
-      "1"
-    ]
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "test-customipprefix",
-        "type": "Microsoft.Network/customIpPrefixes",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/customIpPrefixes/test-customipprefix",
         "etag": "W/\"00000000-0000-0000-0000-00000000\"",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/customIpPrefixes/test-customipprefix",
         "location": "westus",
+        "zones": [
+          "1"
+        ],
         "properties": {
-          "authorizationMessage": "authorizationMessage",
-          "childCustomIpPrefixes": [],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-00000000",
           "cidr": "192.168.254.2/24",
           "commissionedState": "Provisioning",
+          "signedMessage": "signedMessage",
+          "authorizationMessage": "authorizationMessage",
           "failedReason": "",
-          "provisioningState": "Succeeded",
           "publicIpPrefixes": [],
-          "resourceGuid": "00000000-0000-0000-0000-00000000",
-          "signedMessage": "signedMessage"
+          "childCustomIpPrefixes": []
         },
         "tags": {
           "tag1": "value1",
           "tag2": "value2"
         },
-        "zones": [
-          "1"
-        ]
+        "type": "Microsoft.Network/customIpPrefixes"
       }
     }
-  },
-  "operationId": "CustomIPPrefixes_UpdateTags",
-  "title": "Update public IP address tags"
+  }
 }

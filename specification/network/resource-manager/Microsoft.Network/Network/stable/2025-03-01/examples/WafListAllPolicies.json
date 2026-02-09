@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -9,73 +9,127 @@
         "value": [
           {
             "name": "Policy1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/Policy1",
             "type": "Microsoft.Network/applicationgatewaywebapplicationfirewallpolicies",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/Policy1",
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            },
             "location": "WestUs",
             "properties": {
+              "resourceState": "Enabled",
+              "provisioningState": "Succeeded",
+              "policySettings": {
+                "state": "Enabled",
+                "mode": "Prevention",
+                "requestBodyEnforcement": true,
+                "maxRequestBodySizeInKb": 2000,
+                "requestBodyInspectLimitInKB": 2000,
+                "fileUploadEnforcement": true,
+                "fileUploadLimitInMb": 4000,
+                "requestBodyCheck": true,
+                "customBlockResponseStatusCode": 405,
+                "customBlockResponseBody": "SGVsbG8=",
+                "logScrubbing": {
+                  "state": "Enabled",
+                  "scrubbingRules": [
+                    {
+                      "state": "Enabled",
+                      "matchVariable": "RequestArgNames",
+                      "selectorMatchOperator": "Equals",
+                      "selector": "test"
+                    },
+                    {
+                      "state": "Enabled",
+                      "matchVariable": "RequestIPAddress",
+                      "selectorMatchOperator": "EqualsAny",
+                      "selector": "*"
+                    }
+                  ]
+                }
+              },
               "customRules": [
                 {
                   "name": "Rule1",
-                  "action": "Block",
+                  "priority": 1,
+                  "state": "Enabled",
+                  "ruleType": "MatchRule",
                   "matchConditions": [
                     {
+                      "matchVariables": [
+                        {
+                          "variableName": "RemoteAddr",
+                          "selector": null
+                        }
+                      ],
+                      "operator": "IPMatch",
+                      "negationConditon": false,
                       "matchValues": [
                         "192.168.1.0/24",
                         "10.0.0.0/24"
                       ],
-                      "matchVariables": [
-                        {
-                          "selector": null,
-                          "variableName": "RemoteAddr"
-                        }
-                      ],
-                      "negationConditon": false,
-                      "operator": "IPMatch",
                       "transforms": []
                     }
                   ],
-                  "priority": 1,
-                  "ruleType": "MatchRule",
-                  "state": "Enabled"
+                  "action": "Block"
                 },
                 {
                   "name": "Rule2",
-                  "action": "Block",
+                  "priority": 2,
+                  "state": "Enabled",
+                  "ruleType": "MatchRule",
                   "matchConditions": [
                     {
+                      "matchVariables": [
+                        {
+                          "variableName": "RemoteAddr",
+                          "selector": null
+                        }
+                      ],
+                      "operator": "IPMatch",
+                      "negationConditon": false,
                       "matchValues": [
                         "192.168.1.0/24"
-                      ],
-                      "matchVariables": [
-                        {
-                          "selector": null,
-                          "variableName": "RemoteAddr"
-                        }
-                      ],
-                      "negationConditon": false,
-                      "operator": "IPMatch"
+                      ]
                     },
                     {
-                      "matchValues": [
-                        "Windows"
-                      ],
                       "matchVariables": [
                         {
-                          "selector": "UserAgent",
-                          "variableName": "RequestHeader"
+                          "variableName": "RequestHeader",
+                          "selector": "UserAgent"
                         }
                       ],
+                      "operator": "Contains",
                       "negationConditon": false,
-                      "operator": "Contains"
+                      "matchValues": [
+                        "Windows"
+                      ]
                     }
                   ],
-                  "priority": 2,
-                  "ruleType": "MatchRule",
-                  "state": "Enabled"
+                  "action": "Block"
                 },
                 {
                   "name": "RateLimitRule3",
-                  "action": "Block",
+                  "priority": 3,
+                  "rateLimitDuration": "OneMin",
+                  "rateLimitThreshold": 10,
+                  "ruleType": "RateLimitRule",
+                  "matchConditions": [
+                    {
+                      "matchVariables": [
+                        {
+                          "variableName": "RemoteAddr",
+                          "selector": null
+                        }
+                      ],
+                      "operator": "IPMatch",
+                      "negationConditon": true,
+                      "matchValues": [
+                        "192.168.1.0/24",
+                        "10.0.0.0/24"
+                      ]
+                    }
+                  ],
                   "groupByUserSession": [
                     {
                       "groupByVariables": [
@@ -85,31 +139,14 @@
                       ]
                     }
                   ],
-                  "matchConditions": [
-                    {
-                      "matchValues": [
-                        "192.168.1.0/24",
-                        "10.0.0.0/24"
-                      ],
-                      "matchVariables": [
-                        {
-                          "selector": null,
-                          "variableName": "RemoteAddr"
-                        }
-                      ],
-                      "negationConditon": true,
-                      "operator": "IPMatch"
-                    }
-                  ],
-                  "priority": 3,
-                  "rateLimitDuration": "OneMin",
-                  "rateLimitThreshold": 10,
-                  "ruleType": "RateLimitRule"
+                  "action": "Block"
                 }
               ],
               "managedRules": {
                 "managedRuleSets": [
                   {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
                     "computedDisabledRules": [
                       {
                         "ruleGroupName": "General",
@@ -117,51 +154,57 @@
                           "200003"
                         ]
                       }
-                    ],
-                    "ruleSetType": "OWASP",
-                    "ruleSetVersion": "3.2"
+                    ]
                   }
                 ],
                 "exceptions": [
                   {
-                    "exceptionManagedRuleSets": [
-                      {
-                        "ruleSetType": "OWASP",
-                        "ruleSetVersion": "3.2"
-                      }
-                    ],
                     "matchVariable": "RequestURI",
                     "valueMatchOperator": "Contains",
                     "values": [
                       "health",
                       "account/images",
                       "default.aspx"
-                    ]
-                  },
-                  {
+                    ],
                     "exceptionManagedRuleSets": [
                       {
-                        "ruleGroups": [
-                          {
-                            "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
-                          }
-                        ],
                         "ruleSetType": "OWASP",
                         "ruleSetVersion": "3.2"
                       }
-                    ],
+                    ]
+                  },
+                  {
                     "matchVariable": "RequestHeader",
-                    "selector": "User-Agent",
                     "selectorMatchOperator": "StartsWith",
+                    "selector": "User-Agent",
                     "valueMatchOperator": "Contains",
                     "values": [
                       "Mozilla/5.0",
                       "Chrome/122.0.0.0"
+                    ],
+                    "exceptionManagedRuleSets": [
+                      {
+                        "ruleSetType": "OWASP",
+                        "ruleSetVersion": "3.2",
+                        "ruleGroups": [
+                          {
+                            "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                          }
+                        ]
+                      }
                     ]
                   },
                   {
+                    "matchVariable": "RemoteAddr",
+                    "values": [
+                      "1.2.3.4",
+                      "10.0.0.1/6"
+                    ],
+                    "valueMatchOperator": "IPMatch",
                     "exceptionManagedRuleSets": [
                       {
+                        "ruleSetType": "Microsoft_BotManagerRuleSet",
+                        "ruleSetVersion": "1.0",
                         "ruleGroups": [
                           {
                             "ruleGroupName": "BadBots",
@@ -171,61 +214,16 @@
                               }
                             ]
                           }
-                        ],
-                        "ruleSetType": "Microsoft_BotManagerRuleSet",
-                        "ruleSetVersion": "1.0"
+                        ]
                       }
-                    ],
-                    "matchVariable": "RemoteAddr",
-                    "valueMatchOperator": "IPMatch",
-                    "values": [
-                      "1.2.3.4",
-                      "10.0.0.1/6"
                     ]
                   }
                 ]
-              },
-              "policySettings": {
-                "customBlockResponseBody": "SGVsbG8=",
-                "customBlockResponseStatusCode": 405,
-                "fileUploadEnforcement": true,
-                "fileUploadLimitInMb": 4000,
-                "logScrubbing": {
-                  "scrubbingRules": [
-                    {
-                      "matchVariable": "RequestArgNames",
-                      "selector": "test",
-                      "selectorMatchOperator": "Equals",
-                      "state": "Enabled"
-                    },
-                    {
-                      "matchVariable": "RequestIPAddress",
-                      "selector": "*",
-                      "selectorMatchOperator": "EqualsAny",
-                      "state": "Enabled"
-                    }
-                  ],
-                  "state": "Enabled"
-                },
-                "maxRequestBodySizeInKb": 2000,
-                "mode": "Prevention",
-                "requestBodyCheck": true,
-                "requestBodyEnforcement": true,
-                "requestBodyInspectLimitInKB": 2000,
-                "state": "Enabled"
-              },
-              "provisioningState": "Succeeded",
-              "resourceState": "Enabled"
-            },
-            "tags": {
-              "key1": "value1",
-              "key2": "value2"
+              }
             }
           }
         ]
       }
     }
-  },
-  "operationId": "WebApplicationFirewallPolicies_ListAll",
-  "title": "Lists all WAF policies in a subscription"
+  }
 }

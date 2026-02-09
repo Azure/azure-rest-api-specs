@@ -1,27 +1,25 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "networkInterfaceName": "mynic",
+    "subscriptionId": "subid",
     "resourceGroupName": "testrg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "tapConfigurationName": "tapconfiguration1"
+    "networkInterfaceName": "mynic",
+    "tapConfigurationName": "tapconfiguration1",
+    "api-version": "2025-03-01"
   },
   "responses": {
     "200": {
       "body": {
         "name": "tapConfiguration1",
-        "type": "Microsoft.Network/networkInterfaces/tapConfigurations",
+        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1",
         "etag": "etag",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/tapConfigurations/tapConfiguration1",
+        "type": "Microsoft.Network/networkInterfaces/tapConfigurations",
         "properties": {
-          "provisioningState": "Succeded",
           "virtualNetworkTap": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap"
-          }
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkTaps/testvtap"
+          },
+          "provisioningState": "Succeded"
         }
       }
     }
-  },
-  "operationId": "NetworkInterfaceTapConfigurations_Get",
-  "title": "Get Network Interface Tap Configurations"
+  }
 }

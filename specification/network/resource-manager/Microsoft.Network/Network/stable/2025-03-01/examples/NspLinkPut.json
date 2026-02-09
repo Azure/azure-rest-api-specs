@@ -1,11 +1,14 @@
 {
+  "title": "Create/Update NSP link",
   "parameters": {
     "api-version": "2025-03-01",
-    "linkName": "link1",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
     "networkSecurityPerimeterName": "nsp1",
+    "linkName": "link1",
     "parameters": {
       "properties": {
-        "autoApprovedRemotePerimeterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2",
+        "autoApprovedRemotePerimeterResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2",
         "localInboundProfiles": [
           "*"
         ],
@@ -13,82 +16,78 @@
           "*"
         ]
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
-  "title": "NspLinksPut",
   "responses": {
     "200": {
       "body": {
         "name": "link1",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/links/link1",
         "type": "Microsoft.Network/networkSecurityPerimeters/links",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/links/link1",
         "properties": {
-          "description": "Auto Approved",
-          "autoApprovedRemotePerimeterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2",
+          "provisioningState": "Succeeded",
+          "autoApprovedRemotePerimeterResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2",
+          "remotePerimeterGuid": "guid",
+          "remotePerimeterLocation": "westus2",
           "localInboundProfiles": [
             "*"
           ],
           "localOutboundProfiles": [
             "*"
           ],
-          "provisioningState": "Succeeded",
           "remoteInboundProfiles": [
             "*"
           ],
           "remoteOutboundProfiles": [
             "*"
           ],
-          "remotePerimeterGuid": "guid",
-          "remotePerimeterLocation": "westus2",
+          "description": "Auto Approved",
           "status": "Approved"
         },
         "systemData": {
-          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "createdBy": "user",
           "createdByType": "User",
-          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "lastModifiedBy": "user",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
         }
       }
     },
     "201": {
       "body": {
         "name": "link1",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/links/link1",
         "type": "Microsoft.Network/networkSecurityPerimeters/links",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/links/link1",
         "properties": {
-          "description": "Auto Approved",
-          "autoApprovedRemotePerimeterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2",
+          "provisioningState": "Succeeded",
+          "autoApprovedRemotePerimeterResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2",
+          "remotePerimeterGuid": "guid",
+          "remotePerimeterLocation": "westus2",
           "localInboundProfiles": [
             "*"
           ],
           "localOutboundProfiles": [
             "*"
           ],
-          "provisioningState": "Succeeded",
           "remoteInboundProfiles": [
             "*"
           ],
           "remoteOutboundProfiles": [
             "*"
           ],
-          "remotePerimeterGuid": "guid",
-          "remotePerimeterLocation": "westus2",
+          "description": "Auto Approved",
           "status": "Approved"
         },
         "systemData": {
-          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "createdBy": "user",
           "createdByType": "User",
-          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "lastModifiedBy": "user",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
         }
       }
     }
-  },
-  "operationId": "NetworkSecurityPerimeterLinks_CreateOrUpdate"
+  }
 }

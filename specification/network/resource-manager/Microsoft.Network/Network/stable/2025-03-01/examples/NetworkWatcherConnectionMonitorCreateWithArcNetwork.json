@@ -1,30 +1,33 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkWatcherName": "nw1",
     "connectionMonitorName": "cm1",
     "location": "centraluseuap",
-    "networkWatcherName": "nw1",
     "parameters": {
       "properties": {
         "endpoints": [
           {
             "name": "vm1",
-            "type": "AzureVM",
-            "resourceId": "/subscriptions/9cece3e3-0f7d-47ca-af0e-9772773f90b7/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/TESTVM"
+            "resourceId": "/subscriptions/9cece3e3-0f7d-47ca-af0e-9772773f90b7/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/TESTVM",
+            "type": "AzureVM"
           },
           {
             "name": "bing",
-            "type": "ExternalAddress",
-            "address": "bing.com"
+            "address": "bing.com",
+            "type": "ExternalAddress"
           },
           {
             "name": "google",
-            "type": "ExternalAddress",
-            "address": "google.com"
+            "address": "google.com",
+            "type": "ExternalAddress"
           },
           {
             "name": "ArcBasedNetwork",
             "type": "AzureArcNetwork",
+            "subscriptionId": "9cece3e3-0f7d-47ca-af0e-9772773f90b7",
             "locationDetails": {
               "region": "eastus"
             },
@@ -34,52 +37,47 @@
                   "address": "172.21.128.0/20"
                 }
               ]
-            },
-            "subscriptionId": "9cece3e3-0f7d-47ca-af0e-9772773f90b7"
+            }
           }
         ],
-        "outputs": [],
         "testConfigurations": [
           {
             "name": "testConfig1",
-            "tcpConfiguration": {
-              "disableTraceRoute": false,
-              "port": 80
-            },
             "testFrequencySec": 60,
-            "protocol": "Tcp"
+            "protocol": "Tcp",
+            "tcpConfiguration": {
+              "port": 80,
+              "disableTraceRoute": false
+            }
           }
         ],
         "testGroups": [
           {
             "name": "test1",
-            "destinations": [
-              "bing",
-              "google"
-            ],
             "disable": false,
+            "testConfigurations": [
+              "testConfig1"
+            ],
             "sources": [
               "vm1",
               "ArcBasedNetwork"
             ],
-            "testConfigurations": [
-              "testConfig1"
+            "destinations": [
+              "bing",
+              "google"
             ]
           }
-        ]
+        ],
+        "outputs": []
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "cm1",
-        "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
         "etag": "W/\"e7497f26-5f09-4559-900b-fe98f3dedb6f\"",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
-        "location": "centraluseuap",
         "properties": {
           "endpoints": [
             {
@@ -89,6 +87,7 @@
             {
               "name": "ArcBasedNetwork",
               "type": "AzureArcNetwork",
+              "subscriptionId": "9cece3e3-0f7d-47ca-af0e-9772773f90b7",
               "locationDetails": {
                 "region": "eastus"
               },
@@ -98,8 +97,7 @@
                     "address": "172.21.128.0/20"
                   }
                 ]
-              },
-              "subscriptionId": "9cece3e3-0f7d-47ca-af0e-9772773f90b7"
+              }
             },
             {
               "name": "bing",
@@ -110,45 +108,45 @@
               "address": "google.com"
             }
           ],
-          "outputs": [],
           "testConfigurations": [
             {
               "name": "testConfig1",
-              "tcpConfiguration": {
-                "disableTraceRoute": false,
-                "port": 80
-              },
               "testFrequencySec": 60,
-              "protocol": "Tcp"
+              "protocol": "Tcp",
+              "tcpConfiguration": {
+                "port": 80,
+                "disableTraceRoute": false
+              }
             }
           ],
           "testGroups": [
             {
               "name": "test1",
-              "destinations": [
-                "bing",
-                "google"
-              ],
               "disable": false,
+              "testConfigurations": [
+                "testConfig1"
+              ],
               "sources": [
                 "vm1",
                 "ArcBasedNetwork"
               ],
-              "testConfigurations": [
-                "testConfig1"
+              "destinations": [
+                "bing",
+                "google"
               ]
             }
-          ]
-        }
+          ],
+          "outputs": []
+        },
+        "location": "centraluseuap",
+        "type": "Microsoft.Network/networkWatchers/connectionMonitors"
       }
     },
     "201": {
       "body": {
         "name": "cm1",
-        "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
         "etag": "W/\"e7497f26-5f09-4559-900b-fe98f3dedb6f\"",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
-        "location": "centraluseuap",
         "properties": {
           "endpoints": [
             {
@@ -158,6 +156,7 @@
             {
               "name": "ArcBasedNetwork",
               "type": "AzureArcNetwork",
+              "subscriptionId": "9cece3e3-0f7d-47ca-af0e-9772773f90b7",
               "locationDetails": {
                 "region": "eastus"
               },
@@ -167,8 +166,7 @@
                     "address": "172.21.128.0/20"
                   }
                 ]
-              },
-              "subscriptionId": "9cece3e3-0f7d-47ca-af0e-9772773f90b7"
+              }
             },
             {
               "name": "bing",
@@ -179,39 +177,39 @@
               "address": "google.com"
             }
           ],
-          "outputs": [],
           "testConfigurations": [
             {
               "name": "testConfig1",
-              "tcpConfiguration": {
-                "disableTraceRoute": false,
-                "port": 80
-              },
               "testFrequencySec": 60,
-              "protocol": "Tcp"
+              "protocol": "Tcp",
+              "tcpConfiguration": {
+                "port": 80,
+                "disableTraceRoute": false
+              }
             }
           ],
           "testGroups": [
             {
               "name": "test1",
-              "destinations": [
-                "bing",
-                "google"
-              ],
               "disable": false,
+              "testConfigurations": [
+                "testConfig1"
+              ],
               "sources": [
                 "vm1",
                 "ArcBasedNetwork"
               ],
-              "testConfigurations": [
-                "testConfig1"
+              "destinations": [
+                "bing",
+                "google"
               ]
             }
-          ]
-        }
+          ],
+          "outputs": []
+        },
+        "location": "centraluseuap",
+        "type": "Microsoft.Network/networkWatchers/connectionMonitors"
       }
     }
-  },
-  "operationId": "ConnectionMonitors_CreateOrUpdate",
-  "title": "Create connection monitor with Arc Network"
+  }
 }

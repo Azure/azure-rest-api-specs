@@ -1,20 +1,18 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "resourceGroupName": "subnet-test",
     "subnetName": "subnet1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "virtualNetworkName": "vnetname"
+    "virtualNetworkName": "vnetname",
+    "resourceGroupName": "subnet-test",
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {},
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/subnet-test/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnet1?api-version=2025-03-01"
+        "Location": "https://management.azure.com/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/virtualNetworks/vnetname/subnets/subnet1?api-version=2025-03-01"
       }
     },
     "204": {}
-  },
-  "operationId": "Subnets_Delete",
-  "title": "Delete subnet"
+  }
 }

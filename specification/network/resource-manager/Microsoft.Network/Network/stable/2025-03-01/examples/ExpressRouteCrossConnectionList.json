@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "name": "<circuitServiceKey>",
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subid",
+    "name": "<circuitServiceKey>"
   },
   "responses": {
     "200": {
@@ -10,27 +10,25 @@
         "value": [
           {
             "name": "<circuitServiceKey>",
+            "id": "/subscriptions/subid/resourceGroups/CrossConnectionSiliconValley/providers/Microsoft.Network/expressRouteCrossConnections/<circuitServiceKey>",
             "type": "Microsoft.Network/expressRouteCrossConnections",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/CrossConnectionSiliconValley/providers/Microsoft.Network/expressRouteCrossConnections/<circuitServiceKey>",
             "location": "brazilsouth",
             "properties": {
-              "bandwidthInMbps": 1000,
-              "expressRouteCircuit": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ertest/providers/Microsoft.Network/expressRouteCircuits/er1"
-              },
-              "peeringLocation": "SiliconValley",
-              "peerings": [],
-              "primaryAzurePort": "bvtazureixp01",
               "provisioningState": "Enabled",
-              "sTag": 2,
+              "expressRouteCircuit": {
+                "id": "/subscriptions/subid/resourceGroups/ertest/providers/Microsoft.Network/expressRouteCircuits/er1"
+              },
+              "peerings": [],
+              "peeringLocation": "SiliconValley",
+              "bandwidthInMbps": 1000,
+              "primaryAzurePort": "bvtazureixp01",
               "secondaryAzurePort": "bvtazureixp01",
+              "sTag": 2,
               "serviceProviderProvisioningState": "NotProvisioned"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "ExpressRouteCrossConnections_List",
-  "title": "ExpressRouteCrossConnectionList"
+  }
 }

@@ -1,20 +1,19 @@
 {
+  "title": "List NSP logging configuration",
   "parameters": {
     "api-version": "2025-03-01",
-    "networkSecurityPerimeterName": "nsp1",
+    "subscriptionId": "subId",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "networkSecurityPerimeterName": "nsp1"
   },
-  "title": "NspLoggingConfigurationList",
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations?api-version=2025-03-01&$skipToken=10",
         "value": [
           {
             "name": "instance",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations/instance",
             "type": "Microsoft.Network/networkSecurityPerimeters/loggingConfigurations",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations/instance",
             "properties": {
               "enabledLogCategories": [
                 "NspPublicInboundPerimeterRulesDenied",
@@ -23,17 +22,17 @@
               "version": "0"
             },
             "systemData": {
-              "createdAt": "2024-02-07T18:07:36.3446713Z",
               "createdBy": "user",
               "createdByType": "User",
-              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
               "lastModifiedBy": "user",
-              "lastModifiedByType": "User"
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
             }
           }
-        ]
+        ],
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/loggingConfigurations?api-version=2025-03-01&$skipToken=10"
       }
     }
-  },
-  "operationId": "NetworkSecurityPerimeterLoggingConfigurations_List"
+  }
 }

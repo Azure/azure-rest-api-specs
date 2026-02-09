@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "effectiveRoutesParameters": null,
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "virtualHubName": "virtualHub1"
+    "virtualHubName": "virtualHub1",
+    "api-version": "2025-03-01",
+    "effectiveRoutesParameters": null
   },
   "responses": {
     "200": {
@@ -14,23 +14,23 @@
             "addressPrefixes": [
               "10.147.128.0/17"
             ],
-            "asPath": "65520-65520",
-            "nextHopType": "Remote Hub",
             "nextHops": [
               "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/virtualHubs/hub0"
             ],
-            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/virtualHubs/hub0"
+            "nextHopType": "Remote Hub",
+            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/virtualHubs/hub0",
+            "asPath": "65520-65520"
           },
           {
             "addressPrefixes": [
               "10.0.0.0/16"
             ],
-            "asPath": "12076-12076",
-            "nextHopType": "ExpressRouteGateway",
             "nextHops": [
               "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/expressRouteGateways/ErGw1"
             ],
-            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/expressRouteGateways/ErGw1"
+            "nextHopType": "ExpressRouteGateway",
+            "routeOrigin": "/subscriptions/testSub/resourceGroups/testRg/providers/Microsoft.Network/expressRouteGateways/ErGw1",
+            "asPath": "12076-12076"
           }
         ]
       }
@@ -41,7 +41,5 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
       }
     }
-  },
-  "operationId": "VirtualHubs_GetEffectiveVirtualHubRoutes",
-  "title": "Effective Routes for the Virtual Hub"
+  }
 }

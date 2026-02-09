@@ -1,78 +1,46 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
     "firewallPolicyName": "firewallPolicy",
     "parameters": {
+      "tags": {
+        "key1": "value1"
+      },
       "location": "West US",
       "properties": {
-        "dnsSettings": {
-          "enableProxy": true,
-          "requireProxyForNetworkRules": false,
-          "servers": [
-            "30.3.4.5"
+        "threatIntelMode": "Alert",
+        "threatIntelWhitelist": {
+          "ipAddresses": [
+            "20.3.4.5"
+          ],
+          "fqdns": [
+            "*.microsoft.com"
           ]
-        },
-        "explicitProxy": {
-          "enableExplicitProxy": true,
-          "enablePacFile": true,
-          "httpPort": 8087,
-          "httpsPort": 8087,
-          "pacFile": "https://tinawstorage.file.core.windows.net/?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-06-04T07:01:12Z&st=2021-06-03T23:01:12Z&sip=68.65.171.11&spr=https&sig=Plsa0RRVpGbY0IETZZOT6znOHcSro71LLTTbzquYPgs%3D",
-          "pacFilePort": 8087
         },
         "insights": {
           "isEnabled": true,
+          "retentionDays": 100,
           "logAnalyticsResources": {
-            "defaultWorkspaceId": {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"
-            },
             "workspaces": [
               {
                 "region": "westus",
                 "workspaceId": {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace1"
+                  "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace1"
                 }
               },
               {
                 "region": "eastus",
                 "workspaceId": {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace2"
+                  "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace2"
                 }
               }
-            ]
-          },
-          "retentionDays": 100
-        },
-        "intrusionDetection": {
-          "configuration": {
-            "bypassTrafficSettings": [
-              {
-                "name": "bypassRule1",
-                "description": "Rule 1",
-                "destinationAddresses": [
-                  "5.6.7.8"
-                ],
-                "destinationPorts": [
-                  "*"
-                ],
-                "sourceAddresses": [
-                  "1.2.3.4"
-                ],
-                "protocol": "TCP"
-              }
             ],
-            "signatureOverrides": [
-              {
-                "id": "2525004",
-                "mode": "Deny"
-              }
-            ]
-          },
-          "mode": "Alert",
-          "profile": "Balanced"
-        },
-        "sku": {
-          "tier": "Premium"
+            "defaultWorkspaceId": {
+              "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"
+            }
+          }
         },
         "snat": {
           "privateRanges": [
@@ -82,14 +50,51 @@
         "sql": {
           "allowSqlRedirect": true
         },
-        "threatIntelMode": "Alert",
-        "threatIntelWhitelist": {
-          "fqdns": [
-            "*.microsoft.com"
+        "dnsSettings": {
+          "servers": [
+            "30.3.4.5"
           ],
-          "ipAddresses": [
-            "20.3.4.5"
-          ]
+          "enableProxy": true,
+          "requireProxyForNetworkRules": false
+        },
+        "explicitProxy": {
+          "enableExplicitProxy": true,
+          "httpPort": 8087,
+          "httpsPort": 8087,
+          "enablePacFile": true,
+          "pacFilePort": 8087,
+          "pacFile": "https://tinawstorage.file.core.windows.net/?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-06-04T07:01:12Z&st=2021-06-03T23:01:12Z&sip=68.65.171.11&spr=https&sig=Plsa0RRVpGbY0IETZZOT6znOHcSro71LLTTbzquYPgs%3D"
+        },
+        "sku": {
+          "tier": "Premium"
+        },
+        "intrusionDetection": {
+          "mode": "Alert",
+          "profile": "Balanced",
+          "configuration": {
+            "signatureOverrides": [
+              {
+                "id": "2525004",
+                "mode": "Deny"
+              }
+            ],
+            "bypassTrafficSettings": [
+              {
+                "name": "bypassRule1",
+                "description": "Rule 1",
+                "protocol": "TCP",
+                "sourceAddresses": [
+                  "1.2.3.4"
+                ],
+                "destinationAddresses": [
+                  "5.6.7.8"
+                ],
+                "destinationPorts": [
+                  "*"
+                ]
+              }
+            ]
+          }
         },
         "transportSecurity": {
           "certificateAuthority": {
@@ -97,103 +102,64 @@
             "keyVaultSecretId": "https://kv/secret"
           }
         }
-      },
-      "tags": {
-        "key1": "value1"
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "firewallPolicy",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "type": "Microsoft.Network/firewallPolicies",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "location": "West US",
+        "tags": {
+          "key1": "value1"
+        },
         "properties": {
-          "dnsSettings": {
-            "enableProxy": true,
-            "requireProxyForNetworkRules": false,
-            "servers": [
-              "30.3.4.5"
+          "size": "0.5MB",
+          "provisioningState": "Succeeded",
+          "threatIntelMode": "Alert",
+          "threatIntelWhitelist": {
+            "ipAddresses": [
+              "20.3.4.5"
+            ],
+            "fqdns": [
+              "*.microsoft.com"
             ]
           },
-          "explicitProxy": {
-            "enableExplicitProxy": true,
-            "enablePacFile": true,
-            "httpPort": 8087,
-            "httpsPort": 8087,
-            "pacFile": "https://tinawstorage.file.core.windows.net/?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-06-04T07:01:12Z&st=2021-06-03T23:01:12Z&sip=68.65.171.11&spr=https&sig=Plsa0RRVpGbY0IETZZOT6znOHcSro71LLTTbzquYPgs%3D",
-            "pacFilePort": 8087
-          },
-          "firewalls": [],
+          "ruleCollectionGroups": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1"
+            },
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup2"
+            }
+          ],
           "insights": {
             "isEnabled": true,
+            "retentionDays": 100,
             "logAnalyticsResources": {
-              "defaultWorkspaceId": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"
-              },
               "workspaces": [
                 {
                   "region": "westus",
                   "workspaceId": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace1"
+                    "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace1"
                   }
                 },
                 {
                   "region": "eastus",
                   "workspaceId": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace2"
+                    "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace2"
                   }
                 }
-              ]
-            },
-            "retentionDays": 100
-          },
-          "intrusionDetection": {
-            "configuration": {
-              "bypassTrafficSettings": [
-                {
-                  "name": "bypassRule1",
-                  "description": "Rule 1",
-                  "destinationAddresses": [
-                    "5.6.7.8"
-                  ],
-                  "destinationPorts": [
-                    "*"
-                  ],
-                  "sourceAddresses": [
-                    "1.2.3.4"
-                  ],
-                  "protocol": "TCP"
-                }
               ],
-              "signatureOverrides": [
-                {
-                  "id": "2525004",
-                  "mode": "Deny"
-                }
-              ]
-            },
-            "mode": "Alert",
-            "profile": "Balanced"
-          },
-          "provisioningState": "Succeeded",
-          "ruleCollectionGroups": [
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1"
-            },
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup2"
+              "defaultWorkspaceId": {
+                "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"
+              }
             }
-          ],
-          "size": "0.5MB",
-          "sku": {
-            "tier": "Premium"
           },
+          "firewalls": [],
           "snat": {
             "privateRanges": [
               "IANAPrivateRanges"
@@ -202,14 +168,51 @@
           "sql": {
             "allowSqlRedirect": true
           },
-          "threatIntelMode": "Alert",
-          "threatIntelWhitelist": {
-            "fqdns": [
-              "*.microsoft.com"
+          "dnsSettings": {
+            "servers": [
+              "30.3.4.5"
             ],
-            "ipAddresses": [
-              "20.3.4.5"
-            ]
+            "enableProxy": true,
+            "requireProxyForNetworkRules": false
+          },
+          "explicitProxy": {
+            "enableExplicitProxy": true,
+            "httpPort": 8087,
+            "httpsPort": 8087,
+            "enablePacFile": true,
+            "pacFilePort": 8087,
+            "pacFile": "https://tinawstorage.file.core.windows.net/?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-06-04T07:01:12Z&st=2021-06-03T23:01:12Z&sip=68.65.171.11&spr=https&sig=Plsa0RRVpGbY0IETZZOT6znOHcSro71LLTTbzquYPgs%3D"
+          },
+          "sku": {
+            "tier": "Premium"
+          },
+          "intrusionDetection": {
+            "mode": "Alert",
+            "profile": "Balanced",
+            "configuration": {
+              "signatureOverrides": [
+                {
+                  "id": "2525004",
+                  "mode": "Deny"
+                }
+              ],
+              "bypassTrafficSettings": [
+                {
+                  "name": "bypassRule1",
+                  "description": "Rule 1",
+                  "protocol": "TCP",
+                  "sourceAddresses": [
+                    "1.2.3.4"
+                  ],
+                  "destinationAddresses": [
+                    "5.6.7.8"
+                  ],
+                  "destinationPorts": [
+                    "*"
+                  ]
+                }
+              ]
+            }
           },
           "transportSecurity": {
             "certificateAuthority": {
@@ -217,100 +220,63 @@
               "keyVaultSecretId": "https://kv/secret"
             }
           }
-        },
-        "tags": {
-          "key1": "value1"
         }
       }
     },
     "201": {
       "body": {
         "name": "firewallPolicy",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "type": "Microsoft.Network/firewallPolicies",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy",
         "location": "West US",
+        "tags": {
+          "key1": "value1"
+        },
         "properties": {
-          "dnsSettings": {
-            "enableProxy": true,
-            "requireProxyForNetworkRules": false,
-            "servers": [
-              "30.3.4.5"
+          "size": "0.5MB",
+          "provisioningState": "Succeeded",
+          "threatIntelMode": "Alert",
+          "threatIntelWhitelist": {
+            "ipAddresses": [
+              "20.3.4.5"
+            ],
+            "fqdns": [
+              "*.microsoft.com"
             ]
           },
-          "explicitProxy": {
-            "enableExplicitProxy": true,
-            "enablePacFile": true,
-            "httpPort": 8087,
-            "httpsPort": 8087,
-            "pacFile": "https://tinawstorage.file.core.windows.net/?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-06-04T07:01:12Z&st=2021-06-03T23:01:12Z&sip=68.65.171.11&spr=https&sig=Plsa0RRVpGbY0IETZZOT6znOHcSro71LLTTbzquYPgs%3D",
-            "pacFilePort": 8087
-          },
-          "firewalls": [],
+          "ruleCollectionGroups": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1"
+            },
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup2"
+            }
+          ],
           "insights": {
             "isEnabled": true,
+            "retentionDays": 100,
             "logAnalyticsResources": {
-              "defaultWorkspaceId": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"
-              },
               "workspaces": [
                 {
                   "region": "westus",
                   "workspaceId": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace1"
+                    "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace1"
                   }
                 },
                 {
                   "region": "eastus",
                   "workspaceId": {
-                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace2"
+                    "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace2"
                   }
                 }
-              ]
-            },
-            "retentionDays": 100
-          },
-          "intrusionDetection": {
-            "configuration": {
-              "bypassTrafficSettings": [
-                {
-                  "name": "bypassRule1",
-                  "description": "Rule 1",
-                  "destinationAddresses": [
-                    "5.6.7.8"
-                  ],
-                  "destinationPorts": [
-                    "*"
-                  ],
-                  "sourceAddresses": [
-                    "1.2.3.4"
-                  ],
-                  "protocol": "TCP"
-                }
               ],
-              "signatureOverrides": [
-                {
-                  "id": "2525004",
-                  "mode": "Deny"
-                }
-              ]
-            },
-            "mode": "Alert",
-            "profile": "Balanced"
-          },
-          "provisioningState": "Succeeded",
-          "ruleCollectionGroups": [
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1"
-            },
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup2"
+              "defaultWorkspaceId": {
+                "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"
+              }
             }
-          ],
-          "size": "0.5MB",
-          "sku": {
-            "tier": "Premium"
           },
+          "firewalls": [],
           "snat": {
             "privateRanges": [
               "IANAPrivateRanges"
@@ -319,14 +285,51 @@
           "sql": {
             "allowSqlRedirect": true
           },
-          "threatIntelMode": "Alert",
-          "threatIntelWhitelist": {
-            "fqdns": [
-              "*.microsoft.com"
+          "dnsSettings": {
+            "servers": [
+              "30.3.4.5"
             ],
-            "ipAddresses": [
-              "20.3.4.5"
-            ]
+            "enableProxy": true,
+            "requireProxyForNetworkRules": false
+          },
+          "explicitProxy": {
+            "enableExplicitProxy": true,
+            "httpPort": 8087,
+            "httpsPort": 8087,
+            "enablePacFile": true,
+            "pacFilePort": 8087,
+            "pacFile": "https://tinawstorage.file.core.windows.net/?sv=2020-02-10&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-06-04T07:01:12Z&st=2021-06-03T23:01:12Z&sip=68.65.171.11&spr=https&sig=Plsa0RRVpGbY0IETZZOT6znOHcSro71LLTTbzquYPgs%3D"
+          },
+          "sku": {
+            "tier": "Premium"
+          },
+          "intrusionDetection": {
+            "mode": "Alert",
+            "profile": "Balanced",
+            "configuration": {
+              "signatureOverrides": [
+                {
+                  "id": "2525004",
+                  "mode": "Deny"
+                }
+              ],
+              "bypassTrafficSettings": [
+                {
+                  "name": "bypassRule1",
+                  "description": "Rule 1",
+                  "protocol": "TCP",
+                  "sourceAddresses": [
+                    "1.2.3.4"
+                  ],
+                  "destinationAddresses": [
+                    "5.6.7.8"
+                  ],
+                  "destinationPorts": [
+                    "*"
+                  ]
+                }
+              ]
+            }
           },
           "transportSecurity": {
             "certificateAuthority": {
@@ -334,13 +337,8 @@
               "keyVaultSecretId": "https://kv/secret"
             }
           }
-        },
-        "tags": {
-          "key1": "value1"
         }
       }
     }
-  },
-  "operationId": "FirewallPolicies_CreateOrUpdate",
-  "title": "Create FirewallPolicy"
+  }
 }

@@ -1,34 +1,32 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "tapName": "testvtap"
   },
   "responses": {
     "200": {
       "body": {
         "name": "testvtap",
-        "type": "Microsoft.Network/virtualNetworkTaps",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkTaps/testvtap",
         "etag": "etag",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkTaps/testvtap",
+        "type": "Microsoft.Network/virtualNetworkTaps",
         "location": "centraluseuap",
         "properties": {
           "destinationNetworkInterfaceIPConfiguration": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface/ipConfigurations/testIPConfig1"
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface/ipConfigurations/testIPConfig1"
           },
           "destinationPort": 4789,
+          "provisioningState": "Succeded",
+          "resourceGuid": "6A7C139D-8B8D-499B-B7CB-4F3F02A8A44F",
           "networkInterfaceTapConfigurations": [
             {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface2/tapConfigurations/testtapConfiguration"
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkInterfaces/testNetworkInterface2/tapConfigurations/testtapConfiguration"
             }
-          ],
-          "provisioningState": "Succeded",
-          "resourceGuid": "6A7C139D-8B8D-499B-B7CB-4F3F02A8A44F"
+          ]
         }
       }
     }
-  },
-  "operationId": "VirtualNetworkTaps_Get",
-  "title": "Get Virtual Network Tap"
+  }
 }

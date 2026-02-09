@@ -1,120 +1,118 @@
 {
   "parameters": {
+    "connectionName": "connection1",
+    "networkVirtualApplianceName": "nva1",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid",
     "NetworkVirtualApplianceConnectionParameters": {
       "properties": {
         "name": "connection1",
         "asn": 64512,
+        "tunnelIdentifier": 0,
+        "enableInternetSecurity": false,
         "bgpPeerAddress": [
           "169.254.16.13",
           "169.254.16.14"
         ],
-        "enableInternetSecurity": false,
         "routingConfiguration": {
           "associatedRouteTable": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
-          },
-          "inboundRouteMap": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1"
-          },
-          "outboundRouteMap": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap2"
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
           },
           "propagatedRouteTables": {
-            "ids": [
-              {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
-              }
-            ],
             "labels": [
               "label1"
+            ],
+            "ids": [
+              {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
+              }
             ]
+          },
+          "inboundRouteMap": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1"
+          },
+          "outboundRouteMap": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap2"
           }
-        },
-        "tunnelIdentifier": 0
+        }
       }
-    },
-    "api-version": "2025-03-01",
-    "connectionName": "connection1",
-    "networkVirtualApplianceName": "nva1",
-    "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "connection1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva1/networkVirtualApplianceConnections/connection1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva1/networkVirtualApplianceConnections/connection1",
         "properties": {
           "name": "connection1",
           "asn": 64512,
+          "tunnelIdentifier": 0,
           "bgpPeerAddress": [
             "169.254.16.13",
             "169.254.16.14"
           ],
-          "provisioningState": "Updating",
           "routingConfiguration": {
             "associatedRouteTable": {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
-            },
-            "inboundRouteMap": {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1"
-            },
-            "outboundRouteMap": {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap2"
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
             },
             "propagatedRouteTables": {
-              "ids": [
-                {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
-                }
-              ],
               "labels": [
                 "label1"
+              ],
+              "ids": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
+                }
               ]
+            },
+            "inboundRouteMap": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1"
+            },
+            "outboundRouteMap": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap2"
             }
           },
-          "tunnelIdentifier": 0
+          "provisioningState": "Updating"
         }
       }
     },
     "201": {
       "body": {
         "name": "connection1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva1/networkVirtualApplianceConnections/connection1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva1/networkVirtualApplianceConnections/connection1",
         "properties": {
           "name": "connection1",
           "asn": 64512,
+          "tunnelIdentifier": 0,
           "bgpPeerAddress": [
             "169.254.16.13",
             "169.254.16.14"
           ],
-          "provisioningState": "Updating",
           "routingConfiguration": {
             "associatedRouteTable": {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
-            },
-            "inboundRouteMap": {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1"
-            },
-            "outboundRouteMap": {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap2"
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
             },
             "propagatedRouteTables": {
-              "ids": [
-                {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
-                }
-              ],
               "labels": [
                 "label1"
+              ],
+              "ids": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/hubRouteTables/hubRouteTable1"
+                }
               ]
+            },
+            "inboundRouteMap": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap1"
+            },
+            "outboundRouteMap": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1/routeMaps/routeMap2"
             }
           },
-          "tunnelIdentifier": 0
+          "provisioningState": "Updating"
         }
       }
     }
-  },
-  "operationId": "NetworkVirtualApplianceConnections_CreateOrUpdate",
-  "title": "NetworkVirtualApplianceConnectionPut"
+  }
 }

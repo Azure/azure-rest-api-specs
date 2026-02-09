@@ -1,48 +1,47 @@
 {
+  "title": "Get NSP LinkReference",
   "parameters": {
     "api-version": "2025-03-01",
-    "linkReferenceName": "link1-guid",
-    "networkSecurityPerimeterName": "nsp2",
+    "subscriptionId": "subId",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "networkSecurityPerimeterName": "nsp2",
+    "linkReferenceName": "link1-guid"
   },
-  "title": "NspLinkReferencesGet",
   "responses": {
     "200": {
       "body": {
         "name": "link1-guid",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2/linkreferences/link1-guid",
         "type": "Microsoft.Network/networkSecurityPerimeters/linkreferences",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2/linkreferences/link1-guid",
         "properties": {
-          "description": "Auto Approved",
+          "provisioningState": "Succeeded",
+          "remotePerimeterResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1",
+          "remotePerimeterGuid": "guid",
+          "remotePerimeterLocation": "westus2",
           "localInboundProfiles": [
             "*"
           ],
           "localOutboundProfiles": [
             "*"
           ],
-          "provisioningState": "Succeeded",
           "remoteInboundProfiles": [
             "*"
           ],
           "remoteOutboundProfiles": [
             "*"
           ],
-          "remotePerimeterGuid": "guid",
-          "remotePerimeterLocation": "westus2",
-          "remotePerimeterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1",
+          "description": "Auto Approved",
           "status": "Approved"
         },
         "systemData": {
-          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "createdBy": "user",
           "createdByType": "User",
-          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z",
+          "createdAt": "2024-02-07T18:07:36.3446713Z",
           "lastModifiedBy": "user",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
         }
       }
     }
-  },
-  "operationId": "NetworkSecurityPerimeterLinkReferences_Get"
+  }
 }

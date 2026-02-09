@@ -1,59 +1,57 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "networkSecurityGroupName": "testnsg",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
+    "networkSecurityGroupName": "testnsg",
     "securityRuleName": "rule1",
     "securityRuleParameters": {
       "properties": {
-        "access": "Deny",
-        "destinationAddressPrefix": "11.0.0.0/8",
-        "destinationPortRange": "8080",
-        "direction": "Outbound",
-        "priority": 100,
+        "protocol": "*",
         "sourceAddressPrefix": "10.0.0.0/8",
+        "destinationAddressPrefix": "11.0.0.0/8",
+        "access": "Deny",
+        "destinationPortRange": "8080",
         "sourcePortRange": "*",
-        "protocol": "*"
+        "priority": 100,
+        "direction": "Outbound"
       }
-    },
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "rule1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/securityRules/rule1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/securityRules/rule1",
         "properties": {
-          "access": "Deny",
-          "destinationAddressPrefix": "11.0.0.0/8",
-          "destinationPortRange": "8080",
-          "direction": "Outbound",
-          "priority": 100,
           "provisioningState": "Succeeded",
-          "sourceAddressPrefix": "10.0.0.0/8",
+          "protocol": "*",
           "sourcePortRange": "*",
-          "protocol": "*"
+          "destinationPortRange": "8080",
+          "sourceAddressPrefix": "10.0.0.0/8",
+          "destinationAddressPrefix": "11.0.0.0/8",
+          "access": "Deny",
+          "priority": 100,
+          "direction": "Outbound"
         }
       }
     },
     "201": {
       "body": {
         "name": "rule1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/securityRules/rule1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/securityRules/rule1",
         "properties": {
-          "access": "Deny",
-          "destinationAddressPrefix": "11.0.0.0/8",
-          "destinationPortRange": "8080",
-          "direction": "Outbound",
-          "priority": 100,
           "provisioningState": "Succeeded",
-          "sourceAddressPrefix": "10.0.0.0/8",
+          "protocol": "*",
           "sourcePortRange": "*",
-          "protocol": "*"
+          "destinationPortRange": "8080",
+          "sourceAddressPrefix": "10.0.0.0/8",
+          "destinationAddressPrefix": "11.0.0.0/8",
+          "access": "Deny",
+          "priority": 100,
+          "direction": "Outbound"
         }
       }
     }
-  },
-  "operationId": "SecurityRules_CreateOrUpdate",
-  "title": "Create security rule"
+  }
 }

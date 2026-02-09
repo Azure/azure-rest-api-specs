@@ -1,41 +1,41 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
     "firewallPolicyName": "firewallPolicy",
     "resourceGroupName": "rg1",
-    "ruleCollectionGroupName": "ruleCollectionGroup1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "ruleCollectionGroup1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "properties": {
           "priority": 110,
           "ruleCollections": [
             {
+              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
+              "priority": 200,
               "action": {
                 "type": "Deny"
               },
-              "priority": 200,
-              "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "rules": [
                 {
+                  "ruleType": "NetworkRule",
                   "name": "network-rule1",
-                  "destinationAddresses": [
-                    "*"
+                  "sourceAddresses": [
+                    "10.1.25.0/24"
                   ],
-                  "destinationPorts": [
+                  "destinationAddresses": [
                     "*"
                   ],
                   "ipProtocols": [
                     "TCP"
                   ],
-                  "ruleType": "NetworkRule",
-                  "sourceAddresses": [
-                    "10.1.25.0/24"
+                  "destinationPorts": [
+                    "*"
                   ]
                 }
               ]
@@ -44,7 +44,5 @@
         }
       }
     }
-  },
-  "operationId": "FirewallPolicyRuleCollectionGroupDrafts_Get",
-  "title": "get rule collection group draft"
+  }
 }

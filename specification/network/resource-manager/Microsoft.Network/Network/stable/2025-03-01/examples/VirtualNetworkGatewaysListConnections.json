@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
+    "subscriptionId": "subid",
     "resourceGroupName": "testrg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "virtualNetworkGatewayName": "test-vpn-gateway-1"
+    "virtualNetworkGatewayName": "test-vpn-gateway-1",
+    "api-version": "2025-03-01"
   },
   "responses": {
     "200": {
@@ -11,33 +11,31 @@
         "value": [
           {
             "name": "test-vpn-connection",
-            "type": "Microsoft.Network/connections",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/connections/test-vpn-connection",
             "etag": "W/\\\"00000000-0000-0000-0000-000000000000\\\"",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/connections/test-vpn-connection",
+            "type": "Microsoft.Network/connections",
             "location": "eastus",
             "properties": {
-              "connectionType": "Vnet2Vnet",
-              "egressBytesTransferred": 0,
-              "enableBgp": true,
-              "ingressBytesTransferred": 0,
-              "ipsecPolicies": [],
               "provisioningState": "Succeeded",
               "resourceGuid": "00000000-0000-0000-0000-000000000000",
-              "routingWeight": 22,
-              "trafficSelectorPolicies": [],
-              "usePolicyBasedTrafficSelectors": false,
               "virtualNetworkGateway1": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkGateways/test-vpn-gateway-1"
+                "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworkGateways/test-vpn-gateway-1"
               },
               "virtualNetworkGateway2": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg-2/providers/Microsoft.Network/virtualNetworkGateways/test-vpn-gateway-2"
-              }
+                "id": "/subscriptions/subid/resourceGroups/testrg-2/providers/Microsoft.Network/virtualNetworkGateways/test-vpn-gateway-2"
+              },
+              "connectionType": "Vnet2Vnet",
+              "routingWeight": 22,
+              "enableBgp": true,
+              "usePolicyBasedTrafficSelectors": false,
+              "ipsecPolicies": [],
+              "trafficSelectorPolicies": [],
+              "ingressBytesTransferred": 0,
+              "egressBytesTransferred": 0
             }
           }
         ]
       }
     }
-  },
-  "operationId": "VirtualNetworkGateways_ListConnections",
-  "title": "VirtualNetworkGatewaysListConnections"
+  }
 }

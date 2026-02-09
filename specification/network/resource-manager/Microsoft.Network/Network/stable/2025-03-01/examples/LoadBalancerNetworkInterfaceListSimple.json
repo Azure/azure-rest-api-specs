@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "loadBalancerName": "lb",
+    "subscriptionId": "subid",
     "resourceGroupName": "testrg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "loadBalancerName": "lb",
+    "api-version": "2025-03-01"
   },
   "responses": {
     "200": {
@@ -11,51 +11,49 @@
         "value": [
           {
             "name": "mynic",
-            "type": "Microsoft.Network/networkInterfaces",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic",
             "etag": "W/\\\"00000000-0000-0000-0000-000000000000\\\"",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic",
             "location": "westus",
             "properties": {
-              "dnsSettings": {
-                "appliedDnsServers": [],
-                "dnsServers": []
-              },
-              "enableAcceleratedNetworking": false,
-              "enableIPForwarding": false,
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
               "ipConfigurations": [
                 {
                   "name": "ipconfig1",
+                  "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/ipConfigurations/ipconfig1",
                   "etag": "W/\\\"00000000-0000-0000-0000-000000000000\\\"",
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/mynic/ipConfigurations/ipconfig1",
                   "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAddress": "10.0.1.4",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "subnet": {
+                      "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/frontendSubnet"
+                    },
+                    "privateIPAddressVersion": "IPv4",
                     "loadBalancerBackendAddressPools": [
                       {
-                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/bepool1"
+                        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/bepool1"
                       }
                     ],
                     "loadBalancerInboundNatRules": [
                       {
-                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/inbound1"
+                        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/inbound1"
                       }
-                    ],
-                    "privateIPAddress": "10.0.1.4",
-                    "privateIPAddressVersion": "IPv4",
-                    "privateIPAllocationMethod": "Dynamic",
-                    "provisioningState": "Succeeded",
-                    "subnet": {
-                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/myVirtualNetwork/subnets/frontendSubnet"
-                    }
+                    ]
                   }
                 }
               ],
-              "provisioningState": "Succeeded",
-              "resourceGuid": "00000000-0000-0000-0000-000000000000"
-            }
+              "dnsSettings": {
+                "dnsServers": [],
+                "appliedDnsServers": []
+              },
+              "enableAcceleratedNetworking": false,
+              "enableIPForwarding": false
+            },
+            "type": "Microsoft.Network/networkInterfaces"
           }
         ]
       }
     }
-  },
-  "operationId": "LoadBalancerNetworkInterfaces_List",
-  "title": "LoadBalancerNetworkInterfaceListSimple"
+  }
 }

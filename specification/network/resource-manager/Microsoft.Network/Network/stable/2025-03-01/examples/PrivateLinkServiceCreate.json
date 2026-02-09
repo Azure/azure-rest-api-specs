@@ -1,13 +1,23 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "serviceName": "testPls",
     "extendedLocation": {
-      "name": "edgeZone0",
-      "type": "EdgeZone"
+      "type": "EdgeZone",
+      "name": "edgeZone0"
     },
     "parameters": {
       "location": "eastus",
       "properties": {
+        "visibility": {
+          "subscriptions": [
+            "subscription1",
+            "subscription2",
+            "subscription3"
+          ]
+        },
         "autoApproval": {
           "subscriptions": [
             "subscription1",
@@ -19,45 +29,42 @@
           "fqdn2",
           "fqdn3"
         ],
+        "loadBalancerFrontendIpConfigurations": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+          }
+        ],
         "ipConfigurations": [
           {
             "name": "fe-lb",
             "properties": {
               "privateIPAddress": "10.0.1.4",
-              "privateIPAddressVersion": "IPv4",
               "privateIPAllocationMethod": "Static",
+              "privateIPAddressVersion": "IPv4",
               "subnet": {
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
               }
             }
           }
-        ],
-        "loadBalancerFrontendIpConfigurations": [
-          {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
-          }
-        ],
-        "visibility": {
-          "subscriptions": [
-            "subscription1",
-            "subscription2",
-            "subscription3"
-          ]
-        }
+        ]
       }
-    },
-    "resourceGroupName": "rg1",
-    "serviceName": "testPls",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "testPls",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
         "location": "eastus",
         "properties": {
-          "alias": "ContosoService.{guid}.azure.privatelinkservice",
+          "provisioningState": "Succeeded",
+          "visibility": {
+            "subscriptions": [
+              "subscription1",
+              "subscription2",
+              "subscription3"
+            ]
+          },
           "autoApproval": {
             "subscriptions": [
               "subscription1",
@@ -69,48 +76,48 @@
             "fqdn2",
             "fqdn3"
           ],
+          "alias": "ContosoService.{guid}.azure.privatelinkservice",
+          "loadBalancerFrontendIpConfigurations": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+            }
+          ],
           "ipConfigurations": [
             {
               "name": "ipconfig1",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls/ipConfigurations/ipconfig1",
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls/ipConfigurations/ipconfig1",
               "properties": {
                 "privateIPAddress": "10.0.1.4",
-                "privateIPAddressVersion": "IPv4",
                 "privateIPAllocationMethod": "Static",
+                "privateIPAddressVersion": "IPv4",
                 "subnet": {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
                 }
               }
             }
           ],
-          "loadBalancerFrontendIpConfigurations": [
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
-            }
-          ],
           "networkInterfaces": [
             {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPls.nic.abcd1234"
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPls.nic.abcd1234"
             }
-          ],
-          "provisioningState": "Succeeded",
-          "visibility": {
-            "subscriptions": [
-              "subscription1",
-              "subscription2",
-              "subscription3"
-            ]
-          }
+          ]
         }
       }
     },
     "201": {
       "body": {
         "name": "testPls",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
         "location": "eastus",
         "properties": {
-          "alias": "ContosoService.{guid}.azure.privatelinkservice",
+          "provisioningState": "Succeeded",
+          "visibility": {
+            "subscriptions": [
+              "subscription1",
+              "subscription2",
+              "subscription3"
+            ]
+          },
           "autoApproval": {
             "subscriptions": [
               "subscription1",
@@ -122,42 +129,33 @@
             "fqdn2",
             "fqdn3"
           ],
+          "alias": "ContosoService.{guid}.azure.privatelinkservice",
+          "loadBalancerFrontendIpConfigurations": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
+            }
+          ],
           "ipConfigurations": [
             {
               "name": "ipconfig1",
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls/ipConfigurations/ipconfig1",
+              "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls/ipConfigurations/ipconfig1",
               "properties": {
                 "privateIPAddress": "10.0.1.4",
-                "privateIPAddressVersion": "IPv4",
                 "privateIPAllocationMethod": "Static",
+                "privateIPAddressVersion": "IPv4",
                 "subnet": {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnetlb/subnets/subnetlb"
                 }
               }
             }
           ],
-          "loadBalancerFrontendIpConfigurations": [
-            {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
-            }
-          ],
           "networkInterfaces": [
             {
-              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPls.nic.abcd1234"
+              "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/networkInterfaces/testPls.nic.abcd1234"
             }
-          ],
-          "provisioningState": "Succeeded",
-          "visibility": {
-            "subscriptions": [
-              "subscription1",
-              "subscription2",
-              "subscription3"
-            ]
-          }
+          ]
         }
       }
     }
-  },
-  "operationId": "PrivateLinkServices_CreateOrUpdate",
-  "title": "Create private link service"
+  }
 }

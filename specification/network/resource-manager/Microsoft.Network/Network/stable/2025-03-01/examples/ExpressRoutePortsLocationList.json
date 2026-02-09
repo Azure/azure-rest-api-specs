@@ -1,7 +1,7 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subid",
+    "api-version": "2025-03-01"
   },
   "responses": {
     "200": {
@@ -9,20 +9,18 @@
         "value": [
           {
             "name": "locationName",
+            "id": "/subscriptions/subid/providers/Microsoft.Network/expressRoutePortsLocations/locationName",
             "type": "Microsoft.Network/expressRoutePortsLocations",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/expressRoutePortsLocations/locationName",
             "location": "westus",
             "properties": {
+              "provisioningState": "Succeeded",
               "address": "123 Main Street, City, State, Zip",
-              "availableBandwidths": [],
               "contact": "email@address.com",
-              "provisioningState": "Succeeded"
+              "availableBandwidths": []
             }
           }
         ]
       }
     }
-  },
-  "operationId": "ExpressRoutePortsLocations_List",
-  "title": "ExpressRoutePortsLocationList"
+  }
 }

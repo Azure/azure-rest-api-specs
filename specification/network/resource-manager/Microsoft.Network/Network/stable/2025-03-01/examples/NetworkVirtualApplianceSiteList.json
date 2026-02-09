@@ -1,10 +1,10 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "networkVirtualApplianceName": "nva",
-    "resourceGroupName": "rg1",
     "siteName": "site1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "networkVirtualApplianceName": "nva"
   },
   "responses": {
     "200": {
@@ -12,24 +12,22 @@
         "value": [
           {
             "name": "site1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/virtualApplianceSites/site1",
             "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualAppliances/nva/virtualApplianceSites/site1",
             "properties": {
+              "provisioningState": "Succeeded",
               "addressPrefix": "192.168.1.0/24",
               "o365Policy": {
                 "breakOutCategories": {
-                  "default": true,
                   "allow": true,
-                  "optimize": true
+                  "optimize": true,
+                  "default": true
                 }
-              },
-              "provisioningState": "Succeeded"
+              }
             }
           }
         ]
       }
     }
-  },
-  "operationId": "VirtualApplianceSites_List",
-  "title": "List all Network Virtual Appliance sites for a given Network Virtual Appliance"
+  }
 }

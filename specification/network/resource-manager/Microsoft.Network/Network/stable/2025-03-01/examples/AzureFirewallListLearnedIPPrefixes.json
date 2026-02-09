@@ -1,11 +1,16 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "azureFirewallName": "azureFirewall1",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "azureFirewallName": "azureFirewall1"
   },
   "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-03-01&t=638385313328642925&c=abc-123&s=def-456&h=xyz-789"
+      }
+    },
     "200": {
       "body": {
         "ipPrefixes": [
@@ -13,13 +18,6 @@
           "10.102.0.0/16"
         ]
       }
-    },
-    "202": {
-      "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-03-01&t=638385313328642925&c=abc-123&s=def-456&h=xyz-789"
-      }
     }
-  },
-  "operationId": "AzureFirewalls_ListLearnedPrefixes",
-  "title": "AzureFirewallListLearnedPrefixes"
+  }
 }

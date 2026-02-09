@@ -1,56 +1,54 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
+    "ruleCollectionGroupName": "ruleCollectionGroup1",
     "firewallPolicyName": "firewallPolicy",
     "resourceGroupName": "rg1",
-    "ruleCollectionGroupName": "ruleCollectionGroup1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "name": "ruleCollectionGroup1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "etag": "W/\"72090554-7e3b-43f2-80ad-99a9020dcb11\"",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/firewallPolicies/firewallPolicy/ruleCollectionGroups/ruleCollectionGroup1",
         "properties": {
-          "priority": 100,
           "provisioningState": "Succeeded",
+          "priority": 100,
           "ruleCollections": [
             {
-              "name": "NatRC",
+              "ruleCollectionType": "FirewallPolicyNatRuleCollection",
               "action": {
                 "type": "DNAT"
               },
-              "priority": 100,
-              "ruleCollectionType": "FirewallPolicyNatRuleCollection",
               "rules": [
                 {
+                  "ruleType": "NatRule",
                   "name": "NatRule1",
+                  "translatedFqdn": "internalhttpserver",
+                  "translatedPort": "8080",
+                  "ipProtocols": [
+                    "TCP",
+                    "UDP"
+                  ],
+                  "sourceAddresses": [
+                    "2.2.2.2"
+                  ],
+                  "sourceIpGroups": [],
                   "destinationAddresses": [
                     "152.23.32.23"
                   ],
                   "destinationPorts": [
                     "8080"
-                  ],
-                  "ipProtocols": [
-                    "TCP",
-                    "UDP"
-                  ],
-                  "ruleType": "NatRule",
-                  "sourceAddresses": [
-                    "2.2.2.2"
-                  ],
-                  "sourceIpGroups": [],
-                  "translatedFqdn": "internalhttpserver",
-                  "translatedPort": "8080"
+                  ]
                 }
-              ]
+              ],
+              "name": "NatRC",
+              "priority": 100
             }
           ]
         }
       }
     }
-  },
-  "operationId": "FirewallPolicyRuleCollectionGroups_Get",
-  "title": "Get FirewallPolicyNatRuleCollectionGroup"
+  }
 }

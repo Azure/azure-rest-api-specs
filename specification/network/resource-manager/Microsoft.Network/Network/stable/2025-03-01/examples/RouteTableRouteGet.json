@@ -1,24 +1,22 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "routeName": "route1",
     "routeTableName": "testrt",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "routeName": "route1"
   },
   "responses": {
     "200": {
       "body": {
         "name": "route1",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt/routes/route1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt/routes/route1",
         "properties": {
+          "provisioningState": "Succeeded",
           "addressPrefix": "10.0.3.0/24",
-          "nextHopType": "Internet",
-          "provisioningState": "Succeeded"
+          "nextHopType": "Internet"
         }
       }
     }
-  },
-  "operationId": "Routes_Get",
-  "title": "Get route"
+  }
 }

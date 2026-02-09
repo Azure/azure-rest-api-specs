@@ -1,59 +1,57 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "configurationName": "myTestSecurityConfig",
-    "networkManagerName": "testNetworkManager",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
     "ruleCollectionName": "testRuleCollection",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "configurationName": "myTestSecurityConfig"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/subscriptions/22222222-2222-2222-2222-222222222222/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules?api-version=2025-03-01&$skipToken=10",
         "value": [
           {
-            "name": "SampleUserRule",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleUserRule",
             "type": "Microsoft.Network/networkManagers/securityConfigurations/ruleCollections/rules",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkmanagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules/SampleUserRule",
+            "name": "SampleUserRule",
+            "systemData": {
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "createdAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z"
+            },
             "properties": {
               "description": "Sample User Rule",
-              "destinationPortRanges": [
-                "22"
+              "protocol": "Tcp",
+              "sources": [
+                {
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
+                }
               ],
               "destinations": [
                 {
-                  "addressPrefix": "*",
-                  "addressPrefixType": "IPPrefix"
+                  "addressPrefixType": "IPPrefix",
+                  "addressPrefix": "*"
                 }
               ],
-              "direction": "Inbound",
-              "provisioningState": "Succeeded",
-              "resourceGuid": "f930553b-f78d-48c5-9445-6cf86b85e615",
               "sourcePortRanges": [
                 "0-65535"
               ],
-              "sources": [
-                {
-                  "addressPrefix": "*",
-                  "addressPrefixType": "IPPrefix"
-                }
+              "destinationPortRanges": [
+                "22"
               ],
-              "protocol": "Tcp"
-            },
-            "systemData": {
-              "createdAt": "2021-01-11T18:52:27Z",
-              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-              "createdByType": "User",
-              "lastModifiedAt": "2021-01-11T18:52:27Z",
-              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
-              "lastModifiedByType": "User"
+              "direction": "Inbound",
+              "provisioningState": "Succeeded",
+              "resourceGuid": "f930553b-f78d-48c5-9445-6cf86b85e615"
             }
           }
-        ]
+        ],
+        "nextLink": "{baseurl}/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/securityUserConfigurations/myTestSecurityConfig/ruleCollections/testRuleCollection/rules?api-version=2025-03-01&$skipToken=10"
       }
     }
-  },
-  "operationId": "SecurityUserRules_List",
-  "title": "List security user rules"
+  }
 }

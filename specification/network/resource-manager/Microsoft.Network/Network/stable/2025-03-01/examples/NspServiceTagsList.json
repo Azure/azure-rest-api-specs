@@ -1,14 +1,13 @@
 {
+  "title": "List of service tags supported by NSP.",
   "parameters": {
     "api-version": "2025-03-01",
-    "location": "westus",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subId",
+    "location": "westus"
   },
-  "title": "NSPServiceTagsList",
   "responses": {
     "200": {
       "body": {
-        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/nspServiceTags?api-version=2025-03-01&$skipToken=10",
         "value": [
           {
             "serviceTags": [
@@ -21,9 +20,9 @@
               "MicrosoftPrivateIPSpace"
             ]
           }
-        ]
+        ],
+        "nextLink": "{baseurl}/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/nspServiceTags?api-version=2025-03-01&$skipToken=10"
       }
     }
-  },
-  "operationId": "NetworkSecurityPerimeterServiceTags_List"
+  }
 }

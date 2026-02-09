@@ -1,35 +1,33 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "defaultSecurityRuleName": "AllowVnetInBound",
-    "networkSecurityGroupName": "nsg1",
     "resourceGroupName": "testrg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid",
+    "networkSecurityGroupName": "nsg1",
+    "defaultSecurityRuleName": "AllowVnetInBound"
   },
   "responses": {
     "200": {
       "body": {
         "name": "AllowVnetInBound",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetInBound",
+        "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetInBound",
         "properties": {
-          "description": "Allow inbound traffic from all VMs in VNET",
-          "access": "Allow",
-          "destinationAddressPrefix": "VirtualNetwork",
-          "destinationAddressPrefixes": [],
-          "destinationPortRange": "*",
-          "destinationPortRanges": [],
-          "direction": "Inbound",
-          "priority": 65000,
           "provisioningState": "Succeeded",
-          "sourceAddressPrefix": "VirtualNetwork",
-          "sourceAddressPrefixes": [],
+          "description": "Allow inbound traffic from all VMs in VNET",
+          "protocol": "*",
           "sourcePortRange": "*",
+          "destinationPortRange": "*",
+          "sourceAddressPrefix": "VirtualNetwork",
+          "destinationAddressPrefix": "VirtualNetwork",
+          "access": "Allow",
+          "priority": 65000,
+          "direction": "Inbound",
           "sourcePortRanges": [],
-          "protocol": "*"
+          "destinationPortRanges": [],
+          "sourceAddressPrefixes": [],
+          "destinationAddressPrefixes": []
         }
       }
     }
-  },
-  "operationId": "DefaultSecurityRules_Get",
-  "title": "DefaultSecurityRuleGet"
+  }
 }

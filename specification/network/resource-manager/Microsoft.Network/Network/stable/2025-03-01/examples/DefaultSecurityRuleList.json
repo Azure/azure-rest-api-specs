@@ -1,9 +1,9 @@
 {
   "parameters": {
-    "api-version": "2025-03-01",
-    "networkSecurityGroupName": "nsg1",
     "resourceGroupName": "testrg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "api-version": "2025-03-01",
+    "subscriptionId": "subid",
+    "networkSecurityGroupName": "nsg1"
   },
   "responses": {
     "200": {
@@ -11,128 +11,126 @@
         "value": [
           {
             "name": "AllowVnetInBound",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetInBound",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetInBound",
             "properties": {
-              "description": "Allow inbound traffic from all VMs in VNET",
-              "access": "Allow",
-              "destinationAddressPrefix": "VirtualNetwork",
-              "destinationAddressPrefixes": [],
-              "destinationPortRange": "*",
-              "destinationPortRanges": [],
-              "direction": "Inbound",
-              "priority": 65000,
               "provisioningState": "Succeeded",
-              "sourceAddressPrefix": "VirtualNetwork",
-              "sourceAddressPrefixes": [],
+              "description": "Allow inbound traffic from all VMs in VNET",
+              "protocol": "*",
               "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "VirtualNetwork",
+              "access": "Allow",
+              "priority": 65000,
+              "direction": "Inbound",
               "sourcePortRanges": [],
-              "protocol": "*"
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
             }
           },
           {
             "name": "AllowAzureLoadBalancerInBound",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowAzureLoadBalancerInBound",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowAzureLoadBalancerInBound",
             "properties": {
-              "description": "Allow inbound traffic from azure load balancer",
-              "access": "Allow",
-              "destinationAddressPrefix": "*",
-              "destinationAddressPrefixes": [],
-              "destinationPortRange": "*",
-              "destinationPortRanges": [],
-              "direction": "Inbound",
-              "priority": 65001,
               "provisioningState": "Succeeded",
-              "sourceAddressPrefix": "AzureLoadBalancer",
-              "sourceAddressPrefixes": [],
+              "description": "Allow inbound traffic from azure load balancer",
+              "protocol": "*",
               "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "AzureLoadBalancer",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 65001,
+              "direction": "Inbound",
               "sourcePortRanges": [],
-              "protocol": "*"
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
             }
           },
           {
             "name": "DenyAllInBound",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/DenyAllInBound",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/DenyAllInBound",
             "properties": {
-              "description": "Deny all inbound traffic",
-              "access": "Deny",
-              "destinationAddressPrefix": "*",
-              "destinationAddressPrefixes": [],
-              "destinationPortRange": "*",
-              "destinationPortRanges": [],
-              "direction": "Inbound",
-              "priority": 65500,
               "provisioningState": "Succeeded",
-              "sourceAddressPrefix": "*",
-              "sourceAddressPrefixes": [],
+              "description": "Deny all inbound traffic",
+              "protocol": "*",
               "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Deny",
+              "priority": 65500,
+              "direction": "Inbound",
               "sourcePortRanges": [],
-              "protocol": "*"
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
             }
           },
           {
             "name": "AllowVnetOutBound",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetOutBound",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowVnetOutBound",
             "properties": {
-              "description": "Allow outbound traffic from all VMs to all VMs in VNET",
-              "access": "Allow",
-              "destinationAddressPrefix": "VirtualNetwork",
-              "destinationAddressPrefixes": [],
-              "destinationPortRange": "*",
-              "destinationPortRanges": [],
-              "direction": "Outbound",
-              "priority": 65000,
               "provisioningState": "Succeeded",
-              "sourceAddressPrefix": "VirtualNetwork",
-              "sourceAddressPrefixes": [],
+              "description": "Allow outbound traffic from all VMs to all VMs in VNET",
+              "protocol": "*",
               "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "VirtualNetwork",
+              "destinationAddressPrefix": "VirtualNetwork",
+              "access": "Allow",
+              "priority": 65000,
+              "direction": "Outbound",
               "sourcePortRanges": [],
-              "protocol": "*"
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
             }
           },
           {
             "name": "AllowInternetOutBound",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowInternetOutBound",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/AllowInternetOutBound",
             "properties": {
-              "description": "Allow outbound traffic from all VMs to Internet",
-              "access": "Allow",
-              "destinationAddressPrefix": "Internet",
-              "destinationAddressPrefixes": [],
-              "destinationPortRange": "*",
-              "destinationPortRanges": [],
-              "direction": "Outbound",
-              "priority": 65001,
               "provisioningState": "Succeeded",
-              "sourceAddressPrefix": "*",
-              "sourceAddressPrefixes": [],
+              "description": "Allow outbound traffic from all VMs to Internet",
+              "protocol": "*",
               "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "Internet",
+              "access": "Allow",
+              "priority": 65001,
+              "direction": "Outbound",
               "sourcePortRanges": [],
-              "protocol": "*"
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
             }
           },
           {
             "name": "DenyAllOutBound",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/DenyAllOutBound",
+            "id": "/subscriptions/subid/resourceGroups/testrg/providers/Microsoft.Network/networkSecurityGroups/nsg1/defaultSecurityRules/DenyAllOutBound",
             "properties": {
-              "description": "Deny all outbound traffic",
-              "access": "Deny",
-              "destinationAddressPrefix": "*",
-              "destinationAddressPrefixes": [],
-              "destinationPortRange": "*",
-              "destinationPortRanges": [],
-              "direction": "Outbound",
-              "priority": 65500,
               "provisioningState": "Succeeded",
-              "sourceAddressPrefix": "*",
-              "sourceAddressPrefixes": [],
+              "description": "Deny all outbound traffic",
+              "protocol": "*",
               "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Deny",
+              "priority": 65500,
+              "direction": "Outbound",
               "sourcePortRanges": [],
-              "protocol": "*"
+              "destinationPortRanges": [],
+              "sourceAddressPrefixes": [],
+              "destinationAddressPrefixes": []
             }
           }
         ]
       }
     }
-  },
-  "operationId": "DefaultSecurityRules_List",
-  "title": "DefaultSecurityRuleList"
+  }
 }

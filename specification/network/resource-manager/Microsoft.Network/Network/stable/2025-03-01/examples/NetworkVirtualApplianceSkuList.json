@@ -1,7 +1,7 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -9,30 +9,28 @@
         "value": [
           {
             "name": "ciscoSdwan",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualApplianceSkus/ciscoSdwan",
             "type": "Microsoft.Network/networkVirtualApplianceSkus",
             "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkVirtualApplianceSkus/ciscoSdwan",
             "properties": {
-              "availableScaleUnits": [
-                {
-                  "instanceCount": 2,
-                  "scaleUnit": "1"
-                },
-                {
-                  "instanceCount": 2,
-                  "scaleUnit": "2"
-                }
-              ],
+              "vendor": "Cisco",
               "availableVersions": [
                 "11.12"
               ],
-              "vendor": "Cisco"
+              "availableScaleUnits": [
+                {
+                  "scaleUnit": "1",
+                  "instanceCount": 2
+                },
+                {
+                  "scaleUnit": "2",
+                  "instanceCount": 2
+                }
+              ]
             }
           }
         ]
       }
     }
-  },
-  "operationId": "VirtualApplianceSkus_List",
-  "title": "NetworkVirtualApplianceSkuListResult"
+  }
 }

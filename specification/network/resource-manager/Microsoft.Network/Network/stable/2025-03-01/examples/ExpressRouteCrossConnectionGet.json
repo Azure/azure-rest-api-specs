@@ -1,34 +1,32 @@
 {
   "parameters": {
     "api-version": "2025-03-01",
-    "crossConnectionName": "<circuitServiceKey>",
+    "subscriptionId": "subid",
     "resourceGroupName": "CrossConnection-SiliconValley",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "crossConnectionName": "<circuitServiceKey>"
   },
   "responses": {
     "200": {
       "body": {
         "name": "<circuitServiceKey>",
+        "id": "/subscriptions/subid/resourceGroups/CrossConnection-SiliconValley/providers/Microsoft.Network/expressRouteCrossConnections/<circuitServiceKey>",
         "type": "Microsoft.Network/expressRouteCrossConnections",
-        "etag": "W/\"c0e6477e-8150-4d4f-9bf6-bb10e6acb63a\"",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/CrossConnection-SiliconValley/providers/Microsoft.Network/expressRouteCrossConnections/<circuitServiceKey>",
         "location": "brazilsouth",
+        "etag": "W/\"c0e6477e-8150-4d4f-9bf6-bb10e6acb63a\"",
         "properties": {
-          "bandwidthInMbps": 1000,
-          "expressRouteCircuit": {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ertest/providers/Microsoft.Network/expressRouteCircuits/er1"
-          },
-          "peeringLocation": "SiliconValley",
-          "peerings": [],
-          "primaryAzurePort": "bvtazureixp01",
           "provisioningState": "Enabled",
-          "sTag": 2,
+          "expressRouteCircuit": {
+            "id": "/subscriptions/subid/resourceGroups/ertest/providers/Microsoft.Network/expressRouteCircuits/er1"
+          },
+          "peerings": [],
+          "peeringLocation": "SiliconValley",
+          "bandwidthInMbps": 1000,
+          "primaryAzurePort": "bvtazureixp01",
           "secondaryAzurePort": "bvtazureixp01",
+          "sTag": 2,
           "serviceProviderProvisioningState": "NotProvisioned"
         }
       }
     }
-  },
-  "operationId": "ExpressRouteCrossConnections_Get",
-  "title": "GetExpressRouteCrossConnection"
+  }
 }
