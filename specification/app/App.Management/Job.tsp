@@ -172,8 +172,6 @@ interface Jobs {
   /**
    * Get details of a single job execution
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("JobExecution")
   @tag("Jobs")
   @summary("Get details of a single job execution")
   jobExecution is ArmResourceRead<JobExecution, Error = DefaultErrorResponse>;
