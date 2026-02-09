@@ -70,7 +70,7 @@ alias DaprComponentCustomErrorOps = Azure.ResourceManager.Legacy.LegacyOperation
   ErrorType = DefaultErrorResponse
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @tag("DaprComponents")
 interface ConnectedEnvironmentsDaprComponents {
@@ -147,7 +147,7 @@ interface DaprComponents {
   /**
    * Creates or updates a Dapr Component in a Managed Environment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Creates or updates a Dapr Component.")
   createOrUpdate is DaprComponentOperationGroupOps.CreateOrUpdateSync<
     DaprComponent,

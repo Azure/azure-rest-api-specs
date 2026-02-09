@@ -3,21 +3,21 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.App;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HttpRetryPolicy.retryBackOff);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HttpRetryPolicy.matches);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(HeaderMatch.match);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BuilderResourceUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EnvironmentAuthToken.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 
 @@clientName(AppResiliencies.createOrUpdate::parameters.resource,
@@ -27,27 +27,27 @@ using Microsoft.App;
   "resiliencyEnvelope"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AppResiliency.properties);
 
 @@clientName(ContainerAppsAuthConfigs.createOrUpdate::parameters.resource,
   "authConfigEnvelope"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AuthConfig.properties);
 
 @@clientName(Builders.createOrUpdate::parameters.resource, "builderEnvelope");
 
 @@clientName(Builders.update::parameters.properties, "builderEnvelope");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BuilderResource.properties);
 
 @@clientName(Builds.createOrUpdate::parameters.resource, "buildEnvelope");
 @@clientLocation(Builds.list, "BuildsByBuilderResource");
 @@clientLocation(Builds.buildAuthTokenList, "BuildAuthToken");
 @@clientName(Builds.buildAuthTokenList, "List");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(BuildResource.properties);
 
 @@clientName(ConnectedEnvironments.createOrUpdate::parameters.resource,
@@ -59,7 +59,7 @@ using Microsoft.App;
 @@clientName(ConnectedEnvironments.checkNameAvailability::parameters.body,
   "checkNameAvailabilityRequest"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ConnectedEnvironment.properties);
 
 @@clientLocation(Certificates.get, "ConnectedEnvironmentsCertificates");
@@ -90,7 +90,7 @@ using Microsoft.App;
   "daprComponentEnvelope"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DaprComponent.properties);
 
 @@clientName(ConnectedEnvironmentsStorages.createOrUpdate::parameters.resource,
@@ -110,7 +110,7 @@ using Microsoft.App;
 @@clientLocation(ManagedEnvironments.list,
   "ManagedEnvironmentPrivateLinkResources"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ManagedEnvironment.properties);
 
 @@clientLocation(PrivateEndpointConnections.get,
@@ -128,7 +128,7 @@ using Microsoft.App;
 @@clientLocation(PrivateEndpointConnections.list,
   "ManagedEnvironmentPrivateEndpointConnections"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(ManagedCertificates.createOrUpdate::parameters.resource,
@@ -141,13 +141,13 @@ using Microsoft.App;
 @@clientName(DaprComponentResiliencyPolicies.createOrUpdate::parameters.resource,
   "daprComponentResiliencyPolicyEnvelope"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DaprComponentResiliencyPolicy.properties);
 
 @@clientName(DaprSubscriptions.createOrUpdate::parameters.resource,
   "daprSubscriptionEnvelope"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DaprSubscription.properties);
 
 @@clientLocation(HttpRouteConfigs.get, "HttpRouteConfig");
@@ -166,7 +166,7 @@ using Microsoft.App;
   "maintenanceConfigurationEnvelope"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MaintenanceConfigurationResource.properties);
 
 @@clientName(ManagedEnvironmentsStorages.createOrUpdate::parameters.resource,
@@ -176,13 +176,13 @@ using Microsoft.App;
 @@clientName(Jobs.createOrUpdate::parameters.resource, "JobEnvelope");
 @@clientName(Jobs.update::parameters.properties, "JobEnvelope");
 @@clientName(Jobs.start::parameters.body, "template");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Job.properties);
 
 @@clientLocation(Jobs.jobExecution, "");
 @@clientLocation(Jobs.list, "JobsExecutions");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(JobExecution.properties);
 
 @@clientLocation(AvailableWorkloadProfilesOperationGroup.get,
@@ -191,10 +191,10 @@ using Microsoft.App;
 
 @@clientLocation(BillingMetersOperationGroup.get, "BillingMeters");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SessionPoolUpdatableProperties.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ContainerAppAuthToken.properties);
 
 @@clientName(ContainerAppsSessionPools.createOrUpdate::parameters.resource,
@@ -205,10 +205,10 @@ using Microsoft.App;
   "sessionPoolEnvelope"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SessionPool.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SourceControl.properties);
 
 @@clientName(ContainerApps.createOrUpdate::parameters.resource,
@@ -217,11 +217,11 @@ using Microsoft.App;
 @@clientName(ContainerApps.update::parameters.properties,
   "containerAppEnvelope"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ContainerApp.properties);
 
 @@clientLocation(ContainerAppsBuilds.list, "ContainerAppsBuildsByContainerApp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ContainerAppsBuildResource.properties);
 
 @@clientLocation(ContainerAppsFunctions.get, "ContainerAppsRevisionFunctions");
@@ -230,17 +230,17 @@ using Microsoft.App;
 @@clientName(ContainerAppsFunctions.getAzureFunctionsOnContainerApps, "get");
 @@clientName(ContainerAppsFunctions.listAzureFunctionsOnContainerApps, "list");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ContainerAppsFunction.properties);
 
 @@clientName(ContainerAppsPatches.skipConfigure::parameters.body,
   "patchSkipConfig"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Revision.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Replica.properties);
 
 @@clientName(DotNetComponents.createOrUpdate::parameters.resource,
@@ -249,7 +249,7 @@ using Microsoft.App;
 @@clientName(DotNetComponents.update::parameters.properties,
   "dotNetComponentEnvelope"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DotNetComponent.properties);
 
 @@clientName(JavaComponents.createOrUpdate::parameters.resource,
@@ -262,7 +262,7 @@ using Microsoft.App;
 @@clientName(LogicApps.deployWorkflowArtifacts::parameters.body,
   "workflowArtifacts"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(LogicApp.properties);
 
 @@clientLocation(UsagesOperationGroup.list, "Usages");

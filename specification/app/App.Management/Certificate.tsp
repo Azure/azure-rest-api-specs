@@ -102,7 +102,7 @@ interface Certificates {
   /**
    * Create or Update a Certificate.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedEnvironments")
   @summary("Create or Update a Certificate.")
   createOrUpdateCertificates is CertificateOperationGroupOps.CreateOrUpdateSync<

@@ -25,7 +25,7 @@ model ContainerApp
   /**
    * The complex type of the extended location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation?: ExtendedLocation;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -33,14 +33,14 @@ model ContainerApp
   /**
    * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   managedBy?: string;
 
   /**
    * Metadata to represent the container app kind, representing if a container app is workflowapp or functionapp.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   kind?: Kind;
 }
@@ -89,7 +89,7 @@ interface ContainerApps {
   /**
    * Delete a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a Container App.")
   delete is ArmResourceDeleteWithoutOkAsync<
     ContainerApp,
@@ -145,7 +145,7 @@ interface ContainerApps {
   /**
    * Get auth token for a container app
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("getAuthtoken")
   @summary("Get auth token for a container app")
   getAuthToken is ArmResourceActionSync<

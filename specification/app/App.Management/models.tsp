@@ -14,7 +14,7 @@ namespace Microsoft.App;
 /**
  * Logic App call response object.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Object {}
 
 /**
@@ -603,7 +603,7 @@ union JobExecutionRunningState {
 /**
  * The action to take when an unauthenticated client attempts to access the app.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum UnauthenticatedClientActionV2 {
   /**
    * RedirectToLoginPage
@@ -629,7 +629,7 @@ enum UnauthenticatedClientActionV2 {
 /**
  * The convention used when determining the session cookie's expiration.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CookieExpirationConvention {
   /**
    * FixedTime
@@ -645,7 +645,7 @@ enum CookieExpirationConvention {
 /**
  * The convention used to determine the url of the request made.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ForwardProxyConvention {
   /**
    * NoProxy
@@ -666,7 +666,7 @@ enum ForwardProxyConvention {
 /**
  * Day of the week when a managed environment can be patched.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum WeekDay {
   /**
    * Monday
@@ -707,7 +707,7 @@ enum WeekDay {
 /**
  * App Resiliency resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AppResiliencyProperties {
   /**
    * Policy to set request timeouts
@@ -954,7 +954,7 @@ model AuthConfigCollection is Azure.Core.Page<AuthConfig>;
 /**
  * AuthConfig resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AuthConfigProperties {
   /**
    * The configuration settings of the platform of ContainerApp Service Authentication/Authorization.
@@ -1068,7 +1068,7 @@ model IdentityProviders {
    * The map of the name of the alias of each custom Open ID Connect provider to the
    * configuration settings of the custom Open ID Connect provider.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customOpenIdConnectProviders?: Record<CustomOpenIdConnectProvider>;
 }
 
@@ -1161,7 +1161,7 @@ model AzureActiveDirectoryLogin {
   /**
    * <code>true</code> if the www-authenticate provider should be omitted from the request; otherwise, <code>false</code>.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   disableWWWAuthenticate?: boolean;
 }
 
@@ -1374,7 +1374,7 @@ model TwitterRegistration {
    * This setting is required for enabling Twitter Sign-In.
    * Twitter Sign-In documentation: https://dev.twitter.com/web/sign-in
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   consumerKey?: string;
 
   /**
@@ -1742,7 +1742,7 @@ model AvailableWorkloadProfilesCollection
 /**
  * A workload profile with specific hardware configure to run container apps.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AvailableWorkloadProfile
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -1804,7 +1804,7 @@ model BillingMeterCollection {
 /**
  * Billing meter.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BillingMeter extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Region for the billing meter.
@@ -1891,7 +1891,7 @@ model BuilderResourceUpdate {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -2046,7 +2046,7 @@ model ConnectedEnvironmentProperties {
   /**
    * Application Insights connection string used by Dapr to export Service to Service communication telemetry
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   daprAIConnectionString?: string;
 
@@ -2127,8 +2127,8 @@ model CertificateKeyVaultProperties {
 /**
  * Connected environment patch properties
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectedEnvironmentPatchResource extends ResourceTags {}
 
 /**
@@ -2138,7 +2138,7 @@ model ResourceTags {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -2246,7 +2246,7 @@ model CertificatePatch {
   /**
    * Application-specific metadata in the form of key-value pairs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -2543,14 +2543,14 @@ model ManagedEnvironmentProperties {
   /**
    * Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   daprAIInstrumentationKey?: string;
 
   /**
    * Application Insights connection string used by Dapr to export Service to Service communication telemetry
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @secret
   daprAIConnectionString?: string;
 
@@ -2705,7 +2705,7 @@ model VnetConfiguration {
   /**
    *  An IP address from the IP range defined by platformReservedCidr that will be reserved for the internal DNS server.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   platformReservedDnsIP?: string;
 }
@@ -3135,7 +3135,7 @@ model ManagedCertificateProperties {
   /**
    * A TXT token used for DNS TXT domain control validation when issuing this type of managed certificates.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   validationToken?: string;
 }
@@ -3147,7 +3147,7 @@ model ManagedCertificatePatch {
   /**
    * Application-specific metadata in the form of key-value pairs.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -3159,7 +3159,7 @@ model ManagedCertificateCollection is Azure.Core.Page<ManagedCertificate>;
 /**
  * Environment Auth Token.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EnvironmentAuthToken
   extends Azure.ResourceManager.CommonTypes.TrackedResource {
   /**
@@ -3190,14 +3190,14 @@ model EnvironmentAuthTokenProperties {
 /**
  * Collection of workloadProfileStates
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model workloadProfileStatesCollection is Azure.Core.Page<workloadProfileStates>;
 
 /**
  * Collection of all the workload Profile States for a Managed Environment..
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" ""
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model workloadProfileStates
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -3229,7 +3229,7 @@ model WorkloadProfileStatesProperties {
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Resource properties.
@@ -3268,7 +3268,7 @@ model DaprComponentResiliencyPoliciesCollection
 /**
  * Dapr Component Resiliency Policy resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DaprComponentResiliencyPolicyProperties {
   /**
    * The optional inbound component resiliency policy configuration
@@ -3369,7 +3369,7 @@ model DaprSubscriptionsCollection is Azure.Core.Page<DaprSubscription>;
 /**
  * Dapr PubSub Event Subscription resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DaprSubscriptionProperties {
   /**
    * Dapr PubSub component name
@@ -3399,7 +3399,7 @@ model DaprSubscriptionProperties {
   /**
    * Subscription metadata
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: Record<string>;
 
   /**
@@ -3472,7 +3472,7 @@ model HttpRouteConfigProperties {
   /**
    * List of errors when trying to reconcile http routes
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningErrors?: HttpRouteProvisioningErrors[];
 
@@ -3491,7 +3491,7 @@ model HttpRouteConfigProperties {
   /**
    * Routing Rules for http route resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
   rules?: HttpRouteRule[];
 }
@@ -3521,14 +3521,14 @@ model HttpRouteRule {
   /**
    * Targets- container apps, revisions, labels
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
   targets?: HttpRouteTarget[];
 
   /**
    * Routing configuration that will allow matches on specific paths/headers.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#["name"])
   routes?: HttpRoute[];
 
@@ -3629,12 +3629,12 @@ model MaintenanceConfigurationCollection
 /**
  * List of maintenance schedules for a managed environment.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScheduledEntries {
   /**
    * List of maintenance schedules for a managed environment.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" ""
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
   scheduledEntries: ScheduledEntry[];
 }
@@ -3673,7 +3673,7 @@ model ManagedEnvironmentStoragesCollection {
 /**
  * Storage properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedEnvironmentStorageProperties {
   /**
    * Azure file properties
@@ -3912,13 +3912,13 @@ model JobScaleRule {
   /**
    * Metadata properties to describe the scale rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: unknown;
 
   /**
    * Authentication secrets for the scale rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   auth?: ScaleRuleAuth[];
 
   /**
@@ -4088,15 +4088,15 @@ model JobPatchProperties {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: JobPatchPropertiesProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobPatchPropertiesProperties {
   /**
    * Resource ID of environment.
@@ -4201,7 +4201,7 @@ model ContainerAppJobExecutions is Azure.Core.Page<JobExecution>;
 /**
  * Container Apps Job execution specific properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model JobExecutionProperties {
   /**
    * Current running State of the job
@@ -4321,7 +4321,7 @@ model CustomScaleRule {
   /**
    * Metadata properties to describe custom scale rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: Record<string>;
 
   /**
@@ -4343,7 +4343,7 @@ model TcpScaleRule {
   /**
    * Metadata properties to describe tcp scale rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: Record<string>;
 
   /**
@@ -4443,7 +4443,7 @@ model DiagnosticsCollection is Azure.Core.Page<Diagnostics>;
 /**
  * Diagnostics resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiagnosticsProperties {
   /**
    * Metadata of the diagnostics response.
@@ -4680,7 +4680,7 @@ model JobExecutionNamesCollection {
 }
 
 /**
- * The container type of the sessions.
+ * The container type of the sessions. You can use your own container to build the session pool, or you can use a predefined container to run workload with specific language.
  */
 union ContainerType {
   string,
@@ -4694,6 +4694,16 @@ union ContainerType {
    * PythonLTS
    */
   PythonLTS: "PythonLTS",
+
+  /**
+   * Shell
+   */
+  Shell: "Shell",
+
+  /**
+   * NodeLTS
+   */
+  NodeLTS: "NodeLTS",
 }
 
 /**
@@ -5523,7 +5533,7 @@ union RevisionHealthState {
 /**
  * Current provisioning State of the revision
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union RevisionProvisioningState {
   string,
 
@@ -5801,7 +5811,7 @@ union WorkflowState {
   Suspended: "Suspended",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union LogicAppsProxyMethod {
   string,
 
@@ -5819,7 +5829,7 @@ union LogicAppsProxyMethod {
 /**
  * DNS verification test result.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DnsVerificationTestResult {
   /**
    * Passed
@@ -5840,7 +5850,7 @@ enum DnsVerificationTestResult {
 /**
  * Gets or sets the workflow health state.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum WorkflowHealthState {
   /**
    * NotSpecified
@@ -5883,7 +5893,7 @@ model SessionPoolProperties {
   ]>;
 
   /**
-   * The container type of the sessions.
+   * The container type of the sessions. You can use your own container to build the session pool, or you can use a predefined container to run workload with specific language.
    */
   containerType?: ContainerType;
 
@@ -6270,7 +6280,7 @@ model SessionNetworkConfiguration {
   status?: SessionNetworkStatus;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TemplateUpdateStatus {
   /**
    * The status of the current active template.
@@ -6393,7 +6403,7 @@ model SessionPoolUpdatableProperties {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -6459,7 +6469,7 @@ model SourceControlCollection is Azure.Core.Page<SourceControl>;
 /**
  * SourceControl resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SourceControlProperties {
   /**
    * Current provisioning State of the operation
@@ -6565,7 +6575,7 @@ model RegistryInfo {
   /**
    * registry secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Create, Lifecycle.Update)
   registryPassword?: string;
 }
@@ -6657,7 +6667,7 @@ model DefaultErrorResponseErrorDetailsItem {
   target?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ListUsagesResult is Azure.Core.Page<Usage>;
 
 /**
@@ -7326,8 +7336,8 @@ model IdentitySettings {
 /**
  * Container App init container definition
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model InitContainer extends BaseContainer {}
 
 /**
@@ -7426,7 +7436,7 @@ model VolumeMount {
 /**
  * Container App container definition
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Container extends BaseContainer {
   /**
    * List of probes for the container.
@@ -7564,7 +7574,7 @@ model HttpScaleRule {
   /**
    * Metadata properties to describe http scale rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metadata?: Record<string>;
 
   /**
@@ -7616,7 +7626,7 @@ model ServiceBind {
   /**
    * Customized keys for customizing injected values to the app
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customizedKeys?: Record<string>;
 }
 
@@ -7684,7 +7694,7 @@ model CustomHostnameAnalysisResult {
   /**
    * Alternate CName records visible for this hostname.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   alternateCNameRecords?: string[];
 
   /**
@@ -7790,7 +7800,7 @@ model ContainerAppSecret {
 /**
  * Container App Auth Token.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ContainerAppAuthToken
   extends Azure.ResourceManager.CommonTypes.TrackedResource {
   /**
@@ -7960,7 +7970,7 @@ model ContainerAppsFunctionCollection is Azure.Core.Page<ContainerAppsFunction>;
 /**
  * Function resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ContainerAppsFunctionProperties {
   /**
    * Invoke URL for the function.
@@ -7995,12 +8005,12 @@ model LabelHistoryCollection is Azure.Core.Page<LabelHistory>;
 /**
  * Container App Label History resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LabelHistoryProperties {
   /**
    * List of label history records.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @identifiers(#["label"])
   records?: LabelHistoryRecordItem[];
@@ -8045,7 +8055,7 @@ model PatchCollection is Azure.Core.Page<ContainerAppsPatchResource>;
 /**
  * Top level properties that describes current states of the patch resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PatchProperties {
   /**
    * The Azure resource id of the target environment for the patch.
@@ -8284,7 +8294,7 @@ model RevisionProperties {
 /**
  * Replica resource specific properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ReplicaProperties {
   /**
    * Timestamp describing when the pod was created by controller
@@ -8594,19 +8604,19 @@ model WorkflowEnvelopeCollection is Azure.Core.Page<WorkflowEnvelope>;
 /**
  * Logic App properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" ""
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LogicAppProperties {}
 
 /**
  * Additional workflow properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkflowEnvelopeProperties {
   /**
    * Gets or sets the files.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   files?: unknown;
 
   /**
@@ -8690,13 +8700,13 @@ model WorkflowArtifacts {
   /**
    * Application settings of the workflow.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   appSettings?: unknown;
 
   /**
    * Files of the app.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   files?: unknown;
 
   /**
@@ -8827,13 +8837,13 @@ model SpringCloudConfigComponent extends JavaComponentProperties {
  */
 model AvailableOperations is Azure.Core.Page<OperationDetail>;
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ContainerAppsNotFoundError {
   ...NotFoundResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" ""
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 model ManagedCertificateBadRequestError {
   ...BadRequestResponse;

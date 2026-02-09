@@ -16,7 +16,7 @@ namespace Microsoft.App;
 /**
  * Diagnostics data for a resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Diagnostics
   is Azure.ResourceManager.ProxyResource<DiagnosticsProperties> {
   ...ResourceNameParameter<
@@ -102,7 +102,7 @@ interface ContainerAppsDiagnostics {
   /**
    * Get the properties of a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Get the properties of a Container App.")
   @get
   @action("detectorProperties/rootApi/")

@@ -25,7 +25,7 @@ model Job is Azure.ResourceManager.TrackedResource<JobProperties> {
   /**
    * The complex type of the extended location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   extendedLocation?: ExtendedLocation;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -65,7 +65,7 @@ interface Jobs {
   /**
    * Delete a Container Apps Job.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Jobs")
   @summary("Delete a Container Apps Job.")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -172,7 +172,7 @@ interface Jobs {
   /**
    * Get details of a single job execution
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("JobExecution")
   @tag("Jobs")
   @summary("Get details of a single job execution")

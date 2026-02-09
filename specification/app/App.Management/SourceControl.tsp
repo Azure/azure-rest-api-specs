@@ -43,7 +43,7 @@ interface ContainerAppsSourceControls {
       /**
        * Github personal access token used for SourceControl.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-github-auxiliary`?: string;
     },
@@ -55,7 +55,7 @@ interface ContainerAppsSourceControls {
   /**
    * Delete a Container App SourceControl.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a Container App SourceControl.")
   delete is ArmResourceDeleteWithoutOkAsync<
     SourceControl,
@@ -63,7 +63,7 @@ interface ContainerAppsSourceControls {
       /**
        * Github personal access token used for SourceControl.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-github-auxiliary`?: string;
 

@@ -38,7 +38,7 @@ interface ManagedCertificates {
   /**
    * Create or Update a Managed Certificate.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or Update a Managed Certificate.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedCertificate,

@@ -13,7 +13,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.App;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AvailableWorkloadProfilesOperationGroup {
   /**
    * Get all available workload profiles for a location.
@@ -31,7 +31,7 @@ interface AvailableWorkloadProfilesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BillingMetersOperationGroup {
   /**
    * Get all billingMeters for a location.
@@ -52,7 +52,7 @@ interface BillingMetersOperationGroup {
 /**
  * Get the verification id of a subscription used for verifying custom domains
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 @tag("Subscriptions")
 op getCustomDomainVerificationId is ArmProviderActionSync<
@@ -64,7 +64,7 @@ op getCustomDomainVerificationId is ArmProviderActionSync<
   Error = DefaultErrorResponse
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface UsagesOperationGroup {
   /**
    * Gets, for the specified location, the current resource usage information as well as the limits under the subscription.
@@ -82,7 +82,7 @@ interface UsagesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ManagedEnvironmentUsagesOperationGroup {
   /**
    * Gets the current usage information as well as the limits for environment.

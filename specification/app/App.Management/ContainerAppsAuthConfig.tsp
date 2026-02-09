@@ -34,7 +34,7 @@ interface ContainerAppsAuthConfigs {
   /**
    * Create or update the AuthConfig for a Container App.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Create or update the AuthConfig for a Container App.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthConfig,
