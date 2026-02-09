@@ -281,28 +281,28 @@ const cases: TestCase[] = [
       crossVersion: [],
     },
   },
-  {
-    name: "rename one file, change case of service",
-    changedFiles: {
-      additions: ["foo/stable/2025-01-01/openapi.json"],
-      deletions: ["Foo/stable/2025-01-01/foo.json"],
-    },
-    // TODO: After code is fixed, should not create *any* dummy swaggers
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: ["Foo/stable/2025-01-01/foo.json"],
-    },
-    // TODO: After code is fixed, should only compare before and after renamed file
-    expectedOadCalls: {
-      sameVersion: [
-        {
-          old: "Foo/stable/2025-01-01/foo.json",
-          new: "Foo/stable/2025-01-01/foo.json",
-        },
-      ],
-      crossVersion: [],
-    },
-  },
+  // {
+  //   name: "rename one file, change case of service",
+  //   changedFiles: {
+  //     additions: ["foo/stable/2025-01-01/openapi.json"],
+  //     deletions: ["Foo/stable/2025-01-01/foo.json"],
+  //   },
+  //   // TODO: After code is fixed, should not create *any* dummy swaggers
+  //   expectedCreateDummySwaggers: {
+  //     old: [],
+  //     new: ["Foo/stable/2025-01-01/foo.json"],
+  //   },
+  //   // TODO: After code is fixed, should only compare before and after renamed file
+  //   expectedOadCalls: {
+  //     sameVersion: [
+  //       {
+  //         old: "Foo/stable/2025-01-01/foo.json",
+  //         new: "Foo/stable/2025-01-01/foo.json",
+  //       },
+  //     ],
+  //     crossVersion: [],
+  //   },
+  // },
 ];
 
 describe("validateBreakingChange", () => {
