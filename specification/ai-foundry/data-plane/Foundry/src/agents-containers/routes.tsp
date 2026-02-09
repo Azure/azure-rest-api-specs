@@ -8,6 +8,8 @@ using TypeSpec.Streams;
 namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
+// Note: This interface is intentionaly tagged as "Agents" (and not "AgentContainers") so these operations will 
+// still be grouped together with the other Agent operations,under the "Agents" tag in the generated OpenAPI spec.
 @tag("Agents")
 interface AgentContainers {
 
