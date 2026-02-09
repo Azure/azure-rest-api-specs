@@ -21,16 +21,16 @@
           {
             "drillsQualifiedResource": {
               "resourceId": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
-              "activeLocation": [
-                "eastus-az2"
+              "activeLocations": [
+                "eastus-zone2"
               ],
-              "recoveryLocation": [
-                "eastus2-az3"
+              "recoveryLocations": [
+                "eastus-zone3"
               ],
-              "activePhysicalLocation": [
+              "activePhysicalZones": [
                 "eastus2-az2"
               ],
-              "recoveryPhysicalLocation": [
+              "recoveryPhysicalZones": [
                 "eastus2-az1"
               ],
               "drillInclusionState": "Excluded",
@@ -44,7 +44,7 @@
                   "resourceId": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
                   "activeLocation": "eastus2",
                   "recoveryLocations": [
-                    "eastus"
+                    "eastus-zone3"
                   ],
                   "replicationRole": "Unknown",
                   "primaryResource": "/subscriptions/ad261018-e582-488a-815d-c2ebe28ca544/resourceGroups/sampleResourceGroupName/providers/Microsoft.Compute/virtualMachines/iaasvm-1",
@@ -54,8 +54,11 @@
                   "isAutoFailover": true,
                   "failoverState": "None",
                   "testFailoverState": "None",
-                  "physicalZones": [
-                    "1"
+                  "activeLocations": [
+                    "eastus2-zone2"
+                  ],
+                  "activePhysicalZones": [
+                    "eastus2-az3"
                   ]
                 }
               ],
@@ -85,7 +88,8 @@
                     "targetResourceId": "/subscriptions/f2edfd5d-5496-4683-b94f-b3588c579009/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1"
                   }
                 ]
-              }
+              },
+              "resourceProtectionSolutionDisplayName": "Azure Site Recovery"
             },
             "resourceQualificationDetails": {
               "drillQualificationState": "Qualified",

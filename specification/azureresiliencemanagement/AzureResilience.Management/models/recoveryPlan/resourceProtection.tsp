@@ -76,6 +76,16 @@ model ResourceProtectionSolutionSettings {
   @visibility(Lifecycle.Read)
   activeLocation?: string;
 
+  @doc("Active locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activeLocations?: string[];
+
+  @doc("Active Resource location and physical zones of Azure Resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activePhysicalZones?: string[];
+
   @doc("List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)
   recoveryLocations?: string[];
@@ -103,11 +113,6 @@ model ResourceProtectionSolutionSettings {
   @doc("TestFailover state of the recovery orchestration resource.")
   @visibility(Lifecycle.Read)
   testFailoverState?: TestFailoverState;
-
-  @added(Versions.v2026_03_01_preview)
-  @doc("Physical zones of the Azure resource associated with the recovery orchestration plan.")
-  @visibility(Lifecycle.Read)
-  physicalZones?: string[];
 }
 
 @doc("Definition of recovery orchestration resource protection solution setting with recovery orchestration plan.")

@@ -599,7 +599,7 @@
     },
     "DesiredConfigurationUpdate": {
       "type": "object",
-      "description": "Desired configuration input by the user.",
+      "description": "Updatable parameters in the Desired configuration input.",
       "properties": {
         "defenderForServers": {
           "type": "string",
@@ -695,17 +695,17 @@
     },
     "ManagedOpUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the ManagedOp.",
+      "description": "ManagedOps model for update operations",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedOpUpdateProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "Updatable properties in the ManagedOps resource."
         }
       }
     },
     "ManagedOpUpdateProperties": {
       "type": "object",
-      "description": "The updatable properties of the ManagedOp.",
+      "description": "Updatable properties in the ManagedOps resource.",
       "properties": {
         "desiredConfiguration": {
           "$ref": "#/definitions/DesiredConfigurationUpdate",
