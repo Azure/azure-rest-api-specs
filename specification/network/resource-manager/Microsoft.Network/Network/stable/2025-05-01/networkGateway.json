@@ -862,7 +862,6 @@
       "post": {
         "operationId": "VirtualNetworkGateways_VpnDeviceConfigurationScript",
         "tags": [
-          "VirtualNetworkGatewayConnections",
           "VirtualNetworkGateways"
         ],
         "description": "Gets a xml format representation for vpn device configuration script.",
@@ -2149,7 +2148,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ExpressRouteFailoverTestDetailsArray"
         },
         "x-ms-long-running-operation": true
       }
@@ -2230,7 +2230,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ExpressRouteFailoverSingleTestDetailsArray"
         },
         "x-ms-long-running-operation": true
       }
@@ -4085,6 +4086,12 @@
         }
       }
     },
+    "ExpressRouteFailoverSingleTestDetailsArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteFailoverSingleTestDetails"
+      }
+    },
     "ExpressRouteFailoverStopApiParameters": {
       "type": "object",
       "description": "Start packet capture parameters on virtual network gateway.",
@@ -4155,6 +4162,12 @@
             "type": "string"
           }
         }
+      }
+    },
+    "ExpressRouteFailoverTestDetailsArray": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteFailoverTestDetails"
       }
     },
     "FailoverConnectionDetails": {

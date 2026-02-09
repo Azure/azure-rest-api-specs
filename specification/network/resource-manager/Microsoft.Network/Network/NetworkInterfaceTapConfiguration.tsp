@@ -41,12 +41,12 @@ model NetworkInterfaceTapConfiguration extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface NetworkInterfaceTapConfigurations {
   /**
    * Get the specified tap configuration on a network interface.
    */
-  @tag("Network Interfaces")
+  @tag("NetworkInterfaces")
   get is ArmResourceRead<NetworkInterfaceTapConfiguration, Error = CloudError>;
 
   /**
@@ -72,7 +72,7 @@ interface NetworkInterfaceTapConfigurations {
   /**
    * Get all Tap configurations in a network interface.
    */
-  @tag("Network Interfaces")
+  @tag("NetworkInterfaces")
   list is ArmResourceListByParent<
     NetworkInterfaceTapConfiguration,
     Error = CloudError

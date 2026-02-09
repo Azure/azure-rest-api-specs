@@ -4,7 +4,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `tags__added` | added | `[{"name":"NetworkWatchers"},{"name":"PacketCaptures"},{"name":"ConnectionMonitors"},{"name":"FlowLog...` |
+| `tags__added` | added | `[{"name":"NetworkWatchers"},{"name":"TrafficAnalytics"},{"name":"PacketCaptures"},{"name":"Connectio...` |
 
 ### Changes for `headers`
 

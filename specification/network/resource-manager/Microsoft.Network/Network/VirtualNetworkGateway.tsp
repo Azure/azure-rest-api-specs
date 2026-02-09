@@ -50,7 +50,7 @@ model VirtualNetworkGateway extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface VirtualNetworkGateways {
   /**
    * Gets the specified virtual network gateway by resource group.
@@ -377,6 +377,8 @@ interface VirtualNetworkGateways {
       @query("fetchLatest")
       fetchLatest: boolean;
     },
+    LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteFailoverAllTestDetails> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
@@ -404,6 +406,8 @@ interface VirtualNetworkGateways {
       @query("failoverTestId")
       failoverTestId: string;
     },
+    LroHeaders = ArmLroLocationHeader<FinalResult = ExpressRouteFailoverSingleTestDetailsObject> &
+      Azure.Core.Foundations.RetryAfterHeader,
     Error = CloudError
   >;
 
@@ -551,4 +555,3 @@ interface VirtualNetworkGateways {
 @@doc(VirtualNetworkGateways.invokePrepareMigration::parameters.body,
   "Parameters supplied to the Begin Prepare migration on basic vpn gateway through Network resource provider."
 );
-

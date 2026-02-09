@@ -4,7 +4,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `tags__added` | added | `[{"name":"NetworkManagers"},{"name":"NetworkManagerConnections"},{"name":"ConnectivityConfigurations...` |
+| `tags__added` | added | `[{"name":"NetworkManagers"},{"name":"NetworkManagerActiveConnectivityConfigurations"},{"name":"Netwo...` |
 
 ### Changes for `description`
 

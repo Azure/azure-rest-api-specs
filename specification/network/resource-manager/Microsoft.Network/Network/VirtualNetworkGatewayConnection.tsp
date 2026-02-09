@@ -38,16 +38,18 @@ model VirtualNetworkGatewayConnection extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface VirtualNetworkGatewayConnections {
   /**
    * Gets the specified virtual network gateway connection by resource group.
    */
+  @tag("VirtualNetworkGatewayConnections")
   get is ArmResourceRead<VirtualNetworkGatewayConnection, Error = CloudError>;
 
   /**
    * Creates or updates a virtual network gateway connection in the specified resource group.
    */
+  @tag("VirtualNetworkGatewayConnections")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualNetworkGatewayConnection,
     Error = CloudError
@@ -57,6 +59,7 @@ interface VirtualNetworkGatewayConnections {
    * Updates a virtual network gateway connection tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VirtualNetworkGatewayConnections")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchAsync<
     VirtualNetworkGatewayConnection,
@@ -70,6 +73,7 @@ interface VirtualNetworkGatewayConnections {
    * Deletes the specified virtual network Gateway connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VirtualNetworkGatewayConnections")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkGatewayConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -79,6 +83,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * The List VirtualNetworkGatewayConnections operation retrieves all the virtual network gateways connections created.
    */
+  @tag("VirtualNetworkGatewayConnections")
   list is ArmResourceListByParent<
     VirtualNetworkGatewayConnection,
     Error = CloudError
@@ -103,6 +108,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * The Put VirtualNetworkGatewayConnectionSharedKey operation sets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.
    */
+  @tag("VirtualNetworkGatewayConnections")
   @put
   @action("sharedkey")
   setSharedKey is ArmResourceActionAsyncBase<
@@ -120,6 +126,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.
    */
+  @tag("VirtualNetworkGatewayConnections")
   @get
   @action("sharedkey")
   getSharedKey is ArmResourceActionSync<
@@ -132,6 +139,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * The VirtualNetworkGatewayConnectionResetSharedKey operation resets the virtual network gateway connection shared key for passed virtual network gateway connection in the specified resource group through Network resource provider.
    */
+  @tag("VirtualNetworkGatewayConnections")
   @action("sharedkey/reset")
   resetSharedKey is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
@@ -143,6 +151,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * Starts packet capture on virtual network gateway connection in the specified resource group.
    */
+  @tag("VirtualNetworkGatewayConnections")
   startPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     VpnPacketCaptureStartParameters,
@@ -156,6 +165,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * Stops packet capture on virtual network gateway connection in the specified resource group.
    */
+  @tag("VirtualNetworkGatewayConnections")
   stopPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
     VpnPacketCaptureStopParameters,
@@ -168,6 +178,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * Lists IKE Security Associations for the virtual network gateway connection in the specified resource group.
    */
+  @tag("VirtualNetworkGatewayConnections")
   @action("getikesas")
   getIkeSas is ArmResourceActionAsync<
     VirtualNetworkGatewayConnection,
@@ -183,6 +194,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * Resets the virtual network gateway connection specified.
    */
+  @tag("VirtualNetworkGatewayConnections")
   @action("resetconnection")
   resetConnection is ArmResourceActionAsyncBase<
     VirtualNetworkGatewayConnection,

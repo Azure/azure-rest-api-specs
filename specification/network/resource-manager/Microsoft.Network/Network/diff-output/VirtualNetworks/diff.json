@@ -52,6 +52,9 @@
       "name": "NatGateways"
     },
     {
+      "name": "Network Interfaces"
+    },
+    {
       "name": "NetworkProfiles"
     },
     {
@@ -61,7 +64,7 @@
       "name": "SecurityRules"
     },
     {
-      "name": "ReachabilityAnalysisIntent"
+      "name": "ReachabilityAnalysisIntents"
     },
     {
       "name": "VerifierWorkspaces"
@@ -89,9 +92,6 @@
     },
     {
       "name": "PrivateLinkService"
-    },
-    {
-      "name": "PrivateEndpointConnections"
     },
     {
       "name": "PublicIPPrefixes"
@@ -4742,6 +4742,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/tapConfigurations": {
       "get": {
+        "tags": [
+          [
+            "-",
+            "NetworkInterfaces"
+          ],
+          [
+            "+",
+            "Network Interfaces"
+          ]
+        ],
         "responses": {
           "default": {
             "schema": {
@@ -4756,6 +4766,16 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkInterfaces/{networkInterfaceName}/tapConfigurations/{tapConfigurationName}": {
       "get": {
+        "tags": [
+          [
+            "-",
+            "NetworkInterfaces"
+          ],
+          [
+            "+",
+            "Network Interfaces"
+          ]
+        ],
         "responses": {
           "default": {
             "schema": {
@@ -4768,16 +4788,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "Network Interfaces"
-          ],
-          [
-            "+",
-            "NetworkInterfaces"
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -4801,16 +4811,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "-",
-            "Network Interfaces"
-          ],
-          [
-            "+",
-            "NetworkInterfaces"
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -5544,16 +5544,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisIntents": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "ReachabilityAnalysisIntents"
-          ],
-          [
-            "+",
-            "ReachabilityAnalysisIntent"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -5604,16 +5594,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisIntents/{reachabilityAnalysisIntentName}": {
       "get": {
-        "tags": [
-          [
-            "-",
-            "ReachabilityAnalysisIntents"
-          ],
-          [
-            "+",
-            "ReachabilityAnalysisIntent"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -5650,16 +5630,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "-",
-            "ReachabilityAnalysisIntents"
-          ],
-          [
-            "+",
-            "ReachabilityAnalysisIntent"
-          ]
-        ],
         "parameters": [
           [
             "-",
@@ -5699,6 +5669,16 @@
         }
       },
       "delete": {
+        "tags": [
+          [
+            "-",
+            "ReachabilityAnalysisIntent"
+          ],
+          [
+            "+",
+            "ReachabilityAnalysisIntents"
+          ]
+        ],
         "parameters": [
           [
             "-",
@@ -6577,15 +6557,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups": {
       "get": {
-        "tags": [
-          [
-            "+",
-            "PrivateEndpoints"
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -6600,15 +6571,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}": {
       "get": {
-        "tags": [
-          [
-            "+",
-            "PrivateEndpoints"
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -6621,15 +6583,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "+",
-            "PrivateEndpoints"
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -6653,15 +6606,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "+",
-            "PrivateEndpoints"
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
@@ -6710,15 +6654,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "+",
-            "PrivateLinkServices"
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "201": {
             "headers__added": {
@@ -6764,15 +6699,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections": {
       "get": {
-        "tags": [
-          [
-            "+",
-            "PrivateEndpointConnections"
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -6787,15 +6713,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections/{peConnectionName}": {
       "get": {
-        "tags": [
-          [
-            "+",
-            "PrivateEndpointConnections"
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -6808,15 +6725,6 @@
         }
       },
       "put": {
-        "tags": [
-          [
-            "+",
-            "PrivateEndpointConnections"
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "default": {
             "schema": {
@@ -6829,15 +6737,6 @@
         }
       },
       "delete": {
-        "tags": [
-          [
-            "+",
-            "PrivateEndpointConnections"
-          ],
-          [
-            " "
-          ]
-        ],
         "responses": {
           "202": {
             "headers__added": {
