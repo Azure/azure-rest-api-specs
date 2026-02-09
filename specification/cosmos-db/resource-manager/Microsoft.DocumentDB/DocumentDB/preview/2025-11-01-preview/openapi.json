@@ -166,6 +166,9 @@
       "name": "ClusterResources"
     },
     {
+      "name": "GarnetClusters"
+    },
+    {
       "name": "DataCenterResources"
     },
     {
@@ -398,6 +401,45 @@
         "x-ms-examples": {
           "CosmosDB Fleet List by subscription": {
             "$ref": "./examples/fleet/CosmosDBFleetList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/garnetClusters": {
+      "get": {
+        "operationId": "GarnetClusters_ListBySubscription",
+        "tags": [
+          "GarnetClusters"
+        ],
+        "description": "List all Garnet clusters in this subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListGarnetClusters"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGarnetClusterListBySubscription": {
+            "$ref": "./examples/CosmosDBGarnetClusterListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -20349,6 +20391,295 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/garnetClusters": {
+      "get": {
+        "operationId": "GarnetClusters_ListByResourceGroup",
+        "tags": [
+          "GarnetClusters"
+        ],
+        "description": "List all Garnet clusters in this resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListGarnetClusters"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGarnetClusterListByResourceGroup": {
+            "$ref": "./examples/CosmosDBGarnetClusterListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/garnetClusters/{clusterName}": {
+      "get": {
+        "operationId": "GarnetClusters_Get",
+        "tags": [
+          "GarnetClusters"
+        ],
+        "description": "Get the properties of a Garnet cache cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the GarnetClusterResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GarnetClusterResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGarnetClusterGet": {
+            "$ref": "./examples/CosmosDBGarnetClusterGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GarnetClusters_CreateUpdate",
+        "tags": [
+          "GarnetClusters"
+        ],
+        "description": "Create or update a Garnet cache cluster. When updating, you must specify all writable properties.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the GarnetClusterResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GarnetClusterResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GarnetClusterResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GarnetClusterResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'GarnetClusterResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GarnetClusterResource"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGarnetClusterCreate": {
+            "$ref": "./examples/CosmosDBGarnetClusterCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GarnetClusterResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "GarnetClusters_Update",
+        "tags": [
+          "GarnetClusters"
+        ],
+        "description": "Updates some of the properties of a garnet cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the GarnetClusterResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GarnetClusterResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GarnetClusterResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/GarnetClusterResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "GarnetClusters_Delete",
+        "tags": [
+          "GarnetClusters"
+        ],
+        "description": "Deletes a Garnet cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the GarnetClusterResource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBGarnetClusterDelete": {
+            "$ref": "./examples/CosmosDBGarnetClusterDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/throughputPools": {
       "get": {
         "operationId": "ThroughputPools_ListByResourceGroup",
@@ -21000,6 +21331,30 @@
           "description": "Generation time in UTC of the key in ISO-8601 format. If the value is missing from the object, it means that the last key regeneration was triggered before 2022-06-18.",
           "readOnly": true
         }
+      }
+    },
+    "AllocationState": {
+      "type": "string",
+      "description": "Allocation state of the cluster and data center resources.",
+      "enum": [
+        "Active",
+        "Deallocated"
+      ],
+      "x-ms-enum": {
+        "name": "AllocationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active implies the virtual machines of the cluster are allocated."
+          },
+          {
+            "name": "Deallocated",
+            "value": "Deallocated",
+            "description": "Deallocated implies virtual machines and resources are deallocated."
+          }
+        ]
       }
     },
     "AnalyticalStorageConfiguration": {
@@ -25979,6 +26334,179 @@
         }
       }
     },
+    "GarnetCacheProvisioningState": {
+      "type": "string",
+      "description": "The status of the resource at the time the operation was called.",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "GarnetCacheProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deleting"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Canceled"
+          }
+        ]
+      }
+    },
+    "GarnetClusterEndpoint": {
+      "type": "object",
+      "description": "Endpoint for clients to connect to the cluster.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "Ipv4 address of the endpoint."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Port number."
+        }
+      }
+    },
+    "GarnetClusterProperties": {
+      "type": "object",
+      "description": "Properties of a Garnet cache cluster.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/GarnetCacheProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "subnetId": {
+          "type": "string",
+          "description": "Resource id of a subnet that this cluster's management service should have its network interface attached to. The subnet must be routable to all subnets that will be delegated to data centers.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "endPoints": {
+          "type": "array",
+          "description": "Endpoints for clients to connect to the cluster.",
+          "items": {
+            "$ref": "#/definitions/GarnetClusterEndpoint"
+          },
+          "readOnly": true
+        },
+        "replicationFactor": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of copies of data maintained by the cluster."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes."
+        },
+        "nodeSku": {
+          "type": "string",
+          "description": "Virtual Machine SKU used for clusters. Default value is Standard_DS14_v2."
+        },
+        "availabilityZone": {
+          "type": "boolean",
+          "description": "If the data center has Availability Zone support, apply it to the Virtual Machine ScaleSet that host the garnet cluster virtual machines."
+        },
+        "allocationState": {
+          "$ref": "#/definitions/AllocationState",
+          "description": "Allocation state of the cluster and data center resources. Active implies the virtual machines of the cluster are allocated, deallocated implies virtual machines and resources are deallocated."
+        },
+        "clusterType": {
+          "$ref": "#/definitions/ClusterType",
+          "description": "Type of the cluster. If set to Production, some operations might not be permitted on cluster."
+        },
+        "provisionError": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Error related to resource provisioning."
+        },
+        "extensions": {
+          "type": "array",
+          "description": "Extensions to be added or updated on cluster.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GarnetClusterResource": {
+      "type": "object",
+      "description": "Representation of a managed Cassandra cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GarnetClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedCassandraManagedServiceIdentity",
+          "description": "Identity for the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "GarnetClusterResourcePatch": {
+      "type": "object",
+      "description": "Representation of a Garnet cache cluster for updates.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GarnetClusterResourcePatchProperties",
+          "description": "Properties of a Garnet cache cluster for updates."
+        }
+      }
+    },
+    "GarnetClusterResourcePatchProperties": {
+      "type": "object",
+      "description": "Properties of a Garnet cache cluster for updates.",
+      "properties": {
+        "clusterType": {
+          "$ref": "#/definitions/ClusterType",
+          "description": "Type of the cluster. If set to Production, some operations might not be permitted on cluster."
+        },
+        "extensions": {
+          "type": "array",
+          "description": "Extensions to be added or updated on cluster.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "GraphAPIComputeRegionalServiceResource": {
       "type": "object",
       "description": "Resource for a regional service location.",
@@ -27113,6 +27641,23 @@
         },
         "nextLink": {
           "type": "string"
+        }
+      }
+    },
+    "ListGarnetClusters": {
+      "type": "object",
+      "description": "List of Garnet clusters.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Container for the array of clusters.",
+          "items": {
+            "$ref": "#/definitions/ClusterResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link used to get the next page of results."
         }
       }
     },
