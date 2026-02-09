@@ -168,6 +168,16 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
+@@clientName(Microsoft.Peering.Peerings.listByPeering,
+  "listReceivedRoutes",
+  "csharp"
+);
+
+@@clientName(Microsoft.Peering.Peerings.list,
+  "listRpUnbilledPrefixes",
+  "csharp"
+);
+
 //LogAnalyticsWorkspaceProperties
 
 //PeeringPropertiesDirect
