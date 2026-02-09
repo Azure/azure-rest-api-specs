@@ -243,13 +243,6 @@ model OriginClusterInformation {
   peerAddresses: string[];
 
   /**
-   * Actual ONTAP Intercluster LIF IP addresses. The modifyClusterPeer operation can be used to update these addresses.
-   */
-  @added(Versions.v2025_12_15_preview)
-  @visibility(Lifecycle.Read)
-  actualPeerAddresses?: string[];
-
-  /**
    * External Vserver (SVM) name  name of the SVM hosting the origin volume
    */
   peerVserverName: string;
@@ -570,31 +563,6 @@ union CacheProvisioningState {
   Canceled: "Canceled",
 }
 
-/**
- * Break file locks request
- */
-@added(Versions.v2025_12_15_preview)
-model CacheBreakFileLocksRequest {
-  /**
-   * The IP address of the client whose file locks should be broken
-   */
-  clientIp?: Azure.Core.ipV4Address;
-}
-
-/**
- * Modify cluster peer request
- */
-@added(Versions.v2025_12_15_preview)
-model ModifyClusterPeerRequest {
-  /**
-   * The complete set of peer addresses for the cluster.
-   * This array replaces the existing peer addresses. Include all addresses you want to keep, plus any new addresses.
-   * Any existing addresses not included in this array will be removed from the cluster peer configuration.
-   */
-  @minItems(1)
-  newPeerAddresses: string[];
-}
-
 @armResourceOperations
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
@@ -668,38 +636,10 @@ interface Caches {
     LroHeaders = ArmLroLocationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
-
-  /**
-   * Break all the file locks on a cache for a given client IP and if no client IP is provided, break all file locks on the cache.
-   */
-  @added(Versions.v2025_12_15_preview)
-  breakFileLocks is ArmResourceActionAsync<
-    Resource = Cache,
-    Request = CacheBreakFileLocksRequest,
-    OptionalRequestBody = true,
-    Response = Cache,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  /**
-   * Modify the cluster peer addresses for the cache's origin cluster.
-   */
-  @added(Versions.v2025_12_15_preview)
-  modifyClusterPeer is ArmResourceActionAsync<
-    Resource = Cache,
-    Request = ModifyClusterPeerRequest,
-    Response = Cache,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
 }
 
 @@doc(Caches.poolChange::parameters.body,
   "Move cache to the pool supplied in the body of the operation."
-);
-@@doc(Caches.breakFileLocks::parameters.body,
-  "Request to break file locks on a cache. Note: NFSv3 byte-range locks are held at the origin volume and must be broken there. SMB and NFSv4 locks (share locks and byte-range locks) are held at the cache and can be broken using this operation."
 );
 
 @@maxLength(Cache.name, 64);
