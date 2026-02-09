@@ -4,185 +4,140 @@ using Azure.ClientGenerator.Core;
 using Microsoft.SecurityInsights;
 using Azure.ClientGenerator.Core.Legacy;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ActionRequest.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SecurityAlert.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HuntingBookmark.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MetadataPatch.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RepositoryAccessProperties.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RepositoryAccessObject.repositoryAccess);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ThreatIntelligenceIndicatorModel.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FusionAlertRule.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FusionAlertRuleTemplate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MicrosoftSecurityIncidentCreationAlertRule.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MicrosoftSecurityIncidentCreationAlertRuleTemplate.properties
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ScheduledAlertRule.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ScheduledAlertRuleTemplate.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CustomizableConnectorDefinition.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AADDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AATPDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ASCDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AwsCloudTrailDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RestApiPollerDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MCASDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MDATPDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TIDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MSTIDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PremiumMicrosoftDefenderForThreatIntelligence.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(OfficeDataConnector.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AnomalySecurityMLAnalyticsSettings.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AccountEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AzureResourceEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CloudApplicationEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DnsEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FileEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(FileHashEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(HostEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(IoTDeviceEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(IpEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MailboxEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MailClusterEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MailMessageEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MalwareEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProcessEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RegistryKeyEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RegistryValueEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SecurityGroupEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SubmissionMailEntity.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(UrlEntity.properties);
 
 @@clientName(AlertRules.createOrUpdate::parameters.resource, "alertRule");
@@ -192,20 +147,20 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(ActionResponses.createOrUpdate::parameters.resource, "action");
 @@clientLocation(ActionResponses.delete, "Actions");
 @@clientLocation(ActionResponses.listByAlertRule, "Actions");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ActionResponse.properties);
 
 @@clientName(AutomationRules.createOrUpdate::parameters.resource,
   "automationRuleToUpsert"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AutomationRule.properties);
 
 @@clientName(Bookmarks.createOrUpdate::parameters.resource, "bookmark");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Bookmark.properties);
 
 @@clientLocation(PackageModels.get, "ContentPackages");
@@ -215,20 +170,20 @@ using Azure.ClientGenerator.Core.Legacy;
 );
 @@clientLocation(PackageModels.uninstall, "ContentPackage");
 @@clientLocation(PackageModels.list, "ContentPackages");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(PackageModel.properties);
 
 @@clientLocation(ProductPackageModels.get, "ProductPackage");
 @@clientLocation(ProductPackageModels.list, "ProductPackages");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProductPackageModel.properties);
 
 @@clientLocation(ProductTemplateModels.get, "ProductTemplate");
 @@clientLocation(ProductTemplateModels.list, "ProductTemplates");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ProductTemplateModel.properties);
 
 @@clientLocation(TemplateModels.get, "ContentTemplate");
@@ -238,8 +193,8 @@ using Azure.ClientGenerator.Core.Legacy;
 );
 @@clientLocation(TemplateModels.delete, "ContentTemplate");
 @@clientLocation(TemplateModels.list, "ContentTemplates");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TemplateModel.properties);
 
 @@clientName(DataConnectorDefinitions.createOrUpdate::parameters.resource,
@@ -252,15 +207,15 @@ using Azure.ClientGenerator.Core.Legacy;
 
 @@clientName(Incidents.createOrUpdate::parameters.resource, "incident");
 @@clientName(Incidents.runPlaybook::parameters.body, "requestBody");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Incident.properties);
 
 @@clientName(IncidentComments.createOrUpdate::parameters.resource,
   "incidentComment"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(IncidentComment.properties);
 
 @@clientLocation(Relations.get, "IncidentRelations");
@@ -268,13 +223,13 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(Relations.createOrUpdate::parameters.resource, "relation");
 @@clientLocation(Relations.delete, "IncidentRelations");
 @@clientLocation(Relations.list, "IncidentRelations");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Relation.properties);
 
 @@clientName(IncidentTasks.createOrUpdate::parameters.resource, "incidentTask");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(IncidentTask.properties);
 
 @@clientLocation(MetadataModels.get, "Metadata");
@@ -284,15 +239,15 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(MetadataModels.update::parameters.properties, "metadataPatch");
 @@clientLocation(MetadataModels.delete, "Metadata");
 @@clientLocation(MetadataModels.list, "Metadata");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(MetadataModel.properties);
 
 @@clientName(SentinelOnboardingStates.create::parameters.resource,
   "sentinelOnboardingStateParameter"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SentinelOnboardingState.properties);
 
 @@clientName(SecurityMLAnalyticsSettings.createOrUpdate::parameters.resource,
@@ -301,8 +256,8 @@ using Azure.ClientGenerator.Core.Legacy;
 
 @@clientName(SourceControls.create::parameters.resource, "sourceControl");
 @@clientName(SourceControls.delete::parameters.body, "repositoryAccess");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SourceControl.properties);
 
 @@clientLocation(ThreatIntelligenceInformations.get,
@@ -334,16 +289,16 @@ using Azure.ClientGenerator.Core.Legacy;
 );
 
 @@clientName(Watchlists.createOrUpdate::parameters.resource, "watchlist");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Watchlist.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@clientName(WatchlistItems.createOrUpdate::parameters.resource,
   "watchlistItem"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(WatchlistItem.properties);
 
 @@clientLocation(EntitiesOperationGroup.runPlaybook, "Entities");

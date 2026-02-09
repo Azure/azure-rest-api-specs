@@ -24,7 +24,7 @@ model AutomationRule
   /**
    * Etag of the azure resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 
@@ -91,9 +91,9 @@ interface AutomationRules {
   /**
    * Delete the automation rule.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is Extension.DeleteSync<
     OperationalInsights,
     AutomationRule,

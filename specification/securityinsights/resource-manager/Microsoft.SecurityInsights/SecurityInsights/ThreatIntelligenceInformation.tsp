@@ -14,7 +14,7 @@ namespace Microsoft.SecurityInsights;
 /**
  * Threat intelligence information object.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("kind")
 @parentResource(ThreatIntelligenceMain)
 model ThreatIntelligenceInformation
@@ -29,7 +29,7 @@ model ThreatIntelligenceInformation
   /**
    * Etag of the azure resource
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
 }
 

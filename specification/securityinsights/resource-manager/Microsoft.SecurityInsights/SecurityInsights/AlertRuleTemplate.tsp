@@ -14,7 +14,7 @@ namespace Microsoft.SecurityInsights;
 /**
  * Alert rule template.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AlertRuleTemplate
   is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<AlertRuleKind> {
   ...ResourceNameParameter<
