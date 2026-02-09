@@ -2,7 +2,7 @@ import "../common/models.tsp";
 import "../servicepatterns.tsp";
 import "./models.tsp";
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Projects.Beta;
 
 alias ListEvaluatorVersionsParameters = {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."

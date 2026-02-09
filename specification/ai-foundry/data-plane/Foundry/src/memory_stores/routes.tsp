@@ -5,7 +5,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Projects.Beta;
 
 @tag("Memory Stores")
 interface MemoryStores {

@@ -3,7 +3,7 @@ import "./models.tsp";
 using TypeSpec.Http;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Projects.Beta;
 
 alias InsightsServiceTraits = SupportsClientRequestId &
   NoRepeatableRequests &

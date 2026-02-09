@@ -5,7 +5,7 @@ import "./models.tsp";
 using TypeSpec.Http;
 using Azure.Core.Traits;
 
-namespace Azure.AI.Projects;
+namespace Azure.AI.Projects.Beta;
 
 alias EvaluationRuleOperations = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>>;
 
