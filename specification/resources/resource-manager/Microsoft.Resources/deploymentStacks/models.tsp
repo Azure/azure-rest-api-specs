@@ -582,7 +582,7 @@ model ActionOnUnmanage {
   resourceGroups?: UnmanageActionResourceGroupMode;
 
   /**
-   * Specifies an action for a newly unmanaged management group.
+   * Specifies an action for a newly unmanaged resource management group.
    */
   managementGroups?: UnmanageActionManagementGroupMode;
 

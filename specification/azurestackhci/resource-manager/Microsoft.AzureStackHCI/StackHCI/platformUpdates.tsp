@@ -14,7 +14,7 @@ namespace Microsoft.AzureStackHCI;
 
 @doc("Represents a platform update resource.")
 @parentResource(SubscriptionLocationResource)
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model PlatformUpdate
   is Azure.ResourceManager.ProxyResource<PlatformUpdateProperties> {
   ...ResourceNameParameter<
@@ -24,7 +24,7 @@ model PlatformUpdate
 }
 
 @armResourceOperations
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 interface PlatformUpdates {
   @doc("Get a platform update.")
   get is ArmResourceRead<PlatformUpdate>;
@@ -38,7 +38,7 @@ interface PlatformUpdates {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("Represents properties of a platform update resource.")
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model PlatformUpdateProperties {
   @doc("Represents applicable platform updates.")
   @Azure.ResourceManager.identifiers(#[])
@@ -46,7 +46,7 @@ model PlatformUpdateProperties {
 }
 
 @doc("Represents details of a specific platform update.")
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model PlatformUpdateDetails {
   @doc("Represents validated solution recipe version of a platform update.")
   validatedSolutionRecipeVersion?: string;
@@ -60,7 +60,7 @@ model PlatformUpdateDetails {
 }
 
 @doc("Represents details of a specific platform update payload.")
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model PlatformPayload {
   @doc("Represents url of a platform update payload.")
   payloadUrl?: string;

@@ -62,7 +62,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           }
         ],
         "responses": {
@@ -101,7 +106,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "deploymentStackName",
@@ -145,7 +155,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "deploymentStackName",
@@ -219,7 +234,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "deploymentStackName",
@@ -292,7 +312,12 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/ManagementGroupIdParameter"
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "deploymentStackName",
@@ -909,7 +934,7 @@
         },
         "managementGroups": {
           "$ref": "#/definitions/UnmanageActionManagementGroupMode",
-          "description": "Specifies an action for a newly unmanaged management group."
+          "description": "Specifies an action for a newly unmanaged resource management group."
         }
       },
       "required": [
@@ -1531,12 +1556,12 @@
           {
             "name": "Delete",
             "value": "delete",
-            "description": "Delete the resources from Azure."
+            "description": "Delete the resources from Azure"
           },
           {
             "name": "Detach",
             "value": "detach",
-            "description": "Keep the resources in Azure."
+            "description": "Keep the resources in Azure"
           }
         ]
       }
@@ -1618,27 +1643,17 @@
           {
             "name": "Delete",
             "value": "delete",
-            "description": "Delete the resources from Azure."
+            "description": "Delete the resources from Azure"
           },
           {
             "name": "Detach",
             "value": "detach",
-            "description": "Keep the resources in Azure."
+            "description": "Keep the resources in Azure"
           }
         ]
       },
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "unmanageActionResources"
-    },
-    "ManagementGroupIdParameter": {
-      "name": "managementGroupId",
-      "in": "path",
-      "description": "The name of the management group. The name is case insensitive.",
-      "required": true,
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method"
     }
   }
 }
