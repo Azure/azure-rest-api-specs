@@ -57,7 +57,7 @@ interface GarnetClusters {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     GarnetClusterResource,
-    PatchModel = ClusterResourcePatch
+    PatchModel = GarnetClusterResourcePatch
   >;
 
   /**
@@ -74,7 +74,7 @@ interface GarnetClusters {
   @operationId("GarnetClusters_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     GarnetClusterResource,
-    Response = ArmResponse<ListClusters>
+    Response = ArmResponse<ListGarnetClusters>
   >;
 
   /**
@@ -84,6 +84,6 @@ interface GarnetClusters {
   @operationId("GarnetClusters_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     GarnetClusterResource,
-    Response = ArmResponse<ListClusters>
+    Response = ArmResponse<ListGarnetClusters>
   >;
 }

@@ -117,9 +117,34 @@ model ClusterResourcePatch {
 }
 
 /**
+ * Representation of a Garnet cache cluster for updates.
+ */
+model GarnetClusterResourcePatch {
+  /**
+   * Properties of a Garnet cache cluster for updates.
+   */
+  properties?: GarnetClusterResourcePatchProperties;
+}
+
+/**
  * Properties of a Garnet cache cluster for updates.
  */
 model ClusterResourcePatchProperties {
+  /**
+   * Type of the cluster. If set to Production, some operations might not be permitted on cluster.
+   */
+  clusterType?: ClusterType;
+
+  /**
+   * Extensions to be added or updated on cluster.
+   */
+  extensions?: string[];
+}
+
+/**
+ * Properties of a Garnet cache cluster for updates.
+ */
+model GarnetClusterResourcePatchProperties {
   /**
    * Type of the cluster. If set to Production, some operations might not be permitted on cluster.
    */
@@ -5635,6 +5660,23 @@ model ListClusters {
   value?: ClusterResource[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * List of Garnet clusters.
+ */
+model ListGarnetClusters {
+  /**
+   * Container for the array of clusters.
+   */
+  @pageItems
+  value?: ClusterResource[];
+
+  /**
+   * The link used to get the next page of results.
+   */
   @nextLink
   nextLink?: string;
 }

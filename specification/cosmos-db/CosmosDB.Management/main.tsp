@@ -45,6 +45,7 @@ import "./GremlinRoleAssignmentResource.tsp";
 import "./LocationGetResult.tsp";
 import "./DataTransferJobGetResults.tsp";
 import "./ClusterResource.tsp";
+import "./GarnetClusterResource.tsp";
 import "./DataCenterResource.tsp";
 import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./NotebookWorkspace.tsp";
