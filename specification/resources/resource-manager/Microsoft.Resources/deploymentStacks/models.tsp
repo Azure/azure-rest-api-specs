@@ -46,10 +46,10 @@ alias DeploymentStackNameParameter = ResourceNameParameter<
 union UnmanageActionResourceMode {
   string,
 
-  /** Delete the resources from Azure. */
+  /** Delete the resources from Azure */
   Delete: "delete",
 
-  /** Keep the resources in Azure. */
+  /** Keep the resources in Azure */
   Detach: "detach",
 }
 
