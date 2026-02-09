@@ -194,6 +194,20 @@ union JobResourceType {
   string,
 }
 
+@doc("An action task type indicates the type of action task.")
+union ActionTask {
+  @doc("No action task.")
+  None: "None",
+
+  @doc("Pre-action task.")
+  PreActionTask: "PreActionTask",
+
+  @doc("Post-action task.")
+  PostActionTask: "PostActionTask",
+
+  string,
+}
+
 @doc("Types of Failover directions.")
 union FailoverDirectionTypes {
   @doc("Failover resources from specific locations.")
