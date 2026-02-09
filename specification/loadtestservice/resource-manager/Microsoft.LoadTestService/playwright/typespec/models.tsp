@@ -13,7 +13,10 @@ namespace Playwright.Management;
 @doc("Playwright workspace resource.")
 model PlaywrightWorkspace is TrackedResource<PlaywrightWorkspaceProperties> {
   ...ResourceNameParameter<PlaywrightWorkspace>;
+  ...ManagedServiceIdentityProperty;
 }
+
+@@added(PlaywrightWorkspace.identity, Versions.v2026_02_01_preview);
 
 @doc("Playwright workspace resource properties.")
 model PlaywrightWorkspaceProperties {
