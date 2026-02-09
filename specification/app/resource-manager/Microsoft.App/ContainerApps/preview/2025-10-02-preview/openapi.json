@@ -11074,7 +11074,9 @@
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -18696,6 +18698,11 @@
           "description": "The time after the request is made when the nonce should expire."
         }
       }
+    },
+    "Object": {
+      "type": "object",
+      "description": "Logic App call response object.",
+      "additionalProperties": {}
     },
     "OpenIdConnectClientCredential": {
       "type": "object",
