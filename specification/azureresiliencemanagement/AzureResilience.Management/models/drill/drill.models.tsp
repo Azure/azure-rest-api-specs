@@ -696,6 +696,11 @@ model DrillsQualifiedResource {
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   faultProperties?: FaultProperties;
+
+  @doc("Resource Protection Solution Display Name")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceProtectionSolutionDisplayName?: string;
 }
 
 @doc("Details of qualification for an operation.")
