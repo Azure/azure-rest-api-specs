@@ -151,40 +151,10 @@ namespace Azure.AI.Projects {
     embedding_model?: string;
   }
 
-  @@copyProperties(OpenAI.OutputItemFunctionToolCall,
-    {
-      id: string,
-    }
-  );
-
-  @@copyProperties(OpenAI.FunctionToolCallOutputResource,
-    {
-      id: string,
-    }
-  );
-
-  @@copyProperties(OpenAI.OutputItemCustomToolCall,
-    {
-      id: string,
-    }
-  );
-
-  @@copyProperties(OpenAI.OutputItemComputerToolCallOutputResource,
-    {
-      id: string,
-    }
-  );
-
-  @@copyProperties(OpenAI.OutputItemCustomToolCallOutput,
-    {
-      id: string,
-    }
-  );
-
   // Propagate "id" to base of output items, not every union variant
   @@copyProperties(OpenAI.OutputItem,
     {
-      id: string,
+      id?: string,
     }
   );
 
