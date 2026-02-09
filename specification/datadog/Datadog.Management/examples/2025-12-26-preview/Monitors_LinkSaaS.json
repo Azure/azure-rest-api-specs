@@ -1,0 +1,52 @@
+{
+  "operationId": "DatadogMonitorResources_LinkSaaS",
+  "title": "Monitors_LinkSaaS",
+  "parameters": {
+    "api-version": "2025-12-26-preview",
+    "subscriptionId": "1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6",
+    "resourceGroupName": "myResourceGroup",
+    "monitorName": "myMonitor",
+    "body": {
+      "saaSResourceId": "/subscriptions/1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6/resourceGroups/myResourceGroup/providers/Microsoft.SaaS/resources/mySaaSResource"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor",
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "location": "West US",
+        "properties": {
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "id": "myOrg123",
+            "cspm": false,
+            "resourceCollection": false
+          },
+          "marketplaceOfferDetails": {
+            "publisherId": "datadog1591740804488",
+            "offerId": "dd_liftr_v3_decoupled"
+          },
+          "saaSData": {
+            "saaSResourceId": "/subscriptions/1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6/resourceGroups/myResourceGroup/providers/Microsoft.SaaS/resources/mySaaSResource"
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1,
+          "monitoringStatus": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6/providers/Microsoft.Datadog/locations/westus/operationStatuses/7f8e9d0c-1b2a-3c4d-5e6f-a1b2c3d4e5f6",
+        "Location": "https://management.azure.com/subscriptions/1a2b3c4d-5e6f-7a8b-9c0d-e1f2a3b4c5d6/resourceGroups/myResourceGroup/providers/Microsoft.Datadog/monitors/myMonitor",
+        "Retry-After": "10"
+      }
+    }
+  }
+}
