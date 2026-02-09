@@ -2780,28 +2780,6 @@ alias ListBlobsStartFrom = {
   startFrom?: string;
 };
 
-/** Copy operation abort query parameters. */
-alias AbortCopyQueryParameters = {
-  ...TimeoutParameter;
-
-  /** The copy identifier provided in the x-ms-copy-id header of the original Copy Blob operation. */
-  @clientName("copyId")
-  @query
-  copyid: string;
-};
-
-/** Block list query parameters. */
-alias BlockListQueryParameters = {
-  ...SnapshotParameter;
-
-  /** Specifies whether to return the list of committed blocks, the list of uncommitted blocks, or both lists together. */
-  @query
-  @clientName("listType")
-  blocklisttype: BlockListType;
-
-  ...TimeoutParameter;
-};
-
 /** The comp=block query parameter for block operations. */
 alias CompBlockParameter = {
   /** Specifies the block operation type. */
@@ -3006,8 +2984,6 @@ alias RestypeAccountParameter = {
   @query
   restype: "account";
 };
-
-// Combined restype + comp parameter aliases for common patterns
 
 /** Service properties query parameters (restype=service&comp=properties). */
 alias ServicePropertiesQueryParameters = {
