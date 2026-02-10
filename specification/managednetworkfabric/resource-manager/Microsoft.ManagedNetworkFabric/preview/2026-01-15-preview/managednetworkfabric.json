@@ -1533,7 +1533,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponseV2"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -3513,7 +3513,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponseV2"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -5259,7 +5259,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponseV2"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -10356,7 +10356,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponseV2"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -11883,7 +11883,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponseV2"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -12818,7 +12818,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponseV2"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
             }
           },
           "202": {
@@ -15303,7 +15303,7 @@
     },
     "ConfigurationRegenerationType": {
       "type": "string",
-      "description": "Configuration Regeneration Type used for refresh configuration",
+      "description": "Configuration Regenration Type used for refresh configuration",
       "enum": [
         "Partial"
       ],
@@ -27125,36 +27125,6 @@
           "description": "Validate action that to be performed"
         }
       }
-    },
-    "ValidateConfigurationResponseProperties": {
-      "type": "object",
-      "description": "The response of the action validate configuration.",
-      "properties": {
-        "configurationState": {
-          "$ref": "#/definitions/ConfigurationState",
-          "description": "Gets the configuration state.",
-          "readOnly": true
-        },
-        "url": {
-          "type": "string",
-          "description": "URL for the details of the response."
-        }
-      }
-    },
-    "ValidateConfigurationResponseV2": {
-      "type": "object",
-      "description": "The response of the action validate configuration.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ValidateConfigurationResponseProperties",
-          "description": "Network Device Run Rw Command Response properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
-        }
-      ]
     },
     "ViewDeviceConfigurationOperationResponse": {
       "type": "object",
