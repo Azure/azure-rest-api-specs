@@ -9,12 +9,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 /**
  * Publisher details.
  */
 @parentResource(Cluster)
+@added(Versions.v2026_02_15_preview)
 model Publisher is Azure.ResourceManager.ProxyResource<PublisherProperties> {
   ...ResourceNameParameter<
     Resource = Publisher,
@@ -25,6 +27,7 @@ model Publisher is Azure.ResourceManager.ProxyResource<PublisherProperties> {
 }
 
 @armResourceOperations
+@added(Versions.v2026_02_15_preview)
 interface Publishers {
   /**
    * Get Publisher resource details of HCI Cluster.
