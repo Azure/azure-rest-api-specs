@@ -5,11 +5,7 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias EvaluationTaxonomiesServiceTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests;
-
-alias EvaluationTaxonomiesOperations = Azure.Core.ResourceOperations<EvaluationTaxonomiesServiceTraits>;
+alias EvaluationTaxonomiesOperations = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>>;
 
 alias EvaluationTaxonomiesFilterQueryParamsTraits = {
   @query("inputName")
@@ -41,7 +37,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   create is Azure.Core.Foundations.Operation<
     {
-      ...WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @doc("The name of the evaluation taxonomy.")
       @path
@@ -59,7 +55,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   update is Azure.Core.Foundations.Operation<
     {
-      ...WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @doc("The name of the evaluation taxonomy.")
       @path

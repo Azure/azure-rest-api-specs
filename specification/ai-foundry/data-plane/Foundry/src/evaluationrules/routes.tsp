@@ -26,6 +26,8 @@ interface EvaluationRules {
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+
       @doc("Evaluation rule resource")
       @Http.bodyRoot
       evaluationRule: EvaluationRule;
