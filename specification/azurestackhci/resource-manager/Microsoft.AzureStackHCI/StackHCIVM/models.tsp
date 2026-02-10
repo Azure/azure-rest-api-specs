@@ -1535,6 +1535,10 @@ model InboundNATRuleProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("Public IP Address for this NAT rule")
   publicIPAddress: PublicIPAddressArmReference;
+
+  @doc("Provisioning state of the inbound NAT rule.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
