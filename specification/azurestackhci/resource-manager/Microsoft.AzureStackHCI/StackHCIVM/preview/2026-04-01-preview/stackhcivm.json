@@ -7519,7 +7519,7 @@
       "description": "The inbound rule resource definition.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/InboundNATRuleProperties",
+          "$ref": "#/definitions/InboundRuleProperties",
           "description": "The resource-specific properties for this resource."
         },
         "extendedLocation": {
@@ -7533,6 +7533,24 @@
         }
       ],
       "x-ms-azure-resource": true
+    },
+    "InboundRuleArmReference": {
+      "type": "object",
+      "description": "The Azure Resource ID for an Inbound Rule resource",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure Resource ID for an Inbound Rule resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.AzureStackHCI/natGateways/inboundRules"
+              }
+            ]
+          }
+        }
+      }
     },
     "InboundRuleListResult": {
       "type": "object",
@@ -7554,6 +7572,83 @@
       "required": [
         "value"
       ]
+    },
+    "InboundRuleProperties": {
+      "type": "object",
+      "description": "Inbound rule properties - extends InboundNATRuleProperties with additional status tracking",
+      "properties": {
+        "protocol": {
+          "$ref": "#/definitions/InboundNATRuleProtocol",
+          "description": "Protocol for the NAT rule"
+        },
+        "frontendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frontend Port for the inbound rule"
+        },
+        "backendPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "backend Port for the inbound rule"
+        },
+        "backendIPConfiguration": {
+          "$ref": "#/definitions/IPConfigurationArmReference",
+          "description": "IP configuration for the target backend."
+        },
+        "publicIPAddress": {
+          "$ref": "#/definitions/PublicIPAddressArmReference",
+          "description": "Public IP Address for this NAT rule"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateEnum",
+          "description": "Provisioning state of the inbound NAT rule.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/InboundRuleStatus",
+          "description": "The observed state of Inbound Rule",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "protocol",
+        "frontendPort",
+        "backendPort",
+        "backendIPConfiguration",
+        "publicIPAddress"
+      ]
+    },
+    "InboundRuleStatus": {
+      "type": "object",
+      "description": "The observed state of inbound rule",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "InboundRule provisioning error code"
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Descriptive error message"
+        },
+        "provisioningStatus": {
+          "$ref": "#/definitions/InboundRuleStatusProvisioningStatus",
+          "description": "InboundRule provisioning status"
+        }
+      }
+    },
+    "InboundRuleStatusProvisioningStatus": {
+      "type": "object",
+      "description": "Provisioning status of Inbound Rule",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "The ID of the operation performed on the inbound rule"
+        },
+        "status": {
+          "$ref": "#/definitions/Status",
+          "description": "The status of the operation performed on the inbound rule [Succeeded, Failed, InProgress]"
+        }
+      }
     },
     "InstanceViewStatus": {
       "type": "object",
