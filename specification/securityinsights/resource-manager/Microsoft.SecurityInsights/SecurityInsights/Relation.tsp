@@ -30,16 +30,18 @@ model Relation is Azure.ResourceManager.ProxyResource<RelationProperties> {
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Relations {
   /**
    * Gets a relation for a given incident.
    */
+  @tag("IncidentRelations")
   get is Extension.Read<OperationalInsights, Relation, Error = CloudError>;
 
   /**
    * Creates or updates a relation for a given incident.
    */
+  @tag("IncidentRelations")
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     Relation,
@@ -49,6 +51,7 @@ interface Relations {
   /**
    * Deletes a relation for a given incident.
    */
+  @tag("IncidentRelations")
   delete is Extension.DeleteSync<
     OperationalInsights,
     Relation,
@@ -58,6 +61,7 @@ interface Relations {
   /**
    * Gets all relations for a given incident.
    */
+  @tag("IncidentRelations")
   list is Extension.ListByTarget<
     OperationalInsights,
     Relation,

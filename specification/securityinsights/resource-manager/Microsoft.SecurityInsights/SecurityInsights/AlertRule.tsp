@@ -33,16 +33,18 @@ model AlertRule
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AlertRules {
   /**
    * Gets the alert rule.
    */
+  @tag("Alert Rules")
   get is Extension.Read<OperationalInsights, AlertRule, Error = CloudError>;
 
   /**
    * Creates or updates the alert rule.
    */
+  @tag("Alert Rules")
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     AlertRule,
@@ -52,6 +54,7 @@ interface AlertRules {
   /**
    * Delete the alert rule.
    */
+  @tag("Alert Rules")
   delete is Extension.DeleteSync<
     OperationalInsights,
     AlertRule,
@@ -61,6 +64,7 @@ interface AlertRules {
   /**
    * Gets all alert rules.
    */
+  @tag("Alert Rules")
   list is Extension.ListByTarget<
     OperationalInsights,
     AlertRule,

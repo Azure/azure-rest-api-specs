@@ -29,16 +29,18 @@ model PackageModel is Azure.ResourceManager.ProxyResource<PackageProperties> {
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface PackageModels {
   /**
    * Gets an installed packages by its id.
    */
+  @tag("ContentPackages")
   get is Extension.Read<OperationalInsights, PackageModel, Error = CloudError>;
 
   /**
    * Install a package to the workspace.
    */
+  @tag("ContentPackages")
   install is Extension.CreateOrReplaceSync<
     OperationalInsights,
     PackageModel,
@@ -48,6 +50,7 @@ interface PackageModels {
   /**
    * Uninstall a package from the workspace.
    */
+  @tag("ContentPackages")
   uninstall is Extension.DeleteSync<
     OperationalInsights,
     PackageModel,
@@ -57,6 +60,7 @@ interface PackageModels {
   /**
    * Gets all installed packages.
    */
+  @tag("ContentPackages")
   list is Extension.ListByTarget<
     OperationalInsights,
     PackageModel,

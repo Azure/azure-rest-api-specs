@@ -71,11 +71,12 @@ interface ProductTemplateModelsOps
       }
     > {}
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ProductTemplateModels {
   /**
    * Gets a template by its identifier.
    */
+  @tag("ContentProductTemplates")
   get is ProductTemplateModelsOps.Read<
     ProductTemplateModel,
     ErrorType = CloudError
@@ -84,6 +85,7 @@ interface ProductTemplateModels {
   /**
    * Gets all templates in the catalog.
    */
+  @tag("ContentProductTemplates")
   list is Extension.ListByTarget<
     OperationalInsights,
     ProductTemplateModel,

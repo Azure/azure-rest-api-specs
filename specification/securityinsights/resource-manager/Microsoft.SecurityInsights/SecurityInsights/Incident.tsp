@@ -68,7 +68,7 @@ alias IncidentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Incidents {
   /**
    * Gets a given incident.
@@ -132,6 +132,7 @@ interface Incidents {
   /**
    * Triggers playbook on a specific incident
    */
+  @tag("manualTrigger")
   runPlaybook is IncidentOps.ActionSync<
     Incident,
     Request = ManualTriggerRequestBody,
@@ -145,6 +146,7 @@ interface Incidents {
    */
   @list
   @action("alerts")
+  @tag("IncidentAlerts")
   listAlerts is Extension.ActionSync<
     OperationalInsights,
     Incident,
@@ -158,6 +160,7 @@ interface Incidents {
    */
   @list
   @action("bookmarks")
+  @tag("IncidentBookmarks")
   listBookmarks is Extension.ActionSync<
     OperationalInsights,
     Incident,
@@ -170,6 +173,7 @@ interface Incidents {
    * Gets all entities for an incident.
    */
   @action("entities")
+  @tag("IncidentEntities")
   listEntities is Extension.ActionSync<
     OperationalInsights,
     Incident,

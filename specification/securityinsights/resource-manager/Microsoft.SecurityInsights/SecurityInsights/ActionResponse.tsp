@@ -30,11 +30,12 @@ model ActionResponse
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ActionResponses {
   /**
    * Gets the action of alert rule.
    */
+  @tag("Actions")
   get is Extension.Read<
     OperationalInsights,
     ActionResponse,
@@ -47,6 +48,7 @@ interface ActionResponses {
   // Customized resource creation, since request body isn't the resource itself
   @autoRoute
   @put
+  @tag("Actions")
   createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
     Azure.ResourceManager.Extension.ExtensionInstanceParameters<
       OperationalInsights,
@@ -60,6 +62,7 @@ interface ActionResponses {
   /**
    * Delete the action of alert rule.
    */
+  @tag("Actions")
   delete is Extension.DeleteSync<
     OperationalInsights,
     ActionResponse,
@@ -69,6 +72,7 @@ interface ActionResponses {
   /**
    * Gets all actions of alert rule.
    */
+  @tag("Actions")
   listByAlertRule is Extension.ListByTarget<
     OperationalInsights,
     ActionResponse,

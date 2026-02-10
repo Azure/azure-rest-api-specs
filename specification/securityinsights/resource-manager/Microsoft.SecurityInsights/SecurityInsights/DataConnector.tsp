@@ -31,16 +31,18 @@ model DataConnector
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DataConnectors {
   /**
    * Gets a data connector.
    */
+  @tag("Data Connectors")
   get is Extension.Read<OperationalInsights, DataConnector, Error = CloudError>;
 
   /**
    * Creates or updates the data connector.
    */
+  @tag("Data Connectors")
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     DataConnector,
@@ -50,6 +52,7 @@ interface DataConnectors {
   /**
    * Delete the data connector.
    */
+  @tag("Data Connectors")
   delete is Extension.DeleteSync<
     OperationalInsights,
     DataConnector,
@@ -59,6 +62,7 @@ interface DataConnectors {
   /**
    * Gets all data connectors.
    */
+  @tag("Data Connectors")
   list is Extension.ListByTarget<
     OperationalInsights,
     DataConnector,

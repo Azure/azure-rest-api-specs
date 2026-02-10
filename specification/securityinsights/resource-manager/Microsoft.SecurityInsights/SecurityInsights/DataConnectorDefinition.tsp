@@ -33,11 +33,12 @@ model DataConnectorDefinition
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DataConnectorDefinitions {
   /**
    * Gets a data connector definition.
    */
+  @tag("ConnectorDefinitions")
   get is Extension.Read<
     OperationalInsights,
     DataConnectorDefinition,
@@ -47,6 +48,7 @@ interface DataConnectorDefinitions {
   /**
    * Creates or updates the data connector definition.
    */
+  @tag("ConnectorDefinitions")
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     DataConnectorDefinition,
@@ -56,6 +58,7 @@ interface DataConnectorDefinitions {
   /**
    * Delete the data connector definition.
    */
+  @tag("ConnectorDefinitions")
   delete is Extension.DeleteSync<
     OperationalInsights,
     DataConnectorDefinition,
@@ -65,6 +68,7 @@ interface DataConnectorDefinitions {
   /**
    * Gets all data connector definitions.
    */
+  @tag("ConnectorDefinitions")
   list is Extension.ListByTarget<
     OperationalInsights,
     DataConnectorDefinition,

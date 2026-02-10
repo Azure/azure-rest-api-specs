@@ -43,70 +43,82 @@
       "name": "Operations"
     },
     {
-      "name": "AlertRules"
+      "name": "Alert Rules"
     },
     {
-      "name": "ActionResponses"
+      "name": "Actions"
     },
     {
-      "name": "AlertRuleTemplates"
+      "name": "Alert Rule Templates"
     },
     {
-      "name": "AutomationRules"
+      "name": "automationRules"
     },
     {
-      "name": "Incidents"
+      "name": "manualTrigger"
+    },
+    {
+      "name": "IncidentAlerts"
+    },
+    {
+      "name": "IncidentBookmarks"
+    },
+    {
+      "name": "IncidentEntities"
     },
     {
       "name": "Bookmarks"
     },
     {
-      "name": "PackageModels"
+      "name": "ContentPackages"
     },
     {
-      "name": "ProductPackageModels"
+      "name": "ContentProductPackages"
     },
     {
-      "name": "ProductTemplateModels"
+      "name": "ContentProductTemplates"
     },
     {
-      "name": "TemplateModels"
+      "name": "ContentTemplates"
     },
     {
-      "name": "DataConnectorDefinitions"
+      "name": "ConnectorDefinitions"
     },
     {
-      "name": "DataConnectors"
+      "name": "Data Connectors"
     },
     {
       "name": "IncidentComments"
     },
     {
-      "name": "Relations"
+      "name": "IncidentRelations"
     },
     {
       "name": "IncidentTasks"
     },
     {
-      "name": "MetadataModels"
+      "name": "Metadata"
     },
     {
       "name": "SentinelOnboardingStates"
     },
     {
-      "name": "SecurityMLAnalyticsSettings"
+      "name": "Security ML Analytics Settings"
     },
     {
       "name": "SourceControls"
     },
     {
-      "name": "ThreatIntelligenceInformations"
+      "name": "ThreatIntelligence"
     },
     {
       "name": "Watchlists"
     },
     {
       "name": "WatchlistItems"
+    },
+    {
+      "name": "Repositories"
     }
   ],
   "paths": {
@@ -150,7 +162,7 @@
       "get": {
         "operationId": "AlertRuleTemplates_List",
         "tags": [
-          "AlertRuleTemplates"
+          "Alert Rule Templates"
         ],
         "description": "Gets all alert rule templates.",
         "parameters": [
@@ -202,7 +214,7 @@
       "get": {
         "operationId": "AlertRuleTemplates_Get",
         "tags": [
-          "AlertRuleTemplates"
+          "Alert Rule Templates"
         ],
         "description": "Gets the alert rule template.",
         "parameters": [
@@ -258,7 +270,7 @@
       "get": {
         "operationId": "AlertRules_List",
         "tags": [
-          "AlertRules"
+          "Alert Rules"
         ],
         "description": "Gets all alert rules.",
         "parameters": [
@@ -310,7 +322,7 @@
       "get": {
         "operationId": "AlertRules_Get",
         "tags": [
-          "AlertRules"
+          "Alert Rules"
         ],
         "description": "Gets the alert rule.",
         "parameters": [
@@ -370,7 +382,7 @@
       "put": {
         "operationId": "AlertRules_CreateOrUpdate",
         "tags": [
-          "AlertRules"
+          "Alert Rules"
         ],
         "description": "Creates or updates the alert rule.",
         "parameters": [
@@ -445,7 +457,7 @@
       "delete": {
         "operationId": "AlertRules_Delete",
         "tags": [
-          "AlertRules"
+          "Alert Rules"
         ],
         "description": "Delete the alert rule.",
         "parameters": [
@@ -501,7 +513,7 @@
       "get": {
         "operationId": "Actions_ListByAlertRule",
         "tags": [
-          "ActionResponses"
+          "Actions"
         ],
         "description": "Gets all actions of alert rule.",
         "parameters": [
@@ -560,7 +572,7 @@
       "get": {
         "operationId": "Actions_Get",
         "tags": [
-          "ActionResponses"
+          "Actions"
         ],
         "description": "Gets the action of alert rule.",
         "parameters": [
@@ -621,7 +633,7 @@
       "put": {
         "operationId": "Actions_CreateOrUpdate",
         "tags": [
-          "ActionResponses"
+          "Actions"
         ],
         "description": "Creates or updates the action of alert rule.",
         "parameters": [
@@ -704,7 +716,7 @@
       "delete": {
         "operationId": "Actions_Delete",
         "tags": [
-          "ActionResponses"
+          "Actions"
         ],
         "description": "Delete the action of alert rule.",
         "parameters": [
@@ -767,7 +779,7 @@
       "get": {
         "operationId": "AutomationRules_List",
         "tags": [
-          "AutomationRules"
+          "automationRules"
         ],
         "description": "Gets all automation rules.",
         "parameters": [
@@ -819,7 +831,7 @@
       "get": {
         "operationId": "AutomationRules_Get",
         "tags": [
-          "AutomationRules"
+          "automationRules"
         ],
         "description": "Gets the automation rule.",
         "parameters": [
@@ -873,7 +885,7 @@
       "put": {
         "operationId": "AutomationRules_CreateOrUpdate",
         "tags": [
-          "AutomationRules"
+          "automationRules"
         ],
         "description": "Creates or updates the automation rule.",
         "parameters": [
@@ -942,7 +954,7 @@
       "delete": {
         "operationId": "AutomationRules_Delete",
         "tags": [
-          "AutomationRules"
+          "automationRules"
         ],
         "description": "Delete the automation rule.",
         "parameters": [
@@ -1235,7 +1247,7 @@
       "get": {
         "operationId": "ContentPackages_List",
         "tags": [
-          "PackageModels"
+          "ContentPackages"
         ],
         "description": "Gets all installed packages.",
         "parameters": [
@@ -1338,7 +1350,7 @@
       "get": {
         "operationId": "ContentPackages_Get",
         "tags": [
-          "PackageModels"
+          "ContentPackages"
         ],
         "description": "Gets an installed packages by its id.",
         "parameters": [
@@ -1392,7 +1404,7 @@
       "put": {
         "operationId": "ContentPackage_Install",
         "tags": [
-          "PackageModels"
+          "ContentPackages"
         ],
         "description": "Install a package to the workspace.",
         "parameters": [
@@ -1461,7 +1473,7 @@
       "delete": {
         "operationId": "ContentPackage_Uninstall",
         "tags": [
-          "PackageModels"
+          "ContentPackages"
         ],
         "description": "Uninstall a package from the workspace.",
         "parameters": [
@@ -1517,7 +1529,7 @@
       "get": {
         "operationId": "ProductPackages_List",
         "tags": [
-          "ProductPackageModels"
+          "ContentProductPackages"
         ],
         "description": "Gets all packages from the catalog.\nExpandable properties:\n- properties/installed\n- properties/packagedContent",
         "parameters": [
@@ -1605,7 +1617,7 @@
       "get": {
         "operationId": "ProductPackage_Get",
         "tags": [
-          "ProductPackageModels"
+          "ContentProductPackages"
         ],
         "description": "Gets a package by its identifier from the catalog.",
         "parameters": [
@@ -1661,7 +1673,7 @@
       "get": {
         "operationId": "ProductTemplates_List",
         "tags": [
-          "ProductTemplateModels"
+          "ContentProductTemplates"
         ],
         "description": "Gets all templates in the catalog.",
         "parameters": [
@@ -1764,7 +1776,7 @@
       "get": {
         "operationId": "ContentTemplates_List",
         "tags": [
-          "TemplateModels"
+          "ContentTemplates"
         ],
         "description": "Gets all installed templates.\nExpandable properties:\n- properties/mainTemplate\n- properties/dependantTemplates",
         "parameters": [
@@ -1874,7 +1886,7 @@
       "get": {
         "operationId": "ContentTemplate_Get",
         "tags": [
-          "TemplateModels"
+          "ContentTemplates"
         ],
         "description": "Gets a template byt its identifier.\nExpandable properties:\n- properties/mainTemplate\n- properties/dependantTemplates",
         "parameters": [
@@ -1928,7 +1940,7 @@
       "put": {
         "operationId": "ContentTemplate_Install",
         "tags": [
-          "TemplateModels"
+          "ContentTemplates"
         ],
         "description": "Install a template.",
         "parameters": [
@@ -1997,7 +2009,7 @@
       "delete": {
         "operationId": "ContentTemplate_Delete",
         "tags": [
-          "TemplateModels"
+          "ContentTemplates"
         ],
         "description": "Delete an installed template.",
         "parameters": [
@@ -2053,7 +2065,7 @@
       "get": {
         "operationId": "ProductTemplate_Get",
         "tags": [
-          "ProductTemplateModels"
+          "ContentProductTemplates"
         ],
         "description": "Gets a template by its identifier.",
         "parameters": [
@@ -2109,7 +2121,7 @@
       "get": {
         "operationId": "DataConnectorDefinitions_List",
         "tags": [
-          "DataConnectorDefinitions"
+          "ConnectorDefinitions"
         ],
         "description": "Gets all data connector definitions.",
         "parameters": [
@@ -2161,7 +2173,7 @@
       "get": {
         "operationId": "DataConnectorDefinitions_Get",
         "tags": [
-          "DataConnectorDefinitions"
+          "ConnectorDefinitions"
         ],
         "description": "Gets a data connector definition.",
         "parameters": [
@@ -2216,7 +2228,7 @@
       "put": {
         "operationId": "DataConnectorDefinitions_CreateOrUpdate",
         "tags": [
-          "DataConnectorDefinitions"
+          "ConnectorDefinitions"
         ],
         "description": "Creates or updates the data connector definition.",
         "parameters": [
@@ -2286,7 +2298,7 @@
       "delete": {
         "operationId": "DataConnectorDefinitions_Delete",
         "tags": [
-          "DataConnectorDefinitions"
+          "ConnectorDefinitions"
         ],
         "description": "Delete the data connector definition.",
         "parameters": [
@@ -2343,7 +2355,7 @@
       "get": {
         "operationId": "DataConnectors_List",
         "tags": [
-          "DataConnectors"
+          "Data Connectors"
         ],
         "description": "Gets all data connectors.",
         "parameters": [
@@ -2395,7 +2407,7 @@
       "get": {
         "operationId": "DataConnectors_Get",
         "tags": [
-          "DataConnectors"
+          "Data Connectors"
         ],
         "description": "Gets a data connector.",
         "parameters": [
@@ -2479,7 +2491,7 @@
       "put": {
         "operationId": "DataConnectors_CreateOrUpdate",
         "tags": [
-          "DataConnectors"
+          "Data Connectors"
         ],
         "description": "Creates or updates the data connector.",
         "parameters": [
@@ -2557,7 +2569,7 @@
       "delete": {
         "operationId": "DataConnectors_Delete",
         "tags": [
-          "DataConnectors"
+          "Data Connectors"
         ],
         "description": "Delete the data connector.",
         "parameters": [
@@ -2618,6 +2630,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityIdentifier}/runPlaybook": {
       "post": {
         "operationId": "Entities_RunPlaybook",
+        "tags": [
+          "manualTrigger"
+        ],
         "description": "Triggers playbook on a specific entity.",
         "parameters": [
           {
@@ -2677,9 +2692,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents": {
       "get": {
         "operationId": "Incidents_List",
-        "tags": [
-          "Incidents"
-        ],
         "description": "Gets all incidents.",
         "parameters": [
           {
@@ -2759,9 +2771,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentId}": {
       "get": {
         "operationId": "Incidents_Get",
-        "tags": [
-          "Incidents"
-        ],
         "description": "Gets a given incident.",
         "parameters": [
           {
@@ -2813,9 +2822,6 @@
       },
       "put": {
         "operationId": "Incidents_CreateOrUpdate",
-        "tags": [
-          "Incidents"
-        ],
         "description": "Creates or updates an incident.",
         "parameters": [
           {
@@ -2882,9 +2888,6 @@
       },
       "delete": {
         "operationId": "Incidents_Delete",
-        "tags": [
-          "Incidents"
-        ],
         "description": "Deletes a given incident.",
         "parameters": [
           {
@@ -2939,7 +2942,7 @@
       "post": {
         "operationId": "Incidents_ListAlerts",
         "tags": [
-          "Incidents"
+          "IncidentAlerts"
         ],
         "description": "Gets all alerts for an incident.",
         "parameters": [
@@ -2995,7 +2998,7 @@
       "post": {
         "operationId": "Incidents_ListBookmarks",
         "tags": [
-          "Incidents"
+          "IncidentBookmarks"
         ],
         "description": "Gets all bookmarks for an incident.",
         "parameters": [
@@ -3339,7 +3342,7 @@
       "post": {
         "operationId": "Incidents_ListEntities",
         "tags": [
-          "Incidents"
+          "IncidentEntities"
         ],
         "description": "Gets all entities for an incident.",
         "parameters": [
@@ -3395,7 +3398,7 @@
       "get": {
         "operationId": "IncidentRelations_List",
         "tags": [
-          "Relations"
+          "IncidentRelations"
         ],
         "description": "Gets all relations for a given incident.",
         "parameters": [
@@ -3483,7 +3486,7 @@
       "get": {
         "operationId": "IncidentRelations_Get",
         "tags": [
-          "Relations"
+          "IncidentRelations"
         ],
         "description": "Gets a relation for a given incident.",
         "parameters": [
@@ -3547,7 +3550,7 @@
       "put": {
         "operationId": "IncidentRelations_CreateOrUpdate",
         "tags": [
-          "Relations"
+          "IncidentRelations"
         ],
         "description": "Creates or updates a relation for a given incident.",
         "parameters": [
@@ -3626,7 +3629,7 @@
       "delete": {
         "operationId": "IncidentRelations_Delete",
         "tags": [
-          "Relations"
+          "IncidentRelations"
         ],
         "description": "Deletes a relation for a given incident.",
         "parameters": [
@@ -3692,7 +3695,7 @@
       "post": {
         "operationId": "Incidents_RunPlaybook",
         "tags": [
-          "Incidents"
+          "manualTrigger"
         ],
         "description": "Triggers playbook on a specific incident",
         "parameters": [
@@ -4012,6 +4015,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/listRepositories": {
       "post": {
         "operationId": "SourceControl_listRepositories",
+        "tags": [
+          "Repositories"
+        ],
         "description": "Gets a list of repositories metadata.",
         "parameters": [
           {
@@ -4071,7 +4077,7 @@
       "get": {
         "operationId": "Metadata_List",
         "tags": [
-          "MetadataModels"
+          "Metadata"
         ],
         "description": "List of all metadata",
         "parameters": [
@@ -4156,7 +4162,7 @@
       "get": {
         "operationId": "Metadata_Get",
         "tags": [
-          "MetadataModels"
+          "Metadata"
         ],
         "description": "Get a Metadata.",
         "parameters": [
@@ -4211,7 +4217,7 @@
       "put": {
         "operationId": "Metadata_Create",
         "tags": [
-          "MetadataModels"
+          "Metadata"
         ],
         "description": "Create a Metadata.",
         "parameters": [
@@ -4284,7 +4290,7 @@
       "patch": {
         "operationId": "Metadata_Update",
         "tags": [
-          "MetadataModels"
+          "Metadata"
         ],
         "description": "Update an existing Metadata.",
         "parameters": [
@@ -4348,7 +4354,7 @@
       "delete": {
         "operationId": "Metadata_Delete",
         "tags": [
-          "MetadataModels"
+          "Metadata"
         ],
         "description": "Delete a Metadata.",
         "parameters": [
@@ -4633,7 +4639,7 @@
       "get": {
         "operationId": "SecurityMLAnalyticsSettings_List",
         "tags": [
-          "SecurityMLAnalyticsSettings"
+          "Security ML Analytics Settings"
         ],
         "description": "Gets all Security ML Analytics Settings.",
         "parameters": [
@@ -4685,7 +4691,7 @@
       "get": {
         "operationId": "SecurityMLAnalyticsSettings_Get",
         "tags": [
-          "SecurityMLAnalyticsSettings"
+          "Security ML Analytics Settings"
         ],
         "description": "Gets the Security ML Analytics Settings.",
         "parameters": [
@@ -4739,7 +4745,7 @@
       "put": {
         "operationId": "SecurityMLAnalyticsSettings_CreateOrUpdate",
         "tags": [
-          "SecurityMLAnalyticsSettings"
+          "Security ML Analytics Settings"
         ],
         "description": "Creates or updates the Security ML Analytics Settings.",
         "parameters": [
@@ -4808,7 +4814,7 @@
       "delete": {
         "operationId": "SecurityMLAnalyticsSettings_Delete",
         "tags": [
-          "SecurityMLAnalyticsSettings"
+          "Security ML Analytics Settings"
         ],
         "description": "Delete the Security ML Analytics Settings.",
         "parameters": [
@@ -5105,6 +5111,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/createIndicator": {
       "post": {
         "operationId": "ThreatIntelligenceIndicator_CreateIndicator",
+        "tags": [
+          "ThreatIntelligence"
+        ],
         "description": "Create a new threat intelligence indicator.",
         "parameters": [
           {
@@ -5167,7 +5176,7 @@
       "get": {
         "operationId": "ThreatIntelligenceIndicators_List",
         "tags": [
-          "ThreatIntelligenceInformations"
+          "ThreatIntelligence"
         ],
         "description": "Get all threat intelligence indicators.",
         "parameters": [
@@ -5248,7 +5257,7 @@
       "get": {
         "operationId": "ThreatIntelligenceIndicator_Get",
         "tags": [
-          "ThreatIntelligenceInformations"
+          "ThreatIntelligence"
         ],
         "description": "View a threat intelligence indicator by name.",
         "parameters": [
@@ -5302,7 +5311,7 @@
       "put": {
         "operationId": "ThreatIntelligenceIndicator_Create",
         "tags": [
-          "ThreatIntelligenceInformations"
+          "ThreatIntelligence"
         ],
         "description": "Update a threat Intelligence indicator.",
         "parameters": [
@@ -5371,7 +5380,7 @@
       "delete": {
         "operationId": "ThreatIntelligenceIndicator_Delete",
         "tags": [
-          "ThreatIntelligenceInformations"
+          "ThreatIntelligence"
         ],
         "description": "Delete a threat intelligence indicator.",
         "parameters": [
@@ -5427,7 +5436,7 @@
       "post": {
         "operationId": "ThreatIntelligenceIndicator_AppendTags",
         "tags": [
-          "ThreatIntelligenceInformations"
+          "ThreatIntelligence"
         ],
         "description": "Append tags to a threat intelligence indicator.",
         "parameters": [
@@ -5489,7 +5498,7 @@
       "post": {
         "operationId": "ThreatIntelligenceIndicator_ReplaceTags",
         "tags": [
-          "ThreatIntelligenceInformations"
+          "ThreatIntelligence"
         ],
         "description": "Replace tags added to a threat intelligence indicator.",
         "parameters": [
@@ -5553,6 +5562,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/metrics": {
       "get": {
         "operationId": "ThreatIntelligenceIndicatorMetrics_List",
+        "tags": [
+          "ThreatIntelligence"
+        ],
         "description": "Get threat intelligence indicators metrics (Indicators counts by Type, Threat Type, Source).",
         "parameters": [
           {
@@ -5599,6 +5611,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/queryIndicators": {
       "post": {
         "operationId": "ThreatIntelligenceIndicator_QueryIndicators",
+        "tags": [
+          "ThreatIntelligence"
+        ],
         "description": "Query threat intelligence indicators as per filtering criteria.",
         "parameters": [
           {

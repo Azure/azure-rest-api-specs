@@ -31,6 +31,7 @@ interface EntitiesOperationGroup {
    * Triggers playbook on a specific entity.
    */
   @autoRoute
+  @tag("manualTrigger")
   runPlaybook is Extension.ActionSync<
     OperationalInsights,
     EntityResource,
@@ -50,6 +51,7 @@ interface SourceControlOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
+  @tag("Repositories")
   @list
   @post
   @operationId("SourceControl_listRepositories")
@@ -102,6 +104,7 @@ interface ThreatIntelligenceIndicatorOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
+  @tag("ThreatIntelligence")
   @action("createIndicator")
   createIndicator is Extension.ActionSync<
     OperationalInsights,
@@ -117,6 +120,7 @@ interface ThreatIntelligenceIndicatorOperationGroup {
    * Query threat intelligence indicators as per filtering criteria.
    */
   @autoRoute
+  @tag("ThreatIntelligence")
   @action("queryIndicators")
   @list
   queryIndicators is Extension.ActionSync<
@@ -134,6 +138,7 @@ interface ThreatIntelligenceIndicatorMetricsOperationGroup {
    * Get threat intelligence indicators metrics (Indicators counts by Type, Threat Type, Source).
    */
   @autoRoute
+  @tag("ThreatIntelligence")
   @get
   @action("metrics")
   list is Extension.ActionSync<

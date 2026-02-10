@@ -64,3 +64,5 @@ enum Versions {
 
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<OperationsList, CloudError> {}
+
+@@tag(Operations.list, "Operations");

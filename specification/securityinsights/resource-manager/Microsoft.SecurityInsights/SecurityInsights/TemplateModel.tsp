@@ -29,7 +29,7 @@ model TemplateModel is Azure.ResourceManager.ProxyResource<TemplateProperties> {
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface TemplateModels {
   /**
    * Gets a template byt its identifier.
@@ -37,11 +37,13 @@ interface TemplateModels {
    * - properties/mainTemplate
    * - properties/dependantTemplates
    */
+  @tag("ContentTemplates")
   get is Extension.Read<OperationalInsights, TemplateModel, Error = CloudError>;
 
   /**
    * Install a template.
    */
+  @tag("ContentTemplates")
   install is Extension.CreateOrReplaceSync<
     OperationalInsights,
     TemplateModel,
@@ -51,6 +53,7 @@ interface TemplateModels {
   /**
    * Delete an installed template.
    */
+  @tag("ContentTemplates")
   delete is Extension.DeleteSync<
     OperationalInsights,
     TemplateModel,
@@ -63,6 +66,7 @@ interface TemplateModels {
    * - properties/mainTemplate
    * - properties/dependantTemplates
    */
+  @tag("ContentTemplates")
   list is Extension.ListByTarget<
     OperationalInsights,
     TemplateModel,

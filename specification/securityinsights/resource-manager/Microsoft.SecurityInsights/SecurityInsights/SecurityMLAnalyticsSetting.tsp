@@ -34,11 +34,12 @@ model SecurityMLAnalyticsSetting
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SecurityMLAnalyticsSettings {
   /**
    * Gets the Security ML Analytics Settings.
    */
+  @tag("Security ML Analytics Settings")
   get is Extension.Read<
     OperationalInsights,
     SecurityMLAnalyticsSetting,
@@ -48,6 +49,7 @@ interface SecurityMLAnalyticsSettings {
   /**
    * Creates or updates the Security ML Analytics Settings.
    */
+  @tag("Security ML Analytics Settings")
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     SecurityMLAnalyticsSetting,
@@ -57,6 +59,7 @@ interface SecurityMLAnalyticsSettings {
   /**
    * Delete the Security ML Analytics Settings.
    */
+  @tag("Security ML Analytics Settings")
   delete is Extension.DeleteSync<
     OperationalInsights,
     SecurityMLAnalyticsSetting,
@@ -66,6 +69,7 @@ interface SecurityMLAnalyticsSettings {
   /**
    * Gets all Security ML Analytics Settings.
    */
+  @tag("Security ML Analytics Settings")
   list is Extension.ListByTarget<
     OperationalInsights,
     SecurityMLAnalyticsSetting,

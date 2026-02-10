@@ -25,11 +25,12 @@ model AlertRuleTemplate
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AlertRuleTemplates {
   /**
    * Gets the alert rule template.
    */
+  @tag("Alert Rule Templates")
   get is Extension.Read<
     OperationalInsights,
     AlertRuleTemplate,
@@ -39,6 +40,7 @@ interface AlertRuleTemplates {
   /**
    * Gets all alert rule templates.
    */
+  @tag("Alert Rule Templates")
   list is Extension.ListByTarget<
     OperationalInsights,
     AlertRuleTemplate,

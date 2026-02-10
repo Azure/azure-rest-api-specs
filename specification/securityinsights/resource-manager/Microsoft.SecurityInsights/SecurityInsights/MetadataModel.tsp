@@ -29,16 +29,18 @@ model MetadataModel is Azure.ResourceManager.ProxyResource<MetadataProperties> {
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MetadataModels {
   /**
    * Get a Metadata.
    */
+  @tag("Metadata")
   get is Extension.Read<OperationalInsights, MetadataModel, Error = CloudError>;
 
   /**
    * Create a Metadata.
    */
+  @tag("Metadata")
   create is Extension.CreateOrReplaceSync<
     OperationalInsights,
     MetadataModel,
@@ -48,6 +50,7 @@ interface MetadataModels {
   /**
    * Update an existing Metadata.
    */
+  @tag("Metadata")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     OperationalInsights,
@@ -59,6 +62,7 @@ interface MetadataModels {
   /**
    * Delete a Metadata.
    */
+  @tag("Metadata")
   delete is Extension.DeleteSync<
     OperationalInsights,
     MetadataModel,
@@ -68,6 +72,7 @@ interface MetadataModels {
   /**
    * List of all metadata
    */
+  @tag("Metadata")
   list is Extension.ListByTarget<
     OperationalInsights,
     MetadataModel,

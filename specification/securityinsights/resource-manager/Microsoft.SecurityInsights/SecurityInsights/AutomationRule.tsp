@@ -68,11 +68,12 @@ alias AutomationRuleOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface AutomationRules {
   /**
    * Gets the automation rule.
    */
+  @tag("automationRules")
   get is Extension.Read<
     OperationalInsights,
     AutomationRule,
@@ -82,6 +83,7 @@ interface AutomationRules {
   /**
    * Creates or updates the automation rule.
    */
+  @tag("automationRules")
   createOrUpdate is AutomationRuleOps.CreateOrUpdateSync<
     AutomationRule,
     OptionalRequestBody = true,
@@ -94,6 +96,7 @@ interface AutomationRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("automationRules")
   delete is Extension.DeleteSync<
     OperationalInsights,
     AutomationRule,
@@ -106,6 +109,7 @@ interface AutomationRules {
   /**
    * Gets all automation rules.
    */
+  @tag("automationRules")
   list is Extension.ListByTarget<
     OperationalInsights,
     AutomationRule,

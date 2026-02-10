@@ -30,11 +30,12 @@ model ProductPackageModel
   etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ProductPackageModels {
   /**
    * Gets a package by its identifier from the catalog.
    */
+  @tag("ContentProductPackages")
   get is Extension.Read<
     OperationalInsights,
     ProductPackageModel,
@@ -47,6 +48,7 @@ interface ProductPackageModels {
    * - properties/installed
    * - properties/packagedContent
    */
+  @tag("ContentProductPackages")
   list is Extension.ListByTarget<
     OperationalInsights,
     ProductPackageModel,
