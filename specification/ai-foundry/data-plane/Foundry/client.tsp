@@ -66,11 +66,6 @@ using Azure.AI.Projects;
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
 @@clientName(AgentVersionObject, "AgentVersionDetails", "python");
-@@clientName(AgentContainerObject, "AgentContainerDetails", "python");
-@@clientName(AgentContainerOperationObject,
-  "AgentContainerOperationDetails",
-  "python"
-);
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
