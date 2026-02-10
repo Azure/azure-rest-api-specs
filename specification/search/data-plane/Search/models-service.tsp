@@ -3818,6 +3818,73 @@ model SearchIndex {
   eTag?: string;
 }
 
+/** Represents a search index definition, which describes the fields and search behavior of an index. */
+model SearchIndexResponse {
+  /** The name of the index. */
+  name: string;
+
+  /** The description of the index. */
+  description?: string;
+
+  /** The fields of the index. */
+  fields?: SearchField[];
+
+  /** The scoring profiles for the index. */
+  scoringProfiles?: ScoringProfile[];
+
+  /** The name of the scoring profile to use if none is specified in the query. If this property is not set and no scoring profile is specified in the query, then default scoring (tf-idf) will be used. */
+  defaultScoringProfile?: string;
+
+  /** Options to control Cross-Origin Resource Sharing (CORS) for the index. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  corsOptions?: CorsOptions | null;
+
+  /** The suggesters for the index. */
+  suggesters?: SearchSuggester[];
+
+  /** The analyzers for the index. */
+  analyzers?: LexicalAnalyzer[];
+
+  /** The tokenizers for the index. */
+  tokenizers?: LexicalTokenizer[];
+
+  /** The token filters for the index. */
+  tokenFilters?: TokenFilter[];
+
+  /** The character filters for the index. */
+  charFilters?: CharFilter[];
+
+  /** The normalizers for the index. */
+  normalizers?: LexicalNormalizer[];
+
+  /** A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data. Once you have encrypted your data, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  encryptionKey?: SearchResourceEncryptionKey | null;
+
+  /** The type of similarity algorithm to be used when scoring and ranking the documents matching a search query. The similarity algorithm can only be defined at index creation time and cannot be modified on existing indexes. If null, the ClassicSimilarity algorithm is used. */
+  similarity?: SimilarityAlgorithm;
+
+  /** Defines parameters for a search index that influence semantic capabilities. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  semantic?: SemanticSearch | null;
+
+  /** Contains configuration options related to vector search. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  vectorSearch?: VectorSearch | null;
+
+  /** A value indicating whether permission filtering is enabled for the index. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  permissionFilterOption?: SearchIndexPermissionFilterOption | null;
+
+  /** A value indicating whether Purview is enabled for the index. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  purviewEnabled?: boolean | null;
+
+  /** The ETag of the index. */
+  @encodedName("application/json", "@odata.etag")
+  eTag?: string;
+}
+
 /** Represents a field in an index definition, which describes the name, data type, and search behavior of a field. */
 model SearchField {
   /** The name of the field, which must be unique within the fields collection of the index or parent field. */
@@ -4153,6 +4220,14 @@ model ListIndexesResult {
   @pageItems
   @visibility(Lifecycle.Read)
   value: SearchIndex[];
+}
+
+/** Response from a List Indexes request. If successful, it includes the full definitions of all indexes. */
+model ListIndexesSelectedResult {
+  /** The indexes in the Search service. */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value: SearchIndexResponse[];
 }
 
 /** Statistics for a given index. Statistics are collected periodically and are not guaranteed to always be up-to-date. */

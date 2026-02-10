@@ -103,6 +103,10 @@ namespace SearchIndexClient {
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    listWithSelectedProperties is Search.Indexes.listWithSelectedProperties;
+
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.Indexes.create;
 
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -1284,6 +1288,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(Search.ListSynonymMapsResult, Access.public, "java");
 @@clientNamespace(Search.SearchIndex, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchIndex,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.SearchIndexResponse, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexResponse,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -2485,6 +2494,9 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchClient.Documents.count, "getDocumentCount");
 @@clientName(SearchClient.Documents.get, "getDocument");
 @@clientName(SearchIndexClient.Indexes.list, "listIndexes");
+@@clientName(SearchIndexClient.Indexes.listWithSelectedProperties,
+  "listIndexesWithSelectedProperties"
+);
 @@clientName(SearchIndexClient.Indexes.get, "getIndex");
 @@clientName(SearchIndexClient.Indexes.getStatistics, "getIndexStatistics");
 @@clientName(SearchIndexClient.Indexes.delete, "deleteIndex");
