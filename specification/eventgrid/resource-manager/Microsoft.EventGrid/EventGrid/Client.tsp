@@ -82,3 +82,8 @@ interface Clients {
 @@clientName(TlsVersion.`1.0`, "One0", "go");
 @@clientName(TlsVersion.`1.1`, "One1", "go");
 @@clientName(TlsVersion.`1.2`, "One2", "go");
+
+@@clientName(WebHookEventSubscriptionDestinationProperties,
+  "WebhookEventSubscriptionDestinationProperties",
+  "java"
+);
