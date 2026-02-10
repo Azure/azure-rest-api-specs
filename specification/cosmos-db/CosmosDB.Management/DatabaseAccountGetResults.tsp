@@ -193,8 +193,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -212,8 +212,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
        */
-      @query("$filter")
-      filter?: string;
+      @query
+      $filter?: string;
     }
   >;
 
@@ -250,8 +250,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -276,8 +276,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
        */
-      @query("$filter")
-      filter?: string;
+      @query
+      $filter?: string;
     }
   >;
 
@@ -329,8 +329,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -362,8 +362,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
        */
-      @query("$filter")
-      filter?: string;
+      @query
+      $filter?: string;
     }
   >;
 
@@ -429,8 +429,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -455,8 +455,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -488,8 +488,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -514,8 +514,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -533,8 +533,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -573,8 +573,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -606,8 +606,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -639,8 +639,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).
        */
-      @query("$filter")
-      filter?: string;
+      @query
+      $filter?: string;
     }
   >;
 
@@ -679,8 +679,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 
@@ -726,8 +726,8 @@ interface DatabaseAccounts {
       /**
        * An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.
        */
-      @query("$filter")
-      filter: string;
+      @query
+      $filter: string;
     }
   >;
 }

@@ -112,7 +112,7 @@ interface ClusterResources {
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CommandPublicResource>,
     Response = ArmResponse<CommandPublicResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CommandPublicResource> &
       Azure.Core.Foundations.RetryAfterHeader>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 
   /**

@@ -1127,7 +1127,7 @@ union ServiceType {
 /**
  * Describes the status of a service.
  */
-union ServiceStatus {
+union ServiceResourceStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
@@ -2428,12 +2428,6 @@ model DatabaseAccountUpdateProperties {
   customerManagedKeyStatus?: string;
 
   /**
-   * The version of the Customer Managed Key currently being used by the account
-   */
-  @visibility(Lifecycle.Read)
-  keyVaultKeyUriVersion?: string;
-
-  /**
    * Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account
    */
   enablePriorityBasedExecution?: boolean;
@@ -2452,18 +2446,6 @@ model DatabaseAccountUpdateProperties {
    * Flag to indicate if All Versions and Deletes Change feed feature is enabled on the account
    */
   enableAllVersionsAndDeletesChangeFeed?: boolean;
-
-  /**
-   * Total dedicated throughput (RU/s) for database account. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  throughputPoolDedicatedRUs?: int64;
-
-  /**
-   * When this account is part of a fleetspace with throughput pooling enabled, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  throughputPoolMaxConsumableRUs?: int64;
 }
 
 /**
@@ -8059,7 +8041,7 @@ model ServiceResourceProperties {
    * Describes the status of a service.
    */
   @visibility(Lifecycle.Read)
-  status?: ServiceStatus;
+  status?: ServiceResourceStatus;
 }
 
 /**
@@ -9126,7 +9108,7 @@ model RegionalServiceResource {
    * Describes the status of a service.
    */
   @visibility(Lifecycle.Read)
-  status?: ServiceStatus;
+  status?: ServiceResourceStatus;
 }
 
 /**
