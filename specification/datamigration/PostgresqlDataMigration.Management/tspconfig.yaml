@@ -1,0 +1,46 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/postgressqlDatamigration.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-java":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-postgresqldatamigration"
+    namespace: "com.azure.resourcemanager.postgresqldatamigration"
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-postgresqldatamigration"
+    package-details:
+      name: "@azure/arm-postgresqldatamigration"
+  "@azure-tools/typespec-go":
+    service-dir: sdk/resourcemanager/postgresqldatamigration
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/armpostgresqldatamigration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpostgresqldatamigration"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-postgresqldatamigration"
+    namespace: "azure.mgmt.postgresqldatamigration"
+    generate-sample: true
+    generate-test: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    namespace: "Azure.ResourceManager.PostgreSqlDataMigration"
+    clear-output-folder: true
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.PostgreSqlDataMigration"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+parameters:
+  service-dir:
+    default: sdk/postgresqldatamigration

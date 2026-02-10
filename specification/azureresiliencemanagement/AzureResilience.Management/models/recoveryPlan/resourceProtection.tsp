@@ -1,5 +1,6 @@
 import "@typespec/http";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 import "../../main.tsp";
@@ -10,6 +11,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using OpenAPI;
+using TypeSpec.Versioning;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -73,6 +75,16 @@ model ResourceProtectionSolutionSettings {
   @doc("Active location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)
   activeLocation?: string;
+
+  @doc("Active locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activeLocations?: string[];
+
+  @doc("Active Resource location and physical zones of Azure Resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activePhysicalZones?: string[];
 
   @doc("List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.")
   @visibility(Lifecycle.Read)

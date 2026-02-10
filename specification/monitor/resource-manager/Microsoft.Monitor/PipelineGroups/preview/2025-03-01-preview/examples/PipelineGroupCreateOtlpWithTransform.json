@@ -31,7 +31,7 @@
             "type": "TransformLanguage",
             "name": "transform1",
             "transformLanguage": {
-              "transformStatement": "source | extend Foo = 'bar'"
+              "transformStatement": "source | extend FooColumn = 'bar'"
             }
           }
         ],
@@ -47,8 +47,8 @@
                 "schema": {
                   "recordMap": [
                     {
-                      "from": "severity_text",
-                      "to": "SeverityText"
+                      "from": "attributes.FooColumn",
+                      "to": "FooColumn"
                     },
                     {
                       "from": "body",
@@ -119,7 +119,7 @@
               "type": "TransformLanguage",
               "name": "transform1",
               "transformLanguage": {
-                "transformStatement": "source | extend Foo = 'bar'"
+                "transformStatement": "source | extend FooColumn = 'bar'"
               }
             }
           ],
@@ -135,8 +135,8 @@
                   "schema": {
                     "recordMap": [
                       {
-                        "from": "severity_text",
-                        "to": "SeverityText"
+                        "from": "attributes.FooColumn",
+                        "to": "FooColumn"
                       },
                       {
                         "from": "body",
@@ -214,7 +214,7 @@
               "type": "TransformLanguage",
               "name": "transform1",
               "transformLanguage": {
-                "transformStatement": "source | extend Foo = 'bar'"
+                "transformStatement": "source | extend FooColumn = 'bar'"
               }
             }
           ],
@@ -230,8 +230,8 @@
                   "schema": {
                     "recordMap": [
                       {
-                        "from": "severity_text",
-                        "to": "SeverityText"
+                        "from": "attributes.FooColumn",
+                        "to": "FooColumn"
                       },
                       {
                         "from": "body",

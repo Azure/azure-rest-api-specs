@@ -6,7 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./common/extendedLocation.tsp";
 import "./common/provisioningState.tsp";
 import "./common/authenticationMethod.tsp";
-import "./common/ns_discoveredDeviceProperties.tsp";
+import "./properties/ns_discoveredDeviceProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -41,6 +41,7 @@ model NamespaceDiscoveredDevice
 interface NamespaceDiscoveredDevices {
   get is ArmResourceRead<NamespaceDiscoveredDevice>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<NamespaceDiscoveredDevice>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     NamespaceDiscoveredDevice,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

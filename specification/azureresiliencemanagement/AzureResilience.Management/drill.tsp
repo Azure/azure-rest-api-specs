@@ -49,6 +49,24 @@ interface Drills {
   POST Actions
   */
   @route(ServiceGroupRoute)
+  @added(Versions.v2026_03_01_preview)
+  @armResourceAction(Drill)
+  @post
+  @doc("This returns eligible resource to be faulted or failed over.")
+  validateForExecution is ArmResourceActionAsync<
+    Drill,
+    ValidateForExecutionRequest,
+    ValidateForExecutionResponse,
+    ServiceGroupAndRequestHeadersParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+  POST Actions
+  */
+  @route(ServiceGroupRoute)
   @armResourceAction(Drill)
   @post
   @doc("This starts a new running instance of the Drill.")
@@ -95,6 +113,20 @@ interface Drills {
   @post
   @doc("This triggers detection of any drifts from the desired state of Target and capabilities and RBAC.")
   refreshReadinessState is ArmResourceActionNoResponseContentAsync<
+    Drill,
+    void,
+    ServiceGroupAndRequestHeadersParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @route(ServiceGroupRoute)
+  @added(Versions.v2026_03_01_preview)
+  @armResourceAction(Drill)
+  @post
+  @doc("This triggers detection of any drifts from the desired state of Target and capabilities and RBAC.")
+  resyncReadinessCheck is ArmResourceActionNoResponseContentAsync<
     Drill,
     void,
     ServiceGroupAndRequestHeadersParameters,

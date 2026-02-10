@@ -1,0 +1,1010 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure CIS FRP",
+    "version": "2025-11-04-preview",
+    "description": "Geneva Logs Provider",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "GenevaLogsAccounts"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Monitor/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Operations GenevaLogsAccounts": {
+            "$ref": "./examples/GenevaLogsAccounts_Operations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/genevaLogsAccounts": {
+      "get": {
+        "operationId": "GenevaLogsAccounts_ListBySubscription",
+        "tags": [
+          "GenevaLogsAccounts"
+        ],
+        "description": "List GenevaLogsAccountsResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenevaLogsAccountsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListBySubscription GenevaLogsAccounts": {
+            "$ref": "./examples/GenevaLogsAccounts_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/genevaLogsAccounts": {
+      "get": {
+        "operationId": "GenevaLogsAccounts_ListByResourceGroup",
+        "tags": [
+          "GenevaLogsAccounts"
+        ],
+        "description": "List GenevaLogsAccountsResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenevaLogsAccountsResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup GenevaLogsAccounts": {
+            "$ref": "./examples/GenevaLogsAccounts_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/genevaLogsAccounts/{resourceName}": {
+      "get": {
+        "operationId": "GenevaLogsAccounts_Get",
+        "tags": [
+          "GenevaLogsAccounts"
+        ],
+        "description": "Get a GenevaLogsAccountsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GenevaLogsAccountsResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get GenevaLogsAccounts": {
+            "$ref": "./examples/GenevaLogsAccounts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GenevaLogsAccounts_CreateOrUpdate",
+        "tags": [
+          "GenevaLogsAccounts"
+        ],
+        "description": "Create a GenevaLogsAccountsResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenevaLogsAccountsResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GenevaLogsAccountsResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GenevaLogsAccountsResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'GenevaLogsAccountsResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GenevaLogsAccountsResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create GenevaLogsAccounts": {
+            "$ref": "./examples/GenevaLogsAccounts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AccountReplicationType": {
+      "type": "string",
+      "description": "Account replication type (SKU).",
+      "enum": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_ZRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ],
+      "x-ms-enum": {
+        "name": "AccountReplicationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard_LRS",
+            "value": "Standard_LRS",
+            "description": "Standard Locally Redundant Storage."
+          },
+          {
+            "name": "Standard_GRS",
+            "value": "Standard_GRS",
+            "description": "Standard Geo Replicated Storage."
+          },
+          {
+            "name": "Standard_ZRS",
+            "value": "Standard_ZRS",
+            "description": "Standard Zone Redundant Storage."
+          },
+          {
+            "name": "Standard_RAGRS",
+            "value": "Standard_RAGRS",
+            "description": "Standard Read-Access Geo Replicated Storage."
+          },
+          {
+            "name": "Premium_LRS",
+            "value": "Premium_LRS",
+            "description": "Provisioned IO Locally Redundant Storage."
+          }
+        ]
+      }
+    },
+    "AgentClaim": {
+      "type": "object",
+      "description": "Agent claim",
+      "properties": {
+        "namespaceRegex": {
+          "type": "string",
+          "description": "The namespace regex"
+        },
+        "right": {
+          "type": "string",
+          "description": "The right"
+        }
+      },
+      "required": [
+        "namespaceRegex",
+        "right"
+      ]
+    },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
+    "ConfigClaim": {
+      "type": "object",
+      "description": "Config claim",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "The resource"
+        },
+        "right": {
+          "type": "string",
+          "description": "The right"
+        }
+      },
+      "required": [
+        "resource",
+        "right"
+      ]
+    },
+    "ConfigDetails": {
+      "type": "object",
+      "description": "Configuration details result",
+      "properties": {
+        "configVersion": {
+          "type": "string",
+          "description": "Configuration version"
+        }
+      },
+      "required": [
+        "configVersion"
+      ]
+    },
+    "ConfigUploadMode": {
+      "type": "string",
+      "description": "Configuration uploading mode",
+      "enum": [
+        "ARM",
+        "DCMT"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigUploadMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ARM",
+            "value": "ARM",
+            "description": "ARM mode"
+          },
+          {
+            "name": "DCMT",
+            "value": "DCMT",
+            "description": "DCMT mode"
+          }
+        ]
+      }
+    },
+    "DsmsCertificate": {
+      "type": "object",
+      "description": "DSMS certificate",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description"
+        },
+        "identity": {
+          "type": "string",
+          "description": "The identity"
+        }
+      },
+      "required": [
+        "description",
+        "identity"
+      ]
+    },
+    "GenevaLogsAccountsResource": {
+      "type": "object",
+      "description": "genevaLogsAccounts Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GenevaLogsAccountsResourceProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GenevaLogsAccountsResourceListResult": {
+      "type": "object",
+      "description": "The response of a GenevaLogsAccountsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GenevaLogsAccountsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/GenevaLogsAccountsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GenevaLogsAccountsResourceProperties": {
+      "type": "object",
+      "description": "GenevaLogsAccounts properties",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the warm path account. This must be unique. Logs Account name must start with a letter and can contain numbers/letters.",
+          "minLength": 6,
+          "maxLength": 32,
+          "pattern": "^[a-zA-Z0-9-]*$"
+        },
+        "mdsEnvironment": {
+          "$ref": "#/definitions/MdsEnvironment",
+          "description": "The MDS environment"
+        },
+        "metricsAccountName": {
+          "type": "string",
+          "description": "The metrics account name"
+        },
+        "contactEmail": {
+          "type": "string",
+          "description": "The contact email"
+        },
+        "administratorAliases": {
+          "type": "array",
+          "description": "The array of aliases for administrators",
+          "items": {
+            "type": "string"
+          }
+        },
+        "administratorSecurityGroup": {
+          "type": "string",
+          "description": "The security group for account administrator"
+        },
+        "subscriptionIds": {
+          "type": "array",
+          "description": "An Azure subscription to use for GSM provisioning. Each subscription in the list must have granted Geneva access via RBAC.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultStorageReplicationType": {
+          "$ref": "#/definitions/AccountReplicationType",
+          "description": "The default storage replication type"
+        },
+        "dsmsCertificate": {
+          "$ref": "#/definitions/DsmsCertificate",
+          "description": "DSMS certificate for configuring the MACommunication User Role."
+        },
+        "keyVaultCertificate": {
+          "$ref": "#/definitions/KeyVaultCertificate",
+          "description": "Key Vault certificate for configuring the MACommunication User Role."
+        },
+        "namespaceNames": {
+          "type": "array",
+          "description": "Namespaces to register with MDS.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createDefaultStorageGroups": {
+          "type": "boolean",
+          "description": "Flag, indicating whether to create default storage groups."
+        },
+        "defaultAzureRegion": {
+          "type": "string",
+          "description": "Region where the initial monikers would be created for default storage groups."
+        },
+        "mode": {
+          "$ref": "#/definitions/ConfigUploadMode",
+          "description": "Mode for configuration files uploading. Could be 'ARM' or 'DCMT'."
+        },
+        "namespaceConfig": {
+          "type": "string",
+          "description": "SAS for config package zip file containing a configuration to upload."
+        },
+        "namespaceConfigMainFile": {
+          "type": "string",
+          "description": "Specifies the SAS for configuration main file, if provided instead of config package zip file."
+        },
+        "namespaceConfigImportZip": {
+          "type": "string",
+          "description": "Specifies the SAS for zip import file."
+        },
+        "namespaceConfigImportFiles": {
+          "type": "array",
+          "description": "Explicitly specify SAS for each import file, if provided not in zip format.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "storageGroups": {
+          "type": "array",
+          "description": "Define custom storage groups instead of using the default storage groups, and setup Kusto streaming.",
+          "items": {
+            "$ref": "#/definitions/StorageGroup"
+          },
+          "x-ms-identifiers": [
+            "storageGroupName"
+          ]
+        },
+        "userRoles": {
+          "type": "array",
+          "description": "Define custom user roles in addition to the user roles created by default (MaCommunication and MdsAccountAdmin roles).",
+          "items": {
+            "$ref": "#/definitions/UserRole"
+          }
+        },
+        "azureLocation": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure location."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/GenevaLogsProvisioningState",
+          "description": "Provisioning status of the resource.",
+          "readOnly": true
+        },
+        "configDetails": {
+          "$ref": "#/definitions/ConfigDetails",
+          "description": "Resource event argument result; a part of provisioning ResultData output.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "accountName",
+        "mdsEnvironment",
+        "metricsAccountName",
+        "contactEmail",
+        "administratorAliases",
+        "administratorSecurityGroup",
+        "subscriptionIds",
+        "defaultStorageReplicationType",
+        "namespaceNames"
+      ]
+    },
+    "GenevaLogsProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "GenevaLogsProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted State"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "KeyVaultCertificate": {
+      "type": "object",
+      "description": "KeyVault certificate",
+      "properties": {
+        "rootCertificateThumbprint": {
+          "type": "string",
+          "description": "The root certificate thumbprint"
+        },
+        "san": {
+          "type": "string",
+          "description": "The SAN"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description"
+        }
+      },
+      "required": [
+        "rootCertificateThumbprint",
+        "san",
+        "description"
+      ]
+    },
+    "KustoSettingsMode": {
+      "type": "string",
+      "description": "Kusto settings mode",
+      "enum": [
+        "Append",
+        "Reset"
+      ],
+      "x-ms-enum": {
+        "name": "KustoSettingsMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Append",
+            "value": "Append",
+            "description": "Append mode"
+          },
+          {
+            "name": "Reset",
+            "value": "Reset",
+            "description": "Reset mode"
+          }
+        ]
+      }
+    },
+    "MdsEnvironment": {
+      "type": "string",
+      "description": "MDS environment",
+      "enum": [
+        "Smoke",
+        "Canary",
+        "Test",
+        "Stage",
+        "DiagnosticsProd",
+        "FirstPartyProd",
+        "BillingProd",
+        "CaFairfax",
+        "CaMooncake",
+        "CaBlackForest",
+        "UsSec",
+        "UsNat",
+        "ExternalProd",
+        "CanaryEast",
+        "CanaryWest",
+        "CanaryNorth",
+        "CanarySouth",
+        "Bleu",
+        "Delos",
+        "GovSG"
+      ],
+      "x-ms-enum": {
+        "name": "MdsEnvironment",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Smoke",
+            "value": "Smoke",
+            "description": "Smoke environment"
+          },
+          {
+            "name": "Canary",
+            "value": "Canary",
+            "description": "Canary environment"
+          },
+          {
+            "name": "Test",
+            "value": "Test",
+            "description": "Test environment"
+          },
+          {
+            "name": "Stage",
+            "value": "Stage",
+            "description": "Stage environment"
+          },
+          {
+            "name": "DiagnosticsProd",
+            "value": "DiagnosticsProd",
+            "description": "DiagnosticsProd environment"
+          },
+          {
+            "name": "FirstPartyProd",
+            "value": "FirstPartyProd",
+            "description": "FirstPartyProd environment"
+          },
+          {
+            "name": "BillingProd",
+            "value": "BillingProd",
+            "description": "BillingProd environment"
+          },
+          {
+            "name": "CaFairfax",
+            "value": "CaFairfax",
+            "description": "CaFairfax environment"
+          },
+          {
+            "name": "CaMooncake",
+            "value": "CaMooncake",
+            "description": "CaMooncake environment"
+          },
+          {
+            "name": "CaBlackForest",
+            "value": "CaBlackForest",
+            "description": "CaBlackForest environment"
+          },
+          {
+            "name": "UsSec",
+            "value": "UsSec",
+            "description": "UsSec environment"
+          },
+          {
+            "name": "UsNat",
+            "value": "UsNat",
+            "description": "UsNat environment"
+          },
+          {
+            "name": "ExternalProd",
+            "value": "ExternalProd",
+            "description": "ExternalProd environment"
+          },
+          {
+            "name": "CanaryEast",
+            "value": "CanaryEast",
+            "description": "CanaryEast environment"
+          },
+          {
+            "name": "CanaryWest",
+            "value": "CanaryWest",
+            "description": "CanaryWest environment"
+          },
+          {
+            "name": "CanaryNorth",
+            "value": "CanaryNorth",
+            "description": "CanaryNorth environment"
+          },
+          {
+            "name": "CanarySouth",
+            "value": "CanarySouth",
+            "description": "CanarySouth environment"
+          },
+          {
+            "name": "Bleu",
+            "value": "Bleu",
+            "description": "Bleu environment"
+          },
+          {
+            "name": "Delos",
+            "value": "Delos",
+            "description": "Delos environment"
+          },
+          {
+            "name": "GovSG",
+            "value": "GovSG",
+            "description": "GovSG environment"
+          }
+        ]
+      }
+    },
+    "MsiConfig": {
+      "type": "object",
+      "description": "MSI configuration",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "The object identifier"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant identifier"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The resource identifier"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description"
+        }
+      },
+      "required": [
+        "description"
+      ]
+    },
+    "RegionBasedKustoSetting": {
+      "type": "object",
+      "description": "Region based Kusto setting",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "The setting region"
+        },
+        "logAnalyticsId": {
+          "type": "string",
+          "description": "The log analytics id"
+        },
+        "logAnalyticsDatabase": {
+          "type": "string",
+          "description": "The log analytics database"
+        }
+      },
+      "required": [
+        "region",
+        "logAnalyticsId",
+        "logAnalyticsDatabase"
+      ]
+    },
+    "StorageGroup": {
+      "type": "object",
+      "description": "Storage Group",
+      "properties": {
+        "configNamespace": {
+          "type": "string",
+          "description": "The config namespace"
+        },
+        "storageGroupName": {
+          "type": "string",
+          "description": "The storage group name"
+        },
+        "defaultRegion": {
+          "type": "string",
+          "description": "The default region"
+        },
+        "storageReplicationTypes": {
+          "type": "array",
+          "description": "The storage replication types",
+          "items": {
+            "$ref": "#/definitions/AccountReplicationType"
+          }
+        },
+        "consumerGroups": {
+          "type": "array",
+          "description": "The consumer groups",
+          "items": {
+            "type": "string"
+          }
+        },
+        "regionBasedKustoSettingsMode": {
+          "$ref": "#/definitions/KustoSettingsMode",
+          "description": "The region based Kusto settings mode"
+        },
+        "regionBasedKustoSettings": {
+          "type": "array",
+          "description": "The region based Kusto settings",
+          "items": {
+            "$ref": "#/definitions/RegionBasedKustoSetting"
+          },
+          "x-ms-identifiers": [
+            "region"
+          ]
+        }
+      },
+      "required": [
+        "configNamespace",
+        "storageGroupName",
+        "defaultRegion",
+        "storageReplicationTypes",
+        "consumerGroups",
+        "regionBasedKustoSettingsMode",
+        "regionBasedKustoSettings"
+      ]
+    },
+    "UserRole": {
+      "type": "object",
+      "description": "User role",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The user role name"
+        },
+        "securityGroups": {
+          "type": "array",
+          "description": "The security groups",
+          "items": {
+            "type": "string"
+          }
+        },
+        "users": {
+          "type": "array",
+          "description": "The users",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dsmsCertificates": {
+          "type": "array",
+          "description": "The dSMS certificates",
+          "items": {
+            "$ref": "#/definitions/DsmsCertificate"
+          },
+          "x-ms-identifiers": [
+            "identity"
+          ]
+        },
+        "keyVaultCertificates": {
+          "type": "array",
+          "description": "The KeyVault certificates",
+          "items": {
+            "$ref": "#/definitions/KeyVaultCertificate"
+          },
+          "x-ms-identifiers": [
+            "rootCertificateThumbprint"
+          ]
+        },
+        "msiConfigs": {
+          "type": "array",
+          "description": "The MSI configurations",
+          "items": {
+            "$ref": "#/definitions/MsiConfig"
+          },
+          "x-ms-identifiers": [
+            "objectId"
+          ]
+        },
+        "appkiAcl": {
+          "type": "array",
+          "description": "The list of AutoPilot Public Key Infrastructure Access Control Lists",
+          "items": {
+            "type": "string"
+          }
+        },
+        "agentClaims": {
+          "type": "array",
+          "description": "The agent claims",
+          "items": {
+            "$ref": "#/definitions/AgentClaim"
+          },
+          "x-ms-identifiers": [
+            "namespaceRegex"
+          ]
+        },
+        "configClaims": {
+          "type": "array",
+          "description": "The config claims",
+          "items": {
+            "$ref": "#/definitions/ConfigClaim"
+          },
+          "x-ms-identifiers": [
+            "resource"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "securityGroups",
+        "users"
+      ]
+    }
+  },
+  "parameters": {}
+}

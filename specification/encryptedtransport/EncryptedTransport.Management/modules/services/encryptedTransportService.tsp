@@ -9,7 +9,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace
