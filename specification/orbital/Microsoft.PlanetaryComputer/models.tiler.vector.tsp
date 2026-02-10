@@ -49,6 +49,19 @@ model Conformance {
 }
 
 /**
+ * Mapbox Style version.
+ */
+@added(Versions.v2025_04_30_Preview)
+union MapboxStyleVersion {
+  int32,
+
+  /**
+   * Mapbox Style version 8
+   */
+  v8: 8,
+}
+
+/**
  * Mapbox Style definition.
  */
 @added(Versions.v2025_04_30_Preview)
@@ -63,7 +76,7 @@ model MapboxStyle {
   /**
    * Style version.
    */
-  version: 8;
+  version: MapboxStyleVersion;
 
   /**
    * Style name.

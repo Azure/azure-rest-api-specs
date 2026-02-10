@@ -7227,7 +7227,7 @@
     },
     "/data/vector/{searchId}/tiles": {
       "get": {
-        "operationId": "VectorSearchTilesOperations_GetSearchTileSetsList",
+        "operationId": "VectorTilesDataset_GetSearchTileSetsList",
         "tags": [
           "Vector Tiles"
         ],
@@ -7279,15 +7279,15 @@
           }
         },
         "x-ms-examples": {
-          "VectorTilesDataset_GetTileSetsList": {
-            "$ref": "./examples/VectorTilesDataset_GetTileSetsList.json"
+          "VectorTilesDataset_GetSearchTileSetsList": {
+            "$ref": "./examples/VectorTilesDataset_GetSearchTileSetsList.json"
           }
         }
       }
     },
     "/data/vector/{searchId}/tiles/{tileMatrixSetId}": {
       "get": {
-        "operationId": "VectorSearchTilesOperations_GetSearchTileSet",
+        "operationId": "VectorTilesDataset_GetSearchTileSet",
         "tags": [
           "Vector Tiles"
         ],
@@ -7346,15 +7346,15 @@
           }
         },
         "x-ms-examples": {
-          "VectorTilesDataset_GetTileSet": {
-            "$ref": "./examples/VectorTilesDataset_GetTileSet.json"
+          "VectorTilesDataset_GetSearchTileSet": {
+            "$ref": "./examples/VectorTilesDataset_GetSearchTileSet.json"
           }
         }
       }
     },
     "/data/vector/{searchId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}": {
       "get": {
-        "operationId": "VectorSearchTilesOperations_GetSearchTile",
+        "operationId": "VectorTilesDataset_GetSearchTile",
         "tags": [
           "Vector Tiles"
         ],
@@ -7442,8 +7442,8 @@
           }
         },
         "x-ms-examples": {
-          "VectorTilesDataset_GetTile": {
-            "$ref": "./examples/VectorTilesDataset_GetTile.json"
+          "VectorTilesDataset_GetSearchTile": {
+            "$ref": "./examples/VectorTilesDataset_GetSearchTile.json"
           }
         }
       }
@@ -7503,7 +7503,7 @@
     },
     "/data/vector/collections/{collectionId}/tiles": {
       "get": {
-        "operationId": "VectorTilesOperations_GetTileSetsList",
+        "operationId": "VectorTilesCollections_GetTileSetsList",
         "tags": [
           "Vector Tiles"
         ],
@@ -7563,7 +7563,7 @@
     },
     "/data/vector/collections/{collectionId}/tiles/{tileMatrixSetId}": {
       "get": {
-        "operationId": "VectorTilesOperations_GetTileSet",
+        "operationId": "VectorTilesCollections_GetTileSet",
         "tags": [
           "Vector Tiles"
         ],
@@ -7630,7 +7630,7 @@
     },
     "/data/vector/collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}": {
       "get": {
-        "operationId": "VectorTilesOperations_GetTile",
+        "operationId": "VectorTilesCollections_GetTile",
         "tags": [
           "Vector Tiles"
         ],
@@ -15691,11 +15691,8 @@
           "pattern": "^[A-Za-z0-9_-]+$"
         },
         "version": {
-          "type": "number",
-          "description": "Style version.",
-          "enum": [
-            8
-          ]
+          "$ref": "#/definitions/MapboxStyleVersion",
+          "description": "Style version."
         },
         "name": {
           "type": "string",
@@ -15752,6 +15749,24 @@
         "id",
         "version"
       ]
+    },
+    "MapboxStyleVersion": {
+      "type": "number",
+      "description": "Mapbox Style version.",
+      "enum": [
+        8
+      ],
+      "x-ms-enum": {
+        "name": "MapboxStyleVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v8",
+            "value": 8,
+            "description": "Mapbox Style version 8"
+          }
+        ]
+      }
     },
     "MapboxStylesList": {
       "type": "object",
