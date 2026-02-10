@@ -93,19 +93,4 @@ union ServerEventType {
 
   @added(Versions.v2026_01_01_preview)
   response_mcp_call_failed: "response.mcp_call.failed",
-
-  @added(Versions.v2026_01_01_preview)
-  response_foundry_agent_call_arguments_delta: "response.foundry_agent_call_arguments.delta",
-
-  @added(Versions.v2026_01_01_preview)
-  response_foundry_agent_call_arguments_done: "response.foundry_agent_call_arguments.done",
-
-  @added(Versions.v2026_01_01_preview)
-  response_foundry_agent_call_in_progress: "response.foundry_agent_call.in_progress",
-
-  @added(Versions.v2026_01_01_preview)
-  response_foundry_agent_call_completed: "response.foundry_agent_call.completed",
-
-  @added(Versions.v2026_01_01_preview)
-  response_foundry_agent_call_failed: "response.foundry_agent_call.failed",
 }
