@@ -585,7 +585,10 @@ model ValidateConfigurationResponse {
 
 @doc("The response of the action validate configuration.")
 @added(Versions.v2026_01_15_preview)
-model ValidateConfigurationResponseV2 is OperationStatusResult {
+model ValidateConfigurationResponseV2 {
+
+  ...OperationStatusResult;
+
   @doc("Network Device Run Rw Command Response properties.")
   properties?: ValidateConfigurationResponseProperties;
 }
