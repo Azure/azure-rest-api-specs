@@ -114,16 +114,20 @@ alias ExtensionBuildingOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface Extensions {
   /**
    * Gets Kubernetes Cluster Extension.
    */
+  @tag("Extensions")
+  @tag("ClusterExtensions")
   get is ExtensionOps.Read<Extension>;
 
   /**
    * Create a new Kubernetes Cluster Extension.
    */
+  @tag("Extensions")
+  @tag("ClusterExtensions")
   create is ExtensionOps.CreateOrUpdateAsync<Extension>;
 
   /**
@@ -131,6 +135,8 @@ interface Extensions {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Extensions")
+  @tag("ClusterExtensions")
   @patch(#{ implicitOptionality: false })
   update is ExtensionOps.CustomPatchAsync<
     Extension,
@@ -148,6 +154,8 @@ interface Extensions {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Extensions")
+  @tag("ClusterExtensions")
   delete is ExtensionOps.DeleteWithoutOkAsync<
     Extension,
     Parameters = {
@@ -164,11 +172,14 @@ interface Extensions {
   /**
    * List all Extensions in the cluster.
    */
+  @tag("Extensions")
+  @tag("ClusterExtensions")
   list is ExtensionOps.List<Extension, Response = ArmResponse<ExtensionsList>>;
 
   /**
    * Get Async Operation status
    */
+  @tag("Extension Operation Status")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/extensions/{extensionName}/operations/{operationId}")
   operationStatusGet is ExtensionBuildingOps.ActionSync<

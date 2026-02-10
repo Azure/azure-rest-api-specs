@@ -41,6 +41,12 @@
   "tags": [
     {
       "name": "Extensions"
+    },
+    {
+      "name": "ClusterExtensions"
+    },
+    {
+      "name": "Extension Operation Status"
     }
   ],
   "paths": {
@@ -48,7 +54,8 @@
       "get": {
         "operationId": "Extensions_List",
         "tags": [
-          "Extensions"
+          "Extensions",
+          "ClusterExtensions"
         ],
         "description": "List all Extensions in the cluster.",
         "parameters": [
@@ -113,7 +120,8 @@
       "get": {
         "operationId": "Extensions_Get",
         "tags": [
-          "Extensions"
+          "Extensions",
+          "ClusterExtensions"
         ],
         "description": "Gets Kubernetes Cluster Extension.",
         "parameters": [
@@ -183,7 +191,8 @@
       "put": {
         "operationId": "Extensions_Create",
         "tags": [
-          "Extensions"
+          "Extensions",
+          "ClusterExtensions"
         ],
         "description": "Create a new Kubernetes Cluster Extension.",
         "parameters": [
@@ -284,7 +293,8 @@
       "patch": {
         "operationId": "Extensions_Update",
         "tags": [
-          "Extensions"
+          "Extensions",
+          "ClusterExtensions"
         ],
         "description": "Patch an existing Kubernetes Cluster Extension.",
         "parameters": [
@@ -382,7 +392,8 @@
       "delete": {
         "operationId": "Extensions_Delete",
         "tags": [
-          "Extensions"
+          "Extensions",
+          "ClusterExtensions"
         ],
         "description": "Delete a Kubernetes Cluster Extension. This will cause the Agent to Uninstall the extension from the cluster.",
         "parameters": [
@@ -476,7 +487,7 @@
       "get": {
         "operationId": "OperationStatus_Get",
         "tags": [
-          "Extensions"
+          "Extension Operation Status"
         ],
         "description": "Get Async Operation status",
         "parameters": [
