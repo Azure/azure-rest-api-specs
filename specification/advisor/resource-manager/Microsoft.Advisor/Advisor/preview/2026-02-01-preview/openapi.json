@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AdvisorManagementClient",
-    "version": "2025-05-01-preview",
+    "version": "2026-02-01-preview",
     "description": "REST APIs for Azure Advisor Resiliency Reviews.",
     "x-typespec-generated": [
       {
@@ -47,6 +47,9 @@
     },
     {
       "name": "ResourceRecommendationBases"
+    },
+    {
+      "name": "RecommendationsPatch"
     },
     {
       "name": "SuppressionContracts"
@@ -165,56 +168,6 @@
           },
           "GetRecommendationDetailSubscriptionResourceUri": {
             "$ref": "./examples/GetRecommendationDetailSubscriptionResourceUri.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "Recommendations_Patch",
-        "tags": [
-          "ResourceRecommendationBases"
-        ],
-        "description": "Update the tracked properties of a Recommendation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.ResourceManager.ResourceUriParameter"
-          },
-          {
-            "name": "recommendationId",
-            "in": "path",
-            "description": "The recommendation ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "trackedProperties",
-            "in": "body",
-            "description": "The properties to update on the recommendation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TrackedRecommendationPropertiesPayload"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResourceRecommendationBase"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "UpdateTrackedRecommendation": {
-            "$ref": "./examples/UpdateTrackedRecommendation.json"
           }
         }
       }
@@ -1110,6 +1063,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
+      "patch": {
+        "operationId": "RecommendationsPatch_Patch",
+        "tags": [
+          "RecommendationsPatch"
+        ],
+        "description": "Update the state properties of a Recommendation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "recommendationId",
+            "in": "path",
+            "description": "The name of the RecommendationsPatchResponse",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RecommendationStatePropertiesPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RecommendationsPatchResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchRecommendationStateProperties": {
+            "$ref": "./examples/PatchRecommendationStateProperties.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/resiliencyReviews": {
       "get": {
         "operationId": "resiliencyReviews_List",
@@ -1997,11 +2002,6 @@
         }
       }
     },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
     "Category": {
       "type": "string",
       "description": "The category of the recommendation.",
@@ -2400,6 +2400,38 @@
         }
       }
     },
+    "NewState": {
+      "type": "string",
+      "description": "The state of the Recommendation applicable from v2026-02-01-preview.",
+      "enum": [
+        "New",
+        "Postponed",
+        "Dismissed",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "NewState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "New",
+            "value": "New"
+          },
+          {
+            "name": "Postponed",
+            "value": "Postponed"
+          },
+          {
+            "name": "Dismissed",
+            "value": "Dismissed"
+          },
+          {
+            "name": "Completed",
+            "value": "Completed"
+          }
+        ]
+      }
+    },
     "OperationDisplayInfo": {
       "type": "object",
       "description": "The operation supported by Advisor.",
@@ -2613,48 +2645,6 @@
         ]
       }
     },
-    "Reason": {
-      "type": "string",
-      "description": "The reason the state of the Recommendation was changed.",
-      "enum": [
-        "ExcessiveInvestment",
-        "TooComplex",
-        "AlternativeSolution",
-        "Incompatible",
-        "Unclear",
-        "RiskAccepted"
-      ],
-      "x-ms-enum": {
-        "name": "Reason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ExcessiveInvestment",
-            "value": "ExcessiveInvestment"
-          },
-          {
-            "name": "TooComplex",
-            "value": "TooComplex"
-          },
-          {
-            "name": "AlternativeSolution",
-            "value": "AlternativeSolution"
-          },
-          {
-            "name": "Incompatible",
-            "value": "Incompatible"
-          },
-          {
-            "name": "Unclear",
-            "value": "Unclear"
-          },
-          {
-            "name": "RiskAccepted",
-            "value": "RiskAccepted"
-          }
-        ]
-      }
-    },
     "ReasonForRejectionName": {
       "type": "string",
       "description": "Reason for rejecting recommendation name enum.",
@@ -2677,6 +2667,81 @@
             "description": "Risk Accepted"
           }
         ]
+      }
+    },
+    "RecommendationDismissReason": {
+      "type": "string",
+      "description": "The reason for dismissing the Recommendation.",
+      "enum": [
+        "ExcessiveCostInvestmentRequired",
+        "TooComplexOrImpracticalToImplement",
+        "AnAlternativeSolutionIsAlreadyInPlace",
+        "IncompatibleWithTheCurrentConfiguration",
+        "ImplementationStepsAreUnclear",
+        "RiskIsAcceptable",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "RecommendationDismissReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ExcessiveCostInvestmentRequired",
+            "value": "ExcessiveCostInvestmentRequired"
+          },
+          {
+            "name": "TooComplexOrImpracticalToImplement",
+            "value": "TooComplexOrImpracticalToImplement"
+          },
+          {
+            "name": "AnAlternativeSolutionIsAlreadyInPlace",
+            "value": "AnAlternativeSolutionIsAlreadyInPlace"
+          },
+          {
+            "name": "IncompatibleWithTheCurrentConfiguration",
+            "value": "IncompatibleWithTheCurrentConfiguration"
+          },
+          {
+            "name": "ImplementationStepsAreUnclear",
+            "value": "ImplementationStepsAreUnclear"
+          },
+          {
+            "name": "RiskIsAcceptable",
+            "value": "RiskIsAcceptable"
+          },
+          {
+            "name": "Other",
+            "value": "Other"
+          }
+        ]
+      }
+    },
+    "RecommendationPatchProperties": {
+      "type": "object",
+      "description": "Properties for patch Recommendation API.",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent time that Advisor checked the validity of the recommendation."
+        },
+        "recommendationTypeId": {
+          "type": "string",
+          "description": "The recommendation-type GUID."
+        },
+        "state": {
+          "$ref": "#/definitions/NewState",
+          "description": "The state of the Recommendation"
+        },
+        "recommendationDismissReason": {
+          "$ref": "#/definitions/RecommendationDismissReason",
+          "description": "The reason the state of the Recommendation was changed."
+        },
+        "postponedUntilDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the Recommendation was postponed until."
+        }
       }
     },
     "RecommendationProperties": {
@@ -2703,6 +2768,24 @@
           "type": "string",
           "description": "The resource identified by Advisor."
         },
+        "state": {
+          "$ref": "#/definitions/NewState",
+          "description": "The state of the Recommendation"
+        },
+        "recommendationDismissReason": {
+          "$ref": "#/definitions/RecommendationDismissReason",
+          "description": "The reason the Recommendation was dismissed."
+        },
+        "postponedUntilDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the Recommendation was postponed until."
+        },
+        "lastRefreshed": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The most recent time that Advisor checked the validity of the recommendation."
+        },
         "lastUpdated": {
           "type": "string",
           "format": "date-time",
@@ -2725,12 +2808,9 @@
           "$ref": "#/definitions/ShortDescription",
           "description": "A summary of the recommendation."
         },
-        "suppressionIds": {
-          "type": "array",
-          "description": "The list of snoozed and dismissed rules for the recommendation.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.uuid"
-          }
+        "suppressionId": {
+          "type": "string",
+          "description": "The single snoozed or dismissed rule for the recommendation."
         },
         "extendedProperties": {
           "type": "object",
@@ -2777,10 +2857,6 @@
           "type": "object",
           "description": "The recommendation metadata properties exposed to customer to provide additional information.",
           "additionalProperties": {}
-        },
-        "tracked": {
-          "type": "boolean",
-          "description": "If the Recommendation has Tracking enabled."
         },
         "trackedProperties": {
           "$ref": "#/definitions/TrackedRecommendationProperties",
@@ -2842,6 +2918,25 @@
         }
       }
     },
+    "RecommendationStatePropertiesPayload": {
+      "type": "object",
+      "description": "Properties for recommendation state patch payload.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/NewState",
+          "description": "The state of the recommendation."
+        },
+        "recommendationDismissReason": {
+          "$ref": "#/definitions/RecommendationDismissReason",
+          "description": "The reason the state of the Recommendation was changed."
+        },
+        "postponedUntilDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the Recommendation was postponed until."
+        }
+      }
+    },
     "RecommendationStatusName": {
       "type": "string",
       "description": "Recommendation status name enum.",
@@ -2871,6 +2966,21 @@
           }
         ]
       }
+    },
+    "RecommendationsPatchResponse": {
+      "type": "object",
+      "description": "Advisor Recommendation.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RecommendationPatchProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ResiliencyReviewProperties": {
       "type": "object",
@@ -3103,53 +3213,6 @@
         }
       }
     },
-    "State": {
-      "type": "string",
-      "description": "The state of the Recommendation",
-      "enum": [
-        "Approved",
-        "Rejected",
-        "Pending",
-        "InProgress",
-        "Postponed",
-        "Dismissed",
-        "Completed"
-      ],
-      "x-ms-enum": {
-        "name": "State",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Approved",
-            "value": "Approved"
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected"
-          },
-          {
-            "name": "Pending",
-            "value": "Pending"
-          },
-          {
-            "name": "InProgress",
-            "value": "InProgress"
-          },
-          {
-            "name": "Postponed",
-            "value": "Postponed"
-          },
-          {
-            "name": "Dismissed",
-            "value": "Dismissed"
-          },
-          {
-            "name": "Completed",
-            "value": "Completed"
-          }
-        ]
-      }
-    },
     "SuppressionContract": {
       "type": "object",
       "description": "The details of the snoozed or dismissed rule; for example, the duration, name, and GUID associated with the rule.",
@@ -3229,39 +3292,9 @@
       "type": "object",
       "description": "The tracked properties of a Recommendation",
       "properties": {
-        "state": {
-          "$ref": "#/definitions/State",
-          "description": "The state of the Recommendation"
-        },
-        "postponedTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the Recommendation was postponed until."
-        },
-        "reason": {
-          "$ref": "#/definitions/Reason",
-          "description": "The reason the state of the Recommendation was changed."
-        },
         "priority": {
           "$ref": "#/definitions/Priority",
           "description": "The Priority of the Recommendation."
-        }
-      }
-    },
-    "TrackedRecommendationPropertiesPayload": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TrackedRecommendationPropertiesPayloadProperties"
-        }
-      }
-    },
-    "TrackedRecommendationPropertiesPayloadProperties": {
-      "type": "object",
-      "properties": {
-        "trackedProperties": {
-          "$ref": "#/definitions/TrackedRecommendationProperties",
-          "description": "The tracked properties of a Recommendation"
         }
       }
     },
