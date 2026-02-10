@@ -238,10 +238,13 @@
       "type": "object",
       "properties": {
         "result": {
-          "type": "object",
           "description": "The final result of the batch operation.",
-          "$ref": "#/definitions/BatchResponses",
-          "readOnly": true
+          "readOnly": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/BatchResponses"
+            }
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -278,7 +281,7 @@
         },
         "httpStatusCode": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The HTTP status code of the response.",
           "readOnly": true
         },
@@ -299,16 +302,6 @@
         }
       },
       "description": "The response received for one request in the batch."
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-        }
-      },
-      "description": "An error response for a resource management request."
     }
   },
   "parameters": {}
