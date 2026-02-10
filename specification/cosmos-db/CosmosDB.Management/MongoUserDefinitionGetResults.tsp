@@ -43,7 +43,8 @@ interface MongoUserDefinitionGetResultsOperationGroup {
     MongoUserDefinitionGetResults,
     Request = MongoUserDefinitionCreateUpdateParameters,
     Response = ArmResourceUpdatedResponse<MongoUserDefinitionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoUserDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Error = CloudError
   >;
 
   /**
