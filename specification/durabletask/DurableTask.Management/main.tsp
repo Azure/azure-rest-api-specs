@@ -350,7 +350,3 @@ interface PrivateLinkResources {
   /** Get a specific private link resource */
   get is ArmResourceRead<PrivateLinkResource>;
 }
-
-@@pattern(PrivateLinkResourceParameter.name, "^[A-Za-z0-9-._]{2,64}$");
-@@minLength(PrivateLinkResourceParameter.name, 2);
-@@maxLength(PrivateLinkResourceParameter.name, 64);
