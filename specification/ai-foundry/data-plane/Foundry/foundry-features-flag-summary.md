@@ -33,8 +33,8 @@
 | Evaluation Rules | Get | GET | `/evaluationrules/{id}` | None |
 | Evaluation Rules | Delete | DELETE | `/evaluationrules/{id}` | None |
 | Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | None |
-| Evaluation Taxonomies | List | GET | `/evaluationtaxonomies` | None |
-| Evaluation Taxonomies | Get | GET | `/evaluationtaxonomies/{name}` | None |
-| Evaluation Taxonomies | Delete | DELETE | `/evaluationtaxonomies/{name}` | None |
+| Evaluation Taxonomies | List | GET | `/evaluationtaxonomies` | Required: `Evaluations=V1Preview` |
+| Evaluation Taxonomies | Get | GET | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |
+| Evaluation Taxonomies | Delete | DELETE | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |
 | Evaluation Taxonomies | Create | PUT | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |
 | Evaluation Taxonomies | Update | PATCH | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |
