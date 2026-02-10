@@ -6782,6 +6782,11 @@
         "publicIPAddress": {
           "$ref": "#/definitions/PublicIPAddressArmReference",
           "description": "Public IP Address for this NAT rule"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateEnum",
+          "description": "Provisioning state of the inbound NAT rule.",
+          "readOnly": true
         }
       },
       "required": [
@@ -7795,7 +7800,7 @@
         },
         "inboundNATRules": {
           "type": "array",
-          "description": "List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet",
+          "description": "List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet. Deprecated in 2026-04-01-preview, use InboundRule resource instead.",
           "items": {
             "$ref": "#/definitions/InboundNATRule"
           },
