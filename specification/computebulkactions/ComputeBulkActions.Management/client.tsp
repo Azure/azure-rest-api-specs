@@ -9,4 +9,4 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(ExecuteCreateRequest.correlationid, "correlationId", "java");
 @@clientName(GetOperationStatusRequest.correlationid, "correlationId", "java");
 @@clientName(CancelOperationsRequest.correlationid, "correlationId", "java");
-@@clientName(Microsoft.ComputeBulkActions, "ComputeBulkActionsMgmtClient", "python")
+@@clientName(Microsoft.ComputeBulkActions, "ComputeBulkActionsMgmtClient", "python");
