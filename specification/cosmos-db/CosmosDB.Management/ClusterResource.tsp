@@ -198,8 +198,9 @@ interface ClusterResources {
       /**
        * Force to deallocate a cluster of Cluster Type Production. Force to deallocate a cluster of Cluster Type Production might cause data loss
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
-      xMsForceDeallocate?: string;
+      `x-ms-force-deallocate`?: string;
     },
     Error = CloudError
   >;
