@@ -110,6 +110,7 @@ type TestCase = {
   };
 };
 
+// TODO: Use same filename in services Foo and Bar to stress test xver matching logic
 const cases: TestCase[] = [
   {
     name: "modify one file, one version",
@@ -227,56 +228,222 @@ const cases: TestCase[] = [
     },
   },
   {
-    name: "rename one file, one version",
+    name: "add new stable, one of multiple files",
     changedFiles: {
-      renames: [
-        {
-          from: "Foo/stable/2025-01-01/foo.json",
-          to: "Foo/stable/2025-01-01/openapi.json",
-        },
-      ],
+      additions: ["Bar/stable/2026-01-01/bar.json"],
     },
-    // TODO: After code is fixed, should not create *any* dummy swaggers
-    expectedCreateDummySwaggers: {
-      old: ["Foo/stable/2025-01-01/openapi.json"],
-      new: ["Foo/stable/2025-01-01/foo.json"],
-    },
-    // TODO: After code is fixed, should only compare before and after renamed file
     expectedOadCalls: {
-      sameVersion: [
+      crossVersion: [
         {
-          old: "Foo/stable/2025-01-01/foo.json",
-          new: "Foo/stable/2025-01-01/foo.json",
+          old: "Bar/preview/2025-04-01-preview/bar.json",
+          new: "Bar/stable/2026-01-01/bar.json",
         },
         {
-          old: "Foo/stable/2025-01-01/openapi.json",
-          new: "Foo/stable/2025-01-01/openapi.json",
+          old: "Bar/stable/2025-03-01/bar.json",
+          new: "Bar/stable/2026-01-01/bar.json",
         },
       ],
     },
   },
-  // {
-  //   name: "rename one file, change case of service",
-  //   changedFiles: {
-  //     additions: ["foo/stable/2025-01-01/openapi.json"],
-  //     deletions: ["Foo/stable/2025-01-01/foo.json"],
-  //   },
-  //   // TODO: After code is fixed, should not create *any* dummy swaggers
-  //   expectedCreateDummySwaggers: {
-  //     old: [],
-  //     new: ["Foo/stable/2025-01-01/foo.json"],
-  //   },
-  //   // TODO: After code is fixed, should only compare before and after renamed file
-  //   expectedOadCalls: {
-  //     sameVersion: [
-  //       {
-  //         old: "Foo/stable/2025-01-01/foo.json",
-  //         new: "Foo/stable/2025-01-01/foo.json",
-  //       },
-  //     ],
-  //     crossVersion: [],
-  //   },
-  // },
+  {
+    name: "add new stable, two files to one",
+    changedFiles: {
+      additions: ["Bar/stable/2026-01-01/openapi.json"],
+    },
+    expectedOadCalls: {
+      crossVersion: [
+        {
+          old: "Bar/preview/2025-04-01-preview/bar.json",
+          new: "Bar/stable/2026-01-01/openapi.json",
+        },
+        {
+          old: "Bar/preview/2025-04-01-preview/baz.json",
+          new: "Bar/stable/2026-01-01/openapi.json",
+        },
+        {
+          old: "Bar/stable/2025-03-01/bar.json",
+          new: "Bar/stable/2026-01-01/openapi.json",
+        },
+        {
+          old: "Bar/stable/2025-03-01/baz.json",
+          new: "Bar/stable/2026-01-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "add new stable, change case of service",
+    changedFiles: {
+      additions: ["FOO/stable/2026-01-01/foo.json"],
+    },
+    expectedOadCalls: {
+      crossVersion: [
+        {
+          old: "Foo/preview/2025-04-01-preview/foo.json",
+          new: "FOO/stable/2026-01-01/foo.json",
+        },
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "FOO/stable/2026-01-01/foo.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "add new stable, change name of file",
+    changedFiles: {
+      additions: ["Foo/stable/2026-01-01/openapi.json"],
+    },
+    expectedOadCalls: {
+      crossVersion: [
+        {
+          old: "Foo/preview/2025-04-01-preview/foo.json",
+          new: "Foo/stable/2026-01-01/openapi.json",
+        },
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2026-01-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "add new stable, change name of file and case of service",
+    changedFiles: {
+      additions: ["FOO/stable/2026-01-01/openapi.json"],
+    },
+    expectedOadCalls: {
+      crossVersion: [
+        {
+          old: "Foo/preview/2025-04-01-preview/foo.json",
+          new: "FOO/stable/2026-01-01/openapi.json",
+        },
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "FOO/stable/2026-01-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "rename one file, one version",
+    changedFiles: {
+      renames: [
+        {
+          from: "Foo/stable/2025-03-01/foo.json",
+          to: "Foo/stable/2025-03-01/openapi.json",
+        },
+      ],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "rename one file, one version, as add/remove",
+    changedFiles: {
+      // If a file is renamed, but has too many changes, "git diff" may return it as an
+      // add/delete, rather than a rename.
+      additions: ["Foo/stable/2025-03-01/openapi.json"],
+      deletions: ["Foo/stable/2025-03-01/foo.json"],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "rename one file, change case of service",
+    changedFiles: {
+      additions: ["FOO/stable/2025-03-01/openapi.json"],
+      deletions: ["Foo/stable/2025-03-01/foo.json"],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "FOO/stable/2025-03-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "rename files, change case of service, two versions",
+    changedFiles: {
+      additions: ["FOO/stable/2025-03-01/openapi.json"],
+      deletions: ["Foo/stable/2025-03-01/foo.json"],
+      renames: [
+        {
+          from: "Foo/stable/2025-01-01/foo.json",
+          to: "FOO/stable/2025-01-01/foo.json",
+        },
+      ],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-01-01/foo.json",
+          new: "FOO/stable/2025-01-01/foo.json",
+        },
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "FOO/stable/2025-03-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "convert two swaggers to one (TSP conversion)",
+    changedFiles: {
+      additions: ["specification/bar/data-plane/Bar/stable/2025-03-01/openapi.json"],
+      deletions: [
+        "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
+        "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
+      ],
+      renames: [],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
+          new: "specification/bar/data-plane/Bar/stable/2025-03-01/openapi.json",
+        },
+        {
+          old: "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
+          new: "specification/bar/data-plane/Bar/stable/2025-03-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "convert one swagger to two (very rare)",
+    changedFiles: {
+      additions: ["Foo/stable/2025-03-01/openapi1.json", "Foo/stable/2025-03-01/openapi2.json"],
+      deletions: ["Foo/stable/2025-03-01/foo.json"],
+      renames: [],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/openapi1.json",
+        },
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/openapi2.json",
+        },
+      ],
+    },
+  },
 ];
 
 describe("validateBreakingChange", () => {
@@ -323,6 +490,10 @@ describe("validateBreakingChange", () => {
 
         expect(statusCode).toEqual(0);
 
+        expect(mockCreateDummySwagger).toBeCalledTimes(
+          expectedCreateDummySwaggers.old.length + expectedCreateDummySwaggers.new.length,
+        );
+
         for (const expected of expectedCreateDummySwaggers.old) {
           expect(mockCreateDummySwagger).toBeCalledWith(
             expect.anything(),
@@ -334,9 +505,7 @@ describe("validateBreakingChange", () => {
           expect(mockCreateDummySwagger).toBeCalledWith(expect.anything(), resolve(expected));
         }
 
-        expect(mockCreateDummySwagger).toBeCalledTimes(
-          expectedCreateDummySwaggers.old.length + expectedCreateDummySwaggers.new.length,
-        );
+        expect(mockRunOad).toBeCalledTimes(data.expectedOadCalls.length);
 
         for (const expected of data.expectedOadCalls) {
           expect(mockRunOad).toBeCalledWith(
@@ -344,8 +513,6 @@ describe("validateBreakingChange", () => {
             expected.new,
           );
         }
-
-        expect(mockRunOad).toBeCalledTimes(data.expectedOadCalls.length);
       }
     },
   );
