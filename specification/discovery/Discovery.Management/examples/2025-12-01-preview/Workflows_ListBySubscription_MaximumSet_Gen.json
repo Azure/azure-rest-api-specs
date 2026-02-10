@@ -3,7 +3,7 @@
   "operationId": "Workflows_ListBySubscription",
   "parameters": {
     "api-version": "2025-12-01-preview",
-    "subscriptionId": "E11AA1A0-1AAA-43C7-905D-55A1213687EC"
+    "subscriptionId": "0F3F86BA-2B97-4522-80F8-2836DAD0BEBA"
   },
   "responses": {
     "200": {
@@ -11,20 +11,63 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/31735C59-6307-4464-8B80-3675223F23D2/resourceGroups/rgdiscovery/providers/Microsoft.Discovery/Workflows/qtxmrksjwbsk",
-            "name": "qtxmrksjwbsk",
+            "id": "/subscriptions/31735C59-6307-4464-8B80-3675223F23D2/resourceGroups/rgdiscovery/providers/Microsoft.Discovery/Workflows/og",
+            "name": "og",
             "tags": {
-              "key5380": "axwufdzzfyzfe"
+              "key5903": "zhbkwrkqgzrhilyepzjncm"
             },
             "location": "uksouth",
             "type": "Microsoft.Discovery/Workflows",
             "systemData": {
-              "createdBy": "bvscrbgeco",
+              "createdBy": "lkmdutxfebsiyrdlvkspg",
               "createdByType": "User",
-              "createdAt": "2026-02-09T22:11:25.413Z",
-              "lastModifiedBy": "zntvjfpuhox",
+              "createdAt": "2026-02-10T02:01:07.826Z",
+              "lastModifiedBy": "udvvlrosiaxxartwvkvgs",
               "lastModifiedByType": "User",
-              "lastModifiedAt": "2026-02-09T22:11:25.414Z"
+              "lastModifiedAt": "2026-02-10T02:01:07.826Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "version": "stzk",
+              "definitionContent": {
+                "name": "ScienceWorkflow",
+                "states": [
+                  {
+                    "name": "UserProxyAnalysis",
+                    "actors": [
+                      {
+                        "agent": "Science",
+                        "humanInLoopMode": "onNoMessage",
+                        "streamOutput": true
+                      },
+                      {
+                        "agent": "ADFTAgent",
+                        "humanInLoopMode": "onNoMessage",
+                        "streamOutput": true
+                      },
+                      {
+                        "agent": "RDKITExecutePython",
+                        "humanInLoopMode": "onNoMessage",
+                        "streamOutput": true
+                      }
+                    ],
+                    "isFinal": false
+                  },
+                  {
+                    "name": "Terminal",
+                    "actors": [],
+                    "isFinal": true
+                  }
+                ],
+                "transitions": [
+                  {
+                    "from": "UserProxyAnalysis",
+                    "to": "Terminal"
+                  }
+                ],
+                "variables": [],
+                "startstate": "UserProxyAnalysis"
+              }
             }
           }
         ],
