@@ -107,16 +107,20 @@ alias FluxConfigurationsBuildingOps = Azure.ResourceManager.Legacy.RoutedOperati
   }
 >;
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface FluxConfigurations {
   /**
    * Gets details of the Flux Configuration.
    */
+  @tag("FluxConfiguration")
+  @tag("Flux")
   get is FluxConfigurationOperationGroupOps.Read<FluxConfiguration>;
 
   /**
    * Create a new Kubernetes Flux Configuration.
    */
+  @tag("FluxConfiguration")
+  @tag("Flux")
   createOrUpdate is FluxConfigurationOperationGroupOps.CreateOrUpdateAsync<FluxConfiguration>;
 
   /**
@@ -124,6 +128,8 @@ interface FluxConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("FluxConfiguration")
+  @tag("Flux")
   @patch(#{ implicitOptionality: false })
   update is FluxConfigurationOperationGroupOps.CustomPatchAsync<
     FluxConfiguration,
@@ -140,6 +146,8 @@ interface FluxConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("FluxConfiguration")
+  @tag("Flux")
   delete is FluxConfigurationOperationGroupOps.DeleteWithoutOkAsync<
     FluxConfiguration,
     Parameters = {
@@ -156,6 +164,8 @@ interface FluxConfigurations {
   /**
    * List all Flux Configurations.
    */
+  @tag("FluxConfiguration")
+  @tag("Flux")
   list is FluxConfigurationOperationGroupOps.List<
     FluxConfiguration,
     Response = ArmResponse<FluxConfigurationsList>
@@ -164,6 +174,7 @@ interface FluxConfigurations {
   /**
    * Get Async Operation status
    */
+  @tag("FluxConfiguration Operation Status")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{clusterRp}/{clusterResourceName}/{clusterName}/providers/Microsoft.KubernetesConfiguration/fluxConfigurations/{fluxConfigurationName}/operations/{operationId}")
   fluxConfigOperationStatusGet is FluxConfigurationsBuildingOps.ActionSync<
