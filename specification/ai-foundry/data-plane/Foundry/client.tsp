@@ -3,7 +3,7 @@
 // the JS client (package @azure/ai-projects).
 //
 
-// Stable perations (GA routes)
+// Stable operations (GA routes)
 import "./src/agents/routes.tsp";
 import "./src/common/custom_types.tsp";
 import "./src/common/service.tsp";
@@ -101,14 +101,8 @@ using Azure.AI.Projects;
 // Responses sub‐client
 // --------------------------------------------------------------------------------
 
-// Follow JS naming conventions
-@@clientName(OpenAI.CreateResponse, "CreateResponseRequest", "javascript");
-
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
-@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema,
-  Record<unknown>,
-  "python, javascript"
-);
+@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client

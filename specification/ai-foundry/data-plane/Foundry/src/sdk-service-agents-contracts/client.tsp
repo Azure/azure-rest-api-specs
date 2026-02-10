@@ -83,6 +83,7 @@ namespace Azure.AI.Projects {
         web_search?: {
           custom_search_config_id?: string,
           custom_search_resource_id?: string,
+          ...Record<string>,
         },
         `user-context`?: {
           `request-ip`?: string,
@@ -129,10 +130,13 @@ namespace Azure.AI.Projects {
           `user-isolation-key`?: string,
           `chat-isolation-key`?: string,
           `application-id`?: string,
+          ...Record<string>,
         },
         `defender-for-ai-context`?: {
           enabled?: boolean,
+          ...Record<string>,
         },
+        ...Record<string>,
       },
       resolved_agent_version?: AgentVersionObject,
     }
@@ -163,10 +167,12 @@ namespace Azure.AI.Projects {
 
   // To allow in/out use of merged conversation message item, make id and status optional
   @@withoutOmittedProperties(OpenAI.Message, "id" | "status");
-  @@copyProperties(OpenAI.Message, {
-    id?: string,
-    status?: OpenAI.MessageStatus,
-  });
+  @@copyProperties(OpenAI.Message,
+    {
+      id?: string,
+      status?: OpenAI.MessageStatus,
+    }
+  );
 
   // To avoid conflicts with Azure.Response
   @@clientName(OpenAI.Response, "ResponseObject");
