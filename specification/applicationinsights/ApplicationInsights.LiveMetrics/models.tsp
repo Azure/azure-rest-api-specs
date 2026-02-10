@@ -253,19 +253,24 @@ model MetricPoint {
 }
 
 /**
- * Base class of the specific document types.
+ * Common properties shared by all document types.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
-@discriminator("DocumentType")
-model DocumentIngress {
-  @doc("Telemetry type. Types not defined in enum will get replaced with a 'Unknown' type.")
-  DocumentType: DocumentType;
-
+model DocumentIngressBase {
   @doc("An array of document streaming ids. Each id identifies a flow of documents customized by UX customers.")
   DocumentStreamIds?: string[];
 
   @doc("Collection of custom properties.")
   Properties?: KeyValuePairStringString[];
+}
+
+@doc("A document of a specific type: Request, RemoteDependency, Exception, Event, or Trace.")
+union DocumentIngress {
+  Request,
+  RemoteDependency,
+  Exception,
+  Event,
+  Trace,
 }
 
 @doc("Document type")
@@ -295,7 +300,9 @@ union DocumentType {
  * Request document type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
-model Request extends DocumentIngress {
+model Request {
+  ...DocumentIngressBase;
+
   @doc("Telemetry type for Request.")
   DocumentType: DocumentType.Request;
 
@@ -319,7 +326,9 @@ model Request extends DocumentIngress {
  * RemoteDependency document type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
-model RemoteDependency extends DocumentIngress {
+model RemoteDependency {
+  ...DocumentIngressBase;
+
   @doc("Telemetry type for RemoteDependency.")
   DocumentType: DocumentType.RemoteDependency;
 
@@ -343,7 +352,9 @@ model RemoteDependency extends DocumentIngress {
  * Exception document type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
-model Exception extends DocumentIngress {
+model Exception {
+  ...DocumentIngressBase;
+
   @doc("Telemetry type for Exception.")
   DocumentType: DocumentType.Exception;
 
@@ -360,7 +371,9 @@ model Exception extends DocumentIngress {
  * Event document type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
-model Event extends DocumentIngress {
+model Event {
+  ...DocumentIngressBase;
+
   @doc("Telemetry type for Event.")
   DocumentType: DocumentType.Event;
 
@@ -373,7 +386,9 @@ model Event extends DocumentIngress {
  * Trace document type.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Need to follow the casing style of the existing SDK contract."
-model Trace extends DocumentIngress {
+model Trace {
+  ...DocumentIngressBase;
+
   @doc("Telemetry type for Trace.")
   DocumentType: DocumentType.Trace;
 
