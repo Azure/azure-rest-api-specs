@@ -1042,6 +1042,7 @@ model AuthorizedTransceiverProperties {
   @doc("Vendor of the transceiver.")
   vendor?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a transceiver key, not a credential"
   @doc("Key that must be configured on the fabric.")
   key?: string;
 }
@@ -1052,6 +1053,7 @@ model AuthorizedTransceiverPatchProperties {
   @doc("Vendor of the transceiver.")
   vendor?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a transceiver key, not a credential"
   @doc("Key that must be configured on the fabric.")
   key?: string;
 }
