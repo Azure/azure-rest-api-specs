@@ -65,7 +65,7 @@ model L2IsolationDomainPatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: L2IsolationDomainPatchProperties;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("L2 Isolation Domain resource patch properties.")
   @added(Versions.v2025_07_15)
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
