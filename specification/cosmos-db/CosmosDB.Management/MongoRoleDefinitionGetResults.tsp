@@ -25,7 +25,7 @@ model MongoRoleDefinitionGetResults
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MongoRoleDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Mongo Role Definition with the given Id.

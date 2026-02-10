@@ -29,7 +29,7 @@ model GarnetClusterResource
   identity?: ManagedCassandraManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GarnetClusters {
   /**
    * Get the properties of a Garnet cache cluster.

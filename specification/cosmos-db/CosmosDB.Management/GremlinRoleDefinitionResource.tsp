@@ -25,7 +25,7 @@ model GremlinRoleDefinitionResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GremlinRoleDefinitionResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Definition with the given Id.

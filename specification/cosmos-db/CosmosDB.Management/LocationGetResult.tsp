@@ -24,7 +24,7 @@ model LocationGetResult
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface LocationGetResults {
   /**
    * Get the properties of an existing Cosmos DB location

@@ -31,7 +31,7 @@ model GremlinGraphGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GremlinGraphGetResultsOperationGroup {
   /**
    * Gets the Gremlin graph under an existing Azure Cosmos DB database account.

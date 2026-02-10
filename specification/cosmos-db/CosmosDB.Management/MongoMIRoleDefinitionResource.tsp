@@ -27,7 +27,7 @@ model MongoMIRoleDefinitionResource
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MongoMIRoleDefinitionResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Definition with the given Id.

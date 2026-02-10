@@ -25,7 +25,7 @@ model TableRoleAssignmentResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface TableRoleAssignmentResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Table Role Assignment with the given Id.

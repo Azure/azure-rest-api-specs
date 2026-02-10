@@ -31,7 +31,7 @@ model CassandraViewGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface CassandraViewGetResultsOperationGroup {
   /**
    * Gets the Cassandra view under an existing Azure Cosmos DB database account.

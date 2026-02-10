@@ -25,7 +25,7 @@ model FleetspaceResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface FleetspaceResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB fleetspace under a fleet

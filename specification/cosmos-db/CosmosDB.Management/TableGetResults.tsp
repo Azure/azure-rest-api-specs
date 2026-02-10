@@ -31,7 +31,7 @@ model TableGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface TableGetResultsOperationGroup {
   /**
    * Gets the Tables under an existing Azure Cosmos DB database account with the provided name.

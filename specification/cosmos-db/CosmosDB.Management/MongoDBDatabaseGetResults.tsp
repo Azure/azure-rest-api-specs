@@ -32,7 +32,7 @@ model MongoDBDatabaseGetResults
   identity?: ManagedServiceIdentity;
 }
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MongoDBDatabaseGetResultsOperationGroup {
   /**
    * Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.

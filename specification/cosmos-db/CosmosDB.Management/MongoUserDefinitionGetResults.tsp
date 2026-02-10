@@ -25,7 +25,7 @@ model MongoUserDefinitionGetResults
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MongoUserDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Mongo User Definition with the given Id.

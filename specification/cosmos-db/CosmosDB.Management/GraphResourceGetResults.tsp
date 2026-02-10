@@ -31,7 +31,7 @@ model GraphResourceGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GraphResources {
   /**
    * Gets the Graph resource under an existing Azure Cosmos DB database account with the provided name.

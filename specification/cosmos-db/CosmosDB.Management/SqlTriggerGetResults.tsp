@@ -32,7 +32,7 @@ model SqlTriggerGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlTriggerGetResultsOperationGroup {
   /**
    * Gets the SQL trigger under an existing Azure Cosmos DB database account.

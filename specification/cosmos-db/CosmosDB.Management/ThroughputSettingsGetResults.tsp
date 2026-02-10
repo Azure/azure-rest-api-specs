@@ -63,7 +63,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the SQL database under an existing Azure Cosmos DB database account with the provided name.
@@ -171,7 +171,7 @@ alias SqlResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Resource
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.
@@ -268,7 +268,7 @@ alias MongoDBResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MongoDBResources {
   /**
    * Gets the RUs per second of the MongoDB database under an existing Azure Cosmos DB database account with the provided name.
@@ -379,7 +379,7 @@ alias MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.
@@ -484,7 +484,7 @@ alias TableResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface TableResources {
   /**
    * Gets the RUs per second of the Table under an existing Azure Cosmos DB database account with the provided name.
@@ -559,7 +559,7 @@ alias CassandraResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface CassandraResources {
   /**
    * Gets the RUs per second of the Cassandra Keyspace under an existing Azure Cosmos DB database account with the provided name.
@@ -641,7 +641,7 @@ alias CassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Re
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the Cassandra table under an existing Azure Cosmos DB database account with the provided name.
@@ -722,7 +722,7 @@ alias ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azur
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the Cassandra view under an existing Azure Cosmos DB database account with the provided name.
@@ -797,7 +797,7 @@ alias GremlinResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GremlinResources {
   /**
    * Gets the RUs per second of the Gremlin database under an existing Azure Cosmos DB database account with the provided name.
@@ -879,7 +879,7 @@ alias GremlinResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the Gremlin graph throughput under an existing Azure Cosmos DB database account with the provided name.

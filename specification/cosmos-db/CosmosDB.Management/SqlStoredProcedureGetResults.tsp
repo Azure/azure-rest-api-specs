@@ -32,7 +32,7 @@ model SqlStoredProcedureGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlStoredProcedureGetResultsOperationGroup {
   /**
    * Gets the SQL storedProcedure under an existing Azure Cosmos DB database account.

@@ -69,10 +69,6 @@ interface ServiceResources {
   /**
    * Gets the status of service.
    */
-  @tag("DataTransfer")
-  @tag("SqlDedicatedGateway")
-  @tag("GraphAPICompute")
-  @tag("MaterializedViewsBuilder")
   list is ArmResourceListByParent<
     ServiceResource,
     Response = ArmResponse<ServiceResourceListResult>,

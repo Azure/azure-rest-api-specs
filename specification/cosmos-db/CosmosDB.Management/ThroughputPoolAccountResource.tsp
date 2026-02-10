@@ -25,7 +25,7 @@ model ThroughputPoolAccountResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ThroughputPoolAccountResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Throughput Pool

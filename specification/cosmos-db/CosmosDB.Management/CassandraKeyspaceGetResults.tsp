@@ -31,7 +31,7 @@ model CassandraKeyspaceGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface CassandraKeyspaceGetResultsOperationGroup {
   /**
    * Gets the Cassandra keyspaces under an existing Azure Cosmos DB database account with the provided name.

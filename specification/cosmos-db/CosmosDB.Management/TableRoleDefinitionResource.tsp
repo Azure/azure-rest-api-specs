@@ -25,7 +25,7 @@ model TableRoleDefinitionResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface TableRoleDefinitionResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Table Role Definition with the given Id.

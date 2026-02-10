@@ -28,19 +28,16 @@ interface ThroughputPoolResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Throughput Pool
    */
-  @tag("ThroughputPools")
   get is ArmResourceRead<ThroughputPoolResource>;
 
   /**
    * Creates or updates an Azure Cosmos DB ThroughputPool account. The "Update" method is preferred when performing updates on an account.
    */
-  @tag("ThroughputPools")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ThroughputPoolResource>;
 
   /**
    * Updates the properties of an existing Azure Cosmos DB Throughput Pool.
    */
-  @tag("ThroughputPools")
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
@@ -54,7 +51,6 @@ interface ThroughputPoolResources {
   /**
    * Deletes an existing Azure Cosmos DB Throughput Pool.
    */
-  @tag("ThroughputPools")
   delete is ArmResourceDeleteWithoutOkAsync<
     ThroughputPoolResource,
     Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
@@ -72,7 +68,6 @@ interface ThroughputPoolResources {
   /**
    * Lists all the Azure Cosmos DB Throughput Pools available under the subscription.
    */
-  @tag("ThroughputPools")
   list is ArmListBySubscription<
     ThroughputPoolResource,
     Response = ArmResponse<ThroughputPoolsListResult>

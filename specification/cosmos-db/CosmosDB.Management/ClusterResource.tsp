@@ -29,7 +29,7 @@ model ClusterResource
   identity?: ManagedCassandraManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ClusterResources {
   /**
    * Get the properties of a managed Cassandra cluster.

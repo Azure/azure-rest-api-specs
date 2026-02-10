@@ -31,7 +31,7 @@ model SqlContainerGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlContainerGetResultsOperationGroup {
   /**
    * Gets the SQL container under an existing Azure Cosmos DB database account.

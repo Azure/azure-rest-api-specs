@@ -32,7 +32,7 @@ model SqlUserDefinedFunctionGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlUserDefinedFunctionGetResultsOperationGroup {
   /**
    * Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.

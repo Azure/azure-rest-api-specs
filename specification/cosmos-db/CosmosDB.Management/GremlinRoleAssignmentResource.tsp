@@ -25,7 +25,7 @@ model GremlinRoleAssignmentResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface GremlinRoleAssignmentResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Assignment with the given Id.

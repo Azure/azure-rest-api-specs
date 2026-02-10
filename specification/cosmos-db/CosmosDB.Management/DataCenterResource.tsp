@@ -25,7 +25,7 @@ model DataCenterResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DataCenterResources {
   /**
    * Get the properties of a managed Cassandra data center.

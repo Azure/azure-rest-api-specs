@@ -32,7 +32,7 @@ model RestorableDatabaseAccountGetResult
   location?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface RestorableDatabaseAccountGetResults {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB restorable database account.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read/*' permission.

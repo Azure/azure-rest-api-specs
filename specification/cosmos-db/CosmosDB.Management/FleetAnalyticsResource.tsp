@@ -25,7 +25,7 @@ model FleetAnalyticsResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface FleetAnalyticsResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB FleetAnalytics under a fleet

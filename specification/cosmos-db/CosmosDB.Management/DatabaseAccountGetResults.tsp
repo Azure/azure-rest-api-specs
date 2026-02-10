@@ -35,7 +35,7 @@ model DatabaseAccountGetResults
   kind?: DatabaseAccountKind = DatabaseAccountKind.GlobalDocumentDB;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface DatabaseAccounts {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB database account.

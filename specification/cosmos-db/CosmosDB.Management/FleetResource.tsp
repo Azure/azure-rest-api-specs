@@ -28,19 +28,16 @@ interface FleetResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB fleet under a subscription
    */
-  @tag("Fleets")
   get is ArmResourceRead<FleetResource>;
 
   /**
    * Creates an Azure Cosmos DB fleet under a subscription.
    */
-  @tag("Fleets")
   create is ArmResourceCreateOrReplaceSync<FleetResource>;
 
   /**
    * Updates the properties of an existing Azure Cosmos DB Fleet.
    */
-  @tag("Fleets")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     FleetResource,
@@ -52,7 +49,6 @@ interface FleetResources {
    * Deletes an existing Azure Cosmos DB Fleet.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Fleets")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     FleetResource,
@@ -71,7 +67,6 @@ interface FleetResources {
   /**
    * Lists all the fleets under the subscription.
    */
-  @tag("Fleets")
   list is ArmListBySubscription<FleetResource, Response = FleetListResult>;
 }
 

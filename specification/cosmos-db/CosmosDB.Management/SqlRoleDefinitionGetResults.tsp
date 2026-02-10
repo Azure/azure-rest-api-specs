@@ -25,7 +25,7 @@ model SqlRoleDefinitionGetResults
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlRoleDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB SQL Role Definition with the given Id.

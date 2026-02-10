@@ -31,7 +31,7 @@ model SqlDatabaseGetResults
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface SqlResources {
   /**
    * Gets the SQL database under an existing Azure Cosmos DB database account with the provided name.

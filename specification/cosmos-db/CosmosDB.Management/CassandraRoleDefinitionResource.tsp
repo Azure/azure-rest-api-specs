@@ -25,7 +25,7 @@ model CassandraRoleDefinitionResource
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface CassandraRoleDefinitionResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Cassandra Role Definition with the given Id.
