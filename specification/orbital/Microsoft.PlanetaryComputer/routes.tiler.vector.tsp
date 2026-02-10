@@ -210,7 +210,7 @@ interface VectorTileMatrixSets {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
-interface VectorTilesOperations {
+interface VectorTilesCollections {
   /**
    * Retrieve a list of available vector tilesets for the specified collection.
    */
@@ -323,7 +323,7 @@ interface VectorTilesOperations {
 }
 
 @doc("This API is based on the OGC API - Tiles standard defined here: https://github.com/opengeospatial/ogcapi-tiles/tree/master/openapi")
-interface VectorSearchTilesOperations {
+interface VectorTilesDataset {
   /**
    * Retrieve a list of available vector tilesets for the specified search.
    */

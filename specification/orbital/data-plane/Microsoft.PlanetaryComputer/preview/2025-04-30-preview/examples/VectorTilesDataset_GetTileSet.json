@@ -1,0 +1,40 @@
+{
+  "title": "VectorTilesDataset_GetTileSet",
+  "operationId": "VectorTilesDataset_GetTileSet",
+  "parameters": {
+    "api-version": "2025-04-30-preview",
+    "searchId": "search-12345",
+    "tileMatrixSetId": "WebMercatorQuad"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "title": "Vector Tiles for search-12345",
+        "description": "Vector tiles generated from search results using WebMercatorQuad tiling scheme",
+        "dataType": "vector",
+        "crs": "http://www.opengis.net/def/crs/EPSG/0/3857",
+        "tileMatrixSetURI": "http://www.opengis.net/def/tilematrixset/OGC/1.0/WebMercatorQuad",
+        "links": [
+          {
+            "rel": "self",
+            "type": "application/json",
+            "href": "https://contoso-catalog.gwhqfdeddydpareu.uksouth.geocatalog.spatio.azure.com/data/vector/search-12345/tiles/WebMercatorQuad"
+          },
+          {
+            "rel": "item",
+            "type": "application/vnd.mapbox-vector-tile",
+            "href": "https://contoso-catalog.gwhqfdeddydpareu.uksouth.geocatalog.spatio.azure.com/data/vector/search-12345/tiles/WebMercatorQuad/{tileMatrix}/{tileRow}/{tileCol}"
+          },
+          {
+            "rel": "http://www.opengis.net/def/rel/ogc/1.0/tiling-scheme",
+            "type": "application/json",
+            "href": "https://contoso-catalog.gwhqfdeddydpareu.uksouth.geocatalog.spatio.azure.com/data/vector/tileMatrixSets/WebMercatorQuad"
+          }
+        ],
+        "tiles": [
+          "https://contoso-catalog.gwhqfdeddydpareu.uksouth.geocatalog.spatio.azure.com/data/vector/search-12345/tiles/WebMercatorQuad/{tileMatrix}/{tileRow}/{tileCol}?f=mvt"
+        ]
+      }
+    }
+  }
+}
