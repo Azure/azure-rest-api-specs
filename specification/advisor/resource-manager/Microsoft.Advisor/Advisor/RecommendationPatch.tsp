@@ -10,21 +10,20 @@ namespace Microsoft.Advisor;
 /**
  * Advisor Recommendation.
  */
-@added(Versions.v2026_02_01_preview) 
+@added(Versions.v2026_02_01_preview)
 model RecommendationsPatchResponse
-    is Azure.ResourceManager.ExtensionResource<RecommendationPatchProperties> {
-    ...ResourceNameParameter<
+  is Azure.ResourceManager.ExtensionResource<RecommendationPatchProperties> {
+  ...ResourceNameParameter<
     Resource = RecommendationsPatchResponse,
-      KeyName = "recommendationId",
-      SegmentName = "recommendations",
-      NamePattern = ""
-      >;
+    KeyName = "recommendationId",
+    SegmentName = "recommendations",
+    NamePattern = ""
+  >;
 }
 
 @armResourceOperations
 @added(Versions.v2026_02_01_preview)
 interface RecommendationsPatch {
-
   /**
    * Update the state properties of a Recommendation.
    */
@@ -36,5 +35,4 @@ interface RecommendationsPatch {
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Error = ArmDefaultErrorResponse
   >;
-
-  }
+}

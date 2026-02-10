@@ -174,7 +174,7 @@ union NewState {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Dismissed: "Dismissed",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  Completed: "Completed"
+  Completed: "Completed",
 }
 
 /**
@@ -199,7 +199,7 @@ union Reason {
 /**
  * The reason for dismissing the Recommendation.
  */
- @added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_02_01_preview)
 union RecommendationDismissReason {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -572,30 +572,30 @@ model RecommendationProperties {
   @added(Versions.v2026_02_01_preview)
   state?: NewState;
 
-   /**
+  /**
    * The reason the Recommendation was dismissed.
    */
   @added(Versions.v2026_02_01_preview)
   recommendationDismissReason?: RecommendationDismissReason;
 
-   /**
+  /**
    * The time the Recommendation was postponed until.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-    @added(Versions.v2026_02_01_preview)
-  postponedUntilDateTime?: utcDateTime; 
+  @added(Versions.v2026_02_01_preview)
+  postponedUntilDateTime?: utcDateTime;
 
   /**
    * The most recent time that Advisor checked the validity of the recommendation.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-    @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_02_01_preview)
   lastRefreshed?: utcDateTime;
 
   /**
    * The most recent time that Advisor recommendation was updated.
    */
-   lastUpdated?: utcDateTime;
+  lastUpdated?: utcDateTime;
 
   /**
    * The recommendation metadata.
@@ -627,7 +627,7 @@ model RecommendationProperties {
   /**
    * The single snoozed or dismissed rule for the recommendation.
    */
-   @added(Versions.v2026_02_01_preview)
+  @added(Versions.v2026_02_01_preview)
   suppressionId?: string;
 
   /**
@@ -714,18 +714,18 @@ model RecommendationProperties {
 /**
  * Properties for patch Recommendation API.
  */
- #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
- @added(Versions.v2026_02_01_preview)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_02_01_preview)
 model RecommendationPatchProperties {
-   /**
+  /**
    * The most recent time that Advisor checked the validity of the recommendation.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated?: utcDateTime;
 
   /**
-  * The recommendation-type GUID.
-  */
+   * The recommendation-type GUID.
+   */
   recommendationTypeId?: string;
 
   /**
@@ -738,17 +738,17 @@ model RecommendationPatchProperties {
    */
   recommendationDismissReason?: RecommendationDismissReason;
 
-   /**
+  /**
    * The time the Recommendation was postponed until.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  postponedUntilDateTime?: utcDateTime; 
+  postponedUntilDateTime?: utcDateTime;
 }
 
 /**
  * Properties for recommendation state patch payload.
  */
- @added(Versions.v2026_02_01_preview)
+@added(Versions.v2026_02_01_preview)
 model RecommendationStatePropertiesPayload {
   /**
    * The state of the recommendation.
@@ -765,7 +765,6 @@ model RecommendationStatePropertiesPayload {
    */
   postponedUntilDateTime?: utcDateTime;
 }
-
 
 /**
  * A summary of the recommendation.
