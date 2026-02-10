@@ -23,7 +23,7 @@ model KubernetesConfigurationPrivateLinkScope
   >;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface KubernetesConfigurationPrivateLinkScopes {
   /**
    * Returns a Azure Arc PrivateLinkScope.
