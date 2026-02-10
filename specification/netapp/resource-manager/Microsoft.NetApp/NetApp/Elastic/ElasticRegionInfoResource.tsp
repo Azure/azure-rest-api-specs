@@ -38,13 +38,13 @@ model ElasticRegionInfoResource
 @removed(Versions.v2025_12_01)
 @added(Versions.v2025_12_15_preview)
 model ElasticRegionInfo {
-  /** Lists the logical availability zones in the specified region and indicates their current availability status for the subscription. This helps determine which zones can be used to deploy or elastic resources. */
+  /** Lists the logical availability zones in the specified region and indicates their current availability status for the subscription. This helps determine which zones can be used to deploy Elastic resources. */
   @OpenAPI.extension("x-ms-identifiers", #["availabilityZone"])
   availabilityZoneMappings?: AvailabilityZoneMapping[];
 }
 
 /**
- * Lists the logical availability zones in the specified region and indicates their current availability status for the subscription. This helps determine which zones can be used to deploy or elastic resources.
+ * Lists the logical availability zones in the specified region and indicates their current availability status for the subscription. This helps determine which zones can be used to deploy Elastic resources.
  */
 model AvailabilityZoneMapping {
   /** The identifier of the logical availability zone within the region (e.g., '1', '2', '3') */
