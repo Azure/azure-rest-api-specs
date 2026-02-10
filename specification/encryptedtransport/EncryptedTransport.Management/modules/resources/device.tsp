@@ -13,7 +13,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
 
 namespace Microsoft.EncryptedTransport;
 
