@@ -25,6 +25,7 @@ interface UsageAggregatesOperationGroup {
   @autoRoute
   @get
   @list
+  @tag("UsageAggregates")
   @action("UsageAggregates")
   list is ArmProviderActionSync<
     Response = ResourceListResult<UsageAggregation> | (ArmAcceptedResponse &
@@ -73,6 +74,7 @@ interface RateCardOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @autoRoute
   @get
+  @tag("RateCard")
   @action("RateCard")
   @OpenAPI.externalDocs("https://docs.microsoft.com/rest/api/commerce/ratecard")
   get is ArmProviderActionSync<
