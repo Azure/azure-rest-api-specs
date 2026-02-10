@@ -42,7 +42,7 @@ model ClusterMeshProfileProperties {
 
   @doc("The cluster mesh profile status.")
   @visibility(Lifecycle.Read)
-  status: ClusterMeshProfileStatus;
+  status?: ClusterMeshProfileStatus;
 }
 
 @doc("The provisioning state of the cluster mesh profile resource.")
