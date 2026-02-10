@@ -89,7 +89,7 @@ interface OnlineExperimentationWorkspaces {
   /**
    * Patch an online experimentation workspace.
    */
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     OnlineExperimentationWorkspace,
     OnlineExperimentationWorkspacePatch

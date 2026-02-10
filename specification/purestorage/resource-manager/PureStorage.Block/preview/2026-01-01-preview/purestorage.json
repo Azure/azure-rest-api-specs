@@ -3537,7 +3537,7 @@
       "description": "The updatable properties of the AvsStorageContainerVolume.",
       "properties": {
         "softDeletion": {
-          "$ref": "#/definitions/SoftDeletionUpdate",
+          "$ref": "#/definitions/SoftDeletion",
           "description": "Volume's soft-deletion state",
           "x-ms-mutability": [
             "read",
@@ -3681,7 +3681,7 @@
       "description": "The updatable properties of the AvsVm.",
       "properties": {
         "softDeletion": {
-          "$ref": "#/definitions/SoftDeletionUpdate",
+          "$ref": "#/definitions/SoftDeletion",
           "description": "AVS VM's soft-deletion state",
           "x-ms-mutability": [
             "read",
@@ -3743,7 +3743,7 @@
       "description": "The updatable properties of the AvsVmVolume.",
       "properties": {
         "softDeletion": {
-          "$ref": "#/definitions/SoftDeletionUpdate",
+          "$ref": "#/definitions/SoftDeletion",
           "description": "Volume's soft-deletion state",
           "x-ms-mutability": [
             "read",
@@ -4089,36 +4089,6 @@
         "postalCode"
       ]
     },
-    "LiftrBase.AddressUpdate": {
-      "type": "object",
-      "description": "Address details",
-      "properties": {
-        "addressLine1": {
-          "type": "string",
-          "description": "Address line 1"
-        },
-        "addressLine2": {
-          "type": "string",
-          "description": "Address line 2"
-        },
-        "city": {
-          "type": "string",
-          "description": "Name of the city"
-        },
-        "state": {
-          "type": "string",
-          "description": "State (if any)"
-        },
-        "country": {
-          "type": "string",
-          "description": "Name of the country"
-        },
-        "postalCode": {
-          "type": "string",
-          "description": "Postal code"
-        }
-      }
-    },
     "LiftrBase.CompanyDetails": {
       "type": "object",
       "description": "Company details",
@@ -4135,20 +4105,6 @@
       "required": [
         "companyName"
       ]
-    },
-    "LiftrBase.CompanyDetailsUpdate": {
-      "type": "object",
-      "description": "Company details",
-      "properties": {
-        "companyName": {
-          "type": "string",
-          "description": "Company name"
-        },
-        "address": {
-          "$ref": "#/definitions/LiftrBase.AddressUpdate",
-          "description": "Company address"
-        }
-      }
     },
     "LiftrBase.MarketplaceDetails": {
       "type": "object",
@@ -4611,7 +4567,7 @@
       "description": "The updatable properties of the Reservation.",
       "properties": {
         "user": {
-          "$ref": "#/definitions/UserDetailsUpdate",
+          "$ref": "#/definitions/UserDetails",
           "description": "User details"
         }
       }
@@ -4675,20 +4631,6 @@
       "required": [
         "destroyed"
       ]
-    },
-    "SoftDeletionUpdate": {
-      "type": "object",
-      "description": "Soft-deletion state",
-      "properties": {
-        "destroyed": {
-          "type": "boolean",
-          "description": "If false, the resource is active; if true, the resource has been destroyed; resources can be soft-deleted by setting destroyed to true, and recovered by setting it to false",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        }
-      }
     },
     "Space": {
       "type": "object",
@@ -4987,36 +4929,6 @@
         "lastName",
         "emailAddress"
       ]
-    },
-    "UserDetailsUpdate": {
-      "type": "object",
-      "description": "User details",
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "description": "First name"
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name"
-        },
-        "emailAddress": {
-          "$ref": "#/definitions/LiftrBase.email",
-          "description": "Email address"
-        },
-        "upn": {
-          "type": "string",
-          "description": "Principal name"
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "Phone number"
-        },
-        "companyDetails": {
-          "$ref": "#/definitions/LiftrBase.CompanyDetailsUpdate",
-          "description": "Company details"
-        }
-      }
     },
     "VmType": {
       "type": "string",

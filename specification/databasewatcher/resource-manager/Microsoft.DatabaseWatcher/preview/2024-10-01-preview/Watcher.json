@@ -1637,48 +1637,6 @@
         "kustoOfferingType"
       ]
     },
-    "DatastoreUpdate": {
-      "type": "object",
-      "description": "The properties of a data store.",
-      "properties": {
-        "adxClusterResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of an Azure Data Explorer cluster.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Kusto/clusters"
-              }
-            ]
-          }
-        },
-        "kustoClusterDisplayName": {
-          "type": "string",
-          "description": "The Kusto cluster display name."
-        },
-        "kustoClusterUri": {
-          "type": "string",
-          "description": "The Kusto cluster URI."
-        },
-        "kustoDataIngestionUri": {
-          "type": "string",
-          "description": "The Kusto data ingestion URI."
-        },
-        "kustoDatabaseName": {
-          "type": "string",
-          "description": "The name of a Kusto database."
-        },
-        "kustoManagementUrl": {
-          "type": "string",
-          "description": "The Kusto management URL."
-        },
-        "kustoOfferingType": {
-          "$ref": "#/definitions/KustoOfferingType",
-          "description": "The type of a Kusto offering."
-        }
-      }
-    },
     "HealthValidation": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
@@ -2367,7 +2325,7 @@
       "description": "The updatable properties of the Watcher.",
       "properties": {
         "datastore": {
-          "$ref": "#/definitions/DatastoreUpdate",
+          "$ref": "#/definitions/Datastore",
           "description": "The data store for collected monitoring data."
         },
         "defaultAlertRuleIdentityResourceId": {

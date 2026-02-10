@@ -80,7 +80,7 @@ op CreateOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
-@patch(#{ implicitOptionality: true })
+@patch(#{ implicitOptionality: false })
 op UpdateOperation<
   TResource extends TypeSpec.Reflection.Model,
   TResponse

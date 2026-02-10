@@ -263,7 +263,7 @@ interface StoragePools {
   @doc("Create a storage pool")
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
   @doc("Update a storage pool")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     StoragePool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -746,7 +746,7 @@ model AvsDiskDetails {
 @armResourceOperations
 interface AvsStorageContainerVolumes {
   @doc("Update a volume in an AVS storage container")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AvsStorageContainerVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -863,7 +863,7 @@ union VolumeContainerType {
 @armResourceOperations
 interface AvsVms {
   @doc("Update an AVS VM")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AvsVm,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -895,7 +895,7 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
 @armResourceOperations
 interface AvsVmVolumes {
   @doc("Update a volume in an AVS VM")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AvsVmVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -1025,7 +1025,7 @@ interface VolumeGroups {
   @doc("Create a volume group")
   create is ArmResourceCreateOrUpdateAsync<VolumeGroup>;
   @doc("Update a volume group")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     VolumeGroup,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -1106,7 +1106,7 @@ interface Volumes {
   @doc("Create a volume")
   create is ArmResourceCreateOrUpdateAsync<Volume>;
   @doc("Update a volume")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Volume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

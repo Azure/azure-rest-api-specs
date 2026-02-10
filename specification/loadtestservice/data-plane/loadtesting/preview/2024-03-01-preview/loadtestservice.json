@@ -402,7 +402,7 @@
             "description": "App Component model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestRunAppComponentsUpdate"
+              "$ref": "#/definitions/TestRunAppComponents"
             }
           }
         ],
@@ -1129,7 +1129,7 @@
             "description": "App Component model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestAppComponentsUpdate"
+              "$ref": "#/definitions/TestAppComponents"
             }
           }
         ],
@@ -1526,7 +1526,7 @@
             "description": "Server metric configuration model.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TestServerMetricsConfigurationUpdate"
+              "$ref": "#/definitions/TestServerMetricsConfiguration"
             }
           }
         ],
@@ -1661,28 +1661,6 @@
         "resourceName",
         "resourceType"
       ]
-    },
-    "AppComponentUpdate": {
-      "type": "object",
-      "description": "An Azure resource object (Refer azure generic resource model :https://learn.microsoft.com/en-us/rest/api/resources/resources/get-by-id#genericresource)",
-      "properties": {
-        "resourceName": {
-          "type": "string",
-          "description": "Azure resource name, required while creating the app component."
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "Azure resource type, required while creating the app component."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Azure resource display name"
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of Azure resource type"
-        }
-      }
     },
     "ArtifactsContainerInfo": {
       "type": "object",
@@ -2645,41 +2623,6 @@
         "resourceType"
       ]
     },
-    "ResourceMetricUpdate": {
-      "type": "object",
-      "description": "Associated metric definition for particular metrics of the azure resource (\nRefer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition).",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource id."
-        },
-        "metricNamespace": {
-          "type": "string",
-          "description": "Metric name space."
-        },
-        "displayDescription": {
-          "type": "string",
-          "description": "Metric description."
-        },
-        "name": {
-          "type": "string",
-          "description": "The invariant value of metric name"
-        },
-        "aggregation": {
-          "type": "string",
-          "description": "Metric aggregation."
-        },
-        "unit": {
-          "type": "string",
-          "description": "Metric unit."
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "Azure resource type."
-        }
-      }
-    },
     "Secret": {
       "type": "object",
       "description": "Secret",
@@ -2869,19 +2812,6 @@
       "required": [
         "components"
       ]
-    },
-    "TestAppComponentsUpdate": {
-      "type": "object",
-      "description": "Test app components",
-      "properties": {
-        "components": {
-          "type": "object",
-          "description": "Azure resource collection { resource id (fully qualified resource Id e.g\nsubscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})\n: resource object } ",
-          "additionalProperties": {
-            "$ref": "#/definitions/AppComponentUpdate"
-          }
-        }
-      }
     },
     "TestCreateOrUpdate": {
       "type": "object",
@@ -3276,19 +3206,6 @@
       "required": [
         "components"
       ]
-    },
-    "TestRunAppComponentsUpdate": {
-      "type": "object",
-      "description": "Test run app component",
-      "properties": {
-        "components": {
-          "type": "object",
-          "description": "Azure resource collection { resource id (fully qualified resource Id e.g\nsubscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName})\n: resource object } ",
-          "additionalProperties": {
-            "$ref": "#/definitions/AppComponentUpdate"
-          }
-        }
-      }
     },
     "TestRunArtifacts": {
       "type": "object",
@@ -3725,19 +3642,6 @@
       "required": [
         "metrics"
       ]
-    },
-    "TestServerMetricsConfigurationUpdate": {
-      "type": "object",
-      "description": "Test server metrics configuration",
-      "properties": {
-        "metrics": {
-          "type": "object",
-          "description": "Azure resource metrics collection {metric id : metrics object} (Refer :\nhttps://learn.microsoft.com/en-us/rest/api/monitor/metric-definitions/list#metricdefinition\nfor metric id).",
-          "additionalProperties": {
-            "$ref": "#/definitions/ResourceMetricUpdate"
-          }
-        }
-      }
     },
     "TimeGrain": {
       "type": "string",

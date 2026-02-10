@@ -1567,7 +1567,7 @@
       "description": "The updatable properties of the Frontend.",
       "properties": {
         "securityPolicyConfigurations": {
-          "$ref": "#/definitions/SecurityPolicyConfigurationsUpdate",
+          "$ref": "#/definitions/SecurityPolicyConfigurations",
           "description": "Frontend Security Policy Configuration"
         }
       }
@@ -1658,16 +1658,6 @@
       "required": [
         "id"
       ]
-    },
-    "IpAccessRulesSecurityPolicyUpdate": {
-      "type": "object",
-      "description": "IpAccessRules Security Policy",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID of the Ip Access Rules Security Policy"
-        }
-      }
     },
     "PolicyType": {
       "type": "string",
@@ -1791,20 +1781,6 @@
         }
       }
     },
-    "SecurityPolicyConfigurationsUpdate": {
-      "type": "object",
-      "description": "SecurityPolicyConfigurations Subresource of Traffic Controller.",
-      "properties": {
-        "wafSecurityPolicy": {
-          "$ref": "#/definitions/WafSecurityPolicyUpdate",
-          "description": "Contains reference to a WAF-type security policy."
-        },
-        "ipAccessRulesSecurityPolicy": {
-          "$ref": "#/definitions/IpAccessRulesSecurityPolicyUpdate",
-          "description": "Contains reference to a IpAccessRules-type security policy."
-        }
-      }
-    },
     "SecurityPolicyListResult": {
       "type": "object",
       "description": "The response of a SecurityPolicy list operation.",
@@ -1873,7 +1849,7 @@
       "description": "The updatable properties of the SecurityPolicy.",
       "properties": {
         "wafPolicy": {
-          "$ref": "#/definitions/WafPolicyUpdate",
+          "$ref": "#/definitions/WafPolicy",
           "description": "Web Application Firewall Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set."
         },
         "ipAccessRulesPolicy": {
@@ -1989,7 +1965,7 @@
       "description": "The updatable properties of the TrafficController.",
       "properties": {
         "securityPolicyConfigurations": {
-          "$ref": "#/definitions/SecurityPolicyConfigurationsUpdate",
+          "$ref": "#/definitions/SecurityPolicyConfigurations",
           "description": "Security Policy Configuration"
         }
       }
@@ -2007,16 +1983,6 @@
         "id"
       ]
     },
-    "WafPolicyUpdate": {
-      "type": "object",
-      "description": "Web Application Firewall Policy",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID of the WAF"
-        }
-      }
-    },
     "WafSecurityPolicy": {
       "type": "object",
       "description": "Web Application Firewall Security Policy",
@@ -2029,16 +1995,6 @@
       "required": [
         "id"
       ]
-    },
-    "WafSecurityPolicyUpdate": {
-      "type": "object",
-      "description": "Web Application Firewall Security Policy",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID of the Waf Security Policy"
-        }
-      }
     }
   },
   "parameters": {}

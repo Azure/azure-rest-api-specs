@@ -13265,7 +13265,7 @@
       "description": "The type used for update operations of the ActiveDirectoryConfig.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -13339,7 +13339,7 @@
           "maxLength": 255
         },
         "secretPassword": {
-          "$ref": "#/definitions/SecretPasswordUpdate",
+          "$ref": "#/definitions/SecretPassword",
           "description": "Access password from Azure KeyVault Secrets to connect Active Directory"
         }
       }
@@ -13457,24 +13457,6 @@
     "Azure.Core.ipV4Address": {
       "type": "string",
       "description": "Represent an IP V4 address serialized as a string.\n\nIt is formatted as four 8-bit fields separated by periods."
-    },
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
     },
     "AzureKeyVaultDetails": {
       "type": "object",
@@ -15461,7 +15443,7 @@
       "description": "The type used for update operations of the ElasticAccount.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -16085,7 +16067,7 @@
           "maximum": 140737488355330
         },
         "encryption": {
-          "$ref": "#/definitions/ElasticEncryptionConfigurationUpdate",
+          "$ref": "#/definitions/ElasticEncryptionConfiguration",
           "description": "Encryption settings"
         },
         "activeDirectoryConfigResourceId": {
@@ -16145,28 +16127,6 @@
         "elasticPoolEncryptionKeySource",
         "keyVaultPrivateEndpointResourceId"
       ]
-    },
-    "ElasticEncryptionConfigurationUpdate": {
-      "type": "object",
-      "description": "CMK Encryption Configuration",
-      "properties": {
-        "elasticPoolEncryptionKeySource": {
-          "$ref": "#/definitions/ElasticPoolEncryptionKeySource",
-          "description": "Pool Encryption Key Source."
-        },
-        "keyVaultPrivateEndpointResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of private endpoint for KeyVault. It must reside in the same VNET as the volume. Only applicable if encryptionKeySource = 'Microsoft.KeyVault'.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/privateEndpoints"
-              }
-            ]
-          }
-        }
-      }
     },
     "ElasticEncryptionIdentity": {
       "type": "object",
@@ -19985,37 +19945,6 @@
         "keyVaultUri",
         "secretName"
       ]
-    },
-    "SecretPasswordKeyVaultPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties of key vault to get the secrets for password.",
-      "properties": {
-        "keyVaultUri": {
-          "type": "string",
-          "format": "uri",
-          "description": "The Uri of KeyVault.",
-          "maxLength": 255
-        },
-        "secretName": {
-          "type": "string",
-          "description": "The name of KeyVault password secret.",
-          "maxLength": 127
-        }
-      }
-    },
-    "SecretPasswordUpdate": {
-      "type": "object",
-      "description": "Access password from Azure KeyVault Secrets to connect Active Directory",
-      "properties": {
-        "keyVaultProperties": {
-          "$ref": "#/definitions/SecretPasswordKeyVaultPropertiesUpdate",
-          "description": "Properties provided by KeyVault."
-        },
-        "identity": {
-          "$ref": "#/definitions/SecretPasswordIdentity",
-          "description": "Identity used to authenticate to KeyVault. Applicable if keySource is 'Microsoft.KeyVault'."
-        }
-      }
     },
     "ServiceLevel": {
       "type": "string",
