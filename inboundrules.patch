@@ -1,0 +1,331 @@
+From 3cb7b90fd6cd77c9ac95d2783dc6a7f0b7275196 Mon Sep 17 00:00:00 2001
+From: Robert Woodland <rwoodland@microsoft.com>
+Date: Tue, 27 Jan 2026 12:24:43 +0000
+Subject: [PATCH 1/3] Make inbound rules a separate resource, with the NAT GW
+ instead having an ARM ID array
+
+---
+ .../StackHCIVM/InboundNatRules.tsp            | 49 +++++++++++++++++++
+ .../StackHCIVM/client.tsp                     |  9 ++++
+ .../StackHCIVM/main.tsp                       |  1 +
+ .../StackHCIVM/models.tsp                     | 24 ++++-----
+ 4 files changed, 71 insertions(+), 12 deletions(-)
+ create mode 100644 specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/InboundNatRules.tsp
+
+diff --git a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/InboundNatRules.tsp b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/InboundNatRules.tsp
+new file mode 100644
+index 00000000000..70b231f31c8
+--- /dev/null
++++ b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/InboundNatRules.tsp
+@@ -0,0 +1,49 @@
++import "@azure-tools/typespec-azure-core";
++import "@azure-tools/typespec-azure-resource-manager";
++import "@azure-tools/typespec-client-generator-core";
++import "@typespec/rest";
++import "@typespec/versioning";
++import "./models.tsp";
++
++using TypeSpec.Rest;
++using Azure.ResourceManager;
++using TypeSpec.Http;
++using TypeSpec.OpenAPI;
++using TypeSpec.Versioning;
++
++namespace Microsoft.AzureStackHCI;
++
++#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
++#suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - x-ms-azure-resource is this needed?"
++@doc("The inbound Nat rule resource definition.")
++@extension("x-ms-azure-resource", true)
++@parentResource(NatGateway)
++@added(Versions.v2025_09_01_preview)
++model InboundNatRule is ProxyResource<InboundNatRuleProperties> {
++  @doc("Name of the inbound Nat rule")
++  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
++  @path
++  @key("inboundNatRuleName")
++  @segment("inboundNatRules")
++  @visibility(Lifecycle.Read)
++  name: string;
++
++  @doc("The extendedLocation of the resource.")
++  extendedLocation?: ExtendedLocation;
++}
++
++@armResourceOperations
++@added(Versions.v2025_09_01_preview)
++interface InboundNatRules {
++  @doc("The operation to get an inbound Nat rule.")
++  get is ArmResourceRead<InboundNatRule>;
++
++  @doc("The operation to create or update an inbound Nat rule. Please note some properties can be set only during inbound Nat rule creation.")
++  createOrUpdate is ArmResourceCreateOrReplaceAsync<InboundNatRule>;
++
++  @doc("The operation to delete an inbound Nat rule.")
++  delete is ArmResourceDeleteWithoutOkAsync<InboundNatRule>;
++
++  @doc("Lists all of the inbound Nat rules in the specified Nat gateway. Use the nextLink property in the response to get the next page of inbound Nat rules.")
++  listByNatGateway is ArmResourceListByParent<InboundNatRule>;
++}
+diff --git a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/client.tsp b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/client.tsp
+index e69e187c778..b1781c5d126 100644
+--- a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/client.tsp
++++ b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/client.tsp
+@@ -437,6 +437,15 @@ using Microsoft.AzureStackHCI;
+ @@clientName(LoadBalancerProperties, "HciVmLoadBalancerProperties", "csharp");
+ @@clientName(NatGateway, "HciVmNatGateway", "csharp");
+ @@clientName(NatGatewayProperties, "HciVmNatGatewayProperties", "csharp");
++@@clientName(InboundNATRule, "HciVmInboundNatRule", "csharp");
++@@clientName(InboundNATRuleProperties,
++  "HciVmInboundNatRuleProperties",
++  "csharp"
++);
++@@clientName(InboundNATRuleArmReference,
++  "HciVmInboundNatRuleArmReference",
++  "csharp"
++);
+ @@clientName(NatGatewayProperties.inboundNATRules, "InboundNatRules", "csharp");
+ @@clientName(PublicIPAddress, "HciVmPublicIPAddress", "csharp");
+ @@clientName(PublicIPAddressProperties,
+diff --git a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/main.tsp b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/main.tsp
+index 3ae2816f24f..3bd2027226c 100644
+--- a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/main.tsp
++++ b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/main.tsp
+@@ -21,6 +21,7 @@ import "./VirtualNetworks.tsp";
+ import "./VirtualNetworkSubnets.tsp";
+ import "./PublicIPAddresses.tsp";
+ import "./NatGateways.tsp";
++import "./InboundNATRules.tsp";
+ import "./LoadBalancers.tsp";
+ import "./Operations.tsp";
+ 
+diff --git a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp
+index ffc9e9e5535..1878c09cdf2 100644
+--- a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp
++++ b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp
+@@ -1492,17 +1492,16 @@ model InboundNATRuleProperties {
+   publicIPAddress: PublicIPAddressArmReference;
+ }
+ 
+-#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
++#suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+ @added(Versions.v2025_09_01_preview)
+-@doc("Inbound nat rule properties")
+-model InboundNATRule {
+-  @doc("name of the inbound nat rule")
+-  @visibility(Lifecycle.Read, Lifecycle.Create)
+-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
+-  name: string;
+-
+-  @doc("properties of the inbound nat rule")
+-  properties: InboundNATRuleProperties;
++@doc("The Azure Resource ID of an Inbound NAT Rule resource")
++model InboundNATRuleArmReference {
++  @doc("The Azure Resource ID of an Inbound NAT Rule resource")
++  resourceId?: armResourceIdentifier<[
++    {
++      type: "Microsoft.AzureStackHCI/inboundNATRules";
++    }
++  ]>;
+ }
+ 
+ @added(Versions.v2025_09_01_preview)
+@@ -1519,9 +1518,10 @@ model NatGatewayProperties {
+   subnets?: VirtualNetworkSubnetArmReference[];
+ 
+   #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+-  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet")
++  @doc("List of inbound NAT rules associated with this NAT Gateway. These are managed as child resources.")
++  @visibility(Lifecycle.Read)
+   @Azure.ResourceManager.identifiers(#[])
+-  inboundNATRules?: InboundNATRule[];
++  inboundNATRules?: InboundNATRuleArmReference[];
+ 
+   @doc("Provisioning state of the public IP")
+   @visibility(Lifecycle.Read)
+-- 
+2.52.0
+
+
+From d860c621cb5a182f20368dbc608967c6fb828fae Mon Sep 17 00:00:00 2001
+From: Robert Woodland <rwoodland@microsoft.com>
+Date: Tue, 27 Jan 2026 12:46:17 +0000
+Subject: [PATCH 2/3] Add provisioning state for inbound rule
+
+---
+ .../Microsoft.AzureStackHCI/StackHCIVM/models.tsp             | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp
+index 1878c09cdf2..e70841a5b93 100644
+--- a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp
++++ b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp
+@@ -1490,6 +1490,10 @@ model InboundNATRuleProperties {
+   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+   @doc("Public IP Address for this NAT rule")
+   publicIPAddress: PublicIPAddressArmReference;
++
++  @doc("Provisioning state of the inbound rule")
++  @visibility(Lifecycle.Read)
++  provisioningState?: ProvisioningStateEnum;
+ }
+ 
+ #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+-- 
+2.52.0
+
+
+From 886bf9078b2d6e1c7e3c4374b0bc8a83cd10f591 Mon Sep 17 00:00:00 2001
+From: Robert Woodland <rwoodland@microsoft.com>
+Date: Tue, 27 Jan 2026 12:46:37 +0000
+Subject: [PATCH 3/3] Fix casing of Nat
+
+---
+ .../StackHCIVM/client.tsp                     | 18 +++++------
+ .../StackHCIVM/main.tsp                       |  2 +-
+ .../StackHCIVM/models.tsp                     | 30 +++++++++----------
+ 3 files changed, 25 insertions(+), 25 deletions(-)
+
+diff --git a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/client.tsp b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/client.tsp
+index b1781c5d126..1d416215da5 100644
+--- a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/client.tsp
++++ b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/client.tsp
+@@ -437,16 +437,16 @@ using Microsoft.AzureStackHCI;
+ @@clientName(LoadBalancerProperties, "HciVmLoadBalancerProperties", "csharp");
+ @@clientName(NatGateway, "HciVmNatGateway", "csharp");
+ @@clientName(NatGatewayProperties, "HciVmNatGatewayProperties", "csharp");
+-@@clientName(InboundNATRule, "HciVmInboundNatRule", "csharp");
+-@@clientName(InboundNATRuleProperties,
++@@clientName(InboundNatRule, "HciVmInboundNatRule", "csharp");
++@@clientName(InboundNatRuleProperties,
+   "HciVmInboundNatRuleProperties",
+   "csharp"
+ );
+-@@clientName(InboundNATRuleArmReference,
++@@clientName(InboundNatRuleArmReference,
+   "HciVmInboundNatRuleArmReference",
+   "csharp"
+ );
+-@@clientName(NatGatewayProperties.inboundNATRules, "InboundNatRules", "csharp");
++@@clientName(NatGatewayProperties.inboundNatRules, "InboundNatRules", "csharp");
+ @@clientName(PublicIPAddress, "HciVmPublicIPAddress", "csharp");
+ @@clientName(PublicIPAddressProperties,
+   "HciVmPublicIPAddressProperties",
+@@ -492,14 +492,14 @@ using Microsoft.AzureStackHCI;
+   "IsSdnPoliciesBypassed",
+   "csharp"
+ );
+-@@clientName(InboundNATRule, "HciVmInboundNatRule", "csharp");
+-@@clientName(InboundNATRuleProperties,
++@@clientName(InboundNatRule, "HciVmInboundNatRule", "csharp");
++@@clientName(InboundNatRuleProperties,
+   "HciVmInboundNatRuleProperties",
+   "csharp"
+ );
+-@@clientName(InboundNATRuleProtocol, "HciVmInboundNatRuleProtocol", "csharp");
+-@@clientName(InboundNATRuleProtocol.TCP, "Tcp", "csharp");
+-@@clientName(InboundNATRuleProtocol.UDP, "Udp", "csharp");
++@@clientName(InboundNatRuleProtocol, "HciVmInboundNatRuleProtocol", "csharp");
++@@clientName(InboundNatRuleProtocol.TCP, "Tcp", "csharp");
++@@clientName(InboundNatRuleProtocol.UDP, "Udp", "csharp");
+ @@clientName(LoadBalancerBackendAddress,
+   "HciVmLoadBalancerBackendAddress",
+   "csharp"
+diff --git a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/main.tsp b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/main.tsp
+index 3bd2027226c..2495c596244 100644
+--- a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/main.tsp
++++ b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/main.tsp
+@@ -21,7 +21,7 @@ import "./VirtualNetworks.tsp";
+ import "./VirtualNetworkSubnets.tsp";
+ import "./PublicIPAddresses.tsp";
+ import "./NatGateways.tsp";
+-import "./InboundNATRules.tsp";
++import "./InboundNatRules.tsp";
+ import "./LoadBalancers.tsp";
+ import "./Operations.tsp";
+ 
+diff --git a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp
+index e70841a5b93..f3ed26b3c55 100644
+--- a/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp
++++ b/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/models.tsp
+@@ -510,8 +510,8 @@ union LoadBalancerRuleTransportProtocol {
+ }
+ 
+ @added(Versions.v2025_09_01_preview)
+-@doc("Protocol for inbound NAT rules")
+-union InboundNATRuleProtocol {
++@doc("Protocol for inbound Nat rules")
++union InboundNatRuleProtocol {
+   @doc("TCP - load balance only tcp traffic")
+   TCP: "Tcp",
+ 
+@@ -1470,12 +1470,12 @@ model PublicIPAddressProperties {
+   provisioningState?: ProvisioningStateEnum;
+ }
+ 
+-#suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
++#suppress "@azure-tools/typespec-azure-core/casing-style" "Nat is a short form. The casing is correct."
+ @added(Versions.v2025_09_01_preview)
+ @doc("Inbound nat rule properties")
+-model InboundNATRuleProperties {
+-  @doc("Protocol for the NAT rule")
+-  protocol: InboundNATRuleProtocol;
++model InboundNatRuleProperties {
++  @doc("Protocol for the Nat rule")
++  protocol: InboundNatRuleProtocol;
+ 
+   @doc("Frontend Port for the inbound rule")
+   frontendPort: int32;
+@@ -1488,7 +1488,7 @@ model InboundNATRuleProperties {
+   backendIPConfiguration: IPConfigurationArmReference;
+ 
+   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+-  @doc("Public IP Address for this NAT rule")
++  @doc("Public IP Address for this Nat rule")
+   publicIPAddress: PublicIPAddressArmReference;
+ 
+   @doc("Provisioning state of the inbound rule")
+@@ -1498,12 +1498,12 @@ model InboundNATRuleProperties {
+ 
+ #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+ @added(Versions.v2025_09_01_preview)
+-@doc("The Azure Resource ID of an Inbound NAT Rule resource")
+-model InboundNATRuleArmReference {
+-  @doc("The Azure Resource ID of an Inbound NAT Rule resource")
++@doc("The Azure Resource ID of an Inbound Nat Rule resource")
++model InboundNatRuleArmReference {
++  @doc("The Azure Resource ID of an Inbound Nat Rule resource")
+   resourceId?: armResourceIdentifier<[
+     {
+-      type: "Microsoft.AzureStackHCI/inboundNATRules";
++      type: "Microsoft.AzureStackHCI/inboundNatRules";
+     }
+   ]>;
+ }
+@@ -1512,7 +1512,7 @@ model InboundNATRuleArmReference {
+ @doc("Nat Gateway resource properties")
+ model NatGatewayProperties {
+   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
+-  @doc("List of public ip addresses that the gateway can use for NAT.")
++  @doc("List of public ip addresses that the gateway can use for Nat.")
+   @identifiers(#[])
+   publicIPAddresses?: PublicIPAddressArmReference[];
+ 
+@@ -1521,11 +1521,11 @@ model NatGatewayProperties {
+   @identifiers(#[])
+   subnets?: VirtualNetworkSubnetArmReference[];
+ 
+-  #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+-  @doc("List of inbound NAT rules associated with this NAT Gateway. These are managed as child resources.")
++  #suppress "@azure-tools/typespec-azure-core/casing-style" "Nat is a short form. The casing is correct."
++  @doc("List of inbound Nat rules associated with this Nat Gateway. These are managed as child resources.")
+   @visibility(Lifecycle.Read)
+   @Azure.ResourceManager.identifiers(#[])
+-  inboundNATRules?: InboundNATRuleArmReference[];
++  inboundNatRules?: InboundNatRuleArmReference[];
+ 
+   @doc("Provisioning state of the public IP")
+   @visibility(Lifecycle.Read)
+-- 
+2.52.0
+
