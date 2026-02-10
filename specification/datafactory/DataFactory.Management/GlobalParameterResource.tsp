@@ -16,7 +16,7 @@ namespace Microsoft.DataFactory;
  */
 @parentResource(Factory)
 model GlobalParameterResource
-  is Azure.ResourceManager.ProxyResource<Record<unknown>> {
+  is Azure.ResourceManager.ProxyResource<Record<GlobalParameterSpecification>> {
   ...ResourceNameParameter<
     Resource = GlobalParameterResource,
     KeyName = "globalParameterName",
