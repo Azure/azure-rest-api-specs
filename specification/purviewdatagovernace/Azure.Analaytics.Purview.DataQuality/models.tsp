@@ -3559,3 +3559,116 @@ model BulkAssetMetadataRequest {
   @doc("Array of metadata entries to insert")
   metadata: BulkAssetMetadataEntry[];
 }
+
+/**
+ * Status values for alerts.
+ */
+@doc("Alert status classification")
+union AlertStatus {
+  @doc("Alert is enabled and may trigger notifications")
+  Enabled: "Enabled",
+
+  @doc("Alert is disabled and will not trigger")
+  Disabled: "Disabled",
+
+  string,
+}
+
+/**
+ * Reference pair describing the scope of an alert.
+ */
+@doc("Alert scope referencing data product and data asset")
+model AlertScope {
+  @doc("Reference to the data product associated with the alert")
+  dataProduct: Reference;
+
+  @doc("Reference to the data asset associated with the alert")
+  dataAsset: Reference;
+}
+
+/**
+ * Alert entity describing notification rules and metadata.
+ */
+@doc("Alert definition including condition, receivers, and scope")
+model Alert {
+  @doc("Unique identifier for the alert")
+  id: string;
+
+  @doc("Human-readable alert name")
+  name: string;
+
+  @doc("Detailed description of the alert")
+  description?: string;
+
+  @doc("Key-value annotations for alert categorization")
+  annotations?: Record<string>;
+
+  @doc("Reference to the governing business domain")
+  businessDomain?: Reference;
+
+  @doc("Array of scopes the alert monitors")
+  scopes: AlertScope[];
+
+  @doc("Current alert status")
+  status: AlertStatus;
+
+  @doc("Condition expression evaluated for alert triggering")
+  condition: string;
+
+  @doc("Notification receivers for the alert")
+  receivers: string[];
+
+  @doc("Flag indicating whether failures automatically enable the alert")
+  enabledForFailedJobs: boolean;
+
+  @doc("Creation timestamp (UTC)")
+  createdAt?: utcDateTime;
+
+  @doc("Creator identity")
+  createdBy?: string;
+
+  @doc("Last modification timestamp (UTC)")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("Last modifier identity")
+  lastModifiedBy?: string;
+}
+
+/**
+ * Filter settings for alert queries.
+ */
+@doc("Filter criteria for alert queries")
+model AlertFilter {
+  @doc("Alert identifier filter")
+  id?: string;
+
+  @doc("Business domain identifier filter")
+  businessDomainId?: string;
+
+  @doc("Alert name filter")
+  name?: string;
+
+  @doc("Alert scope identifier filter")
+  scopeId?: string;
+}
+
+/**
+ * Paginated list response for alert enumeration.
+ */
+@doc("Paginated alert list result")
+model AlertListResult {
+  @doc("Collection of alerts")
+  value: Alert[];
+
+  @doc("Link to retrieve the next page of results")
+  nextLink?: string;
+}
+
+/**
+ * Status update payload for alerts.
+ */
+@doc("Request payload for updating alert status")
+model AlertStatusUpdateRequest {
+  @doc("New alert status value")
+  status: AlertStatus;
+}
