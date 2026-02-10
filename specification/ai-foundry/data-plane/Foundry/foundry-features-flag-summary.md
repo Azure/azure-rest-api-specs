@@ -4,7 +4,7 @@
 |-----------------|-----------|--------|------|-------------------------|
 | Red Team | List | GET | `/redTeams/runs` | None |
 | Red Team | Get | GET | `/redTeams/runs/{name}` | None |
-| Red Team | Create | POST | `/redTeams/runs:run` | Optional: `RedTeams=V1Preview` |
+| Red Team | Create | POST | `/redTeams/runs:run` | Required: `RedTeams=V1Preview` |
 | Memory Stores | Create | POST | `/memory_stores` | Required: `MemoryStores=V1Preview` |
 | Memory Stores | List | GET | `/memory_stores` | Required: `MemoryStores=V1Preview` |
 | Memory Stores | Update | POST | `/memory_stores/{name}` | Required: `MemoryStores=V1Preview` |
@@ -28,7 +28,7 @@
 | Schedules | Get | GET | `/schedules/{id}` | None |
 | Schedules | CreateOrUpdate | PUT | `/schedules/{id}` | None |
 | Schedules | List Runs | GET | `/schedules/{id}/runs` | None |
-| Schedules | Get Run | GET | `/schedules/{schedule_id}/runs/{run_id}` | Required: `Insights=V1Preview` |
+| Schedules | Get Run | GET | `/schedules/{schedule_id}/runs/{run_id}` | Required: `Schedules=V1Preview` |
 | Evaluation Rules | List | GET | `/evaluationrules` | None |
 | Evaluation Rules | Get | GET | `/evaluationrules/{id}` | None |
 | Evaluation Rules | Delete | DELETE | `/evaluationrules/{id}` | None |
@@ -36,5 +36,5 @@
 | Evaluation Taxonomies | List | GET | `/evaluationtaxonomies` | None |
 | Evaluation Taxonomies | Get | GET | `/evaluationtaxonomies/{name}` | None |
 | Evaluation Taxonomies | Delete | DELETE | `/evaluationtaxonomies/{name}` | None |
-| Evaluation Taxonomies | Create | PUT | `/evaluationtaxonomies/{name}` | Optional: `Evaluations=V1Preview` |
-| Evaluation Taxonomies | Update | PATCH | `/evaluationtaxonomies/{name}` | Optional: `Evaluations=V1Preview` |
+| Evaluation Taxonomies | Create | PUT | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |
+| Evaluation Taxonomies | Update | PATCH | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |
