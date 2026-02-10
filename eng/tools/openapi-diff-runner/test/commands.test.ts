@@ -103,10 +103,10 @@ type TestCase = {
       to: string;
     }[];
   };
-  expectedCreateDummySwaggers: { old: string[]; new: string[] };
+  expectedCreateDummySwaggers?: { old: string[]; new: string[] };
   expectedOadCalls: {
-    sameVersion: { old: string; new: string }[];
-    crossVersion: { old: string; new: string }[];
+    sameVersion?: { old: string; new: string }[];
+    crossVersion?: { old: string; new: string }[];
   };
 };
 
@@ -116,10 +116,6 @@ const cases: TestCase[] = [
     changedFiles: {
       modifications: ["Foo/stable/2025-03-01/foo.json"],
     },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
-    },
     expectedOadCalls: {
       sameVersion: [
         {
@@ -127,7 +123,6 @@ const cases: TestCase[] = [
           new: "Foo/stable/2025-03-01/foo.json",
         },
       ],
-      crossVersion: [],
     },
   },
   {
@@ -138,10 +133,6 @@ const cases: TestCase[] = [
         "Foo/stable/2025-01-01/foo.json",
         "Foo/stable/2025-03-01/foo.json",
       ],
-    },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
     },
     expectedOadCalls: {
       sameVersion: [
@@ -158,7 +149,6 @@ const cases: TestCase[] = [
           new: "Foo/stable/2025-03-01/foo.json",
         },
       ],
-      crossVersion: [],
     },
   },
   {
@@ -170,10 +160,6 @@ const cases: TestCase[] = [
         "Bar/stable/2025-03-01/bar.json",
         "Bar/stable/2025-03-01/baz.json",
       ],
-    },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
     },
     expectedOadCalls: {
       sameVersion: [
@@ -194,7 +180,6 @@ const cases: TestCase[] = [
           new: "Bar/stable/2025-03-01/baz.json",
         },
       ],
-      crossVersion: [],
     },
   },
   {
@@ -202,12 +187,7 @@ const cases: TestCase[] = [
     changedFiles: {
       additions: ["Foo/stable/2026-01-01/foo.json"],
     },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
-    },
     expectedOadCalls: {
-      sameVersion: [],
       crossVersion: [
         {
           old: "Foo/preview/2025-04-01-preview/foo.json",
@@ -225,12 +205,7 @@ const cases: TestCase[] = [
     changedFiles: {
       additions: ["Bar/stable/2026-01-01/bar.json", "Bar/stable/2026-01-01/baz.json"],
     },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
-    },
     expectedOadCalls: {
-      sameVersion: [],
       crossVersion: [
         {
           old: "Bar/preview/2025-04-01-preview/bar.json",
@@ -278,7 +253,6 @@ const cases: TestCase[] = [
           new: "Foo/stable/2025-01-01/openapi.json",
         },
       ],
-      crossVersion: [],
     },
   },
   // {
@@ -313,9 +287,16 @@ describe("validateBreakingChange", () => {
   it.each(cases)(
     "$name",
     async ({ changedFiles, expectedCreateDummySwaggers, expectedOadCalls }) => {
+      expectedCreateDummySwaggers = expectedCreateDummySwaggers || { old: [], new: [] };
+
+      const finalExpectedOadCalls = {
+        sameVersion: expectedOadCalls.sameVersion || [],
+        crossVersion: expectedOadCalls.crossVersion || [],
+      };
+
       // Prepend all input strings with the service parent folder (omitted from string literals for brevity)
       // Use string concat instead of path.join(), since test inputs are all posix paths, and resolved at runtime
-      prependParentFolder(changedFiles, expectedCreateDummySwaggers, expectedOadCalls);
+      prependParentFolder(changedFiles, expectedCreateDummySwaggers, finalExpectedOadCalls);
 
       mockChangedFilesStatuses(changedFiles);
 
@@ -326,11 +307,11 @@ describe("validateBreakingChange", () => {
       for (const data of [
         {
           runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-          expectedOadCalls: expectedOadCalls.sameVersion,
+          expectedOadCalls: finalExpectedOadCalls.sameVersion,
         },
         {
           runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
-          expectedOadCalls: expectedOadCalls.crossVersion,
+          expectedOadCalls: finalExpectedOadCalls.crossVersion,
         },
       ]) {
         mockRunOad.mockClear();
