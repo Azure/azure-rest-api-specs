@@ -73,11 +73,13 @@ interface Incidents {
   /**
    * Gets a given incident.
    */
+  @tag("Incidents")
   get is Extension.Read<OperationalInsights, Incident, Error = CloudError>;
 
   /**
    * Creates or updates an incident.
    */
+  @tag("Incidents")
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     Incident,
@@ -87,6 +89,7 @@ interface Incidents {
   /**
    * Deletes a given incident.
    */
+  @tag("Incidents")
   delete is Extension.DeleteSync<
     OperationalInsights,
     Incident,
@@ -96,6 +99,7 @@ interface Incidents {
   /**
    * Gets all incidents.
    */
+  @tag("Incidents")
   list is Extension.ListByTarget<
     OperationalInsights,
     Incident,
