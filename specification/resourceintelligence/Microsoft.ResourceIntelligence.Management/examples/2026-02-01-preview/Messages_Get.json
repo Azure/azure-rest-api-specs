@@ -1,0 +1,33 @@
+{
+  "operationId": "Messages_Get",
+  "title": "Get a Message",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "agentName": "myAgent",
+    "threadId": "thread-001",
+    "runId": "run-001",
+    "messageId": "msg-001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001/threadRuns/run-001/messages/msg-001",
+        "name": "msg-001",
+        "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns/messages",
+        "properties": {
+          "messageType": "user_message",
+          "source": "user",
+          "content": "Show me all virtual machines in this subscription",
+          "timestamp": "2026-02-01T12:00:00Z"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-02-01T12:00:00Z"
+        }
+      }
+    }
+  }
+}

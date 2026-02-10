@@ -43,11 +43,6 @@ model AgentProperties {
   description?: string;
 
   /**
-   * The list of AgentDefinition IDs associated with this agent.
-   */
-  agentDefinitions?: string[];
-
-  /**
    * The provisioning state of the agent.
    */
   @visibility(Lifecycle.Read)

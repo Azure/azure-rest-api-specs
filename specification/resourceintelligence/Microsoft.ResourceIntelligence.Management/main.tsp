@@ -22,7 +22,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.ResourceIntelligence;
 
 enum Versions {
-  v2025_10_01_preview: "2025-10-01-preview",
+  v2026_02_01_preview: "2026-02-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

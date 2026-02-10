@@ -1,0 +1,31 @@
+{
+  "operationId": "Agents_ListBySubscription",
+  "title": "List Agents by Subscription",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent",
+            "name": "myAgent",
+            "type": "Microsoft.ResourceIntelligence/agents",
+            "location": "eastus",
+            "properties": {
+              "displayName": "My AI Agent",
+              "description": "An AI agent for Azure resource management"
+            },
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-02-01T12:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

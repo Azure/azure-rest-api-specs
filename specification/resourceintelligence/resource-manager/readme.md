@@ -27,14 +27,14 @@ These are the global settings for the Microsoft.ResourceIntelligence.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-10
+tag: package-preview-2026-02
 ```
 
-### Tag: package-preview-2025-10
+### Tag: package-preview-2026-02
 
-These settings apply only when `--tag=package-preview-2025-10` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-10'
+```yaml $(tag) == 'package-preview-2026-02'
 input-file:
-  - Microsoft.ResourceIntelligence/preview/2025-10-01-preview/resourceintelligence.json
+  - Microsoft.ResourceIntelligence/preview/2026-02-01-preview/resourceintelligence.json
 ```

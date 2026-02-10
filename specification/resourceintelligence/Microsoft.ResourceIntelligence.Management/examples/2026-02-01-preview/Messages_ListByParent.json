@@ -1,0 +1,68 @@
+{
+  "operationId": "Messages_ListByParent",
+  "title": "List Messages in a ThreadRun",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "agentName": "myAgent",
+    "threadId": "thread-001",
+    "runId": "run-001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001/threadRuns/run-001/messages/msg-001",
+            "name": "msg-001",
+            "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns/messages",
+            "properties": {
+              "messageType": "user_message",
+              "source": "user",
+              "content": "Show me all virtual machines in this subscription",
+              "timestamp": "2026-02-01T12:00:00Z"
+            },
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-02-01T12:00:00Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001/threadRuns/run-001/messages/msg-002",
+            "name": "msg-002",
+            "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns/messages",
+            "properties": {
+              "messageType": "tool_call",
+              "source": "actor",
+              "content": "{\"toolCallId\": \"call-001\", \"toolName\": \"azure_resource_graph_query\", \"arguments\": \"{\\\"query\\\": \\\"Resources | where type =~ 'Microsoft.Compute/virtualMachines'\\\"}\"}",
+              "timestamp": "2026-02-01T12:00:05Z"
+            },
+            "systemData": {
+              "createdBy": "system",
+              "createdByType": "Application",
+              "createdAt": "2026-02-01T12:00:05Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ResourceIntelligence/agents/myAgent/threads/thread-001/threadRuns/run-001/messages/msg-003",
+            "name": "msg-003",
+            "type": "Microsoft.ResourceIntelligence/agents/threads/threadRuns/messages",
+            "properties": {
+              "messageType": "assistant_message",
+              "source": "actor",
+              "content": "I found 2 virtual machines in your subscription:\n\n1. **vm-web-01** - located in East US\n2. **vm-db-01** - located in East US",
+              "timestamp": "2026-02-01T12:00:15Z"
+            },
+            "systemData": {
+              "createdBy": "system",
+              "createdByType": "Application",
+              "createdAt": "2026-02-01T12:00:15Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
