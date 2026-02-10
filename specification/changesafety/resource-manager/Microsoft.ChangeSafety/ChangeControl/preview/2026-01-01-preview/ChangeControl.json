@@ -592,6 +592,52 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/retrieveAllStages": {
+      "post": {
+        "operationId": "ChangeRecords_RetrieveAllStagesAtSubscriptionLevel",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Retrieves a complete view of all stages defined in the ChangeRecord's associated StageMap, merged with current execution status from existing StageProgression resources at subscription level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordRetrieveAllStagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_RetrieveAllStagesAtSubscriptionLevel_2026_01_01_preview": {
+            "$ref": "./examples/ChangeRecords_RetrieveAllStagesAtSubscriptionLevel.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/retrieveAuditTrail": {
       "post": {
         "operationId": "ChangeRecords_RetrieveAuditTrailAtSubscriptionLevel",
@@ -2346,6 +2392,55 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/retrieveAllStages": {
+      "post": {
+        "operationId": "ChangeRecords_RetrieveAllStages",
+        "tags": [
+          "ChangeRecords"
+        ],
+        "description": "Retrieves a complete view of all stages defined in the ChangeRecord's associated StageMap, merged with current execution status from existing StageProgression resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "changeRecordName",
+            "in": "path",
+            "description": "The name of the ChangeRecord resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9-]{3,100}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRecordRetrieveAllStagesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ChangeRecords_RetrieveAllStages_2026_01_01_preview": {
+            "$ref": "./examples/ChangeRecords_RetrieveAllStages.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ChangeSafety/changeRecords/{changeRecordName}/retrieveAuditTrail": {
@@ -4580,6 +4675,135 @@
         ]
       }
     },
+    "ChangeRecordRetrieveAllStagesResponse": {
+      "type": "object",
+      "description": "RetrieveAllStages POST Action response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of all stages from the StageMap merged with any existing StageProgression execution data.",
+          "items": {
+            "$ref": "#/definitions/ChangeRecordRetrieveAllStagesResponseItem"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "properties/stageReference"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link for next set of results.",
+          "readOnly": true
+        },
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of stages in the response.",
+          "minimum": 0,
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value",
+        "totalRecords"
+      ]
+    },
+    "ChangeRecordRetrieveAllStagesResponseItem": {
+      "type": "object",
+      "description": "Stage data merged from StageMap definition and StageProgression execution status.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ARM resource ID of the StageProgression if it exists, null otherwise.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the StageProgression resource if it exists, null otherwise.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type. Null if StageProgression does not exist.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "ARM systemData with creation/modification timestamps if StageProgression exists, null otherwise.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ChangeRecordRetrieveAllStagesResponseItemProperties",
+          "description": "Stage progression properties. For stages with existing StageProgression resources: includes all properties from the resource. For stages without StageProgression resources: contains only stageReference, stageVariables, sequence, and status set to 'Uninitialized'.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ChangeRecordRetrieveAllStagesResponseItemProperties": {
+      "type": "object",
+      "description": "Properties of a stage in the RetrieveAllStages response.",
+      "properties": {
+        "stageReference": {
+          "type": "string",
+          "description": "Stage name relevant to the hierarchical StageMap. Identifies the stage uniquely within a changerecord resource.",
+          "readOnly": true
+        },
+        "stageVariables": {
+          "type": "object",
+          "description": "Variables to apply on the change for the stage. Key value pairs supporting any JSON values.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/ChangeRecordStageProgressionState",
+          "description": "Current state of the stage progression. Set to 'Uninitialized' for stages without existing StageProgression resources.",
+          "readOnly": true
+        },
+        "sequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence of the stageProgression resource.",
+          "readOnly": true
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments about the stage progression.",
+          "readOnly": true
+        },
+        "links": {
+          "type": "array",
+          "description": "Collection of related links for the change.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "additionalData": {
+          "type": "object",
+          "description": "Additional metadata related to the StageProgression resource.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "object",
+          "description": "Parameters and their values for the current Stage.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Parameter"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "stageReference",
+        "status",
+        "sequence"
+      ]
+    },
     "ChangeRecordRetrieveAuditTrailResponse": {
       "type": "object",
       "description": "The retrieve audit trail response model for ChangeRecord.",
@@ -4917,6 +5141,7 @@
       "type": "string",
       "description": "Indicates the current status of the progression of the change within the stage for ChangeRecord.",
       "enum": [
+        "Uninitialized",
         "Initialized",
         "InProgress",
         "Completed",
@@ -4929,6 +5154,11 @@
         "name": "ChangeRecordStageProgressionState",
         "modelAsString": true,
         "values": [
+          {
+            "name": "Uninitialized",
+            "value": "Uninitialized",
+            "description": "Change has not yet been initialized for the stage."
+          },
           {
             "name": "Initialized",
             "value": "Initialized",
