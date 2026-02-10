@@ -2565,7 +2565,7 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexerClient.Skillsets.delete, "deleteSkillset");
 
 @@clientName(VectorQuery.k, "kNearestNeighbors");
-@@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp");
+@@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp,javascript");
 @@clientName(SearchDocumentsResult.value, "results");
 @@clientName(SearchRequest.count, "includeTotalCount");
 @@clientName(SearchRequest.highlight, "highlightFields");
@@ -2697,6 +2697,10 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientName(SearchIndexerSkill.`@odata.type`, "odataType");
 @@clientName(SearchIndexerSkill.`@odata.type`, "odatatype", "javascript");
+@@clientName(ContentUnderstandingSkill.`@odata.type`,
+  "odatatype",
+  "javascript"
+);
 @@clientName(CognitiveServicesAccount.`@odata.type`, "odataType");
 @@clientName(CognitiveServicesAccount.`@odata.type`, "odatatype", "javascript");
 @@clientName(LexicalAnalyzer.`@odata.type`, "odataType");
