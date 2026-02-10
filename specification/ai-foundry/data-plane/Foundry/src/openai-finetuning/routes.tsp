@@ -7,7 +7,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 @route("openai/v1/fine_tuning")
-@tag("Fine-tuning")
+@tag("Fine-Tuning")
 interface FineTuning {
   /**
    * Creates a fine-tuning job which begins the process of creating a new model from a given dataset.

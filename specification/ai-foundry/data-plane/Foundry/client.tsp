@@ -2,7 +2,25 @@
 // This file is used for emitting the Python client (package azure-ai-projects) and
 // the JS client (package @azure/ai-projects).
 //
-import "./main.tsp";
+
+// Stable operations (GA routes)
+import "./src/agents/routes.tsp";
+import "./src/common/custom_types.tsp";
+import "./src/common/service.tsp";
+import "./src/connections/routes.tsp";
+import "./src/datasets/routes.tsp";
+import "./src/deployments/routes.tsp";
+import "./src/indexes/routes.tsp";
+
+// Beta operations (preview routes, requiring opt-in HTTP request header)
+import "./src/evaluation_taxonomies/routes.tsp";
+import "./src/evaluationrules/routes.tsp";
+import "./src/evaluators/routes.tsp";
+import "./src/insights/routes.tsp";
+import "./src/memory_stores/routes.tsp";
+import "./src/red-teams/routes.tsp";
+import "./src/schedules/routes.tsp";
+import "./relocate-beta-operations.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects;
@@ -19,83 +37,16 @@ using Azure.AI.Projects;
 // To fix circular dependency in Python, remaining OpenAI types are emitted as Azure.AI.Projects
 @@clientNamespace(OpenAI, "azure.ai.projects", "python");
 
-// ------------------------------------------------------------------------------------------------
-// Operation scope customizations - don't generate Responses. We will use OpenAI client for those
-// ------------------------------------------------------------------------------------------------
-@@scope(Responses.createResponse, "!(python, javascript)");
-@@scope(Responses.createResponseStream, "!(python, javascript)");
-@@scope(Responses.getResponseStream, "!(python, javascript)");
-@@scope(Responses.getResponse, "!(python, javascript)");
-@@scope(Responses.deleteResponse, "!(python, javascript)");
-@@scope(Responses.cancelResponse, "!(python, javascript)");
-@@scope(Responses.listInputItems, "!(python, javascript)");
-@@scope(Responses.listResponses, "!(python, javascript)");
-@@scope(Responses.compactResponseConversation, "!(python, javascript)");
-
-// ---------------------------------------------------------------------------------------------------
-// Operation scope customizations - don't generate Conversations. We will use OpenAI client for those
-// ---------------------------------------------------------------------------------------------------
-@@scope(Conversations.createConversation, "!(python, javascript)");
-@@scope(Conversations.updateConversation, "!(python, javascript)");
-@@scope(Conversations.getConversation, "!(python, javascript)");
-@@scope(Conversations.deleteConversation, "!(python, javascript)");
-@@scope(Conversations.listConversations, "!(python, javascript)");
-@@scope(Conversations.createConversationItems, "!(python, javascript)");
-@@scope(Conversations.getConversationItem, "!(python, javascript)");
-@@scope(Conversations.deleteConversationItem, "!(python, javascript)");
-@@scope(Conversations.listConversationItems, "!(python, javascript)");
-
-// ---------------------------------------------------------------------------------------------------
-// Operation scope customizations - don't generate Evaluations. We will use OpenAI client for those
-// ---------------------------------------------------------------------------------------------------
-@@scope(OpenAIEvals.listEvals, "!(python, javascript)");
-@@scope(OpenAIEvals.createEval, "!(python, javascript)");
-@@scope(OpenAIEvals.deleteEval, "!(python, javascript)");
-@@scope(OpenAIEvals.getEval, "!(python, javascript)");
-@@scope(OpenAIEvals.updateEval, "!(python, javascript)");
-@@scope(OpenAIEvals.listRuns, "!(python, javascript)");
-@@scope(OpenAIEvals.createEvalRun, "!(python, javascript)");
-@@scope(OpenAIEvals.deleteEvalRun, "!(python, javascript)");
-@@scope(OpenAIEvals.getEvalRun, "!(python, javascript)");
-@@scope(OpenAIEvals.cancelEvalRun, "!(python, javascript)");
-@@scope(OpenAIEvals.getEvalRunOutputItems, "!(python, javascript)");
-@@scope(OpenAIEvals.getEvalRunOutputItem, "!(python, javascript)");
-
-// ---------------------------------------------------------------------------------------------------
-// Operation scope customizations - don't generate fine-tuning. We will use OpenAI client for those
-// ---------------------------------------------------------------------------------------------------
-@@scope(FineTuning.createFineTuningJob, "!(python, javascript)");
-@@scope(FineTuning.listPaginatedFineTuningJobs, "!(python, javascript)");
-@@scope(FineTuning.cancelFineTuningJob, "!(python, javascript)");
-@@scope(FineTuning.listFineTuningJobCheckpoints, "!(python, javascript)");
-@@scope(FineTuning.retrieveFineTuningJob, "!(python, javascript)");
-@@scope(FineTuning.pauseFineTuningJob, "!(python, javascript)");
-@@scope(FineTuning.resumeFineTuningJob, "!(python, javascript)");
-@@scope(FineTuning.listFineTuningJobEvents, "!(python, javascript)");
-
-// ---------------------------------------------------------------------------------------------------
-// Operation scope customizations - don't generate container operations *except* for backend C#
-// ---------------------------------------------------------------------------------------------------
-@@scope(Agents.startAgentContainer, "!(python, javascript)");
-@@scope(Agents.updateAgentContainer, "!(python, javascript)");
-@@scope(Agents.stopAgentContainer, "!(python, javascript)");
-@@scope(Agents.deleteAgentContainer, "!(python, javascript)");
-@@scope(Agents.getAgentContainer, "!(python, javascript)");
-@@scope(Agents.streamAgentContainerLogs, "!(python, javascript)");
-@@scope(Agents.listAgentContainerOperations, "!(python, javascript)");
-@@scope(Agents.listAgentVersionContainerOperations, "!(python, javascript)");
-@@scope(Agents.getAgentContainerOperation, "!(python, javascript)");
-
 // --------------------------------------------------------------------------------
 // Agents sub‐client
 // --------------------------------------------------------------------------------
 
 // Use short form method names
-@@clientName(Agents.getAgent, "get", "python");
-@@clientName(Agents.createAgent, "create", "python");
-@@clientName(Agents.updateAgent, "update", "python");
-@@clientName(Agents.deleteAgent, "delete", "python");
-@@clientName(Agents.listAgents, "list", "python");
+@@clientName(Agents.getAgent, "get");
+@@clientName(Agents.createAgent, "create");
+@@clientName(Agents.updateAgent, "update");
+@@clientName(Agents.deleteAgent, "delete");
+@@clientName(Agents.listAgents, "list");
 @@clientName(Agents.createAgentVersion, "create_version", "python");
 @@clientName(Agents.getAgentVersion, "get_version", "python");
 @@clientName(Agents.deleteAgentVersion, "delete_version", "python");
@@ -107,23 +58,30 @@ using Azure.AI.Projects;
 );
 @@clientName(Agents.updateAgentFromManifest, "update_from_manifest", "python");
 
+@@clientName(Agents.createAgentVersion, "createVersion", "javascript");
+@@clientName(Agents.getAgentVersion, "getVersion", "javascript");
+@@clientName(Agents.deleteAgentVersion, "deleteVersion", "javascript");
+@@clientName(Agents.listAgentVersions, "listVersions", "javascript");
+
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
 @@clientName(AgentVersionObject, "AgentVersionDetails", "python");
-@@clientName(AgentContainerObject, "AgentContainerDetails", "python");
-@@clientName(AgentContainerOperationObject,
-  "AgentContainerOperationDetails",
-  "python"
-);
+
+@@clientName(AgentObject, "Agent", "javascript");
+@@clientName(AgentVersionObject, "AgentVersion", "javascript");
 
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
-@@clientName(MemoryStores.createMemoryStore, "create", "python");
-@@clientName(MemoryStores.updateMemoryStore, "update", "python");
-@@clientName(MemoryStores.getMemoryStore, "get", "python");
-@@clientName(MemoryStores.listMemoryStores, "list", "python");
-@@clientName(MemoryStores.deleteMemoryStore, "delete", "python");
+@@clientName(MemoryStores.createMemoryStore, "create");
+@@clientName(MemoryStores.updateMemoryStore, "update");
+@@clientName(MemoryStores.getMemoryStore, "get");
+@@clientName(MemoryStores.listMemoryStores, "list");
+@@clientName(MemoryStores.deleteMemoryStore, "delete");
+
+// The SDK will have custom code to handle LRO memory updates.
+@@access(MemoryStores.updateMemories, Access.internal, "python");
+@@scope(MemoryStores.getUpdateResult, "!(python)");
 
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
@@ -132,10 +90,6 @@ using Azure.AI.Projects;
   "MemoryStoreDeleteScopeResult",
   "python"
 );
-
-// The SDK will have custom code to handle LRO memory updates.
-@@access(MemoryStores.updateMemories, Access.internal, "python");
-@@scope(MemoryStores.getUpdateResult, "!(python)");
 
 // Hand written code still needs the below classes. Make sure they are emitted.
 @@usage(MemoryStoreUpdateCompletedResult, Usage.output);
@@ -146,18 +100,14 @@ using Azure.AI.Projects;
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(MemoryStoreObject, "MemoryStoreDetails", "python");
 
+@@clientName(MemoryStoreObject, "MemoryStore", "javascript");
+
 // --------------------------------------------------------------------------------
 // Responses sub‐client
 // --------------------------------------------------------------------------------
 
-// Follow JS naming conventions
-@@clientName(OpenAI.CreateResponse, "CreateResponseRequest", "javascript");
-
 // Allow assigning a `dict[str, Any]` object directly to the "schema" property of TextResponseFormatJsonSchema
-@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema,
-  Record<unknown>,
-  "python, javascript"
-);
+@@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
@@ -205,4 +155,3 @@ using Azure.AI.Projects;
 
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
-

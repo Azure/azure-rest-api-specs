@@ -23,8 +23,8 @@ options:
       - specification/ai-foundry/data-plane/Foundry/src/insights
       - specification/ai-foundry/data-plane/Foundry/src/schedules
       - specification/ai-foundry/data-plane/Foundry/src/memory_stores
-      - specification/ai-foundry/data-plane/Foundry/src/conversations
-      - specification/ai-foundry/data-plane/Foundry/src/responses
+      - specification/ai-foundry/data-plane/Foundry/src/openai-conversations
+      - specification/ai-foundry/data-plane/Foundry/src/openai-responses
       - specification/ai-foundry/data-plane/Foundry/src/tools
 imports:
   - "@azure-tools/typespec-azure-core"
@@ -32,7 +32,6 @@ imports:
   - "@azure-tools/typespec-client-generator-core"
   # Note: Imports for OpenAI types may use alternate views per tspconfig.yaml
   - "@azure-tools/openai-typespec/models/responses"
-  #- "@azure-tools/openai-typespec/views/client-emitters/models/responses"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

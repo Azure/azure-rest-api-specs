@@ -21,8 +21,6 @@ using Azure.AI.Projects;
 
 @@clientName(AgentObject, "AgentDetails");
 @@clientName(AgentVersionObject, "AgentVersionDetails");
-@@clientName(AgentContainerObject, "AgentContainerDetails");
-@@clientName(AgentContainerOperationObject, "AgentContainerOperationDetails");
 
 @@clientName(MemoryStoreObject, "MemoryStoreDetails");
 
@@ -32,19 +30,6 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.FileSearchTool.max_num_results, "maxResults");
 @@clientName(OpenAI.MCPApprovalResponse.approve, "approved");
-
-// ------------------------------------------------------------------------------------------------
-// Operation scope customizations - don't generate agent container operations
-// ------------------------------------------------------------------------------------------------
-@@scope(Agents.startAgentContainer, "!java");
-@@scope(Agents.stopAgentContainer, "!java");
-@@scope(Agents.updateAgentContainer, "!java");
-@@scope(Agents.deleteAgentContainer, "!java");
-@@scope(Agents.getAgentContainer, "!java");
-@@scope(Agents.getAgentContainerOperation, "!java");
-@@scope(Agents.listAgentContainerOperations, "!java");
-@@scope(Agents.listAgentVersionContainerOperations, "!java");
-@@scope(Agents.getAgentContainerOperation, "!java");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
