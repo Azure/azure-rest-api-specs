@@ -123,10 +123,14 @@ using Azure.ClientGenerator.Core;
 @@clientName(OperatorType, "NotificationAlertTriggerType", "csharp");
 @@clientName(ThresholdType, "NotificationThresholdType", "csharp");
 @@clientName(ReservationSummaryProperties.usageDate, "UseOn", "csharp");
-@@clientName(ChargeSummary, "ConsumptionChargeSummary", "csharp");
+// @@clientName(ChargeSummary, "ConsumptionChargeSummary", "csharp");
 @@clientName(Marketplace, "ConsumptionMarketplace", "csharp");
 @@clientName(ReservationRecommendationDetailsModel,
   "ConsumptionReservationRecommendationDetails",
+  "csharp"
+);
+@@clientName(ReservationRecommendationDetailsModel.properties,
+  "ReserRecomDetailsProperties",
   "csharp"
 );
 @@clientName(Scope, "ConsumptionReservationRecommendationScope", "csharp");
@@ -136,7 +140,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(TagsResult, "ConsumptionTagsResult", "csharp");
-@@clientName(UsageDetail, "ConsumptionUsageDetail", "csharp");
+// @@clientName(UsageDetail, "ConsumptionUsageDetail", "csharp");
 @@clientName(LegacyUsageDetail, "ConsumptionLegacyUsageDetail", "csharp");
 @@clientName(ModernUsageDetail, "ConsumptionModernUsageDetail", "csharp");
 @@clientName(MarketplaceProperties.usageStart, "UsageStartOn", "csharp");
@@ -190,10 +194,23 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(EventsOperationGroup.listByBillingAccount, "GetEvents", "csharp");
+@@clientName(CreditSummaryProperties.eTag, "PropertiesETag", "csharp");
+@@clientName(EventProperties.eTag, "PropertiesETag", "csharp");
+@@clientName(LotProperties.eTag, "PropertiesETag", "csharp");
+@@clientName(ReservationDetailProperties.usageDate,
+  "ConsumptionOccurredOn",
+  "csharp"
+);
+@@clientName(ReservationDetail, "ConsumptionReservationDetail", "csharp");
+@@alternateType(ReservationDetailProperties.instanceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(PriceSheetProperties.billingPeriodId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(PriceSheetProperties.meterId, Azure.Core.uuid, "csharp");
 @@alternateType(EventProperties.billingProfileId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -214,7 +231,91 @@ using Azure.ClientGenerator.Core;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(ModernReservationTransactionProperties.purchasingSubscriptionGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(LegacyReservationTransactionProperties.purchasingSubscriptionGuid,
+  Azure.Core.uuid,
+  "csharp"
+);
 @@alternateType(Reseller.resellerId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(ReservationRecommendationDetailsModel.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(ReservationRecommendationDetailsModel.etag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
+@@alternateType(Budget.eTag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(Balance.etag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(ManagementGroupAggregatedCostResult.etag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
+@@alternateType(EventSummary.eTag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(LotSummary.eTag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(ReservationDetail.etag, Azure.Core.EtagProperty.etag, "csharp");
+@@alternateType(ReservationSummary.etag,
+  Azure.Core.EtagProperty.etag,
+  "csharp"
+);
+
+@@clientLocation(PriceSheetResults.get, PriceSheetResults, "csharp");
+// Rename the operation to match the contract's expected method name (GetPriceSheet)
+@@clientName(PriceSheetResults.get, "GetPriceSheet", "csharp");
+
+@@alternateType(UsageDetail, ConsumptionUsageDetail, "csharp");
+@@alternateType(ChargeSummary, ConsumptionChargeSummary, "csharp");
+
+/**
+ * An usage detail resource.
+ */
+@discriminator("kind")
+model ConsumptionUsageDetail {
+  ...Azure.ResourceManager.Foundations.Resource;
+
+  /**
+   * Specifies the kind of usage details.
+   */
+  kind: UsageDetailsKind;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: Azure.Core.EtagProperty.etag;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
+}
+
+/**
+ * A charge summary resource.
+ */
+@discriminator("kind")
+model ConsumptionChargeSummary {
+  ...Azure.ResourceManager.Foundations.ProxyResource;
+
+  /**
+   * Specifies the kind of charge summary.
+   */
+  kind: ChargeSummaryKind;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  eTag?: Azure.Core.EtagProperty.etag;
+}
