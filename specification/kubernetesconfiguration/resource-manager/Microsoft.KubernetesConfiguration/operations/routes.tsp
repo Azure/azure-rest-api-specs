@@ -56,6 +56,7 @@ interface OperationStatusOperationGroup {
   /**
    * List Async Operations, currently in progress, in a cluster
    */
+  @tag("Operations in a Cluster")
   @autoRoute
   @get
   @action("operations")
