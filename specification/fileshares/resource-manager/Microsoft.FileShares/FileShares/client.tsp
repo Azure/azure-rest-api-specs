@@ -17,6 +17,10 @@ using Microsoft.FileShares;
   "FileShareNameAvailabilityResult",
   "csharp"
 );
+@@clientName(CheckNameAvailabilityResponse.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
 @@clientName(CheckNameAvailabilityReason,
   "FileShareNameUnavailableReason",
   "csharp"
@@ -86,6 +90,15 @@ using Microsoft.FileShares;
   "csharp"
 );
 @@clientName(Azure.ResourceManager.PrivateEndpointConnection,
+  "FileSharePrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(PrivateLinkResource, "FileSharePrivateLinkResource", "csharp");
+@@clientName(PrivateLinkResourceProperties,
+  "FileSharePrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(PrivateEndpointConnection,
   "FileSharePrivateEndpointConnection",
   "csharp"
 );

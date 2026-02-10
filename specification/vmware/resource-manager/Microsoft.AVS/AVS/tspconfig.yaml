@@ -17,12 +17,9 @@ options:
     omit-unreachable-types: true
     use-read-only-status-schema: true
 
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Avs"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/avs"
