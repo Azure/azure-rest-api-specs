@@ -14,6 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB resource throughput.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @parentResource(SqlDatabaseGetResults)
 model ThroughputSettingsGetResults

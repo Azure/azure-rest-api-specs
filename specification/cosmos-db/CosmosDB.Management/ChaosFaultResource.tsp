@@ -14,6 +14,8 @@ namespace Microsoft.DocumentDB;
 /**
  * A request object to enable/disable the chaos fault
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/resource-name" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model chaosFaultResource
   is Azure.ResourceManager.ProxyResource<ChaosFaultProperties> {

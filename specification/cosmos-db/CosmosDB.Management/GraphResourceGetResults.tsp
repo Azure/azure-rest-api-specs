@@ -14,6 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Graph resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model GraphResourceGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GraphResourceGetProperties> {

@@ -15,6 +15,7 @@ namespace Microsoft.DocumentDB;
  * An Azure Cosmos DB userDefinedFunction.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SqlContainerGetResults)
 model SqlUserDefinedFunctionGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlUserDefinedFunctionGetProperties> {

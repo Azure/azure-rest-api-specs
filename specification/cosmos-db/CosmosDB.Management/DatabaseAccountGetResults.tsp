@@ -13,6 +13,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB database account.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseAccountGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<DatabaseAccountGetProperties> {
   ...ResourceNameParameter<

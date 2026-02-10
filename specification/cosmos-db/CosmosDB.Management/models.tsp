@@ -14,8 +14,10 @@ model FleetspaceAccountListResult
   is ResourceListResult<FleetspaceAccountResource>;
 
 model FleetspaceListResult is ResourceListResult<FleetspaceResource>;
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoMIRoleDefinitionListResult
   is ResourceListResult<MongoMIRoleDefinitionResource>;
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoMIRoleAssignmentListResult
   is ResourceListResult<MongoMIRoleAssignmentResource>;
 
@@ -46,6 +48,7 @@ model GarnetClusterProperties {
   ]>;
 
   /** Endpoints for clients to connect to the cluster. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   endPoints?: GarnetClusterEndpoint[];
 
@@ -143,6 +146,7 @@ model ClusterResourcePatch {
 /**
  * Representation of a Garnet cache cluster for updates.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GarnetClusterResourcePatch {
   /**
    * Properties of a Garnet cache cluster for updates.
@@ -1279,6 +1283,7 @@ enum RoleDefinitionType {
 /**
  * Chaos Fault List Response.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model chaosFaultListResponse is Azure.Core.Page<chaosFaultResource>;
 
 /**
@@ -1686,11 +1691,13 @@ model DatabaseAccountGetProperties {
   /**
    * Total dedicated throughput (RU/s) for database account. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers in the account for 1 region. READ ONLY.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   throughputPoolDedicatedRUs?: int64;
 
   /**
    * When this account is part of a fleetspace with throughput pooling enabled, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers in the account for 1 region.  READ ONLY.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   throughputPoolMaxConsumableRUs?: int64;
 }
 

@@ -14,6 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Cassandra view.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(CassandraKeyspaceGetResults)
 model CassandraViewGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CassandraViewGetProperties> {

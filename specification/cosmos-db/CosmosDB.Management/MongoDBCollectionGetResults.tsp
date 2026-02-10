@@ -15,6 +15,7 @@ namespace Microsoft.DocumentDB;
  * An Azure Cosmos DB MongoDB collection.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(MongoDBDatabaseGetResults)
 model MongoDBCollectionGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<MongoDBCollectionGetProperties> {

@@ -13,6 +13,7 @@ namespace Microsoft.DocumentDB;
 /**
  * Representation of a managed Cassandra cluster.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClusterResource
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ClusterResourceProperties> {
   ...ResourceNameParameter<

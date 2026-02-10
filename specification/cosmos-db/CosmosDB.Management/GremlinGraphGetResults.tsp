@@ -14,6 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Gremlin graph.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(GremlinDatabaseGetResults)
 model GremlinGraphGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<GremlinGraphGetProperties> {
