@@ -17851,7 +17851,7 @@ model SalesforceMarketingCloudLinkedServiceTypeProperties {
   /**
    * The client secret associated with the Salesforce Marketing Cloud application. Type: string (or Expression with resultType string).
    */
-  clientSecret?: Dfe<string>;
+  clientSecret?: SecretBase;
 
   /**
    * Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Type: boolean (or Expression with resultType boolean).
@@ -18201,7 +18201,7 @@ model AzureDatabricksLinkedServiceTypeProperties {
   /**
    * Access token for databricks REST API. Refer to https://docs.azuredatabricks.net/api/latest/authentication.html. Type: string (or Expression with resultType string).
    */
-  accessToken?: Dfe<string>;
+  accessToken?: SecretBase;
 
   /**
    * Required to specify MSI, if using Workspace resource id for databricks REST API. Type: string (or Expression with resultType string).
@@ -18381,7 +18381,7 @@ model ResponsysLinkedServiceTypeProperties {
   /**
    * The client secret associated with the Responsys application. Type: string (or Expression with resultType string).
    */
-  clientSecret?: Dfe<string>;
+  clientSecret?: SecretBase;
 
   /**
    * Specifies whether the data source endpoints are encrypted using HTTPS. The default value is true. Type: boolean (or Expression with resultType boolean).
@@ -18439,7 +18439,7 @@ model DynamicsAXLinkedServiceTypeProperties {
   /**
    * Specify the application's key. Mark this field as a SecureString to store it securely in Data Factory, or reference a secret stored in Azure Key Vault. Type: string (or Expression with resultType string).
    */
-  servicePrincipalKey: Dfe<string>;
+  servicePrincipalKey: SecretBase;
 
   /**
    * Specify the tenant information (domain name or tenant ID) under which your application resides. Retrieve it by hovering the mouse in the top-right corner of the Azure portal. Type: string (or Expression with resultType string).
@@ -24437,7 +24437,7 @@ model SqlDWSink extends CopySink {
   /**
    * SQL DW upsert settings.
    */
-  upsertSettings?: Dfe<string[]>;
+  upsertSettings?: SqlDWUpsertSettings;
 
   /**
    * Copy sink type.
