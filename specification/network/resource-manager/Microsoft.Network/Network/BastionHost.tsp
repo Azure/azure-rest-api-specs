@@ -101,9 +101,9 @@ interface BastionHosts {
    * Creates a Bastion Shareable Links for all the VMs specified in the request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("PutBastionShareableLink")
   @tag("BastionHosts")
   @tag("BastionShareableLink")
-  @operationId("PutBastionShareableLink")
   @list
   @action("createShareableLinks")
   putBastionShareableLink is ArmResourceActionAsync<
@@ -117,9 +117,9 @@ interface BastionHosts {
    * Deletes the Bastion Shareable Links for all the VMs specified in the request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("DeleteBastionShareableLink")
   @tag("BastionHosts")
   @tag("BastionShareableLink")
-  @operationId("DeleteBastionShareableLink")
   @action("deleteShareableLinks")
   deleteBastionShareableLink is ArmResourceActionAsync<
     BastionHost,
@@ -134,9 +134,9 @@ interface BastionHosts {
    * Deletes the Bastion Shareable Links for all the tokens specified in the request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("DeleteBastionShareableLinkByToken")
   @tag("BastionHosts")
   @tag("BastionShareableLink")
-  @operationId("DeleteBastionShareableLinkByToken")
   @action("deleteShareableLinksByToken")
   deleteBastionShareableLinkByToken is ArmResourceActionAsyncBase<
     BastionHost,
@@ -150,9 +150,9 @@ interface BastionHosts {
    * Return the Bastion Shareable Links for all the VMs specified in the request.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("GetBastionShareableLink")
   @tag("BastionHosts")
   @tag("BastionShareableLink")
-  @operationId("GetBastionShareableLink")
   @list
   @action("getShareableLinks")
   getBastionShareableLink is ArmResourceActionSync<

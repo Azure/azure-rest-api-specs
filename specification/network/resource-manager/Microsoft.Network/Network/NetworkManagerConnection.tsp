@@ -64,8 +64,6 @@ interface NetworkManagerConnections {
   /**
    * Get a specified connection created by this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SubscriptionNetworkManagerConnections_Get")
   get is NetworkManagerConnectionOps.Read<
     NetworkManagerConnection,
     ErrorType = CloudError
@@ -74,8 +72,6 @@ interface NetworkManagerConnections {
   /**
    * Create a network manager connection on this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SubscriptionNetworkManagerConnections_CreateOrUpdate")
   createOrUpdate is NetworkManagerConnectionOps.CreateOrUpdateSync<
     NetworkManagerConnection,
     ErrorType = CloudError
@@ -84,8 +80,6 @@ interface NetworkManagerConnections {
   /**
    * Delete specified connection created by this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SubscriptionNetworkManagerConnections_Delete")
   delete is NetworkManagerConnectionOps.DeleteSync<
     NetworkManagerConnection,
     ErrorType = CloudError
@@ -94,8 +88,6 @@ interface NetworkManagerConnections {
   /**
    * List all network manager connections created by this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SubscriptionNetworkManagerConnections_List")
   list is NetworkManagerConnectionOps.List<
     NetworkManagerConnection,
     Parameters = {
@@ -119,7 +111,7 @@ interface NetworkManagerConnections {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface ManagementGroupNetworkManagerConnections {
   /**
    * Get a specified connection created by this management group.

@@ -37,13 +37,12 @@ model VirtualNetworkTap extends Resource {
 }
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface VirtualNetworkTaps {
   @tag("VirtualNetworkTap")
   get is ArmResourceRead<VirtualNetworkTap, Error = CloudError>;
 
   @tag("VirtualNetworkTap")
-
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualNetworkTap,
     Error = CloudError
@@ -57,8 +56,8 @@ interface VirtualNetworkTaps {
     Error = CloudError
   >;
 
-  @tag("VirtualNetworkTap")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VirtualNetworkTap")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkTap,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -89,4 +88,3 @@ interface VirtualNetworkTaps {
 @@doc(VirtualNetworkTaps.updateTags::parameters.properties,
   "Parameters supplied to update VirtualNetworkTap tags."
 );
-

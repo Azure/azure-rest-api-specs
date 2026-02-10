@@ -71,7 +71,7 @@ alias VpnSiteLinkConnectionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface VpnSiteLinkConnections {
   /**
    * Retrieves the details of a vpn site link connection.
@@ -84,8 +84,6 @@ interface VpnSiteLinkConnections {
   /**
    * Retrieves all vpn site link connections for a particular virtual wan vpn gateway vpn connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnLinkConnections_ListByVpnConnection")
   listByVpnConnection is ArmResourceListByParent<
     VpnSiteLinkConnection,
     Parameters = {
@@ -102,9 +100,7 @@ interface VpnSiteLinkConnections {
   /**
    * Resets the VpnLink connection specified.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("vpnLinkConnections")
-  @operationId("VpnLinkConnections_ResetConnection")
   @action("resetconnection")
   resetConnection is VpnSiteLinkConnectionsOps.ActionAsync<
     VpnSiteLinkConnection,
@@ -117,8 +113,6 @@ interface VpnSiteLinkConnections {
   /**
    * Lists IKE Security Associations for Vpn Site Link Connection in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnLinkConnections_GetIkeSas")
   @action("getikesas")
   getIkeSas is VpnSiteLinkConnectionsOps.ActionAsync<
     VpnSiteLinkConnection,

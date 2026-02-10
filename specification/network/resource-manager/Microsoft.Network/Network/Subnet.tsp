@@ -44,7 +44,7 @@ model Subnet extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface Subnets {
   /**
    * Gets the specified subnet by virtual network and resource group.
@@ -114,8 +114,6 @@ interface Subnets {
   /**
    * Gets a list of resource navigation links for a subnet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ResourceNavigationLinks_List")
   @get
   @action("ResourceNavigationLinks")
   resourceNavigationLinksList is ArmResourceActionSync<
@@ -128,8 +126,6 @@ interface Subnets {
   /**
    * Gets a list of service association links for a subnet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ServiceAssociationLinks_List")
   @get
   @action("ServiceAssociationLinks")
   serviceAssociationLinksList is ArmResourceActionSync<
@@ -151,4 +147,3 @@ interface Subnets {
 @@doc(Subnets.unprepareNetworkPolicies::parameters.body,
   "Parameters supplied to unprepare subnet to remove network intent policies."
 );
-

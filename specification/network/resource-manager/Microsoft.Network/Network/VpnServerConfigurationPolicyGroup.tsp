@@ -43,20 +43,16 @@ model VpnServerConfigurationPolicyGroup extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface VpnServerConfigurationPolicyGroups {
   /**
    * Retrieves the details of a ConfigurationPolicyGroup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConfigurationPolicyGroups_Get")
   get is ArmResourceRead<VpnServerConfigurationPolicyGroup, Error = CloudError>;
 
   /**
    * Creates a ConfigurationPolicyGroup if it doesn't exist else updates the existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConfigurationPolicyGroups_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VpnServerConfigurationPolicyGroup,
     Error = CloudError
@@ -65,9 +61,7 @@ interface VpnServerConfigurationPolicyGroups {
   /**
    * Deletes a ConfigurationPolicyGroup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ConfigurationPolicyGroups_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VpnServerConfigurationPolicyGroup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -95,4 +89,3 @@ interface VpnServerConfigurationPolicyGroups {
 @@doc(VpnServerConfigurationPolicyGroups.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a VpnServerConfiguration PolicyGroup."
 );
-

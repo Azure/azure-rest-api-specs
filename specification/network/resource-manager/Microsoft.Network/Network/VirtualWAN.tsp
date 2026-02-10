@@ -57,20 +57,16 @@ alias VirtualWanOps = Azure.ResourceManager.Legacy.LegacyOperations<
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface VirtualWANS {
   /**
    * Retrieves the details of a VirtualWAN.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualWans_Get")
   get is ArmResourceRead<VirtualWAN, Error = CloudError>;
 
   /**
    * Creates a VirtualWAN resource if it doesn't exist else updates the existing VirtualWAN.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualWans_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualWAN,
     Error = CloudError
@@ -79,10 +75,8 @@ interface VirtualWANS {
   /**
    * Updates a VirtualWAN tags.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VirtualWANs")
-  @operationId("VirtualWans_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     VirtualWAN,
@@ -93,9 +87,7 @@ interface VirtualWANS {
   /**
    * Deletes a VirtualWAN.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualWans_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualWAN,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -105,8 +97,6 @@ interface VirtualWANS {
   /**
    * Lists all the VirtualWANs in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualWans_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     VirtualWAN,
     Response = ArmResponse<ListVirtualWANsResult>,
@@ -116,8 +106,6 @@ interface VirtualWANS {
   /**
    * Lists all the VirtualWANs in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualWans_List")
   list is ArmListBySubscription<
     VirtualWAN,
     Response = ArmResponse<ListVirtualWANsResult>,
@@ -153,8 +141,6 @@ interface VirtualWANS {
   /**
    * Gives the sas-url to download the configurations for vpn-sites in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnSitesConfiguration_Download")
   @action("vpnConfiguration")
   download is VirtualWanOps.ActionAsync<
     VirtualWAN,
@@ -169,8 +155,6 @@ interface VirtualWANS {
   /**
    * Gives the list of VpnServerConfigurations associated with Virtual Wan in a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnServerConfigurationsAssociatedWithVirtualWan_List")
   @action("vpnServerConfigurations")
   vpnServerConfigurationsAssociatedWithVirtualWanList is VirtualWanOps.ActionAsync<
     VirtualWAN,
@@ -194,4 +178,3 @@ interface VirtualWANS {
 @@doc(VirtualWANS.download::parameters.body,
   "Parameters supplied to download vpn-sites configuration."
 );
-

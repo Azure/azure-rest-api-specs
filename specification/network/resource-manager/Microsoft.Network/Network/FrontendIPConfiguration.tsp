@@ -45,22 +45,18 @@ model FrontendIPConfiguration extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface FrontendIPConfigurations {
   /**
    * Gets load balancer frontend IP configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("LoadBalancers")
-  @operationId("LoadBalancerFrontendIPConfigurations_Get")
   get is ArmResourceRead<FrontendIPConfiguration, Error = CloudError>;
 
   /**
    * Gets all the load balancer frontend IP configurations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("LoadBalancers")
-  @operationId("LoadBalancerFrontendIPConfigurations_List")
   list is ArmResourceListByParent<
     FrontendIPConfiguration,
     Response = LoadBalancerFrontendIPConfigurationListResult,

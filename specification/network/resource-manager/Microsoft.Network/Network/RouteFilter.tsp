@@ -130,9 +130,7 @@ interface RouteFilters {
   /**
    * Deletes the specified rule from a route filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("RouteFilterRules")
-  @operationId("RouteFilterRules_Delete")
   @delete
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}")
@@ -152,9 +150,7 @@ interface RouteFilters {
   /**
    * Gets the specified rule from a route filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("RouteFilterRules")
-  @operationId("RouteFilterRules_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}")
   routeFilterRulesGet is RouteFilterRuleOps.ActionSync<
@@ -167,10 +163,8 @@ interface RouteFilters {
   /**
    * Creates or updates a route in the specified route filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("RouteFilterRules")
-  @operationId("RouteFilterRules_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules/{ruleName}")
@@ -189,9 +183,7 @@ interface RouteFilters {
   /**
    * Gets all RouteFilterRules in a route filter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("RouteFilterRules")
-  @operationId("RouteFilterRules_ListByRouteFilter")
   @list
   @get
   @autoRoute
@@ -214,4 +206,3 @@ interface RouteFilters {
 @@doc(RouteFilters.routeFilterRulesCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update route filter rule operation."
 );
-

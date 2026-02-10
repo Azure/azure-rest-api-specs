@@ -38,7 +38,7 @@ model VirtualNetworkGatewayConnection extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface VirtualNetworkGatewayConnections {
   /**
    * Gets the specified virtual network gateway connection by resource group.
@@ -92,9 +92,7 @@ interface VirtualNetworkGatewayConnections {
   /**
    * Gets a xml format representation for vpn device configuration script.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VirtualNetworkGateways")
-  @operationId("VirtualNetworkGateways_VpnDeviceConfigurationScript")
   @action("vpndeviceconfigurationscript")
   vpnDeviceConfigurationScript is ArmResourceActionSync<
     VirtualNetworkGatewayConnection,

@@ -43,7 +43,7 @@ model NetworkManager extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface NetworkManagers {
   /**
    * Gets the specified Network Manager.
@@ -141,8 +141,8 @@ interface NetworkManagers {
    * Lists active connectivity configurations in a network manager.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkManagerActiveConnectivityConfigurations")
   @operationId("ListActiveConnectivityConfigurations")
+  @tag("NetworkManagerActiveConnectivityConfigurations")
   @list
   listActiveConnectivityConfigurations is ArmResourceActionSync<
     NetworkManager,
@@ -164,8 +164,8 @@ interface NetworkManagers {
    * Lists active security admin rules in a network manager.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("NetworkManagerActiveConfigurations")
   @operationId("ListActiveSecurityAdminRules")
+  @tag("NetworkManagerActiveConfigurations")
   @list
   listActiveSecurityAdminRules is ArmResourceActionSync<
     NetworkManager,
@@ -186,10 +186,8 @@ interface NetworkManagers {
   /**
    * Post a Network Manager Commit.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkManagers")
-  @operationId("NetworkManagerCommits_Post")
   @action("commit")
   post is ArmResourceActionAsyncBase<
     NetworkManager,
@@ -206,9 +204,7 @@ interface NetworkManagers {
   /**
    * Post to List of Network Manager Deployment Status.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkManagers")
-  @operationId("NetworkManagerDeploymentStatus_List")
   @list
   @action("listDeploymentStatus")
   networkManagerDeploymentStatusList is ArmResourceActionSync<

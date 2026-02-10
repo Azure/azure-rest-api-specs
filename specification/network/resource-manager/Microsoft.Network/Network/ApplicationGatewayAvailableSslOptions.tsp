@@ -56,9 +56,7 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   /**
    * Lists available Ssl options for configuring Ssl policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ApplicationGateways")
-  @operationId("ApplicationGateways_ListAvailableSslOptions")
   @autoRoute
   listAvailableSslOptions is ArmResourceRead<
     ApplicationGatewayAvailableSslOptions,
@@ -69,9 +67,7 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   /**
    * Lists all SSL predefined policies for configuring Ssl policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ApplicationGateways")
-  @operationId("ApplicationGateways_ListAvailableSslPredefinedPolicies")
   @list
   @get
   @action("predefinedPolicies")
@@ -87,9 +83,7 @@ interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   /**
    * Gets Ssl predefined policy with the specified policy name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ApplicationGateways")
-  @operationId("ApplicationGateways_GetSslPredefinedPolicy")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableSslOptions/default/predefinedPolicies/{predefinedPolicyName}")
   getSslPredefinedPolicy is ApplicationGatewayAvailableSslOptionsOps.ActionSync<

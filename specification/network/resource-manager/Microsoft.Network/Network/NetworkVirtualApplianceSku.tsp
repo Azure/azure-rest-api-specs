@@ -38,14 +38,12 @@ model NetworkVirtualApplianceSku extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface NetworkVirtualApplianceSkus {
   /**
    * Retrieves a single available sku for network virtual appliance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VirtualApplianceSkus")
-  @operationId("VirtualApplianceSkus_Get")
   get is ArmResourceRead<
     NetworkVirtualApplianceSku,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -55,9 +53,7 @@ interface NetworkVirtualApplianceSkus {
   /**
    * List all SKUs available for a virtual appliance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("VirtualApplianceSkus")
-  @operationId("VirtualApplianceSkus_List")
   list is ArmResourceListByParent<
     NetworkVirtualApplianceSku,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

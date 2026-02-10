@@ -140,8 +140,6 @@ interface LoadBalancers {
   /**
    * Gets associated load balancer network interfaces.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("LoadBalancerNetworkInterfaces_List")
   @list
   @get
   @action("networkInterfaces")

@@ -53,8 +53,6 @@ interface ExpressRouteProviderPorts {
   /**
    * Retrieves all the ExpressRouteProviderPorts in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ExpressRouteProviderPortsLocation_List")
   list is Legacy.ArmListSinglePageByParent<
     ExpressRouteProviderPort,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

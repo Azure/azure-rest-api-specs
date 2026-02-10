@@ -47,7 +47,7 @@ model ApplicationGateway extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface ApplicationGateways {
   /**
    * Gets the specified application gateway.
@@ -165,8 +165,6 @@ interface ApplicationGateways {
   /**
    * Lists all private link resources on an application gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ApplicationGatewayPrivateLinkResources_List")
   @tag("ApplicationGatewayPrivateLinkResources")
   @list
   @get

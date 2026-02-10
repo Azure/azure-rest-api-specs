@@ -62,20 +62,16 @@ alias VirtualHubBgpConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface BgpConnections {
   /**
    * Retrieves the details of a Virtual Hub Bgp Connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubBgpConnection_Get")
   get is ArmResourceRead<BgpConnection, Error = CloudError>;
 
   /**
    * Creates a VirtualHubBgpConnection resource if it doesn't exist else updates the existing VirtualHubBgpConnection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubBgpConnection_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BgpConnection,
     Error = CloudError
@@ -84,9 +80,7 @@ interface BgpConnections {
   /**
    * Deletes a VirtualHubBgpConnection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubBgpConnection_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     BgpConnection,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -96,8 +90,6 @@ interface BgpConnections {
   /**
    * Retrieves the details of all VirtualHubBgpConnections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubBgpConnections_List")
   list is ArmResourceListByParent<
     BgpConnection,
     Response = ArmResponse<ListVirtualHubBgpConnectionResults>,
@@ -107,8 +99,6 @@ interface BgpConnections {
   /**
    * Retrieves a list of routes the virtual hub bgp connection has learned.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubBgpConnections_ListLearnedRoutes")
   @action("learnedRoutes")
   listLearnedRoutes is VirtualHubBgpConnectionOps.ActionAsync<
     BgpConnection,
@@ -122,8 +112,6 @@ interface BgpConnections {
   /**
    * Retrieves a list of routes the virtual hub bgp connection is advertising to the specified peer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubBgpConnections_ListAdvertisedRoutes")
   @action("advertisedRoutes")
   listAdvertisedRoutes is VirtualHubBgpConnectionOps.ActionAsync<
     BgpConnection,

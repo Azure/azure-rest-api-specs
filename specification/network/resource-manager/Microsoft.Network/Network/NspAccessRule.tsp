@@ -42,22 +42,18 @@ model NspAccessRule extends CommonProxyResource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface NspAccessRules {
   /**
    * Gets the specified NSP access rule by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterAccessRules")
-  @operationId("NetworkSecurityPerimeterAccessRules_Get")
   get is ArmResourceRead<NspAccessRule, Error = CloudError>;
 
   /**
    * Creates or updates a network access rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterAccessRules")
-  @operationId("NetworkSecurityPerimeterAccessRules_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NspAccessRule,
     Error = CloudError
@@ -66,17 +62,13 @@ interface NspAccessRules {
   /**
    * Deletes an NSP access rule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterAccessRules")
-  @operationId("NetworkSecurityPerimeterAccessRules_Delete")
   delete is ArmResourceDeleteSync<NspAccessRule, Error = CloudError>;
 
   /**
    * Lists the NSP access rules in the specified NSP profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterAccessRules")
-  @operationId("NetworkSecurityPerimeterAccessRules_List")
   list is ArmResourceListByParent<
     NspAccessRule,
     Parameters = {
@@ -100,9 +92,7 @@ interface NspAccessRules {
   /**
    * Reconcile NSP access rules
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterAccessRules")
-  @operationId("NetworkSecurityPerimeterAccessRules_Reconcile")
   reconcile is ArmResourceActionSync<
     NspAccessRule,
     unknown,

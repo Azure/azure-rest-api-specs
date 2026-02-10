@@ -201,8 +201,6 @@ interface VpnGateways {
   /**
    * Retrieves the details of a vpn connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnConnections_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}")
   vpnConnectionsGet is VpnConnectionOps.ActionSync<
@@ -215,9 +213,7 @@ interface VpnGateways {
   /**
    * Creates a vpn connection to a scalable vpn gateway if it doesn't exist else updates the existing connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnConnections_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}")
@@ -236,8 +232,6 @@ interface VpnGateways {
   /**
    * Deletes a vpn connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnConnections_Delete")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/vpnConnections/{connectionName}")
   vpnConnectionsDelete is VpnConnectionOps.ActionAsync<
@@ -253,8 +247,6 @@ interface VpnGateways {
   /**
    * Starts packet capture on Vpn connection in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnConnections_StartPacketCapture")
   @action("startpacketcapture")
   @autoRoute
   vpnConnectionsStartPacketCapture is VpnConnection2Ops.ActionAsync<
@@ -270,8 +262,6 @@ interface VpnGateways {
   /**
    * Stops packet capture on Vpn connection in the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnConnections_StopPacketCapture")
   @action("stoppacketcapture")
   @autoRoute
   vpnConnectionsStopPacketCapture is VpnConnection2Ops.ActionAsync<
@@ -287,8 +277,6 @@ interface VpnGateways {
   /**
    * Retrieves all vpn connections for a particular virtual wan vpn gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VpnConnections_ListByVpnGateway")
   @list
   @get
   @action("vpnConnections")
@@ -324,4 +312,3 @@ interface VpnGateways {
 @@doc(VpnGateways.vpnConnectionsStopPacketCapture::parameters.body,
   "Vpn Connection packet capture parameters supplied to stop packet capture on gateway connection."
 );
-

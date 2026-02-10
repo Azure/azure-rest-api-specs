@@ -42,22 +42,18 @@ model NspProfile extends CommonProxyResource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface NspProfiles {
   /**
    * Gets the specified NSP profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterProfiles")
-  @operationId("NetworkSecurityPerimeterProfiles_Get")
   get is ArmResourceRead<NspProfile, Error = CloudError>;
 
   /**
    * Creates or updates a network profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterProfiles")
-  @operationId("NetworkSecurityPerimeterProfiles_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NspProfile,
     Error = CloudError
@@ -66,17 +62,13 @@ interface NspProfiles {
   /**
    * Deletes an NSP profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterProfiles")
-  @operationId("NetworkSecurityPerimeterProfiles_Delete")
   delete is ArmResourceDeleteSync<NspProfile, Error = CloudError>;
 
   /**
    * Lists the NSP profiles in the specified network security perimeter.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("NetworkSecurityPerimeterProfiles")
-  @operationId("NetworkSecurityPerimeterProfiles_List")
   list is ArmResourceListByParent<
     NspProfile,
     Parameters = {

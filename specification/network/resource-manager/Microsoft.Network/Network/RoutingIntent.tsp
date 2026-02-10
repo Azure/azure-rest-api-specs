@@ -43,20 +43,16 @@ model RoutingIntent extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface RoutingIntents {
   /**
    * Retrieves the details of a RoutingIntent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RoutingIntent_Get")
   get is ArmResourceRead<RoutingIntent, Error = CloudError>;
 
   /**
    * Creates a RoutingIntent resource if it doesn't exist else updates the existing RoutingIntent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RoutingIntent_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     RoutingIntent,
     Error = CloudError
@@ -65,9 +61,7 @@ interface RoutingIntents {
   /**
    * Deletes a RoutingIntent.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RoutingIntent_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     RoutingIntent,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -77,8 +71,6 @@ interface RoutingIntents {
   /**
    * Retrieves the details of all RoutingIntent child resources of the VirtualHub.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RoutingIntent_List")
   list is ArmResourceListByParent<
     RoutingIntent,
     Response = ArmResponse<ListRoutingIntentResult>,

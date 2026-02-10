@@ -43,16 +43,15 @@ model ServiceEndpointPolicyDefinition extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface ServiceEndpointPolicyDefinitions {
   @tag("ServiceEndpointPolicyDefinitions")
   get is ArmResourceRead<ServiceEndpointPolicyDefinition, Error = CloudError>;
 
-  @tag("ServiceEndpointPolicyDefinitions")
-
   /**
    * Creates or updates a service endpoint policy definition in the specified service endpoint policy.
    */
+  @tag("ServiceEndpointPolicyDefinitions")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServiceEndpointPolicyDefinition,
     Error = CloudError

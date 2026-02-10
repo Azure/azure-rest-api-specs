@@ -71,8 +71,6 @@ interface NetworkVirtualApplianceConnections {
   /**
    * Creates a connection to Network Virtual Appliance, if it doesn't exist else updates the existing NVA connection'
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NetworkVirtualApplianceConnections_CreateOrUpdate")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}")
   networkVirtualApplianceConnectionsCreateOrUpdate is NetworkVirtualApplianceNetworkVirtualApplianceOps.ActionAsync<
@@ -90,8 +88,6 @@ interface NetworkVirtualApplianceConnections {
   /**
    * Retrieves the details of specified NVA connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NetworkVirtualApplianceConnections_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}")
   networkVirtualApplianceConnectionsGet is NetworkVirtualApplianceNetworkVirtualApplianceOps.ActionSync<
@@ -104,8 +100,6 @@ interface NetworkVirtualApplianceConnections {
   /**
    * Deletes a NVA connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NetworkVirtualApplianceConnections_Delete")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}")
   networkVirtualApplianceConnectionsDelete is NetworkVirtualApplianceNetworkVirtualApplianceOps.ActionAsync<
@@ -121,8 +115,6 @@ interface NetworkVirtualApplianceConnections {
   /**
    * Lists NetworkVirtualApplianceConnections under the NVA.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("NetworkVirtualApplianceConnections_List")
   @list
   @get
   @autoRoute
@@ -253,4 +245,3 @@ interface NetworkVirtualAppliances {
 @@doc(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
   "Parameters supplied in an NetworkVirtualApplianceConnection PUT operation."
 );
-

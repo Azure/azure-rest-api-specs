@@ -41,20 +41,16 @@ model HubIpConfiguration extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface HubIpConfigurations {
   /**
    * Retrieves the details of a Virtual Hub Ip configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubIpConfiguration_Get")
   get is ArmResourceRead<HubIpConfiguration, Error = CloudError>;
 
   /**
    * Creates a VirtualHubIpConfiguration resource if it doesn't exist else updates the existing VirtualHubIpConfiguration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubIpConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     HubIpConfiguration,
     Error = CloudError
@@ -63,9 +59,7 @@ interface HubIpConfigurations {
   /**
    * Deletes a VirtualHubIpConfiguration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubIpConfiguration_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     HubIpConfiguration,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -75,8 +69,6 @@ interface HubIpConfigurations {
   /**
    * Retrieves the details of all VirtualHubIpConfigurations.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubIpConfiguration_List")
   list is ArmResourceListByParent<
     HubIpConfiguration,
     Response = ArmResponse<ListVirtualHubIpConfigurationResults>,

@@ -38,7 +38,7 @@ model VpnSite extends ResourceWithRequiredLocation {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface VpnSites {
   /**
    * Retrieves the details of a VPN site.
@@ -101,4 +101,3 @@ interface VpnSites {
 @@doc(VpnSites.updateTags::parameters.properties,
   "Parameters supplied to update VpnSite tags."
 );
-

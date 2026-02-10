@@ -196,9 +196,7 @@ interface VirtualHubs {
   /**
    * Creates a hub virtual network connection if it doesn't exist else updates the existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HubVirtualNetworkConnections_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}")
@@ -217,8 +215,6 @@ interface VirtualHubs {
   /**
    * Deletes a HubVirtualNetworkConnection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HubVirtualNetworkConnections_Delete")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}")
   hubVirtualNetworkConnectionsDelete is HubVirtualNetworkConnectionOps.ActionAsync<
@@ -234,8 +230,6 @@ interface VirtualHubs {
   /**
    * Retrieves the details of a HubVirtualNetworkConnection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HubVirtualNetworkConnections_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/hubVirtualNetworkConnections/{connectionName}")
   hubVirtualNetworkConnectionsGet is HubVirtualNetworkConnectionOps.ActionSync<
@@ -248,8 +242,6 @@ interface VirtualHubs {
   /**
    * Retrieves the details of all HubVirtualNetworkConnections.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("HubVirtualNetworkConnections_List")
   @list
   @get
   @autoRoute
@@ -264,8 +256,6 @@ interface VirtualHubs {
   /**
    * Retrieves the details of a VirtualHubRouteTableV2.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubRouteTableV2s_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}")
   virtualHubRouteTableV2sGet is VirtualHubRouteTableV2Ops.ActionSync<
@@ -278,9 +268,7 @@ interface VirtualHubs {
   /**
    * Creates a VirtualHubRouteTableV2 resource if it doesn't exist else updates the existing VirtualHubRouteTableV2.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubRouteTableV2s_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}")
@@ -299,8 +287,6 @@ interface VirtualHubs {
   /**
    * Deletes a VirtualHubRouteTableV2.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubRouteTableV2s_Delete")
   @delete
   virtualHubRouteTableV2sDelete is VirtualHubRouteTableV2Ops.ActionAsync<
     VirtualHub,
@@ -315,8 +301,6 @@ interface VirtualHubs {
   /**
    * Retrieves the details of all VirtualHubRouteTableV2s.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("VirtualHubRouteTableV2s_List")
   @list
   @get
   @action("routeTables")

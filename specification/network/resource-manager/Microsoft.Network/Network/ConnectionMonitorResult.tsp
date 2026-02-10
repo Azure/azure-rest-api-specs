@@ -45,22 +45,18 @@ model ConnectionMonitorResult extends TrackedResourcewithOptionalLocation {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
-@armResourceOperations(#{omitTags: true})
+@armResourceOperations(#{ omitTags: true })
 interface ConnectionMonitorResults {
   /**
    * Gets a connection monitor by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ConnectionMonitors")
-  @operationId("ConnectionMonitors_Get")
   get is ArmResourceRead<ConnectionMonitorResult, Error = ErrorResponse>;
 
   /**
    * Create or update a connection monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ConnectionMonitors")
-  @operationId("ConnectionMonitors_CreateOrUpdate")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ConnectionMonitorResult,
     Request = ConnectionMonitor,
@@ -77,9 +73,7 @@ interface ConnectionMonitorResults {
   /**
    * Update tags of the specified connection monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ConnectionMonitors")
-  @operationId("ConnectionMonitors_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     ConnectionMonitorResult,
@@ -90,9 +84,7 @@ interface ConnectionMonitorResults {
   /**
    * Deletes the specified connection monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ConnectionMonitors")
-  @operationId("ConnectionMonitors_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectionMonitorResult,
     Error = ErrorResponse
@@ -101,9 +93,7 @@ interface ConnectionMonitorResults {
   /**
    * Lists all connection monitors for the specified Network Watcher.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ConnectionMonitors")
-  @operationId("ConnectionMonitors_List")
   list is ArmResourceListByParent<
     ConnectionMonitorResult,
     Response = ArmResponse<ConnectionMonitorListResult>,
@@ -113,9 +103,7 @@ interface ConnectionMonitorResults {
   /**
    * Stops the specified connection monitor.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ConnectionMonitors")
-  @operationId("ConnectionMonitors_Stop")
   stop is ArmResourceActionAsync<
     ConnectionMonitorResult,
     void,
@@ -136,4 +124,3 @@ interface ConnectionMonitorResults {
 @@doc(ConnectionMonitorResults.updateTags::parameters.properties,
   "Parameters supplied to update connection monitor tags."
 );
-

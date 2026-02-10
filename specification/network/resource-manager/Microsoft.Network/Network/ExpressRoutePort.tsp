@@ -152,9 +152,7 @@ interface ExpressRoutePorts {
   /**
    * Retrieves the specified ExpressRouteLink resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ExpressRouteLinks")
-  @operationId("ExpressRouteLinks_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}/links/{linkName}")
   expressRouteLinksGet is ExpressRouteLinkOps.ActionSync<
@@ -167,9 +165,7 @@ interface ExpressRoutePorts {
   /**
    * Retrieve the ExpressRouteLink sub-resources of the specified ExpressRoutePort resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ExpressRouteLinks")
-  @operationId("ExpressRouteLinks_List")
   @list
   @get
   @action("links")

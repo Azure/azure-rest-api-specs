@@ -352,11 +352,9 @@ interface NetworkWatchers {
   /**
    * Create and start a packet capture on the specified VM.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PacketCaptures")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  @operationId("PacketCaptures_Create")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}")
   create is PacketCaptureOps.ActionAsync<
@@ -374,9 +372,7 @@ interface NetworkWatchers {
   /**
    * Gets a packet capture session by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PacketCaptures")
-  @operationId("PacketCaptures_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}")
   packetCapturesGet is PacketCaptureOps.ActionSync<
@@ -389,9 +385,7 @@ interface NetworkWatchers {
   /**
    * Deletes the specified packet capture session.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PacketCaptures")
-  @operationId("PacketCaptures_Delete")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}")
   packetCapturesDelete is PacketCaptureOps.ActionAsync<
@@ -405,9 +399,7 @@ interface NetworkWatchers {
   /**
    * Stops a specified packet capture session.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PacketCaptures")
-  @operationId("PacketCaptures_Stop")
   @action("stop")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/stop")
   stop is PacketCaptureOps.ActionAsync<
@@ -423,10 +415,8 @@ interface NetworkWatchers {
   /**
    * Query the status of a running packet capture session.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PacketCaptures")
-  @operationId("PacketCaptures_GetStatus")
   @action("queryStatus")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus")
   getStatus is PacketCaptureOps.ActionAsync<
@@ -444,9 +434,7 @@ interface NetworkWatchers {
   /**
    * Lists all packet capture sessions within the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("PacketCaptures")
-  @operationId("PacketCaptures_List")
   @list
   @get
   @action("packetCaptures")
