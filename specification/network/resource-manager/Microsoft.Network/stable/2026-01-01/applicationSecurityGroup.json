@@ -302,6 +302,262 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/addressPrefixSets/{addressPrefixSetName}": {
+      "get": {
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "operationId": "AddressPrefixSets_Get",
+        "description": "Gets information about the specified address prefix set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]*[a-zA-Z0-9])?$",
+            "description": "The name of the application security group."
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]*[a-zA-Z0-9])?$",
+            "description": "The name of the address prefix set."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the specified AddressPrefixSet resource.",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get address prefix set": {
+            "$ref": "./examples/AddressPrefixSetGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "operationId": "AddressPrefixSets_CreateOrUpdate",
+        "description": "Creates or updates an address prefix set in the specified application security group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]*[a-zA-Z0-9])?$",
+            "description": "The name of the application security group."
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]*[a-zA-Z0-9])?$",
+            "description": "The name of the address prefix set."
+          },
+          {
+            "name": "addressPrefixSetParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            },
+            "description": "Parameters supplied to the create or update address prefix set operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting AddressPrefixSet resource.",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting AddressPrefixSet resource.",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSet"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create address prefix set": {
+            "$ref": "./examples/AddressPrefixSetCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "operationId": "AddressPrefixSets_Delete",
+        "description": "Deletes the specified address prefix set.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]*[a-zA-Z0-9])?$",
+            "description": "The name of the application security group."
+          },
+          {
+            "name": "addressPrefixSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]*[a-zA-Z0-9])?$",
+            "description": "The name of the address prefix set."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL of the resource used to check the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "Request successful. Resource does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete address prefix set": {
+            "$ref": "./examples/AddressPrefixSetDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups/{applicationSecurityGroupName}/listAddressPrefixSets": {
+      "get": {
+        "tags": [
+          "AddressPrefixSets"
+        ],
+        "operationId": "AddressPrefixSets_List",
+        "description": "Lists all address prefix sets in an application security group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "applicationSecurityGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]([a-zA-Z0-9_.-]*[a-zA-Z0-9])?$",
+            "description": "The name of the application security group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of AddressPrefixSet resources.",
+            "schema": {
+              "$ref": "#/definitions/AddressPrefixSetListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List address prefix sets in application security group": {
+            "$ref": "./examples/AddressPrefixSetList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationSecurityGroups": {
       "get": {
         "tags": [
@@ -401,6 +657,71 @@
         }
       },
       "description": "A list of application security groups."
+    },
+    "AddressPrefixSet": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AddressPrefixSetPropertiesFormat",
+          "description": "Properties of the address prefix set."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "An address prefix set resource that is a child of an application security group."
+    },
+    "AddressPrefixSetPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The list of address prefixes in CIDR notation (e.g., '10.0.0.0/16', '2001:db8::/32'). Supports both IPv4 and IPv6 CIDR notation."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the address prefix set resource."
+        }
+      },
+      "description": "Address prefix set properties."
+    },
+    "AddressPrefixSetListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddressPrefixSet"
+          },
+          "description": "A list of address prefix sets."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "Response for ListAddressPrefixSets API service call. Retrieves all address prefix sets that belong to an application security group."
     }
   }
 }

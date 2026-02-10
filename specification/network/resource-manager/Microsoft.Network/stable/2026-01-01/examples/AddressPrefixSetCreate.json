@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "applicationSecurityGroupName": "test-asg",
+    "addressPrefixSetName": "test-prefix-set",
+    "addressPrefixSetParameters": {
+      "properties": {
+        "addressPrefixes": [
+          "10.0.0.0/16",
+          "192.168.1.0/24"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-prefix-set",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg/addressPrefixSets/test-prefix-set",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "addressPrefixes": [
+            "10.0.0.0/16",
+            "192.168.1.0/24"
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-prefix-set",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationSecurityGroups/test-asg/addressPrefixSets/test-prefix-set",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "addressPrefixes": [
+            "10.0.0.0/16",
+            "192.168.1.0/24"
+          ]
+        }
+      }
+    }
+  }
+}
