@@ -92,7 +92,7 @@ model NetworkBootstrapDevicePatch {
 
   #suppress "deprecated" "Legacy flattening"
   @doc("Network Bootstrap Device Patch properties.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkBootstrapDevicePatchProperties;
 
   @doc("The managed service identities assigned to this resource.")

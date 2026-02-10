@@ -60,7 +60,7 @@ model InternetGatewayPatch {
   #suppress "deprecated" "Legacy flattening"
   @doc("Resource properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: InternetGatewayPatchProperties;
 }
 

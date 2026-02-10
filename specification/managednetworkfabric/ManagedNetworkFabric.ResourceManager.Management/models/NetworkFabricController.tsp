@@ -126,7 +126,7 @@ model NetworkFabricControllerPatch {
 
   #suppress "deprecated" "Legacy flattening"
   @doc("Network Fabric Controller patch properties.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   @added(Versions.v2025_07_15)
   properties?: NetworkFabricControllerPatchProperties;
 

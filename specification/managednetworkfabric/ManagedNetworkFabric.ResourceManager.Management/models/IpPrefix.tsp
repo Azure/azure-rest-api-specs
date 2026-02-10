@@ -71,7 +71,7 @@ model IpPrefixPatch {
   #suppress "deprecated" "Legacy flattening"
   @doc("IP Prefix patchable properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: IpPrefixPatchProperties;
 }
 

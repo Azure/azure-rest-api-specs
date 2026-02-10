@@ -105,7 +105,7 @@ model NetworkDevicePatchParameters {
   #suppress "deprecated" "Legacy flattening"
   @doc("Network Device Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkDevicePatchParametersProperties;
 
   @added(Versions.v2025_07_15)

@@ -146,7 +146,7 @@ model NetworkTapPatch {
   #suppress "deprecated" "Legacy flattening"
   @doc("NetworkTap resource patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkTapPatchProperties;
 
   @added(Versions.v2025_07_15)

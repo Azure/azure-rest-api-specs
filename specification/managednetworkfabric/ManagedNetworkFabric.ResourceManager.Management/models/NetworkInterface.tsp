@@ -86,7 +86,7 @@ model NetworkInterfacePatch {
   #suppress "deprecated" "Legacy flattening"
   @doc("Network Interface Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkInterfacePatchProperties;
 
   @added(Versions.v2025_07_15)

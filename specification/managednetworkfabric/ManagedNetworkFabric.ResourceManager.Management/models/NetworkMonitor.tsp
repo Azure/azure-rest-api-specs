@@ -239,7 +239,7 @@ model NetworkMonitorPatch {
   #suppress "deprecated" "Legacy flattening"
   @doc("Network Monitor Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NetworkMonitorPatchProperties;
 }
 

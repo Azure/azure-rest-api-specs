@@ -221,7 +221,7 @@ model L3IsolationDomainPatch {
   #suppress "deprecated" "Legacy flattening"
   @doc("L3 Isolation Domain resource patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: L3IsolationDomainPatchProperties;
 
   @added(Versions.v2025_07_15)

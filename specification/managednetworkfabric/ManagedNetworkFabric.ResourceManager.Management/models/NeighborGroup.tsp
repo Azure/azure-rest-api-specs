@@ -84,7 +84,7 @@ model NeighborGroupPatch {
   #suppress "deprecated" "Legacy flattening"
   @doc("Neighbor Group Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: NeighborGroupPatchProperties;
 
   @added(Versions.v2025_07_15)

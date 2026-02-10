@@ -245,7 +245,7 @@ model AccessControlListPatch {
   #suppress "deprecated" "Legacy flattening"
   @doc("Access Control Lists patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: AccessControlListPatchProperties;
 }
 
