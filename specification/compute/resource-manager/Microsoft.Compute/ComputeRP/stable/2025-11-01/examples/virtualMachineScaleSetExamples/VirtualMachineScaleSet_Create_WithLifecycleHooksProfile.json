@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
+    "subscriptionId": "2e2e3046-f85f-4966-8fd2-5fd7bf6ea717",
     "resourceGroupName": "myResourceGroup",
     "vmScaleSetName": "{vmss-name}",
     "api-version": "2025-11-01",
@@ -16,20 +16,10 @@
           "lifecycleHooks": [
             {
               "type": "UpgradeAutoOSRollingBatchStarting",
-              "waitDuration": "PT20M"
+              "waitDuration": "PT20M",
+              "defaultAction": "Approve"
             }
           ]
-        },
-        "upgradePolicy": {
-          "mode": "Manual",
-          "rollingUpgradePolicy": {
-            "maxBatchInstancePercent": 50
-          },
-          "automaticOSUpgradePolicy": {
-            "enableAutomaticOSUpgrade": true,
-            "useRollingUpgradePolicy": true,
-            "disableAutomaticRollback": false
-          }
         },
         "virtualMachineProfile": {
           "storageProfile": {
@@ -130,7 +120,7 @@
                         "name": "{vmss-name}",
                         "properties": {
                           "subnet": {
-                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                            "id": "/subscriptions/2e2e3046-f85f-4966-8fd2-5fd7bf6ea717/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
                           },
                           "privateIPAddressVersion": "IPv4"
                         }
@@ -146,26 +136,16 @@
             "lifecycleHooks": [
               {
                 "type": "UpgradeAutoOSRollingBatchStarting",
-                "waitDuration": "PT20M"
+                "waitDuration": "PT20M",
+                "defaultAction": "Approve"
               }
             ]
-          },
-          "upgradePolicy": {
-            "mode": "Manual",
-            "rollingUpgradePolicy": {
-              "maxBatchInstancePercent": 50
-            },
-            "automaticOSUpgradePolicy": {
-              "enableAutomaticOSUpgrade": true,
-              "useRollingUpgradePolicy": true,
-              "disableAutomaticRollback": false
-            }
           },
           "provisioningState": "Updating"
         },
         "location": "westus",
         "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+        "id": "/subscriptions/2e2e3046-f85f-4966-8fd2-5fd7bf6ea717/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     },
     "201": {
@@ -220,7 +200,7 @@
                         "name": "{vmss-name}",
                         "properties": {
                           "subnet": {
-                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
+                            "id": "/subscriptions/2e2e3046-f85f-4966-8fd2-5fd7bf6ea717/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/nsgExistingVnet/subnets/nsgExistingSubnet"
                           },
                           "privateIPAddressVersion": "IPv4"
                         }
@@ -236,26 +216,16 @@
             "lifecycleHooks": [
               {
                 "type": "UpgradeAutoOSRollingBatchStarting",
-                "waitDuration": "PT20M"
+                "waitDuration": "PT20M",
+                "defaultAction": "Approve"
               }
             ]
-          },
-          "upgradePolicy": {
-            "mode": "Manual",
-            "rollingUpgradePolicy": {
-              "maxBatchInstancePercent": 50
-            },
-            "automaticOSUpgradePolicy": {
-              "enableAutomaticOSUpgrade": true,
-              "useRollingUpgradePolicy": true,
-              "disableAutomaticRollback": false
-            }
           },
           "provisioningState": "Creating"
         },
         "location": "westus",
         "type": "Microsoft.Compute/virtualMachineScaleSets",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+        "id": "/subscriptions/2e2e3046-f85f-4966-8fd2-5fd7bf6ea717/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
       }
     }
   },

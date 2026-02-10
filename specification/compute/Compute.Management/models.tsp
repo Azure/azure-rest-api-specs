@@ -1314,12 +1314,6 @@ union VMScaleSetLifecycleHookEventType {
 
   /** Lifecycle hook event sent to the customer before upgrade starts on a batch of virtual machines belonging to a virtual machine scale set during an Auto OS Upgrade operation. */
   UpgradeAutoOSRollingBatchStarting: "UpgradeAutoOSRollingBatchStarting",
-
-  /** Lifecycle hook event sent to the customer after upgrade is completed on a batch of virtual machines belonging to a virtual machine scale set during an Auto OS Upgrade operation. */
-  UpgradeAutoOSRollingBatchCompleted: "UpgradeAutoOSRollingBatchCompleted",
-
-  /** Lifecycle hook event sent to the customer after an Auto OS Upgrade operation is completed on the virtual machine scale set. */
-  UpgradeAutoOSCompleted: "UpgradeAutoOSCompleted",
 }
 
 /**
