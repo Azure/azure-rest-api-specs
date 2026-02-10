@@ -34,15 +34,11 @@ interface GarnetClusters {
   /**
    * Get the properties of a Garnet cache cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GarnetClusters_Get")
   get is ArmResourceRead<GarnetClusterResource>;
 
   /**
    * Create or update a Garnet cache cluster. When updating, you must specify all writable properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GarnetClusters_CreateUpdate")
   createUpdate is ArmResourceCreateOrReplaceAsync<
     GarnetClusterResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = GarnetClusterResource> &
@@ -52,8 +48,6 @@ interface GarnetClusters {
   /**
    * Updates some of the properties of a garnet cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GarnetClusters_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     GarnetClusterResource,
@@ -65,8 +59,6 @@ interface GarnetClusters {
   /**
    * Deletes a Garnet cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GarnetClusters_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     GarnetClusterResource,
     Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
@@ -76,8 +68,6 @@ interface GarnetClusters {
   /**
    * List all Garnet clusters in this resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GarnetClusters_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     GarnetClusterResource,
     Response = ArmResponse<ListGarnetClusters>
@@ -86,8 +76,6 @@ interface GarnetClusters {
   /**
    * List all Garnet clusters in this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GarnetClusters_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     GarnetClusterResource,
     Response = ArmResponse<ListGarnetClusters>
