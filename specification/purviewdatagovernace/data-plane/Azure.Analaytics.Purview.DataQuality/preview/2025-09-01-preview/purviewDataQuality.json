@@ -89,9 +89,580 @@
     },
     {
       "name": "BulkMetadata"
+    },
+    {
+      "name": "DQ Asset"
     }
   ],
   "paths": {
+    "/{businessDomainId}/data-assets/{dataAssetId}:observations": {
+      "post": {
+        "operationId": "CreateAssessmentV2",
+        "tags": [
+          "DQ Assessment Observations"
+        ],
+        "description": "Creates an observation (assessment) for a data asset within a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Job configuration for the assessment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobConfigDTO"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/StatusMonitor"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Alert_Delete": {
+            "$ref": "./examples/2025-09-01-preview/Alert_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{businessDomainId}/data-assets/{dataAssetId}:profile": {
+      "post": {
+        "operationId": "SubmitProfileV3",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Submits a data profiling job for a specific data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Profile observer payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileObserverPayload"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/StatusMonitor"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{businessDomainId}/data-assets/{dataAssetId}/observations/{observationId}": {
+      "delete": {
+        "operationId": "DeleteObservationV2",
+        "tags": [
+          "DQ Assessment Observations"
+        ],
+        "description": "Deletes a specific observation associated with a data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "observationId",
+            "in": "path",
+            "description": "Unique identifier for the observation",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{businessDomainId}/data-assets/{dataAssetId}/profiles/{profileRunId}": {
+      "delete": {
+        "operationId": "DeleteProfileV2",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Deletes a specific profile run from a data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileRunId",
+            "in": "path",
+            "description": "Unique identifier for the profile run",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{businessDomainId}/data-assets/{dataAssetId}/rules": {
+      "get": {
+        "operationId": "GetRulesV2",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Retrieves all rules associated with a specific data asset within a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{businessDomainId}/data-assets/{dataAssetId}/rules/{ruleId}": {
+      "get": {
+        "operationId": "GetRuleByIdV2",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Retrieves a specific rule by ID from a data asset within a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique identifier for the rule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateRuleV3",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Updates an existing rule with a complete rule definition (PUT operation).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique identifier for the rule to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Updated rule entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateRuleV4",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Partially updates an existing rule (PATCH operation).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique identifier for the rule to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Partial rule update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleEntityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteRuleV2",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Deletes a specific rule from a data asset within a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique identifier for the rule to delete",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/bulk-asset-metadata": {
       "get": {
         "operationId": "GetBulkAssetMetadata",
@@ -459,6 +1030,675 @@
         "x-ms-examples": {
           "Alert_Delete": {
             "$ref": "./examples/Alert_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/asset-scores": {
+      "get": {
+        "operationId": "GetAssetScoresV2",
+        "tags": [
+          "DQ Asset"
+        ],
+        "description": "Retrieves quality scores for multiple assets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assetIdString",
+            "in": "query",
+            "description": "Comma-separated asset IDs to retrieve scores for",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets": {
+      "get": {
+        "operationId": "GetDQAssetsPaginationV2",
+        "tags": [
+          "DQ Asset"
+        ],
+        "description": "Retrieves a paginated list of DQ assets for a data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Optional continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateDQAssetV2",
+        "tags": [
+          "DQ Asset"
+        ],
+        "description": "Creates a new DQ asset within a data asset context.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "DQ asset creation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DqAssetRequestWrapper"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets/{assetId}": {
+      "get": {
+        "operationId": "GetDQAssetV2",
+        "tags": [
+          "DQ Asset"
+        ],
+        "description": "Retrieves a specific DQ asset by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assetId",
+            "in": "path",
+            "description": "Unique identifier for the DQ asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteDQAssetV2",
+        "tags": [
+          "DQ Asset"
+        ],
+        "description": "Deletes a specific DQ asset by ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assetId",
+            "in": "path",
+            "description": "Unique identifier for the DQ asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/clone": {
+      "post": {
+        "operationId": "CloneDQAssetV2",
+        "tags": [
+          "DQ Asset"
+        ],
+        "description": "Clones an existing DQ asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the source data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Clone asset request containing clone configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CloneAssetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/StatusMonitor"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/runs": {
+      "get": {
+        "operationId": "GetRunsForAssetV2",
+        "tags": [
+          "JobRunMonitoring"
+        ],
+        "description": "Retrieves all runs (job executions) for a specific data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runType",
+            "in": "query",
+            "description": "Type of run to retrieve (Assessment, Profile, FetchSchema)",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/JobHistoryEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/scoped-asset-metadata": {
+      "get": {
+        "operationId": "GetScopedAssetMetadataV2",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Retrieves scoped asset metadata for a data asset within a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScopedAssetMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateScopedAssetMetadataV3",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Updates scoped asset metadata for a data asset within a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Scoped asset metadata update request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopedAssetMetadataUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScopedAssetMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteScopedAssetMetadataV2",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Deletes scoped asset metadata for a data asset within a business domain.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{assetId}/snapshots": {
+      "get": {
+        "operationId": "GetScoreSnapshotV3",
+        "tags": [
+          "Reports"
+        ],
+        "description": "Retrieves the latest data quality score snapshot for a data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Optional data product identifier",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScoreSnapshotWrapper"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -2982,6 +4222,32 @@
         "metadata"
       ]
     },
+    "CloneAssetRequest": {
+      "type": "object",
+      "description": "Clone asset request with configuration parameters",
+      "properties": {
+        "sourceBusinessDomainId": {
+          "type": "string",
+          "description": "Source business domain identifier"
+        },
+        "targetBusinessDomainId": {
+          "type": "string",
+          "description": "Target business domain identifier"
+        },
+        "isStandAloneAsset": {
+          "type": "boolean",
+          "description": "Indicates whether the cloned asset is standalone"
+        },
+        "targetAssetId": {
+          "type": "string",
+          "description": "Target asset identifier to use for the clone"
+        },
+        "targetDataProductId": {
+          "type": "string",
+          "description": "Target data product identifier for the clone"
+        }
+      }
+    },
     "Column": {
       "type": "object",
       "description": "Column definition for dataset validation and quality checks",
@@ -3548,6 +4814,32 @@
         }
       }
     },
+    "DqAssetRequestWrapper": {
+      "type": "object",
+      "description": "DQ asset request wrapper for creation operations",
+      "properties": {
+        "businessDomainId": {
+          "type": "string",
+          "description": "Business domain identifier"
+        },
+        "dataMapAssetId": {
+          "type": "string",
+          "description": "Data Map asset identifier (GUID)"
+        },
+        "fqn": {
+          "type": "string",
+          "description": "Fully qualified name for the asset"
+        },
+        "catalogAssetId": {
+          "type": "string",
+          "description": "Catalog asset identifier"
+        },
+        "isGovernedAssetFlag": {
+          "type": "boolean",
+          "description": "Indicates whether this is a governed asset"
+        }
+      }
+    },
     "ErrorDetails": {
       "type": "object",
       "description": "Structured error information with codes, messages, and contextual details",
@@ -3583,6 +4875,20 @@
           "items": {
             "$ref": "#/definitions/DatasetToDatasourceMapping"
           }
+        }
+      }
+    },
+    "JobDetail": {
+      "type": "object",
+      "description": "Job detail information for snapshots",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "Identifier for the job"
+        },
+        "businessDomainId": {
+          "type": "string",
+          "description": "Business domain identifier for the job"
         }
       }
     },
@@ -4124,6 +5430,27 @@
         "configuration"
       ]
     },
+    "ProfileObserverPayload": {
+      "type": "object",
+      "description": "Profile observer payload for profiling operations",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Profile type classification"
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "Type-specific profile configuration properties",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dataSourceId": {
+          "type": "string",
+          "description": "Data source identifier"
+        }
+      }
+    },
     "Reference": {
       "type": "object",
       "description": "Reference to entities in the data governance hierarchy for relationship establishment",
@@ -4137,6 +5464,24 @@
           "description": "Unique identifier of the referenced entity"
         }
       }
+    },
+    "RuleColumn": {
+      "type": "object",
+      "description": "Column definition used in rule configurations",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value or name of the column"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the column reference"
+        }
+      },
+      "required": [
+        "value",
+        "type"
+      ]
     },
     "RuleEntity": {
       "type": "object",
@@ -4279,6 +5624,143 @@
         "lastModifiedBy": {
           "type": "string",
           "description": "User identifier for the last modifier of the rule"
+        }
+      }
+    },
+    "RuleScoreSnapshot": {
+      "type": "object",
+      "description": "Per-rule score snapshot information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Rule name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Rule description"
+        },
+        "type": {
+          "type": "string",
+          "description": "Rule type"
+        },
+        "status": {
+          "type": "string",
+          "description": "Execution status of the rule"
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/RuleTypeProperties",
+          "description": "Type-specific properties for the rule"
+        },
+        "id": {
+          "type": "string",
+          "description": "Rule identifier"
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Score for the rule"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified timestamp"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by user/principal"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Last modified by user/principal"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "ETag for concurrency"
+        },
+        "businessDomain": {
+          "$ref": "#/definitions/Reference",
+          "description": "Business domain reference"
+        },
+        "dataProduct": {
+          "$ref": "#/definitions/Reference",
+          "description": "Data product reference"
+        },
+        "dataAsset": {
+          "$ref": "#/definitions/Reference",
+          "description": "Data asset reference"
+        },
+        "isClonedRule": {
+          "type": "boolean",
+          "description": "Indicates if the rule is a cloned rule"
+        },
+        "totalRows": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total rows processed"
+        },
+        "failedRows": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of failed rows"
+        },
+        "passedRows": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of passed rows"
+        },
+        "emptyRows": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of empty rows"
+        },
+        "miscastRows": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of miscast rows"
+        },
+        "unevaluableRows": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of unevaluable rows"
+        },
+        "ignoredRows": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of ignored rows"
+        },
+        "queryExecuted": {
+          "type": "string",
+          "description": "Query executed for the rule, if applicable"
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Dimension of the rule"
+        }
+      }
+    },
+    "RuleTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties configuration for rules",
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "Condition expression for the rule"
+        },
+        "filterCriteria": {
+          "type": "string",
+          "description": "Filter criteria for the rule"
+        },
+        "columns": {
+          "type": "array",
+          "description": "Columns associated with the rule",
+          "items": {
+            "$ref": "#/definitions/RuleColumn"
+          }
         }
       }
     },
@@ -5054,6 +6536,60 @@
         "rules",
         "job"
       ]
+    },
+    "ScoreSnapshotWrapper": {
+      "type": "object",
+      "description": "Wrapper model for score snapshot response",
+      "properties": {
+        "businessDomainId": {
+          "type": "string",
+          "description": "Business domain identifier"
+        },
+        "dataProductId": {
+          "type": "string",
+          "description": "Data product identifier"
+        },
+        "assetId": {
+          "type": "string",
+          "description": "Asset identifier"
+        },
+        "cumulativeAssetScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Cumulative asset score across rules and dimensions"
+        },
+        "assetScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Overall asset score"
+        },
+        "snapshot": {
+          "type": "object",
+          "description": "Snapshot details as a free-form JSON object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "rules": {
+          "type": "array",
+          "description": "List of rule score snapshots",
+          "items": {
+            "$ref": "#/definitions/RuleScoreSnapshot"
+          }
+        },
+        "job": {
+          "$ref": "#/definitions/JobDetail",
+          "description": "Job details associated with the snapshot"
+        },
+        "originAssetId": {
+          "type": "string",
+          "description": "Origin asset id, if this asset is derived from another"
+        },
+        "isStandaloneAsset": {
+          "type": "boolean",
+          "description": "Indicates whether this asset is standalone"
+        }
+      }
     },
     "ScoredRule": {
       "type": "object",
