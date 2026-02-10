@@ -31,17 +31,12 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-azurestackhci"
     service-name: "Azure Stack Hci"
     use-object-for-unknown: true
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    namespace: "Azure.ResourceManager.StackHCI"
-    service-name: sdk/azurestackhci
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
   "@azure-tools/typespec-ts":
     service-dir: "sdk/azurestackhci"
     package-dir: "arm-azurestackhci"
     emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
     flavor: azure
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-azurestackhci"

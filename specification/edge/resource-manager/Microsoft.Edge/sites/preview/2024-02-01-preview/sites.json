@@ -47,7 +47,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites": {
       "get": {
         "operationId": "SitesBySubscription_List",
-        "description": "List Site resources by subscription ID",
+        "description": "List Site resources by scope",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -210,7 +210,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -283,7 +283,7 @@
         "tags": [
           "Sites"
         ],
-        "description": "List a Site",
+        "description": "List Site resources by scope",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -467,7 +467,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -599,7 +599,7 @@
     },
     "Site": {
       "type": "object",
-      "description": "Site as ARM Resource",
+      "description": "Site as Extension Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SiteProperties",

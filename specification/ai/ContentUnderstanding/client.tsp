@@ -93,3 +93,6 @@ interface ContentUnderstandingClient {
   "getAnalyzers",
   "csharp"
 );
+
+@@convenientAPI(ContentAnalyzers.update, false, "csharp");
+@@convenientAPI(ContentAnalyzers.updateDefaults, false, "csharp");
