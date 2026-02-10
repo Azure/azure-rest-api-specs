@@ -50,5 +50,4 @@ interface ChatModelDeployments {
   >;
   delete is ArmResourceDeleteWithoutOkAsync<ChatModelDeployment>;
   listByWorkspace is ArmResourceListByParent<ChatModelDeployment>;
-  listBySubscription is ArmListBySubscription<ChatModelDeployment>;
 }

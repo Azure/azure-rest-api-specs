@@ -317,53 +317,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Discovery/workspaces/{workspaceName}/chatModelDeployments": {
-      "get": {
-        "operationId": "ChatModelDeployments_ListBySubscription",
-        "tags": [
-          "ChatModelDeployments"
-        ],
-        "description": "List ChatModelDeployment resources by subscription ID",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the Workspace",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ChatModelDeploymentListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ChatModelDeployments_ListBySubscription_MaximumSet": {
-            "$ref": "./examples/ChatModelDeployments_ListBySubscription_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/bookshelves": {
       "get": {
         "operationId": "Bookshelves_ListByResourceGroup",
