@@ -24,15 +24,19 @@ alias EvaluationTaxonomiesFilterQueryParamsTraits = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @tag("Evaluation Taxonomies")
 interface EvaluationTaxonomies {
+
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   @doc("Get an evaluation run by name.")
   get is EvaluationTaxonomiesOperations.ResourceRead<EvaluationTaxonomy>;
 
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   @doc("List evaluation taxonomies")
   list is EvaluationTaxonomiesOperations.ResourceList<
     EvaluationTaxonomy,
     ListQueryParametersTrait<EvaluationTaxonomiesFilterQueryParamsTraits>
   >;
 
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   @doc("Delete an evaluation taxonomy by name.")
   delete is EvaluationTaxonomiesOperations.ResourceDelete<EvaluationTaxonomy>;
 
@@ -41,7 +45,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   create is Azure.Core.Foundations.Operation<
     {
-      ...WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @doc("The name of the evaluation taxonomy.")
       @path
@@ -59,7 +63,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   update is Azure.Core.Foundations.Operation<
     {
-      ...WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
       @doc("The name of the evaluation taxonomy.")
       @path

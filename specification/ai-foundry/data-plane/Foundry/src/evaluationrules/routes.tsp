@@ -9,6 +9,7 @@ namespace Azure.AI.Projects;
 
 alias EvaluationRuleOperations = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>>;
 
+// BUG: All operations here (see OpenAPI3 file) are missing the "Foundry-Features" header.
 @tag("Evaluation Rules")
 interface EvaluationRules {
   // GET /evaluationrules/{id}

@@ -62,6 +62,7 @@ interface Insights {
     ResourceCreatedResponse<Insight>
   >;
 
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   @doc("Get a specific insight by Id.")
   @get
   get is InsightsOperations.ResourceRead<
@@ -69,6 +70,7 @@ interface Insights {
     QueryParametersTrait<IncludeCoordinatesTrait, TraitContext.Read>
   >;
 
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   @doc("List all insights in reverse chronological order (newest first).")
   @get
   list is InsightsOperations.ResourceList<
