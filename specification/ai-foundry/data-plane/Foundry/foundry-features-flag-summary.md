@@ -29,10 +29,10 @@
 | Schedules | CreateOrUpdate | PUT | `/schedules/{id}` | None |
 | Schedules | List Runs | GET | `/schedules/{id}/runs` | None |
 | Schedules | Get Run | GET | `/schedules/{schedule_id}/runs/{run_id}` | Required: `Schedules=V1Preview` |
-| Evaluation Rules | List | GET | `/evaluationrules` | None |
-| Evaluation Rules | Get | GET | `/evaluationrules/{id}` | None |
-| Evaluation Rules | Delete | DELETE | `/evaluationrules/{id}` | None |
-| Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | None |
+| Evaluation Rules | List | GET | `/evaluationrules` | Required: `Evaluations=V1Preview` |
+| Evaluation Rules | Get | GET | `/evaluationrules/{id}` | Required: `Evaluations=V1Preview` |
+| Evaluation Rules | Delete | DELETE | `/evaluationrules/{id}` | Required: `Evaluations=V1Preview` |
+| Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Required: `Evaluations=V1Preview` |
 | Evaluation Taxonomies | List | GET | `/evaluationtaxonomies` | Required: `Evaluations=V1Preview` |
 | Evaluation Taxonomies | Get | GET | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |
 | Evaluation Taxonomies | Delete | DELETE | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |
