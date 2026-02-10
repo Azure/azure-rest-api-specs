@@ -24,16 +24,21 @@ alias ScheduleOps = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<Foun
 
 @tag("Schedules")
 interface Schedules {
+
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   @doc("Delete a schedule.")
   delete is ScheduleOps.ResourceDelete<Schedule>;
 
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   @doc("Get a schedule by id.")
   get is ScheduleOps.ResourceRead<Schedule>;
 
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List all schedules.")
   list is ScheduleOps.ResourceList<Schedule, SchedulesFilterQueryParams>;
 
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" ""
   @put
   createOrUpdate is ScheduleOps.ResourceCreateOrUpdate<Schedule>;
@@ -57,6 +62,7 @@ interface Schedules {
     OkResponse<ScheduleRun>
   >;
 
+  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List all schedule runs.")
   listRuns is ScheduleRunOperations.ResourceList<
