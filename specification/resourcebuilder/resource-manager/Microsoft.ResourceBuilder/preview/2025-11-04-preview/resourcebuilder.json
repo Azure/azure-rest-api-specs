@@ -1100,31 +1100,31 @@
     }
   },
   "definitions": {
-    "AnomalyMode": {
+    "AnomalyDetectionStrategy": {
       "type": "string",
-      "description": "Anomaly detection mode",
+      "description": "Anomaly detection strategy",
       "enum": [
-        "isAnomaly",
-        "isPositiveAnomaly",
-        "isNegativeAnomaly"
+        "BidirectionalAnomaly",
+        "PositiveAnomaly",
+        "NegativeAnomaly"
       ],
       "x-ms-enum": {
-        "name": "AnomalyMode",
+        "name": "AnomalyDetectionStrategy",
         "modelAsString": true,
         "values": [
           {
-            "name": "IsAnomaly",
-            "value": "isAnomaly",
+            "name": "BidirectionalAnomaly",
+            "value": "BidirectionalAnomaly",
             "description": "Detects anomalies in either the negative or positive direction."
           },
           {
-            "name": "IsPositiveAnomaly",
-            "value": "isPositiveAnomaly",
+            "name": "PositiveAnomaly",
+            "value": "PositiveAnomaly",
             "description": "Detects anomalies only in the positive direction."
           },
           {
-            "name": "IsNegativeAnomaly",
-            "value": "isNegativeAnomaly",
+            "name": "NegativeAnomaly",
+            "value": "NegativeAnomaly",
             "description": "Detects anomalies only in the negative direction."
           }
         ]
@@ -1139,9 +1139,9 @@
           "format": "int32",
           "description": "Sensitivity for anomaly detection. The value should be between 0 and 100. Defaults to 90."
         },
-        "anomalyMode": {
-          "$ref": "#/definitions/AnomalyMode",
-          "description": "Anomaly detection mode."
+        "anomalyDetectionStrategy": {
+          "$ref": "#/definitions/AnomalyDetectionStrategy",
+          "description": "Anomaly detection strategy."
         },
         "lookbackWindowInDays": {
           "type": "integer",
@@ -1260,7 +1260,7 @@
       "type": "object",
       "description": "Data quality metric evaluation",
       "properties": {
-        "metricEvaluationType": {
+        "evaluationType": {
           "$ref": "#/definitions/DataQualityMetricEvaluationType",
           "description": "Metric evaluation type."
         },
@@ -1293,7 +1293,7 @@
         }
       },
       "required": [
-        "metricEvaluationType",
+        "evaluationType",
         "metricType"
       ]
     },
@@ -1451,11 +1451,11 @@
       "type": "object",
       "description": "Data quality metric validation",
       "properties": {
-        "dataQualityMetricValidationType": {
+        "validationType": {
           "$ref": "#/definitions/DataQualityMetricValidationType",
           "description": "Data quality metric validation type."
         },
-        "dataQualityMetricEvaluationName": {
+        "metricEvaluationName": {
           "type": "string",
           "description": "Data quality metric evaluation name."
         },
@@ -1508,10 +1508,10 @@
       "type": "string",
       "description": "Data quality metric validation type",
       "enum": [
-        "unknown",
-        "anomalyValidation",
-        "ratioValidation",
-        "thresholdValidation"
+        "Unknown",
+        "AnomalyValidation",
+        "RatioValidation",
+        "ThresholdValidation"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricValidationType",
@@ -1519,22 +1519,22 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "unknown",
+            "value": "Unknown",
             "description": "Unknown validation type."
           },
           {
             "name": "AnomalyValidation",
-            "value": "anomalyValidation",
+            "value": "AnomalyValidation",
             "description": "Anomaly validation type."
           },
           {
             "name": "RatioValidation",
-            "value": "ratioValidation",
+            "value": "RatioValidation",
             "description": "Ratio validation type."
           },
           {
             "name": "ThresholdValidation",
-            "value": "thresholdValidation",
+            "value": "ThresholdValidation",
             "description": "Threshold validation type."
           }
         ]
@@ -1544,7 +1544,7 @@
       "type": "object",
       "description": "Data quality metrics",
       "properties": {
-        "evaludations": {
+        "evaluations": {
           "type": "array",
           "description": "Metric evaluations.",
           "items": {
@@ -1560,7 +1560,7 @@
         }
       },
       "required": [
-        "evaludations",
+        "evaluations",
         "validations"
       ]
     },
