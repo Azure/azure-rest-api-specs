@@ -339,7 +339,7 @@ union DataQualityValidationCondition {
 /** Data quality metric evaluation */
 model DataQualityMetricEvaluation {
   /** Metric evaluation type. */
-  metricEvaluationType: DataQualityMetricEvaluationType;
+  evaluationType: DataQualityMetricEvaluationType;
 
   /** Filter of the metric evaluation. */
   filter?: string;
@@ -426,10 +426,10 @@ union DataQualityMetricUnit {
 /** Data quality metric validation */
 model DataQualityMetricValidation {
   /** Data quality metric validation type. */
-  dataQualityMetricValidationType?: DataQualityMetricValidationType;
+  validationType?: DataQualityMetricValidationType;
 
   /** Data quality metric evaluation name. */
-  dataQualityMetricEvaluationName?: string;
+  metricEvaluationName?: string;
 
   /** Columns to validate. */
   columns?: string[];
@@ -450,30 +450,30 @@ model DataQualityMetricValidation {
 /** Data quality metric validation type */
 union DataQualityMetricValidationType {
   /** Unknown validation type. */
-  Unknown: "unknown",
+  Unknown: "Unknown",
 
   /** Anomaly validation type. */
-  AnomalyValidation: "anomalyValidation",
+  AnomalyValidation: "AnomalyValidation",
 
   /** Ratio validation type. */
-  RatioValidation: "ratioValidation",
+  RatioValidation: "RatioValidation",
 
   /** Threshold validation type. */
-  ThresholdValidation: "thresholdValidation",
+  ThresholdValidation: "ThresholdValidation",
 
   string,
 }
 
-/** Anomaly detection mode */
-union AnomalyMode {
+/** Anomaly detection strategy */
+union AnomalyDetectionStrategy {
   /** Detects anomalies in either the negative or positive direction. */
-  IsAnomaly: "isAnomaly",
+  BidirectionalAnomaly: "BidirectionalAnomaly",
 
   /** Detects anomalies only in the positive direction. */
-  IsPositiveAnomaly: "isPositiveAnomaly",
+  PositiveAnomaly: "PositiveAnomaly",
 
   /** Detects anomalies only in the negative direction. */
-  IsNegativeAnomaly: "isNegativeAnomaly",
+  NegativeAnomaly: "NegativeAnomaly",
 
   string,
 }
@@ -481,7 +481,7 @@ union AnomalyMode {
 /** Data quality metrics */
 model DataQualityMetrics {
   /** Metric evaluations. */
-  evaludations: DataQualityMetricEvaluationEntry[];
+  evaluations: DataQualityMetricEvaluationEntry[];
 
   /** Metric validations. */
   validations: DataQualityMetricValidationEntry[];
@@ -510,8 +510,8 @@ model AutoDataQualityParameters {
   /** Sensitivity for anomaly detection. The value should be between 0 and 100. Defaults to 90. */
   sensitivity?: int32;
 
-  /** Anomaly detection mode. */
-  anomalyMode?: AnomalyMode;
+  /** Anomaly detection strategy. */
+  anomalyDetectionStrategy?: AnomalyDetectionStrategy;
 
   /** Lookback window in days. */
   lookbackWindowInDays?: int32;
