@@ -1541,6 +1541,50 @@ model InboundNATRuleProperties {
   provisioningState?: ProvisioningStateEnum;
 }
 
+@added(Versions.v2026_04_01_preview)
+@doc("Inbound rule properties - extends InboundNATRuleProperties with additional status tracking")
+model InboundRuleProperties {
+  ...InboundNATRuleProperties;
+
+  @doc("The observed state of Inbound Rule")
+  @visibility(Lifecycle.Read)
+  status?: InboundRuleStatus;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The observed state of inbound rule")
+model InboundRuleStatus {
+  @doc("InboundRule provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("InboundRule provisioning status")
+  provisioningStatus?: InboundRuleStatusProvisioningStatus;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("Provisioning status of Inbound Rule")
+model InboundRuleStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the inbound rule")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the inbound rule [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The Azure Resource ID for an Inbound Rule resource")
+model InboundRuleArmReference {
+  @doc("The Azure Resource ID for an Inbound Rule resource")
+  resourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/natGateways/inboundRules";
+    }
+  ]>;
+}
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("Inbound nat rule properties")

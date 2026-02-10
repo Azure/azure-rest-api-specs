@@ -19,7 +19,7 @@ namespace Microsoft.AzureStackHCI;
 @extension("x-ms-azure-resource", true)
 @parentResource(NatGateway)
 @added(Versions.v2026_04_01_preview)
-model InboundRule is ProxyResource<InboundNATRuleProperties> {
+model InboundRule is ProxyResource<InboundRuleProperties> {
   @doc("Name of the inbound rule")
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   @path
