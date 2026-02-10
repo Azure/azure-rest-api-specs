@@ -25,7 +25,7 @@ using Microsoft.PlanetaryComputer;
 // ============================================================================
 
 // Base GeoJson union (covers all geometry types)
-@@alternateType(GeoJson ,
+@@alternateType(GeoJson,
   {
     identity: "shapely.geometry.base.BaseGeometry",
     package: "shapely",
