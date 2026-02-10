@@ -17,15 +17,30 @@
         "status": "Failed",
         "error": {
           "code": "PartialSuccess",
-          "message": "Resync succeeded for only some devices. Please address any issues and perform resync operations for the affected devices.",
-          "details": [
-            {
-              "code": "CouldNotConnect",
-              "message": "Could not connect to the device to configure new certificates.",
-              "target": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device-3"
+          "message": "Resync succeeded for only some devices. Please address any issues and perform resync operations for the affected devices."
+        },
+        "operations": [
+          {
+            "resourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device-1",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device-2",
+            "status": "Succeeded"
+          },
+          {
+            "resourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device-3",
+            "status": "Failed",
+            "error": {
+              "code": "DeviceDisabled",
+              "message": "The Network Device is in disabled administrative state. Please perform a resync operation once it is enabled."
             }
-          ]
-        }
+          },
+          {
+            "resourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkDevices/example-device-4",
+            "status": "Succeeded"
+          }
+        ]
       }
     },
     "202": {

@@ -125,6 +125,17 @@
             }
           }
         },
+        "upgradeProfile": [
+          {
+            "preUpgradeProfile": {
+              "maxEnteringMaintenanceTimeoutInSeconds": 300
+            },
+            "postUpgradeProfile": {
+              "maxExitingMaintenanceTimeoutInSeconds": 3000,
+              "mlagReloadDelayTimeoutInSeconds": 900
+            }
+          }
+        ],
         "hardwareAlertThreshold": 43,
         "controlPlaneAcls": [
           "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl"
@@ -138,6 +149,13 @@
         },
         "qosConfiguration": {
           "qosConfigurationState": "Enabled"
+        },
+        "secretArchiveSettings": {
+          "associatedIdentity": {
+            "identityType": "UserAssignedIdentity",
+            "userAssignedIdentityResourceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/example-identity"
+          },
+          "vaultUri": "https://myvault.vault.azure.net/"
         }
       }
     }
@@ -178,6 +196,7 @@
           "ipv4Prefix": "10.18.0.0/19",
           "ipv6Prefix": "3FFE:FFFF:0:CD40::/59",
           "fabricASN": 29249,
+          "networkBootstrapDeviceId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkBootstrapDevices/example-bootstrapDevice",
           "terminalServerConfiguration": {
             "username": "username",
             "serialNumber": "123456",
@@ -304,9 +323,21 @@
           "configurationState": "Succeeded",
           "provisioningState": "Accepted",
           "administrativeState": "Enabled",
+          "operationalState": "Up",
           "qosConfiguration": {
             "qosConfigurationState": "Enabled"
-          }
+          },
+          "upgradeProfile": [
+            {
+              "preUpgradeProfile": {
+                "maxEnteringMaintenanceTimeoutInSeconds": 300
+              },
+              "postUpgradeProfile": {
+                "maxExitingMaintenanceTimeoutInSeconds": 3000,
+                "mlagReloadDelayTimeoutInSeconds": 900
+              }
+            }
+          ]
         },
         "identity": {
           "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",

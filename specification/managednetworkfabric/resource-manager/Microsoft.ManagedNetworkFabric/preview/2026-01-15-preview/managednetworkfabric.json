@@ -1533,7 +1533,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -3513,7 +3513,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -5259,7 +5259,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -9757,6 +9757,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request payload.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/RefreshConfigurationRequestProperties"
+            }
           }
         ],
         "responses": {
@@ -10347,7 +10356,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -11874,7 +11883,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -12809,7 +12818,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ValidateConfigurationResponse"
+              "$ref": "#/definitions/ValidateConfigurationResponseV2"
             }
           },
           "202": {
@@ -15292,6 +15301,24 @@
         }
       }
     },
+    "ConfigurationRegenerationType": {
+      "type": "string",
+      "description": "Configuration Regeneration Type used for refresh configuration",
+      "enum": [
+        "Partial"
+      ],
+      "x-ms-enum": {
+        "name": "ConfigurationRegenerationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Partial",
+            "value": "Partial",
+            "description": "Partial configuration regeneration indicates that the last known good configuration will be reapplied."
+          }
+        ]
+      }
+    },
     "ConfigurationState": {
       "type": "string",
       "description": "Configuration state for the resource.",
@@ -15308,7 +15335,10 @@
         "DeferredControl",
         "Provisioning",
         "PendingCommit",
-        "PendingAdministrativeUpdate"
+        "PendingAdministrativeUpdate",
+        "CommitStaged",
+        "CommitStageFailed",
+        "CommitRollbackFailed"
       ],
       "x-ms-enum": {
         "name": "ConfigurationState",
@@ -15378,6 +15408,21 @@
             "name": "PendingAdministrativeUpdate",
             "value": "PendingAdministrativeUpdate",
             "description": "PendingAdministrativeUpdate State"
+          },
+          {
+            "name": "CommitStaged",
+            "value": "CommitStaged",
+            "description": "Updated configuration is pushed to the selected CE device during staged commit operation"
+          },
+          {
+            "name": "CommitStageFailed",
+            "value": "CommitStageFailed",
+            "description": "Pushing the updated configuration to the selected CE device failed during staged commit operation"
+          },
+          {
+            "name": "CommitRollbackFailed",
+            "value": "CommitRollbackFailed",
+            "description": "Rollback of configuration failed during staged commit rollback operation"
           }
         ]
       },
@@ -16102,7 +16147,8 @@
         "CE",
         "ToR",
         "NPB",
-        "ManagementSwitch"
+        "ManagementSwitch",
+        "TerminalServer"
       ],
       "x-ms-enum": {
         "name": "DeviceRole",
@@ -16127,6 +16173,11 @@
             "name": "ManagementSwitch",
             "value": "ManagementSwitch",
             "description": "Device Role Management Switch"
+          },
+          {
+            "name": "TerminalServer",
+            "value": "TerminalServer",
+            "description": "Device Role Terminal Server (NetworkBootstrapDevice)"
           }
         ]
       }
@@ -20264,6 +20315,11 @@
           "$ref": "#/definitions/ConfigurationState",
           "description": "Configuration state of the resource.",
           "readOnly": true
+        },
+        "administrativeState": {
+          "$ref": "#/definitions/AdministrativeState",
+          "description": "Administrative state of the resource.",
+          "readOnly": true
         }
       },
       "required": [
@@ -20409,6 +20465,22 @@
           "type": "string",
           "description": "Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.",
           "minLength": 1
+        },
+        "controlPlaneAcls": {
+          "type": "array",
+          "description": "Control Plane Access Control List ARM resource IDs.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ManagedNetworkFabric/accessControlLists"
+                }
+              ]
+            }
+          }
         }
       }
     },
@@ -20495,6 +20567,38 @@
           "$ref": "#/definitions/ConfigurationState",
           "description": "Configuration state of the resource.",
           "readOnly": true
+        },
+        "operationalState": {
+          "$ref": "#/definitions/OperationalState",
+          "description": "Operational state of networkBootstrapDevice indicating if the device is reachable and services are available.",
+          "readOnly": true
+        },
+        "controlPlaneAcls": {
+          "type": "array",
+          "description": "Control Plane Access Control List ARM resource IDs.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.ManagedNetworkFabric/accessControlLists"
+                }
+              ]
+            }
+          }
+        },
+        "secretRotationStatus": {
+          "type": "array",
+          "description": "Secret rotation status for the terminal server's secrets.",
+          "items": {
+            "$ref": "#/definitions/SecretRotationStatus"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "secretType"
+          ]
         }
       }
     },
@@ -20837,11 +20941,6 @@
           "type": "string",
           "description": "Switch configuration description."
         },
-        "serialNumber": {
-          "type": "string",
-          "description": "Serial number of the interface. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.",
-          "minLength": 1
-        },
         "additionalDescription": {
           "type": "string",
           "description": "Additional description of the interface."
@@ -20905,10 +21004,10 @@
           "description": "IPv6Address of the interface.",
           "readOnly": true
         },
-        "serialNumber": {
-          "type": "string",
-          "description": "Serial number of the interface. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.",
-          "minLength": 1
+        "operationalState": {
+          "$ref": "#/definitions/OperationalState",
+          "description": "Operational state of networkBootstrapInterface indicating if the interface is reachable",
+          "readOnly": true
         }
       }
     },
@@ -21080,6 +21179,11 @@
         "administrativeState": {
           "$ref": "#/definitions/AdministrativeState",
           "description": "Administrative state of the resource.",
+          "readOnly": true
+        },
+        "operationalState": {
+          "$ref": "#/definitions/OperationalState",
+          "description": "Operational state of networkDevice indicating if the device is reachable and services are available.",
           "readOnly": true
         },
         "secretRotationStatus": {
@@ -21882,6 +21986,15 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provides you the latest status of the NFC service, whether it is Accepted, updating, Succeeded or Failed. During this process, the states keep changing based on the status of NFC provisioning.",
           "readOnly": true
+        },
+        "operationalState": {
+          "$ref": "#/definitions/OperationalState",
+          "description": "Operational state of networkFabricController indicating if the resources of the controller are reachable and services are available.",
+          "readOnly": true
+        },
+        "vmProfile": {
+          "$ref": "#/definitions/VmProfile",
+          "description": "The VM profile configuration for the NFC's associated compute (VM) resources."
         }
       }
     },
@@ -22099,6 +22212,21 @@
         "authorizedTransceiver": {
           "$ref": "#/definitions/AuthorizedTransceiverPatchProperties",
           "description": "Authorized transciever configuration for NetworkFabric."
+        },
+        "secretArchiveSettings": {
+          "$ref": "#/definitions/SecretArchivePatchSettings",
+          "description": "The settings for a customer secret archive that may be used to hold copies of credentials for the Network Fabric."
+        },
+        "upgradeProfile": {
+          "type": "array",
+          "description": "The upgrade profile to be used by devices in the network fabric during device operations",
+          "items": {
+            "$ref": "#/definitions/UpgradeProfilePropertiesPatchProperties"
+          },
+          "x-ms-identifiers": [
+            "preUpgradeProfile",
+            "postUpgradeProfile"
+          ]
         }
       }
     },
@@ -22191,6 +22319,19 @@
           "description": "ASN of CE devices for CE/PE connectivity.",
           "minimum": 1,
           "maximum": 4294967295
+        },
+        "networkBootstrapDeviceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID for the NetworkBootstrapDevice belonging to this Network Fabric.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/networkBootstrapDevices"
+              }
+            ]
+          }
         },
         "terminalServerConfiguration": {
           "$ref": "#/definitions/TerminalServerConfiguration",
@@ -22319,9 +22460,29 @@
           "description": "Administrative state of the resource.",
           "readOnly": true
         },
+        "operationalState": {
+          "$ref": "#/definitions/OperationalState",
+          "description": "Operational state of networkFabric indicating if the resources of the fabric are reachable and services are available.",
+          "readOnly": true
+        },
         "qosConfiguration": {
           "$ref": "#/definitions/QosProperties",
           "description": "NetworkFabric QoS Configuration"
+        },
+        "secretArchiveSettings": {
+          "$ref": "#/definitions/SecretArchiveSettings",
+          "description": "The settings for a customer secret archive that may be used to hold copies of credentials for the Network Fabric."
+        },
+        "upgradeProfile": {
+          "type": "array",
+          "description": "The upgrade profile to be used by devices in the network fabric during device operations",
+          "items": {
+            "$ref": "#/definitions/UpgradeProfileProperties"
+          },
+          "x-ms-identifiers": [
+            "preUpgradeProfile",
+            "postUpgradeProfile"
+          ]
         }
       },
       "required": [
@@ -22330,9 +22491,46 @@
         "serverCountPerRack",
         "ipv4Prefix",
         "fabricASN",
+        "networkBootstrapDeviceId",
         "terminalServerConfiguration",
         "managementNetworkConfiguration"
       ]
+    },
+    "NetworkFabricRefreshDeviceTypes": {
+      "type": "string",
+      "description": "Device types for which the refresh configuration action will be applied: Example: CE | ToR | NPB | ManagementSwitch.",
+      "enum": [
+        "CE",
+        "ToR",
+        "NPB",
+        "ManagementSwitch"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkFabricRefreshDeviceTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CE",
+            "value": "CE",
+            "description": "DeviceType-CE(Customer Edge)"
+          },
+          {
+            "name": "ToR",
+            "value": "ToR",
+            "description": "DeviceType-ToR(top of rack)"
+          },
+          {
+            "name": "NPB",
+            "value": "NPB",
+            "description": "DeviceType-NPB(Network Packet Broker)"
+          },
+          {
+            "name": "ManagementSwitch",
+            "value": "ManagementSwitch",
+            "description": "DeviceType-ManagementSwitch"
+          }
+        ]
+      }
     },
     "NetworkFabricResyncCertificatesResponse": {
       "type": "object",
@@ -22808,6 +23006,11 @@
           "$ref": "#/definitions/ConfigurationState",
           "description": "Configuration state of the resource.",
           "readOnly": true
+        },
+        "operationalState": {
+          "$ref": "#/definitions/OperationalState",
+          "description": "Operational state of networkInterface indicating if the interface is reachable",
+          "readOnly": true
         }
       }
     },
@@ -22968,9 +23171,31 @@
             "type": "string"
           }
         },
+        "properties": {
+          "$ref": "#/definitions/NetworkPacketBrokerPatchProperties",
+          "description": "NetworkPacketBroker patch properties."
+        },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentityPatch",
           "description": "The managed service identities assigned to this resource."
+        }
+      }
+    },
+    "NetworkPacketBrokerPatchProperties": {
+      "type": "object",
+      "description": "The NetworkPacketBroker patch properties.",
+      "properties": {
+        "sourceNetworkTapRuleId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the source Network Tap Rule.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/networkTapRules"
+              }
+            ]
+          }
         }
       }
     },
@@ -23061,6 +23286,19 @@
             }
           },
           "readOnly": true
+        },
+        "sourceNetworkTapRuleId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the source Network Tap Rule.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/networkTapRules"
+              }
+            ]
+          }
         },
         "lastOperation": {
           "$ref": "#/definitions/LastOperationProperties",
@@ -24514,6 +24752,42 @@
         }
       }
     },
+    "OperationalState": {
+      "type": "string",
+      "description": "Operational State represents the current runtime condition of a networking resource. It reflects the actual health, reachability, and availability of the resource at a given point in time.",
+      "enum": [
+        "Unknown",
+        "Up",
+        "Down",
+        "Degraded"
+      ],
+      "x-ms-enum": {
+        "name": "OperationalState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Operational State Unknown indicates the state of the resource cannot be determined."
+          },
+          {
+            "name": "Up",
+            "value": "Up",
+            "description": "Operational State Up indicates the resource is operational and functioning normally and all required control-plane and (where applicable) data-plane operations are healthy."
+          },
+          {
+            "name": "Down",
+            "value": "Down",
+            "description": "Operational State Down indicates the resource is not functioning or not reachable and no meaningful operations can be performed."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Operational State Degraded indicates the resource is partially functional, some capabilities may be impaired, but the resource is still operational."
+          }
+        ]
+      }
+    },
     "OptionBLayer3Configuration": {
       "type": "object",
       "description": "OptionB Layer3 Configuration properties.",
@@ -24850,6 +25124,60 @@
         ]
       }
     },
+    "PostUpgradeProfilePatchProperties": {
+      "type": "object",
+      "description": "The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations",
+      "properties": {
+        "maxExitingMaintenanceTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum wait time in seconds for during the post-upgrade process for devices in the network fabric to successfully move out of maintenance mode."
+        },
+        "mlagReloadDelayTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum time in seconds to wait for MLAG reload delay on devices in the network fabric."
+        }
+      }
+    },
+    "PostUpgradeProfileProperties": {
+      "type": "object",
+      "description": "The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations",
+      "properties": {
+        "maxExitingMaintenanceTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum wait time in seconds for during the post-upgrade process for devices in the network fabric to successfully move out of maintenance mode."
+        },
+        "mlagReloadDelayTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum time in seconds to wait for MLAG reload delay on devices in the network fabric."
+        }
+      }
+    },
+    "PreUpgradeProfilePatchProperties": {
+      "type": "object",
+      "description": "The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations",
+      "properties": {
+        "maxEnteringMaintenanceTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum wait time in seconds for during the pre-upgrade process for devices in the network fabric to successfully move into maintenance mode."
+        }
+      }
+    },
+    "PreUpgradeProfileProperties": {
+      "type": "object",
+      "description": "The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations",
+      "properties": {
+        "maxEnteringMaintenanceTimeoutInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum wait time in seconds for during the pre-upgrade process for devices in the network fabric to successfully move into maintenance mode."
+        }
+      }
+    },
     "PrefixLimitPatchProperties": {
       "type": "object",
       "description": "Prefix Limit Patch properties.",
@@ -25124,6 +25452,31 @@
           }
         ]
       }
+    },
+    "RefreshConfigurationRequestProperties": {
+      "type": "object",
+      "description": "Refresh configuration request properties.",
+      "properties": {
+        "shouldGenerateBaseConfiguration": {
+          "type": "boolean",
+          "description": "Indicates if base configuration needs to be generated afresh."
+        },
+        "configurationRegenerationType": {
+          "$ref": "#/definitions/ConfigurationRegenerationType",
+          "description": "Type of configuration regeneration to be performed."
+        },
+        "deviceTypes": {
+          "type": "array",
+          "description": "The types of devices for which the configuration needs to be refreshed. If not provided, configuration will be refreshed for all device types.",
+          "items": {
+            "$ref": "#/definitions/NetworkFabricRefreshDeviceTypes"
+          }
+        }
+      },
+      "required": [
+        "shouldGenerateBaseConfiguration",
+        "configurationRegenerationType"
+      ]
     },
     "RoutePolicy": {
       "type": "object",
@@ -25615,6 +25968,21 @@
         "action"
       ]
     },
+    "SecretArchivePatchSettings": {
+      "type": "object",
+      "description": "Represents the settings for a secret archive used to hold credentials for the Network Fabric.",
+      "properties": {
+        "associatedIdentity": {
+          "$ref": "#/definitions/IdentitySelectorPatch",
+          "description": "The selection of the managed identity to use with this vault URI. The identity type must be either system assigned or user assigned."
+        },
+        "vaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI for the key vault used as the secret archive."
+        }
+      }
+    },
     "SecretArchiveReference": {
       "type": "object",
       "description": "A reference to a version of a secret in a key vault.",
@@ -25649,6 +26017,25 @@
           "readOnly": true
         }
       }
+    },
+    "SecretArchiveSettings": {
+      "type": "object",
+      "description": "Represents the settings for a secret archive used to hold credentials for the Network Fabric.",
+      "properties": {
+        "associatedIdentity": {
+          "$ref": "#/definitions/IdentitySelector",
+          "description": "The selection of the managed identity to use with this vault URI. The identity type must be either system assigned or user assigned."
+        },
+        "vaultUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI for the key vault used as the secret archive."
+        }
+      },
+      "required": [
+        "associatedIdentity",
+        "vaultUri"
+      ]
     },
     "SecretRotationStatus": {
       "type": "object",
@@ -26623,6 +27010,34 @@
         }
       }
     },
+    "UpgradeProfileProperties": {
+      "type": "object",
+      "description": "The upgrade profile to be used by devices in the network fabric during device upgrade operations",
+      "properties": {
+        "preUpgradeProfile": {
+          "$ref": "#/definitions/PreUpgradeProfileProperties",
+          "description": "The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations"
+        },
+        "postUpgradeProfile": {
+          "$ref": "#/definitions/PostUpgradeProfileProperties",
+          "description": "The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations"
+        }
+      }
+    },
+    "UpgradeProfilePropertiesPatchProperties": {
+      "type": "object",
+      "description": "The upgrade profile patch parameters that can be patched which are used by devices in the network fabric during device upgrade operations",
+      "properties": {
+        "preUpgradeProfile": {
+          "$ref": "#/definitions/PreUpgradeProfilePatchProperties",
+          "description": "The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations"
+        },
+        "postUpgradeProfile": {
+          "$ref": "#/definitions/PostUpgradeProfilePatchProperties",
+          "description": "The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations"
+        }
+      }
+    },
     "V4OverV6BgpSessionState": {
       "type": "string",
       "description": "V4 over V6 BGP session state",
@@ -26711,14 +27126,10 @@
         }
       }
     },
-    "ValidateConfigurationResponse": {
+    "ValidateConfigurationResponseProperties": {
       "type": "object",
       "description": "The response of the action validate configuration.",
       "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
-          "description": "The error object."
-        },
         "configurationState": {
           "$ref": "#/definitions/ConfigurationState",
           "description": "Gets the configuration state.",
@@ -26729,6 +27140,66 @@
           "description": "URL for the details of the response."
         }
       }
+    },
+    "ValidateConfigurationResponseV2": {
+      "type": "object",
+      "description": "The response of the action validate configuration.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID for the async operation."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the async operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "Operation status."
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "Percent of the operation that is complete.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation."
+        },
+        "operations": {
+          "type": "array",
+          "description": "The operations list.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+          }
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "If present, details of the operation error."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ID of the resource against which the original async operation was started.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ValidateConfigurationResponseProperties",
+          "description": "Network Device Run Rw Command Response properties."
+        }
+      },
+      "required": [
+        "status"
+      ]
     },
     "ViewDeviceConfigurationOperationResponse": {
       "type": "object",
@@ -26892,6 +27363,19 @@
           }
         }
       }
+    },
+    "VmProfile": {
+      "type": "object",
+      "description": "The VM profile configuration for the NFC's associated compute (VM) resources.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The SKU that will be used for creating the VMS for AKS cluster."
+        }
+      },
+      "required": [
+        "vmSize"
+      ]
     },
     "VpnConfigurationPatchableProperties": {
       "type": "object",
