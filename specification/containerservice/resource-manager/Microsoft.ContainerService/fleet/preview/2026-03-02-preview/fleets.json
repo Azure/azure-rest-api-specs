@@ -3474,12 +3474,12 @@
         "id": {
           "type": "integer",
           "format": "int32",
-          "description": "The Cilium clusterId",
+          "description": "Cilium requires each cluster to be assigned a unique numeric cluster id. The id is managed by Fleet and cannot be set by the user.",
           "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The Cilium cluster name",
+          "description": "Cilium requires each cluster to be assigned a unique human-readable name. The name is managed by Fleet, based on the Fleet Member name, and cannot be set by the user.",
           "readOnly": true
         }
       },
@@ -3540,8 +3540,7 @@
         },
         "memberLabelSelector": {
           "type": "string",
-          "description": "Kubernetes-style label selector for selecting Fleet members to join the mesh.",
-          "minLength": 1,
+          "description": "Kubernetes-style label selector for selecting Fleet members to join the mesh, e.g. `env=production`. If empty or not specified, no Fleet members will be selected to join the mesh.",
           "maxLength": 512,
           "x-ms-mutability": [
             "read",
@@ -3553,10 +3552,7 @@
           "description": "The cluster mesh profile status.",
           "readOnly": true
         }
-      },
-      "required": [
-        "memberLabelSelector"
-      ]
+      }
     },
     "ClusterMeshProfileProvisioningState": {
       "type": "string",
@@ -3612,8 +3608,7 @@
         },
         "lastAppliedMemberLabelSelector": {
           "type": "string",
-          "description": "The last applied Kubernetes-style label selector defining which Fleet members are in the mesh.",
-          "minLength": 1,
+          "description": "The last applied Kubernetes-style label selector defining which Fleet members are in the mesh, e.g. `env=production`.",
           "maxLength": 512,
           "readOnly": true
         },
@@ -4879,7 +4874,7 @@
         },
         "lastOperationId": {
           "type": "string",
-          "description": "The last operation ID that affected the mesh properties of the fleet member",
+          "description": "The last operation ID that affected the mesh properties of the fleet member.",
           "readOnly": true
         },
         "error": {

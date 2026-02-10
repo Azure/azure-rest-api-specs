@@ -31,11 +31,11 @@ model MeshProperties {
 @added(Versions.v2026_03_02_preview)
 @doc("The Cilium specific properties of the member cluster.")
 model CiliumProperties {
-  @doc("The Cilium clusterId")
+  @doc("Cilium requires each cluster to be assigned a unique numeric cluster id. The id is managed by Fleet and cannot be set by the user.")
   @visibility(Lifecycle.Read)
   id: int32;
 
-  @doc("The Cilium cluster name")
+  @doc("Cilium requires each cluster to be assigned a unique human-readable name. The name is managed by Fleet, based on the Fleet Member name, and cannot be set by the user.")
   @visibility(Lifecycle.Read)
   name: string;
 }
@@ -72,7 +72,7 @@ model MeshMemberStatus {
   @visibility(Lifecycle.Read)
   lastUpdatedAt?: utcDateTime;
 
-  @doc("The last operation ID that affected the mesh properties of the fleet member")
+  @doc("The last operation ID that affected the mesh properties of the fleet member.")
   @visibility(Lifecycle.Read)
   lastOperationId?: string;
 

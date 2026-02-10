@@ -34,11 +34,10 @@ model ClusterMeshProfileProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ClusterMeshProfileProvisioningState;
 
-  @doc("Kubernetes-style label selector for selecting Fleet members to join the mesh.")
-  @minLength(1)
+  @doc("Kubernetes-style label selector for selecting Fleet members to join the mesh, e.g. `env=production`. If empty or not specified, no Fleet members will be selected to join the mesh.")
   @maxLength(512)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  memberLabelSelector: string;
+  memberLabelSelector?: string;
 
   @doc("The cluster mesh profile status.")
   @visibility(Lifecycle.Read)
@@ -77,8 +76,7 @@ model ClusterMeshProfileStatus {
   @visibility(Lifecycle.Read)
   state: ClusterMeshState;
 
-  @doc("The last applied Kubernetes-style label selector defining which Fleet members are in the mesh.")
-  @minLength(1)
+  @doc("The last applied Kubernetes-style label selector defining which Fleet members are in the mesh, e.g. `env=production`.")
   @maxLength(512)
   @visibility(Lifecycle.Read)
   lastAppliedMemberLabelSelector?: string;
