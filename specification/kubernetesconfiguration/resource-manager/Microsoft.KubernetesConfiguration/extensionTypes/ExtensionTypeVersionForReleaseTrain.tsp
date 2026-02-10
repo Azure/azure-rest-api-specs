@@ -56,16 +56,20 @@ alias ExtensionTypeVersionForReleaseTrainOps = Azure.ResourceManager.Legacy.Exte
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ExtensionTypeVersionForReleaseTrains {
   /**
    * Get details of a version for an extension type and location
    */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
   getVersion is ExtensionTypeVersionForReleaseTrainOps.Read<ExtensionTypeVersionForReleaseTrain>;
 
   /**
    * List the versions for an extension type and location.
    */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
   listVersions is ExtensionTypeVersionForReleaseTrainOps.List<
     ExtensionTypeVersionForReleaseTrain,
     Parameters = {
@@ -142,16 +146,20 @@ alias ExtensionTypeVersionForReleaseTrainOperationGroupOps = Azure.ResourceManag
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ExtensionTypeVersionForReleaseTrainOperationGroup {
   /**
    * Get details of a version for an Extension Type installable to the cluster.
    */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
   clusterGetVersion is ExtensionTypeVersionForReleaseTrainOperationGroupOps.Read<ExtensionTypeVersionForReleaseTrain>;
 
   /**
    * List the version for an Extension Type installable to the cluster.
    */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
   clusterListVersions is ExtensionTypeVersionForReleaseTrainOperationGroupOps.List<
     ExtensionTypeVersionForReleaseTrain,
     Parameters = {

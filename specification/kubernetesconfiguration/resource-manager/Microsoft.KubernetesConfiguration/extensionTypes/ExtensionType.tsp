@@ -48,16 +48,20 @@ alias ExtensionTypeOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ExtensionTypes {
   /**
    * Get an extension type for the location.
    */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
   locationGet is ExtensionTypeOps.Read<ExtensionType>;
 
   /**
    * List all Extension Types for the location.
    */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
   locationList is ExtensionTypeOps.List<
     ExtensionType,
     Parameters = {
@@ -134,16 +138,20 @@ alias ExtensionTypeOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOpe
   }
 >;
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ExtensionTypeOperationGroup {
   /**
    * Get an Extension Type installable to the cluster based region and type for the cluster.
    */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
   get is ExtensionTypeOperationGroupOps.Read<ExtensionType>;
 
   /**
    * List installable Extension Types for the cluster based region and type for the cluster.
    */
+  @tag("ExtensionTypes")
+  @tag("ClusterExtensionTypes")
   list is ExtensionTypeOperationGroupOps.List<
     ExtensionType,
     Parameters = {
