@@ -1392,7 +1392,7 @@ model CommonErrorResponse {
 }
 
 
-@doc("Configuration Regenration Type used for refresh configuration")
+@doc("Configuration Regeneration Type used for refresh configuration")
 @added(Versions.v2026_01_15_preview)
 union ConfigurationRegenerationType {
 
