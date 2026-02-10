@@ -677,8 +677,8 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
-- preview/2017-11-11/searchindex.json
-- preview/2017-11-11/searchservice.json
+- stable/2017-11-11/searchindex.json
+- stable/2017-11-11/searchservice.json
 ```
 
 ### Tag: package-2016-09-preview
@@ -697,8 +697,8 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
-- preview/2016-09-01/searchindex.json
-- preview/2016-09-01/searchservice.json
+- stable/2016-09-01/searchindex.json
+- stable/2016-09-01/searchservice.json
 ```
 
 ### Tag: package-2015-02-preview
@@ -717,8 +717,8 @@ These settings apply only when `--tag=package-2015-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-02'
 input-file:
-- preview/2015-02-28/searchindex.json
-- preview/2015-02-28/searchservice.json
+- stable/2015-02-28/searchindex.json
+- stable/2015-02-28/searchservice.json
 ```
 
 ---
@@ -1168,7 +1168,7 @@ directive:
           replace( /this.SearchDnsSuffix/g, "Client.SearchDnsSuffix" ).
           replace( /\"Client.SearchServiceName\"/g, "\"this.Client.SearchServiceName\"" ).
           replace( /\"Client.SearchDnsSuffix\"/g, "\"this.Client.SearchDnsSuffix\"" );
-      return $;  
+      return $;
 ####
   # The following regex are required to make the generated Field class conform to the needs of the custom implementation
   # that we've had in the Azure Search .NET SDK since it was first released. We've decided to keep the custom behavior of
