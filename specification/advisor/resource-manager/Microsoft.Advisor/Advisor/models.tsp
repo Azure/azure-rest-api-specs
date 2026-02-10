@@ -712,37 +712,15 @@ model RecommendationProperties {
 }
 
 /**
- * Properties for patch Recommendation API.
+ * Response for patch Recommendation API.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_02_01_preview)
-model RecommendationPatchProperties {
+model RecommendationsPatchResponse {
   /**
-   * The most recent time that Advisor checked the validity of the recommendation.
+   * The properties for patch recommendation API.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastUpdated?: utcDateTime;
-
-  /**
-   * The recommendation-type GUID.
-   */
-  recommendationTypeId?: string;
-
-  /**
-   * The state of the Recommendation
-   */
-  state?: NewState;
-
-  /**
-   * The reason the state of the Recommendation was changed.
-   */
-  recommendationDismissReason?: RecommendationDismissReason;
-
-  /**
-   * The time the Recommendation was postponed until.
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  postponedUntilDateTime?: utcDateTime;
+  properties?: RecommendationStatePropertiesPayload;
 }
 
 /**

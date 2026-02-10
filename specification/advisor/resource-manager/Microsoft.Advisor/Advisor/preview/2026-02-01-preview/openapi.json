@@ -49,9 +49,6 @@
       "name": "ResourceRecommendationBases"
     },
     {
-      "name": "RecommendationsPatch"
-    },
-    {
       "name": "SuppressionContracts"
     },
     {
@@ -1065,10 +1062,8 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/recommendations/{recommendationId}": {
       "patch": {
-        "operationId": "RecommendationsPatch_Patch",
-        "tags": [
-          "RecommendationsPatch"
-        ],
+        "operationId": "RecommendationsPatch_PatchStateProperties",
+        "summary": "Update the recommendation state properties.",
         "description": "Update the state properties of a Recommendation.",
         "parameters": [
           {
@@ -1080,14 +1075,14 @@
           {
             "name": "recommendationId",
             "in": "path",
-            "description": "The name of the RecommendationsPatchResponse",
+            "description": "The recommendation ID.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "statePropertiesPayload",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "The properties to update the recommendation state.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RecommendationStatePropertiesPayload"
@@ -2716,34 +2711,6 @@
         ]
       }
     },
-    "RecommendationPatchProperties": {
-      "type": "object",
-      "description": "Properties for patch Recommendation API.",
-      "properties": {
-        "lastUpdated": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The most recent time that Advisor checked the validity of the recommendation."
-        },
-        "recommendationTypeId": {
-          "type": "string",
-          "description": "The recommendation-type GUID."
-        },
-        "state": {
-          "$ref": "#/definitions/NewState",
-          "description": "The state of the Recommendation"
-        },
-        "recommendationDismissReason": {
-          "$ref": "#/definitions/RecommendationDismissReason",
-          "description": "The reason the state of the Recommendation was changed."
-        },
-        "postponedUntilDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time the Recommendation was postponed until."
-        }
-      }
-    },
     "RecommendationProperties": {
       "type": "object",
       "description": "The properties of the recommendation.",
@@ -2969,18 +2936,13 @@
     },
     "RecommendationsPatchResponse": {
       "type": "object",
-      "description": "Advisor Recommendation.",
+      "description": "Response for patch Recommendation API.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RecommendationPatchProperties",
-          "description": "The resource-specific properties for this resource."
+          "$ref": "#/definitions/RecommendationStatePropertiesPayload",
+          "description": "The properties for patch recommendation API."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "ResiliencyReviewProperties": {
       "type": "object",
