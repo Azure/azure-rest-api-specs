@@ -220,7 +220,7 @@ model HealthModelPropertiesOfDrill {
 model MonitoringPropertiesOfDrill {
   @doc("Identity to use for Drill monitoring operations.")
   @added(Versions.v2026_03_01_preview)
-  identity: AssociatedIdentity;
+  identity?: AssociatedIdentity;
 
   @doc("Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.")
   @visibility(Lifecycle.Read)
@@ -696,6 +696,11 @@ model DrillsQualifiedResource {
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   faultProperties?: FaultProperties;
+
+  @doc("Resource Protection Solution Display Name")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceProtectionSolutionDisplayName?: string;
 }
 
 @doc("Details of qualification for an operation.")

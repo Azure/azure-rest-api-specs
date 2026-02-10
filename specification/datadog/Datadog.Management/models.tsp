@@ -749,13 +749,6 @@ model MonitorUpdateProperties {
   monitoringStatus?: MonitoringStatus = MonitoringStatus.Enabled;
 
   /**
-   * SaaS details
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is the standard abbreviation for Software as a Service"
-  @added(Microsoft.Datadog.Versions.v2025_12_26_preview)
-  saaSData?: SaaSData;
-
-  /**
    * The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.
    */
   cspm?: boolean;
