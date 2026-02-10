@@ -198,7 +198,10 @@ model NetworkFabricProperties {
   secretArchiveSettings?: SecretArchiveSettings;
 
   @doc("The upgrade profile to be used by devices in the network fabric during device operations")
-  @Azure.ResourceManager.identifiers(#["preUpgradeProfile", "postUpgradeProfile"])
+  @Azure.ResourceManager.identifiers(#[
+    "preUpgradeProfile",
+    "postUpgradeProfile"
+  ])
   @added(Versions.v2026_01_15_preview)
   upgradeProfile?: UpgradeProfileProperties[];
 }
@@ -422,7 +425,10 @@ model NetworkFabricPatchProperties {
   secretArchiveSettings?: SecretArchivePatchSettings;
 
   @doc("The upgrade profile to be used by devices in the network fabric during device operations")
-  @Azure.ResourceManager.identifiers(#["preUpgradeProfile", "postUpgradeProfile"])
+  @Azure.ResourceManager.identifiers(#[
+    "preUpgradeProfile",
+    "postUpgradeProfile"
+  ])
   @added(Versions.v2026_01_15_preview)
   upgradeProfile?: UpgradeProfilePropertiesPatchProperties[];
 }
@@ -872,7 +878,6 @@ model SecretArchivePatchSettings {
   vaultUri?: url;
 }
 
-
 @doc("The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
 @added(Versions.v2026_01_15_preview)
 model PreUpgradeProfileProperties {
@@ -911,20 +916,20 @@ model PostUpgradeProfilePatchProperties {
 @added(Versions.v2026_01_15_preview)
 model UpgradeProfileProperties {
   @doc("The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
-  preUpgradeProfile? : PreUpgradeProfileProperties;
+  preUpgradeProfile?: PreUpgradeProfileProperties;
 
   @doc("The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
-  postUpgradeProfile? : PostUpgradeProfileProperties;
+  postUpgradeProfile?: PostUpgradeProfileProperties;
 }
 
 @doc("The upgrade profile patch parameters that can be patched which are used by devices in the network fabric during device upgrade operations")
 @added(Versions.v2026_01_15_preview)
 model UpgradeProfilePropertiesPatchProperties {
   @doc("The pre-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
-  preUpgradeProfile? : PreUpgradeProfilePatchProperties;
+  preUpgradeProfile?: PreUpgradeProfilePatchProperties;
 
   @doc("The post-upgrade configuration parameters to be used by devices in the network fabric during device upgrade operations")
-  postUpgradeProfile? : PostUpgradeProfilePatchProperties;
+  postUpgradeProfile?: PostUpgradeProfilePatchProperties;
 }
 
 @doc("Response body for a RotatePasswords request on a Network Fabric.")
@@ -1057,7 +1062,6 @@ model AuthorizedTransceiverPatchProperties {
   @doc("Key that must be configured on the fabric.")
   key?: string;
 }
-
 
 @doc("Refresh configuration request properties.")
 @added(Versions.v2026_01_15_preview)

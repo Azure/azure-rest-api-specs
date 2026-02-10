@@ -119,16 +119,16 @@ union AdministrativeState {
 @added(Versions.v2026_01_15_preview)
 union OperationalState {
   @doc("Operational State Unknown indicates the state of the resource cannot be determined.")
-  Unknown : "Unknown",
+  Unknown: "Unknown",
 
   @doc("Operational State Up indicates the resource is operational and functioning normally and all required control-plane and (where applicable) data-plane operations are healthy.")
-  Up : "Up",
+  Up: "Up",
 
   @doc("Operational State Down indicates the resource is not functioning or not reachable and no meaningful operations can be performed.")
-  Down : "Down",
+  Down: "Down",
 
   @doc("Operational State Degraded indicates the resource is partially functional, some capabilities may be impaired, but the resource is still operational.")
-  Degraded : "Degraded",
+  Degraded: "Degraded",
 
   string,
 }
@@ -586,7 +586,6 @@ model ValidateConfigurationResponse {
 @doc("The response of the action validate configuration.")
 @added(Versions.v2026_01_15_preview)
 model ValidateConfigurationResponseV2 {
-
   ...OperationStatusResult;
 
   @doc("Network Device Run Rw Command Response properties.")
@@ -1394,11 +1393,9 @@ model CommonErrorResponse {
   ...Azure.ResourceManager.ErrorResponse;
 }
 
-
 @doc("Configuration Regeneration Type used for refresh configuration")
 @added(Versions.v2026_01_15_preview)
 union ConfigurationRegenerationType {
-
   @doc("Partial configuration regeneration indicates that the last known good configuration will be reapplied.")
   Partial: "Partial",
 

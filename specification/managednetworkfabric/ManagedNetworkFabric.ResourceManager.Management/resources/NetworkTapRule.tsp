@@ -114,8 +114,8 @@ interface NetworkTapRules {
   "Request payload."
 );
 @@doc(NetworkTapRules.validateConfigurationDeprecated::parameters.body,
-   "Validate configuration properties."
+  "Validate configuration properties."
 );
 @@doc(NetworkTapRules.validateConfiguration::parameters.body,
-   "Validate configuration properties."
+  "Validate configuration properties."
 );

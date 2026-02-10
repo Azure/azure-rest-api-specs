@@ -113,8 +113,8 @@ interface RoutePolicies {
   "Request payload."
 );
 @@doc(RoutePolicies.validateConfigurationDeprecated::parameters.body,
-   "Validate configuration properties."
+  "Validate configuration properties."
 );
 @@doc(RoutePolicies.validateConfiguration::parameters.body,
-   "Validate configuration properties."
+  "Validate configuration properties."
 );

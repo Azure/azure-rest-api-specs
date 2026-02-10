@@ -446,10 +446,10 @@ interface NetworkFabrics {
 );
 
 @@doc(NetworkFabrics.validateConfigurationDeprecated::parameters.body,
-   "Validate configuration properties."
+  "Validate configuration properties."
 );
 @@doc(NetworkFabrics.validateConfiguration::parameters.body,
-   "Validate configuration properties."
+  "Validate configuration properties."
 );
 @@doc(NetworkFabrics.commitBatchStatusDeprecated::parameters.body,
   "Request payload."
@@ -462,5 +462,9 @@ interface NetworkFabrics {
 );
 @@doc(NetworkFabrics.discardCommitBatch::parameters.body, "Request payload.");
 @@doc(NetworkFabrics.refreshConfiguration::parameters.body, "Request payload.");
-@@doc(NetworkFabrics.refreshConfigurationDeprecated::parameters.body, "Request payload.");
-@@doc(NetworkFabrics.refreshConfigurationDeprecatedV2::parameters.body, "Request payload.");
+@@doc(NetworkFabrics.refreshConfigurationDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(NetworkFabrics.refreshConfigurationDeprecatedV2::parameters.body,
+  "Request payload."
+);
