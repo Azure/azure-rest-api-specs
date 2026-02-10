@@ -49,12 +49,6 @@
     },
     {
       "name": "RetentionPolicies"
-    },
-    {
-      "name": "PrivateEndpointConnections"
-    },
-    {
-      "name": "PrivateLinkResources"
     }
   ],
   "paths": {
@@ -431,11 +425,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateEndpointConnections": {
       "get": {
-        "operationId": "PrivateEndpointConnections_List",
+        "operationId": "Schedulers_ListPrivateEndpointConnections",
         "tags": [
-          "PrivateEndpointConnections"
+          "Schedulers"
         ],
-        "description": "List existing private endpoint connections",
+        "description": "List private endpoint connections for the durable task scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -459,7 +453,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResourceListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -481,11 +475,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
-        "operationId": "PrivateEndpointConnections_Get",
+        "operationId": "Schedulers_GetPrivateEndpointConnection",
         "tags": [
-          "PrivateEndpointConnections"
+          "Schedulers"
         ],
-        "description": "Get a specific private endpoint connection",
+        "description": "Get a private endpoint connection for the durable task scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -512,7 +506,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -529,11 +523,11 @@
         }
       },
       "put": {
-        "operationId": "PrivateEndpointConnections_Create",
+        "operationId": "Schedulers_CreateOrUpdatePrivateEndpointConnection",
         "tags": [
-          "PrivateEndpointConnections"
+          "Schedulers"
         ],
-        "description": "Create a private endpoint connection",
+        "description": "Create or update a private endpoint connection for the durable task scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -561,21 +555,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'PrivateEndpointConnectionResource' update operation succeeded",
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "201": {
-            "description": "Resource 'PrivateEndpointConnectionResource' create operation succeeded",
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionResource"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -606,12 +600,87 @@
         },
         "x-ms-long-running-operation": true
       },
-      "delete": {
-        "operationId": "PrivateEndpointConnections_Delete",
+      "patch": {
+        "operationId": "Schedulers_UpdatePrivateEndpointConnection",
         "tags": [
-          "PrivateEndpointConnections"
+          "Schedulers"
         ],
-        "description": "Delete the private endpoint connection",
+        "description": "Update a private endpoint connection for the durable task scheduler",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "schedulerName",
+            "in": "path",
+            "description": "The name of the Scheduler",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Azure.ResourceManager.PrivateEndpointConnectionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Update": {
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Schedulers_DeletePrivateEndpointConnection",
+        "tags": [
+          "Schedulers"
+        ],
+        "description": "Delete a private endpoint connection for the durable task scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -672,11 +741,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateLinkResources": {
       "get": {
-        "operationId": "PrivateLinkResources_List",
+        "operationId": "Schedulers_ListPrivateLinks",
         "tags": [
-          "PrivateLinkResources"
+          "Schedulers"
         ],
-        "description": "list private link resources on the given resource",
+        "description": "List private link resources for the durable task scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -700,7 +769,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/MyPrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -722,11 +791,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
-        "operationId": "PrivateLinkResources_Get",
+        "operationId": "Schedulers_GetPrivateLink",
         "tags": [
-          "PrivateLinkResources"
+          "Schedulers"
         ],
-        "description": "Get a specific private link resource",
+        "description": "Get a private link resource for the durable task scheduler",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -757,7 +826,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -1336,30 +1405,35 @@
     }
   },
   "definitions": {
-    "PrivateEndpointConnectionResource": {
+    "Azure.ResourceManager.PrivateEndpointConnectionUpdate": {
       "type": "object",
-      "description": "Holder for private endpoint connections",
+      "description": "PATCH model for private endpoint connections",
       "properties": {
         "properties": {
-          "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The resource-specific properties for this resource."
+          "type": "object",
+          "description": "The private endpoint connection properties",
+          "properties": {
+            "privateEndpoint": {
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpoint",
+              "description": "The private endpoint resource."
+            },
+            "privateLinkServiceConnectionState": {
+              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+              "description": "A collection of information about the state of the connection between service consumer and provider."
+            }
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
-    "PrivateEndpointConnectionResourceListResult": {
+    "MyPrivateLinkResourceListResult": {
       "type": "object",
-      "description": "The response of a PrivateEndpointConnectionResource list operation.",
+      "description": "The response of a MyPrivateLinkResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateEndpointConnectionResource items on this page",
+          "description": "The MyPrivateLinkResource items on this page",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionResource"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
@@ -1372,30 +1446,15 @@
         "value"
       ]
     },
-    "PrivateLinkResource": {
+    "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "description": "Private Link Resource for Schedulers",
-      "properties": {
-        "properties": {
-          "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "The response of a PrivateLinkResource list operation.",
+      "description": "The response of a PrivateEndpointConnection list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The PrivateLinkResource items on this page",
+          "description": "The PrivateEndpointConnection items on this page",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
+            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
           }
         },
         "nextLink": {

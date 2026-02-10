@@ -69,13 +69,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].patch.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
-  - code: ResourceNameRestriction
-    reason: The privateLinkResourceName parameter is determined by the Network Resource Provider service and does not require a pattern restriction.
-    from:
-      - durabletask.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateLinkResources/{privateLinkResourceName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateLinkResources/{privateLinkResourceName}"]
 ```
 
 ### Tag: package-2025-11-01
@@ -117,13 +110,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].patch.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
-  - code: ResourceNameRestriction
-    reason: The privateLinkResourceName parameter is determined by the Network Resource Provider service and does not require a pattern restriction.
-    from:
-      - durabletask.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateLinkResources/{privateLinkResourceName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateLinkResources/{privateLinkResourceName}"]
 ```
 
 ### Tag: package-2025-05-04-preview
@@ -165,13 +151,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}"].patch.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.DurableTask/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
-  - code: ResourceNameRestriction
-    reason: The privateLinkResourceName parameter is determined by the Network Resource Provider service and does not require a pattern restriction.
-    from:
-      - durabletask.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateLinkResources/{privateLinkResourceName}"]
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DurableTask/schedulers/{schedulerName}/privateLinkResources/{privateLinkResourceName}"]
 ```
 
 ### Tag: package-2025-04-01-preview

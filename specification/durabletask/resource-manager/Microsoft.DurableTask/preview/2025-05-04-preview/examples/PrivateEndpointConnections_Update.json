@@ -1,12 +1,19 @@
 {
-  "title": "PrivateEndpointConnections_Get_MaximumSet",
-  "operationId": "Schedulers_GetPrivateEndpointConnection",
+  "title": "PrivateEndpointConnections_Update",
+  "operationId": "Schedulers_UpdatePrivateEndpointConnection",
   "parameters": {
-    "api-version": "2025-11-01",
+    "api-version": "2025-05-04-preview",
     "subscriptionId": "851A7597-D699-45CC-899B-7487A5B3B775",
     "resourceGroupName": "rgdurabletask",
     "schedulerName": "testscheduler",
-    "privateEndpointConnectionName": "spzckqrbhfnabu"
+    "privateEndpointConnectionName": "spzckqrbhfnabu",
+    "properties": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved"
+        }
+      }
+    }
   },
   "responses": {
     "200": {
@@ -16,7 +23,7 @@
             "id": "vjjxatyilmgjaervqztrmlpfodvbo"
           },
           "privateLinkServiceConnectionState": {
-            "status": "Pending",
+            "status": "Approved",
             "actionsRequired": "mxymqfbbmpwjxsroldlsd",
             "description": "ujdcsoyxljivwsgfkexhotaxcmzq"
           },
@@ -36,6 +43,11 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2024-04-17T15:34:17.366Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
       }
     }
   }
