@@ -938,7 +938,6 @@ model LogicalNetworkProperties {
 
   @added(Versions.v2025_06_01_preview)
   @doc("Type of the Logical Network")
-  @visibility(Lifecycle.Read)
   networkType?: LogicalNetworkTypeEnum;
 }
 
