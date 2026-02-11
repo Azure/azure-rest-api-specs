@@ -2917,24 +2917,6 @@ model UserIdentityProperties {
 }
 
 /**
- * Definition of a Tracked Resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model TrackedResource extends Resource {
-  /**
-   * Location of the resource.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
-
-  /**
-   * Tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-}
-
-/**
  * Properties of the Domain update.
  */
 model DomainUpdateParameters {
