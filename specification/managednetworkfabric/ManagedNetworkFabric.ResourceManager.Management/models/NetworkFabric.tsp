@@ -84,7 +84,7 @@ model NetworkFabricProperties {
   @doc("Azure resource ID for the NetworkBootstrapDevice belonging to this Network Fabric.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_01_15_preview)
-  networkBootstrapDeviceId: Azure.Core.armResourceIdentifier<[
+  networkBootstrapDeviceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedNetworkFabric/networkBootstrapDevices";
     }
@@ -332,10 +332,10 @@ model NetworkFabricPatch {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated?: NetworkFabricPatchProperties;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  #suppress "deprecated" "Legacy flattening"
   @doc("Network Fabric Patch properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: NetworkFabricPatchProperties;
 
   @added(Versions.v2024_06_15_preview)
