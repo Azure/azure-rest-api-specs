@@ -13,7 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
-import "./chaosFaultResource.tsp";
+import "./ChaosFaultResource.tsp";
 import "./CopyJobGetResults.tsp";
 import "./DatabaseAccountGetResults.tsp";
 import "./GraphResourceGetResults.tsp";
