@@ -35,7 +35,7 @@ model RecoveryJobResourceProperties extends JobResourceProperties {
   @added(Versions.v2026_03_01_preview)
   @doc("The recovery action settings.")
   @visibility(Lifecycle.Read)
-  recoveryActionSettings: RecoveryActionSettings;
+  recoveryActionSettings?: RecoveryActionSettings;
 }
 
 @added(Versions.v2026_03_01_preview)
