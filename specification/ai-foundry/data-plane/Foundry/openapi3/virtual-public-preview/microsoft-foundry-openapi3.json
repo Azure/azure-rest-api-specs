@@ -4617,21 +4617,21 @@
             "explode": false
           },
           {
-            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Insights=V1Preview"
+              ]
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "required": false,
-                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.uuid"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
@@ -4683,6 +4683,18 @@
             }
           },
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Insights=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "includeCoordinates",
             "in": "query",
             "required": false,
@@ -4691,23 +4703,11 @@
               "type": "boolean"
             },
             "explode": false
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "required": false,
-                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.uuid"
-                }
-              }
-            },
             "content": {
               "application/json": {
                 "schema": {
