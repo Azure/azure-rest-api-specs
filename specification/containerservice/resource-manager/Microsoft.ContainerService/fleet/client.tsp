@@ -4,6 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ContainerService;
 using Azure.Core;
+using TypeSpec.Http;
 
 @@clientName(Microsoft.ContainerService,
   "ContainerServiceFleetManagementClient",
@@ -115,10 +116,7 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(UpdateGroup, "ContainerServiceFleetUpdateGroup", "csharp");
-@@clientName(UpdateState,
-  "ContainerServiceFleetUpdateState",
-  "csharp"
-);
+@@clientName(UpdateState, "ContainerServiceFleetUpdateState", "csharp");
 @@clientName(ManagedClusterUpdate,
   "ContainerServiceFleetManagedClusterUpdate",
   "csharp"
@@ -127,54 +125,27 @@ using Azure.Core;
   "ContainerServiceFleetManagedClusterUpgradeSpec",
   "csharp"
 );
-@@clientName(ManagedClusterUpgradeSpec.type,
-  "UpgradeType",
-  "csharp"
-);
+@@clientName(ManagedClusterUpgradeSpec.type, "UpgradeType", "csharp");
 @@clientName(ManagedClusterUpgradeType,
   "ContainerServiceFleetManagedClusterUpgradeType",
   "csharp"
 );
-@@clientName(NodeImageSelection.type,
-  "SelectionType",
-  "csharp"
-);
-@@clientName(AutoUpgradeNodeImageSelection.type,
-  "SelectionType",
-  "csharp"
-);
-@@clientName(AdoptionPolicy,
-  "ContainerServiceFleetAdoptionPolicy",
-  "csharp"
-);
-@@clientName(DeletePolicy,
-  "ContainerServiceFleetDeletePolicy",
-  "csharp"
-);
-@@clientName(NetworkPolicy,
-  "ContainerServiceFleetNetworkPolicy",
-  "csharp"
-);
+@@clientName(NodeImageSelection.type, "SelectionType", "csharp");
+@@clientName(AutoUpgradeNodeImageSelection.type, "SelectionType", "csharp");
+@@clientName(AdoptionPolicy, "ContainerServiceFleetAdoptionPolicy", "csharp");
+@@clientName(DeletePolicy, "ContainerServiceFleetDeletePolicy", "csharp");
+@@clientName(NetworkPolicy, "ContainerServiceFleetNetworkPolicy", "csharp");
 @@clientName(PlacementProfile,
   "ContainerServiceFleetPlacementProfile",
   "csharp"
 );
-@@clientName(PolicyRule,
-  "ContainerServiceFleetPolicyRule",
-  "csharp"
-);
+@@clientName(PolicyRule, "ContainerServiceFleetPolicyRule", "csharp");
 @@clientName(PropagationPolicy,
   "ContainerServiceFleetPropagationPolicy",
   "csharp"
 );
-@@clientName(PropagationType,
-  "ContainerServiceFleetPropagationType",
-  "csharp"
-);
-@@clientName(ResourceQuota,
-  "ContainerServiceFleetResourceQuota",
-  "csharp"
-);
+@@clientName(PropagationType, "ContainerServiceFleetPropagationType", "csharp");
+@@clientName(ResourceQuota, "ContainerServiceFleetResourceQuota", "csharp");
 @@clientName(Placement.V1.PlacementPolicy,
   "ContainerServiceFleetPlacementPolicy",
   "csharp"
@@ -203,10 +174,7 @@ using Azure.Core;
   "ContainerServiceFleetToleration",
   "csharp"
 );
-@@clientName(Core.V1.TaintEffect,
-  "ContainerServiceFleetTaintEffect",
-  "csharp"
-);
+@@clientName(Core.V1.TaintEffect, "ContainerServiceFleetTaintEffect", "csharp");
 @@clientName(Core.V1.TolerationOperator,
   "ContainerServiceFleetTolerationOperator",
   "csharp"
@@ -217,11 +185,6 @@ using Azure.Core;
 );
 @@alternateType(MemberUpdateStatus.clusterResourceId,
   armResourceIdentifier,
-  "csharp"
-);
-// not working
-@@alternateType(FleetCredentialResult.value,
-  TypeSpec.bytes[],
   "csharp"
 );
 @@usage(Gate, Usage.input, "csharp");
