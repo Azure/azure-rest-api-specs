@@ -826,7 +826,7 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 
-@@clientName(VoiceLive.FillerResponseConfigBase.latency_threshold_ms,
+@@clientName(VoiceLive.InterimResponseConfigBase.latency_threshold_ms,
   "latencyThresholdInMs",
   "javascript"
 );

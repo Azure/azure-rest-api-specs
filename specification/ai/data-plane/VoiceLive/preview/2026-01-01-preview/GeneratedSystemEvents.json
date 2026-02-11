@@ -809,25 +809,6 @@
         }
       }
     },
-    "BasicFillerResponseConfig": {
-      "type": "object",
-      "description": "Configuration for basic/static filler response generation.\nRandomly selects from configured texts when any trigger condition is met.",
-      "properties": {
-        "texts": {
-          "type": "array",
-          "description": "List of filler text options to randomly select from.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/FillerResponseConfigBase"
-        }
-      ],
-      "x-ms-discriminator-value": "static_filler"
-    },
     "CachedTokenDetails": {
       "type": "object",
       "description": "Details of output token usage.",
@@ -1401,85 +1382,6 @@
         "error"
       ]
     },
-    "FillerResponseConfig": {},
-    "FillerResponseConfigBase": {
-      "type": "object",
-      "description": "Base model for filler response configuration.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/FillerResponseConfigType",
-          "description": "The type of filler response configuration."
-        },
-        "triggers": {
-          "type": "array",
-          "description": "List of triggers that can fire the filler. Any trigger can activate the filler (OR logic).\nSupported: 'latency', 'tool'.",
-          "default": [
-            "latency"
-          ],
-          "items": {
-            "$ref": "#/definitions/FillerTrigger"
-          }
-        },
-        "latency_threshold_ms": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Latency threshold in milliseconds before triggering filler response. Default is 2000ms.",
-          "minimum": 0
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "FillerResponseConfigType": {
-      "type": "string",
-      "description": "Filler response configuration types.",
-      "enum": [
-        "static_filler",
-        "llm_filler"
-      ],
-      "x-ms-enum": {
-        "name": "FillerResponseConfigType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "static_filler",
-            "value": "static_filler",
-            "description": "Static filler configuration type."
-          },
-          {
-            "name": "llm_filler",
-            "value": "llm_filler",
-            "description": "LLM-based filler configuration type."
-          }
-        ]
-      }
-    },
-    "FillerTrigger": {
-      "type": "string",
-      "description": "Triggers that can activate filler response generation.",
-      "enum": [
-        "latency",
-        "tool"
-      ],
-      "x-ms-enum": {
-        "name": "FillerTrigger",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "latency",
-            "value": "latency",
-            "description": "Trigger filler when response latency exceeds threshold."
-          },
-          {
-            "name": "tool",
-            "value": "tool",
-            "description": "Trigger filler when a tool call is being executed."
-          }
-        ]
-      }
-    },
     "FunctionCallItem": {
       "type": "object",
       "description": "A function call item within a conversation.",
@@ -1687,6 +1589,85 @@
         "cached_tokens_details"
       ]
     },
+    "InterimResponseConfig": {},
+    "InterimResponseConfigBase": {
+      "type": "object",
+      "description": "Base model for interim response configuration.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/InterimResponseConfigType",
+          "description": "The type of interim response configuration."
+        },
+        "triggers": {
+          "type": "array",
+          "description": "List of triggers that can fire the interim response. Any trigger can activate it (OR logic).\nSupported: 'latency', 'tool'.",
+          "default": [
+            "latency"
+          ],
+          "items": {
+            "$ref": "#/definitions/InterimResponseTrigger"
+          }
+        },
+        "latency_threshold_ms": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Latency threshold in milliseconds before triggering interim response. Default is 2000ms.",
+          "minimum": 0
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "InterimResponseConfigType": {
+      "type": "string",
+      "description": "Interim response configuration types.",
+      "enum": [
+        "static_interim_response",
+        "llm_interim_response"
+      ],
+      "x-ms-enum": {
+        "name": "InterimResponseConfigType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "static_interim_response",
+            "value": "static_interim_response",
+            "description": "Static interim response configuration type."
+          },
+          {
+            "name": "llm_interim_response",
+            "value": "llm_interim_response",
+            "description": "LLM-based interim response configuration type."
+          }
+        ]
+      }
+    },
+    "InterimResponseTrigger": {
+      "type": "string",
+      "description": "Triggers that can activate interim response generation.",
+      "enum": [
+        "latency",
+        "tool"
+      ],
+      "x-ms-enum": {
+        "name": "InterimResponseTrigger",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "latency",
+            "value": "latency",
+            "description": "Trigger interim response when response latency exceeds threshold."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "Trigger interim response when a tool call is being executed."
+          }
+        ]
+      }
+    },
     "ItemParamStatus": {
       "type": "string",
       "description": "Indicates the processing status of an item or parameter.",
@@ -1757,32 +1738,32 @@
         ]
       }
     },
-    "LlmFillerResponseConfig": {
+    "LlmInterimResponseConfig": {
       "type": "object",
-      "description": "Configuration for LLM-based filler response generation.\nUses LLM to generate context-aware filler responses when any trigger condition is met.",
+      "description": "Configuration for LLM-based interim response generation.\nUses LLM to generate context-aware interim responses when any trigger condition is met.",
       "properties": {
         "model": {
           "type": "string",
-          "description": "The model to use for LLM-based filler generation. Default is gpt-4.1-mini."
+          "description": "The model to use for LLM-based interim response generation. Default is gpt-4.1-mini."
         },
         "instructions": {
           "type": "string",
-          "description": "Custom instructions for generating filler responses. If not provided, a default prompt is used."
+          "description": "Custom instructions for generating interim responses. If not provided, a default prompt is used."
         },
         "max_completion_tokens": {
           "type": "integer",
           "format": "int32",
-          "description": "Maximum number of tokens to generate for the filler response.",
+          "description": "Maximum number of tokens to generate for the interim response.",
           "default": 50,
           "minimum": 1
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/FillerResponseConfigBase"
+          "$ref": "#/definitions/InterimResponseConfigBase"
         }
       ],
-      "x-ms-discriminator-value": "llm_filler"
+      "x-ms-discriminator-value": "llm_interim_response"
     },
     "LogProbProperties": {
       "type": "object",
@@ -2523,9 +2504,9 @@
           "$ref": "#/definitions/ReasoningEffort",
           "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
         },
-        "filler_response": {
-          "$ref": "#/definitions/FillerResponseConfig",
-          "description": "Configuration for filler response generation during latency or tool calls."
+        "interim_response": {
+          "$ref": "#/definitions/InterimResponseConfig",
+          "description": "Configuration for interim response generation during latency or tool calls."
         }
       }
     },
@@ -3275,9 +3256,9 @@
           "$ref": "#/definitions/ReasoningEffort",
           "description": "Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.\nReducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response."
         },
-        "filler_response": {
-          "$ref": "#/definitions/FillerResponseConfig",
-          "description": "Configuration for filler response generation during latency or tool calls."
+        "interim_response": {
+          "$ref": "#/definitions/InterimResponseConfig",
+          "description": "Configuration for interim response generation during latency or tool calls."
         },
         "agent": {
           "$ref": "#/definitions/AgentConfig",
@@ -5038,6 +5019,25 @@
     "SessionBase": {
       "type": "object",
       "description": "VoiceLive session object configuration."
+    },
+    "StaticInterimResponseConfig": {
+      "type": "object",
+      "description": "Configuration for static interim response generation.\nRandomly selects from configured texts when any trigger condition is met.",
+      "properties": {
+        "texts": {
+          "type": "array",
+          "description": "List of interim response text options to randomly select from.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/InterimResponseConfigBase"
+        }
+      ],
+      "x-ms-discriminator-value": "static_interim_response"
     },
     "SystemMessageItem": {
       "type": "object",
