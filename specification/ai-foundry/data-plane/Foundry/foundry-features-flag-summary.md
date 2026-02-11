@@ -21,13 +21,13 @@
 | Evaluators | Delete Version | DELETE | `/evaluators/{name}/versions/{version}` | Required: `Evaluations=V1Preview` |
 | Evaluators | Update Version | PATCH | `/evaluators/{name}/versions/{version}` | Required: `Evaluations=V1Preview` |
 | Insights | Generate | POST | `/insights` | Required: `Insights=V1Preview` |
-| Insights | List | GET | `/insights` | None |
-| Insights | Get | GET | `/insights/{id}` | None |
-| Schedules | List | GET | `/schedules` | None |
-| Schedules | Delete | DELETE | `/schedules/{id}` | None |
-| Schedules | Get | GET | `/schedules/{id}` | None |
-| Schedules | CreateOrUpdate | PUT | `/schedules/{id}` | None |
-| Schedules | List Runs | GET | `/schedules/{id}/runs` | None |
+| Insights | List | GET | `/insights` |  Required: `Insights=V1Preview` |
+| Insights | Get | GET | `/insights/{id}` |  Required: `Insights=V1Preview` |
+| Schedules | List | GET | `/schedules` | Required: `Schedules=V1Preview` |
+| Schedules | Delete | DELETE | `/schedules/{id}` | Required: `Schedules=V1Preview` |
+| Schedules | Get | GET | `/schedules/{id}` | Required: `Schedules=V1Preview` |
+| Schedules | CreateOrUpdate | PUT | `/schedules/{id}` | Required: `Schedules=V1Preview` |
+| Schedules | List Runs | GET | `/schedules/{id}/runs` | Required: `Schedules=V1Preview` |
 | Schedules | Get Run | GET | `/schedules/{schedule_id}/runs/{run_id}` | Required: `Schedules=V1Preview` |
 | Evaluation Rules | List | GET | `/evaluationrules` | Required: `Evaluations=V1Preview` |
 | Evaluation Rules | Get | GET | `/evaluationrules/{id}` | Required: `Evaluations=V1Preview` |
