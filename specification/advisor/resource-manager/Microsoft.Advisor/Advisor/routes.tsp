@@ -248,6 +248,6 @@ interface RecommendationsPatch {
      * The properties to update the recommendation state.
      */
     @bodyRoot
-    statePropertiesPayload: RecommendationStatePropertiesPayload,
-  ): ArmResponse<RecommendationsPatchResponse> | ArmDefaultErrorResponse;
+    statePropertiesPayload: RecommendationsPatchPayload,
+  ): ArmResponse<RecommendationsPatchPayload> | ArmDefaultErrorResponse;
 }
