@@ -28,7 +28,7 @@ namespace Azure.AI.Projects {
       connection_id?: string;
       knowledge_sources?: {
         connection_id?: string;
-        query_parameters?: Record<string>;
+        query_parameters?: Record<unknown>;
         index_id?: string;
         index_connection_id?: string;
         index_details?: {

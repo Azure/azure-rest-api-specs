@@ -4,18 +4,19 @@ info:
   version: virtual-public-preview
 tags:
   - name: Agents
+  - name: Agent Containers
   - name: Connections
   - name: Datasets
   - name: Deployments
-  - name: EvaluationTaxonomies
-  - name: EvaluationRules
+  - name: Evaluation Taxonomies
+  - name: Evaluation Rules
   - name: Evaluators
   - name: Indexes
   - name: Insights
   - name: Memory Stores
   - name: Conversations
   - name: Evals
-  - name: Fine-tuning
+  - name: Fine-Tuning
   - name: Responses
   - name: Redteams
   - name: Schedules
@@ -31,7 +32,6 @@ paths:
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             anyOf:
-              - type: string
               - type: string
                 enum:
                   - ContainerAgents=V1Preview
@@ -212,7 +212,6 @@ paths:
           schema:
             anyOf:
               - type: string
-              - type: string
                 enum:
                   - ContainerAgents=V1Preview
               - type: string
@@ -330,7 +329,7 @@ paths:
               $ref: '#/components/schemas/UpdateAgentFromManifestRequest'
   /agents/{agent_name}/operations:
     get:
-      operationId: Agents_listAgentContainerOperations
+      operationId: AgentContainers_listAgentContainerOperations
       description: List container operations for an agent.
       parameters:
         - name: Foundry-Features
@@ -338,11 +337,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
+            type: string
+            enum:
+              - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -429,13 +426,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Containers
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
   /agents/{agent_name}/operations/{operation_id}:
     get:
-      operationId: Agents_getAgentContainerOperation
+      operationId: AgentContainers_getAgentContainerOperation
       description: Get the status of a container operation for an agent.
       parameters:
         - name: Foundry-Features
@@ -443,11 +440,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
+            type: string
+            enum:
+              - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -481,7 +476,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Containers
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
@@ -496,7 +491,6 @@ paths:
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
             anyOf:
-              - type: string
               - type: string
                 enum:
                   - ContainerAgents=V1Preview
@@ -720,7 +714,7 @@ paths:
         - Agents
   /agents/{agent_name}/versions/{agent_version}/containers/default:
     get:
-      operationId: Agents_getAgentContainer
+      operationId: AgentContainers_getAgentContainer
       description: Get a container for a specific version of an agent.
       parameters:
         - name: Foundry-Features
@@ -728,11 +722,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
+            type: string
+            enum:
+              - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -766,13 +758,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Containers
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default/operations:
     get:
-      operationId: Agents_listAgentVersionContainerOperations
+      operationId: AgentContainers_listAgentVersionContainerOperations
       description: List container operations for a specific version of an agent.
       parameters:
         - name: Foundry-Features
@@ -780,11 +772,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
+            type: string
+            enum:
+              - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -877,13 +867,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Containers
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:delete:
     post:
-      operationId: Agents_deleteAgentContainer
+      operationId: AgentContainers_deleteAgentContainer
       description: |-
         Delete a container for a specific version of an agent. If the container doesn't exist, the operation will be no-op.
         The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
@@ -894,11 +884,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
+            type: string
+            enum:
+              - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -938,13 +926,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Containers
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:logstream:
     post:
-      operationId: Agents_streamAgentContainerLogs
+      operationId: AgentContainers_streamAgentContainerLogs
       description: |-
         Container log entry streamed from the container as text chunks.
         Each chunk is a UTF-8 string that may be either a plain text log line
@@ -968,11 +956,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
+            type: string
+            enum:
+              - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1024,13 +1010,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Containers
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:start:
     post:
-      operationId: Agents_startAgentContainer
+      operationId: AgentContainers_startAgentContainer
       description: |-
         Start a container for a specific version of an agent. If the container is already running, the operation will be no-op.
         The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
@@ -1041,11 +1027,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
+            type: string
+            enum:
+              - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1085,7 +1069,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Containers
       requestBody:
         required: true
         content:
@@ -1108,7 +1092,7 @@ paths:
           - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:stop:
     post:
-      operationId: Agents_stopAgentContainer
+      operationId: AgentContainers_stopAgentContainer
       description: |-
         Stop a container for a specific version of an agent. If the container is not running, or already stopped, the operation will be no-op.
         The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
@@ -1119,11 +1103,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
+            type: string
+            enum:
+              - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1163,13 +1145,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Containers
       x-ms-foundry-meta:
         required_previews:
           - ContainerAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}/containers/default:update:
     post:
-      operationId: Agents_updateAgentContainer
+      operationId: AgentContainers_updateAgentContainer
       description: |-
         Update a container for a specific version of an agent. If the container is not running, the operation will be no-op.
         The operation is a long-running operation. Following the design guidelines for long-running operations in Azure REST APIs.
@@ -1180,11 +1162,9 @@ paths:
           required: false
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - ContainerAgents=V1Preview
+            type: string
+            enum:
+              - ContainerAgents=V1Preview
         - name: agent_name
           in: path
           required: true
@@ -1224,7 +1204,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Agents
+        - Agent Containers
       requestBody:
         required: true
         content:
@@ -1866,7 +1846,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - EvaluationRules
+        - Evaluation Rules
   /evaluationrules/{id}:
     get:
       operationId: EvaluationRules_get
@@ -1906,7 +1886,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - EvaluationRules
+        - Evaluation Rules
     delete:
       operationId: EvaluationRules_delete
       description: Delete an evaluation rule.
@@ -1941,7 +1921,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - EvaluationRules
+        - Evaluation Rules
     put:
       operationId: EvaluationRules_createOrUpdate
       description: Create or update an evaluation rule.
@@ -1979,7 +1959,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - EvaluationRules
+        - Evaluation Rules
       requestBody:
         required: true
         content:
@@ -2235,7 +2215,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - EvaluationTaxonomies
+        - Evaluation Taxonomies
   /evaluationtaxonomies/{name}:
     get:
       operationId: EvaluationTaxonomies_get
@@ -2275,7 +2255,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - EvaluationTaxonomies
+        - Evaluation Taxonomies
     delete:
       operationId: EvaluationTaxonomies_delete
       description: Delete an evaluation taxonomy by name.
@@ -2310,7 +2290,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - EvaluationTaxonomies
+        - Evaluation Taxonomies
     put:
       operationId: EvaluationTaxonomies_create
       description: Create an evaluation taxonomy.
@@ -2318,14 +2298,12 @@ paths:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Evaluations=V1Preview
+            type: string
+            enum:
+              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -2358,7 +2336,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - EvaluationTaxonomies
+        - Evaluation Taxonomies
       requestBody:
         required: true
         content:
@@ -2373,14 +2351,12 @@ paths:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Evaluations=V1Preview
+            type: string
+            enum:
+              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -2407,7 +2383,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - EvaluationTaxonomies
+        - Evaluation Taxonomies
       requestBody:
         required: true
         content:
@@ -2446,11 +2422,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Evaluations=V1Preview
+            type: string
+            enum:
+              - Evaluations=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -2509,11 +2483,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Evaluations=V1Preview
+            type: string
+            enum:
+              - Evaluations=V1Preview
       responses:
         '200':
           description: The request has succeeded.
@@ -2551,11 +2523,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Evaluations=V1Preview
+            type: string
+            enum:
+              - Evaluations=V1Preview
       responses:
         '201':
           description: The request has succeeded and a new resource has been created as a result.
@@ -2600,11 +2570,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Evaluations=V1Preview
+            type: string
+            enum:
+              - Evaluations=V1Preview
         - name: version
           in: path
           required: true
@@ -2648,11 +2616,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Evaluations=V1Preview
+            type: string
+            enum:
+              - Evaluations=V1Preview
         - name: version
           in: path
           required: true
@@ -2692,11 +2658,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Evaluations=V1Preview
+            type: string
+            enum:
+              - Evaluations=V1Preview
         - name: version
           in: path
           required: true
@@ -2926,11 +2890,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Insights=V1Preview
+            type: string
+            enum:
+              - Insights=V1Preview
         - name: Repeatability-Request-ID
           in: header
           required: false
@@ -3097,11 +3059,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - MemoryStores=V1Preview
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3203,11 +3163,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - MemoryStores=V1Preview
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3268,11 +3226,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - MemoryStores=V1Preview
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3329,11 +3285,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - MemoryStores=V1Preview
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3374,11 +3328,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - MemoryStores=V1Preview
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3426,11 +3378,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - MemoryStores=V1Preview
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3472,11 +3422,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - MemoryStores=V1Preview
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3530,11 +3478,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - MemoryStores=V1Preview
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -3600,11 +3546,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - MemoryStores=V1Preview
+            type: string
+            enum:
+              - MemoryStores=V1Preview
         - name: api-version
           in: query
           required: true
@@ -4635,7 +4579,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Fine-tuning
+        - Fine-Tuning
       requestBody:
         required: true
         content:
@@ -4683,7 +4627,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Fine-tuning
+        - Fine-Tuning
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}:
     get:
       operationId: retrieveFineTuningJob
@@ -4719,7 +4663,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Fine-tuning
+        - Fine-Tuning
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/cancel:
     post:
       operationId: cancelFineTuningJob
@@ -4752,7 +4696,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Fine-tuning
+        - Fine-Tuning
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/checkpoints:
     get:
       operationId: listFineTuningJobCheckpoints
@@ -4801,7 +4745,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Fine-tuning
+        - Fine-Tuning
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/events:
     get:
       operationId: listFineTuningJobEvents
@@ -4850,7 +4794,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Fine-tuning
+        - Fine-Tuning
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/pause:
     post:
       operationId: pauseFineTuningJob
@@ -4883,7 +4827,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Fine-tuning
+        - Fine-Tuning
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/resume:
     post:
       operationId: resumeFineTuningJob
@@ -4916,7 +4860,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
-        - Fine-tuning
+        - Fine-Tuning
   /openai/v1/responses:
     post:
       operationId: createResponse_createResponseStream
@@ -5022,9 +4966,7 @@ paths:
                     tools:
                       $ref: '#/components/schemas/OpenAI.ToolsArray'
                     tool_choice:
-                      anyOf:
-                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
-                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                      $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                     prompt:
                       $ref: '#/components/schemas/OpenAI.Prompt'
                     truncation:
@@ -5154,9 +5096,7 @@ paths:
                     tools:
                       $ref: '#/components/schemas/OpenAI.ToolsArray'
                     tool_choice:
-                      anyOf:
-                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
-                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                      $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
                     prompt:
                       $ref: '#/components/schemas/OpenAI.Prompt'
                     truncation:
@@ -5608,14 +5548,12 @@ paths:
       parameters:
         - name: Foundry-Features
           in: header
-          required: false
+          required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - RedTeams=V1Preview
+            type: string
+            enum:
+              - RedTeams=V1Preview
         - name: api-version
           in: query
           required: true
@@ -5874,11 +5812,9 @@ paths:
           required: true
           description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
           schema:
-            anyOf:
-              - type: string
-              - type: string
-                enum:
-                  - Insights=V1Preview
+            type: string
+            enum:
+              - Schedules=V1Preview
         - name: api-version
           in: query
           required: true
@@ -11301,8 +11237,6 @@ components:
         file_id:
           type: string
           nullable: true
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A screenshot of a computer.
       title: Computer screenshot
     OpenAI.ComputerScreenshotImage:
@@ -12196,7 +12130,16 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/OpenAI.MessageContent'
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.InputTextContent'
+              - $ref: '#/components/schemas/OpenAI.OutputTextContent'
+              - $ref: '#/components/schemas/OpenAI.TextContent'
+              - $ref: '#/components/schemas/OpenAI.SummaryTextContent'
+              - $ref: '#/components/schemas/OpenAI.ReasoningTextContent'
+              - $ref: '#/components/schemas/OpenAI.RefusalContent'
+              - $ref: '#/components/schemas/OpenAI.InputImageContent'
+              - $ref: '#/components/schemas/OpenAI.ComputerScreenshotContent'
+              - $ref: '#/components/schemas/OpenAI.InputFileContent'
           description: The content of the message
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
@@ -12360,8 +12303,6 @@ components:
           x-stainless-const: true
           default: conversation
         metadata:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.Metadata'
           description: |-
             Set of 16 key-value pairs that can be attached to an object. This can be         useful for storing additional information about the object in a structured         format, and querying for objects via API or the dashboard.
               Keys are strings with a maximum length of 64 characters. Values are strings         with a maximum length of 512 characters.
@@ -13219,6 +13160,8 @@ components:
       required:
         - code
         - message
+        - param
+        - type
       properties:
         code:
           type: string
@@ -18703,187 +18646,6 @@ components:
           $ref: '#/components/schemas/OpenAI.MCPToolFilter'
         never:
           $ref: '#/components/schemas/OpenAI.MCPToolFilter'
-    OpenAI.MessageContent:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OpenAI.MessageContentType'
-      discriminator:
-        propertyName: type
-        mapping:
-          text: '#/components/schemas/OpenAI.TextContent'
-          summary_text: '#/components/schemas/OpenAI.SummaryTextContent'
-          computer_screenshot: '#/components/schemas/OpenAI.ComputerScreenshotContent'
-          input_text: '#/components/schemas/OpenAI.MessageContentInputTextContent'
-          output_text: '#/components/schemas/OpenAI.MessageContentOutputTextContent'
-          reasoning_text: '#/components/schemas/OpenAI.MessageContentReasoningTextContent'
-          refusal: '#/components/schemas/OpenAI.MessageContentRefusalContent'
-          input_image: '#/components/schemas/OpenAI.MessageContentInputImageContent'
-          input_file: '#/components/schemas/OpenAI.MessageContentInputFileContent'
-      description: A content part that makes up an input or output item.
-    OpenAI.MessageContentInputFileContent:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - input_file
-          description: The type of the input item. Always `input_file`.
-          x-stainless-const: true
-          default: input_file
-        file_id:
-          type: string
-          nullable: true
-        filename:
-          type: string
-          description: The name of the file to be sent to the model.
-        file_url:
-          type: string
-          format: uri
-          description: The URL of the file to be sent to the model.
-        file_data:
-          type: string
-          description: The content of the file to be sent to the model.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.MessageContent'
-      description: A file input to the model.
-      title: Input file
-    OpenAI.MessageContentInputImageContent:
-      type: object
-      required:
-        - type
-        - detail
-      properties:
-        type:
-          type: string
-          enum:
-            - input_image
-          description: The type of the input item. Always `input_image`.
-          x-stainless-const: true
-          default: input_image
-        image_url:
-          type: string
-          format: uri
-          nullable: true
-        file_id:
-          type: string
-          nullable: true
-        detail:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.ImageDetail'
-          description: The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.MessageContent'
-      description: An image input to the model. Learn about [image inputs](https://platform.openai.com/docs/guides/vision).
-      title: Input image
-    OpenAI.MessageContentInputTextContent:
-      type: object
-      required:
-        - type
-        - text
-      properties:
-        type:
-          type: string
-          enum:
-            - input_text
-          description: The type of the input item. Always `input_text`.
-          x-stainless-const: true
-          default: input_text
-        text:
-          type: string
-          description: The text input to the model.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.MessageContent'
-      description: A text input to the model.
-      title: Input text
-    OpenAI.MessageContentOutputTextContent:
-      type: object
-      required:
-        - type
-        - text
-        - annotations
-      properties:
-        type:
-          type: string
-          enum:
-            - output_text
-          description: The type of the output text. Always `output_text`.
-          x-stainless-const: true
-          default: output_text
-        text:
-          type: string
-          description: The text output from the model.
-        annotations:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Annotation'
-          description: The annotations of the text output.
-        logprobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.LogProb'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.MessageContent'
-      description: A text output from the model.
-      title: Output text
-    OpenAI.MessageContentReasoningTextContent:
-      type: object
-      required:
-        - type
-        - text
-      properties:
-        type:
-          type: string
-          enum:
-            - reasoning_text
-          description: The type of the reasoning text. Always `reasoning_text`.
-          x-stainless-const: true
-          default: reasoning_text
-        text:
-          type: string
-          description: The reasoning text from the model.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.MessageContent'
-      description: Reasoning text from the model.
-      title: ReasoningTextContent
-    OpenAI.MessageContentRefusalContent:
-      type: object
-      required:
-        - type
-        - refusal
-      properties:
-        type:
-          type: string
-          enum:
-            - refusal
-          description: The type of the refusal. Always `refusal`.
-          x-stainless-const: true
-          default: refusal
-        refusal:
-          type: string
-          description: The refusal explanation from the model.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.MessageContent'
-      description: A refusal from the model.
-      title: Refusal
-    OpenAI.MessageContentType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - input_text
-            - output_text
-            - text
-            - summary_text
-            - reasoning_text
-            - refusal
-            - input_image
-            - computer_screenshot
-            - input_file
     OpenAI.MessageRole:
       type: string
       enum:
@@ -18985,7 +18747,6 @@ components:
         mapping:
           output_text: '#/components/schemas/OpenAI.OutputContentOutputTextContent'
           refusal: '#/components/schemas/OpenAI.OutputContentRefusalContent'
-          reasoning_text: '#/components/schemas/OpenAI.OutputContentReasoningTextContent'
     OpenAI.OutputContentOutputTextContent:
       type: object
       required:
@@ -19016,26 +18777,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.OutputContent'
       description: A text output from the model.
       title: Output text
-    OpenAI.OutputContentReasoningTextContent:
-      type: object
-      required:
-        - type
-        - text
-      properties:
-        type:
-          type: string
-          enum:
-            - reasoning_text
-          description: The type of the reasoning text. Always `reasoning_text`.
-          x-stainless-const: true
-          default: reasoning_text
-        text:
-          type: string
-          description: The reasoning text from the model.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.OutputContent'
-      description: Reasoning text from the model.
-      title: ReasoningTextContent
     OpenAI.OutputContentRefusalContent:
       type: object
       required:
@@ -19885,6 +19626,34 @@ components:
           enum:
             - output_text
             - refusal
+    OpenAI.OutputTextContent:
+      type: object
+      required:
+        - type
+        - text
+        - annotations
+      properties:
+        type:
+          type: string
+          enum:
+            - output_text
+          description: The type of the output text. Always `output_text`.
+          x-stainless-const: true
+          default: output_text
+        text:
+          type: string
+          description: The text output from the model.
+        annotations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Annotation'
+          description: The annotations of the text output.
+        logprobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.LogProb'
+      description: A text output from the model.
+      title: Output text
     OpenAI.Prompt:
       type: object
       required:
@@ -19984,8 +19753,28 @@ components:
         text:
           type: string
           description: The reasoning text from the model.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputContent'
       description: Reasoning text from the model.
       title: ReasoningTextContent
+    OpenAI.RefusalContent:
+      type: object
+      required:
+        - type
+        - refusal
+      properties:
+        type:
+          type: string
+          enum:
+            - refusal
+          description: The type of the refusal. Always `refusal`.
+          x-stainless-const: true
+          default: refusal
+        refusal:
+          type: string
+          description: The refusal explanation from the model.
+      description: A refusal from the model.
+      title: Refusal
     OpenAI.Response:
       type: object
       required:
@@ -20073,9 +19862,7 @@ components:
         tools:
           $ref: '#/components/schemas/OpenAI.ToolsArray'
         tool_choice:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
-            - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+          $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
         prompt:
           $ref: '#/components/schemas/OpenAI.Prompt'
         truncation:
@@ -22884,8 +22671,6 @@ components:
         text:
           type: string
           description: A summary of the reasoning output from the model so far.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A summary text from the model.
       title: Summary text
     OpenAI.TextContent:
@@ -22902,8 +22687,6 @@ components:
           default: text
         text:
           type: string
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A text content.
       title: Text Content
     OpenAI.TextResponseFormatConfiguration:
@@ -23198,19 +22981,6 @@ components:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Use this option to force the model to call a specific tool on a remote MCP server.
       title: MCP tool
-    OpenAI.ToolChoiceOptions:
-      type: string
-      enum:
-        - none
-        - auto
-        - required
-      description: |-
-        Controls which (if any) tool is called by the model.
-        `none` means the model will not call any tool and instead generates a message.
-        `auto` means the model can pick between generating a message or calling one or
-        more tools.
-        `required` means the model must call one or more tools.
-      title: Tool choice mode
     OpenAI.ToolChoiceParam:
       type: object
       required:
