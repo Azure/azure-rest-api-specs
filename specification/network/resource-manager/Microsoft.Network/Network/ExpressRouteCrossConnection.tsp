@@ -61,11 +61,12 @@ alias ExpressRouteCrossConnectionPeeringOps = Azure.ResourceManager.Legacy.Route
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRouteCrossConnections {
   /**
    * Gets details about the specified ExpressRouteCrossConnection.
    */
+  @tag("ExpressRouteCrossConnections")
   @autoRoute
   get is ArmResourceRead<ExpressRouteCrossConnection, Error = CloudError>;
 
@@ -73,6 +74,7 @@ interface ExpressRouteCrossConnections {
    * Update the specified ExpressRouteCrossConnection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCrossConnections")
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRouteCrossConnection,
@@ -84,6 +86,7 @@ interface ExpressRouteCrossConnections {
   /**
    * Updates an express route cross connection tags.
    */
+  @tag("ExpressRouteCrossConnections")
   @patch(#{ implicitOptionality: false })
   @autoRoute
   updateTags is ArmCustomPatchSync<
@@ -95,6 +98,7 @@ interface ExpressRouteCrossConnections {
   /**
    * Retrieves all the ExpressRouteCrossConnections in a resource group.
    */
+  @tag("ExpressRouteCrossConnections")
   @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     ExpressRouteCrossConnection,
@@ -104,6 +108,7 @@ interface ExpressRouteCrossConnections {
   /**
    * Retrieves all the ExpressRouteCrossConnections in a subscription.
    */
+  @tag("ExpressRouteCrossConnections")
   @autoRoute
   list is ArmListBySubscription<
     ExpressRouteCrossConnection,
@@ -120,6 +125,7 @@ interface ExpressRouteCrossConnections {
   /**
    * Gets the currently advertised ARP table associated with the express route cross connection in a resource group.
    */
+  @tag("ExpressRouteCrossConnectionArpTable")
   @post
   @autoRoute
   listArpTable is ArmResourceRead<
@@ -147,6 +153,7 @@ interface ExpressRouteCrossConnections {
   /**
    * Gets the route table summary associated with the express route cross connection in a resource group.
    */
+  @tag("ExpressRouteCrossConnectionRouteTableSummary")
   @post
   @autoRoute
   listRoutesTableSummary is ArmResourceRead<
@@ -173,8 +180,7 @@ interface ExpressRouteCrossConnections {
 
   /**
    * Gets the currently advertised routes table associated with the express route cross connection in a resource group.
-   */
-  @post
+   */  @tag("ExpressRouteCrossConnectionRouteTable")  @post
   @autoRoute
   listRoutesTable is ArmResourceRead<
     ExpressRouteCrossConnection,
@@ -202,6 +208,7 @@ interface ExpressRouteCrossConnections {
    * Gets all peerings in a specified ExpressRouteCrossConnection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCrossConnectionPeerings")
   @operationId("ExpressRouteCrossConnectionPeerings_List")
   @list
   @get
@@ -218,6 +225,7 @@ interface ExpressRouteCrossConnections {
    * Deletes the specified peering from the ExpressRouteCrossConnection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCrossConnectionPeerings")
   @operationId("ExpressRouteCrossConnectionPeerings_Delete")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}")
@@ -235,6 +243,7 @@ interface ExpressRouteCrossConnections {
    * Gets the specified peering for the ExpressRouteCrossConnection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCrossConnectionPeerings")
   @operationId("ExpressRouteCrossConnectionPeerings_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}")
@@ -250,6 +259,7 @@ interface ExpressRouteCrossConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCrossConnectionPeerings")
   @operationId("ExpressRouteCrossConnectionPeerings_CreateOrUpdate")
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}/peerings/{peeringName}")

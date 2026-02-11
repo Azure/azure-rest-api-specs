@@ -225,6 +225,7 @@ interface NetworkWatchers {
    * Configures flow log and traffic analytics (optional) on a specified resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("configureFlowLog")
   setFlowLogConfiguration is ArmResourceActionAsyncBase<
@@ -243,6 +244,7 @@ interface NetworkWatchers {
    * Queries status of flow log and traffic analytics (optional) on a specified resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
   @autoRoute
   @action("queryFlowLogStatus")
   getFlowLogStatus is ArmResourceActionAsyncBase<
@@ -334,6 +336,8 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
+  @tag("PacketCaptures")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @operationId("PacketCaptures_Create")
   @put
@@ -354,6 +358,8 @@ interface NetworkWatchers {
    * Gets a packet capture session by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
+  @tag("PacketCaptures")
   @operationId("PacketCaptures_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}")
@@ -368,6 +374,8 @@ interface NetworkWatchers {
    * Deletes the specified packet capture session.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
+  @tag("PacketCaptures")
   @operationId("PacketCaptures_Delete")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}")
@@ -383,6 +391,8 @@ interface NetworkWatchers {
    * Stops a specified packet capture session.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
+  @tag("PacketCaptures")
   @operationId("PacketCaptures_Stop")
   @action("stop")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/stop")
@@ -401,6 +411,8 @@ interface NetworkWatchers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
+  @tag("PacketCaptures")
   @operationId("PacketCaptures_GetStatus")
   @action("queryStatus")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/packetCaptures/{packetCaptureName}/queryStatus")
@@ -420,6 +432,8 @@ interface NetworkWatchers {
    * Lists all packet capture sessions within the specified resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkWatchers")
+  @tag("PacketCaptures")
   @operationId("PacketCaptures_List")
   @list
   @get

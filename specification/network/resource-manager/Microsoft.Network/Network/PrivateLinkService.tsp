@@ -64,6 +64,7 @@ interface PrivateLinkServices {
   /**
    * Creates or updates an private link service in the specified resource group.
    */
+  @tag("PrivateLinkService")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PrivateLinkService,
     Error = Error
@@ -98,3 +99,4 @@ interface PrivateLinkServices {
 @@doc(PrivateLinkServices.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update private link service operation."
 );
+

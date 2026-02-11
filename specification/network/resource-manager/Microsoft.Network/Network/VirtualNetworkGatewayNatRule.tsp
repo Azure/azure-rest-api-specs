@@ -43,7 +43,7 @@ model VirtualNetworkGatewayNatRule extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface VirtualNetworkGatewayNatRules {
   /**
    * Retrieves the details of a nat rule.
@@ -87,3 +87,4 @@ interface VirtualNetworkGatewayNatRules {
 @@doc(VirtualNetworkGatewayNatRules.createOrUpdate::parameters.resource,
   "Parameters supplied to create or Update a Nat Rule."
 );
+

@@ -38,11 +38,12 @@ model FirewallPolicy extends Resource {
   identity?: ManagedServiceIdentity;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface FirewallPolicies {
   /**
    * Gets the specified Firewall Policy.
    */
+  @tag("FirewallPolicies")
   get is ArmResourceRead<
     FirewallPolicy,
     Parameters = {
@@ -58,6 +59,7 @@ interface FirewallPolicies {
   /**
    * Creates or updates the specified Firewall Policy.
    */
+  @tag("FirewallPolicies")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FirewallPolicy,
     Error = CloudError
@@ -66,6 +68,7 @@ interface FirewallPolicies {
   /**
    * Updates tags of a Azure Firewall Policy resource.
    */
+  @tag("FirewallPolicies")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     FirewallPolicy,
@@ -77,6 +80,7 @@ interface FirewallPolicies {
    * Deletes the specified Firewall Policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("FirewallPolicies")
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallPolicy,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -86,11 +90,13 @@ interface FirewallPolicies {
   /**
    * Lists all Firewall Policies in a resource group.
    */
+  @tag("FirewallPolicies")
   list is ArmResourceListByParent<FirewallPolicy, Error = CloudError>;
 
   /**
    * Gets all the Firewall Policies in a subscription.
    */
+  @tag("FirewallPolicies")
   listAll is ArmListBySubscription<FirewallPolicy, Error = CloudError>;
 
   /**

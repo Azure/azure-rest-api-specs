@@ -126,6 +126,7 @@ interface ExpressRouteGateways {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteConnections")
   @operationId("ExpressRouteConnections_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -146,6 +147,7 @@ interface ExpressRouteGateways {
    * Gets the specified ExpressRouteConnection.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteConnections")
   @operationId("ExpressRouteConnections_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}")
@@ -160,6 +162,7 @@ interface ExpressRouteGateways {
    * Deletes a connection to a ExpressRoute circuit.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteConnections")
   @operationId("ExpressRouteConnections_Delete")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteGateways/{expressRouteGatewayName}/expressRouteConnections/{connectionName}")
@@ -177,6 +180,7 @@ interface ExpressRouteGateways {
    * Lists ExpressRouteConnections.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteConnections")
   @operationId("ExpressRouteConnections_List")
   @list
   @get

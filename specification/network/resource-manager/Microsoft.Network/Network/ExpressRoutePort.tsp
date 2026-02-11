@@ -67,17 +67,19 @@ alias ExpressRouteLinkOps = Azure.ResourceManager.Legacy.RoutedOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRoutePorts {
   /**
    * Retrieves the requested ExpressRoutePort resource.
    */
+  @tag("ExpressRoutePorts")
   @autoRoute
   get is ArmResourceRead<ExpressRoutePort, Error = CloudError>;
 
   /**
    * Creates or updates the specified ExpressRoutePort resource.
    */
+  @tag("ExpressRoutePorts")
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRoutePort,
@@ -87,6 +89,7 @@ interface ExpressRoutePorts {
   /**
    * Update ExpressRoutePort tags.
    */
+  @tag("ExpressRoutePorts")
   @autoRoute
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
@@ -100,6 +103,7 @@ interface ExpressRoutePorts {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRoutePorts")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -112,6 +116,7 @@ interface ExpressRoutePorts {
   /**
    * List all the ExpressRoutePort resources in the specified resource group.
    */
+  @tag("ExpressRoutePorts")
   @autoRoute
   listByResourceGroup is ArmResourceListByParent<
     ExpressRoutePort,
@@ -122,6 +127,7 @@ interface ExpressRoutePorts {
   /**
    * List all the ExpressRoutePort resources in the specified subscription.
    */
+  @tag("ExpressRoutePorts")
   @autoRoute
   list is ArmListBySubscription<
     ExpressRoutePort,
@@ -133,6 +139,7 @@ interface ExpressRoutePorts {
    * Generate a letter of authorization for the requested ExpressRoutePort resource.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRoutePorts")
   @action("generateLoa")
   @autoRoute
   generateLOA is ArmResourceActionSync<
@@ -146,6 +153,7 @@ interface ExpressRoutePorts {
    * Retrieves the specified ExpressRouteLink resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteLinks")
   @operationId("ExpressRouteLinks_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ExpressRoutePorts/{expressRoutePortName}/links/{linkName}")
@@ -160,6 +168,7 @@ interface ExpressRoutePorts {
    * Retrieve the ExpressRouteLink sub-resources of the specified ExpressRoutePort resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteLinks")
   @operationId("ExpressRouteLinks_List")
   @list
   @get

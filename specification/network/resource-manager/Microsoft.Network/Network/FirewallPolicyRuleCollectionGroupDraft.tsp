@@ -33,7 +33,7 @@ model FirewallPolicyRuleCollectionGroupDraft extends SubResourceModel {
   name: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface FirewallPolicyRuleCollectionGroupDrafts {
   /**
    * Get Rule Collection Group Draft.

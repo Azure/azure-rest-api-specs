@@ -67,7 +67,6 @@ interface ApplicationGatewayWafDynamicManifestResults {
    * Gets the regional application gateway waf manifest.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("ApplicationGateways")
   @operationId("ApplicationGatewayWafDynamicManifestsDefault_Get")
   get is ApplicationGatewayWafDynamicManifestResultOps.Read<
     ApplicationGatewayWafDynamicManifestResult,
@@ -78,7 +77,6 @@ interface ApplicationGatewayWafDynamicManifestResults {
    * Gets the regional application gateway waf manifest.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("ApplicationGateways")
   @operationId("ApplicationGatewayWafDynamicManifests_Get")
   applicationGatewayWafDynamicManifestsGet is ArmResourceListByParent<
     ApplicationGatewayWafDynamicManifestResult,

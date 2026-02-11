@@ -38,11 +38,12 @@ model InboundNatRule extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface InboundNatRules {
   /**
    * Gets the specified load balancer inbound NAT rule.
    */
+  @tag("LoadBalancers")
   get is ArmResourceRead<
     InboundNatRule,
     Parameters = {
@@ -58,6 +59,7 @@ interface InboundNatRules {
   /**
    * Creates or updates a load balancer inbound NAT rule.
    */
+  @tag("LoadBalancers")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InboundNatRule,
     Error = CloudError
@@ -67,6 +69,7 @@ interface InboundNatRules {
    * Deletes the specified load balancer inbound NAT rule.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("LoadBalancers")
   delete is ArmResourceDeleteWithoutOkAsync<
     InboundNatRule,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -76,6 +79,7 @@ interface InboundNatRules {
   /**
    * Gets all the inbound NAT rules in a load balancer.
    */
+  @tag("LoadBalancers")
   list is ArmResourceListByParent<InboundNatRule, Error = CloudError>;
 }
 

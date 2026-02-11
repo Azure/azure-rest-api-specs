@@ -36,16 +36,18 @@ model DdosCustomPolicy extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface DdosCustomPolicies {
   /**
    * Gets information about the specified DDoS custom policy.
    */
+  @tag("ddosCustomPolicies")
   get is ArmResourceRead<DdosCustomPolicy, Error = CloudError>;
 
   /**
    * Creates or updates a DDoS custom policy.
    */
+  @tag("ddosCustomPolicies")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DdosCustomPolicy,
     Error = CloudError
@@ -54,6 +56,7 @@ interface DdosCustomPolicies {
   /**
    * Update a DDoS custom policy tags.
    */
+  @tag("ddosCustomPolicies")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     DdosCustomPolicy,
@@ -65,6 +68,7 @@ interface DdosCustomPolicies {
    * Deletes the specified DDoS custom policy.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ddosCustomPolicies")
   delete is ArmResourceDeleteWithoutOkAsync<
     DdosCustomPolicy,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,

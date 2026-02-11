@@ -88,6 +88,7 @@ interface VirtualNetworkGatewayConnections {
    * Gets a xml format representation for vpn device configuration script.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VirtualNetworkGatewayConnections")
   @operationId("VirtualNetworkGateways_VpnDeviceConfigurationScript")
   @action("vpndeviceconfigurationscript")
   vpnDeviceConfigurationScript is ArmResourceActionSync<

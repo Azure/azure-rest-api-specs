@@ -42,12 +42,13 @@ model NspAssociation extends CommonProxyResource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface NspAssociations {
   /**
    * Gets the specified NSP association by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterAssociations")
   @operationId("NetworkSecurityPerimeterAssociations_Get")
   get is ArmResourceRead<NspAssociation, Error = CloudError>;
 
@@ -58,6 +59,7 @@ interface NspAssociations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterAssociations")
   @operationId("NetworkSecurityPerimeterAssociations_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NspAssociation,
@@ -75,6 +77,7 @@ interface NspAssociations {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterAssociations")
   @operationId("NetworkSecurityPerimeterAssociations_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     NspAssociation,
@@ -87,6 +90,7 @@ interface NspAssociations {
    * Lists the NSP resource associations.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterAssociations")
   @operationId("NetworkSecurityPerimeterAssociations_List")
   list is ArmResourceListByParent<
     NspAssociation,
@@ -113,6 +117,7 @@ interface NspAssociations {
    * Reconcile NSP association
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterAssociations")
   @operationId("NetworkSecurityPerimeterAssociations_Reconcile")
   reconcile is ArmResourceActionSync<
     NspAssociation,

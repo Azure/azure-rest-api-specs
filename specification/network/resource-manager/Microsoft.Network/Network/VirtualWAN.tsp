@@ -57,7 +57,7 @@ alias VirtualWanOps = Azure.ResourceManager.Legacy.LegacyOperations<
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface VirtualWANS {
   /**
    * Retrieves the details of a VirtualWAN.
@@ -81,6 +81,7 @@ interface VirtualWANS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VirtualWANs")
   @operationId("VirtualWans_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
@@ -193,3 +194,4 @@ interface VirtualWANS {
 @@doc(VirtualWANS.download::parameters.body,
   "Parameters supplied to download vpn-sites configuration."
 );
+

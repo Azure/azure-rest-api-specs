@@ -31,7 +31,7 @@ model FirewallPolicyDraft extends Resource {
   name: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface FirewallPolicyDrafts {
   /**
    * Get a draft Firewall Policy.

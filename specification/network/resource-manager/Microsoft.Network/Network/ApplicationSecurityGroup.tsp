@@ -36,16 +36,18 @@ model ApplicationSecurityGroup extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface ApplicationSecurityGroups {
   /**
    * Gets information about the specified application security group.
    */
+  @tag("ApplicationSecurityGroups")
   get is ArmResourceRead<ApplicationSecurityGroup, Error = CloudError>;
 
   /**
    * Creates or updates an application security group.
    */
+  @tag("ApplicationSecurityGroups")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApplicationSecurityGroup,
     Error = CloudError
@@ -55,6 +57,7 @@ interface ApplicationSecurityGroups {
    * Updates an application security group's tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("applicationSecurityGroups")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     ApplicationSecurityGroup,
@@ -66,6 +69,7 @@ interface ApplicationSecurityGroups {
    * Deletes the specified application security group.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ApplicationSecurityGroups")
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationSecurityGroup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -75,11 +79,13 @@ interface ApplicationSecurityGroups {
   /**
    * Gets all the application security groups in a resource group.
    */
+  @tag("ApplicationSecurityGroups")
   list is ArmResourceListByParent<ApplicationSecurityGroup, Error = CloudError>;
 
   /**
    * Gets all application security groups in a subscription.
    */
+  @tag("ApplicationSecurityGroups")
   listAll is ArmListBySubscription<
     ApplicationSecurityGroup,
     Error = CloudError

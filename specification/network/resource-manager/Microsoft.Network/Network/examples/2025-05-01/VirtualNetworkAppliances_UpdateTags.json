@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
+    "virtualNetworkApplianceName": "test-vna"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-vna",
+        "type": "Microsoft.Network/virtualNetworkAppliances",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkAppliances/test-vna",
+        "location": "eastus",
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "ipconfig1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkAppliances/test-vna/ipConfigurations/ipconfig1",
+              "properties": {
+                "primary": true,
+                "privateIPAddress": "10.0.1.4",
+                "privateIPAddressVersion": "IPv4",
+                "privateIPAllocationMethod": "Dynamic",
+                "provisioningState": "Succeeded"
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceGuid": "c9b1f5f4-5d6e-4f0a-89c1-6b3d3e3c3e3c",
+          "subnet": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet/subnets/default"
+          }
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualNetworkAppliances_UpdateTags",
+  "title": "Update virtual network appliance tags"
+}

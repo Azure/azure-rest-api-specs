@@ -42,12 +42,13 @@ model NspLoggingConfiguration extends CommonProxyResource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface NspLoggingConfigurations {
   /**
    * Gets the NSP logging configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterLoggingConfigurations")
   @operationId("NetworkSecurityPerimeterLoggingConfigurations_Get")
   get is ArmResourceRead<NspLoggingConfiguration, Error = CloudError>;
 
@@ -55,6 +56,7 @@ interface NspLoggingConfigurations {
    * Creates or updates NSP logging configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterLoggingConfigurations")
   @operationId("NetworkSecurityPerimeterLoggingConfigurations_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NspLoggingConfiguration,
@@ -65,6 +67,7 @@ interface NspLoggingConfigurations {
    * Deletes an NSP Logging configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterLoggingConfigurations")
   @operationId("NetworkSecurityPerimeterLoggingConfigurations_Delete")
   delete is ArmResourceDeleteSync<NspLoggingConfiguration, Error = CloudError>;
 
@@ -72,6 +75,7 @@ interface NspLoggingConfigurations {
    * Lists the NSP logging configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterLoggingConfigurations")
   @operationId("NetworkSecurityPerimeterLoggingConfigurations_List")
   list is ArmResourceListByParent<NspLoggingConfiguration, Error = CloudError>;
 }

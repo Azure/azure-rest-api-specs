@@ -37,24 +37,19 @@ model VirtualNetworkTap extends Resource {
 }
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface VirtualNetworkTaps {
-  /**
-   * Gets information about the specified virtual network tap.
-   */
+  @tag("VirtualNetworkTap")
   get is ArmResourceRead<VirtualNetworkTap, Error = CloudError>;
 
-  /**
-   * Creates or updates a Virtual Network Tap.
-   */
+  @tag("VirtualNetworkTap")
+
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualNetworkTap,
     Error = CloudError
   >;
 
-  /**
-   * Updates an VirtualNetworkTap tags.
-   */
+  @tag("VirtualNetworkTap")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     VirtualNetworkTap,
@@ -62,9 +57,7 @@ interface VirtualNetworkTaps {
     Error = CloudError
   >;
 
-  /**
-   * Deletes the specified virtual network tap.
-   */
+  @tag("VirtualNetworkTap")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkTap,
@@ -75,6 +68,7 @@ interface VirtualNetworkTaps {
   /**
    * Gets all the VirtualNetworkTaps in a subscription.
    */
+  @tag("VirtualNetworkTaps")
   listByResourceGroup is ArmResourceListByParent<
     VirtualNetworkTap,
     Error = CloudError
@@ -83,6 +77,7 @@ interface VirtualNetworkTaps {
   /**
    * Gets all the VirtualNetworkTaps in a subscription.
    */
+  @tag("VirtualNetworkTaps")
   listAll is ArmListBySubscription<VirtualNetworkTap, Error = CloudError>;
 }
 
@@ -94,3 +89,4 @@ interface VirtualNetworkTaps {
 @@doc(VirtualNetworkTaps.updateTags::parameters.properties,
   "Parameters supplied to update VirtualNetworkTap tags."
 );
+

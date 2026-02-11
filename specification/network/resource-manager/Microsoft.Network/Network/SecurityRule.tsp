@@ -120,11 +120,12 @@ alias DefaultSecurityRuleOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface DefaultSecurityRules {
   /**
    * Get the specified default network security rule.
    */
+  @tag("SecurityRules")
   get is DefaultSecurityRuleOps.Read<
     SecurityRule,
     OverrideErrorType = CloudError
@@ -133,6 +134,7 @@ interface DefaultSecurityRules {
   /**
    * Gets all default security rules in a network security group.
    */
+  @tag("SecurityRules")
   list is DefaultSecurityRuleOps.List<
     SecurityRule,
     OverrideErrorType = CloudError

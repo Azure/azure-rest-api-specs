@@ -71,7 +71,7 @@ alias VpnSiteLinkConnectionsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface VpnSiteLinkConnections {
   /**
    * Retrieves the details of a vpn site link connection.
@@ -103,6 +103,7 @@ interface VpnSiteLinkConnections {
    * Resets the VpnLink connection specified.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("vpnLinkConnections")
   @operationId("VpnLinkConnections_ResetConnection")
   @action("resetconnection")
   resetConnection is VpnSiteLinkConnectionsOps.ActionAsync<

@@ -42,12 +42,13 @@ model NspLinkReference extends CommonProxyResource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface NspLinkReferences {
   /**
    * Gets the specified NSP linkReference resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterLinkReferences")
   @operationId("NetworkSecurityPerimeterLinkReferences_Get")
   get is ArmResourceRead<NspLinkReference, Error = CloudError>;
 
@@ -56,6 +57,7 @@ interface NspLinkReferences {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterLinkReferences")
   @operationId("NetworkSecurityPerimeterLinkReferences_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     NspLinkReference,
@@ -67,6 +69,7 @@ interface NspLinkReferences {
    * Lists the NSP LinkReference resources in the specified network security perimeter.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkSecurityPerimeterLinkReferences")
   @operationId("NetworkSecurityPerimeterLinkReferences_List")
   list is ArmResourceListByParent<
     NspLinkReference,

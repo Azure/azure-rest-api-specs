@@ -2396,25 +2396,31 @@ union FirewallPolicyIntrusionDetectionStateType {
 }
 
 /**
- * Possible Intrusion Detection profile values.
+ * Specifies the Intrusion Detection signature profile to apply.
+ *
+ * Values:
+ * - Off: IDPS profiles disabled; uses the same signature set that existed before profiles.
+ * - Emerging: Signatures of the newest, most recent threats.
+ * - Core: Complete, modern, standard set of signatures.
+ * - Extended: Core signatures plus older legacy signatures for maximum coverage.
  */
 union FirewallPolicyIntrusionDetectionProfileType {
   string,
 
   /**
-   * Basic
+   * Off
    */
-  Basic: "Basic",
+  Off: "Off",
 
   /**
-   * Standard
+   * Emerging
    */
-  Standard: "Standard",
+  Emerging: "Emerging",
 
   /**
-   * Advanced
+   * Core
    */
-  Advanced: "Advanced",
+  Core: "Core",
 
   /**
    * Extended
@@ -2547,6 +2553,112 @@ union CreatedByType {
    * Key
    */
   Key: "Key",
+}
+
+/**
+ * Name of a service gateway SKU.
+ */
+union ServiceGatewaySkuName {
+  string,
+
+  /**
+   * Standard
+   */
+  Standard: "Standard",
+}
+
+/**
+ * Tier of a service gateway SKU.
+ */
+union ServiceGatewaySkuTier {
+  string,
+
+  /**
+   * Regional
+   */
+  Regional: "Regional",
+}
+
+/**
+ * Specifies the type of update operation to perform on address locations within the service gateway.
+ *
+ * - FullUpdate: Replaces all existing address location data with the new list provided in the request. Any previously defined locations not included will be removed.
+ * - PartialUpdate: Updates only the specified address locations.
+ */
+union UpdateAction {
+  string,
+
+  /**
+   * FullUpdate
+   */
+  FullUpdate: "FullUpdate",
+
+  /**
+   * PartialUpdate
+   */
+  PartialUpdate: "PartialUpdate",
+}
+
+/**
+ * Specifies the type of update operation to perform on addresses within the address location of service gateway.
+ *
+ * - FullUpdate: Replaces all existing address data with the new list provided in the request. Any previously defined addresses not included will be removed.
+ * - PartialUpdate: Updates only the specified addresses.
+ */
+union AddressUpdateAction {
+  string,
+
+  /**
+   * FullUpdate
+   */
+  FullUpdate: "FullUpdate",
+
+  /**
+   * PartialUpdate
+   */
+  PartialUpdate: "PartialUpdate",
+}
+
+/**
+ * Specifies the type of update operation to perform on services within the service gateway.
+ *
+ * - FullUpdate: Replaces all existing services with the new list provided in the request. Any previously defined services not included will be removed.
+ * - PartialUpdate: Updates only the specified services.
+ */
+union ServiceUpdateAction {
+  string,
+
+  /**
+   * FullUpdate
+   */
+  FullUpdate: "FullUpdate",
+
+  /**
+   * PartialUpdate
+   */
+  PartialUpdate: "PartialUpdate",
+}
+
+/**
+ * Name of the service.
+ */
+union ServiceType {
+  string,
+
+  /**
+   * Inbound
+   */
+  Inbound: "Inbound",
+
+  /**
+   * Outbound
+   */
+  Outbound: "Outbound",
+
+  /**
+   * InboundOutbound
+   */
+  InboundOutbound: "InboundOutbound",
 }
 
 /**
@@ -6139,6 +6251,11 @@ union WebApplicationFirewallAction {
    * JSChallenge
    */
   JSChallenge: "JSChallenge",
+
+  /**
+   * CAPTCHA
+   */
+  CAPTCHA: "CAPTCHA",
 }
 
 /**
@@ -6390,6 +6507,11 @@ union ActionType {
    * JSChallenge
    */
   JSChallenge: "JSChallenge",
+
+  /**
+   * CAPTCHA
+   */
+  CAPTCHA: "CAPTCHA",
 }
 
 /**
@@ -8258,6 +8380,11 @@ model SubnetPropertiesFormat {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipamPoolPrefixAllocations?: IpamPoolPrefixAllocation[];
+
+  /**
+   * Reference to an existing service gateway.
+   */
+  serviceGateway?: SubResource;
 }
 
 /**
@@ -9661,6 +9788,11 @@ model NatGatewayPropertiesFormat {
    * A reference to the source virtual network using this nat gateway resource.
    */
   sourceVirtualNetwork?: SubResource;
+
+  /**
+   * Reference to an existing service gateway.
+   */
+  serviceGateway?: SubResource;
 
   /**
    * The resource GUID property of the NAT gateway resource.
@@ -28216,6 +28348,13 @@ model PolicySettings {
   @maxValue(1440)
   @minValue(5)
   jsChallengeCookieExpirationInMins?: int32;
+
+  /**
+   * Web Application Firewall CAPTCHA Cookie Expiration time in minutes.
+   */
+  @maxValue(1440)
+  @minValue(5)
+  captchaCookieExpirationInMins?: int32;
 }
 
 /**
@@ -29516,3 +29655,325 @@ model BastionHostListResult is Azure.Core.Page<BastionHost>;
 );
 @@visibility(VirtualNetworkListUsageResult.value, Lifecycle.Read);
 @@visibility(WebApplicationFirewallPolicyListResult.value, Lifecycle.Read);
+
+/**
+ * Properties of the service gateway.
+ */
+model ServiceGatewayPropertiesFormat {
+  /**
+   * Reference to an existing virtual network.
+   */
+  virtualNetwork?: VirtualNetwork;
+
+  /**
+   * Route Target address of Service gateway
+   */
+  routeTargetAddress?: RouteTargetAddressPropertiesFormat;
+
+  /**
+   * Route Target address V6 of Service gateway
+   */
+  routeTargetAddressV6?: RouteTargetAddressPropertiesFormat;
+
+  /**
+   * The resource GUID property of the service gateway resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceGuid?: string;
+
+  /**
+   * The provisioning state of the service gateway resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Properties of route target address
+ */
+model RouteTargetAddressPropertiesFormat {
+  /**
+   * The reference to the subnet resource.
+   */
+  subnet?: Subnet;
+
+  /**
+   * The private IPv4 or IPv6 address of the service gateway route target address.
+   */
+  privateIPAddress?: string;
+
+  /**
+   * The Private IP allocation method.
+   */
+  privateIPAllocationMethod?: IPAllocationMethod;
+}
+
+/**
+ * SKU of a service gateway.
+ */
+model ServiceGatewaySku {
+  /**
+   * Name of a service gateway SKU.
+   */
+  name?: ServiceGatewaySkuName;
+
+  /**
+   * Tier of a service gateway SKU.
+   */
+  tier?: ServiceGatewaySkuTier;
+}
+
+/**
+ * Properties of the service gateway update address locations request.
+ */
+model ServiceGatewayUpdateAddressLocationsRequest {
+  /**
+   * Specifies the type of update operation to perform on address locations within the service gateway.
+   *
+   * - FullUpdate: Replaces all existing address location data with the new list provided in the request. Any previously defined locations not included will be removed.
+   * - PartialUpdate: Updates only the specified address locations.
+   */
+  action?: UpdateAction;
+
+  /**
+   * An array of address locations to create or update.
+   */
+  @identifiers(#["addressLocation"])
+  addressLocations?: ServiceGatewayAddressLocation[];
+}
+
+/**
+ * Properties of the service gateway address location.
+ */
+model ServiceGatewayAddressLocation {
+  /**
+   * Location to update
+   */
+  addressLocation?: string;
+
+  /**
+   * Specifies the type of update operation to perform on addresses within the address location of service gateway.
+   *
+   * - FullUpdate: Replaces all existing address data with the new list provided in the request. Any previously defined addresses not included will be removed.
+   * - PartialUpdate: Updates only the specified addresses.
+   */
+  addressUpdateAction?: AddressUpdateAction;
+
+  /**
+   * An array of addresses to create or update in locations.
+   */
+  @identifiers(#["address"])
+  addresses?: ServiceGatewayAddress[];
+}
+
+/**
+ * Properties of the service gateway address.
+ */
+model ServiceGatewayAddress {
+  /**
+   * Address to update
+   */
+  address?: string;
+
+  /**
+   * Collection of services in address.
+   */
+  services?: string[];
+}
+
+/**
+ * Properties of the service gateway update services request.
+ */
+model ServiceGatewayUpdateServicesRequest {
+  /**
+   * Specifies the type of update operation to perform on services within the service gateway.
+   *
+   * - FullUpdate: Replaces all existing services with the new list provided in the request. Any previously defined services not included will be removed.
+   * - PartialUpdate: Updates only the specified services.
+   */
+  action?: ServiceUpdateAction;
+
+  /**
+   * Collection of service updates.
+   */
+  @identifiers(#["service/name"])
+  serviceRequests?: ServiceGatewayServiceRequest[];
+}
+
+/**
+ * Properties of the service gateway services request.
+ */
+model ServiceGatewayServiceRequest {
+  /**
+   * Set to true to mark the service for deletion.
+   */
+  isDelete?: boolean;
+
+  /**
+   * Service of service gateway.
+   */
+  service?: ServiceGatewayService;
+}
+
+/**
+ * Properties of the service gateway service.
+ */
+model ServiceGatewayService {
+  /**
+   * Name of the service
+   */
+  name?: string;
+
+  /**
+   * Properties of service gateway service.
+   */
+  properties?: ServiceGatewayServicePropertiesFormat;
+}
+
+/**
+ * Properties of the service gateway service.
+ */
+model ServiceGatewayServicePropertiesFormat {
+  /**
+   * Name of the service.
+   */
+  serviceType?: ServiceType;
+
+  /**
+   * Set to true to mark default service for inbound or outbound.
+   */
+  isDefault?: boolean;
+
+  /**
+   * An array of load balancer backend address pools.
+   */
+  loadBalancerBackendPools?: BackendAddressPool[];
+
+  /**
+   * Azure Resource Id of public natgateway.
+   */
+  publicNatGatewayId?: string;
+}
+
+/**
+ * Response for get service gateway address locations.
+ */
+model GetServiceGatewayAddressLocationsResult
+  is Azure.Core.Page<ServiceGatewayAddressLocationResponse>;
+
+/**
+ * Properties of the service gateway address location.
+ */
+model ServiceGatewayAddressLocationResponse {
+  /**
+   * Location to update
+   */
+  addressLocation?: string;
+
+  /**
+   * An array of addresses to create or update in locations.
+   */
+  @identifiers(#["address"])
+  addresses?: ServiceGatewayAddress[];
+}
+
+/**
+ * Response for get service gateway services.
+ */
+model GetServiceGatewayServicesResult is Azure.Core.Page<ServiceGatewayService>;
+
+/**
+ * VirtualNetworkAppliance properties.
+ */
+model VirtualNetworkAppliancePropertiesFormat {
+  /**
+   * Bandwidth of the VirtualNetworkAppliance resource in Gbps.
+   */
+  bandwidthInGbps?: string;
+
+  /**
+   * A list of IPConfigurations of the virtual network appliance.
+   */
+  @visibility(Lifecycle.Read)
+  ipConfigurations?: VirtualNetworkApplianceIpConfiguration[];
+
+  /**
+   * The provisioning state of the virtual network appliance resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NetworkProvisioningState;
+
+  /**
+   * The resource GUID property of the virtual network appliance resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceGuid?: string;
+
+  /**
+   * The reference to the subnet resource.
+   */
+  subnet?: Subnet;
+}
+
+/**
+ * The virtual network appliance ip configuration.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model VirtualNetworkApplianceIpConfiguration extends SubResource {
+  /**
+   * Properties of the virtual network appliance ip configuration.
+   */
+  properties?: VirtualNetworkApplianceIpConfigurationProperties;
+
+  /**
+   * The name of virtual network appliance ip configuration.
+   */
+  name?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+}
+
+/**
+ * Properties of virtual network appliance IP configuration.
+ */
+model VirtualNetworkApplianceIpConfigurationProperties {
+  /**
+   * The private IP address of the IP configuration.
+   */
+  privateIPAddress?: string;
+
+  /**
+   * The private IP address allocation method.
+   */
+  privateIPAllocationMethod?: IPAllocationMethod;
+
+  /**
+   * Whether the ip configuration is primary or not.
+   */
+  primary?: boolean;
+
+  /**
+   * The provisioning state of the private link service IP configuration resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: NetworkProvisioningState;
+
+  /**
+   * Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4.
+   */
+  privateIPAddressVersion?: IPVersion;
+}
+@@identifiers(GetServiceGatewayAddressLocationsResult.value,
+  #["addressLocation"]
+);
+@@identifiers(GetServiceGatewayServicesResult.value, #["name"]);

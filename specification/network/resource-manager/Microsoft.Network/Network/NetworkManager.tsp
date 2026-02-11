@@ -43,16 +43,18 @@ model NetworkManager extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface NetworkManagers {
   /**
    * Gets the specified Network Manager.
    */
+  @tag("NetworkManagers")
   get is ArmResourceRead<NetworkManager, Error = CloudError>;
 
   /**
    * Creates or updates a Network Manager.
    */
+  @tag("NetworkManagers")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     NetworkManager,
     Error = CloudError
@@ -61,6 +63,7 @@ interface NetworkManagers {
   /**
    * Patch NetworkManager.
    */
+  @tag("NetworkManagers")
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
     NetworkManager,
@@ -72,6 +75,7 @@ interface NetworkManagers {
    * Deletes a network manager.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkManagers")
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkManager,
     Parameters = {
@@ -88,6 +92,7 @@ interface NetworkManagers {
   /**
    * List network managers in a resource group.
    */
+  @tag("NetworkManagers")
   list is ArmResourceListByParent<
     NetworkManager,
     Parameters = {
@@ -111,6 +116,7 @@ interface NetworkManagers {
   /**
    * List all network managers in a subscription.
    */
+  @tag("NetworkManagers")
   listBySubscription is ArmListBySubscription<
     NetworkManager,
     Parameters = {
@@ -135,6 +141,7 @@ interface NetworkManagers {
    * Lists active connectivity configurations in a network manager.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkManagers")
   @operationId("ListActiveConnectivityConfigurations")
   @list
   listActiveConnectivityConfigurations is ArmResourceActionSync<
@@ -157,6 +164,7 @@ interface NetworkManagers {
    * Lists active security admin rules in a network manager.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkManagers")
   @operationId("ListActiveSecurityAdminRules")
   @list
   listActiveSecurityAdminRules is ArmResourceActionSync<
@@ -180,6 +188,7 @@ interface NetworkManagers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkManagers")
   @operationId("NetworkManagerCommits_Post")
   @action("commit")
   post is ArmResourceActionAsyncBase<
@@ -198,6 +207,7 @@ interface NetworkManagers {
    * Post to List of Network Manager Deployment Status.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkManagers")
   @operationId("NetworkManagerDeploymentStatus_List")
   @list
   @action("listDeploymentStatus")

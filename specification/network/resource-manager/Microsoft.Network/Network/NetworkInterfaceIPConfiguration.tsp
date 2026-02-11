@@ -42,16 +42,18 @@ model NetworkInterfaceIPConfiguration extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface NetworkInterfaceIPConfigurations {
   /**
    * Gets the specified network interface ip configuration.
    */
+  @tag("NetworkInterfaces")
   get is ArmResourceRead<NetworkInterfaceIPConfiguration, Error = CloudError>;
 
   /**
    * Get all ip configurations in a network interface.
    */
+  @tag("NetworkInterfaces")
   list is ArmResourceListByParent<
     NetworkInterfaceIPConfiguration,
     Error = CloudError

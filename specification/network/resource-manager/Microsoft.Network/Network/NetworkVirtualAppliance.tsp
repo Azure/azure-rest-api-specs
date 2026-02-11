@@ -66,7 +66,7 @@ alias NetworkVirtualApplianceNetworkVirtualApplianceOps = Azure.ResourceManager.
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface NetworkVirtualApplianceConnections {
   /**
    * Creates a connection to Network Virtual Appliance, if it doesn't exist else updates the existing NVA connection'
@@ -253,3 +253,4 @@ interface NetworkVirtualAppliances {
 @@doc(NetworkVirtualApplianceConnections.networkVirtualApplianceConnectionsCreateOrUpdate::parameters.body,
   "Parameters supplied in an NetworkVirtualApplianceConnection PUT operation."
 );
+

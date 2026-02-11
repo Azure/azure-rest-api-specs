@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceGatewayName": "sg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "sg",
+        "type": "Microsoft.Network/serviceGateways",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/serviceGateways/sg",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "routeTargetAddress": {
+            "privateIPAddress": "10.0.1.4",
+            "privateIPAllocationMethod": "Static",
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/subnet"
+            }
+          },
+          "virtualNetwork": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet"
+          }
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "ServiceGateways_UpdateTags",
+  "title": "Update service gateway tags"
+}

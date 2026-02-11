@@ -43,7 +43,7 @@ model RouteMap extends ReadOnlySubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface RouteMaps {
   /**
    * Retrieves the details of a RouteMap.
@@ -85,3 +85,4 @@ interface RouteMaps {
 @@doc(RouteMaps.createOrUpdate::parameters.resource,
   "Parameters supplied to create or update a RouteMap."
 );
+

@@ -7,9 +7,9 @@ options:
     azure-resource-provider-folder: "resource-manager"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-    output-file: "{version-status}/{version}/{feature}.json"
+    output-file: "{version-status}/{version}/openapi.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    output-splitting: "legacy-feature-files"
+    # output-splitting: "legacy-feature-files"  # 注释掉或删除此行以禁用 feature 分割
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

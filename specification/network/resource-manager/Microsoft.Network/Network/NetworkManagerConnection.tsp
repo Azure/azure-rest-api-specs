@@ -119,11 +119,12 @@ interface NetworkManagerConnections {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface ManagementGroupNetworkManagerConnections {
   /**
    * Get a specified connection created by this management group.
    */
+  @tag("NetworkManagerConnections")
   get is Extension.Read<
     Extension.ManagementGroup<"managementGroupId">,
     NetworkManagerConnection,
@@ -133,6 +134,7 @@ interface ManagementGroupNetworkManagerConnections {
   /**
    * Create a network manager connection on this management group.
    */
+  @tag("NetworkManagerConnections")
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ManagementGroup<"managementGroupId">,
     NetworkManagerConnection,
@@ -142,6 +144,7 @@ interface ManagementGroupNetworkManagerConnections {
   /**
    * Delete specified pending connection created by this management group.
    */
+  @tag("NetworkManagerConnections")
   delete is Extension.DeleteSync<
     Extension.ManagementGroup<"managementGroupId">,
     NetworkManagerConnection,
@@ -151,6 +154,7 @@ interface ManagementGroupNetworkManagerConnections {
   /**
    * List all network manager connections created by this management group.
    */
+  @tag("NetworkManagerConnections")
   list is Extension.ListByTarget<
     Extension.ManagementGroup<"managementGroupId">,
     NetworkManagerConnection,

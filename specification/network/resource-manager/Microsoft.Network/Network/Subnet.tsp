@@ -44,11 +44,12 @@ model Subnet extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface Subnets {
   /**
    * Gets the specified subnet by virtual network and resource group.
    */
+  @tag("Subnets")
   get is ArmResourceRead<
     Subnet,
     Parameters = {
@@ -64,12 +65,14 @@ interface Subnets {
   /**
    * Creates or updates a subnet in the specified virtual network.
    */
+  @tag("Subnets")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Subnet, Error = CloudError>;
 
   /**
    * Deletes the specified subnet.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("Subnets")
   delete is ArmResourceDeleteWithoutOkAsync<
     Subnet,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -79,6 +82,7 @@ interface Subnets {
   /**
    * Gets all subnets in a virtual network.
    */
+  @tag("Subnets")
   list is ArmResourceListByParent<Subnet, Error = CloudError>;
 
   /**
@@ -147,3 +151,4 @@ interface Subnets {
 @@doc(Subnets.unprepareNetworkPolicies::parameters.body,
   "Parameters supplied to unprepare subnet to remove network intent policies."
 );
+

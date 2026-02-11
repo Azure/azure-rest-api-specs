@@ -41,16 +41,18 @@ model NetworkInterfaceTapConfiguration extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface NetworkInterfaceTapConfigurations {
   /**
    * Get the specified tap configuration on a network interface.
    */
+  @tag("NetworkInterfaces")
   get is ArmResourceRead<NetworkInterfaceTapConfiguration, Error = CloudError>;
 
   /**
    * Creates or updates a Tap configuration in the specified NetworkInterface.
    */
+  @tag("NetworkInterfaces")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     NetworkInterfaceTapConfiguration,
     Error = CloudError
@@ -60,6 +62,7 @@ interface NetworkInterfaceTapConfigurations {
    * Deletes the specified tap configuration from the NetworkInterface.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   delete is ArmResourceDeleteWithoutOkAsync<
     NetworkInterfaceTapConfiguration,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -69,6 +72,7 @@ interface NetworkInterfaceTapConfigurations {
   /**
    * Get all Tap configurations in a network interface.
    */
+  @tag("NetworkInterfaces")
   list is ArmResourceListByParent<
     NetworkInterfaceTapConfiguration,
     Error = CloudError

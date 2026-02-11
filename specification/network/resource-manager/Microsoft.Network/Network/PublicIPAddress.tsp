@@ -117,7 +117,7 @@ alias PublicIPAddressSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperat
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface PublicIPAddresses {
   /**
    * Get the specified public IP address in a cloud service.
@@ -163,12 +163,13 @@ alias PublicIPAddressOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOper
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface PublicIPAddressOperationGroup {
   /**
    * Gets the specified public IP address in a specified resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PublicIPAddresses")
   @operationId("PublicIPAddresses_Get")
   get is PublicIPAddressOperationGroupOps.Read<
     PublicIPAddress,
@@ -186,6 +187,7 @@ interface PublicIPAddressOperationGroup {
    * Creates or updates a static or dynamic public IP address.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PublicIPAddresses")
   @operationId("PublicIPAddresses_CreateOrUpdate")
   createOrUpdate is PublicIPAddressOperationGroupOps.CreateOrUpdateAsync<
     PublicIPAddress,
@@ -196,6 +198,7 @@ interface PublicIPAddressOperationGroup {
    * Updates public IP address tags.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PublicIPAddresses")
   @operationId("PublicIPAddresses_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is PublicIPAddressOperationGroupOps.CustomPatchSync<
@@ -209,6 +212,7 @@ interface PublicIPAddressOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PublicIPAddresses")
   @operationId("PublicIPAddresses_Delete")
   delete is PublicIPAddressOperationGroupOps.DeleteWithoutOkAsync<
     PublicIPAddress,
@@ -220,6 +224,7 @@ interface PublicIPAddressOperationGroup {
    * Gets all public IP addresses in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PublicIPAddresses")
   @operationId("PublicIPAddresses_List")
   list is PublicIPAddressOperationGroupOps.List<
     PublicIPAddress,
@@ -230,6 +235,7 @@ interface PublicIPAddressOperationGroup {
    * Gets all the public IP addresses in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PublicIPAddresses")
   @operationId("PublicIPAddresses_ListAll")
   listAll is PublicIPAddressSubscriptionOps.List<
     PublicIPAddress,
@@ -240,6 +246,7 @@ interface PublicIPAddressOperationGroup {
    * Gets the Ddos Protection Status of a Public IP Address
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PublicIPAddresses")
   @operationId("PublicIPAddresses_DdosProtectionStatus")
   ddosProtectionStatus is PublicIPAddressOperationGroupOps.ActionAsync<
     PublicIPAddress,
@@ -252,6 +259,7 @@ interface PublicIPAddressOperationGroup {
    * Reserves the specified Cloud Service Public IP by switching its allocation method to Static. If rollback is requested, reverts the allocation method to Dynamic.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PublicIPAddresses")
   @operationId("PublicIPAddresses_ReserveCloudServicePublicIpAddress")
   reserveCloudServicePublicIpAddress is PublicIPAddressOperationGroupOps.ActionAsync<
     PublicIPAddress,
@@ -266,6 +274,7 @@ interface PublicIPAddressOperationGroup {
    * Disassociates the Cloud Service reserved Public IP and associates the specified Standalone Public IP to the same Cloud Service frontend.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PublicIPAddresses")
   @operationId("PublicIPAddresses_DisassociateCloudServiceReservedPublicIp")
   disassociateCloudServiceReservedPublicIp is PublicIPAddressOperationGroupOps.ActionAsync<
     PublicIPAddress,
@@ -291,3 +300,4 @@ interface PublicIPAddressOperationGroup {
 @@doc(PublicIPAddressOperationGroup.disassociateCloudServiceReservedPublicIp::parameters.body,
   "Parameter that define which Public IP Address should be associated in place of given Public IP Address."
 );
+

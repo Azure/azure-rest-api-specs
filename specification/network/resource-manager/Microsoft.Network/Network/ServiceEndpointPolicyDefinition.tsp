@@ -43,12 +43,12 @@ model ServiceEndpointPolicyDefinition extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface ServiceEndpointPolicyDefinitions {
-  /**
-   * Get the specified service endpoint policy definitions from service endpoint policy.
-   */
+  @tag("ServiceEndpointPolicyDefinitions")
   get is ArmResourceRead<ServiceEndpointPolicyDefinition, Error = CloudError>;
+
+  @tag("ServiceEndpointPolicyDefinitions")
 
   /**
    * Creates or updates a service endpoint policy definition in the specified service endpoint policy.
@@ -62,6 +62,7 @@ interface ServiceEndpointPolicyDefinitions {
    * Deletes the specified ServiceEndpoint policy definitions.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ServiceEndpointPolicyDefinitions")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceEndpointPolicyDefinition,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -71,6 +72,7 @@ interface ServiceEndpointPolicyDefinitions {
   /**
    * Gets all service endpoint policy definitions in a service end point policy.
    */
+  @tag("ServiceEndpointPolicyDefinitions")
   listByResourceGroup is ArmResourceListByParent<
     ServiceEndpointPolicyDefinition,
     Error = CloudError

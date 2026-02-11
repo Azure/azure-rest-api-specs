@@ -44,12 +44,13 @@ model OutboundRule extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface OutboundRules {
   /**
    * Gets the specified load balancer outbound rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("LoadBalancers")
   @operationId("LoadBalancerOutboundRules_Get")
   get is ArmResourceRead<OutboundRule, Error = CloudError>;
 
@@ -57,6 +58,7 @@ interface OutboundRules {
    * Gets all the outbound rules in a load balancer.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("LoadBalancers")
   @operationId("LoadBalancerOutboundRules_List")
   list is ArmResourceListByParent<
     OutboundRule,

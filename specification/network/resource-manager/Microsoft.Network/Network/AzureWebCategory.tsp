@@ -34,12 +34,13 @@ model AzureWebCategory extends ProxyResource {
   name: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface AzureWebCategories {
   /**
    * Gets the specified Azure Web Category.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("WebCategories")
   @operationId("WebCategories_Get")
   get is ArmResourceRead<
     AzureWebCategory,
@@ -58,6 +59,7 @@ interface AzureWebCategories {
    * Gets all the Azure Web Categories in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("WebCategories")
   @operationId("WebCategories_ListBySubscription")
   listBySubscription is ArmResourceListByParent<
     AzureWebCategory,

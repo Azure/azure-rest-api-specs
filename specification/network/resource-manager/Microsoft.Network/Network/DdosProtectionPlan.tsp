@@ -22,6 +22,12 @@ namespace Microsoft.Network;
 model DdosProtectionPlan extends ResourceWithReadOnlyID {
   properties?: DdosProtectionPlanPropertiesFormat;
 
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
   @visibility(Lifecycle.Read)
   @path
   @key("ddosProtectionPlanName")

@@ -44,11 +44,12 @@ model VirtualNetwork extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface VirtualNetworks {
   /**
    * Gets the specified virtual network by resource group.
    */
+  @tag("VirtualNetworks")
   get is ArmResourceRead<
     VirtualNetwork,
     Parameters = {
@@ -64,6 +65,7 @@ interface VirtualNetworks {
   /**
    * Creates or updates a virtual network in the specified resource group.
    */
+  @tag("VirtualNetworks")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualNetwork,
     Error = CloudError
@@ -72,6 +74,7 @@ interface VirtualNetworks {
   /**
    * Updates a virtual network tags.
    */
+  @tag("VirtualNetworks")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     VirtualNetwork,
@@ -83,6 +86,7 @@ interface VirtualNetworks {
    * Deletes the specified virtual network.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VirtualNetworks")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetwork,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -92,11 +96,13 @@ interface VirtualNetworks {
   /**
    * Gets all virtual networks in a resource group.
    */
+  @tag("VirtualNetworks")
   list is ArmResourceListByParent<VirtualNetwork, Error = CloudError>;
 
   /**
    * Gets all virtual networks in a subscription.
    */
+  @tag("VirtualNetworks")
   listAll is ArmListBySubscription<VirtualNetwork, Error = CloudError>;
 
   /**
@@ -160,12 +166,13 @@ interface VirtualNetworks {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkManager)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface EffectiveConfigurations {
   /**
    * List all effective connectivity configurations applied on a virtual network.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkManagerEffectiveConnectivityConfiguration")
   @operationId("ListNetworkManagerEffectiveConnectivityConfigurations")
   @list
   listNetworkManagerEffectiveConnectivityConfigurations is ArmResourceActionSync<
@@ -188,6 +195,7 @@ interface EffectiveConfigurations {
    * List all effective security admin rules applied on a virtual network.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkManagerEffectiveSecurityAdminRules")
   @operationId("ListNetworkManagerEffectiveSecurityAdminRules")
   @list
   listNetworkManagerEffectiveSecurityAdminRules is ArmResourceActionSync<

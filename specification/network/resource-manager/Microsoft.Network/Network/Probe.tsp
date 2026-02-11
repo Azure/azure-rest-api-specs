@@ -44,12 +44,13 @@ model Probe extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface Probes {
   /**
    * Gets load balancer probe.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("LoadBalancers")
   @operationId("LoadBalancerProbes_Get")
   get is ArmResourceRead<Probe, Error = CloudError>;
 
@@ -57,6 +58,7 @@ interface Probes {
    * Gets all the load balancer probes.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("LoadBalancers")
   @operationId("LoadBalancerProbes_List")
   list is ArmResourceListByParent<
     Probe,

@@ -79,12 +79,13 @@ alias CloudServiceOps = Legacy.ExtensionOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface SwapResources {
   /**
    * Gets the SwapResource which identifies the slot type for the specified cloud service. The slot type on a cloud service can either be Staging or Production
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VipSwap")
   @operationId("VipSwap_Get")
   get is CloudServiceOps.Read<SwapResource, ErrorType = CloudError>;
 
@@ -94,6 +95,7 @@ interface SwapResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VipSwap")
   @operationId("VipSwap_Create")
   create is CloudServiceOps.CreateOrUpdateAsync<
     SwapResource,
@@ -109,6 +111,7 @@ interface SwapResources {
    * Gets the list of SwapResource which identifies the slot type for the specified cloud service. The slot type on a cloud service can either be Staging or Production
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VipSwap")
   @operationId("VipSwap_List")
   list is CloudServiceOps.List<
     SwapResource,

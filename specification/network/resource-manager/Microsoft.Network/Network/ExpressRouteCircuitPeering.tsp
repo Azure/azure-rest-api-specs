@@ -128,17 +128,19 @@ alias RouteTablesSummaryOps = Azure.ResourceManager.Legacy.RoutedOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRouteCircuitPeerings {
   /**
    * Gets the specified peering for the express route circuit.
    */
+  @tag("ExpressRouteCircuitPeerings")
   @autoRoute
   get is ArmResourceRead<ExpressRouteCircuitPeering, Error = CloudError>;
 
   /**
    * Creates or updates a peering in the specified express route circuits.
    */
+  @tag("ExpressRouteCircuitPeerings")
   @autoRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRouteCircuitPeering,
@@ -149,6 +151,7 @@ interface ExpressRouteCircuitPeerings {
    * Deletes the specified peering from the specified express route circuit.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCircuitPeerings")
   @autoRoute
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteCircuitPeering,
@@ -159,6 +162,7 @@ interface ExpressRouteCircuitPeerings {
   /**
    * Gets all peerings in a specified express route circuit.
    */
+  @tag("ExpressRouteCircuitPeerings")
   @autoRoute
   list is ArmResourceListByParent<
     ExpressRouteCircuitPeering,
@@ -169,6 +173,7 @@ interface ExpressRouteCircuitPeerings {
    * Gets the currently advertised ARP table associated with the express route circuit in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCircuitArpTable")
   @operationId("ExpressRouteCircuits_ListArpTable")
   @post
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/arpTables/{devicePath}")
@@ -185,6 +190,7 @@ interface ExpressRouteCircuitPeerings {
    * Gets the currently advertised routes table associated with the express route circuit in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCircuitRoutesTable")
   @operationId("ExpressRouteCircuits_ListRoutesTable")
   @post
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTables/{devicePath}")
@@ -201,6 +207,7 @@ interface ExpressRouteCircuitPeerings {
    * Gets the currently advertised routes table summary associated with the express route circuit in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCircuitRoutesTableSummary")
   @operationId("ExpressRouteCircuits_ListRoutesTableSummary")
   @post
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCircuits/{circuitName}/peerings/{peeringName}/routeTablesSummary/{devicePath}")
@@ -217,6 +224,7 @@ interface ExpressRouteCircuitPeerings {
    * Gets all stats from an express route circuit in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCircuitStats")
   @operationId("ExpressRouteCircuits_GetPeeringStats")
   @get
   @action("stats")

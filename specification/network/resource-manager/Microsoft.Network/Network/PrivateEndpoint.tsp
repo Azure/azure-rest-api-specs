@@ -122,6 +122,7 @@ interface PrivateEndpoints {
    * Deletes the specified private dns zone group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateDnsZoneGroups")
   @operationId("PrivateDnsZoneGroups_Delete")
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
@@ -139,6 +140,7 @@ interface PrivateEndpoints {
    * Gets the private dns zone group resource by specified private dns zone group name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateDnsZoneGroups")
   @operationId("PrivateDnsZoneGroups_Get")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}/privateDnsZoneGroups/{privateDnsZoneGroupName}")
@@ -154,6 +156,7 @@ interface PrivateEndpoints {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/invalid-final-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateDnsZoneGroups")
   @operationId("PrivateDnsZoneGroups_CreateOrUpdate")
   @put
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -174,6 +177,7 @@ interface PrivateEndpoints {
    * Gets all private dns zone groups in a private endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateDnsZoneGroups")
   @operationId("PrivateDnsZoneGroups_List")
   @list
   @get
@@ -195,3 +199,4 @@ interface PrivateEndpoints {
 @@doc(PrivateEndpoints.privateDnsZoneGroupsCreateOrUpdate::parameters.body,
   "Parameters supplied to the create or update private dns zone group operation."
 );
+

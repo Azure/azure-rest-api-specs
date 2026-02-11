@@ -117,12 +117,13 @@ alias NetworkInterfaceOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOpe
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface NetworkInterfaceOperationGroup {
   /**
    * Gets information about the specified network interface.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   @operationId("NetworkInterfaces_Get")
   get is NetworkInterfaceOperationGroupOps.Read<
     NetworkInterface,
@@ -140,6 +141,7 @@ interface NetworkInterfaceOperationGroup {
    * Creates or updates a network interface.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   @operationId("NetworkInterfaces_CreateOrUpdate")
   createOrUpdate is NetworkInterfaceOperationGroupOps.CreateOrUpdateAsync<
     NetworkInterface,
@@ -150,6 +152,7 @@ interface NetworkInterfaceOperationGroup {
    * Updates a network interface tags.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   @operationId("NetworkInterfaces_UpdateTags")
   @patch(#{ implicitOptionality: false })
   updateTags is NetworkInterfaceOperationGroupOps.CustomPatchSync<
@@ -163,6 +166,7 @@ interface NetworkInterfaceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   @operationId("NetworkInterfaces_Delete")
   delete is NetworkInterfaceOperationGroupOps.DeleteWithoutOkAsync<
     NetworkInterface,
@@ -174,6 +178,7 @@ interface NetworkInterfaceOperationGroup {
    * Gets all network interfaces in a resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   @operationId("NetworkInterfaces_List")
   list is NetworkInterfaceOperationGroupOps.List<
     NetworkInterface,
@@ -184,6 +189,7 @@ interface NetworkInterfaceOperationGroup {
    * Gets all network interfaces in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   @operationId("NetworkInterfaces_ListAll")
   listAll is ArmListBySubscription<NetworkInterface, Error = CloudError>;
 
@@ -191,6 +197,7 @@ interface NetworkInterfaceOperationGroup {
    * Gets all route tables applied to a network interface.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   @operationId("NetworkInterfaces_GetEffectiveRouteTable")
   @post
   @action("effectiveRouteTable")
@@ -205,6 +212,7 @@ interface NetworkInterfaceOperationGroup {
    * Gets all network security groups applied to a network interface.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   @operationId("NetworkInterfaces_ListEffectiveNetworkSecurityGroups")
   @post
   @action("effectiveNetworkSecurityGroups")
@@ -219,6 +227,7 @@ interface NetworkInterfaceOperationGroup {
    * List all load balancers in a network interface.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("NetworkInterfaces")
   @operationId("NetworkInterfaceLoadBalancers_List")
   @list
   @get

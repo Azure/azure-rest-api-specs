@@ -49,6 +49,7 @@ interface PrivateEndpointConnections {
    * Get the specific private end point connection by specific private link service in the resource group.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateLinkServices")
   @operationId("PrivateLinkServices_GetPrivateEndpointConnection")
   getPrivateEndpointConnection is ArmResourceRead<
     PrivateEndpointConnection,
@@ -67,6 +68,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateLinkServices")
   @operationId("PrivateLinkServices_UpdatePrivateEndpointConnection")
   updatePrivateEndpointConnection is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
@@ -79,6 +81,7 @@ interface PrivateEndpointConnections {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("PrivateLinkServices")
   @operationId("PrivateLinkServices_DeletePrivateEndpointConnection")
   deletePrivateEndpointConnection is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
@@ -89,7 +92,8 @@ interface PrivateEndpointConnections {
   /**
    * Gets all private end point connections for a specific private link service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversionix for details"
+  @tag("PrivateLinkServices")
   @operationId("PrivateLinkServices_ListPrivateEndpointConnections")
   listPrivateEndpointConnections is ArmResourceListByParent<
     PrivateEndpointConnection,

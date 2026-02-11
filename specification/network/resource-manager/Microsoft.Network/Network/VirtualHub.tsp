@@ -93,7 +93,7 @@ alias VirtualHubRouteTableV2Ops = Azure.ResourceManager.Legacy.RoutedOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations(#{ allowStaticRoutes: true })
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface VirtualHubs {
   /**
    * Retrieves the details of a VirtualHub.
@@ -113,6 +113,7 @@ interface VirtualHubs {
   /**
    * Updates VirtualHub tags.
    */
+  @tag("VirtualWANs")
   @patch(#{ implicitOptionality: false })
   @autoRoute
   updateTags is ArmCustomPatchSync<

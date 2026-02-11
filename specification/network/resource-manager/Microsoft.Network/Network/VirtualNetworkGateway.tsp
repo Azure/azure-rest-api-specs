@@ -50,16 +50,18 @@ model VirtualNetworkGateway extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface VirtualNetworkGateways {
   /**
    * Gets the specified virtual network gateway by resource group.
    */
+  @tag("VirtualNetworkGateways")
   get is ArmResourceRead<VirtualNetworkGateway, Error = CloudError>;
 
   /**
    * Creates or updates a virtual network gateway in the specified resource group.
    */
+  @tag("VirtualNetworkGateways")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualNetworkGateway,
     Error = CloudError
@@ -69,6 +71,7 @@ interface VirtualNetworkGateways {
    * Updates a virtual network gateway tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VirtualNetworkGateways")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchAsync<
     VirtualNetworkGateway,
@@ -82,6 +85,7 @@ interface VirtualNetworkGateways {
    * Deletes the specified virtual network gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VirtualNetworkGateways")
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualNetworkGateway,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -91,11 +95,13 @@ interface VirtualNetworkGateways {
   /**
    * Gets all virtual network gateways by resource group.
    */
+  @tag("VirtualNetworkGateways")
   list is ArmResourceListByParent<VirtualNetworkGateway, Error = CloudError>;
 
   /**
    * Gets all the connections in a virtual network gateway.
    */
+  @tag("VirtualNetworkGateways")
   @list
   @get
   @action("connections")
@@ -109,6 +115,7 @@ interface VirtualNetworkGateways {
   /**
    * Resets the primary of the virtual network gateway in the specified resource group.
    */
+  @tag("VirtualNetworkGateways")
   reset is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
@@ -126,6 +133,7 @@ interface VirtualNetworkGateways {
   /**
    * Resets the VPN client shared key of the virtual network gateway in the specified resource group.
    */
+  @tag("VirtualNetworkGateways")
   @action("resetvpnclientsharedkey")
   resetVpnClientSharedKey is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -139,6 +147,7 @@ interface VirtualNetworkGateways {
   /**
    * Generates VPN client package for P2S client of the virtual network gateway in the specified resource group.
    */
+  @tag("VirtualNetworkGateways")
   generatevpnclientpackage is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnClientParameters,
@@ -151,6 +160,7 @@ interface VirtualNetworkGateways {
   /**
    * Generates VPN profile for P2S client of the virtual network gateway in the specified resource group. Used for IKEV2 and radius based authentication.
    */
+  @tag("VirtualNetworkGateways")
   @action("generatevpnprofile")
   generateVpnProfile is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -164,6 +174,7 @@ interface VirtualNetworkGateways {
   /**
    * Gets pre-generated VPN profile for P2S client of the virtual network gateway in the specified resource group. The profile needs to be generated first using generateVpnProfile.
    */
+  @tag("VirtualNetworkGateways")
   @action("getvpnprofilepackageurl")
   getVpnProfilePackageUrl is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -177,6 +188,7 @@ interface VirtualNetworkGateways {
   /**
    * The GetBgpPeerStatus operation retrieves the status of all BGP peers.
    */
+  @tag("VirtualNetworkGateways")
   @list
   getBgpPeerStatus is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -195,6 +207,7 @@ interface VirtualNetworkGateways {
   /**
    * Gets a xml format representation for supported vpn devices.
    */
+  @tag("VirtualNetworkGateways")
   @action("supportedvpndevices")
   supportedVpnDevices is ArmResourceActionSync<
     VirtualNetworkGateway,
@@ -208,6 +221,7 @@ interface VirtualNetworkGateways {
   /**
    * List all Radius servers with respective radius secrets from virtual network gateway VpnClientConfiguration.
    */
+  @tag("VirtualNetworkGateways")
   @post
   listRadiusSecrets is ArmResourceActionSync<
     VirtualNetworkGateway,
@@ -219,6 +233,7 @@ interface VirtualNetworkGateways {
   /**
    * This operation retrieves a list of routes the virtual network gateway has learned, including routes learned from BGP peers.
    */
+  @tag("VirtualNetworkGateways")
   @list
   getLearnedRoutes is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -230,6 +245,7 @@ interface VirtualNetworkGateways {
   /**
    * This operation retrieves a list of routes the virtual network gateway is advertising to the specified peer.
    */
+  @tag("VirtualNetworkGateways")
   @list
   getAdvertisedRoutes is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -248,6 +264,7 @@ interface VirtualNetworkGateways {
   /**
    * This operation retrieves the resiliency information for an Express Route Gateway, including the gateway's current resiliency score and recommendations to further improve the score
    */
+  @tag("VirtualNetworkGateways")
   getResiliencyInformation is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
@@ -265,6 +282,7 @@ interface VirtualNetworkGateways {
   /**
    * This operation retrieves the route set information for an Express Route Gateway based on their resiliency
    */
+  @tag("VirtualNetworkGateways")
   getRoutesInformation is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
@@ -282,6 +300,7 @@ interface VirtualNetworkGateways {
   /**
    * The Set VpnclientIpsecParameters operation sets the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.
    */
+  @tag("VirtualNetworkGateways")
   @action("setvpnclientipsecparameters")
   setVpnclientIpsecParameters is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -294,6 +313,7 @@ interface VirtualNetworkGateways {
    * The Get VpnclientIpsecParameters operation retrieves information about the vpnclient ipsec policy for P2S client of virtual network gateway in the specified resource group through Network resource provider.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VirtualNetworkGateways")
   @action("getvpnclientipsecparameters")
   getVpnclientIpsecParameters is ArmResourceActionAsyncBase<
     VirtualNetworkGateway,
@@ -308,6 +328,7 @@ interface VirtualNetworkGateways {
   /**
    * Starts packet capture on virtual network gateway in the specified resource group.
    */
+  @tag("VirtualNetworkGateways")
   startPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnPacketCaptureStartParameters,
@@ -321,6 +342,7 @@ interface VirtualNetworkGateways {
   /**
    * Stops packet capture on virtual network gateway in the specified resource group.
    */
+  @tag("VirtualNetworkGateways")
   stopPacketCapture is ArmResourceActionAsync<
     VirtualNetworkGateway,
     VpnPacketCaptureStopParameters,
@@ -333,6 +355,7 @@ interface VirtualNetworkGateways {
   /**
    * This operation retrieves the details of all the failover tests performed on the gateway for different peering locations
    */
+  @tag("VirtualNetworkGateways")
   @action("getFailoverAllTestsDetails")
   getFailoverAllTestDetails is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -360,6 +383,7 @@ interface VirtualNetworkGateways {
   /**
    * This operation retrieves the details of a particular failover test performed on the gateway based on the test Guid
    */
+  @tag("VirtualNetworkGateways")
   getFailoverSingleTestDetails is ArmResourceActionAsync<
     VirtualNetworkGateway,
     void,
@@ -386,6 +410,7 @@ interface VirtualNetworkGateways {
   /**
    * This operation starts failover simulation on the gateway for the specified peering location
    */
+  @tag("VirtualNetworkGateways")
   @action("startSiteFailoverTest")
   startExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -406,6 +431,7 @@ interface VirtualNetworkGateways {
   /**
    * This operation stops failover simulation on the gateway for the specified peering location
    */
+  @tag("VirtualNetworkGateways")
   @action("stopSiteFailoverTest")
   stopExpressRouteSiteFailoverSimulation is ArmResourceActionAsync<
     VirtualNetworkGateway,
@@ -419,6 +445,7 @@ interface VirtualNetworkGateways {
   /**
    * Get VPN client connection health detail per P2S client connection of the virtual network gateway in the specified resource group.
    */
+  @tag("VirtualNetworkGateways")
   @list
   @action("getVpnClientConnectionHealth")
   getVpnclientConnectionHealth is ArmResourceActionAsync<
@@ -431,6 +458,7 @@ interface VirtualNetworkGateways {
   /**
    * Disconnect vpn connections of virtual network gateway in the specified resource group.
    */
+  @tag("VirtualNetworkGateways")
   disconnectVirtualNetworkGatewayVpnConnections is ArmResourceActionAsync<
     VirtualNetworkGateway,
     P2SVpnConnectionRequest,
@@ -523,3 +551,4 @@ interface VirtualNetworkGateways {
 @@doc(VirtualNetworkGateways.invokePrepareMigration::parameters.body,
   "Parameters supplied to the Begin Prepare migration on basic vpn gateway through Network resource provider."
 );
+

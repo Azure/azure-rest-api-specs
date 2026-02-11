@@ -68,12 +68,13 @@ alias LoadBalancerLoadBalancingRuleOps = Azure.ResourceManager.Legacy.LegacyOper
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface LoadBalancingRules {
   /**
    * Gets the specified load balancer load balancing rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("LoadBalancers")
   @operationId("LoadBalancerLoadBalancingRules_Get")
   get is ArmResourceRead<LoadBalancingRule, Error = CloudError>;
 
@@ -81,6 +82,7 @@ interface LoadBalancingRules {
    * Gets all the load balancing rules in a load balancer.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("LoadBalancers")
   @operationId("LoadBalancerLoadBalancingRules_List")
   list is ArmResourceListByParent<
     LoadBalancingRule,
@@ -92,6 +94,7 @@ interface LoadBalancingRules {
    * Get health details of a load balancing rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("LoadBalancers")
   @operationId("LoadBalancerLoadBalancingRules_Health")
   health is LoadBalancerLoadBalancingRuleOps.ActionAsync<
     LoadBalancingRule,

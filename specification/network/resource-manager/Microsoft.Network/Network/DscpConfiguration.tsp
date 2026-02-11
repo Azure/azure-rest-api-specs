@@ -36,12 +36,13 @@ model DscpConfiguration extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface DscpConfigurations {
   /**
    * Gets a DSCP Configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("DscpConfiguration")
   @operationId("DscpConfiguration_Get")
   get is ArmResourceRead<DscpConfiguration, Error = CloudError>;
 
@@ -49,6 +50,7 @@ interface DscpConfigurations {
    * Creates or updates a DSCP Configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("DscpConfiguration")
   @operationId("DscpConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DscpConfiguration,
@@ -62,6 +64,7 @@ interface DscpConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("DscpConfiguration")
   @operationId("DscpConfiguration_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     DscpConfiguration,
@@ -73,6 +76,7 @@ interface DscpConfigurations {
    * Gets a DSCP Configuration.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("DscpConfigurations")
   @operationId("DscpConfiguration_List")
   list is ArmResourceListByParent<DscpConfiguration, Error = CloudError>;
 
@@ -80,6 +84,7 @@ interface DscpConfigurations {
    * Gets all dscp configurations in a subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("DscpConfigurations")
   @operationId("DscpConfiguration_ListAll")
   listAll is ArmListBySubscription<DscpConfiguration, Error = CloudError>;
 }
@@ -87,5 +92,5 @@ interface DscpConfigurations {
 @@doc(DscpConfiguration.name, "The name of the resource.");
 @@doc(DscpConfiguration.properties, "Properties of the network interface.");
 @@doc(DscpConfigurations.createOrUpdate::parameters.resource,
-  "Parameters supplied to the create or update dscp configuration operation."
+  "Parameters supplied to the create or update DscpConfiguration operation."
 );

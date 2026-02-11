@@ -43,16 +43,18 @@ model ExpressRouteCircuit extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface ExpressRouteCircuits {
   /**
    * Gets information about the specified express route circuit.
    */
+  @tag("ExpressRouteCircuits")
   get is ArmResourceRead<ExpressRouteCircuit, Error = CloudError>;
 
   /**
    * Creates or updates an express route circuit.
    */
+  @tag("ExpressRouteCircuits")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ExpressRouteCircuit,
     Error = CloudError
@@ -61,6 +63,7 @@ interface ExpressRouteCircuits {
   /**
    * Updates an express route circuit tags.
    */
+  @tag("ExpressRouteCircuits")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     ExpressRouteCircuit,
@@ -72,6 +75,7 @@ interface ExpressRouteCircuits {
    * Deletes the specified express route circuit.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("ExpressRouteCircuits")
   delete is ArmResourceDeleteWithoutOkAsync<
     ExpressRouteCircuit,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -81,16 +85,19 @@ interface ExpressRouteCircuits {
   /**
    * Gets all the express route circuits in a resource group.
    */
+  @tag("ExpressRouteCircuits")
   list is ArmResourceListByParent<ExpressRouteCircuit, Error = CloudError>;
 
   /**
    * Gets all the express route circuits in a subscription.
    */
+  @tag("ExpressRouteCircuits")
   listAll is ArmListBySubscription<ExpressRouteCircuit, Error = CloudError>;
 
   /**
    * Gets all the stats from an express route circuit in a resource group.
    */
+  @tag("ExpressRouteCircuitStats")
   @get
   @action("stats")
   getStats is ArmResourceActionSync<

@@ -46,16 +46,18 @@ model AzureFirewall extends Resource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.firewall)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface AzureFirewalls {
   /**
    * Gets the specified Azure Firewall.
    */
+  @tag("AzureFirewalls")
   get is ArmResourceRead<AzureFirewall, Error = CloudError>;
 
   /**
    * Creates or updates the specified Azure Firewall.
    */
+  @tag("AzureFirewalls")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AzureFirewall,
     Error = CloudError
@@ -65,6 +67,7 @@ interface AzureFirewalls {
    * Updates tags of an Azure Firewall resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("AzureFirewalls")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchAsync<
     AzureFirewall,
@@ -78,6 +81,7 @@ interface AzureFirewalls {
    * Deletes the specified Azure Firewall.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("AzureFirewalls")
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureFirewall,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -87,11 +91,13 @@ interface AzureFirewalls {
   /**
    * Lists all Azure Firewalls in a resource group.
    */
+  @tag("AzureFirewalls")
   list is ArmResourceListByParent<AzureFirewall, Error = CloudError>;
 
   /**
    * Gets all the Azure Firewalls in a subscription.
    */
+  @tag("AzureFirewalls")
   listAll is ArmListBySubscription<AzureFirewall, Error = CloudError>;
 
   /**
@@ -108,6 +114,7 @@ interface AzureFirewalls {
   /**
    * Runs a packet capture on AzureFirewall.
    */
+  @tag("AzureFirewalls")
   packetCapture is ArmResourceActionAsyncBase<
     AzureFirewall,
     Request = FirewallPacketCaptureParameters,
@@ -119,6 +126,7 @@ interface AzureFirewalls {
   /**
    * Runs a packet capture operation on AzureFirewall.
    */
+  @tag("AzureFirewalls")
   packetCaptureOperation is ArmResourceActionAsync<
     AzureFirewall,
     FirewallPacketCaptureParameters,

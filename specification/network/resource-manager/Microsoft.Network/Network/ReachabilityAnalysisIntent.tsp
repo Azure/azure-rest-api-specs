@@ -46,12 +46,13 @@ model ReachabilityAnalysisIntent extends CommonProxyResource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface ReachabilityAnalysisIntents {
   /**
    * Get the Reachability Analysis Intent.
    */
   @summary("Get the Reachability Analysis Intent.")
+  @tag("ReachabilityAnalysisIntent")
   get is ArmResourceRead<
     ReachabilityAnalysisIntent,
     Error = CommonErrorResponse
@@ -61,6 +62,7 @@ interface ReachabilityAnalysisIntents {
    * Creates Reachability Analysis Intent.
    */
   @summary("Creates Reachability Analysis Intent.")
+  @tag("ReachabilityAnalysisIntent")
   create is ArmResourceCreateOrReplaceSync<
     ReachabilityAnalysisIntent,
     Error = CommonErrorResponse
@@ -70,6 +72,7 @@ interface ReachabilityAnalysisIntents {
    * Deletes Reachability Analysis Intent.
    */
   @summary("Deletes Reachability Analysis Intent.")
+  @tag("ReachabilityAnalysisIntent")
   delete is ArmResourceDeleteSync<
     ReachabilityAnalysisIntent,
     Error = CommonErrorResponse
@@ -79,6 +82,7 @@ interface ReachabilityAnalysisIntents {
    * Gets list of Reachability Analysis Intents .
    */
   @summary("Gets list of Reachability Analysis Intents .")
+  @tag("ReachabilityAnalysisIntent")
   list is ArmResourceListByParent<
     ReachabilityAnalysisIntent,
     Parameters = {

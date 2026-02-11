@@ -38,7 +38,7 @@ model VpnServerConfiguration extends ResourceWithWritableName {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface VpnServerConfigurations {
   /**
    * Retrieves the details of a VpnServerConfiguration.
@@ -57,6 +57,7 @@ interface VpnServerConfigurations {
    * Updates VpnServerConfiguration tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("VpnServerConfigurations")
   @patch(#{ implicitOptionality: false })
   updateTags is ArmCustomPatchSync<
     VpnServerConfiguration,
@@ -95,6 +96,7 @@ interface VpnServerConfigurations {
   /**
    * List all Radius servers with respective radius secrets from VpnServerConfiguration.
    */
+  @tag("VpnServerConfigurations")
   @post
   listRadiusSecrets is ArmResourceActionSync<
     VpnServerConfiguration,

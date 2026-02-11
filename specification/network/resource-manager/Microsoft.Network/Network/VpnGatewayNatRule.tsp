@@ -43,7 +43,7 @@ model VpnGatewayNatRule extends SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@armResourceOperations
+@armResourceOperations(#{omitTags: true})
 interface VpnGatewayNatRules {
   /**
    * Retrieves the details of a nat ruleGet.
@@ -93,3 +93,4 @@ interface VpnGatewayNatRules {
 @@doc(VpnGatewayNatRules.createOrUpdate::parameters.resource,
   "Parameters supplied to create or Update a Nat Rule."
 );
+

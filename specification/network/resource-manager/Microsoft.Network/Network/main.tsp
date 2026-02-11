@@ -131,6 +131,8 @@ import "./HubRouteTable.tsp";
 import "./RoutingIntent.tsp";
 import "./WebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
+import "./VirtualNetworkAppliance.tsp";
+import "./ServiceGateway.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -175,6 +177,7 @@ enum Features {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
+@armResourceOperations(#{omitTags: true})
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
       ArmResponse<OperationListResult>,

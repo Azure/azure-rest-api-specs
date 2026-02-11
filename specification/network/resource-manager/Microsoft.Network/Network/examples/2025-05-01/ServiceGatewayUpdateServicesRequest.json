@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "parameters": {
+      "action": "FullUpdate",
+      "serviceRequests": [
+        {
+          "service": {
+            "name": "Service1",
+            "properties": {
+              "isDefault": true,
+              "loadBalancerBackendPools": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/be1"
+                }
+              ],
+              "publicNatGatewayId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-natGateway",
+              "serviceType": "Inbound"
+            }
+          }
+        },
+        {
+          "isDelete": true,
+          "service": {
+            "name": "Service2",
+            "properties": {
+              "isDefault": false,
+              "serviceType": "Outbound"
+            }
+          }
+        }
+      ]
+    },
+    "resourceGroupName": "rg1",
+    "serviceGatewayName": "sg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2025-05-01"
+      }
+    },
+    "204": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Network/locations/westus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-05-01"
+      }
+    }
+  },
+  "operationId": "ServiceGateways_UpdateServices",
+  "title": "Create or full update services in service gateway"
+}
