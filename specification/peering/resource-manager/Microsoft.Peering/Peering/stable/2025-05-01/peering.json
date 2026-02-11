@@ -103,7 +103,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/cdnPeeringPrefixes": {
       "get": {
-        "operationId": "ListCdnPeeringPrefixes_List",
+        "operationId": "CdnPeeringPrefixes_List",
         "description": "Lists all of the advertised prefixes for the specified peering location",
         "parameters": [
           {
@@ -132,6 +132,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List all the cdn peering prefixes advertised at a particular peering location": {
+            "$ref": "./examples/ListCdnPeeringPrefixes.json"
           }
         },
         "x-ms-pageable": {
@@ -213,7 +218,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/legacyPeerings": {
       "get": {
-        "operationId": "ListLegacyPeerings_List",
+        "operationId": "LegacyPeerings_List",
         "description": "Lists all of the legacy peerings under the given subscription matching the specified kind and location.",
         "parameters": [
           {
@@ -335,6 +340,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List legacy peerings": {
+            "$ref": "./examples/ListLegacyPeerings.json"
           }
         },
         "x-ms-pageable": {
@@ -628,7 +638,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringLocations": {
       "get": {
-        "operationId": "ListPeeringLocations_List",
+        "operationId": "PeeringLocations_List",
         "description": "Lists all of the available peering locations for the specified kind of peering.",
         "parameters": [
           {
@@ -737,6 +747,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List direct peering locations": {
+            "$ref": "./examples/ListDirectPeeringLocations.json"
+          },
+          "List exchange peering locations": {
+            "$ref": "./examples/ListExchangePeeringLocations.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -744,7 +762,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServiceCountries": {
       "get": {
-        "operationId": "ListPeeringServiceCountries_List",
+        "operationId": "PeeringServiceCountries_List",
         "description": "Lists all of the available countries for peering service.",
         "parameters": [
           {
@@ -768,6 +786,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List peering service countries": {
+            "$ref": "./examples/ListPeeringServiceCountriesBySubscription.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -775,7 +798,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Peering/peeringServiceLocations": {
       "get": {
-        "operationId": "ListPeeringServiceLocations_List",
+        "operationId": "PeeringServiceLocations_List",
         "description": "Lists all of the available locations for peering service.",
         "parameters": [
           {
@@ -804,6 +827,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List peering service locations": {
+            "$ref": "./examples/ListPeeringServiceLocationsBySubscription.json"
           }
         },
         "x-ms-pageable": {
