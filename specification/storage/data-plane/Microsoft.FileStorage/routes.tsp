@@ -13,36 +13,70 @@ namespace AzureFileStorage;
 
 /** Azure File Storage basic operation template */
 op FileStorageOperation<
-  TParams extends TypeSpec.Reflection.Model | void,
-  TResponse extends TypeSpec.Reflection.Model | void,
+  TParams extends TypeSpec.Reflection.Model,
+  TResponse extends TypeSpec.Reflection.Model,
+  RequestMediaType extends string = "application/xml",
+  ResponseMediaType extends string = "application/xml",
   TError = FileStorageErrorResponse
 >(
+  /** Content-Type header */
+  @header("Content-Type")
+  contentType: RequestMediaType,
+
   ...ApiVersionHeader,
   ...ClientRequestIdHeader,
   ...TParams,
-): (TResponse & FileStorageResponseHeaders) | TError;
+): (TResponse & {
+  /** Content-Type header */
+  @header("Content-Type")
+  contentType: ResponseMediaType;
+
+  ...FileStorageResponseHeaders;
+}) | TError;
 
 /** Azure File Storage operation template without request body */
 op FileStorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = FileStorageErrorResponse
->(
-  ...ApiVersionHeader,
-  ...ClientRequestIdHeader,
-  ...TParams,
-): (TResponse & FileStorageResponseHeaders) | TError;
+>(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse &
+  FileStorageResponseHeaders) | TError;
 
 /** Azure File Storage operation template with resource headers */
 op FileStorageResourceOperation<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = FileStorageErrorResponse
+>(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse &
+  FileStorageResourceHeaders) | TError;
+
+op FileStorageOperationRequestBody<
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  RequestMediaType extends string = "application/xml",
+  TError = FileStorageErrorResponse
 >(
+  /** Content-Type header */
+  @header("Content-Type")
+  contentType: RequestMediaType,
+
   ...ApiVersionHeader,
   ...ClientRequestIdHeader,
   ...TParams,
-): (TResponse & FileStorageResourceHeaders) | TError;
+): (TResponse & FileStorageResponseHeaders) | TError;
+
+op FileStorageOperationResponseBody<
+  TParams extends TypeSpec.Reflection.Model | void,
+  TResponse extends TypeSpec.Reflection.Model | void,
+  ResponseMediaType extends string = "application/xml",
+  TError = FileStorageErrorResponse
+>(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
+  /** Content-Type header */
+  @header("Content-Type")
+  contentType: ResponseMediaType;
+
+  ...FileStorageResponseHeaders;
+}) | TError;
 
 /**
  * Service operations
@@ -53,7 +87,7 @@ interface Service {
    */
   @route("/?restype=service&comp=properties")
   @put
-  setProperties is FileStorageOperation<
+  setProperties is FileStorageOperationRequestBody<
     {
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -69,7 +103,7 @@ interface Service {
    */
   @route("/?restype=service&comp=properties")
   @get
-  getProperties is FileStorageOperation<
+  getProperties is FileStorageOperationResponseBody<
     {
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
@@ -78,20 +112,20 @@ interface Service {
       @body properties: StorageServiceProperties;
     }
   >;
-  };
 
   /**
    * The List Shares Segment operation returns a list of the shares and share snapshots under the specified account.
    */
   @route("/?comp=list")
   @get
-  listSharesSegment is FileStorageOperation<
+  listSharesSegment is FileStorageOperationResponseBody<
     {
       ...PrefixParameter;
       ...MarkerParameter;
       ...MaxResultsParameter;
       ...TimeoutParameter;
       ...FileRequestIntentParameter;
+
       /** Include additional metadata in response. */
       @query include?: string[];
     },
@@ -115,12 +149,6 @@ interface Service {
       @body userDelegationKey: UserDelegationKey;
     }
   >;
-    @body userDelegationKey: UserDelegationKey;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
 }
 
 /**
@@ -138,57 +166,62 @@ interface Share {
       ...TimeoutParameter;
       ...MetadataHeaders;
       ...FileRequestIntentParameter;
-      
+
       /** The maximum size of the share in bytes. */
       @header("x-ms-share-quota") shareQuota?: int32;
-      
+
       /** Specifies the access tier of the share. */
       @header("x-ms-access-tier") accessTier?: ShareAccessTier;
-      
+
       /** Specifies which protocols are enabled on the share. */
       @header("x-ms-enabled-protocols") enabledProtocols?: string;
-      
+
       /** Specifies the SquashMode for the share. */
       @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
-      
+
       /** Optional. Used to set file permission for shares that use POSIX ACLs. */
       @header("x-ms-file-permission") filePermission?: string;
-      
+
       /** Optional. Used to set file attributes for shares. */
       @header("x-ms-file-attributes") fileAttributes?: string;
-      
+
       /** Optional. Used to set file creation time for shares. */
       @header("x-ms-file-creation-time") fileCreationTime?: string;
-      
+
       /** Optional. Used to set file last write time for shares. */
       @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-      
+
       /** Optional. Used to set file change time for shares. */
       @header("x-ms-file-change-time") fileChangeTime?: string;
-      
+
       /** Optional. Used to set permission format for shares. */
-      @header("x-ms-file-permission-format") filePermissionFormat?: FilePermissionFormat;
-      
+      @header("x-ms-file-permission-format")
+      filePermissionFormat?: FilePermissionFormat;
+
       /** Optional. Used to set provisioned IOPS for shares. */
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
-      
+
       /** Optional. Used to set provisioned bandwidth for shares. */
-      @header("x-ms-share-provisioned-bandwidth-mibps") shareProvisionedBandwidthMibps?: int32;
-      
+      @header("x-ms-share-provisioned-bandwidth-mibps")
+      shareProvisionedBandwidthMibps?: int32;
+
       /** Optional. Used to enable paid bursting for shares. */
       @header("x-ms-paid-bursting-enabled") paidBurstingEnabled?: boolean;
-      
+
       /** Optional. Used to set max IOPS for paid bursting. */
       @header("x-ms-paid-bursting-max-iops") paidBurstingMaxIops?: int64;
-      
+
       /** Optional. Used to set max bandwidth for paid bursting. */
-      @header("x-ms-paid-bursting-max-bandwidth-mibps") paidBurstingMaxBandwidthMibps?: int64;
-      
+      @header("x-ms-paid-bursting-max-bandwidth-mibps")
+      paidBurstingMaxBandwidthMibps?: int64;
+
       /** Optional. Used to enable snapshot virtual directory access. */
-      @header("x-ms-enable-snapshot-virtual-directory-access") enableSnapshotVirtualDirectoryAccess?: boolean;
-      
+      @header("x-ms-enable-snapshot-virtual-directory-access")
+      enableSnapshotVirtualDirectoryAccess?: boolean;
+
       /** Optional. Used to enable SMB directory lease. */
-      @header("x-ms-enable-smb-directory-lease") enableSmbDirectoryLease?: boolean;
+      @header("x-ms-enable-smb-directory-lease")
+      enableSmbDirectoryLease?: boolean;
     },
     {
       @statusCode statusCode: 201;
@@ -210,75 +243,85 @@ interface Share {
     },
     {
       ...MetadataHeaders;
-      
+
       /** The maximum quota for the share. */
       @header("x-ms-share-quota") shareQuota: int32;
-      
+
       /** The provisioned IOPS for the share. */
       @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
-      
+
       /** The provisioned ingress for the share. */
-      @header("x-ms-share-provisioned-ingress-mbps") shareProvisionedIngressMbps?: int32;
-      
+      @header("x-ms-share-provisioned-ingress-mbps")
+      shareProvisionedIngressMbps?: int32;
+
       /** The provisioned egress for the share. */
-      @header("x-ms-share-provisioned-egress-mbps") shareProvisionedEgressMbps?: int32;
-      
+      @header("x-ms-share-provisioned-egress-mbps")
+      shareProvisionedEgressMbps?: int32;
+
       /** The provisioned bandwidth for the share. */
-      @header("x-ms-share-provisioned-bandwidth-mibps") shareProvisionedBandwidthMibps?: int32;
-      
+      @header("x-ms-share-provisioned-bandwidth-mibps")
+      shareProvisionedBandwidthMibps?: int32;
+
       /** The next allowed quota downgrade time. */
-      @header("x-ms-share-next-allowed-quota-downgrade-time") shareNextAllowedQuotaDowngradeTime?: string;
-      
+      @header("x-ms-share-next-allowed-quota-downgrade-time")
+      shareNextAllowedQuotaDowngradeTime?: string;
+
       /** The access tier of the share. */
       @header("x-ms-access-tier") accessTier?: string;
-      
+
       /** The access tier change time. */
       @header("x-ms-access-tier-change-time") accessTierChangeTime?: string;
-      
+
       /** The access tier transition state. */
-      @header("x-ms-access-tier-transition-state") accessTierTransitionState?: string;
-      
+      @header("x-ms-access-tier-transition-state")
+      accessTierTransitionState?: string;
+
       /** The lease duration. */
       @header("x-ms-lease-duration") leaseDuration?: string;
-      
+
       /** The lease state. */
       @header("x-ms-lease-state") leaseState: string;
-      
+
       /** The lease status. */
       @header("x-ms-lease-status") leaseStatus: string;
-      
+
       /** The enabled protocols for the share. */
       @header("x-ms-enabled-protocols") enabledProtocols?: string;
-      
+
       /** The root squash mode for the share. */
       @header("x-ms-root-squash") rootSquash?: string;
-      
+
       /** Whether snapshot virtual directory access is enabled. */
-      @header("x-ms-enable-snapshot-virtual-directory-access") enableSnapshotVirtualDirectoryAccess?: boolean;
-      
+      @header("x-ms-enable-snapshot-virtual-directory-access")
+      enableSnapshotVirtualDirectoryAccess?: boolean;
+
       /** Whether paid bursting is enabled. */
       @header("x-ms-paid-bursting-enabled") paidBurstingEnabled?: boolean;
-      
+
       /** The maximum IOPS for paid bursting. */
       @header("x-ms-paid-bursting-max-iops") paidBurstingMaxIops?: int64;
-      
+
       /** The maximum bandwidth for paid bursting. */
-      @header("x-ms-paid-bursting-max-bandwidth-mibps") paidBurstingMaxBandwidthMibps?: int64;
-      
+      @header("x-ms-paid-bursting-max-bandwidth-mibps")
+      paidBurstingMaxBandwidthMibps?: int64;
+
       /** The included burst IOPS. */
       @header("x-ms-included-burst-iops") includedBurstIops?: int64;
-      
+
       /** The maximum burst credits for IOPS. */
       @header("x-ms-max-burst-credits-for-iops") maxBurstCreditsForIops?: int64;
-      
+
       /** The next allowed provisioned IOPS downgrade time. */
-      @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time") shareNextAllowedProvisionedIopsDowngradeTime?: string;
-      
+      @header("x-ms-share-next-allowed-provisioned-iops-downgrade-time")
+      shareNextAllowedProvisionedIopsDowngradeTime?: string;
+
       /** The next allowed provisioned bandwidth downgrade time. */
-      @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time") shareNextAllowedProvisionedBandwidthDowngradeTime?: string;
-      
+      @header("x-ms-share-next-allowed-provisioned-bandwidth-downgrade-time")
+      shareNextAllowedProvisionedBandwidthDowngradeTime?: string;
+
       /** Whether SMB directory lease is enabled. */
-      @header("x-ms-enable-smb-directory-lease") enableSmbDirectoryLease?: boolean;
+      @header("x-ms-enable-smb-directory-lease")
+      enableSmbDirectoryLease?: boolean;
     }
   >;
 
@@ -928,8 +971,10 @@ interface Directory {
     @header("x-ms-version") apiVersion: "2026-04-06",
     @header("x-ms-rename-source") renameSource: string,
     @query timeout?: int32,
+
     @header("x-ms-file-rename-replace-if-exists")
     renameReplaceIfExists?: boolean,
+
     @header("x-ms-file-rename-ignore-read-only") renameIgnoreReadOnly?: boolean,
     @header("x-ms-source-lease-id") sourceLeaseId?: string,
     @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
@@ -980,8 +1025,10 @@ interface File {
     @header("Content-Disposition") contentDisposition?: string,
     @header("x-ms-lease-id") leaseId?: string,
     @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
+
     @header("x-ms-file-permission-format")
     filePermissionFormat?: FilePermissionFormat,
+
     @header("x-ms-owner") owner?: string,
     @header("x-ms-group") group?: string,
     @header("x-ms-mode") mode?: string,
@@ -1156,8 +1203,10 @@ interface File {
     @header("x-ms-file-creation-time") fileCreationTime?: string,
     @header("x-ms-file-last-write-time") fileLastWriteTime?: string,
     @header("x-ms-file-change-time") fileChangeTime?: string,
+
     @header("x-ms-file-last-write-time-mode")
     fileLastWriteTimeMode?: FileLastWrittenMode,
+
     @header("Content-Length") contentLength?: int64,
     @header("Content-Type") contentType?: string,
     @header("Content-Encoding") contentEncoding?: string,
@@ -1167,9 +1216,12 @@ interface File {
     @header("Content-Disposition") contentDisposition?: string,
     @header("x-ms-lease-id") leaseId?: string,
     @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
+
     @header("x-ms-file-permission-format")
     filePermissionFormat?: FilePermissionFormat,
+
     @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
+
     @header("x-ms-file-property-semantics")
     filePropertySemantics?: FilePropertySemantics,
   ): {
@@ -1443,34 +1495,46 @@ interface File {
     @header("x-ms-meta-*") metadata?: Record<string>,
     @header("x-ms-file-permission") filePermission?: string,
     @header("x-ms-file-permission-key") filePermissionKey?: string,
+
     @header("x-ms-file-permission-copy-mode")
     filePermissionCopyMode?: PermissionCopyModeType,
+
     @header("x-ms-file-copy-ignore-read-only") fileCopyIgnoreReadOnly?: boolean,
     @header("x-ms-file-attributes") fileAttributes?: string,
     @header("x-ms-file-copy-file-attributes") fileCopyFileAttributes?: string,
     @header("x-ms-file-creation-time") fileCreationTime?: string,
+
     @header("x-ms-file-copy-file-creation-time")
     fileCopyFileCreationTime?: string,
+
     @header("x-ms-file-last-write-time") fileLastWriteTime?: string,
+
     @header("x-ms-file-copy-file-last-write-time")
     fileCopyFileLastWriteTime?: string,
+
     @header("x-ms-file-change-time") fileChangeTime?: string,
     @header("x-ms-file-copy-file-change-time") fileCopyFileChangeTime?: string,
+
     @header("x-ms-file-copy-set-archive-attribute")
     fileCopySetArchiveAttribute?: boolean,
+
     @header("x-ms-lease-id") leaseId?: string,
     @header("x-ms-source-lease-id") sourceLeaseId?: string,
     @header("x-ms-copy-source-authorization") copySourceAuthorization?: string,
     @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
+
     @header("x-ms-file-permission-format")
     filePermissionFormat?: FilePermissionFormat,
+
     @header("x-ms-source-allow-trailing-dot") sourceAllowTrailingDot?: boolean,
     @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
     @header("x-ms-owner") owner?: string,
     @header("x-ms-group") group?: string,
     @header("x-ms-mode") mode?: string,
+
     @header("x-ms-file-copy-mode-copy-mode")
     fileCopyModeCopyMode?: ModeCopyMode,
+
     @header("x-ms-file-copy-owner-copy-mode")
     fileCopyOwnerCopyMode?: OwnerCopyMode,
   ): {
@@ -1580,8 +1644,10 @@ interface File {
     @header("x-ms-version") apiVersion: "2026-04-06",
     @header("x-ms-rename-source") renameSource: string,
     @query timeout?: int32,
+
     @header("x-ms-file-rename-replace-if-exists")
     renameReplaceIfExists?: boolean,
+
     @header("x-ms-file-rename-ignore-read-only") renameIgnoreReadOnly?: boolean,
     @header("x-ms-source-lease-id") sourceLeaseId?: string,
     @header("x-ms-destination-lease-id") destinationLeaseId?: string,
@@ -1619,8 +1685,10 @@ interface File {
     @header("x-ms-file-last-write-time") fileLastWriteTime?: string,
     @header("x-ms-file-change-time") fileChangeTime?: string,
     @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
+
     @header("x-ms-file-permission-format")
     filePermissionFormat?: FilePermissionFormat,
+
     @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
     @header("x-ms-owner") owner?: string,
     @header("x-ms-group") group?: string,
