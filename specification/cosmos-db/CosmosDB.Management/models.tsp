@@ -5700,7 +5700,7 @@ model ListGarnetClusters {
    * Container for the array of clusters.
    */
   @pageItems
-  value?: ClusterResource[];
+  value?: GarnetClusterResource[];
 
   /**
    * The link used to get the next page of results.
