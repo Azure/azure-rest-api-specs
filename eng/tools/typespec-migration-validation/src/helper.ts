@@ -63,20 +63,7 @@ export function mergeFiles(folderPath: string): OpenAPI2Document {
 
   for (const file of files) {
     const fileContent = readFileContent(file);
-
-    // Some swagger files may contain a UTF-8 BOM or otherwise invalid JSON.
-    // Make the merge resilient by stripping a BOM and skipping files that
-    // still fail JSON.parse, instead of failing the whole comparison.
-    let jsonContent: OpenAPI2Document;
-    try {
-      const sanitized = fileContent.replace(/^\uFEFF/, "");
-      jsonContent = JSON.parse(sanitized);
-    } catch (e) {
-      logWarning(
-        `Skipping file with invalid JSON while merging old swagger: ${file}. ${(e as Error).message}`,
-      );
-      continue;
-    }
+    const jsonContent: OpenAPI2Document = JSON.parse(fileContent);
     mergedContent.info = jsonContent.info;
 
     for (const consumer of jsonContent.consumes ?? []) {
@@ -96,8 +83,8 @@ export function mergeFiles(folderPath: string): OpenAPI2Document {
       }
     }
 
-    for (const pathKey in jsonContent.paths ?? {}) {
-      const pathValue = jsonContent.paths?.[pathKey];
+    for (const pathKey in jsonContent.paths) {
+      const pathValue = jsonContent.paths[pathKey];
       if (!mergedContent.paths[pathKey]) {
         mergedContent.paths[pathKey] = pathValue!;
       } else {
@@ -106,31 +93,23 @@ export function mergeFiles(folderPath: string): OpenAPI2Document {
       }
     }
 
-    for (const parameterKey in jsonContent.parameters ?? {}) {
-      const parameter = jsonContent.parameters?.[parameterKey];
-      if (!parameter) {
-        continue;
-      }
+    for (const parameterKey in jsonContent.parameters) {
       if (!mergedContent.parameters) {
         mergedContent.parameters = {};
       }
       if (!mergedContent.parameters[parameterKey]) {
-        mergedContent.parameters[parameterKey] = parameter;
+        mergedContent.parameters[parameterKey] = jsonContent.parameters[parameterKey]!;
       } else {
         logWarning(`Duplicate parameter key found: ${parameterKey}. Keeping the first one.`);
       }
     }
 
-    for (const definitionKey in jsonContent.definitions ?? {}) {
-      const definition = jsonContent.definitions?.[definitionKey];
-      if (!definition) {
-        continue;
-      }
+    for (const definitionKey in jsonContent.definitions) {
       if (!mergedContent.definitions) {
         mergedContent.definitions = {};
       }
       if (!mergedContent.definitions[definitionKey]) {
-        mergedContent.definitions[definitionKey] = definition;
+        mergedContent.definitions[definitionKey] = jsonContent.definitions[definitionKey]!;
       } else {
         logWarning(`Duplicate definition key found: ${definitionKey}. Keeping the first one.`);
       }
