@@ -2898,6 +2898,13 @@
       }
     },
     "ExpressRouteCircuitLinkFailoverAllTestsDetails": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverTestDetails"
+      },
+      "description": "Circuit Failover All Test Details"
+    },
+    "ExpressRouteCircuitLinkFailoverTestDetails": {
       "type": "object",
       "properties": {
         "status": {
@@ -2969,6 +2976,13 @@
       "description": "ExpressRoute Circuit link failover test details"
     },
     "ExpressRouteCircuitLinkFailoverSingleTestDetailsObject": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetails"
+      },
+      "description": "Circuit Failover Single Test Details Object"
+    },
+    "ExpressRouteCircuitLinkFailoverSingleTestDetails": {
       "type": "object",
       "properties": {
         "startTimeUTC": {
@@ -3137,8 +3151,7 @@
         },
         "wasSimulationSuccessful": {
           "type": "boolean",
-          "description": "Whether the failover simulation was successful or not",
-          "readOnly": true
+          "description": "Whether the failover simulation was successful or not"
         },
         "isVerified": {
           "type": "boolean",
