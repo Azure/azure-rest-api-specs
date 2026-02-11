@@ -5,6 +5,8 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
+alias InsightsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.insights_v1_preview>;
+
 alias IncludeCoordinatesTrait = {
   @query("includeCoordinates")
   @doc("Whether to include coordinates for visualization in the response. Defaults to false.")
@@ -39,7 +41,7 @@ interface Insights {
   @route("insights")
   generate is Azure.Core.Foundations.Operation<
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.insights_v1_preview>;
+      ...InsightsPreviewHeader;
 
       @header("Repeatability-Request-ID")
       @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
@@ -61,7 +63,7 @@ interface Insights {
   get is Azure.Core.Foundations.ResourceOperation<
     Insight,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.insights_v1_preview>;
+      ...InsightsPreviewHeader;
       ...IncludeCoordinatesTrait;
     },
     Azure.Core.Foundations.ResourceOkResponse<Insight>
@@ -72,8 +74,7 @@ interface Insights {
   @Rest.listsResource(Insight)
   list is Azure.Core.Foundations.ResourceList<
     Insight,
-    FilterQueryParamsTraits &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.insights_v1_preview>,
+    FilterQueryParamsTraits & InsightsPreviewHeader,
     Azure.Core.Page<Insight>
   >;
 }

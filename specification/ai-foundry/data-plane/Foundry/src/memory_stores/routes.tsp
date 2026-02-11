@@ -7,6 +7,8 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
+alias MemoryStorePreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>;
+
 @tag("Memory Stores")
 interface MemoryStores {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -16,8 +18,7 @@ interface MemoryStores {
   @route("/memory_stores")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   createMemoryStore is FoundryDataPlaneOperation<
-    CreateMemoryStoreRequest &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>,
+    CreateMemoryStoreRequest & MemoryStorePreviewHeader,
     MemoryStoreObject
   >;
 
@@ -28,8 +29,7 @@ interface MemoryStores {
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   updateMemoryStore is FoundryDataPlaneOperation<
-    UpdateMemoryStoreRequest &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>,
+    UpdateMemoryStoreRequest & MemoryStorePreviewHeader,
     MemoryStoreObject
   >;
 
@@ -40,8 +40,7 @@ interface MemoryStores {
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   getMemoryStore is FoundryDataPlaneOperation<
-    GetMemoryStoreRequest &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>,
+    GetMemoryStoreRequest & MemoryStorePreviewHeader,
     MemoryStoreObject
   >;
 
@@ -53,8 +52,7 @@ interface MemoryStores {
   @route("/memory_stores")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   listMemoryStores is FoundryDataPlaneOperation<
-    ListMemoryStoresRequest &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>,
+    ListMemoryStoresRequest & MemoryStorePreviewHeader,
     AgentsPagedResult<MemoryStoreObject>
   >;
 
@@ -65,8 +63,7 @@ interface MemoryStores {
   @route("/memory_stores/{name}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   deleteMemoryStore is FoundryDataPlaneOperation<
-    DeleteMemoryStoreRequest &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>,
+    DeleteMemoryStoreRequest & MemoryStorePreviewHeader,
     DeleteMemoryStoreResponse
   >;
 
@@ -77,8 +74,7 @@ interface MemoryStores {
   @route("/memory_stores/{name}:search_memories")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   searchMemories is FoundryDataPlaneOperation<
-    MemoryStoreSearchRequest &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>,
+    MemoryStoreSearchRequest & MemoryStorePreviewHeader,
     MemoryStoreSearchResponse
   >;
 
@@ -90,8 +86,7 @@ interface MemoryStores {
   @pollingOperation(MemoryStores.getUpdateResult)
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   updateMemories is FoundryDataPlaneOperation<
-    MemoryStoreUpdateRequest &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>,
+    MemoryStoreUpdateRequest & MemoryStorePreviewHeader,
     Foundations.AcceptedResponse &
       MemoryStoreUpdateResponse &
       Foundations.LongRunningStatusLocation<MemoryStoreUpdateCompletedResult>
@@ -104,8 +99,7 @@ interface MemoryStores {
   @route("/memory_stores/{name}/updates/{update_id}")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   getUpdateResult is FoundryDataPlaneOperation<
-    MemoryStoreGetUpdateResultRequest &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>,
+    MemoryStoreGetUpdateResultRequest & MemoryStorePreviewHeader,
     MemoryStoreUpdateResponse
   >;
 
@@ -116,8 +110,7 @@ interface MemoryStores {
   @route("/memory_stores/{name}:delete_scope")
   @extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
   deleteScope is FoundryDataPlaneOperation<
-    MemoryStoreDeleteScopeRequest &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.memory_stores_v1_preview>,
+    MemoryStoreDeleteScopeRequest & MemoryStorePreviewHeader,
     MemoryStoreDeleteScopeResponse
   >;
 }

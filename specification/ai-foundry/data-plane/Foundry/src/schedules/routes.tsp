@@ -5,6 +5,8 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
+alias SchedulesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;
+
 alias SchedulesFilterQueryParams = {
   @query("type")
   @doc("Filter by the type of schedule.")
@@ -23,7 +25,7 @@ interface Schedules {
   delete is Azure.Core.Foundations.ResourceOperation<
     Schedule,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;
+      ...SchedulesPreviewHeader;
     },
     Http.NoContentResponse
   >;
@@ -33,7 +35,7 @@ interface Schedules {
   get is Azure.Core.Foundations.ResourceOperation<
     Schedule,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;
+      ...SchedulesPreviewHeader;
     },
     Azure.Core.Foundations.ResourceOkResponse<Schedule>
   >;
@@ -43,8 +45,7 @@ interface Schedules {
   @Rest.listsResource(Schedule)
   list is Azure.Core.Foundations.ResourceList<
     Schedule,
-    SchedulesFilterQueryParams &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>,
+    SchedulesFilterQueryParams & SchedulesPreviewHeader,
     Azure.Core.Page<Schedule>
   >;
 
@@ -54,7 +55,7 @@ interface Schedules {
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     Schedule,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;
+      ...SchedulesPreviewHeader;
 
       @doc("The resource instance.")
       @Http.bodyRoot
@@ -78,7 +79,7 @@ interface Schedules {
       @doc("The unique identifier of the schedule run.")
       run_id: string;
 
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;
+      ...SchedulesPreviewHeader;
     },
     OkResponse<ScheduleRun>
   >;
@@ -88,8 +89,7 @@ interface Schedules {
   @Rest.listsResource(ScheduleRun)
   listRuns is Azure.Core.Foundations.ResourceList<
     ScheduleRun,
-    SchedulesFilterQueryParams &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>,
+    SchedulesFilterQueryParams & SchedulesPreviewHeader,
     Azure.Core.Page<ScheduleRun>
   >;
 }

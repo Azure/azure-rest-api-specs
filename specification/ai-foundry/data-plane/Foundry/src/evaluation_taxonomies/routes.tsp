@@ -5,6 +5,8 @@ using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
+alias EvaluationTaxonomiesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+
 alias EvaluationTaxonomiesFilterQueryParamsTraits = {
   @query("inputName")
   @doc("Filter by the evaluation input name.")
@@ -22,7 +24,7 @@ interface EvaluationTaxonomies {
   get is Azure.Core.Foundations.ResourceOperation<
     EvaluationTaxonomy,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+      ...EvaluationTaxonomiesPreviewHeader;
     },
     Azure.Core.Foundations.ResourceOkResponse<EvaluationTaxonomy>
   >;
@@ -32,8 +34,7 @@ interface EvaluationTaxonomies {
   @Rest.listsResource(EvaluationTaxonomy)
   list is Azure.Core.Foundations.ResourceList<
     EvaluationTaxonomy,
-    EvaluationTaxonomiesFilterQueryParamsTraits &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>,
+    EvaluationTaxonomiesFilterQueryParamsTraits & EvaluationTaxonomiesPreviewHeader,
     Azure.Core.Page<EvaluationTaxonomy>
   >;
 
@@ -42,7 +43,7 @@ interface EvaluationTaxonomies {
   delete is Azure.Core.Foundations.ResourceOperation<
     EvaluationTaxonomy,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+      ...EvaluationTaxonomiesPreviewHeader;
     },
     Http.NoContentResponse
   >;
@@ -52,7 +53,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   create is Azure.Core.Foundations.Operation<
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+      ...EvaluationTaxonomiesPreviewHeader;
 
       @doc("The name of the evaluation taxonomy.")
       @path
@@ -70,7 +71,7 @@ interface EvaluationTaxonomies {
   @route("/evaluationtaxonomies/{name}")
   update is Azure.Core.Foundations.Operation<
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+      ...EvaluationTaxonomiesPreviewHeader;
 
       @doc("The name of the evaluation taxonomy.")
       @path

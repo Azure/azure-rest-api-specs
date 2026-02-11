@@ -4,6 +4,8 @@ using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
+alias RedTeamsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.red_teams_v1_preview>;
+
 @route("redTeams")
 @tag("Redteams")
 interface RedTeams {
@@ -12,7 +14,7 @@ interface RedTeams {
   get is Azure.Core.Foundations.ResourceOperation<
     RedTeam,
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.red_teams_v1_preview>;
+      ...RedTeamsPreviewHeader;
     },
     Azure.Core.Foundations.ResourceOkResponse<RedTeam>
   >;
@@ -22,7 +24,7 @@ interface RedTeams {
   @Rest.listsResource(RedTeam)
   list is Azure.Core.Foundations.ResourceList<
     RedTeam,
-    WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.red_teams_v1_preview>,
+    RedTeamsPreviewHeader,
     Azure.Core.Page<RedTeam>
   >;
 
@@ -32,7 +34,7 @@ interface RedTeams {
   @post
   create is FoundryDataPlaneOperation<
     {
-      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.red_teams_v1_preview>;
+      ...RedTeamsPreviewHeader;
 
       @doc("Redteam to be run")
       @body
