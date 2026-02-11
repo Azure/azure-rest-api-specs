@@ -1281,6 +1281,9 @@ model VMScaleSetLifecycleHookEventProperties {
 
   /**
    * Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.
+   * The keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.
+   * For example, for a lifecycle hook event with UpgradeAutoOSScheduling type,
+   * the additional context can contain the key "priority" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   additionalContext?: VMScaleSetLifecycleHookEventAdditionalContext;
@@ -1293,11 +1296,15 @@ model VMScaleSetLifecycleHookEventProperties {
 
 /**
  * Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.
+ * The keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.
+ * For example, for a lifecycle hook event with UpgradeAutoOSScheduling type,
+ * the additional context can contain the key "priority" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set.
  */
 @added(Versions.v2025_11_01)
 model VMScaleSetLifecycleHookEventAdditionalContext {
   /**
-   * Denotes the priority of the virtual machine scale set lifecycle hook event.
+   * Can only be present for a lifecycle hook event of type "UpgradeAutoOSScheduling".
+   * Denotes the priority of the virtual machine scale set lifecycle hook event for the Auto OS Upgrade scheduled on the virtual machine scale set.
    */
   priority?: string;
 }

@@ -18838,11 +18838,11 @@
     },
     "VMScaleSetLifecycleHookEventAdditionalContext": {
       "type": "object",
-      "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.",
+      "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.\nThe keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.\nFor example, for a lifecycle hook event with UpgradeAutoOSScheduling type,\nthe additional context can contain the key \"priority\" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set.",
       "properties": {
         "priority": {
           "type": "string",
-          "description": "Denotes the priority of the virtual machine scale set lifecycle hook event."
+          "description": "Can only be present for a lifecycle hook event of type \"UpgradeAutoOSScheduling\".\nDenotes the priority of the virtual machine scale set lifecycle hook event for the Auto OS Upgrade scheduled on the virtual machine scale set."
         }
       }
     },
@@ -18907,7 +18907,7 @@
         },
         "additionalContext": {
           "$ref": "#/definitions/VMScaleSetLifecycleHookEventAdditionalContext",
-          "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data."
+          "description": "Additional key-value pairs set on the lifecycle hook event that gives customer some useful context/data.\nThe keys in this dictionary are specific to the lifecycle hook type. Different lifecycle hook events can have different sets of keys in the additional context depending on the lifecycle hook type.\nFor example, for a lifecycle hook event with UpgradeAutoOSScheduling type,\nthe additional context can contain the key \"priority\" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the virtual machine scale set."
         },
         "state": {
           "$ref": "#/definitions/VMScaleSetLifecycleHookEventState",
