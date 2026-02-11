@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "api-version": "2025-12-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1",
+            "name": "account1",
+            "type": "Microsoft.NetApp/elasticAccounts",
+            "location": "eastus",
+            "tags": {
+              "ac-tag1": "account1"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "encryption": {
+                "keySource": "NetApp",
+                "keyVaultProperties": {
+                  "keyVaultUri": "https://myVault.vault.azure.net/",
+                  "keyName": "string",
+                  "keyVaultResourceId": "/subscriptions/a1b2c3d4-e5f6-7890-1234-567890abcdef/resourceGroups/my-keyvault-rg/providers/Microsoft.KeyVault/vaults/my-prod-keyvault",
+                  "status": "Created"
+                },
+                "identity": {
+                  "principalId": "70ab1774-1488-4f9c-a283-2db682f91b98",
+                  "userAssignedIdentity": "/subscriptions/ccdce6ae-b7b3-4a53-b9c5-48e2caa01800/resourcegroups/snaebjor-rotterdam-westcentralus/providers/Microsoft.ManagedIdentity/userAssignedIdentities/snaebjor-wcu-identity"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ElasticAccounts_ListByResourceGroup",
+  "title": "ElasticAccounts_ListByResourceGroup"
+}
