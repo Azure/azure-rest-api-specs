@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(Lab)
 model GalleryImage
-  is Azure.ResourceManager.ProxyResource<GalleryImageProperties> {
+  is Azure.ResourceManager.ProxyResource<GalleryImageProperties, false> {
   ...ResourceNameParameter<
     Resource = GalleryImage,
     KeyName = "galleryImageName",

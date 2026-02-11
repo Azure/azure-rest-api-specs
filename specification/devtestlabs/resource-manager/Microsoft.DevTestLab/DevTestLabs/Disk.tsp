@@ -13,7 +13,7 @@ namespace Microsoft.DevTestLab;
  * A Disk.
  */
 @parentResource(User)
-model Disk is Azure.ResourceManager.ProxyResource<DiskProperties> {
+model Disk is Azure.ResourceManager.ProxyResource<DiskProperties, false> {
   ...ResourceNameParameter<
     Resource = Disk,
     KeyName = "diskName",

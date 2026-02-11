@@ -15,7 +15,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(User)
 model DtlEnvironment
-  is Azure.ResourceManager.ProxyResource<EnvironmentProperties> {
+  is Azure.ResourceManager.ProxyResource<EnvironmentProperties, false> {
   ...ResourceNameParameter<
     Resource = DtlEnvironment,
     KeyName = "environmentName",

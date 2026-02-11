@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  * A user profile.
  */
 @parentResource(Lab)
-model User is Azure.ResourceManager.ProxyResource<UserProperties> {
+model User is Azure.ResourceManager.ProxyResource<UserProperties, false> {
   ...ResourceNameParameter<
     Resource = User,
     KeyName = "userName",

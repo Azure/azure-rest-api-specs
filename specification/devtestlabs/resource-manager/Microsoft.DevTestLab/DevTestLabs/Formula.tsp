@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  * A formula for creating a VM, specifying an image base and other parameters
  */
 @parentResource(Lab)
-model Formula is Azure.ResourceManager.ProxyResource<FormulaProperties> {
+model Formula is Azure.ResourceManager.ProxyResource<FormulaProperties, false> {
   ...ResourceNameParameter<
     Resource = Formula,
     KeyName = "formulaName",

@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(User)
 model ServiceFabric
-  is Azure.ResourceManager.ProxyResource<ServiceFabricProperties> {
+  is Azure.ResourceManager.ProxyResource<ServiceFabricProperties, false> {
   ...ResourceNameParameter<
     Resource = ServiceFabric,
     KeyName = "serviceFabricName",

@@ -13,7 +13,7 @@ namespace Microsoft.DevTestLab;
 /**
  * A lab.
  */
-model Lab is Azure.ResourceManager.ProxyResource<LabProperties> {
+model Lab is Azure.ResourceManager.ProxyResource<LabProperties, false> {
   ...ResourceNameParameter<
     Resource = Lab,
     KeyName = "labName",

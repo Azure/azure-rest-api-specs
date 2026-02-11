@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(ArtifactSource)
 model ArmTemplate
-  is Azure.ResourceManager.ProxyResource<ArmTemplateProperties> {
+  is Azure.ResourceManager.ProxyResource<ArmTemplateProperties, false> {
   ...ResourceNameParameter<
     Resource = ArmTemplate,
     KeyName = "armTemplateName",

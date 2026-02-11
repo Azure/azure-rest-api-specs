@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  */
 @parentResource(Lab)
 model CustomImage
-  is Azure.ResourceManager.ProxyResource<CustomImageProperties> {
+  is Azure.ResourceManager.ProxyResource<CustomImageProperties, false> {
   ...ResourceNameParameter<
     Resource = CustomImage,
     KeyName = "customImageName",

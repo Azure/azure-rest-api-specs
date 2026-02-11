@@ -14,7 +14,7 @@ namespace Microsoft.DevTestLab;
  * A container for a managed identity to execute DevTest lab services.
  */
 @parentResource(Lab)
-model ServiceRunner is Azure.ResourceManager.ProxyResource<never> {
+model ServiceRunner is Azure.ResourceManager.ProxyResource<never, false> {
   ...ResourceNameParameter<
     Resource = ServiceRunner,
     KeyName = "serviceRunnerName",
