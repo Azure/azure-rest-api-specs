@@ -1,0 +1,145 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "id": "/providers/Microsoft.Authorization/policyDefinitions/7433c107-6db4-4ad1-b57a-a76dce0154a1",
+            "properties": {
+              "description": "This policy enables you to specify a set of storage account SKUs that your organization can deploy.",
+              "displayName": "Allowed storage account SKUs",
+              "mode": "All",
+              "parameters": {
+                "listOfAllowedSKUs": {
+                  "type": "Array",
+                  "metadata": {
+                    "description": "The list of SKUs that can be specified for storage accounts.",
+                    "displayName": "Allowed SKUs",
+                    "strongType": "StorageSKUs"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "allOf": [
+                    {
+                      "equals": "Microsoft.Storage/storageAccounts",
+                      "field": "type"
+                    },
+                    {
+                      "not": {
+                        "field": "Microsoft.Storage/storageAccounts/sku.name",
+                        "in": "[parameters('listOfAllowedSKUs')]"
+                      }
+                    }
+                  ]
+                },
+                "then": {
+                  "effect": "Deny"
+                }
+              },
+              "policyType": "BuiltIn",
+              "version": "1.2.1",
+              "versions": [
+                "1.2.1",
+                "1.0.0"
+              ]
+            }
+          },
+          {
+            "name": "ResourceNaming",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+            "properties": {
+              "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+              "displayName": "Naming Convention",
+              "metadata": {
+                "category": "Naming"
+              },
+              "mode": "All",
+              "parameters": {
+                "prefix": {
+                  "type": "String",
+                  "metadata": {
+                    "description": "Resource name prefix",
+                    "displayName": "Prefix"
+                  }
+                },
+                "suffix": {
+                  "type": "String",
+                  "metadata": {
+                    "description": "Resource name suffix",
+                    "displayName": "Suffix"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "not": {
+                    "field": "name",
+                    "like": "[concat(parameters('prefix'), '*', parameters('suffix'))]"
+                  }
+                },
+                "then": {
+                  "effect": "deny"
+                }
+              },
+              "policyType": "Custom",
+              "version": "1.2.1",
+              "versions": [
+                "1.2.1",
+                "1.0.0"
+              ]
+            }
+          },
+          {
+            "name": "AuditSoonToExpireCerts",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/AuditSoonToExpireCerts",
+            "properties": {
+              "description": "Audit certificates that are stored in Azure Key Vault, that expire within 'X' number of days.",
+              "displayName": "Audit KeyVault certificates that expire within specified number of days",
+              "metadata": {
+                "category": "KeyVault DataPlane"
+              },
+              "mode": "Microsoft.KeyVault.Data",
+              "parameters": {
+                "daysToExpire": {
+                  "type": "Integer",
+                  "metadata": {
+                    "description": "The number of days for a certificate to expire.",
+                    "displayName": "Days to expire"
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "field": "Microsoft.KeyVault.Data/vaults/certificates/attributes/expiresOn",
+                  "lessOrEquals": "[addDays(utcNow(), parameters('daysToExpire'))]"
+                },
+                "then": {
+                  "effect": "audit"
+                }
+              },
+              "policyType": "Custom",
+              "version": "1.2.1",
+              "versions": [
+                "1.2.1",
+                "1.0.0"
+              ]
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyDefinitions_List",
+  "title": "List policy definitions by subscription"
+}

@@ -11,12 +11,6 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/iotdps.json"
     examples-dir: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.DeviceProvisioningServices"
   "@azure-tools/typespec-python":
     service-dir: "sdk/iothub"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-iothubprovisioningservices"
@@ -45,6 +39,9 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.DeviceProvisioningServices"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
