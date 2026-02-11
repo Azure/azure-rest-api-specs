@@ -115,7 +115,7 @@ interface DscConfigurations {
   getContent is ArmResourceActionSync<
     DscConfiguration,
     void,
-    ArmResponse<File>
+    ArmResponse<File<"text/powershell">>
   >;
 }
 

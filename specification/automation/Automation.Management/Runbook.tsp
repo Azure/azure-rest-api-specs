@@ -112,7 +112,7 @@ interface Runbooks {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   replaceContent is ArmResourceActionAsync<
     Runbook,
-    File,
+    File<"text/powershell">,
     ArmResponse<File>,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -165,7 +165,11 @@ interface Runbooks {
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/runbookoperations")
   @get
   @action("content")
-  runbookGetContent is ArmResourceActionSync<Runbook, void, ArmResponse<File>>;
+  runbookGetContent is ArmResourceActionSync<
+    Runbook,
+    void,
+    ArmResponse<File<"text/powershell">>
+  >;
 
   /**
    * Retrieve a test job stream of the test job identified by runbook name and stream id.
