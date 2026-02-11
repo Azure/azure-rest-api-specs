@@ -4913,7 +4913,11 @@ model VirtualMachineScaleSetVMProperties {
    */
   @added(Versions.v2025_11_01)
   @visibility(Lifecycle.Read)
-  virtualMachineResourceId?: string;
+  virtualMachineResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
 }
 
 /**
