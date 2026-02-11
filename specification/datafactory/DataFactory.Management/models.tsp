@@ -23884,7 +23884,9 @@ model DWCopyCommandSettings {
   /**
    * Additional options directly passed to SQL DW in Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: "additionalOptions": { "MAXERRORS": "1000", "DATEFORMAT": "'ymd'" }
    */
-  additionalOptions?: Dfe<Record<string>>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.alternateType(Dfe<Record<string>>, "csharp")
+  additionalOptions?: Record<string>;
 }
 
 /**

@@ -13250,7 +13250,11 @@
           ]
         },
         "additionalOptions": {
-          "description": "Additional options directly passed to SQL DW in Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalOptions\": { \"MAXERRORS\": \"1000\", \"DATEFORMAT\": \"'ymd'\" }"
+          "type": "object",
+          "description": "Additional options directly passed to SQL DW in Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalOptions\": { \"MAXERRORS\": \"1000\", \"DATEFORMAT\": \"'ymd'\" }",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
