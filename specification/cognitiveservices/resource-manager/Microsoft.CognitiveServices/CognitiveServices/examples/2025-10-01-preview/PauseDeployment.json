@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "accountName": "accountName",
+    "api-version": "2025-10-01-preview",
+    "deploymentName": "deploymentName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "deploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/deployments",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
+        "properties": {
+          "deploymentState": "Paused",
+          "model": {
+            "name": "gpt-4",
+            "format": "OpenAI",
+            "version": "0613"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "Standard",
+          "capacity": 1
+        }
+      }
+    }
+  },
+  "operationId": "Deployments_Pause",
+  "title": "PauseDeployment"
+}

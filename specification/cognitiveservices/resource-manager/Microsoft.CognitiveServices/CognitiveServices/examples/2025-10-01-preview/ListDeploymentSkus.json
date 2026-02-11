@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "accountName": "accountName",
+    "api-version": "2025-10-01-preview",
+    "deploymentName": "deploymentName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "capacity": {
+              "default": 100,
+              "allowedValues": [
+                100,
+                200
+              ],
+              "maximum": 1000,
+              "minimum": 100,
+              "step": 100
+            },
+            "resourceType": "Microsoft.CognitiveServices/accounts/deployments",
+            "sku": {
+              "name": "Standard",
+              "capacity": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Deployments_ListSkus",
+  "title": "ListDeploymentSkus"
+}

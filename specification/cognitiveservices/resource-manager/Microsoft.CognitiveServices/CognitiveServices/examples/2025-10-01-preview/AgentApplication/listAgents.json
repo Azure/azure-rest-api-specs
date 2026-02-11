@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "name": "agent-app-1",
+    "accountName": "my-cognitive-services-account",
+    "api-version": "2025-10-01-preview",
+    "projectName": "my-project",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "CustomerSupportAgent",
+            "type": "Microsoft.CognitiveServices/accounts/projects/applications/agents",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agents/agent-001",
+            "properties": {
+              "agentId": "agent-001",
+              "agentName": "CustomerSupportAgent"
+            },
+            "systemData": {
+              "createdAt": "2024-09-29T12:34:56.999Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-09-29T12:34:56.999Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "TechnicalSupportAgent",
+            "type": "Microsoft.CognitiveServices/accounts/projects/applications/agents",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/projects/my-project/applications/agent-app-1/agents/agent-002",
+            "properties": {
+              "agentId": "agent-002",
+              "agentName": "TechnicalSupportAgent"
+            },
+            "systemData": {
+              "createdAt": "2024-09-29T12:34:56.999Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-09-29T12:34:56.999Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AgentApplications_ListAgents",
+  "title": "List Agents for Agent Application."
+}
