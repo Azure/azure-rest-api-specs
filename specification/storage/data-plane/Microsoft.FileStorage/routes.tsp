@@ -330,176 +330,136 @@ interface Share {
    */
   @route("/{shareName}?restype=share")
   @delete
-  delete(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query sharesnapshot?: string,
-    @query timeout?: int32,
+  delete is FileStorageOperationNoBody<
+    {
+      @path shareName: string;
+      ...ShareSnapshotParameter;
+      ...TimeoutParameter;
 
-    @header("x-ms-delete-snapshots")
-    deleteSnapshots?: DeleteSnapshotsOptionType,
+      @header("x-ms-delete-snapshots")
+      deleteSnapshots?: DeleteSnapshotsOptionType;
 
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-lease-id") leaseId?: string,
-  ): {
-    @statusCode statusCode: 202;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+      ...FileRequestIntentParameter;
+      ...LeaseIdParameter;
+    },
+    {
+      @statusCode statusCode: 202;
+    }
+  >;
 
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   @route("/{shareName}?restype=share&comp=lease&acquire")
   @put
-  acquireLease(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-lease-duration") leaseDuration: int32,
-    @header("x-ms-proposed-lease-id") proposedLeaseId?: string,
-    @query sharesnapshot?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-lease-id") leaseId: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  acquireLease is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...TimeoutParameter;
+      @header("x-ms-lease-duration") leaseDuration: int32;
+      @header("x-ms-proposed-lease-id") proposedLeaseId?: string;
+      ...ShareSnapshotParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("x-ms-lease-id") leaseId: string;
+    }
+  >;
 
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   @route("/{shareName}?restype=share&comp=lease&release")
   @put
-  releaseLease(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-lease-id") leaseId: string,
-    @query timeout?: int32,
-    @query sharesnapshot?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  releaseLease is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...LeaseIdParameter;
+      ...TimeoutParameter;
+      ...ShareSnapshotParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 200;
+    }
+  >;
 
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   @route("/{shareName}?restype=share&comp=lease&change")
   @put
-  changeLease(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-lease-id") leaseId: string,
-    @header("x-ms-proposed-lease-id") proposedLeaseId: string,
-    @query timeout?: int32,
-    @query sharesnapshot?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-lease-id") leaseId: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  changeLease is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...LeaseIdParameter;
+      @header("x-ms-proposed-lease-id") proposedLeaseId: string;
+      ...TimeoutParameter;
+      ...ShareSnapshotParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("x-ms-lease-id") leaseId: string;
+    }
+  >;
 
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   @route("/{shareName}?restype=share&comp=lease&renew")
   @put
-  renewLease(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-lease-id") leaseId: string,
-    @query timeout?: int32,
-    @query sharesnapshot?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-lease-id") leaseId: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  renewLease is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...LeaseIdParameter;
+      ...TimeoutParameter;
+      ...ShareSnapshotParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("x-ms-lease-id") leaseId: string;
+    }
+  >;
 
   /**
    * The Lease Share operation establishes and manages a lock on a share for delete operations. The lock duration can be 15 to 60 seconds, or can be infinite.
    */
   @route("/{shareName}?restype=share&comp=lease&break")
   @put
-  breakLease(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-lease-break-period") leaseBreakPeriod?: int32,
-    @query sharesnapshot?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 202;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-lease-time") leaseTime?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  breakLease is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...TimeoutParameter;
+      @header("x-ms-lease-break-period") leaseBreakPeriod?: int32;
+      ...ShareSnapshotParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 202;
+      @header("x-ms-lease-time") leaseTime?: string;
+    }
+  >;
 
   /**
    * Creates a read-only snapshot of a share.
    */
   @route("/{shareName}?restype=share&comp=snapshot")
   @put
-  createSnapshot(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-meta-*") metadata?: Record<string>,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("x-ms-snapshot") snapshot: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  createSnapshot is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...TimeoutParameter;
+      ...MetadataHeaders;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("x-ms-snapshot") snapshot: string;
+    }
+  >;
 
   /**
    * Create a permission (a security descriptor). This is used to support file level ACLs for SMB shares.
@@ -528,182 +488,139 @@ interface Share {
    */
   @route("/{shareName}?restype=share&comp=filepermission")
   @get
-  getPermission(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-file-permission-key") filePermissionKey: string,
-    @query timeout?: int32,
+  getPermission is FileStorageOperationResponseBody<
+    {
+      @path shareName: string;
+      @header("x-ms-file-permission-key") filePermissionKey: string;
+      ...TimeoutParameter;
 
-    @header("x-ms-file-permission-format")
-    filePermissionFormat?: FilePermissionFormat,
+      @header("x-ms-file-permission-format")
+      filePermissionFormat?: FilePermissionFormat;
 
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @body permission: SharePermission;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+      ...FileRequestIntentParameter;
+    },
+    {
+      @body permission: SharePermission;
+    }
+  >;
 
   /**
    * Sets properties for the specified share.
    */
   @route("/{shareName}?restype=share&comp=properties")
   @put
-  setProperties(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-share-quota") shareQuota?: int32,
-    @header("x-ms-access-tier") accessTier?: ShareAccessTier,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-root-squash") rootSquash?: ShareRootSquash,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32,
+  setProperties is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...TimeoutParameter;
+      @header("x-ms-share-quota") shareQuota?: int32;
+      @header("x-ms-access-tier") accessTier?: ShareAccessTier;
+      ...LeaseIdParameter;
+      @header("x-ms-root-squash") rootSquash?: ShareRootSquash;
+      ...FileRequestIntentParameter;
+      @header("x-ms-share-provisioned-iops") shareProvisionedIops?: int32;
 
-    @header("x-ms-share-provisioned-bandwidth-mibps")
-    shareProvisionedBandwidthMibps?: int32,
+      @header("x-ms-share-provisioned-bandwidth-mibps")
+      shareProvisionedBandwidthMibps?: int32;
 
-    @header("x-ms-paid-bursting-enabled") paidBurstingEnabled?: boolean,
-    @header("x-ms-paid-bursting-max-iops") paidBurstingMaxIops?: int64,
+      @header("x-ms-paid-bursting-enabled") paidBurstingEnabled?: boolean;
+      @header("x-ms-paid-bursting-max-iops") paidBurstingMaxIops?: int64;
 
-    @header("x-ms-paid-bursting-max-bandwidth-mibps")
-    paidBurstingMaxBandwidthMibps?: int64,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+      @header("x-ms-paid-bursting-max-bandwidth-mibps")
+      paidBurstingMaxBandwidthMibps?: int64;
+    },
+    {
+      @statusCode statusCode: 200;
+    }
+  >;
 
   /**
    * Sets one or more user-defined name-value pairs for the specified share.
    */
   @route("/{shareName}?restype=share&comp=metadata")
   @put
-  setMetadata(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-meta-*") metadata?: Record<string>,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 412 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  setMetadata is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...TimeoutParameter;
+      ...MetadataHeaders;
+      ...LeaseIdParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 200;
+    }
+  >;
 
   /**
    * Returns information about stored access policies specified on the share that may be used with Shared Access Signatures.
    */
   @route("/{shareName}?restype=share&comp=acl")
   @get
-  getAccessPolicy(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @body signedIdentifiers: SignedIdentifier[];
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  getAccessPolicy is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...TimeoutParameter;
+      ...LeaseIdParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @body signedIdentifiers: SignedIdentifier[];
+    }
+  >;
 
   /**
    * Sets stored access policies for the share that may be used with Shared Access Signatures.
    */
   @route("/{shareName}?restype=share&comp=acl")
   @put
-  setAccessPolicy(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @body shareAcl?: SignedIdentifier[],
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  setAccessPolicy is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...TimeoutParameter;
+      ...LeaseIdParameter;
+      ...FileRequestIntentParameter;
+      @body shareAcl?: SignedIdentifier[];
+    },
+    {
+      @statusCode statusCode: 200;
+    }
+  >;
 
   /**
    * Retrieves statistics related to the share.
    */
   @route("/{shareName}?restype=share&comp=stats")
   @get
-  getStatistics(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-lease-id") leaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @body shareStats: ShareStats;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  getStatistics is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...TimeoutParameter;
+      ...LeaseIdParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @body shareStats: ShareStats;
+    }
+  >;
 
   /**
    * Restores a previously deleted share.
    */
   @route("/{shareName}?restype=share&comp=undelete")
   @put
-  restore(
-    @path shareName: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-deleted-share-name") deletedShareName?: string,
-    @header("x-ms-deleted-share-version") deletedShareVersion?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  restore is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      ...TimeoutParameter;
+      @header("x-ms-deleted-share-name") deletedShareName?: string;
+      @header("x-ms-deleted-share-version") deletedShareVersion?: string;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 201;
+    }
+  >;
 }
 
 /**
@@ -715,282 +632,235 @@ interface Directory {
    */
   @route("/{shareName}/{directory}?restype=directory")
   @put
-  create(
-    @path shareName: string,
-    @path directory: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-meta-*") metadata?: Record<string>,
-    @header("x-ms-file-permission") filePermission?: string,
-    @header("x-ms-file-permission-key") filePermissionKey?: string,
-    @header("x-ms-file-attributes") fileAttributes?: string,
-    @header("x-ms-file-creation-time") fileCreationTime?: string,
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string,
-    @header("x-ms-file-change-time") fileChangeTime?: string,
-    @query sharesnapshot?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
+  create is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      @path directory: string;
+      ...TimeoutParameter;
+      ...MetadataHeaders;
+      @header("x-ms-file-permission") filePermission?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      ...ShareSnapshotParameter;
+      ...FileRequestIntentParameter;
 
-    @header("x-ms-file-permission-format")
-    filePermissionFormat?: FilePermissionFormat,
+      @header("x-ms-file-permission-format")
+      filePermissionFormat?: FilePermissionFormat;
 
-    @header("x-ms-posix-permissions") posixPermissions?: string,
-    @header("x-ms-posix-umask") posixUmask?: string,
-    @header("x-ms-owner") owner?: string,
-    @header("x-ms-group") group?: string,
-    @header("x-ms-mode") mode?: string,
-  ): {
-    @statusCode statusCode: 201;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+      @header("x-ms-posix-permissions") posixPermissions?: string;
+      @header("x-ms-posix-umask") posixUmask?: string;
+      @header("x-ms-owner") owner?: string;
+      @header("x-ms-group") group?: string;
+      @header("x-ms-mode") mode?: string;
+    },
+    {
+      @statusCode statusCode: 201;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+    }
+  >;
 
   /**
    * Returns all system properties for the specified directory, and can also be used to check the existence of a directory.
    */
   @route("/{shareName}/{directory}?restype=directory")
   @get
-  getProperties(
-    @path shareName: string,
-    @path directory: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query sharesnapshot?: string,
-    @query timeout?: int32,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("x-ms-meta-*") metadata?: Record<string>;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  getProperties is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      @path directory: string;
+      ...ShareSnapshotParameter;
+      ...TimeoutParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      ...MetadataHeaders;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+    }
+  >;
 
   /**
    * Removes the specified empty directory. Note that the directory must be empty before it can be deleted.
    */
   @route("/{shareName}/{directory}?restype=directory")
   @delete
-  delete(
-    @path shareName: string,
-    @path directory: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 202;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  delete is FileStorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      ...TimeoutParameter;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 202;
+    }
+  >;
 
   /**
    * Sets properties for the specified directory.
    */
   @route("/{shareName}/{directory}?restype=directory&comp=properties")
   @put
-  setProperties(
-    @path shareName: string,
-    @path directory: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-file-permission") filePermission?: string,
-    @header("x-ms-file-permission-key") filePermissionKey?: string,
-    @header("x-ms-file-attributes") fileAttributes?: string,
-    @header("x-ms-file-creation-time") fileCreationTime?: string,
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string,
-    @header("x-ms-file-change-time") fileChangeTime?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
+  setProperties is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      @path directory: string;
+      ...TimeoutParameter;
+      @header("x-ms-file-permission") filePermission?: string;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      ...FileRequestIntentParameter;
 
-    @header("x-ms-file-permission-format")
-    filePermissionFormat?: FilePermissionFormat,
+      @header("x-ms-file-permission-format")
+      filePermissionFormat?: FilePermissionFormat;
 
-    @header("x-ms-posix-permissions") posixPermissions?: string,
-    @header("x-ms-posix-umask") posixUmask?: string,
-    @header("x-ms-owner") owner?: string,
-    @header("x-ms-group") group?: string,
-    @header("x-ms-mode") mode?: string,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-    @header("x-ms-file-permission-key") filePermissionKey?: string;
-    @header("x-ms-file-attributes") fileAttributes?: string;
-    @header("x-ms-file-creation-time") fileCreationTime?: string;
-    @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
-    @header("x-ms-file-change-time") fileChangeTime?: string;
-    @header("x-ms-file-id") fileId?: string;
-    @header("x-ms-file-parent-id") fileParentId?: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+      @header("x-ms-posix-permissions") posixPermissions?: string;
+      @header("x-ms-posix-umask") posixUmask?: string;
+      @header("x-ms-owner") owner?: string;
+      @header("x-ms-group") group?: string;
+      @header("x-ms-mode") mode?: string;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("x-ms-file-permission-key") filePermissionKey?: string;
+      @header("x-ms-file-attributes") fileAttributes?: string;
+      @header("x-ms-file-creation-time") fileCreationTime?: string;
+      @header("x-ms-file-last-write-time") fileLastWriteTime?: string;
+      @header("x-ms-file-change-time") fileChangeTime?: string;
+      @header("x-ms-file-id") fileId?: string;
+      @header("x-ms-file-parent-id") fileParentId?: string;
+    }
+  >;
 
   /**
    * Sets one or more user-defined name-value pairs for the specified directory.
    */
   @route("/{shareName}/{directory}?restype=directory&comp=metadata")
   @put
-  setMetadata(
-    @path shareName: string,
-    @path directory: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query timeout?: int32,
-    @header("x-ms-meta-*") metadata?: Record<string>,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  setMetadata is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      @path directory: string;
+      ...TimeoutParameter;
+      ...MetadataHeaders;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 200;
+    }
+  >;
 
   /**
    * Returns a list of files and directories under the specified share or directory. It lists the contents only for a single level of the directory hierarchy.
    */
   @route("/{shareName}/{directory}?restype=directory&comp=list")
   @get
-  listFilesAndDirectoriesSegment(
-    @path shareName: string,
-    @path directory: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query prefix?: string,
-    @query marker?: string,
-    @query maxresults?: int32,
-    @query include?: string[], // ListFilesIncludeType values
-    @query timeout?: int32,
-    @query sharesnapshot?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-file-extended-info") fileExtendedInfo?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @body response: ListFilesAndDirectoriesSegmentResponse;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  listFilesAndDirectoriesSegment is FileStorageOperationResponseBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      @query include?: string[]; // ListFilesIncludeType values
+      ...TimeoutParameter;
+      ...ShareSnapshotParameter;
+      ...FileRequestIntentParameter;
+      @header("x-ms-file-extended-info") fileExtendedInfo?: boolean;
+    },
+    {
+      @body response: ListFilesAndDirectoriesSegmentResponse;
+    }
+  >;
 
   /**
    * Lists handles for directory.
    */
   @route("/{shareName}/{directory}?comp=listhandles")
   @get
-  listHandles(
-    @path shareName: string,
-    @path directory: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @query marker?: string,
-    @query maxresults?: int32,
-    @query timeout?: int32,
-    @query sharesnapshot?: string,
-    @query recursive?: boolean,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @body response: ListHandlesResponse;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  listHandles is FileStorageOperationResponseBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...TimeoutParameter;
+      ...ShareSnapshotParameter;
+      @query recursive?: boolean;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @body response: ListHandlesResponse;
+    }
+  >;
 
   /**
    * Closes all handles open for given directory.
    */
   @route("/{shareName}/{directory}?comp=forceclosehandles")
   @put
-  forceCloseHandles(
-    @path shareName: string,
-    @path directory: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-handle-id") handleId: string,
-    @query timeout?: int32,
-    @query marker?: string,
-    @query sharesnapshot?: string,
-    @query recursive?: boolean,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
-    @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+  forceCloseHandles is FileStorageOperationNoBody<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @header("x-ms-handle-id") handleId: string;
+      ...TimeoutParameter;
+      ...MarkerParameter;
+      ...ShareSnapshotParameter;
+      @query recursive?: boolean;
+      ...FileRequestIntentParameter;
+    },
+    {
+      @statusCode statusCode: 200;
+      @header("x-ms-number-of-handles-closed") numberOfHandlesClosed: int32;
+      @header("x-ms-number-of-handles-failed") numberOfHandlesFailed: int32;
+    }
+  >;
 
   /**
    * Renames a directory. By default, the destination is overwritten and if the destination already exists and has a read-only attribute set, the operation will fail.
    */
   @route("/{shareName}/{directory}?restype=directory&comp=rename")
   @put
-  rename(
-    @path shareName: string,
-    @path directory: string,
-    @header("x-ms-version") apiVersion: "2026-04-06",
-    @header("x-ms-rename-source") renameSource: string,
-    @query timeout?: int32,
+  rename is FileStorageResourceOperation<
+    {
+      @path shareName: string;
+      @path directory: string;
+      @header("x-ms-rename-source") renameSource: string;
+      ...TimeoutParameter;
 
-    @header("x-ms-file-rename-replace-if-exists")
-    renameReplaceIfExists?: boolean,
+      @header("x-ms-file-rename-replace-if-exists")
+      renameReplaceIfExists?: boolean;
 
-    @header("x-ms-file-rename-ignore-read-only") renameIgnoreReadOnly?: boolean,
-    @header("x-ms-source-lease-id") sourceLeaseId?: string,
-    @header("x-ms-file-request-intent") fileRequestIntent?: ShareTokenIntent,
-    @header("x-ms-source-allow-trailing-dot") sourceAllowTrailingDot?: boolean,
-    @header("x-ms-allow-trailing-dot") allowTrailingDot?: boolean,
-  ): {
-    @statusCode statusCode: 200;
-    @header("x-ms-request-id") requestId: string;
-    @header("x-ms-version") version: string;
-    @header("ETag") etag: string;
-    @header("Last-Modified") lastModified: string;
-  } | {
-    @statusCode statusCode: 400 | 403 | 404 | 409 | 500;
-    @header("x-ms-error-code") errorCode?: string;
-    @body error: StorageError;
-  };
+      @header("x-ms-file-rename-ignore-read-only")
+      renameIgnoreReadOnly?: boolean;
+      @header("x-ms-source-lease-id") sourceLeaseId?: string;
+      ...FileRequestIntentParameter;
+      @header("x-ms-source-allow-trailing-dot")
+      sourceAllowTrailingDot?: boolean;
+      ...AllowTrailingDotParameter;
+    },
+    {
+      @statusCode statusCode: 200;
+    }
+  >;
 }
 
 /**
