@@ -5179,6 +5179,36 @@
     }
   },
   "definitions": {
+    "ActionTask": {
+      "type": "string",
+      "description": "An action task type indicates the type of action task.",
+      "enum": [
+        "None",
+        "PreActionTask",
+        "PostActionTask"
+      ],
+      "x-ms-enum": {
+        "name": "ActionTask",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No action task."
+          },
+          {
+            "name": "PreActionTask",
+            "value": "PreActionTask",
+            "description": "Pre-action task."
+          },
+          {
+            "name": "PostActionTask",
+            "value": "PostActionTask",
+            "description": "Post-action task."
+          }
+        ]
+      }
+    },
     "AddOrUpdateResourcesRequest": {
       "type": "object",
       "description": "Request body of the AddOrUpdateResources API.",
@@ -9402,6 +9432,35 @@
         }
       }
     },
+    "RecoveryActionSettings": {
+      "type": "object",
+      "description": "Settings for a recovery action.",
+      "properties": {
+        "actionTask": {
+          "$ref": "#/definitions/ActionTask",
+          "description": "The action task associated with this job resource."
+        },
+        "actionSequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sequence number for the action."
+        },
+        "actionType": {
+          "type": "string",
+          "description": "Type of the action (ManualAction/CustomRunbook)."
+        },
+        "actionName": {
+          "type": "string",
+          "description": "Name of the action for the Custom Runbook."
+        }
+      },
+      "required": [
+        "actionTask",
+        "actionSequence",
+        "actionType",
+        "actionName"
+      ]
+    },
     "RecoveryChildJob": {
       "type": "object",
       "description": "RecoveryPlan Child Job a AzureResilienceProviderHub resource",
@@ -9824,8 +9883,15 @@
           "$ref": "#/definitions/ResourceProtectionSolutionType",
           "description": "A setting that indicates the protection solution selected.",
           "readOnly": true
+        },
+        "recoveryActionSettings": {
+          "$ref": "#/definitions/RecoveryActionSettings",
+          "description": "The recovery action settings."
         }
       },
+      "required": [
+        "recoveryActionSettings"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/JobResourceProperties"
