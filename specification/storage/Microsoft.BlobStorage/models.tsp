@@ -1240,7 +1240,7 @@ model RetentionPolicy {
 
 /** An enumeration of blobs. */
 @Xml.name("EnumerationResults")
-model ListBlobsFlatSegmentResponse {
+model ListBlobsResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
