@@ -1437,56 +1437,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/dailyUsages": {
-      "post": {
-        "operationId": "Agents_DailyUsages",
-        "tags": [
-          "Agents"
-        ],
-        "description": "Get daily usage information for an Agent",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "agentName",
-            "in": "path",
-            "description": "The name of the Agent",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DailyUsageCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_DailyUsages": {
-            "$ref": "./examples/Agents_DailyUsages.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/listConnectorsWithSecrets": {
       "post": {
         "operationId": "AgentsConnectors_ListWithSecretsByAgent",
@@ -1662,56 +1612,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/usages": {
-      "post": {
-        "operationId": "Agents_Usages",
-        "tags": [
-          "Agents"
-        ],
-        "description": "Get usage information for an Agent",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "agentName",
-            "in": "path",
-            "description": "The name of the Agent",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UsageCollection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Agents_Usages": {
-            "$ref": "./examples/Agents_Usages.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
       }
     }
   },
@@ -2594,47 +2494,6 @@
       },
       "readOnly": true
     },
-    "DailyUsageCollection": {
-      "type": "object",
-      "description": "Collection of daily usage information",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of daily usage records.",
-          "items": {
-            "$ref": "#/definitions/DailyUsageInfo"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to request the next page of results.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "DailyUsageInfo": {
-      "type": "object",
-      "description": "Daily usage information for an Agent",
-      "properties": {
-        "date": {
-          "type": "string",
-          "format": "date",
-          "description": "The date of the usage"
-        },
-        "name": {
-          "$ref": "#/definitions/UsageName",
-          "description": "Usage name"
-        },
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The usage value for the day"
-        }
-      }
-    },
     "DefaultModel": {
       "type": "object",
       "description": "Default AI model configuration",
@@ -2963,62 +2822,6 @@
             "description": "Stable upgrade channel"
           }
         ]
-      }
-    },
-    "UsageCollection": {
-      "type": "object",
-      "description": "Collection of usage information",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of usage records.",
-          "items": {
-            "$ref": "#/definitions/UsageInfo"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI that can be used to request the next list of usage records.",
-          "readOnly": true
-        }
-      }
-    },
-    "UsageInfo": {
-      "type": "object",
-      "description": "Usage information for an Agent",
-      "properties": {
-        "unit": {
-          "type": "string",
-          "description": "The unit of measurement"
-        },
-        "currentValue": {
-          "type": "number",
-          "format": "double",
-          "description": "The current usage value"
-        },
-        "limit": {
-          "type": "number",
-          "format": "double",
-          "description": "The usage limit"
-        },
-        "name": {
-          "$ref": "#/definitions/UsageName",
-          "description": "Usage name"
-        }
-      }
-    },
-    "UsageName": {
-      "type": "object",
-      "description": "Usage name information",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The usage name value"
-        },
-        "localizedValue": {
-          "type": "string",
-          "description": "The localized usage name"
-        }
       }
     }
   },

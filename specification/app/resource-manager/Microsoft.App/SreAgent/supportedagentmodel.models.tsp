@@ -1,5 +1,3 @@
-import "./supportedagentmodel.models.tsp";
-
 namespace Microsoft.App;
 
 /** Supported AI model properties */

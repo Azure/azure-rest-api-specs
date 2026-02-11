@@ -6,6 +6,7 @@ import "./agent.models.tsp";
 
 using Azure.ResourceManager;
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 
 namespace Microsoft.App;
@@ -49,20 +50,4 @@ interface Agents {
 
   /** Stop an Agent */
   stop is ArmResourceActionAsync<Agent, void, Agent>;
-
-  /** Get usage information for an Agent */
-  @action("usages")
-  @armResourceAction(Agent)
-  @list
-  usages is ArmResourceActionSync<Agent, void, ArmResponse<UsageCollection>>;
-
-  /** Get daily usage information for an Agent */
-  @action("dailyUsages")
-  @armResourceAction(Agent)
-  @list
-  dailyUsages is ArmResourceActionSync<
-    Agent,
-    void,
-    ArmResponse<DailyUsageCollection>
-  >;
 }

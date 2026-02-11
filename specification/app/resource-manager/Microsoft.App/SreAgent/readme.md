@@ -48,8 +48,16 @@ directive:
   - suppress: AvoidAdditionalProperties
     from: sreagent.json
     reason: A dictionary allow passing through various key-value pairs
+    where:
+    - $.definitions.AgentConnectorProperties.properties.extendedProperties
+    - $.definitions.AgentSpaceConnectorProperties.properties.extendedProperties
+    - $.definitions.Connector.properties.extendedProperties
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: sreagent.json
     reason: A dictionary allow passing through various key-value pairs
+    where:
+    - $.definitions.AgentConnectorProperties.properties.extendedProperties
+    - $.definitions.AgentSpaceConnectorProperties.properties.extendedProperties
+    - $.definitions.Connector.properties.extendedProperties
 
 ```
