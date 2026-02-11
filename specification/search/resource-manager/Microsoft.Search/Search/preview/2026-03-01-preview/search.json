@@ -2057,6 +2057,11 @@
           "type": "string",
           "format": "arm-id",
           "description": "The fully qualified Azure resource Id of a user assigned managed identity typically in the form \"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\" that should have been assigned to the search service."
+        },
+        "federatedIdentityClientId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Optional for Multi-tenant User-Assigned Managed Identity CMK Support: The client id (as a UUID) of the multi-tentant App Registration that has been configured to federate with the userAssignedIdentity."
         }
       },
       "required": [
