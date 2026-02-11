@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 @service(#{ title: "Microsoft.AzureResilienceManagement" })
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
@@ -194,6 +195,7 @@ union JobResourceType {
   string,
 }
 
+@added(Versions.v2026_03_01_preview)
 @doc("An action task type indicates the type of action task.")
 union ActionTask {
   @doc("No action task.")
