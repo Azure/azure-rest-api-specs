@@ -14,7 +14,8 @@ namespace Microsoft.DevTestLab;
 /**
  * A schedule.
  */
-model Schedule is Azure.ResourceManager.ProxyResource<ScheduleProperties, false> {
+model Schedule
+  is Azure.ResourceManager.ProxyResource<ScheduleProperties, false> {
   ...ResourceNameParameter<
     Resource = Schedule,
     KeyName = "scheduleName",

@@ -13,7 +13,8 @@ namespace Microsoft.DevTestLab;
  * An artifact.
  */
 @parentResource(ArtifactSource)
-model Artifact is Azure.ResourceManager.ProxyResource<ArtifactProperties, false> {
+model Artifact
+  is Azure.ResourceManager.ProxyResource<ArtifactProperties, false> {
   ...ResourceNameParameter<
     Resource = Artifact,
     KeyName = "artifactName",
