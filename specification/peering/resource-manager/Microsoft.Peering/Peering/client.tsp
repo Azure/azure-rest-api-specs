@@ -164,8 +164,6 @@ using Azure.ClientGenerator.Core;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-
-// Alternate types - azure locations
 @@alternateType(Microsoft.Peering.PeeringServiceLocationProperties.azureRegion,
   Azure.Core.azureLocation,
   "csharp"
@@ -187,8 +185,6 @@ using Azure.ClientGenerator.Core;
   Azure.Core.uuid,
   "csharp"
 );
-
-// Alternate types - IP addresses
 @@alternateType(Microsoft.Peering.ExchangePeeringFacility.microsoftIPv4Address,
   Azure.Core.ipV4Address,
   "csharp"
