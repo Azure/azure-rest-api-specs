@@ -2914,13 +2914,11 @@
         },
         "startTime": {
           "type": "string",
-          "format": "date-time",
           "description": "Time when the test was started",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
-          "format": "date-time",
           "description": "Time when the test was completed",
           "readOnly": true
         },
@@ -2987,13 +2985,11 @@
       "properties": {
         "startTimeUTC": {
           "type": "string",
-          "format": "date-time",
           "description": "Time when the test was started",
           "readOnly": true
         },
         "endTimeUTC": {
           "type": "string",
-          "format": "date-time",
           "description": "Time when the test was completed",
           "readOnly": true
         },
@@ -3026,6 +3022,14 @@
         "nonRedundantRoutes": {
           "$ref": "#/definitions/ExpressRouteLinkFailoverRouteList",
           "description": "List of all the routes that were received only from this peering location"
+        },
+        "bgpStatus": {
+          "type": "array",
+          "description": "BGP status information captured during the ExpressRoute link failover test",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLinkFailoverTestBgpStatus"
+          },
+          "readOnly": true
         }
       },
       "description": "ExpressRoute failover single test details"
@@ -3133,7 +3137,6 @@
         },
         "checkTimeUtc": {
           "type": "string",
-          "format": "date-time",
           "description": "The UTC time when the BGP status was checked"
         }
       }
