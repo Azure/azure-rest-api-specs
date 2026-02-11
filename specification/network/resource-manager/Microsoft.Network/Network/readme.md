@@ -83,12 +83,6 @@ suppressions:
     reason: Not a standard azure resource.
     where:
       - $.definitions.GetServiceGatewayServicesResult
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    from: vmssNetworkInterface.json
-    reason: VMSS network interface APIs are included in stable/2025-05-01/vmssNetworkInterface.json which is part of the default tag.
-  - code: MISSING_APIS_IN_DEFAULT_TAG
-    from: vmssPublicIpAddress.json
-    reason: VMSS public IP address APIs are included in stable/2025-05-01/vmssPublicIpAddress.json which is part of the default tag.
 directive:
   - from: specification/common-types/resource-management/v6/types.json
     where: "$.definitions.ProxyResource"
