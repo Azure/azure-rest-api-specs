@@ -47,7 +47,7 @@
     "/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites": {
       "get": {
         "operationId": "SitesByServiceGroup_ListByServiceGroup",
-        "description": "list Site at SG scope",
+        "description": "List Site resources by scope",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -88,7 +88,7 @@
     "/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites/{siteName}": {
       "get": {
         "operationId": "SitesByServiceGroup_Get",
-        "description": "Get Site at SG scope",
+        "description": "Get a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -132,7 +132,7 @@
       },
       "put": {
         "operationId": "SitesByServiceGroup_CreateOrUpdate",
-        "description": "create or update Site at SG scope",
+        "description": "Create a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -206,7 +206,7 @@
       },
       "patch": {
         "operationId": "SitesByServiceGroup_Update",
-        "description": "update Site at SG scope",
+        "description": "Update a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -230,7 +230,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -259,7 +259,7 @@
       },
       "delete": {
         "operationId": "SitesByServiceGroup_Delete",
-        "description": "delete Site at SG scope",
+        "description": "Delete a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -305,7 +305,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Edge/sites": {
       "get": {
         "operationId": "SitesBySubscription_List",
-        "description": "List Site resources by subscription ID",
+        "description": "List Site resources by scope",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -468,7 +468,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -541,7 +541,7 @@
         "tags": [
           "Sites"
         ],
-        "description": "List a Site",
+        "description": "List Site resources by scope",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -725,7 +725,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -857,7 +857,7 @@
     },
     "Site": {
       "type": "object",
-      "description": "Site as ARM Resource",
+      "description": "Site as Extension Resource",
       "properties": {
         "properties": {
           "$ref": "#/definitions/SiteProperties",
