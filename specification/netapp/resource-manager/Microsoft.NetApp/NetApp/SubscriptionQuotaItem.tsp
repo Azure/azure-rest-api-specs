@@ -3,18 +3,20 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Http;
+using Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
 /**
  * Information regarding Quota Item.
  */
 @renamedFrom(Versions.v2025_07_01_preview, "SubscriptionQuotaItem")
+@clientName("NetAppSubscriptionQuotaItem", "csharp")
 @parentResource(SubscriptionLocationResource)
 model QuotaItem is Azure.ResourceManager.ProxyResource<QuotaItemProperties> {
   ...ResourceNameParameter<

@@ -2,6 +2,7 @@ import "./models.tsp";
 import "./customOperation.tsp";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 
 using Azure.ResourceManager;
 using OpenAPI;
@@ -37,25 +38,21 @@ interface LoadTests {
 
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     LoadTestResource,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LoadTestResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing API"
+  @Azure.Core.useFinalStateVia("location")
   update is ArmCustomPatchAsync<
     LoadTestResource,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      LoadTestResource,
-      LoadTestProperties
-    >,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+    LoadTestResourceUpdate,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LoadTestResource> &
+      ArmLroLocationHeader<FinalResult = LoadTestResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
   delete is ArmResourceDeleteWithoutOkAsync<LoadTestResource>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-operation-id" ""
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "OperationID already published."
   @operationId("LoadTests_ListOutboundNetworkDependenciesEndpoints")
   @doc("Lists the endpoints that agents may call as part of load testing.")

@@ -1,3 +1,4 @@
+import { inspect } from "util";
 import { mapAsync } from "./array.js";
 import { embedError } from "./spec-model.js";
 import { Swagger } from "./swagger.js";
@@ -92,6 +93,6 @@ export class Tag {
   }
 
   toString() {
-    return `Tag(${this.#name}, {logger: ${this.#logger}})`;
+    return `Tag(${this.#name}, {logger: ${inspect(this.#logger)}})`;
   }
 }

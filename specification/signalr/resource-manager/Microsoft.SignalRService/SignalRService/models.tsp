@@ -650,6 +650,7 @@ model SignalRProperties {
    * When it's Enabled, network ACLs still apply.
    * When it's Disabled, public network access is always disabled no matter what you set in network ACLs.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   publicNetworkAccess?: string = "Enabled";
 
   /**

@@ -208,6 +208,7 @@ model RelayNamespaceAccessProperties {
   /**
    * Access key for hybrid connection.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   accessKey?: string;
 
@@ -219,6 +220,7 @@ model RelayNamespaceAccessProperties {
   /**
    * The token to access the enabled service.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   serviceConfigurationToken?: string;
 }
 

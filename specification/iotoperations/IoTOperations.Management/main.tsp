@@ -3,7 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-
+import "@typespec/openapi";
 import "./models/base.tsp";
 import "./models/common/aliases.tsp";
 import "./models/instance.tsp";

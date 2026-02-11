@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "containerName": "IaasVMContainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+    "fabricName": "Azure",
+    "parameters": {
+      "properties": {
+        "createNewCloudService": false,
+        "encryptionDetails": {
+          "encryptionEnabled": false
+        },
+        "objectType": "IaasVMRestoreWithRehydrationRequest",
+        "originalStorageAccountOption": false,
+        "recoveryPointId": "348916168024334",
+        "recoveryPointRehydrationInfo": {
+          "rehydrationPriority": "High",
+          "rehydrationRetentionDuration": "P7D"
+        },
+        "recoveryType": "AlternateLocation",
+        "region": "southeastasia",
+        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.Compute/virtualMachines/netvmtestv2vm1",
+        "storageAccountId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Storage/storageAccounts/testingAccount",
+        "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Network/virtualNetworks/testNet/subnets/default",
+        "targetResourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg2",
+        "targetVirtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg2/providers/Microsoft.Compute/virtualmachines/RSMDALRVM981435",
+        "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRg/providers/Microsoft.Network/virtualNetworks/testNet"
+      }
+    },
+    "protectedItemName": "VM;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1",
+    "recoveryPointId": "348916168024334",
+    "resourceGroupName": "netsdktestrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "testVault"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2017-07-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/netsdktestrg/providers/Microsoft.RecoveryServices/vaults/testVault/backupFabrics/Azure/protectionContainers/iaasvmcontainer;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/protectedItems/vm;iaasvmcontainerv2;netsdktestrg;netvmtestv2vm1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2017-07-01",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "Restores_Trigger",
+  "title": "Restore to New Azure IaasVm with IaasVMRestoreWithRehydrationRequest"
+}

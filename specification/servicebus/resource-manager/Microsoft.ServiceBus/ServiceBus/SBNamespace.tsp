@@ -67,11 +67,13 @@ interface SBNamespaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     SBNamespace,
     PatchModel = SBNamespaceUpdateParameters,
-    Response = ArmResponse<SBNamespace> | ArmResourceCreatedSyncResponse<SBNamespace> | AcceptedResponse,
+    Response = ArmResponse<SBNamespace> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SBNamespace> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 

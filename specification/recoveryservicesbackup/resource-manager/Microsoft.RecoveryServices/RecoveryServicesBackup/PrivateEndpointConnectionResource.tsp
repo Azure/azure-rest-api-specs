@@ -12,6 +12,7 @@ namespace Microsoft.RecoveryServices;
 /**
  * Private Endpoint Connection Response Properties
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(VaultResource)
 model PrivateEndpointConnectionResource
   is TrackedResourceWithOptionalLocation<PrivateEndpointConnection> {

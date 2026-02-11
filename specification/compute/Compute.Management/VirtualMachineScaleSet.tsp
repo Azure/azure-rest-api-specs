@@ -110,7 +110,8 @@ interface VirtualMachineScaleSets {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSet> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -134,7 +135,7 @@ interface VirtualMachineScaleSets {
       IfNoneMatch?: string;
     },
     Response = ArmResponse<VirtualMachineScaleSet> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = VirtualMachineScaleSet> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -204,6 +205,8 @@ interface VirtualMachineScaleSets {
       @query("hibernate")
       hibernate?: boolean;
     },
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -221,7 +224,8 @@ interface VirtualMachineScaleSets {
        */
       @query("forceDeletion")
       forceDeletion?: boolean;
-    }
+    },
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -270,7 +274,8 @@ interface VirtualMachineScaleSets {
   updateInstances is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VirtualMachineScaleSetVMInstanceRequiredIDs,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -294,6 +299,8 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     Request = VirtualMachineScaleSetVMInstanceIDs,
     Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -312,6 +319,8 @@ interface VirtualMachineScaleSets {
       @query("skipShutdown")
       skipShutdown?: boolean;
     },
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -321,7 +330,8 @@ interface VirtualMachineScaleSets {
   reapply is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -331,6 +341,8 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     Request = VirtualMachineScaleSetVMInstanceIDs,
     Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -341,6 +353,8 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     Request = VirtualMachineScaleSetReimageParameters,
     Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -352,6 +366,8 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     Request = VirtualMachineScaleSetVMInstanceIDs,
     Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -362,6 +378,8 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     Request = VirtualMachineScaleSetVMInstanceIDs,
     Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -371,7 +389,8 @@ interface VirtualMachineScaleSets {
   setOrchestrationServiceState is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     OrchestrationServiceStateInput,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -393,6 +412,8 @@ interface VirtualMachineScaleSets {
     VirtualMachineScaleSet,
     Request = VirtualMachineScaleSetVMInstanceIDs,
     Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
@@ -405,7 +426,8 @@ interface VirtualMachineScaleSets {
   startExtensionUpgrade is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
-    Response = OkResponse
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -417,7 +439,8 @@ interface VirtualMachineScaleSets {
   startOSUpgrade is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
-    Response = OkResponse
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -429,7 +452,8 @@ interface VirtualMachineScaleSets {
   cancel is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     void,
-    Response = OkResponse
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -440,7 +464,8 @@ interface VirtualMachineScaleSets {
   scaleOut is ComputeResourceActionAsync<
     VirtualMachineScaleSet,
     VMScaleSetScaleOutInput,
-    Response = OkResponse
+    Response = OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

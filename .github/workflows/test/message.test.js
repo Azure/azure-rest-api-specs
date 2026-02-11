@@ -16,7 +16,7 @@ import {
  */
 function testSchemaParse(schema, input, expectedError) {
   if (expectedError) {
-    expect(() => schema.parse(input)).toThrowError(expectedError);
+    expect(() => /** @type {unknown} */ (schema.parse(input))).toThrowError(expectedError);
   } else {
     expect(schema.parse(input)).toEqual(input);
   }

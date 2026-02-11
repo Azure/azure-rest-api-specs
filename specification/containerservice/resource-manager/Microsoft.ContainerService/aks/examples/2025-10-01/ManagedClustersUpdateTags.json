@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "parameters": {
+      "tags": {
+        "archv3": "",
+        "tier": "testing"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "clustername1",
+        "type": "Microsoft.ContainerService/ManagedClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "properties": {
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "count": 3,
+              "currentOrchestratorVersion": "1.9.6",
+              "maxPods": 110,
+              "orchestratorVersion": "1.9.6",
+              "osType": "Linux",
+              "provisioningState": "Succeeded",
+              "vmSize": "Standard_DS1_v2"
+            }
+          ],
+          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+          "dnsPrefix": "dnsprefix1",
+          "enableRBAC": false,
+          "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
+          "kubernetesVersion": "1.9.6",
+          "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "keydata"
+                }
+              ]
+            }
+          },
+          "networkProfile": {
+            "dnsServiceIP": "10.0.0.10",
+            "networkPlugin": "kubenet",
+            "podCidr": "10.244.0.0/16",
+            "serviceCidr": "10.0.0.0/16"
+          },
+          "nodeResourceGroup": "MC_rg1_clustername1_location1",
+          "provisioningState": "Succeeded",
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          }
+        },
+        "tags": {
+          "archv3": "",
+          "tier": "testing"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ContainerService/locations/eastus/operationresults/00000000-0000-0000-0000-000000000000?api-version=2025-10-01"
+      }
+    }
+  },
+  "operationId": "ManagedClusters_UpdateTags",
+  "title": "Update Managed Cluster Tags"
+}

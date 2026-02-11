@@ -1352,10 +1352,6 @@
       "get": {
         "operationId": "VirtualMachineRunCommands_List",
         "description": "Lists all available run commands for a subscription in a location.",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1395,10 +1391,6 @@
       "get": {
         "operationId": "VirtualMachineRunCommands_Get",
         "description": "Gets specific run command for a subscription in a location.",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2675,6 +2667,31 @@
             "description": "The name of the capacity reservation group.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "virtualMachineScaleSetVMs/$ref",
+              "virtualMachines/$ref"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypesForGetCapacityReservationGroups",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "virtualMachineScaleSetVMs/$ref",
+                  "value": "virtualMachineScaleSetVMs/$ref"
+                },
+                {
+                  "name": "virtualMachines/$ref",
+                  "value": "virtualMachines/$ref"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -17604,10 +17621,6 @@
         }
       ]
     },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
-    },
     "UefiSettings": {
       "type": "object",
       "description": "Specifies the security settings like secure boot and vTPM used while creating the virtual machine. Minimum api-version: 2020-12-01.",
@@ -21410,7 +21423,7 @@
         },
         "computerName": {
           "type": "string",
-          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
+          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://learn.microsoft.com/previous-versions/azure/virtual-machines/linux/infrastructure-example?toc=%2Fazure%2Fvirtual-machines%2Flinux%2Ftoc.json#1-naming-conventions)."
         },
         "osName": {
           "type": "string",

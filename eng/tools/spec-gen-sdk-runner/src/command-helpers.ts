@@ -1,12 +1,17 @@
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
-import { groupSpecConfigPaths } from "./spec-helpers.js";
 import {
   APIViewRequestData,
   SdkName,
+  SdkNameSchema,
   SpecGenSdkArtifactInfo,
+} from "@azure-tools/specs-shared/sdk-types";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { inspect } from "node:util";
+import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
+import { groupSpecConfigPaths } from "./spec-helpers.js";
+import {
+  ExecutionReport,
   SpecGenSdkCmdInput,
   SpecGenSdkRequiredSettings,
   VsoLogs,
@@ -24,13 +29,13 @@ import {
  * @param commandInput - The command input.
  * @returns the execution report JSON
  */
-export function getExecutionReport(commandInput: SpecGenSdkCmdInput): any {
+export function getExecutionReport(commandInput: SpecGenSdkCmdInput): ExecutionReport {
   // Read the execution report to determine if the generation was successful
   const executionReportPath = path.join(
     commandInput.workingFolder,
     `${commandInput.sdkRepoName}_tmp/execution-report.json`,
   );
-  return JSON.parse(fs.readFileSync(executionReportPath, "utf8"));
+  return JSON.parse(fs.readFileSync(executionReportPath, "utf8")) as ExecutionReport;
 }
 
 /**
@@ -54,7 +59,9 @@ export function setPipelineVariables(
     setVsoVariable("PrTitle", prTitle);
     setVsoVariable("PrBody", prBody);
   }
-  setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
+  if (stagedArtifactsFolder) {
+    setVsoVariable("StagedArtifactsFolder", stagedArtifactsFolder);
+  }
 }
 
 /**
@@ -93,7 +100,7 @@ export function parseArguments(): SpecGenSdkCmdInput {
     localSpecRepoPath,
     localSdkRepoPath,
     sdkRepoName,
-    sdkLanguage: sdkRepoName.replace("-pr", ""),
+    sdkLanguage: SdkNameSchema.parse(sdkRepoName.replace("-pr", "")),
     runMode,
     tspConfigPath: getArgumentValue(args, "--tsp-config-relative-path", ""),
     readmePath: getArgumentValue(args, "--readme-relative-path", ""),
@@ -229,10 +236,13 @@ export function getSpecPaths(batchType: string, specRepoPath: string): SpecConfi
 export function logIssuesToPipeline(logPath: string, specConfigDisplayText: string): void {
   let vsoLogs: VsoLogs;
   try {
-    const logContent = JSON.parse(fs.readFileSync(logPath, "utf8"));
+    const logContent = JSON.parse(fs.readFileSync(logPath, "utf8")) as Record<
+      string,
+      { errors?: string[]; warnings?: string[] }
+    >;
     vsoLogs = objectToMap(logContent);
   } catch (error) {
-    throw new Error(`Runner: error reading log at ${logPath}:${error}`);
+    throw new Error(`Runner: error reading log at ${logPath}:${inspect(error)}`);
   }
 
   if (vsoLogs) {
@@ -265,7 +275,7 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
  * @param executionReport - The spec-gen-sdk execution report.
  * @returns flag of lable breaking change.
  */
-export function getBreakingChangeInfo(executionReport: any): boolean {
+export function getBreakingChangeInfo(executionReport: ExecutionReport): boolean {
   for (const packageInfo of executionReport.packages) {
     if (packageInfo.shouldLabelBreakingChange) {
       return true;
@@ -312,7 +322,7 @@ export function generateArtifact(
       isSpecGenSdkCheckRequired = getRequiredSettingValue(
         hasManagementPlaneSpecs,
         hasTypeSpecProjects,
-        commandInput.sdkLanguage as SdkName,
+        commandInput.sdkLanguage,
       );
     }
 
@@ -336,7 +346,7 @@ export function generateArtifact(
     setVsoVariable("HasAPIViewArtifact", apiViewRequestData.length > 0 ? "true" : "false");
   } catch (error) {
     logMessage("Runner: errors occurred while processing breaking change", LogLevel.Group);
-    vsoLogIssue(`Runner: errors writing breaking change label artifacts:${error}`);
+    vsoLogIssue(`Runner: errors writing breaking change label artifacts:${inspect(error)}`);
     logMessage("ending group logging", LogLevel.EndGroup);
     return 1;
   }

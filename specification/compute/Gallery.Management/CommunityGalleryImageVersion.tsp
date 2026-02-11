@@ -36,7 +36,7 @@ interface CommunityGalleryImageVersions {
   /**
    * List community gallery image versions inside an image.
    */
-  list is Azure.ResourceManager.Legacy.ComputeLegacyOperations.ArmResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ComputeArmResourceListByParent<
     CommunityGalleryImageVersion,
     Response = CommunityGalleryImageVersionList
   >;

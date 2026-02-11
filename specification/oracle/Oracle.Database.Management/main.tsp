@@ -26,6 +26,7 @@ import "./operations/anchors/resourceAnchorOperations.tsp";
 import "./operations/basedb/dbSystemOperations.tsp";
 import "./operations/basedb/dbVersionOperations.tsp";
 import "./versions.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

@@ -5,6 +5,16 @@ on:
     branches:
       - main
       - RPSaaSMaster
+      - RPSaaSCanary
+
+  pull_request:
+    branches:
+      - main
+      - RPSaaSMaster
+      - RPSaaSCanary
+    paths:
+      - "eng/common/spelling/**"
+      - "cspell.json"
 
   schedule:
     # Run every day at 12:06 UTC
@@ -21,7 +31,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 1
 

@@ -2,11 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Datadog;
 /**
@@ -202,7 +201,7 @@ model DatadogAgreementResource {
    * Metadata pertaining to creation and last modification of the resource.
    */
   @visibility(Lifecycle.Read)
-  systemData?: SystemData;
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 /**
@@ -283,6 +282,29 @@ model CreateResourceSupportedProperties {
 }
 
 /**
+ * Represents a Datadog Application key and its associated properties.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+model DatadogApplicationKey {
+  /**
+   * The user that created the Application key.
+   */
+  createdBy?: string;
+
+  /**
+   * The name of the Application key.
+   */
+  name?: string;
+
+  /**
+   * The value of the Application key.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Check if the contents of this property should be kept private and add @secret"
+  @visibility(Lifecycle.Read)
+  key: string;
+}
+
+/**
  * Response of a list operation.
  */
 model DatadogApiKeyListResponse is Azure.Core.Page<DatadogApiKey>;
@@ -302,6 +324,7 @@ model DatadogApiKey {
   /**
    * The value of the API key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 
   /**
@@ -527,6 +550,14 @@ model MonitorProperties {
    */
   @visibility(Lifecycle.Read)
   liftrResourcePreference?: int32;
+
+  /**
+   * SRE Agent configuration to connect to MCP server of Datadog for given organization.
+   */
+  @identifiers(#["mcpConnectorResourceId"])
+  @added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+  @visibility(Lifecycle.Update)
+  sreAgentConfiguration?: SreAgentConfiguration[];
 }
 
 /**
@@ -594,6 +625,24 @@ model DatadogOrganizationProperties {
    * The configuration which describes the state of resource collection. This collects configuration information for all resources in a subscription.
    */
   resourceCollection?: boolean;
+}
+
+/**
+ * Response of a list operation.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+model SreAgentConfigurationListResponse
+  is Azure.Core.Page<SreAgentConfiguration>;
+
+/**
+ * SRE Agent configuration to connect to MCP server of Datadog for a given organization.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+model SreAgentConfiguration {
+  /**
+   * The ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  mcpConnectorResourceId: string;
 }
 
 /**
@@ -677,6 +726,41 @@ model MonitorUpdateProperties {
    * The new resource collection value of the monitor resource. This collects configuration information for all resources in a subscription.
    */
   resourceCollection?: boolean;
+}
+
+/**
+ * Add or Remove connectors for SRE agents.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+union ConnectorAction {
+  string,
+
+  /**
+   * Add connector actions
+   */
+  Add: "Add",
+
+  /**
+   * Remove connector action
+   */
+  Remove: "Remove",
+}
+
+/**
+ * Request for adding/removing Datadog MCP connectors on SRE Agent resource.
+ */
+@added(Microsoft.Datadog.Versions.v2025_11_03_preview)
+model SreAgentConnectorRequest {
+  /**
+   * The list of ARM resource ID of the MCP connector integrated with SRE Agent resource.
+   */
+  @identifiers(#["mcpConnectorResourceId"])
+  mcpConnectorResourceIdList: SreAgentConfiguration[];
+
+  /**
+   * Add/Remove action.
+   */
+  action: ConnectorAction;
 }
 
 /**
@@ -907,7 +991,7 @@ model SubscriptionList {
   /**
    * List of subscriptions and the state of the monitoring.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   monitoredSubscriptionList?: MonitoredSubscription[];
 }
 

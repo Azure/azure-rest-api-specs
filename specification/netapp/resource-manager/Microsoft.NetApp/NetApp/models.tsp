@@ -4,11 +4,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
@@ -38,6 +35,18 @@ union CheckNameResourceTypes {
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots",
+
+  /**
+   * ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead.
+   */
+  @added(Versions.v2025_09_01)
+  `Microsoft.NetApp/netAppAccounts/backupVaults/backups`: "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+
+  /**
+   * ANF Backup under a Backup Vault
+   */
+  @added(Versions.v2025_09_01)
+  `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
 }
 
 /**
@@ -64,6 +73,18 @@ union CheckQuotaNameResourceTypes {
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots",
+
+  /**
+   * ANF Backup under a volume , deprecated, use `Microsoft.NetApp/netAppAccounts/backupVaults/backups` instead.
+   */
+  @added(Versions.v2025_09_01)
+  `Microsoft.NetApp/netAppAccounts/backupVaults/backups`: "Microsoft.NetApp/netAppAccounts/backupVaults/backups",
+
+  /**
+   * ANF Backup under a Backup Vault
+   */
+  @added(Versions.v2025_09_01)
+  `Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups`: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups",
 }
 
 /**
@@ -220,45 +241,68 @@ union KeySource {
 }
 
 /**
+ * The encryption keySource (provider) for ANF Elastic resources. Possible values (case-insensitive):  Microsoft.NetApp, Microsoft.KeyVault
+ */
+@added(Versions.v2025_09_01_preview)
+union ElasticKeySource {
+  string,
+
+  /**
+   * Microsoft-managed key encryption
+   */
+  `Microsoft.NetApp`: "Microsoft.NetApp",
+
+  /**
+   * Customer-managed key encryption
+   */
+  `Microsoft.KeyVault`: "Microsoft.KeyVault",
+}
+
+/**
  * Gets the status of the VolumeQuotaRule at the time the operation was called.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-@renamedFrom(Versions.v2025_07_01_preview, "ProvisioningState")
 union NetAppProvisioningState {
   string,
 
   /**
-   * Accepted
+   * Resource has been Accepted
    */
   Accepted: "Accepted",
 
   /**
-   * Creating
+   * Resource is being Created
    */
   Creating: "Creating",
 
   /**
-   * Patching
+   * Resource is being Patched
    */
   Patching: "Patching",
 
   /**
-   * Deleting
+   * Resource is updating
+   */
+  @added(Versions.v2025_09_01)
+  Updating: "Updating",
+
+  /**
+   * Resource is being Deleted
    */
   Deleting: "Deleting",
 
   /**
-   * Moving
+   * Resource is being Moved
    */
   Moving: "Moving",
 
   /**
-   * Failed
+   * Resource has Failed
    */
   Failed: "Failed",
 
   /**
-   * Succeeded
+   * Resource has Succeeded
    */
   Succeeded: "Succeeded",
 }
@@ -330,13 +374,13 @@ model ServiceSpecification {
   /**
    * Metric specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 
   /**
    * Log specification of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -397,7 +441,7 @@ model MetricSpecification {
   /**
    * Dimensions of blobs, including blob type and access tier.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: Dimension[];
 
   /**
@@ -615,7 +659,7 @@ model RegionInfo {
   /**
    * Provides logical availability zone mappings for the subscription for a region.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["availabilityZone"])
+  @identifiers(#["availabilityZone"])
   availabilityZoneMappings?: RegionInfoAvailabilityZoneMappingsItem[];
 }
 
@@ -697,16 +741,16 @@ model NetworkSiblingSet {
   /**
    * List of NIC information
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nicInfoList?: NicInfo[];
 }
 
 /**
- * NIC information and list of volumes for which the NIC has the primary mount ip address.
+ * NIC information and list of volumes for which the NIC has the primary mount IP Address.
  */
 model NicInfo {
   /**
-   * ipAddress
+   * IP Address
    */
   @visibility(Lifecycle.Read)
   ipAddress?: string;
@@ -813,7 +857,7 @@ model GetKeyVaultStatusResponseProperties {
   /**
    * Pairs of virtual network ID and private endpoint ID. Every virtual network that has volumes encrypted with customer-managed keys needs its own key vault private endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["virtualNetworkId"])
+  @identifiers(#["virtualNetworkId"])
   keyVaultPrivateEndpoints?: KeyVaultPrivateEndpoint[];
 }
 

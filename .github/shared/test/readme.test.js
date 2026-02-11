@@ -17,7 +17,7 @@ describe("readme", () => {
     expect(readme.specModel).toBeUndefined();
   });
 
-  it("resolves path against SpecModel", async () => {
+  it("resolves path against SpecModel", () => {
     const readme = new Readme("readme.md", {
       specModel: new SpecModel("/specs/foo"),
     });

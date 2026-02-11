@@ -3,8 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -1304,12 +1302,14 @@ model JobDetails {
   /**
    * Shared access key to download the return shipment label
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   reverseShipmentLabelSasKey?: string;
 
   /**
    * Shared access key to download the chain of custody logs
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   chainOfCustodySasKey?: string;
 
@@ -1902,12 +1902,14 @@ model DeviceErasureDetails {
   /**
    * Shared access key to download cleanup or destruction certificate for device
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   erasureOrDestructionCertificateSasKey?: string;
 
   /**
    * Shared access key to download secure erasure certificate for the device
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   secureErasureCertificateSasKey?: string;
 }
@@ -2930,6 +2932,7 @@ model ShareCredentialDetails {
   /**
    * Password for the share.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   password?: string;
 
@@ -3173,6 +3176,7 @@ model DiskSecret {
   /**
    * Bit Locker key of the disk which can be used to unlock the disk to copy data.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   bitLockerKey?: string;
 }
@@ -3629,6 +3633,7 @@ model DataBoxDiskJobDetails extends JobDetails {
   /**
    * User entered passkey for DataBox Disk job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   passkey?: string;
 
   /**
@@ -3651,6 +3656,7 @@ model DataBoxDiskJobSecrets extends JobSecrets {
   /**
    * PassKey for the disk Job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   passKey?: string;
 
@@ -3705,6 +3711,7 @@ model DataBoxHeavyJobDetails extends JobDetails {
   @visibility(Lifecycle.Read)
   copyProgress?: CopyProgress[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Set Device password for unlocking Databox Heavy. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+")
   devicePassword?: string;
 
@@ -3744,6 +3751,7 @@ model DataBoxHeavySecret {
   /**
    * Password for out of the box experience on device.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   devicePassword?: string;
 
@@ -3756,6 +3764,7 @@ model DataBoxHeavySecret {
   /**
    * The base 64 encoded public key to authenticate with the device
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   encodedValidationCertPubKey?: string;
 
@@ -3778,6 +3787,7 @@ model DataBoxJobDetails extends JobDetails {
   @visibility(Lifecycle.Read)
   copyProgress?: CopyProgress[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Set Device password for unlocking Databox. Should not be passed for TransferType:ExportFromAzure jobs. If this is not passed, the service will generate password itself. This will not be returned in Get Call. Password Requirements :  Password must be minimum of 12 and maximum of 64 characters. Password must have at least one uppercase alphabet, one number and one special character. Password cannot have the following characters : IilLoO0 Password can have only alphabets, numbers and these characters : @#\\-$%^!+=;:_()]+")
   devicePassword?: string;
 
@@ -3810,6 +3820,7 @@ model DataBoxSecret {
   /**
    * Password for out of the box experience on device.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   devicePassword?: string;
 
@@ -3822,6 +3833,7 @@ model DataBoxSecret {
   /**
    * The base 64 encoded public key to authenticate with the device
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   encodedValidationCertPubKey?: string;
 

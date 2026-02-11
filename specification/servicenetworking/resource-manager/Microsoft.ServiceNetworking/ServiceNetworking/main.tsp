@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "./back-compatible.tsp";
 
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
@@ -76,8 +77,7 @@ model Association is TrackedResource<AssociationProperties> {
 
 /** The type used for update operations of the Association. */
 model AssociationUpdate {
-  /** Resource tags. */
-  tags?: TrackedResource.tags;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** The resource-specific properties for this resource. */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"

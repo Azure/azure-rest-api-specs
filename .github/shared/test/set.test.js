@@ -56,7 +56,7 @@ describe("set", () => {
     ],
   ])(
     "intersect(%o, %o) = %o",
-    async (
+    (
       /** @type {(string|number)[]} */ a,
       /** @type {(string|number)[]} */ b,
       /** @type {(string|number)[]} */ result,

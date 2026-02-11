@@ -7,7 +7,6 @@ import "./mq.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperationsMQ;
@@ -327,6 +326,7 @@ model VolumeClaimSpecSelector {
 // Add VolumeClaimSpecSelectorMatchExpressions model
 @doc("VolumeClaimSpecSelectorMatchExpressions properties")
 model VolumeClaimSpecSelectorMatchExpressions {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("key is the label key that the selector applies to.")
   key: string;
 

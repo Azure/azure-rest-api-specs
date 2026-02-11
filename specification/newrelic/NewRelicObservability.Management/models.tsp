@@ -3,10 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace NewRelic.Observability;
 
@@ -832,7 +829,7 @@ model MetricRules {
   /**
    * List of filtering tags to be used for capturing metrics.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filteringTags?: FilteringTag[];
 
   /**
@@ -1188,7 +1185,7 @@ model LogRules {
    * List of filtering tags to be used for capturing logs. This only takes effect if SendActivityLogs flag is enabled. If empty, all resources will be captured.
    * If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filteringTags?: FilteringTag[];
 }
 
@@ -1234,7 +1231,7 @@ model SubscriptionList {
   /**
    * List of subscriptions and the state of the monitoring.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   monitoredSubscriptionList?: MonitoredSubscription[];
 
   /**
@@ -1292,6 +1289,7 @@ model VMExtensionPayload {
   /**
    * Ingestion key of the account
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   ingestionKey?: string;
 }
 
@@ -1409,10 +1407,7 @@ model MetricsStatusRequestParameter {
 @mediaTypeHint("application/json")
 scalar email extends string;
 
-@@OpenAPI.extension(AppServicesListResponse.value,
-  "x-ms-identifiers",
-  #["azureResourceId"]
-);
+@@identifiers(AppServicesListResponse.value, #["azureResourceId"]);
 @@visibility(NewRelicMonitorResource.properties,
   Lifecycle.Read,
   Lifecycle.Create

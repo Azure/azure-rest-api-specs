@@ -62,7 +62,38 @@ alias GroupQuotasEntitiesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   }
 >;
 
-@armResourceOperations
+alias groupQuotaOps = Azure.ResourceManager.Legacy.RoutedOperations<
+  {
+    ...ApiVersionParameter;
+
+    /**
+     * The management group ID.
+     */
+    @path
+    @segment("managementGroups")
+    @key
+    @minLength(3)
+    @maxLength(63)
+    managementGroupId: string;
+  },
+  {
+    /**
+     * The GroupQuota name. The name should be unique for the provided context tenantId/MgId.
+     */
+    @path
+    @segment("groupQuotas")
+    @minLength(3)
+    @maxLength(63)
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    groupQuotaName: string;
+  },
+  ResourceRoute = #{
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas",
+  }
+>;
+
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface GroupQuotasEntities {
   /**
    * Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on group quota can be access from the group quota APIs.
@@ -152,9 +183,11 @@ interface GroupQuotasEntities {
    */
   @get
   @list
-  groupQuotaUsagesList is Extension.Read<
-    Extension.ManagementGroup<"managementGroupId">,
+  @route("/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/resourceProviders/{resourceProviderName}/locationUsages/{location}")
+  groupQuotaUsagesList is groupQuotaOps.ActionSync<
     GroupQuotasEntity,
+    void,
+    ArmResponse<ResourceUsageList>,
     Parameters = {
       /**
        * The resource provider name, such as - Microsoft.Compute. Currently only Microsoft.Compute resource provider supports this API.
@@ -171,8 +204,7 @@ interface GroupQuotasEntities {
       @segment("locationUsages")
       @minLength(1)
       location: Azure.Core.azureLocation;
-    },
-    Response = ArmResponse<ResourceUsageList>
+    }
   >;
 }
 

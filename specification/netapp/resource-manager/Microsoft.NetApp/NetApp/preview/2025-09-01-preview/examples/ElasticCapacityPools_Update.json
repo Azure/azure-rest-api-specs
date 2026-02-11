@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "poolName": "pool1",
+    "api-version": "2025-09-01-preview",
+    "body": {
+      "properties": {
+        "size": 4398046511104,
+        "activeDirectoryConfigResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/activeDirectoryConfigs/activeDirectoryConfig1"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticCapacityPools/pool1",
+        "name": "account1/pool1",
+        "type": "Microsoft.NetApp/elasticAccounts/elasticCapacityPools",
+        "location": "eastus",
+        "zones": [
+          "1",
+          "2",
+          "3"
+        ],
+        "properties": {
+          "provisioningState": "Succeeded",
+          "serviceLevel": "ZoneRedundant",
+          "size": 4398046511104,
+          "totalThroughputMibps": 281.474,
+          "currentZone": "1",
+          "availabilityStatus": "Online",
+          "subnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+          "activeDirectoryConfigResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/activeDirectoryConfigs/activeDirectoryConfig1",
+          "encryption": {
+            "elasticPoolEncryptionKeySource": "NetApp",
+            "keyVaultPrivateEndpointResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVault/privateEndpointConnections/myKeyVaultPec"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "ElasticCapacityPools_Update",
+  "title": "ElasticCapacityPools_Update"
+}

@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Setup .NET 6 SDK
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "6.0.x"
 
@@ -69,7 +69,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.breaking-change-cross-version-analyze-code.outputs.summary }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: job-summary
           path: ${{ steps.breaking-change-cross-version-analyze-code.outputs.summary }}

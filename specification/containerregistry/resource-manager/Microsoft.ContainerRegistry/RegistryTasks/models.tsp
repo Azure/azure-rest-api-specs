@@ -2,10 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ContainerRegistry;
 
@@ -563,7 +560,7 @@ model RunProperties {
   /**
    * The list of all images that were generated from the run. This is applicable if the run generates base image dependencies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["registry"])
+  @identifiers(#["registry"])
   outputImages?: ImageDescriptor[];
 
   /**
@@ -599,6 +596,7 @@ model RunProperties {
   /**
    * The scope of the credentials that were used to login to the source registry during this run.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sourceRegistryAuth?: string;
 
   /**
@@ -615,6 +613,7 @@ model RunProperties {
   /**
    * The update trigger token passed for the Run.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   updateTriggerToken?: string;
 
   /**
@@ -678,7 +677,7 @@ model ImageUpdateTrigger {
   /**
    * The list of image updates that caused the build.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["registry"])
+  @identifiers(#["registry"])
   images?: ImageDescriptor[];
 }
 
@@ -1034,7 +1033,7 @@ model TaskStepProperties {
    * List of base image dependencies for a step.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   baseImageDependencies?: BaseImageDependency[];
 
   /**
@@ -1045,6 +1044,7 @@ model TaskStepProperties {
   /**
    * The token (git PAT or SAS token of storage account blob) associated with the context for a step.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   contextAccessToken?: string;
 }
 
@@ -1085,16 +1085,13 @@ model TriggerProperties {
   /**
    * The collection of timer triggers.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   timerTriggers?: TimerTrigger[];
 
   /**
    * The collection of triggers based on source code repository.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["name", "sourceRepository/repositoryUrl"]
-  )
+  @identifiers(#["name", "sourceRepository/repositoryUrl"])
   sourceTriggers?: SourceTrigger[];
 
   /**
@@ -1186,11 +1183,13 @@ model AuthInfo {
   /**
    * The access token used to access the source control provider.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   token: string;
 
   /**
    * The refresh token used to refresh the access token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   refreshToken?: string;
 
   /**
@@ -1435,13 +1434,13 @@ model TriggerUpdateParameters {
   /**
    * The collection of timer triggers.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   timerTriggers?: TimerTriggerUpdateParameters[];
 
   /**
    * The collection of triggers based on source code repository.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   sourceTriggers?: SourceTriggerUpdateParameters[];
 
   /**
@@ -1666,7 +1665,7 @@ model DockerBuildRequest extends RunRequest {
   /**
    * The collection of override arguments to be used when executing the run.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   arguments?: Argument[];
 
   /**
@@ -1740,7 +1739,7 @@ model FileTaskRunRequest extends RunRequest {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -1833,7 +1832,7 @@ model OverrideTaskStepProperties {
    * Gets or sets the collection of override arguments to be used when
    * executing a build step.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   arguments?: Argument[];
 
   /**
@@ -1844,12 +1843,13 @@ model OverrideTaskStepProperties {
   /**
    * The collection of overridable values that can be passed when running a Task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
    * Base64 encoded update trigger token that will be attached with the base image trigger webhook.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   updateTriggerToken?: string;
 }
 
@@ -1870,7 +1870,7 @@ model EncodedTaskRunRequest extends RunRequest {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -1939,7 +1939,7 @@ model DockerBuildStep extends TaskStepProperties {
   /**
    * The collection of override arguments to be used when executing this build step.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   arguments?: Argument[];
 
   /**
@@ -1965,7 +1965,7 @@ model FileTaskStep extends TaskStepProperties {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -1991,7 +1991,7 @@ model EncodedTaskStep extends TaskStepProperties {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -2027,7 +2027,7 @@ model DockerBuildStepUpdateParameters extends TaskStepUpdateParameters {
   /**
    * The collection of override arguments to be used when executing this build step.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   arguments?: Argument[];
 
   /**
@@ -2058,7 +2058,7 @@ model FileTaskStepUpdateParameters extends TaskStepUpdateParameters {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**
@@ -2084,7 +2084,7 @@ model EncodedTaskStepUpdateParameters extends TaskStepUpdateParameters {
   /**
    * The collection of overridable values that can be passed when running a task.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   values?: SetValue[];
 
   /**

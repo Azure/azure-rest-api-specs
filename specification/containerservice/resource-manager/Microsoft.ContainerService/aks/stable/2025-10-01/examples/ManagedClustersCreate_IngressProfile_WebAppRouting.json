@@ -1,0 +1,249 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "parameters": {
+      "location": "location1",
+      "properties": {
+        "agentPoolProfiles": [
+          {
+            "name": "nodepool1",
+            "type": "VirtualMachineScaleSets",
+            "count": 3,
+            "enableNodePublicIP": true,
+            "mode": "System",
+            "osType": "Linux",
+            "vmSize": "Standard_DS2_v2"
+          }
+        ],
+        "dnsPrefix": "dnsprefix1",
+        "ingressProfile": {
+          "webAppRouting": {
+            "dnsZoneResourceIds": [
+              "/subscriptions/SUB_ID/resourceGroups/RG_NAME/providers/Microsoft.Network/dnszones/DNS_ZONE_NAME"
+            ],
+            "enabled": true
+          }
+        },
+        "kubernetesVersion": "",
+        "linuxProfile": {
+          "adminUsername": "azureuser",
+          "ssh": {
+            "publicKeys": [
+              {
+                "keyData": "keydata"
+              }
+            ]
+          }
+        },
+        "networkProfile": {
+          "loadBalancerProfile": {
+            "managedOutboundIPs": {
+              "count": 2
+            }
+          },
+          "loadBalancerSku": "standard",
+          "outboundType": "loadBalancer"
+        }
+      },
+      "sku": {
+        "name": "Basic",
+        "tier": "Free"
+      },
+      "tags": {
+        "archv2": "",
+        "tier": "production"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "clustername1",
+        "type": "Microsoft.ContainerService/ManagedClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "properties": {
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "type": "VirtualMachineScaleSets",
+              "count": 3,
+              "enableNodePublicIP": true,
+              "maxPods": 110,
+              "mode": "System",
+              "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
+              "orchestratorVersion": "1.9.6",
+              "osType": "Linux",
+              "provisioningState": "Succeeded",
+              "vmSize": "Standard_DS2_v2"
+            }
+          ],
+          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+          "dnsPrefix": "dnsprefix1",
+          "enableRBAC": true,
+          "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
+          "ingressProfile": {
+            "webAppRouting": {
+              "dnsZoneResourceIds": [
+                "/subscriptions/SUB_ID/resourceGroups/RG_NAME/providers/Microsoft.Network/dnszones/DNS_ZONE_NAME"
+              ],
+              "enabled": true
+            }
+          },
+          "kubernetesVersion": "1.9.6",
+          "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "keydata"
+                }
+              ]
+            }
+          },
+          "maxAgentPools": 1,
+          "networkProfile": {
+            "dnsServiceIP": "10.0.0.10",
+            "ipFamilies": [
+              "IPv4"
+            ],
+            "loadBalancerProfile": {
+              "allocatedOutboundPorts": 2000,
+              "effectiveOutboundIPs": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
+                }
+              ],
+              "idleTimeoutInMinutes": 10,
+              "managedOutboundIPs": {
+                "count": 2
+              }
+            },
+            "loadBalancerSku": "basic",
+            "networkPlugin": "kubenet",
+            "outboundType": "loadBalancer",
+            "podCidr": "10.244.0.0/16",
+            "podCidrs": [
+              "10.244.0.0/16"
+            ],
+            "serviceCidr": "10.0.0.0/16",
+            "serviceCidrs": [
+              "10.0.0.0/16"
+            ]
+          },
+          "nodeResourceGroup": "MC_rg1_clustername1_location1",
+          "provisioningState": "Succeeded",
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          },
+          "windowsProfile": {
+            "adminUsername": "azureuser"
+          }
+        },
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "clustername1",
+        "type": "Microsoft.ContainerService/ManagedClusters",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "properties": {
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "type": "VirtualMachineScaleSets",
+              "count": 3,
+              "enableNodePublicIP": true,
+              "maxPods": 110,
+              "mode": "System",
+              "orchestratorVersion": "1.9.6",
+              "osType": "Linux",
+              "provisioningState": "Creating",
+              "vmSize": "Standard_DS2_v2"
+            }
+          ],
+          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+          "dnsPrefix": "dnsprefix1",
+          "enableRBAC": true,
+          "ingressProfile": {
+            "webAppRouting": {
+              "dnsZoneResourceIds": [
+                "/subscriptions/SUB_ID/resourceGroups/RG_NAME/providers/Microsoft.Network/dnszones/DNS_ZONE_NAME"
+              ],
+              "enabled": true
+            }
+          },
+          "kubernetesVersion": "1.9.6",
+          "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "keydata"
+                }
+              ]
+            }
+          },
+          "maxAgentPools": 1,
+          "networkProfile": {
+            "dnsServiceIP": "10.0.0.10",
+            "ipFamilies": [
+              "IPv4"
+            ],
+            "loadBalancerProfile": {
+              "allocatedOutboundPorts": 2000,
+              "effectiveOutboundIPs": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
+                }
+              ],
+              "idleTimeoutInMinutes": 10,
+              "managedOutboundIPs": {
+                "count": 2
+              }
+            },
+            "loadBalancerSku": "standard",
+            "networkPlugin": "kubenet",
+            "outboundType": "loadBalancer",
+            "podCidr": "10.244.0.0/16",
+            "podCidrs": [
+              "10.244.0.0/16"
+            ],
+            "serviceCidr": "10.0.0.0/16",
+            "serviceCidrs": [
+              "10.0.0.0/16"
+            ]
+          },
+          "nodeResourceGroup": "MC_rg1_clustername1_location1",
+          "provisioningState": "Creating",
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          },
+          "windowsProfile": {
+            "adminUsername": "azureuser"
+          }
+        },
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        }
+      }
+    }
+  },
+  "operationId": "ManagedClusters_CreateOrUpdate",
+  "title": "Create Managed Cluster with Web App Routing Ingress Profile configured"
+}

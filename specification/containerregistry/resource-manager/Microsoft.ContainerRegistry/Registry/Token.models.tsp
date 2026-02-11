@@ -1,5 +1,7 @@
 namespace Microsoft.ContainerRegistry;
 
+using Azure.ResourceManager;
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TokenCertificateName {
   string,
@@ -69,11 +71,11 @@ model TokenProperties {
  */
 model TokenCredentialsProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["thumbprint"])
+  @identifiers(#["thumbprint"])
   certificates?: TokenCertificate[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   passwords?: TokenPassword[];
 }
 
@@ -194,7 +196,7 @@ model GenerateCredentialsResult {
   /**
    * The list of passwords for a container registry.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   passwords?: TokenPassword[];
 }
 

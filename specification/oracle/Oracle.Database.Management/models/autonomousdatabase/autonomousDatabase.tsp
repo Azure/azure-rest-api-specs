@@ -614,7 +614,7 @@ model AutonomousDatabaseUpdate
   >>> {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
   @doc("The resource-specific properties for this resource.")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("autorest")
   properties?: AutonomousDatabaseUpdateProperties;
 }
 

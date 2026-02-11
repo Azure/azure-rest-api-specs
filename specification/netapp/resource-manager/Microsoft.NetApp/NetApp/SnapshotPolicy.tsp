@@ -5,10 +5,9 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./NetAppAccount.tsp";
 
-using TypeSpec.Rest;
+using Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+using Http;
 
 namespace Microsoft.NetApp;
 /**
@@ -23,6 +22,7 @@ model SnapshotPolicy
     SegmentName = "snapshotPolicies",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
