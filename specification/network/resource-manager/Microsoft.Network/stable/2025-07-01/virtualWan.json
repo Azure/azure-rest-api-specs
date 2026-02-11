@@ -6865,7 +6865,7 @@
             "description": "The name of the vwan express route gateway."
           },
           {
-            "name": "type",
+            "name": "FailoverTestType",
             "in": "query",
             "required": true,
             "type": "string",
@@ -10558,31 +10558,18 @@
           "description": "All circuits in the peering location"
         },
         "status": {
-          "type": "string",
-          "description": "The current status of the test",
-          "enum": [
-            "NotStarted",
-            "Starting",
-            "Running",
-            "StartFailed",
-            "Stopping",
-            "Completed",
-            "StopFailed",
-            "Invalid",
-            "Expired"
-          ],
-          "x-ms-enum": {
-            "name": "FailoverTestStatus",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/FailoverTestStatus",
+          "description": "The current status of the test"
         },
         "startTime": {
           "type": "string",
-          "description": "Time when the test was started"
+          "description": "Time when the test was started",
+          "readOnly": true
         },
         "endTime": {
           "type": "string",
-          "description": "Time when the test was completed"
+          "description": "Time when the test was completed",
+          "readOnly": true
         },
         "connections": {
           "type": "array",
@@ -10593,7 +10580,8 @@
         },
         "testGuid": {
           "type": "string",
-          "description": "The unique GUID associated with the test"
+          "description": "The unique GUID associated with the test",
+          "readOnly": true
         },
         "testType": {
           "type": "string",
@@ -10614,7 +10602,8 @@
           "items": {
             "type": "string"
           },
-          "description": "A list of all issues with the test"
+          "description": "A list of all issues with the test",
+          "readOnly": true
         }
       },
       "description": "Vwan ExpressRoute Gateway failover test details"
@@ -10654,7 +10643,8 @@
         },
         "lastUpdatedTime": {
           "type": "string",
-          "description": "Time when the connection was last updated"
+          "description": "Time when the connection was last updated",
+          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -10683,30 +10673,17 @@
         },
         "startTimeUtc": {
           "type": "string",
-          "description": "Time when the test was started"
+          "description": "Time when the test was started",
+          "readOnly": true
         },
         "endTimeUtc": {
           "type": "string",
-          "description": "Time when the test was completed"
+          "description": "Time when the test was completed",
+          "readOnly": true
         },
         "status": {
-          "type": "string",
-          "description": "The current status of the test",
-          "enum": [
-            "NotStarted",
-            "Starting",
-            "Running",
-            "StartFailed",
-            "Stopping",
-            "Completed",
-            "StopFailed",
-            "Invalid",
-            "Expired"
-          ],
-          "x-ms-enum": {
-            "name": "FailoverTestStatusForSingleTest",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/FailoverTestStatus",
+          "description": "The current status of the test"
         },
         "attestation": {
           "type": "boolean",
@@ -10728,7 +10705,8 @@
         },
         "wasSimulationSuccessful": {
           "type": "boolean",
-          "description": "Whether the failover simulation was successful or not"
+          "description": "Whether the failover simulation was successful or not",
+          "readOnly": true
         },
         "failoverConnectionDetails": {
           "type": "array",
@@ -10739,6 +10717,25 @@
         }
       },
       "description": "ExpressRoute failover single test details"
+    },
+    "FailoverTestStatus": {
+      "type": "string",
+      "description": "The current status of the test",
+      "enum": [
+        "NotStarted",
+        "Starting",
+        "Running",
+        "StartFailed",
+        "Stopping",
+        "Completed",
+        "StopFailed",
+        "Invalid",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "FailoverTestStatus",
+        "modelAsString": true
+      }
     },
     "VwanExpressRouteGatewayFailoverRedundantRoute": {
       "type": "object",
@@ -10785,7 +10782,8 @@
         },
         "wasSimulationSuccessful": {
           "type": "boolean",
-          "description": "Whether the failover simulation was successful or not"
+          "description": "Whether the failover simulation was successful or not",
+          "readOnly": true
         },
         "details": {
           "type": "array",
@@ -10818,7 +10816,8 @@
         },
         "lastComputedTime": {
           "type": "string",
-          "description": "Timestamp denoting the last time when the resiliency score was computed for the gateway"
+          "description": "Timestamp denoting the last time when the resiliency score was computed for the gateway",
+          "readOnly": true
         },
         "nextEligibleComputeTime": {
           "type": "string",
