@@ -115,6 +115,9 @@ function processPath(path: OpenAPI2PathItem): OpenAPI2PathItem {
 
 function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
   const newOperation = deepCopy(operation);
+  // Some operations may not declare any parameters; normalize to an empty array
+  newOperation.parameters ??= [];
+
   let index = newOperation.parameters.findIndex((p) => isApiVersionParameter(p));
   if (index > -1) {
     newOperation.parameters.splice(index, 1);
@@ -129,8 +132,8 @@ function processOperation(operation: OpenAPI2Operation): OpenAPI2Operation {
   }
   newOperation.parameters = newOperation.parameters.map((p) => processParameter(p));
 
-  for (const response in operation.responses) {
-    const responseObject = operation.responses[response] as OpenAPI2Response;
+  for (const response in operation.responses ?? {}) {
+    const responseObject = operation.responses![response] as OpenAPI2Response;
     const processedResponse = processResponse(responseObject);
     newOperation.responses ??= {};
     newOperation.responses[response] = processedResponse;
