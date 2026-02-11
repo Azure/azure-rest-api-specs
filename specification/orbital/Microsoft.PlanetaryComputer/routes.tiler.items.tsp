@@ -162,7 +162,7 @@ interface TilerAssetStatistics {
       ...getAssetStatisticsCustomizedCommonSignatures;
       ...StatisticsQueryParameters;
     },
-    Record<unknown>
+    Record<Record<BandStatistics>>
   >;
 }
 

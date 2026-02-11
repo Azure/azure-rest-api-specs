@@ -711,7 +711,7 @@ model StacItem extends StacItemOrStacItemCollection {
    * MSFT Timestamp
    */
   @encodedName("application/json", "_msft:ts")
-  timestamp?: string;
+  timestamp?: utcDateTime;
 
   /**
    * MSFT ETag
@@ -795,13 +795,13 @@ model StacMicrosoftProperties {
    * MSFT Created
    */
   @encodedName("application/json", "msft:_created")
-  createdOn?: string;
+  createdOn?: utcDateTime;
 
   /**
    * MSFT Updated
    */
   @encodedName("application/json", "msft:_updated")
-  updatedOn?: string;
+  updatedOn?: utcDateTime;
 
   /**
    * MSFT Short Description

@@ -299,6 +299,32 @@ model TilerInfoGeoJsonFeature {
 }
 
 /**
+ * Represents GeoJSON with feature with an asset property
+ */
+model TilerAssetGeoJson {
+  /**
+   * Unique identifier for the feature
+   */
+  id: string;
+
+  /**
+   * ID of the STAC collection this item belongs to.
+   */
+  collection?: string;
+
+  /**
+   * Bounding box coordinates for the feature
+   */
+  @encodedName("application/json", "bbox")
+  boundingBox: float32[];
+
+  /**
+   * Assets
+   */
+  assets: Record<StacAsset>;
+}
+
+/**
  * TileJSON metadata describing a tile set according to the TileJSON specification
  *
  * Based on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0

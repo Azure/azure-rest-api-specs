@@ -145,7 +145,7 @@ model Point extends Geometry {
   /**
    * The coordinates of the point as [longitude, latitude].
    */
-  coordinates: string;
+  coordinates: float32[];
 }
 
 /**
@@ -170,7 +170,7 @@ model MultiPolygon extends Geometry {
   /**
    * The coordinates of the multipolygon.
    */
-  coordinates: float32[][][];
+  coordinates: float32[][][][];
 
   /**
    * The type of the multipolygon.
@@ -223,7 +223,7 @@ model MultiLineString extends Geometry {
   /**
    * The coordinates of the multilinestring.
    */
-  coordinates: float32[][];
+  coordinates: float32[][][];
 }
 
 /**
@@ -238,7 +238,7 @@ model LineString extends Geometry {
   /**
    * The coordinates of the linestring.
    */
-  coordinates: float32[];
+  coordinates: float32[][];
 }
 
 /**
@@ -253,5 +253,5 @@ model MultiPoint extends Geometry {
   /**
    * The coordinates of the multipoint.
    */
-  coordinates: float32[];
+  coordinates: float32[][];
 }

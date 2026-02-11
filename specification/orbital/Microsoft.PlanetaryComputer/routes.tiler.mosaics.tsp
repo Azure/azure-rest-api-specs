@@ -507,7 +507,7 @@ interface MosaicsAssetsForTileMatrixSets {
 
       ...ZxyPathParameters;
     },
-    ApplicationJsonResponse
+    TilerAssetGeoJson[]
   >;
 }
 

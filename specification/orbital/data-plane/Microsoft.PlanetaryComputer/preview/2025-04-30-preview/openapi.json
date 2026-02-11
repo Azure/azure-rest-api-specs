@@ -925,7 +925,12 @@
             "description": "The request has succeeded.",
             "schema": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": {
+                "additionalProperties": {
+                  "$ref": "#/definitions/BandStatistics"
+                },
+                "type": "object"
+              }
             }
           },
           "default": {
@@ -6926,10 +6931,12 @@
         ],
         "responses": {
           "200": {
-            "description": "Return list of assets",
+            "description": "The request has succeeded.",
             "schema": {
               "type": "array",
-              "items": {}
+              "items": {
+                "$ref": "#/definitions/TilerAssetGeoJson"
+              }
             }
           },
           "default": {
@@ -13056,8 +13063,11 @@
           "type": "array",
           "description": "The coordinates of the linestring.",
           "items": {
-            "type": "number",
-            "format": "float"
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
           }
         }
       },
@@ -13235,8 +13245,11 @@
           "items": {
             "type": "array",
             "items": {
-              "type": "number",
-              "format": "float"
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "float"
+              }
             }
           }
         }
@@ -13259,8 +13272,11 @@
           "type": "array",
           "description": "The coordinates of the multipoint.",
           "items": {
-            "type": "number",
-            "format": "float"
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
           }
         }
       },
@@ -13286,8 +13302,11 @@
             "items": {
               "type": "array",
               "items": {
-                "type": "number",
-                "format": "float"
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "float"
+                }
               }
             }
           }
@@ -13614,8 +13633,12 @@
       "description": "Represents a GeoJSON Point geometry.",
       "properties": {
         "coordinates": {
-          "type": "string",
-          "description": "The coordinates of the point as [longitude, latitude]."
+          "type": "array",
+          "description": "The coordinates of the point as [longitude, latitude].",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
         }
       },
       "required": [
@@ -14327,11 +14350,13 @@
       "properties": {
         "msft:_created": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Created",
           "x-ms-client-name": "createdOn"
         },
         "msft:_updated": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Updated",
           "x-ms-client-name": "updatedOn"
         },
@@ -14645,6 +14670,7 @@
         },
         "_msft:ts": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Timestamp",
           "x-ms-client-name": "timestamp"
         },
@@ -14838,11 +14864,13 @@
         },
         "msft:_created": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Created",
           "x-ms-client-name": "createdOn"
         },
         "msft:_updated": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Updated",
           "x-ms-client-name": "updatedOn"
         },
@@ -15135,6 +15163,7 @@
         },
         "_msft:ts": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Timestamp",
           "x-ms-client-name": "timestamp"
         },
@@ -15157,11 +15186,13 @@
       "properties": {
         "msft:_created": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Created",
           "x-ms-client-name": "createdOn"
         },
         "msft:_updated": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Updated",
           "x-ms-client-name": "updatedOn"
         },
@@ -15474,11 +15505,13 @@
       "properties": {
         "msft:_created": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Created",
           "x-ms-client-name": "createdOn"
         },
         "msft:_updated": {
           "type": "string",
+          "format": "date-time",
           "description": "MSFT Updated",
           "x-ms-client-name": "updatedOn"
         },
@@ -16381,6 +16414,41 @@
       "required": [
         "minZoom",
         "maxItemsPerTile"
+      ]
+    },
+    "TilerAssetGeoJson": {
+      "type": "object",
+      "description": "Represents GeoJSON with feature with an asset property",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the feature"
+        },
+        "collection": {
+          "type": "string",
+          "description": "ID of the STAC collection this item belongs to."
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box coordinates for the feature",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "x-ms-client-name": "boundingBox"
+        },
+        "assets": {
+          "type": "object",
+          "description": "Assets",
+          "additionalProperties": {
+            "$ref": "#/definitions/StacAsset"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "bbox",
+        "assets"
       ]
     },
     "TilerCoreModelsResponsesPoint": {
