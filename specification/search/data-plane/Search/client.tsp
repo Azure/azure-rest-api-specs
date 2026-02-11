@@ -844,6 +844,7 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientName(Search.OcrSkillLanguage.`is`, "IsEnum", "python");
+@@clientName(Search.ScoringStatistics.Global, "GlobalEnum", "python");
 @@clientNamespace(Search.OcrLineEnding, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.OcrLineEnding,
   "com.azure.search.documents.indexes",
