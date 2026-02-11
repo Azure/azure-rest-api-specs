@@ -30609,10 +30609,18 @@
       "description": "Snowflake export command settings.",
       "properties": {
         "additionalCopyOptions": {
-          "description": "Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\": \"'HH24:MI:SS.FF'\" }"
+          "type": "object",
+          "description": "Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\": \"'HH24:MI:SS.FF'\" }",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "additionalFormatOptions": {
-          "description": "Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"OVERWRITE\": \"TRUE\", \"MAX_FILE_SIZE\": \"'FALSE'\" }"
+          "type": "object",
+          "description": "Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"OVERWRITE\": \"TRUE\", \"MAX_FILE_SIZE\": \"'FALSE'\" }",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "storageIntegration": {
           "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
@@ -30630,10 +30638,18 @@
       "description": "Snowflake import command settings.",
       "properties": {
         "additionalCopyOptions": {
-          "description": "Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\": \"'HH24:MI:SS.FF'\" }"
+          "type": "object",
+          "description": "Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\": \"'HH24:MI:SS.FF'\" }",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "additionalFormatOptions": {
-          "description": "Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"FORCE\": \"TRUE\", \"LOAD_UNCERTAIN_FILES\": \"'FALSE'\" }"
+          "type": "object",
+          "description": "Additional format options directly passed to snowflake Copy Command. Type: key value pairs (value should be string type) (or Expression with resultType object). Example: \"additionalFormatOptions\": { \"FORCE\": \"TRUE\", \"LOAD_UNCERTAIN_FILES\": \"'FALSE'\" }",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "storageIntegration": {
           "description": "The name of the snowflake storage integration to use for the copy operation. Type: string (or Expression with resultType string)."
