@@ -49,7 +49,7 @@ model RecoveryActionSettings {
   @doc("Type of the action (ManualAction/CustomRunbook).")
   actionType: string;
 
-  @doc("Name of the action for the Custom Runbook.")
+  @doc("Name of the action.")
   actionName: string;
 }
 
