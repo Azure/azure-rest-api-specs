@@ -1624,7 +1624,7 @@
             "description": "The name of the express route circuit."
           },
           {
-            "name": "failoverTestType",
+            "name": "ExpressRouteFailoverTestType",
             "in": "query",
             "required": true,
             "type": "string",
@@ -1715,7 +1715,7 @@
             "description": "The type of link on which failover test was performed"
           },
           {
-            "name": "circuitMaintenanceCategory",
+            "name": "MaintenanceTestCategory",
             "in": "query",
             "required": true,
             "type": "string",
@@ -2878,42 +2878,44 @@
         "modelAsString": true
       }
     },
-    "ExpressRouteCircuitLinkFailoverAllTestsDetails": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverTestDetails"
-      },
-      "description": "Circuit Failover All Test Details"
+    "FailoverTestStatus": {
+      "type": "string",
+      "description": "The current status of the test",
+      "enum": [
+        "NotStarted",
+        "Starting",
+        "Running",
+        "StartFailed",
+        "Stopping",
+        "Completed",
+        "StopFailed",
+        "Invalid",
+        "Expired"
+      ],
+      "x-ms-enum": {
+        "name": "FailoverTestStatus",
+        "modelAsString": true
+      }
     },
-    "ExpressRouteCircuitLinkFailoverTestDetails": {
+    "ExpressRouteCircuitLinkFailoverAllTestsDetails": {
       "type": "object",
       "properties": {
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/FailoverTestStatus",
           "description": "The current status of the test",
-          "enum": [
-            "NotStarted",
-            "Starting",
-            "Running",
-            "StartFailed",
-            "Stopping",
-            "Completed",
-            "StopFailed",
-            "Invalid",
-            "Expired"
-          ],
-          "x-ms-enum": {
-            "name": "FailoverTestStatus",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
-          "description": "Time when the test was started"
+          "format": "date-time",
+          "description": "Time when the test was started",
+          "readOnly": true
         },
         "endTime": {
           "type": "string",
-          "description": "Time when the test was completed"
+          "format": "date-time",
+          "description": "Time when the test was completed",
+          "readOnly": true
         },
         "testType": {
           "type": "string",
@@ -2931,117 +2933,73 @@
         },
         "testGuid": {
           "type": "string",
-          "description": "The unique GUID associated with the test"
+          "description": "The unique GUID associated with the test",
+          "readOnly": true
         },
         "issues": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "description": "A list of all issues with the test"
+          "description": "A list of all issues with the test",
+          "readOnly": true
         },
         "wasSimulationSuccessful": {
           "type": "boolean",
-          "description": "Whether the failover simulation was successful or not"
+          "description": "Whether the failover simulation was successful or not",
+          "readOnly": true
         },
         "circuitTestCategory": {
-          "type": "string",
-          "description": "The type of maintenance test category",
-          "enum": [
-            "BgpDisconnect",
-            "ASPathPrepend"
-          ],
-          "x-ms-enum": {
-            "name": "MaintenanceTestCategory",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/MaintenanceTestCategory",
+          "description": "The type of maintenance test category"
         },
         "linkType": {
-          "type": "string",
-          "description": "The type of link on which failover test was performed",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteFailoverLinkType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ExpressRouteFailoverLinkType",
+          "description": "The type of link on which failover test was performed"
         },
         "bgpStatus": {
           "type": "array",
           "description": "BGP status information captured during the ExpressRoute link failover test",
           "items": {
             "$ref": "#/definitions/ExpressRouteLinkFailoverTestBgpStatus"
-          }
+          },
+          "readOnly": true
         }
       },
       "description": "ExpressRoute Circuit link failover test details"
     },
     "ExpressRouteCircuitLinkFailoverSingleTestDetailsObject": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/ExpressRouteCircuitLinkFailoverSingleTestDetails"
-      },
-      "description": "Circuit Failover Single Test Details Object"
-    },
-    "ExpressRouteCircuitLinkFailoverSingleTestDetails": {
       "type": "object",
       "properties": {
-        "startTimeUtc": {
+        "startTimeUTC": {
           "type": "string",
-          "description": "Time when the test was started"
+          "format": "date-time",
+          "description": "Time when the test was started",
+          "readOnly": true
         },
-        "endTimeUtc": {
+        "endTimeUTC": {
           "type": "string",
-          "description": "Time when the test was completed"
+          "format": "date-time",
+          "description": "Time when the test was completed",
+          "readOnly": true
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/FailoverTestStatus",
           "description": "The current status of the test",
-          "enum": [
-            "NotStarted",
-            "Starting",
-            "Running",
-            "StartFailed",
-            "Stopping",
-            "Completed",
-            "StopFailed",
-            "Invalid",
-            "Expired"
-          ],
-          "x-ms-enum": {
-            "name": "FailoverTestStatusForSingleTest",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
         "wasSimulationSuccessful": {
           "type": "boolean",
-          "description": "Whether the failover simulation was successful or not"
+          "description": "Whether the failover simulation was successful or not",
+          "readOnly": true
         },
         "linkType": {
-          "type": "string",
-          "description": "The type of link on which failover test was performed",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteFailoverLinkType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ExpressRouteFailoverLinkType",
+          "description": "The type of link on which failover test was performed"
         },
         "circuitTestCategory": {
-          "type": "string",
-          "description": "The type of maintenance test category",
-          "enum": [
-            "BgpDisconnect",
-            "ASPathPrepend"
-          ],
-          "x-ms-enum": {
-            "name": "MaintenanceTestCategory",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/MaintenanceTestCategory",
+          "description": "The type of maintenance test category"
         },
         "isSimulationVerified": {
           "type": "boolean",
@@ -3057,6 +3015,18 @@
         }
       },
       "description": "ExpressRoute failover single test details"
+    },
+    "MaintenanceTestCategory": {
+      "type": "string",
+      "description": "The type of maintenance test category",
+      "enum": [
+        "BgpDisconnect",
+        "ASPathPrepend"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceTestCategory",
+        "modelAsString": true
+      }
     },
     "ExpressRouteLinkFailoverRouteList": {
       "type": "object",
@@ -3100,6 +3070,18 @@
         }
       }
     },
+    "ExpressRouteFailoverLinkType": {
+      "type": "string",
+      "description": "The type of link on which failover test was performed",
+      "enum": [
+        "Primary",
+        "Secondary"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteFailoverLinkType",
+        "modelAsString": true
+      }
+    },
     "ExpressRouteLinkFailoverTestBgpStatus": {
       "type": "object",
       "description": "Represents the BGP status of an ExpressRoute link failover test",
@@ -3114,19 +3096,12 @@
           "x-ms-enum": {
             "name": "ExpressRouteFailoverBgpStatusAddressFamily",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "link": {
-          "type": "string",
-          "description": "The type of link on which failover test was performed",
-          "enum": [
-            "Primary",
-            "Secondary"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteFailoverLinkType",
-            "modelAsString": true
-          }
+          "$ref": "#/definitions/ExpressRouteFailoverLinkType",
+          "description": "The type of link on which failover test was performed"
         },
         "status": {
           "type": "string",
@@ -3139,10 +3114,12 @@
           "x-ms-enum": {
             "name": "ExpressRouteLinkFailoverBgpStatus",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "checkTimeUtc": {
           "type": "string",
+          "format": "date-time",
           "description": "The UTC time when the BGP status was checked"
         }
       }
@@ -3151,16 +3128,17 @@
       "type": "object",
       "properties": {
         "circuitTestCategory": {
-          "type": "string",
+          "$ref": "#/definitions/MaintenanceTestCategory",
           "description": "The type of maintenance test category"
         },
         "linkType": {
-          "type": "string",
+          "$ref": "#/definitions/ExpressRouteFailoverLinkType",
           "description": "The type of link on which failover test was performed"
         },
         "wasSimulationSuccessful": {
           "type": "boolean",
-          "description": "Whether the failover simulation was successful or not"
+          "description": "Whether the failover simulation was successful or not",
+          "readOnly": true
         },
         "isVerified": {
           "type": "boolean",
