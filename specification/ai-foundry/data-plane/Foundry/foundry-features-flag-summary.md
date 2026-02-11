@@ -1,5 +1,8 @@
 # Operations Summary
 
+This is a report shows all the preview operations, and which value the caller is
+required to set for the HTTP request header named "Foundry-Features".
+
 | Operation Group | Operation | Method | Path | Foundry-Features Header |
 |-----------------|-----------|--------|------|-------------------------|
 | Red Team | List | GET | `/redTeams/runs` | Required: `RedTeams=V1Preview` |
