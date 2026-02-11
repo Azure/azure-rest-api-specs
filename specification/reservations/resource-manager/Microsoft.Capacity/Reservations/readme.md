@@ -36,8 +36,8 @@ These settings apply only when `--tag=package-2022-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-11'
 input-file:
-  - Microsoft.Capacity/stable/2022-11-01/reservations.json
-  - Microsoft.Capacity/stable/2020-10-25/quota.json
+  - stable/2022-11-01/reservations.json
+  - stable/2020-10-25/quota.json
 ```
 ### Tag: package-2022-03
 
@@ -45,8 +45,8 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
-  - Microsoft.Capacity/stable/2022-03-01/reservations.json
-  - Microsoft.Capacity/stable/2020-10-25/quota.json
+  - stable/2022-03-01/reservations.json
+  - stable/2020-10-25/quota.json
 ```
 
 ### Tag: package-2021-07-01
@@ -55,8 +55,8 @@ These settings apply only when `--tag=package-2021-07-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-07-01'
 input-file:
-  - Microsoft.Capacity/stable/2021-07-01/reservations.json
-  - Microsoft.Capacity/stable/2020-10-25/quota.json
+  - stable/2021-07-01/reservations.json
+  - stable/2020-10-25/quota.json
 ```
 
 ### Tag: package-2020-10-25
@@ -65,8 +65,8 @@ These settings apply only when `--tag=package-2020-10-25` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-10-25'
 input-file:
-  - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
-  - Microsoft.Capacity/stable/2020-10-25/quota.json
+  - preview/2020-10-01-preview/reservations.json
+  - stable/2020-10-25/quota.json
 ```
 
 ### Tag: package-2020-11-preview
@@ -75,9 +75,9 @@ These settings apply only when `--tag=package-2020-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-11-preview'
 input-file:
-  - Microsoft.Capacity/preview/2019-07-19/quota.json
-  - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
-  - Microsoft.Capacity/preview/2020-11-15-preview/reservationsChangeDirectory.json
+  - preview/2019-07-19/quota.json
+  - preview/2020-10-01-preview/reservations.json
+  - preview/2020-11-15-preview/reservationsChangeDirectory.json
 ```
 
 ### Tag: package-2020-10-preview
@@ -86,8 +86,8 @@ These settings apply only when `--tag=package-2020-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-10-preview'
 input-file:
-  - Microsoft.Capacity/preview/2019-07-19/quota.json
-  - Microsoft.Capacity/preview/2020-10-01-preview/reservations.json
+  - preview/2019-07-19/quota.json
+  - preview/2020-10-01-preview/reservations.json
 ```
 
 ### Tag: package-preview-2019-07-19
@@ -96,8 +96,8 @@ These settings apply only when `--tag=package-preview-2019-07-19` is specified o
 
 ``` yaml $(tag) == 'package-preview-2019-07-19'
 input-file:
-  - Microsoft.Capacity/preview/2019-07-19/quota.json
-  - Microsoft.Capacity/preview/2019-04-01/reservations.json
+  - preview/2019-07-19/quota.json
+  - preview/2019-04-01/reservations.json
 ```
 
 ### Tag: package-preview-2019-04
@@ -106,7 +106,7 @@ These settings apply only when `--tag=package-preview-2019-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2019-04'
 input-file:
-  - Microsoft.Capacity/preview/2019-04-01/reservations.json
+  - preview/2019-04-01/reservations.json
 ```
 
 ### Tag: package-2018-06
@@ -115,7 +115,7 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-06'
 input-file:
-- Microsoft.Capacity/preview/2018-06-01/reservations.json
+- preview/2018-06-01/reservations.json
 ```
 
 ### Tag: package-2017-11
@@ -124,7 +124,7 @@ These settings apply only when `--tag=package-2017-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-11'
 input-file:
-- Microsoft.Capacity/stable/2017-11-01/reservations.json
+- stable/2017-11-01/reservations.json
 ```
 
 ---
