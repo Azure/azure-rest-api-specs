@@ -237,11 +237,13 @@ interface RecommendationsPatch {
   patchStateProperties(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
+
     /**
      * The recommendation ID.
      */
     @path
     recommendationId: string,
+
     /**
      * The properties to update the recommendation state.
      */
