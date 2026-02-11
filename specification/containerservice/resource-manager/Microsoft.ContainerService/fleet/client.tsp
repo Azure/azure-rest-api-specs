@@ -179,6 +179,19 @@ using TypeSpec.Http;
   "ContainerServiceFleetTolerationOperator",
   "csharp"
 );
+@@clientName(Meta.V1.LabelSelector,
+  "ContainerServiceFleetLabelSelector",
+  "csharp"
+);
+@@clientName(Meta.V1.LabelSelectorOperator,
+  "ContainerServiceFleetLabelSelectorOperator",
+  "csharp"
+);
+@@clientName(Meta.V1.LabelSelectorRequirement,
+  "ContainerServiceFleetLabelSelectorRequirement",
+  "csharp"
+);
+
 @@alternateType(Azure.ResourceManager.EntityTagProperty.eTag,
   EtagProperty.etag,
   "csharp"
