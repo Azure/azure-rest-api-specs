@@ -2,8 +2,8 @@
 
 | Operation Group | Operation | Method | Path | Foundry-Features Header |
 |-----------------|-----------|--------|------|-------------------------|
-| Red Team | List | GET | `/redTeams/runs` | None |
-| Red Team | Get | GET | `/redTeams/runs/{name}` | None |
+| Red Team | List | GET | `/redTeams/runs` | Required: `RedTeams=V1Preview` |
+| Red Team | Get | GET | `/redTeams/runs/{name}` | Required: `RedTeams=V1Preview` |
 | Red Team | Create | POST | `/redTeams/runs:run` | Required: `RedTeams=V1Preview` |
 | Memory Stores | Create | POST | `/memory_stores` | Required: `MemoryStores=V1Preview` |
 | Memory Stores | List | GET | `/memory_stores` | Required: `MemoryStores=V1Preview` |
