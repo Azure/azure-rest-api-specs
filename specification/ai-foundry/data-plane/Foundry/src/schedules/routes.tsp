@@ -5,11 +5,6 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias ScheduleServiceTraits = SupportsClientRequestId &
-  NoRepeatableRequests &
-  NoConditionalRequests; // NoRetryRequests suppresses @azure-tools/typespec-azure-core/conditional-requests-trait-missing
-
-alias ScheduleRunOperations = Azure.Core.ResourceOperations<ScheduleServiceTraits>;
 alias SchedulesFilterQueryParams = {
   @query("type")
   @doc("Filter by the type of schedule.")
@@ -20,28 +15,54 @@ alias SchedulesFilterQueryParams = {
   enabled?: boolean;
 };
 
-alias ScheduleOps = FoundryAzureOperations<WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>>;
-
 @tag("Schedules")
 interface Schedules {
-
-  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("Delete a schedule.")
-  delete is ScheduleOps.ResourceDelete<Schedule>;
+  @Http.delete
+  delete is Azure.Core.Foundations.ResourceOperation<
+    Schedule,
+    {
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;
+    },
+    Http.NoContentResponse
+  >;
 
-  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("Get a schedule by id.")
-  get is ScheduleOps.ResourceRead<Schedule>;
+  get is Azure.Core.Foundations.ResourceOperation<
+    Schedule,
+    {
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;
+    },
+    Azure.Core.Foundations.ResourceOkResponse<Schedule>
+  >;
 
-  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("List all schedules.")
-  list is ScheduleOps.ResourceList<Schedule, SchedulesFilterQueryParams>;
+  @Rest.listsResource(Schedule)
+  list is Azure.Core.Foundations.ResourceList<
+    Schedule,
+    SchedulesFilterQueryParams &
+      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>,
+    Azure.Core.Page<Schedule>
+  >;
 
-  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
-  #suppress "@azure-tools/typespec-azure-core/verb-conflict" ""
-  @put
-  createOrUpdate is ScheduleOps.ResourceCreateOrUpdate<Schedule>;
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
+  @doc("Create or update operation template.")
+  @Http.put
+  createOrUpdate is Azure.Core.Foundations.ResourceOperation<
+    Schedule,
+    {
+      ...WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>;
+
+      @doc("The resource instance.")
+      @Http.bodyRoot
+      @TypeSpec.OpenAPI.extension("x-ms-client-name", "resource")
+      resource: Schedule;
+    },
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<Schedule>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Get a schedule run by id.")
@@ -62,12 +83,13 @@ interface Schedules {
     OkResponse<ScheduleRun>
   >;
 
-  // BUG: This operation (see OpenAPI3 file) is missing the "Foundry-Features" header.
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("List all schedule runs.")
-  listRuns is ScheduleRunOperations.ResourceList<
+  @Rest.listsResource(ScheduleRun)
+  listRuns is Azure.Core.Foundations.ResourceList<
     ScheduleRun,
     SchedulesFilterQueryParams &
-      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>
+      WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.schedules_v1_preview>,
+    Azure.Core.Page<ScheduleRun>
   >;
 }
