@@ -24,7 +24,7 @@ model Registry
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
@@ -57,7 +57,7 @@ interface Registries {
   /**
    * Delete registry
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete registry")
   delete is ArmResourceDeleteWithoutOkAsync<
     Registry,
@@ -91,8 +91,8 @@ interface Registries {
   /**
    * Get blob reference SAS Uri.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation pattern for existing API"
   @summary("Get blob reference SAS Uri.")
   @post
   getBlobReferenceSAS(

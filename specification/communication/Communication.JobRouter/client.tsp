@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
 
 import "./main.tsp";
+import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
@@ -142,3 +143,13 @@ interface JobRouterRestClient {
   @access(Access.internal, "csharp")
   listWorkers is AzureCommunicationRoutingService.JobRouterOperations.listWorkers;
 }
+
+// Remove the leading "c" in the version enum identifiers for C#
+@@clientName(AzureCommunicationRoutingService.Versions.c2023_11_01,
+  "2023_11_01",
+  "csharp"
+);
+@@clientName(AzureCommunicationRoutingService.Versions.c2024_01_18_Preview,
+  "2024_01_18_Preview",
+  "csharp"
+);
