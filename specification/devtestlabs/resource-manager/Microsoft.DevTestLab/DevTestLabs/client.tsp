@@ -498,3 +498,6 @@ using Microsoft.DevTestLab;
 @@alternateType(LabVhd.id, url, "csharp");
 @@clientName(GalleryImages.list, "GetGalleryImages", "csharp");
 @@clientName(Labs.listVhds, "GetDevTestLabVhds", "csharp");
+@@alternateType(ArtifactProperties.parameters, unknown, "csharp");
+@@alternateType(ArmTemplateInfo.template, unknown, "csharp");
+@@alternateType(ArmTemplateInfo.parameters, unknown, "csharp");

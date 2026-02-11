@@ -1022,8 +1022,9 @@ model ArtifactProperties {
   /**
    * The artifact's parameters.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  parameters?: unknown;
+  parameters?: Record<unknown>;
 
   /**
    * The artifact's creation date.
@@ -1081,12 +1082,14 @@ model ArmTemplateInfo {
   /**
    * The template's contents.
    */
-  template?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  template?: Record<unknown>;
 
   /**
    * The parameters of the ARM template.
    */
-  parameters?: unknown;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  parameters?: Record<unknown>;
 }
 
 /**

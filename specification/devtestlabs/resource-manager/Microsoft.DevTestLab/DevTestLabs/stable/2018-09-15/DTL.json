@@ -9228,10 +9228,14 @@
       "description": "Information about a generated ARM template.",
       "properties": {
         "template": {
-          "description": "The template's contents."
+          "type": "object",
+          "description": "The template's contents.",
+          "additionalProperties": {}
         },
         "parameters": {
-          "description": "The parameters of the ARM template."
+          "type": "object",
+          "description": "The parameters of the ARM template.",
+          "additionalProperties": {}
         }
       }
     },
@@ -9484,7 +9488,9 @@
           "readOnly": true
         },
         "parameters": {
+          "type": "object",
           "description": "The artifact's parameters.",
+          "additionalProperties": {},
           "readOnly": true
         },
         "createdDate": {
