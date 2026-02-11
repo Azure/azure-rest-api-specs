@@ -47,10 +47,10 @@ These settings apply only when `--tag=2024-04` is specified on the command line.
 
 ```yaml $(tag) == '2024-04'
 input-file:
-  - Microsoft.ResourceGraph/stable/2024-04-01/resourcegraph.json
-  - Microsoft.ResourceGraph/stable/2024-04-01/graphquery.json
-  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
-  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+  - stable/2024-04-01/resourcegraph.json
+  - stable/2024-04-01/graphquery.json
+  - preview/2021-06-01-preview/resourceshistory.json
+  - preview/2020-09-01-preview/resourcechanges.json
 ```
 
 ### Tag: package-preview-2023-09
@@ -59,10 +59,10 @@ These settings apply only when `--tag=package-preview-2023-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-09'
 input-file:
-  - Microsoft.ResourceGraph/preview/2023-09-01-preview/resourcecopilot.json
-  - Microsoft.ResourceGraph/preview/2023-09-01-preview/resourcegraph.json
-  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
-  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+  - preview/2023-09-01-preview/resourcecopilot.json
+  - preview/2023-09-01-preview/resourcegraph.json
+  - preview/2021-06-01-preview/resourceshistory.json
+  - preview/2020-09-01-preview/resourcechanges.json
 ```
 ### Tag: package-2022-10
 
@@ -70,10 +70,10 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-10'
 input-file:
-  - Microsoft.ResourceGraph/stable/2022-10-01/resourcegraph.json
-  - Microsoft.ResourceGraph/stable/2022-10-01/graphquery.json
-  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
-  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+  - stable/2022-10-01/resourcegraph.json
+  - stable/2022-10-01/graphquery.json
+  - preview/2021-06-01-preview/resourceshistory.json
+  - preview/2020-09-01-preview/resourcechanges.json
 ```
 
 ### Tag: package-preview-2021-06
@@ -82,8 +82,8 @@ These settings apply only when `--tag=package-preview-2021-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
-  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourcegraph.json
-  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+  - preview/2021-06-01-preview/resourcegraph.json
+  - preview/2021-06-01-preview/resourceshistory.json
 ```
 
 ### Tag: package-preview-2021-03
@@ -92,9 +92,9 @@ These settings apply only when `--tag=package-preview-2021-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-03'
 input-file:
-  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
-  - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
-  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
+  - preview/2020-09-01-preview/resourcechanges.json
+  - stable/2021-03-01/resourcegraph.json
+  - preview/2020-04-01-preview/resourceshistory.json
 ```
 
 ### Tag: package-2021-03
@@ -103,8 +103,8 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
-  - Microsoft.ResourceGraph/stable/2021-03-01/resourcegraph.json
-  - Microsoft.ResourceGraph/stable/2021-03-01/graphquery.json
+  - stable/2021-03-01/resourcegraph.json
+  - stable/2021-03-01/graphquery.json
 ```
 
 ### Tag: package-preview-2020-09
@@ -113,9 +113,9 @@ These settings apply only when `--tag=package-preview-2020-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-09'
 input-file:
-  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
-  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
-  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
+  - preview/2020-09-01-preview/resourcechanges.json
+  - preview/2020-04-01-preview/resourcegraph.json
+  - preview/2020-04-01-preview/resourceshistory.json
 ```
 
 ### Tag: package-preview-2020-04
@@ -124,9 +124,9 @@ These settings apply only when `--tag=package-preview-2020-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-04'
 input-file:
-  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcegraph.json
-  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourcechanges.json
-  - Microsoft.ResourceGraph/preview/2020-04-01-preview/resourceshistory.json
+  - preview/2020-04-01-preview/resourcegraph.json
+  - preview/2020-04-01-preview/resourcechanges.json
+  - preview/2020-04-01-preview/resourceshistory.json
 ```
 
 ### Tag: package-2019-04
@@ -135,8 +135,8 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-04'
 input-file:
-  - Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
-  - Microsoft.ResourceGraph/stable/2019-04-01/graphquery.json
+  - stable/2019-04-01/resourcegraph.json
+  - stable/2019-04-01/graphquery.json
 ```
 
 ### Tag: package-2018-09-preview
@@ -145,8 +145,8 @@ These settings apply only when `--tag=package-2018-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-09-preview'
 input-file:
-  - Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json
-  - Microsoft.ResourceGraph/preview/2018-09-01-preview/graphquery.json
+  - preview/2018-09-01-preview/resourcegraph.json
+  - preview/2018-09-01-preview/graphquery.json
 ```
 
 # Code Generation
