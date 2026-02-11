@@ -19,10 +19,14 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appservice-generated"
-    namespace: "com.azure.resourcemanager.appservice.generated"
-    service-name: "AppService" # human-readable service name, whitespace allowed
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appservice"
+    namespace: "com.azure.resourcemanager.appservice"
+    service-name: "AppService"
     flavor: azure
+    premium: true
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-appservice"
     flavor: "azure"
