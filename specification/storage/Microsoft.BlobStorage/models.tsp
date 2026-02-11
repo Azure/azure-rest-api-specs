@@ -1240,7 +1240,7 @@ model RetentionPolicy {
 
 /** An enumeration of blobs. */
 @Xml.name("EnumerationResults")
-model ListBlobsFlatSegmentResponse {
+model ListBlobsResponse {
   /** The service endpoint. */
   @Xml.attribute
   @Xml.name("ServiceEndpoint")
@@ -2600,6 +2600,14 @@ alias FilterBlobsWhereParameter = {
 alias ContentLengthParameter = {
   /** The length of the request. */
   @header("Content-Length") contentLength: int64;
+};
+
+/** The Content-Length header. */
+alias ContentLengthParameterPrivate = {
+  /** The length of the request. */
+  @access(Access.internal)
+  @header("Content-Length")
+  contentLength: int64;
 };
 
 /** The max results parameter. */
