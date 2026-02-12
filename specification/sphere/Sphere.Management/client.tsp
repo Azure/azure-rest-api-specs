@@ -15,28 +15,42 @@ using Microsoft.AzureSphere;
 @@alternateType(ImageProperties.uri, url, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Catalog.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Catalog.properties,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Certificate.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Certificate.properties,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Deployment.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Deployment.properties,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Device.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Device.properties,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeviceGroup.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeviceGroup.properties,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Image.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Image.properties, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Product.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Product.properties,
+  "csharp"
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Device.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Device.properties,
+  "csharp"
+);
 
 // Client name mappings
 @@clientName(Catalog, "SphereCatalog", "csharp");
