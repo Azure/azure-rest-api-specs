@@ -3037,7 +3037,16 @@
           "format": "date-time",
           "description": "The timestamp of the error occurrence"
         },
+        "timeStamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the error occurrence"
+        },
         "azureOperationName": {
+          "type": "string",
+          "description": "The compute operationId of the Start/Deallocate/Hibernate request"
+        },
+        "crpOperationId": {
           "type": "string",
           "description": "The compute operationId of the Start/Deallocate/Hibernate request"
         }
@@ -3526,6 +3535,10 @@
           "type": "string",
           "description": "Timezone for the operation"
         },
+        "timezone": {
+          "type": "string",
+          "description": "Timezone for the operation"
+        },
         "resourceOperationError": {
           "$ref": "#/definitions/ResourceOperationError",
           "description": "Operation level errors if they exist"
@@ -3541,13 +3554,7 @@
         }
       },
       "required": [
-        "operationId",
-        "resourceId",
-        "opType",
-        "subscriptionId",
-        "deadline",
-        "deadlineType",
-        "state"
+        "operationId"
       ]
     },
     "ResourceOperationError": {
@@ -3726,11 +3733,19 @@
             "additionalProperties": {}
           }
         },
+        "resourceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of resources to create"
+        },
         "resourcePrefix": {
           "type": "string",
           "description": "if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1.."
         }
-      }
+      },
+      "required": [
+        "resourceCount"
+      ]
     },
     "ResourceResultSummary": {
       "type": "object",
@@ -3878,11 +3893,18 @@
               }
             ]
           }
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The deadline for the operation"
+        },
+        "timezone": {
+          "type": "string",
+          "description": "The timezone for the operation"
         }
       },
       "required": [
-        "deadLine",
-        "timeZone",
         "deadlineType"
       ]
     },

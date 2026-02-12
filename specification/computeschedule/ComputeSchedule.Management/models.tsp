@@ -165,13 +165,24 @@ alias Params = {
 model Schedule {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("The deadline for the operation")
-  deadLine: offsetDateTime;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  deadLine?: offsetDateTime;
 
   @doc("The timezone for the operation")
-  timeZone: string;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  timeZone?: string;
 
   @doc("The deadlinetype of the operation, this can either be InitiateAt or CompleteBy")
   deadlineType: DeadlineType = DeadlineType.Unknown;
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  @added(Versions.`2026-03-01-preview`)
+  @doc("The deadline for the operation")
+  deadline?: offsetDateTime;
+
+  @added(Versions.`2026-03-01-preview`)
+  @doc("The timezone for the operation")
+  timezone?: string;
 }
 
 @doc("The resources needed for the user request")
@@ -215,26 +226,36 @@ model ResourceOperationDetails {
 
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
   @typeChangedFrom(Versions.`2026-03-01-preview`, string)
-  resourceId: armResourceIdentifier;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  resourceId?: armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
-  opType: ResourceOperationType = ResourceOperationType.Unknown;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  opType?: ResourceOperationType = ResourceOperationType.Unknown;
 
   @doc("Subscription id attached to the request")
-  subscriptionId: string;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  subscriptionId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Deadline for the operation")
-  deadline: offsetDateTime;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  deadline?: offsetDateTime;
 
   @doc("Type of deadline of the operation")
-  deadlineType: DeadlineType = DeadlineType.Unknown;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  deadlineType?: DeadlineType = DeadlineType.Unknown;
 
   @doc("Current state of the operation")
-  state: OperationState = OperationState.Unknown;
+  @madeOptional(Versions.`2026-03-01-preview`)
+  state?: OperationState = OperationState.Unknown;
 
   @doc("Timezone for the operation")
   timeZone?: string;
+
+  @added(Versions.`2026-03-01-preview`)
+  @doc("Timezone for the operation")
+  timezone?: string;
 
   @doc("Operation level errors if they exist")
   resourceOperationError?: ResourceOperationError;
@@ -410,6 +431,9 @@ model ResourceProvisionPayload {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "reviewed this with ARM, we are a pass through to compute RP and doing any property specific validation, compute RP will do that."
   @doc("JSON array that contains VM properties that should be overridden for each VM in the batch")
   resourceOverrides?: Record<unknown>[];
+
+  @doc("The number of resources to create")
+  resourceCount: int32;
 
   @doc("if resourceOverrides doesn't contain \"name\", service will create name based of prefix and ResourceCount e.g. resourceprefix-0,resourceprefix-1..")
   resourcePrefix?: string;
@@ -685,8 +709,14 @@ model OperationErrorDetails {
   @doc("The timestamp of the error occurrence")
   timestamp?: offsetDateTime;
 
+  @doc("The timestamp of the error occurrence")
+  timeStamp?: offsetDateTime;
+
   @doc("The compute operationId of the Start/Deallocate/Hibernate request")
   azureOperationName?: string;
+
+  @doc("The compute operationId of the Start/Deallocate/Hibernate request")
+  crpOperationId?: string;
 }
 
 @@identifiers(Azure.Core.Foundations.Error.details, #[]);
