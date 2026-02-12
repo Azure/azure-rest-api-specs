@@ -1408,8 +1408,8 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      Alert_Delete: #{
-        $ref: "./examples/2025-09-01-preview/Alert_Delete.json",
+      CreateAssessmentV2: #{
+        $ref: "./examples/CreateAssessmentV2.json",
       },
     }
   )
