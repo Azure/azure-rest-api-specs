@@ -63,16 +63,16 @@ namespace Storage.Blob {
     TResponse extends TypeSpec.Reflection.Model | void,
     ResponseMediaType extends string = "application/xml",
     TError = StorageError
-  >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
-    /** Content-Type header */
-    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-    @header("Content-Type")
-    contentType: ResponseMediaType;
-
-    ...ApiVersionHeader;
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-  }) | TError;
+  > is StorageOperationNoBody<
+    TParams,
+    {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType: ResponseMediaType;
+    } & TResponse,
+    TError
+  >;
 
   /** Azure Storage Blob basic operation template */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
@@ -81,20 +81,16 @@ namespace Storage.Blob {
     TResponse extends TypeSpec.Reflection.Model | void,
     RequestMediaType extends string = "application/xml",
     TError = StorageError
-  >(
-    /** Content-Type header */
-    #suppress "@typespec/http/content-type-ignored" "Template for existing API"
-    @header("Content-Type")
-    contentType: RequestMediaType,
-
-    ...ApiVersionHeader,
-    ...ClientRequestIdHeader,
-    ...TParams,
-  ): (TResponse & {
-    ...ApiVersionHeader;
-    ...RequestIdResponseHeader;
-    ...ClientRequestIdHeader;
-  }) | TError;
+  > is StorageOperationNoBody<
+    {
+      /** Content-Type header */
+      #suppress "@typespec/http/content-type-ignored" "Template for existing API"
+      @header("Content-Type")
+      contentType: RequestMediaType;
+    } & TParams,
+    TResponse,
+    TError
+  >;
 
   /** Sets properties for a storage account's Blob service endpoint, including properties for Storage Analytics and CORS (Cross-Origin Resource Sharing) rules */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
