@@ -79,6 +79,9 @@
       "name": "Profiles"
     },
     {
+      "name": "DQ Assets"
+    },
+    {
       "name": "Reports"
     },
     {
@@ -512,6 +515,1209 @@
         "x-ms-examples": {
           "Alert_Delete": {
             "$ref": "./examples/Alert_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}:observations": {
+      "post": {
+        "operationId": "ObservationsV2",
+        "tags": [
+          "DQ Assessment Observations"
+        ],
+        "description": "Triggers a long-running observation job for a specific data asset. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Job configuration request payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobConfigDTO"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/StatusMonitor"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}:profile": {
+      "post": {
+        "operationId": "ProfileV2",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Creates or updates the profile for a given data asset within a business domain. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Profile entity request payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileEntity"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/StatusMonitor"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/asset-scores": {
+      "get": {
+        "operationId": "GetAssetScoresV2",
+        "tags": [
+          "DQ Assets"
+        ],
+        "description": "Retrieves asset scores for specified assets. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assetIdString",
+            "in": "query",
+            "description": "Comma-separated list of asset identifiers to get scores for",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets": {
+      "get": {
+        "operationId": "GetDQAssetsPaginationV2",
+        "tags": [
+          "DQ Assets"
+        ],
+        "description": "Retrieves DQ assets for a business domain with pagination. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateDQAssetV2",
+        "tags": [
+          "DQ Assets"
+        ],
+        "description": "Creates a DQ asset for a data asset within a business domain. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "DQ asset creation request payload",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets/{assetId}": {
+      "get": {
+        "operationId": "GetDQAssetV2",
+        "tags": [
+          "DQ Assets"
+        ],
+        "description": "Retrieves a DQ asset by identifier within a business domain and data asset. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assetId",
+            "in": "path",
+            "description": "Unique identifier for the DQ asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteDQAssetV2",
+        "tags": [
+          "DQ Assets"
+        ],
+        "description": "Deletes a DQ asset within a business domain and data asset. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assetId",
+            "in": "path",
+            "description": "Unique identifier for the DQ asset to delete",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/clone": {
+      "post": {
+        "operationId": "CloneDQAssetV2",
+        "tags": [
+          "DQ Assets"
+        ],
+        "description": "Submits a clone job for a DQ asset. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Clone request payload",
+            "required": true,
+            "schema": {}
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/observations/{observationId}": {
+      "delete": {
+        "operationId": "DeleteObservationV2",
+        "tags": [
+          "DQ Assessment Observations"
+        ],
+        "description": "Deletes a specific observation associated with a data asset. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "observationId",
+            "in": "path",
+            "description": "Unique identifier for the observation to delete",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/profiles/{profileRunId}": {
+      "delete": {
+        "operationId": "DeleteProfileRunV2",
+        "tags": [
+          "Profiles"
+        ],
+        "description": "Deletes a specific profile run for a given data asset within a business domain. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileRunId",
+            "in": "path",
+            "description": "Unique identifier for the profile run to delete",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/rules": {
+      "get": {
+        "operationId": "GetRulesV2",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Retrieves all rules associated with data assets. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RuleEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/rules/{ruleId}": {
+      "get": {
+        "operationId": "GetRuleV2",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Retrieves a specific rule associated with a data asset. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique identifier for the data quality rule",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateRuleV2",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Updates an existing rule associated with a data asset. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique identifier for the rule to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Rule update request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateRulePatchV2",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Partially updates an existing rule associated with a data asset. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique identifier for the rule to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Rule partial update request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleEntityUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RuleEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteRuleV2",
+        "tags": [
+          "Rules"
+        ],
+        "description": "Deletes a specific rule associated with a data asset. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Unique identifier for the rule to delete",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/runs": {
+      "get": {
+        "operationId": "GetRunsForAssetV2",
+        "tags": [
+          "JobRunMonitoring"
+        ],
+        "description": "Retrieves all runs associated with a specific data asset, optionally filtered by run type. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "The unique identifier for the business domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "The unique identifier for the data asset.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runType",
+            "in": "query",
+            "description": "Specifies the type of run to filter results by (e.g., 'Assessment', 'Profile', 'FetchSchema').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "The unique identifier for the data product. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobHistoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{dataAssetId}/scoped-asset-metadata": {
+      "get": {
+        "operationId": "GetScopedAssetMetaDataV2",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Retrieves the scoped asset metadata for a given data asset within a business domain. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset whose scoped metadata is being retrieved",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScopedAssetMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "UpdateScopedAssetMetaDataV2",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Create or update the scoped asset metadata for a given data asset within a business domain. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset whose scoped metadata is being updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Updated scoped asset metadata with partial modifications",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScopedAssetMetadataUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScopedAssetMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteScopedAssetMetaDataV2",
+        "tags": [
+          "Scoped Asset Metadata"
+        ],
+        "description": "Deletes the scoped asset metadata for a given data asset within a business domain. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain containing the data product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Unique identifier for the data asset whose scoped metadata is being deleted",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique identifier for the data product containing the data asset. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-assets/{assetId}/snapshots": {
+      "get": {
+        "operationId": "GetLatestSnapshotV2",
+        "tags": [
+          "Reports"
+        ],
+        "description": "Retrieves the latest data quality snapshot report for a given business domain. Data product is specified as optional query parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Unique identifier for the business domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assetId",
+            "in": "path",
+            "description": "Unique Data Asset Identifier",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "query",
+            "description": "Unique Data Product Identifier. Optional; default used when omitted.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ScoreSnapshot"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
