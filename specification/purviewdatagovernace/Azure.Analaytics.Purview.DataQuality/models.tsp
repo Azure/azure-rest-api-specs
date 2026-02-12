@@ -3559,3 +3559,300 @@ model BulkAssetMetadataRequest {
   @doc("Array of metadata entries to insert")
   metadata: BulkAssetMetadataEntry[];
 }
+
+/**
+ * Status values for alerts.
+ */
+@doc("Alert status classification")
+union AlertStatus {
+  @doc("Alert is enabled and may trigger notifications")
+  Enabled: "Enabled",
+
+  @doc("Alert is disabled and will not trigger")
+  Disabled: "Disabled",
+
+  string,
+}
+
+/**
+ * Reference pair describing the scope of an alert.
+ */
+@doc("Alert scope referencing data product and data asset")
+model AlertScope {
+  @doc("Reference to the data product associated with the alert")
+  dataProduct: Reference;
+
+  @doc("Reference to the data asset associated with the alert")
+  dataAsset: Reference;
+}
+
+/**
+ * Alert entity describing notification rules and metadata.
+ */
+@doc("Alert definition including condition, receivers, and scope")
+model Alert {
+  @doc("Unique identifier for the alert")
+  id: string;
+
+  @doc("Human-readable alert name")
+  name: string;
+
+  @doc("Detailed description of the alert")
+  description?: string;
+
+  @doc("Key-value annotations for alert categorization")
+  annotations?: Record<string>;
+
+  @doc("Reference to the governing business domain")
+  businessDomain?: Reference;
+
+  @doc("Array of scopes the alert monitors")
+  scopes: AlertScope[];
+
+  @doc("Current alert status")
+  status: AlertStatus;
+
+  @doc("Condition expression evaluated for alert triggering")
+  condition: string;
+
+  @doc("Notification receivers for the alert")
+  receivers: string[];
+
+  @doc("Flag indicating whether failures automatically enable the alert")
+  enabledForFailedJobs: boolean;
+
+  @doc("Creation timestamp (UTC)")
+  createdAt?: utcDateTime;
+
+  @doc("Creator identity")
+  createdBy?: string;
+
+  @doc("Last modification timestamp (UTC)")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("Last modifier identity")
+  lastModifiedBy?: string;
+}
+
+/**
+ * Filter settings for alert queries.
+ */
+@doc("Filter criteria for alert queries")
+model AlertFilter {
+  @doc("Alert identifier filter")
+  id?: string;
+
+  @doc("Business domain identifier filter")
+  businessDomainId?: string;
+
+  @doc("Alert name filter")
+  name?: string;
+
+  @doc("Alert scope identifier filter")
+  scopeId?: string;
+}
+
+/**
+ * Paginated list response for alert enumeration.
+ */
+@doc("Paginated alert list result")
+model AlertListResult {
+  @doc("Collection of alerts")
+  value: Alert[];
+
+  @doc("Link to retrieve the next page of results")
+  nextLink?: string;
+}
+
+/**
+ * Status update payload for alerts.
+ */
+@doc("Request payload for updating alert status")
+model AlertStatusUpdateRequest {
+  @doc("New alert status value")
+  status: AlertStatus;
+}
+/**
+ * Score snapshot wrapper containing the snapshot data.
+ */
+@doc("Wrapper model for score snapshot response")
+model ScoreSnapshotWrapper {
+  @doc("Business domain identifier")
+  businessDomainId?: string;
+
+  @doc("Data product identifier")
+  dataProductId?: string;
+
+  @doc("Asset identifier")
+  assetId?: string;
+
+  @doc("Cumulative asset score across rules and dimensions")
+  cumulativeAssetScore?: float64;
+
+  @doc("Overall asset score")
+  assetScore?: float64;
+
+  @doc("Snapshot details as a free-form JSON object")
+  snapshot?: Record<string>;
+
+  @doc("List of rule score snapshots")
+  rules?: RuleScoreSnapshot[];
+
+  @doc("Job details associated with the snapshot")
+  job?: JobDetail;
+
+  @doc("Origin asset id, if this asset is derived from another")
+  originAssetId?: string;
+
+  @doc("Indicates whether this asset is standalone")
+  isStandaloneAsset?: boolean;
+}
+
+@doc("Job detail information for snapshots")
+model JobDetail {
+  @doc("Identifier for the job")
+  jobId?: string;
+
+  @doc("Business domain identifier for the job")
+  businessDomainId?: string;
+}
+
+@doc("Per-rule score snapshot information")
+model RuleScoreSnapshot {
+  @doc("Rule name")
+  name?: string;
+
+  @doc("Rule description")
+  description?: string;
+
+  @doc("Rule type")
+  type?: string;
+
+  @doc("Execution status of the rule")
+  status?: string;
+
+  @doc("Type-specific properties for the rule")
+  typeProperties?: RuleTypeProperties;
+
+  @doc("Rule identifier")
+  id?: string;
+
+  @doc("Score for the rule")
+  score?: float64;
+
+  @doc("Creation timestamp")
+  createdAt?: utcDateTime;
+
+  @doc("Last modified timestamp")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("Created by user/principal")
+  createdBy?: string;
+
+  @doc("Last modified by user/principal")
+  lastModifiedBy?: string;
+
+  @doc("ETag for concurrency")
+  eTag?: string;
+
+  @doc("Business domain reference")
+  businessDomain?: Reference;
+
+  @doc("Data product reference")
+  dataProduct?: Reference;
+
+  @doc("Data asset reference")
+  dataAsset?: Reference;
+
+  @doc("Indicates if the rule is a cloned rule")
+  isClonedRule?: boolean;
+
+  @doc("Total rows processed")
+  totalRows?: int32;
+
+  @doc("Number of failed rows")
+  failedRows?: int32;
+
+  @doc("Number of passed rows")
+  passedRows?: int32;
+
+  @doc("Number of empty rows")
+  emptyRows?: int32;
+
+  @doc("Number of miscast rows")
+  miscastRows?: int32;
+
+  @doc("Number of non-evaluable rows")
+  nonEvaluableRows?: int32;
+
+  @doc("Number of ignored rows")
+  ignoredRows?: int32;
+
+  @doc("Query executed for the rule, if applicable")
+  queryExecuted?: string;
+
+  @doc("Dimension of the rule")
+  dimension?: string;
+}
+/**
+ * Payload for profile observer operations.
+ */
+@doc("Profile observer payload for profiling operations")
+model ProfileObserverPayload {
+  @doc("Profile type classification")
+  type?: string;
+
+  @doc("Type-specific profile configuration properties")
+  typeProperties?: Record<string>;
+
+  @doc("Data source identifier")
+  dataSourceId?: string;
+}
+
+/**
+ * Request wrapper for DQ asset creation.
+ */
+@doc("DQ asset request wrapper for creation operations")
+model DqAssetRequestWrapper {
+  @doc("Business domain identifier")
+  businessDomainId?: string;
+
+  @doc("Data Map asset identifier (GUID)")
+  dataMapAssetId?: string;
+
+  @doc("Fully qualified name for the asset")
+  fqn?: string;
+
+  @doc("Catalog asset identifier")
+  catalogAssetId?: string;
+
+  @doc("Indicates whether this is a governed asset")
+  isGovernedAssetFlag?: boolean;
+}
+
+/**
+ * Request for cloning a DQ asset.
+ */
+@doc("Clone asset request with configuration parameters")
+model CloneAssetRequest {
+  @doc("Source business domain identifier")
+  sourceBusinessDomainId?: string;
+
+  @doc("Target business domain identifier")
+  targetBusinessDomainId?: string;
+
+  @doc("Indicates whether the cloned asset is standalone")
+  isStandAloneAsset?: boolean;
+
+  @doc("Target asset identifier to use for the clone")
+  targetAssetId?: string;
+
+  @doc("Target data product identifier for the clone")
+  targetDataProductId?: string;
+}
+
+@doc("Request to fetch scores for multiple DQ assets")
+model DqScoreRequest {
+  @doc("List of DQ asset identifiers")
+  dqAssetIds?: string[];
+}
