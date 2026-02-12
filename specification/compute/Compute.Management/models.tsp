@@ -2007,6 +2007,12 @@ model VirtualMachineScaleSetProperties {
    */
   @added(Versions.v2025_11_01)
   lifecycleHooksProfile?: LifecycleHooksProfile;
+
+  /**
+   * Specifies the external health policy for the virtual machine scale set.
+   */
+  @added(Versions.v2025_11_01)
+  externalHealthPolicy?: ExternalHealthPolicy;
 }
 
 /**
@@ -2205,6 +2211,27 @@ model AutomaticRepairsPolicy {
    * Type of repair action (replace, restart, reimage) that will be used for repairing unhealthy virtual machines in the scale set. Default value is replace.
    */
   repairAction?: RepairAction;
+}
+
+/**
+ * Specifies the external health policy for the virtual machine scale set.
+ */
+@added(Versions.v2025_11_01)
+model ExternalHealthPolicy {
+  /**
+   * If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB). Defaults to false.
+   */
+  enabled?: boolean;
+
+  /**
+   * Defines how long the health status set by External Health API will last on the VM. If a signal is not received/updated within this time, the VM Health will be marked as "unknown". Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 3 hours (PT3H).
+   */
+  expiryDuration?: duration;
+
+  /**
+   * Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H).
+   */
+  gracePeriod?: duration;
 }
 
 /**
@@ -3551,39 +3578,6 @@ model VMSizeProperties {
    * Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list). **Setting this property to 1 also means that hyper-threading is disabled.**
    */
   vCPUsPerCore?: int32;
-}
-
-/**
- * Specifies the VM size policy for the virtual machine. With this property the customer is able to specify a list of VM sizes and an allocation strategy.
- */
-@added(Versions.v2025_11_01)
-model VMSizePolicy {
-  /**
-   * Specifies the VM sizes for the virtual machine.
-   */
-  @identifiers(#["name"])
-  vmSizes?: VMSizeWithRank[];
-
-  /**
-   * Specifies the allocation strategy for the virtual machine based on which the VM will be allocated.
-   */
-  allocationStrategy?: AllocationStrategy;
-}
-
-/**
- * Specifies the VM Size with priority rank.
- */
-@added(Versions.v2025_11_01)
-model VMSizeWithRank {
-  /**
-   * Specifies the name of the VM Size. This must be a valid Azure VM size (e.g., Standard_D2s_v3).
-   */
-  name?: string;
-
-  /**
-   * Specifies the rank (a.k.a priority) associated with the VM Size. Lower rank values have higher priority. Ranks should be non-negative integers and typically contiguous starting from 0.
-   */
-  rank?: int32;
 }
 
 /**
@@ -5424,12 +5418,6 @@ model HardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
-
-  /**
-   * Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified in the request, but not both. When vmSizePolicy is used, the allocated VM size will be returned in the vmSize property in the response.
-   */
-  @added(Versions.v2025_11_01)
-  vmSizePolicy?: VMSizePolicy;
 }
 
 /**

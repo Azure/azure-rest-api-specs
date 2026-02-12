@@ -1961,9 +1961,6 @@ model DataDisk {
 
   @doc("The managed disk parameters.")
   managedDisk?: ManagedDisk;
-
-  @doc("The storage Account type to be used for the data disk. If omitted, the default is \"standard_lrs\".")
-  storageAccountType?: StorageAccountType;
 }
 
 @doc("The configuration for container-enabled Pools.")
