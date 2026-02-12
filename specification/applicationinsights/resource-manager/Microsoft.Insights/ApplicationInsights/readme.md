@@ -816,8 +816,8 @@ These settings apply only when `--tag=package-2017-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-10'
 input-file:
-- preview/2017-10-01/eaSubscriptionMigration_API.json
-- preview/2017-10-01/componentFeaturesAndPricing_API.json
+- stable/2017-10-01/eaSubscriptionMigration_API.json
+- stable/2017-10-01/componentFeaturesAndPricing_API.json
 ```
 
 ### Tag: package-2015-05
