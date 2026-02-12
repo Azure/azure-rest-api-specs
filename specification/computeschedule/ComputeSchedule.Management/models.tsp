@@ -177,6 +177,7 @@ model Schedule {
 @doc("The resources needed for the user request")
 model Resources {
   @doc("The resource ids used for the request")
+  @typeChangedFrom(Versions.`2026-03-01-preview`, string)
   ids: Array<armResourceIdentifier>;
 }
 
@@ -213,6 +214,7 @@ model ResourceOperationDetails {
   operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
+  @typeChangedFrom(Versions.`2026-03-01-preview`, string)
   resourceId: armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
@@ -248,6 +250,7 @@ model ResourceOperationDetails {
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, eg ArmId")
+  @typeChangedFrom(Versions.`2026-03-01-preview`, string)
   resourceId?: armResourceIdentifier;
 
   @doc("Resource level error code if it exists")
