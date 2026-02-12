@@ -11667,13 +11667,26 @@ model MSDeployStatusProperties {
 }
 
 /**
+ * MSDeploy ARM PUT information properties
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification"
+model MSDeployProperties extends MSDeployCore {
+  /**
+   * List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.
+   */
+  @identifiers(#["packageUri"])
+  addOnPackages?: MSDeployCore[];
+}
+
+/**
  * MSDeploy ARM PUT information
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification"
 model MSDeploy extends ProxyOnlyResource {
   /** Core resource properties */
-  properties?: MSDeployCore;
+  properties?: MSDeployProperties;
 }
 
 /**
