@@ -1078,10 +1078,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/StringMap"
             }
           },
           "default": {
@@ -1143,10 +1140,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/StringMap"
             }
           },
           "default": {
@@ -1208,10 +1202,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/StringMap"
             }
           },
           "default": {
@@ -1273,10 +1264,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
+              "$ref": "#/definitions/StringMap"
             }
           },
           "default": {
@@ -3740,6 +3728,13 @@
     }
   },
   "definitions": {
+    "StringMap": {
+      "type": "object",
+      "description": "Dictionary of string key-value pairs",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "Alert": {
       "type": "object",
       "description": "Alert definition including condition, receivers, and scope",
