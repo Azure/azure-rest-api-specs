@@ -1,329 +1,355 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+
+// ============================================
+// Mock all external dependencies
+// ============================================
+
+// simple-git: mock git.raw() for merge-base and ls-tree calls
+const mockGitRaw = vi.fn();
+vi.mock('simple-git', () => ({
+  simpleGit: () => ({ raw: mockGitRaw })
+}));
+
+// fs: mock writeFileSync to avoid writing to disk
+vi.mock('fs', () => ({
+  writeFileSync: vi.fn()
+}));
+
+// shared/simple-git: mock getRootFolder so it doesn't depend on cwd
+vi.mock('../../shared/src/simple-git.js', () => ({
+  getRootFolder: vi.fn().mockResolvedValue('/fake/repo')
+}));
+
+// shared/changed-files: mock getChangedFiles, keep resourceManager and swagger real
+const mockGetChangedFiles = vi.fn();
+vi.mock('../../shared/src/changed-files.js', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    getChangedFiles: (...args) => mockGetChangedFiles(...args)
+  };
+});
+
+// detect-arm-leases: mock checkLease
+const mockCheckLease = vi.fn();
+vi.mock('../src/detect-arm-leases.js', () => ({
+  checkLease: (...args) => mockCheckLease(...args)
+}));
+
 import detectNewResourceProvider from '../src/detect-new-resource-provider.js';
 
+// ============================================
+// Helpers
+// ============================================
+
+function makeMockCore() {
+  return {
+    info: vi.fn(),
+    error: vi.fn(),
+    setFailed: vi.fn()
+  };
+}
+
+function makeMockContext(baseBranch = 'main') {
+  return {
+    repo: { owner: 'Azure', repo: 'azure-rest-api-specs' },
+    issue: { number: 42 },
+    payload: {
+      pull_request: {
+        base: { ref: baseBranch },
+        head: { sha: 'abc123' }
+      }
+    }
+  };
+}
+
+/**
+ * Configure mockGitRaw to handle merge-base and ls-tree calls.
+ * @param {Object} opts
+ * @param {string} opts.mergeBase - SHA returned by merge-base
+ * @param {string[]} [opts.lsTreeDirOutput] - output for ls-tree -d (namespace existence check)
+ * @param {string[]} [opts.lsTreeFileOutput] - output for ls-tree -r (brand-new RP pre-check)
+ */
+function setupGitMock({ mergeBase = 'base123', lsTreeDirOutput = [], lsTreeFileOutput = [] } = {}) {
+  mockGitRaw.mockImplementation(async (args) => {
+    if (args[0] === 'merge-base') {
+      return `${mergeBase}\n`;
+    }
+    if (args[0] === 'ls-tree') {
+      // ls-tree -d (directory listing for resourceProviderExistsInCommit)
+      if (args.includes('-d')) {
+        return lsTreeDirOutput.join('\n');
+      }
+      // ls-tree -r (file listing for brand-new RP pre-check)
+      if (args.includes('-r')) {
+        return lsTreeFileOutput.join('\n');
+      }
+    }
+    return '';
+  });
+}
+
+// ============================================
+// Tests
+// ============================================
+
 describe('detect-new-resource-provider', () => {
-  let mockGithub;
-  let mockContext;
   let mockCore;
+  let mockContext;
 
   beforeEach(() => {
-    mockGithub = {
-      rest: {
-        issues: {
-          createComment: vi.fn().mockResolvedValue({})
+    vi.clearAllMocks();
+    mockCore = makeMockCore();
+    mockContext = makeMockContext();
+  });
+
+  describe('no resource-manager changes', () => {
+    it('should return no-changes when no resource-manager files are modified', async () => {
+      mockGetChangedFiles.mockResolvedValue([
+        'specification/compute/data-plane/foo.json'
+      ]);
+      setupGitMock();
+
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
+
+      expect(result.status).toBe('no-changes');
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('none');
+      expect(mockCore.setFailed).not.toHaveBeenCalled();
+    });
+
+    it('should return no-changes when changed files list is empty', async () => {
+      mockGetChangedFiles.mockResolvedValue([]);
+      setupGitMock();
+
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
+
+      expect(result.status).toBe('no-changes');
+    });
+  });
+
+  describe('existing resource provider (not new)', () => {
+    it('should return no-new-rp when all RP namespaces exist in base branch', async () => {
+      const rmFile = 'specification/compute/resource-manager/Microsoft.Compute/stable/2024-01-01/compute.json';
+      mockGetChangedFiles.mockResolvedValue([rmFile]);
+      setupGitMock({
+        // Pre-check: file exists in base → not brand new
+        lsTreeFileOutput: [rmFile],
+      });
+
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
+
+      expect(result.status).toBe('no-new-rp');
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('remove');
+      expect(mockCore.setFailed).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('new resource provider with valid lease', () => {
+    it('should return new-rp-all-leases-valid and not fail', async () => {
+      const rmFile = 'specification/newservice/resource-manager/Microsoft.NewService/stable/2025-01-01/api.json';
+      mockGetChangedFiles.mockResolvedValue([rmFile]);
+      setupGitMock({
+        // Pre-check: no files in base for this namespace → brand new
+        lsTreeFileOutput: [],
+        // Namespace doesn't exist in base commit directories
+        lsTreeDirOutput: [],
+      });
+      mockCheckLease.mockResolvedValue(true);
+
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
+
+      expect(result.status).toBe('new-rp-all-leases-valid');
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('remove');
+      expect(mockCore.setFailed).not.toHaveBeenCalled();
+      expect(mockCore.info).toHaveBeenCalledWith(
+        expect.stringContaining('valid ARM lease')
+      );
+      expect(mockCheckLease).toHaveBeenCalledWith('newservice', 'Microsoft.NewService', '');
+    });
+  });
+
+  describe('new resource provider with invalid lease', () => {
+    it('should return new-rp-invalid-lease and call setFailed', async () => {
+      const rmFile = 'specification/badservice/resource-manager/Microsoft.BadService/preview/2025-01-01/api.json';
+      mockGetChangedFiles.mockResolvedValue([rmFile]);
+      setupGitMock({
+        lsTreeFileOutput: [],
+        lsTreeDirOutput: [],
+      });
+      mockCheckLease.mockResolvedValue(false);
+
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
+
+      expect(result.status).toBe('new-rp-invalid-lease');
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('add');
+      expect(mockCore.setFailed).toHaveBeenCalledTimes(1);
+      expect(mockCore.setFailed).toHaveBeenCalledWith(
+        expect.stringContaining('ARM API Modeling Office Hours')
+      );
+      expect(mockCore.error).toHaveBeenCalledWith(
+        expect.stringContaining('Microsoft.BadService')
+      );
+    });
+  });
+
+  describe('multiple new resource providers with mixed leases', () => {
+    it('should fail when at least one lease is invalid', async () => {
+      mockGetChangedFiles.mockResolvedValue([
+        'specification/svcA/resource-manager/Microsoft.SvcA/stable/2025-01-01/a.json',
+        'specification/svcB/resource-manager/Microsoft.SvcB/stable/2025-01-01/b.json',
+      ]);
+      setupGitMock({
+        lsTreeFileOutput: [],
+        lsTreeDirOutput: [],
+      });
+      // SvcA valid, SvcB invalid
+      mockCheckLease.mockImplementation(async (svc) =>
+        svc === 'svcA'
+      );
+
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
+
+      expect(result.status).toBe('new-rp-invalid-lease');
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('add');
+      expect(mockCore.setFailed).toHaveBeenCalledTimes(1);
+      expect(mockCore.setFailed).toHaveBeenCalledWith(
+        expect.stringContaining('without a valid ARM lease')
+      );
+    });
+
+    it('should pass when all leases are valid', async () => {
+      mockGetChangedFiles.mockResolvedValue([
+        'specification/svcA/resource-manager/Microsoft.SvcA/stable/2025-01-01/a.json',
+        'specification/svcB/resource-manager/Microsoft.SvcB/stable/2025-01-01/b.json',
+      ]);
+      setupGitMock({
+        lsTreeFileOutput: [],
+        lsTreeDirOutput: [],
+      });
+      mockCheckLease.mockResolvedValue(true);
+
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
+
+      expect(result.status).toBe('new-rp-all-leases-valid');
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('remove');
+      expect(mockCore.setFailed).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('service group extraction', () => {
+    it('should pass serviceGroup to checkLease when present', async () => {
+      const rmFile = 'specification/svc/resource-manager/Microsoft.Svc/ComputeRP/stable/2025-01-01/api.json';
+      mockGetChangedFiles.mockResolvedValue([rmFile]);
+      setupGitMock({
+        lsTreeFileOutput: [],
+        lsTreeDirOutput: [],
+      });
+      mockCheckLease.mockResolvedValue(true);
+
+      await detectNewResourceProvider({ context: mockContext, core: mockCore });
+
+      expect(mockCheckLease).toHaveBeenCalledWith('svc', 'Microsoft.Svc', 'ComputeRP');
+    });
+  });
+
+  describe('merge-base fallback', () => {
+    it('should fall back to HEAD^ when merge-base fails', async () => {
+      mockGetChangedFiles.mockResolvedValue([
+        'specification/svc/resource-manager/Microsoft.Svc/stable/2025-01-01/api.json',
+      ]);
+      let callCount = 0;
+      mockGitRaw.mockImplementation(async (args) => {
+        if (args[0] === 'merge-base') {
+          throw new Error('Not a valid object name');
         }
-      }
-    };
-
-    mockContext = {
-      repo: { owner: 'Azure', repo: 'azure-rest-api-specs' },
-      issue: { number: 123 },
-      payload: {
-        pull_request: {
-          base: { ref: 'main' },
-          head: { sha: 'abc123' }
-        }
-      }
-    };
-
-    mockCore = {
-      setFailed: vi.fn(),
-      info: vi.fn(),
-      error: vi.fn()
-    };
-  });
-
-  describe('function export', () => {
-    it('should be exported as default export', () => {
-      expect(typeof detectNewResourceProvider).toBe('function');
-    });
-  });
-
-  describe('basic behavior', () => {
-    it('should return a valid status', async () => {
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: mockContext,
-        core: mockCore
-      });
-
-      // Result depends on actual workspace state
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-  });
-
-  describe('parameter validation', () => {
-    it('should accept all required parameters', async () => {
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: mockContext,
-        core: mockCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-
-    it('should work with different baseBranch values from context', async () => {
-      const rpsaasContext = {
-        ...mockContext,
-        payload: { pull_request: { base: { ref: 'RPSaaSMaster' }, head: { sha: 'abc123' } } }
-      };
-
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: rpsaasContext,
-        core: mockCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-  });
-
-  describe('github API interactions', () => {
-    it('should complete without throwing', async () => {
-      // Test runs against real workspace - result depends on actual state
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: mockContext,
-        core: mockCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-
-    it('should handle GitHub API errors gracefully', async () => {
-      const errorGithub = {
-        rest: {
-          issues: {
-            createComment: vi.fn().mockRejectedValue(new Error('API Error'))
+        if (args[0] === 'ls-tree') {
+          callCount++;
+          // For the pre-check ls-tree -r call, verify it uses HEAD^ as commitish
+          if (args.includes('-r') && callCount === 1) {
+            expect(args).toContain('HEAD^');
           }
+          return '';
         }
-      };
-
-      const result = await detectNewResourceProvider({
-        github: errorGithub,
-        context: mockContext,
-        core: mockCore
+        return '';
       });
+      mockCheckLease.mockResolvedValue(true);
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-  });
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
 
-  describe('return values', () => {
-    it('should return one of three valid statuses', async () => {
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: mockContext,
-        core: mockCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
+      // Should still succeed despite merge-base failure
+      expect(['new-rp-all-leases-valid', 'new-rp-invalid-lease', 'no-new-rp']).toContain(result.status);
     });
   });
 
   describe('context validation', () => {
-    it('should handle minimal context object', async () => {
-      const minimalContext = {
-        repo: { owner: 'test-owner', repo: 'test-repo' },
+    it('should throw when pull_request context is missing', async () => {
+      const badContext = {
+        repo: { owner: 'Azure', repo: 'azure-rest-api-specs' },
         issue: { number: 1 },
-        payload: { pull_request: { base: { ref: 'main' }, head: { sha: 'abc123' } } }
+        payload: {}
       };
 
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: minimalContext,
-        core: mockCore
-      });
+      await expect(
+        detectNewResourceProvider({ context: badContext, core: mockCore })
+      ).rejects.toThrow('Could not determine base branch');
+    });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
+    it('should use baseBranch from context payload', async () => {
+      const rpsaasContext = makeMockContext('RPSaaSMaster');
+      mockGetChangedFiles.mockResolvedValue([]);
+      setupGitMock();
+
+      await detectNewResourceProvider({ context: rpsaasContext, core: mockCore });
+
+      // merge-base should have been called with origin/RPSaaSMaster
+      expect(mockGitRaw).toHaveBeenCalledWith(
+        expect.arrayContaining(['merge-base', 'origin/RPSaaSMaster', 'HEAD'])
+      );
     });
   });
 
-  describe('edge cases', () => {
-    it('should handle issue number as zero', async () => {
-      const zeroIssueContext = {
-        repo: { owner: 'Azure', repo: 'azure-rest-api-specs' },
-        issue: { number: 0 },
-        payload: { pull_request: { base: { ref: 'main' }, head: { sha: 'abc123' } } }
-      };
+  describe('label actions', () => {
+    it('should return Remove for ARMModelingReviewRequired when no new RPs', async () => {
+      const rmFile = 'specification/compute/resource-manager/Microsoft.Compute/stable/2024-01-01/compute.json';
+      mockGetChangedFiles.mockResolvedValue([rmFile]);
+      setupGitMock({ lsTreeFileOutput: [rmFile] });
 
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: zeroIssueContext,
-        core: mockCore
-      });
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('remove');
     });
 
-    it('should handle very large issue numbers', async () => {
-      const largeIssueContext = {
-        repo: { owner: 'Azure', repo: 'azure-rest-api-specs' },
-        issue: { number: 999999999 },
-        payload: { pull_request: { base: { ref: 'main' }, head: { sha: 'abc123' } } }
-      };
+    it('should return Add for ARMModelingReviewRequired when new RP has invalid lease', async () => {
+      mockGetChangedFiles.mockResolvedValue([
+        'specification/svc/resource-manager/Microsoft.Svc/stable/2025-01-01/api.json',
+      ]);
+      setupGitMock({ lsTreeFileOutput: [], lsTreeDirOutput: [] });
+      mockCheckLease.mockResolvedValue(false);
 
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: largeIssueContext,
-        core: mockCore
-      });
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('add');
     });
 
-    it('should handle empty string repo owner', async () => {
-      const emptyOwnerContext = {
-        repo: { owner: '', repo: 'azure-rest-api-specs' },
-        issue: { number: 123 },
-        payload: { pull_request: { base: { ref: 'main' }, head: { sha: 'abc123' } } }
-      };
+    it('should return Remove for ARMModelingReviewRequired when new RP has valid lease', async () => {
+      mockGetChangedFiles.mockResolvedValue([
+        'specification/svc/resource-manager/Microsoft.Svc/stable/2025-01-01/api.json',
+      ]);
+      setupGitMock({ lsTreeFileOutput: [], lsTreeDirOutput: [] });
+      mockCheckLease.mockResolvedValue(true);
 
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: emptyOwnerContext,
-        core: mockCore
-      });
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('remove');
     });
 
-    it('should handle empty string repo name', async () => {
-      const emptyRepoContext = {
-        repo: { owner: 'Azure', repo: '' },
-        issue: { number: 123 },
-        payload: { pull_request: { base: { ref: 'main' }, head: { sha: 'abc123' } } }
-      };
+    it('should return none for no-changes status', async () => {
+      mockGetChangedFiles.mockResolvedValue([]);
+      setupGitMock();
 
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: emptyRepoContext,
-        core: mockCore
-      });
+      const result = await detectNewResourceProvider({ context: mockContext, core: mockCore });
 
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-
-    it('should handle createComment throwing network timeout', async () => {
-      const timeoutGithub = {
-        rest: {
-          issues: {
-            createComment: vi.fn().mockRejectedValue(new Error('Network timeout'))
-          }
-        }
-      };
-
-      const result = await detectNewResourceProvider({
-        github: timeoutGithub,
-        context: mockContext,
-        core: mockCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-
-    it('should handle createComment throwing permission error', async () => {
-      const permissionGithub = {
-        rest: {
-          issues: {
-            createComment: vi.fn().mockRejectedValue(new Error('Permission denied'))
-          }
-        }
-      };
-
-      const result = await detectNewResourceProvider({
-        github: permissionGithub,
-        context: mockContext,
-        core: mockCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-
-    it('should handle GitHub API methods failing', async () => {
-      const failingGithub = {
-        rest: {
-          issues: {
-            createComment: vi.fn().mockRejectedValue(new Error('Service unavailable'))
-          }
-        }
-      };
-
-      const result = await detectNewResourceProvider({
-        github: failingGithub,
-        context: mockContext,
-        core: mockCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-
-    it('should handle core.setFailed as noop', async () => {
-      const noopCore = {
-        info: vi.fn(),
-        error: vi.fn(),
-        setFailed: vi.fn()  // noop setFailed
-      };
-
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: mockContext,
-        core: noopCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-
-    it('should handle multiple concurrent calls', async () => {
-      const calls = Array(3).fill(null).map(() =>
-        detectNewResourceProvider({
-          github: mockGithub,
-          context: mockContext,
-          core: mockCore
-        })
-      );
-
-      const results = await Promise.all(calls);
-
-      results.forEach(result => {
-        expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-      });
-    });
-
-    it('should handle context with additional unexpected properties', async () => {
-      const extendedContext = {
-        repo: { owner: 'Azure', repo: 'azure-rest-api-specs', extra: 'data' },
-        issue: { number: 123, title: 'Test PR', labels: [] },
-        payload: { action: 'opened', pull_request: { base: { ref: 'main' }, head: { sha: 'abc123' } } },
-        unexpected: 'property'
-      };
-
-      const result = await detectNewResourceProvider({
-        github: mockGithub,
-        context: extendedContext,
-        core: mockCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
-    });
-
-    it('should not throw when GitHub methods return null', async () => {
-      const nullGithub = {
-        rest: {
-          issues: {
-            createComment: vi.fn().mockResolvedValue(null)
-          }
-        }
-      };
-
-      const result = await detectNewResourceProvider({
-        github: nullGithub,
-        context: mockContext,
-        core: mockCore
-      });
-
-      expect(['no-changes', 'no-new-rp', 'new-rp-detected']).toContain(result.status);
+      expect(result.labelActions.ARMModelingReviewRequired).toBe('none');
     });
   });
 });

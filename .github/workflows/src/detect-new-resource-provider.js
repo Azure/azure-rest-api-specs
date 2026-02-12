@@ -114,12 +114,11 @@ function extractResourceProviders(files) {
 /**
  * Main detection logic for GitHub script action
  * @param {Object} params - Parameters from github-script
- * @param {Object} params.github - GitHub API client
  * @param {Object} params.context - GitHub context
  * @param {Object} params.core - GitHub Actions core
- * @returns {Promise<string>} Result status
+ * @returns {Promise<{ status: string, labelActions: Record<string, string> }>} Result including status and label actions
  */
-export default async function detectNewResourceProvider({ github, context, core }) {
+export default async function detectNewResourceProvider({ context, core }) {
   const repoRoot = await getRootFolder(process.cwd());
   const git = simpleGit(repoRoot);
 
@@ -131,12 +130,14 @@ export default async function detectNewResourceProvider({ github, context, core 
     throw new Error('Could not determine base branch from pull request context');
   }
 
-  // Get the merge base for proper PR comparison
+  // Get the merge base for proper PR comparison.
+  // With fetch-depth: 2, HEAD is the PR merge commit and HEAD^ is the base commit.
+  // git merge-base may fail if origin/<branch> isn't fetched, so fall back to HEAD^.
   let mergeBase;
   try {
     mergeBase = await git.raw(['merge-base', `origin/${baseBranch}`, 'HEAD']).then(s => s.trim());
   } catch {
-    mergeBase = `origin/${baseBranch}`;
+    mergeBase = 'HEAD^';
   }
 
   // Get all changed files in specification/
@@ -254,38 +255,26 @@ export default async function detectNewResourceProvider({ github, context, core 
       JSON.stringify({ newResourceProviders: leaseCheckResults }, null, 2)
     );
     
-    // Create PR comment with detected resource providers
-    const rpList = leaseCheckResults
-      .map(rp => `- \`${rp.namespace}\``)
-      .join('\n');
+    // Partition results by lease validity
+    const invalidLeases = leaseCheckResults.filter(rp => !rp.leaseValid);
+    const allLeasesValid = invalidLeases.length === 0;
 
-    const commentBody = [
-      '## New Resource Provider Detected',
-      'The following new resource provider namespace(s) were detected in this PR:\n',
-      rpList,
-      '\n### Action Required',
-      'New resource provider namespaces require having a discussion with the ARM team at **ARM API Modeling Office Hours** before merging.\n',
-      '**Please schedule here:**',
-      'https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true'
-    ].join('\n');
-
-    try {
-      await github.rest.issues.createComment({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        issue_number: context.issue.number,
-        body: commentBody
-      });
-      core.info('PR comment created successfully');
-    } catch (error) {
-      core.error(`Failed to create PR comment: ${error.message}`);
+    if (!allLeasesValid) {
+      for (const rp of invalidLeases) {
+        core.error(`${rp.namespace}: ${rp.leaseMessage}`);
+      }
+      core.setFailed(
+        `${invalidLeases.length} new resource provider(s) detected without a valid ARM lease. ` +
+        'Please schedule a discussion at ARM API Modeling Office Hours before merging: ' +
+        'https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true'
+      );
+    } else {
+      core.info('New resource provider(s) detected with valid ARM lease — no action required.');
     }
-    
-    // Set the action as failed to indicate new RPs were detected
-    core.setFailed('New resource providers detected');
+
     return {
-      status: 'new-rp-detected',
-      labelActions: getLabelActions(true)
+      status: allLeasesValid ? 'new-rp-all-leases-valid' : 'new-rp-invalid-lease',
+      labelActions: getLabelActions(!allLeasesValid)
     };
   } else {
     core.info('No new resource providers detected.');
