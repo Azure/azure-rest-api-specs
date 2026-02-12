@@ -27,7 +27,7 @@ These are the global settings for the edge.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: disconnectedOperations-package-2026-03-01
+tag: disconnectedOperations-package-2026-03-15
 ```
 
 ### Tag: disconnectedOperations-package-2024-12-01-preview
