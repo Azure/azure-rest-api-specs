@@ -2,10 +2,16 @@ name: Detect New Resource Provider
 
 on:
   pull_request:
+    branches:
+      - main
+      - RPSaaSMaster
     types:
+      # default
       - opened
       - synchronize
       - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
     paths:
       - "specification/**/resource-manager/**"
 
@@ -13,14 +19,12 @@ permissions:
   contents: read
   pull-requests: write
 
-env:
-  ENABLE_NEW_RP_DETECTION: false
-
 jobs:
   detect-new-rp:
     name: Detect New Resource Provider
     runs-on: ubuntu-24.04
-    if: env.ENABLE_NEW_RP_DETECTION == 'true'
+    # TODO: Set to true to enable new RP detection
+    if: false
 
     steps:
       - name: Checkout repository
@@ -40,12 +44,7 @@ jobs:
           script: |
             const { default: detectNewResourceProvider } =
               await import('${{ github.workspace }}/.github/workflows/src/detect-new-resource-provider.js');
-            return await detectNewResourceProvider({ 
-              github, 
-              context, 
-              core,
-              baseBranch: '${{ github.event.pull_request.base.ref }}'
-            });
+            return await detectNewResourceProvider({ github, context, core });
 
       - if: fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] != 'none'
         name: Upload artifact for ARMModelingReviewRequired label
@@ -53,28 +52,3 @@ jobs:
         with:
           name: "ARMModelingReviewRequired"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] == 'add' }}"
-
-      - if: fromJson(steps.detect.outputs.result).labelActions['NotReadyForARMReview'] != 'none'
-        name: Upload artifact for NotReadyForARMReview label
-        uses: ./.github/actions/add-label-artifact
-        with:
-          name: "NotReadyForARMReview"
-          value: "${{ fromJson(steps.detect.outputs.result).labelActions['NotReadyForARMReview'] == 'add' }}"
-
-      - if: |
-          always() &&
-          fromJson(steps.detect.outputs.result).headSha
-        name: Upload artifact with head SHA
-        uses: ./.github/actions/add-empty-artifact
-        with:
-          name: "head-sha"
-          value: "${{ fromJson(steps.detect.outputs.result).headSha }}"
-
-      - if: |
-          always() &&
-          fromJson(steps.detect.outputs.result).issueNumber > 0
-        name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
-        with:
-          name: "issue-number"
-          value: "${{ fromJson(steps.detect.outputs.result).issueNumber }}"
