@@ -3782,8 +3782,8 @@ model RuleScoreSnapshot {
   @doc("Number of miscast rows")
   miscastRows?: int32;
 
-  @doc("Number of unevaluable rows")
-  unevaluableRows?: int32;
+  @doc("Number of non-evaluable rows")
+  nonEvaluableRows?: int32;
 
   @doc("Number of ignored rows")
   ignoredRows?: int32;
