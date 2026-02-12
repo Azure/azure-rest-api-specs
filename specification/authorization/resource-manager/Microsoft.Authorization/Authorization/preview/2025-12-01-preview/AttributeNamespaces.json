@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}": {
+    "/providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}/Action": {
       "post": {
         "tags": [
           "AttributeNamespaces"
@@ -63,8 +63,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created - Returns information about the created attribute namespace.",
+          "200": {
+            "description": "OK - Returns information about the updated attribute namespace.",
             "schema": {
               "$ref": "#/definitions/AttributeNamespace"
             }
@@ -81,7 +81,9 @@
             "$ref": "./examples/CreateAttributeNamespace.json"
           }
         }
-      },
+      }
+    },
+    "/providers/Microsoft.Authorization/attributeNamespaces/{attributeNamespace}": {
       "get": {
         "tags": [
           "AttributeNamespaces"
@@ -139,6 +141,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - The attribute namespace was successfully deleted."
+          },
           "204": {
             "description": "No Content - The attribute namespace does not exist or was already deleted."
           },
