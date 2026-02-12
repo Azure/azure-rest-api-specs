@@ -659,7 +659,7 @@ model OperationErrorsResult {
   completedAt?: offsetDateTime;
 
   @Azure.ResourceManager.identifiers(#[])
-  @doc("A list of errors associated with the operationid")
+  @doc("A list of errors associated with the operationId")
   operationErrors?: Array<OperationErrorDetails>;
 
   @doc("Request level error code")
@@ -679,10 +679,10 @@ model OperationErrorDetails {
   @doc("The error details of the operation")
   errorDetails: string;
 
-  @doc("The timestamp of the error occurence")
+  @doc("The timestamp of the error occurrence")
   timestamp?: offsetDateTime;
 
-  @doc("The compute operationid of the Start/Deallocate/Hibernate request")
+  @doc("The compute operationId of the Start/Deallocate/Hibernate request")
   azureOperationName?: string;
 }
 
