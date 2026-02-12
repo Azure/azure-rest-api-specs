@@ -18,6 +18,14 @@ using Microsoft.Cache;
 @@clientName(AccessKeys, "RedisEnterpriseDataAccessKeys", "csharp");
 @@clientName(AccessKeyType, "RedisEnterpriseAccessKeyType", "csharp");
 @@clientName(AofFrequency.OneS, "OneSecond", "csharp");
+@@clientName(AzureCacheForRedisMigrationProperties.switchDns,
+  "IsSwitchDns",
+  "csharp"
+);
+@@clientName(AzureCacheForRedisMigrationProperties.skipDataMigration,
+  "IsSkipDataMigration",
+  "csharp"
+);
 @@clientName(AofFrequency, "PersistenceSettingAofFrequency", "csharp");
 @@clientName(Cluster, "RedisEnterpriseCluster", "csharp");
 @@clientName(ClusteringPolicy, "RedisEnterpriseClusteringPolicy", "csharp");
@@ -66,6 +74,24 @@ using Microsoft.Cache;
 @@clientName(LinkedDatabase, "RedisEnterpriseLinkedDatabase", "csharp");
 @@clientName(LinkState, "RedisEnterpriseDatabaseLinkState", "csharp");
 @@clientName(Module, "RedisEnterpriseModule", "csharp");
+@@clientName(Migration, "RedisEnterpriseMigration", "csharp");
+@@clientName(MaintenanceDayOfWeek,
+  "RedisEnterpriseMaintenanceDayOfWeek",
+  "csharp"
+);
+@@clientName(MaintenanceWindow, "RedisEnterpriseMaintenanceWindow", "csharp");
+@@clientName(MaintenanceWindowType,
+  "RedisEnterpriseMaintenanceWindowType",
+  "csharp"
+);
+@@clientName(MigrationProperties,
+  "RedisEnterpriseMigrationProperties",
+  "csharp"
+);
+@@clientName(MigrationProvisioningState,
+  "RedisEnterpriseMigrationProvisioningState",
+  "csharp"
+);
 @@clientName(OperationStatus, "RedisEnterpriseOperationStatus", "csharp");
 @@clientName(OperationStatus.error, "ErrorResponse", "csharp");
 @@clientName(OperationStatus.startTime, "StartOn", "csharp");
@@ -144,5 +170,9 @@ using Microsoft.Cache;
 @@clientLocation(Clusters.list, "RedisEnterpriseCluster", "csharp");
 @@clientLocation(Clusters.listSkusForScaling,
   "RedisEnterpriseCluster",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "csharp"
 );
