@@ -7455,6 +7455,60 @@
         }
       }
     },
+    "CoreDnsCachePlugin": {
+      "type": "object",
+      "description": "CoreDNS cache plugin configuration for enhanced DNS resiliency. The cache plugin enables CoreDNS to serve stale cached DNS responses when upstream servers are unavailable, improving resiliency. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the CoreDNS cache serve-stale feature is enabled. The default is false."
+        },
+        "serveStale": {
+          "type": "string",
+          "description": "Policy for serving stale cached DNS data when upstream is unavailable. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
+          "enum": [
+            "Immediate",
+            "Verify"
+          ],
+          "x-ms-enum": {
+            "name": "CoreDnsServeStale",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Immediate",
+                "value": "Immediate",
+                "description": "Serve stale data immediately. Send the expired entry to the client before checking if the entry is available from the upstream. See [cache plugin](https://coredns.io/plugins/cache) for more information."
+              },
+              {
+                "name": "Verify",
+                "value": "Verify",
+                "description": "Serve stale data with verification. First verify that an entry is still unavailable from the upstream before sending the expired entry to the client. See [cache plugin](https://coredns.io/plugins/cache) for more information."
+              }
+            ]
+          }
+        },
+        "serveStaleDurationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration in seconds for how long stale cached DNS records can be served. See [cache plugin](https://coredns.io/plugins/cache) for more information.",
+          "minimum": 0,
+          "maximum": 86400
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "CoreDnsProfile": {
+      "type": "object",
+      "description": "CoreDNS configuration for the managed cluster.",
+      "properties": {
+        "cachePlugin": {
+          "$ref": "#/definitions/CoreDnsCachePlugin",
+          "description": "Cache plugin settings for CoreDNS, enabling enhanced DNS resiliency."
+        }
+      }
+    },
     "ContainerServiceSshConfiguration": {
       "type": "object",
       "description": "SSH configuration for Linux-based VMs running on Azure.",
@@ -11444,6 +11498,10 @@
         "aiToolchainOperatorProfile": {
           "$ref": "#/definitions/ManagedClusterAIToolchainOperatorProfile",
           "description": "AI toolchain operator settings that apply to the whole cluster."
+        },
+        "coreDnsProfile": {
+          "$ref": "#/definitions/CoreDnsProfile",
+          "description": "CoreDNS configuration profile for the managed cluster."
         },
         "schedulerProfile": {
           "$ref": "#/definitions/SchedulerProfile",
