@@ -1,14 +1,37 @@
-import { existsSync, readFileSync } from 'fs';
-import { join } from 'path';
-import { execSync } from 'child_process';
-import YAML from 'js-yaml';
+import { readFile } from 'fs/promises';
+import { resolve } from 'path';
+import yaml from 'js-yaml';
+import * as z from 'zod';
+import { getRootFolder } from '../../shared/src/simple-git.js';
 
 /**
- * Build the lease path based on service information
+ * Schema for lease.yaml file
+ * 
+ * Example:
+ * ```yaml
+ * lease:
+ *   startdate: "2024-01-01"
+ *   duration: "30 days"
+ * ```
+ */
+const leaseSchema = z.object({
+  lease: z.object({
+    startdate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'startdate must be in YYYY-MM-DD format'),
+    duration: z.string().regex(/^\d+\s*days?$/i, 'duration must be in format "N days"'),
+  }),
+});
+
+/**
+ * Build the lease path based on service information.
+ * 
+ * Lease files are stored at:
+ * - Without service group: `.github/arm-leases/<serviceName>/<resourceProvider>/lease.yaml`
+ * - With service group:    `.github/arm-leases/<serviceName>/<resourceProvider>/<serviceGroup>/lease.yaml`
+ * 
  * @param {string} repoRoot - Repository root path
- * @param {string} serviceName - Service name
- * @param {string} resourceProvider - Resource provider namespace
- * @param {string} serviceGroup - Optional service group
+ * @param {string} serviceName - Service name (e.g., "compute")
+ * @param {string} resourceProvider - Resource provider namespace (e.g., "Microsoft.Compute")
+ * @param {string} serviceGroup - Optional service group for RPs that have sub-groupings (e.g., "ComputeRP")
  * @returns {string} Full path to lease.yaml file
  */
 function buildLeasePath(repoRoot, serviceName, resourceProvider, serviceGroup = '') {
@@ -17,7 +40,7 @@ function buildLeasePath(repoRoot, serviceName, resourceProvider, serviceGroup = 
     leasePathParts.push(serviceGroup);
   }
   leasePathParts.push('lease.yaml');
-  return join(...leasePathParts);
+  return resolve(...leasePathParts);
 }
 
 /**
@@ -25,73 +48,54 @@ function buildLeasePath(repoRoot, serviceName, resourceProvider, serviceGroup = 
  * @param {string} serviceName - Service name
  * @param {string} resourceProvider - Resource provider namespace
  * @param {string} serviceGroup - Optional service group
- * @returns {{ exists: boolean, valid: boolean, leasePath: string }} Lease status
+ * @returns {Promise<{ exists: boolean, valid: boolean, leasePath: string }>} Lease status
  */
-function getLeaseStatus(serviceName, resourceProvider, serviceGroup = '') {
-  const repoRoot = process.env.TEST_REPO_ROOT || execSync('git rev-parse --show-toplevel', { encoding: 'utf-8' }).trim();
+export async function getLeaseStatus(serviceName, resourceProvider, serviceGroup = '') {
+  const repoRoot = process.env.TEST_REPO_ROOT || await getRootFolder(process.cwd());
   const leasePath = buildLeasePath(repoRoot, serviceName, resourceProvider, serviceGroup);
 
+  let content;
   try {
-    if (!existsSync(leasePath)) {
-      return { exists: false, valid: false, leasePath };
+    content = await readFile(leasePath, 'utf-8');
+  } catch {
+    return { exists: false, valid: false, leasePath };
+  }
+
+  try {
+    const rawParsed = /** @type {any} */ (yaml.load(content, { schema: yaml.FAILSAFE_SCHEMA }));
+
+    if (!rawParsed) {
+      return { exists: true, valid: false, leasePath };
     }
 
-    const content = readFileSync(leasePath, 'utf-8');
-    const parsed = YAML.load(content);
+    const parsed = leaseSchema.parse(rawParsed);
     const lease = parsed.lease;
 
-    let startdate = lease.startdate;
-    if (startdate instanceof Date) {
-      startdate = startdate.toISOString().split('T')[0];
-    }
-
     const durationDays = parseInt(lease.duration.match(/^(\d+)\s*days?$/i)[1], 10);
-    const endDate = new Date(startdate);
+    const endDate = new Date(lease.startdate);
     endDate.setDate(endDate.getDate() + durationDays);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
     return { exists: true, valid: today <= endDate, leasePath };
-  } catch (error) {
-    return { exists: existsSync(leasePath), valid: false, leasePath };
+  } catch {
+    // File exists but content is invalid
+    return { exists: true, valid: false, leasePath };
   }
 }
 
 /**
- * Check if ARM lease exists and is valid
- * @param {string} serviceName - Service name
- * @param {string} resourceProvider - Resource provider namespace
- * @param {string} serviceGroup - Optional service group
- * @returns {boolean} True if lease exists and is valid, false otherwise
+ * Check if ARM lease exists and is valid.
+ * 
+ * Looks for a lease file at the appropriate path (see buildLeasePath for path structure).
+ * 
+ * @param {string} serviceName - Service name (e.g., "compute")
+ * @param {string} resourceProvider - Resource provider namespace (e.g., "Microsoft.Compute")
+ * @param {string} serviceGroup - Optional service group for RPs with sub-groupings
+ * @returns {Promise<boolean>} True if lease exists and is valid, false otherwise
  */
-export function checkLease(serviceName, resourceProvider, serviceGroup = '') {
-  return getLeaseStatus(serviceName, resourceProvider, serviceGroup).valid;
-}
-
-function main() {
-  const serviceName = process.argv[2];
-  const resourceProvider = process.argv[3];
-  const serviceGroup = process.argv[4] || '';
-
-  if (!serviceName || !resourceProvider) {
-    console.error(`Missing arguments: serviceName="${serviceName}", resourceProviderName="${resourceProvider}"`);
-    process.exit(1);
-  }
-
-  const status = getLeaseStatus(serviceName, resourceProvider, serviceGroup);
-
-  if (!status.valid) {
-    const message = status.exists ? 'Lease has expired' : 'No lease file found';
-    console.log(message);
-    process.exit(1);
-  }
-
-  console.log('Lease is valid');
-  process.exit(0);
-}
-
-// Only run main if this file is executed directly (not imported)
-if (process.argv[1] && process.argv[1].endsWith('detect-arm-leases.js')) {
-  main();
+export async function checkLease(serviceName, resourceProvider, serviceGroup = '') {
+  const status = await getLeaseStatus(serviceName, resourceProvider, serviceGroup);
+  return status.valid;
 }

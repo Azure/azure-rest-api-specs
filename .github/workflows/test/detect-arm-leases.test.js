@@ -37,12 +37,12 @@ describe('detect-arm-leases', () => {
   }
 
   describe('checkLease', () => {
-    it('returns false when lease file does not exist', () => {
-      const result = checkLease('testservice', 'Microsoft.Test');
+    it('returns false when lease file does not exist', async () => {
+      const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(false);
     });
 
-    it('returns true when lease is valid and not expired', () => {
+    it('returns true when lease is valid and not expired', async () => {
       const today = new Date();
       const startDate = new Date(today);
       startDate.setDate(today.getDate() - 30);
@@ -54,11 +54,11 @@ describe('detect-arm-leases', () => {
         '90 days'
       );
 
-      const result = checkLease('testservice', 'Microsoft.Test');
+      const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(true);
     });
 
-    it('returns false when lease has expired', () => {
+    it('returns false when lease has expired', async () => {
       const today = new Date();
       const startDate = new Date(today);
       startDate.setDate(today.getDate() - 100);
@@ -70,11 +70,11 @@ describe('detect-arm-leases', () => {
         '90 days'
       );
 
-      const result = checkLease('testservice', 'Microsoft.Test');
+      const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(false);
     });
 
-    it('returns true on the last day of lease', () => {
+    it('returns true on the last day of lease', async () => {
       const today = new Date();
       const startDate = new Date(today);
       startDate.setDate(today.getDate() - 89);
@@ -86,11 +86,11 @@ describe('detect-arm-leases', () => {
         '90 days'
       );
 
-      const result = checkLease('testservice', 'Microsoft.Test');
+      const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(true);
     });
 
-    it('returns false one day after lease expires', () => {
+    it('returns false one day after lease expires', async () => {
       const today = new Date();
       const startDate = new Date(today);
       startDate.setDate(today.getDate() - 91);
@@ -102,11 +102,11 @@ describe('detect-arm-leases', () => {
         '90 days'
       );
 
-      const result = checkLease('testservice', 'Microsoft.Test');
+      const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(false);
     });
 
-    it('handles different duration formats', () => {
+    it('handles different duration formats', async () => {
       const today = new Date();
       const startDate = new Date(today);
       startDate.setDate(today.getDate() - 10);
@@ -118,11 +118,11 @@ describe('detect-arm-leases', () => {
         '180 Days'
       );
 
-      const result = checkLease('testservice', 'Microsoft.Test');
+      const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(true);
     });
 
-    it('handles single day duration', () => {
+    it('handles single day duration', async () => {
       const today = new Date();
       
       createLeaseFile(
@@ -132,20 +132,20 @@ describe('detect-arm-leases', () => {
         '1 day'
       );
 
-      const result = checkLease('testservice', 'Microsoft.Test');
+      const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(true);
     });
 
-    it('returns false for invalid lease file format', () => {
+    it('returns false for invalid lease file format', async () => {
       const leaseDir = join(ARM_LEASES_DIR, 'testservice', 'Microsoft.Test');
       mkdirSync(leaseDir, { recursive: true });
       writeFileSync(join(leaseDir, 'lease.yaml'), 'invalid: yaml: content');
 
-      const result = checkLease('testservice', 'Microsoft.Test');
+      const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(false);
     });
 
-    it('handles multiple services and namespaces', () => {
+    it('handles multiple services and namespaces', async () => {
       const today = new Date();
       const startDate = new Date(today);
       startDate.setDate(today.getDate() - 30);
@@ -153,12 +153,12 @@ describe('detect-arm-leases', () => {
       createLeaseFile('app', 'Microsoft.App', startDate.toISOString().split('T')[0], '90 days');
       createLeaseFile('compute', 'Microsoft.Compute', startDate.toISOString().split('T')[0], '90 days');
 
-      expect(checkLease('app', 'Microsoft.App')).toBe(true);
-      expect(checkLease('compute', 'Microsoft.Compute')).toBe(true);
-      expect(checkLease('storage', 'Microsoft.Storage')).toBe(false);
+      expect(await checkLease('app', 'Microsoft.App')).toBe(true);
+      expect(await checkLease('compute', 'Microsoft.Compute')).toBe(true);
+      expect(await checkLease('storage', 'Microsoft.Storage')).toBe(false);
     });
 
-    it('handles future start dates', () => {
+    it('handles future start dates', async () => {
       const today = new Date();
       const futureDate = new Date(today);
       futureDate.setDate(today.getDate() + 10);
@@ -170,7 +170,7 @@ describe('detect-arm-leases', () => {
         '90 days'
       );
 
-      const result = checkLease('testservice', 'Microsoft.Test');
+      const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(true);
     });
   });
