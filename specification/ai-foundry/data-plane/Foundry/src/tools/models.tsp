@@ -1,4 +1,4 @@
-import "../memory_stores/models.tsp";
+import "../memory-stores/models.tsp";
 
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
