@@ -150,6 +150,14 @@ suppressions:
     from: networkcloud.json
     reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[4].schema.properties.properties
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: Long-running POST operation that returns 202 without a schema. This is a valid response code for this operation. Spec previously reviewed and approved in private repo; public spec must match for consistency.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers/{clusterManagerName}/updateRelayPrivateEndpointConnection"].post
+  - code: PostResponseCodes
+    from: networkcloud.json
+    reason: Long-running POST operation that returns 202 without a schema. This is a valid response code for this operation. Spec previously reviewed and approved in private repo; public spec must match for consistency.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/inspect"].post
 ```
 ---
 
