@@ -27,7 +27,7 @@ These are the global settings for Search Client.
 ``` yaml
 title: SearchClient
 openapi-type: data-plane
-tag: package-stable-2025-01-01
+tag: package-stable-2026-01-01
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -37,6 +37,26 @@ sdk-integration: true
 modelerfour:
   additional-checks: false
   lenient-model-deduplication: true
+```
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: IntegerTypeMustHaveFormat
+    reason: Data-plane specs can suppress violations of this rule, since it only exists for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec (https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff#integertypemusthaveformat).
+
+  - suppress: OperationIdNounVerb
+    reason: Fixing this risks introducing breaking changes.
+```
+
+### Tag: package-stable-2026-01-01
+
+These settings apply only when `--tag=package-stable-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-stable-2026-01-01'
+input-file:
+  - stable/2026-01-01/search.json
 ```
 
 ### Tag: package-stable-2025-01-01
@@ -117,7 +137,11 @@ These settings apply only when `--tag=package-stable-1.0` is specified on the co
 
 ``` yaml $(tag) == 'package-stable-1.0'
 input-file:
-  - preview/1.0/search.json
+  - stable/1.0/search.json
+
+suppressions:
+  - code: XmsEnumValidation
+    reason: The Search 1.0 API is already released and nearing the end of its lifecycle, new customers are encouraged to use the newer version of the API and any updates to this version risks introducing breaking changes to existing customers.
 ```
 
 # Code Generation

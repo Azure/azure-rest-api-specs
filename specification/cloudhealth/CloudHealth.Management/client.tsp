@@ -5,7 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.CloudHealth;
 
-@@clientName(Microsoft.CloudHealth, "CloudHealthMgmt", "python");
+@@clientName(Microsoft.CloudHealth, "CloudHealthMgmtClient", "python");
 
 // CSharp
 @@clientName(AuthenticationSetting,
@@ -46,3 +46,5 @@ using Microsoft.CloudHealth;
 @@clientName(SignalGroup, "EntitySignalGroup", "csharp");
 @@clientName(SignalKind, "EntitySignalKind", "csharp");
 @@clientName(SignalOperator, "EntitySignalOperator", "csharp");
+
+@@clientName(SignalOperator.Equals, "EqualsValue", "csharp");

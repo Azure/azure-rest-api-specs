@@ -1,10 +1,14 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
+using Http;
 using Azure.ClientGenerator.Core;
-using Microsoft.Devices;
+using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
+using Microsoft.Devices;
 
 @@clientName(Microsoft.Devices, "IotDpsClient", "javascript");
+@@clientName(Microsoft.Devices, "IotDpsClient", "python");
 @@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
   "certificate_name1",
   "python"
@@ -12,6 +16,14 @@ using Azure.Core;
 @@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
   "certificate_name1",
   "python"
+);
+@@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
+  "certificateName1",
+  "go"
+);
+@@clientName(Microsoft.Devices.CertificateNameQuery2.`certificate.name`,
+  "certificateName1",
+  "go"
 );
 @@clientName(IotDpsResourceOperationGroup.checkProvisioningServiceNameAvailability,
   "CheckDeviceProvisioningServicesNameAvailability",
@@ -56,8 +68,16 @@ using Azure.Core;
   "CertificateVerificationCodeResult",
   "csharp"
 );
+@@clientName(PrivateEndpoint,
+  "DeviceProvisioningServicesPrivateEndpoint",
+  "csharp"
+);
 @@alternateType(VerificationCodeResponse.etag, eTag, "csharp");
-
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(VerificationCodeResponse,
+  Azure.ResourceManager.Foundations.ProxyResource,
+  "csharp"
+);
 @@alternateType(VerificationCodeResponseProperties.certificate,
   unknown,
   "csharp"
@@ -89,6 +109,10 @@ using Azure.Core;
   "CertificateVerificationCodeContent",
   "csharp"
 );
+@@clientName(PrivateEndpointConnection,
+  "DeviceProvisioningServicesPrivateEndpointConnection",
+  "csharp"
+);
 @@clientName(PrivateEndpointConnectionProperties,
   "DeviceProvisioningServicesPrivateEndpointConnectionProperties",
   "csharp"
@@ -97,7 +121,7 @@ using Azure.Core;
   "ConnectionState",
   "csharp"
 );
-
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
 @@clientName(GroupIdInformation,
   "DeviceProvisioningServicesPrivateLinkResource",
   "csharp"
@@ -111,9 +135,17 @@ using Azure.Core;
   "csharp"
 );
 @@alternateType(ProvisioningServiceDescription.etag, eTag, "csharp");
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 @@clientName(IotDpsPropertiesDescription,
   "DeviceProvisioningServiceProperties",
+  "csharp"
+);
+@@clientName(IotDpsPropertiesDescription.ipFilterRules,
+  "IPFilterRules",
   "csharp"
 );
 @@clientName(IotDpsPropertiesDescription.enableDataResidency,
@@ -156,6 +188,7 @@ using Azure.Core;
   "csharp"
 );
 @@clientName(IpFilterRule, "DeviceProvisioningServicesIPFilterRule", "csharp");
+@@clientName(IpFilterRule.ipMask, "IPMask", "csharp");
 @@clientName(IpFilterActionType,
   "DeviceProvisioningServicesIPFilterActionType",
   "csharp"
@@ -187,4 +220,368 @@ using Azure.Core;
 @@clientName(ProvisioningServiceDescription.resourcegroup,
   "resourceGroup",
   "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceDeleteCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): void;
+
+@@override(ProvisioningServiceDescriptions.delete,
+  IotDpsResourceDeleteCustomized,
+  "python,go,java"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(CertificateResponses.list, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(GroupIdInformations.listPrivateLinkResources, "csharp");
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceListKeysCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
+  @body body: void,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): SharedAccessSignatureAuthorizationRuleListResult;
+
+@@override(ProvisioningServiceDescriptions.listKeys,
+  IotDpsResourceListKeysCustomized,
+  "python,go,java,javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceGetOperationResultCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  operationId: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...GetOperationResultParameters,
+): AsyncOperationResult;
+
+@@override(ProvisioningServiceDescriptionOperations.getOperationResult,
+  IotDpsResourceGetOperationResultCustomized,
+  "python,go,java,javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceListKeysForKeyNameCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
+  @body body: void,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  keyName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): SharedAccessSignatureAuthorizationRuleAccessRightsDescription;
+
+@@override(ProvisioningServiceDescriptions.listKeysForKeyName,
+  IotDpsResourceListKeysForKeyNameCustomized,
+  "python,go,java,javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceListValidSkusCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
+  @body body: void,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): IotDpsSkuDefinitionListResult;
+
+@@override(ProvisioningServiceDescriptions.listValidSkus,
+  IotDpsResourceListValidSkusCustomized,
+  "python,go,java,javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceGetCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): ProvisioningServiceDescription;
+
+@@override(ProvisioningServiceDescriptions.get,
+  IotDpsResourceGetCustomized,
+  "python,go,java"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op CertificateResponseDeleteCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  ifMatch: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  certificateName: string,
+
+  ...CertificateNameQuery2,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.rawBytes")
+  certificateRawBytes?: bytes,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.isVerified")
+  certificateIsVerified?: boolean,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.purpose")
+  certificatePurpose?: CertificatePurpose,
+
+  ...CertificateNameQuery3,
+  ...CertificateNameQuery4,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.hasPrivateKey")
+  certificateHasPrivateKey?: boolean,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("certificate.nonce")
+  certificateNonce?: string,
+): void;
+
+@@override(CertificateResponses.delete,
+  CertificateResponseDeleteCustomized,
+  "python,go,java"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op CertificateResponseGenerateVerificationCodeCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  certificateName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  ifMatch: string,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...CertificateNameQuery1,
+
+  /**
+   * Raw data of certificate.
+   */
+  @query("certificate.rawBytes")
+  certificateRawBytes?: bytes,
+
+  /**
+   * Indicates if the certificate has been verified by owner of the private key.
+   */
+  @query("certificate.isVerified")
+  certificateIsVerified?: boolean,
+
+  /**
+   * Description mentioning the purpose of the certificate.
+   */
+  @query("certificate.purpose")
+  certificatePurpose?: CertificatePurpose,
+
+  ...CertificateNameQuery3,
+  ...CertificateNameQuery4,
+
+  /**
+   * Indicates if the certificate contains private key.
+   */
+  @query("certificate.hasPrivateKey")
+  certificateHasPrivateKey?: boolean,
+
+  /**
+   * Random number generated to indicate Proof of Possession.
+   */
+  @query("certificate.nonce")
+  certificateNonce?: string,
+
+  @body
+  body: void,
+): VerificationCodeResponse;
+
+@@override(CertificateResponses.generateVerificationCode,
+  CertificateResponseGenerateVerificationCodeCustomized,
+  "python,go,java,javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op CertificateResponseVerifyCertificateCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<CertificateResponse>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  certificateName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  ifMatch: string,
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...CertificateNameQuery1,
+
+  /**
+   * Raw data of certificate.
+   */
+  @query("certificate.rawBytes")
+  certificateRawBytes?: bytes,
+
+  /**
+   * Indicates if the certificate has been verified by owner of the private key.
+   */
+  @query("certificate.isVerified")
+  certificateIsVerified?: boolean,
+
+  /**
+   * Describe the purpose of the certificate.
+   */
+  @query("certificate.purpose")
+  certificatePurpose?: CertificatePurpose,
+
+  ...CertificateNameQuery3,
+  ...CertificateNameQuery4,
+
+  /**
+   * Indicates if the certificate contains private key.
+   */
+  @query("certificate.hasPrivateKey")
+  certificateHasPrivateKey?: boolean,
+
+  /**
+   * Random number generated to indicate Proof of Possession.
+   */
+  @query("certificate.nonce")
+  certificateNonce?: string,
+
+  @body
+  request: VerificationCodeRequest,
+): CertificateListDescription;
+
+@@override(CertificateResponses.verifyCertificate,
+  CertificateResponseVerifyCertificateCustomized,
+  "python,go,java,javascript"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op CertificateResponseGetCustomized(
+  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  certificateName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  /**
+   * ETag of the certificate.
+   */
+  @header("If-Match")
+  ifMatch?: string,
+): CertificateResponse;
+
+@@override(CertificateResponses.get,
+  CertificateResponseGetCustomized,
+  "python,go,java,javascript"
+);
+
+// Java-specific client name fixes to mitigate TypeSpec migration breaks
+@@clientName(Microsoft.Devices.IotDpsPropertiesDescription.deviceProvisioningHostName,
+  "deviceProvisioningHostname",
+  "java"
+);
+@@clientName(Microsoft.Devices.IotDpsPropertiesDescription.serviceOperationsHostName,
+  "serviceOperationsHostname",
+  "java"
+);
+@@clientName(Microsoft.Devices.ProvisioningServiceDescription.resourcegroup,
+  "resourceGroup",
+  "java"
+);
+@@clientName(SharedAccessSignatureAuthorizationRuleAccessRightsDescription,
+  "SharedAccessSignatureAuthorizationRule",
+  "java"
 );

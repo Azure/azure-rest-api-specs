@@ -5,9 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -698,7 +696,7 @@ model ResourceCapabilities extends ResourceCapabilitiesBase {
  */
 model CapabilitiesProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dnsZones?: DNSZone[];
 }
 
@@ -739,7 +737,7 @@ model CapabilitiesResponse extends ResourceCapabilitiesBase {
  */
 model CapabilitiesResponseProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dnsZones?: DNSZoneResponse[];
 }
 
@@ -1464,11 +1462,13 @@ model VaultExtendedInfo {
   /**
    * Integrity key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   integrityKey?: string;
 
   /**
    * Encryption key.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   encryptionKey?: string;
 
   /**

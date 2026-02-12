@@ -28,7 +28,16 @@ These are the global settings for the DNS resolver API.
 title: DnsResolverManagementClient
 description: DNS Resolver Client
 openapi-type: arm
-tag: package-2025-05
+tag: package-preview-2025-10
+```
+
+### Tag: package-preview-2025-10
+
+These settings apply only when `--tag=package-preview-2025-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-10'
+input-file:
+  - preview/2025-10-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-05

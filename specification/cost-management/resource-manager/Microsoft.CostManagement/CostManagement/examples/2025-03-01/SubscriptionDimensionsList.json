@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "$expand": "properties/data",
+    "$top": 5,
+    "api-version": "2025-03-01",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/dimensions_ResourceGroup_2018-05-01_2018-05-31_5",
+            "properties": {
+              "description": "Resource group",
+              "category": "ResourceGroup",
+              "data": [
+                "dcrg",
+                "rg",
+                "offlinegalleryrg",
+                "system.orlando.adminkeyvault",
+                "system.orlando.keyvault"
+              ],
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 68,
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "usageStart": "2018-05-01T00:00:00-07:00"
+            }
+          },
+          {
+            "name": "dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "type": "microsoft.CostManagement/dimensions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/dimensions_ResourceType_2018-05-01_2018-05-31_5",
+            "properties": {
+              "description": "Resource type",
+              "category": "ResourceType",
+              "data": [
+                "microsoft.storage/storageaccounts",
+                "microsoft.web.admin/role",
+                "microsoft.sql/servers",
+                "microsoft.compute/virtualmachines"
+              ],
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "total": 4,
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "usageStart": "2018-05-01T00:00:00-07:00"
+            }
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "Dimensions_List",
+  "title": "SubscriptionDimensionsList-Legacy"
+}

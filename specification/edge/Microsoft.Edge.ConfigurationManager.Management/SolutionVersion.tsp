@@ -89,7 +89,7 @@ model SolutionVersionProperties {
   @added(Versions.v2025_08_01)
   @doc("Object Id of user who triggered the latest action on this solution version.")
   @visibility(Lifecycle.Read)
-  lastestActionTriggeredBy?: string;
+  latestActionTriggeredBy?: string;
 
   @doc("The type of the latest action performed on this solution version.")
   @visibility(Lifecycle.Read)

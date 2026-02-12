@@ -23,7 +23,7 @@ import { isWindows } from "./test-util.js";
 import { vol } from "memfs";
 
 vi.mock("node:fs/promises", async () => {
-  const memfs = (await vi.importActual("memfs")) as typeof import("memfs");
+  const memfs = await vi.importActual<typeof import("memfs")>("memfs");
   return {
     ...memfs.fs.promises,
   };

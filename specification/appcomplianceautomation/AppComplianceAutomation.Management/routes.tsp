@@ -4,12 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./models/models.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using OpenAPI;
-using Azure.Core;
-using Azure.Core.Traits;
 
 namespace Microsoft.AppComplianceAutomation;
 
@@ -29,7 +24,11 @@ alias ArmProviderActionAsync<
   Response | ArmAcceptedLroResponse<"Accepted", LroHeaders>,
   BaseParameters = ApiVersionParameter,
   Parameters = Parameters,
-  LroHeaders = ArmLroLocationHeader<Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>>
+  LroHeaders = ArmLroLocationHeader<
+    Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+    Response,
+    string
+  >
 >;
 
 alias ArmProviderActionSync<

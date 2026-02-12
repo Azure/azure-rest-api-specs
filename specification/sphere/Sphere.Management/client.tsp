@@ -3,4 +3,4 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.AzureSphere, "AzureSphereMgmt", "python");
+@@clientName(Microsoft.AzureSphere, "AzureSphereMgmtClient", "python");

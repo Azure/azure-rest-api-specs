@@ -5,11 +5,13 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VolumeGroup.tsp";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ElasticSan;
 /**
@@ -73,6 +75,7 @@ interface Volumes {
       /**
        * Optional. Specifies that the delete operation should be a permanent delete for the soft deleted volume. The value of deleteType can only be 'permanent'.
        */
+      @removed(Versions.v2025_09_01)
       @query("deleteType")
       deleteType?: DeleteType;
     },
@@ -89,8 +92,10 @@ interface Volumes {
        * Optional, returns only soft deleted volumes if set to true. If set to false or if not specified, returns only active volumes.
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @removed(Versions.v2025_09_01)
       @header
       @clientName("accessSoftDeletedResources", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
+      @removed(Versions.v2025_09_01)
       `x-ms-access-soft-deleted-resources`?: `x-ms-access-soft-deleted-resources`;
     },
     Response = ArmResponse<VolumeList>
@@ -100,6 +105,7 @@ interface Volumes {
 /**
  * Restore Soft Deleted Volumes. The volume name is obtained by using the API to list soft deleted volumes by volume group
  */
+@removed(Versions.v2025_09_01)
 @action("restore")
 @tag("Restore Volumes")
 op restoreVolume is ArmResourceActionAsync<Volume, void, Volume>;

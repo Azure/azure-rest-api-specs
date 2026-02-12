@@ -63,17 +63,17 @@ model AvsAssessmentSummaryPropertiesV2 is SummaryProperties {
   totalStorageInGB?: float32;
 
   @doc("Estimated AVS SKU for Assessment.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   avsEstimatedNodes?: AvsEstimatedNode[];
 
   @doc("Estimated External Storage for Assessment.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   avsEstimatedExternalStorages?: AvsEstimatedExternalStorage[];
 
   @doc("Estimated External Storage for Assessment.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   avsEstimatedNetworks?: AvsEstimatedNetwork[];
 

@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "21a9967a-e8a9-4656-a70b-96ff1c4d05a0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "myMapsAccount2",
+            "type": "Microsoft.Maps/accounts",
+            "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount2",
+            "kind": "Gen2",
+            "location": "eastus",
+            "properties": {
+              "disableLocalAuth": false,
+              "provisioningState": "Succeeded",
+              "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c593"
+            },
+            "sku": {
+              "name": "G2",
+              "tier": "Standard"
+            },
+            "tags": {
+              "test": "true"
+            }
+          },
+          {
+            "name": "myMapsAccount",
+            "type": "Microsoft.Maps/accounts",
+            "id": "/subscriptions/21a9967a-e8a9-4656-a70b-96ff1c4d05a0/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount",
+            "kind": "Gen2",
+            "location": "eastus",
+            "properties": {
+              "disableLocalAuth": true,
+              "provisioningState": "Succeeded",
+              "uniqueId": "b2e763e6-d6f3-4858-9e2b-7cf8df85c592"
+            },
+            "sku": {
+              "name": "G2",
+              "tier": "Standard"
+            },
+            "tags": {
+              "test": "true"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Accounts_ListByResourceGroup",
+  "title": "List Accounts By Resource Group"
+}

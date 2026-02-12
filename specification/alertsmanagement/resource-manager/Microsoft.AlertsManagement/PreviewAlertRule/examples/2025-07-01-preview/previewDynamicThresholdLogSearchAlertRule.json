@@ -1,0 +1,107 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "scheduledQueryRuleProperties": {
+          "location": "eastus",
+          "properties": {
+            "description": "Performance rule",
+            "criteria": {
+              "allOf": [
+                {
+                  "alertSensitivity": "Medium",
+                  "criterionType": "DynamicThresholdCriterion",
+                  "dimensions": [
+                    {
+                      "name": "AlertName",
+                      "operator": "Include",
+                      "values": [
+                        "alert"
+                      ]
+                    }
+                  ],
+                  "operator": "GreaterThan",
+                  "query": "Alert",
+                  "timeAggregation": "Count"
+                }
+              ]
+            },
+            "enabled": true,
+            "evaluationFrequency": "PT1H",
+            "scopes": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/myWorkspace"
+            ],
+            "severity": 4,
+            "windowSize": "PT1H"
+          }
+        },
+        "timespan": "PT24H"
+      }
+    },
+    "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "rulePreviewResults": [
+          {
+            "dimensionCombination": [
+              {
+                "name": "AlertName",
+                "value": "Alert1"
+              }
+            ],
+            "evaluations": [
+              {
+                "alertState": "Fired",
+                "evaluatedPeriods": [
+                  {
+                    "highThreshold": 80,
+                    "lowThreshold": 20,
+                    "metricValue": 85,
+                    "thresholdMet": true,
+                    "timestamp": "2025-02-15T09:00:00Z"
+                  },
+                  {
+                    "highThreshold": 80,
+                    "lowThreshold": 20,
+                    "metricValue": 75,
+                    "thresholdMet": false,
+                    "timestamp": "2025-02-15T08:00:00Z"
+                  }
+                ],
+                "evaluationTime": "2025-02-15T10:00:00Z",
+                "thresholdMet": true
+              },
+              {
+                "alertState": "Resolved",
+                "evaluatedPeriods": [
+                  {
+                    "highThreshold": 80,
+                    "lowThreshold": 20,
+                    "metricValue": 65,
+                    "thresholdMet": false,
+                    "timestamp": "2025-02-15T10:00:00Z"
+                  },
+                  {
+                    "highThreshold": 80,
+                    "lowThreshold": 20,
+                    "metricValue": 85,
+                    "thresholdMet": true,
+                    "timestamp": "2025-02-15T09:00:00Z"
+                  }
+                ],
+                "evaluationTime": "2025-02-15T11:00:00Z",
+                "thresholdMet": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PreviewAlertRule",
+  "title": "Run preview of a dynamic threshold log search alert rule"
+}

@@ -199,47 +199,6 @@ input-file:
 - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
 ```
 
-### Tag: package-2020-10-01
-
-These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-10-01'
-input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2020-10-01/common-types.json
-- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
-```
-
-### Tag: package-2020-10-01-only
-
-These settings apply only when `--tag=package-2020-10-01-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-10-01-only'
-input-file:
-- Microsoft.Authorization/stable/2020-10-01/common-types.json
-- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
-```
-
 ### Tag: package-2022-04-01
 
 These settings apply only when `--tag=package-2022-04-01` is specified on the command line.

@@ -40,7 +40,14 @@ interface GroupIdInformationsOps
         @segment("provisioningServices")
         resourceName: string,
       },
-      {},
+      {
+        /**
+         * The name of the private link resource
+         */
+        @path
+        @segment("privateLinkResources")
+        groupId: string,
+      },
       ErrorDetails
     > {}
 
@@ -51,21 +58,13 @@ interface GroupIdInformations {
    */
   getPrivateLinkResources is GroupIdInformationsOps.Read<
     GroupIdInformation,
-    Parameters = {
-      /**
-       * The name of the private link resource
-       */
-      @path
-      @segment("privateLinkResources")
-      groupId: string;
-    },
     Response = ArmResponse<GroupIdInformation>
   >;
 
   /**
    * List private link resources for the given provisioning service
    */
-  listPrivateLinkResources is GroupIdInformationsOps.List<
+  listPrivateLinkResources is GroupIdInformationsOps.ListSinglePage<
     GroupIdInformation,
     Response = ArmResponse<PrivateLinkResources>
   >;

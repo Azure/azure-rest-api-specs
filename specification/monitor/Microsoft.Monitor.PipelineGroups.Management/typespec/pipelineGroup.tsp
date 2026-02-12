@@ -17,7 +17,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Private;
-using OpenAPI;
 
 namespace Microsoft.Monitor;
 

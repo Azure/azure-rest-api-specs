@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingAccountId": "1234:5678",
+    "customerId": "1234:5678"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "lot1",
+            "type": "Microsoft.Consumption/lots",
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234/customers/456/providers/Microsoft.Consumption/lots/lot1",
+            "properties": {
+              "closedBalance": {
+                "currency": "USD",
+                "value": 60.9
+              },
+              "expirationDate": "2021-05-01T00:00:00Z",
+              "isEstimatedBalance": false,
+              "originalAmount": {
+                "currency": "USD",
+                "value": 5000
+              },
+              "poNumber": "3524",
+              "source": "PurchasedCredit",
+              "startDate": "2021-05-01T00:00:00Z"
+            }
+          },
+          {
+            "name": "lot2",
+            "type": "Microsoft.Consumption/lots",
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234/customers/456/providers/Microsoft.Consumption/lots/lot2",
+            "properties": {
+              "closedBalance": {
+                "currency": "USD",
+                "value": 80.9
+              },
+              "expirationDate": "2019-12-31T00:00:00Z",
+              "isEstimatedBalance": false,
+              "originalAmount": {
+                "currency": "USD",
+                "value": 6000
+              },
+              "poNumber": "31224",
+              "source": "PurchasedCredit",
+              "startDate": "2021-05-01T00:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Lots_ListByCustomer",
+  "title": "LotsListByCustomer"
+}

@@ -32,16 +32,20 @@ export async function main() {
     allowPositionals: true,
   };
 
-  const { values: opts, positionals } = parseArgs(config);
-  // this option has a default value of process.cwd(), so we can assume it is always defined
-  // just need to resolve that here to make ts aware of it
-  const targetDirectory = opts.targetDirectory as string;
+  const { values: opts, positionals } = parseArgs(config) as {
+    values: {
+      // this option has a default value of process.cwd(), so we can assume it is always defined
+      targetDirectory: string;
+      fileList?: string;
+    };
+    positionals: string[];
+  };
 
-  const resolvedGitRoot = await getRootFolder(targetDirectory);
+  const resolvedGitRoot = await getRootFolder(opts.targetDirectory);
 
   let fileList: string[] | undefined = undefined;
   if (opts.fileList !== undefined) {
-    const fileListPath = resolve(opts.fileList as string);
+    const fileListPath = resolve(opts.fileList);
     try {
       const fileContent = await fs.readFile(fileListPath, { encoding: "utf-8" });
       fileList = fileContent

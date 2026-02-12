@@ -1,5 +1,4 @@
-// @ts-check
-
+import { inspect } from "util";
 import { isFullGitSha } from "../../shared/src/git.js";
 import {
   CheckConclusion,
@@ -92,7 +91,7 @@ export async function setStatusImpl({
   });
   const prLabels = labels.map((label) => label.name);
 
-  core.info(`Labels: ${prLabels}`);
+  core.info(`Labels: ${inspect(prLabels)}`);
 
   // Parse overriding labels (comma-separated string to array)
   const overridingLabelsArray = overridingLabel

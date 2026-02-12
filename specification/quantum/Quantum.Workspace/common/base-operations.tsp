@@ -9,6 +9,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
+using TypeSpec.Versioning;
 
 alias DefaultServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
@@ -35,6 +36,27 @@ namespace Quantum.Workspace.Services {
   alias CreateOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<Resource>;
 
   /** Operation to patch a resource. */
+  @patch(#{ implicitOptionality: true })
+  @updatesResource(Resource)
+  op PatchOperation<Resource extends Reflection.Model> is AzureCoreOperations.ResourceUpdate<
+    Resource,
+    {
+      /** This request uses a JSON Merge Patch body. */
+      @header("Content-Type")
+      contentType: "application/merge-patch+json";
+
+      @body
+      update: Resource;
+
+      ...Azure.Core.Traits.Private.TraitProperties<
+        DefaultServiceTraits,
+        TraitLocation.Parameters,
+        TraitContext.Update
+      >;
+    }
+  >;
+
+  /** Operation to patch a resource. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
     There is no support for JsonPatch in Azure.Core.
     The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
@@ -42,7 +64,7 @@ namespace Quantum.Workspace.Services {
     """
   @updatesResource(Resource)
   @patch(#{ implicitOptionality: true })
-  op PatchOperation<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
+  op PatchOperationOld<Resource extends TypeSpec.Reflection.Model> is Azure.Core.Foundations.ResourceOperation<
     Resource,
     {
       /** This request has a JSON Merge Patch body. */
@@ -66,8 +88,8 @@ namespace Quantum.Workspace.Services {
     Azure.Core.Foundations.ErrorResponse
   >;
 
-  /** Operation to cancel a resource. */
-  alias CancelOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;
+  /** Operation to delete a resource. */
+  alias DeleteOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceDelete<Resource>;
 
   /** Operation to get a resource. */
   alias GetOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceRead<Resource>;

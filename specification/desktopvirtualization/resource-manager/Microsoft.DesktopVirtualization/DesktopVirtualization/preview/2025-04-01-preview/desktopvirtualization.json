@@ -10987,6 +10987,14 @@
         "update": {
           "$ref": "#/definitions/HostPoolUpdateConfigurationPatchProperties",
           "description": "Parameters for a hostpool update."
+        },
+        "provisioning": {
+          "$ref": "#/definitions/SessionHostProvisioningConfigurationPatchProperties",
+          "description": "Parameters that apply when session hosts are provisioned."
+        },
+        "failedSessionHostCleanupPolicy": {
+          "$ref": "#/definitions/FailedSessionHostCleanupPolicySHC",
+          "description": "The policy that should be applied when the Session Host provisioning operation fails."
         }
       }
     },
@@ -11282,17 +11290,20 @@
         "activeSessions": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of active sessions on SessionHost."
+          "description": "Number of active sessions on SessionHost.",
+          "readOnly": true
         },
         "disconnectedSessions": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of disconnected sessions on SessionHost."
+          "description": "Number of disconnected sessions on SessionHost.",
+          "readOnly": true
         },
         "pendingSessions": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of pending sessions on SessionHost."
+          "description": "Number of pending sessions on SessionHost.",
+          "readOnly": true
         },
         "objectId": {
           "type": "string",
@@ -11302,16 +11313,19 @@
         "lastHeartBeat": {
           "type": "string",
           "format": "date-time",
-          "description": "Last heart beat from SessionHost."
+          "description": "Last heart beat from SessionHost.",
+          "readOnly": true
         },
         "sessions": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of sessions on SessionHost."
+          "description": "Number of sessions on SessionHost.",
+          "readOnly": true
         },
         "agentVersion": {
           "type": "string",
-          "description": "Version of agent on SessionHost."
+          "description": "Version of agent on SessionHost.",
+          "readOnly": true
         },
         "allowNewSession": {
           "type": "boolean",
@@ -11337,7 +11351,8 @@
         },
         "status": {
           "$ref": "#/definitions/Status",
-          "description": "Status for a SessionHost."
+          "description": "Status for a SessionHost.",
+          "readOnly": true
         },
         "statusTimestamp": {
           "type": "string",
@@ -11347,15 +11362,18 @@
         },
         "osVersion": {
           "type": "string",
-          "description": "The version of the OS on the session host."
+          "description": "The version of the OS on the session host.",
+          "readOnly": true
         },
         "sxSStackVersion": {
           "type": "string",
-          "description": "The version of the side by side stack on the session host."
+          "description": "The version of the side by side stack on the session host.",
+          "readOnly": true
         },
         "updateState": {
           "$ref": "#/definitions/UpdateState",
-          "description": "Update state of a SessionHost."
+          "description": "Update state of a SessionHost.",
+          "readOnly": true
         },
         "lastUpdateTime": {
           "type": "string",
@@ -11365,7 +11383,8 @@
         },
         "updateErrorMessage": {
           "type": "string",
-          "description": "The error message."
+          "description": "The error message.",
+          "readOnly": true
         },
         "lastSessionHostUpdateTime": {
           "type": "string",
@@ -11388,6 +11407,26 @@
           "x-ms-identifiers": [
             "healthCheckName"
           ]
+        }
+      }
+    },
+    "SessionHostProvisioningConfigurationPatchProperties": {
+      "type": "object",
+      "description": "The configuration for session host provisioning operations.",
+      "properties": {
+        "setDrainMode": {
+          "type": "boolean",
+          "description": "Whether the session host should be set in drain mode following provisioning."
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of session hosts to exist in the Host Pool.",
+          "minimum": 1
+        },
+        "canaryPolicy": {
+          "$ref": "#/definitions/CanaryPolicy",
+          "description": "Policy on whether a Canary VM(a single VM to validate the configuration) should be provisioned during a session host provisioning operation."
         }
       }
     },

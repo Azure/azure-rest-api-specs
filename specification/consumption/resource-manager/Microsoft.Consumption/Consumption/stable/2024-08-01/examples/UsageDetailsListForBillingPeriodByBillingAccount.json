@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "billingPeriodName": "201903",
+    "scope": "providers/Microsoft.Billing/BillingAccounts/1234"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "usageDetails_Id1",
+            "type": "Microsoft.Consumption/usageDetails",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234/providers/Microsoft.Billing/billingPeriods/201903/providers/Microsoft.Consumption/usageDetails/usageDetails_Id1",
+            "kind": "legacy",
+            "properties": {
+              "accountName": "Account Name 1",
+              "benefitId": "00000000-0000-0000-0000-000000000000",
+              "benefitName": "Reservation_purchase_03-09-2018_10-59",
+              "billingAccountId": "xxxxxxxx",
+              "billingAccountName": "Account Name 1",
+              "billingCurrency": "CAD",
+              "billingPeriodEndDate": "2019-03-31T00:00:00.0000000Z",
+              "billingPeriodStartDate": "2019-03-01T00:00:00.0000000Z",
+              "billingProfileId": "xxxxxxxx",
+              "billingProfileName": "Account Name 1",
+              "chargeType": "Usage",
+              "consumedService": "Microsoft.Storage",
+              "cost": 0.000342194841184,
+              "costCenter": "DEV",
+              "date": "2019-03-30T00:00:00.0000000Z",
+              "effectivePrice": 0.010534556373432,
+              "invoiceSection": "Invoice Section 1",
+              "isAzureCreditEligible": false,
+              "meterDetails": null,
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "offerId": "Offer Id 1",
+              "partNumber": "Part Number 1",
+              "product": "Product Name 1",
+              "quantity": 0.8234,
+              "resourceGroup": "Resource Group 1",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Resource Group 1/providers/Microsoft.Storage/storageAccounts/Resource Name 1",
+              "resourceLocation": "USEast",
+              "resourceName": "Resource Name 1",
+              "subscriptionId": "00000000-0000-0000-0000-000000000000",
+              "subscriptionName": "Subscription Name 1",
+              "unitPrice": 3.74
+            },
+            "tags": {
+              "dev": "tools",
+              "env": "newcrp"
+            }
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "UsageDetails_List",
+  "title": "BillingAccountUsageDetailsListForBillingPeriod-Legacy"
+}

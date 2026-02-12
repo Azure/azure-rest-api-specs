@@ -18,7 +18,7 @@ model Gallery is Azure.ResourceManager.TrackedResource<GalleryProperties> {
     Resource = Gallery,
     KeyName = "galleryName",
     SegmentName = "galleries",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
   >;
 
   /**
@@ -59,7 +59,8 @@ interface Galleries {
     Gallery,
     Response = ArmResourceUpdatedResponse<Gallery> | ArmResourceCreatedResponse<
       Gallery,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = Gallery> &
+        Azure.Core.Foundations.RetryAfterHeader
     > | (ArmAcceptedLroResponse & {
       @bodyRoot
       _: Gallery;
@@ -74,7 +75,7 @@ interface Galleries {
     Gallery,
     PatchModel = GalleryUpdate,
     Response = ArmResponse<Gallery> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = Gallery> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -147,7 +148,8 @@ interface Galleries {
     SharingUpdate,
     ArmResponse<SharingUpdate> | (ArmAcceptedLroResponse<
       "Resource operation accepted.",
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+      ArmLroLocationHeader<FinalResult = SharingUpdate> &
+        Azure.Core.Foundations.RetryAfterHeader
     > & {
       @bodyRoot _: SharingUpdate;
     })

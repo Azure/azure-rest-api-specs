@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "accept-language": [
+      "en-US"
+    ],
+    "api-version": "2023-12-01",
+    "deviceName": "testedgedevice",
+    "resourceGroupName": "GroupForEdgeAutomation",
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "IoTRole1",
+            "type": "dataBoxEdgeDevices/roles",
+            "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/GroupForEdgeAutomation/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/testedgedevice/roles/IoTRole1",
+            "kind": "IOT",
+            "properties": {
+              "hostPlatform": "Linux",
+              "ioTDeviceDetails": {
+                "authentication": {
+                  "symmetricKey": {}
+                },
+                "deviceId": "iotdevice",
+                "ioTHostHub": "iothub.azure-devices.net"
+              },
+              "ioTEdgeDeviceDetails": {
+                "authentication": {
+                  "symmetricKey": {}
+                },
+                "deviceId": "iotEdge",
+                "ioTHostHub": "iothub.azure-devices.net"
+              },
+              "roleStatus": "Enabled",
+              "shareMappings": []
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Roles_ListByDataBoxEdgeDevice",
+  "title": "RoleGetAllInDevice"
+}

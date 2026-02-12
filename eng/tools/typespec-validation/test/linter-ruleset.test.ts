@@ -27,46 +27,46 @@ describe("linter-ruleset", function () {
   });
 
   it("succeeds with resource-manager/resource-manager", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
-`,
+`),
     );
     const result = await new LinterRulesetRule().execute(mockFolder);
     assert(result.success);
   });
 
   it("succeeds with data-plane/data-plane", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-`,
+`),
     );
     const result = await new LinterRulesetRule().execute(mockFolder);
     assert(result.success);
   });
 
   it("succeeds with client.tsp/data-plane", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-`,
+`),
     );
 
-    fileExistsSpy.mockImplementation(
-      async (file: string) => file === join(mockFolder, "client.tsp"),
+    fileExistsSpy.mockImplementation((file: string) =>
+      Promise.resolve(file === join(mockFolder, "client.tsp")),
     );
 
     const result = await new LinterRulesetRule().execute(mockFolder);
@@ -74,56 +74,56 @@ linter:
   });
 
   it("fails with no-config", async function () {
-    readTspConfigSpy.mockImplementation(async (_folder: string) => "");
+    readTspConfigSpy.mockImplementation(() => Promise.resolve(""));
     const result = await new LinterRulesetRule().execute(mockFolder);
     assert(!result.success);
   });
 
   it("fails with resource-manager/no-linter", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
-`,
+`),
     );
     const result = await new LinterRulesetRule().execute(mockFolder);
     assert(!result.success);
   });
 
   it("fails with resource-manager/data-plane", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-`,
+`),
     );
     const result = await new LinterRulesetRule().execute(mockFolder);
     assert(!result.success);
   });
 
   it("fails with data-plane/resource-manager", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
-`,
+`),
     );
     const result = await new LinterRulesetRule().execute(mockFolder);
     assert(!result.success);
   });
 
   it("fails with data-plane/old-and-new", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "data-plane"
@@ -131,15 +131,15 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-core/all"
     - "@azure-tools/typespec-azure-rulesets/data-plane"
-`,
+`),
     );
     const result = await new LinterRulesetRule().execute(mockFolder);
     assert(!result.success);
   });
 
   it("fails with resource-manager/old-and-new", async function () {
-    readTspConfigSpy.mockImplementation(
-      async (_folder: string) => `
+    readTspConfigSpy.mockImplementation(() =>
+      Promise.resolve(`
 options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
@@ -147,7 +147,7 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-resource-manager/all"
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
-`,
+`),
     );
     const result = await new LinterRulesetRule().execute(mockFolder);
 

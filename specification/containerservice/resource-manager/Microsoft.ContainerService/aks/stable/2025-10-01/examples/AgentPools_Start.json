@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "agentPoolName": "agentpool1",
+    "api-version": "2025-10-01",
+    "parameters": {
+      "properties": {
+        "powerState": {
+          "code": "Running"
+        }
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "properties": {
+          "count": 50,
+          "enableAutoScaling": true,
+          "maxCount": 55,
+          "minCount": 3,
+          "powerState": {
+            "code": "Running"
+          },
+          "provisioningState": "Starting"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "properties": {
+          "count": 50,
+          "enableAutoScaling": true,
+          "maxCount": 55,
+          "minCount": 3,
+          "powerState": {
+            "code": "Running"
+          },
+          "provisioningState": "Starting"
+        }
+      }
+    }
+  },
+  "operationId": "AgentPools_CreateOrUpdate",
+  "title": "Start Agent Pool"
+}

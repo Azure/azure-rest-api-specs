@@ -5,6 +5,10 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.AzureTerraform;
 
+@@clientName(Microsoft.AzureTerraform.Terraform,
+  "TerraformInterface",
+  "csharp"
+);
 @@clientName(Type, "CommonExportType", "csharp");
 @@clientName(BaseExportModel, "CommonExportProperties", "csharp");
 @@clientName(BaseExportModel.fullProperties,
@@ -37,7 +41,7 @@ using Microsoft.AzureTerraform;
 @@clientName(targetProvider.azapi, "AzApi", "csharp");
 @@clientName(targetProvider.azurerm, "AzureRM", "csharp");
 @@clientName(Terraform.exportTerraform, "ExportTerraform", "csharp");
-@@clientName(Microsoft.AzureTerraform, "TerraformMgmt", "python");
+@@clientName(Microsoft.AzureTerraform, "TerraformMgmtClient", "python");
 @@clientName(authorizationScopeFilter,
   "TerraformAuthorizationScopeFilter",
   "csharp"

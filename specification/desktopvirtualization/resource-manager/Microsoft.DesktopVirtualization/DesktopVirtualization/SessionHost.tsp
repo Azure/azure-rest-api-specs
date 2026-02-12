@@ -2,12 +2,15 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./HostPool.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DesktopVirtualization;
 /**
@@ -103,9 +106,27 @@ interface SessionHosts {
   >;
 
   /**
+   * create or update a sessionHost.
+   */
+  @added(Versions.v2026_01_01_preview)
+  create is ArmResourceCreateOrReplaceSync<SessionHost>;
+
+  /**
    * Retry provisioning on a SessionHost.
    */
   retryProvisioning is ArmResourceActionSync<SessionHost, void, OkResponse>;
+
+  /**
+   * Operation to list the scoped RegistrationTokens associated with the SessionHost.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("SessionHosts_ListSingleRegistrationTokens")
+  @added(Versions.v2026_01_01_preview)
+  listSingleSessionHostRegistrationTokens is ArmResourceActionSync<
+    SessionHost,
+    ScopedRegistrationTokenProperties,
+    RegistrationTokenList
+  >;
 }
 
 @@maxLength(SessionHost.name, 48);
