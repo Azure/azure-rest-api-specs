@@ -153,11 +153,11 @@ suppressions:
   - code: PostResponseCodes
     from: networkcloud.json
     reason: Long-running POST operation that returns 200 with a schema. This is a valid response code for this operation.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers/{clusterManagerName}/updateRelayPrivateEndpointConnection"].post.responses
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers/{clusterManagerName}/updateRelayPrivateEndpointConnection"].post
   - code: PostResponseCodes
     from: networkcloud.json
     reason: Long-running POST operation that returns 200 with a schema. This is a valid response code for this operation.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/inspect"].post.responses
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/inspect"].post
 ```
 ---
 
