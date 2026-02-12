@@ -44,6 +44,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -71,6 +72,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: true,
@@ -96,6 +98,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: true, // Non-RM changes block ARM auto-signoff even when there are no RM changes
@@ -119,6 +122,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true, // New spec files are functional
       rmOther: false,
       other: false,
@@ -142,6 +146,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true, // Deleted spec files are functional
       rmOther: false,
       other: false,
@@ -166,6 +171,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true, // Renamed spec files are functional
       rmOther: false,
       other: false,
@@ -190,6 +196,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -214,6 +221,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: true,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -238,6 +246,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: true,
       other: false,
@@ -286,6 +295,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -335,6 +345,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -385,6 +396,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: true,
+      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -420,6 +432,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -446,6 +459,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -510,6 +524,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -569,6 +584,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -594,6 +610,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: true,
       rmExamples: true,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -614,6 +631,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -648,6 +666,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -682,6 +701,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
@@ -728,6 +748,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -774,6 +795,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: false,
       rmOther: false,
       other: false,
@@ -888,6 +910,7 @@ describe("checkTrivialChanges", () => {
     expect(result).toMatchObject({
       rmDocumentation: false,
       rmExamples: false,
+      rmTypeSpec: false,
       rmFunctional: true,
       rmOther: false,
       other: false,
