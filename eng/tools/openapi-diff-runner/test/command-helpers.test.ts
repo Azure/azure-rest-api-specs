@@ -364,6 +364,7 @@ describe("command-helpers", () => {
         baseCommitish: TEST_CONSTANTS.BRANCHES.MAIN,
         cwd: TEST_CONSTANTS.PATHS.TEST_PATH,
         headCommitish: TEST_CONSTANTS.COMMITS.HEAD,
+        logger: expect.anything(),
         paths: ["specification"],
       });
     });
@@ -446,6 +447,7 @@ describe("command-helpers", () => {
         baseCommitish: undefined,
         cwd: undefined,
         headCommitish: undefined,
+        logger: expect.anything(),
         paths: ["specification"],
       });
     });
