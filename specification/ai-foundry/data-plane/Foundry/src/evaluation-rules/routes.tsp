@@ -6,8 +6,6 @@ using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
-alias EvaluationRulesPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
-
 alias EvaluationRulesFilterQueryParams = {
   @query("actionType")
   @doc("Filter by the type of evaluation rule.")
@@ -29,9 +27,7 @@ interface EvaluationRules {
   @doc("Get an evaluation rule.")
   get is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
-    {
-      ...EvaluationRulesPreviewHeader;
-    },
+    {},
     Azure.Core.Foundations.ResourceOkResponse<EvaluationRule>
   >;
 
@@ -40,9 +36,7 @@ interface EvaluationRules {
   @Http.delete
   delete is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
-    {
-      ...EvaluationRulesPreviewHeader;
-    },
+    {},
     Http.NoContentResponse
   >;
 
@@ -53,8 +47,6 @@ interface EvaluationRules {
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {
-      ...EvaluationRulesPreviewHeader;
-
       @doc("Evaluation rule resource")
       @Http.bodyRoot
       evaluationRule: EvaluationRule;
@@ -68,7 +60,7 @@ interface EvaluationRules {
   @Rest.listsResource(EvaluationRule)
   list is Azure.Core.Foundations.ResourceList<
     EvaluationRule,
-    EvaluationRulesFilterQueryParams & EvaluationRulesPreviewHeader,
+    EvaluationRulesFilterQueryParams,
     Azure.Core.Page<EvaluationRule>
   >;
 }
