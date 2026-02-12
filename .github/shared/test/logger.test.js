@@ -1,10 +1,11 @@
-// @ts-check
-
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ConsoleLogger, debugLogger, defaultLogger } from "../src/logger";
+import { ConsoleLogger, debugLogger, defaultLogger } from "../src/logger.js";
 
 describe("logger", () => {
-  let debugSpy, errorSpy, logSpy, warnSpy;
+  /** @type {import("vitest").MockInstance} */ let debugSpy;
+  /** @type {import("vitest").MockInstance} */ let errorSpy;
+  /** @type {import("vitest").MockInstance} */ let logSpy;
+  /** @type {import("vitest").MockInstance} */ let warnSpy;
 
   beforeEach(() => {
     debugSpy = vi.spyOn(console, "debug");

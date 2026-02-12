@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "gatewayName": "apimService1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "capacity": {
+              "default": 1,
+              "maximum": 4,
+              "minimum": 1,
+              "scaleType": "Manual"
+            },
+            "resourceType": "Microsoft.ApiManagement/gateways",
+            "sku": {
+              "name": "WorkspaceGatewayStandard"
+            }
+          },
+          {
+            "capacity": {
+              "default": 1,
+              "maximum": 12,
+              "minimum": 1,
+              "scaleType": "Manual"
+            },
+            "resourceType": "Microsoft.ApiManagement/gateways",
+            "sku": {
+              "name": "WorkspaceGatewayPremium"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ApiManagementGatewaySkus_ListAvailableSkus",
+  "title": "ApiManagementListSKUs-Gateways"
+}

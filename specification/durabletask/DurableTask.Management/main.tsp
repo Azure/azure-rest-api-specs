@@ -141,10 +141,7 @@ model RetentionPolicyProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The orchestration retention policies")
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["retentionPeriodInDays", "orchestrationState"]
-  )
+  @identifiers(#["retentionPeriodInDays", "orchestrationState"])
   retentionPolicies?: RetentionPolicyDetails[];
 }
 

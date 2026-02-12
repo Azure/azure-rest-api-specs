@@ -1,5 +1,3 @@
-// @ts-check
-
 import { readdir } from "fs/promises";
 import { basename, join, normalize, sep } from "path";
 import { pathToFileURL } from "url";
@@ -32,7 +30,7 @@ export default async function importAllModules({ core }) {
     const fileUrl = pathToFileURL(fullPath).href;
 
     // if import fails, throws error which causes step to fail
-    const module = await import(fileUrl);
+    const module = /** @type {unknown} */ (await import(fileUrl));
 
     core.info(inspect(module));
     core.info("");

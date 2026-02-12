@@ -30,14 +30,15 @@ options:
     namespace: "azure.ai.translation.text"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-translation-text"
     flavor: azure
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-translation-text"
     namespace: com.azure.ai.translation.text
     partial-update: true
     generate-tests: false
-    customization-class: customization/src/main/java/TextTranslationClientBuilderCustomization.java
+    generate-samples: false
+    customization-class: customization/src/main/java/TextTranslationCustomization.java
     use-eclipse-language-server: false
     flavor: azure
   "@azure-tools/typespec-ts":

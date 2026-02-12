@@ -65,6 +65,9 @@ model InstanceProperties {
   @doc("The Azure Device Registry Namespace used by Assets, Discovered Assets and devices")
   @added(Versions.`2025-07-01-preview`)
   adrNamespaceRef?: AzureDeviceRegistryNamespaceRef;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
+  ...ResourceHealth;
 }
 
 @doc("The reference to the AIO Secret provider class.")

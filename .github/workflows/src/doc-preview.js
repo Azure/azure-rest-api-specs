@@ -1,4 +1,5 @@
-// @ts-check
+import { inspect } from "util";
+
 const DOCS_NAMESPACE = "_swagger_specs";
 const SPEC_FILE_REGEX =
   "(specification/)+(.*)/(resourcemanager|resource-manager|dataplane|data-plane|control-plane)/(.*)/(preview|stable|privatepreview)/(.*?)/(example)?(.*)";
@@ -142,7 +143,7 @@ export function getSwaggersToProcess(swaggerFiles) {
       const parsed = parseSwaggerFilePath(file);
       swaggerFileObjs.push(parsed);
     } catch (error) {
-      console.log(`Skipping file "${file}" due to parsing error: ${error}`);
+      console.log(`Skipping file "${file}" due to parsing error: ${inspect(error)}`);
       continue;
     }
   }

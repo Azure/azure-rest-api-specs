@@ -1,0 +1,52 @@
+parameters:
+  "service-dir":
+    default: "sdk/newrelic"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/NewRelic.json"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "all"
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.NewRelicObservability"
+    namespace: "{package-name}"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/newrelicobservability"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-newrelicobservability"
+    namespace: "azure.mgmt.newrelicobservability"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/newrelicobservability"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-newrelicobservability"
+    namespace: "com.azure.resourcemanager.newrelicobservability"
+    service-name: "NewRelic Observability"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/newrelicobservability"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-newrelicobservability"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    typespec-title-map:
+      ObservabilityClient: NewRelicObservability
+    package-details:
+      name: "@azure/arm-newrelicobservability"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/newrelic"
+    emitter-output-dir: "{output-dir}/{service-dir}/armnewrelicobservability"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnewrelicobservability/v2"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

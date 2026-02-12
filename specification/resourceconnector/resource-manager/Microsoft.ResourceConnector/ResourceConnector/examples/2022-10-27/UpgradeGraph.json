@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2022-10-27",
+    "resourceGroupName": "testresourcegroup",
+    "resourceName": "appliance01",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "upgradeGraph": "stable"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "stable",
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.ResourceConnector/appliances/appliance01",
+        "properties": {
+          "applianceVersion": "1.0.0",
+          "supportedVersions": [
+            {
+              "metadata": {
+                "catalogVersion": {
+                  "name": "cloudop-product-information",
+                  "data": {
+                    "audience": "stable",
+                    "catalog": "arc-appliance-stable-catalogs-ext",
+                    "offer": "arcappliance",
+                    "version": "0.1.5.11115"
+                  },
+                  "namespace": "cloudop-system"
+                }
+              },
+              "version": "1.0.1"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "Appliances_GetUpgradeGraph",
+  "title": "Get Appliance Upgrade Graph"
+}

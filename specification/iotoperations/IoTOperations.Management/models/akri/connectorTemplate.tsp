@@ -8,8 +8,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
-using Azure.ClientGenerator.Core;
 
 namespace Microsoft.IoTOperations;
 
@@ -56,13 +54,25 @@ model AkriConnectorTemplateProperties {
 
   /** Mqtt connection configuration settings. */
   mqttConnectionConfiguration?: AkriConnectorsMqttConnectionConfiguration;
+
+  /** A reference to a connector metadata document reference in a container registry. */
+  @added(Versions.`2025-10-01`)
+  connectorMetadataRef?: string;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
+  ...ResourceHealth;
 }
 
 /** AkriConnectorTemplateDeviceInboundEndpointType properties. */
 @added(Versions.`2025-07-01-preview`)
 model AkriConnectorTemplateDeviceInboundEndpointType {
   /** A description of the device inbound endpoint. */
+  @removed(Versions.`2025-10-01`)
   description?: string;
+
+  /** The display name of the device inbound endpoint. */
+  @added(Versions.`2025-10-01`)
+  displayName?: string;
 
   /** The type of the device inbound endpoint. */
   endpointType: NonEmptyString;
@@ -71,11 +81,13 @@ model AkriConnectorTemplateDeviceInboundEndpointType {
   version?: NonEmptyString;
 
   /** The configuration schema references for the device inbound endpoint. */
+  @removed(Versions.`2025-10-01`)
   configurationSchemaRefs?: AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs;
 }
 
 /** AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs {
   /** The default configuration schema reference for datasets. */
   defaultDatasetConfigSchemaRef?: string;
@@ -113,6 +125,7 @@ union AkriConnectorTemplateRuntimeConfigurationType {
   string,
 
   /** Helm Configuration Type. */
+  @removed(Versions.`2025-10-01`)
   HelmConfiguration,
 
   /** Managed Configuration Type. */
@@ -121,6 +134,7 @@ union AkriConnectorTemplateRuntimeConfigurationType {
 
 /** AkriConnectorTemplateHelmConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmConfiguration
   extends AkriConnectorTemplateRuntimeConfiguration {
   /** The runtime configuration type for the Connector template. */
@@ -132,6 +146,7 @@ model AkriConnectorTemplateHelmConfiguration
 
 /** AkriConnectorTemplateHelmConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmConfigurationSettings {
   /** The registry settings for the helm chart to be used. */
   registrySettings?: AkriConnectorTemplateHelmRegistrySettings;
@@ -158,6 +173,7 @@ model AkriConnectorTemplateHelmConfigurationSettings {
 
 /** AkriConnectorTemplateHelmRegistrySettings properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 @discriminator("registrySettingsType")
 model AkriConnectorTemplateHelmRegistrySettings {
   registrySettingsType: AkriConnectorTemplateHelmRegistrySettingsType;
@@ -165,6 +181,7 @@ model AkriConnectorTemplateHelmRegistrySettings {
 
 /** AkriConnectorTemplateHelmRegistrySettingsType values. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 union AkriConnectorTemplateHelmRegistrySettingsType {
   string,
 
@@ -177,6 +194,7 @@ union AkriConnectorTemplateHelmRegistrySettingsType {
 
 /** AkriConnectorTemplateHelmRegistryEndpointRef properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmRegistryEndpointRef
   extends AkriConnectorTemplateHelmRegistrySettings {
   /** The registry endpoint reference. */
@@ -188,6 +206,7 @@ model AkriConnectorTemplateHelmRegistryEndpointRef
 
 /** AkriConnectorTemplateHelmContainerRegistry properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmContainerRegistry
   extends AkriConnectorTemplateHelmRegistrySettings {
   /** The container registry reference. */
@@ -199,6 +218,7 @@ model AkriConnectorTemplateHelmContainerRegistry
 
 /** AkriConnectorTemplateHelmContainerRegistrySettings properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmContainerRegistrySettings {
   /** The registry to use for the Helm chart. */
   registry: string;
@@ -209,14 +229,17 @@ model AkriConnectorTemplateHelmContainerRegistrySettings {
 
 /** AkriConnectorTemplateHelmAuthSecretRef properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmAuthSecretRef {
   /** The name of the secret. */
   secretRef: string;
 
   /** The key of the password in the secret. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   passwordKey: string;
 
   /** The key of the username in the secret. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   usernameKey: string;
 }
 
@@ -371,6 +394,7 @@ model AkriConnectorTemplatePersistentVolumeClaim {
 
 /** AkriConnectorTemplateHelmAdvancedConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmAdvancedConfiguration {
   /** Delete operation configuration for the Helm chart. */
   delete?: AkriConnectorTemplateHelmDeleteConfiguration;
@@ -401,18 +425,21 @@ alias HelmOperationConfiguration = {
 
 /** AkriConnectorTemplateHelmDeleteConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmDeleteConfiguration {
   ...HelmOperationConfiguration;
 }
 
 /** AkriConnectorTemplateHelmInstallConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmInstallConfiguration {
   ...HelmOperationConfiguration;
 }
 
 /** AkriConnectorTemplateHelmUpgradeConfiguration properties. */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model AkriConnectorTemplateHelmUpgradeConfiguration {
   ...HelmOperationConfiguration;
 }

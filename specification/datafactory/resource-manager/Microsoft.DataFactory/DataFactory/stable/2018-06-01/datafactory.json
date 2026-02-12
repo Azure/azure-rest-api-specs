@@ -1764,6 +1764,173 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/enableInteractiveQuery": {
+      "post": {
+        "tags": [
+          "integrationRuntimeEnableInteractiveQuery"
+        ],
+        "operationId": "IntegrationRuntime_EnableInteractiveQuery",
+        "x-ms-examples": {
+          "IntegrationRuntime_EnableInteractiveQuery": {
+            "$ref": "./examples/IntegrationRuntimes_EnableInteractiveQuery.json"
+          }
+        },
+        "description": "Enable interactive authoring of Managed Virtual Network integration runtime.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "enableInteractiveQueryRequest",
+            "description": "The enable interactive authoring integration runtime properties.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnableInteractiveQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeResource"
+            },
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/integrationRuntimes/{integrationRuntimeName}/disableInteractiveQuery": {
+      "post": {
+        "tags": [
+          "integrationRuntimeDisableInteractiveQuery"
+        ],
+        "operationId": "IntegrationRuntime_DisableInteractiveQuery",
+        "x-ms-examples": {
+          "IntegrationRuntime_DisableInteractiveQuery": {
+            "$ref": "./examples/IntegrationRuntimes_DisableInteractiveQuery.json"
+          }
+        },
+        "description": "Disable interactive authoring of Managed Virtual Network integration runtime.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/integrationRuntimeName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeResource"
+            },
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices": {
       "get": {
         "tags": [
@@ -5444,6 +5611,16 @@
         "dataFactoryLocation": {
           "description": "The location of the data factory that the linked integration runtime belongs to.",
           "type": "string"
+        }
+      }
+    },
+    "EnableInteractiveQueryRequest": {
+      "description": "The enable the interactive authoring information.",
+      "type": "object",
+      "properties": {
+        "autoTerminationMinutes": {
+          "description": "The allowed idle time for interactive authoring.",
+          "type": "integer"
         }
       }
     },

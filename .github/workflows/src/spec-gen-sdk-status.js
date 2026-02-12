@@ -1,5 +1,5 @@
-// @ts-check
 import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/github.js";
+import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.js";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
 import { writeToActionsSummary } from "./github.js";
@@ -123,7 +123,7 @@ export async function setSpecGenSdkStatusImpl({
 
 /**
  * @param {Object} params
- * @param {Array<any>} params.checkRuns
+ * @param {import("./github.js").CheckRuns} params.checkRuns
  * @param {typeof import("@actions/core")} params.core
  * @returns {Promise<{state: CommitStatusState, description: string}>}
  */
@@ -140,6 +140,9 @@ async function processResult({ checkRuns, core }) {
 
   for (const checkRun of checkRuns) {
     core.info(`Processing check run: ${checkRun.name} (${checkRun.conclusion})`);
+    if (checkRun.details_url === null) {
+      throw new Error(`'details_url' is null in Check Run '${checkRun.name}'`);
+    }
     const buildInfo = getAdoBuildInfoFromUrl(checkRun.details_url);
     const ado_project_url = buildInfo.projectUrl;
     const ado_build_id = buildInfo.buildId;
@@ -160,7 +163,8 @@ async function processResult({ checkRuns, core }) {
         `Artifact '${artifactName}' not found in the build with details_url:${checkRun.details_url}`,
       );
     }
-    const artifactJsonObj = JSON.parse(result.artifactData);
+
+    const artifactJsonObj = SpecGenSdkArtifactInfoSchema.parse(JSON.parse(result.artifactData));
     const language = artifactJsonObj.language;
     const shortLanguageName = language.split("-").pop();
     const executionResult = artifactJsonObj.result;

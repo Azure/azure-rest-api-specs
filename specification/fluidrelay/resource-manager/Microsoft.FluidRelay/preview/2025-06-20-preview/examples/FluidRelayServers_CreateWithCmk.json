@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroup": "myResourceGroup",
+    "fluidRelayServerName": "myFluidRelayServer",
+    "api-version": "2025-06-20-preview",
+    "resource": {
+      "location": "west-us",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityForCMK": {}
+        }
+      },
+      "properties": {
+        "storagesku": "basic",
+        "encryption": {
+          "customerManagedKeyEncryption": {
+            "keyEncryptionKeyIdentity": {
+              "identityType": "UserAssigned",
+              "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityForCMK"
+            },
+            "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokek"
+          }
+        }
+      },
+      "tags": {
+        "Category": "sales"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer",
+        "name": "myFluidRelayServer",
+        "type": "Microsoft.FluidRelay/fluidRelayServers",
+        "location": "west-us",
+        "identity": {
+          "type": "UserAssigned",
+          "principalId": "00000000-0000-0000-0000-000000000000",
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityForCMK": {
+              "clientId": "00000000-0000-0000-0000-000000000000",
+              "principalId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
+        "properties": {
+          "frsTenantId": "yyyy-yyyy-yyyyy-yyyy",
+          "fluidRelayEndpoints": {
+            "ordererEndpoints": [
+              "https://www.contoso.org/orderer"
+            ],
+            "storageEndpoints": [
+              "https://www.contoso.org/storage"
+            ],
+            "serviceEndpoints": [
+              "https://www.afd.contoso.org"
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "sharedKeyAccess": "Enabled",
+          "privateKeyAccess": "Disabled",
+          "publicNetworkAccess": "Enabled",
+          "privateEndpointConnections": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.FluidRelay/fluidRelayServers/myFluidRelayServer/privateEndpointConnections/myPrivateEndpointConnection",
+              "name": "myPrivateEndpointConnection",
+              "type": "Microsoft.FluidRelay/fluidRelayServers/privateEndpointConnections",
+              "properties": {
+                "provisioningState": "Succeeded",
+                "privateEndpoint": {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpointConnection"
+                },
+                "groupIds": [
+                  "FluidRelayServers"
+                ],
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "Auto-approved",
+                  "actionsRequired": "None"
+                }
+              }
+            }
+          ],
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "identityType": "UserAssigned",
+                "userAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityForCMK"
+              },
+              "keyEncryptionKeyUrl": "https://contosovault.vault.azure.net/keys/contosokek"
+            }
+          }
+        }
+      }
+    }
+  }
+}

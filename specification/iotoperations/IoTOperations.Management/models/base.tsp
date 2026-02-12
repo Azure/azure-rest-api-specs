@@ -1,5 +1,7 @@
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-azure-core";
 
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -27,6 +29,7 @@ union ExtendedLocationType {
 }
 
 @doc("The enum defining status of resource.")
+@lroStatus
 union ProvisioningState {
   string,
   ResourceProvisioningState,
@@ -43,6 +46,32 @@ union ProvisioningState {
   @doc("Resource has been Accepted.")
   Accepted: "Accepted",
 }
+
+@doc("The health state of the resource.")
+@added(Versions.`2025-10-01`)
+union ResourceHealthState {
+  string,
+
+  @doc("Resource is Available and functioning as expected.")
+  Available,
+
+  @doc("Resource health is degraded.")
+  Degraded,
+
+  @doc("Resource is not functioning as expected.")
+  Unavailable,
+
+  @doc("Resource state is unknown.")
+  Unknown,
+}
+
+#deprecated "Field deprecated since v2026-03-01 service version. Use 'status.healthState' instead."
+alias ResourceHealth = {
+  @doc("The health state of the resource.")
+  @added(Versions.`2025-10-01`)
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthState = Unknown;
+};
 
 @doc("Mode properties")
 union OperationalMode {
@@ -98,7 +127,8 @@ model BatchingConfiguration {
 
   @doc("Maximum number of messages in a batch.")
   @minValue(0)
-  @maxValue(4294967295)
+  // TODO: verify values/type -> 4294967295 is not an int32
+  // @maxValue(4294967295)
   maxMessages?: int32 = 100000;
 }
 
@@ -238,3 +268,27 @@ scalar AzureDeviceRegistryNamespaceID
       type: "Microsoft.DeviceRegistry/namespaces",
     }
   ]>;
+
+@doc("Represents the health state of a resource.")
+@added(Versions.`2026-03-01`)
+model ResourceHealthStatus {
+  @visibility(Lifecycle.Read)
+  @doc("The high-level health status of the resource.")
+  status?: ResourceHealthState;
+
+  @visibility(Lifecycle.Read)
+  @doc("The timestamp (RFC3339) when the health status last changed.")
+  lastTransitionTime?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The timestamp (RFC3339) when the health status was last updated, even if the status did not change.")
+  lastUpdateTime?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("A human-readable message describing the last transition.")
+  message?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Unique, CamelCase reason code describing the cause of the last health state transition.")
+  reasonCode?: string;
+}

@@ -5,7 +5,6 @@ import "./auth.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -44,12 +43,22 @@ model RegistryEndpointProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
+  ...ResourceHealth;
+
   /** Trust settings for the registry endpoint */
+  @removed(Versions.`2025-10-01`)
   trustSettings?: RegistryEndpointTrustedSettings;
+
+  /** The signing certificate authorities used by artifacts in the registry endpoint */
+  @added(Versions.`2025-10-01`)
+  @identifiers(#[])
+  codeSigningCas?: RegistryEndpointTrustedSigningKey[];
 }
 
 /** RegistryEndpointTrustedSettings properties */
 @added(Versions.`2025-07-01-preview`)
+@removed(Versions.`2025-10-01`)
 model RegistryEndpointTrustedSettings {
   /** The trust properties for the registry endpoint. */
   trustedSigningKeys: RegistryEndpointTrustedSigningKey;

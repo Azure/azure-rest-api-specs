@@ -3,9 +3,9 @@ import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path from "path";
 import { simpleGit } from "simple-git";
-import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
+import { parse } from "../tsp-config.js";
 import { fileExists, normalizePath, readTspConfig } from "../utils.js";
 
 // Enable simple-git debug logging to improve console output
@@ -97,7 +97,7 @@ export class FolderStructureRule implements Rule {
 
       if (tspConfigExists) {
         const configText = await readTspConfig(folder);
-        const config = yamlParse(configText);
+        const config = parse(configText);
         const rpFolder =
           config?.options?.["@azure-tools/typespec-autorest"]?.["azure-resource-provider-folder"];
         stdOutput += `azure-resource-provider-folder: ${JSON.stringify(rpFolder)}\n`;
@@ -136,7 +136,7 @@ export class FolderStructureRule implements Rule {
           success = false;
         }
 
-        const rpNamespaceRegex = /^[A-Za-z0-9\.]+$/;
+        const rpNamespaceRegex = /^[A-Za-z0-9.]+$/;
         const rpNamespaceFolder = folderStruct[folderStruct.length - 2];
 
         if (!rpNamespaceRegex.test(rpNamespaceFolder)) {

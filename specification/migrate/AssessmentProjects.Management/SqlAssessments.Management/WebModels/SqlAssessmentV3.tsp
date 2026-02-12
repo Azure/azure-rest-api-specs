@@ -4,11 +4,10 @@ import "../Normalized Contract/ArmModels/AssessmentProjectV2.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
+
 namespace Microsoft.Migrate;
+
 @doc("SQL Assessment REST resource.")
 @parentResource(AssessmentProject)
 model SqlAssessmentV3 is ProxyResource<SqlAssessmentV3Properties> {
@@ -40,7 +39,6 @@ model SqlAssessmentSettings is AssessmentSettings {
   entityUptime?: EntityUptime;
 
   @doc("Gets or sets SQL the preferred azure targets.")
-  @extension("x-ms-identifiers", #[])
   preferredTargets?: AzureTarget[];
 
   @doc("Gets or sets user configurable SQL managed instance settings.")

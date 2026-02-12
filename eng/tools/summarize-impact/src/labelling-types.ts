@@ -55,9 +55,8 @@ export class Label {
    */
   shouldBePresent: boolean | undefined = undefined;
 
-  constructor(name: string, presentLabels?: Set<string>) {
+  constructor(name: string) {
     this.name = name;
-    this.present = presentLabels?.has(this.name) ?? undefined;
   }
 
   /**

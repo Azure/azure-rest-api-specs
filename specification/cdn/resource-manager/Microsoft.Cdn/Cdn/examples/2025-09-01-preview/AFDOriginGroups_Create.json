@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "originGroup": {
+      "properties": {
+        "authentication": {
+          "type": "UserAssignedIdentity",
+          "scope": "https://www.contoso.com/.default",
+          "userAssignedIdentity": {
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id-1"
+          }
+        },
+        "healthProbeSettings": {
+          "probeIntervalInSeconds": 10,
+          "probePath": "/path2",
+          "probeProtocol": "NotSet",
+          "probeRequestType": "NotSet"
+        },
+        "loadBalancingSettings": {
+          "additionalLatencyInMilliseconds": 1000,
+          "sampleSize": 3,
+          "successfulSamplesRequired": 3
+        },
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+      }
+    },
+    "originGroupName": "origingroup1",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "properties": {
+          "authentication": {
+            "type": "UserAssignedIdentity",
+            "scope": "https://www.contoso.com/.default",
+            "userAssignedIdentity": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id-1"
+            }
+          },
+          "deploymentStatus": "NotStarted",
+          "healthProbeSettings": {
+            "probeIntervalInSeconds": 10,
+            "probePath": "/path1",
+            "probeProtocol": "Http",
+            "probeRequestType": "HEAD"
+          },
+          "loadBalancingSettings": {
+            "additionalLatencyInMilliseconds": 1000,
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3
+          },
+          "provisioningState": "Succeeded",
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "properties": {
+          "authentication": {
+            "type": "UserAssignedIdentity",
+            "scope": "https://www.contoso.com/.default",
+            "userAssignedIdentity": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id-1"
+            }
+          },
+          "deploymentStatus": "NotStarted",
+          "healthProbeSettings": {
+            "probeIntervalInSeconds": 10,
+            "probePath": "/path1",
+            "probeProtocol": "Http",
+            "probeRequestType": "HEAD"
+          },
+          "loadBalancingSettings": {
+            "additionalLatencyInMilliseconds": 1000,
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3
+          },
+          "provisioningState": "Succeeded",
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "origingroup1",
+        "type": "Microsoft.Cdn/profiles/origingroups",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/origingroups/origingroup1",
+        "properties": {
+          "authentication": {
+            "type": "UserAssignedIdentity",
+            "scope": "https://www.contoso.com/.default",
+            "userAssignedIdentity": {
+              "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id-1"
+            }
+          },
+          "deploymentStatus": "NotStarted",
+          "healthProbeSettings": {
+            "probeIntervalInSeconds": 10,
+            "probePath": "/path1",
+            "probeProtocol": "Http",
+            "probeRequestType": "HEAD"
+          },
+          "loadBalancingSettings": {
+            "additionalLatencyInMilliseconds": 1000,
+            "sampleSize": 3,
+            "successfulSamplesRequired": 3
+          },
+          "provisioningState": "Creating",
+          "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": 5
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "AFDOriginGroups_Create",
+  "title": "AFDOriginGroups_Create"
+}

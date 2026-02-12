@@ -2,8 +2,10 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -28,6 +30,38 @@ model BackupVaultResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Optional ETag.")
   eTag?: string;
+}
+
+/**
+ * Deleted Backup Vault Resource (available from version 2025-09-01)
+ */
+@added(Versions.v2025_09_01)
+@parentResource(ArmLocationResource<"Subscription">)
+model DeletedBackupVaultResource
+  is Azure.ResourceManager.ProxyResource<DeletedBackupVault> {
+  ...ResourceNameParameter<
+    Resource = DeletedBackupVaultResource,
+    KeyName = "deletedVaultName",
+    SegmentName = "deletedVaults",
+    NamePattern = ""
+  >;
+}
+
+/**
+ * List of deleted backup vault resources
+ */
+@added(Versions.v2025_09_01)
+model DeletedBackupVaultResourceList {
+  /**
+   * List of resources.
+   */
+  @pageItems
+  value?: DeletedBackupVaultResource[];
+
+  /**
+   * The uri to fetch the next page of resources. Call ListNext() fetches next page of resources.
+   */
+  nextLink?: string;
 }
 
 @armResourceOperations
@@ -67,6 +101,14 @@ interface BackupVaultResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
+
+      /**
+       * The ID of the deleted backup vault to restore from during undelete flow.
+       */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+      @added(Versions.v2025_09_01)
+      @header
+      `x-ms-deleted-vault-id`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = BackupVaultResource> &
       Azure.Core.Foundations.RetryAfterHeader,
@@ -221,6 +263,23 @@ interface BackupVaultOperationResults {
     Response = ArmResponse<BackupVaultResourceList>,
     Error = CloudError
   >;
+}
+
+/**
+ * Deleted backup vault operations (available from version 2025-09-01)
+ */
+@armResourceOperations
+@added(Versions.v2025_09_01)
+interface DeletedBackupVaults {
+  /**
+   * Gets a deleted backup vault
+   */
+  get is ArmResourceRead<DeletedBackupVaultResource>;
+
+  /**
+   * Lists deleted backup vaults by location
+   */
+  listByLocation is ArmResourceListByParent<DeletedBackupVaultResource>;
 }
 
 @@doc(BackupVaultResource.name, "The name of the backup vault.");

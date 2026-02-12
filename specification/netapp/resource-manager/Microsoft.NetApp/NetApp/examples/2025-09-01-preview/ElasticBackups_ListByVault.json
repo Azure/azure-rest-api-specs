@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "backupVaultName": "backupVault1",
+    "api-version": "2025-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticBackupVaults/backupVault1/elasticBackups/backup1",
+            "name": "account1/backupVault1/backup1",
+            "type": "Microsoft.NetApp/elasticAccounts/elasticBackupVaults/elasticBackups",
+            "properties": {
+              "creationDate": "2017-08-15T13:23:33Z",
+              "snapshotCreationDate": "2017-08-15T13:23:33Z",
+              "completionDate": "2017-08-15T13:23:33Z",
+              "provisioningState": "Succeeded",
+              "size": 10011,
+              "label": "myLabel",
+              "backupType": "Manual",
+              "snapshotUsage": "Existing",
+              "elasticSnapshotResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticCapacityPools/pool1/elasticVolumes/volume1/elasticSnapshots/snap1",
+              "elasticVolumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticCapacityPools/pool1/elasticVolumes/volume1",
+              "elasticBackupPolicyResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticBackupPolicies/policy1",
+              "volumeSize": "Large"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ElasticBackups_ListByVault",
+  "title": "ElasticBackups_ListByVault"
+}

@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * @template T
  * @param {T[]} array

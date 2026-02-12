@@ -346,10 +346,7 @@ model TextMatchingRuleset {
   /**
    * A list of text patterns to block, each with matching rules and case sensitivity options.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["text", "matchType", "caseSensitivity"]
-  )
+  @identifiers(#["text", "matchType", "caseSensitivity"])
   deny?: {
     ...TextMatch;
   }[];
@@ -411,4 +408,15 @@ union Casing {
    * Requires exact casing for the pattern match. For example, "Hello World" would NOT not be found in "hello world".
    */
   Sensitive: "Sensitive",
+}
+
+/**
+ * The flow profiles list result
+ */
+@added(Versions.v2025_05_30_preview)
+model FlowProfilesListResult {
+  /**
+   * FlowProfileMetadata array.
+   */
+  value?: FlowProfileMetadata[];
 }

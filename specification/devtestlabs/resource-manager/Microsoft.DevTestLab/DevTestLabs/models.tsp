@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 namespace Microsoft.DevTestLab;
 
 using OpenAPI;
+using Azure.ResourceManager;
 
 /**
  * The storage type for the disk (i.e. Standard, Premium).
@@ -463,7 +464,7 @@ model CloudErrorBody {
   /**
    * Inner errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: CloudErrorBody[];
 }
 
@@ -650,42 +651,6 @@ model LabSupportProperties {
    * The markdown text (if any) that this lab displays in the UI. If left empty/null, nothing will be shown.
    */
   markdown?: string;
-}
-
-/**
- * An Azure resource.
- */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard resource"
-@extension("x-ms-azure-resource", true)
-model Resource {
-  /**
-   * The identifier of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The location of the resource.
-   */
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 /**
@@ -900,6 +865,7 @@ model ArtifactSourceProperties {
   /**
    * The security token to authenticate to the artifact source.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   securityToken?: string;
 
   /**
@@ -980,7 +946,7 @@ model ArmTemplateProperties {
    * File name and parameter values information from all azuredeploy.*.parameters.json for the ARM template.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   parametersValueFilesInfo?: ParametersValueFileInfo[];
 
   /**
@@ -1015,6 +981,7 @@ model ArtifactList is Azure.Core.Page<Artifact>;
  * Properties of an artifact.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "JSON schema takes an arbitrary json"
 model ArtifactProperties {
   /**
    * The artifact's title.
@@ -1110,6 +1077,7 @@ model ParameterInfo {
 /**
  * Information about a generated ARM template.
  */
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "JSON schema takes an arbitrary json"
 model ArmTemplateInfo {
   /**
    * The template's contents.
@@ -1161,14 +1129,14 @@ model LabCostProperties {
    * The lab cost details component of the cost data.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   labCostDetails?: LabCostDetailsProperties[];
 
   /**
    * The resource cost component of the cost data.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceCosts?: LabResourceCostProperties[];
 
   /**
@@ -1225,7 +1193,7 @@ model TargetCostProperties {
   /**
    * Cost thresholds.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   costThresholds?: CostThresholdProperties[];
 
   /**
@@ -1415,7 +1383,7 @@ model CustomImageProperties {
   /**
    * Storage information about the data disks present in the custom image
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataDiskStorageInfo?: DataDiskStorageTypeInfo[];
 
   /**
@@ -1607,8 +1575,8 @@ model LabVirtualMachineCreationParameter {
   /**
    * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: LabVirtualMachineCreationParameterProperties;
 
   /**
@@ -1676,11 +1644,13 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The password of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
    * The SSH key of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sshKey?: string;
 
   /**
@@ -1706,7 +1676,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The artifacts to be installed on the virtual machine.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   artifacts?: ArtifactInstallProperties[];
 
   /**
@@ -1748,7 +1718,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * New or existing data disks to attach to the virtual machine after creation
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataDiskParameters?: DataDiskProperties[];
 
   /**
@@ -1910,7 +1880,7 @@ model SharedPublicIpAddressConfiguration {
   /**
    * The incoming NAT rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   inboundNatRules?: InboundNatRule[];
 }
 
@@ -1981,8 +1951,8 @@ model ScheduleCreationParameter {
   /**
    * The properties of the schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ScheduleCreationParameterProperties;
 
   /**
@@ -2073,6 +2043,7 @@ model GalleryImageList is Azure.Core.Page<GalleryImage>;
 /**
  * Properties of a gallery image.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model GalleryImageProperties {
   /**
    * The author of the gallery image.
@@ -2149,7 +2120,7 @@ model NotificationChannelProperties {
   /**
    * The list of event for which this notification is enabled.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   events?: Event[];
 
   /**
@@ -2212,7 +2183,7 @@ model EvaluatePoliciesRequest {
   /**
    * Policies to evaluate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   policies?: EvaluatePoliciesProperties[];
 }
 
@@ -2248,7 +2219,7 @@ model EvaluatePoliciesResponse {
   /**
    * Results of evaluating a policy set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   results?: PolicySetResult[];
 }
 
@@ -2264,7 +2235,7 @@ model PolicySetResult {
   /**
    * The list of policy violations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   policyViolations?: PolicyViolation[];
 }
 
@@ -2731,12 +2702,23 @@ model ServiceFabricProperties {
  * Schedules applicable to a virtual machine. The schedules may have been defined on a VM or on lab level.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ApplicableSchedule extends Resource {
+model ApplicableSchedule extends CommonTypes.Resource {
+  /**
+   * The location of the resource.
+   */
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
   /**
    * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: ApplicableScheduleProperties;
 }
 
@@ -2834,11 +2816,13 @@ model LabVirtualMachineProperties {
   /**
    * The password of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
    * The SSH key of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sshKey?: string;
 
   /**
@@ -2870,7 +2854,7 @@ model LabVirtualMachineProperties {
   /**
    * The artifacts to be installed on the virtual machine.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   artifacts?: ArtifactInstallProperties[];
 
   /**
@@ -2936,7 +2920,7 @@ model LabVirtualMachineProperties {
   /**
    * New or existing data disks to attach to the virtual machine after creation
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataDiskParameters?: DataDiskProperties[];
 
   /**
@@ -2991,7 +2975,7 @@ model ComputeVmProperties {
   /**
    * Gets the statuses of the virtual machine.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: ComputeVmInstanceViewStatus[];
 
   /**
@@ -3084,7 +3068,7 @@ model ApplyArtifactsRequest {
   /**
    * The list of artifacts to apply.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   artifacts?: ArtifactInstallProperties[];
 }
 
@@ -3130,7 +3114,7 @@ model VirtualNetworkProperties {
   /**
    * The allowed subnets of the virtual network.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allowedSubnets?: Subnet[];
 
   /**
@@ -3152,7 +3136,7 @@ model VirtualNetworkProperties {
   /**
    * The subnet overrides of the virtual network.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subnetOverrides?: SubnetOverride[];
 
   /**
@@ -3253,7 +3237,7 @@ model SubnetSharedPublicIpAddressConfiguration {
   /**
    * Backend ports that virtual machines on this subnet are allowed to expose
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allowedPorts?: Port[];
 }
 
