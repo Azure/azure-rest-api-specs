@@ -167,7 +167,6 @@ interface Service {
     ...ApiVersionHeader,
     ...TimeoutParameter,
     ...ClientRequestIdHeader,
-    ...ContentLengthParameterPrivate,
     ...MultipartBodyParameter,
   ): (MultipartBodyParameter & {
     /** The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID */
@@ -404,7 +403,6 @@ interface Container {
     @header("Content-Type")
     multipartContentType: "multipart/mixed",
 
-    ...ContentLengthParameterPrivate,
     ...TimeoutParameter,
     ...ApiVersionHeader,
     ...ClientRequestIdHeader,
@@ -1481,7 +1479,6 @@ interface PageBlob {
       /** The data to upload. */
       ...BodyParameter;
 
-      ...ContentLengthParameterPrivate;
       ...ContentMd5Parameter;
       ...ContentCrc64Parameter;
       ...TimeoutParameter;
@@ -1583,7 +1580,6 @@ interface PageBlob {
 
       ...SourceContentMd5Parameter;
       ...SourceContentCrc64Parameter;
-      ...ContentLengthParameterPrivate;
       ...TimeoutParameter;
 
       /** Bytes of source data in the specified range. The length of this range should match the ContentLength header and x-ms-range/Range destination range header. */
@@ -1838,7 +1834,6 @@ interface AppendBlob {
       ...BodyParameter;
 
       ...TimeoutParameter;
-      ...ContentLengthParameterPrivate;
       ...ContentMd5Parameter;
       ...ContentCrc64Parameter;
       ...LeaseIdOptionalParameter;
@@ -1886,7 +1881,6 @@ interface AppendBlob {
       ...SourceContentMd5Parameter;
       ...SourceContentCrc64Parameter;
       ...TimeoutParameter;
-      ...ContentLengthParameterPrivate;
       ...ContentMd5Parameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
@@ -1965,7 +1959,6 @@ interface BlockBlob {
       ...BodyParameter;
       ...TimeoutParameter;
       ...ContentMd5Parameter;
-      ...ContentLengthParameterPrivate;
       ...BlobContentTypeParameter;
       ...BlobContentEncodingParameter;
       ...BlobContentLanguageParameter;
@@ -2086,7 +2079,6 @@ interface BlockBlob {
   stageBlock is StorageOperation<
     {
       ...BlockIdParameter;
-      ...ContentLengthParameterPrivate;
       ...ContentMd5Parameter;
       ...ContentCrc64Parameter;
       ...BodyParameter;
@@ -2121,7 +2113,6 @@ interface BlockBlob {
   stageBlockFromUrl is StorageOperation<
     {
       ...BlockIdParameter;
-      ...ContentLengthParameterPrivate;
       ...SourceUrlParameter;
       ...SourceRangeParameter;
       ...SourceContentMd5Parameter;

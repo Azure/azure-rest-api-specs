@@ -47,8 +47,6 @@ namespace Customizations;
 @@alternateType(BlobProperties.contentLength, uint64, "rust");
 @@alternateType(BlobContentLengthRequired.size, uint64, "rust");
 @@alternateType(ContentLengthResponseHeader.contentLength, uint64, "rust");
-@@alternateType(ContentLengthParameter.contentLength, uint64, "rust");
-@@alternateType(ContentLengthParameterPrivate.contentLength, uint64, "rust");
 @@alternateType(StructuredContentLengthParameter.structuredContentLength,
   uint64,
   "rust"
