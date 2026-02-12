@@ -52,12 +52,6 @@ model ThreadRunProperties {
    */
   @visibility(Lifecycle.Read)
   error?: string;
-
-  /**
-   * The provisioning state of the thread run.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
 }
 
 // ============================================

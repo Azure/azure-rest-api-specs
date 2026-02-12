@@ -57,12 +57,6 @@ model MessageProperties {
    */
   @visibility(Lifecycle.Read)
   timestamp?: utcDateTime;
-
-  /**
-   * The provisioning state of the message.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
 }
 
 // ============================================

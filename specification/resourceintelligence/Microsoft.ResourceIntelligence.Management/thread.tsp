@@ -45,12 +45,6 @@ model ThreadProperties {
    */
   @visibility(Lifecycle.Read)
   lastRunId?: string;
-
-  /**
-   * The provisioning state of the thread.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
 }
 
 // ============================================
