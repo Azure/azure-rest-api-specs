@@ -25,15 +25,13 @@ options:
     service-name: "Machine Learning"
     flavor: azure
     use-object-for-unknown: true
-  # Disabled js as LRO Paging and x-nullable not yet supported
-  # "@azure-tools/typespec-ts":
-  #   emitter-output-dir: "{output-dir}/{service-dir}/arm-machinelearning"
-  #   service-dir: "sdk/machinelearning"
-  #   flavor: "azure"
-  #   compatibility-lro: true
-  #   experimental-extensible-enums: true
-  #   package-details:
-  #     name: "@azure/arm-machinelearning"
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-machinelearning"
+    service-dir: "sdk/machinelearning"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-machinelearning"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/machinelearning"
     emitter-output-dir: "{output-dir}/{service-dir}/armmachinelearning"
