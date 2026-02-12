@@ -516,7 +516,7 @@ op getAssetStatisticsCustomized(
  * Per Asset statistics with grouped parameters.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getAssetStatisticsCustomizedForCSharp(
+op getAssetStatisticsCustomizedForCsharp(
   /**
    * API version
    */
@@ -528,7 +528,7 @@ op getAssetStatisticsCustomizedForCSharp(
 ): Record<unknown>;
 
 @@override(TilerAssetStatistics.getAll,
-  getAssetStatisticsCustomizedForCSharp,
+  getAssetStatisticsCustomizedForCsharp,
   "csharp"
 );
 
