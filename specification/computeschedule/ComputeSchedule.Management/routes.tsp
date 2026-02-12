@@ -73,6 +73,16 @@ interface ScheduledActions {
     @body @doc("The request body") requestBody: ExecuteStartRequest,
   ): ArmResponse<StartResourceOperationResponse> | ErrorResponse;
 
+  /** virtualMachinesExecuteCreateFlex: executeCreateFlex for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
+  @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteCreateFlex")
+  @post
+  virtualMachinesExecuteCreateFlex(
+    ...Params,
+    @body @doc("The request body") requestBody: ExecuteCreateFlexRequest,
+  ): ArmResponse<CreateFlexResourceOperationResponse> | ErrorResponse;
+
   /** virtualMachinesGetOperationStatus: getOperationStatus for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationStatus")
