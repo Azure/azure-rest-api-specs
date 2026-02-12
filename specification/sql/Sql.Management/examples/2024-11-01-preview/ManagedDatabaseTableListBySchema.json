@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "databaseName": "myDatabase",
+    "managedInstanceName": "myManagedInstanceName",
+    "resourceGroupName": "myRG",
+    "schemaName": "dbo",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "table1",
+            "type": "Microsoft.Sql/managedInstances/databases/schemas/tables",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/managedInstances/myManagedInstanceName/databases/myDatabase/schemas/dbo/tables/table1"
+          },
+          {
+            "name": "table2",
+            "type": "Microsoft.Sql/managedInstances/databases/schemas/tables",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myRG/providers/Microsoft.Sql/managedInstances/myManagedInstanceName/databases/myDatabase/schemas/dbo/tables/table2"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedDatabaseTables_ListBySchema",
+  "title": "List managed database tables"
+}

@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "resourceGroupName": "Test1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testinstance1",
+            "type": "Microsoft.Sql/managedInstances",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Test1/providers/Microsoft.Sql/managedInstances/testinstance1",
+            "location": "japaneast",
+            "properties": {
+              "administratorLogin": "dummylogin",
+              "authenticationMetadata": "Windows",
+              "collation": "SQL_Latin1_General_CP1_CI_AS",
+              "createTime": "2022-11-01T01:01:01.011Z",
+              "currentBackupStorageRedundancy": "Geo",
+              "databaseFormat": "SQLServer2022",
+              "dnsZone": "1b4e2caff2530",
+              "externalGovernanceStatus": "Enabled",
+              "fullyQualifiedDomainName": "testinstance1.1b4e2caff2530.database.windows.net",
+              "hybridSecondaryUsage": "Passive",
+              "licenseType": "LicenseIncluded",
+              "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_MI_1",
+              "minimalTlsVersion": "1.2",
+              "pricingModel": "Regular",
+              "provisioningState": "Succeeded",
+              "proxyOverride": "Default",
+              "publicDataEndpointEnabled": false,
+              "requestedBackupStorageRedundancy": "Geo",
+              "requestedLogicalAvailabilityZone": "1",
+              "state": "Ready",
+              "storageSizeInGB": 1024,
+              "subnetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+              "vCores": 8,
+              "virtualClusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/virtualClusters/vc-5555555-6666-7777-8888-999999999999"
+            },
+            "sku": {
+              "name": "GP_Gen5",
+              "capacity": 8,
+              "family": "Gen5",
+              "tier": "GeneralPurpose"
+            }
+          },
+          {
+            "name": "testinstance2",
+            "type": "Microsoft.Sql/managedInstances",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Test1/providers/Microsoft.Sql/managedInstances/testinstance2",
+            "location": "japaneast",
+            "properties": {
+              "administratorLogin": "dummylogin",
+              "authenticationMetadata": "Windows",
+              "collation": "SQL_Latin1_General_CP1_CI_AS",
+              "createTime": "2022-11-01T01:01:01.011Z",
+              "currentBackupStorageRedundancy": "Geo",
+              "databaseFormat": "SQLServer2022",
+              "dnsZone": "2c3d1bdae3412",
+              "externalGovernanceStatus": "Enabled",
+              "fullyQualifiedDomainName": "testinstance2.2c3d1bdae3412.database.windows.net",
+              "hybridSecondaryUsage": "Passive",
+              "licenseType": "Full",
+              "maintenanceConfigurationId": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Maintenance/publicMaintenanceConfigurations/SQL_JapanEast_MI_1",
+              "minimalTlsVersion": "1.2",
+              "pricingModel": "Regular",
+              "provisioningState": "Succeeded",
+              "proxyOverride": "Default",
+              "publicDataEndpointEnabled": false,
+              "requestedBackupStorageRedundancy": "Geo",
+              "requestedLogicalAvailabilityZone": "1",
+              "state": "Ready",
+              "storageSizeInGB": 1024,
+              "subnetId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/subnet2",
+              "vCores": 16,
+              "virtualClusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/virtualClusters/vc-5555555-6666-7777-8888-444444444444"
+            },
+            "sku": {
+              "name": "BC_Gen5",
+              "capacity": 16,
+              "family": "Gen5",
+              "tier": "BusinessCritical"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ManagedInstances_ListByResourceGroup",
+  "title": "List managed instances by resource group"
+}

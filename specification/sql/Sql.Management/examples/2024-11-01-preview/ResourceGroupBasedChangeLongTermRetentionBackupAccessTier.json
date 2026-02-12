@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "backupName": "55555555-6666-7777-8888-999999999999;131637960820000000;Archive",
+    "locationName": "japaneast",
+    "longTermRetentionDatabaseName": "databaseName",
+    "longTermRetentionServerName": "serverName",
+    "parameters": {
+      "backupStorageAccessTier": "Hot",
+      "operationMode": "Copy"
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "55555555-6666-7777-8888-999999999999;131637960820000000;Archive",
+        "type": "Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/serverName/longTermRetentionDatabases/databaseName/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131637960820000000;Archive",
+        "properties": {
+          "backupExpirationTime": null,
+          "backupStorageRedundancy": "Geo",
+          "backupTime": "2017-09-06T08:00:00Z",
+          "databaseDeletionTime": null,
+          "databaseName": "databaseName",
+          "serverCreateTime": "2017-09-06T08:00:00Z",
+          "serverName": "serverName"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroupName/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/serverName/longTermRetentionDatabases/databaseName/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131637960820000000;Archive/operations/55555555-6666-7777-8888-999999999999?api-version=2024-11-01-preview"
+      }
+    }
+  },
+  "operationId": "LongTermRetentionBackups_ChangeAccessTierByResourceGroup",
+  "title": "Change the long term retention backup storage access tier for a resource group."
+}

@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "backupName": "55555555-6666-7777-8888-999999999999;131637960820000000;Hot",
+    "locationName": "japaneast",
+    "longTermRetentionDatabaseName": "testDatabase",
+    "longTermRetentionServerName": "testserver",
+    "resourceGroupName": "testResourceGroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "55555555-6666-7777-8888-999999999999;131637960820000000;Hot",
+        "type": "Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testResourceGroup/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131637960820000000;Hot",
+        "properties": {
+          "backupStorageAccessTier": "Hot",
+          "backupStorageRedundancy": "Geo",
+          "backupTime": "2017-09-06T08:00:00Z",
+          "databaseDeletionTime": null,
+          "databaseName": "testDatabase",
+          "isBackupImmutable": true,
+          "legalHoldImmutability": "Disabled",
+          "serverCreateTime": "2017-03-10T08:00:00Z",
+          "serverName": "testserver",
+          "timeBasedImmutability": "Enabled",
+          "timeBasedImmutabilityMode": "Locked"
+        }
+      }
+    }
+  },
+  "operationId": "LongTermRetentionBackups_GetByResourceGroup",
+  "title": "Get the long term retention backup."
+}

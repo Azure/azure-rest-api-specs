@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01-preview",
+    "managedInstanceName": "testsvr",
+    "parameters": {
+      "properties": {
+        "retentionDays": 14
+      }
+    },
+    "policyName": "default",
+    "resourceGroupName": "resourceGroup",
+    "restorableDroppedDatabaseId": "testdb,131403269876900000",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Sql/managedInstances/restorableDroppedDatabases/backupShortTermRetentionPolicies",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup/providers/Microsoft.Sql/managedInstances/testsvr/restorableDroppedDatabases/testdb,131403269876900000/backupShortTermRetentionPolicies/default",
+        "properties": {
+          "retentionDays": 14
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/westus/managedShortTermRetentionPolicyOperationResults/00000000-1111-2222-3333-444444444444?api-version=2017-03-01-preview"
+      }
+    }
+  },
+  "operationId": "ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies_Update",
+  "title": "Update the short term retention policy for the restorable dropped database."
+}
