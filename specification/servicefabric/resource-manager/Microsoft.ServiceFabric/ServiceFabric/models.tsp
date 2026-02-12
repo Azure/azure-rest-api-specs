@@ -11,6 +11,151 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.ServiceFabric;
 
 /**
+ * The structure of the error.
+ */
+@error
+model ErrorModel {
+  /**
+   * The error details.
+   */
+  error?: ErrorModelError;
+}
+
+/**
+ * The error details.
+ */
+model ErrorModelError {
+  /**
+   * The error code.
+   */
+  code?: string;
+
+  /**
+   * The error message.
+   */
+  message?: string;
+}
+
+/**
+ * The resource model definition for proxy-only resource.
+ */
+model ProxyResource {
+  /**
+   * Azure resource identifier.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Azure resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Azure resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * It will be deprecated in New API, resource location depends on the parent resource.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Azure resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  tags?: Record<string>;
+
+  /**
+   * Azure resource etag.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Metadata pertaining to creation and last modification of the resource.
+   */
+  systemData?: Azure.ResourceManager.Foundations.SystemData;
+}
+
+/**
+ * Describes the result of the request to list Service Fabric resource provider operations.
+ */
+model OperationListResult {
+  /**
+   * List of operations supported by the Service Fabric resource provider.
+   */
+  @pageItems
+  value?: OperationResult[];
+
+  /**
+   * URL to get the next set of operation list results if there are any.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Available operation list result
+ */
+model OperationResult {
+  /**
+   * The name of the operation.
+   */
+  name?: string;
+
+  /**
+   * Indicates whether the operation is a data action
+   */
+  isDataAction?: boolean;
+
+  /**
+   * The object that represents the operation.
+   */
+  display?: AvailableOperationDisplay;
+
+  /**
+   * Origin result
+   */
+  origin?: string;
+
+  /**
+   * The URL to use for getting the next set of results.
+   */
+  nextLink?: string;
+}
+
+/**
+ * Operation supported by the Service Fabric resource provider
+ */
+model AvailableOperationDisplay {
+  /**
+   * The name of the provider.
+   */
+  provider?: string;
+
+  /**
+   * The resource on which the operation is performed
+   */
+  resource?: string;
+
+  /**
+   * The operation that can be performed.
+   */
+  operation?: string;
+
+  /**
+   * Operation description
+   */
+  description?: string;
+}
+
+/**
  * Describes a node type in the cluster, each node type represents sub set of nodes in the cluster.
  */
 model NodeTypeDescription {

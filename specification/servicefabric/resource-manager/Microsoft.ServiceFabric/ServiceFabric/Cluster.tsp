@@ -22,67 +22,88 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
     NamePattern = ""
   >;
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+  /**
+   * Azure resource etag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
+  @visibility(Lifecycle.Read)
+  etag?: string;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface Clusters {
   /**
    * Get a Service Fabric cluster resource created or in the process of being created in the specified resource group.
    */
-  get is ArmResourceRead<Cluster>;
+  @summary("Gets a Service Fabric cluster resource.")
+  @tag("Cluster")
+  get is ArmResourceRead<Cluster, Error = ErrorModel>;
 
   /**
    * Create or update a Service Fabric cluster resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "servicefabric is brownfield service with existing non-standard response codes"
+  @summary("Creates or updates a Service Fabric cluster resource.")
+  @tag("Cluster")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
     Response = ArmResourceUpdatedResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>> & {
       @bodyRoot
       _: Cluster;
-    })
+    }),
+    Error = ErrorModel
   >;
 
   /**
    * Update the configuration of a Service Fabric cluster resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
+  @summary("Updates the configuration of a Service Fabric cluster resource.")
+  @tag("Cluster")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = ClusterUpdateParameters,
-    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<Cluster> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster>> & {
       @bodyRoot
       _: Cluster;
     }),
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster>
+    Error = ErrorModel
   >;
 
   /**
    * Delete a Service Fabric cluster resource with the specified name.
    */
-  delete is ArmResourceDeleteSync<Cluster>;
+  @summary("Deletes a Service Fabric cluster resource.")
+  @tag("Cluster")
+  delete is ArmResourceDeleteSync<Cluster, Error = ErrorModel>;
 
   /**
    * Gets all Service Fabric cluster resources created or in the process of being created in the resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<Cluster>;
+  @summary("Gets the list of Service Fabric cluster resources created in the specified resource group.")
+  @tag("Cluster")
+  listByResourceGroup is ArmResourceListByParent<Cluster, Error = ErrorModel>;
 
   /**
    * Gets all Service Fabric cluster resources created or in the process of being created in the subscription.
    */
-  list is ArmListBySubscription<Cluster>;
+  @summary("Gets the list of Service Fabric cluster resources created in the specified subscription.")
+  @tag("Cluster")
+  list is ArmListBySubscription<Cluster, Error = ErrorModel>;
 
   /**
    * If a target is not provided, it will get the minimum and maximum versions available from the current cluster version. If a target is given, it will provide the required path to get from the current cluster version to the target version.
    */
+  @summary("Operation to get the minimum and maximum upgradable version from the current cluster version, or the required path to get to the an specific target version.")
+  @tag("ListUpgradableVersions")
   listUpgradableVersions is ArmResourceActionSync<
     Cluster,
     UpgradableVersionsDescription,
     ArmResponse<UpgradableVersionPathResult>,
-    OptionalRequestBody = true
+    OptionalRequestBody = true,
+    Error = ErrorModel
   >;
 }
 
@@ -1064,7 +1085,7 @@ model ServiceTypeHealthPolicy {
    */
   @minValue(0)
   @maxValue(100)
-  maxPercentUnhealthyServices?: int32;
+  maxPercentUnhealthyServices?: int32 = 0;
 }
 
 /**
@@ -1137,7 +1158,7 @@ model ServiceTypeDeltaHealthPolicy {
    */
   @minValue(0)
   @maxValue(100)
-  maxPercentDeltaUnhealthyServices?: int32;
+  maxPercentDeltaUnhealthyServices?: int32 = 0;
 }
 
 /**

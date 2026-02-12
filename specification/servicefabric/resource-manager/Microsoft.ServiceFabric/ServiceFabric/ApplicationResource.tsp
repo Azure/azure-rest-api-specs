@@ -17,43 +17,72 @@ namespace Microsoft.ServiceFabric;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(Cluster)
 model ApplicationResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ApplicationResourceProperties> {
+  is Azure.ResourceManager.ProxyResource<ApplicationResourceProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationResource,
     KeyName = "applicationName",
     SegmentName = "applications",
     NamePattern = ""
   >;
-  ...Azure.ResourceManager.Legacy.EntityTagProperty;
+
+  /**
+   * It will be deprecated in New API, resource location depends on the parent resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
+
+  /**
+   * Azure resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  tags?: Record<string>;
+
+  /**
+   * Azure resource etag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
   ...ManagedServiceIdentityProperty;
 }
 
-@armResourceOperations
+@armResourceOperations(#{ omitTags: true })
 interface ApplicationResources {
   /**
    * Get a Service Fabric application resource created or in the process of being created in the Service Fabric cluster resource.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Gets a Service Fabric application resource.")
+  @tag("Application")
   @operationId("Applications_Get")
-  get is ArmResourceRead<ApplicationResource>;
+  get is ArmResourceRead<ApplicationResource, Error = ErrorModel>;
 
   /**
    * Create or update a Service Fabric application resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "servicefabric is brownfield service with existing non-standard response codes"
+  @summary("Creates or updates a Service Fabric application resource.")
+  @tag("Application")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApplicationResource,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
       @bodyRoot
       _: ApplicationResource;
-    }
+    },
+    Error = ErrorModel
   >;
 
   /**
    * Update a Service Fabric application resource with the specified name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "servicefabric is brownfield service with existing non-standard 202 response body"
+  @summary("Updates a Service Fabric application resource.")
+  @tag("Application")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ApplicationResource,
@@ -61,20 +90,29 @@ interface ApplicationResources {
     Response = ArmAcceptedLroResponse & {
       @bodyRoot
       _: ApplicationResource;
-    }
+    },
+    Error = ErrorModel
   >;
 
   /**
    * Delete a Service Fabric application resource with the specified name.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ApplicationResource>;
+  @summary("Deletes a Service Fabric application resource.")
+  @tag("Application")
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ApplicationResource,
+    Error = ErrorModel
+  >;
 
   /**
    * Gets all application resources created or in the process of being created in the Service Fabric cluster resource.
    */
+  @summary("Gets the list of application resources created in the specified Service Fabric cluster resource.")
+  @tag("Application")
   list is ArmResourceListByParent<
     ApplicationResource,
-    Response = ArmResponse<ApplicationResourceList>
+    Response = ArmResponse<ApplicationResourceList>,
+    Error = ErrorModel
   >;
 }
 
@@ -199,39 +237,29 @@ model ArmRollingUpgradeMonitoringPolicy {
   failureAction?: ArmUpgradeFailureAction;
 
   /**
-   * The amount of time to wait after completing an upgrade domain before applying health policies. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
+   * The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
-  @encode("duration-constant")
-  healthCheckWaitDuration?: duration;
+  healthCheckWaitDuration?: string = "0";
 
   /**
-   * The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
+   * The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
-  @encode("duration-constant")
-  healthCheckStableDuration?: duration;
+  healthCheckStableDuration?: string = "PT0H2M0S";
 
   /**
-   * The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
+   * The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
-  @encode("duration-constant")
-  healthCheckRetryTimeout?: duration;
+  healthCheckRetryTimeout?: string = "PT0H10M0S";
 
   /**
-   * The amount of time the overall upgrade has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
+   * The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
-  @encode("duration-constant")
-  upgradeTimeout?: duration;
+  upgradeTimeout?: string = "P10675199DT02H48M05.4775807S";
 
   /**
-   * The amount of time each upgrade domain has to complete before FailureAction is executed. Cannot be larger than 12 hours. It is interpreted as a string representing an ISO 8601 duration with following format "hh:mm:ss.fff".
+   * The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.
    */
-  #suppress "@azure-tools/typespec-azure-core/known-encoding" "Backwards compatibility with non-standard duration encoding in c#"
-  @encode("duration-constant")
-  upgradeDomainTimeout?: duration;
+  upgradeDomainTimeout?: string = "P10675199DT02H48M05.4775807S";
 }
 
 /**
@@ -355,10 +383,7 @@ model ApplicationUserAssignedIdentity {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "servicefabric is a brownfield service with existing APIs that do not support all properties in patch"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ApplicationResourceUpdate
-  extends ProxyResource<ApplicationResourceUpdateProperties> {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
+model ApplicationResourceUpdate extends ProxyResource {
   /**
    * The application resource properties for patch operations.
    */

@@ -18,6 +18,7 @@ interface ClusterVersionsOperationGroup {
   /**
    * Gets information about an available Service Fabric cluster code version.
    */
+  @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available in the specified location.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}")
   get(
@@ -30,11 +31,12 @@ interface ClusterVersionsOperationGroup {
      */
     @path
     clusterVersion: string,
-  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorModel;
 
   /**
    * Gets information about an available Service Fabric cluster code version by environment.
    */
+  @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available for the specified environment.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}")
   @get
@@ -55,11 +57,12 @@ interface ClusterVersionsOperationGroup {
      */
     @path
     clusterVersion: string,
-  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorResponse;
+  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorModel;
 
   /**
    * Gets all available code versions for Service Fabric cluster resources by location.
    */
+  @tag("ClusterVersion")
   @summary("Gets the list of Service Fabric cluster code versions available for the specified location.")
   @autoRoute
   @get
@@ -67,11 +70,13 @@ interface ClusterVersionsOperationGroup {
   list is ArmProviderActionSync<
     Response = ResourceListResult<ClusterCodeVersions>,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter
+    Parameters = LocationParameter,
+    Error = ErrorModel
   >;
   /**
    * Gets all available code versions for Service Fabric cluster resources by environment.
    */
+  @tag("ClusterVersion")
   @summary("Gets the list of Service Fabric cluster code versions available for the specified environment.")
   @autoRoute
   @get
@@ -88,16 +93,35 @@ interface ClusterVersionsOperationGroup {
       @path
       @segment("environments")
       environment: ClusterVersionsEnvironment;
-    }
+    },
+    Error = ErrorModel
   >;
 }
 
 /**
  * The result of the Service Fabric runtime versions
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backwards compatibility with existing API."
-model ClusterCodeVersions is ProxyResource<ClusterVersionDetails> {
-  ...ResourceNameParameter<ClusterCodeVersions>;
+model ClusterCodeVersions {
+  /**
+   * The identification of the result
+   */
+  id?: string;
+
+  /**
+   * The name of the result
+   */
+  name?: string;
+
+  /**
+   * The result resource type
+   */
+  type?: string;
+
+  /**
+   * The detail of the Service Fabric runtime version result
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "x-ms-client-flatten requires exact property name"
+  properties?: ClusterVersionDetails;
 }
 
 /**
