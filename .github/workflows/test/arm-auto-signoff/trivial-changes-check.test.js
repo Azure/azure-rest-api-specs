@@ -780,6 +780,83 @@ describe("checkTrivialChanges", () => {
     });
   });
 
+  it("treats typespec-only changes as trivial", async () => {
+    const tspFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/SomeService/main.tsp",
+      "specification/someservice/resource-manager/Microsoft.Service/SomeService/models.tsp",
+    ];
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: tspFiles,
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmTypeSpec: true,
+      rmFunctional: false,
+      rmOther: false,
+      other: false,
+    });
+    expect(result.isTrivial()).toBe(true);
+  });
+
+  it("treats tspconfig.yaml changes as trivial", async () => {
+    const tspFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/SomeService/tspconfig.yaml",
+    ];
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: tspFiles,
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmTypeSpec: true,
+      rmFunctional: false,
+      rmOther: false,
+      other: false,
+    });
+    expect(result.isTrivial()).toBe(true);
+  });
+
+  it("treats mixed typespec and documentation changes as trivial", async () => {
+    const mixedFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/SomeService/main.tsp",
+      "specification/someservice/resource-manager/Microsoft.Service/README.md",
+    ];
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: mixedFiles,
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: true,
+      rmExamples: false,
+      rmTypeSpec: true,
+      rmFunctional: false,
+      rmOther: false,
+      other: false,
+    });
+    expect(result.isTrivial()).toBe(true);
+  });
+
   it("treats a root array length change as functional (conservative)", async () => {
     const jsonFiles = [
       "specification/someservice/resource-manager/Microsoft.Service/stable/2021-01-01/service.json",

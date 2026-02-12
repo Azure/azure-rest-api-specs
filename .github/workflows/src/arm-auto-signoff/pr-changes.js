@@ -9,6 +9,9 @@ export class PullRequestChanges {
   rmExamples = false;
 
   /** @type {boolean} */
+  rmTypeSpec = false;
+
+  /** @type {boolean} */
   rmFunctional = false;
 
   /** @type {boolean} */
@@ -29,7 +32,7 @@ export class PullRequestChanges {
    */
   isTrivial() {
     const hasNoBlockingChanges = !this.rmFunctional && !this.rmOther && !this.other;
-    const hasTrivialChanges = this.rmDocumentation || this.rmExamples;
+    const hasTrivialChanges = this.rmDocumentation || this.rmExamples || this.rmTypeSpec;
     return hasNoBlockingChanges && hasTrivialChanges;
   }
 
