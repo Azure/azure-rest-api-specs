@@ -177,7 +177,7 @@ model Schedule {
 @doc("The resources needed for the user request")
 model Resources {
   @doc("The resource ids used for the request")
-  @typeChangedFrom(Versions.`2026-03-01-preview`, string)
+  @typeChangedFrom(Versions.`2026-03-01-preview`, Array<string>)
   ids: Array<armResourceIdentifier>;
 }
 
