@@ -52,6 +52,9 @@ model RecoveryActionSettings {
 
   @doc("Name of the action.")
   actionName: string;
+
+  @doc("User description of the action.")
+  actionDescription: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
