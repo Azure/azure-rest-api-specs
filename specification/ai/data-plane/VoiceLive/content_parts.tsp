@@ -30,10 +30,15 @@ model RequestTextContentPart extends ContentPart {
   text?: string;
 }
 
-/** An audio content part for a request. */
+/** An audio content part for a request. This is supported only by realtime models (e.g., gpt-realtime). For text-based models, use `input_text` instead. */
 @usage(RequestUsage)
 model RequestAudioContentPart extends ContentPart {
   type: ContentPartType.input_audio;
+
+  /** Base64-encoded audio bytes, these will be parsed as the format specified in the session input audio type configuration. This defaults to PCM 16-bit 24kHz mono if not specified. */
+  audio: string;
+
+  /** Optional transcript of the audio content. This is not sent to the model, but will be attached to the message item for reference. */
   transcript?: string;
 }
 
