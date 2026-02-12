@@ -1,8 +1,6 @@
 import "./events.tsp";
 import "./items.tsp";
 import "./tools.tsp";
-import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;

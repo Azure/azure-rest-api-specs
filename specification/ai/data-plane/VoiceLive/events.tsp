@@ -1,4 +1,3 @@
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace VoiceLive;
