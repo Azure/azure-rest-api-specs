@@ -150,14 +150,14 @@ suppressions:
     from: networkcloud.json
     reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}"].patch.parameters[4].schema.properties.properties
-  - code: PatchBodyParametersSchema
+  - code: PostResponseCodes
     from: networkcloud.json
-    reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}"].patch.parameters[4].schema.properties.properties
-  - code: PatchBodyParametersSchema
+    reason: Long-running POST operation that returns 200 with a schema. This is a valid response code for this operation.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers/{clusterManagerName}/updateRelayPrivateEndpointConnection"].post.responses
+  - code: PostResponseCodes
     from: networkcloud.json
-    reason: Nested objects that share a structure with PUT have required fields. The required field is present in the patch structure as well, because it reuses types. The nested structure needs to be updated in full by the user.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/consoles/{consoleName}"].patch.parameters[4].schema.properties.properties
+    reason: Long-running POST operation that returns 200 with a schema. This is a valid response code for this operation.
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/inspect"].post.responses
 ```
 ---
 
