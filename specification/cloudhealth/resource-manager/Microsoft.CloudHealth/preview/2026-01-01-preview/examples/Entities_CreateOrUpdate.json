@@ -1,0 +1,451 @@
+{
+  "title": "Entities_CreateOrUpdate",
+  "operationId": "Entities_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "4980D7D5-4E07-47AD-AD34-E76C6BC9F061",
+    "resourceGroupName": "rgopenapi",
+    "healthModelName": "myHealthModel",
+    "entityName": "uszrxbdkxesdrxhmagmzywebgbjj",
+    "resource": {
+      "properties": {
+        "displayName": "My entity",
+        "canvasPosition": {
+          "x": 14,
+          "y": 13
+        },
+        "icon": {
+          "iconName": "Custom",
+          "customData": "rcitntvapruccrhtxmkqjphbxunkz"
+        },
+        "healthObjective": 62,
+        "impact": "Standard",
+        "tags": {
+          "key1376": "sample tag"
+        },
+        "signalGroups": {
+          "azureResource": {
+            "authenticationSetting": "auth123",
+            "azureResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+            "azureResourceKind": "functionapp",
+            "signals": [
+              {
+                "name": "uniqueSignalName1",
+                "signalDefinitionName": "sigdef1",
+                "signalKind": "AzureResourceMetric",
+                "metricNamespace": "microsoft.compute/virtualMachines",
+                "metricName": "cpuusage",
+                "aggregationType": "None",
+                "dimension": "nodename",
+                "dimensionFilter": "node1",
+                "displayName": "CPU usage",
+                "refreshInterval": "PT1M",
+                "timeGrain": "PT1M",
+                "dataUnit": "Count",
+                "evaluationRules": {
+                  "degradedRule": {
+                    "operator": "LowerThan",
+                    "threshold": 10
+                  },
+                  "unhealthyRule": {
+                    "operator": "LowerThan",
+                    "threshold": 1
+                  }
+                }
+              }
+            ]
+          },
+          "azureLogAnalytics": {
+            "authenticationSetting": "auth123",
+            "logAnalyticsWorkspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.OperationalInsights/workspaces/myworkspace",
+            "signals": [
+              {
+                "name": "uniqueSignalName2",
+                "signalDefinitionName": null,
+                "signalKind": "LogAnalyticsQuery",
+                "evaluationRules": {
+                  "degradedRule": {
+                    "operator": "GreaterThan",
+                    "threshold": 1
+                  },
+                  "unhealthyRule": {
+                    "operator": "GreaterThan",
+                    "threshold": 5
+                  }
+                },
+                "refreshInterval": "PT1M",
+                "queryText": "print 1",
+                "timeGrain": "PT30M",
+                "valueColumnName": "result",
+                "displayName": "Test LA signal",
+                "dataUnit": "my unit"
+              }
+            ]
+          },
+          "azureMonitorWorkspace": {
+            "authenticationSetting": "auth123",
+            "azureMonitorWorkspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.OperationalInsights/workspaces/myworkspace",
+            "signals": [
+              {
+                "name": "pod-cpu-usage",
+                "signalDefinitionName": "PodCpuUsageDefinition",
+                "signalKind": "PrometheusMetricsQuery",
+                "displayName": "Pod CPU Usage",
+                "refreshInterval": "PT1M",
+                "dataUnit": "Percent",
+                "queryText": "rate(container_cpu_usage_seconds_total{pod=~\"my-app-.*\"}[5m]) * 100",
+                "timeGrain": "PT5M",
+                "evaluationRules": {
+                  "degradedRule": {
+                    "operator": "GreaterThan",
+                    "threshold": 70
+                  },
+                  "unhealthyRule": {
+                    "operator": "GreaterThan",
+                    "threshold": 90
+                  }
+                }
+              }
+            ]
+          },
+          "dependencies": {
+            "aggregationType": "Thresholds",
+            "degradedThreshold": "3",
+            "unhealthyThreshold": "50%"
+          }
+        },
+        "alerts": {
+          "unhealthy": {
+            "severity": "Sev1",
+            "description": "Alert description",
+            "actionGroupIds": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Insights/actionGroups/myactiongroup"
+            ]
+          },
+          "degraded": {
+            "severity": "Sev4",
+            "description": "Alert description",
+            "actionGroupIds": [
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Insights/actionGroups/myactiongroup"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "My entity",
+          "canvasPosition": {
+            "x": 14,
+            "y": 13
+          },
+          "icon": {
+            "iconName": "Custom",
+            "customData": "rcitntvapruccrhtxmkqjphbxunkz"
+          },
+          "healthObjective": 62,
+          "impact": "Standard",
+          "tags": {
+            "key1376": "sample tag"
+          },
+          "signalGroups": {
+            "azureResource": {
+              "authenticationSetting": "auth123",
+              "azureResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+              "azureResourceKind": "functionapp",
+              "signals": [
+                {
+                  "name": "uniqueSignalName1",
+                  "signalDefinitionName": "sigdef1",
+                  "signalKind": "AzureResourceMetric",
+                  "status": {
+                    "healthState": "Healthy",
+                    "value": 15,
+                    "reportedAt": "2025-11-26T10:00:00Z",
+                    "error": null
+                  },
+                  "metricNamespace": "microsoft.compute/virtualMachines",
+                  "metricName": "cpuusage",
+                  "aggregationType": "None",
+                  "dimension": "nodename",
+                  "dimensionFilter": "node1",
+                  "displayName": "CPU usage",
+                  "refreshInterval": "PT1M",
+                  "timeGrain": "PT1M",
+                  "dataUnit": "Count",
+                  "evaluationRules": {
+                    "degradedRule": {
+                      "operator": "LowerThan",
+                      "threshold": 10
+                    },
+                    "unhealthyRule": {
+                      "operator": "LowerThan",
+                      "threshold": 1
+                    }
+                  }
+                }
+              ]
+            },
+            "azureLogAnalytics": {
+              "authenticationSetting": "auth123",
+              "logAnalyticsWorkspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.OperationalInsights/workspaces/myworkspace",
+              "signals": [
+                {
+                  "name": "uniqueSignalName2",
+                  "signalDefinitionName": null,
+                  "signalKind": "LogAnalyticsQuery",
+                  "status": {
+                    "healthState": "Healthy",
+                    "value": 30,
+                    "reportedAt": "2025-11-26T10:00:00Z",
+                    "error": null
+                  },
+                  "evaluationRules": {
+                    "degradedRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 1
+                    },
+                    "unhealthyRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 5
+                    }
+                  },
+                  "refreshInterval": "PT1M",
+                  "queryText": "print 1",
+                  "timeGrain": "PT30M",
+                  "valueColumnName": "result",
+                  "displayName": "Test LA signal",
+                  "dataUnit": "my unit"
+                }
+              ]
+            },
+            "azureMonitorWorkspace": {
+              "authenticationSetting": "auth123",
+              "azureMonitorWorkspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.OperationalInsights/workspaces/myworkspace",
+              "signals": [
+                {
+                  "name": "pod-cpu-usage",
+                  "signalDefinitionName": "PodCpuUsageDefinition",
+                  "signalKind": "PrometheusMetricsQuery",
+                  "status": {
+                    "healthState": "Healthy",
+                    "value": 45.3,
+                    "reportedAt": "2025-12-11T10:30:00Z"
+                  },
+                  "displayName": "Pod CPU Usage",
+                  "refreshInterval": "PT1M",
+                  "dataUnit": "Percent",
+                  "queryText": "rate(container_cpu_usage_seconds_total{pod=~\"my-app-.*\"}[5m]) * 100",
+                  "timeGrain": "PT5M",
+                  "evaluationRules": {
+                    "degradedRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 70
+                    },
+                    "unhealthyRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 90
+                    }
+                  }
+                }
+              ]
+            },
+            "dependencies": {
+              "aggregationType": "Thresholds",
+              "degradedThreshold": "3",
+              "unhealthyThreshold": "50%"
+            }
+          },
+          "deletionDate": "2023-09-18T14:04:14.531Z",
+          "alerts": {
+            "unhealthy": {
+              "severity": "Sev1",
+              "description": "Alert description",
+              "actionGroupIds": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Insights/actionGroups/myactiongroup"
+              ]
+            },
+            "degraded": {
+              "severity": "Sev4",
+              "description": "Alert description",
+              "actionGroupIds": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Insights/actionGroups/myactiongroup"
+              ]
+            }
+          }
+        },
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.CloudHealth/healthmodels/myHealthModel/entities/uszrxbdkxesdrxhmagmzywebgbjj",
+        "name": "uszrxbdkxesdrxhmagmzywebgbjj",
+        "type": "Microsoft.CloudHealth/healthmodels/entities",
+        "systemData": {
+          "createdBy": "cbhzxxlvkmufetjjjwtk",
+          "createdByType": "User",
+          "createdAt": "2023-09-18T14:04:09.327Z",
+          "lastModifiedBy": "arz",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "My entity",
+          "canvasPosition": {
+            "x": 14,
+            "y": 13
+          },
+          "icon": {
+            "iconName": "Custom",
+            "customData": "rcitntvapruccrhtxmkqjphbxunkz"
+          },
+          "healthObjective": 62,
+          "impact": "Standard",
+          "tags": {
+            "key1376": "sample tag"
+          },
+          "signalGroups": {
+            "azureResource": {
+              "authenticationSetting": "auth123",
+              "azureResourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/vm1",
+              "azureResourceKind": "functionapp",
+              "signals": [
+                {
+                  "name": "uniqueSignalName1",
+                  "signalDefinitionName": "sigdef1",
+                  "signalKind": "AzureResourceMetric",
+                  "status": {
+                    "healthState": "Healthy",
+                    "value": 15,
+                    "reportedAt": "2025-11-26T10:00:00Z",
+                    "error": null
+                  },
+                  "metricNamespace": "microsoft.compute/virtualMachines",
+                  "metricName": "cpuusage",
+                  "aggregationType": "None",
+                  "dimension": "nodename",
+                  "dimensionFilter": "node1",
+                  "displayName": "CPU usage",
+                  "refreshInterval": "PT1M",
+                  "timeGrain": "PT1M",
+                  "dataUnit": "Count",
+                  "evaluationRules": {
+                    "degradedRule": {
+                      "operator": "LowerThan",
+                      "threshold": 10
+                    },
+                    "unhealthyRule": {
+                      "operator": "LowerThan",
+                      "threshold": 1
+                    }
+                  }
+                }
+              ]
+            },
+            "azureLogAnalytics": {
+              "authenticationSetting": "auth123",
+              "logAnalyticsWorkspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.OperationalInsights/workspaces/myworkspace",
+              "signals": [
+                {
+                  "name": "uniqueSignalName2",
+                  "signalDefinitionName": null,
+                  "signalKind": "LogAnalyticsQuery",
+                  "status": {
+                    "healthState": "Healthy",
+                    "value": 30,
+                    "reportedAt": "2025-11-26T10:00:00Z",
+                    "error": null
+                  },
+                  "evaluationRules": {
+                    "degradedRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 1
+                    },
+                    "unhealthyRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 5
+                    }
+                  },
+                  "refreshInterval": "PT1M",
+                  "queryText": "print 1",
+                  "timeGrain": "PT30M",
+                  "valueColumnName": "result",
+                  "displayName": "Test LA signal",
+                  "dataUnit": "my unit"
+                }
+              ]
+            },
+            "azureMonitorWorkspace": {
+              "authenticationSetting": "auth123",
+              "azureMonitorWorkspaceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.OperationalInsights/workspaces/myworkspace",
+              "signals": [
+                {
+                  "name": "pod-cpu-usage",
+                  "signalDefinitionName": "PodCpuUsageDefinition",
+                  "signalKind": "PrometheusMetricsQuery",
+                  "status": {
+                    "healthState": "Healthy",
+                    "value": 45.3,
+                    "reportedAt": "2025-12-11T10:30:00Z"
+                  },
+                  "displayName": "Pod CPU Usage",
+                  "refreshInterval": "PT1M",
+                  "dataUnit": "Percent",
+                  "queryText": "rate(container_cpu_usage_seconds_total{pod=~\"my-app-.*\"}[5m]) * 100",
+                  "timeGrain": "PT5M",
+                  "evaluationRules": {
+                    "degradedRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 70
+                    },
+                    "unhealthyRule": {
+                      "operator": "GreaterThan",
+                      "threshold": 90
+                    }
+                  }
+                }
+              ]
+            },
+            "dependencies": {
+              "aggregationType": "Thresholds",
+              "degradedThreshold": "3",
+              "unhealthyThreshold": "50%"
+            }
+          },
+          "alerts": {
+            "unhealthy": {
+              "severity": "Sev1",
+              "description": "Alert description",
+              "actionGroupIds": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Insights/actionGroups/myactiongroup"
+              ]
+            },
+            "degraded": {
+              "severity": "Sev4",
+              "description": "Alert description",
+              "actionGroupIds": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Insights/actionGroups/myactiongroup"
+              ]
+            }
+          }
+        },
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.CloudHealth/healthmodels/myHealthModel/entities/uszrxbdkxesdrxhmagmzywebgbjj",
+        "name": "uszrxbdkxesdrxhmagmzywebgbjj",
+        "type": "Microsoft.CloudHealth/healthmodels/entities",
+        "systemData": {
+          "createdBy": "cbhzxxlvkmufetjjjwtk",
+          "createdByType": "User",
+          "createdAt": "2023-09-18T14:04:09.327Z",
+          "lastModifiedBy": "arz",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-09-18T14:04:09.328Z"
+        }
+      }
+    }
+  }
+}
