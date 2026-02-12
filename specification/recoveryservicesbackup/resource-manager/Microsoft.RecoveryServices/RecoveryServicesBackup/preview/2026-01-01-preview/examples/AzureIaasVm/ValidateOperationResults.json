@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "NetSDKTestRsVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "validateOperationResponse": {
+          "validationResults": [
+            {
+              "code": "UserErrorCoreCountSubscriptionQuotaReached",
+              "message": "Core Count subscription quota has been reached.",
+              "recommendations": [
+                "Contact Azure support to increase the limits."
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupValidateOperationsStatuses/00000000-0000-0000-0000-000000000000?api-version=2022-03-01",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupValidateOperationResults/00000000-0000-0000-0000-000000000000?api-version=2022-03-01",
+        "Retry-After": 10
+      }
+    }
+  },
+  "operationId": "ValidateOperationResults_Get",
+  "title": "Get Operation Results of Validate Operation"
+}
