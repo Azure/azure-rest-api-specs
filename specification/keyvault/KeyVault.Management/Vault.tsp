@@ -5,9 +5,10 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.KeyVault;
 /**
@@ -21,17 +22,13 @@ model Vault is Azure.ResourceManager.ProxyResource<VaultProperties, false> {
     NamePattern = ""
   >;
 
-  /**
-   * Azure location of the key vault resource.
-   */
+  /** Azure location of the key vault resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
+  location?: azureLocation;
 
-  /**
-   * Tags assigned to the key vault resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  /** Tags assigned to the key vault resource. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 alias VaultsParentParameter = {

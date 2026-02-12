@@ -4,6 +4,7 @@ import "./main.tsp";
 using Http;
 using Azure.Core;
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.SignalRService;
 
 @TypeSpec.Versioning.useDependency(
@@ -29,9 +30,7 @@ namespace Customization;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRPrivateEndpointConnectionsGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -58,9 +57,7 @@ op SignalRPrivateEndpointConnectionsGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRPrivateEndpointConnectionsUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -91,9 +88,7 @@ op SignalRPrivateEndpointConnectionsUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRPrivateEndpointConnectionsDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -133,9 +128,7 @@ op SignalRPrivateEndpointConnectionsDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -166,9 +159,7 @@ op SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRSharedPrivateLinkResourcesGetCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -195,9 +186,7 @@ op SignalRSharedPrivateLinkResourcesGetCustomized(
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op SignalRSharedPrivateLinkResourcesDeleteCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provider: "Microsoft.ThisWillBeReplaced",
+  ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -237,7 +226,6 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(SignalRResource, "ResourceInfo", "go");
 @@clientName(SignalRResourceList, "ResourceInfoList", "go");
 
-@@clientName(Operation, "SignalROperationInfo", "csharp");
 @@clientName(SignalRResource, "SignalR", "csharp");
 @@clientName(CustomCertificate, "SignalRCustomCertificate", "csharp");
 @@clientName(CustomDomain, "SignalRCustomDomain", "csharp");
@@ -250,7 +238,7 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   "csharp"
 );
 @@clientName(ProvisioningState, "SignalRProvisioningState", "csharp");
-@@clientName(FeatureFlags, "SignalRFeatureFlags", "csharp");
+@@clientName(FeatureFlags, "SignalRFeatureFlag", "csharp");
 @@clientName(KeyType, "SignalRKeyType", "csharp");
 @@clientName(LiveTraceCategory, "SignalRLiveTraceCategory", "csharp");
 @@clientName(LiveTraceConfiguration, "SignalRLiveTraceConfiguration", "csharp");
@@ -273,6 +261,10 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 );
 @@clientName(SignalROperationGroup.checkNameAvailability,
   "CheckSignalRNameAvailability",
+  "csharp"
+);
+@@clientName(SignalROperationGroup.checkNameAvailability::parameters.body,
+  "content",
   "csharp"
 );
 @@alternateType(SignalROperationGroup.checkNameAvailability::parameters.location,
@@ -333,9 +325,65 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(PrivateLinkResource, "SignalRPrivateLinkResource", "csharp");
 @@clientName(SignalRResources.list, "GetSignalRPrivateLinkResources", "csharp");
 @@clientName(RegenerateKeyParameters, "SignalRRegenerateKeyContent", "csharp");
-
 @@usage(ShareablePrivateLinkResourceProperties,
   Usage.input | Usage.output,
   "csharp"
 );
 @@usage(ShareablePrivateLinkResourceType, Usage.input | Usage.output, "csharp");
+@@clientName(Replica, "SignalRReplica", "csharp");
+@@clientName(SharedPrivateLinkResources,
+  "SignalRReplicaSharedPrivateLinkResources",
+  "csharp"
+);
+@@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
+@@alternateType(SignalRResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
+@@clientName(ApplicationFirewallSettings,
+  "SignalRApplicationFirewallSettings",
+  "csharp"
+);
+@@clientName(ClientConnectionCountRule,
+  "SignalRClientConnectionCountRule",
+  "csharp"
+);
+@@clientName(IPRule, "SignalRIPRule", "csharp");
+@@clientName(RouteSettings, "SignalRRouteSettings", "csharp");
+@@clientName(ServerlessSettings, "SignalRServerlessSettings", "csharp");
+@@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
+@@clientName(SignalRResources.regenerateKey::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ClientTrafficControlRule,
+  "SignalRClientTrafficControlRule",
+  "csharp"
+);
+@@clientName(ThrottleByJwtCustomClaimRule,
+  "SignalRThrottleByJwtCustomClaimRule",
+  "csharp"
+);
+@@clientName(ThrottleByJwtSignatureRule,
+  "SignalRThrottleByJwtSignatureRule",
+  "csharp"
+);
+@@clientName(ThrottleByUserIdRule, "SignalRThrottleByUserIdRule", "csharp");
+@@clientName(TrafficThrottleByJwtCustomClaimRule,
+  "SignalRTrafficThrottleByJwtCustomClaimRule",
+  "csharp"
+);
+@@clientName(TrafficThrottleByJwtSignatureRule,
+  "SignalRTrafficThrottleByJwtSignatureRule",
+  "csharp"
+);
+@@clientName(TrafficThrottleByUserIdRule,
+  "SignalRTrafficThrottleByUserIdRule",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(Replicas.listReplicaSkus, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
+@@markAsPageable(SignalRResources.listSkus, "csharp");

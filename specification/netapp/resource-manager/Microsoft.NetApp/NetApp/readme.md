@@ -28,7 +28,25 @@ These are the global settings for the Azure NetApp Files API.
 title: NetAppManagementClient
 description: Microsoft NetApp Files Azure Resource Provider specification
 openapi-type: arm
-tag: package-2025-09-01
+tag: package-2025-12-01
+```
+
+### Tag: package-preview-2025-12-15-preview
+
+These settings apply only when `--tag=package-preview-2025-12-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-12-15-preview'
+input-file:
+  - preview/2025-12-15-preview/netapp.json
+```
+
+### Tag: package-2025-12-01
+
+These settings apply only when `--tag=package-2025-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-01'
+input-file:
+  - stable/2025-12-01/netapp.json
 ```
 
 ### Tag: package-preview-2025-09-01-preview
@@ -594,4 +612,22 @@ suppressions:
     from: netapp.json
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/splitCloneFromParent"].post
+
+  - code: PostResponseCodes
+    reason: The linter incorrectly flags LRO POST operations with no payload response, should allow to be a 202/204 NoContent for the LRO empty response case
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}/generateAkvCredentials"].post
+
+  - code: PostResponseCodes
+    reason: The linter incorrectly flags LRO POST operations with no payload response, see https://github.com/Azure/azure-openapi-validator/issues/809
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/buckets/{bucketName}/refreshCertificate"].post
+
+  - code: PostResponseCodes
+    reason: The linter incorrectly flags LRO POST operations with no payload response, see https://github.com/Azure/azure-openapi-validator/issues/809
+    from: netapp.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/ransomwareReports/{ransomwareReportName}/clearSuspects"].post
 ```

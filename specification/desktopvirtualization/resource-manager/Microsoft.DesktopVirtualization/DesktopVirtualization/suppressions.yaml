@@ -7,7 +7,12 @@
     - tspconfig.yaml
   rules:
     - SdkTspConfigValidation
-  reason: Currently the SDK are not generated from the TSP config file, so this rule is not applicable. Will be addressed in future releases.
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration. 
+    Comment: Currently the SDK are not generated from the TSP config file, so this rule is not applicable. Will be addressed in future releases.
+    Note: This suppression MUST be removed when TypeSpec migration is complete.
+
 - tool: TypeSpecRequirement
   path: ./preview/2019-01-23-preview/*.json
   reason: Brownfield service not ready to migrate

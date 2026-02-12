@@ -2679,6 +2679,31 @@
             "description": "The name of the capacity reservation group.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "virtualMachineScaleSetVMs/$ref",
+              "virtualMachines/$ref"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandTypesForGetCapacityReservationGroups",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "virtualMachineScaleSetVMs/$ref",
+                  "value": "virtualMachineScaleSetVMs/$ref"
+                },
+                {
+                  "name": "virtualMachines/$ref",
+                  "value": "virtualMachines/$ref"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -5573,6 +5598,9 @@
           },
           "Create a scale set with extension time budget.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithExtensionsTimeBudget.json"
+          },
+          "Create a scale set with external health policy enabled": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithExternalHealthPolicy.json"
           },
           "Create a scale set with managed boot diagnostics.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithManagedBootDiagnostics.json"
@@ -9874,9 +9902,6 @@
           }
         },
         "x-ms-examples": {
-          "Get a VM with VMSizePolicy": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithVMSizePolicy.json"
-          },
           "Get a Virtual Machine.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get.json"
           },
@@ -10010,9 +10035,6 @@
           },
           "Create a VM with VM Size Properties": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizeProperties.json"
-          },
-          "Create a VM with VMSizePolicy": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithVMSizePolicy.json"
           },
           "Create a VM with automatic zone placement": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPlacement.json"
@@ -10220,9 +10242,6 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
-          },
-          "Update a VM with VMSizePolicy": {
-            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithVMSizePolicy.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -14225,6 +14244,26 @@
         ]
       }
     },
+    "ExternalHealthPolicy": {
+      "type": "object",
+      "description": "Specifies the external health policy for the virtual machine scale set.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "If true, external health is enabled for this scale set. Cannot be set to true on instances where another health monitoring source is active (ApplicationHealth extension or SLB). Defaults to false."
+        },
+        "expiryDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "Defines how long the health status set by External Health API will last on the VM. If a signal is not received/updated within this time, the VM Health will be marked as \"unknown\". Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 3 hours (PT3H)."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "Grace period for newly created VMs or when the External Health policy is first applied on VMSS. Uses the ISO 8601 format. Minimum: 5 minutes (PT5M), Maximum: 4 hours (PT4H)."
+        }
+      }
+    },
     "HardwareProfile": {
       "type": "object",
       "description": "Specifies the hardware settings for the virtual machine.",
@@ -14236,10 +14275,6 @@
         "vmSizeProperties": {
           "$ref": "#/definitions/VMSizeProperties",
           "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
-        },
-        "vmSizePolicy": {
-          "$ref": "#/definitions/VMSizePolicy",
-          "description": "Specifies the VM size policy for the virtual machine. Either vmSize or vmSizePolicy should be specified in the request, but not both. When vmSizePolicy is used, the allocated VM size will be returned in the vmSize property in the response."
         }
       }
     },
@@ -18573,26 +18608,6 @@
         }
       }
     },
-    "VMSizePolicy": {
-      "type": "object",
-      "description": "Specifies the VM size policy for the virtual machine. With this property the customer is able to specify a list of VM sizes and an allocation strategy.",
-      "properties": {
-        "vmSizes": {
-          "type": "array",
-          "description": "Specifies the VM sizes for the virtual machine.",
-          "items": {
-            "$ref": "#/definitions/VMSizeWithRank"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "allocationStrategy": {
-          "$ref": "#/definitions/AllocationStrategy",
-          "description": "Specifies the allocation strategy for the virtual machine based on which the VM will be allocated."
-        }
-      }
-    },
     "VMSizeProperties": {
       "type": "object",
       "description": "Specifies VM Size Property settings on the virtual machine.",
@@ -18606,21 +18621,6 @@
           "type": "integer",
           "format": "int32",
           "description": "Specifies the vCPU to physical core ratio. When this property is not specified in the request body the default behavior is set to the value of vCPUsPerCore for the VM Size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list). **Setting this property to 1 also means that hyper-threading is disabled.**"
-        }
-      }
-    },
-    "VMSizeWithRank": {
-      "type": "object",
-      "description": "Specifies the VM Size with priority rank.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Specifies the name of the VM Size. This must be a valid Azure VM size (e.g., Standard_D2s_v3)."
-        },
-        "rank": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the rank (a.k.a priority) associated with the VM Size. Lower rank values have higher priority. Ranks should be non-negative integers and typically contiguous starting from 0."
         }
       }
     },
@@ -21058,6 +21058,10 @@
         "highSpeedInterconnectPlacement": {
           "$ref": "#/definitions/HighSpeedInterconnectPlacement",
           "description": "Specifies the high speed interconnect placement for the virtual machine scale set."
+        },
+        "externalHealthPolicy": {
+          "$ref": "#/definitions/ExternalHealthPolicy",
+          "description": "Specifies the external health policy for the virtual machine scale set."
         }
       }
     },
@@ -22003,7 +22007,7 @@
         },
         "computerName": {
           "type": "string",
-          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
+          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://learn.microsoft.com/previous-versions/azure/virtual-machines/linux/infrastructure-example?toc=%2Fazure%2Fvirtual-machines%2Flinux%2Ftoc.json#1-naming-conventions)."
         },
         "osName": {
           "type": "string",
