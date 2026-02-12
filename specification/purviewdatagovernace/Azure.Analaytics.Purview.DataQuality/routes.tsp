@@ -196,6 +196,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/rules")
   @get
   @tag("Rules")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Rules_Get_V2: #{
+        $ref: "./examples/2026-01-12-preview/Rules_Get_V2.json",
+      },
+    }
+  )
   @doc("Retrieves all rules associated with data assets. Data product is specified as optional query parameter.")
   op getRulesV2 is RpcOperation<
     {
@@ -229,6 +238,13 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/rules/{ruleId}")
   @get
   @tag("Rules")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Rule_Get_V2: #{ $ref: "./examples/2026-01-12-preview/Rule_Get_V2.json" },
+    }
+  )
   @doc("Retrieves a specific rule associated with a data asset. Data product is specified as optional query parameter.")
   op getRuleV2 is RpcOperation<
     {
@@ -266,6 +282,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/rules/{ruleId}")
   @delete
   @tag("Rules")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Rules_Delete_V2: #{
+        $ref: "./examples/2026-01-12-preview/Rules_Delete_V2.json",
+      },
+    }
+  )
   @doc("Deletes a specific rule associated with a data asset. Data product is specified as optional query parameter.")
   op deleteRuleV2 is RpcOperation<
     {
@@ -302,6 +327,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/rules/{ruleId}")
   @put
   @tag("Rules")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Rules_Update_V2: #{
+        $ref: "./examples/2026-01-12-preview/Rules_Update_V2.json",
+      },
+    }
+  )
   @doc("Updates an existing rule associated with a data asset. Data product is specified as optional query parameter.")
   op updateRuleV2 is RpcOperation<
     {
@@ -343,6 +377,15 @@ namespace PurviewDataQuality {
   @patch(#{ implicitOptionality: true })
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/rules/{ruleId}")
   @tag("Rules")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Rules_UpdatePatch_V2: #{
+        $ref: "./examples/2026-01-12-preview/Rules_UpdatePatch_V2.json",
+      },
+    }
+  )
   @doc("Partially updates an existing rule associated with a data asset. Data product is specified as optional query parameter.")
   op updateRulePatchV2 is RpcOperation<
     {
@@ -787,6 +830,13 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @added(ApiVersions.v2026_01_12_preview)
   @tag("JobRunMonitoring")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Runs_Get_V2: #{ $ref: "./examples/2026-01-12-preview/Runs_Get_V2.json" },
+    }
+  )
   @doc("Retrieves all runs associated with a specific data asset, optionally filtered by run type. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/runs")
   @get
@@ -868,7 +918,17 @@ namespace PurviewDataQuality {
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}:observations")
   @tag("DQ Assessment Observations")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
   @extension("x-ms-long-running-operation", true)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Observation_Create_V2: #{
+        $ref: "./examples/2026-01-12-preview/Observation_Create_V2.json",
+      },
+    }
+  )
   @doc("Triggers a long-running observation job for a specific data asset. Data product is specified as optional query parameter.")
   @post
   op observationsV2 is RpcOperation<
@@ -929,7 +989,17 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/observations/{observationId}")
   @delete
   @tag("DQ Assessment Observations")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
   @extension("x-ms-long-running-operation", true)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Observation_Delete_V2: #{
+        $ref: "./examples/2026-01-12-preview/Observation_Delete_V2.json",
+      },
+    }
+  )
   @doc("Deletes a specific observation associated with a data asset. Data product is specified as optional query parameter.")
   op deleteObservationV2 is RpcOperation<
     {
@@ -1329,6 +1399,15 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @added(ApiVersions.v2026_01_12_preview)
   @tag("Scoped Asset Metadata")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      ScopedAssetMetaData_Get_V2: #{
+        $ref: "./examples/2026-01-12-preview/ScopedAssetMetaData_Get_V2.json",
+      },
+    }
+  )
   @doc("Retrieves the scoped asset metadata for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @get
@@ -1358,6 +1437,15 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @added(ApiVersions.v2026_01_12_preview)
   @tag("Scoped Asset Metadata")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      ScopedAssetMetaData_Update_V2: #{
+        $ref: "./examples/2026-01-12-preview/ScopedAssetMetaData_Update_V2.json",
+      },
+    }
+  )
   @doc("Create or update the scoped asset metadata for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @patch(#{ implicitOptionality: true })
@@ -1391,6 +1479,15 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @added(ApiVersions.v2026_01_12_preview)
   @tag("Scoped Asset Metadata")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      ScopedAssetMetaData_Delete_V2: #{
+        $ref: "./examples/2026-01-12-preview/ScopedAssetMetaData_Delete_V2.json",
+      },
+    }
+  )
   @doc("Deletes the scoped asset metadata for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/scoped-asset-metadata")
   @delete
@@ -1467,7 +1564,17 @@ namespace PurviewDataQuality {
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}:profile")
   @tag("Profiles")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Need to specify long-running operation extensions for 202 responses"
   @extension("x-ms-long-running-operation", true)
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Profile_Create_V2: #{
+        $ref: "./examples/2026-01-12-preview/Profile_Create_V2.json",
+      },
+    }
+  )
   @doc("Creates or updates the profile for a given data asset within a business domain. Data product is specified as optional query parameter.")
   @post
   op profileV2 is RpcOperation<
@@ -1523,6 +1630,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/profiles/{profileRunId}")
   @delete
   @tag("Profiles")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      Profile_Delete_V2: #{
+        $ref: "./examples/2026-01-12-preview/Profile_Delete_V2.json",
+      },
+    }
+  )
   @doc("Deletes a specific profile run for a given data asset within a business domain. Data product is specified as optional query parameter.")
   op deleteProfileRunV2 is RpcOperation<
     {
@@ -1560,6 +1676,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets")
   @post
   @tag("DQ Assets")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      DQAsset_Create_V2: #{
+        $ref: "./examples/2026-01-12-preview/DQAsset_Create_V2.json",
+      },
+    }
+  )
   @doc("Creates a DQ asset for a data asset within a business domain. Data product is specified as optional query parameter.")
   op createDQAssetV2 is RpcOperation<
     {
@@ -1601,6 +1726,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets/{assetId}")
   @get
   @tag("DQ Assets")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      DQAsset_Get_V2: #{
+        $ref: "./examples/2026-01-12-preview/DQAsset_Get_V2.json",
+      },
+    }
+  )
   @doc("Retrieves a DQ asset by identifier within a business domain and data asset. Data product is specified as optional query parameter.")
   op getDQAssetV2 is RpcOperation<
     {
@@ -1638,6 +1772,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets/{assetId}")
   @delete
   @tag("DQ Assets")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      DQAsset_Delete_V2: #{
+        $ref: "./examples/2026-01-12-preview/DQAsset_Delete_V2.json",
+      },
+    }
+  )
   @doc("Deletes a DQ asset within a business domain and data asset. Data product is specified as optional query parameter.")
   op deleteDQAssetV2 is RpcOperation<
     {
@@ -1675,6 +1818,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets")
   @get
   @tag("DQ Assets")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      DQAssets_List_V2: #{
+        $ref: "./examples/2026-01-12-preview/DQAssets_List_V2.json",
+      },
+    }
+  )
   @doc("Retrieves DQ assets for a business domain with pagination. Data product is specified as optional query parameter.")
   op getDQAssetsPaginationV2 is RpcOperation<
     {
@@ -1713,6 +1865,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/asset-scores")
   @get
   @tag("DQ Assets")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      AssetScores_Get_V2: #{
+        $ref: "./examples/2026-01-12-preview/AssetScores_Get_V2.json",
+      },
+    }
+  )
   @doc("Retrieves asset scores for specified assets. Data product is specified as optional query parameter.")
   op getAssetScoresV2 is RpcOperation<
     {
@@ -1751,6 +1912,15 @@ namespace PurviewDataQuality {
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/clone")
   @post
   @tag("DQ Assets")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      DQAsset_Clone_V2: #{
+        $ref: "./examples/2026-01-12-preview/DQAsset_Clone_V2.json",
+      },
+    }
+  )
   @doc("Submits a clone job for a DQ asset. Data product is specified as optional query parameter.")
   op cloneDQAssetV2 is RpcOperation<
     {
@@ -1854,6 +2024,15 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Multiple path parameters are required for this nested resource operation."
   @added(ApiVersions.v2026_01_12_preview)
   @tag("Reports")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
+  @extension(
+    "x-ms-examples",
+    #{
+      LatestSnapshot_Get_V2: #{
+        $ref: "./examples/2026-01-12-preview/LatestSnapshot_Get_V2.json",
+      },
+    }
+  )
   @doc("Retrieves the latest data quality snapshot report for a given business domain. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{assetId}/snapshots")
   @get
