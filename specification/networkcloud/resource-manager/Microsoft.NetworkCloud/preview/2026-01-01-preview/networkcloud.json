@@ -50,6 +50,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/accessBridges": {
+      "get": {
+        "description": "Get a list of access bridges in the provided subscription.",
+        "summary": "List access bridges in the subscription.",
+        "operationId": "AccessBridges_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource list has been successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/AccessBridgeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List access bridges for subscription": {
+            "$ref": "./examples/AccessBridges_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/bareMetalMachines": {
       "get": {
         "description": "Get a list of bare metal machines in the provided subscription.",
@@ -258,6 +301,49 @@
         "x-ms-examples": {
           "List Kubernetes clusters for subscription": {
             "$ref": "./examples/KubernetesClusters_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/kubernetesVersions": {
+      "get": {
+        "description": "Get a list of Kubernetes version resources in the provided subscription.",
+        "summary": "List Kubernetes versions in the subscription.",
+        "operationId": "KubernetesVersions_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource list has been successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Kubernetes versions for subscription": {
+            "$ref": "./examples/KubernetesVersions_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -640,6 +726,272 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/accessBridges": {
+      "get": {
+        "description": "Get a list of access bridges in the provided resource group.",
+        "summary": "List access bridges in the resource group.",
+        "operationId": "AccessBridges_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource list has been successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/AccessBridgeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List access bridges for resource group": {
+            "$ref": "./examples/AccessBridges_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/accessBridges/{accessBridgeName}": {
+      "get": {
+        "description": "Get the properties of the provided access bridge.",
+        "summary": "Retrieve the access bridge.",
+        "operationId": "AccessBridges_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessBridgeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/AccessBridge"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get access bridge": {
+            "$ref": "./examples/AccessBridges_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new access bridge or update the properties of the existing access bridge.",
+        "summary": "Create or update the access bridge.",
+        "operationId": "AccessBridges_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessBridgeNameParameter"
+          },
+          {
+            "description": "The access bridge configuration.",
+            "name": "accessBridge",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccessBridge"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/AccessBridge"
+            }
+          },
+          "201": {
+            "description": "The resource has been accepted for creation or update.",
+            "schema": {
+              "$ref": "#/definitions/AccessBridge"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update access bridge": {
+            "$ref": "./examples/AccessBridges_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete the specified access bridge.",
+        "summary": "Delete the access bridge.",
+        "operationId": "AccessBridges_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessBridgeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The resource has been accepted for deletion.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "The resource has been successfully deleted or does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete access bridge": {
+            "$ref": "./examples/AccessBridges_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-schema": "#/definitions/OperationStatusResult",
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "description": "Update properties of the provided access bridge, or update tags associated with the access bridge. Properties and tag updates can be done independently.",
+        "summary": "Patch the access bridge.",
+        "operationId": "AccessBridges_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccessBridgeNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "accessBridgeUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccessBridgePatchParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/AccessBridge"
+            }
+          },
+          "202": {
+            "description": "The resource has been accepted for update.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch access bridge": {
+            "$ref": "./examples/AccessBridges_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines": {
       "get": {
         "description": "Get a list of bare metal machines in the provided resource group.",
@@ -890,9 +1242,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/BareMetalMachine"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -1763,9 +2112,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/CloudServicesNetwork"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -2060,6 +2406,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusterManagers/{clusterManagerName}/updateRelayPrivateEndpointConnection": {
+      "post": {
+        "description": "Update the private endpoint connection for the Azure Relay namespace managed by the specified cluster manager. Use this operation to approve or reject a pending private endpoint connection request for the relay namespace managed by the cluster manager.",
+        "summary": "Approve or reject a relay private endpoint connection.",
+        "operationId": "ClusterManagers_UpdateRelayPrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterManagerNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "clusterManagerUpdateRelayPrivateEndpointConnectionParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClusterManagerUpdateRelayPrivateEndpointConnectionParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The action has been initiated for the resource.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve private endpoint connection": {
+            "$ref": "./examples/ClusterManagers_UpdateRelayPrivateEndpointConnection_Approve.json"
+          },
+          "Reject private endpoint connection": {
+            "$ref": "./examples/ClusterManagers_UpdateRelayPrivateEndpointConnection_Reject.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-schema": "#/definitions/OperationStatusResult",
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters": {
       "get": {
         "description": "Get a list of clusters in the provided resource group.",
@@ -2310,9 +2715,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/Cluster"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -2628,9 +3030,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/BareMetalMachineKeySet"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -2925,9 +3324,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/BmcKeySet"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -3064,6 +3460,62 @@
           },
           "Deploy cluster skipping validation": {
             "$ref": "./examples/Clusters_Deploy_SkipValidation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-schema": "#/definitions/OperationStatusResult",
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/clusters/{clusterName}/inspect": {
+      "post": {
+        "description": "Trigger an inspection of the cluster to perform validation and optional corrective actions based on the supplied additional actions and filters.",
+        "summary": "Inspect the cluster.",
+        "operationId": "Clusters_Inspect",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "clusterInspectParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ClusterInspectParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The action has been initiated for the resource.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Inspect cluster": {
+            "$ref": "./examples/Clusters_Inspect.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3338,9 +3790,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/ClusterMetricsConfiguration"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -3736,9 +4185,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/KubernetesCluster"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -4033,9 +4479,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/AgentPool"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -4330,9 +4773,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/KubernetesClusterFeature"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -4416,6 +4856,285 @@
         "x-ms-long-running-operation-options": {
           "final-state-schema": "#/definitions/OperationStatusResult",
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/kubernetesVersions": {
+      "get": {
+        "description": "Get a list of Kubernetes version resources in the provided resource group.",
+        "summary": "List Kubernetes versions in the resource group.",
+        "operationId": "KubernetesVersions_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource list has been successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Kubernetes versions for resource group": {
+            "$ref": "./examples/KubernetesVersions_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/kubernetesVersions/{kubernetesVersionName}": {
+      "get": {
+        "description": "Retrieve the Kubernetes version resource that describes the available Kubernetes versions for deployment.",
+        "summary": "Get the Kubernetes version resource.",
+        "operationId": "KubernetesVersions_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KubernetesVersionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Kubernetes versions": {
+            "$ref": "./examples/KubernetesVersions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create the Kubernetes version resource or update its tags. This resource is system managed and should only be created with the name \"default\".",
+        "summary": "Create or update the Kubernetes version resource.",
+        "operationId": "KubernetesVersions_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KubernetesVersionNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "kubernetesVersionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersion"
+            }
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersion"
+            }
+          },
+          "201": {
+            "description": "The resource has been accepted for creation or update.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersion"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update Kubernetes versions": {
+            "$ref": "./examples/KubernetesVersions_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete the specified Kubernetes version resource.",
+        "summary": "Delete the Kubernetes version resource.",
+        "operationId": "KubernetesVersions_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KubernetesVersionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The resource has been accepted for deletion.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "The resource has been successfully deleted or does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Kubernetes versions": {
+            "$ref": "./examples/KubernetesVersions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-schema": "#/definitions/OperationStatusResult",
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "description": "Update tags associated with the Kubernetes version resource. No other properties are supported for update.",
+        "summary": "Patch the Kubernetes version resource.",
+        "operationId": "KubernetesVersions_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/KubernetesVersionNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "kubernetesVersionPatchParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersionPatchParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/IfMatchParameter"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatchParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The resource has been successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/KubernetesVersion"
+            }
+          },
+          "202": {
+            "description": "The resource has been accepted for update.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Kubernetes versions": {
+            "$ref": "./examples/KubernetesVersions_UpdateTags.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -5193,9 +5912,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/Rack"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -5475,9 +6191,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/StorageAppliance"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -6180,9 +6893,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/VirtualMachine"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -6533,9 +7243,6 @@
           },
           "202": {
             "description": "The resource has been accepted for update.",
-            "schema": {
-              "$ref": "#/definitions/Console"
-            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -7050,6 +7757,304 @@
         }
       }
     },
+    "AccessBridge": {
+      "type": "object",
+      "title": "AccessBridge represents a managed access bridge resource.",
+      "required": [
+        "extendedLocation",
+        "properties"
+      ],
+      "properties": {
+        "etag": {
+          "description": "Resource ETag.",
+          "type": "string",
+          "readOnly": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the cluster associated with the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/AccessBridgeProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "AccessBridgeEndpoint": {
+      "type": "object",
+      "title": "AccessBridgeEndpoint describes a single advertised service endpoint.",
+      "properties": {
+        "fqdn": {
+          "description": "The fully qualified domain name used to describe the certificate name for the endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipv4Address": {
+          "description": "The IPv4 address associated with the endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "ipv6Address": {
+          "description": "The IPv6 address associated with the endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name that identifies the type of endpoint (for example VIP or host).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "AccessBridgeList": {
+      "type": "object",
+      "title": "AccessBridgeList represents a paged list of access bridges.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of access bridge resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessBridge"
+          }
+        }
+      }
+    },
+    "AccessBridgePatchParameters": {
+      "type": "object",
+      "title": "AccessBridgePatchParameters represents the payload for a PATCH request to an access bridge.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccessBridgePatchProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "The Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AccessBridgePatchProperties": {
+      "type": "object",
+      "title": "AccessBridgePatchProperties identifies the mutable properties for patch operations.",
+      "properties": {
+        "securityRules": {
+          "description": "The list of security rules enforced by the access bridge.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessBridgeSecurityRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AccessBridgeProperties": {
+      "type": "object",
+      "title": "AccessBridgeProperties captures the input and status for an access bridge.",
+      "required": [
+        "networkId"
+      ],
+      "properties": {
+        "detailedStatus": {
+          "description": "The detailed status reported by the access bridge.",
+          "type": "string",
+          "enum": [
+            "Running",
+            "Degraded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AccessBridgeDetailedStatus",
+            "values": [
+              {
+                "description": "The access bridge is healthy and operating normally.",
+                "name": "Running",
+                "value": "Running"
+              },
+              {
+                "description": "The access bridge is experiencing degraded performance or partial outages.",
+                "name": "Degraded",
+                "value": "Degraded"
+              },
+              {
+                "description": "The access bridge is not operational.",
+                "name": "Failed",
+                "value": "Failed"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "detailedStatusMessage": {
+          "description": "The descriptive message that accompanies the detailed status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endpoints": {
+          "description": "The observed endpoints that clients should use to reach the access bridge.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessBridgeEndpoint"
+          },
+          "x-ms-identifiers": [
+            "fqdn"
+          ],
+          "readOnly": true
+        },
+        "ipv4ConnectedPrefix": {
+          "description": "The IPv4 subnet from which the access bridge allocates an address. This subnet must be part of the internal network specified by networkId.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "ipv6ConnectedPrefix": {
+          "description": "The IPv6 subnet from which the access bridge allocates an address. This subnet must be part of the internal network specified by networkId.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "networkId": {
+          "description": "The resource ID of the internal network in a layer 3 isolation domain containing the IP subnets to use.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedNetworkFabric/l3IsolationDomains/internalNetworks"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "protocol": {
+          "description": "The protocol advertised by the access bridge endpoints.",
+          "type": "string",
+          "enum": [
+            "TCP",
+            "UDP"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "TransportProtocol",
+            "values": [
+              {
+                "description": "The TCP transport protocol.",
+                "name": "TCP",
+                "value": "TCP"
+              },
+              {
+                "description": "The UDP transport protocol.",
+                "name": "UDP",
+                "value": "UDP"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the access bridge.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Canceled",
+            "Failed",
+            "Provisioning",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "AccessBridgeProvisioningState"
+          },
+          "readOnly": true
+        },
+        "securityRules": {
+          "description": "The list of security rules enforced by the access bridge.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessBridgeSecurityRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "AccessBridgeSecurityRule": {
+      "type": "object",
+      "title": "AccessBridgeSecurityRule captures an individual access rule enforced by the bridge.",
+      "required": [
+        "port",
+        "direction"
+      ],
+      "properties": {
+        "description": {
+          "description": "The user provided value describing this rule.",
+          "type": "string"
+        },
+        "direction": {
+          "description": "The direction of allowed network traffic based on the rule.",
+          "type": "string",
+          "enum": [
+            "Inbound",
+            "Outbound"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SecurityRuleDirection",
+            "values": [
+              {
+                "description": "Inbound traffic toward the on-premsises cluster.",
+                "name": "Inbound",
+                "value": "Inbound"
+              },
+              {
+                "description": "Outbound traffic from the on-premises cluster.",
+                "name": "Outbound",
+                "value": "Outbound"
+              }
+            ]
+          }
+        },
+        "ipv4Addresses": {
+          "description": "The set of IPv4 addresses permitted as the source or destination of the security rule. For as single address, utilize a /32 (CIDR notation). One or both Ipv4Addresses and Ipv6Addresses must be specified. Example formats: 10.10.10.10-10.10.10.20 or 10.10.10.10/24.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv6Addresses": {
+          "description": "The set of IPv6 addresses permitted as the source or destination of the security rule. For as single address, utilize a /128 (CIDR notation). One or both Ipv4Addresses and Ipv6Addresses must be specified. Example formats: 2001:db8:abcd::1-2001:db8:abcd::ff or 2001:db8:abcd::1/64.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "port": {
+          "description": "The source or destination port or port range. Example 24562 or 24562-24570.",
+          "type": "string"
+        }
+      }
+    },
     "ActionState": {
       "type": "object",
       "title": "ActionState represents the state of an action taken against a resource. This can be used to represent both explicitly and implicitly defined action types.",
@@ -7142,7 +8147,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SshPublicKey"
-          }
+          },
+          "x-ms-identifiers": [
+            "keyData"
+          ]
         }
       }
     },
@@ -7273,6 +8281,9 @@
           "items": {
             "$ref": "#/definitions/KubernetesLabel"
           },
+          "x-ms-identifiers": [
+            "key"
+          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -7301,6 +8312,9 @@
           "items": {
             "$ref": "#/definitions/KubernetesLabel"
           },
+          "x-ms-identifiers": [
+            "key"
+          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -7453,6 +8467,9 @@
           "items": {
             "$ref": "#/definitions/KubernetesLabel"
           },
+          "x-ms-identifiers": [
+            "key"
+          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -7499,6 +8516,9 @@
           "items": {
             "$ref": "#/definitions/KubernetesLabel"
           },
+          "x-ms-identifiers": [
+            "key"
+          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -7571,6 +8591,10 @@
           "items": {
             "$ref": "#/definitions/L2NetworkAttachmentConfiguration"
           },
+          "x-ms-identifiers": [
+            "networkId",
+            "pluginType"
+          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -7582,6 +8606,10 @@
           "items": {
             "$ref": "#/definitions/L3NetworkAttachmentConfiguration"
           },
+          "x-ms-identifiers": [
+            "networkId",
+            "pluginType"
+          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -7593,6 +8621,10 @@
           "items": {
             "$ref": "#/definitions/TrunkedNetworkAttachmentConfiguration"
           },
+          "x-ms-identifiers": [
+            "networkId",
+            "pluginType"
+          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -8078,6 +9110,16 @@
         "bmcCredentials": {
           "$ref": "#/definitions/AdministrativeCredentials",
           "description": "The credentials of the baseboard management controller on this bare metal machine."
+        },
+        "bmcIpv4Address": {
+          "description": "The IPv4 address of the BMC interface for the bare metal machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "bmcIpv6Address": {
+          "description": "The IPv6 address of the BMC interface for the bare metal machine.",
+          "type": "string",
+          "readOnly": true
         },
         "bmcMacAddress": {
           "description": "The MAC address of the BMC device.",
@@ -9125,6 +10167,22 @@
           "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity for the resource."
         },
+        "kind": {
+          "description": "The type (kind) of the cluster. When specified, the value must exactly match the kind configured on the cluster manager that manages the cluster. If omitted, the service will default the value to the kind value of the cluster manager.",
+          "type": "string",
+          "enum": [
+            "Nexus",
+            "AzureLocal"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DeploymentType"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "$ref": "#/definitions/ClusterProperties",
           "description": "The list of the resource properties.",
@@ -9283,6 +10341,37 @@
         }
       }
     },
+    "ClusterInspectParameters": {
+      "type": "object",
+      "title": "ClusterInspectParameters represents the body of the request to inspect the cluster.",
+      "properties": {
+        "additionalActions": {
+          "description": "Additional actions supplement the default non-disruptive cluster inspection. Additional actions may be disallowed if the cluster is in a deployed and running state.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "ResetHardware"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "name": "ClusterInspectAdditionalAction",
+              "values": [
+                {
+                  "description": "Indicates that hardware reset should be performed during inspection.",
+                  "name": "ResetHardware",
+                  "value": "ResetHardware"
+                }
+              ]
+            }
+          }
+        },
+        "filterDevices": {
+          "$ref": "#/definitions/FilterDevices",
+          "description": "Indicates which devices are included in the inspection. By default, all devices that can be targeted will be included in the inspection."
+        }
+      }
+    },
     "ClusterList": {
       "type": "object",
       "title": "ClusterList represents a list of clusters.",
@@ -9315,6 +10404,22 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The identity of the cluster manager."
+        },
+        "kind": {
+          "description": "The kind of the cluster manager.",
+          "type": "string",
+          "enum": [
+            "Nexus",
+            "AzureLocal"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DeploymentType"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/ClusterManagerProperties",
@@ -9466,6 +10571,11 @@
           },
           "readOnly": true
         },
+        "relayConfiguration": {
+          "$ref": "#/definitions/ClusterManagerRelayConfiguration",
+          "description": "The relay configuration for the cluster manager.",
+          "readOnly": true
+        },
         "vmSize": {
           "description": "The size of the Azure virtual machines to use for hosting the cluster manager resource.",
           "type": "string",
@@ -9473,6 +10583,62 @@
             "read",
             "create"
           ]
+        }
+      }
+    },
+    "ClusterManagerRelayConfiguration": {
+      "type": "object",
+      "title": "ClusterManagerRelayConfiguration represents the relay configuration for the cluster manager.",
+      "properties": {
+        "relayNamespaceId": {
+          "description": "The resource ID of the Azure relay namespace managed by the cluster manager.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Relay/namespaces"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ClusterManagerUpdateRelayPrivateEndpointConnectionParameters": {
+      "type": "object",
+      "title": "ClusterManagerUpdateRelayPrivateEndpointConnectionParameters represents the body of the request to approve or reject the relay private endpoint connection for the private relay managed by a cluster manager.",
+      "required": [
+        "privateEndpointResourceId",
+        "connectionState"
+      ],
+      "properties": {
+        "connectionState": {
+          "description": "The state to set for the private endpoint connection.",
+          "type": "string",
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RelayPrivateEndpointConnectionState"
+          }
+        },
+        "description": {
+          "description": "The description to associate with the private endpoint connection.",
+          "type": "string"
+        },
+        "privateEndpointResourceId": {
+          "description": "The resource ID of private endpoint to be permitted or denied connection to the relay namespace.",
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/privateEndpoints"
+              }
+            ]
+          }
         }
       }
     },
@@ -10491,6 +11657,26 @@
         }
       }
     },
+    "FilterDevices": {
+      "type": "object",
+      "title": "FilterDevices defines the filtered target of the inspection.",
+      "properties": {
+        "bareMetalMachineNames": {
+          "description": "The list of bare metal machine names to include in the inspection.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rackNames": {
+          "description": "The list of rack names to include in the inspection.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "HardwareInventory": {
       "type": "object",
       "title": "HardwareInventory represents the hardware configuration of this machine as exposed to the customer, including information acquired from the model/sku information and from the ironic inspector.",
@@ -10685,6 +11871,9 @@
           "items": {
             "$ref": "#/definitions/KubernetesLabel"
           },
+          "x-ms-identifiers": [
+            "key"
+          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -10722,6 +11911,9 @@
           "items": {
             "$ref": "#/definitions/KubernetesLabel"
           },
+          "x-ms-identifiers": [
+            "key"
+          ],
           "x-ms-mutability": [
             "read",
             "create"
@@ -11463,6 +12655,114 @@
             "read",
             "create"
           ]
+        }
+      }
+    },
+    "KubernetesVersion": {
+      "type": "object",
+      "title": "KubernetesVersion represents the available Kubernetes versions for a cluster.",
+      "required": [
+        "extendedLocation",
+        "properties"
+      ],
+      "properties": {
+        "etag": {
+          "description": "Resource ETag.",
+          "type": "string",
+          "readOnly": true
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the cluster associated with the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/KubernetesVersionProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "KubernetesVersionList": {
+      "type": "object",
+      "title": "KubernetesVersionList represents a list of Kubernetes version resources.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of Kubernetes versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubernetesVersion"
+          }
+        }
+      }
+    },
+    "KubernetesVersionPatchParameters": {
+      "type": "object",
+      "title": "KubernetesVersionPatchParameters represents the body of the request to patch Kubernetes version tags.",
+      "properties": {
+        "tags": {
+          "description": "The Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "KubernetesVersionProperties": {
+      "type": "object",
+      "title": "KubernetesVersionProperties contains the read-only properties describing available versions.",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the Kubernetes version resource.",
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Canceled",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "KubernetesVersionProvisioningState"
+          },
+          "readOnly": true
+        },
+        "values": {
+          "description": "The list of available Kubernetes versions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KubernetesVersionValue"
+          },
+          "x-ms-identifiers": [
+            "version"
+          ],
+          "readOnly": true
+        }
+      }
+    },
+    "KubernetesVersionValue": {
+      "type": "object",
+      "title": "KubernetesVersionValue describes a specific Kubernetes version that can be deployed.",
+      "properties": {
+        "description": {
+          "description": "Additional description for the Kubernetes version.",
+          "type": "string",
+          "readOnly": true
+        },
+        "version": {
+          "description": "The Kubernetes version identifier.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -12834,6 +14134,19 @@
           "x-ms-identifiers": [],
           "readOnly": true
         },
+        "deploymentType": {
+          "description": "The deployment type supported by the rack SKU.",
+          "type": "string",
+          "enum": [
+            "Nexus",
+            "AzureLocal"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DeploymentType"
+          },
+          "readOnly": true
+        },
         "description": {
           "description": "The free-form text describing the rack.",
           "type": "string",
@@ -12913,6 +14226,19 @@
       "type": "object",
       "title": "RuntimeProtectionConfiguration represents the runtime protection configuration for the cluster.",
       "properties": {
+        "definitionUpdateMode": {
+          "description": "The definition update mode for runtime protection.",
+          "type": "string",
+          "default": "None",
+          "enum": [
+            "Automatic",
+            "None"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RuntimeProtectionDefinitionUpdateMode"
+          }
+        },
         "enforcementLevel": {
           "description": "The mode of operation for runtime protection.",
           "type": "string",
@@ -12926,7 +14252,34 @@
           ],
           "x-ms-enum": {
             "modelAsString": true,
-            "name": "RuntimeProtectionEnforcementLevel"
+            "name": "RuntimeProtectionEnforcementLevel",
+            "values": [
+              {
+                "description": "Real-time scans detect but do not remediate detected issues.",
+                "name": "Audit",
+                "value": "Audit"
+              },
+              {
+                "description": "Real-time scans are disabled and can not be triggered.",
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "description": "Real-time scans are disabled but can be triggered to remediate detected issues.",
+                "name": "OnDemand",
+                "value": "OnDemand"
+              },
+              {
+                "description": "Real-time scans are disabled but can be triggered to detect issues without remediation.",
+                "name": "Passive",
+                "value": "Passive"
+              },
+              {
+                "description": "Real-time scans detect and remediate detected issues.",
+                "name": "RealTime",
+                "value": "RealTime"
+              }
+            ]
           }
         }
       }
@@ -12935,6 +14288,90 @@
       "type": "object",
       "title": "RuntimeProtectionStatus represents the runtime protection status of the bare metal machine.",
       "properties": {
+        "agentHealthStatus": {
+          "description": "The runtime protection agent health status.",
+          "type": "string",
+          "enum": [
+            "Healthy",
+            "Unhealthy"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RuntimeProtectionAgentHealthStatus",
+            "values": [
+              {
+                "description": "The runtime protection agent is healthy.",
+                "name": "Healthy",
+                "value": "Healthy"
+              },
+              {
+                "description": "The runtime protection agent has health issues.",
+                "name": "Unhealthy",
+                "value": "Unhealthy"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "agentHealthStatusIssues": {
+          "description": "The runtime protection agent health status issues, if present.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "agentLicenseStatus": {
+          "description": "The runtime protection agent license status.",
+          "type": "string",
+          "enum": [
+            "Licensed",
+            "Unlicensed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RuntimeProtectionAgentLicenseStatus",
+            "values": [
+              {
+                "description": "The runtime protection agent license is valid.",
+                "name": "Licensed",
+                "value": "Licensed"
+              },
+              {
+                "description": "The runtime protection agent license not valid.",
+                "name": "Unlicensed",
+                "value": "Unlicensed"
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "definitionUpdateMode": {
+          "description": "The definition update mode for runtime protection.",
+          "type": "string",
+          "enum": [
+            "Automatic",
+            "None"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RuntimeProtectionDefinitionUpdateMode",
+            "values": [
+              {
+                "description": "Definitions are updated automatically.",
+                "name": "Automatic",
+                "value": "Automatic"
+              },
+              {
+                "description": "Definitions are updated only at the time of deployment or version updates.",
+                "name": "None",
+                "value": "None"
+              }
+            ]
+          },
+          "readOnly": true
+        },
         "definitionsLastUpdated": {
           "description": "The timestamp when the malware definitions were last updated.",
           "type": "string",
@@ -12944,6 +14381,49 @@
         "definitionsVersion": {
           "description": "The version of the malware definitions.",
           "type": "string",
+          "readOnly": true
+        },
+        "enforcementLevel": {
+          "description": "The enforcement level set for the runtime protection on the bare metal machine.",
+          "type": "string",
+          "enum": [
+            "Audit",
+            "Disabled",
+            "OnDemand",
+            "Passive",
+            "RealTime"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "RuntimeProtectionEnforcementLevel",
+            "values": [
+              {
+                "description": "Real-time scans detect but do not remediate detected issues.",
+                "name": "Audit",
+                "value": "Audit"
+              },
+              {
+                "description": "Real-time scans are disabled and can not be triggered.",
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "description": "Real-time scans are disabled but can be triggered to remediate detected issues.",
+                "name": "OnDemand",
+                "value": "OnDemand"
+              },
+              {
+                "description": "Real-time scans are disabled but can be triggered to detect issues without remediation.",
+                "name": "Passive",
+                "value": "Passive"
+              },
+              {
+                "description": "Real-time scans detect and remediate detected issues.",
+                "name": "RealTime",
+                "value": "RealTime"
+              }
+            ]
+          },
           "readOnly": true
         },
         "scanCompletedTime": {
@@ -13348,6 +14828,20 @@
         }
       }
     },
+    "StorageApplianceExpansionShelf": {
+      "type": "object",
+      "title": "StorageApplianceExpansionShelf represents an expansion shelf connected to a storage appliance.",
+      "properties": {
+        "model": {
+          "description": "The model of the expansion shelf.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the expansion shelf.",
+          "type": "string"
+        }
+      }
+    },
     "StorageApplianceList": {
       "type": "object",
       "title": "StorageApplianceList represents a list of storage appliances.",
@@ -13453,6 +14947,15 @@
         "detailedStatusMessage": {
           "description": "The descriptive message about the current detailed status.",
           "type": "string",
+          "readOnly": true
+        },
+        "expansionShelves": {
+          "description": "The list of expansion shelves connected to the storage appliance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageApplianceExpansionShelf"
+          },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "managementIpv4Address": {
@@ -14658,6 +16161,40 @@
     }
   },
   "parameters": {
+    "AccessBridgeNameParameter": {
+      "enum": [
+        "Bastion",
+        "PrivateVault",
+        "StorageDashboard"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "AccessBridgeAllowedName",
+        "values": [
+          {
+            "description": "The access bridge for bare metal machine bastion access.",
+            "name": "Bastion",
+            "value": "Bastion"
+          },
+          {
+            "description": "The access bridge for cluster access to private vault.",
+            "name": "PrivateVault",
+            "value": "PrivateVault"
+          },
+          {
+            "description": "The access bridge for access to the storage dashboard.",
+            "name": "StorageDashboard",
+            "value": "StorageDashboard"
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method",
+      "description": "The name of the access bridge.",
+      "name": "accessBridgeName",
+      "in": "path",
+      "required": true
+    },
     "AgentPoolNameParameter": {
       "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-_]{0,28}[a-zA-Z0-9])$",
       "type": "string",
@@ -14759,6 +16296,15 @@
       "x-ms-parameter-location": "method",
       "description": "The name of the Kubernetes cluster.",
       "name": "kubernetesClusterName",
+      "in": "path",
+      "required": true
+    },
+    "KubernetesVersionNameParameter": {
+      "pattern": "^default$",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the Kubernetes version resource.",
+      "name": "kubernetesVersionName",
       "in": "path",
       "required": true
     },

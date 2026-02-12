@@ -38,7 +38,7 @@
               "bmcCredentials": {
                 "username": "bmcuser"
               },
-              "bmcConnectionString": "bmcconnectionstring",
+              "bmcConnectionString": "redfish+https://10.10.10.16/redfish/v1/Systems/System.Embedded.1",
               "machineDetails": "User-provided machine details.",
               "serialNumber": "BM1219XXX",
               "provisioningState": "Succeeded",
@@ -68,6 +68,8 @@
                   ]
                 }
               ],
+              "bmcIpv4Address": "10.10.10.16",
+              "bmcIpv6Address": "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
               "clusterId": "/subscriptions/123e4567-e89b-12d3-a456-426655440000/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
               "caCertificate": {
                 "value": "-----BEGIN CERTIFICATE-----\nMIIDXTCCAkWgAwIBAgIJAL4a5b1d8f2wM...A0GCSqGSIb3DQEBCwUAMEUxCzAJB==\n-----END CERTIFICATE-----",
@@ -107,11 +109,19 @@
                 "platform.afo-nc.microsoft.com/management-plane=true"
               ],
               "runtimeProtectionStatus": {
-                "scanScheduledTime": "2023-10-01T13:00:00.000Z",
-                "scanStartedTime": "2023-09-30T13:00:03.008Z",
-                "scanCompletedTime": "2023-09-30T13:27:23.103Z",
+                "agentHealthStatus": "Unhealthy",
+                "agentHealthStatusIssues": [
+                  "Issue1",
+                  "Issue2"
+                ],
+                "agentLicenseStatus": "Licensed",
                 "definitionsLastUpdated": "2023-09-28T13:27:03.008Z",
-                "definitionsVersion": "1.2.3"
+                "definitionUpdateMode": "None",
+                "definitionsVersion": "1.2.3",
+                "enforcementLevel": "OnDemand",
+                "scanCompletedTime": "2023-09-30T13:27:23.103Z",
+                "scanScheduledTime": "2023-10-01T13:00:00.000Z",
+                "scanStartedTime": "2023-09-30T13:00:03.008Z"
               },
               "secretRotationStatus": [
                 {
