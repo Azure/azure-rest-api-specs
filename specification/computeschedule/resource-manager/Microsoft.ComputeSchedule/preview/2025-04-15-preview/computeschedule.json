@@ -2692,6 +2692,7 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Unique identifier for the resource involved in the operation, eg ArmId"
         },
         "errorCode": {
@@ -2718,6 +2719,7 @@
         },
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "Unique identifier for the resource involved in the operation, eg ArmId"
         },
         "opType": {
@@ -3093,7 +3095,9 @@
           "type": "array",
           "description": "The resource ids used for the request",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
       },
