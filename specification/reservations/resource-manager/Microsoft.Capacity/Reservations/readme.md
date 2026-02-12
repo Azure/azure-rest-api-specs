@@ -97,7 +97,7 @@ These settings apply only when `--tag=package-preview-2019-07-19` is specified o
 ``` yaml $(tag) == 'package-preview-2019-07-19'
 input-file:
   - preview/2019-07-19-preview/quota.json
-  - preview/2019-04-01/reservations.json
+  - stable/2019-04-01/reservations.json
 ```
 
 ### Tag: package-preview-2019-04
@@ -106,7 +106,7 @@ These settings apply only when `--tag=package-preview-2019-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2019-04'
 input-file:
-  - preview/2019-04-01/reservations.json
+  - stable/2019-04-01/reservations.json
 ```
 
 ### Tag: package-2018-06
@@ -115,7 +115,7 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-06'
 input-file:
-- preview/2018-06-01/reservations.json
+- stable/2018-06-01/reservations.json
 ```
 
 ### Tag: package-2017-11
