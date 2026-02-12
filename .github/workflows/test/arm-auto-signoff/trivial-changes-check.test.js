@@ -879,6 +879,78 @@ describe("checkTrivialChanges", () => {
     expect(result.isTrivial()).toBe(true);
   });
 
+  it("detects functional changes when new typespec files are added", async () => {
+    const tspFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/SomeService/main.tsp",
+    ];
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: tspFiles,
+      modifications: [],
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmTypeSpec: false,
+      rmFunctional: true,
+      rmOther: false,
+      other: false,
+    });
+  });
+
+  it("detects functional changes when typespec files are deleted", async () => {
+    const tspFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/SomeService/models.tsp",
+    ];
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: [],
+      modifications: [],
+      deletions: tspFiles,
+      renames: [],
+      total: 0,
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmTypeSpec: false,
+      rmFunctional: true,
+      rmOther: false,
+      other: false,
+    });
+  });
+
+  it("detects functional changes when tspconfig.yaml is added", async () => {
+    const tspFiles = [
+      "specification/someservice/resource-manager/Microsoft.Service/SomeService/tspconfig.yaml",
+    ];
+
+    vi.spyOn(changedFiles, "getChangedFilesStatuses").mockResolvedValue({
+      additions: tspFiles,
+      modifications: [],
+      deletions: [],
+      renames: [],
+      total: 0,
+    });
+
+    const result = await checkTrivialChanges(core);
+    expect(result).toMatchObject({
+      rmDocumentation: false,
+      rmExamples: false,
+      rmTypeSpec: false,
+      rmFunctional: true,
+      rmOther: false,
+      other: false,
+    });
+  });
+
   it("treats a root array length change as functional (conservative)", async () => {
     const jsonFiles = [
       "specification/someservice/resource-manager/Microsoft.Service/stable/2021-01-01/service.json",

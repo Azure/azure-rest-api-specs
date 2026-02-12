@@ -137,6 +137,20 @@ function hasSignificantFileOperations(changedFilesStatuses, core) {
     return true;
   }
 
+  // New TypeSpec files are non-trivial (conservative approach)
+  const newTypeSpecFiles = changedFilesStatuses.additions.filter(typespec);
+  if (newTypeSpecFiles.length > 0) {
+    core.info(`Significant: New TypeSpec files detected: ${newTypeSpecFiles.join(", ")}`);
+    return true;
+  }
+
+  // Deleted TypeSpec files are non-trivial (conservative approach)
+  const deletedTypeSpecFiles = changedFilesStatuses.deletions.filter(typespec);
+  if (deletedTypeSpecFiles.length > 0) {
+    core.info(`Significant: Deleted TypeSpec files detected: ${deletedTypeSpecFiles.join(", ")}`);
+    return true;
+  }
+
   // Any file renames/moves are non-trivial (conservative approach)
   if (changedFilesStatuses.renames.length > 0) {
     core.info(

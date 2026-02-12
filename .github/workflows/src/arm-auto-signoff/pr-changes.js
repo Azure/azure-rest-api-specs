@@ -24,6 +24,7 @@ export class PullRequestChanges {
    * A PR is trivial if it contains only:
    * - Documentation changes
    * - Example changes
+   * - TypeSpec file changes (.tsp, tspconfig.yaml)
    * and does NOT contain:
    * - Functional spec changes
    * - Other file types
