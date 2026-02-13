@@ -1624,10 +1624,10 @@
             "description": "The name of the express route circuit."
           },
           {
-            "name": "ExpressRouteFailoverTestType",
+            "name": "failoverTestType",
             "in": "query",
             "required": true,
-            "type": "string",
+            "type": "ExpressRouteFailoverTestType",
             "description": "The type of failover test"
           },
           {
@@ -1715,10 +1715,10 @@
             "description": "The type of link on which failover test was performed"
           },
           {
-            "name": "MaintenanceTestCategory",
+            "name": "circuitMaintenanceCategory",
             "in": "query",
             "required": true,
-            "type": "string",
+            "type": "MaintenanceTestCategory",
             "description": "The type of maintenance that can occur during an ExpressRoute Circuit failover test"
           },
           {
@@ -2909,17 +2909,17 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/FailoverTestStatus",
-          "description": "The current status of the test",
+          "description": "The current status of the test.",
           "readOnly": true
         },
         "startTime": {
           "type": "string",
-          "description": "Time when the test was started",
+          "description": "Time when the test was started. Example - 1/6/2026 9:23:21 AM",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
-          "description": "Time when the test was completed",
+          "description": "Time when the test was completed. Example - 1/6/2026 9:23:21 AM",
           "readOnly": true
         },
         "testType": {
@@ -2934,7 +2934,8 @@
           "x-ms-enum": {
             "name": "ExpressRouteFailoverTestType",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         },
         "testGuid": {
           "type": "string",
@@ -2956,11 +2957,13 @@
         },
         "circuitTestCategory": {
           "$ref": "#/definitions/MaintenanceTestCategory",
-          "description": "The type of maintenance test category"
+          "description": "The type of maintenance test category",
+          "readOnly": true
         },
         "linkType": {
           "$ref": "#/definitions/ExpressRouteFailoverLinkType",
-          "description": "The type of link on which failover test was performed"
+          "description": "The type of link on which failover test was performed",
+          "readOnly": true
         },
         "bgpStatus": {
           "type": "array",
@@ -2985,12 +2988,12 @@
       "properties": {
         "startTime": {
           "type": "string",
-          "description": "Time when the test was started",
+          "description": "Time when the test was started. Example - 1/6/2026 9:23:21 AM",
           "readOnly": true
         },
         "endTime": {
           "type": "string",
-          "description": "Time when the test was completed",
+          "description": "Time when the test was completed. Example - 1/6/2026 9:23:21 AM",
           "readOnly": true
         },
         "status": {
@@ -3005,23 +3008,28 @@
         },
         "linkType": {
           "$ref": "#/definitions/ExpressRouteFailoverLinkType",
-          "description": "The type of link on which failover test was performed"
+          "description": "The type of link on which failover test was performed",
+          "readOnly": true
         },
         "circuitTestCategory": {
           "$ref": "#/definitions/MaintenanceTestCategory",
-          "description": "The type of maintenance test category"
+          "description": "The type of maintenance test category",
+          "readOnly": true
         },
         "isSimulationVerified": {
           "type": "boolean",
-          "description": "Whether the customer was able to establish connectivity through this failover connection or not"
+          "description": "Whether the customer was able to establish connectivity through this failover connection or not",
+          "readOnly": true
         },
         "redundantRoutes": {
           "$ref": "#/definitions/ExpressRouteLinkFailoverRouteList",
-          "description": "List of routes received from this peering as well as some other peering location"
+          "description": "List of routes received from this peering as well as some other peering location",
+          "readOnly": true
         },
         "nonRedundantRoutes": {
           "$ref": "#/definitions/ExpressRouteLinkFailoverRouteList",
-          "description": "List of all the routes that were received only from this peering location"
+          "description": "List of all the routes that were received only from this peering location",
+          "readOnly": true
         },
         "bgpStatus": {
           "type": "array",
@@ -3137,7 +3145,8 @@
         },
         "checkTime": {
           "type": "string",
-          "description": "The UTC time when the BGP status was checked"
+          "description": "The UTC time when the BGP status was checked. Example - 1/6/2026 9:23:21 AM",
+          "readOnly": true
         }
       }
     },
@@ -3146,19 +3155,23 @@
       "properties": {
         "circuitTestCategory": {
           "$ref": "#/definitions/MaintenanceTestCategory",
-          "description": "The type of maintenance test category"
+          "description": "The type of maintenance test category",
+          "required": true
         },
         "linkType": {
           "$ref": "#/definitions/ExpressRouteFailoverLinkType",
-          "description": "The type of link on which failover test was performed"
+          "description": "The type of link on which failover test was performed",
+          "required": true
         },
         "wasSimulationSuccessful": {
           "type": "boolean",
-          "description": "Whether the failover simulation was successful or not"
+          "description": "Whether the failover simulation was successful or not",
+          "required": true
         },
         "isVerified": {
           "type": "boolean",
-          "description": "Whether the customer was able to establish connectivity through this failover link or not"
+          "description": "Whether the customer was able to establish connectivity through this failover link or not",
+          "required": true
         }
       },
       "description": "Parameters required to stop an ExpressRoute link failover simulation."
