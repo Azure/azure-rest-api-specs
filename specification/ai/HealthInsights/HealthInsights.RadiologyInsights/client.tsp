@@ -61,8 +61,6 @@ interface RadiologyInsightsClient {
 @@clientName(Fhir.R4.DomainResource, "Fhir_R4_DomainResource", "csharp");
 @@clientName(Fhir.R4.Condition, "Fhir_R4_Condition", "java");
 @@clientName(Fhir.R4.Condition, "Fhir_R4_Condition", "csharp");
-@@usage(Fhir.R4.Condition, Usage.input | Usage.output);
-@@access(Fhir.R4.Condition, Access.public);
 @@clientName(Fhir.R4.ConditionStage, "Fhir_R4_ConditionStage", "java");
 @@clientName(Fhir.R4.ConditionStage, "Fhir_R4_ConditionStage", "csharp");
 @@clientName(Fhir.R4.Observation, "Fhir_R4_Observation", "java");
@@ -85,8 +83,6 @@ interface RadiologyInsightsClient {
 );
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "java");
 @@clientName(Fhir.R4.ResearchStudy, "Fhir_R4_ResearchStudy", "csharp");
-@@usage(Fhir.R4.ResearchStudy, Usage.input | Usage.output);
-@@access(Fhir.R4.ResearchStudy, Access.public);
 
 @@clientName(AzureHealthInsights.FollowupCommunicationInference.wasAcknowledged,
   "acknowledged",
@@ -312,3 +308,9 @@ interface RadiologyInsightsClient {
   "FraxScore",
   "csharp"
 );
+
+// generate the models, even if they are not directly refererenced by API, to avoid breaking changes to Java
+@@usage(Fhir.R4.Condition, Usage.output, "java");
+@@access(Fhir.R4.Condition, Access.public, "java");
+@@usage(Fhir.R4.ResearchStudy, Usage.output, "java");
+@@access(Fhir.R4.ResearchStudy, Access.public, "java");
