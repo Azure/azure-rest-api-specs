@@ -1,0 +1,298 @@
+{
+  "title": "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to a custom table",
+  "operationId": "PipelineGroups_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "pipelineGroupName": "plGroup1",
+    "api-version": "2025-03-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "extendedLocation": {
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+        "type": "CustomLocation"
+      },
+      "tags": {
+        "tag1": "A",
+        "tag2": "B"
+      },
+      "properties": {
+        "receivers": [
+          {
+            "type": "Syslog",
+            "name": "syslog-receiver1",
+            "syslog": {
+              "endpoint": "0.0.0.0:514"
+            }
+          }
+        ],
+        "processors": [
+          {
+            "type": "MicrosoftCommonSecurityLog",
+            "name": "microsoft-cef-transform1"
+          },
+          {
+            "type": "TransformLanguage",
+            "name": "additional-transform1",
+            "transformLanguage": {
+              "transformStatement": "source | where DeviceVendor == 'myVendor' | extend FooColumn = 'bar'"
+            }
+          }
+        ],
+        "exporters": [
+          {
+            "type": "AzureMonitorWorkspaceLogs",
+            "name": "custom-cef-exporter1",
+            "azureMonitorWorkspaceLogs": {
+              "api": {
+                "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                "stream": "Custom-CommonSecurityLogTable_CL",
+                "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                "schema": {
+                  "recordMap": [
+                    {
+                      "from": "attributes.TimeGenerated",
+                      "to": "TimeGenerated"
+                    },
+                    {
+                      "from": "attributes.DeviceVendor",
+                      "to": "DeviceVendor"
+                    },
+                    {
+                      "from": "attributes.FooColumn",
+                      "to": "FooColumn"
+                    }
+                  ]
+                }
+              },
+              "concurrency": {
+                "workerCount": 4,
+                "batchQueueSize": 100
+              }
+            }
+          }
+        ],
+        "service": {
+          "pipelines": [
+            {
+              "name": "MyPipelineForLogs1",
+              "type": "Logs",
+              "receivers": [
+                "syslog-receiver1"
+              ],
+              "processors": [
+                "microsoft-cef-transform1",
+                "additional-transform1"
+              ],
+              "exporters": [
+                "custom-cef-exporter1"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
+        "name": "plGroup1",
+        "type": "Microsoft.Monitor/pipelineGroup",
+        "location": "eastus2",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+          "type": "CustomLocation"
+        },
+        "tags": {
+          "tag1": "A",
+          "tag2": "B"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "receivers": [
+            {
+              "type": "Syslog",
+              "name": "syslog-receiver1",
+              "syslog": {
+                "endpoint": "0.0.0.0:514"
+              }
+            }
+          ],
+          "processors": [
+            {
+              "type": "MicrosoftCommonSecurityLog",
+              "name": "microsoft-cef-transform1"
+            },
+            {
+              "type": "TransformLanguage",
+              "name": "additional-transform1",
+              "transformLanguage": {
+                "transformStatement": "source | where DeviceVendor == 'myVendor' | extend FooColumn = 'bar'"
+              }
+            }
+          ],
+          "exporters": [
+            {
+              "type": "AzureMonitorWorkspaceLogs",
+              "name": "custom-cef-exporter1",
+              "azureMonitorWorkspaceLogs": {
+                "api": {
+                  "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                  "stream": "Custom-CommonSecurityLogTable_CL",
+                  "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                  "schema": {
+                    "recordMap": [
+                      {
+                        "from": "attributes.TimeGenerated",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "attributes.DeviceVendor",
+                        "to": "DeviceVendor"
+                      },
+                      {
+                        "from": "attributes.FooColumn",
+                        "to": "FooColumn"
+                      }
+                    ]
+                  }
+                },
+                "concurrency": {
+                  "workerCount": 4,
+                  "batchQueueSize": 100
+                }
+              }
+            }
+          ],
+          "service": {
+            "pipelines": [
+              {
+                "name": "MyPipelineForLogs1",
+                "type": "Logs",
+                "receivers": [
+                  "syslog-receiver1"
+                ],
+                "processors": [
+                  "microsoft-cef-transform1",
+                  "additional-transform1"
+                ],
+                "exporters": [
+                  "custom-cef-exporter1"
+                ]
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "myuser@myorg.com",
+          "createdByType": "User",
+          "createdAt": "2023-10-02T18:48:39.6050449Z",
+          "lastModifiedBy": "myuser@myorg.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-10-02T18:48:39.6050449Z"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
+        "name": "plGroup1",
+        "type": "Microsoft.Monitor/pipelineGroup",
+        "location": "eastus2",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+          "type": "CustomLocation"
+        },
+        "tags": {
+          "tag1": "A",
+          "tag2": "B"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "receivers": [
+            {
+              "type": "Syslog",
+              "name": "syslog-receiver1",
+              "syslog": {
+                "endpoint": "0.0.0.0:514"
+              }
+            }
+          ],
+          "processors": [
+            {
+              "type": "MicrosoftCommonSecurityLog",
+              "name": "microsoft-cef-transform1"
+            },
+            {
+              "type": "TransformLanguage",
+              "name": "additional-transform1",
+              "transformLanguage": {
+                "transformStatement": "source | where DeviceVendor == 'myVendor' | extend FooColumn = 'bar'"
+              }
+            }
+          ],
+          "exporters": [
+            {
+              "type": "AzureMonitorWorkspaceLogs",
+              "name": "custom-cef-exporter1",
+              "azureMonitorWorkspaceLogs": {
+                "api": {
+                  "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                  "stream": "Custom-CommonSecurityLogTable_CL",
+                  "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                  "schema": {
+                    "recordMap": [
+                      {
+                        "from": "attributes.TimeGenerated",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "attributes.DeviceVendor",
+                        "to": "DeviceVendor"
+                      },
+                      {
+                        "from": "attributes.FooColumn",
+                        "to": "FooColumn"
+                      }
+                    ]
+                  }
+                },
+                "concurrency": {
+                  "workerCount": 4,
+                  "batchQueueSize": 100
+                }
+              }
+            }
+          ],
+          "service": {
+            "pipelines": [
+              {
+                "name": "MyPipelineForLogs1",
+                "type": "Logs",
+                "receivers": [
+                  "syslog-receiver1"
+                ],
+                "processors": [
+                  "microsoft-cef-transform1",
+                  "additional-transform1"
+                ],
+                "exporters": [
+                  "custom-cef-exporter1"
+                ]
+              }
+            ]
+          }
+        },
+        "systemData": {
+          "createdBy": "myuser@myorg.com",
+          "createdByType": "User",
+          "createdAt": "2023-10-02T18:48:39.6050449Z",
+          "lastModifiedBy": "myuser@myorg.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-10-02T18:48:39.6050449Z"
+        }
+      }
+    }
+  }
+}

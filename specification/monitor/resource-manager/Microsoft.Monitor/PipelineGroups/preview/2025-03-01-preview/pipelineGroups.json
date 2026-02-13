@@ -259,12 +259,18 @@
             "$ref": "./examples/PipelineGroupCreateSyslogsWithCache.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to a custom table": {
+            "$ref": "./examples/PipelineGroupCreateStandardCEFWithTransformToCustomTable.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform and a custom TransformLanguage manipulation exporting to the standard CommonSecurityLog table": {
             "$ref": "./examples/PipelineGroupCreateStandardCEFWithTransform.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft CommonSecurityLog transform exporting to the standard CommonSecurityLog table": {
             "$ref": "./examples/PipelineGroupCreateStandardCEF.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage manipulation exporting to a custom table": {
+            "$ref": "./examples/PipelineGroupCreateStandardSyslogWithTransformToCustomTable.json"
+          },
+          "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform and a custom TransformLanguage manipulation exporting to the standard Syslog table": {
             "$ref": "./examples/PipelineGroupCreateStandardSyslogWithTransform.json"
           },
           "Create a PipelineGroup instance using a syslog receiver with Microsoft Syslog transform exporting to the standard Syslog table": {
@@ -741,10 +747,6 @@
         "azureMonitorWorkspaceLogs": {
           "$ref": "#/definitions/AzureMonitorWorkspaceLogsExporter",
           "description": "Azure Monitor Workspace Logs specific configurations."
-        },
-        "tcp": {
-          "$ref": "#/definitions/TcpExporter",
-          "description": "TCP based exporter. Used for pipelineGroup exporter."
         }
       },
       "required": [
@@ -1302,7 +1304,7 @@
         },
         "otlp": {
           "$ref": "#/definitions/OtlpReceiver",
-          "description": "OTLP receiver configurations. This field is mandatory for OTLP and pipelineGroup receivers."
+          "description": "OTLP receiver configurations. This field is mandatory for OTLP receivers."
         },
         "udp": {
           "$ref": "#/definitions/UdpReceiver",
@@ -1319,7 +1321,6 @@
       "description": "The receiver type.",
       "enum": [
         "Syslog",
-        "Ama",
         "OTLP",
         "UDP"
       ],
@@ -1331,11 +1332,6 @@
             "name": "Syslog",
             "value": "Syslog",
             "description": "Linux syslog."
-          },
-          {
-            "name": "Ama",
-            "value": "Ama",
-            "description": "Receives data from azure monitor agent receiver."
           },
           {
             "name": "OTLP",
@@ -1545,20 +1541,6 @@
         "endpoint"
       ]
     },
-    "TcpExporter": {
-      "type": "object",
-      "description": "Base exporter using TCP as transport protocol.",
-      "properties": {
-        "url": {
-          "type": "string",
-          "description": "TCP url to export.",
-          "pattern": "^(https?)://[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$"
-        }
-      },
-      "required": [
-        "url"
-      ]
-    },
     "TlsConfiguration": {
       "type": "object",
       "description": "TLS configuration that can be referenced by receivers.",
@@ -1601,11 +1583,11 @@
         },
         "tlsCertificate": {
           "$ref": "#/definitions/CertificateWithKey",
-          "description": "TLS certificate and its private key."
+          "description": "TLS certificate and its private key. If not specified, default TLS certificate is used."
         },
         "clientCa": {
           "$ref": "#/definitions/CertificateSource",
-          "description": "Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used. Ignored when mode is 'disabled' or 'serverOnly'."
+          "description": "Certificate source configuration for the client CA certificate for validating client certificates. If not specified, default CA certificates are used."
         }
       },
       "required": [
