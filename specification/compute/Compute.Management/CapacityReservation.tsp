@@ -84,6 +84,13 @@ interface CapacityReservations {
    */
   listByCapacityReservationGroup is ComputeResourceListByParent<
     CapacityReservation,
+    Parameters = {
+      /**
+       * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
+       */
+      @query("$expand")
+      $expand?: ExpandTypesForGetCapacityReservationGroups;
+    },
     Response = CapacityReservationListResult
   >;
 }

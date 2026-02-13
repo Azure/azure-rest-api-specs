@@ -16,7 +16,7 @@ jobs:
       github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
       contains(github.event.check_run.name, 'SDK Validation')
     name: "SDK Validation Status"
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@v6
         with:

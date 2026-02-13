@@ -12,7 +12,7 @@ namespace Microsoft.ContainerService;
 /** Scaling configuration */
 model ScalingConfiguration {
   /** Scaling type for the app. Default is manual scaling */
-  type?: ScalingType;
+  type?: ScalingType = "Manual";
 
   /** Minimum number of replicas for the app when using autoscaling */
   minReplicas?: int32;
@@ -21,7 +21,7 @@ model ScalingConfiguration {
   maxReplicas?: int32;
 
   /** List of autoscaling triggers for the app */
-  @identifiers(#["type"])
+  @identifiers(#[])
   autoscalingTriggers?: AutoscalingTrigger[];
 }
 
@@ -36,11 +36,8 @@ union ScalingType {
   string,
 }
 
-/** KEDA Autoscaling Trigger */
+/** KEDA Autoscaling Trigger. Only 1 of these fields can be filled out at a time */
 model AutoscalingTrigger {
-  /** Type of the autoscaling trigger */
-  type: AutoscalingTriggerType;
-
   /** Configuration for GitHub Runner trigger. Only required when type is 'github-runner'. */
   gitHubRunner?: GitHubRunnerTriggerMetadata;
 
@@ -70,50 +67,6 @@ model AutoscalingTrigger {
 
   /** Configuration for Azure Storage Queue trigger. Only required when type is 'azure-storage-queue'. */
   azureStorageQueue?: AzureStorageQueueTriggerMetadata;
-}
-
-/** KEDA Autoscaling Trigger Types */
-union AutoscalingTriggerType {
-  /** CPU based autoscaling */
-  Cpu: "cpu",
-
-  /** Memory based autoscaling */
-  Memory: "memory",
-
-  /** Keda Cron trigger */
-  Cron: "cron",
-
-  /** Keda GitHub Runner trigger */
-  GitHubRunner: "github-runner",
-
-  /** Keda Azure App Insights trigger */
-  AzureAppInsights: "azure-app-insights",
-
-  /** Keda Azure Blob trigger */
-  AzureBlob: "azure-blob",
-
-  /** Keda Azure Data Explorer trigger */
-  AzureDataExplorer: "azure-data-explorer",
-
-  /** Keda Azure Event Hub trigger */
-  AzureEventHub: "azure-eventhub",
-
-  /** Keda Azure Log Analytics trigger */
-  AzureLogAnalytics: "azure-log-analytics",
-
-  /** Keda Azure Monitor trigger */
-  AzureMonitor: "azure-monitor",
-
-  /** Keda Azure Pipelines Trigger */
-  AzurePipelines: "azure-pipelines",
-
-  /** Keda Azure Service Bus Trigger */
-  AzureServiceBus: "azure-servicebus",
-
-  /** Keda Azure Storage Queue Trigger */
-  AzureStorageQueue: "azure-storage-queue",
-
-  string,
 }
 
 /** GitHub Runner Trigger Configuration */

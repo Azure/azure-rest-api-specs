@@ -546,12 +546,8 @@
     },
     "AutoscalingTrigger": {
       "type": "object",
-      "description": "KEDA Autoscaling Trigger",
+      "description": "KEDA Autoscaling Trigger. Only 1 of these fields can be filled out at a time",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/AutoscalingTriggerType",
-          "description": "Type of the autoscaling trigger"
-        },
         "gitHubRunner": {
           "$ref": "#/definitions/GitHubRunnerTriggerMetadata",
           "description": "Configuration for GitHub Runner trigger. Only required when type is 'github-runner'."
@@ -592,99 +588,6 @@
           "$ref": "#/definitions/AzureStorageQueueTriggerMetadata",
           "description": "Configuration for Azure Storage Queue trigger. Only required when type is 'azure-storage-queue'."
         }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "AutoscalingTriggerType": {
-      "type": "string",
-      "description": "KEDA Autoscaling Trigger Types",
-      "enum": [
-        "cpu",
-        "memory",
-        "cron",
-        "github-runner",
-        "azure-app-insights",
-        "azure-blob",
-        "azure-data-explorer",
-        "azure-eventhub",
-        "azure-log-analytics",
-        "azure-monitor",
-        "azure-pipelines",
-        "azure-servicebus",
-        "azure-storage-queue"
-      ],
-      "x-ms-enum": {
-        "name": "AutoscalingTriggerType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Cpu",
-            "value": "cpu",
-            "description": "CPU based autoscaling"
-          },
-          {
-            "name": "Memory",
-            "value": "memory",
-            "description": "Memory based autoscaling"
-          },
-          {
-            "name": "Cron",
-            "value": "cron",
-            "description": "Keda Cron trigger"
-          },
-          {
-            "name": "GitHubRunner",
-            "value": "github-runner",
-            "description": "Keda GitHub Runner trigger"
-          },
-          {
-            "name": "AzureAppInsights",
-            "value": "azure-app-insights",
-            "description": "Keda Azure App Insights trigger"
-          },
-          {
-            "name": "AzureBlob",
-            "value": "azure-blob",
-            "description": "Keda Azure Blob trigger"
-          },
-          {
-            "name": "AzureDataExplorer",
-            "value": "azure-data-explorer",
-            "description": "Keda Azure Data Explorer trigger"
-          },
-          {
-            "name": "AzureEventHub",
-            "value": "azure-eventhub",
-            "description": "Keda Azure Event Hub trigger"
-          },
-          {
-            "name": "AzureLogAnalytics",
-            "value": "azure-log-analytics",
-            "description": "Keda Azure Log Analytics trigger"
-          },
-          {
-            "name": "AzureMonitor",
-            "value": "azure-monitor",
-            "description": "Keda Azure Monitor trigger"
-          },
-          {
-            "name": "AzurePipelines",
-            "value": "azure-pipelines",
-            "description": "Keda Azure Pipelines Trigger"
-          },
-          {
-            "name": "AzureServiceBus",
-            "value": "azure-servicebus",
-            "description": "Keda Azure Service Bus Trigger"
-          },
-          {
-            "name": "AzureStorageQueue",
-            "value": "azure-storage-queue",
-            "description": "Keda Azure Storage Queue Trigger"
-          }
-        ]
       }
     },
     "AzureAppInsightsTriggerMetadata": {
@@ -1976,8 +1879,29 @@
       "description": "Scaling configuration",
       "properties": {
         "type": {
-          "$ref": "#/definitions/ScalingType",
-          "description": "Scaling type for the app. Default is manual scaling"
+          "type": "string",
+          "description": "Scaling type for the app. Default is manual scaling",
+          "default": "Manual",
+          "enum": [
+            "autoscale",
+            "manual"
+          ],
+          "x-ms-enum": {
+            "name": "ScalingType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Autoscale",
+                "value": "autoscale",
+                "description": "Auto scale"
+              },
+              {
+                "name": "Manual",
+                "value": "manual",
+                "description": "Manual scale"
+              }
+            ]
+          }
         },
         "minReplicas": {
           "type": "integer",
@@ -1995,9 +1919,7 @@
           "items": {
             "$ref": "#/definitions/AutoscalingTrigger"
           },
-          "x-ms-identifiers": [
-            "type"
-          ]
+          "x-ms-identifiers": []
         }
       }
     },
