@@ -17,13 +17,21 @@ const exampleCache = new KeyedCache();
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
+ * @param {string[]} [options.gitOptions] Additional git options to pass to git diff command. Example: ["--no-renames"]. Default: []
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
  * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<string[]>} List of changed files, using posix paths, relative to repo root. Example: ["specification/foo/Microsoft.Foo/main.tsp"].
  */
 export async function getChangedFiles(options = {}) {
-  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
+  const {
+    baseCommitish = "HEAD^",
+    cwd,
+    gitOptions = [],
+    headCommitish = "HEAD",
+    logger,
+    paths = [],
+  } = options;
 
   if (paths.length > 0) {
     // Use "--" to separate paths from revisions
@@ -35,7 +43,13 @@ export async function getChangedFiles(options = {}) {
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish, ...paths]);
+  const result = await simpleGit(cwd).diff([
+    "--name-only",
+    ...gitOptions,
+    baseCommitish,
+    headCommitish,
+    ...paths,
+  ]);
 
   const files = result
     .trim()
@@ -59,13 +73,21 @@ export async function getChangedFiles(options = {}) {
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
+ * @param {string[]} [options.gitOptions] Additional git options to pass to git diff command. Example: ["--no-renames"]. Default: []
  * @param {string} [options.headCommitish] Default: "HEAD".
  * @param {import('./logger.js').ILogger} [options.logger]
  * @param {string[]} [options.paths] Limits the diff to the named paths.  If not set, includes all paths in repo.  Default: []
  * @returns {Promise<{additions: string[], modifications: string[], deletions: string[], renames: {from: string, to: string}[], total: number}>}
  */
 export async function getChangedFilesStatuses(options = {}) {
-  const { baseCommitish = "HEAD^", cwd, headCommitish = "HEAD", logger, paths = [] } = options;
+  const {
+    baseCommitish = "HEAD^",
+    cwd,
+    gitOptions = [],
+    headCommitish = "HEAD",
+    logger,
+    paths = [],
+  } = options;
 
   if (paths.length > 0) {
     // Use "--" to separate paths from revisions
@@ -74,6 +96,7 @@ export async function getChangedFilesStatuses(options = {}) {
 
   const result = await simpleGit(cwd).diff([
     "--name-status",
+    ...gitOptions,
     baseCommitish,
     headCommitish,
     ...paths,
