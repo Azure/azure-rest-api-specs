@@ -1349,6 +1349,7 @@ model PolicyExemptionProperties {
   /**
    * The policy exemption metadata. Metadata is an open ended object and is typically a collection of key value pairs.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   metadata?: unknown;
 
   /**
@@ -1441,5 +1442,6 @@ model PolicyVariableValueColumnValue {
   /**
    * Column value for the variable value; this can be an integer, double, boolean, null or a string.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   columnValue: unknown;
 }
