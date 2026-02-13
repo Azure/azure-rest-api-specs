@@ -1279,6 +1279,20 @@ union DeploymentScope {
  * Day of the week. Modeled as string
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
+enum ScalingScheduleDaysOfWeekItem {
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday,
+  Sunday,
+}
+
+/**
+ * Day of the week. Modeled as string
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
 enum DayOfWeek {
   Monday,
   Tuesday,

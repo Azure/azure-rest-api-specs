@@ -226,3 +226,8 @@ using Microsoft.DesktopVirtualization;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+
+@@alternateType(ScalingSchedule.daysOfWeek,
+  ScalingScheduleDaysOfWeekItem,
+  "csharp"
+);
