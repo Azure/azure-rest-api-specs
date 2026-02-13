@@ -1,0 +1,46 @@
+parameters:
+  "service-dir":
+    default: "sdk/alertProcessingrules"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: false
+    emitter-output-dir: "{project-root}"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/AlertProcessingRules.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/alertsmanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-alertprocessingrules"
+    namespace: "azure.mgmt.alertprocessingrules"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-alertprocessingrules"
+    namespace: "com.azure.resourcemanager.alertprocessingrules"
+    service-name: "AlertProcessingRules" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/alertprocessingrules
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-alertprocessingrules"
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-alertprocessingrules"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/alertprocessingrules"
+    emitter-output-dir: "{output-dir}/{service-dir}/armalertprocessingrules"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armalertprocessingrules"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

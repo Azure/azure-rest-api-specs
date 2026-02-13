@@ -949,7 +949,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -1418,7 +1418,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -1629,7 +1629,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2224,7 +2224,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2375,7 +2375,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2618,7 +2618,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2727,7 +2727,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2849,7 +2849,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2981,7 +2981,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3141,7 +3141,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3245,7 +3245,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3349,7 +3349,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3425,12 +3425,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "formData",
             "required": true,
@@ -3458,7 +3452,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3603,7 +3597,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3624,7 +3618,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&acquire": {
+    "/{containerName}?comp=lease&restype=container": {
       "put": {
         "operationId": "Container_AcquireLease",
         "description": "The Acquire Lease operation requests a new lease on a container. The lease lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -3753,7 +3747,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3774,7 +3768,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&release": {
+    "/{containerName}?comp=lease&restype=container&_overload=releaseLease": {
       "put": {
         "operationId": "Container_ReleaseLease",
         "description": "The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the container.",
@@ -3890,7 +3884,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3911,7 +3905,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&renew": {
+    "/{containerName}?comp=lease&restype=container&_overload=renewLease": {
       "put": {
         "operationId": "Container_RenewLease",
         "description": "The Renew Lease operation renews an existing lease.",
@@ -4031,7 +4025,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4052,7 +4046,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&break": {
+    "/{containerName}?comp=lease&restype=container&_overload=breakLease": {
       "put": {
         "operationId": "Container_BreakLease",
         "description": "The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired.",
@@ -4174,7 +4168,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4195,7 +4189,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&change": {
+    "/{containerName}?comp=lease&restype=container&_overload=changeLease": {
       "put": {
         "operationId": "Container_ChangeLease",
         "description": "The Change Lease operation is used to change the ID of an existing lease.",
@@ -4323,7 +4317,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4344,7 +4338,7 @@
         }
       }
     },
-    "/{containerName}?restype=container&comp=list&flat": {
+    "/{containerName}?restype=container&comp=list": {
       "get": {
         "operationId": "Container_ListBlobFlatSegment",
         "description": "The List Blobs operation returns a list of the blobs under the specified container.",
@@ -4516,7 +4510,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4537,7 +4531,7 @@
         }
       }
     },
-    "/{containerName}?restype=container&comp=list&hierarchy": {
+    "/{containerName}?restype=container&comp=list&_overload=listBlobHierarchySegment": {
       "get": {
         "operationId": "Container_ListBlobHierarchySegment",
         "description": "The List Blobs operation returns a list of the blobs under the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system.",
@@ -4716,7 +4710,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4892,7 +4886,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4990,7 +4984,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5146,7 +5140,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5167,7 +5161,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=properties&SetHTTPHeaders": {
+    "/{containerName}/{blobName}?comp=properties": {
       "put": {
         "operationId": "Blob_SetProperties",
         "description": "The Set HTTP Headers operation sets system properties on the blob.",
@@ -5357,7 +5351,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5551,7 +5545,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5664,7 +5658,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5789,7 +5783,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6016,7 +6010,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6037,7 +6031,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&acquire": {
+    "/{containerName}/{blobName}?comp=lease": {
       "put": {
         "operationId": "Blob_AcquireLease",
         "description": "The Acquire Lease operation requests a new lease on a blob. The lease lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -6200,7 +6194,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6221,7 +6215,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&release": {
+    "/{containerName}/{blobName}?comp=lease&_overload=releaseLease": {
       "put": {
         "operationId": "Blob_ReleaseLease",
         "description": "The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the blob.",
@@ -6371,7 +6365,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6392,7 +6386,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&renew": {
+    "/{containerName}/{blobName}?comp=lease&_overload=renewLease": {
       "put": {
         "operationId": "Blob_RenewLease",
         "description": "The Renew Lease operation renews an existing lease.",
@@ -6546,7 +6540,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6567,7 +6561,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&change": {
+    "/{containerName}/{blobName}?comp=lease&_overload=changeLease": {
       "put": {
         "operationId": "Blob_ChangeLease",
         "description": "The Change Lease operation is used to change the ID of an existing lease.",
@@ -6729,7 +6723,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6750,7 +6744,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&break": {
+    "/{containerName}/{blobName}?comp=lease&_overload=breakLease": {
       "put": {
         "operationId": "Blob_BreakLease",
         "description": "The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired.",
@@ -6906,7 +6900,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7129,7 +7123,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7622,7 +7616,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7643,7 +7637,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=copy&copyid": {
+    "/{containerName}/{blobName}?comp=copy": {
       "put": {
         "operationId": "Blob_AbortCopyFromUrl",
         "description": "The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata.",
@@ -7750,7 +7744,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8033,7 +8027,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8054,7 +8048,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?restype=account&comp=properties&blob": {
+    "/{containerName}/{blobName}?restype=account&comp=properties": {
       "get": {
         "operationId": "Blob_GetAccountInfo",
         "description": "Returns the sku name and account kind",
@@ -8219,7 +8213,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8351,7 +8345,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8500,7 +8494,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8859,7 +8853,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8880,7 +8874,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=page&update": {
+    "/{containerName}/{blobName}?comp=page": {
       "put": {
         "operationId": "PageBlob_UploadPages",
         "description": "The Upload Pages operation writes a range of pages to a page blob",
@@ -9199,7 +9193,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9220,7 +9214,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=page&clear": {
+    "/{containerName}/{blobName}?comp=page&_overload=clearPages": {
       "put": {
         "operationId": "PageBlob_ClearPages",
         "description": "The Clear Pages operation clears a range of pages from a page blob",
@@ -9477,7 +9471,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9498,7 +9492,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=page&update&fromUrl": {
+    "/{containerName}/{blobName}?comp=page&_overload=uploadPagesFromUrl": {
       "put": {
         "operationId": "PageBlob_UploadPagesFromUrl",
         "description": "The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL.",
@@ -9863,7 +9857,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10059,7 +10053,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10080,7 +10074,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=pagelist&diff": {
+    "/{containerName}/{blobName}?comp=pagelist&_overload=getPageRangesDiff": {
       "get": {
         "operationId": "PageBlob_GetPageRangesDiff",
         "description": "The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob.",
@@ -10270,7 +10264,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10291,7 +10285,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=properties&Resize": {
+    "/{containerName}/{blobName}?comp=properties&_overload=resize": {
       "put": {
         "operationId": "PageBlob_Resize",
         "description": "The Resize operation increases the size of the page blob to the specified size.",
@@ -10487,7 +10481,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10508,7 +10502,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=properties&UpdateSequenceNumber": {
+    "/{containerName}/{blobName}?comp=properties&_overload=setSequenceNumber": {
       "put": {
         "operationId": "PageBlob_SetSequenceNumber",
         "description": "The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob.",
@@ -10693,7 +10687,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10890,7 +10884,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11203,7 +11197,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11224,7 +11218,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=appendblock&fromUrl": {
+    "/{containerName}/{blobName}?comp=appendblock&_overload=appendBlockFromUrl": {
       "put": {
         "operationId": "AppendBlob_AppendBlockFromUrl",
         "description": "The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL.",
@@ -11571,7 +11565,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11733,7 +11727,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -12254,7 +12248,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -12275,7 +12269,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?BlockBlob&fromUrl": {
+    "/{containerName}/{blobName}?_overload=putBlobFromUrl": {
       "put": {
         "operationId": "BlockBlob_PutBlobFromUrl",
         "description": "The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List.",
@@ -12812,7 +12806,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13056,7 +13050,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13077,7 +13071,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=block&fromURL": {
+    "/{containerName}/{blobName}?comp=block&_overload=stageBlockFromUrl": {
       "put": {
         "operationId": "BlockBlob_StageBlockFromUrl",
         "description": "The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL.",
@@ -13346,7 +13340,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13824,7 +13818,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13996,7 +13990,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14744,7 +14738,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14813,12 +14807,6 @@
             "x-ms-client-name": "contentLength"
           },
           {
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "formData",
             "required": true,
@@ -14851,7 +14839,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14989,7 +14977,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15128,7 +15116,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15297,7 +15285,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15382,7 +15370,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15461,7 +15449,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15545,7 +15533,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15638,7 +15626,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -16920,6 +16908,38 @@
         ]
       }
     },
+    "Error": {
+      "type": "object",
+      "description": "The error response.",
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The error code.",
+          "x-ms-client-name": "code"
+        },
+        "Message": {
+          "type": "string",
+          "description": "The error message.",
+          "x-ms-client-name": "message"
+        },
+        "CopySourceStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Copy source status code",
+          "x-ms-client-name": "copySourceStatusCode"
+        },
+        "CopySourceErrorCode": {
+          "type": "string",
+          "description": "Copy source error code",
+          "x-ms-client-name": "copySourceErrorCode"
+        },
+        "CopySourceErrorMessage": {
+          "type": "string",
+          "description": "Copy source error message",
+          "x-ms-client-name": "copySourceErrorMessage"
+        }
+      }
+    },
     "FileShareTokenIntent": {
       "type": "string",
       "description": "The file share token intent types.",
@@ -18060,38 +18080,6 @@
       "required": [
         "Enabled"
       ]
-    },
-    "StorageError": {
-      "type": "object",
-      "description": "The error response.",
-      "properties": {
-        "Code": {
-          "type": "string",
-          "description": "The error code.",
-          "x-ms-client-name": "code"
-        },
-        "Message": {
-          "type": "string",
-          "description": "The error message.",
-          "x-ms-client-name": "message"
-        },
-        "CopySourceStatusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Copy source status code",
-          "x-ms-client-name": "copySourceStatusCode"
-        },
-        "CopySourceErrorCode": {
-          "type": "string",
-          "description": "Copy source error code",
-          "x-ms-client-name": "copySourceErrorCode"
-        },
-        "CopySourceErrorMessage": {
-          "type": "string",
-          "description": "Copy source error message",
-          "x-ms-client-name": "copySourceErrorMessage"
-        }
-      }
     },
     "StorageServiceProperties": {
       "type": "object",

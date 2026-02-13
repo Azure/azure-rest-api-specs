@@ -26,7 +26,20 @@ These are the global settings for the Resource API.
 title: PolicyClient
 description: Policy Client
 openapi-type: arm
-tag: package-policy-2025-03-stable
+tag: package-policy-2025-11-stable
+```
+
+### Tag: package-policy-2025-11-stable
+
+These settings apply only when `--tag=package-policy-2025-11-stable` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-2025-11-stable'
+input-file:
+  - stable/2025-11-01/openapi.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2025-03-stable
@@ -35,16 +48,178 @@ These settings apply only when `--tag=package-policy-2025-03-stable` is specifie
 
 ```yaml $(tag) == 'package-policy-2025-03-stable'
 input-file:
-  - stable/2025-03-01/policyAssignments.json
-  - stable/2025-03-01/policyDefinitions.json
-  - stable/2025-03-01/policyDefinitionVersions.json
-  - stable/2025-03-01/policySetDefinitions.json
-  - stable/2025-03-01/policySetDefinitionVersions.json
-  - stable/2025-03-01/policyTokens.json
+  - stable/2025-03-01/openapi.json
 
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-policy-python
+
+These settings apply only when `--tag=package-policy-python` is specified on the command line.
+
+```yaml $(tag) == 'package-policy-python'
+input-file:
+  - stable/2025-03-01/openapi.json
+  - stable/2020-09-01/dataPolicyManifests.json
+directive:
+  # Replace CloudError with ErrorResponse from common-types v5 to avoid duplicate schema conflict
+  - from: dataPolicyManifests.json
+    where: $.paths["/providers/Microsoft.Authorization/dataPolicyManifests/{policyMode}"].get.responses.default.schema
+    transform: $["$ref"] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse";
+  - from: dataPolicyManifests.json
+    where: $.paths["/providers/Microsoft.Authorization/dataPolicyManifests"].get.responses.default.schema
+    transform: $["$ref"] = "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse";
+  - from: dataPolicyManifests.json
+    where: $.definitions
+    transform: delete $.CloudError;
+
+  # Add missing operations of PolicyAssignments.json from tag 'package-policy-2023-04' that are not in openapi.json to keep compatibility for Python SDK
+  - from: openapi.json
+    where: $.paths
+    transform: |
+      $["/{policyAssignmentId}"] = {
+        "delete": {
+          "tags": ["PolicyAssignments"],
+          "operationId": "PolicyAssignments_DeleteById",
+          "summary": "Deletes a policy assignment.",
+          "description": "This operation deletes the policy with the given ID. Policy assignment IDs have this format: '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'. Valid formats for {scope} are: '/providers/Microsoft.Management/managementGroups/{managementGroup}' (management group), '/subscriptions/{subscriptionId}' (subscription), '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' (resource group), or '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}' (resource).",
+          "parameters": [
+            {
+              "name": "policyAssignmentId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The ID of the policy assignment to delete. Use the format '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.",
+              "x-ms-skip-url-encoding": true
+            },
+            {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK - Returns information about the policy assignment.",
+              "schema": { "$ref": "#/definitions/PolicyAssignment" }
+            },
+            "204": { "description": "No Content - the policy assignment doesn't exist." },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": { "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            }
+          }
+        },
+        "put": {
+          "tags": ["PolicyAssignments"],
+          "operationId": "PolicyAssignments_CreateById",
+          "summary": "Creates or updates a policy assignment.",
+          "description": "This operation creates or updates the policy assignment with the given ID. Policy assignments made on a scope apply to all resources contained in that scope. For example, when you assign a policy to a resource group that policy applies to all resources in the group. Policy assignment IDs have this format: '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.",
+          "parameters": [
+            {
+              "name": "policyAssignmentId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The ID of the policy assignment to create. Use the format '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.",
+              "x-ms-skip-url-encoding": true
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": { "$ref": "#/definitions/PolicyAssignment" },
+              "description": "Parameters for policy assignment."
+            },
+            {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Created - Returns information about the policy assignment.",
+              "schema": { "$ref": "#/definitions/PolicyAssignment" }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": { "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            }
+          }
+        },
+        "get": {
+          "tags": ["PolicyAssignments"],
+          "operationId": "PolicyAssignments_GetById",
+          "summary": "Retrieves the policy assignment with the given ID.",
+          "description": "The operation retrieves the policy assignment with the given ID. Policy assignment IDs have this format: '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.",
+          "parameters": [
+            {
+              "name": "policyAssignmentId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The ID of the policy assignment to get. Use the format '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.",
+              "x-ms-skip-url-encoding": true
+            },
+            {
+              "name": "$expand",
+              "in": "query",
+              "required": false,
+              "type": "string",
+              "description": "Comma-separated list of additional properties to be included in the response. Supported values are 'LatestDefinitionVersion, EffectiveDefinitionVersion'."
+            },
+            {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK - Returns information about the policy assignment.",
+              "schema": { "$ref": "#/definitions/PolicyAssignment" }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": { "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            }
+          }
+        },
+        "patch": {
+          "tags": ["PolicyAssignments"],
+          "operationId": "PolicyAssignments_UpdateById",
+          "summary": "Updates a policy assignment.",
+          "description": "This operation updates the policy assignment with the given ID. Policy assignments made on a scope apply to all resources contained in that scope. For example, when you assign a policy to a resource group that policy applies to all resources in the group. Policy assignment IDs have this format: '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.",
+          "parameters": [
+            {
+              "name": "policyAssignmentId",
+              "in": "path",
+              "required": true,
+              "type": "string",
+              "description": "The ID of the policy assignment to update. Use the format '{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}'.",
+              "x-ms-skip-url-encoding": true
+            },
+            {
+              "name": "parameters",
+              "in": "body",
+              "required": true,
+              "schema": { "$ref": "#/definitions/PolicyAssignmentUpdate" },
+              "description": "Parameters for policy assignment patch request."
+            },
+            {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK - Returns information about the policy assignment.",
+              "schema": { "$ref": "#/definitions/PolicyAssignment" }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": { "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            }
+          }
+        }
+      };
+      return $;
 ```
 
 ### Tag: package-policy-2025-01
@@ -457,10 +632,19 @@ directive:
     from: policySetDefinitions.json
     reason: policy set definition under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
+    from: openapi.json
+    reason: policy set definition under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
     from: policyDefinitions.json
     reason: policy definition under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
+    from: openapi.json
+    reason: policy definition under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
     from: policyAssignments.json
+    reason: policy assignment under an extension resource with Microsoft.Management
+  - suppress: UniqueResourcePaths
+    from: openapi.json
     reason: policy assignment under an extension resource with Microsoft.Management
   - suppress: UniqueResourcePaths
     from: policyExemptions.json
@@ -470,43 +654,86 @@ directive:
     from: policyAssignments.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
+    from: openapi.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
     from: policyDefinitions.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: openapi.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyDefinitionVersions.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
+    from: openapi.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
     from: policySetDefinitions.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: openapi.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policySetDefinitionVersions.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
+    from: openapi.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
     from: policyExemptions.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: openapi.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
     from: policyVariables.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: OperationsAPIImplementation
+    from: openapi.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
     from: policyVariableValues.json
+    reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
+  - suppress: OperationsAPIImplementation
+    from: openapi.json
     reason: operation APIs for Microsoft.Authorization are to be defined in RBAC swagger
   - suppress: BodyTopLevelProperties
     from: policyAssignments.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
+    from: openapi.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
     from: policyDefinitions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: openapi.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
     from: policyDefinitionVersions.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
+    from: openapi.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
     from: policySetDefinitions.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
+    from: openapi.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
     from: policySetDefinitionVersions.json
     reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
   - suppress: BodyTopLevelProperties
+    from: openapi.json
+    reason: Currently systemData is not allowed. Lint bug - collection GET result contains value and nextLink properties.
+  - suppress: BodyTopLevelProperties
     from: policyExemptions.json
+    where: $.definitions.PolicyExemption.properties
+    reason: Currently systemData is not allowed
+  - suppress: BodyTopLevelProperties
+    from: openapi.json
     where: $.definitions.PolicyExemption.properties
     reason: Currently systemData is not allowed
   - suppress: OperationsAPIImplementation
@@ -529,13 +756,25 @@ directive:
     from: policyDefinitions.json
     reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
   - suppress: TopLevelResourcesListByResourceGroup
+    from: openapi.json
+    reason: Policy definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
     from: policyVariables.json
+    reason: Policy variables are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: openapi.json
     reason: Policy variables are a proxy resource that is only usable on subscriptions or management groups
   - suppress: TopLevelResourcesListByResourceGroup
     from: policyVariableValues.json
     reason: Policy variable values are a proxy resource that is only usable on subscriptions or management groups
   - suppress: TopLevelResourcesListByResourceGroup
+    from: openapi.json
+    reason: Policy variable values are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
     from: policySetDefinitions.json
+    reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
+  - suppress: TopLevelResourcesListByResourceGroup
+    from: openapi.json
     reason: Policy set definitions are a proxy resource that is only usable on subscriptions or management groups
   - suppress: PathForTrackedResourceTypes
     from: policyAssignments.json
