@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "./models.tsp";
+import "./CommonModels.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -9,6 +9,217 @@ using TypeSpec.Http;
 using Versioning;
 
 namespace Microsoft.ContainerService;
+
+/**
+ * The list of available versions for an agent pool.
+ */
+model AgentPoolAvailableVersions {
+  /**
+   * The ID of the agent pool version list.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the agent pool version list.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Type of the agent pool version list.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Properties of agent pool available versions.
+   */
+  properties: AgentPoolAvailableVersionsProperties;
+}
+
+/**
+ * The list of available agent pool versions.
+ */
+model AgentPoolAvailableVersionsProperties {
+  /**
+   * List of versions available for agent pool.
+   */
+  @identifiers(#[])
+  agentPoolVersions?: AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem[];
+}
+
+/** Available version information for an agent pool. */
+model AgentPoolAvailableVersionsPropertiesAgentPoolVersionsItem {
+  /**
+   * Whether this version is the default agent pool version.
+   */
+  default?: boolean;
+
+  /**
+   * The Kubernetes version (major.minor.patch).
+   */
+  kubernetesVersion?: string;
+
+  /**
+   * Whether Kubernetes version is currently in preview.
+   */
+  isPreview?: boolean;
+}
+
+/**
+ * A run command request
+ */
+model RunCommandRequest {
+  /**
+   * The command to run.
+   */
+  command: string;
+
+  /**
+   * A base64 encoded zip file containing the files required by the command.
+   */
+  context?: string;
+
+  /**
+   * AuthToken issued for AKS AAD Server App.
+   */
+  clusterToken?: string;
+}
+
+/**
+ * run command result.
+ */
+model RunCommandResult {
+  /**
+   * The command id.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Properties of command result.
+   */
+  properties?: CommandResultProperties;
+}
+
+/**
+ * The results of a run command
+ */
+model CommandResultProperties {
+  /**
+   * provisioning State
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The exit code of the command
+   */
+  @visibility(Lifecycle.Read)
+  exitCode?: int32;
+
+  /**
+   * The time when the command started.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  startedAt?: utcDateTime;
+
+  /**
+   * The time when the command finished.
+   */
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  finishedAt?: utcDateTime;
+
+  /**
+   * The command output.
+   */
+  @visibility(Lifecycle.Read)
+  logs?: string;
+
+  /**
+   * An explanation of why provisioningState is set to failed (if so).
+   */
+  @visibility(Lifecycle.Read)
+  reason?: string;
+}
+
+/**
+ * Collection of OutboundEnvironmentEndpoint
+ */
+model OutboundEnvironmentEndpointCollection
+  is Azure.Core.Page<OutboundEnvironmentEndpoint>;
+
+/**
+ * Egress endpoints which AKS agent nodes connect to for common purpose.
+ */
+model OutboundEnvironmentEndpoint {
+  /**
+   * The category of endpoints accessed by the AKS agent node, e.g. azure-resource-management, apiserver, etc.
+   */
+  category?: string;
+
+  /**
+   * The endpoints that AKS agent nodes connect to
+   */
+  @identifiers(#[])
+  endpoints?: EndpointDependency[];
+}
+
+/**
+ * A domain name that AKS agent nodes are reaching at.
+ */
+model EndpointDependency {
+  /**
+   * The domain name of the dependency.
+   */
+  domainName?: string;
+
+  /**
+   * The Ports and Protocols used when connecting to domainName.
+   */
+  @identifiers(#[])
+  endpointDetails?: EndpointDetail[];
+}
+
+/**
+ * connect information from the AKS agent nodes to a single endpoint.
+ */
+model EndpointDetail {
+  /**
+   * An IP Address that Domain Name currently resolves to.
+   */
+  ipAddress?: string;
+
+  /**
+   * The port an endpoint is connected to.
+   */
+  port?: int32;
+
+  /**
+   * The protocol used for connection
+   */
+  protocol?: string;
+
+  /**
+   * Description of the detail
+   */
+  description?: string;
+}
+
+/**
+ * A list of private link resources
+ */
+model PrivateLinkResourcesListResult {
+  /**
+   * The collection value.
+   */
+  @pageItems
+  value?: PrivateLinkResource[];
+}
+
 /**
  * Managed cluster.
  */
