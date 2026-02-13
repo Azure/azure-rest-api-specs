@@ -8878,7 +8878,7 @@
         },
         "federatedClientId": {
           "type": "string",
-          "description": "ClientId of the multi-tenant AAD Application. Used to access cross-tenant keyvaults."
+          "description": "ClientId of the multi-tenant Entra ID Application. Used to access cross-tenant keyvaults."
         }
       }
     },
@@ -10328,6 +10328,42 @@
         }
       }
     },
+    "QuotaType": {
+      "type": "string",
+      "description": "Type of quota",
+      "enum": [
+        "DefaultUserQuota",
+        "DefaultGroupQuota",
+        "IndividualUserQuota",
+        "IndividualGroupQuota"
+      ],
+      "x-ms-enum": {
+        "name": "QuotaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DefaultUserQuota",
+            "value": "DefaultUserQuota",
+            "description": "Default user quota"
+          },
+          {
+            "name": "DefaultGroupQuota",
+            "value": "DefaultGroupQuota",
+            "description": "Default group quota"
+          },
+          {
+            "name": "IndividualUserQuota",
+            "value": "IndividualUserQuota",
+            "description": "Individual user quota"
+          },
+          {
+            "name": "IndividualGroupQuota",
+            "value": "IndividualGroupQuota",
+            "description": "Individual group quota"
+          }
+        ]
+      }
+    },
     "ReestablishReplicationRequest": {
       "type": "object",
       "description": "Re-establish request object supplied in the body of the operation.",
@@ -10546,10 +10582,7 @@
           "description": "Replication deletion time",
           "readOnly": true
         }
-      },
-      "required": [
-        "remoteVolumeResourceId"
-      ]
+      }
     },
     "ReplicationMirrorState": {
       "type": "string",
@@ -11294,42 +11327,6 @@
           "type": "string",
           "description": "A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>"
         }
-      }
-    },
-    "Type": {
-      "type": "string",
-      "description": "Type of quota",
-      "enum": [
-        "DefaultUserQuota",
-        "DefaultGroupQuota",
-        "IndividualUserQuota",
-        "IndividualGroupQuota"
-      ],
-      "x-ms-enum": {
-        "name": "Type",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DefaultUserQuota",
-            "value": "DefaultUserQuota",
-            "description": "Default user quota"
-          },
-          {
-            "name": "DefaultGroupQuota",
-            "value": "DefaultGroupQuota",
-            "description": "Default group quota"
-          },
-          {
-            "name": "IndividualUserQuota",
-            "value": "IndividualUserQuota",
-            "description": "Individual user quota"
-          },
-          {
-            "name": "IndividualGroupQuota",
-            "value": "IndividualGroupQuota",
-            "description": "Individual group quota"
-          }
-        ]
       }
     },
     "UnixPermissions": {
@@ -12704,7 +12701,7 @@
           "description": "Size of quota"
         },
         "quotaType": {
-          "$ref": "#/definitions/Type",
+          "$ref": "#/definitions/QuotaType",
           "description": "Type of quota",
           "x-ms-mutability": [
             "read",
