@@ -84,7 +84,8 @@ interface ServiceResources {
   update is ArmCustomPatchAsync<
     ServiceResource,
     PatchModel = ServiceResourceUpdate,
-    Response = ArmAcceptedLroResponse & {
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServiceResource> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ServiceResource;
     },

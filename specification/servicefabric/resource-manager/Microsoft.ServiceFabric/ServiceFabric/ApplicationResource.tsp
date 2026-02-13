@@ -83,7 +83,8 @@ interface ApplicationResources {
   update is ArmCustomPatchAsync<
     ApplicationResource,
     PatchModel = ApplicationResourceUpdate,
-    Response = ArmAcceptedLroResponse & {
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApplicationResource> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ApplicationResource;
     },
