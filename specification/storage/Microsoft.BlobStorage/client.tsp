@@ -7,6 +7,7 @@ using Storage.Blob;
 
 namespace Customizations;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
     service: Storage.Blob,
@@ -15,6 +16,7 @@ namespace Customizations;
 )
 interface BlobServiceClient extends Storage.Blob.Service {}
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
     service: Storage.Blob,
@@ -23,6 +25,7 @@ interface BlobServiceClient extends Storage.Blob.Service {}
 )
 interface BlobContainerClient extends Storage.Blob.Container {}
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
     service: Storage.Blob,
@@ -31,6 +34,7 @@ interface BlobContainerClient extends Storage.Blob.Container {}
 )
 interface BlobClient extends Storage.Blob.Blob {}
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
     service: Storage.Blob,
@@ -39,6 +43,7 @@ interface BlobClient extends Storage.Blob.Blob {}
 )
 interface AppendBlobClient extends Storage.Blob.AppendBlob {}
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
     service: Storage.Blob,
@@ -47,6 +52,7 @@ interface AppendBlobClient extends Storage.Blob.AppendBlob {}
 )
 interface BlockBlobClient extends Storage.Blob.BlockBlob {}
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 @client(
   {
     service: Storage.Blob,
