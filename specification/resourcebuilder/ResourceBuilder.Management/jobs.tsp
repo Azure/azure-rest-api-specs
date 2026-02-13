@@ -101,7 +101,7 @@ model JobProperties {
   metrics?: DataQualityMetrics;
 
   /** Data quality dataset validation. Required for DataQualityValidation jobs. */
-  dataQualityValidation?: DataQualityValidation;
+  validationPolicy?: DataQualityValidationPolicy;
 
   // ============================================
   // AzureResourceNotificationPublish job specific properties (kind: "AzureResourceNotificationPublish")
@@ -313,25 +313,25 @@ union ResourceNotificationResourceType {
   string,
 }
 
-/** Data quality validation */
-model DataQualityValidation {
+/** Data quality validation policy */
+model DataQualityValidationPolicy {
   /** Dataset validation condition. */
-  validationCondition: DataQualityValidationCondition;
+  passCriteria: DataQualityValidationPolicyPassCriteria;
 
   /** Validations to perform. */
   validations: string[];
 }
 
 /** Data quality validation condition */
-union DataQualityValidationCondition {
+union DataQualityValidationPolicyPassCriteria {
   /** Always succeed condition. */
-  AlwaysSucceed: "alwaysSucceed",
+  AlwaysPass: "AlwaysPass",
 
   /** Any validation succeeds condition. */
-  Any: "any",
+  PassIfAnySucceed: "PassIfAnySucceed",
 
   /** All validations succeed condition. */
-  All: "all",
+  PassIfAllSucceed: "PassIfAllSucceed",
 
   string,
 }
@@ -363,19 +363,19 @@ model DataQualityMetricEvaluation {
 /** Data quality metric evaluation type */
 union DataQualityMetricEvaluationType {
   /** Unknown evaluation type. */
-  Unknown: "unknown",
+  Unknown: "Unknown",
 
   /** Table count evaluation type. */
-  TableCount: "tableRowCount",
+  TableCount: "TableRowCount",
 
   /** Non-null column count evaluation type. */
-  NonNullColumnCount: "nonNullColumnCount",
+  NonNullColumnCount: "NonNullColumnCount",
 
   /** Latency evaluation type. */
-  Latency: "latency",
+  Latency: "Latency",
 
   /** Size evaluation type. */
-  Size: "size",
+  Size: "Size",
 
   string,
 }
@@ -383,16 +383,16 @@ union DataQualityMetricEvaluationType {
 /** Data quality metric type */
 union DataQualityMetricType {
   /** Unknown metric type. */
-  Unknown: "unknown",
+  Unknown: "Unknown",
 
   /** Count metric type. */
-  Count: "count",
+  Count: "Count",
 
   /** Minimum metric type. */
-  Minimum: "minimum",
+  Minimum: "Minimum",
 
   /** Maximum metric type. */
-  Maximum: "maximum",
+  Maximum: "Maximum",
 
   /** P50 metric type. */
   P50: "P50",
@@ -401,7 +401,7 @@ union DataQualityMetricType {
   P90: "P90",
 
   /** Distinct count metric type. */
-  DistinctCount: "distinctCount",
+  DistinctCount: "DistinctCount",
 
   string,
 }
@@ -409,16 +409,16 @@ union DataQualityMetricType {
 /** Data quality metric unit */
 union DataQualityMetricUnit {
   /** Count unit. */
-  Count: "count",
+  Count: "Count",
 
   /** Seconds unit. */
-  Seconds: "seconds",
+  Seconds: "Seconds",
 
   /** Minutes unit. */
-  Minutes: "minutes",
+  Minutes: "Minutes",
 
   /** Hours unit. */
-  Hours: "hours",
+  Hours: "Hours",
 
   string,
 }
