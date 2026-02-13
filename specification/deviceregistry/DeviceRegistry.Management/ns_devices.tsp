@@ -51,6 +51,23 @@ alias NamespaceDevicePropertiesUpdate = {
   enabled?: boolean;
 };
 
+@doc("Request payload for revoking device credentials.")
+@added(Versions.v2026_03_01_preview)
+model DeviceCredentialsRevokeRequest {
+  @doc("Indicates whether to disable the device(s) after revoking credentials. Prevents new credentials to be issued.")
+  disable?: boolean;
+}
+
+@doc("Request payload for revoking device credentials.")
+@added(Versions.v2026_03_01_preview)
+model DeviceCredentialsRevokeResponse {
+  @doc("Indicates whether revocation succeeded or failed.")
+  result: string;
+
+  @doc("Error details.")
+  error?: Error;
+}
+
 @added(Versions.v2025_07_01_preview)
 @armResourceOperations
 interface NamespaceDevices {
@@ -69,4 +86,14 @@ interface NamespaceDevices {
   >;
   delete is ArmResourceDeleteWithoutOkAsync<NamespaceDevice>;
   listByResourceGroup is ArmResourceListByParent<NamespaceDevice>;
+
+  @added(Versions.v2026_03_01_preview)
+  revoke is ArmResourceActionAsync<
+    NamespaceDevice,
+    DeviceCredentialsRevokeRequest,
+    DeviceCredentialsRevokeResponse,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }

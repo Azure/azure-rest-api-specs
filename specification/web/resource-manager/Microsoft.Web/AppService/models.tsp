@@ -1,3 +1,4 @@
+import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
@@ -8,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
+using Versioning;
 
 namespace Microsoft.Web;
 
@@ -278,6 +280,26 @@ union RuntimeName {
   python: "python",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   custom: "custom",
+}
+
+/**
+ * Function app site update strategy type. Available options: Recreate, RollingUpdate
+ */
+@added(Versions.v2025_05_01)
+union SiteUpdateStrategyType {
+  string,
+
+  /**
+   * If the app is under load and a deployment or site state update occurs, all pods will be removed
+   * and will need to be Recreated all at once. This is the default behavior.
+   */
+  Recreate: "Recreate",
+
+  /**
+   * If the app is under load and a deployment or site state update occurs, pods will be drained in
+   * batches and gradually replaced, thus minimizing impact to throughput.
+   */
+  RollingUpdate: "RollingUpdate",
 }
 
 /**
@@ -3447,6 +3469,12 @@ model FunctionAppConfig {
    * Function app scale and concurrency settings.
    */
   scaleAndConcurrency?: FunctionsScaleAndConcurrency;
+
+  /**
+   * Function app site update strategy configuration.
+   */
+  @added(Versions.v2025_05_01)
+  siteUpdateStrategy?: FunctionsSiteUpdateStrategy;
 }
 
 /**
@@ -3539,6 +3567,17 @@ model FunctionsScaleAndConcurrency {
    * Scale and concurrency settings for the function app triggers.
    */
   triggers?: FunctionsScaleAndConcurrencyTriggers;
+}
+
+/**
+ * Function app site update strategy configuration for deployments and site config updates.
+ */
+@added(Versions.v2025_05_01)
+model FunctionsSiteUpdateStrategy {
+  /**
+   * Function app site update strategy type. Available options: Recreate, RollingUpdate
+   */
+  type?: SiteUpdateStrategyType;
 }
 
 /**

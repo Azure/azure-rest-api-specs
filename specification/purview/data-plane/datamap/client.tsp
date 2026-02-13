@@ -28,7 +28,7 @@ namespace Customizations;
 @@clientName(Glossary.get, "GetGlossary", "csharp");
 @@clientName(Lineage.get, "GetLineage", "csharp");
 @@clientName(Relationship.get, "GetRelationship", "csharp");
-@@clientName(TypeDefinition.get, "GetTypeDefinitions", "csharp");
+@@clientName(TypeDefinition.get, "GetTypeDefinition", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @operationGroup
