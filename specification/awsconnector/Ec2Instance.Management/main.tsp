@@ -76,6 +76,7 @@ model AwsEc2InstanceProperties {
   @doc("<p>Information about the Capacity Reservation targeting option.</p>")
   capacityReservationSpecification?: CapacityReservationSpecificationResponse;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("<p>The idempotency token you provided when you launched the instance, if applicable.</p>")
   clientToken?: string;
 

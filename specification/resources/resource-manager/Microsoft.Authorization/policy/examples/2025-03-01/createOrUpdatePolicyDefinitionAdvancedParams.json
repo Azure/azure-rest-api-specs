@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "parameters": {
+      "properties": {
+        "description": "Audit enabling of logs and retain them up to a year. This enables recreation of activity trails for investigation purposes when a security incident occurs or your network is compromised",
+        "displayName": "Event Hubs should have diagnostic logging enabled",
+        "metadata": {
+          "category": "Event Hub"
+        },
+        "mode": "Indexed",
+        "parameters": {
+          "requiredRetentionDays": {
+            "type": "Integer",
+            "allowedValues": [
+              0,
+              30,
+              90,
+              180,
+              365
+            ],
+            "defaultValue": 365,
+            "metadata": {
+              "description": "The required diagnostic logs retention in days",
+              "displayName": "Required retention (days)"
+            }
+          }
+        },
+        "policyRule": {
+          "if": {
+            "equals": "Microsoft.EventHub/namespaces",
+            "field": "type"
+          },
+          "then": {
+            "effect": "AuditIfNotExists",
+            "details": {
+              "type": "Microsoft.Insights/diagnosticSettings",
+              "existenceCondition": {
+                "allOf": [
+                  {
+                    "equals": "true",
+                    "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.enabled"
+                  },
+                  {
+                    "equals": "[parameters('requiredRetentionDays')]",
+                    "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "policyDefinitionName": "EventHubDiagnosticLogs",
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "ResourceNaming",
+        "type": "Microsoft.Authorization/policyDefinitions",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+        "properties": {
+          "description": "Audit enabling of logs and retain them up to a year. This enables recreation of activity trails for investigation purposes when a security incident occurs or your network is compromised",
+          "displayName": "Event Hubs should have diagnostic logging enabled",
+          "metadata": {
+            "category": "Event Hub"
+          },
+          "mode": "Indexed",
+          "parameters": {
+            "requiredRetentionDays": {
+              "type": "Integer",
+              "allowedValues": [
+                0,
+                30,
+                90,
+                180,
+                365
+              ],
+              "defaultValue": 365,
+              "metadata": {
+                "description": "The required diagnostic logs retention in days",
+                "displayName": "Required retention (days)"
+              }
+            }
+          },
+          "policyRule": {
+            "if": {
+              "equals": "Microsoft.EventHub/namespaces",
+              "field": "type"
+            },
+            "then": {
+              "effect": "AuditIfNotExists",
+              "details": {
+                "type": "Microsoft.Insights/diagnosticSettings",
+                "existenceCondition": {
+                  "allOf": [
+                    {
+                      "equals": "true",
+                      "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.enabled"
+                    },
+                    {
+                      "equals": "[parameters('requiredRetentionDays')]",
+                      "field": "Microsoft.Insights/diagnosticSettings/logs[*].retentionPolicy.days"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "version": "1.2.1",
+          "versions": [
+            "1.2.1",
+            "1.0.0"
+          ]
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyDefinitions_CreateOrUpdate",
+  "title": "Create or update a policy definition with advanced parameters"
+}

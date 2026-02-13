@@ -3,8 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "./models.tsp";
-import "./Registry.tsp";
+import "./PipelineRun.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -16,7 +15,7 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents a pipeline run for a container registry.
  */
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @parentResource(Registry)
 model PipelineRun
   is Azure.ResourceManager.ProxyResource<PipelineRunProperties> {
@@ -28,7 +27,7 @@ model PipelineRun
   >;
 }
 
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface PipelineRuns {
   /**

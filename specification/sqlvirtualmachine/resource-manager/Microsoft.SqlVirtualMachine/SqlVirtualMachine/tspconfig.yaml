@@ -26,7 +26,6 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-sqlvirtualmachine"
-    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
@@ -41,6 +40,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    # use-legacy-resource-detection: false
+    namespace: "Azure.ResourceManager.SqlVirtualMachine"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -949,7 +949,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -980,6 +980,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -1326,15 +1335,6 @@
               true
             ],
             "x-ms-client-name": "requiresSync"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -1418,7 +1418,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -1449,6 +1449,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -1590,15 +1599,6 @@
               ]
             },
             "x-ms-client-name": "blobDeleteType"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -1629,7 +1629,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -1660,6 +1660,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -1789,15 +1798,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -2224,7 +2224,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2259,6 +2259,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -2327,15 +2336,6 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "PreventEncryptionScopeOverride"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -2375,7 +2375,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2410,6 +2410,15 @@
             "x-ms-client-name": "version"
           },
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -2432,15 +2441,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -2618,7 +2618,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2651,6 +2651,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -2693,15 +2702,6 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ifUnmodifiedSince"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -2727,7 +2727,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2760,6 +2760,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -2801,15 +2810,6 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ifModifiedSince"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -2849,7 +2849,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -2884,6 +2884,15 @@
             "x-ms-client-name": "version"
           },
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -2906,15 +2915,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -2981,7 +2981,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3014,6 +3014,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -3086,15 +3095,6 @@
             "x-ms-client-name": "ifUnmodifiedSince"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
             "name": "containerAcl",
             "in": "body",
             "description": "The access control list for the container.",
@@ -3141,7 +3141,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3176,6 +3176,15 @@
             "x-ms-client-name": "version"
           },
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -3206,15 +3215,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -3245,7 +3245,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3280,6 +3280,15 @@
             "x-ms-client-name": "version"
           },
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -3310,15 +3319,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -3349,7 +3349,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3425,12 +3425,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "formData",
             "required": true,
@@ -3458,7 +3452,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3491,6 +3485,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -3561,15 +3564,6 @@
               }
             },
             "collectionFormat": "csv"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -3603,7 +3597,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3624,7 +3618,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&acquire": {
+    "/{containerName}?comp=lease&restype=container": {
       "put": {
         "operationId": "Container_AcquireLease",
         "description": "The Acquire Lease operation requests a new lease on a container. The lease lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -3636,6 +3630,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -3701,15 +3704,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -3753,7 +3747,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3774,7 +3768,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&release": {
+    "/{containerName}?comp=lease&restype=container&_overload=releaseLease": {
       "put": {
         "operationId": "Container_ReleaseLease",
         "description": "The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the container.",
@@ -3786,6 +3780,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -3842,15 +3845,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -3890,7 +3884,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -3911,7 +3905,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&renew": {
+    "/{containerName}?comp=lease&restype=container&_overload=renewLease": {
       "put": {
         "operationId": "Container_RenewLease",
         "description": "The Renew Lease operation renews an existing lease.",
@@ -3923,6 +3917,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -3979,15 +3982,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -4031,7 +4025,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4052,7 +4046,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&break": {
+    "/{containerName}?comp=lease&restype=container&_overload=breakLease": {
       "put": {
         "operationId": "Container_BreakLease",
         "description": "The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired.",
@@ -4064,6 +4058,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -4121,15 +4124,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -4174,7 +4168,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4195,7 +4189,7 @@
         }
       }
     },
-    "/{containerName}?comp=lease&restype=container&change": {
+    "/{containerName}?comp=lease&restype=container&_overload=changeLease": {
       "put": {
         "operationId": "Container_ChangeLease",
         "description": "The Change Lease operation is used to change the ID of an existing lease.",
@@ -4207,6 +4201,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -4271,15 +4274,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -4323,7 +4317,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4344,7 +4338,7 @@
         }
       }
     },
-    "/{containerName}?restype=container&comp=list&flat": {
+    "/{containerName}?restype=container&comp=list": {
       "get": {
         "operationId": "Container_ListBlobFlatSegment",
         "description": "The List Blobs operation returns a list of the blobs under the specified container.",
@@ -4356,6 +4350,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -4474,15 +4477,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -4516,7 +4510,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4537,7 +4531,7 @@
         }
       }
     },
-    "/{containerName}?restype=container&comp=list&hierarchy": {
+    "/{containerName}?restype=container&comp=list&_overload=listBlobHierarchySegment": {
       "get": {
         "operationId": "Container_ListBlobHierarchySegment",
         "description": "The List Blobs operation returns a list of the blobs under the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system.",
@@ -4549,6 +4543,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -4674,15 +4677,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -4716,7 +4710,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4751,6 +4745,15 @@
             "x-ms-client-name": "version"
           },
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -4765,15 +4768,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -4892,7 +4886,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -4927,6 +4921,15 @@
             "x-ms-client-name": "version"
           },
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -4951,15 +4954,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -4990,7 +4984,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5023,6 +5017,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -5098,15 +5101,6 @@
             "type": "string",
             "format": "date-time-rfc7231",
             "x-ms-client-name": "ExpiresOn"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -5146,7 +5140,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5167,7 +5161,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=properties&SetHTTPHeaders": {
+    "/{containerName}/{blobName}?comp=properties": {
       "put": {
         "operationId": "Blob_SetProperties",
         "description": "The Set HTTP Headers operation sets system properties on the blob.",
@@ -5179,6 +5173,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -5304,15 +5307,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -5357,7 +5351,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5390,6 +5384,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -5477,15 +5480,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "versionId"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -5551,7 +5545,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5584,6 +5578,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -5625,15 +5628,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "versionId"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -5664,7 +5658,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5697,6 +5691,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -5746,15 +5749,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "versionId"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -5789,7 +5783,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -5822,6 +5816,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -5952,15 +5955,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -6016,7 +6010,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6037,7 +6031,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&acquire": {
+    "/{containerName}/{blobName}?comp=lease": {
       "put": {
         "operationId": "Blob_AcquireLease",
         "description": "The Acquire Lease operation requests a new lease on a blob. The lease lock duration can be 15 to 60 seconds, or can be infinite.",
@@ -6049,6 +6043,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -6148,15 +6151,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -6200,7 +6194,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6221,7 +6215,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&release": {
+    "/{containerName}/{blobName}?comp=lease&_overload=releaseLease": {
       "put": {
         "operationId": "Blob_ReleaseLease",
         "description": "The Release Lease operation frees the lease if it's no longer needed, so that another client can immediately acquire a lease against the blob.",
@@ -6233,6 +6227,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -6323,15 +6326,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -6371,7 +6365,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6392,7 +6386,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&renew": {
+    "/{containerName}/{blobName}?comp=lease&_overload=renewLease": {
       "put": {
         "operationId": "Blob_RenewLease",
         "description": "The Renew Lease operation renews an existing lease.",
@@ -6404,6 +6398,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -6494,15 +6497,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -6546,7 +6540,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6567,7 +6561,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&change": {
+    "/{containerName}/{blobName}?comp=lease&_overload=changeLease": {
       "put": {
         "operationId": "Blob_ChangeLease",
         "description": "The Change Lease operation is used to change the ID of an existing lease.",
@@ -6579,6 +6573,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -6677,15 +6680,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -6729,7 +6723,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6750,7 +6744,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=lease&break": {
+    "/{containerName}/{blobName}?comp=lease&_overload=breakLease": {
       "put": {
         "operationId": "Blob_BreakLease",
         "description": "The Break Lease operation ends a lease and ensures that another client can't acquire a new lease until the current lease period has expired.",
@@ -6762,6 +6756,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -6853,15 +6856,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "action"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -6906,7 +6900,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -6939,6 +6933,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -7069,15 +7072,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "leaseId"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -7129,7 +7123,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7162,6 +7156,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -7542,15 +7545,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "requiresSync"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -7622,7 +7616,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7643,7 +7637,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=copy&copyid": {
+    "/{containerName}/{blobName}?comp=copy": {
       "put": {
         "operationId": "Blob_AbortCopyFromUrl",
         "description": "The Abort Copy From URL operation aborts a pending Copy From URL operation, and leaves a destination blob with zero length and full metadata.",
@@ -7655,6 +7649,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -7711,15 +7714,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "copyActionAbortConstant"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -7750,7 +7744,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -7783,6 +7777,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -7980,15 +7983,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -8033,7 +8027,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8054,7 +8048,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?restype=account&comp=properties&blob": {
+    "/{containerName}/{blobName}?restype=account&comp=properties": {
       "get": {
         "operationId": "Blob_GetAccountInfo",
         "description": "Returns the sku name and account kind",
@@ -8066,6 +8060,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -8092,15 +8095,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -8219,7 +8213,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8252,6 +8246,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -8309,15 +8312,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -8351,7 +8345,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8384,6 +8378,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -8454,15 +8457,6 @@
             "x-ms-client-name": "leaseId"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
             "name": "tags",
             "in": "body",
             "description": "The blob tags.",
@@ -8500,7 +8494,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8533,6 +8527,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "x-ms-meta",
@@ -8790,15 +8793,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "blobType"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -8859,7 +8853,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -8880,7 +8874,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=page&update": {
+    "/{containerName}/{blobName}?comp=page": {
       "put": {
         "operationId": "PageBlob_UploadPages",
         "description": "The Upload Pages operation writes a range of pages to a page blob",
@@ -8895,6 +8889,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -9112,15 +9115,6 @@
             "x-ms-client-name": "pageWrite"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The body of the request.",
@@ -9199,7 +9193,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9220,7 +9214,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=page&clear": {
+    "/{containerName}/{blobName}?comp=page&_overload=clearPages": {
       "put": {
         "operationId": "PageBlob_ClearPages",
         "description": "The Clear Pages operation clears a range of pages from a page blob",
@@ -9232,6 +9226,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -9414,15 +9417,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "pageWrite"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -9477,7 +9471,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9498,7 +9492,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=page&update&fromUrl": {
+    "/{containerName}/{blobName}?comp=page&_overload=uploadPagesFromUrl": {
       "put": {
         "operationId": "PageBlob_UploadPagesFromUrl",
         "description": "The Upload Pages operation writes a range of pages to a page blob where the contents are read from a URL.",
@@ -9510,6 +9504,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -9788,15 +9791,6 @@
               "modelAsString": false
             },
             "x-ms-client-name": "pageWrite"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -9863,7 +9857,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -9896,6 +9890,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -10003,15 +10006,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 1
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -10059,7 +10053,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10080,7 +10074,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=pagelist&diff": {
+    "/{containerName}/{blobName}?comp=pagelist&_overload=getPageRangesDiff": {
       "get": {
         "operationId": "PageBlob_GetPageRangesDiff",
         "description": "The Get Page Ranges Diff operation returns the list of valid page ranges for a page blob or snapshot of a page blob.",
@@ -10092,6 +10086,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -10214,15 +10217,6 @@
             "type": "integer",
             "format": "int32",
             "minimum": 1
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -10270,7 +10264,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10291,7 +10285,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=properties&Resize": {
+    "/{containerName}/{blobName}?comp=properties&_overload=resize": {
       "put": {
         "operationId": "PageBlob_Resize",
         "description": "The Resize operation increases the size of the page blob to the specified size.",
@@ -10303,6 +10297,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -10434,15 +10437,6 @@
             "type": "integer",
             "format": "int64",
             "x-ms-client-name": "blobContentLength"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -10487,7 +10481,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10508,7 +10502,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=properties&UpdateSequenceNumber": {
+    "/{containerName}/{blobName}?comp=properties&_overload=setSequenceNumber": {
       "put": {
         "operationId": "PageBlob_SetSequenceNumber",
         "description": "The Update Sequence Number operation sets the blob's sequence number. The operation will fail if the specified sequence number is less than the current sequence number of the blob.",
@@ -10520,6 +10514,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -10640,15 +10643,6 @@
             "format": "int64",
             "default": 0,
             "x-ms-client-name": "blobSequenceNumber"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -10693,7 +10687,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10726,6 +10720,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -10802,15 +10805,6 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "copySource"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -10890,7 +10884,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -10926,6 +10920,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -11112,15 +11115,6 @@
             "x-ms-client-name": "structuredContentLength"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The body of the request.",
@@ -11203,7 +11197,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11224,7 +11218,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=appendblock&fromUrl": {
+    "/{containerName}/{blobName}?comp=appendblock&_overload=appendBlockFromUrl": {
       "put": {
         "operationId": "AppendBlob_AppendBlockFromUrl",
         "description": "The Append Block From URL operation creates a new block to be committed as part of an append blob where the contents are read from a URL.",
@@ -11236,6 +11230,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -11492,15 +11495,6 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -11571,7 +11565,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11604,6 +11598,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -11681,15 +11684,6 @@
             "type": "integer",
             "format": "int64",
             "x-ms-client-name": "appendPosition"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -11733,7 +11727,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -11769,6 +11763,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "x-ms-meta",
@@ -12173,15 +12176,6 @@
             "x-ms-client-name": "blobType"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The body of the request.",
@@ -12254,7 +12248,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -12275,7 +12269,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?BlockBlob&fromUrl": {
+    "/{containerName}/{blobName}?_overload=putBlobFromUrl": {
       "put": {
         "operationId": "BlockBlob_PutBlobFromUrl",
         "description": "The Put Blob from URL operation creates a new Block Blob where the contents of the blob are read from a given URL.  This API is supported beginning with the 2020-04-08 version. Partial updates are not supported with Put Blob from URL; the content of an existing blob is overwritten with the content of the new blob.  To perform partial updates to a block blob’s contents using a source URL, use the Put Block from URL API in conjunction with Put Block List.",
@@ -12287,6 +12281,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "x-ms-meta",
@@ -12743,15 +12746,6 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -12812,7 +12806,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -12850,6 +12844,15 @@
             "x-ms-client-name": "version"
           },
           {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
             "name": "containerName",
             "in": "path",
             "description": "The name of the container.",
@@ -12872,7 +12875,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
-            "format": "base64",
+            "format": "byte",
             "x-ms-client-name": "blockId"
           },
           {
@@ -12983,15 +12986,6 @@
             "x-ms-client-name": "structuredContentLength"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
             "name": "body",
             "in": "body",
             "description": "The body of the request.",
@@ -13056,7 +13050,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13077,7 +13071,7 @@
         }
       }
     },
-    "/{containerName}/{blobName}?comp=block&fromURL": {
+    "/{containerName}/{blobName}?comp=block&_overload=stageBlockFromUrl": {
       "put": {
         "operationId": "BlockBlob_StageBlockFromUrl",
         "description": "The Stage Block From URL operation creates a new block to be committed as part of a blob where the contents are read from a URL.",
@@ -13089,6 +13083,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -13113,7 +13116,7 @@
             "description": "A valid Base64 string value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
             "required": true,
             "type": "string",
-            "format": "base64",
+            "format": "byte",
             "x-ms-client-name": "blockId"
           },
           {
@@ -13285,15 +13288,6 @@
               ]
             },
             "x-ms-client-name": "fileRequestIntent"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -13346,7 +13340,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13379,6 +13373,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -13743,15 +13746,6 @@
             "x-ms-client-name": "legalHold"
           },
           {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
-          },
-          {
             "name": "blocks",
             "in": "body",
             "description": "Blob Blocks.",
@@ -13824,7 +13818,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -13857,6 +13851,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -13940,15 +13943,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -13996,7 +13990,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14033,6 +14027,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "containerName",
@@ -14154,15 +14157,6 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "ifTags"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "queryRequest",
@@ -14744,7 +14738,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14813,12 +14807,6 @@
             "x-ms-client-name": "contentLength"
           },
           {
-            "name": "name",
-            "in": "formData",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "body",
             "in": "formData",
             "required": true,
@@ -14851,7 +14839,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -14884,6 +14872,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "timeout",
@@ -14947,15 +14944,6 @@
               }
             },
             "collectionFormat": "csv"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -14989,7 +14977,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15022,6 +15010,15 @@
             "required": true,
             "type": "string",
             "x-ms-client-name": "version"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "prefix",
@@ -15091,15 +15088,6 @@
               }
             },
             "collectionFormat": "csv"
-          },
-          {
-            "name": "x-ms-client-request-id",
-            "in": "header",
-            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-            "required": false,
-            "type": "string",
-            "format": "uuid",
-            "x-ms-client-name": "clientRequestId"
           }
         ],
         "responses": {
@@ -15128,7 +15116,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15163,15 +15151,6 @@
             "x-ms-client-name": "version"
           },
           {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -15179,6 +15158,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
           }
         ],
         "responses": {
@@ -15297,7 +15285,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15332,15 +15320,6 @@
             "x-ms-client-name": "version"
           },
           {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -15348,6 +15327,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "storageServiceProperties",
@@ -15382,7 +15370,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15417,15 +15405,6 @@
             "x-ms-client-name": "version"
           },
           {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -15433,6 +15412,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
           }
         ],
         "responses": {
@@ -15461,7 +15449,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15496,15 +15484,6 @@
             "x-ms-client-name": "version"
           },
           {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -15512,6 +15491,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
           }
         ],
         "responses": {
@@ -15545,7 +15533,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -15580,15 +15568,6 @@
             "x-ms-client-name": "version"
           },
           {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
             "name": "x-ms-client-request-id",
             "in": "header",
             "description": "An opaque, globally-unique, client-generated string identifier for the request.",
@@ -15596,6 +15575,15 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\">Setting Timeouts for Blob Service Operations.</a>",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
           },
           {
             "name": "keyInfo",
@@ -15638,7 +15626,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/StorageError"
+              "$ref": "#/definitions/Error"
             },
             "headers": {
               "x-ms-copy-source-error-code": {
@@ -16920,6 +16908,38 @@
         ]
       }
     },
+    "Error": {
+      "type": "object",
+      "description": "The error response.",
+      "properties": {
+        "Code": {
+          "type": "string",
+          "description": "The error code.",
+          "x-ms-client-name": "code"
+        },
+        "Message": {
+          "type": "string",
+          "description": "The error message.",
+          "x-ms-client-name": "message"
+        },
+        "CopySourceStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Copy source status code",
+          "x-ms-client-name": "copySourceStatusCode"
+        },
+        "CopySourceErrorCode": {
+          "type": "string",
+          "description": "Copy source error code",
+          "x-ms-client-name": "copySourceErrorCode"
+        },
+        "CopySourceErrorMessage": {
+          "type": "string",
+          "description": "Copy source error message",
+          "x-ms-client-name": "copySourceErrorMessage"
+        }
+      }
+    },
     "FileShareTokenIntent": {
       "type": "string",
       "description": "The file share token intent types.",
@@ -18061,38 +18081,6 @@
         "Enabled"
       ]
     },
-    "StorageError": {
-      "type": "object",
-      "description": "The error response.",
-      "properties": {
-        "Code": {
-          "type": "string",
-          "description": "The error code.",
-          "x-ms-client-name": "code"
-        },
-        "Message": {
-          "type": "string",
-          "description": "The error message.",
-          "x-ms-client-name": "message"
-        },
-        "CopySourceStatusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Copy source status code",
-          "x-ms-client-name": "copySourceStatusCode"
-        },
-        "CopySourceErrorCode": {
-          "type": "string",
-          "description": "Copy source error code",
-          "x-ms-client-name": "copySourceErrorCode"
-        },
-        "CopySourceErrorMessage": {
-          "type": "string",
-          "description": "Copy source error message",
-          "x-ms-client-name": "copySourceErrorMessage"
-        }
-      }
-    },
     "StorageServiceProperties": {
       "type": "object",
       "description": "The service properties.",
@@ -18203,7 +18191,7 @@
     },
     "base64Bytes": {
       "type": "string",
-      "format": "base64"
+      "format": "byte"
     }
   },
   "parameters": {

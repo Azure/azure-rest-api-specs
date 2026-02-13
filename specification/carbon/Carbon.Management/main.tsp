@@ -488,6 +488,7 @@ model CarbonEmissionDataListResult {
   @Azure.ResourceManager.identifiers(#[])
   value: CarbonEmissionData[];
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The pagination token to fetch next page data, it's null or empty if it doesn't have next page data")
   skipToken?: string;
 
@@ -506,11 +507,10 @@ model CarbonEmissionDataAvailableDateRange {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Each resource interface must have an @armResourceOperations decorator."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-missing-decorator" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Resource POST operation must be decorated with @armResourceAction or @armResourceCollectionAction."
 interface CarbonService {
   @doc("API for Carbon Emissions Reports")
   @post
-  @armResourceCollectionAction
   @route("/providers/Microsoft.Carbon/carbonEmissionReports")
   queryCarbonEmissionReports(
     ...ApiVersionParameter,
@@ -522,7 +522,6 @@ interface CarbonService {
 
   @doc("API for query carbon emission data available date range")
   @post
-  @armResourceAction(CarbonEmissionDataAvailableDateRange)
   @route("/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange")
   queryCarbonEmissionDataAvailableDateRange(
     ...ApiVersionParameter,

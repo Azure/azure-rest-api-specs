@@ -654,42 +654,6 @@ model LabSupportProperties {
 }
 
 /**
- * An Azure resource.
- */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard resource"
-@extension("x-ms-azure-resource", true)
-model Resource {
-  /**
-   * The identifier of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The name of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * The type of the resource.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The location of the resource.
-   */
-  location?: string;
-
-  /**
-   * The tags of the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
-}
-
-/**
  * An Operation Result
  */
 model OperationResult {
@@ -901,6 +865,7 @@ model ArtifactSourceProperties {
   /**
    * The security token to authenticate to the artifact source.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   securityToken?: string;
 
   /**
@@ -1016,6 +981,7 @@ model ArtifactList is Azure.Core.Page<Artifact>;
  * Properties of an artifact.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "JSON schema takes an arbitrary json"
 model ArtifactProperties {
   /**
    * The artifact's title.
@@ -1111,6 +1077,7 @@ model ParameterInfo {
 /**
  * Information about a generated ARM template.
  */
+#suppress "@azure-tools/typespec-azure-core/no-unknown" "JSON schema takes an arbitrary json"
 model ArmTemplateInfo {
   /**
    * The template's contents.
@@ -1608,8 +1575,8 @@ model LabVirtualMachineCreationParameter {
   /**
    * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: LabVirtualMachineCreationParameterProperties;
 
   /**
@@ -1677,11 +1644,13 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The password of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
    * The SSH key of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sshKey?: string;
 
   /**
@@ -1982,8 +1951,8 @@ model ScheduleCreationParameter {
   /**
    * The properties of the schedule.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ScheduleCreationParameterProperties;
 
   /**
@@ -2074,6 +2043,7 @@ model GalleryImageList is Azure.Core.Page<GalleryImage>;
 /**
  * Properties of a gallery image.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 model GalleryImageProperties {
   /**
    * The author of the gallery image.
@@ -2732,12 +2702,23 @@ model ServiceFabricProperties {
  * Schedules applicable to a virtual machine. The schedules may have been defined on a VM or on lab level.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-model ApplicableSchedule extends Resource {
+model ApplicableSchedule extends CommonTypes.Resource {
+  /**
+   * The location of the resource.
+   */
+  location?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  tags?: Record<string>;
+
   /**
    * The properties of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: ApplicableScheduleProperties;
 }
 
@@ -2835,11 +2816,13 @@ model LabVirtualMachineProperties {
   /**
    * The password of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   password?: string;
 
   /**
    * The SSH key of the virtual machine administrator.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sshKey?: string;
 
   /**

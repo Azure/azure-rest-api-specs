@@ -5,12 +5,7 @@ import "../Enums/Enums.tsp";
 import "./CommonAssessmentPropertiesEnums.tsp";
 import "../Enums/Enums.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.Migrate;
 
@@ -121,6 +116,7 @@ model AzureVirtualMachineSkuDto {
 
 @doc("Migration Guideline Context.")
 model MigrationGuidelineContext {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("Gets the reasoning context key.")
   contextKey?: string;
 

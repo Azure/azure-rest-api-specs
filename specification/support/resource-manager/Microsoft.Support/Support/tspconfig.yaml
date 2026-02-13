@@ -16,7 +16,7 @@ options:
     output-file: "{version-status}/{version}/support.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: true
+
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-support"
@@ -34,6 +34,7 @@ options:
     experimental-extensible-enums: true
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-support"
+    package-dir: "azure-resourcemanager-support"
     namespace: com.azure.resourcemanager.support
     flavor: azure
     service-name: Support

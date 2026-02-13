@@ -148,5 +148,10 @@ interface EasmClient {
   "csharp"
 );
 @@clientName(EasmClient.getDiscoTemplate, "GetDiscoveryTemplate", "csharp");
+@@clientName(EasmClient.listAssetResource, "GetAssetResources", "csharp");
+@@clientName(EasmClient.listDataConnection, "GetDataConnections", "csharp");
 @@clientName(EasmClient.listDiscoTemplate, "GetDiscoveryTemplates", "csharp");
+@@clientName(EasmClient.listPolicy, "GetPolicies", "csharp");
+@@clientName(EasmClient.listSavedFilter, "GetSavedFilters", "csharp");
+@@clientName(EasmClient.listTask, "GetTasks", "csharp");
 @@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");

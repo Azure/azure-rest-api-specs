@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "clusterName": "myCluster",
+    "parameters": {
+      "simulationId": "aec13cc2-1d39-4ba6-a1a8-2fc35b00643c"
+    },
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "endTime": "0001-01-01T00:00:00",
+        "simulationId": "aec13cc2-1d39-4ba6-a1a8-2fc35b00643c",
+        "startTime": "2024-11-21T18:11:11.3471742Z",
+        "status": "Active",
+        "details": {
+          "operationId": "00000000-0000-0000-0000-000000000000",
+          "clusterId": "dd65fb6d-753b-4664-8798-4f077d4a2e18",
+          "nodeTypeFaultSimulation": [
+            {
+              "operationId": "714f0003-80d8-464a-a019-69e6bf89ed4c",
+              "nodeTypeName": "BE",
+              "operationStatus": "Succeeded",
+              "status": "Active"
+            }
+          ],
+          "parameters": {
+            "constraints": {
+              "expirationTime": "0001-01-01T00:00:00"
+            },
+            "faultKind": "Zone",
+            "force": false,
+            "zones": [
+              "2"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ManagedClusters_GetFaultSimulation",
+  "title": "Get Managed Cluster Fault Simulation"
+}

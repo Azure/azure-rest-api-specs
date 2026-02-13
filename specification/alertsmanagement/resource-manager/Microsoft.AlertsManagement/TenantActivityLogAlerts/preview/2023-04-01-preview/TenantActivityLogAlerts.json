@@ -1,0 +1,609 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Tenant Level Activity Log Alert Rules in AlertsManagement Resource Provider",
+    "version": "2023-04-01-preview",
+    "description": "Tenant Level Activity Log Alert Rules provides rules creation on management group level.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "TenantActivityLogAlertResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AlertsManagement/tenantActivityLogAlerts": {
+      "get": {
+        "operationId": "TenantActivityLogAlerts_ListByTenant",
+        "tags": [
+          "TenantActivityLogAlertResources"
+        ],
+        "description": "Get a list of all Tenant Activity Log Alert rules in the tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantAlertRuleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Activity Log Alerts by tenant": {
+            "$ref": "./examples/TenantActivityLogAlertRule_ListByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.AlertsManagement/tenantActivityLogAlerts": {
+      "get": {
+        "operationId": "TenantActivityLogAlerts_ListByManagementGroup",
+        "tags": [
+          "TenantActivityLogAlertResources"
+        ],
+        "description": "Get a list of all Tenant Activity Log Alert rules in a management group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupName",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantAlertRuleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Activity Log Alerts by management group": {
+            "$ref": "./examples/TenantActivityLogAlertRule_ListByManagementGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.AlertsManagement/tenantActivityLogAlerts/{alertRuleName}": {
+      "get": {
+        "operationId": "TenantActivityLogAlerts_Get",
+        "tags": [
+          "TenantActivityLogAlertResources"
+        ],
+        "description": "Get Tenant Activity Log Alert rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupName",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "alertRuleName",
+            "in": "path",
+            "description": "The name of the Tenant Activity Log Alert rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantActivityLogAlertResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Tenant Activity Log Alert rule": {
+            "$ref": "./examples/TenantActivityLogAlertRule_GetRule.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TenantActivityLogAlerts_CreateOrUpdate",
+        "tags": [
+          "TenantActivityLogAlertResources"
+        ],
+        "description": "Create a new Tenant Activity Log Alert rule or update an existing one.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupName",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "alertRuleName",
+            "in": "path",
+            "description": "The name of the Tenant Activity Log Alert rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "tenantActivityLogAlertRule",
+            "in": "body",
+            "description": "The Tenant Activity Log Alert rule to create or use for the update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TenantActivityLogAlertResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'TenantActivityLogAlertResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TenantActivityLogAlertResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'TenantActivityLogAlertResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/TenantActivityLogAlertResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a Tenant Activity Log Alert rule for tenant level events": {
+            "$ref": "./examples/TenantActivityLogAlertRule_CreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "TenantActivityLogAlerts_Update",
+        "tags": [
+          "TenantActivityLogAlertResources"
+        ],
+        "description": "Updates 'tags' and 'enabled' fields in an existing Tenant Alert rule. This method is used to update the Alert rule tags, and to enable or disable the Alert rule. To update other fields use CreateOrUpdate operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupName",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "alertRuleName",
+            "in": "path",
+            "description": "The name of the Tenant Activity Log Alert rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "tenantActivityLogAlertRulePatch",
+            "in": "body",
+            "description": "Parameters supplied to the operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TenantAlertRulePatchObject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantActivityLogAlertResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a Tenant Activity Log Alert rule": {
+            "$ref": "./examples/TenantActivityLogAlertRule_UpdateRule.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TenantActivityLogAlerts_Delete",
+        "tags": [
+          "TenantActivityLogAlertResources"
+        ],
+        "description": "Delete a Tenant Activity Log Alert rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupName",
+            "in": "path",
+            "description": "The management group ID.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "alertRuleName",
+            "in": "path",
+            "description": "The name of the Tenant Activity Log Alert rule.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a Tenant Activity Log Alert rule": {
+            "$ref": "./examples/TenantActivityLogAlertRule_DeleteRule.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionGroup": {
+      "type": "object",
+      "description": "A pointer to an Azure Action Group.",
+      "properties": {
+        "actionGroupId": {
+          "type": "string",
+          "description": "The resource ID of the Action Group. This cannot be null or empty."
+        },
+        "webhookProperties": {
+          "type": "object",
+          "description": "the dictionary of custom properties to include with the post operation. These data are appended to the webhook payload.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "actionProperties": {
+          "type": "object",
+          "description": "Predefined list of properties and configuration items for the action group.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "actionGroupId"
+      ]
+    },
+    "ActionList": {
+      "type": "object",
+      "description": "A list of Activity Log Alert rule actions.",
+      "properties": {
+        "actionGroups": {
+          "type": "array",
+          "description": "The list of the Action Groups.",
+          "items": {
+            "$ref": "#/definitions/ActionGroup"
+          },
+          "x-ms-identifiers": [
+            "actionGroupId"
+          ]
+        }
+      }
+    },
+    "AlertRuleAllOfCondition": {
+      "type": "object",
+      "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.",
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "description": "The list of Activity Log Alert rule conditions.",
+          "items": {
+            "$ref": "#/definitions/AlertRuleAnyOfOrLeafCondition"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "allOf"
+      ]
+    },
+    "AlertRuleAnyOfOrLeafCondition": {
+      "type": "object",
+      "description": "An Activity Log Alert rule condition that is met when all its member conditions are met.\nEach condition can be of one of the following types:\n__Important__: Each type has its unique subset of properties. Properties from different types CANNOT exist in one condition.\n* __Leaf Condition -__ must contain 'field' and either 'equals' or 'containsAny'.\n_Please note, 'anyOf' should __not__ be set in a Leaf Condition._\n* __AnyOf Condition -__ must contain __only__ 'anyOf' (which is an array of Leaf Conditions).\n_Please note, 'field', 'equals' and 'containsAny' should __not__ be set in an AnyOf Condition._",
+      "properties": {
+        "anyOf": {
+          "type": "array",
+          "description": "An Activity Log Alert rule condition that is met when at least one of its member leaf conditions are met.",
+          "items": {
+            "$ref": "#/definitions/AlertRuleLeafCondition"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleLeafCondition"
+        }
+      ]
+    },
+    "AlertRuleLeafCondition": {
+      "type": "object",
+      "description": "An Activity Log Alert rule condition that is met by comparing the field and value of an Activity Log event.\nThis condition must contain 'field' and either 'equals' or 'containsAny'.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The name of the Activity Log event's field that this condition will examine.\nThe possible values for this field are (case-insensitive): 'resourceId', 'category', 'caller', 'level', 'operationName', 'resourceGroup', 'resourceProvider', 'status', 'subStatus', 'resourceType', or anything beginning with 'properties'."
+        },
+        "equals": {
+          "type": "string",
+          "description": "The value of the event's field will be compared to this value (case-insensitive) to determine if the condition is met."
+        },
+        "containsAny": {
+          "type": "array",
+          "description": "The value of the event's field will be compared to the values in this array (case-insensitive) to determine if the condition is met.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AlertRuleProperties": {
+      "type": "object",
+      "description": "An Azure Activity Log Alert rule.",
+      "properties": {
+        "tenantScope": {
+          "type": "string",
+          "description": "The tenant GUID. Must be provided for tenant-level and management group events rules."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "A list of resource IDs that will be used as prefixes. The alert will only apply to Activity Log events with resource IDs that fall under one of these prefixes. This list must include at least one item.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "condition": {
+          "$ref": "#/definitions/AlertRuleAllOfCondition",
+          "description": "The condition that will cause this alert to activate."
+        },
+        "actions": {
+          "$ref": "#/definitions/ActionList",
+          "description": "The actions that will activate when the condition is met."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
+          "default": true
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of this Activity Log Alert rule."
+        }
+      },
+      "required": [
+        "condition",
+        "actions"
+      ]
+    },
+    "AzureResource": {
+      "type": "object",
+      "description": "An Azure resource object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource Id.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
+          "default": "global",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags of the resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TenantActivityLogAlertResource": {
+      "type": "object",
+      "description": "A Tenant Activity Log Alert rule resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AlertRuleProperties",
+          "description": "The Activity Log Alert rule properties of the resource.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "TenantAlertRuleList": {
+      "type": "object",
+      "description": "A list of Tenant Activity Log Alert rules.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TenantActivityLogAlertResource items on this page",
+          "items": {
+            "$ref": "#/definitions/TenantActivityLogAlertResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "TenantAlertRulePatchObject": {
+      "type": "object",
+      "description": "An Activity Log Alert rule object for the body of patch operations.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/TenantAlertRulePatchProperties",
+          "description": "The activity log alert settings for an update operation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TenantAlertRulePatchProperties": {
+      "type": "object",
+      "description": "An Activity Log Alert rule properties for patch operations.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
+          "default": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

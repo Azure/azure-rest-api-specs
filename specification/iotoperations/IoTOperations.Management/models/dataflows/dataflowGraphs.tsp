@@ -49,6 +49,12 @@ model DataflowGraphProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  /** The status for the dataflow graph. */
+  @visibility(Lifecycle.Read)
+  @added(Versions.`2026-03-01`)
+  status?: DataflowGraphStatus;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -218,6 +224,7 @@ model DataflowGraphDestinationAddIfNotPresentHeaderAction
   actionType: AddIfNotPresent;
 
   /** The name of the header to add. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 
   /** The value of the header to add. */
@@ -231,6 +238,7 @@ model DataflowGraphDestinationRemoveHeaderAction
   actionType: Remove;
 
   /** The name of the header to remove. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 }
 
@@ -241,6 +249,7 @@ model DataflowGraphDestinationAddOrReplaceHeaderAction
   actionType: AddOrReplace;
 
   /** The name of the header to add or replace. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   key: string;
 
   /** The value of the header to add or replace. */
@@ -291,4 +300,12 @@ union DataflowGraphConnectionSchemaSerializationFormat {
 model DataflowGraphConnectionOutput {
   /** Name of the destination node. */
   name: string;
+}
+
+/** DataflowGraph status. */
+@added(Versions.`2026-03-01`)
+model DataflowGraphStatus {
+  /** The health state of the DataflowGraph. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

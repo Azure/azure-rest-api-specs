@@ -1,0 +1,140 @@
+name: ARM Auto SignOff - Set Status
+
+on:
+  # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
+  # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
+  # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
+  # which simplifies implementation.
+  pull_request_target:
+    types:
+      # Depends on labels, so must re-evaluate whenever a relevant label is manually added or removed.
+      - labeled
+      - unlabeled
+  workflow_run:
+    workflows:
+      [
+        "ARM Auto SignOff - Analyze Code",
+        "Swagger Avocado - Set Status",
+        "Swagger LintDiff - Set Status",
+      ]
+    types: [completed]
+
+permissions:
+  # actions.listWorkflowRunsForRepo
+  # actions.listWorkflowRunArtifacts
+  actions: read
+  # default
+  contents: read
+  # issues.listLabelsOnIssue
+  issues: read
+  # issues.listLabelsOnIssue
+  pull-requests: read
+  # repos.listCommitStatusesForRef
+  statuses: read
+
+jobs:
+  arm-auto-signoff-status:
+    name: ARM Auto SignOff - Set Status
+
+    # workflow_run - already filtered by triggers above
+    # pull_request_target:labeled - filter to only the input and output labels
+    if: |
+      github.event_name == 'workflow_run' ||
+      (github.event_name == 'pull_request_target' &&
+       (github.event.action == 'labeled' ||
+        github.event.action == 'unlabeled') &&
+       (github.event.label.name == 'Approved-Suppression' ||
+        github.event.label.name == 'ARMAutoSignedOff' ||
+        github.event.label.name == 'ARMAutoSignedOff-IncrementalTSP' ||
+        github.event.label.name == 'ARMAutoSignedOff-Trivial-Test' ||
+        github.event.label.name == 'ARMReview' ||
+        github.event.label.name == 'ARMSignedOff' ||
+        github.event.label.name == 'NotReadyForARMReview' ||
+        github.event.label.name == 'SuppressionReviewRequired'))
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      # *** IMPORTANT ***
+      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
+      # context of the base of the pull request.  You should make sure that you do not check out,
+      # build, or run untrusted code from the head of the pull request.
+      - uses: actions/checkout@v6
+        with:
+          # Only needs .github folder for automation, not the files in the PR (analyzed in a
+          # separate workflow).
+          #
+          # Uses the .github folder from the PR base branch (pull_request_target trigger),
+          # or the repo default branch (other triggers).
+          sparse-checkout: |
+            .github
+
+      # Output:
+      # {
+      #   headSha: string,
+      #   issueNumber: number,
+      #   labelActions: {
+      #     'ARMSignedOff': 'none'|'add'|'remove',
+      #     'ARMAutoSignedOff-IncrementalTSP': 'none'|'add'|'remove',
+      #     'ARMAutoSignedOff-Trivial-Test': 'none'|'add'|'remove'
+      #   }
+      # }
+      - id: get-label-action
+        name: ARM Auto SignOff - Set Status
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: getLabelAction } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-status.js');
+            return await getLabelAction({ github, context, core });
+
+        # Add/remove specific auto sign-off labels based on analysis results.
+        # The action is explicit: 'add' | 'remove' | 'none'.
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] != 'none'
+        name: Upload artifact for ARMSignedOff label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMSignedOff"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] == 'add' }}"
+
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] != 'none'
+        name: Upload artifact for ARMAutoSignedOff-IncrementalTSP label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMAutoSignedOff-IncrementalTSP"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] == 'add' }}"
+
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial-Test'] != 'none'
+        name: Upload artifact for ARMAutoSignedOff-Trivial-Test label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMAutoSignedOff-Trivial-Test"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial-Test'] == 'add' }}"
+
+      # Required for consumers to identify the head SHA associated with this workflow run.
+      # Output can be trusted, because it was uploaded from a workflow that is trusted,
+      # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
+      # Consumers should verify the "event_name" before attempting to extract from the artifact name.
+      - if: |
+          always() &&
+          (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
+          fromJson(steps.get-label-action.outputs.result).headSha
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "head-sha"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).headSha }}"
+
+      # Required for consumers to identify the PR associated with this workflow run.
+      # Output can be trusted, because it was uploaded from a workflow that is trusted,
+      # because "issue_comment", and "workflow_run" only trigger on workflows in the default branch.
+      # Consumers should verify the "event_name" before attempting to extract from the artifact name.
+      - if: |
+          always() &&
+          (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
+          fromJson(steps.get-label-action.outputs.result).issueNumber > 0
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: "issue-number"
+          value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"

@@ -653,7 +653,6 @@ model RoleAssignmentEntity {
   /**
    * Role assignment entity properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: RoleAssignmentEntityProperties;
 }
 
@@ -893,7 +892,6 @@ model PurchaseRequest {
    */
   sku?: ResourceSku;
 
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: PurchaseRequestProperties;
 }
@@ -1125,7 +1123,6 @@ model ReservationOrderAliasRequest
   /**
    * Reservation order alias request properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ReservationOrderAliasRequestProperties;
 }
 
@@ -1477,7 +1474,6 @@ model DiscountPatchRequest {
   /**
    * Discounts patch request properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DiscountPatchRequestProperties;
 
   /**
@@ -1847,7 +1843,6 @@ model AppliedDiscount extends Azure.ResourceManager.Foundations.ProxyResource {
   /**
    * Discount properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DiscountProperties;
 }
 

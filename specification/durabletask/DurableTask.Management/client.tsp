@@ -12,20 +12,32 @@ using Microsoft.DurableTask;
 @@clientName(Microsoft.DurableTask, "DurableTaskManagementClient", "java");
 
 // csharp
-@@clientName(Scheduler, "Scheduler", "csharp");
-@@clientName(SchedulerProperties, "SchedulerProperties", "csharp");
-@@clientName(TaskHub, "SchedulerTaskHub", "csharp");
-@@clientName(TaskHubProperties, "SchedulerTaskHubProperties", "csharp");
-@@clientName(ProvisioningState, "ProvisioningState", "csharp");
-@@clientName(SchedulerUpdate, "SchedulerPatch", "csharp");
-@@clientName(SchedulerPropertiesUpdate, "SchedulerPatchProperties", "csharp");
-@@clientName(SchedulerSku, "SchedulerSku", "csharp");
-@@clientName(SchedulerSkuUpdate, "SchedulerSkuUpdate", "csharp");
-@@clientName(RedundancyState, "ResourceRedundancyState", "csharp");
-@@clientName(PurgeableOrchestrationState,
-  "PurgeableOrchestrationState",
+@@clientName(Scheduler, "DurableTaskScheduler", "csharp");
+@@clientName(SchedulerProperties, "DurableTaskSchedulerProperties", "csharp");
+@@clientName(TaskHub, "DurableTaskHub", "csharp");
+@@clientName(TaskHubProperties, "DurableTaskHubProperties", "csharp");
+@@clientName(ProvisioningState, "DurableTaskProvisioningState", "csharp");
+@@clientName(SchedulerUpdate, "DurableTaskSchedulerPatch", "csharp");
+@@clientName(SchedulerPropertiesUpdate,
+  "DurableTaskSchedulerPatchProperties",
   "csharp"
 );
-@@clientName(RetentionPolicyDetails, "RetentionPolicyDetails", "csharp");
-@@clientName(RetentionPolicy, "RetentionPolicy", "csharp");
-@@clientName(RetentionPolicyProperties, "RetentionPolicyProperties", "csharp");
+@@clientName(SchedulerSku, "DurableTaskSchedulerSku", "csharp");
+@@clientName(SchedulerSkuName, "DurableTaskSchedulerSkuName", "csharp");
+@@clientName(SchedulerSkuUpdate, "DurableTaskSchedulerSkuUpdate", "csharp");
+@@clientName(RedundancyState, "DurableTaskResourceRedundancyState", "csharp");
+@@clientName(PurgeableOrchestrationState,
+  "DurableTaskPurgeableOrchestrationState",
+  "csharp"
+);
+@@clientName(RetentionPolicyDetails,
+  "DurableTaskRetentionPolicyDetails",
+  "csharp"
+);
+@@clientName(RetentionPolicy, "DurableTaskRetentionPolicy", "csharp");
+@@clientName(RetentionPolicyProperties,
+  "DurableTaskRetentionPolicyProperties",
+  "csharp"
+);
+@@clientName(SchedulerProperties.ipAllowlist, "IPAllowlist", "csharp");
+@@clientName(SchedulerPropertiesUpdate.ipAllowlist, "IPAllowlist", "csharp");

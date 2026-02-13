@@ -8,12 +8,14 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @parentResource(ProtectedItemResource)
 model RecoveryPointResource
   is TrackedResourceWithOptionalLocation<RecoveryPoint> {
@@ -64,6 +66,18 @@ interface RecoveryPoints {
     MoveRPAcrossTiersRequest,
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryPointResource>
+  >;
+
+  /**
+   * UpdateRecoveryPoint to update recovery point for given RecoveryPointID.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Recovery point updates use UpdateRecoveryPointRequest model which does not include tags property"
+  @added(Versions.v2026_01_01_preview)
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchSync<
+    RecoveryPointResource,
+    PatchModel = UpdateRecoveryPointRequest,
+    Response = ArmResponse<RecoveryPointResource>
   >;
 }
 
@@ -124,6 +138,9 @@ interface ItemLevelRecoveryConnections {
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(RecoveryPoints.moveRecoveryPoint::parameters.body,
   "Move Resource Across Tiers Request"
+);
+@@doc(RecoveryPoints.update::parameters.properties,
+  "Request body for operation"
 );
 @@doc(Restores.trigger::parameters.body, "resource restore request");
 @@doc(ItemLevelRecoveryConnections.provision::parameters.body,

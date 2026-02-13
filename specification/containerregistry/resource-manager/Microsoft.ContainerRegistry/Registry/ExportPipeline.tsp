@@ -3,8 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
-import "./models.tsp";
-import "./Registry.tsp";
+import "./ExportPipeline.models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -16,7 +15,7 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents an export pipeline for a container registry.
  */
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @parentResource(Registry)
 model ExportPipeline
   is Azure.ResourceManager.ProxyResource<ExportPipelineProperties> {
@@ -40,7 +39,7 @@ model ExportPipeline
   identity?: IdentityProperties;
 }
 
-@removed(Versions.v2025_11_01)
+@added(Versions.vLatestPreview)
 @armResourceOperations
 interface ExportPipelines {
   /**

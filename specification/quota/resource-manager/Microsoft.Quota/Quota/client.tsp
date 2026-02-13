@@ -51,6 +51,17 @@ using Microsoft.Quota;
   "GetGroupQuotaLimitsRequests",
   "csharp"
 );
+@@clientName(GroupQuotasEntities.groupQuotaUsagesList,
+  "GetGroupQuotaUsages",
+  "csharp"
+);
+@@clientName(QuotaRequestDetails, "QuotaRequestDetail", "csharp");
+@@clientName(QuotaLimitTypes, "QuotaLimitType", "csharp");
+@@clientName(GroupQuotasEntityPatch, "GroupQuotaEntityPatch", "csharp");
+@@clientName(GroupQuotasEntityBase, "GroupQuotaEntityBase", "csharp");
+@@clientName(GroupQuotaLimitLists.list, "get", "csharp");
+@@clientName(SubscriptionQuotaAllocationsLists.list, "get", "csharp");
+
 @@usage(QuotaAllocationRequestStatus, Usage.input, "csharp");
 @@usage(QuotaAllocationRequestBase, Usage.input, "csharp");
 @@usage(GroupQuotaSubscriptionRequestStatusProperties, Usage.input, "csharp");

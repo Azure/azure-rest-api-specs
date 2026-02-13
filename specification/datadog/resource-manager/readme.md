@@ -26,8 +26,45 @@ These are the global settings for the Datadog API.
 title: Microsoft Datadog Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-10
+tag: package-2025-06
 ```
+
+### Tag: package-2025-11
+
+These settings apply only when `--tag=package-2025-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-11'
+input-file:
+- Microsoft.Datadog/preview/2025-11-03-preview/datadog.json
+```
+
+### Tag: package-2025-06
+
+These settings apply only when `--tag=package-2025-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-06'
+input-file:
+- Microsoft.Datadog/stable/2025-06-11/datadog.json
+```
+
+### Tag: package-2025-01
+
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01'
+input-file:
+- Microsoft.Datadog/stable/2025-01-07/datadog.json
+```
+
+### Tag: package-2024-03
+
+These settings apply only when `--tag=package-2024-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2024-03'
+input-file:
+- Microsoft.Datadog/stable/2024-03-01/datadog.json
+```
+
 ### Tag: package-2023-10
 
 These settings apply only when `--tag=package-2023-10` is specified on the command line.

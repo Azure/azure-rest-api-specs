@@ -851,6 +851,7 @@ model FailOver {
   properties?: FailOverProperties;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-case-mismatch" "Name conflict with FailoverProperties, see if they can be combined"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FailOverProperties {
   /**
@@ -1232,7 +1233,7 @@ model ArmDisasterRecoveryProperties {
 /**
  * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
  */
-model FailoverProperties {
+model NamespaceFailoverProperties {
   /**
    * Safe failover is to indicate the service should wait for pending replication to finish before switching to the secondary.
    */
@@ -1406,12 +1407,14 @@ model AccessKeys {
   /**
    * A base64-encoded 256-bit primary key for signing and validating the SAS token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * A base64-encoded 256-bit primary key for signing and validating the SAS token.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 

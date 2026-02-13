@@ -5,6 +5,10 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.AzureTerraform;
 
+@@clientName(Microsoft.AzureTerraform.Terraform,
+  "TerraformInterface",
+  "csharp"
+);
 @@clientName(Type, "CommonExportType", "csharp");
 @@clientName(BaseExportModel, "CommonExportProperties", "csharp");
 @@clientName(BaseExportModel.fullProperties,

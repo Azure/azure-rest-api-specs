@@ -54,7 +54,8 @@ interface CapacityReservations {
    */
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     CapacityReservation,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -64,7 +65,8 @@ interface CapacityReservations {
   update is ComputeCustomPatchAsync<
     CapacityReservation,
     CapacityReservationUpdate,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -82,6 +84,13 @@ interface CapacityReservations {
    */
   listByCapacityReservationGroup is ComputeResourceListByParent<
     CapacityReservation,
+    Parameters = {
+      /**
+       * The expand expression to apply on the operation. Based on the expand param(s) specified we return Virtual Machine or ScaleSet VM Instance or both resource Ids which are associated to capacity reservation group in the response.
+       */
+      @query("$expand")
+      $expand?: ExpandTypesForGetCapacityReservationGroups;
+    },
     Response = CapacityReservationListResult
   >;
 }

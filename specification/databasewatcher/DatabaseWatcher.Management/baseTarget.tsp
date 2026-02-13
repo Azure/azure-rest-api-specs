@@ -58,6 +58,7 @@ model VaultSecret {
   @pattern("^[a-zA-Z0-9-]{1,127}$")
   akvTargetUser?: string;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   @doc("The path to the Key Vault secret storing the password for authentication to a target.")
   @pattern("^[a-zA-Z0-9-]{1,127}$")
   akvTargetPassword?: string;

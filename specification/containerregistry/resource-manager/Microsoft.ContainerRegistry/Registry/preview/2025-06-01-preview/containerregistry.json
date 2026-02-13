@@ -43,10 +43,10 @@
       "name": "Operations"
     },
     {
-      "name": "Archives"
+      "name": "Registries"
     },
     {
-      "name": "Registries"
+      "name": "Archives"
     },
     {
       "name": "ArchiveVersions"
@@ -55,22 +55,13 @@
       "name": "CacheRules"
     },
     {
-      "name": "ConnectedRegistries"
-    },
-    {
       "name": "CredentialSets"
     },
     {
-      "name": "ExportPipelines"
+      "name": "ConnectedRegistries"
     },
     {
       "name": "PrivateLinkResources"
-    },
-    {
-      "name": "ImportPipelines"
-    },
-    {
-      "name": "PipelineRuns"
     },
     {
       "name": "PrivateEndpointConnections"
@@ -83,6 +74,15 @@
     },
     {
       "name": "Tokens"
+    },
+    {
+      "name": "ExportPipelines"
+    },
+    {
+      "name": "ImportPipelines"
+    },
+    {
+      "name": "PipelineRuns"
     },
     {
       "name": "Webhooks"
@@ -6645,7 +6645,7 @@
         },
         "uri": {
           "type": "string",
-          "description": "The target uri of the export pipeline.\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\""
+          "description": "The target uri of the export pipeline.\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\""
         },
         "keyVaultUri": {
           "type": "string",
@@ -6960,7 +6960,7 @@
         },
         "uri": {
           "type": "string",
-          "description": "The target uri of the export pipeline.\nWhen 'AzureStorageBlobContainer':  \"https://accountName.blob.core.windows.net/containerName\""
+          "description": "The source uri of the import pipeline.\nWhen 'AzureStorageBlob': \"https://accountName.blob.core.windows.net/containerName/blobName\"\nWhen 'AzureStorageBlobContainer': \"https://accountName.blob.core.windows.net/containerName\""
         },
         "keyVaultUri": {
           "type": "string",

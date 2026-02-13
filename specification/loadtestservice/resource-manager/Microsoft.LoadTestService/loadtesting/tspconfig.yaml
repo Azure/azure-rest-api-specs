@@ -16,8 +16,6 @@ options:
   "@azure-tools/typespec-autorest":
     azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
-    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
-    arm-resource-flattening: true
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/loadtestservice.json"
     omit-unreachable-types: true
@@ -35,10 +33,8 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/sdk/loadtestservice/{namespace}"
     namespace: "Azure.ResourceManager.LoadTesting"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-loadtesting"
