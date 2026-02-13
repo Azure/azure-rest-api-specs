@@ -201,7 +201,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       Rules_Get_V2: #{
-        $ref: "./examples/2026-01-12-preview/Rules_Get_V2.json",
+        $ref: "./examples/Rules_Get_V2.json",
       },
     }
   )
@@ -242,7 +242,7 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      Rule_Get_V2: #{ $ref: "./examples/2026-01-12-preview/Rule_Get_V2.json" },
+      Rule_Get_V2: #{ $ref: "./examples/Rule_Get_V2.json" },
     }
   )
   @doc("Retrieves a specific rule associated with a data asset. Data product is specified as optional query parameter.")
@@ -287,7 +287,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       Rules_Delete_V2: #{
-        $ref: "./examples/2026-01-12-preview/Rules_Delete_V2.json",
+        $ref: "./examples/Rules_Delete_V2.json",
       },
     }
   )
@@ -332,7 +332,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       Rules_Update_V2: #{
-        $ref: "./examples/2026-01-12-preview/Rules_Update_V2.json",
+        $ref: "./examples/Rules_Update_V2.json",
       },
     }
   )
@@ -382,7 +382,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       Rules_UpdatePatch_V2: #{
-        $ref: "./examples/2026-01-12-preview/Rules_UpdatePatch_V2.json",
+        $ref: "./examples/Rules_UpdatePatch_V2.json",
       },
     }
   )
@@ -834,7 +834,7 @@ namespace PurviewDataQuality {
   @extension(
     "x-ms-examples",
     #{
-      Runs_Get_V2: #{ $ref: "./examples/2026-01-12-preview/Runs_Get_V2.json" },
+      Runs_Get_V2: #{ $ref: "./examples/Runs_Get_V2.json" },
     }
   )
   @doc("Retrieves all runs associated with a specific data asset, optionally filtered by run type. Data product is specified as optional query parameter.")
@@ -925,7 +925,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       Observation_Create_V2: #{
-        $ref: "./examples/2026-01-12-preview/Observation_Create_V2.json",
+        $ref: "./examples/Observation_Create_V2.json",
       },
     }
   )
@@ -996,7 +996,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       Observation_Delete_V2: #{
-        $ref: "./examples/2026-01-12-preview/Observation_Delete_V2.json",
+        $ref: "./examples/Observation_Delete_V2.json",
       },
     }
   )
@@ -1404,7 +1404,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       ScopedAssetMetaData_Get_V2: #{
-        $ref: "./examples/2026-01-12-preview/ScopedAssetMetaData_Get_V2.json",
+        $ref: "./examples/ScopedAssetMetaData_Get_V2.json",
       },
     }
   )
@@ -1442,7 +1442,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       ScopedAssetMetaData_Update_V2: #{
-        $ref: "./examples/2026-01-12-preview/ScopedAssetMetaData_Update_V2.json",
+        $ref: "./examples/ScopedAssetMetaData_Update_V2.json",
       },
     }
   )
@@ -1484,7 +1484,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       ScopedAssetMetaData_Delete_V2: #{
-        $ref: "./examples/2026-01-12-preview/ScopedAssetMetaData_Delete_V2.json",
+        $ref: "./examples/ScopedAssetMetaData_Delete_V2.json",
       },
     }
   )
@@ -1571,7 +1571,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       Profile_Create_V2: #{
-        $ref: "./examples/2026-01-12-preview/Profile_Create_V2.json",
+        $ref: "./examples/Profile_Create_V2.json",
       },
     }
   )
@@ -1635,7 +1635,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       Profile_Delete_V2: #{
-        $ref: "./examples/2026-01-12-preview/Profile_Delete_V2.json",
+        $ref: "./examples/Profile_Delete_V2.json",
       },
     }
   )
@@ -1681,7 +1681,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       DQAsset_Create_V2: #{
-        $ref: "./examples/2026-01-12-preview/DQAsset_Create_V2.json",
+        $ref: "./examples/DQAsset_Create_V2.json",
       },
     }
   )
@@ -1731,7 +1731,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       DQAsset_Get_V2: #{
-        $ref: "./examples/2026-01-12-preview/DQAsset_Get_V2.json",
+        $ref: "./examples/DQAsset_Get_V2.json",
       },
     }
   )
@@ -1777,7 +1777,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       DQAsset_Delete_V2: #{
-        $ref: "./examples/2026-01-12-preview/DQAsset_Delete_V2.json",
+        $ref: "./examples/DQAsset_Delete_V2.json",
       },
     }
   )
@@ -1823,7 +1823,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       DQAssets_List_V2: #{
-        $ref: "./examples/2026-01-12-preview/DQAssets_List_V2.json",
+        $ref: "./examples/DQAssets_List_V2.json",
       },
     }
   )
@@ -1870,7 +1870,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       AssetScores_Get_V2: #{
-        $ref: "./examples/2026-01-12-preview/AssetScores_Get_V2.json",
+        $ref: "./examples/AssetScores_Get_V2.json",
       },
     }
   )
@@ -1917,7 +1917,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       DQAsset_Clone_V2: #{
-        $ref: "./examples/2026-01-12-preview/DQAsset_Clone_V2.json",
+        $ref: "./examples/DQAsset_Clone_V2.json",
       },
     }
   )
@@ -2029,7 +2029,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{
       LatestSnapshot_Get_V2: #{
-        $ref: "./examples/2026-01-12-preview/LatestSnapshot_Get_V2.json",
+        $ref: "./examples/LatestSnapshot_Get_V2.json",
       },
     }
   )
