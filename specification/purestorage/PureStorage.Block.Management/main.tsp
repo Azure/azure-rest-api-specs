@@ -258,7 +258,7 @@ interface StoragePools {
   @doc("Create a storage pool")
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
   @doc("Update a storage pool")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     StoragePool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
