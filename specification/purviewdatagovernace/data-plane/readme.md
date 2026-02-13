@@ -72,6 +72,71 @@ input-file:
   - Azure.Analaytics.Purview.DataQuality/preview/2026-01-12-preview/purviewDataQuality.json
 ```
 
+### LintDiff suppressions for package-2026-01-12-preview (TypeSpec-generated)
+
+OpenAPI for 2026-01-12-preview is emitted from TypeSpec. Per [Swagger LintDiff for TypeSpec](https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff#typespec), data-plane specs may suppress these rules when the spec is generated from TypeSpec and SDKs are generated from TypeSpec.
+
+```yaml $(tag) == 'package-2026-01-12-preview'
+directive:
+  - suppress: AvoidNestedProperties
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; SDKs are generated from TypeSpec.
+  - suppress: EnumInsteadOfBoolean
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; SDKs are generated from TypeSpec.
+  - suppress: GetInOperationName
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; existing service operation names.
+  - suppress: ListInOperationName
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; existing service operation names.
+  - suppress: LongRunningOperationsOptionsValidator
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; LRO behavior is service-defined.
+  - suppress: LroExtension
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; 202 accepted for async clone/jobs without full LRO extension.
+  - suppress: LroHeaders
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; LRO behavior is service-defined.
+  - suppress: OperationId
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; existing service operation names.
+  - suppress: PageableOperation
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; pagination is service-defined.
+  - suppress: PaginationResponse
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; pagination is service-defined.
+  - suppress: ParameterNamesConvention
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; parameter names are existing.
+  - suppress: PatchContentType
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec.
+  - suppress: PathParameterNames
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; path parameter names are existing.
+  - suppress: PathParameterSchema
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec.
+  - suppress: Post201Response
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; response codes are service-defined.
+  - suppress: PropertyType
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec.
+  - suppress: PutPath
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; paths are existing.
+  - suppress: RequestBodyOptional
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; optional body is intentional (e.g. clone).
+  - suppress: SecurityDefinitionDescription
+    from: purviewDataQuality.json
+    reason: Data-plane spec is generated from TypeSpec; security is defined in TypeSpec.
+```
+
 ---
 
 # Code Generation
