@@ -231,3 +231,16 @@ using Microsoft.DesktopVirtualization;
   ScalingScheduleDaysOfWeekItem,
   "csharp"
 );
+
+@@clientName(AppAttachPackageArchitectures,
+  "AppAttachPackageArchitecture",
+  "csharp"
+);
+@@clientName(ImportPackageInfoRequest, "ImportPackageInfoContent", "csharp");
+@@clientName(SetStartVMOnConnect, "SetStartVmOnConnect", "csharp");
+@@clientName(ScalingPlans.listByHostPool, "listScalingPlans", "csharp");
+@@clientName(UserSessions.listByHostPool, "listUserSessions", "csharp");
+@@clientName(SessionHostManagementProvisioningStatuses.get,
+  "getProvisioningStatus",
+  "csharp"
+);
