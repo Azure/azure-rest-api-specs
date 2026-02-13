@@ -55,24 +55,18 @@ interface DevicePools {
   @doc("List all device pools in a subscription.")
   listBySubscription is ArmListBySubscription<DevicePool>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
   @doc("Claiming devices of the pool.")
-  @action("claimDevices")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  claimDevices is ArmResourceActionAsync<
+  claimDevices is ArmResourceActionNoContentAsync<
     DevicePool,
-    ClaimDeviceRequest,
-    OkResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    ClaimDeviceRequest
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
   @doc("Releasing devices of the pool.")
-  @action("releaseDevices")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  releaseDevices is ArmResourceActionAsync<
+  releaseDevices is ArmResourceActionNoContentAsync<
     DevicePool,
-    ReleaseDeviceRequest,
-    OkResponse,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    ReleaseDeviceRequest
   >;
 }
 
