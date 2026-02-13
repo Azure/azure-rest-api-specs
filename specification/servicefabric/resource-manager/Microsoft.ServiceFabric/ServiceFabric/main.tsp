@@ -56,3 +56,6 @@ interface Operations
 @@summary(Operations.list,
   "Lists all of the available Service Fabric resource provider API operations."
 );
+@@doc(Operations.list,
+  "Get the list of available Service Fabric resource provider API operations."
+);

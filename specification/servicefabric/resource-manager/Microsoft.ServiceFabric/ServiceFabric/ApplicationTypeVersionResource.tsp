@@ -45,8 +45,6 @@ model ApplicationTypeVersionResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing property in original swagger"
   @visibility(Lifecycle.Read)
   etag?: string;
-
-  ...ManagedServiceIdentityProperty;
 }
 
 @armResourceOperations(#{ omitTags: true })
