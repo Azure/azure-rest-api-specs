@@ -76,6 +76,7 @@ interface EasmClient {
 
 @@clientName(Easm.Policy, "Policy", "csharp");
 @@clientName(Easm.AlexaInfo, "AlexaDetails", "java");
+@@clientName(InnerError, "EasmInnerError", "java");
 @@clientName(Easm.AssetUpdateData, "AssetUpdatePayload", "csharp");
 @@clientName(Easm.Attribute, "AttributeDetails", "csharp");
 @@clientName(Easm.Banner, "BannerDetails", "csharp");
