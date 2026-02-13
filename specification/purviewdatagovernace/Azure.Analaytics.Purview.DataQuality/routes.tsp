@@ -1971,7 +1971,9 @@ namespace PurviewDataQuality {
   @tag("Reports")
   @extension(
     "x-ms-examples",
-    #{ LatestSnapshot_Get_V2: #{ $ref: "./examples/LatestSnapshot_Get_V2.json" } }
+    #{
+      LatestSnapshot_Get_V2: #{ $ref: "./examples/LatestSnapshot_Get_V2.json" },
+    }
   )
   @doc("Retrieves the latest data quality snapshot report for a given business domain. Data product is specified as optional query parameter.")
   @route("/business-domains/{businessDomainId}/data-assets/{assetId}/snapshots")
