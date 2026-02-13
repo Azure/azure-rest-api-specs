@@ -522,22 +522,6 @@
         "value"
       ]
     },
-    "SignStatusResult": {
-      "type": "object",
-      "description": "The sign status model.",
-      "properties": {
-        "signature": {
-          "type": "string",
-          "format": "byte",
-          "description": "Digital signature of the requested content digest."
-        },
-        "signingCertificate": {
-          "type": "string",
-          "format": "byte",
-          "description": "Signing certificate corresponding to the private key used to sign the requested \ndigest."
-        }
-      }
-    },
     "SignSignatureAlgorithm": {
       "type": "string",
       "description": "Algorithms supported for signing.",
@@ -610,12 +594,28 @@
         ]
       }
     },
+    "SignStatusResult": {
+      "type": "object",
+      "description": "The sign status model.",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "format": "byte",
+          "description": "Digital signature of the requested content digest."
+        },
+        "signingCertificate": {
+          "type": "string",
+          "format": "byte",
+          "description": "Signing certificate corresponding to the private key used to sign the requested \ndigest."
+        }
+      }
+    },
     "SigningPayloadOptions": {
       "type": "object",
       "description": "The artifact request information to be signed by the service.",
       "properties": {
         "signatureAlgorithm": {
-          "$ref": "#/definitions/SignatureAlgorithm",
+          "$ref": "#/definitions/SignSignatureAlgorithm",
           "description": "The supported signature algorithm identifiers."
         },
         "digest": {
