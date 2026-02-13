@@ -120,7 +120,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/SignResult",
+                  "$ref": "#/definitions/SignStatusResult",
                   "description": "The result of the operation."
                 }
               },
@@ -205,7 +205,7 @@
                   "description": "Error object that describes the error when status is \"Failed\"."
                 },
                 "result": {
-                  "$ref": "#/definitions/SignResult",
+                  "$ref": "#/definitions/SignStatusResult",
                   "description": "The result of the operation."
                 }
               },
@@ -522,7 +522,7 @@
         "value"
       ]
     },
-    "SignResult": {
+    "SignStatusResult": {
       "type": "object",
       "description": "The sign status model.",
       "properties": {
@@ -538,7 +538,7 @@
         }
       }
     },
-    "SignatureAlgorithm": {
+    "SignSignatureAlgorithm": {
       "type": "string",
       "description": "Algorithms supported for signing.",
       "enum": [
@@ -554,7 +554,7 @@
         "ES256K"
       ],
       "x-ms-enum": {
-        "name": "SignatureAlgorithm",
+        "name": "SignSignatureAlgorithm",
         "modelAsString": true,
         "values": [
           {
