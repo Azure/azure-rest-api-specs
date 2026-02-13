@@ -1627,10 +1627,18 @@
             "name": "failoverTestType",
             "in": "query",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExpressRouteFailoverTestType"
-            },
-            "description": "The type of failover test"
+            "type": "string",
+            "description": "The type of failover test",
+            "enum": [
+              "SingleSiteFailover",
+              "MultiSiteFailover",
+              "All",
+              "LinkFailover"
+            ],
+            "x-ms-enum": {
+              "name": "ExpressRouteFailoverTestType",
+              "modelAsString": true
+            }
           },
           {
             "name": "fetchLatest",
@@ -1720,8 +1728,16 @@
             "name": "circuitMaintenanceCategory",
             "in": "query",
             "required": true,
-            "type": "MaintenanceTestCategory",
-            "description": "The type of maintenance that can occur during an ExpressRoute Circuit failover test"
+            "type": "string",
+            "description": "The type of maintenance test category",
+            "enum": [
+              "BgpDisconnect",
+              "ASPathPrepend"
+            ],
+            "x-ms-enum": {
+              "name": "MaintenanceTestCategory",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
