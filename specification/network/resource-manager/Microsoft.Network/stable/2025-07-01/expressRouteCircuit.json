@@ -1627,7 +1627,9 @@
             "name": "failoverTestType",
             "in": "query",
             "required": true,
-            "type": "ExpressRouteFailoverTestType",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteFailoverTestType"
+            },
             "description": "The type of failover test"
           },
           {
@@ -3152,26 +3154,28 @@
     },
     "ExpressRouteLinkFailoverStopApiParameters": {
       "type": "object",
+      "required": [
+        "circuitTestCategory",
+        "linkType",
+        "wasSimulationSuccessful",
+        "isVerified"
+      ],
       "properties": {
         "circuitTestCategory": {
           "$ref": "#/definitions/MaintenanceTestCategory",
-          "description": "The type of maintenance test category",
-          "required": true
+          "description": "The type of maintenance test category"
         },
         "linkType": {
           "$ref": "#/definitions/ExpressRouteFailoverLinkType",
-          "description": "The type of link on which failover test was performed",
-          "required": true
+          "description": "The type of link on which failover test was performed"
         },
         "wasSimulationSuccessful": {
           "type": "boolean",
-          "description": "Whether the failover simulation was successful or not",
-          "required": true
+          "description": "Whether the failover simulation was successful or not"
         },
         "isVerified": {
           "type": "boolean",
-          "description": "Whether the customer was able to establish connectivity through this failover link or not",
-          "required": true
+          "description": "Whether the customer was able to establish connectivity through this failover link or not"
         }
       },
       "description": "Parameters required to stop an ExpressRoute link failover simulation."
