@@ -9,12 +9,14 @@ import { CoreLogger } from './core-logger.js';
 // Configuration
 // ============================================
 
-const ALLOWED_FILE_PATTERNS = [
-  /^\.github\/arm-leases\//,
-];
-
 const LEASE_FILE_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
 const LEASE_FILE_WITH_GROUP_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^/]+)\/lease\.yaml$/;
+
+const ALLOWED_FILE_PATTERNS = [
+  LEASE_FILE_PATTERN,
+  LEASE_FILE_WITH_GROUP_PATTERN,
+  /^\.github\/arm-leases\/README\.md$/,
+];
 
 /**
  * Zod schema for lease.yaml file content.
@@ -58,18 +60,18 @@ const leaseSchema = z.object({
 /**
  * Check if a file is allowed based on patterns
  * @param {string} file - File path to check
- * @returns {Promise<boolean>} True if file is allowed
+ * @returns {boolean} True if file is allowed
  */
-async function isFileAllowed(file) {
+function isFileAllowed(file) {
   return ALLOWED_FILE_PATTERNS.some(pattern => pattern.test(file));
 }
 
 /**
  * Validate folder structure of lease files
  * @param {string[]} files - Array of file paths
- * @returns {Promise<string[]>} Array of invalid files
+ * @returns {string[]} Array of invalid files
  */
-async function validateFolderStructure(files) {
+function validateFolderStructure(files) {
   return files.filter(file => !LEASE_FILE_PATTERN.test(file) && !LEASE_FILE_WITH_GROUP_PATTERN.test(file));
 }
 
@@ -163,7 +165,7 @@ export default async function validateArmLeases(core) {
   // Step 2: Check for disallowed files
   const disallowedFiles = [];
   for (const file of allChangedFiles) {
-    if (!(await isFileAllowed(file))) {
+    if (!isFileAllowed(file)) {
       disallowedFiles.push(file);
     }
   }
@@ -206,7 +208,7 @@ export default async function validateArmLeases(core) {
   }
 
   // Step 5: Validate folder structure
-  const invalidStructure = await validateFolderStructure(armLeaseFiles);
+  const invalidStructure = validateFolderStructure(armLeaseFiles);
   
   if (invalidStructure.length > 0) {
     core.info(`${invalidStructure.length} file(s) with invalid folder structure:`);

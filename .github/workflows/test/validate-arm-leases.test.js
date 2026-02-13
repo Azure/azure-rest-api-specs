@@ -23,46 +23,47 @@ describe("validate-arm-leases", () => {
   });
 
   describe("isFileAllowed", () => {
-    it("allows files in arm-leases directory", async () => {
-      await expect(isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/lease.yaml")).resolves.toBe(true);
-      await expect(isFileAllowed(".github/arm-leases/anything/here")).resolves.toBe(true);
+    it("allows valid lease files and README.md", () => {
+      expect(isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/lease.yaml")).toBe(true);
+      expect(isFileAllowed(".github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml")).toBe(true);
+      expect(isFileAllowed(".github/arm-leases/README.md")).toBe(true);
     });
 
-    it("rejects files outside arm-leases directory", async () => {
-      await expect(isFileAllowed("specification/testservice/readme.md")).resolves.toBe(false);
-      await expect(isFileAllowed(".github/other-file.yaml")).resolves.toBe(false);
-      await expect(isFileAllowed(".github/workflows/validate-arm-leases.yaml")).resolves.toBe(false);
-      await expect(isFileAllowed("arm-leases/testservice/Microsoft.Test/lease.yaml")).resolves.toBe(false);
+    it("rejects files that do not match allowed patterns", () => {
+      expect(isFileAllowed(".github/arm-leases/anything/here")).toBe(false);
+      expect(isFileAllowed(".github/arm-leases/testservice/Microsoft.Test/other.yaml")).toBe(false);
+      expect(isFileAllowed(".github/arm-leases/badtest/bad.test/noyaml.md")).toBe(false);
+      expect(isFileAllowed(".github/arm-leases/testservice/readme.md")).toBe(false);
     });
   });
 
   describe("validateFolderStructure", () => {
-    it("accepts valid lease file paths", async () => {
+    it("accepts valid lease file paths", () => {
       const validFiles = [
         ".github/arm-leases/testservice/Microsoft.Test/lease.yaml",
         ".github/arm-leases/widgetservice/Azure.Widget/lease.yaml",
         ".github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml",
       ];
-      await expect(validateFolderStructure(validFiles)).resolves.toHaveLength(0);
+      expect(validateFolderStructure(validFiles)).toHaveLength(0);
     });
 
-    it("rejects invalid folder structures", async () => {
+    it("rejects invalid folder structures", () => {
       const invalidFiles = [
         ".github/arm-leases/TestService/Microsoft.Test/lease.yaml",
         ".github/arm-leases/test-service/Microsoft.Test/lease.yaml",
         ".github/arm-leases/testservice/Microsoft.Test/other.yaml",
       ];
-      await expect(validateFolderStructure(invalidFiles)).resolves.toHaveLength(invalidFiles.length);
+      expect(validateFolderStructure(invalidFiles)).toHaveLength(invalidFiles.length);
     });
 
-    it("rejects stable or preview as service group", async () => {
+    it("rejects stable or preview as service group", () => {
       const invalidFiles = [
         ".github/arm-leases/compute/Microsoft.Compute/stable/lease.yaml",
         ".github/arm-leases/compute/Microsoft.Compute/preview/lease.yaml",
         ".github/arm-leases/compute/Microsoft.Compute/stable-2024-01-01/lease.yaml",
         ".github/arm-leases/compute/Microsoft.Compute/preview-internal/lease.yaml",
       ];
-      await expect(validateFolderStructure(invalidFiles)).resolves.toHaveLength(invalidFiles.length);
+      expect(validateFolderStructure(invalidFiles)).toHaveLength(invalidFiles.length);
     });
   });
 
