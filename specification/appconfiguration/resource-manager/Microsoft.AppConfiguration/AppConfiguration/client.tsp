@@ -122,7 +122,10 @@ using Azure.ClientGenerator.Core;
   "CheckAppConfigurationNameAvailability",
   "csharp"
 );
-// @@clientName(ConfigurationStoresOperationGroup.listDeleted, "GetAll", "csharp");
+@@clientName(OperationsOperationGroup.regionalCheckNameAvailability,
+  "CheckAppConfigurationRegionalNameAvailability",
+  "csharp"
+);
 @@alternateType(DeletedConfigurationStoreProperties.configurationStoreId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -147,5 +150,13 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(SnapshotProperties.etag,
   Azure.Core.EtagProperty.etag,
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ManagedOnBehalfOfConfiguration,
+  "AppConfigurationManagedOnBehalfOfConfiguration",
+  "csharp"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.MoboBrokerResource,
+  "AppConfigurationMoboBrokerResourceInfo",
   "csharp"
 );
