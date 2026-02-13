@@ -40,3 +40,7 @@ using Azure.ClientGenerator.Core;
   "SupportedHighAvailabilityMode",
   "java"
 );
+@@alternateType(Microsoft.DBforPostgreSQL.ServerSkuCapability.supportedHaMode,
+  PostgreSqlFlexibleServerHighAvailabilityMode[],
+  "java"
+);
