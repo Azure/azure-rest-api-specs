@@ -105,3 +105,12 @@ using Microsoft.DataFactory;
   "hostnameInCertificate",
   "java"
 );
+
+@@clientLocation(PrivateEndpointConnectionResources.listByFactory,
+  "PrivateEndPointConnections",
+  "python"
+);
+@@clientLocation(Factories.privateLinkResourcesGet,
+  "PrivateLinkResources",
+  "python"
+);
