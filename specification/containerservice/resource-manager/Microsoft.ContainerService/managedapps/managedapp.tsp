@@ -66,9 +66,6 @@ model ManagedAppRollbackPostParameters {
 
 /** App properties */
 model AppProperties {
-  /** Determines the application type. This influences the base set of kubernetes manifests that will be used */
-  applicationType: ApplicationType;
-
   /** Additional k8s resources (in yaml format) to deploy along with the app
    * This can include things like ConfigMaps, Secrets, PersistentVolumeClaims, etc.
    * Do we split this out into separate fields? Easier to maintain as raw yaml, but harder to validate
@@ -83,18 +80,8 @@ model AppProperties {
   @identifiers(#["apiGroups", "resources", "verbs"])
   clusterWidePermissions?: Permissions[];
 
-  /** An array of prometheus expressions to evaluate to determine if the app is healthy. Multiple expressions in this list are logically AND-ed together, so all must return true in order for the app to be considered healthy */
-  @identifiers(#["name"])
-  healthChecks?: HealthCheck[];
-
-  /** Observability configuration for the app */
-  observability?: ObservabilityProperties;
-
   /** Scaling type for the app. Default is manual scaling */
   scaling?: ScalingConfiguration;
-
-  /** Ingress configuration for the app */
-  ingressConfiguration?: IngressProperties;
 
   /** User assigned identity for the app deployment to use */
   @visibility(Lifecycle.Read)
@@ -130,7 +117,7 @@ model DeploymentTemplate {
   /** Arguments to the command */
   arguments?: string[];
 
-  /** The primary port your application listens on, where it receives traffic. Required if ingress configuration is set */
+  /** The primary port your application listens on, where it receives traffic. */
   primaryPort?: ContainerPort;
 
   /** An array of container probes for the app. If not specified, the default is an http request to /healthz */
@@ -168,15 +155,6 @@ model DeploymentTemplate {
   /** Volume mounts for the app */
   @identifiers(#["name"])
   volumeMounts?: VolumeMount[];
-}
-
-/** Observability properties for the app */
-model ObservabilityProperties {
-  /** Log Analytics Workspace ID */
-  logAnalyticsWorkspaceId?: logAnalyticsWorkspaceId;
-
-  /** Azure Managed Prometheus Workspace ID */
-  azureMonitorAccount?: azureManagedPrometheusWorkspaceId;
 }
 
 scalar UserAssignedIdentity
@@ -277,61 +255,6 @@ model ResourceRequirements {
   /** Memory resource request and limit */
   memory?: string = "2Gi";
 }
-
-/** Ingress configuration for the app */
-union IngressType {
-  /** HTTP Ingress */
-  Http: "http",
-
-  /** gRPC Ingress */
-  Grpc: "grpc",
-
-  string,
-}
-
-/** Ingress visibility */
-union IngressVisibility {
-  /** Public visibility, accessible from the internet */
-  Public: "public",
-
-  /** Private visibility, only accessible within the cluster */
-  Private: "private",
-
-  string,
-}
-
-/** Ingress state enum */
-union IngressState {
-  /** Ingress is enabled */
-  Enabled: "enabled",
-
-  /** Ingress is disabled */
-  Disabled: "disabled",
-
-  string,
-}
-
-/** Ingress properties */
-model IngressProperties {
-  /** Ingress state, enabled or disabled. Intended to answer the question 'does my app accept public traffic?'. Use TrafficRules to configure traffic routing */
-  state: IngressState;
-
-  /** Ingress type needed. I.e. http, grpc, */
-  ingressType: IngressType;
-}
-
-scalar logAnalyticsWorkspaceId
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.OperationalInsights/workspaces",
-    }
-  ]>;
-scalar azureManagedPrometheusWorkspaceId
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Monitor/accounts",
-    }
-  ]>;
 
 /** Role definition for k8s resources that the app needs to access */
 model Permissions {
@@ -437,23 +360,6 @@ union HealthCheckState {
 
   /** Health check is unknown */
   Unknown: "unknown",
-
-  string,
-}
-
-/** Type of application */
-union ApplicationType {
-  /** Web application */
-  WebApp: "webApp",
-
-  /** AI training application */
-  AITraining: "aiTraining",
-
-  /** AI inference application */
-  AIInference: "aiInference",
-
-  /** Background worker application */
-  BackgroundWorker: "backgroundWorker",
 
   string,
 }

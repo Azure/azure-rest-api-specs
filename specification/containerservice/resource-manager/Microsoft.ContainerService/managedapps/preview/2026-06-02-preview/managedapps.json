@@ -478,10 +478,6 @@
       "type": "object",
       "description": "App properties",
       "properties": {
-        "applicationType": {
-          "$ref": "#/definitions/ApplicationType",
-          "description": "Determines the application type. This influences the base set of kubernetes manifests that will be used"
-        },
         "additionalK8sResources": {
           "type": "array",
           "description": "Additional k8s resources (in yaml format) to deploy along with the app\nThis can include things like ConfigMaps, Secrets, PersistentVolumeClaims, etc.\nDo we split this out into separate fields? Easier to maintain as raw yaml, but harder to validate",
@@ -513,27 +509,9 @@
             "verbs"
           ]
         },
-        "healthChecks": {
-          "type": "array",
-          "description": "An array of prometheus expressions to evaluate to determine if the app is healthy. Multiple expressions in this list are logically AND-ed together, so all must return true in order for the app to be considered healthy",
-          "items": {
-            "$ref": "#/definitions/HealthCheck"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "observability": {
-          "$ref": "#/definitions/ObservabilityProperties",
-          "description": "Observability configuration for the app"
-        },
         "scaling": {
           "$ref": "#/definitions/ScalingConfiguration",
           "description": "Scaling type for the app. Default is manual scaling"
-        },
-        "ingressConfiguration": {
-          "$ref": "#/definitions/IngressProperties",
-          "description": "Ingress configuration for the app"
         },
         "identity": {
           "$ref": "#/definitions/AppDeploymentUserAssignedIdentity",
@@ -561,47 +539,10 @@
         }
       },
       "required": [
-        "applicationType",
         "template",
         "generatedServiceAccountName",
         "generatedKubernetesServiceName"
       ]
-    },
-    "ApplicationType": {
-      "type": "string",
-      "description": "Type of application",
-      "enum": [
-        "webApp",
-        "aiTraining",
-        "aiInference",
-        "backgroundWorker"
-      ],
-      "x-ms-enum": {
-        "name": "ApplicationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "WebApp",
-            "value": "webApp",
-            "description": "Web application"
-          },
-          {
-            "name": "AITraining",
-            "value": "aiTraining",
-            "description": "AI training application"
-          },
-          {
-            "name": "AIInference",
-            "value": "aiInference",
-            "description": "AI inference application"
-          },
-          {
-            "name": "BackgroundWorker",
-            "value": "backgroundWorker",
-            "description": "Background worker application"
-          }
-        ]
-      }
     },
     "AutoscalingTrigger": {
       "type": "object",
@@ -1448,7 +1389,7 @@
         },
         "primaryPort": {
           "$ref": "#/definitions/ContainerPort",
-          "description": "The primary port your application listens on, where it receives traffic. Required if ingress configuration is set"
+          "description": "The primary port your application listens on, where it receives traffic."
         },
         "containerProbes": {
           "type": "array",
@@ -1711,96 +1652,6 @@
         ]
       }
     },
-    "IngressProperties": {
-      "type": "object",
-      "description": "Ingress properties",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/IngressState",
-          "description": "Ingress state, enabled or disabled. Intended to answer the question 'does my app accept public traffic?'. Use TrafficRules to configure traffic routing"
-        },
-        "ingressType": {
-          "$ref": "#/definitions/IngressType",
-          "description": "Ingress type needed. I.e. http, grpc,"
-        }
-      },
-      "required": [
-        "state",
-        "ingressType"
-      ]
-    },
-    "IngressState": {
-      "type": "string",
-      "description": "Ingress state enum",
-      "enum": [
-        "enabled",
-        "disabled"
-      ],
-      "x-ms-enum": {
-        "name": "IngressState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "enabled",
-            "description": "Ingress is enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "disabled",
-            "description": "Ingress is disabled"
-          }
-        ]
-      }
-    },
-    "IngressType": {
-      "type": "string",
-      "description": "Ingress configuration for the app",
-      "enum": [
-        "http",
-        "grpc"
-      ],
-      "x-ms-enum": {
-        "name": "IngressType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Http",
-            "value": "http",
-            "description": "HTTP Ingress"
-          },
-          {
-            "name": "Grpc",
-            "value": "grpc",
-            "description": "gRPC Ingress"
-          }
-        ]
-      }
-    },
-    "IngressVisibility": {
-      "type": "string",
-      "description": "Ingress visibility",
-      "enum": [
-        "public",
-        "private"
-      ],
-      "x-ms-enum": {
-        "name": "IngressVisibility",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Public",
-            "value": "public",
-            "description": "Public visibility, accessible from the internet"
-          },
-          {
-            "name": "Private",
-            "value": "private",
-            "description": "Private visibility, only accessible within the cluster"
-          }
-        ]
-      }
-    },
     "KeyValuePair": {
       "type": "object",
       "description": "Key Value Pair for labels/annotations",
@@ -1942,20 +1793,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
-        }
-      }
-    },
-    "ObservabilityProperties": {
-      "type": "object",
-      "description": "Observability properties for the app",
-      "properties": {
-        "logAnalyticsWorkspaceId": {
-          "$ref": "#/definitions/logAnalyticsWorkspaceId",
-          "description": "Log Analytics Workspace ID"
-        },
-        "azureMonitorAccount": {
-          "$ref": "#/definitions/azureManagedPrometheusWorkspaceId",
-          "description": "Azure Managed Prometheus Workspace ID"
         }
       }
     },
@@ -2336,30 +2173,6 @@
         "mountPath",
         "readOnly"
       ]
-    },
-    "azureManagedPrometheusWorkspaceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.Monitor/accounts"
-          }
-        ]
-      }
-    },
-    "logAnalyticsWorkspaceId": {
-      "type": "string",
-      "format": "arm-id",
-      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-      "x-ms-arm-id-details": {
-        "allowedResources": [
-          {
-            "type": "Microsoft.OperationalInsights/workspaces"
-          }
-        ]
-      }
     }
   },
   "parameters": {
