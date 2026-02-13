@@ -1176,13 +1176,13 @@ union State {
   /**
    * The health check has expired and needs to be redone.
    */
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   HealthCheckExpired: "HealthCheckExpired",
 
   /**
    * The update is pending OEM validation before it can proceed.
    */
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   PendingOEMValidation: "PendingOEMValidation",
 }
 
@@ -1873,7 +1873,7 @@ model ClusterProperties {
    * The ring to which this cluster belongs to.
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   ring?: string;
 
   /**
@@ -1999,14 +1999,14 @@ model ClusterProperties {
   /**
    * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
    */
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProperties?: ConfidentialVmProperties;
 
   /**
    * Software Defined Networking Properties of the cluster
    */
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   sdnProperties?: ClusterSdnProperties;
 
@@ -2637,14 +2637,14 @@ model SoftwareAssuranceChangeRequestProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 model ChangeRingRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ChangeRingRequestProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 model ChangeRingRequestProperties {
   /**
    * The target ring for the cluster.
@@ -5392,7 +5392,7 @@ model HciNetworkProfile {
     oftware Defined Networking Properties of the cluster
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   sdnProperties?: SdnProperties;
 }
 
@@ -5834,14 +5834,14 @@ model ReportedProperties {
   /**
    * Most recent edge device sync timestamp in UTC.
    */
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 
   /**
    * CVM support details for edge device.
    */
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
 }
@@ -5849,7 +5849,7 @@ model ReportedProperties {
 /**
  * ClusterJob Type supported.
  */
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 union HciJobType {
   string,
 
@@ -5867,7 +5867,7 @@ union HciJobType {
 /**
  * Properties for configuring SDN integration intent for the cluster.
  */
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 model HciConfigureSdnIntegrationJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureSdnIntegration;
@@ -5888,7 +5888,7 @@ model HciConfigureSdnIntegrationJobProperties extends ClusterJobProperties {
 /**
  * Defines the customer's intent for updating confidential VM properties
  */
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 model HciConfigureCvmJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureCVM;
@@ -5902,10 +5902,83 @@ model HciConfigureCvmJobProperties extends ClusterJobProperties {
 /**
  * Request body for the check updates action on update summaries.
  */
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 model CheckUpdatesRequest {
   /**
    * Name of update
    */
   updateName?: string;
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Request for Add/Remove Devices to the pool.")
+model ListOfDevicesRequest {
+  @doc("List of resource ids of the devices to be modified")
+  devices: Azure.Core.armResourceIdentifier[];
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Request for claiming devices of the pool.")
+model ClaimDeviceRequest {
+  @doc("List of resource ids of the devices to be modified")
+  devices: Azure.Core.armResourceIdentifier[];
+
+  @doc("Resource Id of group device belongs to.")
+  claimedBy?: string;
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Request for releasing devices of the pool.")
+model ReleaseDeviceRequest {
+  @doc("List of resource ids of the devices to be modified")
+  devices: Azure.Core.armResourceIdentifier[];
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Properties for device pool.")
+model DevicePoolProperties {
+  @doc("The provisioning state of a resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  @doc("Unique, immutable resource id.")
+  @visibility(Lifecycle.Read)
+  cloudId?: string;
+
+  @doc("List of machines in device pool.")
+  @Azure.ResourceManager.identifiers(#[])
+  devices?: DeviceDetail[];
+
+  @doc("Custom Location Resource Id for the pool")
+  @visibility(Lifecycle.Read)
+  customLocationResourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("Custom Location Name for the pool, default: <DevicePoolName>-CL")
+  customLocationName?: string;
+
+  @doc("Managed resource group name for the pool")
+  managedResourceGroup?: string;
+
+  @doc("operation status details for device pool.")
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  operationDetails?: OperationDetail[];
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Properties for patching Device Pool.")
+model DevicePoolPatch {
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Device details.")
+model DeviceDetail {
+  @doc("Resource Id of the device.")
+  deviceResourceId?: Azure.Core.armResourceIdentifier;
+
+  @doc("Resource Id of group device belongs to.")
+  @visibility(Lifecycle.Read)
+  claimedBy?: string;
 }

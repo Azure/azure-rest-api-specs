@@ -128,7 +128,7 @@ interface Clusters {
   /**
    * Changes ring of a cluster
    */
-  @added(Versions.v2026_02_15_preview)
+  @added(Versions.v2026_03_01_preview)
   changeRing is ArmResourceActionAsync<Cluster, ChangeRingRequest, Cluster>;
 
   /**

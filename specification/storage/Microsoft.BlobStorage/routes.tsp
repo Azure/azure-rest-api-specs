@@ -23,7 +23,7 @@ namespace Storage.Blob {
     TResponse extends TypeSpec.Reflection.Model | void,
     RequestMediaType extends string = "application/xml",
     ResponseMediaType extends string = "application/xml",
-    TError = StorageError
+    TError = Error
   >(
     /** Content-Type header */
     #suppress "@typespec/http/content-type-ignored" "Template for existing API"
@@ -49,7 +49,7 @@ namespace Storage.Blob {
   op StorageOperationNoBody<
     TParams extends TypeSpec.Reflection.Model | void,
     TResponse extends TypeSpec.Reflection.Model | void,
-    TError = StorageError
+    TError = Error
   >(...ApiVersionHeader, ...ClientRequestIdHeader, ...TParams): (TResponse & {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
@@ -62,7 +62,7 @@ namespace Storage.Blob {
     TParams extends TypeSpec.Reflection.Model | void,
     TResponse extends TypeSpec.Reflection.Model | void,
     ResponseMediaType extends string = "application/xml",
-    TError = StorageError
+    TError = Error
   > is StorageOperationNoBody<
     TParams,
     {
@@ -80,7 +80,7 @@ namespace Storage.Blob {
     TParams extends TypeSpec.Reflection.Model | void,
     TResponse extends TypeSpec.Reflection.Model | void,
     RequestMediaType extends string = "application/xml",
-    TError = StorageError
+    TError = Error
   > is StorageOperationNoBody<
     {
       /** Content-Type header */
@@ -216,7 +216,7 @@ namespace Storage.Blob {
     ...ApiVersionHeader;
     ...RequestIdResponseHeader;
     ...ClientRequestIdHeader;
-  }) | StorageError;
+  }) | Error;
 
   /** The Filter Blobs operation enables callers to list blobs across all containers whose tags match a given search expression. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -474,7 +474,7 @@ namespace Storage.Blob {
 
       ...RequestIdResponseHeader;
       ...ApiVersionHeader;
-    } & MultipartBodyParameter) | StorageError;
+    } & MultipartBodyParameter) | Error;
 
     /** The Filter Blobs operation enables callers to list blobs in a container whose tags match a given search expression.  Filter blobs searches within the given container. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -835,7 +835,7 @@ namespace Storage.Blob {
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
         ...ApiVersionHeader;
-      }) | StorageError;
+      }) | Error;
 
       /** The Get Properties operation returns all user-defined metadata, standard HTTP properties, and system properties for the blob. It does not return the content of the blob. */
       #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
