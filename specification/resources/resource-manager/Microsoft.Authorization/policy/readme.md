@@ -816,6 +816,9 @@ directive:
   - suppress: TenantLevelAPIsNotAllowed
     from: policyVariableValues.json
     reason: Linter rule limitation. The API has always supported management group scope.
+  - suppress: TenantLevelAPIsNotAllowed
+    from: openapi.json
+    reason: Linter rule limitation. The API has always supported management group scope.
   - suppress: EvenSegmentedPathForPutOperation
     from: policyAssignments.json
     reason: Linter rule limitation. The API has never been changed since inception. Would be a breaking change.
@@ -896,6 +899,9 @@ directive:
     reason: Using common types for management group name
   - suppress: ResourceNameRestriction
     from: policyVariableValues.json
+    reason: Using common types for management group name
+  - suppress: ResourceNameRestriction
+    from: openapi.json
     reason: Using common types for management group name
   - suppress: ParametersInPointGet
     from: policyAssignments.json

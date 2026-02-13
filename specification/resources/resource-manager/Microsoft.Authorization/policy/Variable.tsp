@@ -44,6 +44,7 @@ alias VariableOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("variables")
     @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     variableName: string;
   }
 >;
@@ -74,6 +75,7 @@ alias VariableManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOperati
     @path
     @segment("variables")
     @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     variableName: string;
   }
 >;
@@ -104,10 +106,7 @@ interface Variables {
   /**
    * This operation retrieves a single variable, given its name and the  management group it was created at.
    */
-  getAtManagementGroup is VariableManagementGroupOps.Read<
-    Extension.ManagementGroup,
-    Variable
-  >;
+  getAtManagementGroup is VariableManagementGroupOps.Read<Variable>;
 
   /**
    *  This operation creates or updates a variable with the given  management group and name. Policy variables can only be used by a policy definition at the scope they are created or below.
@@ -119,18 +118,12 @@ interface Variables {
   /**
    * This operation deletes a variable, given its name and the management group it was created in. The scope of a variable is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.
    */
-  deleteAtManagementGroup is VariableManagementGroupOps.DeleteSync<
-    Extension.ManagementGroup,
-    Variable
-  >;
+  deleteAtManagementGroup is VariableManagementGroupOps.DeleteSync<Variable>;
 
   /**
    * This operation retrieves the list of all variables applicable to the management group.
    */
-  listForManagementGroup is VariableManagementGroupOps.List<
-    Extension.ManagementGroup,
-    Variable
-  >;
+  listForManagementGroup is VariableManagementGroupOps.List<Variable>;
 }
 
 @@doc(Variable.name, "The name of the variable to operate on.");

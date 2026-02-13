@@ -1918,64 +1918,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}": {
-      "put": {
-        "operationId": "Variables_CreateOrUpdateAtManagementGroup",
-        "tags": [
-          "Variables"
-        ],
-        "description": "This operation creates or updates a variable with the given  management group and name. Policy variables can only be used by a policy definition at the scope they are created or below.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "managementGroupId",
-            "in": "path",
-            "description": "The ID of the management group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "variableName",
-            "in": "path",
-            "description": "The name of the variable to operate on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters for the variable.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Variable"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'Variable' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Variable"
-            }
-          },
-          "201": {
-            "description": "Resource 'Variable' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/Variable"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{name}/managementGroups": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables": {
       "get": {
         "operationId": "Variables_ListForManagementGroup",
         "tags": [
@@ -1992,29 +1935,13 @@
             "description": "The ID of the management group.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the variable to operate on.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Variable"
-            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ManagementGroupListResult"
+              "$ref": "#/definitions/VariableListResult"
             }
           },
           "default": {
@@ -2029,272 +1956,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values/{variableValueName}": {
-      "put": {
-        "operationId": "VariableValues_CreateOrUpdateAtManagementGroup",
-        "tags": [
-          "VariableValues"
-        ],
-        "description": "This operation creates or updates a variable value with the given management group and name for a given variable. Variable values are scoped to the variable for which they are created for.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "managementGroupId",
-            "in": "path",
-            "description": "The ID of the management group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "variableName",
-            "in": "path",
-            "description": "The name of the variable to operate on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "variableValueName",
-            "in": "path",
-            "description": "The name of the variable value to operate on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "Parameters for the variable value.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VariableValue"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'VariableValue' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VariableValue"
-            }
-          },
-          "201": {
-            "description": "Resource 'VariableValue' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VariableValue"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values/{name}/managementGroups": {
-      "get": {
-        "operationId": "VariableValues_ListForManagementGroup",
-        "tags": [
-          "VariableValues"
-        ],
-        "description": "This operation retrieves the list of all variable values applicable the variable indicated at the management group scope.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "managementGroupId",
-            "in": "path",
-            "description": "The ID of the management group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "variableName",
-            "in": "path",
-            "description": "The name of the variable to operate on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the variable value to operate on.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VariableValue"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ManagementGroupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values/{variableValueName}/values/{name}": {
-      "get": {
-        "operationId": "VariableValues_GetAtManagementGroup",
-        "tags": [
-          "VariableValues"
-        ],
-        "description": "This operation retrieves a single variable value; given its name,  management group it was created at and the variable it's created for.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "managementGroupId",
-            "in": "path",
-            "description": "The ID of the management group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "variableName",
-            "in": "path",
-            "description": "The name of the variable to operate on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "variableValueName",
-            "in": "path",
-            "description": "The name of the variable value to operate on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the variable value to operate on.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VariableValue"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "description": "A management group",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "The management group ID.",
-                  "minLength": 1,
-                  "readOnly": true
-                }
-              },
-              "required": [
-                "name"
-              ]
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "VariableValues_DeleteAtManagementGroup",
-        "tags": [
-          "VariableValues"
-        ],
-        "description": "This operation deletes a variable value, given its name, the management group it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "managementGroupId",
-            "in": "path",
-            "description": "The ID of the management group.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "variableName",
-            "in": "path",
-            "description": "The name of the variable to operate on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "variableValueName",
-            "in": "path",
-            "description": "The name of the variable value to operate on.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the variable value to operate on.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VariableValue"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/variables/{name}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}": {
       "get": {
         "operationId": "Variables_GetAtManagementGroup",
         "tags": [
@@ -2317,10 +1979,44 @@
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Variables_CreateOrUpdateAtManagementGroup",
+        "tags": [
+          "Variables"
+        ],
+        "description": "This operation creates or updates a variable with the given  management group and name. Policy variables can only be used by a policy definition at the scope they are created or below.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "variableName",
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
@@ -2328,8 +2024,9 @@
             "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           },
           {
-            "name": "body",
+            "name": "parameters",
             "in": "body",
+            "description": "Parameters for the variable.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Variable"
@@ -2338,21 +2035,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'Variable' update operation succeeded",
             "schema": {
-              "type": "object",
-              "description": "A management group",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "description": "The management group ID.",
-                  "minLength": 1,
-                  "readOnly": true
-                }
-              },
-              "required": [
-                "name"
-              ]
+              "$ref": "#/definitions/Variable"
+            }
+          },
+          "201": {
+            "description": "Resource 'Variable' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Variable"
             }
           },
           "default": {
@@ -2385,10 +2076,92 @@
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values": {
+      "get": {
+        "operationId": "VariableValues_ListForManagementGroup",
+        "tags": [
+          "VariableValues"
+        ],
+        "description": "This operation retrieves the list of all variable values applicable the variable indicated at the management group scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
             "type": "string"
           },
           {
-            "name": "name",
+            "name": "variableName",
+            "in": "path",
+            "description": "The name of the variable to operate on.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VariableValueListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/variables/{variableName}/values/{variableValueName}": {
+      "get": {
+        "operationId": "VariableValues_GetAtManagementGroup",
+        "tags": [
+          "VariableValues"
+        ],
+        "description": "This operation retrieves a single variable value; given its name,  management group it was created at and the variable it's created for.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "variableName",
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
@@ -2396,12 +2169,125 @@
             "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           },
           {
-            "name": "body",
+            "name": "variableValueName",
+            "in": "path",
+            "description": "The name of the variable value to operate on.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VariableValue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VariableValues_CreateOrUpdateAtManagementGroup",
+        "tags": [
+          "VariableValues"
+        ],
+        "description": "This operation creates or updates a variable value with the given management group and name for a given variable. Variable values are scoped to the variable for which they are created for.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "description": "The name of the variable to operate on.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "variableValueName",
+            "in": "path",
+            "description": "The name of the variable value to operate on.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "parameters",
             "in": "body",
+            "description": "Parameters for the variable value.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Variable"
+              "$ref": "#/definitions/VariableValue"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VariableValue' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VariableValue"
+            }
+          },
+          "201": {
+            "description": "Resource 'VariableValue' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VariableValue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VariableValues_DeleteAtManagementGroup",
+        "tags": [
+          "VariableValues"
+        ],
+        "description": "This operation deletes a variable value, given its name, the management group it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "managementGroupId",
+            "in": "path",
+            "description": "The ID of the management group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "variableName",
+            "in": "path",
+            "description": "The name of the variable to operate on.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+          },
+          {
+            "name": "variableValueName",
+            "in": "path",
+            "description": "The name of the variable value to operate on.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           }
         ],
         "responses": {
@@ -3458,7 +3344,8 @@
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           }
         ],
         "responses": {
@@ -3494,7 +3381,8 @@
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           },
           {
             "name": "parameters",
@@ -3545,7 +3433,8 @@
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           }
         ],
         "responses": {
@@ -3583,7 +3472,8 @@
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           }
         ],
         "responses": {
@@ -3624,14 +3514,16 @@
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           },
           {
             "name": "variableValueName",
             "in": "path",
             "description": "The name of the variable value to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           }
         ],
         "responses": {
@@ -3667,14 +3559,16 @@
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           },
           {
             "name": "variableValueName",
             "in": "path",
             "description": "The name of the variable value to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           },
           {
             "name": "parameters",
@@ -3725,14 +3619,16 @@
             "in": "path",
             "description": "The name of the variable to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           },
           {
             "name": "variableValueName",
             "in": "path",
             "description": "The name of the variable value to operate on.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
           }
         ],
         "responses": {
@@ -4244,39 +4140,6 @@
           }
         }
       }
-    },
-    "ManagementGroupListResult": {
-      "type": "object",
-      "description": "The response of a ManagementGroup list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ManagementGroup items on this page",
-          "items": {
-            "type": "object",
-            "description": "A management group",
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "The management group ID.",
-                "minLength": 1,
-                "readOnly": true
-              }
-            },
-            "required": [
-              "name"
-            ]
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "NonComplianceMessage": {
       "type": "object",

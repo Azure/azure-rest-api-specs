@@ -44,6 +44,7 @@ alias VariableValueOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("variables")
     @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     variableName: string;
   },
   {},
@@ -52,6 +53,7 @@ alias VariableValueOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("values")
     @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     variableValueName: string;
   }
 >;
@@ -79,6 +81,7 @@ alias VariableValueManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOp
     @path
     @segment("variables")
     @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     variableName: string;
   },
   {
@@ -88,12 +91,14 @@ alias VariableValueManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOp
     @path
     @segment("variables")
     @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     variableName: string;
 
     /** The name of the variable value to operate on. */
     @path
     @segment("values")
     @key
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     variableValueName: string;
   }
 >;
@@ -124,10 +129,7 @@ interface VariableValues {
   /**
    * This operation retrieves a single variable value; given its name,  management group it was created at and the variable it's created for.
    */
-  getAtManagementGroup is VariableValueManagementGroupOps.Read<
-    Extension.ManagementGroup,
-    VariableValue
-  >;
+  getAtManagementGroup is VariableValueManagementGroupOps.Read<VariableValue>;
 
   /**
    *  This operation creates or updates a variable value with the given management group and name for a given variable. Variable values are scoped to the variable for which they are created for.
@@ -139,18 +141,12 @@ interface VariableValues {
   /**
    * This operation deletes a variable value, given its name, the management group it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.
    */
-  deleteAtManagementGroup is VariableValueManagementGroupOps.DeleteSync<
-    Extension.ManagementGroup,
-    VariableValue
-  >;
+  deleteAtManagementGroup is VariableValueManagementGroupOps.DeleteSync<VariableValue>;
 
   /**
    * This operation retrieves the list of all variable values applicable the variable indicated at the management group scope.
    */
-  listForManagementGroup is VariableValueManagementGroupOps.List<
-    Extension.ManagementGroup,
-    VariableValue
-  >;
+  listForManagementGroup is VariableValueManagementGroupOps.List<VariableValue>;
 }
 
 @@doc(VariableValue.name, "The name of the variable value to operate on.");
