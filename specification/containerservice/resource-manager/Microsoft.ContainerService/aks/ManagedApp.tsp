@@ -2,9 +2,9 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./volumetypes.tsp";
-import "./helpers.tsp";
-import "./autoscalingtriggers.tsp";
+import "./ManagedAppVolumeTypes.tsp";
+import "./ManagedAppAutoscalingTriggers.tsp";
+import "./ManagedNamespace.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -13,30 +13,31 @@ using TypeSpec.Rest;
 
 namespace Microsoft.ContainerService;
 
-/** Represents a managed cluster. Just a placeholder until rest of aks is converted to typespec */
-model ManagedCluster is TrackedResource<ManagedClusterProperties> {
-  ...ResourceNameParameter<ManagedCluster>;
+@armResourceOperations
+interface Apps {
+  // Managed App Operations
+  get is ArmResourceRead<ManagedApp>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<ManagedApp>;
+  delete is ArmResourceDeleteWithoutOkAsync<ManagedApp>;
+  rollback is ArmResourceActionAsync<
+    ManagedApp,
+    ManagedAppRollbackPostParameters,
+    ManagedApp
+  >;
 }
 
-/** Managed Cluster properties. Just a placeholder */
-model ManagedClusterProperties {
-  /** The status of the last operation. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
+@armResourceOperations
+// Managed App Revision Operations
+interface ManagedAppRevisions {
+  get is ArmResourceRead<ManagedAppRevision>;
+  listByManagedApp is ArmResourceListByParent<ManagedAppRevision>;
 }
 
-/** Managed Namespace resource. Just a placeholder for now */
-@parentResource(ManagedCluster)
-model ManagedNamespace is ProxyResource<ManagedNamespaceProperties> {
-  ...ResourceNameParameter<ManagedNamespace>;
-}
-
-/** Managed Namespace properties. Just a placeholder */
-model ManagedNamespaceProperties {
-  /** The status of the last operation. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
+alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
+  @header("If-Match")
+  @doc("The request should only proceed if an entity matches this string.")
+  ifMatch?: string;
+};
 
 /** App resource */
 @parentResource(ManagedNamespace)
@@ -156,13 +157,6 @@ model DeploymentTemplate {
   @identifiers(#["name"])
   volumeMounts?: VolumeMount[];
 }
-
-scalar UserAssignedIdentity
-  extends Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities",
-    }
-  ]>;
 
 /** App Deployment User Assigned Identity */
 model AppDeploymentUserAssignedIdentity {
