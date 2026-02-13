@@ -18,6 +18,9 @@ import "./PolicyDefinition.tsp";
 import "./PolicyDefinitionVersion.tsp";
 import "./PolicySetDefinition.tsp";
 import "./PolicySetDefinitionVersion.tsp";
+import "./PolicyExemption.tsp";
+import "./Variable.tsp";
+import "./VariableValue.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -50,4 +53,9 @@ enum Versions {
    * The 2025-11-01 API version.
    */
   v2025_11_01: "2025-11-01",
+
+  /**
+   * The 2025-12-01-preview API version.
+   */
+  v2025_12_01_preview: "2025-12-01-preview",
 }
