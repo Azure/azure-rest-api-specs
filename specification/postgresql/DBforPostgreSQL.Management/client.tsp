@@ -31,3 +31,12 @@ using Azure.ClientGenerator.Core;
   "java"
 );
 @@clientName(RequestIdResponseHeader.requestId, "xMsRequestId", "java");
+
+@@clientName(Microsoft.DBforPostgreSQL.PostgreSqlFlexibleServerHighAvailabilityMode,
+  "HighAvailabilityMode",
+  "java"
+);
+@@clientName(Microsoft.DBforPostgreSQL.HighAvailabilityMode,
+  "SupportedHighAvailabilityMode",
+  "java"
+);
