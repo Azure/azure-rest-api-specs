@@ -1,4 +1,13 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+
+// Mock fs/promises before imports
+vi.mock("fs/promises", () => ({ access: vi.fn(), readFile: vi.fn() }));
+
+import * as fs from "fs/promises";
+
+const mockAccess = /** @type {import("vitest").Mock} */ (fs.access);
+const mockReadFile = /** @type {import("vitest").Mock} */ (fs.readFile);
+
 import {
   isFileAllowed,
   validateFolderStructure,
@@ -7,17 +16,6 @@ import {
   LEASE_FILE_PATTERN,
   LEASE_FILE_WITH_GROUP_PATTERN,
 } from "../src/validate-arm-leases.js";
-
-/** @type {import("vitest").MockedFunction<typeof import("fs/promises").access>} */
-let mockAccess;
-
-/** @type {import("vitest").MockedFunction<typeof import("fs/promises").readFile>} */
-let mockReadFile;
-
-vi.mock("fs/promises", () => ({
-  access: (...args) => mockAccess(...args),
-  readFile: (...args) => mockReadFile(...args),
-}));
 
 describe("validate-arm-leases", () => {
   afterEach(() => {
@@ -191,8 +189,8 @@ describe("validate-arm-leases", () => {
 `;
 
     it("validates a complete valid lease file", async () => {
-      mockAccess = vi.fn().mockResolvedValue(undefined);
-      mockReadFile = vi.fn().mockResolvedValue(validYaml);
+      mockAccess.mockResolvedValue(undefined);
+      mockReadFile.mockResolvedValue(validYaml);
 
       const result = await validateLeaseContent(
         "/repo/.github/arm-leases/testservice/Microsoft.Test/lease.yaml",
@@ -207,8 +205,8 @@ describe("validate-arm-leases", () => {
 
     it("detects resource provider mismatch", async () => {
       const mismatchYaml = validYaml.replace("Microsoft.Test", "Microsoft.Other");
-      mockAccess = vi.fn().mockResolvedValue(undefined);
-      mockReadFile = vi.fn().mockResolvedValue(mismatchYaml);
+      mockAccess.mockResolvedValue(undefined);
+      mockReadFile.mockResolvedValue(mismatchYaml);
 
       const result = await validateLeaseContent(
         "/repo/.github/arm-leases/testservice/Microsoft.Test/lease.yaml",
@@ -221,8 +219,8 @@ describe("validate-arm-leases", () => {
 
     it("detects past startdate", async () => {
       const pastYaml = validYaml.replace("2027-06-01", "2025-01-01");
-      mockAccess = vi.fn().mockResolvedValue(undefined);
-      mockReadFile = vi.fn().mockResolvedValue(pastYaml);
+      mockAccess.mockResolvedValue(undefined);
+      mockReadFile.mockResolvedValue(pastYaml);
 
       const result = await validateLeaseContent(
         "/repo/.github/arm-leases/testservice/Microsoft.Test/lease.yaml",
@@ -234,7 +232,7 @@ describe("validate-arm-leases", () => {
     });
 
     it("returns error for non-existent file", async () => {
-      mockAccess = vi.fn().mockRejectedValue(new Error("ENOENT"));
+      mockAccess.mockRejectedValue(new Error("ENOENT"));
 
       const result = await validateLeaseContent(
         "/nonexistent/lease.yaml",
@@ -246,8 +244,8 @@ describe("validate-arm-leases", () => {
     });
 
     it("detects invalid YAML content", async () => {
-      mockAccess = vi.fn().mockResolvedValue(undefined);
-      mockReadFile = vi.fn().mockResolvedValue("invalid yaml content without structure");
+      mockAccess.mockResolvedValue(undefined);
+      mockReadFile.mockResolvedValue("invalid yaml content without structure");
 
       const result = await validateLeaseContent(
         "/repo/.github/arm-leases/testservice/Microsoft.Test/lease.yaml",
@@ -260,8 +258,8 @@ describe("validate-arm-leases", () => {
 
     it("accepts today as startdate", async () => {
       const todayYaml = validYaml.replace("2027-06-01", "2026-01-07");
-      mockAccess = vi.fn().mockResolvedValue(undefined);
-      mockReadFile = vi.fn().mockResolvedValue(todayYaml);
+      mockAccess.mockResolvedValue(undefined);
+      mockReadFile.mockResolvedValue(todayYaml);
 
       const result = await validateLeaseContent(
         "/repo/.github/arm-leases/testservice/Microsoft.Test/lease.yaml",
