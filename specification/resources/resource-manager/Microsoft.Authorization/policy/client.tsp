@@ -23,7 +23,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Retrieves the policy assignment with the given ID.")
-  @scope("java")
+  @scope("java,go")
   @clientLocation(PolicyAssignments)
   @get
   @route("/{+policyAssignmentId}")
@@ -37,7 +37,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Creates or updates a policy assignment.")
-  @scope("java")
+  @scope("java,go")
   @clientLocation(PolicyAssignments)
   @put
   @route("/{+policyAssignmentId}")
@@ -58,7 +58,7 @@ namespace Microsoft.Authorization {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   #suppress "@typespec/http/patch-implicit-optional" "For client"
   @summary("Updates a policy assignment.")
-  @scope("java")
+  @scope("java,go")
   @clientLocation(PolicyAssignments)
   @patch
   @route("/{+policyAssignmentId}")
@@ -78,7 +78,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Deletes a policy assignment.")
-  @scope("java")
+  @scope("java,go")
   @clientLocation(PolicyAssignments)
   @delete
   @route("/{+policyAssignmentId}")

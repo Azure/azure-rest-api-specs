@@ -407,29 +407,6 @@ union ConnectivityStatus {
 }
 
 /**
- * Indicates whether the cluster is under support.
- */
-@removed(Versions.v2026_02_01)
-union SupportStatus {
-  string,
-
-  /**
-   * The cluster is under support.
-   */
-  InSupport: "InSupport",
-
-  /**
-   * The cluster is out of support.
-   */
-  OutOfSupport: "OutOfSupport",
-
-  /**
-   * The support status is not specified.
-   */
-  NotSpecified: "NotSpecified",
-}
-
-/**
  * Status of the Software Assurance for the cluster.
  */
 union SoftwareAssuranceStatus {
@@ -1195,6 +1172,18 @@ union State {
    * Additional content is required to proceed with the update.
    */
   AdditionalContentRequired: "AdditionalContentRequired",
+
+  /**
+   * The health check has expired and needs to be redone.
+   */
+  @added(Versions.v2026_02_15_preview)
+  HealthCheckExpired: "HealthCheckExpired",
+
+  /**
+   * The update is pending OEM validation before it can proceed.
+   */
+  @added(Versions.v2026_02_15_preview)
+  PendingOEMValidation: "PendingOEMValidation",
 }
 
 /**
@@ -1875,13 +1864,6 @@ model ClusterProperties {
   connectivityStatus?: ConnectivityStatus;
 
   /**
-   * Indicates whether the cluster is under support.
-   */
-  @visibility(Lifecycle.Read)
-  @removed(Versions.v2026_02_01)
-  supportStatus?: SupportStatus;
-
-  /**
    * Unique, immutable resource id.
    */
   @visibility(Lifecycle.Read)
@@ -1891,7 +1873,7 @@ model ClusterProperties {
    * The ring to which this cluster belongs to.
    */
   @visibility(Lifecycle.Read)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   ring?: string;
 
   /**
@@ -2017,16 +1999,14 @@ model ClusterProperties {
   /**
    * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
    */
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProperties?: ConfidentialVmProperties;
 
   /**
    * Software Defined Networking Properties of the cluster
    */
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   @visibility(Lifecycle.Read)
   sdnProperties?: ClusterSdnProperties;
 
@@ -2657,14 +2637,14 @@ model SoftwareAssuranceChangeRequestProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model ChangeRingRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ChangeRingRequestProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@removed(Versions.v2026_02_01)
+@added(Versions.v2026_02_15_preview)
 model ChangeRingRequestProperties {
   /**
    * The target ring for the cluster.
@@ -5412,8 +5392,7 @@ model HciNetworkProfile {
     oftware Defined Networking Properties of the cluster
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   sdnProperties?: SdnProperties;
 }
 
@@ -5855,16 +5834,78 @@ model ReportedProperties {
   /**
    * Most recent edge device sync timestamp in UTC.
    */
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 
   /**
    * CVM support details for edge device.
    */
-  @added(Versions.v2025_12_01_preview)
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_02_15_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
+}
+
+/**
+ * ClusterJob Type supported.
+ */
+@added(Versions.v2026_02_15_preview)
+union HciJobType {
+  string,
+
+  /**
+   * Job to CVM  intent for the cluster.
+   */
+  ConfigureCVM: "ConfigureCVM",
+
+  /**
+   * Job to configure SDN (Software Defined Networking) integration for the cluster.
+   */
+  ConfigureSdnIntegration: "ConfigureSdnIntegration",
+}
+
+/**
+ * Properties for configuring SDN integration intent for the cluster.
+ */
+@added(Versions.v2026_02_15_preview)
+model HciConfigureSdnIntegrationJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureSdnIntegration;
+
+  /**
+   * Defines the customer's intent for configuring SDN integration
+   */
+  sdnIntegrationIntent: SdnIntegrationIntent;
+
+  /**
+   * A string identifier used to construct the Network Controller (NC) REST resource name. This prefix helps group and distinguish SDN-managed network components and must follow specific formatting rules.
+   */
+  @maxLength(8)
+  @pattern("^(?!.*--)(?!.*-$)[A-Za-z0-9-]{1,8}$")
+  sdnPrefix?: string;
+}
+
+/**
+ * Defines the customer's intent for updating confidential VM properties
+ */
+@added(Versions.v2026_02_15_preview)
+model HciConfigureCvmJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureCVM;
+
+  /**
+   * Defines the customer's intent for updating confidential VM properties
+   */
+  confidentialVmIntent: ConfidentialVmIntent;
+}
+
+/**
+ * Request body for the check updates action on update summaries.
+ */
+@added(Versions.v2026_02_15_preview)
+model CheckUpdatesRequest {
+  /**
+   * Name of update
+   */
+  updateName?: string;
 }

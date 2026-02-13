@@ -60,6 +60,30 @@ describe("changedFiles", () => {
     expect(mockDiff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
   });
 
+  it("getChangedFiles accepts gitOptions parameter", async () => {
+    const files = ["file1.json", "file2.json"];
+    mockDiff.mockResolvedValue(files.join("\n"));
+
+    await expect(getChangedFiles({ gitOptions: ["--no-renames"] })).resolves.toEqual(files);
+    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "--no-renames", "HEAD^", "HEAD"]);
+  });
+
+  it("getChangedFiles accepts multiple gitOptions", async () => {
+    const files = ["file1.json"];
+    mockDiff.mockResolvedValue(files.join("\n"));
+
+    await expect(
+      getChangedFiles({ gitOptions: ["--no-renames", "--find-copies"] }),
+    ).resolves.toEqual(files);
+    expect(mockDiff).toHaveBeenCalledWith([
+      "--name-only",
+      "--no-renames",
+      "--find-copies",
+      "HEAD^",
+      "HEAD",
+    ]);
+  });
+
   const files = [
     "CONTRIBUTING.MD",
     "cspell.json",
@@ -380,6 +404,40 @@ describe("changedFiles", () => {
       await getChangedFilesStatuses(options);
       expect(simpleGit.simpleGit).toHaveBeenCalledWith("/custom/path");
       expect(mockDiff).toHaveBeenCalledWith(["--name-status", "origin/main", "feature-branch"]);
+    });
+
+    it("should accept gitOptions parameter", async () => {
+      mockDiff.mockResolvedValue("A\tfile1.json\nM\tfile2.json");
+      const result = await getChangedFilesStatuses({ gitOptions: ["--no-renames"] });
+      expect(result).toEqual({
+        additions: ["file1.json"],
+        modifications: ["file2.json"],
+        deletions: [],
+        renames: [],
+        total: 2,
+      });
+      expect(mockDiff).toHaveBeenCalledWith(["--name-status", "--no-renames", "HEAD^", "HEAD"]);
+    });
+
+    it("should accept multiple gitOptions", async () => {
+      mockDiff.mockResolvedValue("A\tfile1.json");
+      const result = await getChangedFilesStatuses({
+        gitOptions: ["--no-renames", "--find-copies"],
+      });
+      expect(result).toEqual({
+        additions: ["file1.json"],
+        modifications: [],
+        deletions: [],
+        renames: [],
+        total: 1,
+      });
+      expect(mockDiff).toHaveBeenCalledWith([
+        "--name-status",
+        "--no-renames",
+        "--find-copies",
+        "HEAD^",
+        "HEAD",
+      ]);
     });
   });
 });
