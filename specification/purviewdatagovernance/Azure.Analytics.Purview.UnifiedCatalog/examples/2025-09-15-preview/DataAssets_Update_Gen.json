@@ -1,78 +1,40 @@
 {
-  "title": "DataAssets_CreateDataAsset",
-  "operationId": "DataAssets_CreateDataAsset",
+  "title": "DataAssets_Update",
+  "operationId": "DataAssets_Update",
   "parameters": {
     "api-version": "2025-09-15-preview",
+    "dataAssetId": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
     "dataAsset": {
       "id": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
-      "name": "myDataProduct",
+      "name": "ac",
       "systemData": {
-        "lastModifiedAt": "1970-01-01T00:00:00.000Z",
-        "lastModifiedBy": "766BF2B9-5D8A-4FB1-B8D5-D30A53E22A9E",
-        "createdAt": "1970-01-01T00:00:00.000Z",
-        "createdBy": "766BF2B9-5D8A-4FB1-B8D5-D30A53E22A9E"
+        "provisioningState": "SoftDeleted",
+        "createdAt": "2025-06-16T21:01:37.447Z",
+        "createdBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+        "lastModifiedAt": "2025-06-16T21:01:37.447Z",
+        "lastModifiedBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
+        "expiredAt": "2025-06-16T21:01:37.447Z",
+        "expiredBy": "4e74f902-62f5-49f4-8258-92ed2b8537ba"
       },
-      "description": "This is a description",
-      "openInUrl": "http://example.com/dataproduct",
-      "domain": "7e74f902-62f5-49f4-8258-92ed2b8537ba",
       "source": {
         "type": "DataMap",
         "assetId": "7e74f902-62f5-49f4-8258-92ed2b8537ba",
         "assetType": "adls_gen2_path",
         "fqn": "https://test.dfs.core.windows.net/prip3/adf/moviesDB.csv",
         "accountName": "test",
-        "lastRefreshedAt": "1970-01-01T00:00:00.000Z",
-        "lastRefreshedBy": "766BF2B9-5D8A-4FB1-B8D5-D30A53E22A9E"
+        "lastRefreshedAt": "1970-01-01T00:00:00Z",
+        "lastRefreshedBy": "766bf2b9-5d8a-4fb1-b8d5-d30a53e22a9e"
       },
       "contacts": {
-        "owner": [
+        "key5536": [
           {
             "id": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
-            "description": "db1"
-          },
-          {
-            "id": "5e74f902-62f5-49f4-8258-92ed2b8537ba",
-            "description": "db2"
-          }
-        ],
-        "expert": [
-          {
-            "id": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
-            "description": "db1"
-          },
-          {
-            "id": "5e74f902-62f5-49f4-8258-92ed2b8537ba",
-            "description": "db2"
-          }
-        ],
-        "databaseAdmin": [
-          {
-            "id": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
-            "description": "db1"
-          },
-          {
-            "id": "5e74f902-62f5-49f4-8258-92ed2b8537ba",
-            "description": "db2"
+            "description": "atitetlocznsnmithbzk"
           }
         ]
       },
-      "classifications": [
-        "PII",
-        "PHI"
-      ],
-      "sensitivityLabel": "9620744d-630c-4d07-b8db-541ec20e1a2a",
       "type": "AzureSqlTable",
-      "schema": [
-        {
-          "name": "columnA",
-          "description": "string",
-          "classifications": [
-            "PII",
-            "PHI"
-          ],
-          "type": "nvarchar"
-        }
-      ],
+      "openInUrl": "http://example.com/dataproduct",
       "typeProperties": {
         "format": "Table",
         "serverEndpoint": "myserver.database.windows.net",
@@ -83,19 +45,18 @@
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "id": "4e74f902-62f5-49f4-8258-92ed2b8537ba",
         "name": "myDataProduct",
         "systemData": {
+          "provisioningState": "SoftDeleted",
           "lastModifiedAt": "1970-01-01T00:00:00.000Z",
           "lastModifiedBy": "766BF2B9-5D8A-4FB1-B8D5-D30A53E22A9E",
           "createdAt": "1970-01-01T00:00:00.000Z",
           "createdBy": "766BF2B9-5D8A-4FB1-B8D5-D30A53E22A9E"
         },
-        "description": "766BF2B9-5D8A-4FB1-B8D5-D30A53E22A9E",
         "openInUrl": "http://example.com/dataproduct",
-        "domain": "7e74f902-62f5-49f4-8258-92ed2b8537ba",
         "source": {
           "type": "DataMap",
           "assetId": "7e74f902-62f5-49f4-8258-92ed2b8537ba",
@@ -137,23 +98,7 @@
             }
           ]
         },
-        "classifications": [
-          "PII",
-          "PHI"
-        ],
-        "sensitivityLabel": "9620744d-630c-4d07-b8db-541ec20e1a2a",
         "type": "AzureSqlTable",
-        "schema": [
-          {
-            "name": "columnA",
-            "description": "string",
-            "classifications": [
-              "PII",
-              "PHI"
-            ],
-            "type": "nvarchar"
-          }
-        ],
         "typeProperties": {
           "format": "Table",
           "serverEndpoint": "myserver.database.windows.net",

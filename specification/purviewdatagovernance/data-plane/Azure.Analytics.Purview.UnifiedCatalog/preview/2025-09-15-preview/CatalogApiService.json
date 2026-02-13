@@ -60,6 +60,9 @@
       "name": "CriticalDataElements"
     },
     {
+      "name": "DataAsset"
+    },
+    {
       "name": "DataProduct"
     },
     {
@@ -1124,6 +1127,766 @@
         "x-ms-examples": {
           "CriticalDataElements_Query": {
             "$ref": "./examples/CriticalDataElements_Query_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/dataAssets": {
+      "get": {
+        "operationId": "DataAssets_List",
+        "tags": [
+          "DataAsset"
+        ],
+        "description": "Lists data assets with optional ordering and pagination.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "includeLineage",
+            "in": "query",
+            "description": "Identifier of the related entity (required).",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "includeExtendedProperties",
+            "in": "query",
+            "description": "Identifier of the related entity (required).",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDataAsset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_List": {
+            "$ref": "./examples/DataAssets_List_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "DataAssets_Create",
+        "tags": [
+          "DataAsset"
+        ],
+        "description": "Creates a new data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataAsset",
+            "in": "body",
+            "description": "The data asset payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataAssetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DataAssetRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_Create": {
+            "$ref": "./examples/DataAssets_Create_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataAssets/{dataAssetId}": {
+      "get": {
+        "operationId": "DataAssets_GetById",
+        "tags": [
+          "DataAsset"
+        ],
+        "description": "Retrieves a data asset by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "The data asset identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataAsset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_GetById": {
+            "$ref": "./examples/DataAssets_GetById_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataAssets_Update",
+        "tags": [
+          "DataAsset"
+        ],
+        "description": "Updates a data asset by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "The unique identifier of the critical data asset.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "dataAsset",
+            "in": "body",
+            "description": "Updated data asset payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataAssetRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataAssetRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_Update": {
+            "$ref": "./examples/DataAssets_Update_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataAssets_DeleteById",
+        "tags": [
+          "DataAsset"
+        ],
+        "description": "Deletes a data asset by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "The data asset identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_DeleteById_MaximumSet": {
+            "$ref": "./examples/DataAssets_DeleteById_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataAssets/{dataAssetId}/relationships": {
+      "get": {
+        "operationId": "DataAssets_ListRelationships",
+        "tags": [
+          "DataAsset"
+        ],
+        "description": "Lists relationships for a data asset filtered by entity category.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "The data asset identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "Required entity category to list relationships for.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "DATAPRODUCT",
+              "TERM",
+              "DATAASSET",
+              "OBJECTIVE",
+              "KEYRESULT",
+              "CRITICALDATAELEMENT",
+              "CRITICALDATACOLUMN",
+              "CUSTOMMETADATA",
+              "ATTRIBUTE",
+              "ATTRIBUTEINSTANCE",
+              "WORKFLOW",
+              "CATALOGSNAPSHOT",
+              "WORKFLOWRUN"
+            ],
+            "x-ms-enum": {
+              "name": "EntityCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Domain",
+                  "value": "DOMAIN",
+                  "description": "Domain entity category."
+                },
+                {
+                  "name": "DataProduct",
+                  "value": "DATAPRODUCT",
+                  "description": "Data product entity category."
+                },
+                {
+                  "name": "Term",
+                  "value": "TERM",
+                  "description": "Term entity category."
+                },
+                {
+                  "name": "DataAsset",
+                  "value": "DATAASSET",
+                  "description": "Data asset entity category."
+                },
+                {
+                  "name": "Objective",
+                  "value": "OBJECTIVE",
+                  "description": "Objective entity category."
+                },
+                {
+                  "name": "KeyResult",
+                  "value": "KEYRESULT",
+                  "description": "Key result entity category."
+                },
+                {
+                  "name": "CriticalDataElement",
+                  "value": "CRITICALDATAELEMENT",
+                  "description": "Critical data element entity category."
+                },
+                {
+                  "name": "CriticalDataColumn",
+                  "value": "CRITICALDATACOLUMN",
+                  "description": "Critical data column entity category."
+                },
+                {
+                  "name": "CustomMetadata",
+                  "value": "CUSTOMMETADATA",
+                  "description": "Custom metadata entity category."
+                },
+                {
+                  "name": "Attribute",
+                  "value": "ATTRIBUTE",
+                  "description": "Attribute entity category."
+                },
+                {
+                  "name": "AttributeInstance",
+                  "value": "ATTRIBUTEINSTANCE",
+                  "description": "Attribute instance entity category."
+                },
+                {
+                  "name": "Workflow",
+                  "value": "WORKFLOW",
+                  "description": "Workflow entity category."
+                },
+                {
+                  "name": "CatalogSnapshot",
+                  "value": "CATALOGSNAPSHOT",
+                  "description": "Catalog snapshot entity category."
+                },
+                {
+                  "name": "WorkflowRun",
+                  "value": "WORKFLOWRUN",
+                  "description": "Workflow run entity category."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDataAssetRelationship"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_ListRelationships": {
+            "$ref": "./examples/DataAssets_ListRelationships_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "DataAssets_CreateRelationship",
+        "tags": [
+          "DataAsset"
+        ],
+        "description": "Creates a relationship between the specified data asset and another entity.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "The unique identifier of the critical data asset.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "Category of the entity to relate to (required).",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "DATAPRODUCT",
+              "TERM",
+              "DATAASSET",
+              "OBJECTIVE",
+              "KEYRESULT",
+              "CRITICALDATAELEMENT",
+              "CRITICALDATACOLUMN",
+              "CUSTOMMETADATA",
+              "ATTRIBUTE",
+              "ATTRIBUTEINSTANCE",
+              "WORKFLOW",
+              "CATALOGSNAPSHOT",
+              "WORKFLOWRUN"
+            ],
+            "x-ms-enum": {
+              "name": "EntityCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Domain",
+                  "value": "DOMAIN",
+                  "description": "Domain entity category."
+                },
+                {
+                  "name": "DataProduct",
+                  "value": "DATAPRODUCT",
+                  "description": "Data product entity category."
+                },
+                {
+                  "name": "Term",
+                  "value": "TERM",
+                  "description": "Term entity category."
+                },
+                {
+                  "name": "DataAsset",
+                  "value": "DATAASSET",
+                  "description": "Data asset entity category."
+                },
+                {
+                  "name": "Objective",
+                  "value": "OBJECTIVE",
+                  "description": "Objective entity category."
+                },
+                {
+                  "name": "KeyResult",
+                  "value": "KEYRESULT",
+                  "description": "Key result entity category."
+                },
+                {
+                  "name": "CriticalDataElement",
+                  "value": "CRITICALDATAELEMENT",
+                  "description": "Critical data element entity category."
+                },
+                {
+                  "name": "CriticalDataColumn",
+                  "value": "CRITICALDATACOLUMN",
+                  "description": "Critical data column entity category."
+                },
+                {
+                  "name": "CustomMetadata",
+                  "value": "CUSTOMMETADATA",
+                  "description": "Custom metadata entity category."
+                },
+                {
+                  "name": "Attribute",
+                  "value": "ATTRIBUTE",
+                  "description": "Attribute entity category."
+                },
+                {
+                  "name": "AttributeInstance",
+                  "value": "ATTRIBUTEINSTANCE",
+                  "description": "Attribute instance entity category."
+                },
+                {
+                  "name": "Workflow",
+                  "value": "WORKFLOW",
+                  "description": "Workflow entity category."
+                },
+                {
+                  "name": "CatalogSnapshot",
+                  "value": "CATALOGSNAPSHOT",
+                  "description": "Catalog snapshot entity category."
+                },
+                {
+                  "name": "WorkflowRun",
+                  "value": "WORKFLOWRUN",
+                  "description": "Workflow run entity category."
+                }
+              ]
+            }
+          },
+          {
+            "name": "relationship",
+            "in": "body",
+            "description": "Relationship payload as JSON (required).",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataAssetProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataAssetsRelationship"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_CreateRelationship": {
+            "$ref": "./examples/DataAssets_CreateRelationship_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataAssets_DeleteRelationship",
+        "tags": [
+          "DataAsset"
+        ],
+        "description": "Deletes relationships for a data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "The unique identifier of the critical data asset.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entityType",
+            "in": "query",
+            "description": "Category of the related entity (required).",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "DOMAIN",
+              "DATAPRODUCT",
+              "TERM",
+              "DATAASSET",
+              "OBJECTIVE",
+              "KEYRESULT",
+              "CRITICALDATAELEMENT",
+              "CRITICALDATACOLUMN",
+              "CUSTOMMETADATA",
+              "ATTRIBUTE",
+              "ATTRIBUTEINSTANCE",
+              "WORKFLOW",
+              "CATALOGSNAPSHOT",
+              "WORKFLOWRUN"
+            ],
+            "x-ms-enum": {
+              "name": "EntityCategory",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Domain",
+                  "value": "DOMAIN",
+                  "description": "Domain entity category."
+                },
+                {
+                  "name": "DataProduct",
+                  "value": "DATAPRODUCT",
+                  "description": "Data product entity category."
+                },
+                {
+                  "name": "Term",
+                  "value": "TERM",
+                  "description": "Term entity category."
+                },
+                {
+                  "name": "DataAsset",
+                  "value": "DATAASSET",
+                  "description": "Data asset entity category."
+                },
+                {
+                  "name": "Objective",
+                  "value": "OBJECTIVE",
+                  "description": "Objective entity category."
+                },
+                {
+                  "name": "KeyResult",
+                  "value": "KEYRESULT",
+                  "description": "Key result entity category."
+                },
+                {
+                  "name": "CriticalDataElement",
+                  "value": "CRITICALDATAELEMENT",
+                  "description": "Critical data element entity category."
+                },
+                {
+                  "name": "CriticalDataColumn",
+                  "value": "CRITICALDATACOLUMN",
+                  "description": "Critical data column entity category."
+                },
+                {
+                  "name": "CustomMetadata",
+                  "value": "CUSTOMMETADATA",
+                  "description": "Custom metadata entity category."
+                },
+                {
+                  "name": "Attribute",
+                  "value": "ATTRIBUTE",
+                  "description": "Attribute entity category."
+                },
+                {
+                  "name": "AttributeInstance",
+                  "value": "ATTRIBUTEINSTANCE",
+                  "description": "Attribute instance entity category."
+                },
+                {
+                  "name": "Workflow",
+                  "value": "WORKFLOW",
+                  "description": "Workflow entity category."
+                },
+                {
+                  "name": "CatalogSnapshot",
+                  "value": "CATALOGSNAPSHOT",
+                  "description": "Catalog snapshot entity category."
+                },
+                {
+                  "name": "WorkflowRun",
+                  "value": "WORKFLOWRUN",
+                  "description": "Workflow run entity category."
+                }
+              ]
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "query",
+            "description": "Identifier of the related entity (required).",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_DeleteRelationship": {
+            "$ref": "./examples/DataAssets_DeleteRelationship_Gen.json"
+          }
+        }
+      }
+    },
+    "/dataAssets/query": {
+      "post": {
+        "operationId": "DataAssets_Query",
+        "tags": [
+          "DataAsset"
+        ],
+        "description": "Creates a new data asset with fileted query inputs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The data asset payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataAssetQueryRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataAssetsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataAssets_Query": {
+            "$ref": "./examples/DataAssets_Query_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -3845,6 +4608,73 @@
         ]
       }
     },
+    "CatalogModelDataAssetSchema": {
+      "type": "object",
+      "description": "Schema of the asset.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the asset."
+        },
+        "classifications": {
+          "type": "array",
+          "description": "Classifications of the asset.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the asset."
+        }
+      }
+    },
+    "CatalogModelDataAssetSource": {
+      "type": "object",
+      "description": "Source information for data assets.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the data source."
+        },
+        "assetId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Unique identifier of the asset."
+        },
+        "assetType": {
+          "type": "string",
+          "description": "The type of the asset."
+        },
+        "assetAttributes": {
+          "type": "array",
+          "description": ".Type properties of the asset.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fqn": {
+          "type": "string",
+          "description": "Fully qualified name."
+        },
+        "accountName": {
+          "type": "string",
+          "description": "Name of the account."
+        },
+        "lastRefreshedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "FIXME: (utcDateTime) Please double check that this is the correct type for your scenario"
+        },
+        "lastRefreshedBy": {
+          "type": "string",
+          "description": "Name of the user who last refreshed the asset."
+        }
+      }
+    },
     "CatalogModelDataProductAllOfAdditionalProperties": {
       "type": "object",
       "description": "Additional properties for data product model.",
@@ -4189,6 +5019,10 @@
       "type": "object",
       "description": "System metadata with expiration information for catalog entities.",
       "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the record. ex: softdeleted"
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -4610,6 +5444,306 @@
           "description": "The list of critical data elements.",
           "items": {
             "$ref": "#/definitions/CriticalDataElement"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DataAsset": {
+      "type": "object",
+      "description": "DataAsset.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The data asset identifier.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the asset."
+        },
+        "systemData": {
+          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
+          "description": "System data associated with the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description about the relationship."
+        },
+        "source": {
+          "$ref": "#/definitions/CatalogModelDataAssetSource",
+          "description": "Source of the asset."
+        },
+        "contacts": {
+          "type": "object",
+          "description": "Contacts associated with the asset.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/CatalogModelContactsValueInner"
+            },
+            "type": "array"
+          }
+        },
+        "classifications": {
+          "type": "array",
+          "description": "A list of classification labels.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the data asset."
+        },
+        "schema": {
+          "type": "array",
+          "description": "Schema of the asset.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelDataAssetSchema"
+          }
+        },
+        "dataQuality": {
+          "type": "number",
+          "format": "double",
+          "description": "Data quality score for the data asset."
+        },
+        "openInUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A redirection link.."
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "Type properties of the asset.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "lineage": {
+          "$ref": "#/definitions/LineageInfo",
+          "description": "Lineage information for the asset."
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "DataAssetProperties": {
+      "type": "object",
+      "description": "Properties for data asset relationships.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the relationship."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "Type of the relationship."
+        },
+        "entityId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Name of the associated entity. ex:dataproduct id"
+        }
+      },
+      "required": [
+        "entityId"
+      ]
+    },
+    "DataAssetQueryRequest": {
+      "type": "object",
+      "description": "DataAssetQueryRequest.",
+      "properties": {
+        "skip": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to skip."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of items to return."
+        },
+        "orderby": {
+          "type": "array",
+          "description": "To order the records.",
+          "items": {
+            "$ref": "#/definitions/CatalogApiServiceOrderBy"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "To filter by Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "domainIds": {
+          "type": "array",
+          "description": "To filter by domain Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nameKeyword": {
+          "type": "string",
+          "description": "To filter by name keyword."
+        },
+        "owners": {
+          "type": "array",
+          "description": "To filter by owners.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataMapAssetIds": {
+          "type": "array",
+          "description": "To filter by data map asset Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includingOrphans": {
+          "type": "boolean",
+          "description": "includingOrphans true or false"
+        },
+        "assetTypes": {
+          "type": "array",
+          "description": "To filter by data map asset Ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "includeLineage": {
+          "type": "boolean",
+          "description": "includeLineage true or false"
+        },
+        "includeExtendedProperties": {
+          "type": "boolean",
+          "description": "includeExtendedProperties true or false"
+        }
+      }
+    },
+    "DataAssetRelationship": {
+      "type": "object",
+      "description": "Relationship information between entities.",
+      "properties": {
+        "relationshipType": {
+          "type": "string",
+          "description": "Type of the relationship. ex: Related"
+        },
+        "entityId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Unique identifier of the related entity. ex: dataproductID",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "entityId"
+      ]
+    },
+    "DataAssetRequest": {
+      "type": "object",
+      "description": "DataAsset.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The data asset identifier.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the asset."
+        },
+        "systemData": {
+          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
+          "description": "System data associated with the asset."
+        },
+        "source": {
+          "$ref": "#/definitions/CatalogModelDataAssetSource",
+          "description": "Source of the asset."
+        },
+        "contacts": {
+          "type": "object",
+          "description": "Contacts associated with the asset.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/CatalogModelContactsValueInner"
+            },
+            "type": "array"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the data asset."
+        },
+        "openInUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A redirection link.."
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "Type properties of the asset.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "DataAssetsRelationship": {
+      "type": "object",
+      "description": "Relationship information between entities.",
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the relationship."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the relationship."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "Type of the relationship."
+        },
+        "entityId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Unique identifier of the related entity.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "entityId"
+      ]
+    },
+    "DataAssetsResponse": {
+      "type": "object",
+      "description": "Response containing a list of data assets.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of data assets.",
+          "items": {
+            "$ref": "#/definitions/DataAsset"
           }
         },
         "nextLink": {
@@ -5141,6 +6275,259 @@
         "domainId"
       ]
     },
+    "LineageEntityAttributes": {
+      "type": "object",
+      "description": "Attributes of a lineage entity.",
+      "properties": {
+        "modifiedTime": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The last modified time of the entity."
+        },
+        "partitionCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of partitions in the entity."
+        },
+        "qualifiedName": {
+          "type": "string",
+          "description": "The fully qualified name of the entity."
+        },
+        "schemaCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of schemas in the entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the entity."
+        },
+        "totalSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total size of the entity in bytes."
+        }
+      }
+    },
+    "LineageEntityDetails": {
+      "type": "object",
+      "description": "Details of an entity in the lineage graph.",
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "description": "The type name of the entity."
+        },
+        "attributes": {
+          "$ref": "#/definitions/LineageEntityAttributes",
+          "description": "The attributes of the entity."
+        },
+        "lastModifiedTS": {
+          "type": "string",
+          "description": "The last modified timestamp."
+        },
+        "guid": {
+          "type": "string",
+          "description": "The GUID of the entity."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the entity."
+        },
+        "displayText": {
+          "type": "string",
+          "description": "The display text for the entity."
+        },
+        "classificationNames": {
+          "type": "array",
+          "description": "An array of classification names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "meaningNames": {
+          "type": "array",
+          "description": "An array of meaning names.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "meanings": {
+          "type": "array",
+          "description": "An array of term assignment headers.",
+          "items": {
+            "$ref": "#/definitions/LineageTermAssignmentHeader"
+          }
+        },
+        "isIncomplete": {
+          "type": "boolean",
+          "description": "Indicates if the entity is incomplete."
+        },
+        "labels": {
+          "type": "array",
+          "description": "An array of labels associated with the entity.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isIndexed": {
+          "type": "boolean",
+          "description": "Indicates if the entity is indexed."
+        },
+        "collectionId": {
+          "type": "string",
+          "description": "The collection ID of the entity."
+        },
+        "domainId": {
+          "type": "string",
+          "description": "The domain ID of the entity."
+        }
+      }
+    },
+    "LineageInfo": {
+      "type": "object",
+      "description": "The lineage information for an entity.",
+      "properties": {
+        "baseEntityGuid": {
+          "type": "string",
+          "description": "The GUID of the base entity."
+        },
+        "lineageDirection": {
+          "type": "string",
+          "description": "The direction of lineage traversal."
+        },
+        "lineageDepth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The depth of lineage to retrieve."
+        },
+        "lineageWidth": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The width of lineage to retrieve."
+        },
+        "childrenCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of children nodes."
+        },
+        "includeParent": {
+          "type": "boolean",
+          "description": "Indicates whether to include the parent entity."
+        },
+        "guidEntityMap": {
+          "type": "object",
+          "description": "A map of entity GUIDs to entity details.",
+          "additionalProperties": {
+            "$ref": "#/definitions/LineageEntityDetails"
+          }
+        },
+        "relations": {
+          "type": "array",
+          "description": "An array of lineage relations.",
+          "items": {
+            "$ref": "#/definitions/LineageRelation"
+          }
+        },
+        "parentRelations": {
+          "type": "array",
+          "description": "An array of parent relations.",
+          "items": {
+            "$ref": "#/definitions/LineageParentRelation"
+          }
+        },
+        "widthCounts": {
+          "type": "object",
+          "description": "The width counts for input and output directions.",
+          "additionalProperties": {
+            "additionalProperties": {},
+            "type": "object"
+          }
+        }
+      }
+    },
+    "LineageParentRelation": {
+      "type": "object",
+      "description": "A parent relation in the lineage graph.",
+      "properties": {
+        "childEntityId": {
+          "type": "string",
+          "description": "The GUID of the child entity."
+        },
+        "relationshipId": {
+          "type": "string",
+          "description": "The GUID of the relationship."
+        },
+        "parentEntityId": {
+          "type": "string",
+          "description": "The GUID of the parent entity."
+        }
+      }
+    },
+    "LineageRelation": {
+      "type": "object",
+      "description": "A lineage relation between entities.",
+      "properties": {
+        "fromEntityId": {
+          "type": "string",
+          "description": "The GUID of the source entity."
+        },
+        "relationshipId": {
+          "type": "string",
+          "description": "The GUID of the relationship."
+        },
+        "toEntityId": {
+          "type": "string",
+          "description": "The GUID of the target entity."
+        }
+      }
+    },
+    "LineageTermAssignmentHeader": {
+      "type": "object",
+      "description": "Term assignment header for lineage entities.",
+      "properties": {
+        "termGuid": {
+          "type": "string",
+          "description": "The GUID of the term."
+        },
+        "relationGuid": {
+          "type": "string",
+          "description": "The relationship GUID."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the term assignment."
+        },
+        "displayText": {
+          "type": "string",
+          "description": "The display text for the term."
+        },
+        "expression": {
+          "type": "string",
+          "description": "The expression for the term assignment."
+        },
+        "source": {
+          "type": "string",
+          "description": "The source of the term assignment."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the term assignment."
+        },
+        "steward": {
+          "type": "string",
+          "description": "The steward of the term assignment."
+        },
+        "confidence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The confidence level of the term assignment."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The user who created the term assignment."
+        }
+      }
+    },
     "ModelsFacetRequestObject": {
       "type": "object",
       "description": "ModelsFacetRequestObject.",
@@ -5542,6 +6929,48 @@
           "description": "The CriticalDataElement items on this page",
           "items": {
             "$ref": "#/definitions/CriticalDataElement"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDataAsset": {
+      "type": "object",
+      "description": "Paged collection of DataAsset items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataAsset items on this page",
+          "items": {
+            "$ref": "#/definitions/DataAsset"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDataAssetRelationship": {
+      "type": "object",
+      "description": "Paged collection of DataAssetRelationship items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DataAssetRelationship items on this page",
+          "items": {
+            "$ref": "#/definitions/DataAssetRelationship"
           }
         },
         "nextLink": {

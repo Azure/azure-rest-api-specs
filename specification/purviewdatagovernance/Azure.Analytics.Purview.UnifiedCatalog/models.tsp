@@ -55,6 +55,9 @@ union SharedEntityStatus {
 
 @doc("System metadata with expiration information for catalog entities.")
 model CatalogModelSystemDataWithExpired {
+  @doc("The provisioning state of the record. ex: softdeleted")
+  provisioningState?: string;
+
   @doc("The timestamp when the record was created.")
   createdAt?: utcDateTime;
 
@@ -325,6 +328,17 @@ model CriticalDataColumnProperties {
   entityId: uuid;
 }
 
+@doc("Properties for data asset relationships.")
+model DataAssetProperties {
+  @doc("Description of the relationship.")
+  description?: string;
+
+  @doc("Type of the relationship.")
+  relationshipType?: string;
+
+  @doc("Name of the associated entity. ex:dataproduct id")
+  entityId: uuid;
+}
 @doc("Request body for creating relationships with critical data column properties.")
 model CriticalDataColumnRelationshipRequest {
   ...Record<CriticalDataColumnProperties>;
@@ -436,9 +450,6 @@ model DataAsset {
   @doc("A description about the relationship.")
   description?: string;
 
-  @doc("Link to the owning domain.")
-  domain?: string;
-
   @doc("Source of the asset.")
   source?: CatalogModelDataAssetSource;
 
@@ -448,9 +459,6 @@ model DataAsset {
   @doc("A list of classification labels.")
   classifications?: string[];
 
-  @doc("Only one label is allowed. A GUID of the information protection label.")
-  sensitivityLabel?: uuid;
-
   @doc("type of the data asset.")
   type?: string;
 
@@ -458,7 +466,40 @@ model DataAsset {
   schema?: CatalogModelDataAssetSchema[];
 
   @doc("Data quality score for the data asset.")
-  dataQualityScore?: float64;
+  dataQuality?: float64;
+
+  @doc("A redirection link..")
+  openInUrl?: url;
+
+  @doc("Type properties of the asset.")
+  typeProperties?: Record<string>;
+
+  @doc("Lineage information for the asset.")
+  lineage?: LineageInfo;
+}
+
+@doc("DataAsset.")
+@resource("dataAssets")
+model DataAssetRequest {
+  @doc("The data asset identifier.")
+  @key("dataAssetId")
+  @visibility(Lifecycle.Create)
+  id: uuid;
+
+  @doc("Name of the asset.")
+  name: string;
+
+  @doc("System data associated with the asset.")
+  systemData?: CatalogModelSystemDataWithExpired;
+
+  @doc("Source of the asset.")
+  source?: CatalogModelDataAssetSource;
+
+  @doc("Contacts associated with the asset.")
+  contacts?: Record<CatalogModelContactsValueInner[]>;
+
+  @doc("type of the data asset.")
+  type?: string;
 
   @doc("A redirection link..")
   openInUrl?: url;
@@ -466,7 +507,6 @@ model DataAsset {
   @doc("Type properties of the asset.")
   typeProperties?: Record<string>;
 }
-
 @doc("DataAssetQueryRequest.")
 model DataAssetQueryRequest {
   @doc("Number of items to skip.")
@@ -495,6 +535,15 @@ model DataAssetQueryRequest {
 
   @doc("includingOrphans true or false")
   includingOrphans?: boolean;
+
+  @doc("To filter by data map asset Ids.")
+  assetTypes?: string[];
+
+  @doc("includeLineage true or false")
+  includeLineage?: boolean;
+
+  @doc("includeExtendedProperties true or false")
+  includeExtendedProperties?: boolean;
 }
 
 @doc("FacetValue.")
@@ -1444,7 +1493,7 @@ model CreateDataAssetResponse {
 
   @doc("The request body containing query criteria.")
   @bodyRoot
-  body: DataAsset;
+  body: DataAssetRequest;
 }
 
 alias DataAssetIdParameter = {
@@ -1456,6 +1505,19 @@ alias DataAssetIdParameter = {
 @resource("relationships")
 @parentResource(DataAsset)
 model DataAssetRelationship {
+  @doc("Type of the relationship. ex: Related")
+  relationshipType?: string;
+
+  @doc("Unique identifier of the related entity. ex: dataproductID")
+  @key
+  @visibility(Lifecycle.Create)
+  entityId: uuid;
+}
+
+@doc("Relationship information between entities.")
+@resource("relationships")
+@parentResource(DataAsset)
+model DataAssetsRelationship {
   @doc("System metadata for the relationship.")
   systemData?: SystemData;
 
@@ -1470,7 +1532,6 @@ model DataAssetRelationship {
   @visibility(Lifecycle.Create)
   entityId: uuid;
 }
-
 @doc("The number of duplicate checks to perform.")
 model CreateDataProductResponse {
   @doc("Create response.")
@@ -1684,3 +1745,161 @@ alias PolicyIdParameters = {
   @doc("The unique identifier of the policy.")
   policyId: uuid;
 };
+
+@doc("Attributes of a lineage entity.")
+model LineageEntityAttributes {
+  @doc("The last modified time of the entity.")
+  modifiedTime?: int64;
+
+  @doc("The number of partitions in the entity.")
+  partitionCount?: int32;
+
+  @doc("The fully qualified name of the entity.")
+  qualifiedName?: string;
+
+  @doc("The number of schemas in the entity.")
+  schemaCount?: int32;
+
+  @doc("The name of the entity.")
+  name?: string;
+
+  @doc("The total size of the entity in bytes.")
+  totalSizeBytes?: int64;
+}
+
+@doc("Term assignment header for lineage entities.")
+model LineageTermAssignmentHeader {
+  @doc("The GUID of the term.")
+  termGuid?: string;
+
+  @doc("The relationship GUID.")
+  relationGuid?: string;
+
+  @doc("The description of the term assignment.")
+  description?: string;
+
+  @doc("The display text for the term.")
+  displayText?: string;
+
+  @doc("The expression for the term assignment.")
+  expression?: string;
+
+  @doc("The source of the term assignment.")
+  source?: string;
+
+  @doc("The status of the term assignment.")
+  status?: string;
+
+  @doc("The steward of the term assignment.")
+  steward?: string;
+
+  @doc("The confidence level of the term assignment.")
+  confidence?: int32;
+
+  @doc("The user who created the term assignment.")
+  createdBy?: string;
+}
+
+@doc("Details of an entity in the lineage graph.")
+model LineageEntityDetails {
+  @doc("The type name of the entity.")
+  typeName?: string;
+
+  @doc("The attributes of the entity.")
+  attributes?: LineageEntityAttributes;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service property."
+  @doc("The last modified timestamp.")
+  lastModifiedTS?: string;
+
+  @doc("The GUID of the entity.")
+  guid?: string;
+
+  @doc("The status of the entity.")
+  status?: string;
+
+  @doc("The display text for the entity.")
+  displayText?: string;
+
+  @doc("An array of classification names.")
+  classificationNames?: string[];
+
+  @doc("An array of meaning names.")
+  meaningNames?: string[];
+
+  @doc("An array of term assignment headers.")
+  meanings?: LineageTermAssignmentHeader[];
+
+  @doc("Indicates if the entity is incomplete.")
+  isIncomplete?: boolean;
+
+  @doc("An array of labels associated with the entity.")
+  labels?: string[];
+
+  @doc("Indicates if the entity is indexed.")
+  isIndexed?: boolean;
+
+  @doc("The collection ID of the entity.")
+  collectionId?: string;
+
+  @doc("The domain ID of the entity.")
+  domainId?: string;
+}
+
+@doc("A lineage relation between entities.")
+model LineageRelation {
+  @doc("The GUID of the source entity.")
+  fromEntityId?: string;
+
+  @doc("The GUID of the relationship.")
+  relationshipId?: string;
+
+  @doc("The GUID of the target entity.")
+  toEntityId?: string;
+}
+
+@doc("A parent relation in the lineage graph.")
+model LineageParentRelation {
+  @doc("The GUID of the child entity.")
+  childEntityId?: string;
+
+  @doc("The GUID of the relationship.")
+  relationshipId?: string;
+
+  @doc("The GUID of the parent entity.")
+  parentEntityId?: string;
+}
+
+@doc("The lineage information for an entity.")
+model LineageInfo {
+  @doc("The GUID of the base entity.")
+  baseEntityGuid?: string;
+
+  @doc("The direction of lineage traversal.")
+  lineageDirection?: string;
+
+  @doc("The depth of lineage to retrieve.")
+  lineageDepth?: int32;
+
+  @doc("The width of lineage to retrieve.")
+  lineageWidth?: int32;
+
+  @doc("The number of children nodes.")
+  childrenCount?: int32;
+
+  @doc("Indicates whether to include the parent entity.")
+  includeParent?: boolean;
+
+  @doc("A map of entity GUIDs to entity details.")
+  guidEntityMap?: Record<LineageEntityDetails>;
+
+  @doc("An array of lineage relations.")
+  relations?: LineageRelation[];
+
+  @doc("An array of parent relations.")
+  parentRelations?: LineageParentRelation[];
+
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
+  @doc("The width counts for input and output directions.")
+  widthCounts?: Record<Record<unknown>>;
+}
