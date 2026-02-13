@@ -13,7 +13,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
 
 namespace Microsoft.EncryptedTransport;
 
@@ -31,7 +30,7 @@ model EncryptedTransportAccount
 
 @doc("Encrypted Transport Account Properties")
 model EncryptedTransportAccountProperties {
-  @doc("Wi-Fi Pre-Shared Key as printable ASCII string")
+  @doc("Wifi Pre-Shared Key as printable ASCII string")
   @pattern("^[ -~ ]{8,64}$")
   @visibility(Lifecycle.Create)
   @secret
@@ -39,10 +38,11 @@ model EncryptedTransportAccountProperties {
   @removed(Microsoft.EncryptedTransport.Versions.v2025_10_01_preview)
   wifiPsk: string;
 
-  @doc("List of Wi-Fi Pre-Shared Keys as printable ASCII secure strings")
-  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @doc("List of wifi ssid and pre-shared key pairs as printable ASCII secure strings")
   @added(Microsoft.EncryptedTransport.Versions.v2025_10_01_preview)
-  wifiPsks: WifiPsk[];
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
+  @identifiers(#["ssid"])
+  wifiProfiles: WifiProfile[];
 
   @doc("Reference to an existing subnet in the customer's Azure virtual network")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -85,8 +85,25 @@ union EncryptedTransportAccountBandwidthOptions {
   string,
 }
 
+@doc("Wifi network info")
+@added(Microsoft.EncryptedTransport.Versions.v2025_10_01_preview)
+model WifiProfile {
+  @doc("The wifi network's SSID")
+  ssid: WifiSSID;
+
+  @doc("The wifi network's PSK")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  psk?: WifiPsk;
+}
+
+@doc("UTF-8 string wifi SSID")
+@minLength(1)
+@maxLength(32)
+@added(Microsoft.EncryptedTransport.Versions.v2025_10_01_preview)
+scalar WifiSSID extends string;
+
 @doc("Secure string wifi PSK")
-@pattern("^[ -~ ]{8,64}$")
+@pattern("^[ -~ ]{8,63}$")
 @secret
 @added(Microsoft.EncryptedTransport.Versions.v2025_10_01_preview)
 scalar WifiPsk extends string;

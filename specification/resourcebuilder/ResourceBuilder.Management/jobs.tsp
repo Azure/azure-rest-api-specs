@@ -25,6 +25,13 @@ model Job is ProxyResource<JobProperties> {
   /** Job kind discriminator. Determines which properties are valid for this job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is a valid top-level property for Job resource"
   kind: JobKind;
+
+  /**
+   * Gets or sets tags of the resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressing error expected"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
+  tags?: Record<string>;
 }
 
 /** Job properties - properties vary by kind.
