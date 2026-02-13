@@ -42,7 +42,7 @@ interface CertificateProfileOperations {
   @route("/codesigningaccounts/{accountName}/certificateprofiles/{certificateProfile}/sign")
   getSigningStatus is Foundations.GetOperationStatus<
     SigningOptions,
-    SignResult
+    SignStatusResult
   >;
 
   #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "no body included, bytesbody is the response object."
@@ -76,14 +76,14 @@ interface CertificateProfileOperations {
   sign is StandardResourceOperations.LongRunningResourceAction<
     CertificateProfileName,
     BodyParameter<SigningPayloadOptions>,
-    SignResult,
+    SignStatusResult,
     Foundations.ErrorResponse,
     SigningRequestHeadersTraits
   >;
 }
 
 @doc("Algorithms supported for signing.")
-union SignatureAlgorithm {
+union SignSignatureAlgorithm {
   string,
 
   @doc("RSASSA-PKCS1-v1_5 using SHA-256 hash algorithm.")
@@ -139,7 +139,7 @@ model CertificateProfileName {
 @doc("The artifact request information to be signed by the service.")
 model SigningPayloadOptions {
   @doc("The supported signature algorithm identifiers.")
-  signatureAlgorithm: SignatureAlgorithm;
+  signatureAlgorithm: SignSignatureAlgorithm;
 
   @doc("Content digest to sign.")
   digest: bytes;
@@ -152,7 +152,7 @@ model SigningPayloadOptions {
 }
 
 @doc("The sign status model.")
-model SignResult {
+model SignStatusResult {
   @doc("Digital signature of the requested content digest.")
   signature?: bytes;
 
