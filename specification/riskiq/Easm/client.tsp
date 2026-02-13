@@ -76,10 +76,6 @@ interface EasmClient {
 
 @@clientName(Easm.Policy, "Policy", "csharp");
 @@clientName(Easm.AlexaInfo, "AlexaDetails", "java");
-@@clientName(Azure.Core.Foundations.InnerError,
-  "CoreInnerError",
-  "java,go,python"
-);
 @@clientName(Easm.AssetUpdateData, "AssetUpdatePayload", "csharp");
 @@clientName(Easm.Attribute, "AttributeDetails", "csharp");
 @@clientName(Easm.Banner, "BannerDetails", "csharp");
@@ -159,3 +155,10 @@ interface EasmClient {
 @@clientName(EasmClient.listSavedFilter, "GetSavedFilters", "csharp");
 @@clientName(EasmClient.listTask, "GetTasks", "csharp");
 @@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");
+
+// avoid duplicate model from Azure.Core.Foundations
+@@clientName(Azure.Core.Foundations.InnerError,
+  "CoreInnerError",
+  "java,go,python"
+);
+
