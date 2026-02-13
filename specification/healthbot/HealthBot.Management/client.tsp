@@ -8,10 +8,10 @@ using Microsoft.HealthBot;
 @@clientName(Microsoft.HealthBot, "HealthBotMgmtClient", "python");
 
 // rename for duplicate model from Azure.ResourceManager.Foundations
-@@clientName(ErrorAdditionalInfo, "HealthBotErrorAdditionalInfo", "java,go");
+@@clientName(ErrorAdditionalInfo, "HealthBotErrorAdditionalInfo", "java");
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
   "ArmErrorAdditionalInfo",
-  "python"
+  "python,go"
 );
 
 @@clientName(KeyVaultProperties, "HealthBotKeyVaultProperties", "csharp");
