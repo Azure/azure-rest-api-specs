@@ -36,8 +36,45 @@ union ScalingType {
   string,
 }
 
+/** Metric type for CPU and Memory triggers */
+union MetricType {
+  /** Utilization metric type */
+  Utilization: "Utilization",
+
+  /** Average value metric type */
+  AverageValue: "AverageValue",
+
+  string,
+}
+
+/** Trigger authentication kind */
+union TriggerAuthenticationKind {
+  /** Cluster-scoped trigger authentication */
+  ClusterTriggerAuthentication: "ClusterTriggerAuthentication",
+
+  /** Namespace-scoped trigger authentication */
+  TriggerAuthentication: "TriggerAuthentication",
+
+  string,
+}
+
+/** Trigger authentication reference */
+model TriggerAuthenticationReference {
+  /** Name of the trigger authentication */
+  name: string;
+
+  /** Kind of trigger authentication (ClusterTriggerAuthentication or TriggerAuthentication) */
+  kind?: TriggerAuthenticationKind = "TriggerAuthentication";
+}
+
 /** KEDA Autoscaling Trigger. Only 1 of these fields can be filled out at a time */
 model AutoscalingTrigger {
+  /** Configuration for CPU trigger. Only required when type is 'cpu'. */
+  cpu?: CpuTriggerMetadata;
+
+  /** Configuration for Memory trigger. Only required when type is 'memory'. */
+  memory?: MemoryTriggerMetadata;
+
   /** Configuration for GitHub Runner trigger. Only required when type is 'github-runner'. */
   gitHubRunner?: GitHubRunnerTriggerMetadata;
 
@@ -67,6 +104,36 @@ model AutoscalingTrigger {
 
   /** Configuration for Azure Storage Queue trigger. Only required when type is 'azure-storage-queue'. */
   azureStorageQueue?: AzureStorageQueueTriggerMetadata;
+}
+
+/** CPU Trigger Configuration */
+model CpuTriggerMetadata {
+  /** Type of metric to use for scaling (Utilization or AverageValue) */
+  metricType?: MetricType;
+
+  /** Target value for the metric */
+  value?: string;
+
+  /** Optional. Target a specific container in a pod */
+  containerName?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
+}
+
+/** Memory Trigger Configuration */
+model MemoryTriggerMetadata {
+  /** Type of metric to use for scaling (Utilization or AverageValue) */
+  metricType?: MetricType;
+
+  /** Target value for the metric */
+  value?: string;
+
+  /** Optional. Target a specific container in a pod */
+  containerName?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** GitHub Runner Trigger Configuration */
@@ -103,6 +170,9 @@ model GitHubRunnerTriggerMetadata {
 
   /** Installation ID from the GitHub App once installed into org or repo */
   installationId?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** Azure App Insights Trigger Configuration */
@@ -148,6 +218,9 @@ model AzureAppInsightsTriggerMetadata {
 
   /** Whether to ignore null values in query results (Default: false) */
   ignoreNullValues?: boolean;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** Azure Pipelines Trigger Configuration */
@@ -190,6 +263,9 @@ model AzurePipelinesTriggerMetadata {
 
   /** Enable case-insensitive comparison of demands (Default: false) */
   caseInsensitiveDemandsProcessing?: boolean;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** Azure Blob Trigger Configuration */
@@ -226,6 +302,9 @@ model AzureBlobTriggerMetadata {
 
   /** Glob pattern for filtering blobs */
   globPattern?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** Azure Data Explorer Trigger Configuration */
@@ -265,6 +344,9 @@ model AzureDataExplorerTriggerMetadata {
 
   /** Active Directory endpoint (required when cloud = Private) */
   activeDirectoryEndpoint?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** Azure Event Hub Trigger Configuration */
@@ -298,6 +380,9 @@ model AzureEventHubTriggerMetadata {
 
   /** Storage account name (required for workload identity auth) */
   storageAccountName?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** Azure Log Analytics Trigger Configuration */
@@ -350,6 +435,9 @@ model AzureLogAnalyticsTriggerMetadata {
 
   /** Custom timeout for HTTP client in milliseconds */
   timeout?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** Azure Monitor Trigger Configuration */
@@ -398,6 +486,9 @@ model AzureMonitorTriggerMetadata {
 
   /** Active Directory endpoint (required when cloud = Private) */
   activeDirectoryEndpoint?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** Azure Service Bus Trigger Configuration */
@@ -428,6 +519,9 @@ model AzureServiceBusTriggerMetadata {
 
   /** Service Bus endpoint suffix (required when cloud = Private) */
   endpointSuffix?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }
 
 /** Azure Storage Queue Trigger Configuration */
@@ -452,4 +546,7 @@ model AzureStorageQueueTriggerMetadata {
 
   /** Cloud environment */
   cloud?: string;
+
+  /** Authentication reference for the trigger */
+  authenticationRef?: TriggerAuthenticationReference;
 }

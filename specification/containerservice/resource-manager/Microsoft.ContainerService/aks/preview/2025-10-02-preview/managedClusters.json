@@ -7529,6 +7529,14 @@
       "type": "object",
       "description": "KEDA Autoscaling Trigger. Only 1 of these fields can be filled out at a time",
       "properties": {
+        "cpu": {
+          "$ref": "#/definitions/CpuTriggerMetadata",
+          "description": "Configuration for CPU trigger. Only required when type is 'cpu'."
+        },
+        "memory": {
+          "$ref": "#/definitions/MemoryTriggerMetadata",
+          "description": "Configuration for Memory trigger. Only required when type is 'memory'."
+        },
         "gitHubRunner": {
           "$ref": "#/definitions/GitHubRunnerTriggerMetadata",
           "description": "Configuration for GitHub Runner trigger. Only required when type is 'github-runner'."
@@ -7630,6 +7638,10 @@
         "ignoreNullValues": {
           "type": "boolean",
           "description": "Whether to ignore null values in query results (Default: false)"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -7680,6 +7692,10 @@
         "globPattern": {
           "type": "string",
           "description": "Glob pattern for filtering blobs"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -7734,6 +7750,10 @@
         "activeDirectoryEndpoint": {
           "type": "string",
           "description": "Active Directory endpoint (required when cloud = Private)"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -7780,6 +7800,10 @@
         "storageAccountName": {
           "type": "string",
           "description": "Storage account name (required for workload identity auth)"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -7903,6 +7927,10 @@
         "timeout": {
           "type": "string",
           "description": "Custom timeout for HTTP client in milliseconds"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -7969,6 +7997,10 @@
         "activeDirectoryEndpoint": {
           "type": "string",
           "description": "Active Directory endpoint (required when cloud = Private)"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -8027,6 +8059,10 @@
         "caseInsensitiveDemandsProcessing": {
           "type": "boolean",
           "description": "Enable case-insensitive comparison of demands (Default: false)"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -8069,6 +8105,10 @@
         "endpointSuffix": {
           "type": "string",
           "description": "Service Bus endpoint suffix (required when cloud = Private)"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -8103,6 +8143,10 @@
         "cloud": {
           "type": "string",
           "description": "Cloud environment"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -8692,6 +8736,28 @@
         "keyData"
       ]
     },
+    "CpuTriggerMetadata": {
+      "type": "object",
+      "description": "CPU Trigger Configuration",
+      "properties": {
+        "metricType": {
+          "$ref": "#/definitions/MetricType",
+          "description": "Type of metric to use for scaling (Utilization or AverageValue)"
+        },
+        "value": {
+          "type": "string",
+          "description": "Target value for the metric"
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Optional. Target a specific container in a pod"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
+        }
+      }
+    },
     "CreationData": {
       "type": "object",
       "description": "Data used when creating a target resource from a source resource.",
@@ -9240,6 +9306,10 @@
         "installationId": {
           "type": "string",
           "description": "Installation ID from the GitHub App once installed into org or repo"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
         }
       }
     },
@@ -13754,6 +13824,28 @@
         }
       }
     },
+    "MemoryTriggerMetadata": {
+      "type": "object",
+      "description": "Memory Trigger Configuration",
+      "properties": {
+        "metricType": {
+          "$ref": "#/definitions/MetricType",
+          "description": "Type of metric to use for scaling (Utilization or AverageValue)"
+        },
+        "value": {
+          "type": "string",
+          "description": "Target value for the metric"
+        },
+        "containerName": {
+          "type": "string",
+          "description": "Optional. Target a specific container in a pod"
+        },
+        "authenticationRef": {
+          "$ref": "#/definitions/TriggerAuthenticationReference",
+          "description": "Authentication reference for the trigger"
+        }
+      }
+    },
     "MeshMembership": {
       "type": "object",
       "description": "Mesh membership of a managed cluster.",
@@ -14001,6 +14093,30 @@
           "$ref": "#/definitions/MeshRevision"
         }
       ]
+    },
+    "MetricType": {
+      "type": "string",
+      "description": "Metric type for CPU and Memory triggers",
+      "enum": [
+        "Utilization",
+        "AverageValue"
+      ],
+      "x-ms-enum": {
+        "name": "MetricType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Utilization",
+            "value": "Utilization",
+            "description": "Utilization metric type"
+          },
+          {
+            "name": "AverageValue",
+            "value": "AverageValue",
+            "description": "Average value metric type"
+          }
+        ]
+      }
     },
     "Mode": {
       "type": "string",
@@ -16184,6 +16300,44 @@
           }
         ]
       }
+    },
+    "TriggerAuthenticationReference": {
+      "type": "object",
+      "description": "Trigger authentication reference",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the trigger authentication"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of trigger authentication (ClusterTriggerAuthentication or TriggerAuthentication)",
+          "default": "TriggerAuthentication",
+          "enum": [
+            "ClusterTriggerAuthentication",
+            "TriggerAuthentication"
+          ],
+          "x-ms-enum": {
+            "name": "TriggerAuthenticationKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ClusterTriggerAuthentication",
+                "value": "ClusterTriggerAuthentication",
+                "description": "Cluster-scoped trigger authentication"
+              },
+              {
+                "name": "TriggerAuthentication",
+                "value": "TriggerAuthentication",
+                "description": "Namespace-scoped trigger authentication"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "TrustedAccessRole": {
       "type": "object",
