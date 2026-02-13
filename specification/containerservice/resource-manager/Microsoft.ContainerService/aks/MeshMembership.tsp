@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
-import "./models.tsp";
+import "./CommonModels.tsp";
 import "./ManagedCluster.tsp";
 
 using TypeSpec.Rest;
@@ -10,6 +10,11 @@ using TypeSpec.Http;
 using Versioning;
 
 namespace Microsoft.ContainerService;
+
+// =============================================================================
+// MeshMembership resource and operations
+// =============================================================================
+
 /**
  * Mesh membership of a managed cluster.
  */
@@ -33,6 +38,16 @@ model MeshMembership
 
   ...Azure.ResourceManager.EntityTagProperty;
 }
+
+@@maxLength(MeshMembership.name, 63);
+@@minLength(MeshMembership.name, 1);
+@@doc(MeshMembership.name, "The name of the mesh membership.");
+@@doc(MeshMembership.properties,
+  "Mesh membership properties of a managed cluster."
+);
+@@doc(MeshMemberships.createOrUpdate::parameters.resource,
+  "The mesh membership to create or update."
+);
 
 @armResourceOperations
 @added(Versions.v2025_10_02_preview)
@@ -65,12 +80,82 @@ interface MeshMemberships {
   >;
 }
 
-@@maxLength(MeshMembership.name, 63);
-@@minLength(MeshMembership.name, 1);
-@@doc(MeshMembership.name, "The name of the mesh membership.");
-@@doc(MeshMembership.properties,
-  "Mesh membership properties of a managed cluster."
-);
-@@doc(MeshMemberships.createOrUpdate::parameters.resource,
-  "The mesh membership to create or update."
-);
+// =============================================================================
+// MeshMembership models
+// =============================================================================
+
+/**
+ * The provisioning state of the last accepted operation.
+ */
+@added(Versions.v2025_10_02_preview)
+union MeshMembershipProvisioningState {
+  string,
+
+  /**
+   * Resource creation was canceled.
+   */
+  Canceled: "Canceled",
+
+  /**
+   * The Mesh Membership is being created.
+   */
+  Creating: "Creating",
+
+  /**
+   * The Mesh Membership is being deleted.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * Resource creation failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * Resource has been created.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The Mesh Membership is being updated.
+   */
+  Updating: "Updating",
+}
+
+/**
+ * Mesh membership properties of a managed cluster.
+ */
+@added(Versions.v2025_10_02_preview)
+model MeshMembershipProperties {
+  /**
+   * The current provisioning state of the Mesh Membership.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: MeshMembershipProvisioningState;
+
+  /**
+   * The ARM resource id for the managed mesh member. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/applinks/{appLinkName}/appLinkMembers/{appLinkMemberName}'. Visit https://aka.ms/applink for more information.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  managedMeshID: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.AppLink/applinks";
+    }
+  ]>;
+}
+
+/**
+ * The result of a request to list mesh memberships in a managed cluster.
+ */
+@added(Versions.v2025_10_02_preview)
+model MeshMembershipsListResult {
+  /**
+   * The list of mesh memberships.
+   */
+  @pageItems
+  value: MeshMembership[];
+
+  @doc("The URL to get the next set of mesh membership results.")
+  @nextLink
+  nextLink?: ResourceLocation<MeshMembership>;
+}
