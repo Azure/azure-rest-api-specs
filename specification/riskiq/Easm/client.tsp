@@ -156,7 +156,7 @@ interface EasmClient {
 @@clientName(EasmClient.listTask, "GetTasks", "csharp");
 @@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");
 
-// avoid duplicate model from Azure.Core.Foundations
+// rename for duplicate model from Azure.Core.Foundations
 @@clientName(Azure.Core.Foundations.InnerError,
   "CoreInnerError",
   "java,go,python"
