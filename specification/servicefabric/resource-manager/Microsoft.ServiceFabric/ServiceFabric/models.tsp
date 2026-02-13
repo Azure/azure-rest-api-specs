@@ -253,3 +253,75 @@ model EndpointRangeDescription {
    */
   endPort: int32;
 }
+
+/**
+ * Describes the managed identities for an Azure resource.
+ */
+model ManagedIdentity {
+  /**
+   * The principal id of the managed identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The tenant id of the managed identity. This property will only be provided for a system assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * The type of managed identity for the resource.
+   */
+  type?: ManagedIdentityType;
+
+  /**
+   * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:
+   * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "servicefabric is a brownfield resource with existing APIs that use Record types"
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/**
+ * The type of managed identity for the resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum ManagedIdentityType {
+  /**
+   * Indicates that system assigned identity is associated with the resource.
+   */
+  SystemAssigned: "SystemAssigned",
+
+  /**
+   * Indicates that user assigned identity is associated with the resource.
+   */
+  UserAssigned: "UserAssigned",
+
+  /**
+   * Indicates that both system assigned and user assigned identity are associated with the resource.
+   */
+  SystemAssignedUserAssigned: "SystemAssigned, UserAssigned",
+
+  /**
+   * Indicates that no identity is associated with the resource.
+   */
+  None: "None",
+}
+
+/**
+ * Describes a user assigned identity.
+ */
+model UserAssignedIdentity {
+  /**
+   * The principal id of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  principalId?: string;
+
+  /**
+   * The client id of user assigned identity.
+   */
+  @visibility(Lifecycle.Read)
+  clientId?: string;
+}

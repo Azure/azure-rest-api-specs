@@ -273,7 +273,7 @@ model ServiceResourceUpdate extends ProxyResource {
   /**
    * The RP-specific properties for this resource.
    */
-  properties: ServiceResourceUpdateProperties;
+  properties?: ServiceResourceUpdateProperties;
 }
 
 /**

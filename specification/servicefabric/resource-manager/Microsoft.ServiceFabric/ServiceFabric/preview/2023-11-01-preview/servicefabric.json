@@ -2140,7 +2140,7 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "#/definitions/ManagedIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -3593,6 +3593,69 @@
         }
       }
     },
+    "ManagedIdentity": {
+      "type": "object",
+      "description": "Describes the managed identities for an Azure resource.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of the managed identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id of the managed identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType",
+          "description": "The type of managed identity for the resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource ids in the form:\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "ManagedIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity for the resource.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "Indicates that system assigned identity is associated with the resource."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "Indicates that user assigned identity is associated with the resource."
+          },
+          {
+            "name": "SystemAssignedUserAssigned",
+            "value": "SystemAssigned, UserAssigned",
+            "description": "Indicates that both system assigned and user assigned identity are associated with the resource."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Indicates that no identity is associated with the resource."
+          }
+        ]
+      }
+    },
     "MoveCost": {
       "type": "string",
       "description": "Specifies the move cost for the service.",
@@ -4477,9 +4540,6 @@
           "description": "The RP-specific properties for this resource."
         }
       },
-      "required": [
-        "properties"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -4857,6 +4917,22 @@
       "required": [
         "targetVersion"
       ]
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "Describes a user assigned identity.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
+        }
+      }
     },
     "VMSize": {
       "type": "object",
