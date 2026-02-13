@@ -63,8 +63,9 @@ jobs:
       - name: Install dev deps
         uses: ./.github/actions/setup-node-install-deps
         with:
-          # actions/github-script@v8 uses Node 24
-          node-version: 24.x
+          # Use default Node version from runner cache for better performance
+          # See: https://github.com/actions/setup-node/issues/1492
+          node-version: ""
           working-directory: ./${{ matrix.folder }}
 
       - run: npm run lint
