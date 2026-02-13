@@ -1936,17 +1936,17 @@ namespace PurviewDataQuality {
       @query("dataProductId")
       dataProductId?: string;
 
-      @doc("Clone request payload")
+      @doc("Clone request payload. Optional.")
       @body
-      request: unknown;
+      request?: CloneAssetRequest;
     },
     {
       @statusCode
       statusCode: 202;
 
-      @doc("Accepted clone job response")
+      @doc("Accepted clone job; response body is the clone job ID (GUID string).")
       @body
-      response: unknown;
+      response: string;
     }
   >;
 

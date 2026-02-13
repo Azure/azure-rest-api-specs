@@ -986,6 +986,10 @@
           "DQ Assets"
         ],
         "description": "Submits a clone job for a DQ asset. Data product is specified as optional query parameter.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -1014,15 +1018,19 @@
           {
             "name": "request",
             "in": "body",
-            "description": "Clone request payload",
-            "required": true,
-            "schema": {}
+            "description": "Clone request payload. Optional.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CloneAssetRequest"
+            }
           }
         ],
         "responses": {
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {}
+            "schema": {
+              "type": "string"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4340,6 +4348,32 @@
       "required": [
         "metadata"
       ]
+    },
+    "CloneAssetRequest": {
+      "type": "object",
+      "description": "Clone asset request specifying source, target, and clone options",
+      "properties": {
+        "sourceBusinessDomainId": {
+          "type": "string",
+          "description": "Source business domain identifier"
+        },
+        "targetBusinessDomainId": {
+          "type": "string",
+          "description": "Target business domain identifier"
+        },
+        "isStandAloneAsset": {
+          "type": "boolean",
+          "description": "Whether the cloned asset is stand-alone"
+        },
+        "targetAssetId": {
+          "type": "string",
+          "description": "Target data asset identifier"
+        },
+        "targetDataProductId": {
+          "type": "string",
+          "description": "Target data product identifier"
+        }
+      }
     },
     "Column": {
       "type": "object",

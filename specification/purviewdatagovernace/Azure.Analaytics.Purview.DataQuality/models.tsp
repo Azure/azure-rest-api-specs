@@ -2055,6 +2055,42 @@ model ScanDTOResponse {
 }
 
 /**
+ * Request payload for cloning a DQ asset to another business domain, data product, or as a stand-alone asset.
+ */
+@doc("Clone asset request specifying source, target, and clone options")
+model CloneAssetRequest {
+  /**
+   * Business domain identifier of the source asset.
+   */
+  @doc("Source business domain identifier")
+  sourceBusinessDomainId?: string;
+
+  /**
+   * Business domain identifier for the clone target.
+   */
+  @doc("Target business domain identifier")
+  targetBusinessDomainId?: string;
+
+  /**
+   * Whether the cloned asset is stand-alone (not tied to a data product).
+   */
+  @doc("Whether the cloned asset is stand-alone")
+  isStandAloneAsset?: boolean;
+
+  /**
+   * Data asset identifier for the clone target.
+   */
+  @doc("Target data asset identifier")
+  targetAssetId?: string;
+
+  /**
+   * Data product identifier for the clone target.
+   */
+  @doc("Target data product identifier")
+  targetDataProductId?: string;
+}
+
+/**
  * Empty parameter model for operations that require no input parameters.
  * Used for API operations that need explicit parameter structure without content.
  */
