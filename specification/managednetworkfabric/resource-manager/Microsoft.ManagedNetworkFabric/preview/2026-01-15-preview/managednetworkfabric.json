@@ -17240,6 +17240,30 @@
         ]
       }
     },
+    "GenerateBaseConfiguration": {
+      "type": "string",
+      "description": "Allowed types for generate base configuration during network fabric refresh",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "GenerateBaseConfiguration",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled indicates that base configuration should not be generated during network fabric refresh"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled indicates that base configuration should be generated during network fabric refresh"
+          }
+        ]
+      }
+    },
     "GetTopologyResponse": {
       "type": "object",
       "description": "GetTopology Response.",
@@ -22215,7 +22239,8 @@
         },
         "secretArchiveSettings": {
           "$ref": "#/definitions/SecretArchivePatchSettings",
-          "description": "The settings for a customer secret archive that may be used to hold copies of credentials for the Network Fabric."
+          "description": "The settings for a customer secret archive that may be used to hold copies of credentials for the Network Fabric.",
+          "x-nullable": true
         },
         "upgradeProfile": {
           "type": "array",
@@ -25456,8 +25481,8 @@
       "type": "object",
       "description": "Refresh configuration request properties.",
       "properties": {
-        "shouldGenerateBaseConfiguration": {
-          "type": "boolean",
+        "generateBaseConfiguration": {
+          "$ref": "#/definitions/GenerateBaseConfiguration",
           "description": "Indicates if base configuration needs to be generated afresh."
         },
         "configurationRegenerationType": {
@@ -25473,7 +25498,7 @@
         }
       },
       "required": [
-        "shouldGenerateBaseConfiguration",
+        "generateBaseConfiguration",
         "configurationRegenerationType"
       ]
     },
@@ -27367,13 +27392,13 @@
       "type": "object",
       "description": "The VM profile configuration for the NFC's associated compute (VM) resources.",
       "properties": {
-        "vmSize": {
+        "vmSkuName": {
           "type": "string",
           "description": "The SKU that will be used for creating the VMS for AKS cluster."
         }
       },
       "required": [
-        "vmSize"
+        "vmSkuName"
       ]
     },
     "VpnConfigurationPatchableProperties": {

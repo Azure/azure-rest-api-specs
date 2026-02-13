@@ -1381,6 +1381,7 @@ model UpdateAdministrativeStateResponseProperties {
   failedResources?: Azure.Core.armResourceIdentifier<[]>[];
 }
 
+
 @doc("Configuration Regeneration Type used for refresh configuration")
 @added(Versions.v2026_01_15_preview)
 union ConfigurationRegenerationType {
@@ -1423,6 +1424,17 @@ union NetworkFabricRefreshDeviceTypes {
 
   @doc("DeviceType-ManagementSwitch")
   ManagementSwitch: "ManagementSwitch",
+
+  string,
+}
+
+@doc("Allowed types for generate base configuration during network fabric refresh")
+union GenerateBaseConfiguration {
+  @doc("Disabled indicates that base configuration should not be generated during network fabric refresh")
+  Disabled: "Disabled",
+
+  @doc("Enabled indicates that base configuration should be generated during network fabric refresh")
+  Enabled: "Enabled",
 
   string,
 }

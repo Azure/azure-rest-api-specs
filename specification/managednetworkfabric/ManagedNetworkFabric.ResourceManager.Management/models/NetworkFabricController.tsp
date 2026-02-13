@@ -175,5 +175,5 @@ union NfcSku {
 @added(Versions.v2026_01_15_preview)
 model VmProfile {
   @doc("The SKU that will be used for creating the VMS for AKS cluster.")
-  vmSize: string;
+  vmSkuName: string;
 }

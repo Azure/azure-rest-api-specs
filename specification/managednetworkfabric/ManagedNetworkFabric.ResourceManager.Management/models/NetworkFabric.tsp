@@ -420,9 +420,10 @@ model NetworkFabricPatchProperties {
   @added(Versions.v2025_07_15)
   authorizedTransceiver?: AuthorizedTransceiverPatchProperties;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "A null value removes secret archive settings; an omitted value leaves it unchanged instead."
   @doc("The settings for a customer secret archive that may be used to hold copies of credentials for the Network Fabric.")
   @added(Versions.v2026_01_15_preview)
-  secretArchiveSettings?: SecretArchivePatchSettings;
+  secretArchiveSettings?: SecretArchivePatchSettings | null;
 
   @doc("The upgrade profile to be used by devices in the network fabric during device operations")
   @Azure.ResourceManager.identifiers(#[
@@ -1068,7 +1069,7 @@ model AuthorizedTransceiverPatchProperties {
 model RefreshConfigurationRequestProperties {
   @doc("Indicates if base configuration needs to be generated afresh.")
   @added(Versions.v2026_01_15_preview)
-  shouldGenerateBaseConfiguration: boolean;
+  generateBaseConfiguration: GenerateBaseConfiguration;
 
   @doc("Type of configuration regeneration to be performed.")
   @added(Versions.v2026_01_15_preview)
