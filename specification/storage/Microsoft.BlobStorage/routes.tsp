@@ -778,7 +778,7 @@ namespace Storage.Blob {
         ...LastAccessedResponseHeader;
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
-        ...LegalHoldResponseHeader;
+        ...LegalHoldOptionalResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
         ...ApiVersionHeader;
@@ -831,7 +831,7 @@ namespace Storage.Blob {
         ...LastAccessedResponseHeader;
         ...ImmutabilityPolicyExpiresOnResponseHeader;
         ...ImmutabilityPolicyModeResponseHeader;
-        ...LegalHoldResponseHeader;
+        ...LegalHoldOptionalResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
         ...ApiVersionHeader;
@@ -926,7 +926,7 @@ namespace Storage.Blob {
           ...LastAccessedResponseHeader;
           ...ImmutabilityPolicyExpiresOnResponseHeader;
           ...ImmutabilityPolicyModeResponseHeader;
-          ...LegalHoldResponseHeader;
+          ...LegalHoldOptionalResponseHeader;
         }
       >;
 
