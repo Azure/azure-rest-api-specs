@@ -295,11 +295,11 @@ describe('detect-new-resource-provider', () => {
     });
 
     it('should use baseBranch from context payload', async () => {
-      const rpsaasContext = makeMockContext('RPSaaSMaster');
+      const altBranchContext = makeMockContext('RPSaaSMaster');
       mockGetChangedFiles.mockResolvedValue([]);
       setupGitMock();
 
-      await detectNewResourceProvider({ context: rpsaasContext, core: mockCore });
+      await detectNewResourceProvider({ context: altBranchContext, core: mockCore });
 
       // merge-base should have been called with origin/RPSaaSMaster
       expect(mockGitRaw).toHaveBeenCalledWith(
