@@ -16,7 +16,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Cluster Jobs resource
  */
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 @parentResource(Cluster)
 model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
   ...ResourceNameParameter<
@@ -30,7 +30,7 @@ model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
 /**
  * ClusterJobs operations
  */
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 @armResourceOperations
 interface ClusterJobs {
   /** Get a ClusterJob */
@@ -50,7 +50,7 @@ interface ClusterJobs {
 }
 
 /** Cluster Job properties */
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 @discriminator("jobType")
 model ClusterJobProperties {
   /** Job Type to support polymorphic resource. */
@@ -90,5 +90,5 @@ model ClusterJobProperties {
 /**
  * List of Cluster Job resources for the HCI cluster.
  */
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
