@@ -8,6 +8,8 @@ import { createDummySwagger } from "../src/command-helpers.js";
 import { validateBreakingChange } from "../src/commands.js";
 import { runOad } from "../src/run-oad.js";
 
+const serviceParent = "specification/foo/data-plane/";
+
 vi.mock("@azure-tools/specs-shared/changed-files", async () => {
   const actual = await vi.importActual("@azure-tools/specs-shared/changed-files");
   return {
@@ -90,112 +92,110 @@ const context = {
   prUrl: "",
 };
 
-const cases = [
+type TestCase = {
+  name: string;
+  changedFiles: {
+    additions?: string[];
+    modifications?: string[];
+    deletions?: string[];
+    renames?: {
+      from: string;
+      to: string;
+    }[];
+  };
+  expectedCreateDummySwaggers?: { old: string[]; new: string[] };
+  expectedOadCalls: {
+    sameVersion?: { old: string; new: string }[];
+    crossVersion?: { old: string; new: string }[];
+  };
+};
+
+const cases: TestCase[] = [
   {
     name: "modify one file, one version",
     changedFiles: {
-      modifications: ["specification/foo/data-plane/Foo/stable/2025-03-01/foo.json"],
-    },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
+      modifications: ["Foo/stable/2025-03-01/foo.json"],
     },
     expectedOadCalls: {
       sameVersion: [
         {
-          old: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/foo.json",
         },
       ],
-      crossVersion: [],
     },
   },
   {
     name: "modify one file, multiple versions",
     changedFiles: {
       modifications: [
-        "specification/foo/data-plane/Foo/preview/2025-04-01-preview/foo.json",
-        "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
-        "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
+        "Foo/preview/2025-04-01-preview/foo.json",
+        "Foo/stable/2025-01-01/foo.json",
+        "Foo/stable/2025-03-01/foo.json",
       ],
-    },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
     },
     expectedOadCalls: {
       sameVersion: [
         {
-          old: "specification/foo/data-plane/Foo/preview/2025-04-01-preview/foo.json",
-          new: "specification/foo/data-plane/Foo/preview/2025-04-01-preview/foo.json",
+          old: "Foo/preview/2025-04-01-preview/foo.json",
+          new: "Foo/preview/2025-04-01-preview/foo.json",
         },
         {
-          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          old: "Foo/stable/2025-01-01/foo.json",
+          new: "Foo/stable/2025-01-01/foo.json",
         },
         {
-          old: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/foo.json",
         },
       ],
-      crossVersion: [],
     },
   },
   {
     name: "modify multiple files, multiple versions",
     changedFiles: {
       modifications: [
-        "specification/bar/data-plane/Bar/preview/2025-04-01-preview/bar.json",
-        "specification/bar/data-plane/Bar/preview/2025-04-01-preview/baz.json",
-        "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
-        "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
+        "Bar/preview/2025-04-01-preview/bar.json",
+        "Bar/preview/2025-04-01-preview/baz.json",
+        "Bar/stable/2025-03-01/bar.json",
+        "Bar/stable/2025-03-01/baz.json",
       ],
-    },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
     },
     expectedOadCalls: {
       sameVersion: [
         {
-          old: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/bar.json",
-          new: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/bar.json",
+          old: "Bar/preview/2025-04-01-preview/bar.json",
+          new: "Bar/preview/2025-04-01-preview/bar.json",
         },
         {
-          old: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/baz.json",
-          new: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/baz.json",
+          old: "Bar/preview/2025-04-01-preview/baz.json",
+          new: "Bar/preview/2025-04-01-preview/baz.json",
         },
         {
-          old: "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
-          new: "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
+          old: "Bar/stable/2025-03-01/bar.json",
+          new: "Bar/stable/2025-03-01/bar.json",
         },
         {
-          old: "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
-          new: "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
+          old: "Bar/stable/2025-03-01/baz.json",
+          new: "Bar/stable/2025-03-01/baz.json",
         },
       ],
-      crossVersion: [],
     },
   },
   {
     name: "add new stable, one file",
     changedFiles: {
-      additions: ["specification/foo/data-plane/Foo/stable/2026-01-01/foo.json"],
-    },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
+      additions: ["Foo/stable/2026-01-01/foo.json"],
     },
     expectedOadCalls: {
-      sameVersion: [],
       crossVersion: [
         {
-          old: "specification/foo/data-plane/Foo/preview/2025-04-01-preview/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+          old: "Foo/preview/2025-04-01-preview/foo.json",
+          new: "Foo/stable/2026-01-01/foo.json",
         },
         {
-          old: "specification/foo/data-plane/Foo/stable/2025-03-01/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2026-01-01/foo.json",
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2026-01-01/foo.json",
         },
       ],
     },
@@ -203,33 +203,25 @@ const cases = [
   {
     name: "add new stable, multiple files",
     changedFiles: {
-      additions: [
-        "specification/bar/data-plane/Bar/stable/2026-01-01/bar.json",
-        "specification/bar/data-plane/Bar/stable/2026-01-01/baz.json",
-      ],
-    },
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: [],
+      additions: ["Bar/stable/2026-01-01/bar.json", "Bar/stable/2026-01-01/baz.json"],
     },
     expectedOadCalls: {
-      sameVersion: [],
       crossVersion: [
         {
-          old: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/bar.json",
-          new: "specification/bar/data-plane/Bar/stable/2026-01-01/bar.json",
+          old: "Bar/preview/2025-04-01-preview/bar.json",
+          new: "Bar/stable/2026-01-01/bar.json",
         },
         {
-          old: "specification/bar/data-plane/Bar/preview/2025-04-01-preview/baz.json",
-          new: "specification/bar/data-plane/Bar/stable/2026-01-01/baz.json",
+          old: "Bar/preview/2025-04-01-preview/baz.json",
+          new: "Bar/stable/2026-01-01/baz.json",
         },
         {
-          old: "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
-          new: "specification/bar/data-plane/Bar/stable/2026-01-01/bar.json",
+          old: "Bar/stable/2025-03-01/bar.json",
+          new: "Bar/stable/2026-01-01/bar.json",
         },
         {
-          old: "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
-          new: "specification/bar/data-plane/Bar/stable/2026-01-01/baz.json",
+          old: "Bar/stable/2025-03-01/baz.json",
+          new: "Bar/stable/2026-01-01/baz.json",
         },
       ],
     },
@@ -239,87 +231,121 @@ const cases = [
     changedFiles: {
       renames: [
         {
-          from: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
-          to: "specification/foo/data-plane/Foo/stable/2025-01-01/openapi.json",
+          from: "Foo/stable/2025-03-01/foo.json",
+          to: "Foo/stable/2025-03-01/openapi.json",
         },
       ],
     },
-    // TODO: After code is fixed, should not create *any* dummy swaggers
-    expectedCreateDummySwaggers: {
-      old: ["specification/foo/data-plane/Foo/stable/2025-01-01/openapi.json"],
-      new: ["specification/foo/data-plane/Foo/stable/2025-01-01/foo.json"],
-    },
-    // TODO: After code is fixed, should only compare before and after renamed file
     expectedOadCalls: {
       sameVersion: [
         {
-          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
-        },
-        {
-          old: "specification/foo/data-plane/Foo/stable/2025-01-01/openapi.json",
-          new: "specification/foo/data-plane/Foo/stable/2025-01-01/openapi.json",
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/openapi.json",
         },
       ],
-      crossVersion: [],
+    },
+  },
+  {
+    name: "rename one file, one version, as add/remove",
+    changedFiles: {
+      // If a file is renamed, but has too many changes, "git diff" may return it as an
+      // add/delete, rather than a rename.
+      additions: ["Foo/stable/2025-03-01/openapi.json"],
+      deletions: ["Foo/stable/2025-03-01/foo.json"],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/openapi.json",
+        },
+      ],
     },
   },
   {
     name: "rename one file, change case of service",
     changedFiles: {
-      addtions: ["specification/foo/data-plane/foo/stable/2025-01-01/openapi.json"],
-      deletions: ["specification/foo/data-plane/Foo/stable/2025-01-01/foo.json"],
+      additions: ["FOO/stable/2025-03-01/openapi.json"],
+      deletions: ["Foo/stable/2025-03-01/foo.json"],
     },
-    // TODO: After code is fixed, should not create *any* dummy swaggers
-    expectedCreateDummySwaggers: {
-      old: [],
-      new: ["specification/foo/data-plane/Foo/stable/2025-01-01/foo.json"],
-    },
-    // TODO: After code is fixed, should only compare before and after renamed file
     expectedOadCalls: {
       sameVersion: [
         {
-          old: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
-          new: "specification/foo/data-plane/Foo/stable/2025-01-01/foo.json",
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "FOO/stable/2025-03-01/openapi.json",
         },
       ],
-      crossVersion: [],
     },
   },
-
-  // Currently failing, code needs better support for renames
-  //
-  // {
-  //   name: "change case folder, rename file",
-  //   changedFiles: {
-  //     additions: [
-  //       "specification/nginx/resource-manager/Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json",
-  //     ],
-  //     deletions: [
-  //       "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
-  //     ],
-  //     renames: [
-  //       {
-  //         from: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-  //         to: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
-  //       },
-  //     ],
-  //   },
-  //   existingFiles: [
-  //     "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-  //     "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
-  //   ],
-  //   expectedOadCalls: [
-  //     {
-  //       old: "specification/nginx/resource-manager/NGINX.NGINXPLUS/preview/2025-03-01-preview/swagger.json",
-  //       new: "specification/nginx/resource-manager/Nginx.NginxPlus/preview/2025-03-01-preview/openapi.json",
-  //     },
-  //     {
-  //       old: "specification/nginx/resource-manager/NGINX.NGINXPLUS/stable/2023-09-01/swagger.json",
-  //       new: "specification/nginx/resource-manager/Nginx.NginxPlus/stable/2023-09-01/swagger.json",
-  //     },
-  //   ],
-  // },
+  {
+    // Minimal repro for https://github.com/Azure/azure-rest-api-specs/issues/38245
+    name: "rename files, change case of service, two versions",
+    changedFiles: {
+      additions: ["FOO/stable/2025-03-01/openapi.json"],
+      deletions: ["Foo/stable/2025-03-01/foo.json"],
+      renames: [
+        {
+          from: "Foo/stable/2025-01-01/foo.json",
+          to: "FOO/stable/2025-01-01/foo.json",
+        },
+      ],
+    },
+    expectedOadCalls: {
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-01-01/foo.json",
+          new: "FOO/stable/2025-01-01/foo.json",
+        },
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "FOO/stable/2025-03-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "convert two swaggers to one (TSP conversion)",
+    changedFiles: {
+      additions: ["specification/bar/data-plane/Bar/stable/2025-03-01/openapi.json"],
+      deletions: [
+        "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
+        "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
+      ],
+    },
+    expectedOadCalls: {
+      // Comparisons are probably invalid, and will fail, but better than comparing to a dummy file
+      sameVersion: [
+        {
+          old: "specification/bar/data-plane/Bar/stable/2025-03-01/bar.json",
+          new: "specification/bar/data-plane/Bar/stable/2025-03-01/openapi.json",
+        },
+        {
+          old: "specification/bar/data-plane/Bar/stable/2025-03-01/baz.json",
+          new: "specification/bar/data-plane/Bar/stable/2025-03-01/openapi.json",
+        },
+      ],
+    },
+  },
+  {
+    name: "convert one swagger to two (very rare)",
+    changedFiles: {
+      additions: ["Foo/stable/2025-03-01/openapi1.json", "Foo/stable/2025-03-01/openapi2.json"],
+      deletions: ["Foo/stable/2025-03-01/foo.json"],
+    },
+    expectedOadCalls: {
+      // Comparisons are probably invalid, and will fail, but better than comparing to a dummy file
+      sameVersion: [
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/openapi1.json",
+        },
+        {
+          old: "Foo/stable/2025-03-01/foo.json",
+          new: "Foo/stable/2025-03-01/openapi2.json",
+        },
+      ],
+    },
+  },
 ];
 
 describe("validateBreakingChange", () => {
@@ -330,6 +356,17 @@ describe("validateBreakingChange", () => {
   it.each(cases)(
     "$name",
     async ({ changedFiles, expectedCreateDummySwaggers, expectedOadCalls }) => {
+      expectedCreateDummySwaggers = expectedCreateDummySwaggers || { old: [], new: [] };
+
+      const finalExpectedOadCalls = {
+        sameVersion: expectedOadCalls.sameVersion || [],
+        crossVersion: expectedOadCalls.crossVersion || [],
+      };
+
+      // Prepend all input strings with the service parent folder (omitted from string literals for brevity)
+      // Use string concat instead of path.join(), since test inputs are all posix paths, and resolved at runtime
+      prependParentFolder(changedFiles, expectedCreateDummySwaggers, finalExpectedOadCalls);
+
       mockChangedFilesStatuses(changedFiles);
 
       const mockCreateDummySwagger = vi.mocked(createDummySwagger);
@@ -339,11 +376,11 @@ describe("validateBreakingChange", () => {
       for (const data of [
         {
           runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
-          expectedOadCalls: expectedOadCalls.sameVersion,
+          expectedOadCalls: finalExpectedOadCalls.sameVersion,
         },
         {
           runType: BREAKING_CHANGES_CHECK_TYPES.CROSS_VERSION,
-          expectedOadCalls: expectedOadCalls.crossVersion,
+          expectedOadCalls: finalExpectedOadCalls.crossVersion,
         },
       ]) {
         mockRunOad.mockClear();
@@ -354,6 +391,10 @@ describe("validateBreakingChange", () => {
         });
 
         expect(statusCode).toEqual(0);
+
+        expect(mockCreateDummySwagger).toBeCalledTimes(
+          expectedCreateDummySwaggers.old.length + expectedCreateDummySwaggers.new.length,
+        );
 
         for (const expected of expectedCreateDummySwaggers.old) {
           expect(mockCreateDummySwagger).toBeCalledWith(
@@ -366,9 +407,7 @@ describe("validateBreakingChange", () => {
           expect(mockCreateDummySwagger).toBeCalledWith(expect.anything(), resolve(expected));
         }
 
-        expect(mockCreateDummySwagger).toBeCalledTimes(
-          expectedCreateDummySwaggers.old.length + expectedCreateDummySwaggers.new.length,
-        );
+        expect(mockRunOad).toBeCalledTimes(data.expectedOadCalls.length);
 
         for (const expected of data.expectedOadCalls) {
           expect(mockRunOad).toBeCalledWith(
@@ -376,9 +415,52 @@ describe("validateBreakingChange", () => {
             expected.new,
           );
         }
-
-        expect(mockRunOad).toBeCalledTimes(data.expectedOadCalls.length);
       }
     },
   );
 });
+
+function prependParentFolder(
+  changedFiles: {
+    additions?: string[];
+    modifications?: string[];
+    deletions?: string[];
+    renames?: {
+      from: string;
+      to: string;
+    }[];
+  },
+  expectedCreateDummySwaggers: { old: string[]; new: string[] },
+  expectedOadCalls: {
+    sameVersion: { old: string; new: string }[];
+    crossVersion: { old: string; new: string }[];
+  },
+) {
+  if (changedFiles.additions !== undefined) {
+    changedFiles.additions = changedFiles.additions?.map((p) => serviceParent + p);
+  }
+  if (changedFiles.modifications !== undefined) {
+    changedFiles.modifications = changedFiles.modifications?.map((p) => serviceParent + p);
+  }
+  if (changedFiles.deletions !== undefined) {
+    changedFiles.deletions = changedFiles.deletions?.map((p) => serviceParent + p);
+  }
+  if (changedFiles.renames !== undefined) {
+    changedFiles.renames = changedFiles.renames?.map((r) => ({
+      from: serviceParent + r.from,
+      to: serviceParent + r.to,
+    }));
+  }
+
+  expectedCreateDummySwaggers.old = expectedCreateDummySwaggers.old.map((p) => serviceParent + p);
+  expectedCreateDummySwaggers.new = expectedCreateDummySwaggers.new.map((p) => serviceParent + p);
+
+  expectedOadCalls.sameVersion = expectedOadCalls.sameVersion.map((c) => ({
+    old: serviceParent + c.old,
+    new: serviceParent + c.new,
+  }));
+  expectedOadCalls.crossVersion = expectedOadCalls.crossVersion.map((c) => ({
+    old: serviceParent + c.old,
+    new: serviceParent + c.new,
+  }));
+}
