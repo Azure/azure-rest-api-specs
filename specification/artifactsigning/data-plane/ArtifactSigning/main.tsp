@@ -18,14 +18,6 @@ using Azure.Core;
 )
 @service(#{ title: "Azure Artifact Signing" })
 @versioned(Azure.Developer.ArtifactSigning.Versions)
-@server(
-  "{endpoint}",
-  "Sign and retrieve relevant information pertaining signing process.",
-  {
-    @doc("The Azure Artifact signing service endpoint.")
-    endpoint: string,
-  }
-)
 @doc("Azure Artifact Signing is a service that provides managed artifact signing for all.")
 namespace Azure.Developer.ArtifactSigning;
 
