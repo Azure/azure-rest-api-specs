@@ -1,0 +1,38 @@
+{
+  "title": "Get a ClusterMeshProfile resource.",
+  "operationId": "ClusterMeshProfiles_Get",
+  "parameters": {
+    "api-version": "2026-03-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgfleets",
+    "fleetName": "fleet1",
+    "clusterMeshProfileName": "clustermeshprofile1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "memberLabelSelector": "env=production",
+          "provisioningState": "Succeeded",
+          "status": {
+            "state": "Connected",
+            "lastAppliedMemberLabelSelector": "env=production",
+            "lastOperationId": "12345678-1234-1234-1234-123456789012"
+          }
+        },
+        "eTag": "\"EtagValue\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/fleets/myFleet/clusterMeshProfiles/clustermeshprofile1",
+        "name": "clustermeshprofile1",
+        "type": "Microsoft.ContainerService/fleets/clusterMeshProfiles",
+        "systemData": {
+          "createdBy": "someUser",
+          "createdByType": "User",
+          "createdAt": "2022-03-23T05:40:40.657Z",
+          "lastModifiedBy": "someOtherUser",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-03-23T05:40:40.657Z"
+        }
+      }
+    }
+  }
+}
