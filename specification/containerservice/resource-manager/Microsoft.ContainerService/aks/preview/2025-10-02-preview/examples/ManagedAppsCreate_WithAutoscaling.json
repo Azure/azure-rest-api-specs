@@ -1,0 +1,852 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "parameters": {
+      "properties": {
+        "additionalK8sResources": [
+          "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  config.json: '{\"setting\":\"value\"}'",
+          "apiVersion: v1\nkind: Secret\nmetadata:\n  name: app-secret\ntype: Opaque\ndata:\n  api-key: Y29uZmlkZW50aWFs"
+        ],
+        "namespacedPermissions": [
+          {
+            "apiGroups": [
+              ""
+            ],
+            "resources": [
+              "configmaps",
+              "secrets"
+            ],
+            "verbs": [
+              "get",
+              "list",
+              "watch"
+            ]
+          }
+        ],
+        "clusterWidePermissions": [
+          {
+            "apiGroups": [
+              ""
+            ],
+            "resources": [
+              "nodes"
+            ],
+            "verbs": [
+              "get",
+              "list"
+            ]
+          }
+        ],
+        "scaling": {
+          "type": "autoscale",
+          "minReplicas": 2,
+          "maxReplicas": 10,
+          "autoscalingTriggers": [
+            {
+              "cpu": {
+                "metricType": "Utilization",
+                "value": "70",
+                "authenticationRef": {
+                  "name": "keda-trigger-auth",
+                  "kind": "TriggerAuthentication"
+                }
+              }
+            },
+            {
+              "memory": {
+                "metricType": "Utilization",
+                "value": "80"
+              }
+            },
+            {
+              "azureServiceBus": {
+                "queueName": "orders-queue",
+                "serviceBusNamespace": "myservicebus",
+                "messageCount": "5",
+                "activationMessageCount": "2",
+                "cloud": "AzurePublicCloud",
+                "authenticationRef": {
+                  "name": "servicebus-auth",
+                  "kind": "ClusterTriggerAuthentication"
+                }
+              }
+            }
+          ]
+        },
+        "template": {
+          "image": "mcr.microsoft.com/azuredocs/aks-helloworld:v1",
+          "replicas": 3,
+          "command": "/app/start.sh",
+          "arguments": [
+            "--port",
+            "8080",
+            "--log-level",
+            "info"
+          ],
+          "primaryPort": {
+            "name": "http",
+            "port": 8080,
+            "protocol": "TCP"
+          },
+          "containerProbes": [
+            {
+              "type": "liveness",
+              "protocol": "HTTP",
+              "path": "/healthz",
+              "port": 8080,
+              "initialDelaySeconds": 15,
+              "periodSeconds": 10,
+              "timeoutSeconds": 1,
+              "successThreshold": 1,
+              "failureThreshold": 3
+            },
+            {
+              "type": "readiness",
+              "protocol": "HTTP",
+              "path": "/ready",
+              "port": 8080,
+              "initialDelaySeconds": 5,
+              "periodSeconds": 5,
+              "timeoutSeconds": 1,
+              "successThreshold": 1,
+              "failureThreshold": 3
+            }
+          ],
+          "additionalPorts": [
+            {
+              "name": "metrics",
+              "port": 9090,
+              "protocol": "TCP"
+            }
+          ],
+          "labels": [
+            {
+              "key": "app",
+              "value": "helloworld"
+            },
+            {
+              "key": "version",
+              "value": "v1"
+            }
+          ],
+          "annotations": [
+            {
+              "key": "prometheus.io/scrape",
+              "value": "true"
+            },
+            {
+              "key": "prometheus.io/port",
+              "value": "9090"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "name": "DATABASE_URL",
+              "value": "postgresql://db.example.com:5432/mydb"
+            },
+            {
+              "name": "API_KEY",
+              "value": "",
+              "secretRef": "app-secret"
+            },
+            {
+              "name": "LOG_LEVEL",
+              "value": "info"
+            }
+          ],
+          "initContainers": [
+            {
+              "name": "init-db",
+              "image": "busybox:1.35",
+              "command": "sh",
+              "arguments": [
+                "-c",
+                "until nc -z db.example.com 5432; do echo waiting for db; sleep 2; done"
+              ],
+              "probes": [],
+              "resources": {
+                "cpu": "100m",
+                "memory": "128Mi"
+              }
+            }
+          ],
+          "sidecarContainers": [
+            {
+              "name": "log-forwarder",
+              "image": "fluent/fluent-bit:2.0",
+              "command": "/fluent-bit/bin/fluent-bit",
+              "arguments": [
+                "-c",
+                "/fluent-bit/etc/fluent-bit.conf"
+              ],
+              "probes": [],
+              "resources": {
+                "cpu": "200m",
+                "memory": "256Mi"
+              },
+              "volumeMounts": [
+                {
+                  "name": "log-config",
+                  "mountPath": "/fluent-bit/etc",
+                  "readOnly": true
+                }
+              ]
+            }
+          ],
+          "volumes": [
+            {
+              "name": "cache",
+              "emptyDir": {
+                "medium": "Memory",
+                "sizeLimit": "1Gi"
+              }
+            },
+            {
+              "name": "app-config-volume",
+              "configMap": {
+                "name": "app-config",
+                "defaultMode": 420,
+                "items": [
+                  {
+                    "keyName": "config.json",
+                    "path": "config.json",
+                    "mode": 420
+                  }
+                ],
+                "optional": false
+              }
+            },
+            {
+              "name": "app-secrets",
+              "secret": {
+                "secretName": "app-secret",
+                "defaultMode": 384,
+                "items": [
+                  {
+                    "keyName": "api-key",
+                    "path": "api-key",
+                    "mode": 384
+                  }
+                ],
+                "optional": false
+              }
+            },
+            {
+              "name": "data-storage",
+              "persistentVolumeClaim": {
+                "claimName": "app-data-pvc",
+                "readOnly": false
+              }
+            },
+            {
+              "name": "log-config",
+              "configMap": {
+                "name": "fluent-bit-config",
+                "optional": false
+              }
+            }
+          ],
+          "volumeMounts": [
+            {
+              "name": "cache",
+              "mountPath": "/tmp/cache",
+              "readOnly": false
+            },
+            {
+              "name": "app-config-volume",
+              "mountPath": "/etc/config",
+              "readOnly": true
+            },
+            {
+              "name": "app-secrets",
+              "mountPath": "/etc/secrets",
+              "readOnly": true
+            },
+            {
+              "name": "data-storage",
+              "mountPath": "/data",
+              "readOnly": false
+            }
+          ]
+        }
+      }
+    },
+    "namespaceName": "production",
+    "appName": "helloworld-app",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "helloworld-app",
+        "type": "Microsoft.ContainerService/managedClusters/managedNamespaces/managedApps",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/production/managedApps/helloworld-app",
+        "etag": "\"0000aaaa-0000-1111-2222-bbbb3333cccc\"",
+        "properties": {
+          "additionalK8sResources": [
+            "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  config.json: '{\"setting\":\"value\"}'",
+            "apiVersion: v1\nkind: Secret\nmetadata:\n  name: app-secret\ntype: Opaque\ndata:\n  api-key: Y29uZmlkZW50aWFs"
+          ],
+          "namespacedPermissions": [
+            {
+              "apiGroups": [
+                ""
+              ],
+              "resources": [
+                "configmaps",
+                "secrets"
+              ],
+              "verbs": [
+                "get",
+                "list",
+                "watch"
+              ]
+            }
+          ],
+          "clusterWidePermissions": [
+            {
+              "apiGroups": [
+                ""
+              ],
+              "resources": [
+                "nodes"
+              ],
+              "verbs": [
+                "get",
+                "list"
+              ]
+            }
+          ],
+          "scaling": {
+            "type": "autoscale",
+            "minReplicas": 2,
+            "maxReplicas": 10,
+            "autoscalingTriggers": [
+              {
+                "cpu": {
+                  "metricType": "Utilization",
+                  "value": "70",
+                  "authenticationRef": {
+                    "name": "keda-trigger-auth",
+                    "kind": "TriggerAuthentication"
+                  }
+                }
+              },
+              {
+                "memory": {
+                  "metricType": "Utilization",
+                  "value": "80"
+                }
+              },
+              {
+                "azureServiceBus": {
+                  "queueName": "orders-queue",
+                  "serviceBusNamespace": "myservicebus",
+                  "messageCount": "5",
+                  "activationMessageCount": "2",
+                  "cloud": "AzurePublicCloud",
+                  "authenticationRef": {
+                    "name": "servicebus-auth",
+                    "kind": "ClusterTriggerAuthentication"
+                  }
+                }
+              }
+            ]
+          },
+          "identity": {
+            "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/app-identity",
+            "clientId": "00000000-0000-0000-0000-000000000001",
+            "principalId": "00000000-0000-0000-0000-000000000002"
+          },
+          "template": {
+            "image": "mcr.microsoft.com/azuredocs/aks-helloworld:v1",
+            "replicas": 3,
+            "command": "/app/start.sh",
+            "arguments": [
+              "--port",
+              "8080",
+              "--log-level",
+              "info"
+            ],
+            "primaryPort": {
+              "name": "http",
+              "port": 8080,
+              "protocol": "TCP"
+            },
+            "containerProbes": [
+              {
+                "type": "liveness",
+                "protocol": "HTTP",
+                "path": "/healthz",
+                "port": 8080,
+                "initialDelaySeconds": 15,
+                "periodSeconds": 10,
+                "timeoutSeconds": 1,
+                "successThreshold": 1,
+                "failureThreshold": 3
+              },
+              {
+                "type": "readiness",
+                "protocol": "HTTP",
+                "path": "/ready",
+                "port": 8080,
+                "initialDelaySeconds": 5,
+                "periodSeconds": 5,
+                "timeoutSeconds": 1,
+                "successThreshold": 1,
+                "failureThreshold": 3
+              }
+            ],
+            "additionalPorts": [
+              {
+                "name": "metrics",
+                "port": 9090,
+                "protocol": "TCP"
+              }
+            ],
+            "labels": [
+              {
+                "key": "app",
+                "value": "helloworld"
+              },
+              {
+                "key": "version",
+                "value": "v1"
+              }
+            ],
+            "annotations": [
+              {
+                "key": "prometheus.io/scrape",
+                "value": "true"
+              },
+              {
+                "key": "prometheus.io/port",
+                "value": "9090"
+              }
+            ],
+            "environmentVariables": [
+              {
+                "name": "DATABASE_URL",
+                "value": "postgresql://db.example.com:5432/mydb"
+              },
+              {
+                "name": "API_KEY",
+                "value": "",
+                "secretRef": "app-secret"
+              },
+              {
+                "name": "LOG_LEVEL",
+                "value": "info"
+              }
+            ],
+            "initContainers": [
+              {
+                "name": "init-db",
+                "image": "busybox:1.35",
+                "command": "sh",
+                "arguments": [
+                  "-c",
+                  "until nc -z db.example.com 5432; do echo waiting for db; sleep 2; done"
+                ],
+                "probes": [],
+                "resources": {
+                  "cpu": "100m",
+                  "memory": "128Mi"
+                }
+              }
+            ],
+            "sidecarContainers": [
+              {
+                "name": "log-forwarder",
+                "image": "fluent/fluent-bit:2.0",
+                "command": "/fluent-bit/bin/fluent-bit",
+                "arguments": [
+                  "-c",
+                  "/fluent-bit/etc/fluent-bit.conf"
+                ],
+                "probes": [],
+                "resources": {
+                  "cpu": "200m",
+                  "memory": "256Mi"
+                },
+                "volumeMounts": [
+                  {
+                    "name": "log-config",
+                    "mountPath": "/fluent-bit/etc",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "volumes": [
+              {
+                "name": "cache",
+                "emptyDir": {
+                  "medium": "Memory",
+                  "sizeLimit": "1Gi"
+                }
+              },
+              {
+                "name": "app-config-volume",
+                "configMap": {
+                  "name": "app-config",
+                  "defaultMode": 420,
+                  "items": [
+                    {
+                      "keyName": "config.json",
+                      "path": "config.json",
+                      "mode": 420
+                    }
+                  ],
+                  "optional": false
+                }
+              },
+              {
+                "name": "app-secrets",
+                "secret": {
+                  "secretName": "app-secret",
+                  "defaultMode": 384,
+                  "items": [
+                    {
+                      "keyName": "api-key",
+                      "path": "api-key",
+                      "mode": 384
+                    }
+                  ],
+                  "optional": false
+                }
+              },
+              {
+                "name": "data-storage",
+                "persistentVolumeClaim": {
+                  "claimName": "app-data-pvc",
+                  "readOnly": false
+                }
+              },
+              {
+                "name": "log-config",
+                "configMap": {
+                  "name": "fluent-bit-config",
+                  "optional": false
+                }
+              }
+            ],
+            "volumeMounts": [
+              {
+                "name": "cache",
+                "mountPath": "/tmp/cache",
+                "readOnly": false
+              },
+              {
+                "name": "app-config-volume",
+                "mountPath": "/etc/config",
+                "readOnly": true
+              },
+              {
+                "name": "app-secrets",
+                "mountPath": "/etc/secrets",
+                "readOnly": true
+              },
+              {
+                "name": "data-storage",
+                "mountPath": "/data",
+                "readOnly": false
+              }
+            ]
+          },
+          "generatedServiceAccountName": "sa-production-helloworld-app",
+          "generatedKubernetesServiceName": "svc-production-helloworld-app",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "helloworld-app",
+        "type": "Microsoft.ContainerService/managedClusters/managedNamespaces/managedApps",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/production/managedApps/helloworld-app",
+        "etag": "\"0000aaaa-0000-1111-2222-bbbb3333cccc\"",
+        "properties": {
+          "additionalK8sResources": [
+            "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  config.json: '{\"setting\":\"value\"}'",
+            "apiVersion: v1\nkind: Secret\nmetadata:\n  name: app-secret\ntype: Opaque\ndata:\n  api-key: Y29uZmlkZW50aWFs"
+          ],
+          "namespacedPermissions": [
+            {
+              "apiGroups": [
+                ""
+              ],
+              "resources": [
+                "configmaps",
+                "secrets"
+              ],
+              "verbs": [
+                "get",
+                "list",
+                "watch"
+              ]
+            }
+          ],
+          "clusterWidePermissions": [
+            {
+              "apiGroups": [
+                ""
+              ],
+              "resources": [
+                "nodes"
+              ],
+              "verbs": [
+                "get",
+                "list"
+              ]
+            }
+          ],
+          "scaling": {
+            "type": "autoscale",
+            "minReplicas": 2,
+            "maxReplicas": 10,
+            "autoscalingTriggers": [
+              {
+                "cpu": {
+                  "metricType": "Utilization",
+                  "value": "70",
+                  "authenticationRef": {
+                    "name": "keda-trigger-auth",
+                    "kind": "TriggerAuthentication"
+                  }
+                }
+              },
+              {
+                "memory": {
+                  "metricType": "Utilization",
+                  "value": "80"
+                }
+              },
+              {
+                "azureServiceBus": {
+                  "queueName": "orders-queue",
+                  "serviceBusNamespace": "myservicebus",
+                  "messageCount": "5",
+                  "activationMessageCount": "2",
+                  "cloud": "AzurePublicCloud",
+                  "authenticationRef": {
+                    "name": "servicebus-auth",
+                    "kind": "ClusterTriggerAuthentication"
+                  }
+                }
+              }
+            ]
+          },
+          "identity": {
+            "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/app-identity",
+            "clientId": "00000000-0000-0000-0000-000000000001",
+            "principalId": "00000000-0000-0000-0000-000000000002"
+          },
+          "template": {
+            "image": "mcr.microsoft.com/azuredocs/aks-helloworld:v1",
+            "replicas": 3,
+            "command": "/app/start.sh",
+            "arguments": [
+              "--port",
+              "8080",
+              "--log-level",
+              "info"
+            ],
+            "primaryPort": {
+              "name": "http",
+              "port": 8080,
+              "protocol": "TCP"
+            },
+            "containerProbes": [
+              {
+                "type": "liveness",
+                "protocol": "HTTP",
+                "path": "/healthz",
+                "port": 8080,
+                "initialDelaySeconds": 15,
+                "periodSeconds": 10,
+                "timeoutSeconds": 1,
+                "successThreshold": 1,
+                "failureThreshold": 3
+              },
+              {
+                "type": "readiness",
+                "protocol": "HTTP",
+                "path": "/ready",
+                "port": 8080,
+                "initialDelaySeconds": 5,
+                "periodSeconds": 5,
+                "timeoutSeconds": 1,
+                "successThreshold": 1,
+                "failureThreshold": 3
+              }
+            ],
+            "additionalPorts": [
+              {
+                "name": "metrics",
+                "port": 9090,
+                "protocol": "TCP"
+              }
+            ],
+            "labels": [
+              {
+                "key": "app",
+                "value": "helloworld"
+              },
+              {
+                "key": "version",
+                "value": "v1"
+              }
+            ],
+            "annotations": [
+              {
+                "key": "prometheus.io/scrape",
+                "value": "true"
+              },
+              {
+                "key": "prometheus.io/port",
+                "value": "9090"
+              }
+            ],
+            "environmentVariables": [
+              {
+                "name": "DATABASE_URL",
+                "value": "postgresql://db.example.com:5432/mydb"
+              },
+              {
+                "name": "API_KEY",
+                "value": "",
+                "secretRef": "app-secret"
+              },
+              {
+                "name": "LOG_LEVEL",
+                "value": "info"
+              }
+            ],
+            "initContainers": [
+              {
+                "name": "init-db",
+                "image": "busybox:1.35",
+                "command": "sh",
+                "arguments": [
+                  "-c",
+                  "until nc -z db.example.com 5432; do echo waiting for db; sleep 2; done"
+                ],
+                "probes": [],
+                "resources": {
+                  "cpu": "100m",
+                  "memory": "128Mi"
+                }
+              }
+            ],
+            "sidecarContainers": [
+              {
+                "name": "log-forwarder",
+                "image": "fluent/fluent-bit:2.0",
+                "command": "/fluent-bit/bin/fluent-bit",
+                "arguments": [
+                  "-c",
+                  "/fluent-bit/etc/fluent-bit.conf"
+                ],
+                "probes": [],
+                "resources": {
+                  "cpu": "200m",
+                  "memory": "256Mi"
+                },
+                "volumeMounts": [
+                  {
+                    "name": "log-config",
+                    "mountPath": "/fluent-bit/etc",
+                    "readOnly": true
+                  }
+                ]
+              }
+            ],
+            "volumes": [
+              {
+                "name": "cache",
+                "emptyDir": {
+                  "medium": "Memory",
+                  "sizeLimit": "1Gi"
+                }
+              },
+              {
+                "name": "app-config-volume",
+                "configMap": {
+                  "name": "app-config",
+                  "defaultMode": 420,
+                  "items": [
+                    {
+                      "keyName": "config.json",
+                      "path": "config.json",
+                      "mode": 420
+                    }
+                  ],
+                  "optional": false
+                }
+              },
+              {
+                "name": "app-secrets",
+                "secret": {
+                  "secretName": "app-secret",
+                  "defaultMode": 384,
+                  "items": [
+                    {
+                      "keyName": "api-key",
+                      "path": "api-key",
+                      "mode": 384
+                    }
+                  ],
+                  "optional": false
+                }
+              },
+              {
+                "name": "data-storage",
+                "persistentVolumeClaim": {
+                  "claimName": "app-data-pvc",
+                  "readOnly": false
+                }
+              },
+              {
+                "name": "log-config",
+                "configMap": {
+                  "name": "fluent-bit-config",
+                  "optional": false
+                }
+              }
+            ],
+            "volumeMounts": [
+              {
+                "name": "cache",
+                "mountPath": "/tmp/cache",
+                "readOnly": false
+              },
+              {
+                "name": "app-config-volume",
+                "mountPath": "/etc/config",
+                "readOnly": true
+              },
+              {
+                "name": "app-secrets",
+                "mountPath": "/etc/secrets",
+                "readOnly": true
+              },
+              {
+                "name": "data-storage",
+                "mountPath": "/data",
+                "readOnly": false
+              }
+            ]
+          },
+          "generatedServiceAccountName": "sa-production-helloworld-app",
+          "generatedKubernetesServiceName": "svc-production-helloworld-app",
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  },
+  "operationId": "Apps_CreateOrUpdate",
+  "title": "Create Managed App with Autoscaling and Multiple Volume Types"
+}

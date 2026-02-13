@@ -1,0 +1,152 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "parameters": {
+      "properties": {
+        "scaling": {
+          "type": "manual"
+        },
+        "template": {
+          "image": "nginx:1.25",
+          "replicas": 3,
+          "command": "nginx",
+          "arguments": [
+            "-g",
+            "daemon off;"
+          ],
+          "primaryPort": {
+            "name": "http",
+            "port": 80,
+            "protocol": "TCP"
+          },
+          "containerProbes": [
+            {
+              "type": "liveness",
+              "protocol": "HTTP",
+              "path": "/",
+              "port": 80,
+              "initialDelaySeconds": 0,
+              "periodSeconds": 10,
+              "timeoutSeconds": 1,
+              "successThreshold": 1,
+              "failureThreshold": 3
+            }
+          ],
+          "environmentVariables": [
+            {
+              "name": "NGINX_HOST",
+              "value": "example.com"
+            }
+          ]
+        }
+      }
+    },
+    "namespaceName": "default",
+    "appName": "nginx-app",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "nginx-app",
+        "type": "Microsoft.ContainerService/managedClusters/managedNamespaces/managedApps",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/default/managedApps/nginx-app",
+        "etag": "\"0000aaaa-0000-1111-2222-bbbb3333cccc\"",
+        "properties": {
+          "scaling": {
+            "type": "manual"
+          },
+          "template": {
+            "image": "nginx:1.25",
+            "replicas": 3,
+            "command": "nginx",
+            "arguments": [
+              "-g",
+              "daemon off;"
+            ],
+            "primaryPort": {
+              "name": "http",
+              "port": 80,
+              "protocol": "TCP"
+            },
+            "containerProbes": [
+              {
+                "type": "liveness",
+                "protocol": "HTTP",
+                "path": "/",
+                "port": 80,
+                "initialDelaySeconds": 0,
+                "periodSeconds": 10,
+                "timeoutSeconds": 1,
+                "successThreshold": 1,
+                "failureThreshold": 3
+              }
+            ],
+            "environmentVariables": [
+              {
+                "name": "NGINX_HOST",
+                "value": "example.com"
+              }
+            ]
+          },
+          "generatedServiceAccountName": "sa-default-nginx-app",
+          "generatedKubernetesServiceName": "svc-default-nginx-app",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "nginx-app",
+        "type": "Microsoft.ContainerService/managedClusters/managedNamespaces/managedApps",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/default/managedApps/nginx-app",
+        "etag": "\"0000aaaa-0000-1111-2222-bbbb3333cccc\"",
+        "properties": {
+          "scaling": {
+            "type": "manual"
+          },
+          "template": {
+            "image": "nginx:1.25",
+            "replicas": 3,
+            "command": "nginx",
+            "arguments": [
+              "-g",
+              "daemon off;"
+            ],
+            "primaryPort": {
+              "name": "http",
+              "port": 80,
+              "protocol": "TCP"
+            },
+            "containerProbes": [
+              {
+                "type": "liveness",
+                "protocol": "HTTP",
+                "path": "/",
+                "port": 80,
+                "initialDelaySeconds": 0,
+                "periodSeconds": 10,
+                "timeoutSeconds": 1,
+                "successThreshold": 1,
+                "failureThreshold": 3
+              }
+            ],
+            "environmentVariables": [
+              {
+                "name": "NGINX_HOST",
+                "value": "example.com"
+              }
+            ]
+          },
+          "generatedServiceAccountName": "sa-default-nginx-app",
+          "generatedKubernetesServiceName": "svc-default-nginx-app",
+          "provisioningState": "Provisioning"
+        }
+      }
+    }
+  },
+  "operationId": "Apps_CreateOrUpdate",
+  "title": "Create Simple Managed App with Manual Scaling"
+}

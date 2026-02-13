@@ -1,0 +1,143 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "namespaceName": "production",
+    "appName": "helloworld-app",
+    "managedAppRevisionName": "helloworld-app-revision-7",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "helloworld-app-revision-7",
+        "type": "Microsoft.ContainerService/managedClusters/managedNamespaces/managedApps/managedAppRevisions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/managedNamespaces/production/managedApps/helloworld-app/managedAppRevisions/helloworld-app-revision-7",
+        "etag": "\"0000aaaa-0000-1111-2222-bbbb3333cccc\"",
+        "properties": {
+          "additionalK8sResources": [
+            "apiVersion: v1\nkind: ConfigMap\nmetadata:\n  name: app-config\ndata:\n  config.json: '{\"setting\":\"value\"}'"
+          ],
+          "scaling": {
+            "type": "autoscale",
+            "minReplicas": 2,
+            "maxReplicas": 10,
+            "autoscalingTriggers": [
+              {
+                "cpu": {
+                  "metricType": "Utilization",
+                  "value": "70"
+                }
+              },
+              {
+                "memory": {
+                  "metricType": "Utilization",
+                  "value": "80"
+                }
+              }
+            ]
+          },
+          "identity": {
+            "userAssignedIdentityId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/app-identity",
+            "clientId": "00000000-0000-0000-0000-000000000001",
+            "principalId": "00000000-0000-0000-0000-000000000002"
+          },
+          "template": {
+            "image": "mcr.microsoft.com/azuredocs/aks-helloworld:v1.2",
+            "replicas": 3,
+            "command": "/app/start.sh",
+            "arguments": [
+              "--port",
+              "8080",
+              "--log-level",
+              "info"
+            ],
+            "primaryPort": {
+              "name": "http",
+              "port": 8080,
+              "protocol": "TCP"
+            },
+            "containerProbes": [
+              {
+                "type": "liveness",
+                "protocol": "HTTP",
+                "path": "/healthz",
+                "port": 8080,
+                "initialDelaySeconds": 15,
+                "periodSeconds": 10,
+                "timeoutSeconds": 1,
+                "successThreshold": 1,
+                "failureThreshold": 3
+              },
+              {
+                "type": "readiness",
+                "protocol": "HTTP",
+                "path": "/ready",
+                "port": 8080,
+                "initialDelaySeconds": 5,
+                "periodSeconds": 5,
+                "timeoutSeconds": 1,
+                "successThreshold": 1,
+                "failureThreshold": 3
+              }
+            ],
+            "labels": [
+              {
+                "key": "app",
+                "value": "helloworld"
+              },
+              {
+                "key": "version",
+                "value": "v1.2"
+              }
+            ],
+            "environmentVariables": [
+              {
+                "name": "DATABASE_URL",
+                "value": "postgresql://db.example.com:5432/mydb"
+              },
+              {
+                "name": "LOG_LEVEL",
+                "value": "info"
+              }
+            ],
+            "volumes": [
+              {
+                "name": "cache",
+                "emptyDir": {
+                  "medium": "Memory",
+                  "sizeLimit": "512Mi"
+                }
+              },
+              {
+                "name": "app-config-volume",
+                "configMap": {
+                  "name": "app-config",
+                  "optional": false
+                }
+              }
+            ],
+            "volumeMounts": [
+              {
+                "name": "cache",
+                "mountPath": "/tmp/cache",
+                "readOnly": false
+              },
+              {
+                "name": "app-config-volume",
+                "mountPath": "/etc/config",
+                "readOnly": true
+              }
+            ]
+          },
+          "generatedServiceAccountName": "sa-production-helloworld-app",
+          "generatedKubernetesServiceName": "svc-production-helloworld-app",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "ManagedAppRevisions_Get",
+  "title": "Get Managed App Revision"
+}
