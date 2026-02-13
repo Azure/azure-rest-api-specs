@@ -1319,11 +1319,11 @@
       "type": "string",
       "description": "Data quality metric evaluation type",
       "enum": [
-        "unknown",
-        "tableRowCount",
-        "nonNullColumnCount",
-        "latency",
-        "size"
+        "Unknown",
+        "TableRowCount",
+        "NonNullColumnCount",
+        "Latency",
+        "Size"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricEvaluationType",
@@ -1331,27 +1331,27 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "unknown",
+            "value": "Unknown",
             "description": "Unknown evaluation type."
           },
           {
             "name": "TableCount",
-            "value": "tableRowCount",
+            "value": "TableRowCount",
             "description": "Table count evaluation type."
           },
           {
             "name": "NonNullColumnCount",
-            "value": "nonNullColumnCount",
+            "value": "NonNullColumnCount",
             "description": "Non-null column count evaluation type."
           },
           {
             "name": "Latency",
-            "value": "latency",
+            "value": "Latency",
             "description": "Latency evaluation type."
           },
           {
             "name": "Size",
-            "value": "size",
+            "value": "Size",
             "description": "Size evaluation type."
           }
         ]
@@ -1361,13 +1361,13 @@
       "type": "string",
       "description": "Data quality metric type",
       "enum": [
-        "unknown",
-        "count",
-        "minimum",
-        "maximum",
+        "Unknown",
+        "Count",
+        "Minimum",
+        "Maximum",
         "P50",
         "P90",
-        "distinctCount"
+        "DistinctCount"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricType",
@@ -1375,22 +1375,22 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "unknown",
+            "value": "Unknown",
             "description": "Unknown metric type."
           },
           {
             "name": "Count",
-            "value": "count",
+            "value": "Count",
             "description": "Count metric type."
           },
           {
             "name": "Minimum",
-            "value": "minimum",
+            "value": "Minimum",
             "description": "Minimum metric type."
           },
           {
             "name": "Maximum",
-            "value": "maximum",
+            "value": "Maximum",
             "description": "Maximum metric type."
           },
           {
@@ -1405,7 +1405,7 @@
           },
           {
             "name": "DistinctCount",
-            "value": "distinctCount",
+            "value": "DistinctCount",
             "description": "Distinct count metric type."
           }
         ]
@@ -1415,10 +1415,10 @@
       "type": "string",
       "description": "Data quality metric unit",
       "enum": [
-        "count",
-        "seconds",
-        "minutes",
-        "hours"
+        "Count",
+        "Seconds",
+        "Minutes",
+        "Hours"
       ],
       "x-ms-enum": {
         "name": "DataQualityMetricUnit",
@@ -1426,22 +1426,22 @@
         "values": [
           {
             "name": "Count",
-            "value": "count",
+            "value": "Count",
             "description": "Count unit."
           },
           {
             "name": "Seconds",
-            "value": "seconds",
+            "value": "Seconds",
             "description": "Seconds unit."
           },
           {
             "name": "Minutes",
-            "value": "minutes",
+            "value": "Minutes",
             "description": "Minutes unit."
           },
           {
             "name": "Hours",
-            "value": "hours",
+            "value": "Hours",
             "description": "Hours unit."
           }
         ]
@@ -1564,12 +1564,12 @@
         "validations"
       ]
     },
-    "DataQualityValidation": {
+    "DataQualityValidationPolicy": {
       "type": "object",
-      "description": "Data quality validation",
+      "description": "Data quality validation policy",
       "properties": {
-        "validationCondition": {
-          "$ref": "#/definitions/DataQualityValidationCondition",
+        "passCriteria": {
+          "$ref": "#/definitions/DataQualityValidationPolicyPassCriteria",
           "description": "Dataset validation condition."
         },
         "validations": {
@@ -1581,35 +1581,35 @@
         }
       },
       "required": [
-        "validationCondition",
+        "passCriteria",
         "validations"
       ]
     },
-    "DataQualityValidationCondition": {
+    "DataQualityValidationPolicyPassCriteria": {
       "type": "string",
       "description": "Data quality validation condition",
       "enum": [
-        "alwaysSucceed",
-        "any",
-        "all"
+        "AlwaysPass",
+        "PassIfAnySucceed",
+        "PassIfAllSucceed"
       ],
       "x-ms-enum": {
-        "name": "DataQualityValidationCondition",
+        "name": "DataQualityValidationPolicyPassCriteria",
         "modelAsString": true,
         "values": [
           {
-            "name": "AlwaysSucceed",
-            "value": "alwaysSucceed",
+            "name": "AlwaysPass",
+            "value": "AlwaysPass",
             "description": "Always succeed condition."
           },
           {
-            "name": "Any",
-            "value": "any",
+            "name": "PassIfAnySucceed",
+            "value": "PassIfAnySucceed",
             "description": "Any validation succeeds condition."
           },
           {
-            "name": "All",
-            "value": "all",
+            "name": "PassIfAllSucceed",
+            "value": "PassIfAllSucceed",
             "description": "All validations succeed condition."
           }
         ]
@@ -2061,8 +2061,8 @@
           "$ref": "#/definitions/DataQualityMetrics",
           "description": "Data quality metrics evaluations and validations. Required for DataQualityValidation jobs."
         },
-        "dataQualityValidation": {
-          "$ref": "#/definitions/DataQualityValidation",
+        "validationPolicy": {
+          "$ref": "#/definitions/DataQualityValidationPolicy",
           "description": "Data quality dataset validation. Required for DataQualityValidation jobs."
         },
         "resourceType": {
