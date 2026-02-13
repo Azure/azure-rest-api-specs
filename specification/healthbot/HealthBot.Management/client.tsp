@@ -6,6 +6,7 @@ using Microsoft.HealthBot;
 
 @@clientName(Microsoft.HealthBot, "HealthbotClient", "javascript");
 @@clientName(Microsoft.HealthBot, "HealthBotMgmtClient", "python");
+@@clientName(ErrorAdditionalInfo, "HealthBotErrorAdditionalInfo", "java");
 
 @@clientName(KeyVaultProperties, "HealthBotKeyVaultProperties", "csharp");
 @@clientName(HealthBots.update::parameters.properties, "patch", "csharp");
