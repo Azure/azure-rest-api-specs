@@ -1381,7 +1381,6 @@ model UpdateAdministrativeStateResponseProperties {
   failedResources?: Azure.Core.armResourceIdentifier<[]>[];
 }
 
-
 @doc("Configuration Regeneration Type used for refresh configuration")
 @added(Versions.v2026_01_15_preview)
 union ConfigurationRegenerationType {
