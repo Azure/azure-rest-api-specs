@@ -6,6 +6,8 @@ using Microsoft.HealthBot;
 
 @@clientName(Microsoft.HealthBot, "HealthbotClient", "javascript");
 @@clientName(Microsoft.HealthBot, "HealthBotMgmtClient", "python");
+
+// rename for duplicate model from Azure.ResourceManager.Foundations
 @@clientName(ErrorAdditionalInfo,
   "HealthBotErrorAdditionalInfo",
   "java,go,python"
