@@ -2906,6 +2906,20 @@
       },
       "description": "Circuit Failover All Test Details"
     },
+    "ExpressRouteFailoverTestType": {
+      "type": "string",
+      "description": "The type of failover test",
+      "enum": [
+        "SingleSiteFailover",
+        "MultiSiteFailover",
+        "All",
+        "LinkFailover"
+      ],
+      "x-ms-enum": {
+        "name": "ExpressRouteFailoverTestType",
+        "modelAsString": true
+      }
+    },
     "ExpressRouteCircuitLinkFailoverTestDetails": {
       "type": "object",
       "properties": {
@@ -2925,18 +2939,8 @@
           "readOnly": true
         },
         "testType": {
-          "type": "string",
+          "$ref": "#/definitions/ExpressRouteFailoverTestType",
           "description": "The type of failover test",
-          "enum": [
-            "SingleSiteFailover",
-            "MultiSiteFailover",
-            "All",
-            "LinkFailover"
-          ],
-          "x-ms-enum": {
-            "name": "ExpressRouteFailoverTestType",
-            "modelAsString": true
-          },
           "readOnly": true
         },
         "testGuid": {
