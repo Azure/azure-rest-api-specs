@@ -16,7 +16,12 @@ namespace Microsoft.ServiceFabric;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation. Backwards compatibility with existing API."
 @subscriptionResource
 model VMSizeResource is Azure.ResourceManager.ProxyResource<VMSize> {
-  ...ResourceNameParameter<VMSizeResource>;
+  ...ResourceNameParameter<
+    Resource = VMSizeResource,
+    KeyName = "vmSize",
+    SegmentName = "unsupportedVmSizes",
+    NamePattern = ""
+  >;
 }
 
 /**
@@ -38,52 +43,47 @@ model VMSize {
   size?: string;
 }
 
+alias VmSizeOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Legacy.Provider;
+    ...LocationResourceParameter;
+  },
+  {
+    /**
+     * VM Size name.
+     */
+    @path
+    @segment("unsupportedVmSizes")
+    vmSize: string;
+  },
+  ErrorModel
+>;
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VM is a well-known abbreviation. Backwards compatibility with existing API."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Necessary to avoid standard routing"
+@armResourceOperations(#{ omitTags: true })
 interface VMSizeResources {
   /**
    * Get unsupported vm size for Service Fabric Clusters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @summary("Get unsupported vm size for Service Fabric Clusters.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/unsupportedVmSizes/{vmSize}")
   @operationId("UnsupportedVmSizes_Get")
   @tag("VMSizes")
   @get
-  get(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * VM Size name.
-     */
-    @OpenAPI.extension("x-ms-parameter-location", "method")
-    @path
-    vmSize: string,
-  ): ArmResponse<VMSizeResource> | ErrorModel;
+  get is VmSizeOps.Read<VMSizeResource, Response = ArmResponse<VMSizeResource>>;
 
   /**
    * Get the lists of unsupported vm sizes for Service Fabric Clusters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @summary("Get the lists of unsupported vm sizes for Service Fabric Clusters.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/unsupportedVmSizes")
   @operationId("UnsupportedVmSizes_List")
   @tag("VMSizes")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * The location for the unsupported VM size(s). This is different from cluster location.
-     */
-    @OpenAPI.extension("x-ms-parameter-location", "method")
-    @path
-    location: string,
-  ): ArmResponse<VMSizesResult> | ErrorModel;
+  list is VmSizeOps.List<VMSizeResource, Response = ArmResponse<VMSizesResult>>;
 }
 
 @@doc(VMSizeResource.name, "VM Size name.");

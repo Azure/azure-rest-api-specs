@@ -13,58 +13,78 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Necessary to avoid standard routing"
+alias ClusterVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Legacy.Provider;
+    ...LocationResourceParameter;
+  },
+  {
+    /**
+     * The cluster code version.
+     */
+    @path
+    @segment("clusterVersions")
+    clusterVersion: string;
+  },
+  ErrorModel
+>;
+
+alias ClusterVersionEnvOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...Legacy.Provider;
+    ...LocationResourceParameter;
+  },
+  {
+    /**
+     * The operating system of the cluster. The default means all.
+     */
+    @path
+    @segment("environments")
+    @key
+    environment: ClusterVersionsEnvironment;
+
+    /**
+     * The cluster code version.
+     */
+    @path
+    @segment("clusterVersions")
+    @key
+    clusterVersion: string;
+  },
+  ErrorModel
+>;
+
+@armResourceOperations(#{ omitTags: true })
 interface ClusterVersionsOperationGroup {
   /**
    * Gets information about an available Service Fabric cluster code version.
    */
   @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available in the specified location.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/clusterVersions/{clusterVersion}")
-  get(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-    ...SubscriptionIdParameter,
-
-    /**
-     * The cluster code version.
-     */
-    @path
-    clusterVersion: string,
-  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorModel;
-
+  get is ClusterVersionOps.Read<
+    Cluster,
+    Response = ArmResponse<ResourceListResult<ClusterCodeVersions>>
+  >;
   /**
    * Gets information about an available Service Fabric cluster code version by environment.
    */
   @tag("ClusterVersion")
   @summary("Gets information about a Service Fabric cluster code version available for the specified environment.")
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/environments/{environment}/clusterVersions/{clusterVersion}")
   @get
-  getByEnvironment(
-    ...ApiVersionParameter,
-    ...LocationResourceParameter,
-
-    /**
-     * The operating system of the cluster. The default means all.
-     */
-    @path
-    environment: ClusterVersionsEnvironment,
-
-    ...SubscriptionIdParameter,
-
-    /**
-     * The cluster code version.
-     */
-    @path
-    clusterVersion: string,
-  ): ArmResponse<ResourceListResult<ClusterCodeVersions>> | ErrorModel;
+  getByEnvironment is ClusterVersionEnvOps.Read<
+    Cluster,
+    Response = ArmResponse<ResourceListResult<ClusterCodeVersions>>
+  >;
 
   /**
    * Gets all available code versions for Service Fabric cluster resources by location.
    */
   @tag("ClusterVersion")
   @summary("Gets the list of Service Fabric cluster code versions available for the specified location.")
-  @autoRoute
   @get
   @action("clusterVersions")
   list is ArmProviderActionSync<
@@ -78,7 +98,6 @@ interface ClusterVersionsOperationGroup {
    */
   @tag("ClusterVersion")
   @summary("Gets the list of Service Fabric cluster code versions available for the specified environment.")
-  @autoRoute
   @get
   @action("clusterVersions")
   listByEnvironment is ArmProviderActionSync<
