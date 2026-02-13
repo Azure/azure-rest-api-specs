@@ -12,6 +12,9 @@ on:
     paths:
       # Only trigger if PR includes at least one changed ARM lease file
       - ".github/arm-leases/**"
+      # Also trigger on own sources
+      - ".github/workflows/validate-arm-leases.yaml"
+      - ".github/workflows/src/validate-arm-leases.js"
 
 permissions:
   contents: read
@@ -25,21 +28,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
+          sparse-checkout: |
+            .github
 
-      - name: Fetch base branch
-        run: git fetch origin ${{ github.event.pull_request.base.ref }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-
-      - name: Install dependencies
-        run: npm ci
-        working-directory: .github
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
 
       - name: Validate ARM leases
-        run: node workflows/src/validate-arm-leases.js ${{ github.event.pull_request.base.ref }}
-        working-directory: .github
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: validateArmLeases } =
+              await import('${{ github.workspace }}/.github/workflows/src/validate-arm-leases.js');
+            return await validateArmLeases(core);

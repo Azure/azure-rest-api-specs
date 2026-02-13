@@ -8,13 +8,13 @@ This directory contains lease files that establish a time-limited design discuss
 
 ## Code Owners and Contribution Guidelines
 
-This directory is protected by CODEOWNERS to ensure proper governance:
+This directory is intended to be governed via CODEOWNERS to ensure proper governance:
 
 - **Product Managers (PMs)**: Can add and modify `lease.yaml` files after office hours discussions with RP owners
 - **Engineers**: Can enhance and improve the validation workflow and related automation
-- **Approvals**: All changes require approval from code owners (PMs and engineers listed in CODEOWNERS)
+- **Approvals**: All changes should be reviewed and approved by designated code owners (PMs and engineers listed in CODEOWNERS, when configured)
 
-**Adding New PMs**: To grant a new PM access to add lease files, they must be added to the CODEOWNERS file for the `.github/arm-leases/` directory path.
+**Adding New PMs**: To grant a new PM access to add lease files, they should be added to the CODEOWNERS file for the `.github/arm-leases/` directory path when CODEOWNERS protection is configured.
 
 ## Lease File Structure
 
@@ -36,8 +36,21 @@ The `lease.yaml` file must follow this format:
 lease:
   resource-provider: Microsoft.TestRP    # Must match the namespace folder name
   startdate: 2026-01-07                  # ISO 8601 format (YYYY-MM-DD)
-  duration: 180 days                     # Maximum allowed is 180 days
+  duration-days: P180D                   # ISO 8601 duration (maximum P180D)
   reviewer: Evan Hissey                  # Name of the approving reviewer
+```
+
+### Copy-Paste Template
+
+Create a file at `.github/arm-leases/<servicename>/<namespace>/lease.yaml` with the following content (replace the placeholder values):
+
+```yaml
+lease:
+  resource-provider: <Namespace>
+  startdate: <YYYY-MM-DD>
+  duration-days: P180D
+  reviewer: <Your Name>
+
 ```
 
 ## Validation Rules
@@ -46,7 +59,7 @@ All lease files are automatically validated with the following requirements:
 
 ### 1. File Location
 - Only `lease.yaml` files are allowed in the `.github/arm-leases/` directory
-- Must follow the exact folder structure: `<servicename>/<namespace>/lease.yaml`
+- Must follow the folder structure: `<servicename>/<namespace>/[<servicegroup> (optional)]/lease.yaml`
 
 ### 2. Resource Provider Name
 - Must match the namespace folder name exactly
@@ -58,11 +71,12 @@ All lease files are automatically validated with the following requirements:
 
 ### 4. Duration
 - Required field that cannot be empty
-- Must be in the format: `X days` (e.g., `90 days`, `180 days`)
-- **Cannot exceed 180 days** (maximum lease period)
+- Must be in ISO 8601 duration format: `P{n}D` (e.g., `P90D`, `P180D`)
+- **Cannot exceed P180D** (maximum lease period of 180 days)
 - Must be greater than 0 days
 
 ### 5. Reviewer
 - Required field that cannot be empty
 - Must contain the name of the PM who approved the lease
 - Only PMs can be listed as reviewers
+

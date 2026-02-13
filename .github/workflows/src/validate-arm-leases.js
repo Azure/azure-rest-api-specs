@@ -1,10 +1,9 @@
-#!/usr/bin/env node
-
-import { execSync } from 'child_process';
-import { readFileSync, existsSync } from 'fs';
+import { readFile, access } from 'fs/promises';
 import { join } from 'path';
 import YAML from 'js-yaml';
+import * as z from 'zod';
 import { getChangedFiles } from '../../shared/src/changed-files.js';
+import { CoreLogger } from './core-logger.js';
 
 // ============================================
 // Configuration
@@ -12,13 +11,45 @@ import { getChangedFiles } from '../../shared/src/changed-files.js';
 
 const ALLOWED_FILE_PATTERNS = [
   /^\.github\/arm-leases\//,
-  /^\.github\/workflows\/validate-arm-leases\.yaml$/,
-  /^\.github\/workflows\/src\/validate-arm-leases\.js$/
 ];
 
 const LEASE_FILE_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/lease\.yaml$/;
 const LEASE_FILE_WITH_GROUP_PATTERN = /^\.github\/arm-leases\/[a-z0-9]+\/[a-zA-Z0-9.]+\/(?!stable|preview)([^\/]+)\/lease\.yaml$/;
-const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * Zod schema for lease.yaml file content.
+ *
+ * Example:
+ * ```yaml
+ * lease:
+ *   resource-provider: Microsoft.Compute
+ *   startdate: "2025-06-01"
+ *   duration-days: "P180D"
+ *   reviewer: alias
+ * ```
+ */
+const leaseSchema = z.object({
+  lease: z.object({
+    'resource-provider': z.string().min(1, 'resource-provider is required').refine(
+      (rp) => rp.split('.').every(part => /^[A-Z]/.test(part)),
+      'Resource provider parts must start with a capital letter (e.g., Microsoft.Test, Azure.Widget)',
+    ),
+    startdate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Invalid startdate format (expected: YYYY-MM-DD)'),
+    'duration-days': z.string().regex(/^P(\d+)D$/i, 'Invalid duration-days format (expected ISO 8601: "P180D")').refine(
+      (d) => {
+        const m = d.match(/^P(\d+)D$/i);
+        if (!m) return false;
+        const days = parseInt(m[1], 10);
+        return days > 0 && days <= 180;
+      },
+      'Duration must be between 1 and 180 days',
+    ),
+    reviewer: z.string().min(1, 'Reviewer is required and cannot be empty').refine(
+      (r) => r.trim().length > 0,
+      'Reviewer is required and cannot be empty',
+    ),
+  }),
+});
 
 // ============================================
 // Utility Functions
@@ -27,173 +58,125 @@ const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 /**
  * Check if a file is allowed based on patterns
  * @param {string} file - File path to check
- * @returns {boolean} True if file is allowed
+ * @returns {Promise<boolean>} True if file is allowed
  */
-function isFileAllowed(file) {
+async function isFileAllowed(file) {
   return ALLOWED_FILE_PATTERNS.some(pattern => pattern.test(file));
 }
 
 /**
  * Validate folder structure of lease files
  * @param {string[]} files - Array of file paths
- * @returns {string[]} Array of invalid files
+ * @returns {Promise<string[]>} Array of invalid files
  */
-function validateFolderStructure(files) {
+async function validateFolderStructure(files) {
   return files.filter(file => !LEASE_FILE_PATTERN.test(file) && !LEASE_FILE_WITH_GROUP_PATTERN.test(file));
 }
 
 /**
- * Parse lease YAML file
- * @param {string} filePath - Path to lease.yaml file
- * @returns {{resourceProvider: string, startdate: string, duration: string, reviewer: string}|{error: string}} Parsed lease data or error object
- */
-function parseLeaseFile(filePath) {
-  try {
-    const content = readFileSync(filePath, 'utf-8');
-    const data = YAML.load(content);
-    
-    if (!data || !data.lease) {
-      return { error: 'Invalid YAML structure: missing "lease" key' };
-    }
-    
-    // Convert Date objects to YYYY-MM-DD strings
-    let startdate = data.lease.startdate || '';
-    if (startdate instanceof Date) {
-      startdate = startdate.toISOString().split('T')[0];
-    }
-    
-    return {
-      resourceProvider: data.lease['resource-provider'] || '',
-      startdate: startdate,
-      duration: data.lease.duration || '',
-      reviewer: data.lease.reviewer || ''
-    };
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    return { error: `Error reading file: ${errorMessage}` };
-  }
-}
-
-/**
- * Validate lease file contents
- * @param {string} leaseFile - Path to lease file (can be full or relative)
+ * Validate lease file contents using Zod schema
+ * @param {string} leaseFile - Full path to lease file
  * @param {string} today - Today's date in YYYY-MM-DD format
  * @param {string} relativePath - Relative path for folder name extraction
- * @returns {{file: string, errors: string[]}} Validation result with errors array
+ * @returns {Promise<{file: string, errors: string[]}>} Validation result with errors array
  */
-function validateLeaseContent(leaseFile, today, relativePath) {
+async function validateLeaseContent(leaseFile, today, relativePath) {
   const errors = [];
   const pathForExtraction = relativePath || leaseFile;
   // Extract namespace from .github/arm-leases/<servicename>/<namespace>/lease.yaml
   // or .github/arm-leases/<servicename>/<namespace>/<servicegroup>/lease.yaml
   const folderRP = pathForExtraction.split('/')[3]; // namespace is always at index 3
-  
-  if (!existsSync(leaseFile)) {
+
+  try {
+    await access(leaseFile);
+  } catch {
     return { file: leaseFile, errors: ['File does not exist'] };
   }
 
-  const leaseData = parseLeaseFile(leaseFile);
-  
-  if (!leaseData) {
-    return { file: leaseFile, errors: ['Failed to parse lease file'] };
-  }
-  
-  if ('error' in leaseData) {
-    return { file: leaseFile, errors: [leaseData.error] };
+  let content;
+  try {
+    content = await readFile(leaseFile, 'utf-8');
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
+    return { file: leaseFile, errors: [`Error reading file: ${msg}`] };
   }
 
-  // Validation 1: Resource provider name matches folder name
-  if (leaseData.resourceProvider !== folderRP) {
-    errors.push(`Resource provider mismatch: folder=${folderRP}, yaml=${leaseData.resourceProvider}`);
+  // Use FAILSAFE_SCHEMA to keep all values as strings (prevents YAML Date auto-parsing)
+  let raw;
+  try {
+    raw = /** @type {any} */ (YAML.load(content, { schema: YAML.FAILSAFE_SCHEMA }));
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
+    return { file: leaseFile, errors: [`Invalid YAML: ${msg}`] };
   }
 
-  // Validation 1b: Resource provider must start with a capital letter (before and after dot)
-  if (leaseData.resourceProvider) {
-    const parts = leaseData.resourceProvider.split('.');
-    const invalidParts = parts.filter(part => part && !/^[A-Z]/.test(part));
-    if (invalidParts.length > 0) {
-      errors.push(`Resource provider parts must start with a capital letter: ${leaseData.resourceProvider} (e.g., Microsoft.Test, Azure.Widget)`);
+  // Parse with Zod schema — collects all field-level errors at once
+  const result = leaseSchema.safeParse(raw);
+  if (!result.success) {
+    for (const issue of result.error.issues) {
+      errors.push(issue.message);
     }
+    return { file: leaseFile, errors };
   }
 
-  // Validation 2: Startdate format (ISO 8601: YYYY-MM-DD)
-  if (!DATE_PATTERN.test(leaseData.startdate)) {
-    errors.push(`Invalid startdate format: ${leaseData.startdate} (expected: YYYY-MM-DD)`);
-  } else {
-    // Validation 3: Startdate is today or future (not past)
-    if (leaseData.startdate < today) {
-      errors.push(`Startdate is in the past: ${leaseData.startdate} (today: ${today})`);
-    }
+  const lease = result.data.lease;
+
+  // Cross-field validation: resource-provider must match folder name
+  if (lease['resource-provider'] !== folderRP) {
+    errors.push(`Resource provider mismatch: folder=${folderRP}, yaml=${lease['resource-provider']}`);
   }
 
-  // Validation 4: Duration validation (must not exceed 180 days)
-  if (!leaseData.duration) {
-    errors.push('Duration is missing (expected format: "180 days")');
-  } else {
-    const durationMatch = leaseData.duration.match(/^(\d+)\s*days?$/i);
-    if (!durationMatch) {
-      errors.push(`Invalid duration format: ${leaseData.duration} (expected format: "180 days")`);
-    } else {
-      const durationDays = parseInt(durationMatch[1], 10);
-      if (durationDays > 180) {
-        errors.push(`Duration exceeds maximum allowed: ${durationDays} days (maximum: 180 days)`);
-      }
-      if (durationDays <= 0) {
-        errors.push(`Duration must be greater than 0: ${durationDays} days`);
-      }
-    }
-  }
-
-  // Validation 5: Reviewer cannot be null or empty
-  if (!leaseData.reviewer || leaseData.reviewer.trim() === '') {
-    errors.push('Reviewer is required and cannot be empty');
+  // Cross-field validation: startdate must not be in the past
+  if (lease.startdate < today) {
+    errors.push(`Startdate is in the past: ${lease.startdate} (today: ${today})`);
   }
 
   return { file: leaseFile, errors };
 }
 
+export { isFileAllowed, validateFolderStructure, validateLeaseContent, leaseSchema,
+  ALLOWED_FILE_PATTERNS, LEASE_FILE_PATTERN, LEASE_FILE_WITH_GROUP_PATTERN };
+
 // ============================================
 // Main Validation Logic
 // ============================================
 
-async function main() {
-  const baseBranch = process.argv[2] || 'main';
+/**
+ * Main validation logic for GitHub script action
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} core
+ * @returns {Promise<{ status: string, errors: number }>} Validation result
+ */
+export default async function validateArmLeases(core) {
   const today = new Date().toISOString().split('T')[0];
-  const repoRoot = execSync('git rev-parse --show-toplevel', { encoding: 'utf-8' }).trim();
-  let exitCode = 0;
+  const cwd = process.env.GITHUB_WORKSPACE;
+  let hasErrors = false;
 
-  console.log('Running ARM Lease File Validation\n');
+  core.info('Running ARM Lease File Validation\n');
 
-  // Get the merge base for proper PR comparison
-  let mergeBase;
-  try {
-    mergeBase = execSync(`git merge-base origin/${baseBranch} HEAD`, { encoding: 'utf-8' }).trim();
-  } catch (error) {
-    console.log('Warning: Could not find merge-base, using origin/main directly');
-    mergeBase = `origin/${baseBranch}`;
-  }
-
-  // Step 1: Get all changed files (first without filter to debug)
-  const allFiles = await getChangedFiles({
-    baseCommitish: mergeBase,
-    headCommitish: 'HEAD'
+  // Step 1: Get all changed files under .github/arm-leases/
+  const allChangedFiles = await getChangedFiles({
+    cwd,
+    paths: ['.github/arm-leases'],
+    logger: new CoreLogger(core),
   });
-  
-  // Filter for arm-leases files from all changed files
-  const allChangedFiles = allFiles.filter(file => file.startsWith('.github/arm-leases/'));
 
   // Step 2: Check for disallowed files
-  const disallowedFiles = allChangedFiles.filter(file => !isFileAllowed(file));
+  const disallowedFiles = [];
+  for (const file of allChangedFiles) {
+    if (!(await isFileAllowed(file))) {
+      disallowedFiles.push(file);
+    }
+  }
   
   if (disallowedFiles.length > 0) {
-    console.log(`Found ${disallowedFiles.length} file(s) outside the .github/arm-leases/ directory. Only changes within .github/arm-leases/ directory are allowed. Please move the following files under .github/arm-leases/ directory:\n`);
-    console.log('Disallowed files:');
-    disallowedFiles.slice(0, 20).forEach(file => console.log(`  ${file}`));
+    core.info(`Found ${disallowedFiles.length} disallowed file(s). Only lease.yaml and README.md files within .github/arm-leases/ are allowed:\n`);
+    core.info('Disallowed files:');
+    disallowedFiles.slice(0, 20).forEach(file => core.info(`  ${file}`));
     if (disallowedFiles.length > 20) {
-      console.log(`  ... and ${disallowedFiles.length - 20} more files`);
+      core.info(`  ... and ${disallowedFiles.length - 20} more files`);
     }
-    console.log('');
-    exitCode = 1;
+    core.info('');
+    hasErrors = true;
   }
 
   // Step 3: Check for non-lease.yaml and non-README files
@@ -202,10 +185,10 @@ async function main() {
   );
   
   if (nonLeaseFiles.length > 0) {
-    console.log(`Found ${nonLeaseFiles.length} file(s) that are not lease.yaml:`);
-    nonLeaseFiles.forEach(file => console.log(`Remove or rename - ${file}`));
-    console.log('Only lease.yaml files are allowed in .github/arm-leases/ directory\n');
-    exitCode = 1;
+    core.info(`Found ${nonLeaseFiles.length} file(s) that are not lease.yaml:`);
+    nonLeaseFiles.forEach(file => core.info(`Remove or rename - ${file}`));
+    core.info('Only lease.yaml files are allowed in .github/arm-leases/ directory\n');
+    hasErrors = true;
   }
 
   // Step 4: Get ARM lease files (only lease.yaml files)
@@ -214,29 +197,31 @@ async function main() {
   );
 
   if (armLeaseFiles.length === 0) {
-    if (exitCode === 0) {
-      console.log('--------- No ARM lease files to validate ------------');
+    if (!hasErrors) {
+      core.info('--------- No ARM lease files to validate ------------');
+    } else {
+      core.setFailed('ARM Lease Validation failed - fix errors above');
     }
-    process.exit(exitCode);
+    return { status: hasErrors ? 'failed' : 'no-lease-files', errors: hasErrors ? 1 : 0 };
   }
 
   // Step 5: Validate folder structure
-  const invalidStructure = validateFolderStructure(armLeaseFiles);
+  const invalidStructure = await validateFolderStructure(armLeaseFiles);
   
   if (invalidStructure.length > 0) {
-    console.log(`${invalidStructure.length} file(s) with invalid folder structure:`);
-    invalidStructure.forEach(file => console.log(`  ${file}`));
-    console.log('Expected format: .github/arm-leases/<servicename>/<namespace>/[<servicegroup> (optional)]/lease.yaml');
-    console.log('Requirements:');
-    console.log('  - <servicename>: lowercase alphanumeric only (e.g., testservice, widgetservice)');
-    console.log('  - <namespace>: alphanumeric with dots and case-sensitive (e.g., Test.Rp, Widget.Manager)');
-    console.log('  - <servicegroup>: (optional) logical grouping within an RP (e.g., DiskRP, ComputeRP). Must not start with "stable" or "preview"');
-    console.log('  - Only lease.yaml files are allowed in arm-leases folder');
-    console.log('Examples:');
-    console.log('  - .github/arm-leases/testservice/Test.Rp/lease.yaml');
-    console.log('  - .github/arm-leases/widgetservice/Widget.Manager/lease.yaml');
-    console.log('  - .github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml\n');
-    exitCode = 1;
+    core.info(`${invalidStructure.length} file(s) with invalid folder structure:`);
+    invalidStructure.forEach(file => core.info(`  ${file}`));
+    core.info('Expected format: .github/arm-leases/<servicename>/<namespace>/[<servicegroup> (optional)]/lease.yaml');
+    core.info('Requirements:');
+    core.info('  - <servicename>: lowercase alphanumeric only (e.g., testservice, widgetservice)');
+    core.info('  - <namespace>: alphanumeric with dots and case-sensitive (e.g., Test.Rp, Widget.Manager)');
+    core.info('  - <servicegroup>: (optional) logical grouping within an RP (e.g., DiskRP, ComputeRP). Must not start with "stable" or "preview"');
+    core.info('  - Only lease.yaml files are allowed in arm-leases folder');
+    core.info('Examples:');
+    core.info('  - .github/arm-leases/testservice/Test.Rp/lease.yaml');
+    core.info('  - .github/arm-leases/widgetservice/Widget.Manager/lease.yaml');
+    core.info('  - .github/arm-leases/compute/Microsoft.Compute/DiskRP/lease.yaml\n');
+    hasErrors = true;
   }
 
   // Step 6: Validate lease file contents
@@ -245,46 +230,40 @@ async function main() {
   );
   
   if (validLeaseFiles.length === 0) {
-    printSummary(exitCode);
-    process.exit(exitCode);
+    if (hasErrors) {
+      core.setFailed('ARM Lease Validation failed - fix errors above');
+    } else {
+      core.info('All validations passed!');
+    }
+    return { status: hasErrors ? 'failed' : 'passed', errors: hasErrors ? 1 : 0 };
   }
 
   const contentErrors = [];
   
   for (const leaseFile of validLeaseFiles) {
-    const fullPath = join(repoRoot, leaseFile);
-    const result = validateLeaseContent(fullPath, today, leaseFile);
+    const fullPath = join(cwd, leaseFile);
+    const result = await validateLeaseContent(fullPath, today, leaseFile);
     if (result.errors.length > 0) {
-      // Store with relative path for display
       contentErrors.push({ file: leaseFile, errors: result.errors });
-      exitCode = 1;
+      hasErrors = true;
     }
   }
 
   // Step 7: Print lease file content errors
   if (contentErrors.length > 0) {
-    console.log('Lease content validation errors:\n');
+    core.info('Lease content validation errors:\n');
     contentErrors.forEach(({ file, errors }) => {
-      console.log(`${file}`);
-      errors.forEach(error => console.log(`  - ${error}`));
-      console.log('');
+      core.info(`${file}`);
+      errors.forEach(error => core.info(`  - ${error}`));
+      core.info('');
     });
   }
 
-  printSummary(exitCode);
-  process.exit(exitCode);
-}
-
-/**
- * Print final validation summary
- * @param {number} exitCode - Exit code (0 = success, 1 = failure)
- */
-function printSummary(exitCode) {
-  if (exitCode === 0) {
-    console.log('All validations passed!');
+  if (hasErrors) {
+    core.setFailed('ARM Lease Validation failed - fix errors above');
   } else {
-    console.log('ARM Lease Validation failed - fix errors above');
+    core.info('All validations passed!');
   }
-}
 
-main();
+  return { status: hasErrors ? 'failed' : 'passed', errors: contentErrors.length };
+}
