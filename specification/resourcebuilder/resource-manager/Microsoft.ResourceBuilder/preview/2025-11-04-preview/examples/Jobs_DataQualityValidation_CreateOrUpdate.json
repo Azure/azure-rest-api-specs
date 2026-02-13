@@ -25,7 +25,7 @@
             {
               "name": "tableRowCountMetric",
               "evaluation": {
-                "type": "tableRowCount",
+                "evaluationType": "tableRowCount",
                 "metricType": "count",
                 "metricUnit": "count"
               }
@@ -35,8 +35,13 @@
             {
               "name": "tableRowCountValidation",
               "validation": {
-                "type": "anomalyValidation",
-                "metricEvaluationName": "tableRowCountMetric"
+                "validationType": "AnomalyValidation",
+                "metricEvaluationName": "tableRowCountMetric",
+                "anomalyDetectionParameters": {
+                  "sensitivity": 5,
+                  "lookbackWindowInDays": 7,
+                  "minimumDataPoints": 10
+                }
               }
             }
           ]
