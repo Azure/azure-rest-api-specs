@@ -1,9 +1,14 @@
 import "../common/models.tsp";
 
+using TypeSpec.OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
+
+const AllConditionalEvaluationRuleActionPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
 
 @doc("Type of the evaluation action.")
 union EvaluationRuleActionType {
@@ -89,6 +94,7 @@ model EvaluationRule {
   description?: string;
 
   @doc("Definition of the evaluation rule action.")
+  @extension("x-ms-foundry-meta", AllConditionalEvaluationRuleActionPreviews)
   action: EvaluationRuleAction;
 
   @doc("Filter condition of the evaluation rule.")

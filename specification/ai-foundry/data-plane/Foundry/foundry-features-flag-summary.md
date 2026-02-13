@@ -32,10 +32,10 @@ required to set for the HTTP request header named "Foundry-Features".
 | Schedules | CreateOrUpdate | PUT | `/schedules/{id}` | Required: `Schedules=V1Preview` |
 | Schedules | List Runs | GET | `/schedules/{id}/runs` | Required: `Schedules=V1Preview` |
 | Schedules | Get Run | GET | `/schedules/{schedule_id}/runs/{run_id}` | Required: `Schedules=V1Preview` |
-| Evaluation Rules | List | GET | `/evaluationrules` | Required: `Evaluations=V1Preview` |
-| Evaluation Rules | Get | GET | `/evaluationrules/{id}` | Required: `Evaluations=V1Preview` |
-| Evaluation Rules | Delete | DELETE | `/evaluationrules/{id}` | Required: `Evaluations=V1Preview` |
-| Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Required: `Evaluations=V1Preview` |
+| Evaluation Rules | List | GET | `/evaluationrules` | Optional: `Evaluations=V1Preview` |
+| Evaluation Rules | Get | GET | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
+| Evaluation Rules | Delete | DELETE | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
+| Evaluation Rules | CreateOrUpdate | PUT | `/evaluationrules/{id}` | Optional: `Evaluations=V1Preview` |
 | Evaluation Taxonomies | List | GET | `/evaluationtaxonomies` | Required: `Evaluations=V1Preview` |
 | Evaluation Taxonomies | Get | GET | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |
 | Evaluation Taxonomies | Delete | DELETE | `/evaluationtaxonomies/{name}` | Required: `Evaluations=V1Preview` |

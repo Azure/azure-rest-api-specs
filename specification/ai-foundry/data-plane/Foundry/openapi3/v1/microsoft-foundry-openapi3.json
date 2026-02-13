@@ -2738,6 +2738,18 @@
               "type": "boolean"
             },
             "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
           }
         ],
         "responses": {
@@ -2792,6 +2804,18 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
           }
         ],
         "responses": {
@@ -2844,6 +2868,18 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
           }
         ],
         "responses": {
@@ -2888,6 +2924,18 @@
             "description": "Unique identifier for the evaluation rule.",
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
             }
           }
         ],
@@ -12162,7 +12210,12 @@
                 "$ref": "#/components/schemas/EvaluationRuleAction"
               }
             ],
-            "description": "Definition of the evaluation rule action."
+            "description": "Definition of the evaluation rule action.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "Evaluations=V1Preview"
+              ]
+            }
           },
           "filter": {
             "allOf": [
