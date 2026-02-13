@@ -93,16 +93,6 @@ interface ScheduledActions {
     @body @doc("The request body") requestBody: ExecuteCreateRequest,
   ): ArmResponse<CreateResourceOperationResponse> | ErrorResponse;
 
-  /** virtualMachinesExecuteDelete: executeDelete for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDelete")
-  @post
-  virtualMachinesExecuteDelete(
-    ...Params,
-    @body @doc("The request body") requestBody: ExecuteDeleteRequest,
-  ): ArmResponse<DeleteResourceOperationResponse> | ErrorResponse;
-
   /** virtualMachinesGetOperationStatus: getOperationStatus for a virtual machine */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationStatus")
@@ -120,16 +110,6 @@ interface ScheduledActions {
     ...Params,
     @body @doc("The request body") requestBody: CancelOperationsRequest,
   ): ArmResponse<CancelOperationsResponse> | ErrorResponse;
-
-  /** virtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "necessary to avoid standard routing"
-  @added(Microsoft.ComputeSchedule.Versions.`2026-03-01-preview`)
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationErrors")
-  @post
-  virtualMachinesGetOperationErrors(
-    ...Params,
-    @body @doc("The request body") requestBody: GetOperationErrorsRequest,
-  ): ArmResponse<GetOperationErrorsResponse> | ErrorResponse;
 
   @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
   get is ArmResourceRead<ScheduledAction>;

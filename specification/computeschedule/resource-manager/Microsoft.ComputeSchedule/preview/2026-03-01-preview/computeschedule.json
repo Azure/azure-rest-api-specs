@@ -385,59 +385,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteDelete": {
-      "post": {
-        "operationId": "ScheduledActions_VirtualMachinesExecuteDelete",
-        "description": "virtualMachinesExecuteDelete: executeDelete for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationparameter",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExecuteDeleteRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeleteResourceOperationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesExecuteDelete_MaximumSet": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDelete_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesExecuteDelete_MinimumSet": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteDelete_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesExecuteHibernate": {
       "post": {
         "operationId": "ScheduledActions_VirtualMachinesExecuteHibernate",
@@ -540,59 +487,6 @@
           },
           "ScheduledActions_VirtualMachinesExecuteStart_MinimumSet": {
             "$ref": "./examples/ScheduledActions_VirtualMachinesExecuteStart_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationErrors": {
-      "post": {
-        "operationId": "ScheduledActions_VirtualMachinesGetOperationErrors",
-        "description": "virtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "locationparameter",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "requestBody",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetOperationErrorsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/GetOperationErrorsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ScheduledActions_VirtualMachinesGetOperationErrors_MaximumSet": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationErrors_MaximumSet_Gen.json"
-          },
-          "ScheduledActions_VirtualMachinesGetOperationErrors_MinimumSet": {
-            "$ref": "./examples/ScheduledActions_VirtualMachinesGetOperationErrors_MinimumSet_Gen.json"
           }
         }
       }
@@ -2194,43 +2088,6 @@
         "resourceIds"
       ]
     },
-    "DeleteResourceOperationResponse": {
-      "type": "object",
-      "description": "The response from a delete request",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "The description of the operation response"
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of resources used in the delete request eg virtual machines"
-        },
-        "location": {
-          "type": "string",
-          "description": "The location of the start request eg westus",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "results": {
-          "type": "array",
-          "description": "The results from the delete request if no errors exist",
-          "items": {
-            "$ref": "#/definitions/ResourceOperation"
-          },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
-        }
-      },
-      "required": [
-        "description",
-        "type",
-        "location"
-      ]
-    },
     "DistributionStrategy": {
       "type": "string",
       "description": "The distribution strategy for zone allocation",
@@ -2334,32 +2191,6 @@
         "correlationid"
       ]
     },
-    "ExecuteDeleteRequest": {
-      "type": "object",
-      "description": "The ExecuteDeleteRequest for delete VM operation",
-      "properties": {
-        "executionParameters": {
-          "$ref": "#/definitions/ExecutionParameters",
-          "description": "The execution parameters for the request"
-        },
-        "resources": {
-          "$ref": "#/definitions/Resources",
-          "description": "The resources for the request"
-        },
-        "correlationid": {
-          "type": "string",
-          "description": "Correlationid item"
-        },
-        "forceDeletion": {
-          "type": "boolean",
-          "description": "Forced delete resource item"
-        }
-      },
-      "required": [
-        "executionParameters",
-        "resources"
-      ]
-    },
     "ExecuteHibernateRequest": {
       "type": "object",
       "description": "The ExecuteHibernateRequest request for executeHibernate operations",
@@ -2451,39 +2282,6 @@
         "vmSizeProfiles",
         "osType",
         "priorityProfile"
-      ]
-    },
-    "GetOperationErrorsRequest": {
-      "type": "object",
-      "description": "This is the request to get errors per vm operations",
-      "properties": {
-        "operationIds": {
-          "type": "array",
-          "description": "The list of operation ids to query errors of",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "operationIds"
-      ]
-    },
-    "GetOperationErrorsResponse": {
-      "type": "object",
-      "description": "This is the response from a get operations errors request",
-      "properties": {
-        "results": {
-          "type": "array",
-          "description": "An array of errors based on the operationids",
-          "items": {
-            "$ref": "#/definitions/OperationErrorsResult"
-          },
-          "x-ms-identifiers": []
-        }
-      },
-      "required": [
-        "results"
       ]
     },
     "GetOperationStatusRequest": {
@@ -3020,83 +2818,6 @@
       },
       "readOnly": true
     },
-    "OperationErrorDetails": {
-      "type": "object",
-      "description": "This describes errors per vm during an operation",
-      "properties": {
-        "errorCode": {
-          "type": "string",
-          "description": "The error code of the operation"
-        },
-        "errorDetails": {
-          "type": "string",
-          "description": "The error details of the operation"
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the error occurrence"
-        },
-        "timeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of the error occurrence"
-        },
-        "azureOperationName": {
-          "type": "string",
-          "description": "The compute operationId of the Start/Deallocate/Hibernate request"
-        },
-        "crpOperationId": {
-          "type": "string",
-          "description": "The compute operationId of the Start/Deallocate/Hibernate request"
-        }
-      },
-      "required": [
-        "errorCode",
-        "errorDetails"
-      ]
-    },
-    "OperationErrorsResult": {
-      "type": "object",
-      "description": "This is the first level of operation errors from the request when clients get errors per vm operation",
-      "properties": {
-        "operationId": {
-          "type": "string",
-          "description": "The operationId identifying a vm operation"
-        },
-        "creationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation time of the error result"
-        },
-        "activationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The activation time of a vm operation"
-        },
-        "completedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The completion time of the operation if the operation was completed"
-        },
-        "operationErrors": {
-          "type": "array",
-          "description": "A list of errors associated with the operationId",
-          "items": {
-            "$ref": "#/definitions/OperationErrorDetails"
-          },
-          "x-ms-identifiers": []
-        },
-        "requestErrorCode": {
-          "type": "string",
-          "description": "Request level error code"
-        },
-        "requestErrorDetails": {
-          "type": "string",
-          "description": "Request level error details"
-        }
-      }
-    },
     "OperationState": {
       "type": "string",
       "description": "Values that define the states of operations in Scheduled Actions",
@@ -3547,10 +3268,6 @@
           "type": "string",
           "description": "Timezone for the operation"
         },
-        "timezone": {
-          "type": "string",
-          "description": "Timezone for the operation"
-        },
         "resourceOperationError": {
           "$ref": "#/definitions/ResourceOperationError",
           "description": "Operation level errors if they exist"
@@ -3566,7 +3283,13 @@
         }
       },
       "required": [
-        "operationId"
+        "operationId",
+        "resourceId",
+        "opType",
+        "subscriptionId",
+        "deadline",
+        "deadlineType",
+        "state"
       ]
     },
     "ResourceOperationError": {
@@ -3917,18 +3640,11 @@
               }
             ]
           }
-        },
-        "deadline": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The deadline for the operation"
-        },
-        "timezone": {
-          "type": "string",
-          "description": "The timezone for the operation"
         }
       },
       "required": [
+        "deadLine",
+        "timeZone",
         "deadlineType"
       ]
     },
