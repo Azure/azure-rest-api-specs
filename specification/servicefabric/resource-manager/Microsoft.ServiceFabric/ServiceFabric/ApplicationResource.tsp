@@ -8,13 +8,11 @@ import "./Cluster.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 /**
  * The application resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(Cluster)
 model ApplicationResource
   is Azure.ResourceManager.ProxyResource<ApplicationResourceProperties> {
@@ -55,10 +53,8 @@ interface ApplicationResources {
   /**
    * Get a Service Fabric application resource created or in the process of being created in the Service Fabric cluster resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Gets a Service Fabric application resource.")
   @tag("Application")
-  @operationId("Applications_Get")
   get is ArmResourceRead<ApplicationResource, Error = ErrorModel>;
 
   /**
@@ -380,7 +376,6 @@ model ApplicationUserAssignedIdentity {
 /**
  * The application resource for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "servicefabric is a brownfield service with existing APIs that do not support all properties in patch"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model ApplicationResourceUpdate extends ProxyResource {

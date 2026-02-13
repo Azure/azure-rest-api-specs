@@ -14,7 +14,6 @@ namespace Microsoft.ServiceFabric;
 /**
  * An application type version resource for the specified application type name resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(ApplicationTypeResource)
 model ApplicationTypeVersionResource
   is Azure.ResourceManager.ProxyResource<ApplicationTypeVersionResourceProperties> {

@@ -8,13 +8,11 @@ import "./Cluster.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceFabric;
 /**
  * The application type name resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(Cluster)
 model ApplicationTypeResource
   is Azure.ResourceManager.ProxyResource<ApplicationTypeResourceProperties> {
@@ -84,10 +82,8 @@ interface ApplicationTypeResources {
   /**
    * Gets all application type name resources created or in the process of being created in the Service Fabric cluster resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Gets the list of application type name resources created in the specified Service Fabric cluster resource.")
   @tag("ApplicationType")
-  @operationId("ApplicationTypes_List")
   list is ArmResourceListByParent<
     ApplicationTypeResource,
     Response = ArmResponse<ApplicationTypeResourceList>,

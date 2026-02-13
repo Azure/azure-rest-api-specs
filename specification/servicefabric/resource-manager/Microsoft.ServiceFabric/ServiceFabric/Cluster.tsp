@@ -21,7 +21,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
     SegmentName = "clusters",
     NamePattern = ""
   >;
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
+
   /**
    * Azure resource etag.
    */

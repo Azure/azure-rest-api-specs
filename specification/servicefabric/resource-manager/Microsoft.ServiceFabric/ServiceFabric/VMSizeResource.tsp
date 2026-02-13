@@ -67,9 +67,7 @@ interface VMSizeResources {
   /**
    * Get unsupported vm size for Service Fabric Clusters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @summary("Get unsupported vm size for Service Fabric Clusters.")
-  @operationId("UnsupportedVmSizes_Get")
   @tag("VMSizes")
   @get
   get is VmSizeOps.Read<VMSizeResource, Response = ArmResponse<VMSizeResource>>;
@@ -77,9 +75,7 @@ interface VMSizeResources {
   /**
    * Get the lists of unsupported vm sizes for Service Fabric Clusters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
   @summary("Get the lists of unsupported vm sizes for Service Fabric Clusters.")
-  @operationId("UnsupportedVmSizes_List")
   @tag("VMSizes")
   @get
   @list

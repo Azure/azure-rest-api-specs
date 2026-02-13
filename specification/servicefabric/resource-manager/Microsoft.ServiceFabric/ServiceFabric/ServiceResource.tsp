@@ -14,7 +14,6 @@ namespace Microsoft.ServiceFabric;
 /**
  * The service resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 @parentResource(ApplicationResource)
 model ServiceResource
   is Azure.ResourceManager.ProxyResource<ServiceResourceProperties> {
@@ -270,7 +269,6 @@ model ServicePlacementPolicyDescription {
  * The service resource for patch operations.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "servicefabric is brownfield service with legacy patterns for resources"
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ServiceResourceUpdate extends ProxyResource {
   /**
