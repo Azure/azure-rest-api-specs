@@ -15,6 +15,10 @@ namespace Microsoft.Authorization;
 /**
  * The policy exemption.
  */
+// Preview-only resource type: excluded from stable API version openapi.json files.
+// Stable-only types use @removed(Versions.v2025_12_01_preview) to exclude themselves from preview.
+// When adding a new stable version after the preview, add @removed on this type for that version,
+// or re-add the stable types with @added for the new version.
 @added(Versions.v2025_12_01_preview)
 model PolicyExemption
   is Azure.ResourceManager.ExtensionResource<PolicyExemptionProperties> {
@@ -30,6 +34,8 @@ alias PolicyExemptionListParameters = {
   /**
    * The filter to apply on the operation. Valid values for $filter are: 'atScope()', 'atExactScope()', 'excludeExpired()' or 'policyAssignmentId eq '{value}''. If $filter is not provided, no filtering is performed. If $filter is not provided, the unfiltered list includes all policy exemptions associated with the scope, including those that apply directly or apply from containing scopes. If $filter=atScope() is provided, the returned list only includes all policy exemptions that apply to the scope, which is everything in the unfiltered list except those applied to sub scopes contained within the given scope. If $filter=atExactScope() is provided, the returned list only includes all policy exemptions that at the given scope. If $filter=excludeExpired() is provided, the returned list only includes all policy exemptions that either haven't expired or didn't set expiration date. If $filter=policyAssignmentId eq '{value}' is provided. the returned list only includes all policy exemptions that are associated with the give policyAssignmentId.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-skip-url-encoding is required on $filter to match legacy swagger"
+  @extension("x-ms-skip-url-encoding", true)
   @query("$filter")
   $filter?: string;
 };
@@ -85,11 +91,13 @@ interface PolicyExemptions {
   /**
    * This operation retrieves a single policy exemption, given its name and the scope it was created at.
    */
+  @summary("Retrieves a policy exemption.")
   get is Extension.Read<Extension.ScopeParameter, PolicyExemption>;
 
   /**
    *  This operation creates or updates a policy exemption with the given scope and name. Policy exemptions apply to all resources contained within their scope. For example, when you create a policy exemption at resource group scope for a policy assignment at the same or above level, the exemption exempts to all applicable resources in the resource group.
    */
+  @summary("Creates or updates a policy exemption.")
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
     PolicyExemption
@@ -98,6 +106,7 @@ interface PolicyExemptions {
   /**
    *  This operation updates a policy exemption with the given scope and name.
    */
+  @summary("Updates a policy exemption.")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     Extension.ScopeParameter,
@@ -108,11 +117,13 @@ interface PolicyExemptions {
   /**
    * This operation deletes a policy exemption, given its name and the scope it was created in. The scope of a policy exemption is the part of its ID preceding '/providers/Microsoft.Authorization/policyExemptions/{policyExemptionName}'.
    */
+  @summary("Deletes a policy exemption.")
   delete is Extension.DeleteSync<Extension.ScopeParameter, PolicyExemption>;
 
   /**
    * This operation retrieves the list of all policy exemptions associated with the given resource group in the given subscription that match the optional given $filter. Valid values for $filter are: 'atScope()', 'atExactScope()', 'excludeExpired()' or 'policyAssignmentId eq '{value}''. If $filter is not provided, the unfiltered list includes all policy exemptions associated with the resource group, including those that apply directly or apply from containing scopes, as well as any applied to resources contained within the resource group.
    */
+  @summary("Retrieves all policy exemptions that apply to a resource group.")
   listForResourceGroup is Extension.ListByTarget<
     Extension.ResourceGroup,
     PolicyExemption,

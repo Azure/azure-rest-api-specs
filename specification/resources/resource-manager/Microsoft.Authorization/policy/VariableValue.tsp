@@ -16,6 +16,10 @@ namespace Microsoft.Authorization;
 /**
  * The variable value.
  */
+// Preview-only resource type: excluded from stable API version openapi.json files.
+// Stable-only types use @removed(Versions.v2025_12_01_preview) to exclude themselves from preview.
+// When adding a new stable version after the preview, add @removed on this type for that version,
+// or re-add the stable types with @added for the new version.
 @added(Versions.v2025_12_01_preview)
 @subscriptionResource
 @parentResource(Variable)
@@ -109,31 +113,37 @@ interface VariableValues {
   /**
    * This operation retrieves a single variable value; given its name, subscription it was created at and the variable it's created for.
    */
+  @summary("Retrieves a variable value.")
   get is VariableValueOps.Read<VariableValue>;
 
   /**
    *  This operation creates or updates a variable value with the given subscription and name for a given variable. Variable values are scoped to the variable for which they are created for.
    */
+  @summary("Creates or updates a variable value.")
   createOrUpdate is VariableValueOps.CreateOrUpdateSync<VariableValue>;
 
   /**
    * This operation deletes a variable value, given its name, the subscription it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.
    */
+  @summary("Deletes a variable value.")
   delete is VariableValueOps.DeleteSync<VariableValue>;
 
   /**
    * This operation retrieves the list of all variable values associated with the given variable that is at a subscription level.
    */
+  @summary("List variable values for a variable.")
   list is VariableValueOps.List<VariableValue>;
 
   /**
    * This operation retrieves a single variable value; given its name,  management group it was created at and the variable it's created for.
    */
+  @summary("Retrieves a variable value.")
   getAtManagementGroup is VariableValueManagementGroupOps.Read<VariableValue>;
 
   /**
    *  This operation creates or updates a variable value with the given management group and name for a given variable. Variable values are scoped to the variable for which they are created for.
    */
+  @summary("Creates or updates a variable value.")
   createOrUpdateAtManagementGroup is VariableValueManagementGroupOps.CreateOrUpdateSync<
     VariableValue
   >;
@@ -141,11 +151,13 @@ interface VariableValues {
   /**
    * This operation deletes a variable value, given its name, the management group it was created in, and the variable it belongs to. The scope of a variable value is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.
    */
+  @summary("Deletes a variable value.")
   deleteAtManagementGroup is VariableValueManagementGroupOps.DeleteSync<VariableValue>;
 
   /**
    * This operation retrieves the list of all variable values applicable the variable indicated at the management group scope.
    */
+  @summary("List variable values at management group level.")
   listForManagementGroup is VariableValueManagementGroupOps.List<VariableValue>;
 }
 

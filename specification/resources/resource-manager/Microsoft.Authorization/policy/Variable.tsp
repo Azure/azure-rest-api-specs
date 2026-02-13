@@ -15,6 +15,10 @@ namespace Microsoft.Authorization;
 /**
  * The variable.
  */
+// Preview-only resource type: excluded from stable API version openapi.json files.
+// Stable-only types use @removed(Versions.v2025_12_01_preview) to exclude themselves from preview.
+// When adding a new stable version after the preview, add @removed on this type for that version,
+// or re-add the stable types with @added for the new version.
 @added(Versions.v2025_12_01_preview)
 @subscriptionResource
 model Variable
@@ -86,31 +90,37 @@ interface Variables {
   /**
    * This operation retrieves a single variable, given its name and the subscription it was created at.
    */
+  @summary("Retrieves a variable.")
   get is VariableOps.Read<Variable>;
 
   /**
    *  This operation creates or updates a variable with the given subscription and name. Policy variables can only be used by a policy definition at the scope they are created or below.
    */
+  @summary("Creates or updates a variable.")
   createOrUpdate is VariableOps.CreateOrUpdateSync<Variable>;
 
   /**
    * This operation deletes a variable, given its name and the subscription it was created in. The scope of a variable is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.
    */
+  @summary("Deletes a variable.")
   delete is VariableOps.DeleteSync<Variable>;
 
   /**
    * This operation retrieves the list of all variables associated with the given subscription.
    */
+  @summary("Retrieves all variables that are at this subscription level.")
   list is VariableOps.List<Variable>;
 
   /**
    * This operation retrieves a single variable, given its name and the  management group it was created at.
    */
+  @summary("Retrieves a variable.")
   getAtManagementGroup is VariableManagementGroupOps.Read<Variable>;
 
   /**
    *  This operation creates or updates a variable with the given  management group and name. Policy variables can only be used by a policy definition at the scope they are created or below.
    */
+  @summary("Creates or updates a variable.")
   createOrUpdateAtManagementGroup is VariableManagementGroupOps.CreateOrUpdateSync<
     Variable
   >;
@@ -118,11 +128,13 @@ interface Variables {
   /**
    * This operation deletes a variable, given its name and the management group it was created in. The scope of a variable is the part of its ID preceding '/providers/Microsoft.Authorization/variables/{variableName}'.
    */
+  @summary("Deletes a variable.")
   deleteAtManagementGroup is VariableManagementGroupOps.DeleteSync<Variable>;
 
   /**
    * This operation retrieves the list of all variables applicable to the management group.
    */
+  @summary("Retrieves all variables that are at this management group level.")
   listForManagementGroup is VariableManagementGroupOps.List<Variable>;
 }
 

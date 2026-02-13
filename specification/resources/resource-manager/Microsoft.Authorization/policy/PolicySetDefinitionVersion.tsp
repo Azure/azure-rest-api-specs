@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./PolicySetDefinition.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -14,6 +16,9 @@ namespace Microsoft.Authorization;
 /**
  * The policy set definition version.
  */
+// Stable-only resource type: excluded from the preview API version openapi.json.
+// Preview-only types are in PolicyExemption.tsp, Variable.tsp, VariableValue.tsp.
+@removed(Versions.v2025_12_01_preview)
 @subscriptionResource
 @parentResource(PolicySetDefinition)
 model PolicySetDefinitionVersion
@@ -124,6 +129,7 @@ alias PolicySetDefinitionVersionManagementGroupOps = Azure.ResourceManager.Legac
   }
 >;
 
+@removed(Versions.v2025_12_01_preview)
 @armResourceOperations
 interface PolicySetDefinitionVersions {
   /**

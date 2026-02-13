@@ -42,6 +42,19 @@ namespace Microsoft.Authorization;
 
 /**
  * The available API versions.
+ *
+ * IMPORTANT: Stable and preview API versions produce separate openapi.json files
+ * with mutually exclusive resource types:
+ * - Stable versions (v2025_03_01, v2025_11_01): PolicyAssignment, PolicyDefinition,
+ *   PolicyDefinitionVersion, PolicySetDefinition, PolicySetDefinitionVersion, PolicyTokens.
+ *   These use @removed(Versions.v2025_12_01_preview) to exclude from preview.
+ * - Preview version (v2025_12_01_preview): PolicyExemption, Variable, VariableValue.
+ *   These use @added(Versions.v2025_12_01_preview) to exclude from stable.
+ *
+ * When adding a new stable version after the preview, ensure:
+ * 1. Add @added(newStableVersion) on stable types to bring them back.
+ * 2. Add @removed(newStableVersion) on preview-only types to keep them out, or
+ *    promote them to stable by removing the preview-only annotations.
  */
 enum Versions {
   /**
