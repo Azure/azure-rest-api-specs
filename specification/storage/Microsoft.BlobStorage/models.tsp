@@ -369,10 +369,14 @@ model UserDelegationKey {
   @Xml.name("SignedTid") signedTid: uuid;
 
   /** The date-time the key is active. */
-  @Xml.name("SignedStart") signedStart: string;
+  @encode("rfc7231")
+  @Xml.name("SignedStart")
+  signedStart: utcDateTime;
 
   /** The date-time the key expires. */
-  @Xml.name("SignedExpiry") signedExpiry: string;
+  @encode("rfc7231")
+  @Xml.name("SignedExpiry")
+  signedExpiry: utcDateTime;
 
   /** Abbreviation of the Azure Storage service that accepts the key. */
   @Xml.name("SignedService") signedService: string;

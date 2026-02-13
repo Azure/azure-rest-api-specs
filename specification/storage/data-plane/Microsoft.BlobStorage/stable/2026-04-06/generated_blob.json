@@ -1324,17 +1324,6 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-requires-sync",
-            "in": "header",
-            "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
-            "required": true,
-            "type": "boolean",
-            "enum": [
-              true
-            ],
-            "x-ms-client-name": "requiresSync"
           }
         ],
         "responses": {
@@ -18484,11 +18473,13 @@
         },
         "SignedStart": {
           "type": "string",
+          "format": "date-time-rfc7231",
           "description": "The date-time the key is active.",
           "x-ms-client-name": "signedStart"
         },
         "SignedExpiry": {
           "type": "string",
+          "format": "date-time-rfc7231",
           "description": "The date-time the key expires.",
           "x-ms-client-name": "signedExpiry"
         },

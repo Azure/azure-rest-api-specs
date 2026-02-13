@@ -1347,10 +1347,6 @@ namespace Storage.Blob {
           ...ImmutabilityPolicyExpiryParameter;
           ...ImmutabilityPolicyModeParameter;
           ...LegalHoldOptionalParameter;
-
-          /** This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob. */
-          @header("x-ms-requires-sync")
-          requiresSync: true;
         },
         {
           @statusCode statusCode: 202;
