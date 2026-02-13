@@ -426,6 +426,26 @@ model TargetCompletionEvalRunDataSource extends EvalRunDataSource {
   target: Target;
 }
 
+/** Represents a reference to an uploaded CSV file used as a source for evaluation data. */
+model EvalCsvFileIdSource {
+  /** The type of source, always `file_id`. */
+  type: "file_id";
+
+  /** The identifier of the uploaded CSV file. */
+  id: string;
+}
+
+/** Represents a CSV data source for evaluation runs. */
+model EvalCsvRunDataSource extends EvalRunDataSource {
+  /** The type of data source, always `csv`. */
+  type: "csv";
+
+  /** The source of the CSV data, either inline content or a file reference. */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" "This union is defined according to the Azure OpenAI API."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+  source: EvalCsvFileIdSource;
+}
+
 model RedTeamEvalRunDataSource extends EvalRunDataSource {
   /** The type of data source. Always `azure_ai_red_team`. */
   type: "azure_ai_red_team";
