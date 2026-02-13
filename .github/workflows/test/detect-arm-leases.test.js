@@ -29,7 +29,7 @@ describe('detect-arm-leases', () => {
     const leaseContent = `lease:
   resource-provider: ${resourceProvider}
   startdate: ${startdate}
-  duration: ${duration}
+  duration-days: ${duration}
   reviewer: Test Reviewer
 `;
     
@@ -51,7 +51,7 @@ describe('detect-arm-leases', () => {
         'testservice',
         'Microsoft.Test',
         startDate.toISOString().split('T')[0],
-        '90 days'
+        'P90D'
       );
 
       const result = await checkLease('testservice', 'Microsoft.Test');
@@ -67,7 +67,7 @@ describe('detect-arm-leases', () => {
         'testservice',
         'Microsoft.Test',
         startDate.toISOString().split('T')[0],
-        '90 days'
+        'P90D'
       );
 
       const result = await checkLease('testservice', 'Microsoft.Test');
@@ -83,7 +83,7 @@ describe('detect-arm-leases', () => {
         'testservice',
         'Microsoft.Test',
         startDate.toISOString().split('T')[0],
-        '90 days'
+        'P90D'
       );
 
       const result = await checkLease('testservice', 'Microsoft.Test');
@@ -99,14 +99,14 @@ describe('detect-arm-leases', () => {
         'testservice',
         'Microsoft.Test',
         startDate.toISOString().split('T')[0],
-        '90 days'
+        'P90D'
       );
 
       const result = await checkLease('testservice', 'Microsoft.Test');
       expect(result).toBe(false);
     });
 
-    it('handles different duration formats', async () => {
+    it('handles case-insensitive duration format', async () => {
       const today = new Date();
       const startDate = new Date(today);
       startDate.setDate(today.getDate() - 10);
@@ -115,7 +115,7 @@ describe('detect-arm-leases', () => {
         'testservice',
         'Microsoft.Test',
         startDate.toISOString().split('T')[0],
-        '180 Days'
+        'P180d'
       );
 
       const result = await checkLease('testservice', 'Microsoft.Test');
@@ -129,7 +129,7 @@ describe('detect-arm-leases', () => {
         'testservice',
         'Microsoft.Test',
         today.toISOString().split('T')[0],
-        '1 day'
+        'P1D'
       );
 
       const result = await checkLease('testservice', 'Microsoft.Test');
@@ -150,8 +150,8 @@ describe('detect-arm-leases', () => {
       const startDate = new Date(today);
       startDate.setDate(today.getDate() - 30);
       
-      createLeaseFile('app', 'Microsoft.App', startDate.toISOString().split('T')[0], '90 days');
-      createLeaseFile('compute', 'Microsoft.Compute', startDate.toISOString().split('T')[0], '90 days');
+      createLeaseFile('app', 'Microsoft.App', startDate.toISOString().split('T')[0], 'P90D');
+      createLeaseFile('compute', 'Microsoft.Compute', startDate.toISOString().split('T')[0], 'P90D');
 
       expect(await checkLease('app', 'Microsoft.App')).toBe(true);
       expect(await checkLease('compute', 'Microsoft.Compute')).toBe(true);
@@ -167,7 +167,7 @@ describe('detect-arm-leases', () => {
         'testservice',
         'Microsoft.Test',
         futureDate.toISOString().split('T')[0],
-        '90 days'
+        'P90D'
       );
 
       const result = await checkLease('testservice', 'Microsoft.Test');

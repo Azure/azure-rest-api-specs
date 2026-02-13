@@ -11,13 +11,13 @@ import { getRootFolder } from '../../shared/src/simple-git.js';
  * ```yaml
  * lease:
  *   startdate: "2024-01-01"
- *   duration: "30 days"
+ *   duration-days: "P30D"
  * ```
  */
 const leaseSchema = z.object({
   lease: z.object({
     startdate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'startdate must be in YYYY-MM-DD format'),
-    duration: z.string().regex(/^\d+\s*days?$/i, 'duration must be in format "N days"'),
+    'duration-days': z.string().regex(/^P(\d+)D$/i, 'duration-days must be in ISO 8601 format (e.g. P180D)'),
   }),
 });
 
@@ -71,7 +71,7 @@ export async function getLeaseStatus(serviceName, resourceProvider, serviceGroup
     const parsed = leaseSchema.parse(rawParsed);
     const lease = parsed.lease;
 
-    const durationDays = parseInt(lease.duration.match(/^(\d+)\s*days?$/i)[1], 10);
+    const durationDays = parseInt(lease['duration-days'].match(/^P(\d+)D$/i)[1], 10);
     const endDate = new Date(lease.startdate);
     endDate.setDate(endDate.getDate() + durationDays);
 
