@@ -19,6 +19,13 @@ runs:
     - uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
+        cache: 'npm'
+        cache-dependency-path: |
+          package-lock.json
+          .github/package-lock.json
+          .github/shared/package-lock.json
+          eng/common/spelling/package-lock.json
+          eng/common/tsp-client/package-lock.json
 
     - run: |
         echo "::group::$INSTALL_COMMAND"
