@@ -55,28 +55,24 @@ interface DevicePools {
   @doc("List all device pools in a subscription.")
   listBySubscription is ArmListBySubscription<DevicePool>;
 
-  @doc("Add Devices to the pool.")
-  addDevices is ArmResourceActionNoResponseContentAsync<
-    DevicePool,
-    ListOfDevicesRequest
-  >;
-
-  @doc("Remove Devices to the pool.")
-  removeDevices is ArmResourceActionNoResponseContentAsync<
-    DevicePool,
-    ListOfDevicesRequest
-  >;
-
   @doc("Claiming devices of the pool.")
-  claimDevices is ArmResourceActionNoResponseContentAsync<
+  @action("claimDevices")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  claimDevices is ArmResourceActionAsync<
     DevicePool,
-    ClaimDeviceRequest
+    ClaimDeviceRequest,
+    OkResponse,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @doc("Releasing devices of the pool.")
-  releaseDevices is ArmResourceActionNoResponseContentAsync<
+  @action("releaseDevices")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  releaseDevices is ArmResourceActionAsync<
     DevicePool,
-    ReleaseDeviceRequest
+    ReleaseDeviceRequest,
+    OkResponse,
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
