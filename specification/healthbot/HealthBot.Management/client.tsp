@@ -10,7 +10,11 @@ using Microsoft.HealthBot;
 // rename for duplicate model from Azure.ResourceManager.Foundations
 @@clientName(ErrorAdditionalInfo,
   "HealthBotErrorAdditionalInfo",
-  "java,go,python"
+  "java,go"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo,
+  "ArmErrorAdditionalInfo",
+  "python"
 );
 
 @@clientName(KeyVaultProperties, "HealthBotKeyVaultProperties", "csharp");
