@@ -6,7 +6,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rgfleets",
     "fleetName": "fleet1",
-    "fleetMemberName": "fleet1"
+    "fleetMemberName": "member1"
   },
   "responses": {
     "200": {
@@ -14,7 +14,29 @@
         "properties": {
           "clusterResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster-1",
           "group": "fleet1",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Succeeded",
+          "labels": {
+            "env": "production",
+            "fleet.azure.com/cluster-name": "cluster1",
+            "fleet.azure.com/location": "East US",
+            "fleet.azure.com/member-name": "member1",
+            "fleet.azure.com/resource-group": "rgfleets",
+            "fleet.azure.com/subscription-id": "00000000-0000-0000-0000-000000000000"
+          },
+          "status": {
+            "lastOperationId": "12345678-1234-1234-1234-123456789012"
+          },
+          "meshProperties": {
+            "ciliumProperties": {
+              "id": 1,
+              "name": "cilium-1"
+            },
+            "status": {
+              "state": "Connected",
+              "lastOperationId": "abcdef78-1234-1234-1234-123456789012"
+            },
+            "clusterMeshProfileResourceId": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet/clusterMeshProfiles/clusterMeshProfile-1"
+          }
         },
         "eTag": "kd30rkdfo49=",
         "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet-1/members/member-1",
