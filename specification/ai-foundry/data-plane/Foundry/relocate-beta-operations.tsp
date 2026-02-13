@@ -50,14 +50,6 @@ interface Insights {}
 @@clientLocation(Azure.AI.Projects.Insights.get, Insights);
 @@clientLocation(Azure.AI.Projects.Insights.list, Insights);
 
-interface EvaluationRules {}
-@@clientLocation(Azure.AI.Projects.EvaluationRules.get, EvaluationRules);
-@@clientLocation(Azure.AI.Projects.EvaluationRules.delete, EvaluationRules);
-@@clientLocation(Azure.AI.Projects.EvaluationRules.createOrUpdate,
-  EvaluationRules
-);
-@@clientLocation(Azure.AI.Projects.EvaluationRules.list, EvaluationRules);
-
 interface EvaluationTaxonomies {}
 @@clientLocation(Azure.AI.Projects.EvaluationTaxonomies.get,
   EvaluationTaxonomies

@@ -1,6 +1,7 @@
 import "../common/models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -13,6 +14,9 @@ union EvaluationRuleActionType {
 
   @doc("Human evaluation.")
   humanEvaluation: "humanEvaluation",
+
+  @doc("Human evaluation preview.")
+  humanEvaluationPreview: "humanEvaluationPreview",
 }
 
 @doc("Evaluation action model.")
@@ -34,8 +38,17 @@ model ContinuousEvaluationRuleAction extends EvaluationRuleAction {
 }
 
 @doc("Evaluation rule action for human evaluation.")
+@removed(Versions.v1)
 model HumanEvaluationRuleAction extends EvaluationRuleAction {
   type: EvaluationRuleActionType.humanEvaluation;
+
+  @doc("Human evaluation template Id.")
+  templateId: AssetId;
+}
+
+@doc("Evaluation rule action for human evaluation.")
+model HumanEvaluationPreviewRuleAction extends EvaluationRuleAction {
+  type: EvaluationRuleActionType.humanEvaluationPreview;
 
   @doc("Human evaluation template Id.")
   templateId: AssetId;

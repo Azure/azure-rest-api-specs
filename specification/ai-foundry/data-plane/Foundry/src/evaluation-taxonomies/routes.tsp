@@ -34,7 +34,8 @@ interface EvaluationTaxonomies {
   @Rest.listsResource(EvaluationTaxonomy)
   list is Azure.Core.Foundations.ResourceList<
     EvaluationTaxonomy,
-    EvaluationTaxonomiesFilterQueryParamsTraits & EvaluationTaxonomiesPreviewHeader,
+    EvaluationTaxonomiesFilterQueryParamsTraits &
+      EvaluationTaxonomiesPreviewHeader,
     Azure.Core.Page<EvaluationTaxonomy>
   >;
 
