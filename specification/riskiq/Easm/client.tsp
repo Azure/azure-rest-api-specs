@@ -76,7 +76,10 @@ interface EasmClient {
 
 @@clientName(Easm.Policy, "Policy", "csharp");
 @@clientName(Easm.AlexaInfo, "AlexaDetails", "java");
-@@clientName(Azure.Core.Foundations.InnerError, "CoreInnerError", "java,go,python");
+@@clientName(Azure.Core.Foundations.InnerError,
+  "CoreInnerError",
+  "java,go,python"
+);
 @@clientName(Easm.AssetUpdateData, "AssetUpdatePayload", "csharp");
 @@clientName(Easm.Attribute, "AttributeDetails", "csharp");
 @@clientName(Easm.Banner, "BannerDetails", "csharp");
