@@ -50,10 +50,6 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(ConfigurationStore, "AppConfigurationStore", "csharp");
-// @@clientName(ConfigurationStoreListResult,
-//   "AppConfigurationStoreListResult",
-//   "csharp"
-// );
 @@clientName(ConnectionStatus,
   "AppConfigurationPrivateLinkServiceConnectionStatus",
   "csharp"
@@ -115,7 +111,6 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(SnapshotStatus, "AppConfigurationSnapshotStatus", "csharp");
 @@clientName(Snapshot, "AppConfigurationSnapshot", "csharp");
-// @@clientName(Azure.ResourceManager.CommonTypes.ProxyResource.type, "SnapshotType", "csharp");
 @@clientName(SnapshotProperties.created, "CreatedOn", "csharp");
 @@clientName(SnapshotProperties.expires, "ExpireOn", "csharp");
 @@clientName(OperationsOperationGroup.checkNameAvailability,
