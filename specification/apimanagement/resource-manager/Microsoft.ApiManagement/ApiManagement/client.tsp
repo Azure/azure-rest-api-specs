@@ -91,6 +91,10 @@ using Azure.ResourceManager;
   Microsoft.ApiManagement,
   "python"
 );
+@@clientName(CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "python"
+);
 
 /**
  * override for DeletedServiceContracts.getByName
