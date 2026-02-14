@@ -1,0 +1,21 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "poolName": "pool1",
+    "cacheName": "cache-1",
+    "api-version": "2025-12-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "clusterPeeringCommand": "cluster peer create -ipspace replication -encryption-protocol-proposed tls-psk -passphrase passphraseString -peer-addrs 192.0.2.10,192.0.2.11,192.0.2.12,192.0.2.13,192.0.2.14,192.0.2.15",
+        "clusterPeeringPassphrase": "f@&@B^#r!",
+        "vserverPeeringCommand": "vserver peer accept -vserver {onPremiseSVMName} -peer-vserver {anfSVMName}"
+      }
+    }
+  },
+  "operationId": "Caches_ListPeeringPassphrases",
+  "title": "Caches_ListPeeringPassphrases"
+}
