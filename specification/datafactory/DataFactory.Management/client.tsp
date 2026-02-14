@@ -101,3 +101,76 @@ using Microsoft.DataFactory;
   "hostnameInCertificate",
   "java"
 );
+
+// Mitigate Java breaking changes: property case renames
+@@clientName(HBaseLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(HiveLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(ImpalaLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(PhoenixLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(PrestoLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(SparkLinkedServiceTypeProperties.allowHostNameCNMismatch,
+  "allowHostnameCNMismatch",
+  "java"
+);
+@@clientName(PrestoLinkedServiceTypeProperties.timeZoneID,
+  "timeZoneId",
+  "java"
+);
+@@clientName(HDInsightOnDemandLinkedServiceTypeProperties.clusterUserName,
+  "clusterUsername",
+  "java"
+);
+@@clientName(HDInsightOnDemandLinkedServiceTypeProperties.clusterSshUserName,
+  "clusterSshUsername",
+  "java"
+);
+@@clientName(GoogleAdWordsLinkedServiceTypeProperties.clientCustomerID,
+  "clientCustomerId",
+  "java"
+);
+@@clientName(GoogleAdWordsLinkedServiceTypeProperties.loginCustomerID,
+  "loginCustomerId",
+  "java"
+);
+@@clientName(IntegrationRuntimeSsisCatalogInfo.catalogAdminUserName,
+  "catalogAdminUsername",
+  "java"
+);
+@@clientName(SelfHostedIntegrationRuntimeStatusTypeProperties.autoUpdateETA,
+  "autoUpdateEta",
+  "java"
+);
+@@clientName(SalesforceServiceCloudV2Source.SOQLQuery, "soqlQuery", "java");
+
+// Mitigate Java breaking changes: interface renames
+@@clientLocation(PrivateEndpointConnectionResources.get,
+  "PrivateEndpointConnectionOperations",
+  "java"
+);
+@@clientLocation(PrivateEndpointConnectionResources.createOrUpdate,
+  "PrivateEndpointConnectionOperations",
+  "java"
+);
+@@clientLocation(PrivateEndpointConnectionResources.delete,
+  "PrivateEndpointConnectionOperations",
+  "java"
+);
+@@clientLocation(PrivateEndpointConnectionResources.listByFactory,
+  "PrivateEndPointConnections",
+  "java"
+);
