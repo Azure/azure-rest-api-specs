@@ -1895,13 +1895,6 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
-- stable/2014-04-01/dataMasking.json
-- stable/2014-04-01/geoBackupPolicies.json
-- stable/2014-04-01/metrics.json
-- stable/2014-04-01/serverCommunicationLinks.json
-- stable/2014-04-01/serviceObjectives.json
-- stable/2014-04-01-legacy/sql.core_legacy.json
-- stable/2014-04-01-legacy/usages_legacy.json
 - ./preview/2020-11-01-preview/DatabaseAdvisors.json
 - ./preview/2020-11-01-preview/DatabaseAutomaticTuning.json
 - ./preview/2020-11-01-preview/DatabaseColumns.json
@@ -2059,19 +2052,6 @@ Differences in v4 (compared to v3):
 
 ``` yaml $(tag) == 'package-composite-v4'
 input-file:
-- stable/2014-04-01/backups.json
-- stable/2014-04-01/connectionPolicies.json
-- stable/2014-04-01/databaseSecurityAlertPolicies.json
-- stable/2014-04-01/dataMasking.json
-- stable/2014-04-01/firewallRules.json
-- stable/2014-04-01/geoBackupPolicies.json
-- stable/2014-04-01/metrics.json
-- stable/2014-04-01/recommendedElasticPoolsDecoupled.json
-- stable/2014-04-01/replicationLinks.json
-- stable/2014-04-01/serverCommunicationLinks.json
-- stable/2014-04-01/serviceObjectives.json
-- stable/2014-04-01/sql.core.json
-- stable/2014-04-01/usages.json
 - preview/2015-05-01-preview/databaseAutomaticTuning.json
 - preview/2015-05-01-preview/encryptionProtectors.json
 - preview/2015-05-01-preview/failoverGroups.json
@@ -2177,19 +2157,6 @@ Differences in v3 (compared to v2):
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
-- stable/2014-04-01/backups.json
-- stable/2014-04-01/connectionPolicies.json
-- stable/2014-04-01/databaseSecurityAlertPolicies.json
-- stable/2014-04-01/dataMasking.json
-- stable/2014-04-01/firewallRules.json
-- stable/2014-04-01/geoBackupPolicies.json
-- stable/2014-04-01/metrics.json
-- stable/2014-04-01/recommendedElasticPoolsDecoupled.json
-- stable/2014-04-01/replicationLinks.json
-- stable/2014-04-01/serverCommunicationLinks.json
-- stable/2014-04-01/serviceObjectives.json
-- stable/2014-04-01/sql.core.json
-- stable/2014-04-01/usages.json
 - preview/2015-05-01-preview/databaseAutomaticTuning.json
 - preview/2015-05-01-preview/encryptionProtectors.json
 - preview/2015-05-01-preview/failoverGroups.json
@@ -2281,23 +2248,6 @@ Differences in v2 (compared to v1):
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
-- stable/2014-04-01/backups.json
-- stable/2014-04-01/capabilities.json
-- stable/2014-04-01/connectionPolicies.json
-- stable/2014-04-01/databases.json
-- stable/2014-04-01/databaseSecurityAlertPolicies.json
-- stable/2014-04-01/dataMasking.json
-- stable/2014-04-01/elasticPools.json
-- stable/2014-04-01/firewallRules.json
-- stable/2014-04-01/geoBackupPolicies.json
-- stable/2014-04-01/importExport.json
-- stable/2014-04-01/metrics.json
-- stable/2014-04-01/recommendedElasticPools.json
-- stable/2014-04-01/replicationLinks.json
-- stable/2014-04-01/serverCommunicationLinks.json
-- stable/2014-04-01/serviceObjectives.json
-- stable/2014-04-01/sql.core.json
-- stable/2014-04-01/usages.json
 - preview/2015-05-01-preview/databaseAutomaticTuning.json
 - preview/2015-05-01-preview/encryptionProtectors.json
 - preview/2015-05-01-preview/failoverGroups.json
@@ -2375,23 +2325,6 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-composite-v1'
 input-file:
-- stable/2014-04-01/backups.json
-- stable/2014-04-01/capabilities.json
-- stable/2014-04-01/connectionPolicies.json
-- stable/2014-04-01/databases.json
-- stable/2014-04-01/databaseSecurityAlertPolicies.json
-- stable/2014-04-01/dataMasking.json
-- stable/2014-04-01/elasticPools.json
-- stable/2014-04-01/firewallRules.json
-- stable/2014-04-01/geoBackupPolicies.json
-- stable/2014-04-01/importExport.json
-- stable/2014-04-01/metrics.json
-- stable/2014-04-01/recommendedElasticPools.json
-- stable/2014-04-01/replicationLinks.json
-- stable/2014-04-01/serverCommunicationLinks.json
-- stable/2014-04-01/serviceObjectives.json
-- stable/2014-04-01/sql.core.json
-- stable/2014-04-01/usages.json
 - preview/2015-05-01-preview/databaseAutomaticTuning.json
 - preview/2015-05-01-preview/encryptionProtectors.json
 - preview/2015-05-01-preview/failoverGroups.json
@@ -2468,24 +2401,6 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-2017-03-preview'
 input-file:
-- stable/2014-04-01/backups.json
-- stable/2014-04-01/capabilities.json
-- stable/2014-04-01/checkNameAvailability.json
-- stable/2014-04-01/connectionPolicies.json
-- stable/2014-04-01/databases.json
-- stable/2014-04-01/databaseSecurityAlertPolicies.json
-- stable/2014-04-01/dataMasking.json
-- stable/2014-04-01/elasticPools.json
-- stable/2014-04-01/firewallRules.json
-- stable/2014-04-01/geoBackupPolicies.json
-- stable/2014-04-01/importExport.json
-- stable/2014-04-01/metrics.json
-- stable/2014-04-01/replicationLinks.json
-- stable/2014-04-01/serverAzureADAdministrators.json
-- stable/2014-04-01/serverCommunicationLinks.json
-- stable/2014-04-01/serviceObjectives.json
-- stable/2014-04-01/sql.core.json
-- stable/2014-04-01/usages.json
 - preview/2015-05-01-preview/databaseAutomaticTuning.json
 - preview/2015-05-01-preview/encryptionProtectors.json
 - preview/2015-05-01-preview/failoverGroups.json
@@ -2531,24 +2446,6 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-2015-05-preview'
 input-file:
-- stable/2014-04-01/backups.json
-- stable/2014-04-01/restorePoints.json
-- stable/2014-04-01/checkNameAvailability.json
-- stable/2014-04-01/connectionPolicies.json
-- stable/2014-04-01/databases.json
-- stable/2014-04-01/databaseSecurityAlertPolicies.json
-- stable/2014-04-01/dataMasking.json
-- stable/2014-04-01/elasticPools.json
-- stable/2014-04-01/firewallRules.json
-- stable/2014-04-01/geoBackupPolicies.json
-- stable/2014-04-01/importExport.json
-- stable/2014-04-01/metrics.json
-- stable/2014-04-01/replicationLinks.json
-- stable/2014-04-01/serverAzureADAdministrators.json
-- stable/2014-04-01/serverCommunicationLinks.json
-- stable/2014-04-01/serviceObjectives.json
-- stable/2014-04-01/sql.core.json
-- stable/2014-04-01/usages.json
 - stable/2015-05-01/capabilities.json
 - preview/2015-05-01-preview/blobAuditing.json
 - preview/2015-05-01-preview/encryptionProtectors.json
@@ -2569,23 +2466,18 @@ override-info:
   title: SqlManagementClient
 ```
 
-### Tag: package-2014-04
+### Tag: package-2015-05
 
-These settings apply only when `--tag=package-2014-04` is specified on the command line.
+These settings apply only when `--tag=package-2015-05` is specified on the command line.
+
+This section contains the input swagger files that are used when generating client SDKs up to and including api-version 2015-05-01-preview.
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
-``` yaml $(tag) == 'package-2014-04'
+``` yaml $(tag) == 'package-2015-05'
 input-file:
-- stable/2014-04-01/checkNameAvailability.json
-- stable/2014-04-01/databases.json
-- stable/2014-04-01/elasticPools.json
-- stable/2014-04-01/firewallRules.json
-- stable/2014-04-01/importExport.json
-- stable/2014-04-01/recommendedElasticPools.json
-- stable/2014-04-01/replicationLinks.json
-- stable/2014-04-01/sql.core.json
-- stable/2014-04-01/databaseSecurityAlertPolicies.json
+- stable/2015-05-01/capabilities.json
+- stable/2015-05-01/usages.json
 
 # Needed when there is more than one input file
 override-info:
@@ -3346,9 +3238,11 @@ These can be regenerated by running the following PowerShell script from this re
 ``` yaml $(tag) == 'package-pure-2018-06-preview'
 input-file:
  - ./preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
+ - ./preview/2018-06-01-preview/DatabaseSchema.json
  - ./preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
  - ./preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
  - ./preview/2018-06-01-preview/managedInstanceOperations.json
+ - ./preview/2018-06-01-preview/ManagedDatabaseSchema.json
  - ./preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
  - ./preview/2018-06-01-preview/instancePools.json
  - ./preview/2018-06-01-preview/usages.json
@@ -3453,6 +3347,7 @@ These can be regenerated by running the following PowerShell script from this re
 input-file:
  - ./preview/2015-05-01-preview/advisors.json
  - ./preview/2015-05-01-preview/blobAuditing.json
+ - ./preview/2015-05-01-preview/blobAuditingPolicies.json
  - ./preview/2015-05-01-preview/databaseAutomaticTuning.json
  - ./preview/2015-05-01-preview/encryptionProtectors.json
  - ./preview/2015-05-01-preview/failoverGroups.json
@@ -3467,51 +3362,6 @@ input-file:
  - ./preview/2015-05-01-preview/usages.json
  - ./preview/2015-05-01-preview/virtualclusters.json
  - ./preview/2015-05-01-preview/virtualNetworkRules.json
-
-# Needed when there is more than one input file
-override-info:
-  title: SqlManagementClient
-```
-
-### Tag: package-pure-2014-04
-
-These settings apply only when `--tag=package-pure-2014-04` is specified on the command line.
-
-This section contains all input swagger files for version 2014-04-01-preview. All APIs of that version must be added this section when the API is ready for production.
-
-APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
-
-These can be regenerated by running the following PowerShell script from this readme file's folder: `dir .\Microsoft.Sql\stable\2014-04-01\ -File | Resolve-Path -Relative | % { " - $_".Replace("\", "/") }`
-
-``` yaml $(tag) == 'package-pure-2014-04'
-input-file:
- - ./stable/2014-04-01/advisors.json
- - ./stable/2014-04-01/backups.json
- - ./stable/2014-04-01/capabilities.json
- - ./stable/2014-04-01/checkNameAvailability.json
- - ./stable/2014-04-01/connectionPolicies.json
- - ./stable/2014-04-01/databases.json
- - ./stable/2014-04-01/databaseSecurityAlertPolicies.json
- - ./stable/2014-04-01/dataMasking.json
- - ./stable/2014-04-01/deprecated.json
- - ./stable/2014-04-01/disasterRecoveryConfigurations.json
- - ./stable/2014-04-01/elasticPools.json
- - ./stable/2014-04-01/firewallRules.json
- - ./stable/2014-04-01/geoBackupPolicies.json
- - ./stable/2014-04-01/importExport.json
- - ./stable/2014-04-01/metrics.json
- - ./stable/2014-04-01/operations.json
- - ./stable/2014-04-01/queries.json
- - ./stable/2014-04-01/recommendedElasticPools.json
- - ./stable/2014-04-01/replicationLinks.json
- - ./stable/2014-04-01/restorePoints.json
- - ./stable/2014-04-01/serverAzureADAdministrators.json
- - ./stable/2014-04-01/serverCommunicationLinks.json
- - ./stable/2014-04-01/servers.json
- - ./stable/2014-04-01/serviceObjectives.json
- - ./stable/2014-04-01/sql.core.json
- - ./stable/2014-04-01/tableAuditing.json
- - ./stable/2014-04-01/usages.json
 
 # Needed when there is more than one input file
 override-info:
