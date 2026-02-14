@@ -12154,6 +12154,57 @@
           "example": "{\n  \"object\": \"eval\",\n  \"id\": \"eval_67abd54d9b0081909a86353f6fb9317a\",\n  \"data_source_config\": {\n    \"type\": \"custom\",\n    \"item_schema\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"label\": {\"type\": \"string\"},\n      },\n      \"required\": [\"label\"]\n    },\n    \"include_sample_schema\": true\n  },\n  \"testing_criteria\": [\n    {\n      \"name\": \"My string check grader\",\n      \"type\": \"string_check\",\n      \"input\": \"{{sample.output_text}}\",\n      \"reference\": \"{{item.label}}\",\n      \"operation\": \"eq\",\n    }\n  ],\n  \"name\": \"External Data Eval\",\n  \"created_at\": 1739314509,\n  \"metadata\": {\n    \"test\": \"synthetics\",\n  }\n}\n"
         }
       },
+      "EvalCsvFileIdSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "file_id"
+            ],
+            "description": "The type of source, always `file_id`."
+          },
+          "id": {
+            "type": "string",
+            "description": "The identifier of the uploaded CSV file."
+          }
+        },
+        "description": "Represents a reference to an uploaded CSV file used as a source for evaluation data."
+      },
+      "EvalCsvRunDataSource": {
+        "type": "object",
+        "required": [
+          "type",
+          "source"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "csv"
+            ],
+            "description": "The type of data source, always `csv`."
+          },
+          "source": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/EvalCsvFileIdSource"
+              }
+            ],
+            "description": "The source of the CSV data, either inline content or a file reference."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/EvalRunDataSource"
+          }
+        ],
+        "description": "Represents a CSV data source for evaluation runs."
+      },
       "EvalGraderAzureAIEvaluator": {
         "type": "object",
         "required": [
@@ -12378,6 +12429,7 @@
             "azure_ai_synthetic_data_gen_preview": "#/components/schemas/SyntheticDataGenerationPreviewEvalRunDataSource",
             "azure_ai_responses": "#/components/schemas/AzureAIResponsesEvalRunDataSource",
             "azure_ai_target_completions": "#/components/schemas/TargetCompletionEvalRunDataSource",
+            "csv": "#/components/schemas/EvalCsvRunDataSource",
             "azure_ai_red_team": "#/components/schemas/RedTeamEvalRunDataSource"
           }
         },
