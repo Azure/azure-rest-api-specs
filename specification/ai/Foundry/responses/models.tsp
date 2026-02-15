@@ -105,6 +105,14 @@ union _AgentItemType {
   workflow_action: "workflow_action",
   memory_search_call: "memory_search_call",
   oauth_consent_request: "oauth_consent_request",
+  bing_grounding_call: "bing_grounding_call",
+  sharepoint_grounding_preview_call: "sharepoint_grounding_preview_call",
+  azure_ai_search_call: "azure_ai_search_call",
+  bing_custom_search_preview_call: "bing_custom_search_preview_call",
+  openapi_call: "openapi_call",
+  browser_automation_preview_call: "browser_automation_preview_call",
+  fabric_dataagent_preview_call: "fabric_dataagent_preview_call",
+  azure_function_call: "azure_function_call",
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"

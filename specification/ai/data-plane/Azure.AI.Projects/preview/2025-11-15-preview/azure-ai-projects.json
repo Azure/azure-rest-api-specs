@@ -4347,7 +4347,15 @@
               "structured_outputs",
               "workflow_action",
               "memory_search_call",
-              "oauth_consent_request"
+              "oauth_consent_request",
+              "bing_grounding_call",
+              "sharepoint_grounding_preview_call",
+              "azure_ai_search_call",
+              "bing_custom_search_preview_call",
+              "openapi_call",
+              "browser_automation_preview_call",
+              "fabric_dataagent_preview_call",
+              "azure_function_call"
             ],
             "x-ms-enum": {
               "name": "ItemType",
@@ -4436,6 +4444,38 @@
                 {
                   "name": "oauth_consent_request",
                   "value": "oauth_consent_request"
+                },
+                {
+                  "name": "bing_grounding_call",
+                  "value": "bing_grounding_call"
+                },
+                {
+                  "name": "sharepoint_grounding_preview_call",
+                  "value": "sharepoint_grounding_preview_call"
+                },
+                {
+                  "name": "azure_ai_search_call",
+                  "value": "azure_ai_search_call"
+                },
+                {
+                  "name": "bing_custom_search_preview_call",
+                  "value": "bing_custom_search_preview_call"
+                },
+                {
+                  "name": "openapi_call",
+                  "value": "openapi_call"
+                },
+                {
+                  "name": "browser_automation_preview_call",
+                  "value": "browser_automation_preview_call"
+                },
+                {
+                  "name": "fabric_dataagent_preview_call",
+                  "value": "fabric_dataagent_preview_call"
+                },
+                {
+                  "name": "azure_function_call",
+                  "value": "azure_function_call"
                 }
               ]
             }
@@ -8033,6 +8073,68 @@
         ]
       }
     },
+    "AzureAISearchToolCallItemParam": {
+      "type": "object",
+      "description": "An Azure AI Search tool call item for input.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query used for the Azure AI Search."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemParam"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_search_call"
+    },
+    "AzureAISearchToolCallItemResource": {
+      "type": "object",
+      "description": "An Azure AI Search tool call item resource.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the Azure AI Search tool call.",
+          "enum": [
+            "in_progress",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The query used for the Azure AI Search."
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents returned from Azure AI Search.",
+          "items": {
+            "$ref": "#/definitions/GroundingToolCallDocument"
+          }
+        },
+        "get_urls": {
+          "type": "array",
+          "description": "URLs to retrieve the full document content.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemResource"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_ai_search_call"
+    },
     "AzureAISearchToolResource": {
       "type": "object",
       "description": "A set of index resources used by the `azure_ai_search` tool.",
@@ -8151,6 +8253,65 @@
         "queue_name"
       ]
     },
+    "AzureFunctionToolCallItemParam": {
+      "type": "object",
+      "description": "An Azure Function tool call item for input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Azure Function being called."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments passed to the Azure Function as a JSON string."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemParam"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function_call"
+    },
+    "AzureFunctionToolCallItemResource": {
+      "type": "object",
+      "description": "An Azure Function tool call item resource.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the Azure Function tool call.",
+          "enum": [
+            "in_progress",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Azure Function being called."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments passed to the Azure Function as a JSON string."
+        },
+        "response": {
+          "description": "The response from the Azure Function."
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemResource"
+        }
+      ],
+      "x-ms-discriminator-value": "azure_function_call"
+    },
     "AzureOpenAIModelConfiguration": {
       "type": "object",
       "description": "Azure OpenAI model configuration. The API version would be selected by the service for querying the model.",
@@ -8239,6 +8400,61 @@
         "instance_name"
       ]
     },
+    "BingCustomSearchToolCallItemParam": {
+      "type": "object",
+      "description": "A Bing custom search tool call item for input.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query used for the Bing custom search."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemParam"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search_preview_call"
+    },
+    "BingCustomSearchToolCallItemResource": {
+      "type": "object",
+      "description": "A Bing custom search tool call item resource.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the Bing custom search tool call.",
+          "enum": [
+            "in_progress",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The query used for the Bing custom search."
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents returned from Bing custom search.",
+          "items": {
+            "$ref": "#/definitions/GroundingToolCallDocument"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemResource"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_custom_search_preview_call"
+    },
     "BingCustomSearchToolParameters": {
       "type": "object",
       "description": "The bing custom search tool parameters.",
@@ -8322,6 +8538,61 @@
         "search_configurations"
       ]
     },
+    "BingGroundingToolCallItemParam": {
+      "type": "object",
+      "description": "A Bing grounding tool call item for input.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query used for the Bing search."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemParam"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_grounding_call"
+    },
+    "BingGroundingToolCallItemResource": {
+      "type": "object",
+      "description": "A Bing grounding tool call item resource.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the Bing grounding tool call.",
+          "enum": [
+            "in_progress",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The query used for the Bing search."
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents returned from the Bing grounding search.",
+          "items": {
+            "$ref": "#/definitions/GroundingToolCallDocument"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemResource"
+        }
+      ],
+      "x-ms-discriminator-value": "bing_grounding_call"
+    },
     "BlobReference": {
       "type": "object",
       "description": "Blob reference details.",
@@ -8363,6 +8634,57 @@
         }
       ],
       "x-ms-discriminator-value": "browser_automation_preview"
+    },
+    "BrowserAutomationToolCallItemParam": {
+      "type": "object",
+      "description": "A browser automation tool call item for input.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query or command for browser automation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemParam"
+        }
+      ],
+      "x-ms-discriminator-value": "browser_automation_preview_call"
+    },
+    "BrowserAutomationToolCallItemResource": {
+      "type": "object",
+      "description": "A browser automation tool call item resource.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the browser automation tool call.",
+          "enum": [
+            "in_progress",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The query or command for browser automation."
+        },
+        "output": {
+          "description": "The output from the browser automation operation."
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemResource"
+        }
+      ],
+      "x-ms-discriminator-value": "browser_automation_preview_call"
     },
     "BrowserAutomationToolConnectionParameters": {
       "type": "object",
@@ -10772,6 +11094,57 @@
         }
       }
     },
+    "FabricDataAgentToolCallItemParam": {
+      "type": "object",
+      "description": "A Fabric data agent tool call item for input.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query for the Fabric data agent."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemParam"
+        }
+      ],
+      "x-ms-discriminator-value": "fabric_dataagent_preview_call"
+    },
+    "FabricDataAgentToolCallItemResource": {
+      "type": "object",
+      "description": "A Fabric data agent tool call item resource.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the Fabric data agent tool call.",
+          "enum": [
+            "in_progress",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The query for the Fabric data agent."
+        },
+        "output": {
+          "description": "The output from the Fabric data agent operation."
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemResource"
+        }
+      ],
+      "x-ms-discriminator-value": "fabric_dataagent_preview_call"
+    },
     "FabricDataAgentToolParameters": {
       "type": "object",
       "description": "The fabric data agent tool parameters.",
@@ -10883,6 +11256,42 @@
         "name",
         "arguments"
       ]
+    },
+    "GroundingToolCallDocument": {
+      "type": "object",
+      "description": "A document returned from a grounding tool search.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the document."
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the document."
+        },
+        "filepath": {
+          "type": "string",
+          "description": "The file path or source path of the document."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the document."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of the document."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The relevance score of the document."
+        },
+        "knowledgeSourceIndex": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the knowledge source that provided the document."
+        }
+      }
     },
     "HostedAgentDefinition": {
       "type": "object",
@@ -15042,7 +15451,15 @@
         "structured_outputs",
         "workflow_action",
         "memory_search_call",
-        "oauth_consent_request"
+        "oauth_consent_request",
+        "bing_grounding_call",
+        "sharepoint_grounding_preview_call",
+        "azure_ai_search_call",
+        "bing_custom_search_preview_call",
+        "openapi_call",
+        "browser_automation_preview_call",
+        "fabric_dataagent_preview_call",
+        "azure_function_call"
       ],
       "x-ms-enum": {
         "name": "ItemType",
@@ -15131,6 +15548,38 @@
           {
             "name": "oauth_consent_request",
             "value": "oauth_consent_request"
+          },
+          {
+            "name": "bing_grounding_call",
+            "value": "bing_grounding_call"
+          },
+          {
+            "name": "sharepoint_grounding_preview_call",
+            "value": "sharepoint_grounding_preview_call"
+          },
+          {
+            "name": "azure_ai_search_call",
+            "value": "azure_ai_search_call"
+          },
+          {
+            "name": "bing_custom_search_preview_call",
+            "value": "bing_custom_search_preview_call"
+          },
+          {
+            "name": "openapi_call",
+            "value": "openapi_call"
+          },
+          {
+            "name": "browser_automation_preview_call",
+            "value": "browser_automation_preview_call"
+          },
+          {
+            "name": "fabric_dataagent_preview_call",
+            "value": "fabric_dataagent_preview_call"
+          },
+          {
+            "name": "azure_function_call",
+            "value": "azure_function_call"
           }
         ]
       }
@@ -18827,6 +19276,65 @@
         "project_connection_id"
       ]
     },
+    "OpenApiToolCallItemParam": {
+      "type": "object",
+      "description": "An OpenAPI tool call item for input.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the OpenAPI operation being called."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments passed to the OpenAPI operation as a JSON string."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemParam"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi_call"
+    },
+    "OpenApiToolCallItemResource": {
+      "type": "object",
+      "description": "An OpenAPI tool call item resource.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the OpenAPI tool call.",
+          "enum": [
+            "in_progress",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the OpenAPI operation being called."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "The arguments passed to the OpenAPI operation as a JSON string."
+        },
+        "response": {
+          "description": "The response from the OpenAPI operation."
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemResource"
+        }
+      ],
+      "x-ms-discriminator-value": "openapi_call"
+    },
     "PagedConnection": {
       "type": "object",
       "description": "Paged collection of Connection items",
@@ -19744,6 +20252,61 @@
         }
       ],
       "x-ms-discriminator-value": "sharepoint_grounding_preview"
+    },
+    "SharepointGroundingToolCallItemParam": {
+      "type": "object",
+      "description": "A SharePoint grounding tool call item for input.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query used for the SharePoint search."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemParam"
+        }
+      ],
+      "x-ms-discriminator-value": "sharepoint_grounding_preview_call"
+    },
+    "SharepointGroundingToolCallItemResource": {
+      "type": "object",
+      "description": "A SharePoint grounding tool call item resource.",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status of the SharePoint grounding tool call.",
+          "enum": [
+            "in_progress",
+            "completed",
+            "incomplete",
+            "failed"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The query used for the SharePoint search."
+        },
+        "documents": {
+          "type": "array",
+          "description": "The documents returned from the SharePoint grounding search.",
+          "items": {
+            "$ref": "#/definitions/GroundingToolCallDocument"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OpenAI.ItemResource"
+        }
+      ],
+      "x-ms-discriminator-value": "sharepoint_grounding_preview_call"
     },
     "SharepointGroundingToolParameters": {
       "type": "object",
