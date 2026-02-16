@@ -49,18 +49,6 @@ interface ClusterJobs {
   >;
 }
 
-/** ClusterJob Type supported. */
-@added(Versions.v2026_03_01_preview)
-union HciJobType {
-  string,
-
-  /** Job to configure arc gateway for the cluster. */
-  ConfigureArcGateway: "ConfigureArcGateway",
-
-  GpuCreatePartition: "GpuCreatePartition",
-  GpuSwitchMode: "GpuSwitchMode",
-}
-
 /** Cluster Job properties */
 @added(Versions.v2026_03_01_preview)
 @discriminator("jobType")
@@ -104,55 +92,3 @@ model ClusterJobProperties {
  */
 @added(Versions.v2026_03_01_preview)
 model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
-
-/** Properties for configuring arc gateway to a cluster. */
-@added(Versions.v2026_03_01_preview)
-model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
-  /** ClusterJob Type to support polymorphic resource. */
-  jobType: HciJobType.ConfigureArcGateway;
-}
-
-/**
- * Properties for creating GPU partitions for virtualization and workload isolation.
- */
-@added(Versions.v2026_03_01_preview)
-model GpuCreatePartitionJobProperties extends ClusterJobProperties {
-  /** ClusterJob Type to support polymorphic resource. */
-  jobType: HciJobType.GpuCreatePartition;
-
-  /**
-   * Number of partitions to be created on the GPU.
-   */
-  partitionCount: int32;
-}
-
-/**
- * Properties for switching GPU mode between DDA and GPU-P for different workload requirements.
- */
-@added(Versions.v2026_03_01_preview)
-model GpuSwitchModeJobProperties extends ClusterJobProperties {
-  /** ClusterJob Type to support polymorphic resource. */
-  jobType: HciJobType.GpuSwitchMode;
-
-  /**
-   * Desired GPU mode to switch to.
-   */
-  mode: GpuMode;
-}
-
-/**
- * GPU modes supported.
- */
-@added(Versions.v2026_03_01_preview)
-union GpuMode {
-  string,
-
-  /** Unknown mode. */
-  Unknown: "Unknown",
-
-  /** GPU-P mode. */
-  GPUP: "GPUP",
-
-  /** DDA mode. */
-  DDA: "DDA",
-}
