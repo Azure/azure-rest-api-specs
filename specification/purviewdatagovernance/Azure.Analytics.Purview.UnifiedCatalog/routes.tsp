@@ -273,11 +273,11 @@ interface DataAssets {
   List is UnifiedCatalogOperations.ResourceList<
     DataAsset,
     ListQueryParametersTrait<{
-      @doc("Identifier of the related entity (required).")
+      @doc("Include lineage information in the response.")
       @query
       includeLineage: boolean;
 
-      @doc("Identifier of the related entity (required).")
+      @doc("Include extended properties in the response.")
       @query
       includeExtendedProperties: boolean;
 
@@ -306,7 +306,7 @@ interface DataAssets {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   @tag("DataAsset")
-  @doc("Creates a new data asset with fileted query inputs.")
+  @doc("Retrieves data assets with filtered query inputs.")
   @route("/dataAssets/query")
   @list
   @post
