@@ -9457,14 +9457,7 @@
           "type": "string",
           "description": "User description of the action."
         }
-      },
-      "required": [
-        "actionTask",
-        "actionSequence",
-        "actionType",
-        "actionName",
-        "actionDescription"
-      ]
+      }
     },
     "RecoveryChildJob": {
       "type": "object",
@@ -9538,6 +9531,38 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "RecoveryGroupActionSettings": {
+      "type": "object",
+      "description": "Settings for a recovery group action.",
+      "properties": {
+        "actionTask": {
+          "$ref": "#/definitions/ActionTask",
+          "description": "The action task associated with this job resource.",
+          "readOnly": true
+        },
+        "actionSequence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Sequence number for the action.",
+          "readOnly": true
+        },
+        "recoveryGroupActionType": {
+          "type": "string",
+          "description": "Type of the recovery group action (ManualAction/CustomRunbook).",
+          "readOnly": true
+        },
+        "actionName": {
+          "type": "string",
+          "description": "Name of the action.",
+          "readOnly": true
+        },
+        "actionDescription": {
+          "type": "string",
+          "description": "User description of the action.",
+          "readOnly": true
+        }
+      }
     },
     "RecoveryGroupActionType": {
       "type": "string",
@@ -9889,8 +9914,8 @@
           "description": "A setting that indicates the protection solution selected.",
           "readOnly": true
         },
-        "recoveryActionSettings": {
-          "$ref": "#/definitions/RecoveryActionSettings",
+        "recoveryGroupActionSettings": {
+          "$ref": "#/definitions/RecoveryGroupActionSettings",
           "description": "The recovery action settings.",
           "readOnly": true
         }

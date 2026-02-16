@@ -35,26 +35,31 @@ model RecoveryJobResourceProperties extends JobResourceProperties {
   @added(Versions.v2026_03_01_preview)
   @doc("The recovery action settings.")
   @visibility(Lifecycle.Read)
-  recoveryActionSettings?: RecoveryActionSettings;
+  recoveryGroupActionSettings?: RecoveryGroupActionSettings;
 }
 
 @added(Versions.v2026_03_01_preview)
-@doc("Settings for a recovery action.")
-model RecoveryActionSettings {
+@doc("Settings for a recovery group action.")
+model RecoveryGroupActionSettings {
   @doc("The action task associated with this job resource.")
-  actionTask: ActionTask;
+  @visibility(Lifecycle.Read)
+  actionTask?: ActionTask;
 
   @doc("Sequence number for the action.")
-  actionSequence: int32;
+  @visibility(Lifecycle.Read)
+  actionSequence?: int32;
 
-  @doc("Type of the action (ManualAction/CustomRunbook).")
-  actionType: string;
+  @doc("Type of the recovery group action (ManualAction/CustomRunbook).")
+  @visibility(Lifecycle.Read)
+  recoveryGroupActionType?: string;
 
   @doc("Name of the action.")
-  actionName: string;
+  @visibility(Lifecycle.Read)
+  actionName?: string;
 
   @doc("User description of the action.")
-  actionDescription: string;
+  @visibility(Lifecycle.Read)
+  actionDescription?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
