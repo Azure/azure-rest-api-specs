@@ -27,9 +27,6 @@ model ArcSetting is Azure.ResourceManager.ProxyResource<ArcSettingProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-// here is the augment decorator for versioning
-@@removed(ArcSetting.identity, Versions.v2025_12_01_preview);
-
 @armResourceOperations
 interface ArcSettings {
   /**

@@ -36,8 +36,8 @@ import "./ValidatedSolutionRecipe.tsp";
 import "./edgeMachine.tsp";
 import "./edgeMachineJobs.tsp";
 import "./validateOwnershipVouchers.tsp";
-//private preview
 import "./clusterJobs.tsp";
+import "./devicePool.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -68,4 +68,19 @@ enum Versions {
    * The 2025-12-01-preview API version.
    */
   v2025_12_01_preview: "2025-12-01-preview",
+
+  /**
+   * The 2026-02-01 API version.
+   */
+  v2026_02_01: "2026-02-01",
+
+  /**
+   * The 2026-03-01-preview API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
+
+  /**
+   * The 2026-03-15-preview API version.
+   */
+  v2026_03_15_preview: "2026-03-15-preview",
 }

@@ -1778,7 +1778,7 @@ model ArcSettingsPatch {
    */
   properties?: ArcSettingsPatchProperties;
 
-  @removed(Versions.v2025_12_01_preview)
+  @added(Versions.v2026_03_01_preview)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
@@ -2018,14 +2018,14 @@ model ClusterProperties {
   /**
    * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
    */
-  @added(Versions.v2025_12_01_preview)
+  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProperties?: ConfidentialVmProperties;
 
   /**
    * Software Defined Networking Properties of the cluster
    */
-  @added(Versions.v2025_12_01_preview)
+  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   sdnProperties?: ClusterSdnProperties;
 
@@ -5409,7 +5409,7 @@ model HciNetworkProfile {
     oftware Defined Networking Properties of the cluster
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_12_01_preview)
+  @added(Versions.v2026_03_01_preview)
   sdnProperties?: SdnProperties;
 }
 
@@ -5851,14 +5851,14 @@ model ReportedProperties {
   /**
    * Most recent edge device sync timestamp in UTC.
    */
-  @added(Versions.v2025_12_01_preview)
+  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 
   /**
    * CVM support details for edge device.
    */
-  @added(Versions.v2025_12_01_preview)
+  @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
 }
@@ -5866,7 +5866,7 @@ model ReportedProperties {
 /**
  * Request body for the check updates action on update summaries.
  */
-@removed(Versions.v2025_12_01_preview)
+@added(Versions.v2026_03_01_preview)
 model CheckUpdatesRequest {
   /**
    * Name of update
