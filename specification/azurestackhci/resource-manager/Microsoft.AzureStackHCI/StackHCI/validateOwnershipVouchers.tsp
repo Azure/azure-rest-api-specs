@@ -15,7 +15,7 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 interface OwnershipVouchers {
   /**
    * Validates ownership vouchers.
@@ -28,7 +28,7 @@ interface OwnershipVouchers {
   >;
 }
 
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 @doc("Validate Ownership Voucher Request")
 model ValidateOwnershipVouchersRequest {
   @doc("Ownership Voucher Details.")
@@ -43,7 +43,7 @@ model ValidateOwnershipVouchersRequest {
 
 @@clientName(OwnershipVouchers.validate::parameters.body, "validationRequest");
 
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 @doc("Validate Ownership Voucher Response")
 model ValidateOwnershipVouchersResponse {
   @doc("Ownership Voucher Validation Details.")
@@ -51,7 +51,7 @@ model ValidateOwnershipVouchersResponse {
   ownershipVoucherValidationDetails: OwnershipVoucherValidationDetails[];
 }
 
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 @doc("Ownership Voucher Validation Details")
 model OwnershipVoucherValidationDetails {
   @doc("The ownership voucher validation status.")
@@ -79,7 +79,7 @@ model OwnershipVoucherValidationDetails {
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
 
-@added(Versions.v2026_02_15_preview)
+@added(Versions.v2026_03_01_preview)
 @doc("Ownership Voucher validation Status.")
 union OwnershipVoucherValidationStatus {
   string,
