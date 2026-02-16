@@ -7622,7 +7622,16 @@
           "type": "array",
           "description": "Selected recovery resource Ids to be processed. If not provided, all resources in the source location(s) will be processed.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources"
+                }
+              ]
+            }
           }
         },
         "executionConfigurations": {

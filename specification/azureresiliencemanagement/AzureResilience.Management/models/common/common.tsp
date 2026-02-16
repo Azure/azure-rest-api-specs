@@ -248,7 +248,11 @@ model FailoverRequestProperties {
 
   @added(Versions.v2026_03_01_preview)
   @doc("Selected recovery resource Ids to be processed. If not provided, all resources in the source location(s) will be processed.")
-  selectedResourceIds?: string[];
+  selectedResourceIds?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources";
+    },
+  ]>[];
 
   @added(Versions.v2026_03_01_preview)
   @doc("Execution configurations for the recovery action.")
