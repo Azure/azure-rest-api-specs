@@ -49,9 +49,9 @@ model RecoveryGroupActionSettings {
   @visibility(Lifecycle.Read)
   actionSequence?: int32;
 
-  @doc("Type of the recovery group action (ManualAction/CustomRunbook).")
+  @doc("Type of the recovery group action.")
   @visibility(Lifecycle.Read)
-  recoveryGroupActionType?: string;
+  recoveryGroupActionType?: RecoveryGroupActionType;
 
   @doc("Name of the action.")
   @visibility(Lifecycle.Read)
