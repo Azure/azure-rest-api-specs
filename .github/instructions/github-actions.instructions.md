@@ -7,10 +7,10 @@ applyTo:
   - ".github/package.json"
   - ".github/tsconfig.json"
   - ".github/vitest.config.js"
-  - ".github/actions/**"
-  - ".github/matchers/**"
-  - ".github/workflows/**"
-  - ".github/shared/**"
+  - ".github/actions/**/*"
+  - ".github/matchers/**/*"
+  - ".github/workflows/**/*"
+  - ".github/shared/**/*"
 ---
 
 # GitHub Copilot Instructions for GitHub Actions Code
