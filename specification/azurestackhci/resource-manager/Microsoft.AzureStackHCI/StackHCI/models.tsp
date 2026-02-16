@@ -1876,6 +1876,7 @@ model ClusterProperties {
   /**
    * The ring to which this cluster belongs to.
    */
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read)
   ring?: string;
 
@@ -2640,12 +2641,14 @@ model SoftwareAssuranceChangeRequestProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_15_preview)
 model ChangeRingRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ChangeRingRequestProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_15_preview)
 model ChangeRingRequestProperties {
   /**
    * The target ring for the cluster.
