@@ -1,9 +1,11 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -82,22 +84,22 @@ union AssignmentType {
   string,
 
   /**
-   * NotSpecified
+   * The not specified assignment type.
    */
   NotSpecified: "NotSpecified",
 
   /**
-   * System
+   * The system assignment type.
    */
   System: "System",
 
   /**
-   * SystemHidden
+   * The system hidden assignment type.
    */
   SystemHidden: "SystemHidden",
 
   /**
-   * Custom
+   * The custom assignment type.
    */
   Custom: "Custom",
 }
@@ -136,22 +138,22 @@ union PolicyType {
   string,
 
   /**
-   * NotSpecified
+   * The not specified policy definition type.
    */
   NotSpecified: "NotSpecified",
 
   /**
-   * BuiltIn
+   * The built in policy definition type.
    */
   BuiltIn: "BuiltIn",
 
   /**
-   * Custom
+   * The custom policy definition type.
    */
   Custom: "Custom",
 
   /**
-   * Static
+   * The static policy definition type.
    */
   Static: "Static",
 }
@@ -163,37 +165,37 @@ union ParameterType {
   string,
 
   /**
-   * String
+   * The string parameter type.
    */
   String: "String",
 
   /**
-   * Array
+   * The array parameter type.
    */
   Array: "Array",
 
   /**
-   * Object
+   * The object parameter type.
    */
   Object: "Object",
 
   /**
-   * Boolean
+   * The boolean parameter type.
    */
   Boolean: "Boolean",
 
   /**
-   * Integer
+   * The integer parameter type.
    */
   Integer: "Integer",
 
   /**
-   * Float
+   * The float parameter type.
    */
   Float: "Float",
 
   /**
-   * DateTime
+   * The date-time parameter type.
    */
   DateTime: "DateTime",
 }
@@ -205,12 +207,12 @@ union PolicyTokenResult {
   string,
 
   /**
-   * Succeeded
+   * The token acquisition succeeded.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The token acquisition failed.
    */
   Failed: "Failed",
 }
@@ -222,14 +224,47 @@ union ExternalEndpointResult {
   string,
 
   /**
-   * Succeeded
+   * The external endpoint succeeded.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * The external endpoint failed.
    */
   Failed: "Failed",
+}
+
+/**
+ * The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error.
+ */
+@added(Versions.v2025_11_01)
+union PolicyAction {
+  string,
+
+  /**
+   * The effective outcome of policy evaluation is unknown.
+   */
+  Unknown: "Unknown",
+
+  /**
+   * The effective outcome of policy evaluation is to allow the request.
+   */
+  Allow: "Allow",
+
+  /**
+   * The effective outcome of policy evaluation is to audit the request.
+   */
+  Audit: "Audit",
+
+  /**
+   * The effective outcome of policy evaluation is to deny the request.
+   */
+  Deny: "Deny",
+
+  /**
+   * The policy evaluation resulted in an error.
+   */
+  Error: "Error",
 }
 
 /**
@@ -346,6 +381,28 @@ model PolicyAssignmentProperties {
    */
   @visibility(Lifecycle.Read)
   instanceId?: string;
+
+  /**
+   * The self-serve exemption settings for the policy assignment.
+   */
+  @added(Versions.v2025_11_01)
+  selfServeExemptionSettings?: SelfServeExemptionSettings;
+}
+
+/**
+ * The self-serve exemption settings for a policy assignment.
+ */
+@added(Versions.v2025_11_01)
+model SelfServeExemptionSettings {
+  /**
+   * Indicates whether self-serve exemption is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The policy definition reference IDs for self-serve exemption.
+   */
+  policyDefinitionReferenceIds?: string[];
 }
 
 /**
@@ -509,6 +566,12 @@ model PolicyAssignmentUpdateProperties {
    */
   @identifiers(#[])
   overrides?: Override[];
+
+  /**
+   * The self-serve exemption settings for the policy assignment.
+   */
+  @added(Versions.v2025_11_01)
+  selfServeExemptionSettings?: SelfServeExemptionSettings;
 }
 
 /**
@@ -948,6 +1011,12 @@ model PolicyTokenResponse {
   result?: PolicyTokenResult;
 
   /**
+   * The external evaluation request details.
+   */
+  @added(Versions.v2025_11_01)
+  requestDetails?: PolicyTokenEvaluatedRequestDetails;
+
+  /**
    * Status message with additional details about the token acquisition operation result.
    */
   message?: string;
@@ -955,7 +1024,6 @@ model PolicyTokenResponse {
   /**
    * The date and time after which the client can try to acquire a token again in the case of retry-able failures.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   retryAfter?: utcDateTime;
 
   /**
@@ -983,7 +1051,6 @@ model PolicyTokenResponse {
   /**
    * The expiration of the policy token.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiration?: utcDateTime;
 }
 
@@ -1002,6 +1069,12 @@ model ExternalEvaluationEndpointInvocationResult {
   result?: ExternalEndpointResult;
 
   /**
+   * The external evaluation endpoint kind.
+   */
+  @added(Versions.v2025_11_01)
+  endpointKind?: string;
+
+  /**
    * The status message with additional details about the invocation result.
    */
   message?: string;
@@ -1009,7 +1082,6 @@ model ExternalEvaluationEndpointInvocationResult {
   /**
    * The date and time after which a failed endpoint invocation can be retried.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   retryAfter?: utcDateTime;
 
   /**
@@ -1019,10 +1091,65 @@ model ExternalEvaluationEndpointInvocationResult {
   claims?: unknown;
 
   /**
+   * The effective outcome of the policy evaluation based on both the policy effect and evaluation result. Possible values are Unknown, Allow, Audit, Deny, Error.
+   */
+  @added(Versions.v2025_11_01)
+  policyAction?: PolicyAction;
+
+  /**
+   * The evaluation details returned by the policy evaluation engine.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  @added(Versions.v2025_11_01)
+  policyEvaluationDetails?: unknown;
+
+  /**
+   * The endpoint specific metadata.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  @added(Versions.v2025_11_01)
+  additionalInfo?: unknown;
+
+  /**
    * The expiration of the results.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   expiration?: utcDateTime;
+}
+
+/**
+ * The policy token evaluated request details.
+ */
+@added(Versions.v2025_11_01)
+model PolicyTokenEvaluatedRequestDetails {
+  /**
+   * The request URI of the resource operation that is targeted by the issued token.
+   */
+  uri: string;
+
+  /**
+   * The resource Id of the resource operation that is targeted by the issued token.
+   */
+  resourceId: string;
+
+  /**
+   * The api-version of the resource operation that is targeted by the issued token.
+   */
+  apiVersion: string;
+
+  /**
+   * The authorization action of the resource operation that is targeted by the issued token.
+   */
+  authorizationAction: string;
+
+  /**
+   * The http method of the resource operation that is targeted by the issued token.
+   */
+  httpMethod: string;
+
+  /**
+   * The hashed payload of the resource operation that is targeted by the issued token.
+   */
+  contentHash: string;
 }
 
 /**
@@ -1133,4 +1260,331 @@ model PolicyLogInfo {
    * An array of policy exemption Ids.
    */
   policyExemptionIds?: string[];
+}
+
+/**
+ * The type of the alias.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+@added(Versions.v2025_11_01)
+enum AliasType {
+  /**
+   * Alias type is unknown (same as not providing alias type).
+   */
+  NotSpecified,
+
+  /**
+   * Alias value is not secret.
+   */
+  PlainText,
+
+  /**
+   * Alias value is secret.
+   */
+  Mask,
+}
+
+/**
+ * The type of alias pattern.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+@added(Versions.v2025_11_01)
+enum AliasPatternType {
+  /**
+   * NotSpecified is not allowed.
+   */
+  NotSpecified,
+
+  /**
+   * Extract is the only allowed value.
+   */
+  Extract,
+}
+
+/**
+ * The type of the token that the alias path is referring to.
+ */
+@added(Versions.v2025_11_01)
+union AliasPathTokenType {
+  string,
+
+  /**
+   * The token type is not specified.
+   */
+  NotSpecified: "NotSpecified",
+
+  /**
+   * The token type can be anything.
+   */
+  Any: "Any",
+
+  /**
+   * The token type is string.
+   */
+  String: "String",
+
+  /**
+   * The token type is object.
+   */
+  Object: "Object",
+
+  /**
+   * The token type is array.
+   */
+  Array: "Array",
+
+  /**
+   * The token type is integer.
+   */
+  Integer: "Integer",
+
+  /**
+   * The token type is number.
+   */
+  Number: "Number",
+
+  /**
+   * The token type is boolean.
+   */
+  Boolean: "Boolean",
+}
+
+/**
+ * The attributes of the token that the alias path is referring to.
+ */
+@added(Versions.v2025_11_01)
+union AliasPathAttributes {
+  string,
+
+  /**
+   * The token that the alias path is referring to has no attributes.
+   */
+  None: "None",
+
+  /**
+   * The token that the alias path is referring to is modifiable by policies with 'modify' effect.
+   */
+  Modifiable: "Modifiable",
+}
+
+/**
+ * The type of the pattern for an alias path.
+ */
+@added(Versions.v2025_11_01)
+model AliasPattern {
+  /**
+   * The alias pattern phrase.
+   */
+  phrase?: string;
+
+  /**
+   * The alias pattern variable.
+   */
+  variable?: string;
+
+  /**
+   * The pattern for an alias path.
+   */
+  type?: AliasPatternType;
+}
+
+/**
+ * The alias path metadata.
+ */
+@added(Versions.v2025_11_01)
+model AliasPathMetadata {
+  /**
+   * The type of the token that the alias path is referring to.
+   */
+  type?: AliasPathTokenType;
+
+  /**
+   * The attributes of the token that the alias path is referring to.
+   */
+  attributes?: AliasPathAttributes;
+}
+
+/**
+ * The type of the paths for alias.
+ */
+@added(Versions.v2025_11_01)
+model AliasPath {
+  /**
+   * The path of an alias.
+   */
+  path?: string;
+
+  /**
+   * The API versions.
+   */
+  apiVersions?: string[];
+
+  /**
+   * The pattern for an alias path.
+   */
+  pattern?: AliasPattern;
+
+  /**
+   * The metadata of the alias path. If missing, fall back to the default metadata of the alias.
+   */
+  @visibility(Lifecycle.Read)
+  metadata?: AliasPathMetadata;
+}
+
+/**
+ * The alias type.
+ */
+@added(Versions.v2025_11_01)
+model Alias {
+  /**
+   * The alias name.
+   */
+  name?: string;
+
+  /**
+   * The paths for an alias.
+   */
+  @identifiers(#[])
+  paths?: AliasPath[];
+
+  /**
+   * The type of the alias.
+   */
+  type?: AliasType;
+
+  /**
+   * The default path for an alias.
+   */
+  defaultPath?: string;
+
+  /**
+   * The default pattern for an alias.
+   */
+  defaultPattern?: AliasPattern;
+
+  /**
+   * The default alias path metadata. Applies to the default path and to any alias path that doesn't have metadata.
+   */
+  defaultMetadata?: AliasPathMetadata;
+}
+
+/**
+ * The custom resource function definition.
+ */
+@added(Versions.v2025_11_01)
+model DataManifestCustomResourceFunctionDefinition {
+  /**
+   * The function name as it will appear in the policy rule. eg - 'vault'.
+   */
+  name?: string;
+
+  /**
+   * The fully qualified control plane resource type that this function represents. eg - 'Microsoft.KeyVault/vaults'.
+   */
+  fullyQualifiedResourceType?: string;
+
+  /**
+   * The top-level properties that can be selected on the function's output. eg - [ \"name\", \"location\" ] if vault().name and vault().location are supported.
+   */
+  defaultProperties?: string[];
+
+  /**
+   * A value indicating whether the custom properties within the property bag are allowed. Needs api-version to be specified in the policy rule eg - vault('2019-06-01').
+   */
+  allowCustomProperties?: boolean;
+}
+
+/**
+ * The resource functions supported by a manifest.
+ */
+@added(Versions.v2025_11_01)
+model DataManifestResourceFunctionsDefinition {
+  /**
+   * The standard resource functions (subscription and/or resourceGroup).
+   */
+  standard?: string[];
+
+  /**
+   * An array of data manifest custom resource definitions.
+   */
+  @identifiers(#["name", "fullyQualifiedResourceType"])
+  custom?: DataManifestCustomResourceFunctionDefinition[];
+}
+
+/**
+ * The data effect definition.
+ */
+@added(Versions.v2025_11_01)
+model DataEffect {
+  /**
+   * The data effect name.
+   */
+  name?: string;
+
+  /**
+   * The data effect details schema.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  detailsSchema?: unknown;
+}
+
+/**
+ * The resource type aliases definition.
+ */
+@added(Versions.v2025_11_01)
+model ResourceTypeAliases {
+  /**
+   * The resource type name.
+   */
+  resourceType?: string;
+
+  /**
+   * The aliases for property names.
+   */
+  @identifiers(#["name"])
+  aliases?: Alias[];
+}
+
+/**
+ * The properties of the data policy manifest.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_11_01)
+model DataPolicyManifestProperties {
+  /**
+   * The list of namespaces for the data policy manifest.
+   */
+  namespaces?: string[];
+
+  /**
+   * The policy mode of the data policy manifest.
+   */
+  policyMode?: string;
+
+  /**
+   * A value indicating whether policy mode is allowed only in built-in definitions.
+   */
+  isBuiltInOnly?: boolean;
+
+  /**
+   * An array of resource type aliases.
+   */
+  @identifiers(#["resourceType"])
+  resourceTypeAliases?: ResourceTypeAliases[];
+
+  /**
+   * The effect definition.
+   */
+  @identifiers(#["name"])
+  effects?: DataEffect[];
+
+  /**
+   * The non-alias field accessor values that can be used in the policy rule.
+   */
+  fieldValues?: string[];
+
+  /**
+   * The resource functions definition specified in the data manifest.
+   */
+  resourceFunctions?: DataManifestResourceFunctionsDefinition;
 }

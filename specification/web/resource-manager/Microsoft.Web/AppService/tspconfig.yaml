@@ -12,6 +12,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+    xml-strategy: "none"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-web"
     namespace: "azure.mgmt.web"
@@ -32,7 +33,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/appservice"
     emitter-output-dir: "{output-dir}/{service-dir}/armappservice"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice/v5"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
