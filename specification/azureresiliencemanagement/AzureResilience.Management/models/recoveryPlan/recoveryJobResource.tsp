@@ -41,22 +41,27 @@ model RecoveryJobResourceProperties extends JobResourceProperties {
 @added(Versions.v2026_03_01_preview)
 @doc("Settings for a recovery group action.")
 model RecoveryGroupActionSettings {
+  @added(Versions.v2026_03_01_preview)
   @doc("The action task associated with this job resource.")
   @visibility(Lifecycle.Read)
   actionTask?: ActionTask;
 
+  @added(Versions.v2026_03_01_preview)
   @doc("Sequence number for the action.")
   @visibility(Lifecycle.Read)
   actionSequence?: int32;
 
+  @added(Versions.v2026_03_01_preview)
   @doc("Type of the recovery group action.")
   @visibility(Lifecycle.Read)
   recoveryGroupActionType?: RecoveryGroupActionType;
 
+  @added(Versions.v2026_03_01_preview)
   @doc("Name of the action.")
   @visibility(Lifecycle.Read)
   actionName?: string;
 
+  @added(Versions.v2026_03_01_preview)
   @doc("User description of the action.")
   @visibility(Lifecycle.Read)
   actionDescription?: string;

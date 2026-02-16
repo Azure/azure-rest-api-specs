@@ -61,9 +61,11 @@ union JobTriggeredBy {
 @added(Versions.v2026_03_01_preview)
 @doc("The type of user comment.")
 union CommentType {
+  @added(Versions.v2026_03_01_preview)
   @doc("A general description comment.")
   Description: "Description",
 
+  @added(Versions.v2026_03_01_preview)
   @doc("A comment indicating the reason for resuming a job.")
   ResumeReason: "ResumeReason",
 

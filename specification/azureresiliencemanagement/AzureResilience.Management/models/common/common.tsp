@@ -198,12 +198,15 @@ union JobResourceType {
 @added(Versions.v2026_03_01_preview)
 @doc("An action task type indicates the type of action task.")
 union ActionTask {
+  @added(Versions.v2026_03_01_preview)
   @doc("No action task.")
   None: "None",
 
+  @added(Versions.v2026_03_01_preview)
   @doc("Pre-action task.")
   PreActionTask: "PreActionTask",
 
+  @added(Versions.v2026_03_01_preview)
   @doc("Post-action task.")
   PostActionTask: "PostActionTask",
 
