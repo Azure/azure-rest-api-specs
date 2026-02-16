@@ -251,7 +251,7 @@ model FailoverRequestProperties {
   selectedResourceIds?: armResourceIdentifier<[
     {
       type: "Microsoft.AzureResilienceManagement/recoveryPlans/recoveryResources";
-    },
+    }
   ]>[];
 
   @added(Versions.v2026_03_01_preview)
