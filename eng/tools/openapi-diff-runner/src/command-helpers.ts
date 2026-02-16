@@ -1,5 +1,6 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses, swagger } from "@azure-tools/specs-shared/changed-files";
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { logError, LogLevel, logMessage, setOutput } from "./log.js";
@@ -131,6 +132,7 @@ export async function getSwaggerDiffs(
   additions: string[];
   modifications: string[];
   deletions: string[];
+  renames: { from: string; to: string }[];
   total: number;
 }> {
   try {
@@ -139,26 +141,53 @@ export async function getSwaggerDiffs(
       baseCommitish: options.baseCommitish,
       cwd: options.cwd,
       headCommitish: options.headCommitish,
+      logger: defaultLogger,
       paths: ["specification"],
     });
 
     // Filter each array to only include Swagger files using the swagger filter from changed-files.js
-    const filteredAdditions = result.additions.filter(swagger);
+    let filteredAdditions = result.additions.filter(swagger);
     const filteredModifications = result.modifications.filter(swagger);
-    const filteredDeletions = result.deletions.filter(swagger);
-    const filteredRenames = result.renames.filter(
+    let filteredDeletions = result.deletions.filter(swagger);
+    let filteredRenames = result.renames.filter(
       (rename) => swagger(rename.from) && swagger(rename.to),
     );
 
-    // Add renamed files to the additions array and deletions array
-    filteredAdditions.push(...filteredRenames.map((rename) => rename.to));
-    filteredDeletions.push(...filteredRenames.map((rename) => rename.from));
+    // Store matches in temp array, to avoid modifying "filteredDeletions" while iterating
+    const matchedRenames: { from: string; to: string }[] = [];
+
+    // Try to manually match deletions with additions to form renames
+    for (const deletion of filteredDeletions) {
+      const deletionDir = path.dirname(deletion).toLowerCase();
+
+      const additionMatches = filteredAdditions.filter(
+        (a) => path.dirname(a).toLowerCase() === deletionDir,
+      );
+
+      // If there are multiple matching additions (which should be rare), it's safest
+      // to add all the combinations as "renames".  This will probably always trigger a check failure,
+      // but it's safest to "fail closed" this way, rather than ignoring the files.
+      for (const addition of additionMatches) {
+        matchedRenames.push({ from: deletion, to: addition });
+      }
+    }
+
+    const renamesFrom = matchedRenames.map((r) => r.from);
+    const renamesTo = matchedRenames.map((r) => r.to);
+    filteredAdditions = filteredAdditions.filter((a) => !renamesTo.includes(a));
+    filteredDeletions = filteredDeletions.filter((d) => !renamesFrom.includes(d));
+    filteredRenames = filteredRenames.concat(matchedRenames);
 
     return {
       additions: filteredAdditions,
       modifications: filteredModifications,
       deletions: filteredDeletions,
-      total: filteredAdditions.length + filteredModifications.length + filteredDeletions.length,
+      renames: filteredRenames,
+      total:
+        filteredAdditions.length +
+        filteredModifications.length +
+        filteredDeletions.length +
+        filteredRenames.length,
     };
   } catch (error) {
     logError(`Error getting categorized changed files: ${error}`);
@@ -167,6 +196,7 @@ export async function getSwaggerDiffs(
       additions: [],
       modifications: [],
       deletions: [],
+      renames: [],
       total: 0,
     };
   }
