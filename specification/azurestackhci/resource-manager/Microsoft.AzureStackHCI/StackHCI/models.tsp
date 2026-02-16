@@ -1176,13 +1176,13 @@ union State {
   /**
    * The health check has expired and needs to be redone.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_15_preview)
   HealthCheckExpired: "HealthCheckExpired",
 
   /**
    * The update is pending OEM validation before it can proceed.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_15_preview)
   PendingOEMValidation: "PendingOEMValidation",
 }
 
@@ -1768,7 +1768,7 @@ model ArcSettingsPatch {
    */
   properties?: ArcSettingsPatchProperties;
 
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_15_preview)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
@@ -2002,14 +2002,14 @@ model ClusterProperties {
   /**
    * Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProperties?: ConfidentialVmProperties;
 
   /**
    * Software Defined Networking Properties of the cluster
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read)
   sdnProperties?: ClusterSdnProperties;
 
@@ -5393,7 +5393,7 @@ model HciNetworkProfile {
     oftware Defined Networking Properties of the cluster
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_15_preview)
   sdnProperties?: SdnProperties;
 }
 
@@ -5835,14 +5835,14 @@ model ReportedProperties {
   /**
    * Most recent edge device sync timestamp in UTC.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 
   /**
    * CVM support details for edge device.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2026_03_15_preview)
   @visibility(Lifecycle.Read)
   confidentialVmProfile?: ConfidentialVmProfile;
 }
@@ -5850,7 +5850,7 @@ model ReportedProperties {
 /**
  * Request body for the check updates action on update summaries.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 model CheckUpdatesRequest {
   /**
    * Name of update
@@ -5861,7 +5861,7 @@ model CheckUpdatesRequest {
 /**
  * ClusterJob Type supported.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 union HciJobType {
   string,
 
@@ -5883,7 +5883,7 @@ union HciJobType {
 }
 
 /** Properties for configuring arc gateway to a cluster. */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureArcGateway;
@@ -5892,7 +5892,7 @@ model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
 /**
  * Properties for creating GPU partitions for virtualization and workload isolation.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 model GpuCreatePartitionJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.GpuCreatePartition;
@@ -5906,7 +5906,7 @@ model GpuCreatePartitionJobProperties extends ClusterJobProperties {
 /**
  * Properties for switching GPU mode between DDA and GPU-P for different workload requirements.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 model GpuSwitchModeJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.GpuSwitchMode;
@@ -5920,7 +5920,7 @@ model GpuSwitchModeJobProperties extends ClusterJobProperties {
 /**
  * GPU modes supported.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 union GpuMode {
   string,
 
@@ -5937,7 +5937,7 @@ union GpuMode {
 /**
  * Properties for configuring SDN integration intent for the cluster.
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 model HciConfigureSdnIntegrationJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureSdnIntegration;
@@ -5958,7 +5958,7 @@ model HciConfigureSdnIntegrationJobProperties extends ClusterJobProperties {
 /**
  * Defines the customer's intent for updating confidential VM properties
  */
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 model HciConfigureCvmJobProperties extends ClusterJobProperties {
   /** ClusterJob Type to support polymorphic resource. */
   jobType: HciJobType.ConfigureCVM;
@@ -5969,14 +5969,14 @@ model HciConfigureCvmJobProperties extends ClusterJobProperties {
   confidentialVmIntent: ConfidentialVmIntent;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 @doc("Request for Add/Remove Devices to the pool.")
 model ListOfDevicesRequest {
   @doc("List of resource ids of the devices to be modified")
   devices: Azure.Core.armResourceIdentifier[];
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 @doc("Request for claiming devices of the pool.")
 model ClaimDeviceRequest {
   @doc("List of resource ids of the devices to be modified")
@@ -5986,14 +5986,14 @@ model ClaimDeviceRequest {
   claimedBy?: string;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 @doc("Request for releasing devices of the pool.")
 model ReleaseDeviceRequest {
   @doc("List of resource ids of the devices to be modified")
   devices: Azure.Core.armResourceIdentifier[];
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 @doc("Properties for device pool.")
 model DevicePoolProperties {
   @doc("The provisioning state of a resource.")
@@ -6024,14 +6024,14 @@ model DevicePoolProperties {
   operationDetails?: OperationDetail[];
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 @doc("Properties for patching Device Pool.")
 model DevicePoolPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-@added(Versions.v2026_03_01_preview)
+@added(Versions.v2026_03_15_preview)
 @doc("Device details.")
 model DeviceDetail {
   @doc("Resource Id of the device.")
