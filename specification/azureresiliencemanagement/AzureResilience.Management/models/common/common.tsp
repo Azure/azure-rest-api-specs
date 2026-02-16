@@ -221,10 +221,38 @@ union FailoverDirectionTypes {
   string,
 }
 
+@added(Versions.v2026_03_01_preview)
+@doc("User consent for performing recovery action.")
+union UserConsent {
+  @doc("User consent is not specified for the operation.")
+  Unspecified: "Unspecified",
+
+  @doc("Action is allowed with user consent.")
+  Allowed: "Allowed",
+
+  string,
+}
+
+@added(Versions.v2026_03_01_preview)
+@doc("Execution configurations for recovery action.")
+model ExecutionConfigurations {
+  @added(Versions.v2026_03_01_preview)
+  @doc("User consent for performing recovery action.")
+  userConsent: UserConsent;
+}
+
 @doc("Additional properties for Failover.")
 model FailoverRequestProperties {
   @doc("Source locations from where resources to be failed-over.")
   sourceLocations: string[];
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Selected recovery resource Ids to be processed. If not provided, all resources in the source location(s) will be processed.")
+  selectedResourceIds?: string[];
+
+  @added(Versions.v2026_03_01_preview)
+  @doc("Execution configurations for the recovery action.")
+  executionConfigurations?: ExecutionConfigurations;
 }
 
 @doc("Failover post action request.")

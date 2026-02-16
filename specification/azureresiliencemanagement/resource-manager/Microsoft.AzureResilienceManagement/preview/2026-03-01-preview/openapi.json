@@ -7441,6 +7441,19 @@
         ]
       }
     },
+    "ExecutionConfigurations": {
+      "type": "object",
+      "description": "Execution configurations for recovery action.",
+      "properties": {
+        "userConsent": {
+          "$ref": "#/definitions/UserConsent",
+          "description": "User consent for performing recovery action."
+        }
+      },
+      "required": [
+        "userConsent"
+      ]
+    },
     "ExecutionReadinessState": {
       "type": "string",
       "description": "Drill Execution Readiness State",
@@ -7604,6 +7617,17 @@
           "items": {
             "type": "string"
           }
+        },
+        "selectedResourceIds": {
+          "type": "array",
+          "description": "Selected recovery resource Ids to be processed. If not provided, all resources in the source location(s) will be processed.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "executionConfigurations": {
+          "$ref": "#/definitions/ExecutionConfigurations",
+          "description": "Execution configurations for the recovery action."
         }
       },
       "required": [
@@ -8484,6 +8508,11 @@
           "description": "The type of job.",
           "readOnly": true
         },
+        "executionConfigurations": {
+          "$ref": "#/definitions/ExecutionConfigurations",
+          "description": "Execution configurations for the job.",
+          "readOnly": true
+        },
         "triggeredBy": {
           "$ref": "#/definitions/JobTriggeredBy",
           "description": "Indicates whether the job was triggered by the system or a user.",
@@ -8679,6 +8708,7 @@
       "type": "string",
       "description": "Job Statuses",
       "enum": [
+        "NotApplicable",
         "NotStarted",
         "Pending",
         "InProgress",
@@ -8694,6 +8724,11 @@
         "name": "JobStatus",
         "modelAsString": true,
         "values": [
+          {
+            "name": "NotApplicable",
+            "value": "NotApplicable",
+            "description": "The job status is not applicable."
+          },
           {
             "name": "NotStarted",
             "value": "NotStarted",
@@ -11385,6 +11420,30 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "UserConsent": {
+      "type": "string",
+      "description": "User consent for performing recovery action.",
+      "enum": [
+        "Unspecified",
+        "Allowed"
+      ],
+      "x-ms-enum": {
+        "name": "UserConsent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unspecified",
+            "value": "Unspecified",
+            "description": "User consent is not specified for the operation."
+          },
+          {
+            "name": "Allowed",
+            "value": "Allowed",
+            "description": "Action is allowed with user consent."
+          }
+        ]
       }
     },
     "VMPresent": {
