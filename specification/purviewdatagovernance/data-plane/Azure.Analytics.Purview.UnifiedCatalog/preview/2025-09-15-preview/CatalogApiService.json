@@ -6439,8 +6439,7 @@
           "type": "object",
           "description": "The width counts for input and output directions.",
           "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
+            "$ref": "#/definitions/LineageWidthCount"
           }
         }
       }
@@ -6526,6 +6525,14 @@
           "type": "string",
           "description": "The user who created the term assignment."
         }
+      }
+    },
+    "LineageWidthCount": {
+      "type": "object",
+      "description": "A map of entity GUIDs to their lineage width counts.",
+      "additionalProperties": {
+        "format": "int32",
+        "type": "integer"
       }
     },
     "ModelsFacetRequestObject": {

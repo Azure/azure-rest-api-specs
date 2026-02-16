@@ -1870,6 +1870,11 @@ model LineageParentRelation {
   parentEntityId?: string;
 }
 
+@doc("A map of entity GUIDs to their lineage width counts.")
+model LineageWidthCount {
+  ...Record<int32>;
+}
+
 @doc("The lineage information for an entity.")
 model LineageInfo {
   @doc("The GUID of the base entity.")
@@ -1899,7 +1904,6 @@ model LineageInfo {
   @doc("An array of parent relations.")
   parentRelations?: LineageParentRelation[];
 
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Should use Record<unknown> to model Map<String,Object>"
   @doc("The width counts for input and output directions.")
-  widthCounts?: Record<Record<unknown>>;
+  widthCounts?: Record<LineageWidthCount>;
 }
