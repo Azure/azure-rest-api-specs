@@ -8,6 +8,10 @@ import "./models.common.images.tsp";
 using TypeSpec.Http;
 namespace Microsoft.PlanetaryComputer;
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC queryable definitions contain mixed types (objects, booleans, strings)"
+@doc("Queryable definitions response.")
+model QueryableDefinitionsResponse is Record<unknown>;
+
 interface StacCollectionAssets {
   /**
    * Create a new asset in the Collection metadata and write the associated
@@ -577,7 +581,7 @@ interface StacQueryables {
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   @route("/stac/queryables")
   @get
-  getAll is Azure.Core.Foundations.Operation<{}, Record<unknown>>;
+  getAll is Azure.Core.Foundations.Operation<{}, QueryableDefinitionsResponse>;
   /**
    * Delete queryables by name for specified collection.
    */
@@ -624,7 +628,7 @@ interface StacQueryables {
       @pattern(".*")
       collectionId: string;
     },
-    Record<unknown>
+    QueryableDefinitionsResponse
   >;
   /**
    * Set queryables for a collection given a list of queryable definitions

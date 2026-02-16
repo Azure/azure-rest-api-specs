@@ -10,6 +10,7 @@ using Azure.Core.Foundations;
 namespace Microsoft.PlanetaryComputer;
 
 @doc("Generic paged response model")
+@friendlyName("{name}PagedResponse", T)
 model Page<T> {
   @doc("The items on the page")
   @pageItems

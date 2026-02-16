@@ -8,6 +8,10 @@ using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Response values are RGBA color arrays, not strings"
+@doc("Classmap legend response containing values and color swatches mapping.")
+model ClassMapLegendResponse is Record<unknown>;
+
 interface MapsIntervalLegends {
   /**
    * Generate values and color swatches mapping for a given interval classmap.
@@ -97,7 +101,7 @@ interface MapsClassMapLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    Record<unknown>
+    ClassMapLegendResponse
   >;
 }
 

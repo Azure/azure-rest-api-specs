@@ -924,13 +924,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "additionalProperties": {
-                  "$ref": "#/definitions/BandStatistics"
-                },
-                "type": "object"
-              }
+              "$ref": "#/definitions/AssetStatisticsResponse"
             }
           },
           "default": {
@@ -2056,10 +2050,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/TilerInfo"
-              }
+              "$ref": "#/definitions/TilerInfoMapResponse"
             }
           },
           "default": {
@@ -3704,8 +3695,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/ClassMapLegendResponse"
             }
           },
           "default": {
@@ -7280,25 +7270,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Generic paged response model",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The items on the page",
-                  "items": {
-                    "$ref": "#/definitions/IngestionDefinition"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/IngestionDefinitionPagedResponse"
             }
           },
           "default": {
@@ -7567,25 +7539,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Generic paged response model",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The items on the page",
-                  "items": {
-                    "$ref": "#/definitions/IngestionRun"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/IngestionRunPagedResponse"
             }
           },
           "default": {
@@ -7731,25 +7685,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Generic paged response model",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The items on the page",
-                  "items": {
-                    "$ref": "#/definitions/IngestionSourceSummary"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/IngestionSourceSummaryPagedResponse"
             }
           },
           "default": {
@@ -7989,25 +7925,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Generic paged response model",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The items on the page",
-                  "items": {
-                    "$ref": "#/definitions/ManagedIdentityMetadata"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/ManagedIdentityMetadataPagedResponse"
             }
           },
           "default": {
@@ -8113,25 +8031,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "Generic paged response model",
-              "properties": {
-                "value": {
-                  "type": "array",
-                  "description": "The items on the page",
-                  "items": {
-                    "$ref": "#/definitions/Operation"
-                  }
-                },
-                "nextLink": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "Link to the next page of results"
-                }
-              },
-              "required": [
-                "value"
-              ]
+              "$ref": "#/definitions/OperationPagedResponse"
             }
           },
           "default": {
@@ -10248,8 +10148,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/QueryableDefinitionsResponse"
             }
           },
           "default": {
@@ -10570,8 +10469,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "$ref": "#/definitions/QueryableDefinitionsResponse"
             }
           },
           "default": {
@@ -10914,6 +10812,13 @@
         "description"
       ]
     },
+    "AssetStatisticsResponse": {
+      "type": "object",
+      "description": "Return dataset's statistics.",
+      "additionalProperties": {
+        "$ref": "#/definitions/BandStatisticsMap"
+      }
+    },
     "AvailableAssets": {
       "type": "object",
       "description": "Return a list of supported assets.",
@@ -11113,6 +11018,18 @@
         "percentile_2",
         "percentile_98"
       ]
+    },
+    "BandStatisticsMap": {
+      "type": "object",
+      "description": "Map of band names to their statistics.",
+      "additionalProperties": {
+        "$ref": "#/definitions/BandStatistics"
+      }
+    },
+    "ClassMapLegendResponse": {
+      "type": "object",
+      "description": "Classmap legend response containing values and color swatches mapping.",
+      "additionalProperties": {}
     },
     "ColorMapNames": {
       "type": "string",
@@ -12757,6 +12674,27 @@
         "status"
       ]
     },
+    "IngestionDefinitionPagedResponse": {
+      "type": "object",
+      "description": "Generic paged response model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The items on the page",
+          "items": {
+            "$ref": "#/definitions/IngestionDefinition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the next page of results"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "IngestionDefinitionUpdate": {
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion creation model",
@@ -12901,6 +12839,27 @@
         "totalFailedItems"
       ]
     },
+    "IngestionRunPagedResponse": {
+      "type": "object",
+      "description": "Generic paged response model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The items on the page",
+          "items": {
+            "$ref": "#/definitions/IngestionRun"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the next page of results"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "IngestionSource": {
       "type": "object",
       "description": "Ingestion Source",
@@ -12951,6 +12910,27 @@
       "required": [
         "id",
         "kind"
+      ]
+    },
+    "IngestionSourceSummaryPagedResponse": {
+      "type": "object",
+      "description": "Generic paged response model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The items on the page",
+          "items": {
+            "$ref": "#/definitions/IngestionSourceSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the next page of results"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "IngestionSourceType": {
@@ -13144,6 +13124,27 @@
       "required": [
         "objectId",
         "resourceId"
+      ]
+    },
+    "ManagedIdentityMetadataPagedResponse": {
+      "type": "object",
+      "description": "Generic paged response model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The items on the page",
+          "items": {
+            "$ref": "#/definitions/ManagedIdentityMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the next page of results"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "MosaicMetadata": {
@@ -13426,6 +13427,27 @@
         "statusHistory"
       ]
     },
+    "OperationPagedResponse": {
+      "type": "object",
+      "description": "Generic paged response model",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The items on the page",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Link to the next page of results"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "OperationStatus": {
       "type": "string",
       "description": "Operation status",
@@ -13679,6 +13701,11 @@
         }
       ],
       "x-ms-discriminator-value": "Polygon"
+    },
+    "QueryableDefinitionsResponse": {
+      "type": "object",
+      "description": "Queryable definitions response.",
+      "additionalProperties": {}
     },
     "RegisterMosaic": {
       "type": "object",
@@ -16716,6 +16743,13 @@
         "geometry",
         "properties"
       ]
+    },
+    "TilerInfoMapResponse": {
+      "type": "object",
+      "description": "Return dataset's basic info.",
+      "additionalProperties": {
+        "$ref": "#/definitions/TilerInfo"
+      }
     },
     "TilerMosaicSearchRegistrationResponse": {
       "type": "object",

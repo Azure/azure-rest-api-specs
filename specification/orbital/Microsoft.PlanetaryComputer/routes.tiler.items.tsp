@@ -9,6 +9,15 @@ using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
 
+@doc("Map of band names to their statistics.")
+model BandStatisticsMap is Record<BandStatistics>;
+
+@doc("Return dataset's statistics.")
+model AssetStatisticsResponse is Record<BandStatisticsMap>;
+
+@doc("Return dataset's basic info.")
+model TilerInfoMapResponse is Record<TilerInfo>;
+
 interface TilerBound {
   /**
    * Return all Bounds
@@ -74,7 +83,7 @@ interface TilerInfoOperations {
       @query(#{ explode: true })
       assets?: string[];
     },
-    Record<TilerInfo>
+    TilerInfoMapResponse
   >;
 }
 
@@ -162,7 +171,7 @@ interface TilerAssetStatistics {
       ...getAssetStatisticsCustomizedCommonSignatures;
       ...StatisticsQueryParameters;
     },
-    Record<Record<BandStatistics>>
+    AssetStatisticsResponse
   >;
 }
 
