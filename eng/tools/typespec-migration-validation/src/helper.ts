@@ -62,7 +62,7 @@ export function mergeFiles(folderPath: string): OpenAPI2Document {
   };
 
   for (const file of files) {
-    const fileContent = readFileContent(file);
+    const fileContent = readFileContent(file).replace(/^\uFEFF/, "");
     const jsonContent: OpenAPI2Document = JSON.parse(fileContent);
     mergedContent.info = jsonContent.info;
 

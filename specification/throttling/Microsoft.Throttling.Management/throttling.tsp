@@ -127,7 +127,7 @@ model EntraProperties {
 
 @doc("Throttling rules")
 @parentResource(ThrottlingAccount)
-model Rule is TrackedResource<RuleProperties> {
+model Rule is ProxyResource<RuleProperties> {
   @doc("Throttling rule name")
   @key("ruleName")
   @segment("rules")

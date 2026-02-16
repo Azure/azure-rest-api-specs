@@ -228,7 +228,7 @@ model ManagedOpUpdate {
 model ManagedOpUpdateProperties {
   @doc("Desired configuration input by the user.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  desiredConfiguration: DesiredConfigurationUpdate;
+  desiredConfiguration?: DesiredConfigurationUpdate;
 }
 
 @doc("Updatable parameters in the Desired configuration input.")
