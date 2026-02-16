@@ -802,43 +802,6 @@ model Operation {
 
   @doc("Error information")
   error?: ErrorInfo;
-
-  @lroResult
-  @doc("Document analysis result.")
-  result?: OperationResult;
-}
-
-@doc("Microsoft Planetary Computer Pro geo-catalog operation")
-model OperationResult {
-  @doc("Operation id")
-  id: uuid;
-
-  @doc("Operation status")
-  status: OperationStatus;
-
-  @doc("Operation type")
-  type: string;
-
-  @doc("The UTC time at which the operation was created")
-  creationTime: utcDateTime;
-
-  @doc("Collection ID")
-  collectionId?: string;
-
-  @doc("The history of the operation status in time")
-  statusHistory: OperationStatusHistoryItem[];
-
-  @doc("The UTC time at which the operation was started")
-  startTime?: utcDateTime;
-
-  @doc("The UTC time at which the operation finished its execution")
-  finishTime?: utcDateTime;
-
-  @doc("Additional information elements about the particular operation type")
-  additionalInformation?: Record<string>;
-
-  @doc("Error information")
-  error?: ErrorInfo;
 }
 
 @doc("Operation status")
