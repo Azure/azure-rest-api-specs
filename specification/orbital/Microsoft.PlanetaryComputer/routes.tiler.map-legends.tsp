@@ -2,15 +2,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.common.images.tsp";
+import "./models.tiler.map-legends.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
-
-#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Response values are RGBA color arrays, not strings"
-@doc("Classmap legend response containing values and color swatches mapping.")
-model ClassMapLegendResponse is Record<unknown>;
 
 interface MapsIntervalLegends {
   /**
@@ -66,7 +63,7 @@ interface MapsIntervalLegends {
       @query("trim_end")
       trimEnd?: int32;
     },
-    Record<unknown>
+    IntervalLegendsResponse
   >;
 }
 

@@ -3849,10 +3849,19 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Interval legend response model.\n\nRepresents a color map for intervals, where each interval is defined by:\n- A numeric range `[min, max]` representing the interval boundaries.\n- An RGBA color `[red, green, blue, alpha]` associated with the interval.\n\nThe response is a 2D array of interval definitions, where each element is a pair:\n- The first element is an array of two numbers `[min, max]` defining the interval.\n- The second element is an array of four numbers `[red, green, blue, alpha]` defining the RGBA color.\n\nExample:\n```json\n[\n  [\n    [-2, 0], [0, 0, 0, 0]\n  ],\n  [\n    [1, 32], [255, 255, 178, 255]\n  ]\n]\n```\nThis example defines two intervals:\n- The interval `[-2, 0]` is mapped to the color `[0, 0, 0, 0]` (transparent black).\n- The interval `[1, 32]` is mapped to the color `[255, 255, 178, 255]` (opaque yellow).",
             "schema": {
-              "type": "object",
-              "additionalProperties": {}
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                }
+              }
             }
           },
           "default": {
@@ -11028,7 +11037,7 @@
     },
     "ClassMapLegendResponse": {
       "type": "object",
-      "description": "Classmap legend response containing values and color swatches mapping.",
+      "description": "ClassMap legend response model.",
       "additionalProperties": {}
     },
     "ColorMapNames": {
