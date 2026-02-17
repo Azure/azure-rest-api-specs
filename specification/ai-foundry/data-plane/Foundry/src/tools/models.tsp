@@ -782,4 +782,297 @@ namespace Azure.AI.Projects {
 
     ...MemorySearchToolCallItemBase;
   }
+
+  // ==============================================================================
+  // Grounding Tool Call Document Models
+  // ==============================================================================
+
+  @doc("A document returned from a grounding tool search.")
+  model GroundingToolCallDocument {
+    @doc("The unique identifier of the document.")
+    id?: string;
+
+    @doc("The content of the document.")
+    content?: string;
+
+    @doc("The file path or source path of the document.")
+    filepath?: string;
+
+    @doc("The title of the document.")
+    title?: string;
+
+    @doc("The URL of the document.")
+    url?: string;
+
+    @doc("The relevance score of the document.")
+    score?: float64;
+
+    @doc("The index of the knowledge source that provided the document.")
+    knowledgeSourceIndex?: int32;
+  }
+
+  // ==============================================================================
+  // Bing Grounding Tool Call Item Models
+  // ==============================================================================
+
+  alias BingGroundingToolCallItemBase = {
+    @doc("The query used for the Bing search.")
+    query?: string;
+  };
+
+  alias BingGroundingToolCallOutputBase = {
+    @doc("The documents returned from the Bing grounding search.")
+    documents?: GroundingToolCallDocument[];
+  };
+
+  @doc("A Bing grounding tool call item for input.")
+  model BingGroundingToolCallItemParam extends OpenAI.Item {
+    type: "bing_grounding_call";
+    ...BingGroundingToolCallItemBase;
+  }
+
+  @doc("A Bing grounding tool call item resource.")
+  model BingGroundingToolCallItemResource extends OpenAI.OutputItem {
+    type: "bing_grounding_call";
+
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    @doc("The status of the Bing grounding tool call.")
+    status: "in_progress" | "completed" | "incomplete" | "failed";
+
+    ...BingGroundingToolCallItemBase;
+    ...BingGroundingToolCallOutputBase;
+  }
+
+  // ==============================================================================
+  // SharePoint Grounding Tool Call Item Models
+  // ==============================================================================
+
+  alias SharepointGroundingToolCallItemBase = {
+    @doc("The query used for the SharePoint search.")
+    query?: string;
+  };
+
+  alias SharepointGroundingToolCallOutputBase = {
+    @doc("The documents returned from the SharePoint grounding search.")
+    documents?: GroundingToolCallDocument[];
+  };
+
+  @doc("A SharePoint grounding tool call item for input.")
+  model SharepointGroundingToolCallItemParam extends OpenAI.Item {
+    type: "sharepoint_grounding_preview_call";
+    ...SharepointGroundingToolCallItemBase;
+  }
+
+  @doc("A SharePoint grounding tool call item resource.")
+  model SharepointGroundingToolCallItemResource extends OpenAI.OutputItem {
+    type: "sharepoint_grounding_preview_call";
+
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    @doc("The status of the SharePoint grounding tool call.")
+    status: "in_progress" | "completed" | "incomplete" | "failed";
+
+    ...SharepointGroundingToolCallItemBase;
+    ...SharepointGroundingToolCallOutputBase;
+  }
+
+  // ==============================================================================
+  // Azure AI Search Tool Call Item Models
+  // ==============================================================================
+
+  alias AzureAISearchToolCallItemBase = {
+    @doc("The query used for the Azure AI Search.")
+    query?: string;
+  };
+
+  alias AzureAISearchToolCallOutputBase = {
+    @doc("The documents returned from Azure AI Search.")
+    documents?: GroundingToolCallDocument[];
+
+    @doc("URLs to retrieve the full document content.")
+    get_urls?: string[];
+  };
+
+  @doc("An Azure AI Search tool call item for input.")
+  model AzureAISearchToolCallItemParam extends OpenAI.Item {
+    type: "azure_ai_search_call";
+    ...AzureAISearchToolCallItemBase;
+  }
+
+  @doc("An Azure AI Search tool call item resource.")
+  model AzureAISearchToolCallItemResource extends OpenAI.OutputItem {
+    type: "azure_ai_search_call";
+
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    @doc("The status of the Azure AI Search tool call.")
+    status: "in_progress" | "completed" | "incomplete" | "failed";
+
+    ...AzureAISearchToolCallItemBase;
+    ...AzureAISearchToolCallOutputBase;
+  }
+
+  // ==============================================================================
+  // Bing Custom Search Tool Call Item Models
+  // ==============================================================================
+
+  alias BingCustomSearchToolCallItemBase = {
+    @doc("The query used for the Bing custom search.")
+    query?: string;
+  };
+
+  alias BingCustomSearchToolCallOutputBase = {
+    @doc("The documents returned from Bing custom search.")
+    documents?: GroundingToolCallDocument[];
+  };
+
+  @doc("A Bing custom search tool call item for input.")
+  model BingCustomSearchToolCallItemParam extends OpenAI.Item {
+    type: "bing_custom_search_preview_call";
+    ...BingCustomSearchToolCallItemBase;
+  }
+
+  @doc("A Bing custom search tool call item resource.")
+  model BingCustomSearchToolCallItemResource extends OpenAI.OutputItem {
+    type: "bing_custom_search_preview_call";
+
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    @doc("The status of the Bing custom search tool call.")
+    status: "in_progress" | "completed" | "incomplete" | "failed";
+
+    ...BingCustomSearchToolCallItemBase;
+    ...BingCustomSearchToolCallOutputBase;
+  }
+
+  // ==============================================================================
+  // OpenAPI Tool Call Item Models
+  // ==============================================================================
+
+  alias OpenApiToolCallItemBase = {
+    @doc("The name of the OpenAPI operation being called.")
+    name?: string;
+
+    @doc("The arguments passed to the OpenAPI operation as a JSON string.")
+    arguments?: string;
+  };
+
+  alias OpenApiToolCallOutputBase = {
+    @doc("The response from the OpenAPI operation.")
+    response?: unknown;
+  };
+
+  @doc("An OpenAPI tool call item for input.")
+  model OpenApiToolCallItemParam extends OpenAI.Item {
+    type: "openapi_call";
+    ...OpenApiToolCallItemBase;
+  }
+
+  @doc("An OpenAPI tool call item resource.")
+  model OpenApiToolCallItemResource extends OpenAI.OutputItem {
+    type: "openapi_call";
+
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    @doc("The status of the OpenAPI tool call.")
+    status: "in_progress" | "completed" | "incomplete" | "failed";
+
+    ...OpenApiToolCallItemBase;
+    ...OpenApiToolCallOutputBase;
+  }
+
+  // ==============================================================================
+  // Browser Automation Tool Call Item Models
+  // ==============================================================================
+
+  alias BrowserAutomationToolCallItemBase = {
+    @doc("The query or command for browser automation.")
+    query?: string;
+  };
+
+  alias BrowserAutomationToolCallOutputBase = {
+    @doc("The output from the browser automation operation.")
+    output?: unknown;
+  };
+
+  @doc("A browser automation tool call item for input.")
+  model BrowserAutomationToolCallItemParam extends OpenAI.Item {
+    type: "browser_automation_preview_call";
+    ...BrowserAutomationToolCallItemBase;
+  }
+
+  @doc("A browser automation tool call item resource.")
+  model BrowserAutomationToolCallItemResource extends OpenAI.OutputItem {
+    type: "browser_automation_preview_call";
+
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    @doc("The status of the browser automation tool call.")
+    status: "in_progress" | "completed" | "incomplete" | "failed";
+
+    ...BrowserAutomationToolCallItemBase;
+    ...BrowserAutomationToolCallOutputBase;
+  }
+
+  // ==============================================================================
+  // Fabric DataAgent Tool Call Item Models
+  // ==============================================================================
+
+  alias FabricDataAgentToolCallItemBase = {
+    @doc("The query for the Fabric data agent.")
+    query?: string;
+  };
+
+  alias FabricDataAgentToolCallOutputBase = {
+    @doc("The output from the Fabric data agent operation.")
+    output?: unknown;
+  };
+
+  @doc("A Fabric data agent tool call item for input.")
+  model FabricDataAgentToolCallItemParam extends OpenAI.Item {
+    type: "fabric_dataagent_preview_call";
+    ...FabricDataAgentToolCallItemBase;
+  }
+
+  @doc("A Fabric data agent tool call item resource.")
+  model FabricDataAgentToolCallItemResource extends OpenAI.OutputItem {
+    type: "fabric_dataagent_preview_call";
+
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    @doc("The status of the Fabric data agent tool call.")
+    status: "in_progress" | "completed" | "incomplete" | "failed";
+
+    ...FabricDataAgentToolCallItemBase;
+    ...FabricDataAgentToolCallOutputBase;
+  }
+
+  // ==============================================================================
+  // Azure Function Tool Call Item Models
+  // ==============================================================================
+
+  alias AzureFunctionToolCallItemBase = {
+    @doc("The name of the Azure Function being called.")
+    name?: string;
+
+    @doc("The arguments passed to the Azure Function as a JSON string.")
+    arguments?: string;
+  };
+
+  alias AzureFunctionToolCallOutputBase = {
+    @doc("The response from the Azure Function.")
+    response?: unknown;
+  };
+
+  @doc("An Azure Function tool call item for input.")
+  model AzureFunctionToolCallItemParam extends OpenAI.Item {
+    type: "azure_function_call";
+    ...AzureFunctionToolCallItemBase;
+  }
+
+  @doc("An Azure Function tool call item resource.")
+  model AzureFunctionToolCallItemResource extends OpenAI.OutputItem {
+    type: "azure_function_call";
+
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
+    @doc("The status of the Azure Function tool call.")
+    status: "in_progress" | "completed" | "incomplete" | "failed";
+
+    ...AzureFunctionToolCallItemBase;
+    ...AzureFunctionToolCallOutputBase;
+  }
 }
