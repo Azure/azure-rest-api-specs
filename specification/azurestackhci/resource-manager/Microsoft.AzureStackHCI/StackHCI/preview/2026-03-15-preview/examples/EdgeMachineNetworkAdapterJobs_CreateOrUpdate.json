@@ -11,7 +11,7 @@
     "resource": {
       "properties": {
         "jobType": "ApplyConfiguration",
-        "networkConfiguration": {
+        "targetConfiguration": {
           "adapterName": "vmanagement",
           "ip4Address": "192.168.200.100",
           "subnetMask": "255.255.255.0",
@@ -26,20 +26,22 @@
       "body": {
         "properties": {
           "jobType": "ApplyConfiguration",
-          "provisioningState": "Succeeded",
-          "jobId": "nic-job-002",
-          "startTimeUtc": "2024-11-14T10:46:55.167Z",
-          "endTimeUtc": "2024-11-14T10:50:55.167Z",
-          "status": "Succeeded",
-          "networkConfiguration": {
+          "targetConfiguration": {
             "adapterName": "vmanagement",
             "ip4Address": "192.168.200.100",
             "subnetMask": "255.255.255.0",
             "defaultGateway": "192.168.200.1",
             "dnsServers": ["192.168.200.222", "192.168.200.223"]
           },
+          "provisioningState": "Succeeded",
+          "status": "Succeeded",
           "reportedProperties": {
-            "percentComplete": 100
+            "validationStatus": {
+              "status": "Completed"
+            },
+            "deploymentStatus": {
+              "status": "Completed"
+            }
           }
         },
         "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/networkAdapters/vmanagement/jobs/nic-job-002",
@@ -59,19 +61,19 @@
       "body": {
         "properties": {
           "jobType": "ApplyConfiguration",
-          "provisioningState": "Creating",
-          "jobId": "nic-job-002",
-          "startTimeUtc": "2024-11-14T10:46:55.167Z",
-          "status": "Running",
-          "networkConfiguration": {
+          "targetConfiguration": {
             "adapterName": "vmanagement",
             "ip4Address": "192.168.200.100",
             "subnetMask": "255.255.255.0",
             "defaultGateway": "192.168.200.1",
             "dnsServers": ["192.168.200.222", "192.168.200.223"]
           },
+          "provisioningState": "Creating",
+          "status": "Running",
           "reportedProperties": {
-            "percentComplete": 25
+            "validationStatus": {
+              "status": "Running"
+            }
           }
         },
         "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-1/networkAdapters/vmanagement/jobs/nic-job-002",
