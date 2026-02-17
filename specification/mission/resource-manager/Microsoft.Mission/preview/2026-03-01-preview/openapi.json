@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Mission",
-    "version": "2026-01-01-preview",
+    "version": "2026-03-01-preview",
     "description": "Microsoft Mission Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -4900,6 +4900,13 @@
         "monitoringSettings": {
           "$ref": "#/definitions/MonitoringSettingsPatchModel",
           "description": "Community Monitoring Settings for diagnostic and virtual network flow logs"
+        },
+        "addressSpaces": {
+          "type": "array",
+          "description": "Address spaces list",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5019,6 +5026,13 @@
         "monitoringSettings": {
           "$ref": "#/definitions/MonitoringSettingsModel",
           "description": "Community Monitoring Settings for diagnostic and virtual network flow logs"
+        },
+        "addressSpaces": {
+          "type": "array",
+          "description": "Address spaces list",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
