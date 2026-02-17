@@ -6,39 +6,41 @@ This document captures the understanding of the Azure Stack HCI TypeSpec private
 
 ## Repository Locations
 
-| Repository | Path | Branch |
-|------------|------|--------|
-| **Private** | `c:\pvt\specs\specification\azurestackhci\resource-manager\Microsoft.AzureStackHCI\StackHCI` | RPSaaSMaster |
-| **Public** | `C:\pb\specs\specification\azurestackhci\resource-manager\Microsoft.AzureStackHCI\StackHCI` | main |
+| Repository | GitHub URL | Branch |
+|------------|------------|--------|
+| **Private** | [azure-rest-api-specs-pr](https://github.com/Azure/azure-rest-api-specs-pr) `/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCI` | RPSaaSMaster |
+| **Public** | [azure-rest-api-specs](https://github.com/Azure/azure-rest-api-specs) `/specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCI` | main |
 
 ## Repository Structure
+
+> **Note:** All TypeSpec files should use PascalCase naming (except `client.tsp`, `back-compatible.tsp`, `models.tsp`). See [typespec-style-guide.md](./typespec-style-guide.md) for details.
 
 ```
 StackHCI/
 ├── main.tsp              # Main entry point, version definitions
 ├── models.tsp            # Shared models, enums, and types
-├── commonModels.tsp      # CVM and SDN common models
+├── CommonModels.tsp      # CVM and SDN common models
 ├── client.tsp            # Python SDK configuration
 ├── Cluster.tsp           # Cluster resource and operations
 ├── ArcSetting.tsp        # ArcSetting resource
-├── clusterJobs.tsp       # Cluster jobs resource
-├── devicePool.tsp        # Device pool resource
-├── edgeMachine.tsp       # Edge machine resource
-├── edgeMachineJobs.tsp   # Edge machine jobs
-├── edgeMachineGpu.tsp    # Edge machine GPU resource (NEW)
-├── edgeMachineGpuJobs.tsp # Edge machine GPU jobs (NEW)
-├── edgeMachineStorage.tsp # Edge machine Storage - Disks, Volumes, DiskJobs (NEW)
-├── edgeMachineNetworkAdapters.tsp # Edge machine NetworkAdapters, Jobs (NEW)
-├── edgeDeviceMetadata.tsp # Edge device metadata resource (NEW)
-├── networkProfile.tsp    # Network profile resource - child of Cluster (NEW)
+├── ClusterJobs.tsp       # Cluster jobs resource
+├── DevicePool.tsp        # Device pool resource
+├── EdgeMachine.tsp       # Edge machine resource
+├── EdgeMachineJobs.tsp   # Edge machine jobs
+├── EdgeMachineGpu.tsp    # Edge machine GPU resource (PRIVATE)
+├── EdgeMachineGpuJobs.tsp # Edge machine GPU jobs (PRIVATE)
+├── EdgeMachineStorage.tsp # Edge machine Storage - Disks, Volumes, DiskJobs (PRIVATE)
+├── EdgeMachineNetworkAdapters.tsp # Edge machine NetworkAdapters, Jobs (PRIVATE)
+├── EdgeDeviceMetadata.tsp # Edge device metadata resource (PRIVATE)
+├── NetworkProfile.tsp    # Network profile resource - child of Cluster (PRIVATE)
 ├── DeploymentSetting.tsp # Deployment settings
 ├── EdgeDevice.tsp        # Edge device resource
 ├── EdgeDeviceJob.tsp     # Edge device jobs
 ├── Extension.tsp         # Extension resource
-├── kubernetesVersions.tsp # Kubernetes versions
-├── osImages.tsp          # OS images
-├── platformUpdates.tsp   # Platform updates
-├── updateContents.tsp    # Update contents
+├── KubernetesVersions.tsp # Kubernetes versions
+├── OsImages.tsp          # OS images
+├── PlatformUpdates.tsp   # Platform updates
+├── UpdateContents.tsp    # Update contents
 ├── Publisher.tsp         # Publisher resource
 ├── Offer.tsp             # Offer resource
 ├── Sku.tsp               # SKU resource
@@ -47,12 +49,17 @@ StackHCI/
 ├── UpdateRun.tsp         # Update run resource
 ├── UpdateSummaries.tsp   # Update summaries
 ├── ValidatedSolutionRecipe.tsp # Validated solution recipes
-├── validateOwnershipVouchers.tsp # Ownership voucher validation
+├── ValidateOwnershipVouchers.tsp # Ownership voucher validation
 ├── back-compatible.tsp   # Backward compatibility
 ├── Operations.tsp        # Operations
 ├── eng/                  # Engineering docs
-│   ├── private-repo-differences.md
-│   └── repo-understanding.md (this file)
+│   ├── convert-doc-to-jsdoc.ps1    # Script to convert @doc to /** */
+│   ├── model-validation.md          # Model validation guide
+│   ├── prettier-formatting.md       # JSON formatting guide
+│   ├── private-repo-differences.md  # Diff tracking
+│   ├── repo-understanding.md        # This file
+│   ├── typespec-style-guide.md      # TypeSpec style guide
+│   └── version-creator.md           # API version creation guide
 ├── examples/             # Example JSON files
 ├── preview/              # Preview version outputs
 ├── stable/               # Stable version outputs
@@ -226,6 +233,49 @@ Contains TSP files for features planned but not active:
 - **18 DIFFERENT** files (62%)
 - Differences are mostly version annotation changes
 - Generated GA OpenAPI specs are identical
+
+## Session History (2026-02-17)
+
+### Actions Completed
+1. Compared private vs public repos - identified differences
+2. Copied missing eng files from public repo:
+   - `convert-doc-to-jsdoc.ps1` - Script to convert @doc to /** */
+   - `typespec-style-guide.md` - TypeSpec coding standards
+   - `version-creator.md` - API version creation guide
+3. Renamed 16 TypeSpec files to PascalCase naming convention (per style guide)
+4. Updated `main.tsp` imports to use PascalCase paths
+5. Fixed imports in EdgeMachineGpuJobs.tsp, EdgeMachineNetworkAdapters.tsp, EdgeMachineStorage.tsp
+6. Compiled and verified - compilation successful
+7. Committed changes: "Refactor: Rename TypeSpec files to PascalCase and add eng documentation"
+
+### Files Renamed (lowercase → PascalCase)
+| Original | New |
+|----------|-----|
+| clusterJobs.tsp | ClusterJobs.tsp |
+| commonModels.tsp | CommonModels.tsp |
+| devicePool.tsp | DevicePool.tsp |
+| edgeDeviceMetadata.tsp | EdgeDeviceMetadata.tsp |
+| edgeMachine.tsp | EdgeMachine.tsp |
+| edgeMachineGpu.tsp | EdgeMachineGpu.tsp |
+| edgeMachineGpuJobs.tsp | EdgeMachineGpuJobs.tsp |
+| edgeMachineJobs.tsp | EdgeMachineJobs.tsp |
+| edgeMachineNetworkAdapters.tsp | EdgeMachineNetworkAdapters.tsp |
+| edgeMachineStorage.tsp | EdgeMachineStorage.tsp |
+| kubernetesVersions.tsp | KubernetesVersions.tsp |
+| networkProfile.tsp | NetworkProfile.tsp |
+| osImages.tsp | OsImages.tsp |
+| platformUpdates.tsp | PlatformUpdates.tsp |
+| updateContents.tsp | UpdateContents.tsp |
+| validateOwnershipVouchers.tsp | ValidateOwnershipVouchers.tsp |
+
+### Private-Only Files (not in public repo)
+- CommonModels.tsp (CVM/SDN models)
+- EdgeDeviceMetadata.tsp
+- EdgeMachineGpu.tsp
+- EdgeMachineGpuJobs.tsp
+- EdgeMachineStorage.tsp
+- EdgeMachineNetworkAdapters.tsp
+- NetworkProfile.tsp
 
 ## Next Steps (TODOs)
 
