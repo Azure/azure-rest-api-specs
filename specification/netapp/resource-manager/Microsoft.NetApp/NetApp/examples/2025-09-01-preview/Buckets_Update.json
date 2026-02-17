@@ -1,52 +1,53 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
     "accountName": "account1",
+    "poolName": "pool1",
+    "volumeName": "volume1",
+    "bucketName": "bucket1",
     "api-version": "2025-09-01-preview",
     "body": {
       "properties": {
-        "permissions": "ReadWrite",
         "server": {
+          "fqdn": "fullyqualified.domainname.com",
           "certificateObject": "<REDACTED>",
-          "fqdn": "fullyqualified.domainname.com"
-        }
+          "onCertificateConflictAction": "Update"
+        },
+        "permissions": "ReadWrite"
       }
-    },
-    "bucketName": "bucket1",
-    "poolName": "pool1",
-    "resourceGroupName": "myRG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "volumeName": "volume1"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/buckets/bucket1",
         "name": "account1/pool1/volume1/bucket1",
         "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/buckets",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/buckets/bucket1",
         "properties": {
           "path": "/path",
+          "provisioningState": "Succeeded",
           "fileSystemUser": {
             "nfsUser": {
-              "groupId": 1000,
-              "userId": 1001
+              "userId": 1001,
+              "groupId": 1000
             }
           },
-          "permissions": "ReadWrite",
-          "provisioningState": "Succeeded",
+          "status": "Active",
           "server": {
+            "fqdn": "fullyqualified.domainname.com",
             "certificateCommonName": "www.example.com",
             "certificateExpiryDate": "2027-08-15T13:23:32Z",
-            "fqdn": "fullyqualified.domainname.com",
             "ipAddress": "1.2.3.4"
           },
-          "status": "Active"
+          "permissions": "ReadWrite"
         }
       }
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-09-01-preview",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-09-01-preview&operationResultResponseType=Location"
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-09-01-preview&operationResultResponseType=Location",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2025-09-01-preview"
       }
     }
   },

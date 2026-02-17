@@ -26,7 +26,7 @@ These are the global settings for the quantum.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2025-09-01-preview
+tag: package-2026-01-15-preview
 suppressions:
   - code: OperationId
     where:
@@ -57,6 +57,24 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}"].put.operationId
     reason:
       A Quantum Workspace session has an intentional pattern of `open` (with a PUT) and `close` (with a POST action). 
+```
+
+### Tag: package-2026-01-15-preview
+
+These settings apply only when `--tag=package-2026-01-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-15-preview'
+input-file:
+  - Microsoft.Quantum/preview/2026-01-15-preview/quantum.json
+```
+
+### Tag: package-2025-12-01-preview
+
+These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-12-01-preview'
+input-file:
+  - Microsoft.Quantum/preview/2025-12-01-preview/quantum.json
 ```
 
 ### Tag: package-2025-09-01-preview
@@ -126,31 +144,14 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 input-file:
   - Microsoft.Quantum/preview/2024-03-01-preview/quantum.json
 ```
-### Tag: package-2019-11-04-preview
 
-These settings apply only when `--tag=package-2019-11-04-preview` is specified on the command line.
+### Tag: package-2023-11-13-preview
 
-``` yaml $(tag) == 'package-2019-11-04-preview'
+These settings apply only when `--tag=package-2023-11-13-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-11-13-preview'
 input-file:
-  - Microsoft.Quantum/preview/2019-11-04-preview/quantum.json
-```
-
-### Tag: package-2021-05-06-preview
-
-These settings apply only when `--tag=package-2021-05-06-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-05-06-preview'
-input-file:
-  - Microsoft.Quantum/preview/2021-05-06-preview/quantum.json
-```
-
-### Tag: package-2021-11-01-preview
-
-These settings apply only when `--tag=package-2021-11-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2021-11-01-preview'
-input-file:
-  - Microsoft.Quantum/preview/2021-11-01-preview/quantum.json
+  - Microsoft.Quantum/preview/2023-11-13-preview/quantum.json
 ```
 
 ### Tag: package-2022-09-12-preview
@@ -162,13 +163,31 @@ input-file:
   - Microsoft.Quantum/preview/2022-09-12-preview/quantum.json
 ```
 
-### Tag: package-2023-11-13-preview
+### Tag: package-2021-11-01-preview
 
-These settings apply only when `--tag=package-2023-11-13-preview` is specified on the command line.
+These settings apply only when `--tag=package-2021-11-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-11-13-preview'
+``` yaml $(tag) == 'package-2021-11-01-preview'
 input-file:
-  - Microsoft.Quantum/preview/2023-11-13-preview/quantum.json
+  - Microsoft.Quantum/preview/2021-11-01-preview/quantum.json
+```
+
+### Tag: package-2021-05-06-preview
+
+These settings apply only when `--tag=package-2021-05-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-05-06-preview'
+input-file:
+  - Microsoft.Quantum/preview/2021-05-06-preview/quantum.json
+```
+
+### Tag: package-2019-11-04-preview
+
+These settings apply only when `--tag=package-2019-11-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-04-preview'
+input-file:
+  - Microsoft.Quantum/preview/2019-11-04-preview/quantum.json
 ```
 
 ---

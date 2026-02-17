@@ -32,7 +32,6 @@ options:
     model-namespace: false
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/contoso-widgetmanager"
-    is-modular-library: true
     package-details:
       name: "@azure/contoso-widgetmanager"
     flavor: azure
@@ -48,6 +47,10 @@ options:
     single-client: true
     slice-elements-byval: true
     flavor: azure
+  "@azure-tools/typespec-rust":
+    crate-name: "azure_contoso_widgetmanager"
+    crate-version: "0.1.0"
+    emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - "specification/contosowidgetmanager/Contoso.WidgetManager.Shared/"

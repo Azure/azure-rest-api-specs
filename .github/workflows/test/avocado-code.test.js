@@ -51,8 +51,8 @@ describe("generateJobSummary", () => {
 
     await expect(generateJobSummary({ core })).resolves.toBeUndefined();
 
-    expect(core.info.mock.calls.at(-1)?.[0]).toMatchInlineSnapshot(
-      `"Error reading 'avocado.ndjson': Error: ENOENT: no such file or directory, open 'avocado.ndjson'"`,
+    expect(core.info.mock.calls.at(-1)?.[0]).toContain(
+      "Error reading 'avocado.ndjson': Error: ENOENT: no such file or directory, open 'avocado.ndjson'",
     );
   });
 

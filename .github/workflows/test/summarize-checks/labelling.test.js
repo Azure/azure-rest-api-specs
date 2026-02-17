@@ -287,11 +287,72 @@ describe("update labels", () => {
         targetBranch: "main",
       },
     },
+    {
+      description:
+        "Should NOT remove ARMSignedOff when CI-RpaaSRPNotInPrivateRepo is set and RPaaSException is present",
+      existingLabels: [
+        "ARMReview",
+        "ARMSignedOff",
+        "CI-RpaaSRPNotInPrivateRepo",
+        "new-api-version",
+        "new-rp-namespace",
+        "PublishToCustomers",
+        "resource-manager",
+        "RPaaS",
+        "RPaaSException",
+        "TypeSpec",
+      ],
+      expectedLabelsToAdd: [],
+      expectedLabelsToRemove: [],
+      impactAssessment: {
+        resourceManagerRequired: true,
+        dataPlaneRequired: false,
+        suppressionReviewRequired: false,
+        isNewApiVersion: true,
+        rpaasRpNotInPrivateRepo: true,
+        rpaasChange: true,
+        newRP: true,
+        rpaasRPMissing: false,
+        typeSpecChanged: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
+    {
+      description:
+        "Should remove ARMSignedOff when CI-RpaaSRPNotInPrivateRepo is set and RPaaSException is NOT present",
+      existingLabels: [
+        "ARMReview",
+        "ARMSignedOff",
+        "CI-RpaaSRPNotInPrivateRepo",
+        "new-api-version",
+        "new-rp-namespace",
+        "PublishToCustomers",
+        "resource-manager",
+        "RPaaS",
+        "TypeSpec",
+      ],
+      expectedLabelsToAdd: ["NotReadyForARMReview"],
+      expectedLabelsToRemove: ["ARMSignedOff"],
+      impactAssessment: {
+        resourceManagerRequired: true,
+        dataPlaneRequired: false,
+        suppressionReviewRequired: false,
+        isNewApiVersion: true,
+        rpaasRpNotInPrivateRepo: true,
+        rpaasChange: true,
+        newRP: true,
+        rpaasRPMissing: false,
+        typeSpecChanged: true,
+        isDraft: false,
+        targetBranch: "main",
+      },
+    },
   ];
   it.each(testCases)(
     "$description",
-    async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
-      const labelContext = await updateLabels(existingLabels, impactAssessment);
+    ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove, impactAssessment }) => {
+      const labelContext = updateLabels(existingLabels, impactAssessment);
 
       expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());
@@ -361,14 +422,14 @@ describe("ARM review process labelling", () => {
 
   it.each(testCases)(
     "$description",
-    async ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
+    ({ existingLabels, expectedLabelsToAdd, expectedLabelsToRemove }) => {
       /** @type {import("../../src/summarize-checks/labelling.js").LabelContext} */
       const labelContext = {
         present: new Set(),
         toAdd: new Set(),
         toRemove: new Set(),
       };
-      await processArmReviewLabels(labelContext, existingLabels);
+      processArmReviewLabels(labelContext, existingLabels);
 
       expect([...labelContext.toAdd].sort()).toEqual(expectedLabelsToAdd.sort());
       expect([...labelContext.toRemove].sort()).toEqual(expectedLabelsToRemove.sort());

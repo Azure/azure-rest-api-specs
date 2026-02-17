@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "MACC",
+          "properties": {
+            "entityType": "Primary",
+            "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
+            "systemId": "13810867107109237",
+            "milestones": [
+              {
+                "milestoneId": "11111111-1111-1111-1111-111111111111",
+                "automaticShortfall": "Enabled"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.BillingBenefits/maccs/myBenefit",
+            "valid": true
+          }
+        ]
+      }
+    }
+  }
+}

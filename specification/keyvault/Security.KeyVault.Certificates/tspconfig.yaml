@@ -45,7 +45,6 @@ options:
     generate-metadata: true
     src-folder: "src/generated"
     experimental-extensible-enums: true
-    is-modular-library: true
     package-details:
       name: "@azure/keyvault-certificates"
       description: "Azure Key Vault Certificates"
@@ -63,6 +62,7 @@ options:
     crate-name: "azure_security_keyvault_certificates"
     crate-version: "0.0.1"
     emitter-output-dir: "{output-dir}/{service-dir}/{crate-name}"
+    omit-constructors: true
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - "specification/keyvault/Security.KeyVault.Common/"

@@ -14,7 +14,9 @@ afterEach(() => {
 
 describe("retry function", () => {
   it("should resolve immediately when function succeeds on first attempt", async () => {
+    /** @type {import("vitest").Mock<() => string>} */
     const mockFn = vi.fn().mockResolvedValue("success");
+
     const result = await retry(mockFn);
 
     expect(result).toBe("success");
@@ -22,6 +24,7 @@ describe("retry function", () => {
   });
 
   it("should retry when function fails and then succeed", async () => {
+    /** @type {import("vitest").Mock<() => string>} */
     const mockFn = vi.fn().mockRejectedValueOnce(new Error("failure")).mockResolvedValue("success");
 
     // Use fake timers

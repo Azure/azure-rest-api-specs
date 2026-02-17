@@ -1,8 +1,7 @@
 /**
  * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
- * @returns {Promise<void>}
  */
-export default async function dumpTriggerMetadata({ context, core }) {
+export default function dumpTriggerMetadata({ context, core }) {
   core.info(`Event name: ${context.eventName}`);
   core.info(`Action: ${context.payload.action}`);
 

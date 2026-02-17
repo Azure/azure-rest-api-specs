@@ -1,4 +1,5 @@
 import { readFile } from "fs/promises";
+import { inspect } from "util";
 import {
   generateMarkdownTable,
   MessageLevel,
@@ -29,7 +30,7 @@ export default async function generateJobSummary({ core }) {
   } catch (error) {
     // If we can't read the file, the previous step must have failed catastrophically.
     // generateJobSummary() should never fail, so just log the error and return
-    core.info(`Error reading '${avocadoOutputFile}': ${error}`);
+    core.info(`Error reading '${avocadoOutputFile}': ${inspect(error)}`);
     return;
   }
 
@@ -51,6 +52,6 @@ export default async function generateJobSummary({ core }) {
     core.summary.addRaw(generateMarkdownTable(messages));
   }
 
-  core.summary.write();
+  await core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 }

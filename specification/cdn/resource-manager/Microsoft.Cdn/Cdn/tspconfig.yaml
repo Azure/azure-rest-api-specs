@@ -30,7 +30,6 @@ options:
   "@azure-tools/typespec-ts":
     service-dir: sdk/cdn
     emitter-output-dir: "{output-dir}/{service-dir}/arm-cdn"
-    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
@@ -38,7 +37,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/cdn"
     emitter-output-dir: "{output-dir}/{service-dir}/armcdn"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcdn"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcdn/v2"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

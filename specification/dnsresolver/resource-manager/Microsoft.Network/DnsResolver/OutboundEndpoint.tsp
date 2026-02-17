@@ -23,6 +23,7 @@ model OutboundEndpoint
     SegmentName = "outboundEndpoints",
     NamePattern = ""
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Legacy.EntityTagProperty;
 }
 

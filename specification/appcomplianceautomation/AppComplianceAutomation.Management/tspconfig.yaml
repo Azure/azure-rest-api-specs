@@ -24,12 +24,24 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
-  # "@azure-tools/typespec-java":
-  #   flavor: azure
-  #   emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appcomplianceautomation"
-  #   namespace: "com.azure.resourcemanager.appcomplianceautomation"
-  #   service-name: "App Compliance Automation"
-  #   examples-directory: "{project-root}/examples"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appcomplianceautomation"
+    namespace: "com.azure.resourcemanager.appcomplianceautomation"
+    service-name: "App Compliance Automation"
+    flavor: azure
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/appcomplianceautomation"
+    emitter-output-dir: "{output-dir}/{service-dir}/armappcomplianceautomation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappcomplianceautomation"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.AppComplianceAutomation"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

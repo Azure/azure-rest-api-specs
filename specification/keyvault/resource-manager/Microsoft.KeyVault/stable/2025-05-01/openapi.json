@@ -2897,6 +2897,10 @@
         }
       }
     },
+    "Azure.Core.azureLocation": {
+      "type": "string",
+      "description": "Represents an Azure geography region where supported resource providers live."
+    },
     "Azure.Core.eTag": {
       "type": "string",
       "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
@@ -3736,7 +3740,8 @@
         },
         "kty": {
           "$ref": "#/definitions/JsonWebKeyType",
-          "description": "The type of the key. For valid values, see JsonWebKeyType."
+          "description": "The type of the key. For valid values, see JsonWebKeyType.",
+          "minLength": 1
         },
         "keyOps": {
           "type": "array",
@@ -3945,21 +3950,6 @@
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "sku": {
           "$ref": "#/definitions/ManagedHsmSku",
           "description": "SKU details"
@@ -3971,11 +3961,22 @@
         "etag": {
           "$ref": "#/definitions/Azure.Core.eTag",
           "description": "Modified whenever there is a change in the state of private endpoint connection."
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4046,11 +4047,19 @@
           "$ref": "#/definitions/MHSMPrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "sku": {
+          "$ref": "#/definitions/ManagedHsmSku",
+          "description": "SKU details"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ManagedHsmResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -4185,21 +4194,6 @@
           "$ref": "#/definitions/ManagedHsmProperties",
           "description": "Properties of the managed HSM"
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "sku": {
           "$ref": "#/definitions/ManagedHsmSku",
           "description": "SKU details"
@@ -4207,11 +4201,22 @@
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "Managed service identity"
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The geo-location where the resource lives"
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4360,7 +4365,8 @@
         },
         "kty": {
           "$ref": "#/definitions/JsonWebKeyType",
-          "description": "The type of the key. For valid values, see JsonWebKeyType."
+          "description": "The type of the key. For valid values, see JsonWebKeyType.",
+          "minLength": 1
         },
         "keyOps": {
           "type": "array",
@@ -4576,55 +4582,6 @@
           "$ref": "#/definitions/ManagedHSMSecurityDomainProperties",
           "description": "Managed HSM security domain properties.",
           "readOnly": true
-        }
-      }
-    },
-    "ManagedHsmResource": {
-      "type": "object",
-      "description": "Managed HSM resource",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The Azure Resource Manager resource ID for the managed HSM Pool.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the managed HSM Pool.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type of the managed HSM Pool.",
-          "readOnly": true
-        },
-        "location": {
-          "type": "string",
-          "description": "The supported Azure location where the managed HSM Pool should be created.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "sku": {
-          "$ref": "#/definitions/ManagedHsmSku",
-          "description": "SKU details"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the key vault resource.",
-          "readOnly": true
-        },
-        "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (system assigned and/or user assigned identities)"
         }
       }
     },
@@ -5732,7 +5689,7 @@
           "description": "Properties of the vault"
         },
         "location": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.azureLocation",
           "description": "Azure location of the key vault resource."
         },
         "tags": {

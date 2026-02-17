@@ -44,6 +44,7 @@ namespace LiftrBase;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "for backward compatibility purpose"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LiftrBase.Storage.FileSystemResource.properties,
   "csharp"
 );
@@ -93,3 +94,7 @@ enum OldMarketplaceSubscriptionStatus {
   Suspended,
   Unsubscribed,
 }
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);

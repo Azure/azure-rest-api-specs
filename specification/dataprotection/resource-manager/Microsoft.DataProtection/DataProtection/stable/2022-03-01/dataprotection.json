@@ -4230,14 +4230,14 @@
       "description": "Schedule for backup",
       "properties": {
         "repeatingTimeIntervals": {
-          "description": "Repeating time interval which only support the following ISO 8601 format [R/startDateTime/Duration]. Example: R/2007-03-01T13:00:00Z/P1Y2M10DT2H30M",
+          "description": "Repeating time interval which supports the ISO 8601 format and unsupported or partially supported formats.\n\nSupported ISO 8601 Time Formats\n\nThe following time formats were verified to be successfully parsed and supported:\n- T14:30:45.123 → Thh:mm:ss.sss (with milliseconds)\n- T14:30:45 → Thh:mm:ss (standard time format)\n- T14:30 → Thh:mm (hour and minute only)\n\nAll of the above may include time zone indicators like 'Z', '+05:30', '-08:00'.\n\nExamples of supported timestamps:\n- 2023-10-15T14:30:45Z\n- 2023-10-15T14:30:45.123+05:30\n- 2023-10-15T14:30Z\n\nUnsupported or partially supported formats:\n- T143045.123 or T143045 (no colons)\n- T14.500 (decimal hours)\n- T14 (hour only)\n- T14:30.500 (minute fractions)\n- T24:00:00 (invalid)\n- T23:59:60 (leap second)",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "timeZone": {
-          "description": "Time zone for a schedule. Example: Pacific Standard Time",
+          "description": "Time Zone for a schedule.\n\nSupported timezone indicators include:\n- 'Z' for UTC\n- '+00:00'\n- '+05:30'\n- '-08:00'\n\nExamples:\n- 2023-10-15T14:30:45Z\n- 2023-10-15T14:30:45.123+05:30\n- 2023-10-15T14:30-08:00",
           "type": "string"
         }
       },

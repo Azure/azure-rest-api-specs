@@ -45,3 +45,13 @@ options:
     namespace: "com.azure.resourcemanager.playwrighttesting"
     flavor: azure
     service-name: Playwright Testing
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/playwrighttesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/armplaywrighttesting"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armplaywrighttesting"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true

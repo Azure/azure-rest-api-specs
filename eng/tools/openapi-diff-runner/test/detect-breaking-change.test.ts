@@ -197,6 +197,7 @@ describe("detect-breaking-change", () => {
         existingVersionSwaggers: ["existing1.json", "existing2.json"],
         newVersionSwaggers: ["new1.json", "new2.json"],
         newVersionChangedSwaggers: ["changed1.json", "changed2.json"],
+        renamedSwaggers: [],
         msgs: [],
         runtimeErrors: [],
         oadTracer: { traces: [], baseBranch: "main", context },
@@ -233,11 +234,13 @@ describe("detect-breaking-change", () => {
     setupSpecModelMock: (mockInstance?: any) => {
       if (mockInstance) {
         // Use the provided instance
-        vi.mocked(SpecModel).mockImplementation(() => mockInstance as unknown as SpecModel);
+        vi.mocked(SpecModel).mockImplementation(function () {
+          return mockInstance as unknown as SpecModel;
+        });
         return mockInstance;
       } else {
         // Create different instances based on folder path
-        vi.mocked(SpecModel).mockImplementation((folder: string) => {
+        vi.mocked(SpecModel).mockImplementation(function (folder: string) {
           return TestFixtures.createMockSpecModel(folder) as unknown as SpecModel;
         });
         return null; // No specific instance to return
@@ -727,7 +730,9 @@ describe("detect-breaking-change", () => {
         { path: "/test/swagger2.json" },
       ]);
 
-      vi.mocked(SpecModel).mockImplementation(() => mockSpecModelInstance);
+      vi.mocked(SpecModel).mockImplementation(function () {
+        return mockSpecModelInstance;
+      });
       vi.mocked(getPrecedingSwaggers).mockResolvedValue({
         stable: "/test/previous-stable.json",
         preview: "/test/previous-preview.json",
@@ -778,7 +783,9 @@ describe("detect-breaking-change", () => {
       };
 
       // Mock SpecModel constructor directly
-      vi.mocked(SpecModel).mockImplementation(() => mockSpecModelInstance as unknown as SpecModel);
+      vi.mocked(SpecModel).mockImplementation(function () {
+        return mockSpecModelInstance as unknown as SpecModel;
+      });
 
       // Mock getExistedVersionOperations to return a proper Map
       vi.mocked(getExistedVersionOperations).mockResolvedValue(new Map());

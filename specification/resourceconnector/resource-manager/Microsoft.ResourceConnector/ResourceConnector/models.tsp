@@ -1,8 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.ResourceConnector;
 
@@ -40,7 +44,7 @@ union Provider {
 }
 
 /**
- * Appliance’s health and state of connection to on-prem
+ * Appliance’s health and state of connection to on-prem. This list of values is not exhaustive.
  */
 union Status {
   string,
@@ -108,6 +112,54 @@ union Status {
   Offline: "Offline",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  NetworkProxyUpdatePreparing: "NetworkProxyUpdatePreparing",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  NetworkProxyUpdating: "NetworkProxyUpdating",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  NetworkProxyUpdateComplete: "NetworkProxyUpdateComplete",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  NetworkProxyUpdateFailed: "NetworkProxyUpdateFailed",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  NetworkDNSUpdatePreparing: "NetworkDNSUpdatePreparing",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  NetworkDNSUpdating: "NetworkDNSUpdating",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  NetworkDNSUpdateComplete: "NetworkDNSUpdateComplete",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  NetworkDNSUpdateFailed: "NetworkDNSUpdateFailed",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  ArcGatewayUpdatePreparing: "ArcGatewayUpdatePreparing",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  ArcGatewayUpdating: "ArcGatewayUpdating",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  ArcGatewayUpdateComplete: "ArcGatewayUpdateComplete",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  ArcGatewayUpdateFailed: "ArcGatewayUpdateFailed",
 }
 
 /**
@@ -139,6 +191,7 @@ union AccessProfileType {
 /**
  * Appliance ArtifactType definition.
  */
+@usage(Usage.output)
 union ArtifactType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -148,6 +201,7 @@ union ArtifactType {
 /**
  * Appliance SSHKeyType definition.
  */
+@usage(Usage.output)
 union SSHKeyType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -158,6 +212,10 @@ union SSHKeyType {
   LogsKey: "LogsKey",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ScopedAccessKey: "ScopedAccessKey",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2025_03_01_preview)
+  UserManagementKey: "UserManagementKey",
 }
 
 /**
@@ -266,7 +324,7 @@ model ApplianceProperties {
   publicKey?: string;
 
   /**
-   * Appliance’s health and state of connection to on-prem
+   * Appliance’s health and state of connection to on-prem. This list of values is not exhaustive.
    */
   @visibility(Lifecycle.Read)
   status?: Status;
@@ -275,6 +333,20 @@ model ApplianceProperties {
    * Version of the Appliance
    */
   version?: string;
+
+  /**
+   * A list of events that occurred on the Appliance to relay information to the user.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  @added(Versions.v2025_03_01_preview)
+  events?: Event[];
+
+  /**
+   * Contains network information about the Appliance
+   */
+  @added(Versions.v2025_03_01_preview)
+  networkProfile?: NetworkProfile;
 }
 
 /**
@@ -285,6 +357,91 @@ model AppliancePropertiesInfrastructureConfig {
    * Information about the connected appliance.
    */
   provider?: Provider;
+}
+
+/**
+ * Event contains information about customer driven, platform driven, or unplanned events that occurred on the Appliance
+ */
+model Event {
+  /**
+   * The type of event is used to classify how the event was initiated.
+   */
+  type?: string;
+
+  /**
+   * Code is used to break down the event further to identify why it occurred.
+   */
+  code?: string;
+
+  /**
+   * Status is used to represent the outcome of the event.
+   */
+  status?: string;
+
+  /**
+   * Message is intended to be actionable and should be used to inform the user of the event.
+   */
+  message?: string;
+
+  /**
+   * Severity is the classification of the event to relay the importance of the event.
+   */
+  severity?: string;
+
+  /**
+   * Timestamp is the time the event occurred.
+   */
+  timestamp?: utcDateTime;
+}
+
+/**
+ * Contains network information about the Appliance
+ */
+model NetworkProfile {
+  /**
+   * Contains proxy information about the Appliance
+   */
+  proxyConfiguration?: ProxyConfiguration;
+
+  /**
+   * Contains DNS information about the Appliance
+   */
+  dnsConfiguration?: DnsConfiguration;
+
+  /**
+   * Contains Arc Gateway information about the Appliance
+   */
+  gatewayConfiguration?: GatewayConfiguration;
+}
+
+/**
+ * Contains proxy information about the Appliance
+ */
+model ProxyConfiguration {
+  /**
+   * Version of the proxy configuration.
+   */
+  version?: string;
+}
+
+/**
+ * Contains DNS information about the Appliance
+ */
+model DnsConfiguration {
+  /**
+   * Version of the DNS configuration.
+   */
+  version?: string;
+}
+
+/**
+ * Contains Arc Gateway information about the Appliance
+ */
+model GatewayConfiguration {
+  /**
+   * Version of the Arc Gateway configuration.
+   */
+  version?: string;
 }
 
 /**

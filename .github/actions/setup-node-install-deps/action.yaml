@@ -4,7 +4,7 @@ description: Uses specified Node version and installs dependencies (typically us
 inputs:
   node-version:
     description: "Node version to use"
-    default: 22.x
+    default: 24.x
   install-command:
     description: "Command to install dependencies"
     default: "npm ci"
@@ -16,7 +16,7 @@ runs:
   using: "composite"
 
   steps:
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
 

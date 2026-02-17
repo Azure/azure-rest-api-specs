@@ -1,3 +1,50 @@
+import { SdkName } from "@azure-tools/specs-shared/sdk-types";
+
+/**
+ * SDK automation execution state.
+ * Matches SDKAutomationState from spec-gen-sdk.
+ *
+ * - pending: The generation process has not yet begun.
+ * - inProgress: The generation process is in-progress.
+ * - failed: The generation process has failed.
+ * - succeeded: The generation process has succeeded.
+ * - warning: The generation process has warnings.
+ * - notEnabled: The generation process exited due to missing language configuration.
+ */
+export type ExecutionResult =
+  | "pending"
+  | "inProgress"
+  | "failed"
+  | "succeeded"
+  | "warning"
+  | "notEnabled";
+
+/**
+ * Represents a package entry in the execution report.
+ */
+export interface ExecutionReportPackage {
+  packageName?: string;
+  installationInstructions?: string;
+  apiViewArtifact?: string;
+  shouldLabelBreakingChange?: boolean;
+}
+
+/**
+ * Represents the execution report from spec-gen-sdk command.
+ */
+export interface ExecutionReport {
+  packages: ExecutionReportPackage[];
+  executionResult: ExecutionResult;
+  fullLogPath?: string;
+  filteredLogPath?: string;
+  vsoLogPath?: string;
+  stagedArtifactsFolder?: string;
+  sdkArtifactFolder?: string;
+  sdkApiViewArtifactFolder?: string;
+  isSdkConfigDuplicated?: boolean;
+  generateFromTypeSpec?: boolean;
+}
+
 /**
  * Represents the input parameters required for spec-gen-sdk command execution.
  */
@@ -9,7 +56,7 @@ export interface SpecGenSdkCmdInput {
   tspConfigPath?: string;
   readmePath?: string;
   sdkRepoName: string;
-  sdkLanguage: string;
+  sdkLanguage: SdkName;
   apiVersion?: string;
   prNumber?: string;
   sdkReleaseType?: string;
@@ -17,14 +64,6 @@ export interface SpecGenSdkCmdInput {
   specRepoHttpsUrl: string;
   headRepoHttpsUrl?: string;
   headBranch?: string;
-}
-
-/**
- * Data for the API view request.
- */
-export interface APIViewRequestData {
-  packageName: string;
-  filePath: string;
 }
 
 /*
@@ -37,29 +76,6 @@ export type VsoLogs = Map<
     warnings?: string[];
   }
 >;
-
-/**
- * Represents the result of the spec-gen-sdk generation process.
- */
-export interface SpecGenSdkArtifactInfo {
-  language: string;
-  result: string;
-  headSha: string;
-  prNumber?: string;
-  labelAction?: boolean;
-  isSpecGenSdkCheckRequired: boolean;
-  apiViewRequestData: APIViewRequestData[];
-}
-
-/**
- * Represents supported SDK language identifiers.
- */
-export type SdkName =
-  | "azure-sdk-for-go"
-  | "azure-sdk-for-java"
-  | "azure-sdk-for-js"
-  | "azure-sdk-for-net"
-  | "azure-sdk-for-python";
 
 /**
  * Represents the plane types for SDK generation settings
@@ -94,7 +110,7 @@ export const SpecGenSdkRequiredSettings: Record<SdkName, PlaneTypeSettings> = {
   },
   "azure-sdk-for-net": {
     dataPlane: false,
-    managementPlane: false,
+    managementPlane: true,
   },
   "azure-sdk-for-python": {
     dataPlane: true,

@@ -306,6 +306,7 @@ model LedgerProperties {
   /**
    * Enclave platform of the Confidential Ledger.
    */
+  @visibility(Lifecycle.Read)
   enclavePlatform?: EnclavePlatform;
 
   /**
@@ -472,6 +473,7 @@ model ManagedCCFProperties {
   /**
    * Enclave platform of Managed CCF.
    */
+  @visibility(Lifecycle.Read)
   enclavePlatform?: EnclavePlatform;
 }
 

@@ -16,6 +16,7 @@ namespace Microsoft.DataBoxEdge;
 /**
  * Role Addon
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy DiscriminatedProxyResource for back compatibility"
 @discriminator("kind")
 @parentResource(Role)
 model Addon
@@ -73,7 +74,7 @@ interface AddonsOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
         ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.ProviderNamespace<Addon>,
 
         /**
          * The name of the device.

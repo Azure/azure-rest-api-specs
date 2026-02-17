@@ -12,6 +12,9 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ResourceConnector"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resourceconnector"
     namespace: "azure.mgmt.resourceconnector"
@@ -25,7 +28,6 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-resourceconnector"
-    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:

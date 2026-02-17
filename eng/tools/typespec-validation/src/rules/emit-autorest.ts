@@ -1,7 +1,7 @@
 import { join } from "path";
-import { parse as yamlParse } from "yaml";
 import { RuleResult } from "../rule-result.js";
 import { Rule } from "../rule.js";
+import { parse } from "../tsp-config.js";
 import { fileExists, readTspConfig } from "../utils.js";
 
 export class EmitAutorestRule implements Rule {
@@ -19,7 +19,7 @@ export class EmitAutorestRule implements Rule {
 
     if (mainTspExists) {
       const configText = await readTspConfig(folder);
-      const config = yamlParse(configText);
+      const config = parse(configText);
 
       const emit = config?.emit;
       stdOutput += `emit: ${JSON.stringify(emit)}\n`;

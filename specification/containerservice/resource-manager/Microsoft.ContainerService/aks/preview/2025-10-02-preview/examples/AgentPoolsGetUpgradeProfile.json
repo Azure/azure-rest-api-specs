@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "agentPoolName": "agentpool1",
+    "api-version": "2025-10-02-preview",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools/upgradeProfiles",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1/upgradeprofiles/default",
+        "properties": {
+          "kubernetesVersion": "1.12.8",
+          "latestNodeImageVersion": "AKSUbuntu:1604:2020.03.11",
+          "osType": "Linux",
+          "upgrades": [
+            {
+              "kubernetesVersion": "1.13.5"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "AgentPools_GetUpgradeProfile",
+  "title": "Get Upgrade Profile for Agent Pool"
+}

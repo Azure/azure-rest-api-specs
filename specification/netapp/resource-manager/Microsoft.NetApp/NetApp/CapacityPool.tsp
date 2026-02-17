@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./NetAppAccount.tsp";
 import "@azure-tools/typespec-client-generator-core";
@@ -10,6 +11,7 @@ using Rest;
 using Azure.ResourceManager;
 using Http;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetApp;
 /**
@@ -24,6 +26,7 @@ model CapacityPool
     SegmentName = "capacityPools",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,63}$"
   >;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy EntityTagProperty for back compatibility"
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
@@ -48,6 +51,14 @@ model PoolProperties {
   /**
    * Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776).
    */
+  @removed(Versions.v2025_12_15_preview)
+  @renamedFrom(Versions.v2025_12_15_preview, "size")
+  sizeOld: int64 = 4398046511104;
+
+  /**
+   * Provisioned size of the pool (in bytes). Allowed values are 512GiB (549755813888 bytes) or in 1TiB chunks (value must be multiple of 1099511627776).
+   */
+  @added(Versions.v2025_12_15_preview)
   size: int64 = 4398046511104;
 
   /**
@@ -144,6 +155,14 @@ model PoolPatchProperties {
   /**
    * Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776).
    */
+  @removed(Versions.v2025_12_15_preview)
+  @renamedFrom(Versions.v2025_12_15_preview, "size")
+  sizeOld?: int64;
+
+  /**
+   * Provisioned size of the pool (in bytes). Allowed values are 512GiB (549755813888 bytes) or in 1TiB chunks (value must be multiple of 1099511627776).
+   */
+  @added(Versions.v2025_12_15_preview)
   size?: int64;
 
   /**

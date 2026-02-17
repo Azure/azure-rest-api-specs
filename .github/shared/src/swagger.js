@@ -1,10 +1,12 @@
 import $RefParser from "@apidevtools/json-schema-ref-parser";
 import { readFile } from "fs/promises";
-import { dirname, relative, resolve } from "path";
+import { dirname, relative } from "path";
 import { inspect } from "util";
 import { z } from "zod";
 import { mapAsync } from "./array.js";
+import { KeyedCache } from "./cache.js";
 import { example, preview } from "./changed-files.js";
+import { resolveCached, resolvePairCached } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 
@@ -26,6 +28,13 @@ import { embedError } from "./spec-model.js";
  * @property {string} path
  * @property {Operation[]} [operations]
  * @property {Object[]} [refs]
+ */
+
+const infoSchema = z.object({
+  "x-typespec-generated": z.array(z.object({ emitter: z.string().optional() })).optional(),
+});
+/**
+ * @typedef {import("zod").infer<typeof infoSchema>} InfoObject
  */
 
 // https://swagger.io/specification/v2/#operation-object
@@ -53,6 +62,7 @@ const pathsSchema = z.record(z.string(), pathSchema);
 
 // https://swagger.io/specification/v2/#swagger-object
 const swaggerSchema = z.object({
+  info: infoSchema.optional(),
   paths: pathsSchema.optional(),
   "x-ms-paths": pathsSchema.optional(),
 });
@@ -98,17 +108,48 @@ const excludeExamples = {
 
 export class Swagger {
   /**
-   * Content of swagger file, either loaded from `#path` or passed in via `options`.
+   * Caches the contents of files on disk, using the resolved path as the key.
    *
-   * Reset to `undefined` after `#data` is loaded to save memory.
+   * @type {KeyedCache<string, Promise<string>>}
+   */
+  static #contentCache = new KeyedCache();
+
+  /**
+   * Caches JSON objects parsed from text, using the resolved path (or content string itself) as the key.
+   *
+   * @type {KeyedCache<string, Promise<unknown>>}
+   * */
+  static #contentJsonCache = new KeyedCache();
+
+  /**
+   * Caches SwaggerObject objects parsed from JSON objects, using the resolved path (or content string itself) as the key.
+   *
+   * @type {KeyedCache<string, Promise<SwaggerObject>>}
+   */
+  static #contentObjectCache = new KeyedCache();
+
+  /**
+   * Caches operations extracted from a SwaggerObject, using the resolved path (or content string itself) as the key.
+   *
+   * @type {KeyedCache<string, Promise<Map<string, Operation>>>}
+   */
+  static #operationsCache = new KeyedCache();
+
+  /**
+   * Caches reference paths extracted from a JSON object, using the resolved path (or content string itself) as the key.
+   *
+   * Swagger objects should not be cached statically, because they may belong to different Tags, Readmes, or SpecModels.
+   *
+   * @type {KeyedCache<string, Promise<string[]>>}
+   */
+  static #refPathCache = new KeyedCache();
+
+  /**
+   * Optional content of swagger file, passed in via `options`.  If undefined, content is loaded from `#path`.
    *
    * @type {string | undefined}
    */
   #content;
-
-  // operations: Map of the operations in this swagger, using `operationId` as key
-  /** @type {{operations: Map<string, Operation>, refs: Map<string, Swagger>} | undefined} */
-  #data;
 
   /** @type {import('./logger.js').ILogger | undefined} */
   #logger;
@@ -118,6 +159,15 @@ export class Swagger {
 
   /** @type {Tag | undefined} Tag that contains this Swagger */
   #tag;
+
+  /** @type {Map<string, Swagger> | undefined} all references, safe to cache in instance (but not statically) */
+  #allRefs;
+
+  /** @type {Map<string, Swagger> | undefined} referenced swaggers (excluding examples), safe to cache in instance (but not statically) */
+  #refs;
+
+  /** @type {Map<string, Swagger> | undefined} referenced examples (excluding swaggers), safe to cache in instance (but not statically) */
+  #examples;
 
   /**
    * @param {string} path
@@ -130,66 +180,104 @@ export class Swagger {
     const { content, logger, tag } = options;
 
     const rootDir = dirname(tag?.readme?.path ?? "");
-    this.#path = resolve(rootDir, path);
+    this.#path = resolvePairCached(rootDir, path);
 
     this.#content = content;
     this.#logger = logger;
     this.#tag = tag;
   }
 
-  async #getData() {
-    if (!this.#data) {
-      const path = this.#path;
-
-      const content =
-        this.#content ??
-        (await this.#wrapError(
-          async () => await readFile(path, { encoding: "utf8" }),
-          "Failed to read file for swagger",
-        ));
-
-      /** @type {Map<string, Operation>} */
-      const operations = new Map();
-
-      const swaggerJson = await this.#wrapError(
-        () => /** @type {unknown} */ (JSON.parse(content)),
-        "Failed to parse JSON for swagger",
-      );
-
-      /** @type {SwaggerObject} */
-      const swagger = await this.#wrapError(
-        () => swaggerSchema.parse(swaggerJson),
-        "Failed to parse schema for swagger",
-      );
-
-      // Process regular paths
-      if (swagger.paths) {
-        for (const [path, pathObject] of Object.entries(swagger.paths)) {
-          this.#addOperations(operations, path, pathObject);
-        }
-      }
-
-      // Process x-ms-paths (Azure extension)
-      if (swagger["x-ms-paths"]) {
-        for (const [path, pathObject] of Object.entries(swagger["x-ms-paths"])) {
-          this.#addOperations(operations, path, pathObject);
-        }
-      }
-
-      const schema = await this.#wrapError(
+  /**
+   * @returns {Promise<string>} Content of swagger file, represented as a string, either loaded from `#path` or passed in via `options`
+   * @throws {SpecModelError}
+   */
+  async #getContent() {
+    return (
+      this.#content ??
+      (await Swagger.#contentCache.getOrCreate(
+        this.#path,
         async () =>
-          await $RefParser.resolve(this.#path, swaggerJson, {
-            resolve: { file: excludeExamples, http: false },
-          }),
-        "Failed to resolve file for swagger",
+          await this.#wrapError(
+            async () => await readFile(this.#path, { encoding: "utf8" }),
+            "Failed to read file for swagger",
+          ),
+      ))
+    );
+  }
+
+  /**
+   * @returns {Promise<unknown>} Content of swagger file, represented as an untyped JSON object
+   * @throws {SpecModelError}
+   */
+  async #getContentJSON() {
+    return await Swagger.#contentJsonCache.getOrCreate(
+      this.#content ?? this.#path,
+      async () =>
+        await this.#wrapError(
+          async () => /** @type {unknown} */ (JSON.parse(await this.#getContent())),
+          "Failed to parse JSON for swagger",
+        ),
+    );
+  }
+
+  /**
+   * @returns {Promise<SwaggerObject>} Content of swagger file, represented as a typed object
+   * @throws {SpecModelError}
+   */
+  async #getContentObject() {
+    return await Swagger.#contentObjectCache.getOrCreate(
+      this.#content ?? this.#path,
+      async () =>
+        await this.#wrapError(
+          async () => swaggerSchema.parse(await this.#getContentJSON()),
+          "Failed to parse schema for swagger",
+        ),
+    );
+  }
+
+  /**
+   * @returns {Promise<Map<string, Swagger>>} Map of swaggers referenced from this swagger, using `path` as key
+   */
+  async getRefs() {
+    if (this.#refs === undefined) {
+      const allRefs = await this.#getRefs();
+
+      // filter out any paths that are examples
+      const filtered = new Map([...allRefs].filter(([path]) => !example(path)));
+
+      this.#refs = filtered;
+    }
+    return this.#refs;
+  }
+
+  async #getRefs() {
+    if (this.#allRefs === undefined) {
+      // Safe to cache refPaths statically, since it's just an array of string paths
+      const refPaths = await Swagger.#refPathCache.getOrCreate(
+        this.#content ?? this.#path,
+        async () => {
+          const contentJSON = await this.#getContentJSON();
+
+          const schema = await this.#wrapError(
+            async () =>
+              await $RefParser.resolve(this.#path, contentJSON, {
+                resolve: { file: excludeExamples, http: false },
+              }),
+            "Failed to resolve file for swagger",
+          );
+
+          return (
+            schema
+              .paths("file")
+              // Exclude ourself
+              .filter((p) => resolveCached(p) !== resolveCached(this.#path))
+          );
+        },
       );
 
-      const refPaths = schema
-        .paths("file")
-        // Exclude ourself
-        .filter((p) => resolve(p) !== resolve(this.#path));
-
-      const refs = new Map(
+      // Swagger objects should not be cached statically, because they may belong to different Tags, Readmes, or SpecModels.
+      // But, they are safe to cache in this instance.
+      this.#allRefs = new Map(
         refPaths.map((p) => {
           const swagger = new Swagger(p, {
             logger: this.#logger,
@@ -198,49 +286,60 @@ export class Swagger {
           return [swagger.path, swagger];
         }),
       );
-
-      this.#data = { operations, refs };
-
-      // Clear #content to save memory, since it's no longer needed after #data is loaded
-      this.#content = undefined;
     }
 
-    return this.#data;
-  }
-
-  /**
-   * @returns {Promise<Map<string, Swagger>>} Map of swaggers referenced from this swagger, using `path` as key
-   */
-  async getRefs() {
-    const allRefs = await this.#getRefs();
-
-    // filter out any paths that are examples
-    const filtered = new Map([...allRefs].filter(([path]) => !example(path)));
-
-    return filtered;
-  }
-
-  async #getRefs() {
-    return (await this.#getData()).refs;
+    return this.#allRefs;
   }
 
   /**
    * @returns {Promise<Map<string, Swagger>>} Map of examples referenced from this swagger, using `path` as key
    */
   async getExamples() {
-    const allRefs = await this.#getRefs();
+    if (this.#examples === undefined) {
+      const allRefs = await this.#getRefs();
 
-    // filter out any paths that are examples
-    const filtered = new Map([...allRefs].filter(([path]) => example(path)));
+      // filter out any paths that are examples
+      const filtered = new Map([...allRefs].filter(([path]) => example(path)));
 
-    return filtered;
+      this.#examples = filtered;
+    }
+    return this.#examples;
   }
 
   /**
    * @returns {Promise<Map<string, Operation>>} Map of the operations in this swagger, using `operationId` as key
    */
   async getOperations() {
-    return (await this.#getData()).operations;
+    return await Swagger.#operationsCache.getOrCreate(this.#content ?? this.#path, async () => {
+      const contentObject = await this.#getContentObject();
+
+      /** @type {Map<string, Operation>} */
+      const operations = new Map();
+
+      // Process regular paths
+      if (contentObject.paths) {
+        for (const [path, pathObject] of Object.entries(contentObject.paths)) {
+          this.#addOperations(operations, path, pathObject);
+        }
+      }
+
+      // Process x-ms-paths (Azure extension)
+      if (contentObject["x-ms-paths"]) {
+        for (const [path, pathObject] of Object.entries(contentObject["x-ms-paths"])) {
+          this.#addOperations(operations, path, pathObject);
+        }
+      }
+
+      return operations;
+    });
+  }
+
+  /**
+   * @returns {Promise<boolean>} True if the spec was generated from TypeSpec
+   */
+  async getTypeSpecGenerated() {
+    const contentObject = await this.#getContentObject();
+    return contentObject.info?.["x-typespec-generated"] !== undefined;
   }
 
   /**

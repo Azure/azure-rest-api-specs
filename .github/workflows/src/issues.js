@@ -1,3 +1,5 @@
+import { inspect } from "util";
+
 /**
  * Retrieves the PR number associated with a specific commit SHA
  * @param {import('@actions/github-script').AsyncFunctionArguments["github"]} github - GitHub API client
@@ -38,7 +40,7 @@ export async function getIssueNumber(github, head_sha, logger) {
       logger?.info(`No open PRs found for commit ${head_sha}`);
     }
   } catch (error) {
-    logger?.error(`Error searching for PRs with commit ${head_sha}: ${error}`);
+    logger?.error(`Error searching for PRs with commit ${head_sha}: ${inspect(error)}`);
     throw error;
   }
 

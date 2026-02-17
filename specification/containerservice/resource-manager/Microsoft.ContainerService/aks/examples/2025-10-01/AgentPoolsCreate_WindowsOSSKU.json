@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "agentPoolName": "wnp2",
+    "api-version": "2025-10-01",
+    "parameters": {
+      "properties": {
+        "count": 3,
+        "orchestratorVersion": "1.23.3",
+        "osSKU": "Windows2022",
+        "osType": "Windows",
+        "vmSize": "Standard_D4s_v3"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "wnp2",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/wnp2",
+        "properties": {
+          "count": 3,
+          "currentOrchestratorVersion": "1.23.3",
+          "maxPods": 110,
+          "orchestratorVersion": "1.23.3",
+          "osSKU": "Windows2022",
+          "osType": "Windows",
+          "provisioningState": "Succeeded",
+          "vmSize": "Standard_D4s_v3"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "wnp2",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/wnp2",
+        "properties": {
+          "count": 3,
+          "currentOrchestratorVersion": "1.23.3",
+          "maxPods": 110,
+          "orchestratorVersion": "1.23.3",
+          "osSKU": "Windows2022",
+          "osType": "Windows",
+          "provisioningState": "Creating",
+          "vmSize": "Standard_D4s_v3"
+        }
+      }
+    }
+  },
+  "operationId": "AgentPools_CreateOrUpdate",
+  "title": "Create Agent Pool with Windows OSSKU"
+}

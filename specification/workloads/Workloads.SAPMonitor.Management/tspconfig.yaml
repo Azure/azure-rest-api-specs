@@ -23,6 +23,22 @@ options:
     flavor: "azure"
     generate-test: true
     generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-workloadssapmonitors"
+    service-dir: "sdk/workloadssapmonitors"
+    namespace: "com.azure.resourcemanager.workloadssapmonitors"
+    service-name: "Sap Monitors"
+    flavor: "azure"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/sapmonitors"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsapmonitors"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsapmonitors"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

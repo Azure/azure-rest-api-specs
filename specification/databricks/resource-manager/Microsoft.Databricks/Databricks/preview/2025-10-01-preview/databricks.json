@@ -860,7 +860,7 @@
         },
         "publicNetworkAccess": {
           "type": "string",
-          "description": "The network access type for accessing workspace. Set value to disabled to access workspace only via private link. Used to config frontend Only private link for Serverless ComputeMode workspace.",
+          "description": "The network access type for accessing workspace. Set value to disabled to access workspace only via private link. Used to configure front-end only private link for Serverless ComputeMode workspace.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -1262,15 +1262,15 @@
         },
         "customVirtualNetworkId": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The ID of a Virtual Network where this Databricks Cluster should be created. Required in Hybrid ComputeMode. Not allowed in Serverless ComputeMode workspace."
+          "description": "The ID of a Virtual Network where this Databricks Cluster should be created. Not allowed in Serverless ComputeMode workspace."
         },
         "customPublicSubnetName": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The name of a Public Subnet within the Virtual Network. Required in Hybrid ComputeMode. Not allowed in Serverless ComputeMode workspace."
+          "description": "The name of a Public Subnet within the Virtual Network. Not allowed in Serverless ComputeMode workspace."
         },
         "customPrivateSubnetName": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
-          "description": "The name of the Private Subnet within the Virtual Network. Required in Hybrid ComputeMode. Not allowed in Serverless ComputeMode workspace."
+          "description": "The name of the Private Subnet within the Virtual Network. Not allowed in Serverless ComputeMode workspace."
         },
         "enableNoPublicIp": {
           "$ref": "#/definitions/WorkspaceNoPublicIPBooleanParameter",
@@ -1322,7 +1322,7 @@
           "description": "Tags applied to resources under Managed resource group. These can be updated by updating tags at workspace level. Not allowed in Serverless ComputeMode workspace."
         }
       },
-      "description": "Custom Parameters used for Cluster Creation. The customVirtualNetworkId, customPublicSubnetName, customPrivateSubnetName are required for Hybrid ComputeMode. Not allowed in Serverless ComputeMode workspace."
+      "description": "Custom Parameters used for Cluster Creation. Not allowed in Serverless ComputeMode workspace."
     },
     "CreatedDateTime": {
       "type": "string",

@@ -7,7 +7,6 @@ options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
-    emit-common-types-schema: "never"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-informaticadatamanagement"
@@ -24,12 +23,25 @@ options:
     namespace: "Azure.ResourceManager.InformaticaDataManagement"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
+    typespec-title-map:
+      DataManagementClient: InformaticaDataManagement
     service-dir: "sdk/informatica"
     experimental-extensible-enums: true
+    compatibility-lro: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-informaticadatamanagement"
     flavor: azure
     package-details:
       name: "@azure/arm-informaticadatamanagement"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/informaticadatamgmt"
+    emitter-output-dir: "{output-dir}/{service-dir}/arminformaticadatamgmt"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/arminformaticadatamgmt"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
