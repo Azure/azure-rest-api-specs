@@ -267,13 +267,6 @@ model ConnectedClusterProperties {
   inboundConnectivityStatus?: InboundConnectivityStatus;
 
   /**
-   * Represents the full JSON response fom ConnectedProxyAgent health endpoint including component-level health details
-   */
-  @added(Versions.v2026_02_01_preview)
-  @visibility(Lifecycle.Read)
-  inboundConnectivityDetails?: string;
-
-  /**
    * Property which describes the state of private link on a connected cluster resource.
    */
   privateLinkState?: PrivateLinkState = PrivateLinkState.Disabled;
