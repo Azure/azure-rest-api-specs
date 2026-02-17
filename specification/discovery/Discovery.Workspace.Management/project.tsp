@@ -66,7 +66,7 @@ model ProjectProperties {
   ]>;
 
   @doc("Allowed StorageContainers (Control plane resource references).")
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @added(Microsoft.Discovery.Versions.v2026_02_01_preview)
   storageContainerIds?: StorageContainerId[];
 

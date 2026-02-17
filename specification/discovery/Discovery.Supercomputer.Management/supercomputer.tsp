@@ -20,11 +20,15 @@ model Supercomputer is TrackedResource<SupercomputerProperties> {
   ...ResourceNameParameter<Supercomputer>;
 }
 
-@added(Versions.v2025_12_01_preview)
 @doc("Supported System SKU Sizes.")
 union SystemSku {
-  @doc("Standard_D4s_v6 SKU")
-  Standard_D4s_v6: "Standard_D4s_v6 basic compute VM (default)",
+  @added(Versions.v2026_02_01_preview)
+  @doc("Standard_D4s_v6 basic compute VM (default)")
+  Standard_D4s_v6: "Standard_D4s_v6",
+
+  @removed(Versions.v2026_02_01_preview)
+  @doc("Standard_D4s_v6 basic compute VM (default)")
+  Standard_D4s_v6_legacy: "Standard_D4s_v6 basic compute VM (default)",
 
   @doc("Standard_D4s_v5 SKU")
   Standard_D4s_v5: "Standard_D4s_v5",
@@ -39,10 +43,10 @@ union SystemSku {
 @doc("Supported network egress types.")
 union NetworkEgressType {
   @doc("Public outbound network via load balancer (Default)")
-  LoadBalancer: "Public outbound route via load balancer (Default)",
+  LoadBalancer: "LoadBalancer",
 
   @doc("No default outbound")
-  None: "No default outbound connectivity",
+  None: "None",
 
   string,
 }
@@ -69,14 +73,6 @@ model SupercomputerProperties {
   managementSubnetId?: Microsoft.Discovery.Shared.SubnetId;
 
   /**
-    Private Link subnet ID associated with inbound connectivity to the AKS apiserver. Must be delegated to Microsoft.ContainerService/managedClusters.
-    It should have connectivity to the management subnet.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  @added(Versions.v2026_02_01_preview)
-  privateLinkSubnetId?: Microsoft.Discovery.Shared.SubnetId;
-
-  /**
     Network egress type provisioned for the supercomputer workloads.
     Defaults to LoadBalancer if not specified.
     If None is specified, the customer is responsible for providing outbound connectivity for Supercomputer functionality.
@@ -85,9 +81,8 @@ model SupercomputerProperties {
   @added(Versions.v2026_02_01_preview)
   outboundType?: NetworkEgressType = NetworkEgressType.LoadBalancer;
 
-  @doc("The SKU to use for the system nodepool.")
+  @doc("The SKU to use for the system node pool.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @added(Versions.v2025_12_01_preview)
   systemSku?: SystemSku;
 
   /**
@@ -139,7 +134,7 @@ model SupercomputerIdentities {
   kubeletIdentity: Microsoft.Discovery.Identity;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
-  @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer.")
+  @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
 }

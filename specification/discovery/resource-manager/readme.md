@@ -35,12 +35,6 @@ These settings apply only when `--tag=package-2026-02-01-preview` is specified o
 input-file:
   - Microsoft.Discovery/preview/2026-02-01-preview/discovery.json
 suppressions:
-  - code: AvoidAnonymousTypes
-    from: discovery.json
-    reason: Swagger LintDiff false positive for ManagedServiceIdentityProperty
-  - code: LatestVersionOfCommonTypesMustBeUsed
-    from: discovery.json
-    reason: Newer version no longer has MoboConfigurationWithMrg
   - code: AvoidAdditionalProperties
     reason: Enable customer to apply environment variables.
     from:
@@ -54,14 +48,8 @@ suppressions:
       - discovery.json
     where:
       - $.definitions.WithDefinitionContent.properties.definitionContent
-      - $.definitions.AgentProperties.properties.definitionContent
-      - $.definitions.AgentPropertiesUpdate.properties.definitionContent
-      - $.definitions.ModelProperties.properties.definitionContent
-      - $.definitions.ModelPropertiesUpdate.properties.definitionContent
       - $.definitions.ToolProperties.properties.definitionContent
       - $.definitions.ToolPropertiesUpdate.properties.definitionContent
-      - $.definitions.WorkflowProperties.properties.definitionContent
-      - $.definitions.WorkflowPropertiesUpdate.properties.definitionContent
   - code: AvoidAdditionalProperties
     reason: Enable customer to assign identities to tools.
     from:
@@ -92,6 +80,13 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].put.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
+  - code: ResourceNameRestriction
+    reason: The privateLinkResourceName parameter is determined by the service and does not require a pattern restriction.
+    from:
+      - discovery.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/bookshelves/{bookshelfName}/privateLinkResources/{privateLinkResourceName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}/privateLinkResources/{privateLinkResourceName}"]
 ```
 
 ---
