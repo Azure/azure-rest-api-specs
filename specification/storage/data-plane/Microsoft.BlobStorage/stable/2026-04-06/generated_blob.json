@@ -533,7 +533,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-meta": {
                 "type": "string",
@@ -899,7 +899,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-meta": {
                 "type": "string",
@@ -1324,17 +1324,6 @@
             "required": false,
             "type": "boolean",
             "x-ms-client-name": "legalHold"
-          },
-          {
-            "name": "x-ms-requires-sync",
-            "in": "header",
-            "description": "This header indicates that this is a synchronous Copy Blob From URL instead of a Asynchronous Copy Blob.",
-            "required": true,
-            "type": "boolean",
-            "enum": [
-              true
-            ],
-            "x-ms-client-name": "requiresSync"
           }
         ],
         "responses": {
@@ -2177,7 +2166,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-meta": {
                 "type": "string",
@@ -5817,7 +5806,7 @@
               },
               "x-ms-legal-hold": {
                 "type": "boolean",
-                "description": "Specifies the legal hold status to set on the blob."
+                "description": "Indicates whether the blob has a legal hold."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -18484,11 +18473,13 @@
         },
         "SignedStart": {
           "type": "string",
+          "format": "date-time-rfc7231",
           "description": "The date-time the key is active.",
           "x-ms-client-name": "signedStart"
         },
         "SignedExpiry": {
           "type": "string",
+          "format": "date-time-rfc7231",
           "description": "The date-time the key expires.",
           "x-ms-client-name": "signedExpiry"
         },
