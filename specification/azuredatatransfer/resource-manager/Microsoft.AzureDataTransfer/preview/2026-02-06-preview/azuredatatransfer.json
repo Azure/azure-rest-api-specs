@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "azuredatatransferrp",
-    "version": "2025-10-10-preview",
+    "version": "2026-02-06-preview",
     "description": "Azure Data Transfer service resource provider",
     "x-typespec-generated": [
       {
@@ -3119,6 +3119,24 @@
         }
       }
     },
+    "AntivirusRulesetActions": {
+      "type": "object",
+      "description": "Actions applied to data transfers when Antivirus scanning rules indicate the data transfer is potentially\nunwanted.",
+      "properties": {
+        "audit": {
+          "$ref": "#/definitions/AntivirusRuleset",
+          "description": "Failures of this rule will not block data transfers but will provide an audit log\nof the failure occurring."
+        },
+        "quarantine": {
+          "$ref": "#/definitions/AntivirusRuleset",
+          "description": "Failures of this rule will block data transfers for manual review. Upon manual review\nthe transfer can be rejected (to stop the transfer completely) or released (to allow the data\nto transfer)."
+        },
+        "deny": {
+          "$ref": "#/definitions/AntivirusRuleset",
+          "description": "Failures of this rule will block data transfers with no further review."
+        }
+      }
+    },
     "AntivirusSolutions": {
       "type": "string",
       "description": "The list of Antivirus solutions currently provided.",
@@ -3241,6 +3259,24 @@
           "format": "double",
           "description": "Optional. Provides the multiplication value for an archive in total based on the initial object being validated. This value takes the root object size and multiplies it by this value to create a maximum. Once this maximum is exceeded, the archive is failed. Used to detect and block archives with suspiciously high compression (e.g., zip bombs).",
           "minimum": 0
+        }
+      }
+    },
+    "ArchiveRulesetActions": {
+      "type": "object",
+      "description": "Actions applied when supported archive based data transfers fail the ArchiveRuleset(s) specified.",
+      "properties": {
+        "audit": {
+          "$ref": "#/definitions/ArchiveRuleset",
+          "description": "Failures of this rule will not block data transfers but will provide an audit log\nof the failure occurring."
+        },
+        "quarantine": {
+          "$ref": "#/definitions/ArchiveRuleset",
+          "description": "Failures of this rule will block data transfers for manual review. Upon manual review\nthe transfer can be rejected (to stop the transfer completely) or released (to allow the data\nto transfer)."
+        },
+        "deny": {
+          "$ref": "#/definitions/ArchiveRuleset",
+          "description": "Failures of this rule will block data transfers with no further review."
         }
       }
     },
@@ -3704,6 +3740,24 @@
         }
       }
     },
+    "DataSizeRulesetActions": {
+      "type": "object",
+      "description": "Actions applied when data transfers fail the DataSizeRuleset(s) specified.",
+      "properties": {
+        "audit": {
+          "$ref": "#/definitions/DataSizeRuleset",
+          "description": "Failures of this rule will not block data transfers but will provide an audit log\nof the failure occurring."
+        },
+        "quarantine": {
+          "$ref": "#/definitions/DataSizeRuleset",
+          "description": "Failures of this rule will block data transfers for manual review. Upon manual review\nthe transfer can be rejected (to stop the transfer completely) or released (to allow the data\nto transfer)."
+        },
+        "deny": {
+          "$ref": "#/definitions/DataSizeRuleset",
+          "description": "Failures of this rule will block data transfers with no further review."
+        }
+      }
+    },
     "DataType": {
       "type": "string",
       "description": "Transfer Storage Blobs or Tables",
@@ -4014,27 +4068,27 @@
       "description": "The allowed set of configurable rulesets for a FlowProfile resource, used during data replication.\nAll rulesets are optional, and any ruleset configured will be applied to every applicable replicating\ndata. Any data that fails a ruleset will be denied replication. If a ruleset is not configured\nthen the ruleset is considered disabled and will not apply towards replicating data.",
       "properties": {
         "antivirus": {
-          "$ref": "#/definitions/AntivirusRuleset",
+          "$ref": "#/definitions/AntivirusRulesetActions",
           "description": "Antivirus scanning rules for replicated data."
         },
         "archives": {
-          "$ref": "#/definitions/ArchiveRuleset",
+          "$ref": "#/definitions/ArchiveRulesetActions",
           "description": "Rules for handling archive files during replication."
         },
         "dataSize": {
-          "$ref": "#/definitions/DataSizeRuleset",
+          "$ref": "#/definitions/DataSizeRulesetActions",
           "description": "Rules that enforce minimum and maximum data size limits."
         },
         "mimeFilters": {
-          "$ref": "#/definitions/MimeFilterRuleset",
+          "$ref": "#/definitions/MimeFilterRulesetActions",
           "description": "Rules for filtering files based on MIME types."
         },
         "xmlFilters": {
-          "$ref": "#/definitions/XmlFilterRuleset",
+          "$ref": "#/definitions/XmlFilterRulesetActions",
           "description": "Rules for filtering XML content using XSD schemas."
         },
         "textMatching": {
-          "$ref": "#/definitions/TextMatchingRuleset",
+          "$ref": "#/definitions/TextMatchingRulesetActions",
           "description": "Rules for detecting and blocking specific text patterns."
         }
       }
@@ -4629,6 +4683,24 @@
             "media",
             "extensions"
           ]
+        }
+      }
+    },
+    "MimeFilterRulesetActions": {
+      "type": "object",
+      "description": "Actions applied when data transfers fail the MimeFilterRuleset(s) specified.",
+      "properties": {
+        "audit": {
+          "$ref": "#/definitions/MimeFilterRuleset",
+          "description": "Failures of this rule will not block data transfers but will provide an audit log\nof the failure occurring."
+        },
+        "quarantine": {
+          "$ref": "#/definitions/MimeFilterRuleset",
+          "description": "Failures of this rule will block data transfers for manual review. Upon manual review\nthe transfer can be rejected (to stop the transfer completely) or released (to allow the data\nto transfer)."
+        },
+        "deny": {
+          "$ref": "#/definitions/MimeFilterRuleset",
+          "description": "Failures of this rule will block data transfers with no further review."
         }
       }
     },
@@ -5765,13 +5837,37 @@
         "caseSensitivity"
       ]
     },
-    "TextMatchingRuleset": {
+    "TextMatchingRulesetActions": {
       "type": "object",
-      "description": "Rules for detecting and blocking specific text patterns. If a file contains a text pattern that is part of the configured deny list, the file will be denied.",
+      "description": "Actions applied when data transfers fail the TextMatches specified.",
       "properties": {
+        "audit": {
+          "type": "array",
+          "description": "Failures of this rule will not block data transfers but will provide an audit log\nof the failure occurring.",
+          "items": {
+            "$ref": "#/definitions/TextMatch"
+          },
+          "x-ms-identifiers": [
+            "text",
+            "matchType",
+            "caseSensitivity"
+          ]
+        },
+        "quarantine": {
+          "type": "array",
+          "description": "Failures of this rule will block data transfers for manual review. Upon manual review\nthe transfer can be rejected (to stop the transfer completely) or released (to allow the data\nto transfer).",
+          "items": {
+            "$ref": "#/definitions/TextMatch"
+          },
+          "x-ms-identifiers": [
+            "text",
+            "matchType",
+            "caseSensitivity"
+          ]
+        },
         "deny": {
           "type": "array",
-          "description": "A list of text patterns to block, each with matching rules and case sensitivity options.",
+          "description": "Failures of this rule will block data transfers with no further review.",
           "items": {
             "$ref": "#/definitions/TextMatch"
           },
@@ -5837,6 +5933,24 @@
         "schema": {
           "type": "string",
           "description": "The inline XSD schema to be used for validation."
+        }
+      }
+    },
+    "XmlFilterRulesetActions": {
+      "type": "object",
+      "description": "Actions applied when data transfers fail the XmlFilterRuleset(s) specified.",
+      "properties": {
+        "audit": {
+          "$ref": "#/definitions/XmlFilterRuleset",
+          "description": "Failures of this rule will not block data transfers but will provide an audit log\nof the failure occurring."
+        },
+        "quarantine": {
+          "$ref": "#/definitions/XmlFilterRuleset",
+          "description": "Failures of this rule will block data transfers for manual review. Upon manual review\nthe transfer can be rejected (to stop the transfer completely) or released (to allow the data\nto transfer)."
+        },
+        "deny": {
+          "$ref": "#/definitions/XmlFilterRuleset",
+          "description": "Failures of this rule will block data transfers with no further review."
         }
       }
     },
