@@ -6,8 +6,8 @@
 - [x] **Bring GPU and GPU Jobs from 2024-11-01-preview** - Added EdgeMachineGpu and EdgeMachineGpuJobs resources (files: edgeMachineGpu.tsp, edgeMachineGpuJobs.tsp)
 - [x] **Create Storage APIs from swagger** - Added EdgeMachineDisks, EdgeMachineVolumes, EdgeMachineDiskJobs resources (file: edgeMachineStorage.tsp)
 - [x] **Create Network Adapter APIs from swagger** - Added EdgeMachineNetworkAdapters, EdgeMachineNetworkAdapterJobs resources (file: edgeMachineNetworkAdapters.tsp)
+- [x] **Bring EdgeDevice Metadata from backlog** - Added EdgeDeviceMetadata resource (file: edgeDeviceMetadata.tsp)
 - [ ] **Create SAN APIs from swagger** - Swagger will be provided
-- [ ] **Bring EdgeMachine Metadata from 2023-11-01-preview** - edgeMachineMetadata
 - [ ] **Bring Network Profiles from 2023-11-01-preview** - networkProfiles
 - [ ] **Bring Cluster kind property** - cluster kind (recreate for preview version)
 
@@ -70,12 +70,13 @@ This document tracks the differences between the private preview repository and 
 | edgeMachineGpuJobs.tsp | **NEW** | - | - |
 | edgeMachineStorage.tsp | **NEW** | - | - |
 | edgeMachineNetworkAdapters.tsp | **NEW** | - | - |
+| edgeDeviceMetadata.tsp | **NEW** | - | - |
 
 ### Summary
-- **Total Files**: 33 (29 shared + 4 new)
+- **Total Files**: 34 (29 shared + 5 new)
 - **Identical**: 11 (38% of shared)
 - **Different**: 18 (62% of shared)
-- **New in Private**: 4 (edgeMachineGpu.tsp, edgeMachineGpuJobs.tsp, edgeMachineStorage.tsp, edgeMachineNetworkAdapters.tsp)
+- **New in Private**: 5 (edgeMachineGpu.tsp, edgeMachineGpuJobs.tsp, edgeMachineStorage.tsp, edgeMachineNetworkAdapters.tsp, edgeDeviceMetadata.tsp)
 
 > **Note**: Most differences are due to version annotation changes (using simplified v2026_02_01/v2026_03_15_preview instead of v2025_12_01_preview/v2026_03_01_preview). Generated OpenAPI specs for `stable/2026-02-01/hci.json` are **identical** between private and public repositories.
 
@@ -191,6 +192,13 @@ The private repository contains the following features not yet available in the 
   - Validation and deployment status tracking
   - Files: `edgeMachineNetworkAdapters.tsp`
 
+### 8. EdgeDevice Metadata Resources (Preview Only) - NEW
+- **EdgeDeviceMetadata** - Extension resource for EdgeDevice metadata management
+  - List, Get, Create, Delete operations
+  - Properties: validatedRecipe (string), provisioningState (read-only)
+  - Stores validated recipe information for an edge device
+  - Files: `edgeDeviceMetadata.tsp`
+
 ---
 
 ## Version Annotations
@@ -210,8 +218,8 @@ When merging changes from public to private repository:
 3. Preserve `identity` property on `ArcSettingsPatch` and `ArcSetting` with appropriate `@added` annotations
 4. Preserve `ring`, `ChangeRingRequest`, and `ChangeRingRequestProperties` with `@added(v2026_03_15_preview)`
 5. Update version annotations from public versions to private versions as needed
-6. **Keep private-only files**: `edgeMachineGpu.tsp`, `edgeMachineGpuJobs.tsp`, `edgeMachineStorage.tsp`, `edgeMachineNetworkAdapters.tsp` (not in public repo)
-7. **Keep main.tsp imports** for EdgeMachineGpu, EdgeMachineGpuJobs, EdgeMachineStorage, EdgeMachineNetworkAdapters
+6. **Keep private-only files**: `edgeMachineGpu.tsp`, `edgeMachineGpuJobs.tsp`, `edgeMachineStorage.tsp`, `edgeMachineNetworkAdapters.tsp`, `edgeDeviceMetadata.tsp` (not in public repo)
+7. **Keep main.tsp imports** for EdgeMachineGpu, EdgeMachineGpuJobs, EdgeMachineStorage, EdgeMachineNetworkAdapters, EdgeDeviceMetadata
 
 ### Version Mapping (Public → Private)
 | Public Version | Private Version |
@@ -234,3 +242,7 @@ When merging changes from public to private repository:
 8. Created EdgeMachineNetworkAdapters resources (edgeMachineNetworkAdapters.tsp) from swagger - NetworkAdapters, NetworkAdapterJobs
 9. Updated main.tsp to import new Storage and NetworkAdapter modules
 10. Compiled TypeSpec - 83 paths in preview swagger
+11. Added EdgeDeviceMetadata resource from backlog (edgeDeviceMetadata.tsp) - Extension resource for EdgeDevice
+12. Compiled TypeSpec - 85 paths in preview swagger
+13. Added EdgeDeviceMetadata examples from preview/2023-12-01-preview - 4 files
+14. Total examples in 2026-03-15-preview: 144

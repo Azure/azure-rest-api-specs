@@ -73,6 +73,9 @@
       "name": "EdgeDevices"
     },
     {
+      "name": "EdgeDeviceMetadataOperations"
+    },
+    {
       "name": "Extensions"
     },
     {
@@ -131,6 +134,238 @@
     }
   ],
   "paths": {
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDeviceMetadata": {
+      "get": {
+        "operationId": "EdgeDeviceMetadataOperations_List",
+        "tags": [
+          "EdgeDeviceMetadataOperations"
+        ],
+        "description": "List EdgeDevice metadata resources by EdgeDevice.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceMetadataListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceMetadataOperations_List": {
+            "$ref": "./examples/EdgeDeviceMetadata_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDeviceMetadata/{metadataName}": {
+      "get": {
+        "operationId": "EdgeDeviceMetadataOperations_Get",
+        "tags": [
+          "EdgeDeviceMetadataOperations"
+        ],
+        "description": "Get EdgeDevice metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "metadataName",
+            "in": "path",
+            "description": "The name of the EdgeDeviceMetadata",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceMetadata"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceMetadataOperations_Get": {
+            "$ref": "./examples/EdgeDeviceMetadata_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EdgeDeviceMetadataOperations_CreateOrUpdate",
+        "tags": [
+          "EdgeDeviceMetadataOperations"
+        ],
+        "description": "Create or update EdgeDevice metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "metadataName",
+            "in": "path",
+            "description": "The name of the EdgeDeviceMetadata",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceMetadata"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EdgeDeviceMetadata' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceMetadata"
+            }
+          },
+          "201": {
+            "description": "Resource 'EdgeDeviceMetadata' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EdgeDeviceMetadata"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceMetadataOperations_CreateOrUpdate": {
+            "$ref": "./examples/EdgeDeviceMetadata_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeDeviceMetadataOperations_Delete",
+        "tags": [
+          "EdgeDeviceMetadataOperations"
+        ],
+        "description": "Delete EdgeDevice metadata.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "resourceUri",
+            "in": "path",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "metadataName",
+            "in": "path",
+            "description": "The name of the EdgeDeviceMetadata",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EdgeDeviceMetadataOperations_Delete": {
+            "$ref": "./examples/EdgeDeviceMetadata_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/{resourceUri}/providers/Microsoft.AzureStackHCI/edgeDevices": {
       "get": {
         "operationId": "EdgeDevices_List",
@@ -11191,6 +11426,57 @@
       "required": [
         "value"
       ]
+    },
+    "EdgeDeviceMetadata": {
+      "type": "object",
+      "description": "EdgeDevice Metadata resource - stores validated recipe information for an edge device.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EdgeDeviceMetadataProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeDeviceMetadataListResult": {
+      "type": "object",
+      "description": "The response of a EdgeDeviceMetadata list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeDeviceMetadata items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeDeviceMetadata"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EdgeDeviceMetadataProperties": {
+      "type": "object",
+      "description": "Edge device metadata properties.",
+      "properties": {
+        "validatedRecipe": {
+          "type": "string",
+          "description": "Validated Recipe name or identifier."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the metadata resource.",
+          "readOnly": true
+        }
+      }
     },
     "EdgeDeviceProperties": {
       "type": "object",
