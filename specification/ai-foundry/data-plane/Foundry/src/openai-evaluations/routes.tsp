@@ -56,7 +56,7 @@ alias EvalRunOutputItemsQueryParameters = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @route("openai/v1/evals")
 @tag("Evals")
-interface OpenAIEvals {
+interface Evals {
   /** List evaluations for a project. */
   @summary("List all evaluations")
   @list
