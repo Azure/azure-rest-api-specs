@@ -111,6 +111,7 @@ using Azure.ClientGenerator.Core;
 
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
 @@access(VoiceLive.ServerEventSessionCreated, Access.public, "csharp");
+@@access(VoiceLive.RequestAudioContentPart, Access.public, "csharp");
 @@access(VoiceLive.ClientEvent, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventConversationItemCreate,
   Access.internal,
