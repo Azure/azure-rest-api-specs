@@ -6,6 +6,9 @@
 - [ ] **Copy examples from main repo** - Also copy from previous previews so that the example list is complete
 - [ ] **Create Storage APIs back from swagger** - Swagger will be provided
 - [ ] **Create SAN APIs from swagger** - Swagger will be provided
+- [ ] **Bring GPU and GPU Jobs from 2024-11-01-preview** - gpu and gpuJobs resources
+- [ ] **Bring EdgeMachine Metadata from 2023-11-01-preview** - edgeMachineMetadata
+- [ ] **Bring Network Profiles from 2023-11-01-preview** - networkProfiles
 
 ---
 
