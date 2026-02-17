@@ -11,7 +11,6 @@ using TypeSpec.OpenAPI;
 using Azure.Core;
 using TypeSpec.Versioning;
 
-@armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
 /**

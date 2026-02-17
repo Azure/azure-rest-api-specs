@@ -11,7 +11,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.Core;
 
-@armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
 /**
