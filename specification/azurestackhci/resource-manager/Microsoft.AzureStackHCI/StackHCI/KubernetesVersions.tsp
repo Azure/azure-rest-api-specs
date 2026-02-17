@@ -1,18 +1,17 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/http";
-import "@azure-tools/typespec-azure-resource-manager";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-@armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-@doc("Represents a kubernetes version resource.")
+/**
+ * Represents a kubernetes version resource.
+ */
 @parentResource(SubscriptionLocationResource)
 @added(Versions.v2026_03_01_preview)
 model KubernetesVersion
@@ -26,14 +25,8 @@ model KubernetesVersion
 @armResourceOperations
 @added(Versions.v2026_03_01_preview)
 interface KubernetesVersions {
-  @doc("List all kubernetes versions.")
+  /**
+   * List all kubernetes versions.
+   */
   list is ArmResourceListAtScope<KubernetesVersion>;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("Represents properties of a kubernetes version.")
-@added(Versions.v2026_03_01_preview)
-model KubernetesVersionProperties {
-  @doc("Represents kubernetes version.")
-  version: string;
 }

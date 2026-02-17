@@ -1,20 +1,20 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/http";
+import "./models.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using Azure.Core;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
-@armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+/**
+ * DevicePool details.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("DevicePool details.")
 @added(Versions.v2026_03_01_preview)
 model DevicePool
   is Azure.ResourceManager.TrackedResource<DevicePoolProperties> {
@@ -45,25 +45,35 @@ interface DevicePools {
    */
   delete is ArmResourceDeleteWithoutOkAsync<DevicePool>;
 
-  @doc("Update a devicePool")
+  /**
+   * Update a devicePool
+   */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<DevicePool, DevicePoolPatch>;
 
-  @doc("List all device pools in a resource group.")
+  /**
+   * List all device pools in a resource group.
+   */
   listByResourceGroup is ArmResourceListByParent<DevicePool>;
 
-  @doc("List all device pools in a subscription.")
+  /**
+   * List all device pools in a subscription.
+   */
   listBySubscription is ArmListBySubscription<DevicePool>;
 
+  /**
+   * Claiming devices of the pool.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @doc("Claiming devices of the pool.")
   claimDevices is ArmResourceActionNoContentAsync<
     DevicePool,
     ClaimDeviceRequest
   >;
 
+  /**
+   * Releasing devices of the pool.
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @doc("Releasing devices of the pool.")
   releaseDevices is ArmResourceActionNoContentAsync<
     DevicePool,
     ReleaseDeviceRequest
