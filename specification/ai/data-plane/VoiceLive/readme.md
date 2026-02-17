@@ -14,7 +14,16 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2025-10-01
+tag: package-2026-01-01-preview
+```
+
+### Tag: package-2026-01-01-preview
+
+These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01-preview'
+input-file:
+  - preview/2026-01-01-preview/VoiceLive.json
 ```
 
 ### Tag: package-2025-10-01
@@ -23,5 +32,14 @@ These settings apply only when `--tag=package-2025-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-10-01'
 input-file:
-  - stable/2025-10-01/GeneratedSystemEvents.json
+  - stable/2025-10-01/VoiceLive.json
+```
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: OAV133
+    from: VoiceLive.json
+    reason: OpenAI and Azure require two different discriminators.
 ```

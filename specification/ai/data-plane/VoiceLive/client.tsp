@@ -98,6 +98,8 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "python");
 
 @@access(VoiceLive.ToolChoice, Access.public, "python");
+
+@@clientName(VoiceLive.Scene, "SceneParams", "csharp");
 @@access(VoiceLive.Voice, Access.public, "python");
 
 @@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "python");
@@ -109,6 +111,7 @@ using Azure.ClientGenerator.Core;
 
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
 @@access(VoiceLive.ServerEventSessionCreated, Access.public, "csharp");
+@@access(VoiceLive.RequestAudioContentPart, Access.public, "csharp");
 @@access(VoiceLive.ClientEvent, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventConversationItemCreate,
   Access.internal,
@@ -824,7 +827,7 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 
-@@clientName(VoiceLive.FillerResponseConfigBase.latency_threshold_ms,
+@@clientName(VoiceLive.InterimResponseConfigBase.latency_threshold_ms,
   "latencyThresholdInMs",
   "javascript"
 );

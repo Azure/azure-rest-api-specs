@@ -1,11 +1,10 @@
 import "./events.tsp";
 import "./items.tsp";
 import "./tools.tsp";
-import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace VoiceLive;
 
@@ -83,10 +82,12 @@ model RequestSession {
    * Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.
    * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
+  @added(Versions.v2026_01_01_preview)
   reasoning_effort?: ReasoningEffort;
 
-  /** Configuration for filler response generation during latency or tool calls. */
-  filler_response?: FillerResponseConfig;
+  /** Configuration for interim response generation during latency or tool calls. */
+  @added(Versions.v2026_01_01_preview)
+  interim_response?: InterimResponseConfig;
 }
 
 /**
@@ -94,6 +95,7 @@ model RequestSession {
  * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 union ReasoningEffort {
   string,
 
@@ -157,9 +159,11 @@ union OAIVoice {
   verse: "verse",
 
   /** Marin voice. */
+  @added(Versions.v2026_01_01_preview)
   marin: "marin",
 
   /** Cedar voice. */
+  @added(Versions.v2026_01_01_preview)
   cedar: "cedar",
 }
 
@@ -330,9 +334,11 @@ union OutputAudioFormat {
   pcm16: "pcm16",
 
   /** 16-bit PCM audio format at 8kHz sampling rate */
+  @added(Versions.v2026_01_01_preview)
   pcm16_8000hz: "pcm16_8000hz",
 
   /** 16-bit PCM audio format at 16kHz sampling rate */
+  @added(Versions.v2026_01_01_preview)
   pcm16_16000hz: "pcm16_16000hz",
 
   /** G.711 μ-law (mu-law) audio format at 8kHz sampling rate */
@@ -606,11 +612,39 @@ model Animation {
   outputs?: AnimationOutputType[] = #[AnimationOutputType.blendshapes];
 }
 
+/** Configuration for avatar's zoom level, position, rotation and movement amplitude in the video frame. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
+@usage(RequestUsage)
+model Scene {
+  /** Zoom level of the avatar. Range is (0, +∞). Values less than 1 zoom out, values greater than 1 zoom in. */
+  zoom?: float32 = 0.0;
+
+  /** Horizontal position of the avatar. Range is [-1, 1], as a proportion of frame width. Negative values move left, positive values move right. */
+  position_x?: float32 = 0.0;
+
+  /** Vertical position of the avatar. Range is [-1, 1], as a proportion of frame height. Negative values move up, positive values move down. */
+  position_y?: float32 = 0.0;
+
+  /** Rotation around the X-axis (pitch). Range is [-π, π] in radians. Negative values rotate up, positive values rotate down. */
+  rotation_x?: float32 = 0.0;
+
+  /** Rotation around the Y-axis (yaw). Range is [-π, π] in radians. Negative values rotate left, positive values rotate right. */
+  rotation_y?: float32 = 0.0;
+
+  /** Rotation around the Z-axis (roll). Range is [-π, π] in radians. Negative values rotate anticlockwise, positive values rotate clockwise. */
+  rotation_z?: float32 = 0.0;
+
+  /** Amplitude of the avatar movement. Range is (0, 1]. Values in (0, 1) mean reduced amplitude, 1 means full amplitude. */
+  amplitude?: float32 = 0.0;
+}
+
 /** Configuration for avatar streaming and behavior during the session. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
 model AvatarConfig {
   /** Type of avatar to use. */
+  @added(Versions.v2026_01_01_preview)
   type?: AvatarConfigTypes;
 
   /** Optional list of ICE servers to use for WebRTC connection establishment. */
@@ -623,6 +657,7 @@ model AvatarConfig {
   style?: string;
 
   /** Base model to use for the avatar. Required for photo avatar. */
+  @added(Versions.v2026_01_01_preview)
   `model`?: PhotoAvatarBaseModes;
 
   /** Indicates whether the avatar is customized or not. */
@@ -631,11 +666,21 @@ model AvatarConfig {
   /** Optional video configuration including resolution, bitrate, and codec. */
   video?: VideoParams;
 
+  /** Configuration for the avatar's zoom level, position, rotation and movement amplitude in the video frame. */
+  @added(Versions.v2026_01_01_preview)
+  scene?: Scene;
+
   /** Output protocol for avatar streaming. Default is 'webrtc'. */
+  @added(Versions.v2026_01_01_preview)
   output_protocol?: AvatarOutputProtocol = AvatarOutputProtocol.webrtc;
+
+  /** When enabled, forwards audit audio via WebSocket for review/debugging purposes, even when avatar output is delivered via WebRTC. */
+  @added(Versions.v2026_01_01_preview)
+  output_audit_audio?: boolean = false;
 }
 
 /** Avatar config types */
+@added(Versions.v2026_01_01_preview)
 union AvatarConfigTypes {
   string,
 
@@ -647,6 +692,7 @@ union AvatarConfigTypes {
 }
 
 /** Photo avatar base modes */
+@added(Versions.v2026_01_01_preview)
 union PhotoAvatarBaseModes {
   string,
 
@@ -655,6 +701,7 @@ union PhotoAvatarBaseModes {
 }
 
 /** Avatar config output protocols */
+@added(Versions.v2026_01_01_preview)
 union AvatarOutputProtocol {
   string,
 
@@ -698,85 +745,91 @@ model AgentConfig {
   thread_id: string;
 }
 
-// --- Filler Response Configuration -----------------------------------------
+// --- Interim Response Configuration ----------------------------------------
 
-/** Triggers that can activate filler response generation. */
-union FillerTrigger {
+/** Triggers that can activate interim response generation. */
+@added(Versions.v2026_01_01_preview)
+union InterimResponseTrigger {
   string,
 
-  /** Trigger filler when response latency exceeds threshold. */
+  /** Trigger interim response when response latency exceeds threshold. */
   latency: "latency",
 
-  /** Trigger filler when a tool call is being executed. */
+  /** Trigger interim response when a tool call is being executed. */
   tool: "tool",
 }
 
-/** Union of filler response configuration types. */
-#suppress "@azure-tools/typespec-autorest/union-unsupported" // Discriminated union for filler config types.
-union FillerResponseConfig {
-  BasicFillerResponseConfig,
-  LlmFillerResponseConfig,
+/** Union of interim response configuration types. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" // Discriminated union for interim response config types.
+@added(Versions.v2026_01_01_preview)
+union InterimResponseConfig {
+  StaticInterimResponseConfig,
+  LlmInterimResponseConfig,
 }
 
-/** Base model for filler response configuration. */
+/** Base model for interim response configuration. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @discriminator("type")
 @usage(RequestUsage)
-model FillerResponseConfigBase {
-  /** The type of filler response configuration. */
-  type: FillerResponseConfigType;
+model InterimResponseConfigBase {
+  /** The type of interim response configuration. */
+  type: InterimResponseConfigType;
 
   /**
-   * List of triggers that can fire the filler. Any trigger can activate the filler (OR logic).
+   * List of triggers that can fire the interim response. Any trigger can activate it (OR logic).
    * Supported: 'latency', 'tool'.
    */
-  triggers?: FillerTrigger[] = #[FillerTrigger.latency];
+  triggers?: InterimResponseTrigger[] = #[InterimResponseTrigger.latency];
 
-  /** Latency threshold in milliseconds before triggering filler response. Default is 2000ms. */
+  /** Latency threshold in milliseconds before triggering interim response. Default is 2000ms. */
   @minValue(0)
   latency_threshold_ms?: int32;
 }
 
-/** Filler response configuration types. */
-union FillerResponseConfigType {
+/** Interim response configuration types. */
+@added(Versions.v2026_01_01_preview)
+union InterimResponseConfigType {
   string,
 
-  /** Static filler configuration type. */
-  static_filler: "static_filler",
+  /** Static interim response configuration type. */
+  static_interim_response: "static_interim_response",
 
-  /** LLM-based filler configuration type. */
-  llm_filler: "llm_filler",
+  /** LLM-based interim response configuration type. */
+  llm_interim_response: "llm_interim_response",
 }
 
 /**
- * Configuration for basic/static filler response generation.
+ * Configuration for static interim response generation.
  * Randomly selects from configured texts when any trigger condition is met.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
-model BasicFillerResponseConfig extends FillerResponseConfigBase {
-  type: FillerResponseConfigType.static_filler;
+model StaticInterimResponseConfig extends InterimResponseConfigBase {
+  type: InterimResponseConfigType.static_interim_response;
 
-  /** List of filler text options to randomly select from. */
+  /** List of interim response text options to randomly select from. */
   texts?: string[];
 }
 
 /**
- * Configuration for LLM-based filler response generation.
- * Uses LLM to generate context-aware filler responses when any trigger condition is met.
+ * Configuration for LLM-based interim response generation.
+ * Uses LLM to generate context-aware interim responses when any trigger condition is met.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
-model LlmFillerResponseConfig extends FillerResponseConfigBase {
-  type: FillerResponseConfigType.llm_filler;
+model LlmInterimResponseConfig extends InterimResponseConfigBase {
+  type: InterimResponseConfigType.llm_interim_response;
 
-  /** The model to use for LLM-based filler generation. Default is gpt-4.1-mini. */
+  /** The model to use for LLM-based interim response generation. Default is gpt-4.1-mini. */
   `model`?: string;
 
-  /** Custom instructions for generating filler responses. If not provided, a default prompt is used. */
+  /** Custom instructions for generating interim responses. If not provided, a default prompt is used. */
   instructions?: string;
 
-  /** Maximum number of tokens to generate for the filler response. */
+  /** Maximum number of tokens to generate for the interim response. */
   @minValue(1)
   max_completion_tokens?: int32 = 50;
 }
