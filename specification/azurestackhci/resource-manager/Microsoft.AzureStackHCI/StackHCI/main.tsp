@@ -21,6 +21,7 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./ArcSetting.tsp";
 import "./Cluster.tsp";
+import "./networkProfile.tsp";
 import "./DeploymentSetting.tsp";
 import "./EdgeDeviceJob.tsp";
 import "./EdgeDevice.tsp";

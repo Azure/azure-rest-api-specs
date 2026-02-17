@@ -7,9 +7,9 @@
 - [x] **Create Storage APIs from swagger** - Added EdgeMachineDisks, EdgeMachineVolumes, EdgeMachineDiskJobs resources (file: edgeMachineStorage.tsp)
 - [x] **Create Network Adapter APIs from swagger** - Added EdgeMachineNetworkAdapters, EdgeMachineNetworkAdapterJobs resources (file: edgeMachineNetworkAdapters.tsp)
 - [x] **Bring EdgeDevice Metadata from backlog** - Added EdgeDeviceMetadata resource (file: edgeDeviceMetadata.tsp)
-- [ ] **Create SAN APIs from swagger** - Swagger will be provided
-- [ ] **Bring Network Profiles from 2023-11-01-preview** - networkProfiles
-- [ ] **Bring Cluster kind property** - cluster kind (recreate for preview version)
+- [x] **Bring Network Profiles from backlog** - Added NetworkProfile resource (file: networkProfile.tsp)
+- [x] **Bring Cluster kind property** - Changed from @@removed to @@added for v2026_03_15_preview (updated Cluster.tsp)
+- [x] **Create SAN/Storage APIs from swagger** - Added EdgeMachineDisks, EdgeMachineVolumes, EdgeMachineDiskJobs resources (file: edgeMachineStorage.tsp)
 
 ---
 
@@ -71,12 +71,13 @@ This document tracks the differences between the private preview repository and 
 | edgeMachineStorage.tsp | **NEW** | - | - |
 | edgeMachineNetworkAdapters.tsp | **NEW** | - | - |
 | edgeDeviceMetadata.tsp | **NEW** | - | - |
+| networkProfile.tsp | **NEW** | - | - |
 
 ### Summary
-- **Total Files**: 34 (29 shared + 5 new)
+- **Total Files**: 35 (29 shared + 6 new)
 - **Identical**: 11 (38% of shared)
 - **Different**: 18 (62% of shared)
-- **New in Private**: 5 (edgeMachineGpu.tsp, edgeMachineGpuJobs.tsp, edgeMachineStorage.tsp, edgeMachineNetworkAdapters.tsp, edgeDeviceMetadata.tsp)
+- **New in Private**: 6 (edgeMachineGpu.tsp, edgeMachineGpuJobs.tsp, edgeMachineStorage.tsp, edgeMachineNetworkAdapters.tsp, edgeDeviceMetadata.tsp, networkProfile.tsp)
 
 > **Note**: Most differences are due to version annotation changes (using simplified v2026_02_01/v2026_03_15_preview instead of v2025_12_01_preview/v2026_03_01_preview). Generated OpenAPI specs for `stable/2026-02-01/hci.json` are **identical** between private and public repositories.
 
@@ -199,13 +200,27 @@ The private repository contains the following features not yet available in the 
   - Stores validated recipe information for an edge device
   - Files: `edgeDeviceMetadata.tsp`
 
+### 9. NetworkProfile Resources (Preview Only) - NEW
+- **NetworkProfile** - Child resource of Cluster for network profile management
+  - List, Get, Create, Update, Delete operations
+  - Properties: reportedProperties (cluster network info), lastSyncTimestamp, lastSyncStatus
+  - Tracks cluster network configuration including IPs, adapters, switches, networks, intents
+  - Files: `networkProfile.tsp`
+
+### 10. Cluster Kind Property (Preview Only) - RESTORED
+- **Cluster.kind** - Property to identify the purpose of Cluster deployment
+  - Changed from `@@removed(v2026_02_01)` to `@@added(v2026_03_15_preview)`
+  - Now explicitly added in preview only (not in GA)
+  - Example value: "AzureLocal"
+  - Updated cluster examples to include kind property
+
 ---
 
 ## Version Annotations
 
 | Annotation | File | Target | Purpose |
 |------------|------|--------|---------|
-| `@@removed(Cluster.kind, v2026_02_01)` | Cluster.tsp | Cluster.kind | Deprecates kind in GA |
+| `@@added(Cluster.kind, v2026_03_15_preview)` | Cluster.tsp | Cluster.kind | Kind property only in preview |
 | `@@added(ArcSetting.identity, v2026_03_15_preview)` | ArcSetting.tsp | ArcSetting.identity | Identity only in preview |
 
 ---
@@ -218,8 +233,9 @@ When merging changes from public to private repository:
 3. Preserve `identity` property on `ArcSettingsPatch` and `ArcSetting` with appropriate `@added` annotations
 4. Preserve `ring`, `ChangeRingRequest`, and `ChangeRingRequestProperties` with `@added(v2026_03_15_preview)`
 5. Update version annotations from public versions to private versions as needed
-6. **Keep private-only files**: `edgeMachineGpu.tsp`, `edgeMachineGpuJobs.tsp`, `edgeMachineStorage.tsp`, `edgeMachineNetworkAdapters.tsp`, `edgeDeviceMetadata.tsp` (not in public repo)
-7. **Keep main.tsp imports** for EdgeMachineGpu, EdgeMachineGpuJobs, EdgeMachineStorage, EdgeMachineNetworkAdapters, EdgeDeviceMetadata
+6. **Keep private-only files**: `edgeMachineGpu.tsp`, `edgeMachineGpuJobs.tsp`, `edgeMachineStorage.tsp`, `edgeMachineNetworkAdapters.tsp`, `edgeDeviceMetadata.tsp`, `networkProfile.tsp` (not in public repo)
+7. **Keep main.tsp imports** for EdgeMachineGpu, EdgeMachineGpuJobs, EdgeMachineStorage, EdgeMachineNetworkAdapters, EdgeDeviceMetadata, NetworkProfile
+8. **Preserve Cluster.kind** with `@@added(v2026_03_15_preview)` annotation
 
 ### Version Mapping (Public → Private)
 | Public Version | Private Version |
@@ -246,3 +262,8 @@ When merging changes from public to private repository:
 12. Compiled TypeSpec - 85 paths in preview swagger
 13. Added EdgeDeviceMetadata examples from preview/2023-12-01-preview - 4 files
 14. Total examples in 2026-03-15-preview: 144
+15. Added NetworkProfile resource from backlog (networkProfile.tsp) - Child resource of Cluster
+16. Added NetworkProfile examples from preview/2023-12-01-preview - 5 files
+17. Total examples in 2026-03-15-preview: 149
+18. Changed Cluster.kind from @@removed to @@added for preview version
+19. Updated cluster examples (CreateCluster, GetCluster, UpdateCluster, ListClustersByResourceGroup, ListClustersBySubscription) with kind: "AzureLocal"

@@ -64,6 +64,9 @@
       "name": "Clusters"
     },
     {
+      "name": "NetworkProfiles"
+    },
+    {
       "name": "DeploymentSettings"
     },
     {
@@ -3649,6 +3652,304 @@
         "x-ms-examples": {
           "ClusterJobs_Delete": {
             "$ref": "./examples/ClusterJobs_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/networkProfiles": {
+      "get": {
+        "operationId": "NetworkProfiles_ListByCluster",
+        "tags": [
+          "NetworkProfiles"
+        ],
+        "description": "List NetworkProfile resources by Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfileListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkProfiles_ListByCluster": {
+            "$ref": "./examples/NetworkProfiles_ListByCluster.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/networkProfiles/{networkProfileName}": {
+      "get": {
+        "operationId": "NetworkProfiles_Get",
+        "tags": [
+          "NetworkProfiles"
+        ],
+        "description": "Get a Network Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkProfileName",
+            "in": "path",
+            "description": "The name of the NetworkProfile",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkProfiles_Get": {
+            "$ref": "./examples/NetworkProfiles_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkProfiles_Create",
+        "tags": [
+          "NetworkProfiles"
+        ],
+        "description": "Create a Network Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkProfileName",
+            "in": "path",
+            "description": "The name of the NetworkProfile",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkProfile' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkProfile' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkProfiles_Create": {
+            "$ref": "./examples/NetworkProfiles_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NetworkProfiles_Update",
+        "tags": [
+          "NetworkProfiles"
+        ],
+        "description": "Update a Network Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkProfileName",
+            "in": "path",
+            "description": "The name of the NetworkProfile",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkProfiles_Update": {
+            "$ref": "./examples/NetworkProfiles_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NetworkProfiles_Delete",
+        "tags": [
+          "NetworkProfiles"
+        ],
+        "description": "Delete a Network Profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "networkProfileName",
+            "in": "path",
+            "description": "The name of the NetworkProfile",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkProfiles_Delete": {
+            "$ref": "./examples/NetworkProfiles_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8683,6 +8984,15 @@
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource.",
           "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -15555,6 +15865,530 @@
           }
         ]
       }
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "description": "Network Profile details - child resource of Cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkProfileProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkProfileIntent": {
+      "type": "object",
+      "description": "Details of a network intent.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The intent ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the intent."
+        },
+        "isComputeType": {
+          "type": "boolean",
+          "description": "Whether this is a compute type intent."
+        },
+        "isStorageType": {
+          "type": "boolean",
+          "description": "Whether this is a storage type intent."
+        },
+        "isManagementType": {
+          "type": "boolean",
+          "description": "Whether this is a management type intent."
+        },
+        "physicalAdapterIds": {
+          "type": "array",
+          "description": "The physical adapter IDs associated with the intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualAdapterIds": {
+          "type": "array",
+          "description": "The virtual adapter IDs associated with the intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualSwitchIds": {
+          "type": "array",
+          "description": "The virtual switch IDs associated with the intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networkIds": {
+          "type": "array",
+          "description": "The network IDs associated with the intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "physicalAdapterNames": {
+          "type": "array",
+          "description": "The physical adapter names associated with the intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualAdapterNames": {
+          "type": "array",
+          "description": "The virtual adapter names associated with the intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualSwitchNames": {
+          "type": "array",
+          "description": "The virtual switch names associated with the intent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networkNames": {
+          "type": "array",
+          "description": "The network names associated with the intent.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "NetworkProfileListResult": {
+      "type": "object",
+      "description": "The response of a NetworkProfile list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkProfileLogicalNetwork": {
+      "type": "object",
+      "description": "Details of a logical network.",
+      "properties": {
+        "addressSpace": {
+          "type": "string",
+          "description": "IP address space of the logical network."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkProfileNetwork"
+        }
+      ],
+      "x-ms-discriminator-value": "Logical"
+    },
+    "NetworkProfileNetwork": {
+      "type": "object",
+      "description": "Details of a network.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The network ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the network."
+        },
+        "type": {
+          "$ref": "#/definitions/NetworkProfileNetworkType",
+          "description": "The type of the network."
+        },
+        "vlan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The VLAN associated with the network."
+        },
+        "intentId": {
+          "type": "string",
+          "description": "The intent ID associated with the network."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "NetworkProfileNetworkType": {
+      "type": "string",
+      "description": "Types of networks.",
+      "enum": [
+        "Storage",
+        "Logical"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkProfileNetworkType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Storage",
+            "value": "Storage",
+            "description": "Storage network type."
+          },
+          {
+            "name": "Logical",
+            "value": "Logical",
+            "description": "Logical network type."
+          }
+        ]
+      }
+    },
+    "NetworkProfileNode": {
+      "type": "object",
+      "description": "Details of a node in the network profile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The node ID."
+        },
+        "physicalAdapterIds": {
+          "type": "array",
+          "description": "The physical adapter IDs associated with the node.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualSwitchIds": {
+          "type": "array",
+          "description": "The virtual switch IDs associated with the node.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "arcStatus": {
+          "type": "string",
+          "description": "The arc status of the node."
+        },
+        "arcMachineId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource id of Arc machine of the corresponding node."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "NetworkProfilePhysicalAdapter": {
+      "type": "object",
+      "description": "Details of a physical adapter.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The physical adapter ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the physical adapter."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the physical adapter."
+        },
+        "vlan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The VLAN associated with the physical adapter."
+        },
+        "ipv4Addresses": {
+          "type": "array",
+          "description": "The IPv4 addresses of the physical adapter.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "description": "The IPv6 addresses of the physical adapter.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "driverVersion": {
+          "type": "string",
+          "description": "The driver version of the physical adapter."
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "The node ID the physical adapter is associated with."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "NetworkProfileProperties": {
+      "type": "object",
+      "description": "Network Profile properties.",
+      "properties": {
+        "reportedProperties": {
+          "$ref": "#/definitions/NetworkProfileReportedProperties",
+          "description": "Network profile properties reported from the cluster.",
+          "readOnly": true
+        },
+        "lastSyncTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Network profile resource Last sync timestamp.",
+          "readOnly": true
+        },
+        "lastSyncStatus": {
+          "type": "string",
+          "description": "Network profile resource Last sync status.",
+          "readOnly": true
+        }
+      }
+    },
+    "NetworkProfileReportedProperties": {
+      "type": "object",
+      "description": "Network Profile properties reported by the cluster.",
+      "properties": {
+        "clusterIpv4Addresses": {
+          "type": "array",
+          "description": "The IPv4 addresses of the cluster.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "clusterIpv6Addresses": {
+          "type": "array",
+          "description": "The IPv6 addresses of the cluster.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "subnet": {
+          "type": "string",
+          "description": "The subnet associated with the cluster.",
+          "readOnly": true
+        },
+        "autoSelectMigrationNetwork": {
+          "type": "boolean",
+          "description": "Whether auto-selection for VM migration network is enabled.",
+          "readOnly": true
+        },
+        "enableNetworkNaming": {
+          "type": "boolean",
+          "description": "Whether network naming is enabled.",
+          "readOnly": true
+        },
+        "autoSelectVmMigrationPerformance": {
+          "type": "boolean",
+          "description": "Whether auto-selection for VM migration performance is enabled.",
+          "readOnly": true
+        },
+        "maxVmMigration": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of VM migrations allowed.",
+          "readOnly": true
+        },
+        "vmMigrationPerformance": {
+          "type": "string",
+          "description": "The performance type for VM migration.",
+          "readOnly": true
+        },
+        "maxSmbMigrationBandwidth": {
+          "type": "string",
+          "description": "Maximum bandwidth for SMB migration.",
+          "readOnly": true
+        },
+        "nodes": {
+          "type": "array",
+          "description": "Details of nodes in the network profile.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileNode"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "physicalAdapters": {
+          "type": "array",
+          "description": "Details of physical adapters.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfilePhysicalAdapter"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "virtualSwitches": {
+          "type": "array",
+          "description": "Details of virtual switches.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileVirtualSwitch"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "networks": {
+          "type": "array",
+          "description": "Details of networks.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileNetwork"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "virtualAdapters": {
+          "type": "array",
+          "description": "Details of virtual adapters.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileVirtualAdapter"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "intents": {
+          "type": "array",
+          "description": "Details of network intents.",
+          "items": {
+            "$ref": "#/definitions/NetworkProfileIntent"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "NetworkProfileStorageNetwork": {
+      "type": "object",
+      "description": "Details of a storage network.",
+      "properties": {
+        "networkDirect": {
+          "type": "string",
+          "description": "Whether the network supports direct access."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkProfileNetwork"
+        }
+      ],
+      "x-ms-discriminator-value": "Storage"
+    },
+    "NetworkProfileVirtualAdapter": {
+      "type": "object",
+      "description": "Details of a virtual adapter.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The virtual adapter ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the virtual adapter."
+        },
+        "vlan": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The VLAN associated with the virtual adapter."
+        },
+        "ipv4Addresses": {
+          "type": "array",
+          "description": "The IPv4 addresses of the virtual adapter.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ipv6Addresses": {
+          "type": "array",
+          "description": "The IPv6 addresses of the virtual adapter.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "NetworkProfileVirtualSwitch": {
+      "type": "object",
+      "description": "Details of a virtual switch.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The virtual switch ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the virtual switch."
+        },
+        "virtualAdapterIds": {
+          "type": "array",
+          "description": "The virtual adapter IDs associated with the virtual switch.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "physicalAdapterIds": {
+          "type": "array",
+          "description": "The physical adapter IDs associated with the virtual switch.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "physicalAdapterNames": {
+          "type": "array",
+          "description": "The physical adapter names associated with the virtual switch.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "virtualAdapterNames": {
+          "type": "array",
+          "description": "The virtual adapter names associated with the virtual switch.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "intentId": {
+          "type": "string",
+          "description": "The intent ID associated with the virtual switch."
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "NicDetail": {
       "type": "object",
