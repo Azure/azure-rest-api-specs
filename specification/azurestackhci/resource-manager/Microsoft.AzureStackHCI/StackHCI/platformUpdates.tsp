@@ -12,7 +12,9 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-@doc("Represents a platform update resource.")
+/**
+ * Represents a platform update resource.
+ */
 @parentResource(SubscriptionLocationResource)
 @added(Versions.v2026_03_01_preview)
 model PlatformUpdate
@@ -26,10 +28,14 @@ model PlatformUpdate
 @armResourceOperations
 @added(Versions.v2026_03_01_preview)
 interface PlatformUpdates {
-  @doc("Get a platform update.")
+  /**
+   * Get a platform update.
+   */
   get is ArmResourceRead<PlatformUpdate>;
 
-  @doc("List all platform updates.")
+  /**
+   * List all platform updates.
+   */
   list is ArmResourceListByParent<
     PlatformUpdate,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters

@@ -12,7 +12,9 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
-@doc("Represents a update content.")
+/**
+ * Represents a update content.
+ */
 @parentResource(SubscriptionLocationResource)
 @added(Versions.v2026_03_01_preview)
 model UpdateContent
@@ -26,10 +28,14 @@ model UpdateContent
 @armResourceOperations
 @added(Versions.v2026_03_01_preview)
 interface UpdateContents {
-  @doc("Gets content for an update.")
+  /**
+   * Gets content for an update.
+   */
   get is ArmResourceRead<UpdateContent>;
 
-  @doc("List all update contents.")
+  /**
+   * List all update contents.
+   */
   list is ArmResourceListByParent<
     UpdateContent,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters

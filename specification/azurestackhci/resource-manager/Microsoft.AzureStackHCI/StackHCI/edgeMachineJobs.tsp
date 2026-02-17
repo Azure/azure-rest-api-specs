@@ -14,9 +14,11 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+/**
+ * Cluster Jobs resource
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @added(Versions.v2026_03_01_preview)
-@doc("Cluster Jobs resource")
 @parentResource(EdgeMachine)
 model EdgeMachineJob
   is Azure.ResourceManager.ProxyResource<EdgeMachineJobProperties> {
@@ -33,15 +35,23 @@ model EdgeMachineJob
 @added(Versions.v2026_03_01_preview)
 @armResourceOperations
 interface EdgeMachineJobs {
-  @doc("Get a EdgeMachineJob")
+  /**
+   * Get a EdgeMachineJob
+   */
   get is ArmResourceRead<EdgeMachineJob>;
 
-  @doc("Create a EdgeMachineJob")
+  /**
+   * Create a EdgeMachineJob
+   */
   createOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeMachineJob>;
 
-  @doc("Delete a EdgeMachineJob")
+  /**
+   * Delete a EdgeMachineJob
+   */
   delete is ArmResourceDeleteWithoutOkAsync<EdgeMachineJob>;
 
-  @doc("List EdgeMachineJob resources by EdgeMachines")
+  /**
+   * List EdgeMachineJob resources by EdgeMachines
+   */
   list is ArmResourceListByParent<EdgeMachineJob>;
 }

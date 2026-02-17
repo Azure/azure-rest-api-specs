@@ -14,8 +14,10 @@ using Azure.Core;
 @armProviderNamespace("Microsoft.AzureStackHCI")
 namespace Microsoft.AzureStackHCI;
 
+/**
+ * EdgeMachine details.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("EdgeMachine details.")
 model EdgeMachine
   is Azure.ResourceManager.TrackedResource<EdgeMachineProperties> {
   ...ResourceNameParameter<
@@ -30,23 +32,35 @@ model EdgeMachine
 @added(Versions.v2026_03_01_preview)
 @armResourceOperations
 interface EdgeMachines {
-  @doc("Get an edge machine.")
+  /**
+   * Get an edge machine.
+   */
   get is ArmResourceRead<EdgeMachine>;
 
-  @doc("Create or update an edge machine.")
+  /**
+   * Create or update an edge machine.
+   */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<EdgeMachine>;
 
-  @doc("Update an edge machine.")
+  /**
+   * Update an edge machine.
+   */
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<EdgeMachine, EdgeMachinePatch>;
 
-  @doc("Delete an edge machine.")
+  /**
+   * Delete an edge machine.
+   */
   delete is ArmResourceDeleteWithoutOkAsync<EdgeMachine>;
 
-  @doc("List all edge machines in a resource group.")
+  /**
+   * List all edge machines in a resource group.
+   */
   listByResourceGroup is ArmResourceListByParent<EdgeMachine>;
 
-  @doc("List all edge machines in a subscription.")
+  /**
+   * List all edge machines in a subscription.
+   */
   listBySubscription is ArmListBySubscription<EdgeMachine>;
 }
 

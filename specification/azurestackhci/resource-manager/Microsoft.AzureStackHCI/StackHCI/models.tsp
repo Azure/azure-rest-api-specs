@@ -6122,75 +6122,113 @@ model HciConfigureCvmJobProperties extends ClusterJobProperties {
 ////////////////////// Device Pool Models //////////////////////
 ////////////////////////////////////////////////////////////////
 
+/**
+ * Request for Add/Remove Devices to the pool.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Request for Add/Remove Devices to the pool.")
 model ListOfDevicesRequest {
-  @doc("List of resource ids of the devices to be modified")
+  /**
+   * List of resource ids of the devices to be modified
+   */
   devices: Azure.Core.armResourceIdentifier[];
 }
 
+/**
+ * Request for claiming devices of the pool.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Request for claiming devices of the pool.")
 model ClaimDeviceRequest {
-  @doc("List of resource ids of the devices to be modified")
+  /**
+   * List of resource ids of the devices to be modified
+   */
   devices: Azure.Core.armResourceIdentifier[];
 
-  @doc("Resource Id of group device belongs to.")
+  /**
+   * Resource Id of group device belongs to.
+   */
   claimedBy?: string;
 }
 
+/**
+ * Request for releasing devices of the pool.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Request for releasing devices of the pool.")
 model ReleaseDeviceRequest {
-  @doc("List of resource ids of the devices to be modified")
+  /**
+   * List of resource ids of the devices to be modified
+   */
   devices: Azure.Core.armResourceIdentifier[];
 }
 
+/**
+ * Properties for device pool.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Properties for device pool.")
 model DevicePoolProperties {
-  @doc("The provisioning state of a resource.")
+  /**
+   * The provisioning state of a resource.
+   */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @doc("Unique, immutable resource id.")
+  /**
+   * Unique, immutable resource id.
+   */
   @visibility(Lifecycle.Read)
   cloudId?: string;
 
-  @doc("List of machines in device pool.")
+  /**
+   * List of machines in device pool.
+   */
   @Azure.ResourceManager.identifiers(#[])
   devices?: DeviceDetail[];
 
-  @doc("Custom Location Resource Id for the pool")
+  /**
+   * Custom Location Resource Id for the pool
+   */
   @visibility(Lifecycle.Read)
   customLocationResourceId?: Azure.Core.armResourceIdentifier;
 
-  @doc("Custom Location Name for the pool, default: <DevicePoolName>-CL")
+  /**
+   * Custom Location Name for the pool, default: <DevicePoolName>-CL
+   */
   customLocationName?: string;
 
-  @doc("Managed resource group name for the pool")
+  /**
+   * Managed resource group name for the pool
+   */
   managedResourceGroup?: string;
 
-  @doc("operation status details for device pool.")
+  /**
+   * operation status details for device pool.
+   */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   operationDetails?: OperationDetail[];
 }
 
+/**
+ * Properties for patching Device Pool.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Properties for patching Device Pool.")
 model DevicePoolPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
+/**
+ * Device details.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Device details.")
 model DeviceDetail {
-  @doc("Resource Id of the device.")
+  /**
+   * Resource Id of the device.
+   */
   deviceResourceId?: Azure.Core.armResourceIdentifier;
 
-  @doc("Resource Id of group device belongs to.")
+  /**
+   * Resource Id of group device belongs to.
+   */
   @visibility(Lifecycle.Read)
   claimedBy?: string;
 }
@@ -6199,34 +6237,50 @@ model DeviceDetail {
 ////////////////////// Edge machine Models //////////////////////
 ////////////////////////////////////////////////////////////////
 
+/**
+ * Edge Machine Kind.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Edge Machine Kind.")
 union EdgeMachineKind {
   string,
 
-  @doc("EdgeMachine resource created using Zero-touch provisioning.")
+  /**
+   * EdgeMachine resource created using Zero-touch provisioning.
+   */
   Standard: "Standard",
 
-  @doc("EdgeMachine resource created for brownfield HCI customers without zero touch provisioning.")
+  /**
+   * EdgeMachine resource created for brownfield HCI customers without zero touch provisioning.
+   */
   Dedicated: "Dedicated",
 }
 
+/**
+ * Properties for edge machine.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Properties for edge machine.")
 model EdgeMachineProperties {
-  @doc("Edge Machine type.")
+  /**
+   * Edge Machine type.
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   edgeMachineKind?: EdgeMachineKind;
 
-  @doc("The provisioning state of a resource.")
+  /**
+   * The provisioning state of a resource.
+   */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @doc("Unique, immutable resource id.")
+  /**
+   * Unique, immutable resource id.
+   */
   @visibility(Lifecycle.Read)
   cloudId?: string;
 
-  @doc("Optional property to create arc machine in custom resource group.")
+  /**
+   * Optional property to create arc machine in custom resource group.
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   arcMachineResourceGroupId?: Azure.Core.armResourceIdentifier<[
     {
@@ -6234,14 +6288,18 @@ model EdgeMachineProperties {
     }
   ]>;
 
-  @doc("Arc machine instance resource id.")
+  /**
+   * Arc machine instance resource id.
+   */
   arcMachineResourceId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.HybridCompute/machines";
     }
   ]>;
 
-  @doc("Link to Arc Gateway ARM resource Id")
+  /**
+   * Link to Arc Gateway ARM resource Id
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   arcGatewayResourceId?: Azure.Core.armResourceIdentifier<[
     {
@@ -6249,50 +6307,72 @@ model EdgeMachineProperties {
     }
   ]>;
 
-  @doc("Service fetches common configuration from site.")
+  /**
+   * Service fetches common configuration from site.
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   siteDetails?: SiteDetails;
 
-  @doc("Ownership voucher details for provisioned machine.")
+  /**
+   * Ownership voucher details for provisioned machine.
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ownershipVoucherDetails?: OwnershipVoucherDetails;
 
-  @doc("Details for device provisioning.")
+  /**
+   * Details for device provisioning.
+   */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   provisioningDetails?: ProvisioningDetails;
 
-  @doc("A machine can only be assigned to single device pool")
+  /**
+   * A machine can only be assigned to single device pool
+   */
   @visibility(Lifecycle.Read)
   devicePoolResourceId?: string;
 
-  @doc("OS configuration status details ")
+  /**
+   * OS configuration status details
+   */
   @visibility(Lifecycle.Read)
   machineState?: EdgeMachineState;
 
-  @doc("machine connectivity status")
+  /**
+   * machine connectivity status
+   */
   @visibility(Lifecycle.Read)
   connectivityStatus?: EdgeMachineConnectivityStatus;
 
-  @doc("Tracks the ID of the consuming resource, setting the machine as in-use.")
+  /**
+   * Tracks the ID of the consuming resource, setting the machine as in-use.
+   */
   @visibility(Lifecycle.Read)
   claimedBy?: string;
 
-  @doc("Reported properties for edge machine.")
+  /**
+   * Reported properties for edge machine.
+   */
   @visibility(Lifecycle.Read)
   reportedProperties?: EdgeMachineReportedProperties;
 
-  @doc("operation status details for edge machine.")
+  /**
+   * operation status details for edge machine.
+   */
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   operationDetails?: OperationDetail[];
 
-  @doc("Last time data updated to service.")
+  /**
+   * Last time data updated to service.
+   */
   @visibility(Lifecycle.Read)
   lastSyncTimestamp?: utcDateTime;
 }
 
+/**
+ * Model for patching edge machine.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Model for patching edge machine.")
 model EdgeMachinePatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -6303,10 +6383,14 @@ model EdgeMachinePatch {
  */
 @added(Versions.v2026_03_01_preview)
 model ProvisioningDetails {
-  @doc("Operating system profile.")
+  /**
+   * Operating system profile.
+   */
   osProfile: OsProvisionProfile;
 
-  @doc("User configuration.")
+  /**
+   * User configuration.
+   */
   @minItems(1)
   @Azure.ResourceManager.identifiers(#["userName"])
   userDetails?: UserDetails[];
@@ -6317,11 +6401,15 @@ model ProvisioningDetails {
  */
 @added(Versions.v2026_03_01_preview)
 model OwnershipVoucherDetails {
-  @doc("Ownership voucher in base64 encoded format")
+  /**
+   * Ownership voucher in base64 encoded format
+   */
   @secret
   ownershipVoucher: string;
 
-  @doc("Owner key type")
+  /**
+   * Owner key type
+   */
   ownerKeyType: OwnerKeyType;
 }
 
@@ -6332,152 +6420,228 @@ model OwnershipVoucherDetails {
 union OwnerKeyType {
   string,
 
-  @doc("Owner is Microsoft managed key")
+  /**
+   * Owner is Microsoft managed key
+   */
   MicrosoftManaged: "MicrosoftManaged",
 }
 
+/**
+ * operation detail.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("operation detail.")
 model OperationDetail {
-  @doc("operation name.")
+  /**
+   * operation name.
+   */
   @visibility(Lifecycle.Read)
   name?: string;
 
-  @doc("operation id.")
+  /**
+   * operation id.
+   */
   @visibility(Lifecycle.Read)
   id?: string;
 
-  @doc("operation type.")
+  /**
+   * operation type.
+   */
   @visibility(Lifecycle.Read)
   type?: string;
 
-  @doc("operation resource id.")
+  /**
+   * operation resource id.
+   */
   @visibility(Lifecycle.Read)
   resourceId?: armResourceIdentifier;
 
-  @doc("operation description.")
+  /**
+   * operation description.
+   */
   @visibility(Lifecycle.Read)
   description?: string;
 
-  @doc("operation status.")
+  /**
+   * operation status.
+   */
   @visibility(Lifecycle.Read)
   status?: string;
 
-  @doc("error details.")
+  /**
+   * error details.
+   */
   @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
+/**
+ * Overall connectivity status for the machine resource.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Overall connectivity status for the machine resource.")
 union EdgeMachineConnectivityStatus {
   string,
 
-  @doc("The connectivity status of the machine resource is not specified.")
+  /**
+   * The connectivity status of the machine resource is not specified.
+   */
   NotSpecified: "NotSpecified",
 
-  @doc("The machine resource is disconnected.")
+  /**
+   * The machine resource is disconnected.
+   */
   Disconnected: "Disconnected",
 
-  @doc("The machine resource is connected.")
+  /**
+   * The machine resource is connected.
+   */
   Connected: "Connected",
 }
 
+/**
+ * Site Details consists of common configurations.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Site Details consists of common configurations.")
 model SiteDetails {
-  @doc("Site resource Id to be set during Edge Machine resource creation.")
+  /**
+   * Site resource Id to be set during Edge Machine resource creation.
+   */
   siteResourceId: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Edge/sites";
     }
   ]>;
 
-  @doc("Edge Device configuration received from site common configuration.")
+  /**
+   * Edge Device configuration received from site common configuration.
+   */
   deviceConfiguration?: TargetDeviceConfiguration;
 }
 
+/**
+ * OS State
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("OS State")
 union EdgeMachineState {
   string,
 
-  @doc("Created when EdgeMachine resource created")
+  /**
+   * Created when EdgeMachine resource created
+   */
   Created: "Created",
 
-  @doc("EdgeMachine state during device discovery and registration")
+  /**
+   * EdgeMachine state during device discovery and registration
+   */
   Registering: "Registering",
 
-  @doc("EdgeMachine state when machine configured with restricted OS and not provisioned to deploy workloads")
+  /**
+   * EdgeMachine state when machine configured with restricted OS and not provisioned to deploy workloads
+   */
   Unpurposed: "Unpurposed",
 
-  @doc("EdgeMachine state when transitioning from initial OS to target OS")
+  /**
+   * EdgeMachine state when transitioning from initial OS to target OS
+   */
   Transitioning: "Transitioning",
 
-  @doc("EdgeMachine state when machine configured with target OS to deploy workloads")
+  /**
+   * EdgeMachine state when machine configured with target OS to deploy workloads
+   */
   Purposed: "Purposed",
 
-  @doc("EdgeMachine state when OS updates are in-progress")
+  /**
+   * EdgeMachine state when OS updates are in-progress
+   */
   Updating: "Updating",
 
-  @doc("EdgeMachine state when transitioning from target OS to restricted OS")
+  /**
+   * EdgeMachine state when transitioning from target OS to restricted OS
+   */
   Resetting: "Resetting",
 
-  @doc("EdgeMachine failed state and only option to recover is to re-provisioning machine")
+  /**
+   * EdgeMachine failed state and only option to recover is to re-provisioning machine
+   */
   Failed: "Failed",
 
-  @doc("Preparing EdgeMachine")
+  /**
+   * Preparing EdgeMachine
+   */
   Preparing: "Preparing",
 }
 
+/**
+ * Reported properties for edge machine.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Reported properties for edge machine.")
 model EdgeMachineReportedProperties {
-  @doc("Last time data reported.")
+  /**
+   * Last time data reported.
+   */
   @visibility(Lifecycle.Read)
   lastUpdated?: utcDateTime;
 
-  @doc("Network details for edge machine.")
+  /**
+   * Network details for edge machine.
+   */
   @visibility(Lifecycle.Read)
   networkProfile?: EdgeMachineNetworkProfile;
 
-  @doc("OS Properties for edge machine.")
+  /**
+   * OS Properties for edge machine.
+   */
   @visibility(Lifecycle.Read)
   osProfile?: OsProfile;
 
-  @doc("Hardware related information for edge machine.")
+  /**
+   * Hardware related information for edge machine.
+   */
   @visibility(Lifecycle.Read)
   hardwareProfile?: HardwareProfile;
 
-  @doc("Storage related information for edge machine.")
+  /**
+   * Storage related information for edge machine.
+   */
   @visibility(Lifecycle.Read)
   storageProfile?: StorageProfile;
 
-  @doc("Solution builder extension (SBE) deployment package information.")
+  /**
+   * Solution builder extension (SBE) deployment package information.
+   */
   @visibility(Lifecycle.Read)
   sbeDeploymentPackageInfo?: SbeDeploymentPackageInfo;
 
-  @doc("Extension details for edge machine.")
+  /**
+   * Extension details for edge machine.
+   */
   @visibility(Lifecycle.Read)
   extensionProfile?: ExtensionProfile;
 }
 
+/**
+ * NetworkProfile of edge machine.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("NetworkProfile of edge machine.")
 model EdgeMachineNetworkProfile {
-  @doc("List of Network Interface Card (NIC) Details of edge machine.")
+  /**
+   * List of Network Interface Card (NIC) Details of edge machine.
+   */
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["adapterName"])
   nicDetails?: EdgeMachineNicDetail[];
 
-  @doc("List of switch Details of edge machine.")
+  /**
+   * List of switch Details of edge machine.
+   */
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["switchName"])
   switchDetails?: SwitchDetail[];
 }
 
+/**
+ * Network Interface Card (NIC) Details of edge machine.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Network Interface Card (NIC) Details of edge machine.")
 model EdgeMachineNicDetail {
   /**
    * Adapter Name of NIC
@@ -6678,10 +6842,14 @@ model HardwareProfile {
   processorType?: string;
 }
 
+/**
+ * StorageProfile of edge machine.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("StorageProfile of edge machine.")
 model StorageProfile {
-  @doc("Number of storage disks in the device with $CanPool as true.")
+  /**
+   * Number of storage disks in the device with $CanPool as true.
+   */
   @visibility(Lifecycle.Read)
   poolableDisksCount?: int64;
 }
@@ -6701,485 +6869,753 @@ model ErrorDetailModel {
 ////////////////////// Edge machine Job Models //////////////////////
 ////////////////////////////////////////////////////////////////
 
+/**
+ * EdgeMachine Job properties
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("EdgeMachine Job properties")
 @discriminator("jobType")
 model EdgeMachineJobProperties {
-  @doc("Job Type to support polymorphic resource.")
+  /**
+   * Job Type to support polymorphic resource.
+   */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: EdgeMachineJobType;
 
-  @doc("Deployment mode to trigger job.")
+  /**
+   * Deployment mode to trigger job.
+   */
   deploymentMode?: DeploymentMode;
 
-  @doc("Job provisioning state")
+  /**
+   * Job provisioning state
+   */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @doc("Unique, immutable job id.")
+  /**
+   * Unique, immutable job id.
+   */
   @visibility(Lifecycle.Read)
   jobId?: string;
 
-  @doc("The UTC date and time at which the job started.")
+  /**
+   * The UTC date and time at which the job started.
+   */
   @visibility(Lifecycle.Read)
   startTimeUtc?: utcDateTime;
 
-  @doc("The UTC date and time at which the job completed.")
+  /**
+   * The UTC date and time at which the job completed.
+   */
   @visibility(Lifecycle.Read)
   endTimeUtc?: utcDateTime;
 
-  @doc("Status of Edge device job.")
+  /**
+   * Status of Edge device job.
+   */
   @visibility(Lifecycle.Read)
   status?: JobStatus;
 
-  @doc("error details.")
+  /**
+   * error details.
+   */
   @visibility(Lifecycle.Read)
   error?: Azure.ResourceManager.Foundations.ErrorDetail;
 }
 
+/**
+ * Job Type supported.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Job Type supported.")
 union EdgeMachineJobType {
   string,
 
-  @doc("Job to collect logs from the device.")
+  /**
+   * Job to collect logs from the device.
+   */
   CollectLog: "CollectLog",
 
-  @doc("Job to provide remote support to the device.")
+  /**
+   * Job to provide remote support to the device.
+   */
   RemoteSupport: "RemoteSupport",
 
-  @doc("Job to provision operating system in the device.")
+  /**
+   * Job to provision operating system in the device.
+   */
   ProvisionOs: "ProvisionOs",
 
-  @doc("Job to download OS packages on to the device")
+  /**
+   * Job to download OS packages on to the device
+   */
   DownloadOs: "DownloadOs",
 }
 
+/**
+ * Properties for adding a server in the cluster.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Properties for adding a server in the cluster.")
 model EdgeMachineRemoteSupportJobProperties extends EdgeMachineJobProperties {
-  @doc("Job Type to support polymorphic resource.")
+  /**
+   * Job Type to support polymorphic resource.
+   */
   jobType: EdgeMachineJobType.RemoteSupport;
 
-  @doc("Remote support access level.")
+  /**
+   * Remote support access level.
+   */
   accessLevel: RemoteSupportAccessLevel;
 
-  @doc("Remote support expiration timestamp.")
+  /**
+   * Remote support expiration timestamp.
+   */
   expirationTimestamp: utcDateTime;
 
-  @doc("Remote support type.")
+  /**
+   * Remote support type.
+   */
   type: RemoteSupportType;
 
-  @doc("log collection job reported properties.")
+  /**
+   * log collection job reported properties.
+   */
   @visibility(Lifecycle.Read)
   reportedProperties?: EdgeMachineRemoteSupportJobReportedProperties;
 }
 
+/**
+ * Represents the properties of an Azure Linux restricted operating environment Provision Os job.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Represents the properties of an Azure Linux restricted operating environment Provision Os job.")
 model ProvisionOsJobProperties extends EdgeMachineJobProperties {
-  @doc("Job Type to support polymorphic resource.")
+  /**
+   * Job Type to support polymorphic resource.
+   */
   jobType: EdgeMachineJobType.ProvisionOs;
 
-  @doc("Os Provisioning request.")
+  /**
+   * Os Provisioning request.
+   */
   provisioningRequest: ProvisioningRequest;
 
-  @doc("Reported Properties for Provision Os job")
+  /**
+   * Reported Properties for Provision Os job
+   */
   reportedProperties?: ProvisionOsReportedProperties;
 }
 
+/**
+ * Download Request properties
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Download Request properties")
 model DownloadRequest {
-  @doc("Target operating system to support polymorphic resource.")
+  /**
+   * Target operating system to support polymorphic resource.
+   */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   target: ProvisioningOsType;
 
-  @doc("Operating system profile.")
+  /**
+   * Operating system profile.
+   */
   osProfile: DownloadOsProfile;
 }
 
+/**
+ * Represents the properties of Download Os job.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Represents the properties of Download Os job.")
 model DownloadOsJobProperties extends EdgeMachineJobProperties {
-  @doc("Job Type to support polymorphic resource.")
+  /**
+   * Job Type to support polymorphic resource.
+   */
   jobType: EdgeMachineJobType.DownloadOs;
 
-  @doc("Download OS request.")
+  /**
+   * Download OS request.
+   */
   downloadRequest: DownloadRequest;
 
-  @doc("Reported Properties for Download Os job")
+  /**
+   * Reported Properties for Download Os job
+   */
   reportedProperties?: ProvisionOsReportedProperties;
 }
 
+/**
+ * Reported Properties for Provision Os job
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Reported Properties for Provision Os job")
 model ProvisionOsReportedProperties {
   ...JobReportedProperties;
 }
 
+/**
+ * Represents a provisioning request.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Represents a provisioning request.")
 model ProvisioningRequest {
-  @doc("Target operating system to support polymorphic resource.")
+  /**
+   * Target operating system to support polymorphic resource.
+   */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   target: ProvisioningOsType;
 
-  @doc("Operating system profile.")
+  /**
+   * Operating system profile.
+   */
   osProfile: OsProvisionProfile;
 
-  @doc("User configuration.")
+  /**
+   * User configuration.
+   */
   @Azure.ResourceManager.identifiers(#["userName"])
   userDetails?: UserDetails[];
 
-  @doc("Onboarding configuration.")
+  /**
+   * Onboarding configuration.
+   */
   onboardingConfiguration?: OnboardingConfiguration;
 
-  @doc("Device configuration.")
+  /**
+   * Device configuration.
+   */
   deviceConfiguration?: TargetDeviceConfiguration;
 
-  @doc("Base64 encoded custom configuration for CAPI to use")
+  /**
+   * Base64 encoded custom configuration for CAPI to use
+   */
   customConfiguration?: string;
 }
 
+/**
+ * Represents the provisioning operating system type.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Represents the provisioning operating system type.")
 union ProvisioningOsType {
   string,
 
-  @doc("AzureLinux OS.")
+  /**
+   * AzureLinux OS.
+   */
   AzureLinux: "AzureLinux",
 
-  @doc("HCI OS.")
+  /**
+   * HCI OS.
+   */
   HCI: "HCI",
 }
 
+/**
+ * Represents the reported properties of a remote support job.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Represents the reported properties of a remote support job.")
 model EdgeMachineRemoteSupportJobReportedProperties {
   ...EdgeMachineJobReportedProperties;
 
-  @doc("Optional settings for configuring the node for remote support.")
+  /**
+   * Optional settings for configuring the node for remote support.
+   */
   @visibility(Lifecycle.Read)
   nodeSettings?: EdgeMachineRemoteSupportNodeSettings;
 
-  @doc("Details of the remote support session.")
+  /**
+   * Details of the remote support session.
+   */
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
 }
 
+/**
+ * Represents the settings of a remote support node.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Represents the settings of a remote support node.")
 model EdgeMachineRemoteSupportNodeSettings {
-  @doc("The state of the remote support node.")
+  /**
+   * The state of the remote support node.
+   */
   @visibility(Lifecycle.Read)
   state?: string;
 
-  @doc("The timestamp when the node settings were created, in UTC.")
+  /**
+   * The timestamp when the node settings were created, in UTC.
+   */
   @visibility(Lifecycle.Read)
   createdAt?: utcDateTime;
 
-  @doc("The timestamp when the node settings were last updated, in UTC.")
+  /**
+   * The timestamp when the node settings were last updated, in UTC.
+   */
   @visibility(Lifecycle.Read)
   updatedAt?: utcDateTime;
 
-  @doc("The current connection status of the remote support session.")
+  /**
+   * The current connection status of the remote support session.
+   */
   @visibility(Lifecycle.Read)
   connectionStatus?: string;
 
-  @doc("The error message, if any, from the last connection attempt.")
+  /**
+   * The error message, if any, from the last connection attempt.
+   */
   @visibility(Lifecycle.Read)
   connectionErrorMessage?: string;
 }
 
+/**
+ * Properties for pausing a server in the cluster.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Properties for pausing a server in the cluster.")
 model EdgeMachineCollectLogJobProperties extends EdgeMachineJobProperties {
-  @doc("ClusterJob Type to support polymorphic resource.")
+  /**
+   * ClusterJob Type to support polymorphic resource.
+   */
   jobType: EdgeMachineJobType.CollectLog;
 
-  @doc("From date for log collection.")
+  /**
+   * From date for log collection.
+   */
   fromDate: utcDateTime;
 
-  @doc("To date for log collection.")
+  /**
+   * To date for log collection.
+   */
   toDate: utcDateTime;
 
-  @doc("To date for log collection.")
+  /**
+   * To date for log collection.
+   */
   @visibility(Lifecycle.Read)
   lastLogGenerated?: utcDateTime;
 
-  @doc("log collection job reported properties.")
+  /**
+   * log collection job reported properties.
+   */
   @visibility(Lifecycle.Read)
   reportedProperties?: EdgeMachineCollectLogJobReportedProperties;
 }
 
+/**
+ * Represents the reported properties of a log collection job.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Represents the reported properties of a log collection job.")
 model EdgeMachineCollectLogJobReportedProperties {
   ...JobReportedProperties;
 
-  @doc("Details of the log collection session.")
+  /**
+   * Details of the log collection session.
+   */
   @visibility(Lifecycle.Read)
   @Azure.ResourceManager.identifiers(#["correlationId"])
   logCollectionSessionDetails?: LogCollectionJobSession[];
 }
 
+/**
+ * Reported Properties for job triggered from cloud.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Reported Properties for job triggered from cloud.")
 model EdgeMachineJobReportedProperties {
-  @doc("The percentage of the job that is complete.")
+  /**
+   * The percentage of the job that is complete.
+   */
   @visibility(Lifecycle.Read)
   percentComplete?: int32;
 
-  @doc("Validation status of job.")
+  /**
+   * Validation status of job.
+   */
   @visibility(Lifecycle.Read)
   validationStatus?: EceActionStatus;
 
-  @doc("Deployment status of job.")
+  /**
+   * Deployment status of job.
+   */
   @visibility(Lifecycle.Read)
   deploymentStatus?: EceActionStatus;
 }
 
+/**
+ * Operating system profile.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Operating system profile.")
 model OsProvisionProfile {
-  @doc("Name of the operating system.")
+  /**
+   * Name of the operating system.
+   */
   osName?: string;
 
-  @doc("Type of the operating system.")
+  /**
+   * Type of the operating system.
+   */
   osType?: string;
 
-  @doc("Version of the operating system.")
+  /**
+   * Version of the operating system.
+   */
   osVersion?: string;
 
-  @doc("Location of the operating system image.")
+  /**
+   * Location of the operating system image.
+   */
   osImageLocation?: string;
 
-  @doc("Validated Solution Recipe version to be used for the job")
+  /**
+   * Validated Solution Recipe version to be used for the job
+   */
   vsrVersion?: string;
 
-  @doc("Hash of the OS package downloaded")
+  /**
+   * Hash of the OS package downloaded
+   */
   imageHash?: string;
 
+  /**
+   * GPG Public Key used for package verification
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "GPG Public Key is not sensitive information"
-  @doc("GPG Public Key used for package verification")
   gpgPubKey?: string;
 
-  @doc("Operation sub type of OS Provisioning")
+  /**
+   * Operation sub type of OS Provisioning
+   */
   operationType?: OSOperationType = OSOperationType.Provision;
 }
 
+/**
+ * Operating system profile.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Operating system profile.")
 model DownloadOsProfile {
-  @doc("Name of the operating system.")
+  /**
+   * Name of the operating system.
+   */
   osName?: string;
 
-  @doc("Type of the operating system.")
+  /**
+   * Type of the operating system.
+   */
   osType?: string;
 
-  @doc("Version of the operating system.")
+  /**
+   * Version of the operating system.
+   */
   osVersion?: string;
 
-  @doc("Location of the operating system image.")
+  /**
+   * Location of the operating system image.
+   */
   osImageLocation?: string;
 
-  @doc("Validated Solution Recipe version to be used for the job")
+  /**
+   * Validated Solution Recipe version to be used for the job
+   */
   vsrVersion?: string;
 
-  @doc("Hash of the OS package downloaded")
+  /**
+   * Hash of the OS package downloaded
+   */
   imageHash?: string;
 
+  /**
+   * GPG Public Key used for package verification
+   */
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "GPG Public Key is not sensitive information"
-  @doc("GPG Public Key used for package verification")
   gpgPubKey?: string;
 }
 
+/**
+ * OS Provision Operation type
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("OS Provision Operation type")
 union OSOperationType {
   string,
 
-  @doc("OS Provisioning operation")
+  /**
+   * OS Provisioning operation
+   */
   Provision: "Provision",
 
-  @doc("OS Update operation")
+  /**
+   * OS Update operation
+   */
   Update: "Update",
 
-  @doc("OS ReImage operation")
+  /**
+   * OS ReImage operation
+   */
   ReImage: "ReImage",
 }
 
+/**
+ * Type of secret used for authentication.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Type of secret used for authentication.")
 union SecretType {
   string,
 
-  @doc("Key Vault based authentication")
+  /**
+   * Key Vault based authentication
+   */
   KeyVault: "KeyVault",
 
-  @doc("SSH Public Key based authentication")
+  /**
+   * SSH Public Key based authentication
+   */
   SshPubKey: "SshPubKey",
 }
 
+/**
+ * User configuration.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("User configuration.")
 model UserDetails {
-  @doc("Name of the user.")
+  /**
+   * Name of the user.
+   */
   userName: string;
 
-  @doc("Type of the secret used for authentication.")
+  /**
+   * Type of the secret used for authentication.
+   */
   secretType: SecretType;
 
-  @doc("Location of the secret used for authentication.")
+  /**
+   * Location of the secret used for authentication.
+   */
   secretLocation?: string;
 
-  @doc("SSH Public Key for the user.")
+  /**
+   * SSH Public Key for the user.
+   */
   sshPubKey?: string[];
 }
 
+/**
+ * Onboarding resource type.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Onboarding resource type.")
 union OnboardingResourceType {
   string,
 
-  @doc("Hybrid Compute Machine.")
+  /**
+   * Hybrid Compute Machine.
+   */
   HybridComputeMachine: "HybridComputeMachine",
 }
 
+/**
+ * Onboarding configuration.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Onboarding configuration.")
 model OnboardingConfiguration {
-  @doc("Type of the onboarding resource to support polymorphic resource.")
+  /**
+   * Type of the onboarding resource to support polymorphic resource.
+   */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   type?: OnboardingResourceType;
 
-  @doc("Resource ID.")
+  /**
+   * Resource ID.
+   */
   resourceId?: Azure.Core.armResourceIdentifier;
 
-  @doc("Location of the resource.")
+  /**
+   * Location of the resource.
+   */
   @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 
-  @doc("Tenant ID of the resource.")
+  /**
+   * Tenant ID of the resource.
+   */
   tenantId?: string;
 
-  @doc("Azure Arc virtual machine ID.")
+  /**
+   * Azure Arc virtual machine ID.
+   */
   arcVirtualMachineId?: string;
 }
 
+/**
+ * Device configuration.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Device configuration.")
 model TargetDeviceConfiguration {
-  @doc("Network configuration.")
+  /**
+   * Network configuration.
+   */
   network?: NetworkConfiguration;
 
-  @doc("Hostname of the device.")
+  /**
+   * Hostname of the device.
+   */
   hostName?: string;
 
-  @doc("Web proxy configuration.")
+  /**
+   * Web proxy configuration.
+   */
   webProxy?: WebProxyConfiguration;
 
-  @doc("Time configuration.")
+  /**
+   * Time configuration.
+   */
   time?: TimeConfiguration;
 
-  @doc("Storage configuration.")
+  /**
+   * Storage configuration.
+   */
   storage?: StorageConfiguration;
 }
 
+/**
+ * Network configuration.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Network configuration.")
 model NetworkConfiguration {
+  /**
+   * List of network adapters.
+   */
   @Azure.ResourceManager.identifiers(#[])
-  @doc("List of network adapters.")
   networkAdapters?: NetworkAdapter[];
 }
 
+/**
+ * Storage configuration.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Storage configuration.")
 model StorageConfiguration {
-  @doc("Partition size.")
+  /**
+   * Partition size.
+   */
   partitionSize?: string;
 }
 
+/**
+ * Network adapter configuration.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Network adapter configuration.")
 model NetworkAdapter {
-  @doc("Type of IP assignment.")
+  /**
+   * Type of IP assignment.
+   */
   ipAssignmentType: IpAssignmentType;
 
-  @doc("IP address.")
+  /**
+   * IP address.
+   */
   ipAddress?: string;
 
-  @doc("Adapter Name.")
+  /**
+   * Adapter Name.
+   */
   adapterName?: string;
 
-  @doc("MAC address.")
+  /**
+   * MAC address.
+   */
   macAddress?: string;
 
-  @doc("IP address range.")
+  /**
+   * IP address range.
+   */
   ipAddressRange?: IpAddressRange;
 
-  @doc("Gateway id.")
+  /**
+   * Gateway id.
+   */
   gateway?: string;
 
-  @doc("Subnet mask.")
+  /**
+   * Subnet mask.
+   */
   subnetMask?: string;
 
-  @doc("Array of DNS addresses.")
+  /**
+   * Array of DNS addresses.
+   */
   dnsAddressArray?: string[];
 
-  @doc("VLAN ID for the network setup.")
+  /**
+   * VLAN ID for the network setup.
+   */
   vlanId?: string;
 }
 
+/**
+ * IP assignment types
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("IP assignment types")
 union IpAssignmentType {
   string,
 
-  @doc("Automatic IP assignment")
+  /**
+   * Automatic IP assignment
+   */
   Automatic: "Automatic",
 
-  @doc("Manual IP assignment")
+  /**
+   * Manual IP assignment
+   */
   Manual: "Manual",
 }
 
+/**
+ * IP address range configuration.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("IP address range configuration.")
 model IpAddressRange {
-  @doc("Start IP address.")
+  /**
+   * Start IP address.
+   */
   startIp: string;
 
-  @doc("End IP address.")
+  /**
+   * End IP address.
+   */
   endIp: string;
 }
 
+/**
+ * Web proxy configuration.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Web proxy configuration.")
 model WebProxyConfiguration {
-  @doc("Connection URI of the web proxy.")
+  /**
+   * Connection URI of the web proxy.
+   */
   connectionUri?: url;
 
-  @doc("Port of the web proxy.")
+  /**
+   * Port of the web proxy.
+   */
   @pattern("^[0-9]{0,5}$")
   port?: string;
 
-  @doc("Bypass list for the web proxy.")
+  /**
+   * Bypass list for the web proxy.
+   */
   bypassList?: url[];
 }
 
+/**
+ * Time configuration.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Time configuration.")
 model TimeConfiguration {
-  @doc("Primary NTP server.")
+  /**
+   * Primary NTP server.
+   */
   primaryTimeServer?: string;
 
-  @doc("Secondary NTP server.")
+  /**
+   * Secondary NTP server.
+   */
   secondaryTimeServer?: string;
 
-  @doc("Time zone.")
+  /**
+   * Time zone.
+   */
   timeZone?: string;
 }
 
@@ -7187,11 +7623,15 @@ model TimeConfiguration {
 ////////////////////// Kubernetes Version Models //////////////////////
 ////////////////////////////////////////////////////////////////
 
+/**
+ * Represents properties of a kubernetes version.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("Represents properties of a kubernetes version.")
 @added(Versions.v2026_03_01_preview)
 model KubernetesVersionProperties {
-  @doc("Represents kubernetes version.")
+  /**
+   * Represents kubernetes version.
+   */
   version: string;
 }
 
@@ -7245,20 +7685,30 @@ model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
 ////////////////////// OS Image Models //////////////////////
 ////////////////////////////////////////////////////////////////
 
+/**
+ * Represents properties of a os image resource.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("Represents properties of a os image resource.")
 @added(Versions.v2026_03_01_preview)
 model OsImageProperties {
-  @doc("Represents validated solution recipe version of a os image.")
+  /**
+   * Represents validated solution recipe version of a os image.
+   */
   validatedSolutionRecipeVersion?: string;
 
-  @doc("Represents composed image version of a os image.")
+  /**
+   * Represents composed image version of a os image.
+   */
   composedImageVersion?: string;
 
-  @doc("Represents composed image iso download url of a os image.")
+  /**
+   * Represents composed image iso download url of a os image.
+   */
   composedImageIsoUrl?: string;
 
-  @doc("Represents composed image iso hash of a os image.")
+  /**
+   * Represents composed image iso hash of a os image.
+   */
   composedImageIsoHash?: string;
 }
 
@@ -7266,42 +7716,64 @@ model OsImageProperties {
 ////////////////////// Platform Update Models //////////////////////
 ////////////////////////////////////////////////////////////////
 
+/**
+ * Represents properties of a platform update resource.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("Represents properties of a platform update resource.")
 @added(Versions.v2026_03_01_preview)
 model PlatformUpdateProperties {
-  @doc("Represents applicable platform updates.")
+  /**
+   * Represents applicable platform updates.
+   */
   @Azure.ResourceManager.identifiers(#[])
   platformUpdateDetails: Array<PlatformUpdateDetails>;
 }
 
-@doc("Represents details of a specific platform update.")
+/**
+ * Represents details of a specific platform update.
+ */
 @added(Versions.v2026_03_01_preview)
 model PlatformUpdateDetails {
-  @doc("Represents validated solution recipe version of a platform update.")
+  /**
+   * Represents validated solution recipe version of a platform update.
+   */
   validatedSolutionRecipeVersion?: string;
 
-  @doc("Represents version of a platform update.")
+  /**
+   * Represents version of a platform update.
+   */
   platformVersion?: string;
 
-  @doc("Represents the platform payloads of a platform update.")
+  /**
+   * Represents the platform payloads of a platform update.
+   */
   @Azure.ResourceManager.identifiers(#[])
   platformPayloads: Array<PlatformPayload>;
 }
 
-@doc("Represents details of a specific platform update payload.")
+/**
+ * Represents details of a specific platform update payload.
+ */
 @added(Versions.v2026_03_01_preview)
 model PlatformPayload {
-  @doc("Represents url of a platform update payload.")
+  /**
+   * Represents url of a platform update payload.
+   */
   payloadUrl?: string;
 
-  @doc("Represents hash of a platform update payload.")
+  /**
+   * Represents hash of a platform update payload.
+   */
   payloadHash?: string;
 
-  @doc("Represents size in bytes of a platform update payload.")
+  /**
+   * Represents size in bytes of a platform update payload.
+   */
   payloadPackageSizeInBytes?: string;
 
-  @doc("Represents identifier of a platform update payload.")
+  /**
+   * Represents identifier of a platform update payload.
+   */
   payloadIdentifier?: string;
 }
 
@@ -7309,60 +7781,92 @@ model PlatformPayload {
 ////////////////////// Validate Ownership Vouchers Models //////////////////////
 ////////////////////////////////////////////////////////////////
 
+/**
+ * Validate Ownership Voucher Request
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Validate Ownership Voucher Request")
 model ValidateOwnershipVouchersRequest {
-  @doc("Ownership Voucher Details.")
+  /**
+   * Ownership Voucher Details.
+   */
   @identifiers(#[])
   @minItems(1)
   ownershipVoucherDetails: OwnershipVoucherDetails[];
 }
 
+/**
+ * Validate Ownership Voucher Response
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Validate Ownership Voucher Response")
 model ValidateOwnershipVouchersResponse {
-  @doc("Ownership Voucher Validation Details.")
+  /**
+   * Ownership Voucher Validation Details.
+   */
   @identifiers(#["id"])
   ownershipVoucherValidationDetails: OwnershipVoucherValidationDetails[];
 }
 
+/**
+ * Ownership Voucher Validation Details
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Ownership Voucher Validation Details")
 model OwnershipVoucherValidationDetails {
-  @doc("The ownership voucher validation status.")
+  /**
+   * The ownership voucher validation status.
+   */
   validationStatus?: OwnershipVoucherValidationStatus;
 
-  @doc("Serial number of the device.")
+  /**
+   * Serial number of the device.
+   */
   serialNumber?: string;
 
-  @doc("FDO guid of the Ownership Voucher.")
+  /**
+   * FDO guid of the Ownership Voucher.
+   */
   id?: string;
 
-  @doc("Name of the manufacturer.")
+  /**
+   * Name of the manufacturer.
+   */
   manufacturer?: string;
 
-  @doc("Name of the model.")
+  /**
+   * Name of the model.
+   */
   modelName?: string;
 
-  @doc("Version of the Ownership Voucher format")
+  /**
+   * Version of the Ownership Voucher format
+   */
   version?: string;
 
-  @doc("Azure Machine Id of the Ownership voucher")
+  /**
+   * Azure Machine Id of the Ownership voucher
+   */
   azureMachineId?: string;
 
-  @doc("Error details if the validation failed.")
+  /**
+   * Error details if the validation failed.
+   */
   error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
 }
 
+/**
+ * Ownership Voucher validation Status.
+ */
 @added(Versions.v2026_03_01_preview)
-@doc("Ownership Voucher validation Status.")
 union OwnershipVoucherValidationStatus {
   string,
 
-  @doc("Voucher evaluated as valid.")
+  /**
+   * Voucher evaluated as valid.
+   */
   Valid: "Valid",
 
-  @doc("Voucher evaluated as invalid.")
+  /**
+   * Voucher evaluated as invalid.
+   */
   Invalid: "Invalid",
 }
 
@@ -7370,36 +7874,56 @@ union OwnershipVoucherValidationStatus {
 ////////////////////// Update Content Models //////////////////////
 ////////////////////////////////////////////////////////////////
 
+/**
+ * Represents properties of a update content resource.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("Represents properties of a update content resource.")
 @added(Versions.v2026_03_01_preview)
 model UpdateContentProperties {
-  @doc("Represents the payloads of a update content resource.")
+  /**
+   * Represents the payloads of a update content resource.
+   */
   @Azure.ResourceManager.identifiers(#[])
   updatePayloads: Array<ContentPayload>;
 }
 
-@doc("Represents details of a specific update content payload.")
+/**
+ * Represents details of a specific update content payload.
+ */
 @added(Versions.v2026_03_01_preview)
 model ContentPayload {
-  @doc("Represents url of a update payload.")
+  /**
+   * Represents url of a update payload.
+   */
   url?: string;
 
-  @doc("Represents hash of a update payload.")
+  /**
+   * Represents hash of a update payload.
+   */
   hash?: string;
 
-  @doc("Represents hash algorithm of a update payload.")
+  /**
+   * Represents hash algorithm of a update payload.
+   */
   hashAlgorithm?: string;
 
-  @doc("Represents identifier of a update payload.")
+  /**
+   * Represents identifier of a update payload.
+   */
   identifier?: string;
 
-  @doc("Represents size in bytes of a update payload.")
+  /**
+   * Represents size in bytes of a update payload.
+   */
   packageSizeInBytes?: string;
 
-  @doc("Represents the group of a update payload.")
+  /**
+   * Represents the group of a update payload.
+   */
   group?: string;
 
-  @doc("Represents the file name of a update payload.")
+  /**
+   * Represents the file name of a update payload.
+   */
   fileName?: string;
 }
