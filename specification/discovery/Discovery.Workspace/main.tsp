@@ -44,18 +44,6 @@ namespace Microsoft.Discovery.Workspace;
 @doc("The Microsoft.Discovery.Workspace service versions.")
 enum Versions {
   @useDependency(
-    Microsoft.Discovery.DataPlane.Shared.Versions.`2025-07-01-preview`
-  )
-  @doc("The 2025-07-01-preview version of the Microsoft.Discovery.Workspace service data plane.")
-  `2025-07-01-preview`,
-
-  @useDependency(
-    Microsoft.Discovery.DataPlane.Shared.Versions.`2025-12-01-preview`
-  )
-  @doc("The 2025-12-01-preview version of the Microsoft.Discovery.Workspace service data plane.")
-  `2025-12-01-preview`,
-
-  @useDependency(
     Microsoft.Discovery.DataPlane.Shared.Versions.`2026-02-01-preview`
   )
   @doc("The 2026-02-01-preview version of the Microsoft.Discovery.Workspace service data plane.")

@@ -438,7 +438,6 @@ interface Investigations {
   @doc("Update the discovery engine for an investigation. This will create the discovery engine if it does not already exist.")
   @route("/projects/{projectName}/investigations/{investigationName}/discoveryEngine")
   @patch
-  @added(Versions.`2025-12-01-preview`)
   updateDiscoveryEngine is Azure.Core.Foundations.Operation<
     {
       @doc("The project name.")

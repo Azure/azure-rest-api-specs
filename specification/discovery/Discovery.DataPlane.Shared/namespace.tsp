@@ -14,12 +14,6 @@ namespace Microsoft.Discovery.DataPlane.Shared;
 
 @doc("The Microsoft.Discovery.DataPlane.Shared versions.")
 enum Versions {
-  @doc("The 2025-07-01-preview version.")
-  `2025-07-01-preview`,
-
-  @doc("The 2025-12-01-preview version.")
-  `2025-12-01-preview`,
-
   @doc("The 2026-02-01-preview version.")
   `2026-02-01-preview`,
 }

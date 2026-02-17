@@ -43,7 +43,6 @@ model TaskResult {
   dataAssetIds?: string[];
 
   @doc("Array of citations supporting the result.")
-  @added(Versions.`2025-07-01-preview`)
   @removed(Versions.`2026-02-01-preview`)
   citations?: Citation[];
 }
