@@ -1,14 +1,15 @@
 # Private Repository Differences from Main
 
 ## TODOs
-
-- [ ] **Compare against previous Private preview** - Ensure none of the API changes are missed in the `v2026_03_15_preview` version
-- [ ] **Copy examples from main repo** - Also copy from previous previews so that the example list is complete
-- [ ] **Create Storage APIs back from swagger** - Swagger will be provided
+- [x] **Copy examples from main repo** - Copied from 2026-03-01-preview with version updates (118 files)
+- [x] **Compare against previous Private preview** - Compared 2025-09-22-preview, 2025-12-01-preview, 2026-03-15-preview - no API gaps found (checkHealth deprecated, supportStatus excluded as intended)
+- [x] **Bring GPU and GPU Jobs from 2024-11-01-preview** - Added EdgeMachineGpu and EdgeMachineGpuJobs resources (files: edgeMachineGpu.tsp, edgeMachineGpuJobs.tsp)
+- [x] **Create Storage APIs from swagger** - Added EdgeMachineDisks, EdgeMachineVolumes, EdgeMachineDiskJobs resources (file: edgeMachineStorage.tsp)
+- [x] **Create Network Adapter APIs from swagger** - Added EdgeMachineNetworkAdapters, EdgeMachineNetworkAdapterJobs resources (file: edgeMachineNetworkAdapters.tsp)
 - [ ] **Create SAN APIs from swagger** - Swagger will be provided
-- [ ] **Bring GPU and GPU Jobs from 2024-11-01-preview** - gpu and gpuJobs resources
 - [ ] **Bring EdgeMachine Metadata from 2023-11-01-preview** - edgeMachineMetadata
 - [ ] **Bring Network Profiles from 2023-11-01-preview** - networkProfiles
+- [ ] **Bring Cluster kind property** - cluster kind (recreate for preview version)
 
 ---
 
@@ -65,11 +66,16 @@ This document tracks the differences between the private preview repository and 
 | UpdateSummaries.tsp | DIFFERENT | 29F4F0B1 | 8764B940 |
 | ValidatedSolutionRecipe.tsp | SAME | C162907E | C162907E |
 | validateOwnershipVouchers.tsp | DIFFERENT | 3D4C20F9 | 09885DDD |
+| edgeMachineGpu.tsp | **NEW** | - | - |
+| edgeMachineGpuJobs.tsp | **NEW** | - | - |
+| edgeMachineStorage.tsp | **NEW** | - | - |
+| edgeMachineNetworkAdapters.tsp | **NEW** | - | - |
 
 ### Summary
-- **Total Files**: 29
-- **Identical**: 11 (38%)
-- **Different**: 18 (62%)
+- **Total Files**: 33 (29 shared + 4 new)
+- **Identical**: 11 (38% of shared)
+- **Different**: 18 (62% of shared)
+- **New in Private**: 4 (edgeMachineGpu.tsp, edgeMachineGpuJobs.tsp, edgeMachineStorage.tsp, edgeMachineNetworkAdapters.tsp)
 
 > **Note**: Most differences are due to version annotation changes (using simplified v2026_02_01/v2026_03_15_preview instead of v2025_12_01_preview/v2026_03_01_preview). Generated OpenAPI specs for `stable/2026-02-01/hci.json` are **identical** between private and public repositories.
 
@@ -100,10 +106,10 @@ The following are the **actual functional differences** between the private and 
 | **GpuCreatePartitionJobProperties** | ✅ Present | ❌ Not present |
 | **GpuSwitchModeJobProperties** | ✅ Present | ❌ Not present |
 | **GpuMode union** | ✅ Present (Unknown, GPUP, DDA) | ❌ Not present |
-| **ClusterProperties.ring** | ✅ Present (v2026_03_15_preview) | ❌ Not present |
-| **ChangeRingRequest/Properties** | ✅ Present (v2026_03_15_preview) | ❌ Not present |
+| **ClusterProperties.ring** | ✅ Present (v2026_03_15_preview) | ✅ Present (v2026_03_01_preview) |
+| **ChangeRingRequest/Properties** | ✅ Present (v2026_03_15_preview) | ✅ Present (v2026_03_01_preview) |
 
-**Purpose**: Private preview includes GPU virtualization support (partitioning, mode switching), ArcGateway configuration, and cluster ring management features.
+**Purpose**: Private preview includes GPU virtualization support (partitioning, mode switching), ArcGateway configuration features. Cluster ring management is also present in public repo.
 
 ---
 
@@ -122,23 +128,68 @@ The following are the **actual functional differences** between the private and 
 
 The private repository contains the following features not yet available in the public API:
 
-### 1. GPU Virtualization Support (Preview Only)
+### 1. EdgeMachine GPU Resources (Preview Only) - NEW
+- **EdgeMachineGpu** - Child resource of EdgeMachine for GPU management
+  - List, Get, Create, Delete operations
+  - Tracks GPU properties: manufacturer, model, status, pciLocation, gpuMode
+  - Supports DDA (Direct Device Assignment) and GPU-P (Partitioned) modes
+  - Partition details including vRAM, encode/decode capabilities
+  - Files: `edgeMachineGpu.tsp`
+  
+- **EdgeMachineGpuJobs** - GPU job operations
+  - CreatePartition, SwitchMode, AssignPartition, RemovePartition job types
+  - Files: `edgeMachineGpuJobs.tsp`
+
+### 2. GPU Virtualization via ClusterJobs (Preview Only)
 - Create GPU partitions for virtualization workloads
 - Switch between GPU-P (Partitioned) and DDA (Direct Device Assignment) modes
-- GPU job management via cluster jobs
+- GPU job management via cluster jobs (`GpuCreatePartition`, `GpuSwitchMode`)
 
-### 2. ArcGateway Configuration (Preview Only)
+### 3. ArcGateway Configuration (Preview Only)
 - Configure Arc Gateway for cluster connectivity
 - `HciConfigureArcGatewayJobProperties` for job management
 
-### 3. Managed Identity on ArcSettings (Preview Only)
+### 4. Managed Identity on ArcSettings (Preview Only)
 - Support for managed service identities on ArcSetting resources
 - `ArcSetting.identity` and `ArcSettingsPatch.identity` properties
 
-### 4. Cluster Ring Management (Preview Only)
+### 5. Cluster Ring Management (Both Repos)
 - `changeRing` action on Clusters interface
 - `ring` property in ClusterProperties
 - `ChangeRingRequest` and `ChangeRingRequestProperties` models
+- **Note**: This feature exists in BOTH private (v2026_03_15_preview) and public (v2026_03_01_preview) repos
+
+### 6. EdgeMachine Storage Resources (Preview Only) - NEW
+- **EdgeMachineDisks** - Child resource of EdgeMachine for disk management
+  - List, Get, Create, Delete operations
+  - Tracks disk properties: diskName, model, manufacturer, serialNumber, firmwareVersion
+  - DiskType: HDD, SSD, SCM, Unknown
+  - DiskState: Healthy, Warning, Unhealthy, Missing, Unknown
+  - DiskConfiguration with volumes
+  - Files: `edgeMachineStorage.tsp`
+
+- **EdgeMachineVolumes** - Child resource of EdgeMachine for volume management
+  - List, Get, Create, Delete operations
+  - Volume properties: partitionId, offset, name, path, parentDiskId, isBoot, size, fileSystem
+  - Files: `edgeMachineStorage.tsp`
+
+- **EdgeMachineDiskJobs** - Disk job operations
+  - CreateVolume, DeleteVolume, SyncConfiguration job types
+  - ResolutionStrategy: UseDesired, UseActual
+  - DriftDetail tracking for configuration sync
+  - Files: `edgeMachineStorage.tsp`
+
+### 7. EdgeMachine Network Adapter Resources (Preview Only) - NEW
+- **EdgeMachineNetworkAdapters** - Child resource of EdgeMachine for network adapter management (read-only)
+  - List, Get operations only
+  - Tracks adapter properties: interfaceDescription, componentId, driverVersion, slot, switchName
+  - Network configuration and status reporting
+  - Files: `edgeMachineNetworkAdapters.tsp`
+
+- **EdgeMachineNetworkAdapterJobs** - Network adapter job operations
+  - ApplyConfiguration, ForcePush job types
+  - Validation and deployment status tracking
+  - Files: `edgeMachineNetworkAdapters.tsp`
 
 ---
 
@@ -159,9 +210,27 @@ When merging changes from public to private repository:
 3. Preserve `identity` property on `ArcSettingsPatch` and `ArcSetting` with appropriate `@added` annotations
 4. Preserve `ring`, `ChangeRingRequest`, and `ChangeRingRequestProperties` with `@added(v2026_03_15_preview)`
 5. Update version annotations from public versions to private versions as needed
+6. **Keep private-only files**: `edgeMachineGpu.tsp`, `edgeMachineGpuJobs.tsp`, `edgeMachineStorage.tsp`, `edgeMachineNetworkAdapters.tsp` (not in public repo)
+7. **Keep main.tsp imports** for EdgeMachineGpu, EdgeMachineGpuJobs, EdgeMachineStorage, EdgeMachineNetworkAdapters
 
 ### Version Mapping (Public → Private)
 | Public Version | Private Version |
 |----------------|-----------------|
 | `v2026_02_01` | `v2026_02_01` (GA) - Same |
 | `v2026_03_01_preview` | `v2026_03_15_preview` (Preview) |
+
+---
+
+## Session History
+
+### 2026-02-17 Updates
+1. Copied examples from main repo (2026-03-01-preview → examples/2026-03-15-preview) - 118 files
+2. Compared preview versions (2025-09-22-preview, 2025-12-01-preview, 2026-03-15-preview) - no API gaps
+3. Added EdgeMachineGpu and EdgeMachineGpuJobs resources from private-preview
+4. Added GPU examples from examples/2024-11-01-preview - 16 files
+5. Added ClusterJobs examples for ArcGateway and GPU from preview/2025-09-22-preview - 6 files
+6. Total examples in 2026-03-15-preview: 140
+7. Created EdgeMachineStorage resources (edgeMachineStorage.tsp) from swagger - Disks, Volumes, DiskJobs
+8. Created EdgeMachineNetworkAdapters resources (edgeMachineNetworkAdapters.tsp) from swagger - NetworkAdapters, NetworkAdapterJobs
+9. Updated main.tsp to import new Storage and NetworkAdapter modules
+10. Compiled TypeSpec - 83 paths in preview swagger
