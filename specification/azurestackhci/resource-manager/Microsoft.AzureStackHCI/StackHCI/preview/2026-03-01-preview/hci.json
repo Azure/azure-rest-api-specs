@@ -6856,6 +6856,15 @@
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource.",
           "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
@@ -9680,7 +9689,7 @@
         },
         "machineState": {
           "$ref": "#/definitions/EdgeMachineState",
-          "description": "OS configuration status details ",
+          "description": "OS configuration status details",
           "readOnly": true
         },
         "connectivityStatus": {

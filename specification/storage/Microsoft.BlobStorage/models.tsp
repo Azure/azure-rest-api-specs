@@ -1504,8 +1504,15 @@ alias ServerEncryptedResponseHeaderPrivate = {
 };
 
 /** The legal hold response header. */
+alias LegalHoldOptionalResponseHeader = {
+  /** Indicates whether the blob has a legal hold. */
+  @header("x-ms-legal-hold")
+  legalHold?: boolean;
+};
+
+/** The legal hold response header. */
 alias LegalHoldResponseHeader = {
-  /** Specifies the legal hold status to set on the blob. */
+  /** Indicates whether the blob has a legal hold. */
   @header("x-ms-legal-hold")
   legalHold: boolean;
 };
