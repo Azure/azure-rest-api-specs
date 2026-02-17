@@ -7009,6 +7009,77 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeMachineDiskJobs_Delete",
+        "tags": [
+          "EdgeMachineDiskJobs"
+        ],
+        "description": "Delete a disk job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "diskName",
+            "in": "path",
+            "description": "The name of the EdgeMachineDisk",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the EdgeMachineDiskJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/gpus": {
@@ -8138,6 +8209,77 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "EdgeMachineNetworkAdapterJobs_Delete",
+        "tags": [
+          "EdgeMachineNetworkAdapterJobs"
+        ],
+        "description": "Delete a network adapter job.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "edgeMachineName",
+            "in": "path",
+            "description": "Name of Device",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "networkAdapterName",
+            "in": "path",
+            "description": "The name of the EdgeMachineNetworkAdapter",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "The name of the EdgeMachineNetworkAdapterJob",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_]{3,63}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -11035,23 +11177,28 @@
         "values": [
           {
             "name": "NotStarted",
-            "value": "NotStarted"
+            "value": "NotStarted",
+            "description": "Job has not started."
           },
           {
             "name": "Running",
-            "value": "Running"
+            "value": "Running",
+            "description": "Job is currently running."
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded"
+            "value": "Succeeded",
+            "description": "Job completed successfully."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Job failed."
           },
           {
             "name": "Canceled",
-            "value": "Canceled"
+            "value": "Canceled",
+            "description": "Job was canceled."
           }
         ]
       },
@@ -11172,23 +11319,28 @@
         "values": [
           {
             "name": "Online",
-            "value": "Online"
+            "value": "Online",
+            "description": "Disk is online and available."
           },
           {
             "name": "Offline",
-            "value": "Offline"
+            "value": "Offline",
+            "description": "Disk is offline."
           },
           {
             "name": "Failed",
-            "value": "Failed"
+            "value": "Failed",
+            "description": "Disk has failed."
           },
           {
             "name": "Missing",
-            "value": "Missing"
+            "value": "Missing",
+            "description": "Disk is missing."
           },
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "Disk state is unknown."
           }
         ]
       }
@@ -11212,35 +11364,43 @@
         "values": [
           {
             "name": "Unknown",
-            "value": "Unknown"
+            "value": "Unknown",
+            "description": "Unknown disk type."
           },
           {
             "name": "SCM",
-            "value": "SCM"
+            "value": "SCM",
+            "description": "Storage Class Memory disk."
           },
           {
             "name": "NVMe",
-            "value": "NVMe"
+            "value": "NVMe",
+            "description": "NVMe disk."
           },
           {
             "name": "SATA",
-            "value": "SATA"
+            "value": "SATA",
+            "description": "SATA disk."
           },
           {
             "name": "SSD",
-            "value": "SSD"
+            "value": "SSD",
+            "description": "Solid State Drive."
           },
           {
             "name": "HDD",
-            "value": "HDD"
+            "value": "HDD",
+            "description": "Hard Disk Drive."
           },
           {
             "name": "Virtual",
-            "value": "Virtual"
+            "value": "Virtual",
+            "description": "Virtual disk."
           },
           {
             "name": "Other",
-            "value": "Other"
+            "value": "Other",
+            "description": "Other disk type."
           }
         ]
       }
@@ -20480,7 +20640,13 @@
     },
     "VolumeConfiguration": {
       "type": "object",
-      "description": "Desired configuration for a volume. Reserved for future use."
+      "description": "Desired configuration for a volume. Reserved for future use.",
+      "properties": {
+        "reserved": {
+          "type": "string",
+          "description": "Reserved for future volume configuration options."
+        }
+      }
     },
     "VolumeReportedProperties": {
       "type": "object",

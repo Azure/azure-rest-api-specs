@@ -115,6 +115,9 @@ interface EdgeMachineDiskJobs {
 
   /** Create or update a disk job. */
   createOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeMachineDiskJob>;
+
+  /** Delete a disk job. */
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeMachineDiskJob>;
 }
 
 // ==================== Disk Models ====================
@@ -238,13 +241,29 @@ model DiskReportedProperties {
 @added(Versions.v2026_03_15_preview)
 union DiskType {
   string,
+
+  /** Unknown disk type. */
   Unknown: "Unknown",
+
+  /** Storage Class Memory disk. */
   SCM: "SCM",
+
+  /** NVMe disk. */
   NVMe: "NVMe",
+
+  /** SATA disk. */
   SATA: "SATA",
+
+  /** Solid State Drive. */
   SSD: "SSD",
+
+  /** Hard Disk Drive. */
   HDD: "HDD",
+
+  /** Virtual disk. */
   Virtual: "Virtual",
+
+  /** Other disk type. */
   Other: "Other",
 }
 
@@ -254,10 +273,20 @@ union DiskType {
 @added(Versions.v2026_03_15_preview)
 union DiskState {
   string,
+
+  /** Disk is online and available. */
   Online: "Online",
+
+  /** Disk is offline. */
   Offline: "Offline",
+
+  /** Disk has failed. */
   Failed: "Failed",
+
+  /** Disk is missing. */
   Missing: "Missing",
+
+  /** Disk state is unknown. */
   Unknown: "Unknown",
 }
 
@@ -310,7 +339,10 @@ model EdgeMachineVolumeProperties {
  * Desired configuration for a volume. Reserved for future use.
  */
 @added(Versions.v2026_03_15_preview)
-model VolumeConfiguration {}
+model VolumeConfiguration {
+  /** Reserved for future volume configuration options. */
+  reserved?: string;
+}
 
 /**
  * The actual state of the volume as reported by the device.
@@ -418,10 +450,20 @@ union DiskJobType {
 @added(Versions.v2026_03_15_preview)
 union DiskJobStatus {
   string,
+
+  /** Job has not started. */
   NotStarted: "NotStarted",
+
+  /** Job is currently running. */
   Running: "Running",
+
+  /** Job completed successfully. */
   Succeeded: "Succeeded",
+
+  /** Job failed. */
   Failed: "Failed",
+
+  /** Job was canceled. */
   Canceled: "Canceled",
 }
 

@@ -25,6 +25,12 @@ StackHCI/
 ├── devicePool.tsp        # Device pool resource
 ├── edgeMachine.tsp       # Edge machine resource
 ├── edgeMachineJobs.tsp   # Edge machine jobs
+├── edgeMachineGpu.tsp    # Edge machine GPU resource (NEW)
+├── edgeMachineGpuJobs.tsp # Edge machine GPU jobs (NEW)
+├── edgeMachineStorage.tsp # Edge machine Storage - Disks, Volumes, DiskJobs (NEW)
+├── edgeMachineNetworkAdapters.tsp # Edge machine NetworkAdapters, Jobs (NEW)
+├── edgeDeviceMetadata.tsp # Edge device metadata resource (NEW)
+├── networkProfile.tsp    # Network profile resource - child of Cluster (NEW)
 ├── DeploymentSetting.tsp # Deployment settings
 ├── EdgeDevice.tsp        # Edge device resource
 ├── EdgeDeviceJob.tsp     # Edge device jobs

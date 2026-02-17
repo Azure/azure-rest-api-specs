@@ -76,6 +76,9 @@ interface EdgeMachineNetworkAdapterJobs {
 
   /** Create or update a network adapter job. */
   createOrUpdate is ArmResourceCreateOrUpdateAsync<EdgeMachineNetworkAdapterJob>;
+
+  /** Delete a network adapter job. */
+  delete is ArmResourceDeleteWithoutOkAsync<EdgeMachineNetworkAdapterJob>;
 }
 
 // ==================== Network Adapter Models ====================
