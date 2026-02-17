@@ -169,7 +169,6 @@ model FileSystemResourceUpdateProperties {
    */
   @added(Versions.v2026_02_17_preview)
   performanceTier?: string;
-
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
