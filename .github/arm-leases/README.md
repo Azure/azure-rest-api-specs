@@ -42,7 +42,7 @@ lease:
 
 ### Copy-Paste Template
 
-Create a file at `.github/arm-leases/<servicename>/<namespace>/lease.yaml` with the following content (replace the placeholder values):
+Create a file at `.github/arm-leases/<servicename>/<namespace>/<servicegroup>(optional)/lease.yaml` with the following content (replace the placeholder values):
 
 ```yaml
 lease:
@@ -79,4 +79,15 @@ All lease files are automatically validated with the following requirements:
 - Required field that cannot be empty
 - Must contain the name of the PM who approved the lease
 - Only PMs can be listed as reviewers
+
+## Troubleshooting
+
+If your PR check **"ARM Lease Validation - PMs as reviewer"** is failing, review the error messages in the check output and fix the issues in your `lease.yaml` file. Common causes include:
+
+- **Invalid folder structure**: Ensure the path follows `<servicename>/<namespace>/[<servicegroup>]/lease.yaml` with lowercase service name
+- **Resource provider mismatch**: The `resource-provider` value must match the namespace folder name exactly
+- **Past start date**: The `startdate` must be today or a future date in `YYYY-MM-DD` format
+- **Invalid duration**: Use ISO 8601 format `P{n}D` (e.g., `P180D`), maximum `P180D`
+- **Missing or empty fields**: All fields (`resource-provider`, `startdate`, `duration-days`, `reviewer`) are required
+- **Disallowed files**: Only `lease.yaml` and `README.md` files are permitted in `.github/arm-leases/`
 
