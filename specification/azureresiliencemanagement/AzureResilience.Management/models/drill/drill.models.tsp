@@ -55,15 +55,15 @@ model DrillProperties {
   healthModelProperties?: HealthModelPropertiesOfDrill;
 
   @doc("ROPlan properties.")
-  recoveryPlanProperties: RecoveryPlanPropertiesOfDrill;
+  recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
   @doc("Properties for internal resources that are created for the Drill.")
   @added(Versions.v2026_03_01_preview)
-  drillAssetProperties: AssetPropertiesOfDrill;
+  drillAssetProperties?: AssetPropertiesOfDrill;
 
   @doc("Chaos Resource properties.")
   @added(Versions.v2026_03_01_preview)
-  chaosResourceProperties: ChaosResourcePropertiesOfDrill;
+  chaosResourceProperties?: ChaosResourcePropertiesOfDrill;
 
   @doc("Chaos Experiment properties.")
   chaosExperimentProperties: ChaosExperimentPropertiesOfDrill;
@@ -220,7 +220,7 @@ model HealthModelPropertiesOfDrill {
 model MonitoringPropertiesOfDrill {
   @doc("Identity to use for Drill monitoring operations.")
   @added(Versions.v2026_03_01_preview)
-  identity: AssociatedIdentity;
+  identity?: AssociatedIdentity;
 
   @doc("Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.")
   @visibility(Lifecycle.Read)
@@ -639,22 +639,22 @@ model DrillsQualifiedResource {
   @doc("Active Resource location and zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activeLocation?: string[];
+  activeLocations?: string[];
 
   @doc("Recovery Resource location and zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  recoveryLocation?: string[];
+  recoveryLocations?: string[];
 
   @doc("Active Resource location and physical zones of Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  activePhysicalLocation?: string[];
+  activePhysicalZones?: string[];
 
   @doc("Recovery Resource location and physical zones of HA Azure Resource.")
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
-  recoveryPhysicalLocation?: string[];
+  recoveryPhysicalZones?: string[];
 
   @doc("Inclusion State of the Drill resource in Drill")
   @added(Versions.v2026_03_01_preview)
@@ -696,6 +696,11 @@ model DrillsQualifiedResource {
   @added(Versions.v2026_03_01_preview)
   @visibility(Lifecycle.Read)
   faultProperties?: FaultProperties;
+
+  @doc("Resource Protection Solution Display Name")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceProtectionSolutionDisplayName?: string;
 }
 
 @doc("Details of qualification for an operation.")

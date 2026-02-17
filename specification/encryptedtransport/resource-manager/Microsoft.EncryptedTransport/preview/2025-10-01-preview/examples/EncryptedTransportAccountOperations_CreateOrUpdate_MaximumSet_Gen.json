@@ -8,9 +8,12 @@
     "encryptedTransportAccountName": "test-account-123",
     "resource": {
       "properties": {
-        "subnetId": "/subscriptions/1EF89291-AE86-40EA-B5D8-30DCBE260812/resourceGroups/rgopenapi/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
-        "wifiPsks": [
-          "Password123!"
+        "subnetId": "/subscriptions/01234567-1234-abcd-ef01-1234567890ab/resourceGroups/rgopenapi/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+        "wifiProfiles": [
+          {
+            "psk": "Password123!",
+            "ssid": "MyNetwork01"
+          }
         ]
       },
       "tags": {},
@@ -21,15 +24,20 @@
     "200": {
       "body": {
         "properties": {
-          "subnetId": "/subscriptions/1EF89291-AE86-40EA-B5D8-30DCBE260812/resourceGroups/rgopenapi/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "subnetId": "/subscriptions/01234567-1234-abcd-ef01-1234567890ab/resourceGroups/rgopenapi/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
           "privateIpAddress": [
             "10.0.0.4"
           ],
-          "provisioningState": "Provisioning"
+          "provisioningState": "Provisioning",
+          "wifiProfiles": [
+            {
+              "ssid": "MyNetwork01"
+            }
+          ]
         },
         "tags": {},
         "location": "eastus",
-        "id": "/subscriptions/1EF89291-AE86-40EA-B5D8-30DCBE260812/resourceGroups/rgopenapi/providers/Microsoft.EncryptedTransport/encryptedTransportAccounts/test-account-123",
+        "id": "/subscriptions/01234567-1234-abcd-ef01-1234567890ab/resourceGroups/rgopenapi/providers/Microsoft.EncryptedTransport/encryptedTransportAccounts/test-account-123",
         "name": "test-account-123",
         "type": "Microsoft.EncryptedTransport/encryptedTransportAccounts",
         "systemData": {
@@ -48,15 +56,20 @@
       },
       "body": {
         "properties": {
-          "subnetId": "/subscriptions/1EF89291-AE86-40EA-B5D8-30DCBE260812/resourceGroups/rgopenapi/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
+          "subnetId": "/subscriptions/01234567-1234-abcd-ef01-1234567890ab/resourceGroups/rgopenapi/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/subnet1",
           "privateIpAddress": [
             "10.0.0.4"
           ],
-          "provisioningState": "Provisioning"
+          "provisioningState": "Provisioning",
+          "wifiProfiles": [
+            {
+              "ssid": "MyNetwork01"
+            }
+          ]
         },
         "tags": {},
         "location": "eastus",
-        "id": "/subscriptions/1EF89291-AE86-40EA-B5D8-30DCBE260812/resourceGroups/rgopenapi/providers/Microsoft.EncryptedTransport/encryptedTransportAccounts/test-account-123",
+        "id": "/subscriptions/01234567-1234-abcd-ef01-1234567890ab/resourceGroups/rgopenapi/providers/Microsoft.EncryptedTransport/encryptedTransportAccounts/test-account-123",
         "name": "test-account-123",
         "type": "Microsoft.EncryptedTransport/encryptedTransportAccounts",
         "systemData": {

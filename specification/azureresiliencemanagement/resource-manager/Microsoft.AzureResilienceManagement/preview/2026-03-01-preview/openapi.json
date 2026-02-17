@@ -2128,9 +2128,6 @@
               }
             }
           },
-          "204": {
-            "description": "Action completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -6333,9 +6330,6 @@
       },
       "discriminator": "drillType",
       "required": [
-        "recoveryPlanProperties",
-        "drillAssetProperties",
-        "chaosResourceProperties",
         "chaosExperimentProperties",
         "drillType"
       ]
@@ -6511,7 +6505,7 @@
           "type": "string",
           "description": "Type of the Drill resource."
         },
-        "activeLocation": {
+        "activeLocations": {
           "type": "array",
           "description": "Active location and zones of the Azure resource.",
           "items": {
@@ -6527,7 +6521,7 @@
           },
           "readOnly": true
         },
-        "activePhysicalLocation": {
+        "activePhysicalZones": {
           "type": "array",
           "description": "Active Resource location and physical zones of Azure Resource.",
           "items": {
@@ -6535,7 +6529,7 @@
           },
           "readOnly": true
         },
-        "recoveryPhysicalLocation": {
+        "recoveryPhysicalZones": {
           "type": "array",
           "description": "Recovery Resource location and physical zones of HA Azure Resource.",
           "items": {
@@ -7259,7 +7253,7 @@
           "description": "ARM Resource ID of the Azure resource.",
           "readOnly": true
         },
-        "activeLocation": {
+        "activeLocations": {
           "type": "array",
           "description": "Active Resource location and zones of Azure Resource.",
           "items": {
@@ -7267,7 +7261,7 @@
           },
           "readOnly": true
         },
-        "recoveryLocation": {
+        "recoveryLocations": {
           "type": "array",
           "description": "Recovery Resource location and zones of HA Azure Resource.",
           "items": {
@@ -7275,7 +7269,7 @@
           },
           "readOnly": true
         },
-        "activePhysicalLocation": {
+        "activePhysicalZones": {
           "type": "array",
           "description": "Active Resource location and physical zones of Azure Resource.",
           "items": {
@@ -7283,7 +7277,7 @@
           },
           "readOnly": true
         },
-        "recoveryPhysicalLocation": {
+        "recoveryPhysicalZones": {
           "type": "array",
           "description": "Recovery Resource location and physical zones of HA Azure Resource.",
           "items": {
@@ -7333,6 +7327,11 @@
         "faultProperties": {
           "$ref": "#/definitions/FaultProperties",
           "description": "Fault Properties",
+          "readOnly": true
+        },
+        "resourceProtectionSolutionDisplayName": {
+          "type": "string",
+          "description": "Resource Protection Solution Display Name",
           "readOnly": true
         }
       },
@@ -9140,10 +9139,7 @@
             ]
           }
         }
-      },
-      "required": [
-        "identity"
-      ]
+      }
     },
     "MonitoringPropertiesOfDrillUpdate": {
       "type": "object",
@@ -10310,7 +10306,7 @@
           "description": "Original location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
           "readOnly": true
         },
-        "physicalZones": {
+        "resourcePhysicalZones": {
           "type": "array",
           "description": "Physical zones of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
           "items": {
@@ -10678,6 +10674,22 @@
           "description": "Active location of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
           "readOnly": true
         },
+        "activeLocations": {
+          "type": "array",
+          "description": "Active locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "activePhysicalZones": {
+          "type": "array",
+          "description": "Active Resource location and physical zones of Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "recoveryLocations": {
           "type": "array",
           "description": "List of recovery locations of the Azure resource associated with the recovery orchestration plan and linked to the recovery resource.",
@@ -10721,14 +10733,6 @@
         "testFailoverState": {
           "$ref": "#/definitions/TestFailoverState",
           "description": "TestFailover state of the recovery orchestration resource.",
-          "readOnly": true
-        },
-        "physicalZones": {
-          "type": "array",
-          "description": "Physical zones of the Azure resource associated with the recovery orchestration plan.",
-          "items": {
-            "type": "string"
-          },
           "readOnly": true
         }
       },

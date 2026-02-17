@@ -51,6 +51,11 @@ model NeighborGroupProperties {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @added(Versions.v2026_01_15_preview)
+  @doc("Administrative state of the resource.")
+  @visibility(Lifecycle.Read)
+  administrativeState?: AdministrativeState;
 }
 
 @doc("An array of destination IPv4 Addresses or IPv6 Addresses.")
