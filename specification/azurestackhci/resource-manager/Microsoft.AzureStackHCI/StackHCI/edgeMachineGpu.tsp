@@ -62,8 +62,8 @@ interface EdgeMachineGpus {
 /**
  * List of GPUs in Edge Machine.
  */
-@added(Versions.v2026_03_15_preview)
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
+@added(Versions.v2026_03_15_preview)
 model GpuList is Azure.Core.Page<EdgeMachineGpu>;
 
 /**

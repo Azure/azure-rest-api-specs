@@ -21,7 +21,8 @@ namespace Microsoft.AzureStackHCI;
  */
 @added(Versions.v2026_03_15_preview)
 @parentResource(EdgeMachine)
-model EdgeMachineDisk is Azure.ResourceManager.ProxyResource<EdgeMachineDiskProperties> {
+model EdgeMachineDisk
+  is Azure.ResourceManager.ProxyResource<EdgeMachineDiskProperties> {
   ...ResourceNameParameter<
     Resource = EdgeMachineDisk,
     KeyName = "diskName",
@@ -56,7 +57,8 @@ interface EdgeMachineDisks {
  */
 @added(Versions.v2026_03_15_preview)
 @parentResource(EdgeMachine)
-model EdgeMachineVolume is Azure.ResourceManager.ProxyResource<EdgeMachineVolumeProperties> {
+model EdgeMachineVolume
+  is Azure.ResourceManager.ProxyResource<EdgeMachineVolumeProperties> {
   ...ResourceNameParameter<
     Resource = EdgeMachineVolume,
     KeyName = "volumeName",
@@ -92,7 +94,8 @@ interface EdgeMachineVolumes {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
 @added(Versions.v2026_03_15_preview)
 @parentResource(EdgeMachineDisk)
-model EdgeMachineDiskJob is Azure.ResourceManager.ProxyResource<EdgeMachineDiskJobProperties> {
+model EdgeMachineDiskJob
+  is Azure.ResourceManager.ProxyResource<EdgeMachineDiskJobProperties> {
   ...ResourceNameParameter<
     Resource = EdgeMachineDiskJob,
     KeyName = "jobName",
