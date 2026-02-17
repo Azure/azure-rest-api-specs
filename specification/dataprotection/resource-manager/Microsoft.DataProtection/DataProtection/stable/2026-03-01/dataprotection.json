@@ -4649,6 +4649,25 @@
       ],
       "x-ms-discriminator-value": "AdlsBlobBackupDatasourceParameters"
     },
+    "AdlsBlobBackupDatasourceParametersForAutoProtection": {
+      "type": "object",
+      "description": "Parameters to be used during configuration of backup of azure data lake storage account blobs using AutoProtection settings",
+      "properties": {
+        "autoProtectionSettings": {
+          "$ref": "#/definitions/BlobBackupAutoProtectionSettings",
+          "description": "AutoProtection settings"
+        }
+      },
+      "required": [
+        "autoProtectionSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "AdlsBlobBackupDatasourceParametersForAutoProtection"
+    },
     "AlertsState": {
       "type": "string",
       "enum": [
@@ -5749,18 +5768,36 @@
           "items": {
             "type": "string"
           }
-        },
-        "autoProtectionSettings": {
-          "$ref": "#/definitions/BlobBackupAutoProtectionSettings",
-          "description": "AutoProtection settings"
         }
       },
+      "required": [
+        "containersList"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/BackupDatasourceParameters"
         }
       ],
       "x-ms-discriminator-value": "BlobBackupDatasourceParameters"
+    },
+    "BlobBackupDatasourceParametersForAutoProtection": {
+      "type": "object",
+      "description": "Paramters to be used during configuration of backup of blobs using AutoProtection settings",
+      "properties": {
+        "autoProtectionSettings": {
+          "$ref": "#/definitions/BlobBackupAutoProtectionSettings",
+          "description": "AutoProtection settings"
+        }
+      },
+      "required": [
+        "autoProtectionSettings"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "BlobBackupDatasourceParametersForAutoProtection"
     },
     "BlobBackupPatternType": {
       "type": "string",

@@ -3135,19 +3135,37 @@ model BlobBackupDatasourceParameters extends BackupDatasourceParameters {
   objectType: "BlobBackupDatasourceParameters";
 }
 
+/**
+ * Paramters to be used during configuration of backup of blobs using AutoProtection settings
+ */
+@added(Versions.v2026_03_01)
+model BlobBackupDatasourceParametersForAutoProtection
+  extends BackupDatasourceParameters {
+  ...BlobBackupDatasourceCommonParametersForAutoProtection;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: "BlobBackupDatasourceParametersForAutoProtection";
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BlobBackupDatasourceCommonParameters {
   /**
    * List of containers to be backed up during configuration of backup of blobs
    */
-  @madeOptional(Versions.v2026_03_01)
-  containersList?: string[];
+  containersList: string[];
+}
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_01)
+model BlobBackupDatasourceCommonParametersForAutoProtection {
   /**
    * AutoProtection settings
    */
   @added(Versions.v2026_03_01)
-  autoProtectionSettings?: BlobBackupAutoProtectionSettings;
+  autoProtectionSettings: BlobBackupAutoProtectionSettings;
 }
 
 /**
@@ -3160,6 +3178,21 @@ model AdlsBlobBackupDatasourceParameters extends BackupDatasourceParameters {
    * Type of the specific object - used for deserializing
    */
   objectType: "AdlsBlobBackupDatasourceParameters";
+}
+
+/**
+ * Parameters to be used during configuration of backup of azure data lake storage account blobs using AutoProtection settings
+ */
+@added(Versions.v2026_03_01)
+model AdlsBlobBackupDatasourceParametersForAutoProtection
+  extends BackupDatasourceParameters {
+  ...BlobBackupDatasourceCommonParametersForAutoProtection;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: "AdlsBlobBackupDatasourceParametersForAutoProtection";
 }
 
 /**
