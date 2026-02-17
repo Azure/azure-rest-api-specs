@@ -12,12 +12,14 @@ using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.TrackedResourceWithOptionalLocation to make location property optional for backward compatibility"
 @added(Versions.v2025_11_01_preview)
 @removed(Versions.v2026_03_01_preview)
 @renamedFrom(Versions.v2026_03_01_preview, "Policy")
 @doc("A Credential Policy")
 @parentResource(Credential)
-model PolicyV1 is TrackedResource<PolicyProperties> {
+model PolicyV1
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<PolicyProperties> {
   @doc("The name of the Policy tracked resource.")
   @minLength(3)
   @maxLength(63)
