@@ -178,7 +178,7 @@ model ExistingModel {
 
 When reviewing TypeSpec changes, verify:
 
-- [ ] File name uses PascalCase
+- [ ] File name uses PascalCase except: client.tsp,  back-compatible.tsp and models.tsp
 - [ ] Models are defined in `models.tsp` (not in resource files)
 - [ ] Documentation uses `/** */` style (not `@doc`)
 - [ ] No unused imports or using statements

@@ -16,7 +16,7 @@ import "./PlatformUpdates.tsp";
 import "./OsImages.tsp";
 import "./UpdateContents.tsp";
 import "./Operations.tsp";
-import "./BackCompatible.tsp";
+import "./back-compatible.tsp";
 import "./ArcSetting.tsp";
 import "./Cluster.tsp";
 import "./DeploymentSetting.tsp";
