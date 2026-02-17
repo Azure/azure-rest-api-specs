@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-resource-manager";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -28,12 +28,4 @@ model KubernetesVersion
 interface KubernetesVersions {
   @doc("List all kubernetes versions.")
   list is ArmResourceListAtScope<KubernetesVersion>;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("Represents properties of a kubernetes version.")
-@added(Versions.v2026_03_01_preview)
-model KubernetesVersionProperties {
-  @doc("Represents kubernetes version.")
-  version: string;
 }

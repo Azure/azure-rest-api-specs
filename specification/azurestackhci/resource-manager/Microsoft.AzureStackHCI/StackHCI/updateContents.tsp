@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-resource-manager";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -34,38 +34,4 @@ interface UpdateContents {
     UpdateContent,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
   >;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("Represents properties of a update content resource.")
-@added(Versions.v2026_03_01_preview)
-model UpdateContentProperties {
-  @doc("Represents the payloads of a update content resource.")
-  @Azure.ResourceManager.identifiers(#[])
-  updatePayloads: Array<ContentPayload>;
-}
-
-@doc("Represents details of a specific update content payload.")
-@added(Versions.v2026_03_01_preview)
-model ContentPayload {
-  @doc("Represents url of a update payload.")
-  url?: string;
-
-  @doc("Represents hash of a update payload.")
-  hash?: string;
-
-  @doc("Represents hash algorithm of a update payload.")
-  hashAlgorithm?: string;
-
-  @doc("Represents identifier of a update payload.")
-  identifier?: string;
-
-  @doc("Represents size in bytes of a update payload.")
-  packageSizeInBytes?: string;
-
-  @doc("Represents the group of a update payload.")
-  group?: string;
-
-  @doc("Represents the file name of a update payload.")
-  fileName?: string;
 }

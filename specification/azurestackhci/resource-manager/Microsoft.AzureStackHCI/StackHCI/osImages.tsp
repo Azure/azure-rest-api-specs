@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-azure-resource-manager";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -30,21 +30,4 @@ interface OsImages {
 
   @doc("List all os images.")
   list is ArmResourceListAtScope<OsImage>;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
-@doc("Represents properties of a os image resource.")
-@added(Versions.v2026_03_01_preview)
-model OsImageProperties {
-  @doc("Represents validated solution recipe version of a os image.")
-  validatedSolutionRecipeVersion?: string;
-
-  @doc("Represents composed image version of a os image.")
-  composedImageVersion?: string;
-
-  @doc("Represents composed image iso download url of a os image.")
-  composedImageIsoUrl?: string;
-
-  @doc("Represents composed image iso hash of a os image.")
-  composedImageIsoHash?: string;
 }

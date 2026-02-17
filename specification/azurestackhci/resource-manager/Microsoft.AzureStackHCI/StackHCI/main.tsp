@@ -11,13 +11,11 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./commonModels.tsp";
 import "./kubernetesVersions.tsp";
 import "./platformUpdates.tsp";
 import "./osImages.tsp";
 import "./updateContents.tsp";
 import "./Operations.tsp";
-import "./models.tsp";
 import "./back-compatible.tsp";
 import "./ArcSetting.tsp";
 import "./Cluster.tsp";
@@ -39,10 +37,6 @@ import "./validateOwnershipVouchers.tsp";
 import "./clusterJobs.tsp";
 import "./devicePool.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
