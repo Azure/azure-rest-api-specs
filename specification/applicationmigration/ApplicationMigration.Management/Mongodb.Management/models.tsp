@@ -692,6 +692,12 @@ model MongoDatabaseProperties is AzureResourceProperties {
    * The number of informational messages.
    */
   informationalMessagesCount: int64;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
@@ -818,6 +824,12 @@ model MongoCollectionProperties is AzureResourceProperties {
    * The number of informational messages.
    */
   informationalMessagesCount: int64;
+
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
