@@ -5227,6 +5227,13 @@
         "attributeName"
       ]
     },
+    "ContactsMap": {
+      "type": "object",
+      "description": "A dictionary of contact lists keyed by contact type (e.g., 'Owner', 'Expert').",
+      "additionalProperties": {
+        "$ref": "#/definitions/ContactsValueInnerList"
+      }
+    },
     "ContactsValueInnerList": {
       "type": "array",
       "description": "A list of contacts for catalog entities.",
@@ -5306,11 +5313,8 @@
           "description": "A detailed description of the critical data element."
         },
         "contacts": {
-          "type": "object",
-          "description": "The contacts associated with this critical data element.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ContactsValueInnerList"
-          }
+          "$ref": "#/definitions/ContactsMap",
+          "description": "The contacts associated with this critical data element."
         },
         "managedAttributes": {
           "type": "array",
@@ -5487,11 +5491,8 @@
           "description": "Source of the asset."
         },
         "contacts": {
-          "type": "object",
-          "description": "Contacts associated with the asset.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ContactsValueInnerList"
-          }
+          "$ref": "#/definitions/ContactsMap",
+          "description": "Contacts associated with the asset."
         },
         "classifications": {
           "type": "array",
@@ -5728,11 +5729,8 @@
           "description": "Source of the asset."
         },
         "contacts": {
-          "type": "object",
-          "description": "Contacts associated with the asset.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ContactsValueInnerList"
-          }
+          "$ref": "#/definitions/ContactsMap",
+          "description": "Contacts associated with the asset."
         },
         "type": {
           "$ref": "#/definitions/DataAssetType",
@@ -5952,11 +5950,8 @@
           "description": "The business use of the data product."
         },
         "contacts": {
-          "type": "object",
-          "description": "The contacts associated with the data product.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ContactsValueInnerList"
-          }
+          "$ref": "#/definitions/ContactsMap",
+          "description": "The contacts associated with the data product."
         },
         "termsOfUse": {
           "type": "array",
@@ -6779,11 +6774,8 @@
           "description": "The target date for the objective."
         },
         "contacts": {
-          "type": "object",
-          "description": "The contacts associated with the objective.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ContactsValueInnerList"
-          }
+          "$ref": "#/definitions/ContactsMap",
+          "description": "The contacts associated with the objective."
         },
         "additionalProperties": {
           "$ref": "#/definitions/OverallStatusEnum",
@@ -6890,11 +6882,8 @@
           "description": "The target date for the objective."
         },
         "contacts": {
-          "type": "object",
-          "description": "The contacts associated with the objective.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ContactsValueInnerList"
-          }
+          "$ref": "#/definitions/ContactsMap",
+          "description": "The contacts associated with the objective."
         },
         "additionalProperties": {
           "$ref": "#/definitions/ObjectiveAdditionalProperties",
@@ -7377,11 +7366,8 @@
           "description": "The description of the term."
         },
         "contacts": {
-          "type": "object",
-          "description": "The contacts associated with the term.",
-          "additionalProperties": {
-            "$ref": "#/definitions/ContactsValueInnerList"
-          }
+          "$ref": "#/definitions/ContactsMap",
+          "description": "The contacts associated with the term."
         },
         "domain": {
           "$ref": "#/definitions/Azure.Core.uuid",

@@ -123,6 +123,11 @@ model CatalogModelContactsValueInner {
 @doc("A list of contacts for catalog entities.")
 model ContactsValueInnerList is CatalogModelContactsValueInner[];
 
+@doc("A dictionary of contact lists keyed by contact type (e.g., 'Owner', 'Expert').")
+model ContactsMap {
+  ...Record<ContactsValueInnerList>;
+}
+
 @doc("The format of the SQL table.")
 union TypePropertiesFormat {
   @doc("Table format.")
@@ -191,7 +196,7 @@ model CriticalDataElement {
   description?: string;
 
   @doc("The contacts associated with this critical data element.")
-  contacts?: Record<ContactsValueInnerList>;
+  contacts?: ContactsMap;
 
   @doc("Managed attributes associated with this critical data element.")
   managedAttributes?: CatalogModelManagedAttribute[];
@@ -543,7 +548,7 @@ model DataAsset {
   source?: CatalogModelDataAssetSource;
 
   @doc("Contacts associated with the asset.")
-  contacts?: Record<ContactsValueInnerList>;
+  contacts?: ContactsMap;
 
   @doc("A list of classification labels.")
   classifications?: string[];
@@ -585,7 +590,7 @@ model DataAssetRequest {
   source?: CatalogModelDataAssetSource;
 
   @doc("Contacts associated with the asset.")
-  contacts?: Record<ContactsValueInnerList>;
+  contacts?: ContactsMap;
 
   @doc("type of the data asset.")
   type?: DataAssetType;
@@ -778,7 +783,7 @@ model DataProduct {
   businessUse?: string;
 
   @doc("The contacts associated with the data product.")
-  contacts?: Record<ContactsValueInnerList>;
+  contacts?: ContactsMap;
 
   @doc("The terms of use for the data product.")
   termsOfUse?: CatalogModelExternalLink[];
@@ -1077,7 +1082,7 @@ model Term {
   description?: string;
 
   @doc("The contacts associated with the term.")
-  contacts?: Record<ContactsValueInnerList>;
+  contacts?: ContactsMap;
 
   @doc("The domain associated with the term.")
   domain: uuid;
@@ -1250,7 +1255,7 @@ model ObjectiveWithAdditionalProperties {
   targetDate?: utcDateTime;
 
   @doc("The contacts associated with the objective.")
-  contacts?: Record<ContactsValueInnerList>;
+  contacts?: ContactsMap;
 
   @doc("Additional properties for the objective.")
   additionalProperties?: ObjectiveAdditionalProperties;
@@ -1421,7 +1426,7 @@ model ObjectiveQueryAdditionalProperties {
   targetDate?: utcDateTime;
 
   @doc("The contacts associated with the objective.")
-  contacts?: Record<ContactsValueInnerList>;
+  contacts?: ContactsMap;
 
   @doc("Additional properties for objective query.")
   additionalProperties?: OverallStatusEnum;
