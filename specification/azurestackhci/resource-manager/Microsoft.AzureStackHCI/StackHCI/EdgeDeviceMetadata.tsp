@@ -4,11 +4,8 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 
@@ -63,23 +60,4 @@ interface EdgeDeviceMetadataOperations {
     Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDeviceMetadata
   >;
-}
-
-/////////////////// Models ///////////////////
-
-/**
- * Edge device metadata properties.
- */
-@added(Versions.v2026_03_15_preview)
-model EdgeDeviceMetadataProperties {
-  /**
-   * Validated Recipe name or identifier.
-   */
-  validatedRecipe?: string;
-
-  /**
-   * Provisioning state of the metadata resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
 }

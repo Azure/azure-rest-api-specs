@@ -3,10 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
@@ -7998,4 +7995,1678 @@ model ContentPayload {
    * Represents the file name of a update payload.
    */
   fileName?: string;
+}
+
+////////////////////////////////////////////////////////////////
+////////// PRIVATE PREVIEW - Edge Machine GPU Models ///////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * List of GPUs in Edge Machine.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
+@added(Versions.v2026_03_15_preview)
+model GpuList is Azure.Core.Page<EdgeMachineGpu>;
+
+/**
+ * GPU resource properties
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineGpuProperties {
+  /**
+   * The provisioning state of the GPU.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Represents the instance Id of the GPU.
+   */
+  @visibility(Lifecycle.Read)
+  gpuId?: string;
+
+  /**
+   * The vendor of the GPU.
+   */
+  @visibility(Lifecycle.Read)
+  manufacturer?: string;
+
+  /**
+   * The model of the GPU.
+   */
+  @visibility(Lifecycle.Read)
+  `model`?: string;
+
+  /**
+   * The status of the GPU.
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /**
+   * The PCI location of the GPU.
+   */
+  @visibility(Lifecycle.Read)
+  pciLocation?: string;
+
+  /**
+   * Indicates whether the GPU is assignable.
+   */
+  @visibility(Lifecycle.Read)
+  assignable?: boolean;
+
+  /**
+   * Indicates whether the GPU is partitionable.
+   */
+  @visibility(Lifecycle.Read)
+  partitionable?: boolean;
+
+  /**
+   * This is the host driver for the host on which GPU is assigned, only for DDA
+   */
+  @visibility(Lifecycle.Read)
+  hostDriverVersion?: string;
+
+  /**
+   * This is the assignment status of the GPU.
+   */
+  @visibility(Lifecycle.Read)
+  assignmentStatus?: string;
+
+  /**
+   * Specified by admin whether this GPU can be used as DDA, GPU-P with LM. Can only be updated when the GPU is not attached to any VM.
+   */
+  @visibility(Lifecycle.Read)
+  gpuMode?: GpuMode;
+
+  /**
+   * Details of the workload using DDA mode.
+   */
+  @visibility(Lifecycle.Read)
+  ddaDetails?: DdaDetails;
+
+  /**
+   * Details of the GPU specifically in GPU-P mode.
+   */
+  @visibility(Lifecycle.Read)
+  partitionDetails?: GpuPartitionDetails;
+}
+
+/**
+ * GPU Vendor Type supported.
+ */
+@added(Versions.v2026_03_15_preview)
+union GpuVendorType {
+  string,
+
+  /** Nvidia GPU. */
+  Nvidia: "Nvidia",
+
+  /** AMD GPU. */
+  AMD: "AMD",
+
+  /** Intel GPU. */
+  Intel: "Intel",
+}
+
+/**
+ * Represents the details of a workload.
+ */
+@added(Versions.v2026_03_15_preview)
+model WorkloadDetails {
+  /**
+   * workload Id to which GPU is assigned.
+   */
+  @visibility(Lifecycle.Read)
+  workloadId?: string;
+
+  /**
+   * This gives information about workload name (VM/AKS) specifically the VM Name or AKS Name.
+   */
+  @visibility(Lifecycle.Read)
+  workloadName?: string;
+
+  /**
+   * This gives information about workload status, running or down.
+   */
+  @visibility(Lifecycle.Read)
+  workloadStatus?: string;
+
+  /**
+   * This tells if workload is VM, AKS, etc.
+   */
+  @visibility(Lifecycle.Read)
+  workloadType?: string;
+
+  /**
+   * This is the unique instance path for a workload using GPU-P.
+   */
+  @visibility(Lifecycle.Read)
+  slotLocation?: string;
+}
+
+/**
+ * Represents the details of the GPU specifically in DDA mode.
+ */
+@added(Versions.v2026_03_15_preview)
+model DdaDetails {
+  /**
+   * It is a resource pool on each server containing the clustered GPU resources.
+   */
+  @visibility(Lifecycle.Read)
+  ddaPool?: string;
+
+  /**
+   * The workload to which this GPU is assigned.
+   */
+  @visibility(Lifecycle.Read)
+  workloadDetail?: WorkloadDetails;
+}
+
+/**
+ * Represents the details of the GPU specifically in GPU-P mode.
+ */
+@added(Versions.v2026_03_15_preview)
+model GpuPartitionDetails {
+  /**
+   * The name used by Hyper-V commandlets for GPU partitioning
+   */
+  partitionableGpuName?: string;
+
+  /**
+   * Reported partition size (default: 0 for DDA) For e.g. 2, 4, etc.
+   */
+  @visibility(Lifecycle.Read)
+  partitionSizeGb?: string;
+
+  /**
+   * This is the count of total partitions.
+   */
+  @visibility(Lifecycle.Read)
+  totalPartitions?: int32;
+
+  /**
+   * The number of available partitions.
+   */
+  @visibility(Lifecycle.Read)
+  availablePartitions?: int32;
+
+  /**
+   * This is the count of assigned partitions.
+   */
+  @visibility(Lifecycle.Read)
+  assignedPartitions?: int32;
+
+  /**
+   * It is the available processing power to encode video.
+   */
+  @visibility(Lifecycle.Read)
+  availableEncode?: string;
+
+  /**
+   * It is the available processing power to decode video.
+   */
+  @visibility(Lifecycle.Read)
+  availableDecode?: string;
+
+  /**
+   * It is a high-speed memory which drivers allow the GPU to borrow from system memory.
+   */
+  @visibility(Lifecycle.Read)
+  availableVram?: string;
+
+  /**
+   * VRAM (Video Random-Access Memory) is the total RAM that is plugged into your GPU and acts as temporary storage for data related to graphics rendering.
+   */
+  @visibility(Lifecycle.Read)
+  totalVram?: string;
+
+  /**
+   * IA set of valid partition counts that's predefined to configure.
+   */
+  @visibility(Lifecycle.Read)
+  validPartitionCount?: string[];
+
+  /**
+   * partition details to which GPU is assigned.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["uniqueId"])
+  partitions?: PartitionDetails[];
+}
+
+/**
+ * Represents the GPU partition details
+ */
+@added(Versions.v2026_03_15_preview)
+model PartitionDetails {
+  /**
+   * Unique identifier for the partition
+   */
+  @visibility(Lifecycle.Read)
+  uniqueId?: string;
+
+  /**
+   * The partition number that is being used by the workload
+   */
+  @visibility(Lifecycle.Read)
+  partitionId?: int32;
+
+  /**
+   * The current vRAM that is used by the partition
+   */
+  @visibility(Lifecycle.Read)
+  currentVram?: string;
+
+  /**
+   * The current encode that is used by the partition
+   */
+  @visibility(Lifecycle.Read)
+  currentEncode?: string;
+
+  /**
+   * The current decode that is used by the partition
+   */
+  @visibility(Lifecycle.Read)
+  currentDecode?: string;
+
+  /**
+   * The workload to which this partition is assigned.
+   */
+  @visibility(Lifecycle.Read)
+  workloadDetail?: WorkloadDetails;
+}
+
+////////////////////////////////////////////////////////////////
+//////// PRIVATE PREVIEW - Edge Machine GPU Jobs Models ////////
+////////////////////////////////////////////////////////////////
+
+/**
+ *EdgeMachine GPU Job properties
+ */
+@added(Versions.v2026_03_15_preview)
+@discriminator("jobType")
+model EdgeMachineGpuJobProperties {
+  /**
+   * The ID of the GPU on which the job is to be performed.
+   */
+  @visibility(Lifecycle.Read)
+  gpuId?: string;
+
+  /**
+   * Type of GPU job to be performed.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: EdgeMachineGpuJobType;
+
+  /**
+   * Deployment mode for the GPU job.
+   */
+  deploymentMode?: DeploymentMode;
+
+  /**
+   * Job provisioning state
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * Unique, immutable job id.
+   */
+  @visibility(Lifecycle.Read)
+  jobId?: string;
+
+  /**
+   * The UTC date and time at which the job started.
+   */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: utcDateTime;
+
+  /**
+   * The UTC date and time at which the job completed.
+   */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: utcDateTime;
+
+  /**
+   * Status of GPU job.
+   */
+  @visibility(Lifecycle.Read)
+  status?: JobStatus;
+
+  /**
+   * Error details.
+   */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /**
+   * Reported properties specific to the GPU job.
+   */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: JobReportedProperties;
+}
+
+/**
+ * GPU Job Type supported for Edge Machine GPU operations.
+ */
+@added(Versions.v2026_03_15_preview)
+union EdgeMachineGpuJobType {
+  string,
+
+  /**
+   * Create GPU partitions for virtualization and workload isolation.
+   */
+  CreatePartition: "CreatePartition",
+
+  /**
+   * Switch GPU mode between DDA and GPU-P for different workload requirements.
+   */
+  SwitchMode: "SwitchMode",
+
+  /**
+   * Assign GPU partition to a specific workload or virtual machine.
+   */
+  AssignPartition: "AssignPartition",
+
+  /**
+   * Remove GPU partition and free up resources for other workloads.
+   */
+  RemovePartition: "RemovePartition",
+}
+
+/**
+ * Properties for creating GPU partitions for virtualization and workload isolation.
+ */
+@added(Versions.v2026_03_15_preview)
+model CreatePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
+  /**
+   * Type of GPU job to be performed.
+   */
+  jobType: EdgeMachineGpuJobType.CreatePartition;
+
+  /**
+   * Number of partitions to be created on the GPU.
+   */
+  partitionCount: int32;
+}
+
+/**
+ * Properties for switching GPU mode between DDA and GPU-P for different workload requirements.
+ */
+@added(Versions.v2026_03_15_preview)
+model SwitchModeGpuJobProperties extends EdgeMachineGpuJobProperties {
+  /**
+   * Type of GPU job to be performed.
+   */
+  jobType: EdgeMachineGpuJobType.SwitchMode;
+
+  /**
+   * Desired GPU mode to switch to.
+   */
+  mode: GpuMode;
+}
+
+/**
+ * Properties for assigning GPU partition to a specific workload or virtual machine.
+ */
+@added(Versions.v2026_03_15_preview)
+model AssignPartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
+  /**
+   * Type of GPU job to be performed.
+   */
+  jobType: EdgeMachineGpuJobType.AssignPartition;
+
+  /**
+   * Virtual machine ID to which the GPU partition is assigned.
+   */
+  vmId: string;
+}
+
+/**
+ * Properties for removing GPU partition and freeing up resources for other workloads.
+ */
+@added(Versions.v2026_03_15_preview)
+model RemovePartitionGpuJobProperties extends EdgeMachineGpuJobProperties {
+  /**
+   * Type of GPU job to be performed.
+   */
+  jobType: EdgeMachineGpuJobType.RemovePartition;
+
+  /**
+   * Virtual machine ID from which the GPU partition is removed.
+   */
+  vmId: string;
+}
+
+////////////////////////////////////////////////////////////////
+//////// PRIVATE PREVIEW - Edge Machine Storage Models /////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Properties of a disk.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineDiskProperties {
+  /** The authoritative desired configuration for this disk. */
+  diskConfiguration?: DiskConfiguration;
+
+  /** The actual state of the disk as reported by the device. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: DiskReportedProperties;
+
+  /** Provisioning state of the disk resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Desired configuration for a disk.
+ */
+@added(Versions.v2026_03_15_preview)
+model DiskConfiguration {
+  /** List of desired volumes on this disk. */
+  @identifiers(#["path"])
+  volumes?: DiskVolumeConfiguration[];
+}
+
+/**
+ * Configuration for a volume on a disk.
+ */
+@added(Versions.v2026_03_15_preview)
+model DiskVolumeConfiguration {
+  /** Size of the volume in bytes. */
+  sizeInBytes: int64;
+
+  /** Mount path for the volume (e.g., /data or D:\data). */
+  path: string;
+
+  /** File system type to format the volume with. */
+  fileSystem?: DiskFileSystemType;
+}
+
+/**
+ * File system types supported for volumes.
+ */
+@added(Versions.v2026_03_15_preview)
+union DiskFileSystemType {
+  string,
+
+  /** ext4 file system (Linux). */
+  ext4: "ext4",
+
+  /** xfs file system (Linux). */
+  xfs: "xfs",
+
+  /** NTFS file system (Windows). */
+  NTFS: "NTFS",
+
+  /** ReFS file system (Windows). */
+  ReFS: "ReFS",
+}
+
+/**
+ * The actual state of the disk as reported by the device.
+ */
+@added(Versions.v2026_03_15_preview)
+model DiskReportedProperties {
+  /** The actual disk name as reported by the OS. */
+  @visibility(Lifecycle.Read)
+  diskName?: string;
+
+  /** Model number of the hardware. */
+  @visibility(Lifecycle.Read)
+  `model`?: string;
+
+  /** The manufacturer of the disk. */
+  @visibility(Lifecycle.Read)
+  manufacturer?: string;
+
+  /** Serial number. */
+  @visibility(Lifecycle.Read)
+  serialNumber?: string;
+
+  /** Firmware version. */
+  @visibility(Lifecycle.Read)
+  firmwareVersion?: string;
+
+  /** Size in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: int64;
+
+  /** Type of the disk. */
+  @visibility(Lifecycle.Read)
+  diskType?: DiskType;
+
+  /** Bus location of the disk. */
+  @visibility(Lifecycle.Read)
+  busLocation?: string;
+
+  /** Unallocated space on the disk in bytes. */
+  @visibility(Lifecycle.Read)
+  unallocatedSizeInBytes?: int64;
+
+  /** Current state of the disk. */
+  @visibility(Lifecycle.Read)
+  state?: DiskState;
+
+  /** List of volumes on this disk. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["volumeId"])
+  volumes?: DiskVolumeReportedProperties[];
+}
+
+/**
+ * Type of disk.
+ */
+@added(Versions.v2026_03_15_preview)
+union DiskType {
+  string,
+
+  /** Unknown disk type. */
+  Unknown: "Unknown",
+
+  /** Storage Class Memory disk. */
+  SCM: "SCM",
+
+  /** NVMe disk. */
+  NVMe: "NVMe",
+
+  /** SATA disk. */
+  SATA: "SATA",
+
+  /** Solid State Drive. */
+  SSD: "SSD",
+
+  /** Hard Disk Drive. */
+  HDD: "HDD",
+
+  /** Virtual disk. */
+  Virtual: "Virtual",
+
+  /** Other disk type. */
+  Other: "Other",
+}
+
+/**
+ * State of the disk.
+ */
+@added(Versions.v2026_03_15_preview)
+union DiskState {
+  string,
+
+  /** Disk is online and available. */
+  Online: "Online",
+
+  /** Disk is offline. */
+  Offline: "Offline",
+
+  /** Disk has failed. */
+  Failed: "Failed",
+
+  /** Disk is missing. */
+  Missing: "Missing",
+
+  /** Disk state is unknown. */
+  Unknown: "Unknown",
+}
+
+/**
+ * Reported properties of a volume on the disk.
+ */
+@added(Versions.v2026_03_15_preview)
+model DiskVolumeReportedProperties {
+  /** Unique identifier for the volume. */
+  @visibility(Lifecycle.Read)
+  volumeId?: string;
+
+  /** Volume/partition number. */
+  @visibility(Lifecycle.Read)
+  volumeNumber?: int32;
+
+  /** Size of the volume in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: int64;
+
+  /** Mount path for the volume. */
+  @visibility(Lifecycle.Read)
+  path?: string;
+
+  /** File system type. */
+  @visibility(Lifecycle.Read)
+  fileSystem?: string;
+}
+
+/**
+ * Properties of a volume.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineVolumeProperties {
+  /** Desired configuration for this volume. */
+  volumeConfiguration?: VolumeConfiguration;
+
+  /** The actual state of the volume as reported by the device. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: VolumeReportedProperties;
+
+  /** Provisioning state of the volume resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Desired configuration for a volume. Reserved for future use.
+ */
+@added(Versions.v2026_03_15_preview)
+model VolumeConfiguration {
+  /** Reserved for future volume configuration options. */
+  reserved?: string;
+}
+
+/**
+ * The actual state of the volume as reported by the device.
+ */
+@added(Versions.v2026_03_15_preview)
+model VolumeReportedProperties {
+  /** Unique identifier for the partition. */
+  @visibility(Lifecycle.Read)
+  partitionId?: string;
+
+  /** Byte offset of the partition start. */
+  @visibility(Lifecycle.Read)
+  offsetInBytes?: int64;
+
+  /** Label of the volume. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Access path for the volume. */
+  @visibility(Lifecycle.Read)
+  path?: string;
+
+  /** ARM resource ID of the parent disk. */
+  @visibility(Lifecycle.Read)
+  parentDiskId?: string;
+
+  /** Indicates if this volume is a boot volume. */
+  @visibility(Lifecycle.Read)
+  isBoot?: boolean;
+
+  /** Total size of the volume in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeInBytes?: int64;
+
+  /** Available space on the volume in bytes. */
+  @visibility(Lifecycle.Read)
+  sizeRemainingInBytes?: int64;
+
+  /** File system on the volume. */
+  @visibility(Lifecycle.Read)
+  fileSystem?: string;
+}
+
+/**
+ * Disk Job properties.
+ */
+@added(Versions.v2026_03_15_preview)
+@discriminator("jobType")
+model EdgeMachineDiskJobProperties {
+  /** Job Type to support polymorphic resource. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: DiskJobType;
+
+  /** Job provisioning state. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Unique, immutable job id. */
+  @visibility(Lifecycle.Read)
+  jobId?: string;
+
+  /** The UTC date and time at which the job started. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: utcDateTime;
+
+  /** The UTC date and time at which the job completed. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: utcDateTime;
+
+  /** Status of disk job. */
+  @visibility(Lifecycle.Read)
+  status?: DiskJobStatus;
+
+  /** Error details if job failed. */
+  @visibility(Lifecycle.Read)
+  error?: Azure.ResourceManager.Foundations.ErrorDetail;
+
+  /** Properties reported by the job execution. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: DiskJobReportedProperties;
+}
+
+/**
+ * Job Type supported for disk operations.
+ */
+@added(Versions.v2026_03_15_preview)
+union DiskJobType {
+  string,
+
+  /** Job to create a volume on the disk. */
+  CreateVolume: "CreateVolume",
+
+  /** Job to delete a volume from the disk. */
+  DeleteVolume: "DeleteVolume",
+
+  /** Job to resolve configuration drift between desired and reported state. */
+  SyncConfiguration: "SyncConfiguration",
+}
+
+/**
+ * Status of the job execution.
+ */
+@added(Versions.v2026_03_15_preview)
+union DiskJobStatus {
+  string,
+
+  /** Job has not started. */
+  NotStarted: "NotStarted",
+
+  /** Job is currently running. */
+  Running: "Running",
+
+  /** Job completed successfully. */
+  Succeeded: "Succeeded",
+
+  /** Job failed. */
+  Failed: "Failed",
+
+  /** Job was canceled. */
+  Canceled: "Canceled",
+}
+
+/**
+ * Reported properties of a disk job.
+ */
+@added(Versions.v2026_03_15_preview)
+model DiskJobReportedProperties {
+  /** Percentage of job completion. */
+  @visibility(Lifecycle.Read)
+  percentComplete?: int32;
+}
+
+/**
+ * Properties for creating a volume on a disk.
+ */
+@added(Versions.v2026_03_15_preview)
+model CreateVolumeJobProperties extends EdgeMachineDiskJobProperties {
+  /** Job type. */
+  jobType: DiskJobType.CreateVolume;
+
+  /** Size of the volume to create in bytes. */
+  sizeInBytes: int64;
+
+  /** Absolute path where the volume should be mounted. */
+  path: string;
+
+  /** File system type to format the volume with. */
+  @visibility(Lifecycle.Create)
+  fileSystem?: DiskFileSystemType;
+
+  /** ARM resource ID of the created volume. */
+  @visibility(Lifecycle.Read)
+  createdVolumeId?: string;
+}
+
+/**
+ * Properties for deleting a volume from a disk.
+ */
+@added(Versions.v2026_03_15_preview)
+model DeleteVolumeJobProperties extends EdgeMachineDiskJobProperties {
+  /** Job type. */
+  jobType: DiskJobType.DeleteVolume;
+
+  /** The mount path of the volume to delete. */
+  volumePath: string;
+
+  /** Confirmation flag that must be set to true to proceed with deletion. */
+  confirmDeletion?: boolean = false;
+}
+
+/**
+ * Properties for resolving configuration drift.
+ */
+@added(Versions.v2026_03_15_preview)
+model SyncConfigurationJobProperties extends EdgeMachineDiskJobProperties {
+  /** Job type. */
+  jobType: DiskJobType.SyncConfiguration;
+
+  /** The strategy to use for resolving the configuration drift. */
+  @visibility(Lifecycle.Create)
+  resolutionStrategy: ResolutionStrategy;
+
+  /** Details of the detected drift. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  driftDetails?: DriftDetail[];
+}
+
+/**
+ * Strategy for resolving configuration drift.
+ */
+@added(Versions.v2026_03_15_preview)
+union ResolutionStrategy {
+  string,
+
+  /** Trust Cloud. Push the desiredConfiguration down to the device. */
+  ApplyDesired: "ApplyDesired",
+
+  /** Trust Device. Update the desiredConfiguration in ARM to match the reported state. */
+  AcceptReported: "AcceptReported",
+}
+
+/**
+ * Describes a single drift discrepancy between desired and reported state.
+ */
+@added(Versions.v2026_03_15_preview)
+model DriftDetail {
+  /** The type of drift detected. */
+  @visibility(Lifecycle.Read)
+  driftType?: DriftType;
+
+  /** Property name that has drifted (for PropertyMismatch). */
+  @visibility(Lifecycle.Read)
+  propertyName?: string;
+
+  /** Desired value (for PropertyMismatch). */
+  @visibility(Lifecycle.Read)
+  desiredValue?: string;
+
+  /** Reported value (for PropertyMismatch). */
+  @visibility(Lifecycle.Read)
+  reportedValue?: string;
+}
+
+/**
+ * Type of drift detected.
+ */
+@added(Versions.v2026_03_15_preview)
+union DriftType {
+  string,
+
+  /** A volume exists in desiredConfiguration but is not present on the device. */
+  MissingOnDevice: "MissingOnDevice",
+
+  /** A volume exists on the device but is not present in desiredConfiguration. */
+  ExtraOnDevice: "ExtraOnDevice",
+
+  /** A property value differs between desired and reported state. */
+  PropertyMismatch: "PropertyMismatch",
+}
+
+////////////////////////////////////////////////////////////////
+///// PRIVATE PREVIEW - Edge Machine Network Adapter Models ////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Properties of the Network Adapter resource.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineNetworkAdapterProperties {
+  /** The authoritative desired configuration for this specific interface. */
+  networkConfiguration?: NetworkAdapterConfiguration;
+
+  /** The actual applied configuration reported by the device. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: NetworkAdapterReportedProperties;
+
+  /** Provisioning state of the network adapter resource. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Network adapter configuration.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkAdapterConfiguration {
+  /** Adapter name. */
+  adapterName?: string;
+
+  /** IP address. */
+  ip4Address?: string;
+
+  /** Subnet mask. */
+  subnetMask?: string;
+
+  /** Default gateway. */
+  defaultGateway?: string;
+
+  /** List of DNS servers. */
+  dnsServers?: string[];
+}
+
+/**
+ * Reported properties of a network adapter.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkAdapterReportedProperties {
+  ...NetworkAdapterConfiguration;
+
+  /** Interface description of NIC. */
+  @visibility(Lifecycle.Read)
+  interfaceDescription?: string;
+
+  /** Component ID of NIC. */
+  @visibility(Lifecycle.Read)
+  componentId?: string;
+
+  /** Driver version of NIC. */
+  @visibility(Lifecycle.Read)
+  driverVersion?: string;
+
+  /** Default isolation of management NIC. */
+  @visibility(Lifecycle.Read)
+  defaultIsolationId?: string;
+
+  /** MAC address. */
+  @visibility(Lifecycle.Read)
+  macAddress?: string;
+
+  /** The slot attached to the NIC. */
+  @visibility(Lifecycle.Read)
+  slot?: string;
+
+  /** The switch attached to the NIC, if any. */
+  @visibility(Lifecycle.Read)
+  switchName?: string;
+
+  /** Type of network interface. */
+  @visibility(Lifecycle.Read)
+  interfaceType?: NetworkInterfaceType;
+
+  /** Interface speed in Mbps. */
+  @visibility(Lifecycle.Read)
+  interfaceSpeed?: int32;
+
+  /** Current state of the interface. */
+  @visibility(Lifecycle.Read)
+  interfaceState?: InterfaceState;
+
+  /** The type of NIC (physical, virtual, management). */
+  @visibility(Lifecycle.Read)
+  nicType?: string;
+
+  /** The status of NIC (up, disconnected). */
+  @visibility(Lifecycle.Read)
+  nicStatus?: string;
+
+  /** IP configuration type. */
+  @visibility(Lifecycle.Read)
+  ipInterfaceType?: IpInterfaceType;
+
+  /** VLAN identifier (0-4096). */
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  @maxValue(4096)
+  vlanId?: int32;
+
+  /** Indicates if this is a management interface. */
+  @visibility(Lifecycle.Read)
+  managementInterface?: boolean;
+
+  /** RDMA capability of the network adapter. */
+  @visibility(Lifecycle.Read)
+  rdmaCapability?: RdmaCapability;
+
+  /** The observed state of network adapter. */
+  @visibility(Lifecycle.Read)
+  networkAdapterStatus?: NetworkAdapterStatus;
+}
+
+/**
+ * Type of network interface.
+ */
+@added(Versions.v2026_03_15_preview)
+union NetworkInterfaceType {
+  string,
+
+  /** Ethernet interface. */
+  Eth: "Eth",
+
+  /** Wi-Fi interface. */
+  wifi: "wifi",
+}
+
+/**
+ * Current state of the interface.
+ */
+@added(Versions.v2026_03_15_preview)
+union InterfaceState {
+  string,
+
+  /** Interface is up. */
+  up: "up",
+
+  /** Interface is down. */
+  down: "down",
+}
+
+/**
+ * IP configuration type.
+ */
+@added(Versions.v2026_03_15_preview)
+union IpInterfaceType {
+  string,
+
+  /** DHCP configuration. */
+  Dhcp: "Dhcp",
+
+  /** Static configuration. */
+  static: "static",
+}
+
+/**
+ * The observed state of network adapters.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkAdapterStatus {
+  /** Network adapter provisioning error code. */
+  @visibility(Lifecycle.Read)
+  errorCode?: string;
+
+  /** Descriptive error message. */
+  @visibility(Lifecycle.Read)
+  errorMessage?: string;
+
+  /** Network adapter provisioning status. */
+  @visibility(Lifecycle.Read)
+  provisioningStatus?: NetworkAdapterProvisioningStatus;
+}
+
+/**
+ * Network adapter provisioning status.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkAdapterProvisioningStatus {
+  /** The ID of the operation performed on the network adapter. */
+  @visibility(Lifecycle.Read)
+  operationId?: string;
+
+  /** The status of the operation performed on the network adapter. */
+  @visibility(Lifecycle.Read)
+  status?: NetworkAdapterOperationStatus;
+}
+
+/**
+ * Status of network adapter operation.
+ */
+@added(Versions.v2026_03_15_preview)
+union NetworkAdapterOperationStatus {
+  string,
+
+  /** Operation succeeded. */
+  Succeeded: "Succeeded",
+
+  /** Operation failed. */
+  Failed: "Failed",
+
+  /** Operation in progress. */
+  InProgress: "InProgress",
+}
+
+/**
+ * Properties of the Network Adapter Job.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeMachineNetworkAdapterJobProperties {
+  /** Type of operation. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  jobType: NetworkAdapterJobType;
+
+  /** The desired network configuration to apply. */
+  targetConfiguration: NetworkAdapterConfiguration;
+
+  /** Provisioning state of the job. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Status of the job. */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** Reported properties for Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: NetworkAdapterJobReportedProperties;
+}
+
+/**
+ * Type of network adapter job operation.
+ */
+@added(Versions.v2026_03_15_preview)
+union NetworkAdapterJobType {
+  string,
+
+  /** Apply configuration to the network adapter. */
+  ApplyConfiguration: "ApplyConfiguration",
+
+  /** Force push configuration to the network adapter. */
+  ForcePush: "ForcePush",
+}
+
+/**
+ * Reported properties for Network Adapter Job.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkAdapterJobReportedProperties {
+  /** Validation status of Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  validationStatus?: NetworkAdapterActionStatus;
+
+  /** Deployment status of Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  deploymentStatus?: NetworkAdapterActionStatus;
+}
+
+/**
+ * The action plan deployment status for Network Adapter Job.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkAdapterActionStatus {
+  /** Status of ECE action Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of steps of Network Adapter Job. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: NetworkAdapterDeploymentStep[];
+}
+
+/**
+ * The Step of Network Adapter Job.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkAdapterDeploymentStep {
+  /** Name of step. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Description of step. */
+  @visibility(Lifecycle.Read)
+  description?: string;
+
+  /** FullStepIndex of step. */
+  @visibility(Lifecycle.Read)
+  fullStepIndex?: string;
+
+  /** Start time of step. */
+  @visibility(Lifecycle.Read)
+  startTimeUtc?: string;
+
+  /** End time of step. */
+  @visibility(Lifecycle.Read)
+  endTimeUtc?: string;
+
+  /** Status of step (Error, Success, InProgress). */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /** List of nested steps. */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["name"])
+  steps?: NetworkAdapterDeploymentStep[];
+
+  /** List of exceptions. */
+  @visibility(Lifecycle.Read)
+  exception?: string[];
+}
+
+////////////////////////////////////////////////////////////////
+//////// PRIVATE PREVIEW - Edge Device Metadata Models /////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Edge device metadata properties.
+ */
+@added(Versions.v2026_03_15_preview)
+model EdgeDeviceMetadataProperties {
+  /**
+   * Validated Recipe name or identifier.
+   */
+  validatedRecipe?: string;
+
+  /**
+   * Provisioning state of the metadata resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+////////////////////////////////////////////////////////////////
+/////////// PRIVATE PREVIEW - Network Profile Models ///////////
+////////////////////////////////////////////////////////////////
+
+/**
+ * Network Profile properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
+@added(Versions.v2026_03_15_preview)
+model NetworkProfileProperties {
+  /**
+   * Network profile properties reported from the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  reportedProperties?: NetworkProfileReportedProperties;
+
+  /**
+   * Network profile resource Last sync timestamp.
+   */
+  @visibility(Lifecycle.Read)
+  lastSyncTimestamp?: utcDateTime;
+
+  /**
+   * Network profile resource Last sync status.
+   */
+  @visibility(Lifecycle.Read)
+  lastSyncStatus?: string;
+}
+
+/**
+ * Network Profile properties reported by the cluster.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkProfileReportedProperties {
+  /**
+   * The IPv4 addresses of the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  clusterIpv4Addresses?: string[];
+
+  /**
+   * The IPv6 addresses of the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  clusterIpv6Addresses?: string[];
+
+  /**
+   * The subnet associated with the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  subnet?: string;
+
+  /**
+   * Whether auto-selection for VM migration network is enabled.
+   */
+  @visibility(Lifecycle.Read)
+  autoSelectMigrationNetwork?: boolean;
+
+  /**
+   * Whether network naming is enabled.
+   */
+  @visibility(Lifecycle.Read)
+  enableNetworkNaming?: boolean;
+
+  /**
+   * Whether auto-selection for VM migration performance is enabled.
+   */
+  @visibility(Lifecycle.Read)
+  autoSelectVmMigrationPerformance?: boolean;
+
+  /**
+   * The maximum number of VM migrations allowed.
+   */
+  @visibility(Lifecycle.Read)
+  maxVmMigration?: int32;
+
+  /**
+   * The performance type for VM migration.
+   */
+  @visibility(Lifecycle.Read)
+  vmMigrationPerformance?: string;
+
+  /**
+   * Maximum bandwidth for SMB migration.
+   */
+  @visibility(Lifecycle.Read)
+  maxSmbMigrationBandwidth?: string;
+
+  /**
+   * Details of nodes in the network profile.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  nodes?: NetworkProfileNode[];
+
+  /**
+   * Details of physical adapters.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  physicalAdapters?: NetworkProfilePhysicalAdapter[];
+
+  /**
+   * Details of virtual switches.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  virtualSwitches?: NetworkProfileVirtualSwitch[];
+
+  /**
+   * Details of networks.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  networks?: NetworkProfileNetwork[];
+
+  /**
+   * Details of virtual adapters.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  virtualAdapters?: NetworkProfileVirtualAdapter[];
+
+  /**
+   * Details of network intents.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  intents?: NetworkProfileIntent[];
+}
+
+/**
+ * Details of a node in the network profile.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkProfileNode {
+  /**
+   * The node ID.
+   */
+  id: string;
+
+  /**
+   * The physical adapter IDs associated with the node.
+   */
+  physicalAdapterIds?: string[];
+
+  /**
+   * The virtual switch IDs associated with the node.
+   */
+  virtualSwitchIds?: string[];
+
+  /**
+   * The arc status of the node.
+   */
+  arcStatus?: string;
+
+  /**
+   * The Azure resource id of Arc machine of the corresponding node.
+   */
+  arcMachineId?: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * Details of a physical adapter.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkProfilePhysicalAdapter {
+  /**
+   * The physical adapter ID.
+   */
+  id: string;
+
+  /**
+   * The name of the physical adapter.
+   */
+  name?: string;
+
+  /**
+   * The description of the physical adapter.
+   */
+  description?: string;
+
+  /**
+   * The VLAN associated with the physical adapter.
+   */
+  vlan?: int32;
+
+  /**
+   * The IPv4 addresses of the physical adapter.
+   */
+  ipv4Addresses?: string[];
+
+  /**
+   * The IPv6 addresses of the physical adapter.
+   */
+  ipv6Addresses?: string[];
+
+  /**
+   * The driver version of the physical adapter.
+   */
+  driverVersion?: string;
+
+  /**
+   * The node ID the physical adapter is associated with.
+   */
+  nodeId?: string;
+}
+
+/**
+ * Details of a virtual switch.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkProfileVirtualSwitch {
+  /**
+   * The virtual switch ID.
+   */
+  id: string;
+
+  /**
+   * The name of the virtual switch.
+   */
+  name?: string;
+
+  /**
+   * The virtual adapter IDs associated with the virtual switch.
+   */
+  virtualAdapterIds?: string[];
+
+  /**
+   * The physical adapter IDs associated with the virtual switch.
+   */
+  physicalAdapterIds?: string[];
+
+  /**
+   * The physical adapter names associated with the virtual switch.
+   */
+  physicalAdapterNames?: string[];
+
+  /**
+   * The virtual adapter names associated with the virtual switch.
+   */
+  virtualAdapterNames?: string[];
+
+  /**
+   * The intent ID associated with the virtual switch.
+   */
+  intentId?: string;
+}
+
+/**
+ * Details of a network.
+ */
+@added(Versions.v2026_03_15_preview)
+@discriminator("type")
+model NetworkProfileNetwork {
+  /**
+   * The network ID.
+   */
+  id: string;
+
+  /**
+   * The name of the network.
+   */
+  name?: string;
+
+  /**
+   * The type of the network.
+   */
+  type: NetworkProfileNetworkType;
+
+  /**
+   * The VLAN associated with the network.
+   */
+  vlan?: int32;
+
+  /**
+   * The intent ID associated with the network.
+   */
+  intentId?: string;
+}
+
+/**
+ * Details of a storage network.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkProfileStorageNetwork extends NetworkProfileNetwork {
+  /**
+   * The type of the network.
+   */
+  type: NetworkProfileNetworkType.Storage;
+
+  /**
+   * Whether the network supports direct access.
+   */
+  networkDirect?: string;
+}
+
+/**
+ * Details of a logical network.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkProfileLogicalNetwork extends NetworkProfileNetwork {
+  /**
+   * The type of the network.
+   */
+  type: NetworkProfileNetworkType.Logical;
+
+  /**
+   * IP address space of the logical network.
+   */
+  addressSpace?: string;
+}
+
+/**
+ * Details of a virtual adapter.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkProfileVirtualAdapter {
+  /**
+   * The virtual adapter ID.
+   */
+  id: string;
+
+  /**
+   * The name of the virtual adapter.
+   */
+  name?: string;
+
+  /**
+   * The VLAN associated with the virtual adapter.
+   */
+  vlan?: int32;
+
+  /**
+   * The IPv4 addresses of the virtual adapter.
+   */
+  ipv4Addresses?: string[];
+
+  /**
+   * The IPv6 addresses of the virtual adapter.
+   */
+  ipv6Addresses?: string[];
+}
+
+/**
+ * Details of a network intent.
+ */
+@added(Versions.v2026_03_15_preview)
+model NetworkProfileIntent {
+  /**
+   * The intent ID.
+   */
+  id: string;
+
+  /**
+   * The name of the intent.
+   */
+  name?: string;
+
+  /**
+   * Whether this is a compute type intent.
+   */
+  isComputeType?: boolean;
+
+  /**
+   * Whether this is a storage type intent.
+   */
+  isStorageType?: boolean;
+
+  /**
+   * Whether this is a management type intent.
+   */
+  isManagementType?: boolean;
+
+  /**
+   * The physical adapter IDs associated with the intent.
+   */
+  physicalAdapterIds?: string[];
+
+  /**
+   * The virtual adapter IDs associated with the intent.
+   */
+  virtualAdapterIds?: string[];
+
+  /**
+   * The virtual switch IDs associated with the intent.
+   */
+  virtualSwitchIds?: string[];
+
+  /**
+   * The network IDs associated with the intent.
+   */
+  networkIds?: string[];
+
+  /**
+   * The physical adapter names associated with the intent.
+   */
+  physicalAdapterNames?: string[];
+
+  /**
+   * The virtual adapter names associated with the intent.
+   */
+  virtualAdapterNames?: string[];
+
+  /**
+   * The virtual switch names associated with the intent.
+   */
+  virtualSwitchNames?: string[];
+
+  /**
+   * The network names associated with the intent.
+   */
+  networkNames?: string[];
+}
+
+/**
+ * Types of networks.
+ */
+@added(Versions.v2026_03_15_preview)
+union NetworkProfileNetworkType {
+  string,
+
+  /** Storage network type. */
+  Storage: "Storage",
+
+  /** Logical network type. */
+  Logical: "Logical",
 }
