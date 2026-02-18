@@ -77,11 +77,11 @@ union Visibility {
  */
 union RebootOptions {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppress documentation error for reboot"
   IfRequired: "IfRequired",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppress expected reboot errors"
   Never: "Never",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Suppress documentation required errors"
   Always: "Always",
 }
 
@@ -291,7 +291,7 @@ model ListMaintenanceConfigurationsResult {
 /**
  * Properties for maintenance configuration
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppress expected provisioning error"
 model MaintenanceConfigurationProperties {
   /**
    * Gets or sets namespace of the resource
@@ -301,7 +301,7 @@ model MaintenanceConfigurationProperties {
   /**
    * Gets or sets extensionProperties of the maintenanceConfiguration
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected provisioning extension properties"
   extensionProperties?: Record<string>;
 
   /**
@@ -452,7 +452,7 @@ model Resource {
 /**
  * Properties for apply update
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppress expected provisioning state"
 model ApplyUpdateProperties {
   /**
    * The status
@@ -474,7 +474,7 @@ model ApplyUpdateProperties {
 /**
  * Properties for configuration assignment
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Suppress expected config state"
 model ConfigurationAssignmentProperties {
   /**
    * The maintenance configuration Id
@@ -529,7 +529,7 @@ model TagSettingsProperties {
   /**
    * Dictionary of tags with its list of values.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress tag no record issue"
   tags?: Record<string[]>;
 
   /**

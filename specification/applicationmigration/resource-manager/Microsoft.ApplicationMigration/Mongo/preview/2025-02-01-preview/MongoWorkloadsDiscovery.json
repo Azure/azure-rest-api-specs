@@ -2464,6 +2464,47 @@
           "type": "integer",
           "format": "int64",
           "description": "IOPS"
+        },
+        "csName": {
+          "type": "string",
+          "description": "The network node host name for mongo."
+        },
+        "osType": {
+          "type": "string",
+          "description": "The operating system type for mongo."
+        },
+        "osName": {
+          "type": "string",
+          "description": "The operating system name for mongo."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "The operating system version for mongo."
+        },
+        "osEdition": {
+          "type": "string",
+          "description": "The operating system edition for mongo."
+        },
+        "osArch": {
+          "type": "string",
+          "description": "The operating system architecture for mongo."
+        },
+        "procName": {
+          "type": "string",
+          "description": "The processor name for mongo."
+        },
+        "procArch": {
+          "type": "string",
+          "description": "The processor architecture for mongo."
+        },
+        "procMaxClockSpeedMhz": {
+          "type": "string",
+          "description": "The processor max clock speed."
+        },
+        "sockets": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The sockets count."
         }
       },
       "required": [
@@ -2559,6 +2600,10 @@
         "version": {
           "type": "string",
           "description": "The mongo server version."
+        },
+        "home": {
+          "type": "string",
+          "description": "The home directory of mongo installation."
         },
         "region": {
           "type": "string",
@@ -2669,6 +2714,13 @@
           "type": "array",
           "description": "List of enabled MongoDB features.",
           "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
             "type": "string"
           }
         }

@@ -3,13 +3,13 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Discovery.Management.Shared/all.tsp";
-import "../Discovery.Shared/shared.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Microsoft.Discovery.Shared;
 
 @armProviderNamespace
 @versioned(Microsoft.Discovery.Versions)
@@ -18,6 +18,38 @@ namespace Microsoft.Discovery;
 @doc("Supercomputer tracked resource")
 model Supercomputer is TrackedResource<SupercomputerProperties> {
   ...ResourceNameParameter<Supercomputer>;
+}
+
+@added(Versions.v2025_12_01_preview)
+@doc("Supported System SKU Sizes.")
+union SystemSku {
+  @added(Versions.v2026_02_01_preview)
+  @doc("Standard_D4s_v6 basic compute VM (default)")
+  Standard_D4s_v6: "Standard_D4s_v6",
+
+  @removed(Versions.v2026_02_01_preview)
+  @doc("Standard_D4s_v6 basic compute VM (default)")
+  Standard_D4s_v6_legacy: "Standard_D4s_v6 basic compute VM (default)",
+
+  @doc("Standard_D4s_v5 SKU")
+  Standard_D4s_v5: "Standard_D4s_v5",
+
+  @doc("Standard_D4s_v4 SKU")
+  Standard_D4s_v4: "Standard_D4s_v4",
+
+  string,
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("Supported network egress types.")
+union NetworkEgressType {
+  @doc("Public outbound network via load balancer (Default)")
+  LoadBalancer: "LoadBalancer",
+
+  @doc("No default outbound")
+  None: "None",
+
+  string,
 }
 
 @doc("Supercomputer properties")
@@ -34,11 +66,49 @@ model SupercomputerProperties {
   subnetId: Microsoft.Discovery.Shared.SubnetId;
 
   /**
+    System Subnet ID associated with AKS apiserver. Must be delegated to Microsoft.ContainerService/managedClusters.
+    It should have connectivity to the system subnet and nodepool subnets.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_02_01_preview)
+  managementSubnetId?: Microsoft.Discovery.Shared.SubnetId;
+
+  /**
+    Network egress type provisioned for the supercomputer workloads.
+    Defaults to LoadBalancer if not specified.
+    If None is specified, the customer is responsible for providing outbound connectivity for Supercomputer functionality.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_02_01_preview)
+  outboundType?: NetworkEgressType = NetworkEgressType.LoadBalancer;
+
+  @doc("The SKU to use for the system node pool.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_12_01_preview)
+  systemSku?: SystemSku;
+
+  /**
     Dictionary of identity properties for the Supercomputer.
    */
   @doc("Dictionary of identity properties.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   identities: SupercomputerIdentities;
+
+  @doc("Whether or not to use a customer managed key when encrypting data at rest")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_02_01_preview)
+  // Typically this would be something like "KeySource = 'Microsoft.KeyVault' or 'Microsoft.Discovery'". Encryption is all done by downstream services, so keeping this API simplified.
+  customerManagedKeys?: CustomerManagedKeys;
+
+  @doc("Disk Encryption Set ID to use for Customer Managed Keys encryption. Required if Customer Managed Keys is enabled.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_02_01_preview)
+  diskEncryptionSetId?: Microsoft.Discovery.Shared.DiskEncryptionSetId;
+
+  @doc("The Log Analytics Cluster to use for debug logs. This is required when Customer Managed Keys are enabled.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2026_02_01_preview)
+  logAnalyticsClusterId?: Microsoft.Discovery.Shared.LogAnalyticsClusterId;
 
   ...MoboConfigurationWithMrg;
 }
@@ -66,7 +136,7 @@ model SupercomputerIdentities {
   kubeletIdentity: Microsoft.Discovery.Identity;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "User-determined keys"
-  @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer.")
+  @doc("User assigned identity IDs to be used by workloads as federated credentials running on supercomputer. The key value must be the resource ID of the identity resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   workloadIdentities?: Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity | null>;
 }
