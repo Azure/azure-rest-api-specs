@@ -18,6 +18,7 @@ union EvaluationRuleActionType {
   continuousEvaluation: "continuousEvaluation",
 
   @doc("Human evaluation.")
+  @removed(Versions.v1)
   humanEvaluation: "humanEvaluation",
 
   @doc("Human evaluation preview.")

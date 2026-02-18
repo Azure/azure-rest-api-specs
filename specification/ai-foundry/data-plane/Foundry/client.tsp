@@ -3,23 +3,25 @@
 // the JS client (package @azure/ai-projects).
 //
 
-// Stable operations (GA routes)
+// Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "./src/agents/routes.tsp";
-import "./src/common/custom-types.tsp";
-import "./src/common/service.tsp";
+import "./src/evaluation-rules/routes.tsp";
+
+// Stable operation (GA routes) without preview features
 import "./src/connections/routes.tsp";
 import "./src/datasets/routes.tsp";
 import "./src/deployments/routes.tsp";
 import "./src/indexes/routes.tsp";
-import "./src/evaluation-rules/routes.tsp";
 
-// Beta operations (preview routes, requiring opt-in HTTP request header)
+// Beta operations (preview routes, requiring opt-in request header)
 import "./src/evaluation-taxonomies/routes.tsp";
 import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
 import "./src/red-teams/routes.tsp";
 import "./src/schedules/routes.tsp";
+
+// Create a ".beta" subclient for the above beta operations
 import "./relocate-beta-operations.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -155,3 +157,14 @@ using Azure.AI.Projects;
 
 // Less generic names
 @@clientName(Sku, "ModelDeploymentSku");
+
+
+// --------------------------------------------------------------------------------
+// Other
+// --------------------------------------------------------------------------------
+
+// Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
+// OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse` 
+// and `MemoryStoreUpdateResponse`.
+@@clientName(OpenAI.Error, "ApiError");
+
