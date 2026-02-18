@@ -212,7 +212,7 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -254,7 +254,7 @@ namespace PurviewDataQuality {
       @path
       ruleId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -296,7 +296,7 @@ namespace PurviewDataQuality {
       @path
       ruleId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -337,7 +337,7 @@ namespace PurviewDataQuality {
       @path
       ruleId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
 
@@ -383,7 +383,7 @@ namespace PurviewDataQuality {
       @path
       ruleId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
 
@@ -834,7 +834,7 @@ namespace PurviewDataQuality {
       @doc("Specifies the type of run to filter results by (e.g., 'Assessment', 'Profile', 'FetchSchema').")
       runType: string;
 
-      @doc("The unique identifier for the data product. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -919,7 +919,7 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
 
@@ -991,7 +991,7 @@ namespace PurviewDataQuality {
       @path
       observationId: string;
 
-      @doc("Unique identifier for the data product. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -1397,7 +1397,7 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -1435,7 +1435,7 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
 
@@ -1477,7 +1477,7 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -1559,7 +1559,7 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
 
-      @doc("Unique identifier for the data product containing the data asset. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
 
@@ -1622,7 +1622,7 @@ namespace PurviewDataQuality {
       @path
       profileRunId: string;
 
-      @doc("Unique identifier for the data product. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -1641,25 +1641,21 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
-  @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets")
-  @post
+  @route("/business-domains/{businessDomainId}/assets")
+  @put
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
     #{ DQAsset_Create_V2: #{ $ref: "./examples/DQAsset_Create_V2.json" } }
   )
-  @doc("Creates a DQ asset for a data asset within a business domain. Data product is specified as optional query parameter.")
+  @doc("Creates a DQ asset within a business domain. Data product is specified as optional query parameter.")
   op createDQAssetV2 is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
       businessDomainId: string;
 
-      @doc("Unique identifier for the data asset")
-      @path
-      dataAssetId: string;
-
-      @doc("Unique identifier for the data product. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
 
@@ -1686,29 +1682,25 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
-  @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets/{assetId}")
+  @route("/business-domains/{businessDomainId}/assets/{assetId}")
   @get
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
     #{ DQAsset_Get_V2: #{ $ref: "./examples/DQAsset_Get_V2.json" } }
   )
-  @doc("Retrieves a DQ asset by identifier within a business domain and data asset. Data product is specified as optional query parameter.")
+  @doc("Retrieves a DQ asset by identifier within a business domain. Data product is specified as optional query parameter.")
   op getDQAssetV2 is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
       businessDomainId: string;
 
-      @doc("Unique identifier for the data asset")
-      @path
-      dataAssetId: string;
-
       @doc("Unique identifier for the DQ asset")
       @path
       assetId: string;
 
-      @doc("Unique identifier for the data product. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -1728,29 +1720,25 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
-  @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets/{assetId}")
+  @route("/business-domains/{businessDomainId}/assets/{assetId}")
   @delete
   @tag("DQ Assets")
   @extension(
     "x-ms-examples",
     #{ DQAsset_Delete_V2: #{ $ref: "./examples/DQAsset_Delete_V2.json" } }
   )
-  @doc("Deletes a DQ asset within a business domain and data asset. Data product is specified as optional query parameter.")
+  @doc("Deletes a DQ asset within a business domain. Data product is specified as optional query parameter.")
   op deleteDQAssetV2 is RpcOperation<
     {
       @doc("Unique identifier for the business domain")
       @path
       businessDomainId: string;
 
-      @doc("Unique identifier for the data asset")
-      @path
-      dataAssetId: string;
-
       @doc("Unique identifier for the DQ asset to delete")
       @path
       assetId: string;
 
-      @doc("Unique identifier for the data product. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -1769,7 +1757,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
-  @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets")
+  @route("/business-domains/{businessDomainId}/assets")
   @get
   @tag("DQ Assets")
   @extension(
@@ -1783,15 +1771,11 @@ namespace PurviewDataQuality {
       @path
       businessDomainId: string;
 
-      @doc("Unique identifier for the data asset")
-      @path
-      dataAssetId: string;
-
       @doc("Continuation token for pagination")
       @query("continuationToken")
       continuationToken?: string;
 
-      @doc("Unique identifier for the data product. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -1811,7 +1795,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
-  @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/asset-scores")
+  @route("/business-domains/{businessDomainId}/asset-scores")
   @get
   @tag("DQ Assets")
   @extension(
@@ -1825,15 +1809,11 @@ namespace PurviewDataQuality {
       @path
       businessDomainId: string;
 
-      @doc("Unique identifier for the data asset")
-      @path
-      dataAssetId: string;
-
       @doc("Comma-separated list of asset identifiers to get scores for. Required.")
       @query("assetIdString")
       assetIdString: string;
 
-      @doc("Unique identifier for the data product. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -1853,7 +1833,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
-  @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/clone")
+  @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}:clone")
   @post
   @tag("DQ Assets")
   @extension(
@@ -1871,7 +1851,7 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
 
-      @doc("Unique identifier for the data product. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
 
@@ -1883,9 +1863,9 @@ namespace PurviewDataQuality {
       @statusCode
       statusCode: 202;
 
-      @doc("Accepted clone job; response body is the clone job ID (GUID string).")
+      @doc("Accepted clone job; returns status monitor for the long-running clone operation.")
       @body
-      response: string;
+      response: StatusMonitor;
     }
   >;
 
@@ -1983,7 +1963,7 @@ namespace PurviewDataQuality {
       @path
       assetId: string;
 
-      @doc("Unique Data Product Identifier. Optional; default used when omitted.")
+      @doc("For assets not associated with any Data Product, use Guid.Empty for dataProductId. Optional.")
       @query("dataProductId")
       dataProductId?: string;
     },
@@ -2150,38 +2130,6 @@ namespace PurviewDataQuality {
   >;
 
   /**
-   * Create a new alert within a business domain.
-   */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
-  @tag("Alerts")
-  @added(ApiVersions.v2026_01_12_preview)
-  @doc("Creates an alert scoped to the specified business domain.")
-  @route("/business-domains/{businessDomainId}/alerts")
-  @post
-  op createAlert is RpcOperation<
-    {
-      @doc("Unique identifier for the business domain containing the alerts")
-      @path
-      businessDomainId: string;
-
-      @doc("Alert payload to create")
-      @body
-      request: Alert;
-    },
-    {
-      @statusCode
-      statusCode: 201;
-
-      @doc("Created alert entity")
-      @body
-      response: Alert;
-    }
-  >;
-
-  /**
    * Get a specific alert by identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
@@ -2207,7 +2155,7 @@ namespace PurviewDataQuality {
   >;
 
   /**
-   * Update an existing alert.
+   * Create an alert.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
@@ -2215,7 +2163,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Existing service operation."
   @tag("Alerts")
   @added(ApiVersions.v2026_01_12_preview)
-  @doc("Replaces an existing alert definition within the specified business domain.")
+  @doc("Creates an alert scoped to the specified business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @put
   op updateAlert is RpcOperation<
@@ -2224,11 +2172,11 @@ namespace PurviewDataQuality {
       @path
       businessDomainId: string;
 
-      @doc("Unique identifier of the alert to update")
+      @doc("Unique identifier of the alert to create or replace")
       @path
       alertId: string;
 
-      @doc("Updated alert payload")
+      @doc("Alert payload to create")
       @body
       request: Alert;
     },
@@ -2264,7 +2212,7 @@ namespace PurviewDataQuality {
   >;
 
   /**
-   * Update alert status.
+   * Update an alert.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing service operation."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service operation."
@@ -2277,7 +2225,7 @@ namespace PurviewDataQuality {
     "x-ms-examples",
     #{ Alert_UpdateStatus: #{ $ref: "./examples/Alert_UpdateStatus.json" } }
   )
-  @doc("Updates the status of an alert within the specified business domain.")
+  @doc("Updates an alert within the specified business domain.")
   @route("/business-domains/{businessDomainId}/alerts/{alertId}")
   @patch(#{ implicitOptionality: true })
   op updateAlertStatus is RpcOperation<

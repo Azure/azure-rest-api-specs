@@ -2133,7 +2133,7 @@ model DqAssetResponse {
   isGovernedAssetFlag?: boolean;
 
   /** DQAssetWrapper-specific fields */
-  @doc("Data product identifier")
+  @doc("Data product identifier. For assets not associated with any Data Product, use Guid.Empty for dataProductId.")
   dataProductId?: string;
 
   @doc("Data quality score for the asset")
