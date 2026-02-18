@@ -408,136 +408,9 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AAD/resilienceServices/{resilienceServiceName}/syncPolicies": {
-      "post": {
-        "operationId": "ResilienceServices_SyncPolicies",
-        "tags": [
-          "ResilienceServices"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resilienceServiceName",
-            "in": "path",
-            "description": "The name of the ResilienceService",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ResilienceServicePolicyResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ResilienceServices_SyncPolicies_MaximumSet": {
-            "$ref": "./examples/ResilienceServices_SyncPolicies_MaximumSet_Gen.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
-    "Policy": {
-      "type": "object",
-      "description": "A policy enforced in the tenant where the resilience service resides",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the policy"
-        },
-        "type": {
-          "$ref": "#/definitions/PolicyType",
-          "description": "The type of the policy"
-        },
-        "definition": {
-          "type": "array",
-          "description": "The definitions of the policy",
-          "items": {
-            "type": "string"
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the policy"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the policy"
-        },
-        "isOrganizationDefault": {
-          "type": "boolean",
-          "description": "Indicates if the policy is the organization default"
-        },
-        "deletedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the policy was deleted"
-        }
-      },
-      "required": [
-        "id",
-        "type",
-        "definition",
-        "isOrganizationDefault"
-      ]
-    },
-    "PolicyType": {
-      "type": "string",
-      "description": "The type of policy",
-      "enum": [
-        "ConditionalAccess",
-        "AuthenticationStrength",
-        "SecurityRisk",
-        "UserCredential"
-      ],
-      "x-ms-enum": {
-        "name": "PolicyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ConditionalAccess",
-            "value": "ConditionalAccess",
-            "description": "Conditional Access policy"
-          },
-          {
-            "name": "AuthenticationStrength",
-            "value": "AuthenticationStrength",
-            "description": "Authentication Strength policy"
-          },
-          {
-            "name": "SecurityRisk",
-            "value": "SecurityRisk",
-            "description": "Security Risk policy"
-          },
-          {
-            "name": "UserCredential",
-            "value": "UserCredential",
-            "description": "User Credential policy"
-          }
-        ]
-      }
-    },
     "ProvisioningState": {
       "type": "string",
       "description": "The resource provisioning state.",
@@ -662,22 +535,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "ResilienceServicePolicyResponse": {
-      "type": "object",
-      "description": "The response containing the policies enforced in the tenant where the resilience service resides",
-      "properties": {
-        "policies": {
-          "type": "array",
-          "description": "The list of policies",
-          "items": {
-            "$ref": "#/definitions/Policy"
-          }
-        }
-      },
-      "required": [
-        "policies"
       ]
     },
     "ResilienceServiceUpdate": {
