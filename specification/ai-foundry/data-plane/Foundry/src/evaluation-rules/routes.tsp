@@ -29,9 +29,7 @@ interface EvaluationRules {
   @doc("Get an evaluation rule.")
   get is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
-    {
-      ...EvaluationRulesPreviewHeader;
-    },
+    {},
     Azure.Core.Foundations.ResourceOkResponse<EvaluationRule>
   >;
 
@@ -40,9 +38,7 @@ interface EvaluationRules {
   @Http.delete
   delete is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
-    {
-      ...EvaluationRulesPreviewHeader;
-    },
+    {},
     Http.NoContentResponse
   >;
 
@@ -63,12 +59,11 @@ interface EvaluationRules {
   >;
 
   // GET /evaluationrules
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("List all evaluation rules.")
   @Rest.listsResource(EvaluationRule)
   list is Azure.Core.Foundations.ResourceList<
     EvaluationRule,
-    EvaluationRulesFilterQueryParams & EvaluationRulesPreviewHeader,
+    EvaluationRulesFilterQueryParams,
     Azure.Core.Page<EvaluationRule>
   >;
 }
