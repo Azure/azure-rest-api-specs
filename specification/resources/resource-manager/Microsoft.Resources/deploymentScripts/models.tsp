@@ -270,8 +270,10 @@ model AzurePowerShellScriptProperties extends DeploymentScriptPropertiesBase {
 /**
  * Common properties for the deployment script.
  */
-model DeploymentScriptPropertiesBase {
-  ...ScriptConfigurationBase;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Using extends to preserve original allOf structure and avoid AddedRequiredProperty breaking change"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy - x-ms-external required for backward compatibility"
+@Azure.ResourceManager.Legacy.armExternalType
+model DeploymentScriptPropertiesBase extends ScriptConfigurationBase {
 
   /**
    * Container settings.
@@ -409,6 +411,8 @@ model ScriptStatus {
 /**
  * Common configuration settings for both Azure PowerShell and Azure CLI scripts.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy - x-ms-external required for backward compatibility"
+@Azure.ResourceManager.Legacy.armExternalType
 model ScriptConfigurationBase {
   /**
    * Uri for the script. This is the entry point for the external script.
