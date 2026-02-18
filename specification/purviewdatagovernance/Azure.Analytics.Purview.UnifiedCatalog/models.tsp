@@ -125,7 +125,14 @@ model ContactsValueInnerList is CatalogModelContactsValueInner[];
 
 @doc("A dictionary of contact lists keyed by contact type (e.g., 'Owner', 'Expert').")
 model ContactsMap {
-  ...Record<ContactsValueInnerList>;
+  @doc("List of owner contacts.")
+  owner?: CatalogModelContactsValueInner[];
+
+  @doc("List of expert contacts.")
+  expert?: CatalogModelContactsValueInner[];
+
+  @doc("List of database administrator contacts.")
+  databaseAdmin?: CatalogModelContactsValueInner[];
 }
 
 @doc("The format of the SQL table.")

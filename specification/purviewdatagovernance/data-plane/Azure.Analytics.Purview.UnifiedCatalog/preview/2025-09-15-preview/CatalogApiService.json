@@ -5230,15 +5230,28 @@
     "ContactsMap": {
       "type": "object",
       "description": "A dictionary of contact lists keyed by contact type (e.g., 'Owner', 'Expert').",
-      "additionalProperties": {
-        "$ref": "#/definitions/ContactsValueInnerList"
-      }
-    },
-    "ContactsValueInnerList": {
-      "type": "array",
-      "description": "A list of contacts for catalog entities.",
-      "items": {
-        "$ref": "#/definitions/CatalogModelContactsValueInner"
+      "properties": {
+        "owner": {
+          "type": "array",
+          "description": "List of owner contacts.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelContactsValueInner"
+          }
+        },
+        "expert": {
+          "type": "array",
+          "description": "List of expert contacts.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelContactsValueInner"
+          }
+        },
+        "databaseAdmin": {
+          "type": "array",
+          "description": "List of database administrator contacts.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelContactsValueInner"
+          }
+        }
       }
     },
     "CriticalDataColumnProperties": {
