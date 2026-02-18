@@ -57,7 +57,7 @@ input-file:
   - Microsoft.Insights/stable/2016-03-01/alertRulesIncidents_API.json
   - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
   - Microsoft.Insights/stable/2024-02-01/metrics_API.json
-  - Microsoft.Insights/preview/2023-01-01-preview/activityLogAlerts_API.json
+  - Microsoft.Insights/stable/2026-01-01/activityLogAlerts_API.json
   - Microsoft.Insights/preview/2024-03-01-preview/metricAlert_API.json
   - Microsoft.Insights/preview/2025-01-01-preview/scheduledQueryRule_API.json
   - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
