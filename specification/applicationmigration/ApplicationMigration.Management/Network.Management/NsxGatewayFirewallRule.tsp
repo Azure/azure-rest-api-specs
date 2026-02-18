@@ -17,7 +17,10 @@ namespace Microsoft.ApplicationMigration;
  */
 @parentResource(NsxGatewayFirewallPolicy)
 model NsxGatewayFirewallRule
-  is Azure.ResourceManager.ProxyResource<NsxGatewayFirewallRuleProperties, false> {
+  is Azure.ResourceManager.ProxyResource<
+    NsxGatewayFirewallRuleProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = NsxGatewayFirewallRule,
     KeyName = "ruleName",

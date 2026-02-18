@@ -17,7 +17,10 @@ namespace Microsoft.ApplicationMigration;
  */
 @parentResource(NetworkSite)
 model NsxGatewayFirewallPolicy
-  is Azure.ResourceManager.ProxyResource<NsxGatewayFirewallPolicyProperties, false> {
+  is Azure.ResourceManager.ProxyResource<
+    NsxGatewayFirewallPolicyProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = NsxGatewayFirewallPolicy,
     KeyName = "policyName",
@@ -91,4 +94,6 @@ model NsxGatewayFirewallPolicyList is Azure.Core.Page<NsxGatewayFirewallPolicy>;
 
 @@maxLength(NsxGatewayFirewallPolicy.name, 63);
 @@minLength(NsxGatewayFirewallPolicy.name, 3);
-@@doc(NsxGatewayFirewallPolicy.name, "The name of the gateway firewall policy.");
+@@doc(NsxGatewayFirewallPolicy.name,
+  "The name of the gateway firewall policy."
+);

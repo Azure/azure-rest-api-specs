@@ -31,14 +31,14 @@ model NetworkSiteProperties is AzureResourceProperties {
   /** ARM resource ID of the associated master site. */
   masterSiteId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.OffAzure/masterSites",
+      type: "Microsoft.OffAzure/masterSites";
     }
   ]>;
 
   /** ARM resource ID of the associated migrate project. */
   migrateProjectId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.Migrate/migrateProjects",
+      type: "Microsoft.Migrate/migrateProjects";
     }
   ]>;
 }

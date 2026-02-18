@@ -63,7 +63,10 @@ interface NsxDnsForwarderZones {
    * Patches the NsxDnsForwarderZone resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<NsxDnsForwarderZone, NsxDnsForwarderZonePatchProperties>;
+  update is ArmCustomPatchSync<
+    NsxDnsForwarderZone,
+    NsxDnsForwarderZonePatchProperties
+  >;
 
   /**
    * Deletes the NsxDnsForwarderZone resource.

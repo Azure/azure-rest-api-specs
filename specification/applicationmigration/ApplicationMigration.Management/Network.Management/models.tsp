@@ -521,7 +521,7 @@ model BackendPoolMember {
  */
 model AssociatedCompute {
   /** The type of compute (e.g. VMwareVM). */
-  `type`?: string;
+  type?: string;
 
   /** ARM resource ID of the compute resource. */
   id?: Azure.Core.armResourceIdentifier;
@@ -543,7 +543,7 @@ model HealthProbe {
  */
 model SnatConfig {
   /** The SNAT type. */
-  `type`?: SnatType;
+  type?: SnatType;
 
   /** IP pool addresses for SNAT. */
   ipPoolAddresses?: string[];
