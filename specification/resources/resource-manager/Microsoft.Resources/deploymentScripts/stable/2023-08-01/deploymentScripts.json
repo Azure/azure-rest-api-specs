@@ -83,7 +83,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts": {
       "get": {
         "operationId": "DeploymentScripts_ListByResourceGroup",
         "tags": [
@@ -98,7 +98,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/DeploymentScriptBaseParameters.resourceGroupName"
           }
         ],
         "responses": {
@@ -125,7 +125,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts/{scriptName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts/{scriptName}": {
       "get": {
         "operationId": "DeploymentScripts_Get",
         "tags": [
@@ -140,7 +140,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/DeploymentScriptBaseParameters.resourceGroupName"
           },
           {
             "name": "scriptName",
@@ -186,7 +186,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/DeploymentScriptBaseParameters.resourceGroupName"
           },
           {
             "name": "scriptName",
@@ -277,7 +277,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/DeploymentScriptBaseParameters.resourceGroupName"
           },
           {
             "name": "scriptName",
@@ -332,7 +332,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/DeploymentScriptBaseParameters.resourceGroupName"
           },
           {
             "name": "scriptName",
@@ -365,7 +365,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts/{scriptName}/logs": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts/{scriptName}/logs": {
       "get": {
         "operationId": "DeploymentScripts_GetLogs",
         "tags": [
@@ -380,7 +380,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/DeploymentScriptBaseParameters.resourceGroupName"
           },
           {
             "name": "scriptName",
@@ -413,7 +413,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts/{scriptName}/logs/default": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentScripts/{scriptName}/logs/default": {
       "get": {
         "operationId": "DeploymentScripts_GetLogsDefault",
         "tags": [
@@ -428,7 +428,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/DeploymentScriptBaseParameters.resourceGroupName"
           },
           {
             "name": "scriptName",
@@ -1029,5 +1029,16 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "DeploymentScriptBaseParameters.resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

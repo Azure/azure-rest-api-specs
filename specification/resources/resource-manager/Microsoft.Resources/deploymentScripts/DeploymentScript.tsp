@@ -9,9 +9,26 @@ import "./ScriptLog.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 namespace DeploymentScriptsClient;
+
+/**
+ * Custom base parameters to preserve the original lowercase "resourcegroups"
+ * path segment for backward compatibility.
+ */
+model DeploymentScriptBaseParameters {
+  ...CommonTypes.ApiVersionParameter;
+  ...CommonTypes.SubscriptionIdParameter;
+
+  /** The name of the resource group. The name is case insensitive. */
+  @path
+  @minLength(1)
+  @maxLength(90)
+  @segment("resourcegroups")
+  resourceGroupName: string;
+}
 
 /**
  * Deployment script object.
@@ -56,6 +73,7 @@ interface DeploymentScripts {
    */
   create is ArmResourceCreateOrReplaceAsync<
     DeploymentScript,
+    BaseParameters = DeploymentScriptBaseParameters,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -66,24 +84,32 @@ interface DeploymentScripts {
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
     DeploymentScript,
     PatchModel = DeploymentScriptUpdateParameter,
+    BaseParameters = DeploymentScriptBaseParameters,
     OptionalRequestBody = true
   >;
 
   /**
    * Gets a deployment script with a given name.
    */
-  get is ArmResourceRead<DeploymentScript>;
+  get is ArmResourceRead<
+    DeploymentScript,
+    BaseParameters = DeploymentScriptBaseParameters
+  >;
 
   /**
    * Deletes a deployment script. When operation completes, status code 200 returned without content.
    */
-  delete is ArmResourceDeleteSync<DeploymentScript>;
+  delete is ArmResourceDeleteSync<
+    DeploymentScript,
+    BaseParameters = DeploymentScriptBaseParameters
+  >;
 
   /**
    * Lists deployments scripts.
    */
   listByResourceGroup is ArmResourceListByParent<
     DeploymentScript,
+    BaseParameters = DeploymentScriptBaseParameters,
     Response = ArmResponse<DeploymentScriptListResult>
   >;
 
@@ -100,6 +126,7 @@ interface DeploymentScripts {
    */
   getLogs is ArmResourceListByParent<
     ScriptLog,
+    BaseParameters = DeploymentScriptBaseParameters,
     Response = ArmResponse<ScriptLogsList>
   >;
 
@@ -108,6 +135,7 @@ interface DeploymentScripts {
    */
   getLogsDefault is ArmResourceRead<
     ScriptLog,
+    BaseParameters = DeploymentScriptBaseParameters,
     Parameters = {
       /**
        * The number of lines to show from the tail of the deployment script log. Valid value is a positive number up to 1000. If 'tail' is not provided, all available logs are shown up to container instance log capacity of 4mb.
