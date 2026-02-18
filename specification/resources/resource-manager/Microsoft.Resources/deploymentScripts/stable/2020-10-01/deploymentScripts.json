@@ -625,6 +625,50 @@
       "type": "object",
       "description": "Common properties for the deployment script.",
       "properties": {
+        "primaryScriptUri": {
+          "type": "string",
+          "description": "Uri for the script. This is the entry point for the external script."
+        },
+        "supportingScriptUris": {
+          "type": "array",
+          "description": "Supporting files for the external script.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scriptContent": {
+          "type": "string",
+          "description": "Script body."
+        },
+        "arguments": {
+          "type": "string",
+          "description": "Command line arguments to pass to the script. Arguments are separated by spaces. ex: -Name blue* -Location 'West US 2'"
+        },
+        "environmentVariables": {
+          "type": "array",
+          "description": "The environment variables to pass over to the script.",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "Gets or sets how the deployment script should be forced to execute even if the script resource has not changed. Can be current time stamp or a GUID."
+        },
+        "retentionInterval": {
+          "type": "string",
+          "format": "duration",
+          "description": "Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. Duration is based on ISO 8601 pattern (for example P1D means one day)."
+        },
+        "timeout": {
+          "type": "string",
+          "format": "duration",
+          "description": "Maximum allowed script execution time specified in ISO 8601 format. Default value is P1D",
+          "default": "P1D"
+        },
         "containerSettings": {
           "$ref": "#/definitions/ContainerConfiguration",
           "description": "Container settings."
@@ -681,12 +725,9 @@
           "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ScriptConfigurationBase"
-        }
-      ],
-      "x-ms-external": true
+      "required": [
+        "retentionInterval"
+      ]
     },
     "DeploymentScriptUpdateParameter": {
       "type": "object",
@@ -778,60 +819,6 @@
           }
         ]
       }
-    },
-    "ScriptConfigurationBase": {
-      "type": "object",
-      "description": "Common configuration settings for both Azure PowerShell and Azure CLI scripts.",
-      "properties": {
-        "primaryScriptUri": {
-          "type": "string",
-          "description": "Uri for the script. This is the entry point for the external script."
-        },
-        "supportingScriptUris": {
-          "type": "array",
-          "description": "Supporting files for the external script.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "scriptContent": {
-          "type": "string",
-          "description": "Script body."
-        },
-        "arguments": {
-          "type": "string",
-          "description": "Command line arguments to pass to the script. Arguments are separated by spaces. ex: -Name blue* -Location 'West US 2'"
-        },
-        "environmentVariables": {
-          "type": "array",
-          "description": "The environment variables to pass over to the script.",
-          "items": {
-            "$ref": "#/definitions/EnvironmentVariable"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "forceUpdateTag": {
-          "type": "string",
-          "description": "Gets or sets how the deployment script should be forced to execute even if the script resource has not changed. Can be current time stamp or a GUID."
-        },
-        "retentionInterval": {
-          "type": "string",
-          "format": "duration",
-          "description": "Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. Duration is based on ISO 8601 pattern (for example P1D means one day)."
-        },
-        "timeout": {
-          "type": "string",
-          "format": "duration",
-          "description": "Maximum allowed script execution time specified in ISO 8601 format. Default value is P1D",
-          "default": "P1D"
-        }
-      },
-      "required": [
-        "retentionInterval"
-      ],
-      "x-ms-external": true
     },
     "ScriptLog": {
       "type": "object",
