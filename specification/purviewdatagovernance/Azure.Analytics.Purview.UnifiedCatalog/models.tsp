@@ -77,13 +77,79 @@ model CatalogModelSystemDataWithExpired {
   expiredBy?: uuid;
 }
 
+@doc("The provisioning state of a data asset.")
+union DataAssetProvisioningState {
+  @doc("The resource has been successfully provisioned.")
+  Succeeded: "Succeeded",
+
+  @doc("The resource has been soft deleted.")
+  SoftDeleted: "SoftDeleted",
+
+  string,
+}
+
+@doc("System metadata with expiration information for data assets.")
+model DataAssetSystemData {
+  @doc("The provisioning state of the record.")
+  provisioningState?: DataAssetProvisioningState;
+
+  @doc("The timestamp when the record was created.")
+  createdAt?: utcDateTime;
+
+  @doc("The unique identifier of the user who created the record.")
+  createdBy?: uuid;
+
+  @doc("The timestamp when the record was last modified.")
+  lastModifiedAt?: utcDateTime;
+
+  @doc("The unique identifier of the user who last modified the record.")
+  lastModifiedBy?: uuid;
+
+  @doc("The timestamp when the record expires.")
+  expiredAt?: utcDateTime;
+
+  @doc("The unique identifier of the user who expired the record.")
+  expiredBy?: uuid;
+}
 @doc("Contact information for catalog entities.")
 model CatalogModelContactsValueInner {
-  @doc("The unique identifier of the contact.")
+  @doc("AAD oid for the person or group")
   id?: uuid;
 
-  @doc("A description or note about the contact.")
+  @doc("A description of this user assignment")
   description?: string;
+}
+
+@doc("A list of contacts for catalog entities.")
+model ContactsValueInnerList is CatalogModelContactsValueInner[];
+
+@doc("The format of the SQL table.")
+union TypePropertiesFormat {
+  @doc("Table format.")
+  Table: "Table",
+
+  @doc("View format.")
+  View: "View",
+
+  string,
+}
+
+@doc("Type properties for a data asset.")
+model DataAssetTypeProperties {
+  @doc("The format of the sql table.")
+  format?: TypePropertiesFormat;
+
+  @doc("The server endpoint of the sql table.")
+  serverEndpoint?: url;
+
+  @doc("The database name of the sql table.")
+  databaseName?: string;
+
+  @doc("The schema name of the sql table.")
+  schemaName?: string;
+
+  @doc("The table name of the sql table.")
+  tableName?: string;
 }
 
 @doc("Managed attribute configuration for catalog entities.")
@@ -125,7 +191,7 @@ model CriticalDataElement {
   description?: string;
 
   @doc("The contacts associated with this critical data element.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: Record<ContactsValueInnerList>;
 
   @doc("Managed attributes associated with this critical data element.")
   managedAttributes?: CatalogModelManagedAttribute[];
@@ -334,11 +400,26 @@ model DataAssetProperties {
   description?: string;
 
   @doc("Type of the relationship.")
-  relationshipType?: string;
+  relationshipType?: DataAssetRelationshipType;
 
   @doc("Name of the associated entity. ex:dataproduct id")
   entityId: uuid;
 }
+
+@doc("The type of relationship between data assets.")
+union DataAssetRelationshipType {
+  @doc("Related relationship type.")
+  Related: "Related",
+
+  @doc("Synonym relationship type.")
+  Synonym: "Synonym",
+
+  @doc("Parent relationship type.")
+  Parent: "Parent",
+
+  string,
+}
+
 @doc("Request body for creating relationships with critical data column properties.")
 model CriticalDataColumnRelationshipRequest {
   ...Record<CriticalDataColumnProperties>;
@@ -355,7 +436,7 @@ model SystemData {
   @doc("The timestamp when the entity was created.")
   createdAt?: string;
 
-  @doc("Unique identifier of the asset.")
+  @doc("The unique identifier of the user who created the entity.")
   createdBy?: uuid;
 }
 
@@ -393,28 +474,28 @@ model CdeRelationship {
 
 @doc("Source information for data assets.")
 model CatalogModelDataAssetSource {
-  @doc("The type of the data source.")
+  @doc("The type of the data asset source.")
   type?: string;
 
-  @doc("Unique identifier of the asset.")
+  @doc("Link to the data map asset ID.")
   assetId?: uuid;
 
-  @doc("The type of the asset.")
+  @doc("Data map asset type. Example: adls_gen2_path")
   assetType?: string;
 
   @doc(".Type properties of the asset.")
   assetAttributes?: string[];
 
-  @doc("Fully qualified name.")
+  @doc("Fully qualified name of the data asset.")
   fqn?: string;
 
-  @doc("Name of the account.")
+  @doc("The data map account name of the data asset.")
   accountName?: string;
 
-  @doc("FIXME: (utcDateTime) Please double check that this is the correct type for your scenario")
+  @doc("Date of the last sync time.")
   lastRefreshedAt?: utcDateTime;
 
-  @doc("Name of the user who last refreshed the asset.")
+  @doc("ID of the user who last refreshed the asset.")
   lastRefreshedBy?: string;
 }
 
@@ -433,6 +514,14 @@ model CatalogModelDataAssetSchema {
   type?: string;
 }
 
+@doc("The type of a data asset.")
+union DataAssetType {
+  @doc("General data asset type.")
+  General: "General",
+
+  string,
+}
+
 @doc("DataAsset.")
 @resource("dataAssets")
 model DataAsset {
@@ -441,11 +530,11 @@ model DataAsset {
   @visibility(Lifecycle.Create)
   id: uuid;
 
-  @doc("Name of the asset.")
+  @doc("myDataProduct.")
   name: string;
 
   @doc("System data associated with the asset.")
-  systemData?: CatalogModelSystemDataWithExpired;
+  systemData?: DataAssetSystemData;
 
   @doc("A description about the relationship.")
   description?: string;
@@ -454,13 +543,13 @@ model DataAsset {
   source?: CatalogModelDataAssetSource;
 
   @doc("Contacts associated with the asset.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: Record<ContactsValueInnerList>;
 
   @doc("A list of classification labels.")
   classifications?: string[];
 
   @doc("type of the data asset.")
-  type?: string;
+  type?: DataAssetType;
 
   @doc("Schema of the asset.")
   schema?: CatalogModelDataAssetSchema[];
@@ -472,7 +561,7 @@ model DataAsset {
   openInUrl?: url;
 
   @doc("Type properties of the asset.")
-  typeProperties?: Record<string>;
+  typeProperties?: DataAssetTypeProperties;
 
   @doc("Lineage information for the asset.")
   lineage?: LineageInfo;
@@ -490,22 +579,22 @@ model DataAssetRequest {
   name: string;
 
   @doc("System data associated with the asset.")
-  systemData?: CatalogModelSystemDataWithExpired;
+  systemData?: DataAssetSystemData;
 
   @doc("Source of the asset.")
   source?: CatalogModelDataAssetSource;
 
   @doc("Contacts associated with the asset.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: Record<ContactsValueInnerList>;
 
   @doc("type of the data asset.")
-  type?: string;
+  type?: DataAssetType;
 
   @doc("A redirection link..")
   openInUrl?: url;
 
   @doc("Type properties of the asset.")
-  typeProperties?: Record<string>;
+  typeProperties?: DataAssetTypeProperties;
 }
 @doc("DataAssetQueryRequest.")
 model DataAssetQueryRequest {
@@ -531,7 +620,7 @@ model DataAssetQueryRequest {
   owners?: string[];
 
   @doc("To filter by data map asset Ids.")
-  dataMapAssetIds?: string[];
+  sourceAssetIds?: string[];
 
   @doc("includingOrphans true or false")
   includingOrphans?: boolean;
@@ -560,18 +649,6 @@ model FacetsResponse {
   @doc("The list of facets.")
   facets: Record<FacetValue[]>;
 }
-
-// @doc("Response containing a list of critical data columns.")
-// @pagedResult
-// model CriticalDataColumnsResponse {
-//   @doc("The list of critical data columns.")
-//   @pageItems
-//   value: CriticalDataColumn[];
-
-//   @doc("The link to the next page of results.")
-//   @nextLink
-//   nextLink?: string;
-// }
 
 @doc("Response containing a list of critical data elements.")
 model CriticalDataElementsResponse {
@@ -701,7 +778,7 @@ model DataProduct {
   businessUse?: string;
 
   @doc("The contacts associated with the data product.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: Record<ContactsValueInnerList>;
 
   @doc("The terms of use for the data product.")
   termsOfUse?: CatalogModelExternalLink[];
@@ -1000,7 +1077,7 @@ model Term {
   description?: string;
 
   @doc("The contacts associated with the term.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: Record<ContactsValueInnerList>;
 
   @doc("The domain associated with the term.")
   domain: uuid;
@@ -1173,7 +1250,7 @@ model ObjectiveWithAdditionalProperties {
   targetDate?: utcDateTime;
 
   @doc("The contacts associated with the objective.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: Record<ContactsValueInnerList>;
 
   @doc("Additional properties for the objective.")
   additionalProperties?: ObjectiveAdditionalProperties;
@@ -1344,7 +1421,7 @@ model ObjectiveQueryAdditionalProperties {
   targetDate?: utcDateTime;
 
   @doc("The contacts associated with the objective.")
-  contacts?: Record<CatalogModelContactsValueInner[]>;
+  contacts?: Record<ContactsValueInnerList>;
 
   @doc("Additional properties for objective query.")
   additionalProperties?: OverallStatusEnum;
@@ -1497,7 +1574,7 @@ model CreateDataAssetResponse {
 }
 
 alias DataAssetIdParameter = {
-  @doc("The unique identifier of the critical data asset.")
+  @doc("The unique identifier of the data asset.")
   dataAssetId: uuid;
 };
 
@@ -1544,7 +1621,7 @@ model CreateDataProductResponse {
 }
 
 alias DataProductIdParameter = {
-  @doc("The unique identifier of the critical data product.")
+  @doc("The unique identifier of the  data product.")
   dataProductId: uuid;
 };
 
@@ -1579,7 +1656,7 @@ model CreateDomainResponse {
 }
 
 alias DomainIdParameter = {
-  @doc("The unique identifier of the critical data domain.")
+  @doc("The unique identifier of the data domain.")
   domainId: uuid;
 };
 
@@ -1595,7 +1672,7 @@ model CreateTermResponse {
 }
 
 alias TermIdParameter = {
-  @doc("The unique identifier of the critical data term or Parent term identifier.")
+  @doc("The unique identifier of the data term or Parent term identifier.")
   termId: uuid;
 };
 

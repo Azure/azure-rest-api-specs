@@ -241,7 +241,7 @@
           {
             "name": "domainId",
             "in": "path",
-            "description": "The unique identifier of the critical data domain.",
+            "description": "The unique identifier of the data domain.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1308,7 +1308,7 @@
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "The unique identifier of the critical data asset.",
+            "description": "The unique identifier of the data asset.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1386,7 +1386,7 @@
           }
         },
         "x-ms-examples": {
-          "DataAssets_DeleteById_MaximumSet": {
+          "DataAssets_DeleteById": {
             "$ref": "./examples/DataAssets_DeleteById_Gen.json"
           }
         }
@@ -1553,7 +1553,7 @@
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "The unique identifier of the critical data asset.",
+            "description": "The unique identifier of the data asset.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -1706,7 +1706,7 @@
           {
             "name": "dataAssetId",
             "in": "path",
-            "description": "The unique identifier of the critical data asset.",
+            "description": "The unique identifier of the data asset.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2062,7 +2062,7 @@
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "The unique identifier of the critical data product.",
+            "description": "The unique identifier of the  data product.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2307,7 +2307,7 @@
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "The unique identifier of the critical data product.",
+            "description": "The unique identifier of the  data product.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -2460,7 +2460,7 @@
           {
             "name": "dataProductId",
             "in": "path",
-            "description": "The unique identifier of the critical data product.",
+            "description": "The unique identifier of the  data product.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -3633,7 +3633,7 @@
           {
             "name": "termId",
             "in": "path",
-            "description": "The unique identifier of the critical data term or Parent term identifier.",
+            "description": "The unique identifier of the data term or Parent term identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -3731,7 +3731,7 @@
           {
             "name": "termId",
             "in": "path",
-            "description": "The unique identifier of the critical data term or Parent term identifier.",
+            "description": "The unique identifier of the data term or Parent term identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -3961,7 +3961,7 @@
           {
             "name": "termId",
             "in": "path",
-            "description": "The unique identifier of the critical data term or Parent term identifier.",
+            "description": "The unique identifier of the data term or Parent term identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -4114,7 +4114,7 @@
           {
             "name": "termId",
             "in": "path",
-            "description": "The unique identifier of the critical data term or Parent term identifier.",
+            "description": "The unique identifier of the data term or Parent term identifier.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -4564,11 +4564,11 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the contact."
+          "description": "AAD oid for the person or group"
         },
         "description": {
           "type": "string",
-          "description": "A description or note about the contact."
+          "description": "A description of this user assignment"
         }
       }
     },
@@ -4639,15 +4639,15 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The type of the data source."
+          "description": "The type of the data asset source."
         },
         "assetId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the asset."
+          "description": "Link to the data map asset ID."
         },
         "assetType": {
           "type": "string",
-          "description": "The type of the asset."
+          "description": "Data map asset type. Example: adls_gen2_path"
         },
         "assetAttributes": {
           "type": "array",
@@ -4658,20 +4658,20 @@
         },
         "fqn": {
           "type": "string",
-          "description": "Fully qualified name."
+          "description": "Fully qualified name of the data asset."
         },
         "accountName": {
           "type": "string",
-          "description": "Name of the account."
+          "description": "The data map account name of the data asset."
         },
         "lastRefreshedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "FIXME: (utcDateTime) Please double check that this is the correct type for your scenario"
+          "description": "Date of the last sync time."
         },
         "lastRefreshedBy": {
           "type": "string",
-          "description": "Name of the user who last refreshed the asset."
+          "description": "ID of the user who last refreshed the asset."
         }
       }
     },
@@ -5227,6 +5227,13 @@
         "attributeName"
       ]
     },
+    "ContactsValueInnerList": {
+      "type": "array",
+      "description": "A list of contacts for catalog entities.",
+      "items": {
+        "$ref": "#/definitions/CatalogModelContactsValueInner"
+      }
+    },
     "CriticalDataColumnProperties": {
       "type": "object",
       "description": "Properties for critical data column relationships.",
@@ -5302,10 +5309,7 @@
           "type": "object",
           "description": "The contacts associated with this critical data element.",
           "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/CatalogModelContactsValueInner"
-            },
-            "type": "array"
+            "$ref": "#/definitions/ContactsValueInnerList"
           }
         },
         "managedAttributes": {
@@ -5468,10 +5472,10 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the asset."
+          "description": "myDataProduct."
         },
         "systemData": {
-          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
+          "$ref": "#/definitions/DataAssetSystemData",
           "description": "System data associated with the asset."
         },
         "description": {
@@ -5486,10 +5490,7 @@
           "type": "object",
           "description": "Contacts associated with the asset.",
           "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/CatalogModelContactsValueInner"
-            },
-            "type": "array"
+            "$ref": "#/definitions/ContactsValueInnerList"
           }
         },
         "classifications": {
@@ -5500,7 +5501,7 @@
           }
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/DataAssetType",
           "description": "type of the data asset."
         },
         "schema": {
@@ -5521,11 +5522,8 @@
           "description": "A redirection link.."
         },
         "typeProperties": {
-          "type": "object",
-          "description": "Type properties of the asset.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/DataAssetTypeProperties",
+          "description": "Type properties of the asset."
         },
         "lineage": {
           "$ref": "#/definitions/LineageInfo",
@@ -5546,7 +5544,7 @@
           "description": "Description of the relationship."
         },
         "relationshipType": {
-          "type": "string",
+          "$ref": "#/definitions/DataAssetRelationshipType",
           "description": "Type of the relationship."
         },
         "entityId": {
@@ -5557,6 +5555,30 @@
       "required": [
         "entityId"
       ]
+    },
+    "DataAssetProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a data asset.",
+      "enum": [
+        "Succeeded",
+        "SoftDeleted"
+      ],
+      "x-ms-enum": {
+        "name": "DataAssetProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource has been successfully provisioned."
+          },
+          {
+            "name": "SoftDeleted",
+            "value": "SoftDeleted",
+            "description": "The resource has been soft deleted."
+          }
+        ]
+      }
     },
     "DataAssetQueryRequest": {
       "type": "object",
@@ -5604,7 +5626,7 @@
             "type": "string"
           }
         },
-        "dataMapAssetIds": {
+        "sourceAssetIds": {
           "type": "array",
           "description": "To filter by data map asset Ids.",
           "items": {
@@ -5652,6 +5674,36 @@
         "entityId"
       ]
     },
+    "DataAssetRelationshipType": {
+      "type": "string",
+      "description": "The type of relationship between data assets.",
+      "enum": [
+        "Related",
+        "Synonym",
+        "Parent"
+      ],
+      "x-ms-enum": {
+        "name": "DataAssetRelationshipType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Related",
+            "value": "Related",
+            "description": "Related relationship type."
+          },
+          {
+            "name": "Synonym",
+            "value": "Synonym",
+            "description": "Synonym relationship type."
+          },
+          {
+            "name": "Parent",
+            "value": "Parent",
+            "description": "Parent relationship type."
+          }
+        ]
+      }
+    },
     "DataAssetRequest": {
       "type": "object",
       "description": "DataAsset.",
@@ -5668,7 +5720,7 @@
           "description": "Name of the asset."
         },
         "systemData": {
-          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
+          "$ref": "#/definitions/DataAssetSystemData",
           "description": "System data associated with the asset."
         },
         "source": {
@@ -5679,14 +5731,11 @@
           "type": "object",
           "description": "Contacts associated with the asset.",
           "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/CatalogModelContactsValueInner"
-            },
-            "type": "array"
+            "$ref": "#/definitions/ContactsValueInnerList"
           }
         },
         "type": {
-          "type": "string",
+          "$ref": "#/definitions/DataAssetType",
           "description": "type of the data asset."
         },
         "openInUrl": {
@@ -5695,17 +5744,96 @@
           "description": "A redirection link.."
         },
         "typeProperties": {
-          "type": "object",
-          "description": "Type properties of the asset.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/DataAssetTypeProperties",
+          "description": "Type properties of the asset."
         }
       },
       "required": [
         "id",
         "name"
       ]
+    },
+    "DataAssetSystemData": {
+      "type": "object",
+      "description": "System metadata with expiration information for data assets.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/DataAssetProvisioningState",
+          "description": "The provisioning state of the record."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the record was created."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the user who created the record."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the record was last modified."
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the user who last modified the record."
+        },
+        "expiredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the record expires."
+        },
+        "expiredBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the user who expired the record."
+        }
+      }
+    },
+    "DataAssetType": {
+      "type": "string",
+      "description": "The type of a data asset.",
+      "enum": [
+        "General"
+      ],
+      "x-ms-enum": {
+        "name": "DataAssetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "General",
+            "value": "General",
+            "description": "General data asset type."
+          }
+        ]
+      }
+    },
+    "DataAssetTypeProperties": {
+      "type": "object",
+      "description": "Type properties for a data asset.",
+      "properties": {
+        "format": {
+          "$ref": "#/definitions/TypePropertiesFormat",
+          "description": "The format of the sql table."
+        },
+        "serverEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "The server endpoint of the sql table."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name of the sql table."
+        },
+        "schemaName": {
+          "type": "string",
+          "description": "The schema name of the sql table."
+        },
+        "tableName": {
+          "type": "string",
+          "description": "The table name of the sql table."
+        }
+      }
     },
     "DataAssetsRelationship": {
       "type": "object",
@@ -5827,10 +5955,7 @@
           "type": "object",
           "description": "The contacts associated with the data product.",
           "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/CatalogModelContactsValueInner"
-            },
-            "type": "array"
+            "$ref": "#/definitions/ContactsValueInnerList"
           }
         },
         "termsOfUse": {
@@ -6657,10 +6782,7 @@
           "type": "object",
           "description": "The contacts associated with the objective.",
           "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/CatalogModelContactsValueInner"
-            },
-            "type": "array"
+            "$ref": "#/definitions/ContactsValueInnerList"
           }
         },
         "additionalProperties": {
@@ -6771,10 +6893,7 @@
           "type": "object",
           "description": "The contacts associated with the objective.",
           "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/CatalogModelContactsValueInner"
-            },
-            "type": "array"
+            "$ref": "#/definitions/ContactsValueInnerList"
           }
         },
         "additionalProperties": {
@@ -7226,7 +7345,7 @@
         },
         "createdBy": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the asset."
+          "description": "The unique identifier of the user who created the entity."
         }
       }
     },
@@ -7261,10 +7380,7 @@
           "type": "object",
           "description": "The contacts associated with the term.",
           "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/CatalogModelContactsValueInner"
-            },
-            "type": "array"
+            "$ref": "#/definitions/ContactsValueInnerList"
           }
         },
         "domain": {
@@ -7514,6 +7630,30 @@
       "required": [
         "value"
       ]
+    },
+    "TypePropertiesFormat": {
+      "type": "string",
+      "description": "The format of the SQL table.",
+      "enum": [
+        "Table",
+        "View"
+      ],
+      "x-ms-enum": {
+        "name": "TypePropertiesFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Table",
+            "value": "Table",
+            "description": "Table format."
+          },
+          {
+            "name": "View",
+            "value": "View",
+            "description": "View format."
+          }
+        ]
+      }
     },
     "UpdateFrequencyEnum": {
       "type": "string",
