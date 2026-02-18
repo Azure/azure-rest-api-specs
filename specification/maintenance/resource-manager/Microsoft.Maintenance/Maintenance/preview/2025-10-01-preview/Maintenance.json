@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "MaintenanceManagementClient",
-    "version": "2023-10-01-preview",
+    "version": "2025-10-01-preview",
     "description": "Azure Maintenance Management Client",
     "x-typespec-generated": [
       {
@@ -2132,6 +2132,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents": {
+      "post": {
+        "operationId": "ScheduledEvents_AcknowledgeList",
+        "summary": "Post ScheduledEvents List Acknowledgement",
+        "description": "Post List of ScheduledEvents Acknowledgement",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "Resource type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Resource name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduledEventsIdList",
+            "in": "body",
+            "description": "List of ScheduledEvents Id.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScheduledEventsIdList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledEventsApproveResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ScheduledEventsListAcknowledgeError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Post ScheduledEvents List Acknowledgement": {
+            "$ref": "./examples/ScheduledEvents_AcknowledgeList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge": {
       "post": {
         "operationId": "ScheduledEvents_Acknowledge",
@@ -2697,6 +2757,24 @@
         }
       }
     },
+    "ScheduledEventsAcknowledgeErrorDetails": {
+      "type": "object",
+      "description": "An error response details received from the Azure Maintenance service for each ScheduledEvents.",
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "ScheduledEvents Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+        },
+        "code": {
+          "type": "string",
+          "description": "Status code for the ScheduledEvents acknowledge operation on the target ScheduledEvents Id."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        }
+      }
+    },
     "ScheduledEventsApproveResponse": {
       "type": "object",
       "description": "Response of ScheduledEvents acknowledge",
@@ -2704,6 +2782,54 @@
         "value": {
           "type": "string",
           "description": "Successfully Approved"
+        }
+      }
+    },
+    "ScheduledEventsIdList": {
+      "type": "object",
+      "description": "ScheduledEvents Id List",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of ScheduledEvents Id.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ScheduledEventsListAcknowledgeError": {
+      "type": "object",
+      "description": "An error response received from the Azure Maintenance service.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ScheduledEventsListAcknowledgeErrorDetails",
+          "description": "Error response"
+        }
+      }
+    },
+    "ScheduledEventsListAcknowledgeErrorDetails": {
+      "type": "object",
+      "description": "An error response details received from the Azure Maintenance service.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "Error details for each ScheduledEvents.",
+          "items": {
+            "$ref": "#/definitions/ScheduledEventsAcknowledgeErrorDetails"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
