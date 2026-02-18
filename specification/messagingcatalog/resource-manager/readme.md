@@ -47,7 +47,7 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}"].put.responses["201"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs/{catalogName}"].patch.responses["200"].schema.properties.properties.properties.publicNetworkAccess
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/schedulers"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MessagingCatalog/catalogs"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.MessagingCatalog/catalogs"].get.responses["200"].schema.properties.properties.properties.publicNetworkAccess
 ```
 
