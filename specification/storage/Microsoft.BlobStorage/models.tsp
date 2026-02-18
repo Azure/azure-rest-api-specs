@@ -607,7 +607,7 @@ model ContainerProperties {
   lastModified: utcDateTime;
 
   /** The ETag of the container. */
-  @Xml.name("ETag") eTag: string;
+  @Xml.name("Etag") eTag: string;
 
   /** The lease status of the container. */
   @Xml.name("LeaseStatus") leaseStatus?: LeaseStatus;
