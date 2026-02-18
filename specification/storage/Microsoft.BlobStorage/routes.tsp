@@ -813,6 +813,11 @@ interface Blob {
       ...IfTagsParameter;
     },
     {
+      /** Content-type. */
+      #suppress "@typespec/http/content-type-ignored" "This is a HEAD operation, so content-type header can be returned."
+      @header("Content-Type")
+      contentType?: string;
+
       ...MetadataHeaders;
       ...ObjectReplicationHeaders;
       ...LastModifiedResponseHeader;
