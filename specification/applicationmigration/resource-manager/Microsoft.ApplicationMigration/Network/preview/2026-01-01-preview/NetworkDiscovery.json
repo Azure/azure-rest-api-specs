@@ -1,0 +1,6001 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ApplicationMigration management service",
+    "version": "2026-01-01-preview",
+    "description": "The Microsoft.ApplicationMigration Rest API spec.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "NetworkSites"
+    },
+    {
+      "name": "NsxManagers"
+    },
+    {
+      "name": "NsxTier0Gateways"
+    },
+    {
+      "name": "NsxTier1Gateways"
+    },
+    {
+      "name": "NsxSegments"
+    },
+    {
+      "name": "NsxGroups"
+    },
+    {
+      "name": "GatewayFirewallPolicies"
+    },
+    {
+      "name": "NsxGatewayFirewallRules"
+    },
+    {
+      "name": "NsxLoadBalancers"
+    },
+    {
+      "name": "NsxNatRules"
+    },
+    {
+      "name": "NsxDnsServices"
+    },
+    {
+      "name": "NsxDnsForwarderZones"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ApplicationMigration/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApplicationMigration/networkSites": {
+      "get": {
+        "operationId": "NetworkSites_ListBySubscription",
+        "tags": [
+          "NetworkSites"
+        ],
+        "description": "Lists NetworkSite resources in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSiteList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites": {
+      "get": {
+        "operationId": "NetworkSites_ListByResourceGroup",
+        "tags": [
+          "NetworkSites"
+        ],
+        "description": "Lists NetworkSite resources in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSiteList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}": {
+      "get": {
+        "operationId": "NetworkSites_Get",
+        "tags": [
+          "NetworkSites"
+        ],
+        "description": "Gets the NetworkSite resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSite"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NetworkSites_CreateOrUpdate",
+        "tags": [
+          "NetworkSites"
+        ],
+        "description": "Creates or updates the NetworkSite resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating a NetworkSite resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkSite"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NetworkSite' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkSite"
+            }
+          },
+          "201": {
+            "description": "Resource 'NetworkSite' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NetworkSite"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NetworkSites_Update",
+        "tags": [
+          "NetworkSites"
+        ],
+        "description": "Patches the NetworkSite resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SiteTagsPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSite"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NetworkSites_Delete",
+        "tags": [
+          "NetworkSites"
+        ],
+        "description": "Deletes the NetworkSite resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/dnsServices": {
+      "get": {
+        "operationId": "NsxDnsServices_ListByNetworkSite",
+        "tags": [
+          "NsxDnsServices"
+        ],
+        "description": "Lists NsxDnsService resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsServiceList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/dnsServices/{dnsServiceName}": {
+      "get": {
+        "operationId": "NsxDnsServices_Get",
+        "tags": [
+          "NsxDnsServices"
+        ],
+        "description": "Gets the NsxDnsService resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "dnsServiceName",
+            "in": "path",
+            "description": "The name of the DNS service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxDnsServices_CreateOrUpdate",
+        "tags": [
+          "NsxDnsServices"
+        ],
+        "description": "Creates or updates the NsxDnsService resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "dnsServiceName",
+            "in": "path",
+            "description": "The name of the DNS service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating a NsxDnsService resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxDnsService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxDnsService' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsService"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxDnsService' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxDnsServices_Update",
+        "tags": [
+          "NsxDnsServices"
+        ],
+        "description": "Patches the NsxDnsService resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "dnsServiceName",
+            "in": "path",
+            "description": "The name of the DNS service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching a NsxDnsService resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxDnsServicePatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxDnsServices_Delete",
+        "tags": [
+          "NsxDnsServices"
+        ],
+        "description": "Deletes the NsxDnsService resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "dnsServiceName",
+            "in": "path",
+            "description": "The name of the DNS service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/dnsServices/{dnsServiceName}/dnsForwarderZones": {
+      "get": {
+        "operationId": "NsxDnsForwarderZones_ListByNsxDnsService",
+        "tags": [
+          "NsxDnsForwarderZones"
+        ],
+        "description": "Lists NsxDnsForwarderZone resources within a DNS service.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "dnsServiceName",
+            "in": "path",
+            "description": "The name of the DNS service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsForwarderZoneList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/dnsServices/{dnsServiceName}/dnsForwarderZones/{zoneName}": {
+      "get": {
+        "operationId": "NsxDnsForwarderZones_Get",
+        "tags": [
+          "NsxDnsForwarderZones"
+        ],
+        "description": "Gets the NsxDnsForwarderZone resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "dnsServiceName",
+            "in": "path",
+            "description": "The name of the DNS service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "description": "The name of the DNS forwarder zone.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsForwarderZone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxDnsForwarderZones_CreateOrUpdate",
+        "tags": [
+          "NsxDnsForwarderZones"
+        ],
+        "description": "Creates or updates the NsxDnsForwarderZone resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "dnsServiceName",
+            "in": "path",
+            "description": "The name of the DNS service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "description": "The name of the DNS forwarder zone.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating a NsxDnsForwarderZone resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxDnsForwarderZone"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxDnsForwarderZone' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsForwarderZone"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxDnsForwarderZone' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsForwarderZone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxDnsForwarderZones_Update",
+        "tags": [
+          "NsxDnsForwarderZones"
+        ],
+        "description": "Patches the NsxDnsForwarderZone resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "dnsServiceName",
+            "in": "path",
+            "description": "The name of the DNS service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "description": "The name of the DNS forwarder zone.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching a NsxDnsForwarderZone resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxDnsForwarderZonePatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxDnsForwarderZone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxDnsForwarderZones_Delete",
+        "tags": [
+          "NsxDnsForwarderZones"
+        ],
+        "description": "Deletes the NsxDnsForwarderZone resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "dnsServiceName",
+            "in": "path",
+            "description": "The name of the DNS service.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "zoneName",
+            "in": "path",
+            "description": "The name of the DNS forwarder zone.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/gatewayFirewallPolicies": {
+      "get": {
+        "operationId": "GatewayFirewallPolicies_ListByNetworkSite",
+        "tags": [
+          "GatewayFirewallPolicies"
+        ],
+        "description": "Lists NsxGatewayFirewallPolicy resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallPolicyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/gatewayFirewallPolicies/{policyName}": {
+      "get": {
+        "operationId": "GatewayFirewallPolicies_Get",
+        "tags": [
+          "GatewayFirewallPolicies"
+        ],
+        "description": "Gets the NsxGatewayFirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the gateway firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "GatewayFirewallPolicies_CreateOrUpdate",
+        "tags": [
+          "GatewayFirewallPolicies"
+        ],
+        "description": "Creates or updates the NsxGatewayFirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the gateway firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating a NsxGatewayFirewallPolicy resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxGatewayFirewallPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxGatewayFirewallPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "GatewayFirewallPolicies_Update",
+        "tags": [
+          "GatewayFirewallPolicies"
+        ],
+        "description": "Patches the NsxGatewayFirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the gateway firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching a NsxGatewayFirewallPolicy resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallPolicyPatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "GatewayFirewallPolicies_Delete",
+        "tags": [
+          "GatewayFirewallPolicies"
+        ],
+        "description": "Deletes the NsxGatewayFirewallPolicy resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the gateway firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/gatewayFirewallPolicies/{policyName}/rules": {
+      "get": {
+        "operationId": "NsxGatewayFirewallRules_ListByNsxGatewayFirewallPolicy",
+        "tags": [
+          "NsxGatewayFirewallRules"
+        ],
+        "description": "Lists NsxGatewayFirewallRule resources within a gateway firewall policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the gateway firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallRuleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/gatewayFirewallPolicies/{policyName}/rules/{ruleName}": {
+      "get": {
+        "operationId": "NsxGatewayFirewallRules_Get",
+        "tags": [
+          "NsxGatewayFirewallRules"
+        ],
+        "description": "Gets the NsxGatewayFirewallRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the gateway firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the gateway firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxGatewayFirewallRules_CreateOrUpdate",
+        "tags": [
+          "NsxGatewayFirewallRules"
+        ],
+        "description": "Creates or updates the NsxGatewayFirewallRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the gateway firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the gateway firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating a NsxGatewayFirewallRule resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxGatewayFirewallRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxGatewayFirewallRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxGatewayFirewallRules_Update",
+        "tags": [
+          "NsxGatewayFirewallRules"
+        ],
+        "description": "Patches the NsxGatewayFirewallRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the gateway firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the gateway firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching a NsxGatewayFirewallRule resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallRulePatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxGatewayFirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxGatewayFirewallRules_Delete",
+        "tags": [
+          "NsxGatewayFirewallRules"
+        ],
+        "description": "Deletes the NsxGatewayFirewallRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the gateway firewall policy.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "ruleName",
+            "in": "path",
+            "description": "The name of the gateway firewall rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/loadBalancers": {
+      "get": {
+        "operationId": "NsxLoadBalancers_ListByNetworkSite",
+        "tags": [
+          "NsxLoadBalancers"
+        ],
+        "description": "Lists NsxLoadBalancer resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxLoadBalancerList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/loadBalancers/{loadBalancerName}": {
+      "get": {
+        "operationId": "NsxLoadBalancers_Get",
+        "tags": [
+          "NsxLoadBalancers"
+        ],
+        "description": "Gets the NsxLoadBalancer resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "The name of the load balancer.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxLoadBalancer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxLoadBalancers_CreateOrUpdate",
+        "tags": [
+          "NsxLoadBalancers"
+        ],
+        "description": "Creates or updates the NsxLoadBalancer resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "The name of the load balancer.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating an NsxLoadBalancer resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxLoadBalancer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxLoadBalancer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxLoadBalancer"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxLoadBalancer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxLoadBalancer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxLoadBalancers_Update",
+        "tags": [
+          "NsxLoadBalancers"
+        ],
+        "description": "Patches the NsxLoadBalancer resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "The name of the load balancer.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching an NsxLoadBalancer resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxLoadBalancerPatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxLoadBalancer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxLoadBalancers_Delete",
+        "tags": [
+          "NsxLoadBalancers"
+        ],
+        "description": "Deletes the NsxLoadBalancer resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "loadBalancerName",
+            "in": "path",
+            "description": "The name of the load balancer.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/natRules": {
+      "get": {
+        "operationId": "NsxNatRules_ListByNetworkSite",
+        "tags": [
+          "NsxNatRules"
+        ],
+        "description": "Lists NsxNatRule resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxNatRuleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/natRules/{natRuleName}": {
+      "get": {
+        "operationId": "NsxNatRules_Get",
+        "tags": [
+          "NsxNatRules"
+        ],
+        "description": "Gets the NsxNatRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "description": "The name of the NAT rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxNatRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxNatRules_CreateOrUpdate",
+        "tags": [
+          "NsxNatRules"
+        ],
+        "description": "Creates or updates the NsxNatRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "description": "The name of the NAT rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating an NsxNatRule resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxNatRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxNatRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxNatRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxNatRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxNatRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxNatRules_Update",
+        "tags": [
+          "NsxNatRules"
+        ],
+        "description": "Patches the NsxNatRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "description": "The name of the NAT rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching an NsxNatRule resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxNatRulePatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxNatRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxNatRules_Delete",
+        "tags": [
+          "NsxNatRules"
+        ],
+        "description": "Deletes the NsxNatRule resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "natRuleName",
+            "in": "path",
+            "description": "The name of the NAT rule.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsGroups": {
+      "get": {
+        "operationId": "NsxGroups_ListByNetworkSite",
+        "tags": [
+          "NsxGroups"
+        ],
+        "description": "Lists NsxGroup resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxGroupList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsGroups/{groupName}": {
+      "get": {
+        "operationId": "NsxGroups_Get",
+        "tags": [
+          "NsxGroups"
+        ],
+        "description": "Gets the NsxGroup resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the NS group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxGroups_CreateOrUpdate",
+        "tags": [
+          "NsxGroups"
+        ],
+        "description": "Creates or updates the NsxGroup resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the NS group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating an NsxGroup resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxGroups_Update",
+        "tags": [
+          "NsxGroups"
+        ],
+        "description": "Patches the NsxGroup resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the NS group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching an NsxGroup resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxGroupPatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxGroups_Delete",
+        "tags": [
+          "NsxGroups"
+        ],
+        "description": "Deletes the NsxGroup resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the NS group.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxManagers": {
+      "get": {
+        "operationId": "NsxManagers_ListByNetworkSite",
+        "tags": [
+          "NsxManagers"
+        ],
+        "description": "Lists NsxManager resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxManagerList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsxManagers/{managerName}": {
+      "get": {
+        "operationId": "NsxManagers_Get",
+        "tags": [
+          "NsxManagers"
+        ],
+        "description": "Gets the NsxManager resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "managerName",
+            "in": "path",
+            "description": "The name of the NSX Manager.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxManager"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxManagers_CreateOrUpdate",
+        "tags": [
+          "NsxManagers"
+        ],
+        "description": "Creates or updates the NsxManager resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "managerName",
+            "in": "path",
+            "description": "The name of the NSX Manager.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating an NsxManager resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxManager"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxManager' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxManager"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxManager' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxManager"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxManagers_Update",
+        "tags": [
+          "NsxManagers"
+        ],
+        "description": "Patches the NsxManager resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "managerName",
+            "in": "path",
+            "description": "The name of the NSX Manager.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching an NsxManager resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxManagerPatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxManager"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxManagers_Delete",
+        "tags": [
+          "NsxManagers"
+        ],
+        "description": "Deletes the NsxManager resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "managerName",
+            "in": "path",
+            "description": "The name of the NSX Manager.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/segments": {
+      "get": {
+        "operationId": "NsxSegments_ListByNetworkSite",
+        "tags": [
+          "NsxSegments"
+        ],
+        "description": "Lists NsxSegment resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxSegmentList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/segments/{segmentName}": {
+      "get": {
+        "operationId": "NsxSegments_Get",
+        "tags": [
+          "NsxSegments"
+        ],
+        "description": "Gets the NsxSegment resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "segmentName",
+            "in": "path",
+            "description": "The name of the segment.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxSegment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxSegments_CreateOrUpdate",
+        "tags": [
+          "NsxSegments"
+        ],
+        "description": "Creates or updates the NsxSegment resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "segmentName",
+            "in": "path",
+            "description": "The name of the segment.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating a NsxSegment resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxSegment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxSegment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxSegment"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxSegment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxSegment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxSegments_Update",
+        "tags": [
+          "NsxSegments"
+        ],
+        "description": "Patches the NsxSegment resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "segmentName",
+            "in": "path",
+            "description": "The name of the segment.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching a NsxSegment resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxSegmentPatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxSegment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxSegments_Delete",
+        "tags": [
+          "NsxSegments"
+        ],
+        "description": "Deletes the NsxSegment resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "segmentName",
+            "in": "path",
+            "description": "The name of the segment.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/tier0Gateways": {
+      "get": {
+        "operationId": "NsxTier0Gateways_ListByNetworkSite",
+        "tags": [
+          "NsxTier0Gateways"
+        ],
+        "description": "Lists NsxTier0Gateway resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxTier0GatewayList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/tier0Gateways/{gatewayName}": {
+      "get": {
+        "operationId": "NsxTier0Gateways_Get",
+        "tags": [
+          "NsxTier0Gateways"
+        ],
+        "description": "Gets the NsxTier0Gateway resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-0 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxTier0Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxTier0Gateways_CreateOrUpdate",
+        "tags": [
+          "NsxTier0Gateways"
+        ],
+        "description": "Creates or updates the NsxTier0Gateway resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-0 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating a NsxTier0Gateway resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxTier0Gateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxTier0Gateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxTier0Gateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxTier0Gateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxTier0Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxTier0Gateways_Update",
+        "tags": [
+          "NsxTier0Gateways"
+        ],
+        "description": "Patches the NsxTier0Gateway resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-0 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching a NsxTier0Gateway resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxTier0GatewayPatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxTier0Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxTier0Gateways_Delete",
+        "tags": [
+          "NsxTier0Gateways"
+        ],
+        "description": "Deletes the NsxTier0Gateway resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-0 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/tier1Gateways": {
+      "get": {
+        "operationId": "NsxTier1Gateways_ListByNetworkSite",
+        "tags": [
+          "NsxTier1Gateways"
+        ],
+        "description": "Lists NsxTier1Gateway resources within a network site.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxTier1GatewayList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/tier1Gateways/{gatewayName}": {
+      "get": {
+        "operationId": "NsxTier1Gateways_Get",
+        "tags": [
+          "NsxTier1Gateways"
+        ],
+        "description": "Gets the NsxTier1Gateway resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-1 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxTier1Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "NsxTier1Gateways_CreateOrUpdate",
+        "tags": [
+          "NsxTier1Gateways"
+        ],
+        "description": "Creates or updates the NsxTier1Gateway resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-1 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The request body for creating or updating a NsxTier1Gateway resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxTier1Gateway"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NsxTier1Gateway' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxTier1Gateway"
+            }
+          },
+          "201": {
+            "description": "Resource 'NsxTier1Gateway' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NsxTier1Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "NsxTier1Gateways_Update",
+        "tags": [
+          "NsxTier1Gateways"
+        ],
+        "description": "Patches the NsxTier1Gateway resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-1 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The request body for patching a NsxTier1Gateway resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NsxTier1GatewayPatchProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxTier1Gateway"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NsxTier1Gateways_Delete",
+        "tags": [
+          "NsxTier1Gateways"
+        ],
+        "description": "Deletes the NsxTier1Gateway resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-1 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AdminState": {
+      "type": "string",
+      "description": "The administrative state.",
+      "enum": [
+        "UP",
+        "DOWN",
+        "ENABLED",
+        "DISABLED"
+      ],
+      "x-ms-enum": {
+        "name": "AdminState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UP",
+            "value": "UP",
+            "description": "Resource is up."
+          },
+          {
+            "name": "DOWN",
+            "value": "DOWN",
+            "description": "Resource is down."
+          },
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "Resource is enabled."
+          },
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "Resource is disabled."
+          }
+        ]
+      }
+    },
+    "AssociatedCompute": {
+      "type": "object",
+      "description": "An associated compute resource reference.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of compute (e.g. VMwareVM)."
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the compute resource."
+        }
+      }
+    },
+    "AzureResourceProperties": {
+      "type": "object",
+      "description": "Base properties shared by all resources.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "BackendConfig": {
+      "type": "object",
+      "description": "Backend configuration for a load balancer.",
+      "properties": {
+        "backendPool": {
+          "$ref": "#/definitions/BackendPool",
+          "description": "The backend pool."
+        },
+        "healthProbe": {
+          "$ref": "#/definitions/HealthProbe",
+          "description": "The health probe configuration."
+        },
+        "snat": {
+          "$ref": "#/definitions/SnatConfig",
+          "description": "The SNAT configuration."
+        }
+      }
+    },
+    "BackendPool": {
+      "type": "object",
+      "description": "A backend pool definition.",
+      "properties": {
+        "algorithm": {
+          "$ref": "#/definitions/LbAlgorithm",
+          "description": "The load balancing algorithm."
+        },
+        "members": {
+          "type": "array",
+          "description": "The backend pool members.",
+          "items": {
+            "$ref": "#/definitions/BackendPoolMember"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "BackendPoolMember": {
+      "type": "object",
+      "description": "A member of a load balancer backend pool.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address of the member."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port number."
+        },
+        "adminState": {
+          "$ref": "#/definitions/MemberAdminState",
+          "description": "The admin state of the member."
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The weight of the member."
+        },
+        "associatedCompute": {
+          "$ref": "#/definitions/AssociatedCompute",
+          "description": "The associated compute resource."
+        }
+      }
+    },
+    "ConjunctionOperator": {
+      "type": "string",
+      "description": "The conjunction operator between group expressions.",
+      "enum": [
+        "OR",
+        "AND"
+      ],
+      "x-ms-enum": {
+        "name": "ConjunctionOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OR",
+            "value": "OR",
+            "description": "Logical OR."
+          },
+          {
+            "name": "AND",
+            "value": "AND",
+            "description": "Logical AND."
+          }
+        ]
+      }
+    },
+    "CoverageCounts": {
+      "type": "object",
+      "description": "Coverage counts for discovered NSX resources.",
+      "properties": {
+        "tier0Gateways": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Tier-0 gateways."
+        },
+        "tier1Gateways": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Tier-1 gateways."
+        },
+        "segments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of segments."
+        },
+        "groups": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of groups."
+        },
+        "gatewayFirewallPolicies": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of gateway firewall policies."
+        },
+        "natRules": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of NAT rules."
+        },
+        "loadBalancers": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of load balancers."
+        },
+        "dnsServices": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of DNS services."
+        }
+      }
+    },
+    "DiscoveryWindow": {
+      "type": "object",
+      "description": "A discovery time window.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "description": "The start time of the discovery window."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "The end time of the discovery window."
+        }
+      }
+    },
+    "DnsZoneType": {
+      "type": "string",
+      "description": "The type of a DNS forwarder zone.",
+      "enum": [
+        "FQDN"
+      ],
+      "x-ms-enum": {
+        "name": "DnsZoneType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FQDN",
+            "value": "FQDN",
+            "description": "FQDN-based zone."
+          }
+        ]
+      }
+    },
+    "EffectiveVmRef": {
+      "type": "object",
+      "description": "A reference to an effective virtual machine.",
+      "properties": {
+        "vmRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the virtual machine."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the virtual machine."
+        }
+      }
+    },
+    "FederationScope": {
+      "type": "string",
+      "description": "The federation scope of a gateway firewall policy.",
+      "enum": [
+        "Local",
+        "Global"
+      ],
+      "x-ms-enum": {
+        "name": "FederationScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "Local scope."
+          },
+          {
+            "name": "Global",
+            "value": "Global",
+            "description": "Global scope."
+          }
+        ]
+      }
+    },
+    "FirewallAction": {
+      "type": "string",
+      "description": "The action for a firewall rule.",
+      "enum": [
+        "ALLOW",
+        "DROP",
+        "REJECT"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ALLOW",
+            "value": "ALLOW",
+            "description": "Allow traffic."
+          },
+          {
+            "name": "DROP",
+            "value": "DROP",
+            "description": "Drop traffic."
+          },
+          {
+            "name": "REJECT",
+            "value": "REJECT",
+            "description": "Reject traffic."
+          }
+        ]
+      }
+    },
+    "FirewallDirection": {
+      "type": "string",
+      "description": "The direction for a firewall rule.",
+      "enum": [
+        "IN",
+        "OUT",
+        "IN_OUT"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IN",
+            "value": "IN",
+            "description": "Inbound traffic."
+          },
+          {
+            "name": "OUT",
+            "value": "OUT",
+            "description": "Outbound traffic."
+          },
+          {
+            "name": "IN_OUT",
+            "value": "IN_OUT",
+            "description": "Both inbound and outbound traffic."
+          }
+        ]
+      }
+    },
+    "FrontendConfig": {
+      "type": "object",
+      "description": "Frontend configuration for a load balancer.",
+      "properties": {
+        "vip": {
+          "type": "string",
+          "description": "The virtual IP address."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The frontend port."
+        },
+        "protocol": {
+          "$ref": "#/definitions/LbProtocol",
+          "description": "The frontend protocol."
+        }
+      }
+    },
+    "GatewayPolicyCategory": {
+      "type": "string",
+      "description": "The category of a gateway firewall policy.",
+      "enum": [
+        "LocalGatewayRules"
+      ],
+      "x-ms-enum": {
+        "name": "GatewayPolicyCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LocalGatewayRules",
+            "value": "LocalGatewayRules",
+            "description": "Local gateway rules category."
+          }
+        ]
+      }
+    },
+    "GroupExpression": {
+      "type": "object",
+      "description": "A group membership expression.",
+      "properties": {
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type (Condition or ConjunctionOperator)."
+        },
+        "memberType": {
+          "$ref": "#/definitions/GroupMemberType",
+          "description": "The member type for conditions."
+        },
+        "key": {
+          "$ref": "#/definitions/GroupExpressionKey",
+          "description": "The key for conditions."
+        },
+        "operator": {
+          "$ref": "#/definitions/GroupExpressionOperator",
+          "description": "The operator for conditions."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value for conditions."
+        },
+        "conjunctionOperator": {
+          "$ref": "#/definitions/ConjunctionOperator",
+          "description": "The conjunction operator (for ConjunctionOperator type)."
+        }
+      }
+    },
+    "GroupExpressionKey": {
+      "type": "string",
+      "description": "The key used in a group expression condition.",
+      "enum": [
+        "Name",
+        "Tag",
+        "OSName",
+        "ComputerName"
+      ],
+      "x-ms-enum": {
+        "name": "GroupExpressionKey",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Name",
+            "value": "Name",
+            "description": "Match by name."
+          },
+          {
+            "name": "Tag",
+            "value": "Tag",
+            "description": "Match by tag."
+          },
+          {
+            "name": "OSName",
+            "value": "OSName",
+            "description": "Match by OS name."
+          },
+          {
+            "name": "ComputerName",
+            "value": "ComputerName",
+            "description": "Match by computer name."
+          }
+        ]
+      }
+    },
+    "GroupExpressionOperator": {
+      "type": "string",
+      "description": "The operator in a group expression condition.",
+      "enum": [
+        "CONTAINS",
+        "EQUALS",
+        "STARTSWITH",
+        "ENDSWITH"
+      ],
+      "x-ms-enum": {
+        "name": "GroupExpressionOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CONTAINS",
+            "value": "CONTAINS",
+            "description": "Contains operator."
+          },
+          {
+            "name": "EQUALS",
+            "value": "EQUALS",
+            "description": "Equals operator."
+          },
+          {
+            "name": "STARTSWITH",
+            "value": "STARTSWITH",
+            "description": "Starts with operator."
+          },
+          {
+            "name": "ENDSWITH",
+            "value": "ENDSWITH",
+            "description": "Ends with operator."
+          }
+        ]
+      }
+    },
+    "GroupMemberType": {
+      "type": "string",
+      "description": "The member type in a group expression.",
+      "enum": [
+        "VirtualMachine",
+        "SegmentPort"
+      ],
+      "x-ms-enum": {
+        "name": "GroupMemberType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "VirtualMachine",
+            "value": "VirtualMachine",
+            "description": "Virtual machine member."
+          },
+          {
+            "name": "SegmentPort",
+            "value": "SegmentPort",
+            "description": "NsxSegment port member."
+          }
+        ]
+      }
+    },
+    "HaMode": {
+      "type": "string",
+      "description": "The high-availability mode of a gateway.",
+      "enum": [
+        "ACTIVE_ACTIVE",
+        "ACTIVE_STANDBY"
+      ],
+      "x-ms-enum": {
+        "name": "HaMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ACTIVE_ACTIVE",
+            "value": "ACTIVE_ACTIVE",
+            "description": "Active-active HA mode."
+          },
+          {
+            "name": "ACTIVE_STANDBY",
+            "value": "ACTIVE_STANDBY",
+            "description": "Active-standby HA mode."
+          }
+        ]
+      }
+    },
+    "HealthProbe": {
+      "type": "object",
+      "description": "Health probe configuration for a load balancer.",
+      "properties": {
+        "protocol": {
+          "$ref": "#/definitions/LbProtocol",
+          "description": "The protocol for health checks."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port for health checks."
+        }
+      }
+    },
+    "IngestionStatus": {
+      "type": "string",
+      "description": "The ingestion status of a discovery operation.",
+      "enum": [
+        "Complete",
+        "Partial",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "IngestionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "Ingestion completed successfully."
+          },
+          {
+            "name": "Partial",
+            "value": "Partial",
+            "description": "Ingestion completed partially."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Ingestion failed."
+          }
+        ]
+      }
+    },
+    "LbAlgorithm": {
+      "type": "string",
+      "description": "The load balancing algorithm.",
+      "enum": [
+        "ROUND_ROBIN",
+        "LEAST_CONNECTION",
+        "WEIGHTED_ROUND_ROBIN",
+        "WEIGHTED_LEAST_CONNECTION"
+      ],
+      "x-ms-enum": {
+        "name": "LbAlgorithm",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ROUND_ROBIN",
+            "value": "ROUND_ROBIN",
+            "description": "Round robin algorithm."
+          },
+          {
+            "name": "LEAST_CONNECTION",
+            "value": "LEAST_CONNECTION",
+            "description": "Least connection algorithm."
+          },
+          {
+            "name": "WEIGHTED_ROUND_ROBIN",
+            "value": "WEIGHTED_ROUND_ROBIN",
+            "description": "Weighted round robin algorithm."
+          },
+          {
+            "name": "WEIGHTED_LEAST_CONNECTION",
+            "value": "WEIGHTED_LEAST_CONNECTION",
+            "description": "Weighted least connection algorithm."
+          }
+        ]
+      }
+    },
+    "LbProtocol": {
+      "type": "string",
+      "description": "The protocol for load balancer frontend/health probe.",
+      "enum": [
+        "TCP",
+        "HTTP",
+        "HTTPS"
+      ],
+      "x-ms-enum": {
+        "name": "LbProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TCP",
+            "value": "TCP",
+            "description": "TCP protocol."
+          },
+          {
+            "name": "HTTP",
+            "value": "HTTP",
+            "description": "HTTP protocol."
+          },
+          {
+            "name": "HTTPS",
+            "value": "HTTPS",
+            "description": "HTTPS protocol."
+          }
+        ]
+      }
+    },
+    "LbType": {
+      "type": "string",
+      "description": "The type of load balancer.",
+      "enum": [
+        "L4",
+        "L7"
+      ],
+      "x-ms-enum": {
+        "name": "LbType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "L4",
+            "value": "L4",
+            "description": "Layer 4 load balancer."
+          },
+          {
+            "name": "L7",
+            "value": "L7",
+            "description": "Layer 7 load balancer."
+          }
+        ]
+      }
+    },
+    "MatchProtocol": {
+      "type": "string",
+      "description": "The protocol for NAT rule matching.",
+      "enum": [
+        "TCP",
+        "UDP",
+        "ICMP",
+        "ANY"
+      ],
+      "x-ms-enum": {
+        "name": "MatchProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TCP",
+            "value": "TCP",
+            "description": "TCP protocol."
+          },
+          {
+            "name": "UDP",
+            "value": "UDP",
+            "description": "UDP protocol."
+          },
+          {
+            "name": "ICMP",
+            "value": "ICMP",
+            "description": "ICMP protocol."
+          },
+          {
+            "name": "ANY",
+            "value": "ANY",
+            "description": "Any protocol."
+          }
+        ]
+      }
+    },
+    "MemberAdminState": {
+      "type": "string",
+      "description": "The admin state of a backend pool member.",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "GRACEFUL_DISABLED"
+      ],
+      "x-ms-enum": {
+        "name": "MemberAdminState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ENABLED",
+            "value": "ENABLED",
+            "description": "Member is enabled."
+          },
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "Member is disabled."
+          },
+          {
+            "name": "GRACEFUL_DISABLED",
+            "value": "GRACEFUL_DISABLED",
+            "description": "Member is gracefully disabled."
+          }
+        ]
+      }
+    },
+    "NatEndpoint": {
+      "type": "object",
+      "description": "NAT rule match endpoint.",
+      "properties": {
+        "ipRanges": {
+          "type": "array",
+          "description": "IP ranges to match.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "port": {
+          "type": "string",
+          "description": "Port to match."
+        }
+      }
+    },
+    "NatMatch": {
+      "type": "object",
+      "description": "NAT rule match criteria.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/NatEndpoint",
+          "description": "Source match criteria."
+        },
+        "destination": {
+          "$ref": "#/definitions/NatEndpoint",
+          "description": "Destination match criteria."
+        },
+        "protocol": {
+          "$ref": "#/definitions/MatchProtocol",
+          "description": "Protocol to match."
+        }
+      }
+    },
+    "NatTranslate": {
+      "type": "object",
+      "description": "NAT rule translation target.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "The translated IP address."
+        },
+        "port": {
+          "type": "string",
+          "description": "The translated port."
+        }
+      }
+    },
+    "NatType": {
+      "type": "string",
+      "description": "The type of NAT rule.",
+      "enum": [
+        "SNAT",
+        "DNAT"
+      ],
+      "x-ms-enum": {
+        "name": "NatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SNAT",
+            "value": "SNAT",
+            "description": "Source NAT."
+          },
+          {
+            "name": "DNAT",
+            "value": "DNAT",
+            "description": "Destination NAT."
+          }
+        ]
+      }
+    },
+    "NetworkSite": {
+      "type": "object",
+      "description": "A network discovery site resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkSiteProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NetworkSiteList": {
+      "type": "object",
+      "description": "A list of NetworkSite resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkSite items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkSiteProperties": {
+      "type": "object",
+      "description": "Properties of a network site.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "masterSiteId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated master site.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/masterSites"
+              }
+            ]
+          }
+        },
+        "migrateProjectId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated migrate project.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Migrate/migrateProjects"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "NsxDnsForwarderZone": {
+      "type": "object",
+      "description": "A DNS forwarder zone resource (child of NsxDnsService).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxDnsForwarderZoneProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxDnsForwarderZoneList": {
+      "type": "object",
+      "description": "A list of NsxDnsForwarderZone resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxDnsForwarderZone items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxDnsForwarderZone"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxDnsForwarderZonePatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxDnsForwarderZone.",
+      "properties": {
+        "upstreamServers": {
+          "type": "array",
+          "description": "The upstream DNS servers.",
+          "items": {
+            "$ref": "#/definitions/UpstreamServer"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NsxDnsForwarderZonePatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxDnsForwarderZone.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxDnsForwarderZonePatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxDnsForwarderZoneProperties": {
+      "type": "object",
+      "description": "Properties of a DNS forwarder zone.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "zoneType": {
+          "$ref": "#/definitions/DnsZoneType",
+          "description": "The zone type."
+        },
+        "domainNames": {
+          "type": "array",
+          "description": "The domain names served by this zone.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "upstreamServers": {
+          "type": "array",
+          "description": "The upstream DNS servers.",
+          "items": {
+            "$ref": "#/definitions/UpstreamServer"
+          },
+          "x-ms-identifiers": []
+        },
+        "sourceIps": {
+          "type": "array",
+          "description": "Source IP addresses for forwarding.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nsxOriginal": {
+          "$ref": "#/definitions/NsxOriginal",
+          "description": "Original NSX resource metadata."
+        }
+      }
+    },
+    "NsxDnsService": {
+      "type": "object",
+      "description": "A DNS service resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxDnsServiceProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxDnsServiceList": {
+      "type": "object",
+      "description": "A list of NsxDnsService resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxDnsService items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxDnsService"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxDnsServicePatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxDnsService.",
+      "properties": {
+        "listenerIp": {
+          "type": "string",
+          "description": "The listener IP address."
+        }
+      }
+    },
+    "NsxDnsServicePatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxDnsService.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxDnsServicePatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxDnsServiceProperties": {
+      "type": "object",
+      "description": "Properties of a DNS service.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "listenerIp": {
+          "type": "string",
+          "description": "The listener IP address."
+        },
+        "gatewayRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated gateway."
+        },
+        "zoneRefs": {
+          "type": "array",
+          "description": "ARM resource IDs of the DNS forwarder zones.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "nsxOriginal": {
+          "$ref": "#/definitions/NsxOriginal",
+          "description": "Original NSX resource metadata."
+        }
+      }
+    },
+    "NsxFabricPatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxFabric.",
+      "properties": {
+        "sourceApplianceId": {
+          "type": "string",
+          "description": "The source appliance identifier."
+        }
+      }
+    },
+    "NsxFabricPatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxFabric (kept for NsxManager-level fabric patching).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxFabricPatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxGatewayFirewallPolicy": {
+      "type": "object",
+      "description": "A gateway firewall policy resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxGatewayFirewallPolicyProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxGatewayFirewallPolicyList": {
+      "type": "object",
+      "description": "A list of NsxGatewayFirewallPolicy resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxGatewayFirewallPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxGatewayFirewallPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxGatewayFirewallPolicyPatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxGatewayFirewallPolicy.",
+      "properties": {
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number."
+        }
+      }
+    },
+    "NsxGatewayFirewallPolicyPatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxGatewayFirewallPolicy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxGatewayFirewallPolicyPatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxGatewayFirewallPolicyProperties": {
+      "type": "object",
+      "description": "Properties of a gateway firewall policy.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "category": {
+          "$ref": "#/definitions/GatewayPolicyCategory",
+          "description": "The policy category."
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number determining policy evaluation order."
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether this is a default policy."
+        },
+        "federationScope": {
+          "$ref": "#/definitions/FederationScope",
+          "description": "The federation scope of the policy."
+        },
+        "appliedScopes": {
+          "type": "array",
+          "description": "ARM resource IDs of scopes this policy is applied to.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "effectiveScopes": {
+          "type": "array",
+          "description": "ARM resource IDs of effective scopes.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "nsxOriginal": {
+          "$ref": "#/definitions/NsxOriginal",
+          "description": "Original NSX resource metadata."
+        }
+      }
+    },
+    "NsxGatewayFirewallRule": {
+      "type": "object",
+      "description": "A gateway firewall rule resource (child of NsxGatewayFirewallPolicy).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxGatewayFirewallRuleProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxGatewayFirewallRuleList": {
+      "type": "object",
+      "description": "A list of NsxGatewayFirewallRule resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxGatewayFirewallRule items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxGatewayFirewallRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxGatewayFirewallRulePatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxGatewayFirewallRule.",
+      "properties": {
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the rule is disabled."
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number."
+        }
+      }
+    },
+    "NsxGatewayFirewallRulePatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxGatewayFirewallRule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxGatewayFirewallRulePatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxGatewayFirewallRuleProperties": {
+      "type": "object",
+      "description": "Properties of a gateway firewall rule.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "action": {
+          "$ref": "#/definitions/FirewallAction",
+          "description": "The action to take when the rule matches."
+        },
+        "direction": {
+          "$ref": "#/definitions/FirewallDirection",
+          "description": "The traffic direction the rule applies to."
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the rule is disabled."
+        },
+        "sequenceNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sequence number determining rule evaluation order."
+        },
+        "sourceIpGroups": {
+          "type": "array",
+          "description": "ARM resource IDs of source IP groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "sourceAddresses": {
+          "type": "array",
+          "description": "Source IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpGroups": {
+          "type": "array",
+          "description": "ARM resource IDs of destination IP groups.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "destinationAddresses": {
+          "type": "array",
+          "description": "Destination IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "services": {
+          "type": "array",
+          "description": "ARM resource IDs of services this rule applies to.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "appliedScopes": {
+          "type": "array",
+          "description": "ARM resource IDs of scopes this rule is applied to.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "effectiveScopes": {
+          "type": "array",
+          "description": "ARM resource IDs of effective scopes.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "nsxOriginal": {
+          "$ref": "#/definitions/NsxOriginal",
+          "description": "Original NSX resource metadata."
+        }
+      }
+    },
+    "NsxGroup": {
+      "type": "object",
+      "description": "An NS group resource (NSX security group).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxGroupProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxGroupList": {
+      "type": "object",
+      "description": "A list of NsxGroup resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxGroupPatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxGroup.",
+      "properties": {
+        "expressions": {
+          "type": "array",
+          "description": "The group membership expressions.",
+          "items": {
+            "$ref": "#/definitions/GroupExpression"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NsxGroupPatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxGroup.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxGroupPatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxGroupProperties": {
+      "type": "object",
+      "description": "Properties of an NS group.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "expressions": {
+          "type": "array",
+          "description": "The group membership expressions.",
+          "items": {
+            "$ref": "#/definitions/GroupExpression"
+          },
+          "x-ms-identifiers": []
+        },
+        "effectiveVirtualMachineRefs": {
+          "type": "array",
+          "description": "Effective virtual machine references resolved by the group.",
+          "items": {
+            "$ref": "#/definitions/EffectiveVmRef"
+          },
+          "x-ms-identifiers": []
+        },
+        "effectiveIpMembers": {
+          "type": "array",
+          "description": "Effective IP address members resolved by the group.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nsxOriginal": {
+          "$ref": "#/definitions/NsxOriginal",
+          "description": "Original NSX resource metadata."
+        }
+      }
+    },
+    "NsxLoadBalancer": {
+      "type": "object",
+      "description": "An NSX load balancer resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxLoadBalancerProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxLoadBalancerList": {
+      "type": "object",
+      "description": "A list of NsxLoadBalancer resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxLoadBalancer items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxLoadBalancer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxLoadBalancerPatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxLoadBalancer.",
+      "properties": {
+        "adminState": {
+          "$ref": "#/definitions/AdminState",
+          "description": "The admin state."
+        }
+      }
+    },
+    "NsxLoadBalancerPatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxLoadBalancer.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxLoadBalancerPatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxLoadBalancerProperties": {
+      "type": "object",
+      "description": "Properties of an NSX load balancer.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "lbType": {
+          "$ref": "#/definitions/LbType",
+          "description": "The type of load balancer (L4 or L7)."
+        },
+        "adminState": {
+          "$ref": "#/definitions/AdminState",
+          "description": "The administrative state."
+        },
+        "routingContext": {
+          "$ref": "#/definitions/RoutingContext",
+          "description": "The routing context referencing a Tier-1 gateway."
+        },
+        "frontend": {
+          "$ref": "#/definitions/FrontendConfig",
+          "description": "The frontend configuration."
+        },
+        "backendConfig": {
+          "$ref": "#/definitions/BackendConfig",
+          "description": "The backend configuration (pool, health probe, SNAT)."
+        }
+      }
+    },
+    "NsxManager": {
+      "type": "object",
+      "description": "An NSX Manager resource discovered within a network site.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxManagerProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxManagerList": {
+      "type": "object",
+      "description": "A list of NsxManager resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxManager items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxManager"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxManagerPatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxManager.",
+      "properties": {
+        "runAsAccount": {
+          "type": "string",
+          "description": "The run-as account credential reference."
+        },
+        "version": {
+          "type": "string",
+          "description": "The NSX Manager version."
+        }
+      }
+    },
+    "NsxManagerPatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxManager.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxManagerPatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxManagerProperties": {
+      "type": "object",
+      "description": "Properties of an NSX Manager.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "The fully qualified domain name of the NSX Manager."
+        },
+        "runAsAccount": {
+          "type": "string",
+          "description": "The run-as account credential reference."
+        },
+        "version": {
+          "type": "string",
+          "description": "The NSX Manager software version."
+        },
+        "isGlobalManager": {
+          "type": "boolean",
+          "description": "Whether this is an NSX global manager."
+        },
+        "managedSiteRefs": {
+          "type": "array",
+          "description": "ARM resource IDs of managed VMware sites.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "managedVcenterRefs": {
+          "type": "array",
+          "description": "ARM resource IDs of managed vCenter servers.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "localManagers": {
+          "type": "array",
+          "description": "ARM resource IDs of local NSX managers (if this is a global manager).",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "discoverySnapshotId": {
+          "type": "string",
+          "description": "The discovery snapshot identifier."
+        },
+        "discoveryWindow": {
+          "$ref": "#/definitions/DiscoveryWindow",
+          "description": "The discovery time window."
+        },
+        "sourceApplianceId": {
+          "type": "string",
+          "description": "The source appliance identifier."
+        },
+        "ingestionStatus": {
+          "$ref": "#/definitions/IngestionStatus",
+          "description": "The ingestion status of the last discovery."
+        },
+        "coverageCounts": {
+          "$ref": "#/definitions/CoverageCounts",
+          "description": "Coverage counts of discovered NSX resources."
+        }
+      },
+      "required": [
+        "fqdn"
+      ]
+    },
+    "NsxNatRule": {
+      "type": "object",
+      "description": "An NSX NAT rule resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxNatRuleProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxNatRuleList": {
+      "type": "object",
+      "description": "A list of NsxNatRule resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxNatRule items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxNatRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxNatRulePatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxNatRule.",
+      "properties": {
+        "adminState": {
+          "$ref": "#/definitions/AdminState",
+          "description": "The admin state."
+        }
+      }
+    },
+    "NsxNatRulePatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxNatRule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxNatRulePatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxNatRuleProperties": {
+      "type": "object",
+      "description": "Properties of an NSX NAT rule.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "natType": {
+          "$ref": "#/definitions/NatType",
+          "description": "The NAT type (SNAT or DNAT)."
+        },
+        "adminState": {
+          "$ref": "#/definitions/AdminState",
+          "description": "The administrative state."
+        },
+        "routingContext": {
+          "$ref": "#/definitions/RoutingContext",
+          "description": "The routing context referencing a Tier-1 gateway."
+        },
+        "match": {
+          "$ref": "#/definitions/NatMatch",
+          "description": "The match criteria."
+        },
+        "translate": {
+          "$ref": "#/definitions/NatTranslate",
+          "description": "The translation target."
+        },
+        "contentHash": {
+          "type": "string",
+          "description": "A content hash for change detection."
+        },
+        "tags": {
+          "type": "array",
+          "description": "NSX tags applied to this NAT rule.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NsxOriginal": {
+      "type": "object",
+      "description": "Original NSX resource reference metadata.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The NSX path identifier."
+        },
+        "localId": {
+          "type": "string",
+          "description": "The NSX local identifier."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The NSX resource type."
+        }
+      }
+    },
+    "NsxSegment": {
+      "type": "object",
+      "description": "An NSX segment resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxSegmentProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxSegmentList": {
+      "type": "object",
+      "description": "A list of NsxSegment resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxSegment items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxSegment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxSegmentPatchFields": {
+      "type": "object",
+      "description": "Patchable fields for NsxSegment.",
+      "properties": {
+        "adminState": {
+          "$ref": "#/definitions/AdminState",
+          "description": "The admin state."
+        }
+      }
+    },
+    "NsxSegmentPatchProperties": {
+      "type": "object",
+      "description": "Patch properties for NsxSegment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxSegmentPatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxSegmentProperties": {
+      "type": "object",
+      "description": "Properties of an NSX segment.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "parentGateway": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent gateway."
+        },
+        "segmentType": {
+          "$ref": "#/definitions/SegmentType",
+          "description": "The segment type."
+        },
+        "vlanIds": {
+          "type": "array",
+          "description": "VLAN identifiers for this segment.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subnets": {
+          "type": "array",
+          "description": "The subnet definitions.",
+          "items": {
+            "$ref": "#/definitions/Subnet"
+          },
+          "x-ms-identifiers": []
+        },
+        "systemOwned": {
+          "type": "boolean",
+          "description": "Whether this segment is system-owned."
+        },
+        "adminState": {
+          "$ref": "#/definitions/AdminState",
+          "description": "The administrative state of the segment."
+        },
+        "associatedVirtualMachines": {
+          "type": "array",
+          "description": "ARM resource IDs of virtual machines connected to this segment.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "tags": {
+          "type": "array",
+          "description": "NSX tags applied to this segment.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "NsxTag": {
+      "type": "object",
+      "description": "An NSX tag (scope + tag pair).",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The tag scope."
+        },
+        "tag": {
+          "type": "string",
+          "description": "The tag value."
+        }
+      }
+    },
+    "NsxTier0Gateway": {
+      "type": "object",
+      "description": "An NSX Tier-0 gateway resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxTier0GatewayProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxTier0GatewayList": {
+      "type": "object",
+      "description": "A list of NsxTier0Gateway resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxTier0Gateway items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxTier0Gateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxTier0GatewayPatchFields": {
+      "type": "object",
+      "description": "Patchable fields for Tier-0 gateway.",
+      "properties": {
+        "haMode": {
+          "$ref": "#/definitions/HaMode",
+          "description": "The high-availability mode."
+        },
+        "firewallEnabled": {
+          "type": "boolean",
+          "description": "Whether the firewall is enabled."
+        }
+      }
+    },
+    "NsxTier0GatewayPatchProperties": {
+      "type": "object",
+      "description": "Patch properties for Tier-0 gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxTier0GatewayPatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxTier0GatewayProperties": {
+      "type": "object",
+      "description": "Properties of an NSX Tier-0 gateway.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "haMode": {
+          "$ref": "#/definitions/HaMode",
+          "description": "The high-availability mode."
+        },
+        "firewallEnabled": {
+          "type": "boolean",
+          "description": "Whether the firewall is enabled on this gateway."
+        },
+        "associatedSegments": {
+          "type": "array",
+          "description": "ARM resource IDs of associated segments.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedDnsServices": {
+          "type": "array",
+          "description": "ARM resource IDs of associated DNS services.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedNatRules": {
+          "type": "array",
+          "description": "ARM resource IDs of associated NAT rules.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedGfwPolicies": {
+          "type": "array",
+          "description": "ARM resource IDs of associated gateway firewall policies.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedLoadBalancers": {
+          "type": "array",
+          "description": "ARM resource IDs of associated load balancers.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      }
+    },
+    "NsxTier1Gateway": {
+      "type": "object",
+      "description": "An NSX Tier-1 gateway resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxTier1GatewayProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxTier1GatewayList": {
+      "type": "object",
+      "description": "A list of NsxTier1Gateway resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NsxTier1Gateway items on this page",
+          "items": {
+            "$ref": "#/definitions/NsxTier1Gateway"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxTier1GatewayPatchFields": {
+      "type": "object",
+      "description": "Patchable fields for Tier-1 gateway.",
+      "properties": {
+        "haMode": {
+          "$ref": "#/definitions/HaMode",
+          "description": "The high-availability mode."
+        },
+        "firewallEnabled": {
+          "type": "boolean",
+          "description": "Whether the firewall is enabled."
+        }
+      }
+    },
+    "NsxTier1GatewayPatchProperties": {
+      "type": "object",
+      "description": "Patch properties for Tier-1 gateway.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxTier1GatewayPatchFields",
+          "description": "The patch properties."
+        }
+      }
+    },
+    "NsxTier1GatewayProperties": {
+      "type": "object",
+      "description": "Properties of an NSX Tier-1 gateway.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "haMode": {
+          "$ref": "#/definitions/HaMode",
+          "description": "The high-availability mode."
+        },
+        "firewallEnabled": {
+          "type": "boolean",
+          "description": "Whether the firewall is enabled on this gateway."
+        },
+        "parentTier0Gateway": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent Tier-0 gateway."
+        },
+        "associatedSegments": {
+          "type": "array",
+          "description": "ARM resource IDs of associated segments.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedDnsServices": {
+          "type": "array",
+          "description": "ARM resource IDs of associated DNS services.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedNatRules": {
+          "type": "array",
+          "description": "ARM resource IDs of associated NAT rules.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedGfwPolicies": {
+          "type": "array",
+          "description": "ARM resource IDs of associated gateway firewall policies.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        },
+        "associatedLoadBalancers": {
+          "type": "array",
+          "description": "ARM resource IDs of associated load balancers.",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Deleting",
+        "Updating",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The provisioning state is unknown."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RoutingContext": {
+      "type": "object",
+      "description": "Routing context referencing a Tier-1 gateway.",
+      "properties": {
+        "tier1Gateway": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated Tier-1 gateway."
+        }
+      }
+    },
+    "SegmentType": {
+      "type": "string",
+      "description": "The type of an NSX segment.",
+      "enum": [
+        "ROUTED",
+        "EXTENDED",
+        "ROUTED_AND_EXTENDED",
+        "DISCONNECTED"
+      ],
+      "x-ms-enum": {
+        "name": "SegmentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ROUTED",
+            "value": "ROUTED",
+            "description": "Routed segment."
+          },
+          {
+            "name": "EXTENDED",
+            "value": "EXTENDED",
+            "description": "Extended segment."
+          },
+          {
+            "name": "ROUTED_AND_EXTENDED",
+            "value": "ROUTED_AND_EXTENDED",
+            "description": "Routed and extended segment."
+          },
+          {
+            "name": "DISCONNECTED",
+            "value": "DISCONNECTED",
+            "description": "Disconnected segment."
+          }
+        ]
+      }
+    },
+    "SiteTagsPatch": {
+      "type": "object",
+      "description": "Site-level patch model (tags only).",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SnatConfig": {
+      "type": "object",
+      "description": "SNAT configuration for a load balancer.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SnatType",
+          "description": "The SNAT type."
+        },
+        "ipPoolAddresses": {
+          "type": "array",
+          "description": "IP pool addresses for SNAT.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SnatType": {
+      "type": "string",
+      "description": "The SNAT type for a load balancer.",
+      "enum": [
+        "DISABLED",
+        "AUTOMAP",
+        "IPPOOL"
+      ],
+      "x-ms-enum": {
+        "name": "SnatType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DISABLED",
+            "value": "DISABLED",
+            "description": "SNAT is disabled."
+          },
+          {
+            "name": "AUTOMAP",
+            "value": "AUTOMAP",
+            "description": "SNAT uses auto-mapped IPs."
+          },
+          {
+            "name": "IPPOOL",
+            "value": "IPPOOL",
+            "description": "SNAT uses an IP pool."
+          }
+        ]
+      }
+    },
+    "Subnet": {
+      "type": "object",
+      "description": "A subnet definition within a segment.",
+      "properties": {
+        "gatewayAddress": {
+          "type": "string",
+          "description": "The gateway address in CIDR notation."
+        },
+        "network": {
+          "type": "string",
+          "description": "The network address in CIDR notation."
+        }
+      }
+    },
+    "TagsUpdate": {
+      "type": "object",
+      "description": "Tags update model.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpstreamServer": {
+      "type": "object",
+      "description": "An upstream DNS server.",
+      "properties": {
+        "ip": {
+          "type": "string",
+          "description": "The IP address of the upstream server."
+        },
+        "vmRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated virtual machine."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

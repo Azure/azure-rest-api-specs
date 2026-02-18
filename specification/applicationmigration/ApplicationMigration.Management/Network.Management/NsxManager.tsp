@@ -1,0 +1,116 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./NetworkSite.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.ApplicationMigration;
+
+/**
+ * An NSX Manager resource discovered within a network site.
+ */
+@parentResource(NetworkSite)
+model NsxManager
+  is Azure.ResourceManager.ProxyResource<NsxManagerProperties, false> {
+  ...ResourceNameParameter<
+    Resource = NsxManager,
+    KeyName = "managerName",
+    SegmentName = "nsxManagers",
+    NamePattern = "^[a-zA-Z0-9-]*$"
+  >;
+}
+
+/**
+ * Properties of an NSX Manager.
+ */
+model NsxManagerProperties is AzureResourceProperties {
+  /** The fully qualified domain name of the NSX Manager. */
+  fqdn: string;
+
+  /** The run-as account credential reference. */
+  runAsAccount?: string;
+
+  /** The NSX Manager software version. */
+  version?: string;
+
+  /** Whether this is an NSX global manager. */
+  isGlobalManager?: boolean;
+
+  /** ARM resource IDs of managed VMware sites. */
+  managedSiteRefs?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of managed vCenter servers. */
+  managedVcenterRefs?: Azure.Core.armResourceIdentifier[];
+
+  /** ARM resource IDs of local NSX managers (if this is a global manager). */
+  localManagers?: Azure.Core.armResourceIdentifier[];
+
+  /** The discovery snapshot identifier. */
+  discoverySnapshotId?: string;
+
+  /** The discovery time window. */
+  discoveryWindow?: DiscoveryWindow;
+
+  /** The source appliance identifier. */
+  sourceApplianceId?: string;
+
+  /** The ingestion status of the last discovery. */
+  ingestionStatus?: IngestionStatus;
+
+  /** Coverage counts of discovered NSX resources. */
+  coverageCounts?: CoverageCounts;
+}
+
+@armResourceOperations
+interface NsxManagers {
+  /**
+   * Gets the NsxManager resource.
+   */
+  get is ArmResourceRead<NsxManager>;
+
+  /**
+   * Creates or updates the NsxManager resource.
+   */
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NsxManager>;
+
+  /**
+   * Patches the NsxManager resource.
+   */
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<NsxManager, NsxManagerPatchProperties>;
+
+  /**
+   * Deletes the NsxManager resource.
+   */
+  delete is ArmResourceDeleteSync<NsxManager>;
+
+  /**
+   * Lists NsxManager resources within a network site.
+   */
+  listByNetworkSite is ArmResourceListByParent<
+    NsxManager,
+    Response = ArmResponse<NsxManagerList>
+  >;
+}
+
+/**
+ * A list of NsxManager resources.
+ */
+model NsxManagerList is Azure.Core.Page<NsxManager>;
+
+@@maxLength(NsxManager.name, 63);
+@@minLength(NsxManager.name, 3);
+@@doc(NsxManager.name, "The name of the NSX Manager.");
+@@doc(NsxManager.properties, "Resource properties.");
+@@doc(NsxManagers.createOrUpdate::parameters.resource,
+  "The request body for creating or updating an NsxManager resource."
+);
+@@doc(NsxManagers.update::parameters.properties,
+  "The request body for patching an NsxManager resource."
+);
