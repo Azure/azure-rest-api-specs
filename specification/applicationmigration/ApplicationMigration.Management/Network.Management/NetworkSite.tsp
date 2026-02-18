@@ -83,15 +83,8 @@ interface NetworkSites {
   >;
 }
 
-/**
- * A list of NetworkSite resources.
- */
 model NetworkSiteList is Azure.Core.Page<NetworkSite>;
 
 @@maxLength(NetworkSite.name, 63);
 @@minLength(NetworkSite.name, 3);
 @@doc(NetworkSite.name, "The name of the network site.");
-@@doc(NetworkSite.properties, "Resource properties.");
-@@doc(NetworkSites.createOrUpdate::parameters.resource,
-  "The request body for creating or updating a NetworkSite resource."
-);

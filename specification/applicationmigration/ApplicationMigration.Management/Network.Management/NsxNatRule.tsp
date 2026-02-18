@@ -85,18 +85,8 @@ interface NsxNatRules {
   >;
 }
 
-/**
- * A list of NsxNatRule resources.
- */
 model NsxNatRuleList is Azure.Core.Page<NsxNatRule>;
 
 @@maxLength(NsxNatRule.name, 63);
 @@minLength(NsxNatRule.name, 3);
 @@doc(NsxNatRule.name, "The name of the NAT rule.");
-@@doc(NsxNatRule.properties, "Resource properties.");
-@@doc(NsxNatRules.createOrUpdate::parameters.resource,
-  "The request body for creating or updating an NsxNatRule resource."
-);
-@@doc(NsxNatRules.update::parameters.properties,
-  "The request body for patching an NsxNatRule resource."
-);

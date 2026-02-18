@@ -78,18 +78,8 @@ interface NsxLoadBalancers {
   >;
 }
 
-/**
- * A list of NsxLoadBalancer resources.
- */
 model NsxLoadBalancerList is Azure.Core.Page<NsxLoadBalancer>;
 
 @@maxLength(NsxLoadBalancer.name, 63);
 @@minLength(NsxLoadBalancer.name, 3);
 @@doc(NsxLoadBalancer.name, "The name of the load balancer.");
-@@doc(NsxLoadBalancer.properties, "Resource properties.");
-@@doc(NsxLoadBalancers.createOrUpdate::parameters.resource,
-  "The request body for creating or updating an NsxLoadBalancer resource."
-);
-@@doc(NsxLoadBalancers.update::parameters.properties,
-  "The request body for patching an NsxLoadBalancer resource."
-);

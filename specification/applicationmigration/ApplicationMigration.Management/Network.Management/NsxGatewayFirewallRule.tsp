@@ -102,18 +102,8 @@ interface NsxGatewayFirewallRules {
   >;
 }
 
-/**
- * A list of NsxGatewayFirewallRule resources.
- */
 model NsxGatewayFirewallRuleList is Azure.Core.Page<NsxGatewayFirewallRule>;
 
 @@maxLength(NsxGatewayFirewallRule.name, 63);
 @@minLength(NsxGatewayFirewallRule.name, 3);
 @@doc(NsxGatewayFirewallRule.name, "The name of the gateway firewall rule.");
-@@doc(NsxGatewayFirewallRule.properties, "Resource properties.");
-@@doc(NsxGatewayFirewallRules.createOrUpdate::parameters.resource,
-  "The request body for creating or updating a NsxGatewayFirewallRule resource."
-);
-@@doc(NsxGatewayFirewallRules.update::parameters.properties,
-  "The request body for patching a NsxGatewayFirewallRule resource."
-);

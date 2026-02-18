@@ -87,18 +87,8 @@ interface NsxTier1Gateways {
   >;
 }
 
-/**
- * A list of NsxTier1Gateway resources.
- */
 model NsxTier1GatewayList is Azure.Core.Page<NsxTier1Gateway>;
 
 @@maxLength(NsxTier1Gateway.name, 63);
 @@minLength(NsxTier1Gateway.name, 3);
 @@doc(NsxTier1Gateway.name, "The name of the Tier-1 gateway.");
-@@doc(NsxTier1Gateway.properties, "Resource properties.");
-@@doc(NsxTier1Gateways.createOrUpdate::parameters.resource,
-  "The request body for creating or updating a NsxTier1Gateway resource."
-);
-@@doc(NsxTier1Gateways.update::parameters.properties,
-  "The request body for patching a NsxTier1Gateway resource."
-);

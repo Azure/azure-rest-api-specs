@@ -1,0 +1,73 @@
+{
+  "title": "NetworkSites_CreateOrUpdate_MaximumSet",
+  "operationId": "NetworkSites_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "79C8D6F5-8132-4850-8755-1E1CD4A513F7",
+    "resourceGroupName": "rgNetworkDiscovery",
+    "siteName": "testSite",
+    "resource": {
+      "properties": {
+        "masterSiteId": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.OffAzure/masterSites/testMasterSite",
+        "migrateProjectId": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.Migrate/migrateProjects/testProject"
+      },
+      "tags": {
+        "env": "test"
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "masterSiteId": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.OffAzure/masterSites/testMasterSite",
+          "migrateProjectId": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.Migrate/migrateProjects/testProject"
+        },
+        "tags": {
+          "env": "test"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.ApplicationMigration/networkSites/testSite",
+        "name": "testSite",
+        "type": "Microsoft.ApplicationMigration/networkSites",
+        "systemData": {
+          "lastModifiedBy": "user@contoso.com",
+          "createdByType": "User",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-15T10:00:00.000Z",
+          "createdBy": "user@contoso.com",
+          "createdAt": "2026-01-15T10:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "masterSiteId": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.OffAzure/masterSites/testMasterSite",
+          "migrateProjectId": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.Migrate/migrateProjects/testProject"
+        },
+        "tags": {
+          "env": "test"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.ApplicationMigration/networkSites/testSite",
+        "name": "testSite",
+        "type": "Microsoft.ApplicationMigration/networkSites",
+        "systemData": {
+          "lastModifiedBy": "user@contoso.com",
+          "createdByType": "User",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-15T10:00:00.000Z",
+          "createdBy": "user@contoso.com",
+          "createdAt": "2026-01-15T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}

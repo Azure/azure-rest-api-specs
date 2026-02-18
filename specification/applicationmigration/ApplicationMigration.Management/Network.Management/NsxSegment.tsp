@@ -89,18 +89,8 @@ interface NsxSegments {
   >;
 }
 
-/**
- * A list of NsxSegment resources.
- */
 model NsxSegmentList is Azure.Core.Page<NsxSegment>;
 
 @@maxLength(NsxSegment.name, 63);
 @@minLength(NsxSegment.name, 3);
 @@doc(NsxSegment.name, "The name of the segment.");
-@@doc(NsxSegment.properties, "Resource properties.");
-@@doc(NsxSegments.createOrUpdate::parameters.resource,
-  "The request body for creating or updating a NsxSegment resource."
-);
-@@doc(NsxSegments.update::parameters.properties,
-  "The request body for patching a NsxSegment resource."
-);

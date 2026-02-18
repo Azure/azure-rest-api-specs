@@ -87,18 +87,8 @@ interface GatewayFirewallPolicies {
   >;
 }
 
-/**
- * A list of NsxGatewayFirewallPolicy resources.
- */
 model NsxGatewayFirewallPolicyList is Azure.Core.Page<NsxGatewayFirewallPolicy>;
 
 @@maxLength(NsxGatewayFirewallPolicy.name, 63);
 @@minLength(NsxGatewayFirewallPolicy.name, 3);
 @@doc(NsxGatewayFirewallPolicy.name, "The name of the gateway firewall policy.");
-@@doc(NsxGatewayFirewallPolicy.properties, "Resource properties.");
-@@doc(GatewayFirewallPolicies.createOrUpdate::parameters.resource,
-  "The request body for creating or updating a NsxGatewayFirewallPolicy resource."
-);
-@@doc(GatewayFirewallPolicies.update::parameters.properties,
-  "The request body for patching a NsxGatewayFirewallPolicy resource."
-);

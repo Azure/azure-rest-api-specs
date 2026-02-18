@@ -652,17 +652,13 @@ model GroupExpression {
 //  Patch Models for ProxyResources
 // ──────────────────────────────────────────────
 
-/**
- * Patch properties for NsxManager.
- */
+/** NsxManager patch envelope. */
 model NsxManagerPatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxManagerPatchFields;
 }
 
-/**
- * Patchable fields for NsxManager.
- */
+/** NsxManager updatable fields. */
 model NsxManagerPatchFields {
   /** The run-as account credential reference. */
   runAsAccount?: string;
@@ -671,17 +667,13 @@ model NsxManagerPatchFields {
   version?: string;
 }
 
-/**
- * Patch properties for Tier-0 gateway.
- */
+/** NsxTier0Gateway patch envelope. */
 model NsxTier0GatewayPatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxTier0GatewayPatchFields;
 }
 
-/**
- * Patchable fields for Tier-0 gateway.
- */
+/** NsxTier0Gateway updatable fields. */
 model NsxTier0GatewayPatchFields {
   /** The high-availability mode. */
   haMode?: HaMode;
@@ -690,17 +682,13 @@ model NsxTier0GatewayPatchFields {
   firewallEnabled?: boolean;
 }
 
-/**
- * Patch properties for Tier-1 gateway.
- */
+/** NsxTier1Gateway patch envelope. */
 model NsxTier1GatewayPatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxTier1GatewayPatchFields;
 }
 
-/**
- * Patchable fields for Tier-1 gateway.
- */
+/** NsxTier1Gateway updatable fields. */
 model NsxTier1GatewayPatchFields {
   /** The high-availability mode. */
   haMode?: HaMode;
@@ -709,66 +697,50 @@ model NsxTier1GatewayPatchFields {
   firewallEnabled?: boolean;
 }
 
-/**
- * Patch properties for NsxSegment.
- */
+/** NsxSegment patch envelope. */
 model NsxSegmentPatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxSegmentPatchFields;
 }
 
-/**
- * Patchable fields for NsxSegment.
- */
+/** NsxSegment updatable fields. */
 model NsxSegmentPatchFields {
   /** The admin state. */
   adminState?: AdminState;
 }
 
-/**
- * Patch properties for NsxGroup.
- */
+/** NsxGroup patch envelope. */
 model NsxGroupPatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxGroupPatchFields;
 }
 
-/**
- * Patchable fields for NsxGroup.
- */
+/** NsxGroup updatable fields. */
 model NsxGroupPatchFields {
   /** The group membership expressions. */
   @identifiers(#[])
   expressions?: GroupExpression[];
 }
 
-/**
- * Patch properties for NsxGatewayFirewallPolicy.
- */
+/** NsxGatewayFirewallPolicy patch envelope. */
 model NsxGatewayFirewallPolicyPatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxGatewayFirewallPolicyPatchFields;
 }
 
-/**
- * Patchable fields for NsxGatewayFirewallPolicy.
- */
+/** NsxGatewayFirewallPolicy updatable fields. */
 model NsxGatewayFirewallPolicyPatchFields {
   /** The sequence number. */
   sequenceNumber?: int32;
 }
 
-/**
- * Patch properties for NsxGatewayFirewallRule.
- */
+/** NsxGatewayFirewallRule patch envelope. */
 model NsxGatewayFirewallRulePatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxGatewayFirewallRulePatchFields;
 }
 
-/**
- * Patchable fields for NsxGatewayFirewallRule.
- */
+/** NsxGatewayFirewallRule updatable fields. */
 model NsxGatewayFirewallRulePatchFields {
   /** Whether the rule is disabled. */
   disabled?: boolean;
@@ -777,82 +749,62 @@ model NsxGatewayFirewallRulePatchFields {
   sequenceNumber?: int32;
 }
 
-/**
- * Patch properties for NsxLoadBalancer.
- */
+/** NsxLoadBalancer patch envelope. */
 model NsxLoadBalancerPatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxLoadBalancerPatchFields;
 }
 
-/**
- * Patchable fields for NsxLoadBalancer.
- */
+/** NsxLoadBalancer updatable fields. */
 model NsxLoadBalancerPatchFields {
   /** The admin state. */
   adminState?: AdminState;
 }
 
-/**
- * Patch properties for NsxNatRule.
- */
+/** NsxNatRule patch envelope. */
 model NsxNatRulePatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxNatRulePatchFields;
 }
 
-/**
- * Patchable fields for NsxNatRule.
- */
+/** NsxNatRule updatable fields. */
 model NsxNatRulePatchFields {
   /** The admin state. */
   adminState?: AdminState;
 }
 
-/**
- * Patch properties for NsxDnsService.
- */
+/** NsxDnsService patch envelope. */
 model NsxDnsServicePatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxDnsServicePatchFields;
 }
 
-/**
- * Patchable fields for NsxDnsService.
- */
+/** NsxDnsService updatable fields. */
 model NsxDnsServicePatchFields {
   /** The listener IP address. */
   listenerIp?: string;
 }
 
-/**
- * Patch properties for NsxDnsForwarderZone.
- */
+/** NsxDnsForwarderZone patch envelope. */
 model NsxDnsForwarderZonePatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxDnsForwarderZonePatchFields;
 }
 
-/**
- * Patchable fields for NsxDnsForwarderZone.
- */
+/** NsxDnsForwarderZone updatable fields. */
 model NsxDnsForwarderZonePatchFields {
   /** The upstream DNS servers. */
   @identifiers(#[])
   upstreamServers?: UpstreamServer[];
 }
 
-/**
- * Patch properties for NsxFabric (kept for NsxManager-level fabric patching).
- */
+/** NsxFabric patch envelope. */
 model NsxFabricPatchProperties {
-  /** The patch properties. */
+  /** Patch payload. */
   properties?: NsxFabricPatchFields;
 }
 
-/**
- * Patchable fields for NsxFabric.
- */
+/** NsxFabric updatable fields. */
 model NsxFabricPatchFields {
   /** The source appliance identifier. */
   sourceApplianceId?: string;

@@ -1,0 +1,70 @@
+{
+  "title": "NsxLoadBalancers_ListByNetworkSite_MaximumSet",
+  "operationId": "NsxLoadBalancers_ListByNetworkSite",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "79C8D6F5-8132-4850-8755-1E1CD4A513F7",
+    "resourceGroupName": "rgNetworkDiscovery",
+    "siteName": "testSite"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "adminState": "ENABLED",
+              "frontend": {
+                "vip": "10.0.0.100",
+                "port": 443,
+                "protocol": "HTTPS"
+              },
+              "routingContext": {
+                "tier1Gateway": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.ApplicationMigration/networkSites/testSite/tier1Gateways/testT1Gw"
+              },
+              "lbType": "L4",
+              "backendConfig": {
+                "backendPool": {
+                  "algorithm": "ROUND_ROBIN",
+                  "members": [
+                    {
+                      "ipAddress": "10.0.1.10",
+                      "port": 8080,
+                      "adminState": "ENABLED",
+                      "weight": 1,
+                      "associatedCompute": {
+                        "type": "VMwareVM",
+                        "id": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.OffAzure/vmwareSites/site1/machines/vm1"
+                      }
+                    }
+                  ]
+                },
+                "healthProbe": {
+                  "protocol": "HTTP",
+                  "port": 8080
+                },
+                "snat": {
+                  "type": "AUTOMAP",
+                  "ipPoolAddresses": []
+                }
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.ApplicationMigration/networkSites/testSite/loadBalancers/testLb",
+            "name": "testLb",
+            "type": "Microsoft.ApplicationMigration/networkSites/loadBalancers",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2026-01-15T10:00:00.000Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-01-15T10:00:00.000Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

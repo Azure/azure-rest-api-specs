@@ -1,0 +1,126 @@
+{
+  "title": "NsxGroups_CreateOrUpdate_MaximumSet",
+  "operationId": "NsxGroups_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "79C8D6F5-8132-4850-8755-1E1CD4A513F7",
+    "resourceGroupName": "rgNetworkDiscovery",
+    "siteName": "testSite",
+    "groupName": "testGroup",
+    "resource": {
+      "properties": {
+        "effectiveVirtualMachineRefs": [
+          {
+            "vmRef": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.OffAzure/vmwareSites/site1/machines/vm1",
+            "displayName": "web-vm-01"
+          }
+        ],
+        "provisioningState": "Succeeded",
+        "nsxOriginal": {
+          "id": "/infra/domains/default/groups/testGroup",
+          "localId": "group-1",
+          "displayName": "testGroup",
+          "resourceType": "Group"
+        },
+        "expressions": [
+          {
+            "resourceType": "Condition",
+            "memberType": "VirtualMachine",
+            "key": "Tag",
+            "operator": "EQUALS",
+            "value": "web"
+          }
+        ],
+        "effectiveIpMembers": [
+          "10.0.1.5"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "effectiveVirtualMachineRefs": [
+            {
+              "vmRef": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.OffAzure/vmwareSites/site1/machines/vm1",
+              "displayName": "web-vm-01"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "nsxOriginal": {
+            "id": "/infra/domains/default/groups/testGroup",
+            "localId": "group-1",
+            "displayName": "testGroup",
+            "resourceType": "Group"
+          },
+          "expressions": [
+            {
+              "resourceType": "Condition",
+              "memberType": "VirtualMachine",
+              "key": "Tag",
+              "operator": "EQUALS",
+              "value": "web"
+            }
+          ],
+          "effectiveIpMembers": [
+            "10.0.1.5"
+          ]
+        },
+        "id": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.ApplicationMigration/networkSites/testSite/nsGroups/testGroup",
+        "name": "testGroup",
+        "type": "Microsoft.ApplicationMigration/networkSites/nsGroups",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-15T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-15T10:00:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "effectiveVirtualMachineRefs": [
+            {
+              "vmRef": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.OffAzure/vmwareSites/site1/machines/vm1",
+              "displayName": "web-vm-01"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "nsxOriginal": {
+            "id": "/infra/domains/default/groups/testGroup",
+            "localId": "group-1",
+            "displayName": "testGroup",
+            "resourceType": "Group"
+          },
+          "expressions": [
+            {
+              "resourceType": "Condition",
+              "memberType": "VirtualMachine",
+              "key": "Tag",
+              "operator": "EQUALS",
+              "value": "web"
+            }
+          ],
+          "effectiveIpMembers": [
+            "10.0.1.5"
+          ]
+        },
+        "id": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.ApplicationMigration/networkSites/testSite/nsGroups/testGroup",
+        "name": "testGroup",
+        "type": "Microsoft.ApplicationMigration/networkSites/nsGroups",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-15T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-15T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}

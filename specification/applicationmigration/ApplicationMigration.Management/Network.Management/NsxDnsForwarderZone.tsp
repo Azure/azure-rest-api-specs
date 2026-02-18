@@ -79,18 +79,8 @@ interface NsxDnsForwarderZones {
   >;
 }
 
-/**
- * A list of NsxDnsForwarderZone resources.
- */
 model NsxDnsForwarderZoneList is Azure.Core.Page<NsxDnsForwarderZone>;
 
 @@maxLength(NsxDnsForwarderZone.name, 63);
 @@minLength(NsxDnsForwarderZone.name, 3);
 @@doc(NsxDnsForwarderZone.name, "The name of the DNS forwarder zone.");
-@@doc(NsxDnsForwarderZone.properties, "Resource properties.");
-@@doc(NsxDnsForwarderZones.createOrUpdate::parameters.resource,
-  "The request body for creating or updating a NsxDnsForwarderZone resource."
-);
-@@doc(NsxDnsForwarderZones.update::parameters.properties,
-  "The request body for patching a NsxDnsForwarderZone resource."
-);

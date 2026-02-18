@@ -77,18 +77,8 @@ interface NsxGroups {
   >;
 }
 
-/**
- * A list of NsxGroup resources.
- */
 model NsxGroupList is Azure.Core.Page<NsxGroup>;
 
 @@maxLength(NsxGroup.name, 63);
 @@minLength(NsxGroup.name, 3);
 @@doc(NsxGroup.name, "The name of the NS group.");
-@@doc(NsxGroup.properties, "Resource properties.");
-@@doc(NsxGroups.createOrUpdate::parameters.resource,
-  "The request body for creating or updating an NsxGroup resource."
-);
-@@doc(NsxGroups.update::parameters.properties,
-  "The request body for patching an NsxGroup resource."
-);

@@ -1,0 +1,58 @@
+{
+  "title": "NsxManagers_Get_MaximumSet",
+  "operationId": "NsxManagers_Get",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "79C8D6F5-8132-4850-8755-1E1CD4A513F7",
+    "resourceGroupName": "rgNetworkDiscovery",
+    "siteName": "testSite",
+    "managerName": "testManager"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sourceApplianceId": "appliance-001",
+          "discoveryWindow": {
+            "startTime": "2026-01-01T00:00:00Z",
+            "endTime": "2026-01-01T01:00:00Z"
+          },
+          "discoverySnapshotId": "snap-001",
+          "managedSiteRefs": [
+            "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.OffAzure/vmwareSites/site1"
+          ],
+          "runAsAccount": "account1",
+          "coverageCounts": {
+            "tier0Gateways": 2,
+            "tier1Gateways": 5,
+            "segments": 10,
+            "groups": 8,
+            "gatewayFirewallPolicies": 3,
+            "natRules": 4,
+            "loadBalancers": 2,
+            "dnsServices": 1
+          },
+          "managedVcenterRefs": [
+            "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.OffAzure/vmwareSites/site1/vcenters/vc1"
+          ],
+          "fqdn": "nsx-mgr01.contoso.com",
+          "version": "4.1.0",
+          "provisioningState": "Succeeded",
+          "isGlobalManager": false,
+          "ingestionStatus": "Complete"
+        },
+        "id": "/subscriptions/79C8D6F5-8132-4850-8755-1E1CD4A513F7/resourceGroups/rgNetworkDiscovery/providers/Microsoft.ApplicationMigration/networkSites/testSite/nsxManagers/testManager",
+        "name": "testManager",
+        "type": "Microsoft.ApplicationMigration/networkSites/nsxManagers",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-15T10:00:00.000Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-15T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}

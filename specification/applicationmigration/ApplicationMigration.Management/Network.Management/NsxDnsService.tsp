@@ -75,18 +75,8 @@ interface NsxDnsServices {
   >;
 }
 
-/**
- * A list of NsxDnsService resources.
- */
 model NsxDnsServiceList is Azure.Core.Page<NsxDnsService>;
 
 @@maxLength(NsxDnsService.name, 63);
 @@minLength(NsxDnsService.name, 3);
 @@doc(NsxDnsService.name, "The name of the DNS service.");
-@@doc(NsxDnsService.properties, "Resource properties.");
-@@doc(NsxDnsServices.createOrUpdate::parameters.resource,
-  "The request body for creating or updating a NsxDnsService resource."
-);
-@@doc(NsxDnsServices.update::parameters.properties,
-  "The request body for patching a NsxDnsService resource."
-);

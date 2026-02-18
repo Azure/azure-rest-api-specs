@@ -99,18 +99,8 @@ interface NsxManagers {
   >;
 }
 
-/**
- * A list of NsxManager resources.
- */
 model NsxManagerList is Azure.Core.Page<NsxManager>;
 
 @@maxLength(NsxManager.name, 63);
 @@minLength(NsxManager.name, 3);
 @@doc(NsxManager.name, "The name of the NSX Manager.");
-@@doc(NsxManager.properties, "Resource properties.");
-@@doc(NsxManagers.createOrUpdate::parameters.resource,
-  "The request body for creating or updating an NsxManager resource."
-);
-@@doc(NsxManagers.update::parameters.properties,
-  "The request body for patching an NsxManager resource."
-);
