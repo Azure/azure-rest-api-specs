@@ -9,30 +9,6 @@ import {
 import { byDate, invert } from "../../shared/src/sort.js";
 import { extractInputs } from "./context.js";
 
-/**
- * Wraps createCommitStatus to catch 401/403/404 (e.g. fork PRs or token restrictions) so the
- * workflow does not fail; logs a warning instead.
- * @param {Object} params
- * @param {import("@octokit/core").Octokit} params.github
- * @param {typeof import("@actions/core")} params.core
- * @param {Parameters<import("@octokit/core").Octokit["rest"]["repos"]["createCommitStatus"]>[0]} params.options
- * @returns {Promise<void>}
- */
-async function createCommitStatusSafe({ github, core, options }) {
-  try {
-    await github.rest.repos.createCommitStatus(options);
-  } catch (err) {
-    const status = err?.response?.status;
-    if (status === 401 || status === 403 || status === 404) {
-      core.warning(
-        `Could not set commit status (${status}): ${err.message}. This can happen for fork PRs or when the token cannot write to the commit.`,
-      );
-      return;
-    }
-    throw err;
-  }
-}
-
 // TODO: Add tests
 /* v8 ignore start */
 /**
@@ -135,18 +111,14 @@ export async function setStatusImpl({
     const state = CheckConclusion.SUCCESS;
     core.info(`Setting status to '${state}' for '${requiredStatusName}'`);
 
-    await createCommitStatusSafe({
-      github,
-      core,
-      options: {
-        owner,
-        repo,
-        sha: head_sha,
-        state,
-        context: requiredStatusName,
-        description,
-        target_url,
-      },
+    await github.rest.repos.createCommitStatus({
+      owner,
+      repo,
+      sha: head_sha,
+      state,
+      context: requiredStatusName,
+      description,
+      target_url,
     });
 
     return;
@@ -243,17 +215,13 @@ export async function setStatusImpl({
         : CheckConclusion.FAILURE;
 
     core.info(`Setting status to '${state}' for '${requiredStatusName}'`);
-    await createCommitStatusSafe({
-      github,
-      core,
-      options: {
-        owner,
-        repo,
-        sha: head_sha,
-        state,
-        context: requiredStatusName,
-        target_url,
-      },
+    await github.rest.repos.createCommitStatus({
+      owner,
+      repo,
+      sha: head_sha,
+      state,
+      context: requiredStatusName,
+      target_url,
     });
   } else {
     core.info(
@@ -261,17 +229,13 @@ export async function setStatusImpl({
         ` Setting status to ${CommitStatusState.PENDING} for required status: ${requiredStatusName}.`,
     );
     // Run was not found (not started), or not completed
-    await createCommitStatusSafe({
-      github,
-      core,
-      options: {
-        owner,
-        repo,
-        sha: head_sha,
-        state: CommitStatusState.PENDING,
-        context: requiredStatusName,
-        target_url,
-      },
+    await github.rest.repos.createCommitStatus({
+      owner,
+      repo,
+      sha: head_sha,
+      state: CommitStatusState.PENDING,
+      context: requiredStatusName,
+      target_url,
     });
   }
 }
