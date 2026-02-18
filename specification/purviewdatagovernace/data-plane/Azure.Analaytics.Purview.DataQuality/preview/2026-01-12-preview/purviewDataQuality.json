@@ -687,7 +687,7 @@
           {
             "name": "assetIdString",
             "in": "query",
-            "description": "Comma-separated list of asset identifiers to get scores for",
+            "description": "Comma-separated list of asset identifiers to get scores for. Required.",
             "required": true,
             "type": "string"
           },
@@ -702,7 +702,9 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/AssetScoresResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -767,7 +769,9 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/DqAssetPaginatedResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -824,13 +828,17 @@
             "in": "body",
             "description": "DQ asset creation request payload",
             "required": true,
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/CreateDqAssetRequest"
+            }
           }
         ],
         "responses": {
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/DqAssetResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -895,7 +903,9 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/DqAssetResponse"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4238,6 +4248,34 @@
         }
       }
     },
+    "AssetScoreObject": {
+      "type": "object",
+      "description": "Asset identifier and its quality score",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "DQ asset identifier (GUID)"
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Data quality score for the asset"
+        }
+      }
+    },
+    "AssetScoresResponse": {
+      "type": "object",
+      "description": "List of asset scores for the requested assets",
+      "properties": {
+        "response": {
+          "type": "array",
+          "description": "List of asset id and score pairs",
+          "items": {
+            "$ref": "#/definitions/AssetScoreObject"
+          }
+        }
+      }
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -4386,6 +4424,32 @@
         "value": {
           "type": "string",
           "description": "Column name or identifier"
+        }
+      }
+    },
+    "CreateDqAssetRequest": {
+      "type": "object",
+      "description": "DQ asset creation request payload",
+      "properties": {
+        "businessDomainId": {
+          "type": "string",
+          "description": "Business domain identifier"
+        },
+        "dataMapAssetId": {
+          "type": "string",
+          "description": "Data map asset identifier (GUID)"
+        },
+        "fqn": {
+          "type": "string",
+          "description": "Fully qualified name of the asset"
+        },
+        "catalogAssetId": {
+          "type": "string",
+          "description": "Catalog asset identifier"
+        },
+        "isGovernedAssetFlag": {
+          "type": "boolean",
+          "description": "Whether the asset is governed"
         }
       }
     },
@@ -4938,6 +5002,82 @@
         "datasourceId": {
           "type": "string",
           "description": "Physical data source identifier"
+        }
+      }
+    },
+    "DqAssetPaginatedResponse": {
+      "type": "object",
+      "description": "Paginated list of DQ assets with continuation token",
+      "properties": {
+        "continuationToken": {
+          "type": "string",
+          "description": "Token to fetch the next page of results"
+        },
+        "response": {
+          "type": "array",
+          "description": "List of DQ assets for the current page",
+          "items": {
+            "$ref": "#/definitions/DqAssetResponse"
+          }
+        }
+      }
+    },
+    "DqAssetResponse": {
+      "type": "object",
+      "description": "DQ asset entity with score, audit fields, and base request fields",
+      "properties": {
+        "businessDomainId": {
+          "type": "string",
+          "description": "Business domain identifier"
+        },
+        "dataMapAssetId": {
+          "type": "string",
+          "description": "Data map asset identifier (GUID)"
+        },
+        "fqn": {
+          "type": "string",
+          "description": "Fully qualified name of the asset"
+        },
+        "catalogAssetId": {
+          "type": "string",
+          "description": "Catalog asset identifier"
+        },
+        "isGovernedAssetFlag": {
+          "type": "boolean",
+          "description": "Whether the asset is governed"
+        },
+        "dataProductId": {
+          "type": "string",
+          "description": "Data product identifier"
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Data quality score for the asset"
+        },
+        "assetId": {
+          "type": "string",
+          "description": "DQ asset identifier (GUID)"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp (ISO 8601)"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Created by (user or system)"
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "description": "Last modified timestamp (ISO 8601)"
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Last modified by (user or system)"
+        },
+        "eTag": {
+          "type": "string",
+          "description": "ETag for concurrency"
         }
       }
     },

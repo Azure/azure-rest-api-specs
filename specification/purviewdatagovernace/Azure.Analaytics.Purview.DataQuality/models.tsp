@@ -2091,6 +2091,107 @@ model CloneAssetRequest {
 }
 
 /**
+ * Request body for creating a DQ asset. Matches service DQAssetRequestWrapper.
+ */
+@doc("DQ asset creation request payload")
+model CreateDqAssetRequest {
+  @doc("Business domain identifier")
+  businessDomainId?: string;
+
+  @doc("Data map asset identifier (GUID)")
+  dataMapAssetId?: string;
+
+  @doc("Fully qualified name of the asset")
+  fqn?: string;
+
+  @doc("Catalog asset identifier")
+  catalogAssetId?: string;
+
+  @doc("Whether the asset is governed")
+  isGovernedAssetFlag?: boolean;
+}
+
+/**
+ * DQ asset response (GET by asset ID). Matches service DQAssetWrapper (extends DQAssetRequestWrapper).
+ */
+@doc("DQ asset entity with score, audit fields, and base request fields")
+model DqAssetResponse {
+  /** Base fields from DQAssetRequestWrapper */
+  @doc("Business domain identifier")
+  businessDomainId?: string;
+
+  @doc("Data map asset identifier (GUID)")
+  dataMapAssetId?: string;
+
+  @doc("Fully qualified name of the asset")
+  fqn?: string;
+
+  @doc("Catalog asset identifier")
+  catalogAssetId?: string;
+
+  @doc("Whether the asset is governed")
+  isGovernedAssetFlag?: boolean;
+
+  /** DQAssetWrapper-specific fields */
+  @doc("Data product identifier")
+  dataProductId?: string;
+
+  @doc("Data quality score for the asset")
+  score?: float64;
+
+  @doc("DQ asset identifier (GUID)")
+  assetId?: string;
+
+  @doc("Creation timestamp (ISO 8601)")
+  createdAt?: string;
+
+  @doc("Created by (user or system)")
+  createdBy?: string;
+
+  @doc("Last modified timestamp (ISO 8601)")
+  lastModifiedAt?: string;
+
+  @doc("Last modified by (user or system)")
+  lastModifiedBy?: string;
+
+  @doc("ETag for concurrency")
+  eTag?: string;
+}
+
+/**
+ * Paginated response for list DQ assets. Matches service DQAssetPaginatedResponse.
+ */
+@doc("Paginated list of DQ assets with continuation token")
+model DqAssetPaginatedResponse {
+  @doc("Token to fetch the next page of results")
+  continuationToken?: string;
+
+  @doc("List of DQ assets for the current page")
+  response?: DqAssetResponse[];
+}
+
+/**
+ * Single asset score entry. Matches service scoreObject.
+ */
+@doc("Asset identifier and its quality score")
+model AssetScoreObject {
+  @doc("DQ asset identifier (GUID)")
+  assetId?: string;
+
+  @doc("Data quality score for the asset")
+  score?: float64;
+}
+
+/**
+ * Response for get asset scores. Matches service AssetScores.
+ */
+@doc("List of asset scores for the requested assets")
+model AssetScoresResponse {
+  @doc("List of asset id and score pairs")
+  response?: AssetScoreObject[];
+}
+
+/**
  * Empty parameter model for operations that require no input parameters.
  * Used for API operations that need explicit parameter structure without content.
  */

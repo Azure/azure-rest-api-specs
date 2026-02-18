@@ -1639,7 +1639,6 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Request body type to be provided; use existing DQ asset request model when available."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets")
@@ -1666,7 +1665,7 @@ namespace PurviewDataQuality {
 
       @doc("DQ asset creation request payload")
       @body
-      request: unknown;
+      request: CreateDqAssetRequest;
     },
     {
       @statusCode
@@ -1674,7 +1673,7 @@ namespace PurviewDataQuality {
 
       @doc("Created DQ asset")
       @body
-      response: unknown;
+      response: DqAssetResponse;
     }
   >;
 
@@ -1685,7 +1684,6 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Response type to be provided; use existing DQ asset model when available."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets/{assetId}")
@@ -1717,7 +1715,7 @@ namespace PurviewDataQuality {
     {
       @doc("DQ asset entity")
       @body
-      response: unknown;
+      response: DqAssetResponse;
     }
   >;
 
@@ -1769,7 +1767,6 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Response type to be provided; use existing paginated DQ asset model when available."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/assets")
@@ -1801,7 +1798,7 @@ namespace PurviewDataQuality {
     {
       @doc("Paginated list of DQ assets")
       @body
-      response: unknown;
+      response: DqAssetPaginatedResponse;
     }
   >;
 
@@ -1812,7 +1809,6 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Response type to be provided; use existing asset scores model when available."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/asset-scores")
@@ -1833,7 +1829,7 @@ namespace PurviewDataQuality {
       @path
       dataAssetId: string;
 
-      @doc("Comma-separated list of asset identifiers to get scores for")
+      @doc("Comma-separated list of asset identifiers to get scores for. Required.")
       @query("assetIdString")
       assetIdString: string;
 
@@ -1844,7 +1840,7 @@ namespace PurviewDataQuality {
     {
       @doc("Asset scores")
       @body
-      response: unknown;
+      response: AssetScoresResponse;
     }
   >;
 
@@ -1855,7 +1851,6 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Request/response body type to be provided; use existing clone model when available."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-examples for API documentation"
   @added(ApiVersions.v2026_01_12_preview)
   @route("/business-domains/{businessDomainId}/data-assets/{dataAssetId}/clone")
