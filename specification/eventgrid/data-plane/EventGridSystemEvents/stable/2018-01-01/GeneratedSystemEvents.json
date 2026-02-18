@@ -3106,6 +3106,16 @@
         "name"
       ]
     },
+    "ApiEntityReference": {
+      "type": "object",
+      "description": "The API entity reference.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/..."
+        }
+      }
+    },
     "ApiManagementApiCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.APICreated event.",
@@ -6771,6 +6781,82 @@
         "Version"
       ]
     },
+    "LifecycleHookAction": {
+      "type": "string",
+      "description": "The action that will be applied to a target resource in the Virtual Machine Scale Set Lifecycle Hook event if the platform does not receive a response from the customer for the target resource before waitUntil.",
+      "enum": [
+        "Approve",
+        "Reject"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleHookAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Approve",
+            "value": "Approve",
+            "description": "The Lifecycle Hook of a target resource in a Lifecycle Hook event will be approved."
+          },
+          {
+            "name": "Reject",
+            "value": "Reject",
+            "description": "The Lifecycle Hook of a target resource in a Lifecycle Hook event will be rejected."
+          }
+        ]
+      }
+    },
+    "LifecycleHookActionState": {
+      "type": "string",
+      "description": "Approval status of a target resource in a Virtual Machine Scale Set Lifecycle Hook event.",
+      "enum": [
+        "Waiting",
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "LifecycleHookActionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Waiting",
+            "value": "Waiting",
+            "description": "The Lifecycle Hook for the target resource is waiting for approval."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The Lifecycle Hook for the target resource is approved."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The Lifecycle Hook for the target resource is rejected."
+          }
+        ]
+      }
+    },
+    "LifecycleHookEventsEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Compute.VirtualMachineScaleSets.LifecycleHookEvents preview event.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Lifecycle Hook event. This is a unique identifier for the Lifecycle Hook event."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ARM resource ID of the Lifecycle Hook event entity created by the platform for this event. Customers can use this ARM resource ID to query more details about the event through Azure Resource Manager APIs."
+        },
+        "properties": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventProperties",
+          "description": "The properties of the Virtual Machine Scale Set Lifecycle Hook event."
+        },
+        "operationalInfo": {
+          "$ref": "#/definitions/OperationalInfo",
+          "description": "Operational information related to the Lifecycle Hook event."
+        }
+      }
+    },
     "MachineLearningServicesDatasetDriftDetectedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.MachineLearningServices.DatasetDriftDetected event.",
@@ -7103,6 +7189,16 @@
       "required": [
         "userId"
       ]
+    },
+    "OperationalInfo": {
+      "type": "object",
+      "description": "Operational information for a Virtual Machine Scale Set Lifecycle Hook event.",
+      "properties": {
+        "activityId": {
+          "type": "string",
+          "description": "The activity ID associated with the operation generating the Lifecycle Hook event."
+        }
+      }
     },
     "PhoneNumberIdentifierModel": {
       "type": "object",
@@ -9079,6 +9175,120 @@
       "required": [
         "validationResponse"
       ]
+    },
+    "VMScaleSetLifecycleHookEventAdditionalContext": {
+      "type": "object",
+      "description": "Additional key-value pairs set on the Lifecycle Hook event that gives customer some useful context/data.\nThe keys in this dictionary are specific to the Lifecycle Hook type. Different Lifecycle Hook events can have different sets of keys in the additional context depending on the Lifecycle Hook type.\nFor example, for a Lifecycle Hook event with UpgradeAutoOSScheduling type,\nthe additional context can contain the key \"priority\" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the Virtual Machine Scale Set.",
+      "properties": {
+        "priority": {
+          "type": "string",
+          "description": "Can only be present for a Lifecycle Hook event of type \"UpgradeAutoOSScheduling\". Denotes the priority of the Virtual Machine Scale Set Lifecycle Hook event for the Auto OS Upgrade scheduled on the Virtual Machine Scale Set."
+        }
+      }
+    },
+    "VMScaleSetLifecycleHookEventProperties": {
+      "type": "object",
+      "description": "Defines the Virtual Machine Scale Set Lifecycle Hook event properties.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventType",
+          "description": "Defines the type or scenario for sending a Virtual Machine Scale Set Lifecycle Hook event to the customer."
+        },
+        "waitUntil": {
+          "type": "string",
+          "description": "Specifies the exact UTC timestamp in ISO 8601 format till which the event would remain in the current lifecycle state waiting for an action from the customer. Beyond this timestamp, the platform will apply the defaultAction for the event."
+        },
+        "maxWaitUntil": {
+          "type": "string",
+          "description": "Specifies the exact UTC timestamp in ISO 8601 format till when the customer can delay the Lifecycle Hook event. The customer will not be allowed to delay the event to a timestamp beyond this."
+        },
+        "timeCreated": {
+          "type": "string",
+          "description": "The UTC timestamp in ISO 8601 format at which the platform creates the Virtual Machine Scale Set Lifecycle Hook event entity."
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/LifecycleHookAction",
+          "description": "Specify the action that will be applied on the a target resource in the Virtual Machine Scale Set Lifecycle Hook event if the platform does not get a response from the customer for the target resource before waitUntil."
+        },
+        "targetResources": {
+          "type": "array",
+          "description": "List of target resources which are getting processed in the Virtual Machine Scale Set Lifecycle Hook event.",
+          "items": {
+            "$ref": "#/definitions/VMScaleSetLifecycleHookEventTargetResource"
+          },
+          "readOnly": true
+        },
+        "additionalContext": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventAdditionalContext",
+          "description": "Additional key-value pairs set on the Lifecycle Hook event that gives customer some useful context/data.\nThe keys in this dictionary are specific to the Lifecycle Hook type. Different Lifecycle Hook events can have different sets of keys in the additional context depending on the Lifecycle Hook type.\nFor example, for a Lifecycle Hook event with UpgradeAutoOSScheduling type,\nthe additional context can contain the key \"priority\" that helps customer identify the priority of the Auto OS Upgrade operation triggered on the Virtual Machine Scale Set."
+        },
+        "state": {
+          "$ref": "#/definitions/VMScaleSetLifecycleHookEventState",
+          "description": "Specifies the state of the Virtual Machine Scale Set Lifecycle Hook event."
+        }
+      }
+    },
+    "VMScaleSetLifecycleHookEventState": {
+      "type": "string",
+      "description": "The states that a Virtual Machine Scale Set Lifecycle Hook event can be in. This is not settable by the customer. It is set only by the platform.",
+      "enum": [
+        "Active",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "VMScaleSetLifecycleHookEventState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The Lifecycle Hook event is active. E.g., waiting on a response from the customer."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The Lifecycle Hook event is completed. i.e., all the target resources in the event have moved to a terminal state."
+          }
+        ]
+      }
+    },
+    "VMScaleSetLifecycleHookEventTargetResource": {
+      "type": "object",
+      "description": "Define a single target ARM resource in a Virtual Machine Scale Set Lifecycle Hook event. Currently, this can be a Virtual Machine Scale Set resource or an individual virtual machine resource within a VMScaleSet.",
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "Specifies the target ARM resource. Currently, this can be a Virtual Machine Scale Set resource or an individual virtual machine resource within a VMScaleSet."
+        },
+        "actionState": {
+          "$ref": "#/definitions/LifecycleHookActionState",
+          "description": "State of the Lifecycle Hook for the target resource. The customer can patch this property to move the Lifecycle Hook to a terminal state."
+        }
+      }
+    },
+    "VMScaleSetLifecycleHookEventType": {
+      "type": "string",
+      "description": "Specifies the scenario for which the customer is interested in receiving Virtual Machine Scale Set Lifecycle Hook events.",
+      "enum": [
+        "UpgradeAutoOSScheduling",
+        "UpgradeAutoOSRollingBatchStarting"
+      ],
+      "x-ms-enum": {
+        "name": "VMScaleSetLifecycleHookEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "UpgradeAutoOSScheduling",
+            "value": "UpgradeAutoOSScheduling",
+            "description": "Lifecycle Hook event sent to the customer before an Auto OS Upgrade operation starts on the Virtual Machine Scale Set."
+          },
+          {
+            "name": "UpgradeAutoOSRollingBatchStarting",
+            "value": "UpgradeAutoOSRollingBatchStarting",
+            "description": "Lifecycle Hook event sent to the customer before upgrade starts on a batch of virtual machines belonging to a Virtual Machine Scale Set during an Auto OS Upgrade operation."
+          }
+        ]
+      }
     },
     "WebAppServicePlanUpdatedEventData": {
       "type": "object",
