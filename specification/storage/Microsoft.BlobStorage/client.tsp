@@ -61,6 +61,53 @@ interface BlockBlobClient extends Storage.Blob.BlockBlob {}
 )
 interface PageBlobClient extends Storage.Blob.PageBlob {}
 
+@@clientInitialization(BlobServiceClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  }
+);
+
+@@clientInitialization(BlobContainerClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  }
+);
+
+@@clientInitialization(BlobClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  }
+);
+
+@@clientInitialization(AppendBlobClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  }
+);
+
+@@clientInitialization(BlockBlobClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  }
+);
+
+@@clientInitialization(PageBlobClient,
+  {
+    initializedBy: InitializedBy.customizeCode,
+  }
+);
+
+@@clientOption(BlobItem.name,
+  "deserialize_with",
+  "crate::models::deserialize_blob_name",
+  "rust"
+);
+@@clientOption(BlobPrefix.name,
+  "deserialize_with",
+  "crate::models::deserialize_blob_name",
+  "rust"
+);
+
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs");
