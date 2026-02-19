@@ -3359,6 +3359,7 @@ model ManagedClusterIngressProfileWebAppRouting {
   /**
    * Configurations for Gateway API providers to be used for managed ingress with App Routing. See https://aka.ms/k8s-gateway-api for more information on the Gateway API.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
   @added(Versions.v2026_01_02_preview)
   gatewayAPIImplementations?: ManagedClusterWebAppRoutingGatewayAPIImplementations;
 
@@ -3394,6 +3395,7 @@ model ManagedClusterIngressProfileWebAppRouting {
 }
 
 /** Configurations for Gateway API providers to be used for managed ingress with App Routing. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained to align with protos JSON field naming conventions"
 @added(Versions.v2026_01_02_preview)
 model ManagedClusterWebAppRoutingGatewayAPIImplementations {
   /**
