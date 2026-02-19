@@ -36,7 +36,6 @@ steps:
   - name: Checkout code
     uses: actions/checkout@v6
 
-  
   - name: Acquire OIDC token for Azure
     id: oidc
     uses: actions/github-script@v7
@@ -132,12 +131,17 @@ You are an AI agent that handles SDK generation requests from GitHub issues and 
 This workflow can be triggered in three ways:
 
 1. **Issues event**
-  - Allow `opened` or `labeled` events only when the issue has the `Run sdk generation` label.
+
+- Allow `opened` or `labeled` events only when the issue has the `Run sdk generation` label.
+
 2. **Issue comment event**
-  - Allow `created` comments on issues (not PRs) that already carry the `Run sdk generation` label **and** contain the exact text `Regenerate SDK` (case-sensitive substring match).
+
+- Allow `created` comments on issues (not PRs) that already carry the `Run sdk generation` label **and** contain the exact text `Regenerate SDK` (case-sensitive substring match).
+
 3. **Manual dispatch**
-  - Ensure required inputs `work_item_id` and `release_plan_id` are provided via `github.event.inputs`.
-  - Parse optional inputs `languages` (comma-separated list, normalized) and `pr_number` (numeric).
+
+- Ensure required inputs `work_item_id` and `release_plan_id` are provided via `github.event.inputs`.
+- Parse optional inputs `languages` (comma-separated list, normalized) and `pr_number` (numeric).
 
 If the triggering event does not meet its corresponding requirements, immediately call `noop` with guidance (for example: missing label, missing `Regenerate SDK`, or missing workflow_dispatch inputs).
 
@@ -146,27 +150,35 @@ If the triggering event does not meet its corresponding requirements, immediatel
 When validation succeeds, execute the following steps in order.
 
 1. Add a debug comment on the target issue with the workflow run link:
-  - `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`
+
+- `https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}`
+
 2. Set following env variables(if not present):
-  AZURE_CLIENT_ID: c277c2aa-5326-4d16-90de-98feeca69cbc
-  AZURE_TENANT_ID: 72f988bf-86f1-41af-91ab-2d7cd011db47
-  AZURE_FEDERATED_TOKEN_FILE: /tmp/azure-oidc-token 
+   AZURE_CLIENT_ID: c277c2aa-5326-4d16-90de-98feeca69cbc
+   AZURE_TENANT_ID: 72f988bf-86f1-41af-91ab-2d7cd011db47
+   AZURE_FEDERATED_TOKEN_FILE: /tmp/azure-oidc-token
 3. Identify the target issue number and collect issue context.
 4. Find whether there is an open TypeSpec API spec pull request associated with this request.
    - Identify TypeSpec API spec PR from issue context.
    - Check if API spec PR is in open status or merged status.
-  - If such a PR is found and if it's open, set source branch to exactly `refs/pull/<PR number>`.
-  - If no such PR is found, use default branch context.
+
+- If such a PR is found and if it's open, set source branch to exactly `refs/pull/<PR number>`.
+- If no such PR is found, use default branch context.
+
 5. Use the azsdk CLI at `/tmp/bin/azsdk` (installed earlier) to gather release plan metadata and required arguments:
-  - Execute `/tmp/bin/azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>` 
-  - Capture the TypeSpec project path, API version, release type, and target languages from the issue context.
+
+- Execute `/tmp/bin/azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>`
+- Capture the TypeSpec project path, API version, release type, and target languages from the issue context.
+
 6. Trigger SDK generation by calling `/tmp/bin/azsdk spec-workflow generate-sdk` with the following options:
-  - `--typespec-project <PATH>` (required)
-  - `--api-version <VERSION>` (required)
-  - `--release-type <beta|stable>` (required)
-  - `--language <LANGUAGE>` (required, run once per language returned in step 4; languages: Python, .NET, JavaScript, Java, go)
-  - `--workitem-id <WORK_ITEM_ID>` to tie the generation back to the release plan work item
-  - Capture the pipeline/run URL emitted by the CLI for status tracking.
+
+- `--typespec-project <PATH>` (required)
+- `--api-version <VERSION>` (required)
+- `--release-type <beta|stable>` (required)
+- `--language <LANGUAGE>` (required, run once per language returned in step 4; languages: Python, .NET, JavaScript, Java, go)
+- `--workitem-id <WORK_ITEM_ID>` to tie the generation back to the release plan work item
+- Capture the pipeline/run URL emitted by the CLI for status tracking.
+
 7. Immediately add a comment with:
    - Pipeline run link/status URL, or
    - Failure details if triggering the pipeline failed.
@@ -179,9 +191,10 @@ When validation succeeds, execute the following steps in order.
 4. If still running, update status via comment (keep concise).
 5. If failed, add a comment indicating failure and include pipeline link and failure summary.
 6. If completed:
-  - Refresh release plan data via `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>` and inspect the SDK pull request references per language.
-  - Add a comment that includes one line per language using this exact format:
-     - `sdk pr for  <language>`: `<Link to sdk pull request>`
+
+- Refresh release plan data via `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>` and inspect the SDK pull request references per language.
+- Add a comment that includes one line per language using this exact format:
+  - `sdk pr for  <language>`: `<Link to sdk pull request>`
 
 ## Output Requirements
 
