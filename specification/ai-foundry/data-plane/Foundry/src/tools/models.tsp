@@ -1,5 +1,4 @@
 import "../memory-stores/models.tsp";
-import "../openai-responses/models.tsp";
 
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
@@ -796,20 +795,6 @@ namespace Azure.AI.Projects {
     failed: "failed",
   }
 
-  @doc("Base model for Azure tool call input items.")
-  @discriminator("type")
-  model AgentToolCallItem {
-    @doc("The type of the tool call item.")
-    type: _AgentItemType;
-  }
-
-  @doc("Base model for Azure tool call output items.")
-  @discriminator("type")
-  model AgentToolCallOutputItem {
-    @doc("The type of the tool call item.")
-    type: _AgentItemType;
-  }
-
   @doc("A document returned from a grounding tool search.")
   model GroundingToolCallDocument {
     @doc("The unique identifier of the document.")
@@ -849,14 +834,14 @@ namespace Azure.AI.Projects {
   };
 
   @doc("A Bing grounding tool call item for input.")
-  model BingGroundingToolCallItemParam extends AgentToolCallItem {
-    type: _AgentItemType.bing_grounding_call;
+  model BingGroundingToolCallItemParam extends OpenAI.Item {
+    type: "bing_grounding_call";
     ...BingGroundingToolCallItemBase;
   }
 
   @doc("A Bing grounding tool call item resource.")
-  model BingGroundingToolCallItemResource extends AgentToolCallOutputItem {
-    type: _AgentItemType.bing_grounding_call;
+  model BingGroundingToolCallItemResource extends OpenAI.OutputItem {
+    type: "bing_grounding_call";
 
     @doc("The status of the Bing grounding tool call.")
     status: ToolCallStatus;
@@ -880,14 +865,14 @@ namespace Azure.AI.Projects {
   };
 
   @doc("A SharePoint grounding tool call item for input.")
-  model SharepointGroundingToolCallItemParam extends AgentToolCallItem {
-    type: _AgentItemType.sharepoint_grounding_preview_call;
+  model SharepointGroundingToolCallItemParam extends OpenAI.Item {
+    type: "sharepoint_grounding_preview_call";
     ...SharepointGroundingToolCallItemBase;
   }
 
   @doc("A SharePoint grounding tool call item resource.")
-  model SharepointGroundingToolCallItemResource extends AgentToolCallOutputItem {
-    type: _AgentItemType.sharepoint_grounding_preview_call;
+  model SharepointGroundingToolCallItemResource extends OpenAI.OutputItem {
+    type: "sharepoint_grounding_preview_call";
 
     @doc("The status of the SharePoint grounding tool call.")
     status: ToolCallStatus;
@@ -914,14 +899,14 @@ namespace Azure.AI.Projects {
   };
 
   @doc("An Azure AI Search tool call item for input.")
-  model AzureAISearchToolCallItemParam extends AgentToolCallItem {
-    type: _AgentItemType.azure_ai_search_call;
+  model AzureAISearchToolCallItemParam extends OpenAI.Item {
+    type: "azure_ai_search_call";
     ...AzureAISearchToolCallItemBase;
   }
 
   @doc("An Azure AI Search tool call item resource.")
-  model AzureAISearchToolCallItemResource extends AgentToolCallOutputItem {
-    type: _AgentItemType.azure_ai_search_call;
+  model AzureAISearchToolCallItemResource extends OpenAI.OutputItem {
+    type: "azure_ai_search_call";
 
     @doc("The status of the Azure AI Search tool call.")
     status: ToolCallStatus;
@@ -945,14 +930,14 @@ namespace Azure.AI.Projects {
   };
 
   @doc("A Bing custom search tool call item for input.")
-  model BingCustomSearchToolCallItemParam extends AgentToolCallItem {
-    type: _AgentItemType.bing_custom_search_preview_call;
+  model BingCustomSearchToolCallItemParam extends OpenAI.Item {
+    type: "bing_custom_search_preview_call";
     ...BingCustomSearchToolCallItemBase;
   }
 
   @doc("A Bing custom search tool call item resource.")
-  model BingCustomSearchToolCallItemResource extends AgentToolCallOutputItem {
-    type: _AgentItemType.bing_custom_search_preview_call;
+  model BingCustomSearchToolCallItemResource extends OpenAI.OutputItem {
+    type: "bing_custom_search_preview_call";
 
     @doc("The status of the Bing custom search tool call.")
     status: ToolCallStatus;
@@ -979,14 +964,14 @@ namespace Azure.AI.Projects {
   };
 
   @doc("An OpenAPI tool call item for input.")
-  model OpenApiToolCallItemParam extends AgentToolCallItem {
-    type: _AgentItemType.openapi_call;
+  model OpenApiToolCallItemParam extends OpenAI.Item {
+    type: "openapi_call";
     ...OpenApiToolCallItemBase;
   }
 
   @doc("An OpenAPI tool call item resource.")
-  model OpenApiToolCallItemResource extends AgentToolCallOutputItem {
-    type: _AgentItemType.openapi_call;
+  model OpenApiToolCallItemResource extends OpenAI.OutputItem {
+    type: "openapi_call";
 
     @doc("The status of the OpenAPI tool call.")
     status: ToolCallStatus;
@@ -1010,14 +995,14 @@ namespace Azure.AI.Projects {
   };
 
   @doc("A browser automation tool call item for input.")
-  model BrowserAutomationToolCallItemParam extends AgentToolCallItem {
-    type: _AgentItemType.browser_automation_preview_call;
+  model BrowserAutomationToolCallItemParam extends OpenAI.Item {
+    type: "browser_automation_preview_call";
     ...BrowserAutomationToolCallItemBase;
   }
 
   @doc("A browser automation tool call item resource.")
-  model BrowserAutomationToolCallItemResource extends AgentToolCallOutputItem {
-    type: _AgentItemType.browser_automation_preview_call;
+  model BrowserAutomationToolCallItemResource extends OpenAI.OutputItem {
+    type: "browser_automation_preview_call";
 
     @doc("The status of the browser automation tool call.")
     status: ToolCallStatus;
@@ -1041,14 +1026,14 @@ namespace Azure.AI.Projects {
   };
 
   @doc("A Fabric data agent tool call item for input.")
-  model FabricDataAgentToolCallItemParam extends AgentToolCallItem {
-    type: _AgentItemType.fabric_dataagent_preview_call;
+  model FabricDataAgentToolCallItemParam extends OpenAI.Item {
+    type: "fabric_dataagent_preview_call";
     ...FabricDataAgentToolCallItemBase;
   }
 
   @doc("A Fabric data agent tool call item resource.")
-  model FabricDataAgentToolCallItemResource extends AgentToolCallOutputItem {
-    type: _AgentItemType.fabric_dataagent_preview_call;
+  model FabricDataAgentToolCallItemResource extends OpenAI.OutputItem {
+    type: "fabric_dataagent_preview_call";
 
     @doc("The status of the Fabric data agent tool call.")
     status: ToolCallStatus;
@@ -1075,14 +1060,14 @@ namespace Azure.AI.Projects {
   };
 
   @doc("An Azure Function tool call item for input.")
-  model AzureFunctionToolCallItemParam extends AgentToolCallItem {
-    type: _AgentItemType.azure_function_call;
+  model AzureFunctionToolCallItemParam extends OpenAI.Item {
+    type: "azure_function_call";
     ...AzureFunctionToolCallItemBase;
   }
 
   @doc("An Azure Function tool call item resource.")
-  model AzureFunctionToolCallItemResource extends AgentToolCallOutputItem {
-    type: _AgentItemType.azure_function_call;
+  model AzureFunctionToolCallItemResource extends OpenAI.OutputItem {
+    type: "azure_function_call";
 
     @doc("The status of the Azure Function tool call.")
     status: ToolCallStatus;
