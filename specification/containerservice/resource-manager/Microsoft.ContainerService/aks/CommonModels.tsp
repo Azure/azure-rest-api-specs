@@ -3007,6 +3007,7 @@ model ManagedClusterHTTPProxyConfig {
   /**
    * Whether to enable HTTP Proxy. If not specified, the default is true.
    */
+  @added(Versions.v2026_01_01)
   enabled?: boolean;
 }
 
