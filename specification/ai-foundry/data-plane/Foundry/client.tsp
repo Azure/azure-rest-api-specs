@@ -45,25 +45,26 @@ using Azure.AI.Projects;
 
 // Use short form method names
 @@clientName(Agents.getAgent, "get");
-@@clientName(Agents.createAgent, "create");
-@@clientName(Agents.updateAgent, "update");
 @@clientName(Agents.deleteAgent, "delete");
 @@clientName(Agents.listAgents, "list");
 @@clientName(Agents.createAgentVersion, "create_version", "python");
 @@clientName(Agents.getAgentVersion, "get_version", "python");
 @@clientName(Agents.deleteAgentVersion, "delete_version", "python");
 @@clientName(Agents.listAgentVersions, "list_versions", "python");
-@@clientName(Agents.createAgentFromManifest, "create_from_manifest", "python");
 @@clientName(Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
   "python"
 );
-@@clientName(Agents.updateAgentFromManifest, "update_from_manifest", "python");
-
 @@clientName(Agents.createAgentVersion, "createVersion", "javascript");
 @@clientName(Agents.getAgentVersion, "getVersion", "javascript");
 @@clientName(Agents.deleteAgentVersion, "deleteVersion", "javascript");
 @@clientName(Agents.listAgentVersions, "listVersions", "javascript");
+
+// Suppress these operations from Python and JavaScript SDK public surface.
+@@access(Agents.createAgent, Access.internal);
+@@access(Agents.updateAgent, Access.internal);
+@@access(Agents.createAgentFromManifest, Access.internal);
+@@access(Agents.updateAgentFromManifest, Access.internal);
 
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
