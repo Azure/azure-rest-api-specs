@@ -2517,7 +2517,7 @@
     },
     "Microsoft.Discovery.DataPlane.Shared.StorageUri": {
       "type": "string",
-      "description": "A URI that references data. There are three forms this can take:\n1. discovery://storages/<storageArmId>/paths/<path> to reference data on Discovery Storage.\n2. discovery://storageassets/<storageAssetArmId> to reference a Discovery Storage Asset.\n3. discovery://storageassets/<storageAssetArmId>/paths/<path> to reference a subpath within a Discovery Storage Asset.\n\nNote that in the discovery://storages/<storageArmId>/paths/<path>, the <path> is not an absolute path within\nthe underlying NFS volume. Rather, the service creates a subdirectory on each storage for storing job\nartifacts, and the <path> is relative to that subdirectory. The location of the subdirectory is not published,\nnor is it guaranteed to be stable over time, but we do guarantee that a given discovery://storages/ URI will\nalways point to the same logical data. We do not expect API consumers to build these URIs from scratch,\nbut to use the output URI (or a subpath of it) from an earlier API call as the input to a later API call.",
+      "description": "A URI that references data. There are two forms this can take:\n1. discovery://storageassets/<storageAssetArmId> to reference a Discovery Storage Asset.\n2. discovery://storageassets/<storageAssetArmId>/paths/<path> to reference a subpath within a Discovery Storage Asset.",
       "pattern": "^discovery://(storages|storageassets)/.*$"
     },
     "Microsoft.Discovery.DataPlane.Shared.Tag": {
@@ -2784,18 +2784,6 @@
             "$ref": "#/definitions/InlineFile"
           }
         },
-        "storageId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Discovery Storage resource to use for this run.",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Discovery/Storages"
-              }
-            ]
-          }
-        },
         "inputData": {
           "type": "array",
           "description": "Input data and associated mountPath for each.",
@@ -2890,7 +2878,7 @@
         },
         "outputData": {
           "type": "array",
-          "description": "Output data URIs.\n\nThis array will contain the same set of mountPaths specified in the outputData property of initial tool run request,\nbut every mountPath will have a corresponding URI that points to the location where the output data was persisted:\n* for mount paths which had a URI specified in the outputData property, the URI will be the same as the one\nspecified in the request, and the data will have been persisted to the location specified by that URI.\n* for mount paths which did not have a URI specified in the outputData property, the URI will point to a\nfolder created by the service on the Storage specified by the storageId property in the tool run request.\n\nE.g. if the following run request is made:\n```json\n{\n  \"toolId\": \"testTool\",\n  \"command\": \"echo 'hello world' > /output1/hello.txt\",\n  \"inlineFiles\": [],\n  \"inputData\": [],\n  \"outputData\": [\n      {\n          \"mountPath\": \"/output1\"\n      }\n  ],\n  \"nodePoolIds\": [\"<nodePoolId>\"],\n  \"storageId\": \"<storageARMId\"\n}\n```\nthen once the tool completes, the status API response will contain the following:\n```json\n{\n  \"status\": \"Succeeded\",\n  ...\n  \"outputData\": [\n     {\n       \"uri\": \"discovery://storages/<storageARMId>/paths/<some-generated-path>/output1\",\n       \"mountPath\": \"/output1\"\n     }\n  ]\n}\n```\n`discovery://storages/<storageARMId>/paths/<some-generated-path>/output1` can then be used as an\ninput to another tool run. Any valid subpaths can also be used, e.g.\n`discovery://storages/<storageARMId>/paths/<some-generated-path>/output1/hello.txt` to refer specifically\nto the hello.txt file.",
+          "description": "Output data URIs.",
           "items": {
             "$ref": "#/definitions/OutputDataUri"
           }

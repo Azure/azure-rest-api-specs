@@ -120,11 +120,11 @@ model OutputDataUri {
  *   ],
  *   "outputData": [
  *     {
- *         "mountPath": "/outputs/abcdef-output-1"
+ *         "mountPath": "/outputs/abcdef-output-1",
+ *          "uri": "discovery://storageassets/<storageAssetArmId2>"
  *     }
  *   ],
- *   "nodePoolIds": ["<myNodePoolId>"],
- *   "storageId": "<myStorageId>"
+ *   "nodePoolIds": ["<myNodePoolId>"]
  * }
  * ```
  * where SmilesTxtStorageAsset refers to a blob StorageAsset containing a single smiles.txt file, then the
@@ -138,12 +138,6 @@ model OutputDataUri {
  *     └── smiles.txt
  * /outputs
  * └── abcdef-output-1/
- *
- * Supercomputer will ensure that the abcdef-output-1/ directory is backed, via filesystem mounts,
- * by a persistent folder on <myStorageId> (the storage specified by storageId).
- *
- * wrapper.py will write its output to /outputs/abcdef-output-1/, meaning it is persisted to the
- * provided folder on <myStorageId>.
  *
  * When the run completes, the status API will provide a URI which identifies the location to which
  * the output has been written, allowing it to be consumed by downstream tools.
@@ -205,6 +199,7 @@ model RunRequest {
   @maxItems(10)
   inlineFiles?: Array<InlineFile>;
 
+  @removed(Versions.`2026-02-01-preview`)
   @doc("The Discovery Storage resource to use for this run.")
   storageId?: DiscoveryStorageId;
 
@@ -289,48 +284,8 @@ model RunResult {
     logs?: string[];
   };
 
-  /** Output data URIs.
-   *
-   * This array will contain the same set of mountPaths specified in the outputData property of initial tool run request,
-   * but every mountPath will have a corresponding URI that points to the location where the output data was persisted:
-   * * for mount paths which had a URI specified in the outputData property, the URI will be the same as the one
-   *   specified in the request, and the data will have been persisted to the location specified by that URI.
-   * * for mount paths which did not have a URI specified in the outputData property, the URI will point to a
-   *   folder created by the service on the Storage specified by the storageId property in the tool run request.
-   *
-   * E.g. if the following run request is made:
-   * ```json
-   * {
-   *   "toolId": "testTool",
-   *   "command": "echo 'hello world' > /output1/hello.txt",
-   *   "inlineFiles": [],
-   *   "inputData": [],
-   *   "outputData": [
-   *       {
-   *           "mountPath": "/output1"
-   *       }
-   *   ],
-   *   "nodePoolIds": ["<nodePoolId>"],
-   *   "storageId": "<storageARMId"
-   * }
-   * ```
-   * then once the tool completes, the status API response will contain the following:
-   * ```json
-   * {
-   *   "status": "Succeeded",
-   *   ...
-   *   "outputData": [
-   *      {
-   *        "uri": "discovery://storages/<storageARMId>/paths/<some-generated-path>/output1",
-   *        "mountPath": "/output1"
-   *      }
-   *   ]
-   * }
-   * ```
-   * `discovery://storages/<storageARMId>/paths/<some-generated-path>/output1` can then be used as an
-   * input to another tool run. Any valid subpaths can also be used, e.g.
-   * `discovery://storages/<storageARMId>/paths/<some-generated-path>/output1/hello.txt` to refer specifically
-   * to the hello.txt file.
+  /**
+   * Output data URIs.
    */
   outputData: OutputDataUri[];
 
