@@ -1,4 +1,5 @@
 import "./main.tsp";
+import "./models.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -40,4 +41,22 @@ using Microsoft.AzureStackHCI;
 @@clientName(Microsoft.AzureStackHCI.HciEdgeDeviceStorageAdapterIPInfo,
   "HciEdgeDeviceStorageAdapterIpInfo",
   "java"
+);
+
+@@clientName(Microsoft.AzureStackHCI, "AzureStackHCIClient", "python");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(EdgeDevice.name,
+  "default",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(DeploymentSetting.name,
+  "default",
+  "python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(SecuritySetting.name,
+  "default",
+  "python"
 );

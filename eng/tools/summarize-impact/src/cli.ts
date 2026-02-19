@@ -77,6 +77,8 @@ export async function main() {
   const targetGitRoot = await getRootFolder(targetDirectory);
   const fileList = await getChangedFilesStatuses({
     cwd: sourceGitRoot,
+    // code in diff-types.ts and impact.ts assumes the file list only contains add/modify/delete, not renames
+    gitOptions: ["--no-renames"],
     logger: defaultLogger,
     paths: ["specification"],
   });
