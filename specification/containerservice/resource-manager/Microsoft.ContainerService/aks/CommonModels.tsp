@@ -1038,7 +1038,6 @@ union TransitEncryptionType {
 /**
  * Enable advanced network acceleration options. This allows users to configure acceleration using BPF host routing. This can be enabled only with Cilium dataplane. If not specified, the default value is None (no acceleration). The acceleration mode can be changed on a pre-existing cluster. See https://aka.ms/acnsperformance for a detailed explanation
  */
-@added(Versions.v2026_01_02_preview)
 union AccelerationMode {
   string,
 
@@ -2389,7 +2388,6 @@ model AdvancedNetworking {
   /**
    * Profile to enable performance-enhancing features on clusters that use Azure CNI powered by Cilium.
    */
-  @added(Versions.v2026_01_02_preview)
   performance?: AdvancedNetworkingPerformance;
 }
 
@@ -2647,7 +2645,6 @@ model AdvancedNetworkingSecurityTransitEncryption {
 /**
  * Profile to enable performance-enhancing features on clusters that use Azure CNI powered by Cilium.
  */
-@added(Versions.v2026_01_02_preview)
 model AdvancedNetworkingPerformance {
   /**
    * Enable advanced network acceleration options. This allows users to configure acceleration using BPF host routing. This can be enabled only with Cilium dataplane. If not specified, the default value is None (no acceleration). The acceleration mode can be changed on a pre-existing cluster. See https://aka.ms/acnsperformance for a detailed explanation

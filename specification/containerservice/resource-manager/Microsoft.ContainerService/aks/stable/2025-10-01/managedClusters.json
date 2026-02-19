@@ -4361,6 +4361,10 @@
         "security": {
           "$ref": "#/definitions/AdvancedNetworkingSecurity",
           "description": "Security profile to enable security features on cilium based cluster."
+        },
+        "performance": {
+          "$ref": "#/definitions/AdvancedNetworkingPerformance",
+          "description": "Profile to enable performance-enhancing features on clusters that use Azure CNI powered by Cilium."
         }
       }
     },
@@ -4371,6 +4375,37 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates the enablement of Advanced Networking observability functionalities on clusters."
+        }
+      }
+    },
+    "AdvancedNetworkingPerformance": {
+      "type": "object",
+      "description": "Profile to enable performance-enhancing features on clusters that use Azure CNI powered by Cilium.",
+      "properties": {
+        "accelerationMode": {
+          "type": "string",
+          "description": "Enable advanced network acceleration options. This allows users to configure acceleration using BPF host routing. This can be enabled only with Cilium dataplane. If not specified, the default value is None (no acceleration). The acceleration mode can be changed on a pre-existing cluster. See https://aka.ms/acnsperformance for a detailed explanation",
+          "default": "None",
+          "enum": [
+            "BpfVeth",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "AccelerationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "BpfVeth",
+                "value": "BpfVeth",
+                "description": "Enable eBPF host routing with veth device mode."
+              },
+              {
+                "name": "None",
+                "value": "None",
+                "description": "Disable acceleration options."
+              }
+            ]
+          }
         }
       }
     },
