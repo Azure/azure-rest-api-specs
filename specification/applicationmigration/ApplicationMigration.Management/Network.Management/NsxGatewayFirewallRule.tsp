@@ -45,6 +45,9 @@ model NsxGatewayFirewallRuleProperties is AzureResourceProperties {
   /** The sequence number determining rule evaluation order. */
   sequenceNumber?: int32;
 
+  /** The global priority of the rule. */
+  globalPriority?: string;
+
   /** ARM resource IDs of source IP groups. */
   sourceIpGroups?: Azure.Core.armResourceIdentifier[];
 
@@ -57,17 +60,15 @@ model NsxGatewayFirewallRuleProperties is AzureResourceProperties {
   /** Destination IP addresses. */
   destinationAddresses?: string[];
 
-  /** ARM resource IDs of services this rule applies to. */
-  services?: Azure.Core.armResourceIdentifier[];
+  /** The services this rule applies to. */
+  @identifiers(#[])
+  services?: FirewallService[];
 
   /** ARM resource IDs of scopes this rule is applied to. */
   appliedScopes?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of effective scopes. */
   effectiveScopes?: Azure.Core.armResourceIdentifier[];
-
-  /** Original NSX resource metadata. */
-  nsxOriginal?: NsxOriginal;
 }
 
 @armResourceOperations

@@ -1,0 +1,111 @@
+{
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsGroups/grp1",
+        "name": "grp1",
+        "type": "Microsoft.ApplicationMigration/networkSites/nsGroups",
+        "systemData": {
+          "lastModifiedAt": "2024-01-01T00:00:00Z",
+          "createdBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "Group-01",
+          "nsxOriginalId": "/infra/domains/default/groups/grp1",
+          "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+          "uniqueId": "grp-uid-001",
+          "nsxTags": [],
+          "expressions": [
+            {
+              "resourceType": "Condition",
+              "memberType": "VirtualMachine",
+              "key": "Tag",
+              "operator": "EQUALS",
+              "value": "web-tier"
+            },
+            {
+              "resourceType": "ConjunctionOperator",
+              "conjunctionOperator": "OR"
+            },
+            {
+              "resourceType": "Condition",
+              "memberType": "VirtualMachine",
+              "key": "Tag",
+              "operator": "EQUALS",
+              "value": "app-tier"
+            }
+          ],
+          "effectiveVirtualMachineRefs": [
+            {
+              "displayName": "vm-01",
+              "vmRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
+            }
+          ],
+          "effectiveIpMembers": [
+            "10.0.0.5"
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsGroups/grp1",
+        "name": "grp1",
+        "type": "Microsoft.ApplicationMigration/networkSites/nsGroups",
+        "systemData": {
+          "lastModifiedAt": "2024-01-01T00:00:00Z",
+          "createdBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "Group-01",
+          "nsxOriginalId": "/infra/domains/default/groups/grp1",
+          "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+          "uniqueId": "grp-uid-001",
+          "nsxTags": [],
+          "expressions": [
+            {
+              "resourceType": "Condition",
+              "memberType": "VirtualMachine",
+              "key": "Tag",
+              "operator": "EQUALS",
+              "value": "web-tier"
+            },
+            {
+              "resourceType": "ConjunctionOperator",
+              "conjunctionOperator": "OR"
+            },
+            {
+              "resourceType": "Condition",
+              "memberType": "VirtualMachine",
+              "key": "Tag",
+              "operator": "EQUALS",
+              "value": "app-tier"
+            }
+          ],
+          "effectiveVirtualMachineRefs": [
+            {
+              "displayName": "vm-01",
+              "vmRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
+            }
+          ],
+          "effectiveIpMembers": [
+            "10.0.0.5"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": null,
+  "operationId": "NsxNsGroups_CreateOrUpdate",
+  "title": "NsxNsGroups_CreateOrUpdate_MaximumSet"
+}

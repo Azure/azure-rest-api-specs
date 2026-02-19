@@ -1,0 +1,52 @@
+{
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/natRules/nat1",
+        "name": "nat1",
+        "type": "Microsoft.ApplicationMigration/networkSites/natRules",
+        "systemData": {
+          "lastModifiedAt": "2024-01-01T00:00:00Z",
+          "createdBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "NAT-SNAT-01",
+          "nsxOriginalId": "/infra/tier-1s/t1gw/nat/USER/nat-rules/nat1",
+          "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+          "uniqueId": "nat-uid-001",
+          "nsxTags": [],
+          "natType": "SNAT",
+          "adminState": "ENABLED",
+          "parentGateway": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier1Gateways/t1gw1",
+          "match": {
+            "source": {
+              "ipAddress": [
+                "10.0.0.0/24"
+              ],
+              "port": "1024-65535"
+            },
+            "destination": {
+              "ipAddress": [
+                "0.0.0.0/0"
+              ],
+              "port": "443"
+            },
+            "protocol": "ANY"
+          },
+          "translate": {
+            "ipAddress": "203.0.113.10",
+            "port": "8443"
+          }
+        }
+      }
+    }
+  },
+  "parameters": null,
+  "operationId": "NsxNatRules_Update",
+  "title": "NsxNatRules_Update_MaximumSet"
+}

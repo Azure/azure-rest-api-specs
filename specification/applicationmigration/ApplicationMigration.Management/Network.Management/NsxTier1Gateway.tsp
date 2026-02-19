@@ -42,9 +42,6 @@ model NsxTier1GatewayProperties is AzureResourceProperties {
   /** ARM resource IDs of associated segments. */
   associatedSegments?: Azure.Core.armResourceIdentifier[];
 
-  /** ARM resource IDs of associated DNS services. */
-  associatedDnsServices?: Azure.Core.armResourceIdentifier[];
-
   /** ARM resource IDs of associated NAT rules. */
   associatedNatRules?: Azure.Core.armResourceIdentifier[];
 
@@ -85,6 +82,12 @@ interface NsxTier1Gateways {
     NsxTier1Gateway,
     Response = ArmResponse<NsxTier1GatewayList>
   >;
+
+  /**
+   * Lists NAT rules associated with this Tier-1 gateway.
+   */
+  @action("listNatRules")
+  listNatRules is ArmResourceActionSync<NsxTier1Gateway, void, NsxNatRuleList>;
 }
 
 model NsxTier1GatewayList is Azure.Core.Page<NsxTier1Gateway>;

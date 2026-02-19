@@ -1,0 +1,51 @@
+{
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://microsoft.com/a",
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/gatewayFirewallPolicies/pol1",
+            "name": "pol1",
+            "type": "Microsoft.ApplicationMigration/networkSites/gatewayFirewallPolicies",
+            "systemData": {
+              "lastModifiedAt": "2024-01-01T00:00:00Z",
+              "createdBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "createdByType": "User",
+              "createdAt": "2024-01-01T00:00:00Z",
+              "lastModifiedBy": "user@example.com"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "displayName": "Default-Policy",
+              "nsxOriginalId": "/infra/domains/default/gateway-policies/pol1",
+              "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+              "uniqueId": "pol-uid-001",
+              "nsxTags": [],
+              "category": "LocalGatewayRules",
+              "sequenceNumber": 100,
+              "isDefault": true,
+              "contextType": "GatewaySpecific",
+              "federationScope": "Local",
+              "appliedScopes": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1"
+              ],
+              "effectiveScopes": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "siteName": "site1"
+  },
+  "operationId": "GatewayFirewallPolicies_ListByNetworkSite",
+  "title": "GatewayFirewallPolicies_ListByNetworkSite_MaximumSet"
+}

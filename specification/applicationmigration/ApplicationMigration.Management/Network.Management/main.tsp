@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./NetworkSite.tsp";
+import "./NetworkAgent.tsp";
 import "./NsxManager.tsp";
 import "./NsxTier0Gateway.tsp";
 import "./NsxTier1Gateway.tsp";
@@ -13,8 +14,6 @@ import "./NsxGatewayFirewallPolicy.tsp";
 import "./NsxGatewayFirewallRule.tsp";
 import "./NsxLoadBalancer.tsp";
 import "./NsxNatRule.tsp";
-import "./NsxDnsService.tsp";
-import "./NsxDnsForwarderZone.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -45,22 +45,6 @@ union ProvisioningState {
 }
 
 /**
- * The ingestion status of a discovery operation.
- */
-union IngestionStatus {
-  string,
-
-  /** Ingestion completed successfully. */
-  Complete: "Complete",
-
-  /** Ingestion completed partially. */
-  Partial: "Partial",
-
-  /** Ingestion failed. */
-  Failed: "Failed",
-}
-
-/**
  * The high-availability mode of a gateway.
  */
 union HaMode {
@@ -237,16 +221,6 @@ union FirewallDirection {
 }
 
 /**
- * The type of a DNS forwarder zone.
- */
-union DnsZoneType {
-  string,
-
-  /** FQDN-based zone. */
-  FQDN: "FQDN",
-}
-
-/**
  * The protocol for NAT rule matching.
  */
 union MatchProtocol {
@@ -363,6 +337,22 @@ model AzureResourceProperties {
   /** The provisioning state of the resource. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  /** The NSX display name. */
+  displayName?: string;
+
+  /** The NSX original path identifier. */
+  nsxOriginalId?: string;
+
+  /** ARM resource ID of the associated NSX Manager. */
+  nsxManagerRef?: Azure.Core.armResourceIdentifier;
+
+  /** The NSX unique identifier. */
+  uniqueId?: string;
+
+  /** NSX tags applied to this resource. */
+  @identifiers(#[])
+  nsxTags?: NsxTag[];
 }
 
 // ──────────────────────────────────────────────
@@ -388,20 +378,47 @@ model SiteTagsPatch {
 // ──────────────────────────────────────────────
 
 /**
- * Original NSX resource reference metadata.
+ * An NSX service definition for firewall rules.
  */
-model NsxOriginal {
-  /** The NSX path identifier. */
-  id?: string;
-
-  /** The NSX local identifier. */
-  localId?: string;
-
-  /** The NSX display name. */
+model FirewallService {
+  /** The display name of the service. */
   displayName?: string;
 
-  /** The NSX resource type. */
-  resourceType?: string;
+  /** The service entries. */
+  @identifiers(#[])
+  serviceEntries?: ServiceEntry[];
+}
+
+/**
+ * A service entry within a firewall service.
+ */
+model ServiceEntry {
+  /** The type of service entry (e.g. L4PortSetServiceEntry). */
+  serviceEntryType?: string;
+
+  /** The display name of the service entry. */
+  displayName?: string;
+
+  /** The Layer 4 protocol (TCP, UDP, etc.). */
+  l4Protocol?: string;
+
+  /** The source port ranges. */
+  sourcePorts?: string[];
+
+  /** The destination port ranges. */
+  destinationPorts?: string[];
+
+  /** The protocol. */
+  protocol?: string;
+
+  /** The ICMP type. */
+  icmpType?: string;
+
+  /** The application layer gateway type. */
+  alg?: string;
+
+  /** The IP protocol number. */
+  protocolNumber?: int32;
 }
 
 /**
@@ -427,46 +444,6 @@ model Subnet {
 }
 
 /**
- * A discovery time window.
- */
-model DiscoveryWindow {
-  /** The start time of the discovery window. */
-  startTime?: string;
-
-  /** The end time of the discovery window. */
-  endTime?: string;
-}
-
-/**
- * Coverage counts for discovered NSX resources.
- */
-model CoverageCounts {
-  /** Number of Tier-0 gateways. */
-  tier0Gateways?: int32;
-
-  /** Number of Tier-1 gateways. */
-  tier1Gateways?: int32;
-
-  /** Number of segments. */
-  segments?: int32;
-
-  /** Number of groups. */
-  groups?: int32;
-
-  /** Number of gateway firewall policies. */
-  gatewayFirewallPolicies?: int32;
-
-  /** Number of NAT rules. */
-  natRules?: int32;
-
-  /** Number of load balancers. */
-  loadBalancers?: int32;
-
-  /** Number of DNS services. */
-  dnsServices?: int32;
-}
-
-/**
  * A reference to an effective virtual machine.
  */
 model EffectiveVmRef {
@@ -475,25 +452,6 @@ model EffectiveVmRef {
 
   /** Display name of the virtual machine. */
   displayName?: string;
-}
-
-/**
- * An upstream DNS server.
- */
-model UpstreamServer {
-  /** The IP address of the upstream server. */
-  ip?: string;
-
-  /** ARM resource ID of the associated virtual machine. */
-  vmRef?: Azure.Core.armResourceIdentifier;
-}
-
-/**
- * Routing context referencing a Tier-1 gateway.
- */
-model RoutingContext {
-  /** ARM resource ID of the associated Tier-1 gateway. */
-  tier1Gateway?: Azure.Core.armResourceIdentifier;
 }
 
 /**
@@ -512,19 +470,12 @@ model BackendPoolMember {
   /** The weight of the member. */
   weight?: int32;
 
-  /** The associated compute resource. */
-  associatedCompute?: AssociatedCompute;
-}
-
-/**
- * An associated compute resource reference.
- */
-model AssociatedCompute {
-  /** The type of compute (e.g. VMwareVM). */
-  type?: string;
-
-  /** ARM resource ID of the compute resource. */
-  id?: Azure.Core.armResourceIdentifier;
+  /** ARM resource ID of the virtual machine. */
+  vmRef?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.OffAzure/vmwareSites/machines";
+    }
+  ]>;
 }
 
 /**
@@ -593,8 +544,8 @@ model BackendConfig {
  * NAT rule match endpoint.
  */
 model NatEndpoint {
-  /** IP ranges to match. */
-  ipRanges?: string[];
+  /** IP addresses to match. */
+  ipAddress?: string[];
 
   /** Port to match. */
   port?: string;
@@ -662,9 +613,6 @@ model NsxManagerPatchProperties {
 model NsxManagerPatchFields {
   /** The run-as account credential reference. */
   runAsAccount?: string;
-
-  /** The NSX Manager version. */
-  version?: string;
 }
 
 /** NsxTier0Gateway patch envelope. */
@@ -709,14 +657,14 @@ model NsxSegmentPatchFields {
   adminState?: AdminState;
 }
 
-/** NsxGroup patch envelope. */
-model NsxGroupPatchProperties {
+/** NsxNsGroup patch envelope. */
+model NsxNsGroupPatchProperties {
   /** Patch payload. */
-  properties?: NsxGroupPatchFields;
+  properties?: NsxNsGroupPatchFields;
 }
 
-/** NsxGroup updatable fields. */
-model NsxGroupPatchFields {
+/** NsxNsGroup updatable fields. */
+model NsxNsGroupPatchFields {
   /** The group membership expressions. */
   @identifiers(#[])
   expressions?: GroupExpression[];
@@ -773,39 +721,82 @@ model NsxNatRulePatchFields {
   adminState?: AdminState;
 }
 
-/** NsxDnsService patch envelope. */
-model NsxDnsServicePatchProperties {
+// ──────────────────────────────────────────────
+//  Network Agent Models
+// ──────────────────────────────────────────────
+
+/**
+ * List of NetworkAgent resources.
+ */
+model NetworkAgentList is Azure.Core.Page<NetworkAgent>;
+
+/**
+ * Properties of a network agent.
+ */
+model NetworkAgentProperties is AzureResourceProperties {
+  /**
+   * Service principal identity details used by agent for communication to the service.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  servicePrincipalIdentityDetails: AgentSpnProperties;
+
+  /**
+   * Name of the appliance on which agent is running.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  migrateApplianceName: string;
+
+  /**
+   * Name of the fabric site associated with the agent.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  fabricSiteName: string;
+
+  /**
+   * Health details of the agent.
+   */
+  healthDetails?: AgentHealthProperties;
+}
+
+/**
+ * Service principal properties for agent authentication.
+ */
+model AgentSpnProperties {
+  /**
+   * Tenant Id for the service principal.
+   */
+  tenantId?: string;
+
+  /**
+   * Application/client Id for the service principal.
+   */
+  applicationId?: string;
+
+  /**
+   * Object Id of the service principal.
+   */
+  objectId?: string;
+}
+
+/**
+ * Health properties of an agent.
+ */
+model AgentHealthProperties {
+  /** Version of the agent. */
+  version?: string;
+
+  /** Last heartbeat time of the agent in UTC. */
+  lastHeartBeatUtc?: utcDateTime;
+}
+
+/** NetworkAgent patch envelope. */
+model NetworkAgentPatchProperties {
   /** Patch payload. */
-  properties?: NsxDnsServicePatchFields;
+  properties?: NetworkAgentPatchFields;
 }
 
-/** NsxDnsService updatable fields. */
-model NsxDnsServicePatchFields {
-  /** The listener IP address. */
-  listenerIp?: string;
-}
-
-/** NsxDnsForwarderZone patch envelope. */
-model NsxDnsForwarderZonePatchProperties {
-  /** Patch payload. */
-  properties?: NsxDnsForwarderZonePatchFields;
-}
-
-/** NsxDnsForwarderZone updatable fields. */
-model NsxDnsForwarderZonePatchFields {
-  /** The upstream DNS servers. */
-  @identifiers(#[])
-  upstreamServers?: UpstreamServer[];
-}
-
-/** NsxFabric patch envelope. */
-model NsxFabricPatchProperties {
-  /** Patch payload. */
-  properties?: NsxFabricPatchFields;
-}
-
-/** NsxFabric updatable fields. */
-model NsxFabricPatchFields {
-  /** The source appliance identifier. */
-  sourceApplianceId?: string;
+/** NetworkAgent updatable fields. */
+model NetworkAgentPatchFields {
+  /** Health details of the agent. */
+  healthDetails?: AgentHealthProperties;
 }

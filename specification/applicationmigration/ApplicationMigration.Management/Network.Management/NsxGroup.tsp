@@ -16,10 +16,10 @@ namespace Microsoft.ApplicationMigration;
  * An NS group resource (NSX security group).
  */
 @parentResource(NetworkSite)
-model NsxGroup
-  is Azure.ResourceManager.ProxyResource<NsxGroupProperties, false> {
+model NsxNsGroup
+  is Azure.ResourceManager.ProxyResource<NsxNsGroupProperties, false> {
   ...ResourceNameParameter<
-    Resource = NsxGroup,
+    Resource = NsxNsGroup,
     KeyName = "groupName",
     SegmentName = "nsGroups",
     NamePattern = "^[a-zA-Z0-9-]*$"
@@ -29,7 +29,7 @@ model NsxGroup
 /**
  * Properties of an NS group.
  */
-model NsxGroupProperties is AzureResourceProperties {
+model NsxNsGroupProperties is AzureResourceProperties {
   /** The group membership expressions. */
   @identifiers(#[])
   expressions?: GroupExpression[];
@@ -40,45 +40,42 @@ model NsxGroupProperties is AzureResourceProperties {
 
   /** Effective IP address members resolved by the group. */
   effectiveIpMembers?: string[];
-
-  /** Original NSX resource metadata. */
-  nsxOriginal?: NsxOriginal;
 }
 
 @armResourceOperations
-interface NsxGroups {
+interface NsxNsGroups {
   /**
-   * Gets the NsxGroup resource.
+   * Gets the NsxNsGroup resource.
    */
-  get is ArmResourceRead<NsxGroup>;
+  get is ArmResourceRead<NsxNsGroup>;
 
   /**
-   * Creates or updates the NsxGroup resource.
+   * Creates or updates the NsxNsGroup resource.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<NsxGroup>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<NsxNsGroup>;
 
   /**
-   * Patches the NsxGroup resource.
+   * Patches the NsxNsGroup resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<NsxGroup, NsxGroupPatchProperties>;
+  update is ArmCustomPatchSync<NsxNsGroup, NsxNsGroupPatchProperties>;
 
   /**
-   * Deletes the NsxGroup resource.
+   * Deletes the NsxNsGroup resource.
    */
-  delete is ArmResourceDeleteSync<NsxGroup>;
+  delete is ArmResourceDeleteSync<NsxNsGroup>;
 
   /**
-   * Lists NsxGroup resources within a network site.
+   * Lists NsxNsGroup resources within a network site.
    */
   listByNetworkSite is ArmResourceListByParent<
-    NsxGroup,
-    Response = ArmResponse<NsxGroupList>
+    NsxNsGroup,
+    Response = ArmResponse<NsxNsGroupList>
   >;
 }
 
-model NsxGroupList is Azure.Core.Page<NsxGroup>;
+model NsxNsGroupList is Azure.Core.Page<NsxNsGroup>;
 
-@@maxLength(NsxGroup.name, 63);
-@@minLength(NsxGroup.name, 3);
-@@doc(NsxGroup.name, "The name of the NS group.");
+@@maxLength(NsxNsGroup.name, 63);
+@@minLength(NsxNsGroup.name, 3);
+@@doc(NsxNsGroup.name, "The name of the NS group.");

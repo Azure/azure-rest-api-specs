@@ -1,0 +1,56 @@
+{
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://microsoft.com/a",
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/segments/seg1",
+            "name": "seg1",
+            "type": "Microsoft.ApplicationMigration/networkSites/segments",
+            "systemData": {
+              "lastModifiedAt": "2024-01-01T00:00:00Z",
+              "createdBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "createdByType": "User",
+              "createdAt": "2024-01-01T00:00:00Z",
+              "lastModifiedBy": "user@example.com"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "displayName": "Segment-01",
+              "nsxOriginalId": "/infra/segments/seg1",
+              "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+              "uniqueId": "seg-uid-001",
+              "nsxTags": [],
+              "parentGateway": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier1Gateways/t1gw1",
+              "segmentType": "ROUTED",
+              "vlanIds": [
+                "100"
+              ],
+              "subnets": [
+                {
+                  "gatewayAddress": "10.0.0.1/24",
+                  "network": "10.0.0.0/24"
+                }
+              ],
+              "systemOwned": false,
+              "adminState": "UP",
+              "associatedVirtualMachines": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "siteName": "site1"
+  },
+  "operationId": "NsxSegments_ListByNetworkSite",
+  "title": "NsxSegments_ListByNetworkSite_MaximumSet"
+}

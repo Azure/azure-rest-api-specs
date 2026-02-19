@@ -36,20 +36,20 @@ model NsxTier0GatewayProperties is AzureResourceProperties {
   /** Whether the firewall is enabled on this gateway. */
   firewallEnabled?: boolean;
 
+  /** Whether this is a VRF gateway. */
+  isVrf?: boolean;
+
+  /** ARM resource IDs of associated Tier-1 gateways. */
+  associatedTier1Gateways?: Azure.Core.armResourceIdentifier[];
+
   /** ARM resource IDs of associated segments. */
   associatedSegments?: Azure.Core.armResourceIdentifier[];
-
-  /** ARM resource IDs of associated DNS services. */
-  associatedDnsServices?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated NAT rules. */
   associatedNatRules?: Azure.Core.armResourceIdentifier[];
 
   /** ARM resource IDs of associated gateway firewall policies. */
   associatedGfwPolicies?: Azure.Core.armResourceIdentifier[];
-
-  /** ARM resource IDs of associated load balancers. */
-  associatedLoadBalancers?: Azure.Core.armResourceIdentifier[];
 }
 
 @armResourceOperations
@@ -82,6 +82,12 @@ interface NsxTier0Gateways {
     NsxTier0Gateway,
     Response = ArmResponse<NsxTier0GatewayList>
   >;
+
+  /**
+   * Lists NAT rules associated with this Tier-0 gateway.
+   */
+  @action("listNatRules")
+  listNatRules is ArmResourceActionSync<NsxTier0Gateway, void, NsxNatRuleList>;
 }
 
 model NsxTier0GatewayList is Azure.Core.Page<NsxTier0Gateway>;

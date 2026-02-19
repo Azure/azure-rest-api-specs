@@ -36,35 +36,12 @@ model NsxManagerProperties is AzureResourceProperties {
   /** The run-as account credential reference. */
   runAsAccount?: string;
 
-  /** The NSX Manager software version. */
-  version?: string;
-
-  /** Whether this is an NSX global manager. */
-  isGlobalManager?: boolean;
-
-  /** ARM resource IDs of managed VMware sites. */
-  managedSiteRefs?: Azure.Core.armResourceIdentifier[];
-
   /** ARM resource IDs of managed vCenter servers. */
-  managedVcenterRefs?: Azure.Core.armResourceIdentifier[];
-
-  /** ARM resource IDs of local NSX managers (if this is a global manager). */
-  localManagers?: Azure.Core.armResourceIdentifier[];
-
-  /** The discovery snapshot identifier. */
-  discoverySnapshotId?: string;
-
-  /** The discovery time window. */
-  discoveryWindow?: DiscoveryWindow;
-
-  /** The source appliance identifier. */
-  sourceApplianceId?: string;
-
-  /** The ingestion status of the last discovery. */
-  ingestionStatus?: IngestionStatus;
-
-  /** Coverage counts of discovered NSX resources. */
-  coverageCounts?: CoverageCounts;
+  vcenterRefs?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.OffAzure/vmwareSites/vcenters";
+    }
+  ]>[];
 }
 
 @armResourceOperations

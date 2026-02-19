@@ -36,8 +36,8 @@ model NsxLoadBalancerProperties is AzureResourceProperties {
   /** The administrative state. */
   adminState?: AdminState;
 
-  /** The routing context referencing a Tier-1 gateway. */
-  routingContext?: RoutingContext;
+  /** ARM resource ID of the parent gateway. */
+  parentGateway?: Azure.Core.armResourceIdentifier;
 
   /** The frontend configuration. */
   frontend?: FrontendConfig;

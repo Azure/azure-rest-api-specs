@@ -42,6 +42,9 @@ model NsxGatewayFirewallPolicyProperties is AzureResourceProperties {
   /** Whether this is a default policy. */
   isDefault?: boolean;
 
+  /** The context type (e.g. GatewaySpecific). */
+  contextType?: string;
+
   /** The federation scope of the policy. */
   federationScope?: FederationScope;
 
@@ -50,9 +53,6 @@ model NsxGatewayFirewallPolicyProperties is AzureResourceProperties {
 
   /** ARM resource IDs of effective scopes. */
   effectiveScopes?: Azure.Core.armResourceIdentifier[];
-
-  /** Original NSX resource metadata. */
-  nsxOriginal?: NsxOriginal;
 }
 
 @armResourceOperations

@@ -1,0 +1,175 @@
+{
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/gatewayFirewallPolicies/pol1/rules/rule1",
+        "name": "rule1",
+        "type": "Microsoft.ApplicationMigration/networkSites/gatewayFirewallPolicies/rules",
+        "systemData": {
+          "lastModifiedAt": "2024-01-01T00:00:00Z",
+          "createdBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "Allow-SSH",
+          "nsxOriginalId": "/infra/domains/default/gateway-policies/pol1/rules/rule1",
+          "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+          "uniqueId": "rule-uid-001",
+          "nsxTags": [],
+          "action": "ALLOW",
+          "direction": "IN_OUT",
+          "disabled": false,
+          "sequenceNumber": 10,
+          "globalPriority": "05-0000000010-0000000001",
+          "sourceIpGroups": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsGroups/grp1"
+          ],
+          "sourceAddresses": [
+            "10.0.0.0/24"
+          ],
+          "destinationIpGroups": [],
+          "destinationAddresses": [
+            "192.168.1.0/24"
+          ],
+          "services": [
+            {
+              "displayName": "SSH",
+              "serviceEntries": [
+                {
+                  "serviceEntryType": "L4PortSetServiceEntry",
+                  "displayName": "SSH",
+                  "l4Protocol": "TCP",
+                  "protocol": "TCP",
+                  "sourcePorts": [
+                    "1024-65535"
+                  ],
+                  "destinationPorts": [
+                    "22"
+                  ]
+                }
+              ]
+            },
+            {
+              "displayName": "ICMP-and-GRE",
+              "serviceEntries": [
+                {
+                  "serviceEntryType": "ICMPTypeServiceEntry",
+                  "displayName": "ICMP-Echo",
+                  "protocol": "ICMPv4",
+                  "icmpType": "8"
+                },
+                {
+                  "serviceEntryType": "ALGTypeServiceEntry",
+                  "displayName": "FTP-ALG",
+                  "alg": "FTP"
+                },
+                {
+                  "serviceEntryType": "IPProtocolServiceEntry",
+                  "displayName": "GRE",
+                  "protocolNumber": 47
+                }
+              ]
+            }
+          ],
+          "appliedScopes": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1"
+          ],
+          "effectiveScopes": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1"
+          ]
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/gatewayFirewallPolicies/pol1/rules/rule1",
+        "name": "rule1",
+        "type": "Microsoft.ApplicationMigration/networkSites/gatewayFirewallPolicies/rules",
+        "systemData": {
+          "lastModifiedAt": "2024-01-01T00:00:00Z",
+          "createdBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "Allow-SSH",
+          "nsxOriginalId": "/infra/domains/default/gateway-policies/pol1/rules/rule1",
+          "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+          "uniqueId": "rule-uid-001",
+          "nsxTags": [],
+          "action": "ALLOW",
+          "direction": "IN_OUT",
+          "disabled": false,
+          "sequenceNumber": 10,
+          "globalPriority": "05-0000000010-0000000001",
+          "sourceIpGroups": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsGroups/grp1"
+          ],
+          "sourceAddresses": [
+            "10.0.0.0/24"
+          ],
+          "destinationIpGroups": [],
+          "destinationAddresses": [
+            "192.168.1.0/24"
+          ],
+          "services": [
+            {
+              "displayName": "SSH",
+              "serviceEntries": [
+                {
+                  "serviceEntryType": "L4PortSetServiceEntry",
+                  "displayName": "SSH",
+                  "l4Protocol": "TCP",
+                  "protocol": "TCP",
+                  "sourcePorts": [
+                    "1024-65535"
+                  ],
+                  "destinationPorts": [
+                    "22"
+                  ]
+                }
+              ]
+            },
+            {
+              "displayName": "ICMP-and-GRE",
+              "serviceEntries": [
+                {
+                  "serviceEntryType": "ICMPTypeServiceEntry",
+                  "displayName": "ICMP-Echo",
+                  "protocol": "ICMPv4",
+                  "icmpType": "8"
+                },
+                {
+                  "serviceEntryType": "ALGTypeServiceEntry",
+                  "displayName": "FTP-ALG",
+                  "alg": "FTP"
+                },
+                {
+                  "serviceEntryType": "IPProtocolServiceEntry",
+                  "displayName": "GRE",
+                  "protocolNumber": 47
+                }
+              ]
+            }
+          ],
+          "appliedScopes": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1"
+          ],
+          "effectiveScopes": [
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": null,
+  "operationId": "NsxGatewayFirewallRules_CreateOrUpdate",
+  "title": "NsxGatewayFirewallRules_CreateOrUpdate_MaximumSet"
+}

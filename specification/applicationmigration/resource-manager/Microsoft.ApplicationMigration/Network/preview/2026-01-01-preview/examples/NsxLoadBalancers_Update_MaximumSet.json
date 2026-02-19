@@ -1,0 +1,63 @@
+{
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/loadBalancers/lb1",
+        "name": "lb1",
+        "type": "Microsoft.ApplicationMigration/networkSites/loadBalancers",
+        "systemData": {
+          "lastModifiedAt": "2024-01-01T00:00:00Z",
+          "createdBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "displayName": "LB-01",
+          "nsxOriginalId": "/infra/lb-services/lb1",
+          "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+          "uniqueId": "lb-uid-001",
+          "nsxTags": [],
+          "lbType": "L4",
+          "adminState": "ENABLED",
+          "parentGateway": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier1Gateways/t1gw1",
+          "frontend": {
+            "protocol": "HTTPS",
+            "vip": "10.0.1.100",
+            "port": 443
+          },
+          "backendConfig": {
+            "snat": {
+              "type": "IPPOOL",
+              "ipPoolAddresses": [
+                "10.0.3.100",
+                "10.0.3.101"
+              ]
+            },
+            "backendPool": {
+              "members": [
+                {
+                  "weight": 1,
+                  "ipAddress": "10.0.2.10",
+                  "adminState": "ENABLED",
+                  "port": 8443,
+                  "vmRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
+                }
+              ],
+              "algorithm": "ROUND_ROBIN"
+            },
+            "healthProbe": {
+              "port": 8443,
+              "protocol": "HTTPS"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": null,
+  "operationId": "NsxLoadBalancers_Update",
+  "title": "NsxLoadBalancers_Update_MaximumSet"
+}

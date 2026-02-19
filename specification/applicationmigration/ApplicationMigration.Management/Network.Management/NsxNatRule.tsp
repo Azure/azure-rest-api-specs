@@ -36,21 +36,14 @@ model NsxNatRuleProperties is AzureResourceProperties {
   /** The administrative state. */
   adminState?: AdminState;
 
-  /** The routing context referencing a Tier-1 gateway. */
-  routingContext?: RoutingContext;
+  /** ARM resource ID of the parent gateway. */
+  parentGateway?: Azure.Core.armResourceIdentifier;
 
   /** The match criteria. */
   match?: NatMatch;
 
   /** The translation target. */
   translate?: NatTranslate;
-
-  /** A content hash for change detection. */
-  contentHash?: string;
-
-  /** NSX tags applied to this NAT rule. */
-  @identifiers(#[])
-  tags?: NsxTag[];
 }
 
 @armResourceOperations

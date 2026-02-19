@@ -46,6 +46,9 @@
       "name": "NetworkSites"
     },
     {
+      "name": "NetworkAgents"
+    },
+    {
       "name": "NsxManagers"
     },
     {
@@ -58,7 +61,7 @@
       "name": "NsxSegments"
     },
     {
-      "name": "NsxGroups"
+      "name": "NsxNsGroups"
     },
     {
       "name": "GatewayFirewallPolicies"
@@ -71,12 +74,6 @@
     },
     {
       "name": "NsxNatRules"
-    },
-    {
-      "name": "NsxDnsServices"
-    },
-    {
-      "name": "NsxDnsForwarderZones"
     }
   ],
   "paths": {
@@ -108,7 +105,7 @@
         },
         "x-ms-examples": {
           "Operations_List_MaximumSet": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+            "$ref": "./examples/Operations_List_MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -147,7 +144,7 @@
         },
         "x-ms-examples": {
           "NetworkSites_ListBySubscription_MaximumSet": {
-            "$ref": "./examples/NetworkSites_ListBySubscription_MaximumSet_Gen.json"
+            "$ref": "./examples/NetworkSites_ListBySubscription_MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -189,7 +186,7 @@
         },
         "x-ms-examples": {
           "NetworkSites_ListByResourceGroup_MaximumSet": {
-            "$ref": "./examples/NetworkSites_ListByResourceGroup_MaximumSet_Gen.json"
+            "$ref": "./examples/NetworkSites_ListByResourceGroup_MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -241,7 +238,7 @@
         },
         "x-ms-examples": {
           "NetworkSites_Get_MaximumSet": {
-            "$ref": "./examples/NetworkSites_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/NetworkSites_Get_MaximumSet.json"
           }
         }
       },
@@ -314,7 +311,7 @@
         },
         "x-ms-examples": {
           "NetworkSites_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NetworkSites_CreateOrUpdate_MaximumSet_Gen.json"
+            "$ref": "./examples/NetworkSites_CreateOrUpdate_MaximumSet.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -388,7 +385,7 @@
         },
         "x-ms-examples": {
           "NetworkSites_Update_MaximumSet": {
-            "$ref": "./examples/NetworkSites_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/NetworkSites_Update_MaximumSet.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -439,18 +436,18 @@
         },
         "x-ms-examples": {
           "NetworkSites_Delete_MaximumSet": {
-            "$ref": "./examples/NetworkSites_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/NetworkSites_Delete_MaximumSet.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/dnsServices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/agents": {
       "get": {
-        "operationId": "NsxDnsServices_ListByNetworkSite",
+        "operationId": "NetworkAgents_ListByNetworkSite",
         "tags": [
-          "NsxDnsServices"
+          "NetworkAgents"
         ],
-        "description": "Lists NsxDnsService resources within a network site.",
+        "description": "Lists NetworkAgent resources within a network site.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -476,7 +473,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NsxDnsServiceList"
+              "$ref": "#/definitions/NetworkAgentList"
             }
           },
           "default": {
@@ -487,8 +484,8 @@
           }
         },
         "x-ms-examples": {
-          "NsxDnsServices_ListByNetworkSite_MaximumSet": {
-            "$ref": "./examples/NsxDnsServices_ListByNetworkSite_MaximumSet_Gen.json"
+          "NetworkAgents_ListByNetworkSite_MaximumSet": {
+            "$ref": "./examples/NetworkAgents__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -496,13 +493,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/dnsServices/{dnsServiceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/agents/{agentName}": {
       "get": {
-        "operationId": "NsxDnsServices_Get",
+        "operationId": "NetworkAgents_Get",
         "tags": [
-          "NsxDnsServices"
+          "NetworkAgents"
         ],
-        "description": "Gets the NsxDnsService resource.",
+        "description": "Gets the NetworkAgent resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -524,9 +521,9 @@
             "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "name": "dnsServiceName",
+            "name": "agentName",
             "in": "path",
-            "description": "The name of the DNS service.",
+            "description": "The name of the network agent.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -538,7 +535,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NsxDnsService"
+              "$ref": "#/definitions/NetworkAgent"
             }
           },
           "default": {
@@ -549,17 +546,17 @@
           }
         },
         "x-ms-examples": {
-          "NsxDnsServices_Get_MaximumSet": {
-            "$ref": "./examples/NsxDnsServices_Get_MaximumSet_Gen.json"
+          "NetworkAgents_Get_MaximumSet": {
+            "$ref": "./examples/NetworkAgents_Get_MaximumSet.json"
           }
         }
       },
       "put": {
-        "operationId": "NsxDnsServices_CreateOrUpdate",
+        "operationId": "NetworkAgents_CreateOrUpdate",
         "tags": [
-          "NsxDnsServices"
+          "NetworkAgents"
         ],
-        "description": "Creates or updates the NsxDnsService resource.",
+        "description": "Creates or updates the NetworkAgent resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -581,9 +578,9 @@
             "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "name": "dnsServiceName",
+            "name": "agentName",
             "in": "path",
-            "description": "The name of the DNS service.",
+            "description": "The name of the network agent.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -596,21 +593,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NsxDnsService"
+              "$ref": "#/definitions/NetworkAgent"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NsxDnsService' update operation succeeded",
+            "description": "Resource 'NetworkAgent' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NsxDnsService"
+              "$ref": "#/definitions/NetworkAgent"
             }
           },
           "201": {
-            "description": "Resource 'NsxDnsService' create operation succeeded",
+            "description": "Resource 'NetworkAgent' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NsxDnsService"
+              "$ref": "#/definitions/NetworkAgent"
             }
           },
           "default": {
@@ -621,17 +618,17 @@
           }
         },
         "x-ms-examples": {
-          "NsxDnsServices_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxDnsServices_CreateOrUpdate_MaximumSet_Gen.json"
+          "NetworkAgents_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/NetworkAgents_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
       "patch": {
-        "operationId": "NsxDnsServices_Update",
+        "operationId": "NetworkAgents_Update",
         "tags": [
-          "NsxDnsServices"
+          "NetworkAgents"
         ],
-        "description": "Patches the NsxDnsService resource.",
+        "description": "Patches the NetworkAgent resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -653,9 +650,9 @@
             "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "name": "dnsServiceName",
+            "name": "agentName",
             "in": "path",
-            "description": "The name of the DNS service.",
+            "description": "The name of the network agent.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -668,7 +665,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NsxDnsServicePatchProperties"
+              "$ref": "#/definitions/NetworkAgentPatchProperties"
             }
           }
         ],
@@ -676,7 +673,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NsxDnsService"
+              "$ref": "#/definitions/NetworkAgent"
             }
           },
           "default": {
@@ -687,17 +684,17 @@
           }
         },
         "x-ms-examples": {
-          "NsxDnsServices_Update_MaximumSet": {
-            "$ref": "./examples/NsxDnsServices_Update_MaximumSet_Gen.json"
+          "NetworkAgents_Update_MaximumSet": {
+            "$ref": "./examples/NetworkAgents_Update_MaximumSet.json"
           }
         }
       },
       "delete": {
-        "operationId": "NsxDnsServices_Delete",
+        "operationId": "NetworkAgents_Delete",
         "tags": [
-          "NsxDnsServices"
+          "NetworkAgents"
         ],
-        "description": "Deletes the NsxDnsService resource.",
+        "description": "Deletes the NetworkAgent resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -719,9 +716,9 @@
             "pattern": "^[a-zA-Z0-9-]*$"
           },
           {
-            "name": "dnsServiceName",
+            "name": "agentName",
             "in": "path",
-            "description": "The name of the DNS service.",
+            "description": "The name of the network agent.",
             "required": true,
             "type": "string",
             "minLength": 3,
@@ -744,364 +741,8 @@
           }
         },
         "x-ms-examples": {
-          "NsxDnsServices_Delete_MaximumSet": {
-            "$ref": "./examples/NsxDnsServices_Delete_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/dnsServices/{dnsServiceName}/dnsForwarderZones": {
-      "get": {
-        "operationId": "NsxDnsForwarderZones_ListByNsxDnsService",
-        "tags": [
-          "NsxDnsForwarderZones"
-        ],
-        "description": "Lists NsxDnsForwarderZone resources within a DNS service.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "The name of the network site.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "dnsServiceName",
-            "in": "path",
-            "description": "The name of the DNS service.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NsxDnsForwarderZoneList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NsxDnsForwarderZones_ListByNsxDnsService_MaximumSet": {
-            "$ref": "./examples/NsxDnsForwarderZones_ListByNsxDnsService_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/dnsServices/{dnsServiceName}/dnsForwarderZones/{zoneName}": {
-      "get": {
-        "operationId": "NsxDnsForwarderZones_Get",
-        "tags": [
-          "NsxDnsForwarderZones"
-        ],
-        "description": "Gets the NsxDnsForwarderZone resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "The name of the network site.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "dnsServiceName",
-            "in": "path",
-            "description": "The name of the DNS service.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "zoneName",
-            "in": "path",
-            "description": "The name of the DNS forwarder zone.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NsxDnsForwarderZone"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NsxDnsForwarderZones_Get_MaximumSet": {
-            "$ref": "./examples/NsxDnsForwarderZones_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "NsxDnsForwarderZones_CreateOrUpdate",
-        "tags": [
-          "NsxDnsForwarderZones"
-        ],
-        "description": "Creates or updates the NsxDnsForwarderZone resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "The name of the network site.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "dnsServiceName",
-            "in": "path",
-            "description": "The name of the DNS service.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "zoneName",
-            "in": "path",
-            "description": "The name of the DNS forwarder zone.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NsxDnsForwarderZone"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'NsxDnsForwarderZone' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/NsxDnsForwarderZone"
-            }
-          },
-          "201": {
-            "description": "Resource 'NsxDnsForwarderZone' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/NsxDnsForwarderZone"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NsxDnsForwarderZones_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxDnsForwarderZones_CreateOrUpdate_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "patch": {
-        "operationId": "NsxDnsForwarderZones_Update",
-        "tags": [
-          "NsxDnsForwarderZones"
-        ],
-        "description": "Patches the NsxDnsForwarderZone resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "The name of the network site.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "dnsServiceName",
-            "in": "path",
-            "description": "The name of the DNS service.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "zoneName",
-            "in": "path",
-            "description": "The name of the DNS forwarder zone.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NsxDnsForwarderZonePatchProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NsxDnsForwarderZone"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NsxDnsForwarderZones_Update_MaximumSet": {
-            "$ref": "./examples/NsxDnsForwarderZones_Update_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "NsxDnsForwarderZones_Delete",
-        "tags": [
-          "NsxDnsForwarderZones"
-        ],
-        "description": "Deletes the NsxDnsForwarderZone resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "description": "The name of the network site.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "dnsServiceName",
-            "in": "path",
-            "description": "The name of the DNS service.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "zoneName",
-            "in": "path",
-            "description": "The name of the DNS forwarder zone.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NsxDnsForwarderZones_Delete_MaximumSet": {
-            "$ref": "./examples/NsxDnsForwarderZones_Delete_MaximumSet_Gen.json"
+          "NetworkAgents_Delete_MaximumSet": {
+            "$ref": "./examples/NetworkAgents_Delete_MaximumSet.json"
           }
         }
       }
@@ -1150,7 +791,7 @@
         },
         "x-ms-examples": {
           "GatewayFirewallPolicies_ListByNetworkSite_MaximumSet": {
-            "$ref": "./examples/GatewayFirewallPolicies_ListByNetworkSite_MaximumSet_Gen.json"
+            "$ref": "./examples/GatewayFirewallPolicies__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -1212,7 +853,7 @@
         },
         "x-ms-examples": {
           "GatewayFirewallPolicies_Get_MaximumSet": {
-            "$ref": "./examples/GatewayFirewallPolicies_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/GatewayFirewallPolicies_Get_MaximumSet.json"
           }
         }
       },
@@ -1284,7 +925,7 @@
         },
         "x-ms-examples": {
           "GatewayFirewallPolicies_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/GatewayFirewallPolicies_CreateOrUpdate_MaximumSet_Gen.json"
+            "$ref": "./examples/GatewayFirewallPolicies_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
@@ -1350,7 +991,7 @@
         },
         "x-ms-examples": {
           "GatewayFirewallPolicies_Update_MaximumSet": {
-            "$ref": "./examples/GatewayFirewallPolicies_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/GatewayFirewallPolicies_Update_MaximumSet.json"
           }
         }
       },
@@ -1407,7 +1048,7 @@
         },
         "x-ms-examples": {
           "GatewayFirewallPolicies_Delete_MaximumSet": {
-            "$ref": "./examples/GatewayFirewallPolicies_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/GatewayFirewallPolicies_Delete_MaximumSet.json"
           }
         }
       }
@@ -1466,7 +1107,7 @@
         },
         "x-ms-examples": {
           "NsxGatewayFirewallRules_ListByNsxGatewayFirewallPolicy_MaximumSet": {
-            "$ref": "./examples/NsxGatewayFirewallRules_ListByNsxGatewayFirewallPolicy_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxGatewayFirewallRules__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -1538,7 +1179,7 @@
         },
         "x-ms-examples": {
           "NsxGatewayFirewallRules_Get_MaximumSet": {
-            "$ref": "./examples/NsxGatewayFirewallRules_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxGatewayFirewallRules_Get_MaximumSet.json"
           }
         }
       },
@@ -1620,7 +1261,7 @@
         },
         "x-ms-examples": {
           "NsxGatewayFirewallRules_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxGatewayFirewallRules_CreateOrUpdate_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxGatewayFirewallRules_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
@@ -1696,7 +1337,7 @@
         },
         "x-ms-examples": {
           "NsxGatewayFirewallRules_Update_MaximumSet": {
-            "$ref": "./examples/NsxGatewayFirewallRules_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxGatewayFirewallRules_Update_MaximumSet.json"
           }
         }
       },
@@ -1763,7 +1404,7 @@
         },
         "x-ms-examples": {
           "NsxGatewayFirewallRules_Delete_MaximumSet": {
-            "$ref": "./examples/NsxGatewayFirewallRules_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxGatewayFirewallRules_Delete_MaximumSet.json"
           }
         }
       }
@@ -1812,7 +1453,7 @@
         },
         "x-ms-examples": {
           "NsxLoadBalancers_ListByNetworkSite_MaximumSet": {
-            "$ref": "./examples/NsxLoadBalancers_ListByNetworkSite_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxLoadBalancers__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -1874,7 +1515,7 @@
         },
         "x-ms-examples": {
           "NsxLoadBalancers_Get_MaximumSet": {
-            "$ref": "./examples/NsxLoadBalancers_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxLoadBalancers_Get_MaximumSet.json"
           }
         }
       },
@@ -1946,7 +1587,7 @@
         },
         "x-ms-examples": {
           "NsxLoadBalancers_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxLoadBalancers_CreateOrUpdate_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxLoadBalancers_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
@@ -2012,7 +1653,7 @@
         },
         "x-ms-examples": {
           "NsxLoadBalancers_Update_MaximumSet": {
-            "$ref": "./examples/NsxLoadBalancers_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxLoadBalancers_Update_MaximumSet.json"
           }
         }
       },
@@ -2069,7 +1710,7 @@
         },
         "x-ms-examples": {
           "NsxLoadBalancers_Delete_MaximumSet": {
-            "$ref": "./examples/NsxLoadBalancers_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxLoadBalancers_Delete_MaximumSet.json"
           }
         }
       }
@@ -2118,7 +1759,7 @@
         },
         "x-ms-examples": {
           "NsxNatRules_ListByNetworkSite_MaximumSet": {
-            "$ref": "./examples/NsxNatRules_ListByNetworkSite_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxNatRules__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -2180,7 +1821,7 @@
         },
         "x-ms-examples": {
           "NsxNatRules_Get_MaximumSet": {
-            "$ref": "./examples/NsxNatRules_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxNatRules_Get_MaximumSet.json"
           }
         }
       },
@@ -2252,7 +1893,7 @@
         },
         "x-ms-examples": {
           "NsxNatRules_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxNatRules_CreateOrUpdate_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxNatRules_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
@@ -2318,7 +1959,7 @@
         },
         "x-ms-examples": {
           "NsxNatRules_Update_MaximumSet": {
-            "$ref": "./examples/NsxNatRules_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxNatRules_Update_MaximumSet.json"
           }
         }
       },
@@ -2375,18 +2016,18 @@
         },
         "x-ms-examples": {
           "NsxNatRules_Delete_MaximumSet": {
-            "$ref": "./examples/NsxNatRules_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxNatRules_Delete_MaximumSet.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsGroups": {
       "get": {
-        "operationId": "NsxGroups_ListByNetworkSite",
+        "operationId": "NsxNsGroups_ListByNetworkSite",
         "tags": [
-          "NsxGroups"
+          "NsxNsGroups"
         ],
-        "description": "Lists NsxGroup resources within a network site.",
+        "description": "Lists NsxNsGroup resources within a network site.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2412,7 +2053,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NsxGroupList"
+              "$ref": "#/definitions/NsxNsGroupList"
             }
           },
           "default": {
@@ -2423,8 +2064,8 @@
           }
         },
         "x-ms-examples": {
-          "NsxGroups_ListByNetworkSite_MaximumSet": {
-            "$ref": "./examples/NsxGroups_ListByNetworkSite_MaximumSet_Gen.json"
+          "NsxNsGroups_ListByNetworkSite_MaximumSet": {
+            "$ref": "./examples/NsxNsGroups__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -2434,11 +2075,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/nsGroups/{groupName}": {
       "get": {
-        "operationId": "NsxGroups_Get",
+        "operationId": "NsxNsGroups_Get",
         "tags": [
-          "NsxGroups"
+          "NsxNsGroups"
         ],
-        "description": "Gets the NsxGroup resource.",
+        "description": "Gets the NsxNsGroup resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2474,7 +2115,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NsxGroup"
+              "$ref": "#/definitions/NsxNsGroup"
             }
           },
           "default": {
@@ -2485,17 +2126,17 @@
           }
         },
         "x-ms-examples": {
-          "NsxGroups_Get_MaximumSet": {
-            "$ref": "./examples/NsxGroups_Get_MaximumSet_Gen.json"
+          "NsxNsGroups_Get_MaximumSet": {
+            "$ref": "./examples/NsxNsGroups_Get_MaximumSet.json"
           }
         }
       },
       "put": {
-        "operationId": "NsxGroups_CreateOrUpdate",
+        "operationId": "NsxNsGroups_CreateOrUpdate",
         "tags": [
-          "NsxGroups"
+          "NsxNsGroups"
         ],
-        "description": "Creates or updates the NsxGroup resource.",
+        "description": "Creates or updates the NsxNsGroup resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2532,21 +2173,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NsxGroup"
+              "$ref": "#/definitions/NsxNsGroup"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NsxGroup' update operation succeeded",
+            "description": "Resource 'NsxNsGroup' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NsxGroup"
+              "$ref": "#/definitions/NsxNsGroup"
             }
           },
           "201": {
-            "description": "Resource 'NsxGroup' create operation succeeded",
+            "description": "Resource 'NsxNsGroup' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/NsxGroup"
+              "$ref": "#/definitions/NsxNsGroup"
             }
           },
           "default": {
@@ -2557,17 +2198,17 @@
           }
         },
         "x-ms-examples": {
-          "NsxGroups_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxGroups_CreateOrUpdate_MaximumSet_Gen.json"
+          "NsxNsGroups_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/NsxNsGroups_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
       "patch": {
-        "operationId": "NsxGroups_Update",
+        "operationId": "NsxNsGroups_Update",
         "tags": [
-          "NsxGroups"
+          "NsxNsGroups"
         ],
-        "description": "Patches the NsxGroup resource.",
+        "description": "Patches the NsxNsGroup resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2604,7 +2245,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NsxGroupPatchProperties"
+              "$ref": "#/definitions/NsxNsGroupPatchProperties"
             }
           }
         ],
@@ -2612,7 +2253,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/NsxGroup"
+              "$ref": "#/definitions/NsxNsGroup"
             }
           },
           "default": {
@@ -2623,17 +2264,17 @@
           }
         },
         "x-ms-examples": {
-          "NsxGroups_Update_MaximumSet": {
-            "$ref": "./examples/NsxGroups_Update_MaximumSet_Gen.json"
+          "NsxNsGroups_Update_MaximumSet": {
+            "$ref": "./examples/NsxNsGroups_Update_MaximumSet.json"
           }
         }
       },
       "delete": {
-        "operationId": "NsxGroups_Delete",
+        "operationId": "NsxNsGroups_Delete",
         "tags": [
-          "NsxGroups"
+          "NsxNsGroups"
         ],
-        "description": "Deletes the NsxGroup resource.",
+        "description": "Deletes the NsxNsGroup resource.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -2680,8 +2321,8 @@
           }
         },
         "x-ms-examples": {
-          "NsxGroups_Delete_MaximumSet": {
-            "$ref": "./examples/NsxGroups_Delete_MaximumSet_Gen.json"
+          "NsxNsGroups_Delete_MaximumSet": {
+            "$ref": "./examples/NsxNsGroups_Delete_MaximumSet.json"
           }
         }
       }
@@ -2730,7 +2371,7 @@
         },
         "x-ms-examples": {
           "NsxManagers_ListByNetworkSite_MaximumSet": {
-            "$ref": "./examples/NsxManagers_ListByNetworkSite_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxManagers__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -2792,7 +2433,7 @@
         },
         "x-ms-examples": {
           "NsxManagers_Get_MaximumSet": {
-            "$ref": "./examples/NsxManagers_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxManagers_Get_MaximumSet.json"
           }
         }
       },
@@ -2864,7 +2505,7 @@
         },
         "x-ms-examples": {
           "NsxManagers_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxManagers_CreateOrUpdate_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxManagers_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
@@ -2930,7 +2571,7 @@
         },
         "x-ms-examples": {
           "NsxManagers_Update_MaximumSet": {
-            "$ref": "./examples/NsxManagers_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxManagers_Update_MaximumSet.json"
           }
         }
       },
@@ -2987,7 +2628,7 @@
         },
         "x-ms-examples": {
           "NsxManagers_Delete_MaximumSet": {
-            "$ref": "./examples/NsxManagers_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxManagers_Delete_MaximumSet.json"
           }
         }
       }
@@ -3036,7 +2677,7 @@
         },
         "x-ms-examples": {
           "NsxSegments_ListByNetworkSite_MaximumSet": {
-            "$ref": "./examples/NsxSegments_ListByNetworkSite_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxSegments__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -3098,7 +2739,7 @@
         },
         "x-ms-examples": {
           "NsxSegments_Get_MaximumSet": {
-            "$ref": "./examples/NsxSegments_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxSegments_Get_MaximumSet.json"
           }
         }
       },
@@ -3170,7 +2811,7 @@
         },
         "x-ms-examples": {
           "NsxSegments_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxSegments_CreateOrUpdate_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxSegments_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
@@ -3236,7 +2877,7 @@
         },
         "x-ms-examples": {
           "NsxSegments_Update_MaximumSet": {
-            "$ref": "./examples/NsxSegments_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxSegments_Update_MaximumSet.json"
           }
         }
       },
@@ -3293,7 +2934,7 @@
         },
         "x-ms-examples": {
           "NsxSegments_Delete_MaximumSet": {
-            "$ref": "./examples/NsxSegments_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxSegments_Delete_MaximumSet.json"
           }
         }
       }
@@ -3342,7 +2983,7 @@
         },
         "x-ms-examples": {
           "NsxTier0Gateways_ListByNetworkSite_MaximumSet": {
-            "$ref": "./examples/NsxTier0Gateways_ListByNetworkSite_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier0Gateways__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -3404,7 +3045,7 @@
         },
         "x-ms-examples": {
           "NsxTier0Gateways_Get_MaximumSet": {
-            "$ref": "./examples/NsxTier0Gateways_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier0Gateways_Get_MaximumSet.json"
           }
         }
       },
@@ -3476,7 +3117,7 @@
         },
         "x-ms-examples": {
           "NsxTier0Gateways_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxTier0Gateways_CreateOrUpdate_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier0Gateways_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
@@ -3542,7 +3183,7 @@
         },
         "x-ms-examples": {
           "NsxTier0Gateways_Update_MaximumSet": {
-            "$ref": "./examples/NsxTier0Gateways_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier0Gateways_Update_MaximumSet.json"
           }
         }
       },
@@ -3599,7 +3240,66 @@
         },
         "x-ms-examples": {
           "NsxTier0Gateways_Delete_MaximumSet": {
-            "$ref": "./examples/NsxTier0Gateways_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier0Gateways_Delete_MaximumSet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/tier0Gateways/{gatewayName}/listNatRules": {
+      "post": {
+        "operationId": "NsxTier0Gateways_ListNatRules",
+        "tags": [
+          "NsxTier0Gateways"
+        ],
+        "description": "Lists NAT rules associated with this Tier-0 gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-0 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxNatRuleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxTier0Gateways_ListNatRules_MaximumSet": {
+            "$ref": "./examples/NsxTier0Gateways_ListNatRules_MaximumSet.json"
           }
         }
       }
@@ -3648,7 +3348,7 @@
         },
         "x-ms-examples": {
           "NsxTier1Gateways_ListByNetworkSite_MaximumSet": {
-            "$ref": "./examples/NsxTier1Gateways_ListByNetworkSite_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier1Gateways__MaximumSet.json"
           }
         },
         "x-ms-pageable": {
@@ -3710,7 +3410,7 @@
         },
         "x-ms-examples": {
           "NsxTier1Gateways_Get_MaximumSet": {
-            "$ref": "./examples/NsxTier1Gateways_Get_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier1Gateways_Get_MaximumSet.json"
           }
         }
       },
@@ -3782,7 +3482,7 @@
         },
         "x-ms-examples": {
           "NsxTier1Gateways_CreateOrUpdate_MaximumSet": {
-            "$ref": "./examples/NsxTier1Gateways_CreateOrUpdate_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier1Gateways_CreateOrUpdate_MaximumSet.json"
           }
         }
       },
@@ -3848,7 +3548,7 @@
         },
         "x-ms-examples": {
           "NsxTier1Gateways_Update_MaximumSet": {
-            "$ref": "./examples/NsxTier1Gateways_Update_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier1Gateways_Update_MaximumSet.json"
           }
         }
       },
@@ -3905,7 +3605,66 @@
         },
         "x-ms-examples": {
           "NsxTier1Gateways_Delete_MaximumSet": {
-            "$ref": "./examples/NsxTier1Gateways_Delete_MaximumSet_Gen.json"
+            "$ref": "./examples/NsxTier1Gateways_Delete_MaximumSet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApplicationMigration/networkSites/{siteName}/tier1Gateways/{gatewayName}/listNatRules": {
+      "post": {
+        "operationId": "NsxTier1Gateways_ListNatRules",
+        "tags": [
+          "NsxTier1Gateways"
+        ],
+        "description": "Lists NAT rules associated with this Tier-1 gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "The name of the network site.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "description": "The name of the Tier-1 gateway.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NsxNatRuleList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NsxTier1Gateways_ListNatRules_MaximumSet": {
+            "$ref": "./examples/NsxTier1Gateways_ListNatRules_MaximumSet.json"
           }
         }
       }
@@ -3948,18 +3707,36 @@
         ]
       }
     },
-    "AssociatedCompute": {
+    "AgentHealthProperties": {
       "type": "object",
-      "description": "An associated compute resource reference.",
+      "description": "Health properties of an agent.",
       "properties": {
-        "type": {
+        "version": {
           "type": "string",
-          "description": "The type of compute (e.g. VMwareVM)."
+          "description": "Version of the agent."
         },
-        "id": {
+        "lastHeartBeatUtc": {
           "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the compute resource."
+          "format": "date-time",
+          "description": "Last heartbeat time of the agent in UTC."
+        }
+      }
+    },
+    "AgentSpnProperties": {
+      "type": "object",
+      "description": "Service principal properties for agent authentication.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id for the service principal."
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Application/client Id for the service principal."
+        },
+        "objectId": {
+          "type": "string",
+          "description": "Object Id of the service principal."
         }
       }
     },
@@ -3971,6 +3748,31 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -4032,9 +3834,17 @@
           "format": "int32",
           "description": "The weight of the member."
         },
-        "associatedCompute": {
-          "$ref": "#/definitions/AssociatedCompute",
-          "description": "The associated compute resource."
+        "vmRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the virtual machine.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OffAzure/vmwareSites/machines"
+              }
+            ]
+          }
         }
       }
     },
@@ -4058,84 +3868,6 @@
             "name": "AND",
             "value": "AND",
             "description": "Logical AND."
-          }
-        ]
-      }
-    },
-    "CoverageCounts": {
-      "type": "object",
-      "description": "Coverage counts for discovered NSX resources.",
-      "properties": {
-        "tier0Gateways": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of Tier-0 gateways."
-        },
-        "tier1Gateways": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of Tier-1 gateways."
-        },
-        "segments": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of segments."
-        },
-        "groups": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of groups."
-        },
-        "gatewayFirewallPolicies": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of gateway firewall policies."
-        },
-        "natRules": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of NAT rules."
-        },
-        "loadBalancers": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of load balancers."
-        },
-        "dnsServices": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of DNS services."
-        }
-      }
-    },
-    "DiscoveryWindow": {
-      "type": "object",
-      "description": "A discovery time window.",
-      "properties": {
-        "startTime": {
-          "type": "string",
-          "description": "The start time of the discovery window."
-        },
-        "endTime": {
-          "type": "string",
-          "description": "The end time of the discovery window."
-        }
-      }
-    },
-    "DnsZoneType": {
-      "type": "string",
-      "description": "The type of a DNS forwarder zone.",
-      "enum": [
-        "FQDN"
-      ],
-      "x-ms-enum": {
-        "name": "DnsZoneType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FQDN",
-            "value": "FQDN",
-            "description": "FQDN-based zone."
           }
         ]
       }
@@ -4237,6 +3969,24 @@
             "description": "Both inbound and outbound traffic."
           }
         ]
+      }
+    },
+    "FirewallService": {
+      "type": "object",
+      "description": "An NSX service definition for firewall rules.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the service."
+        },
+        "serviceEntries": {
+          "type": "array",
+          "description": "The service entries.",
+          "items": {
+            "$ref": "#/definitions/ServiceEntry"
+          },
+          "x-ms-identifiers": []
+        }
       }
     },
     "FrontendConfig": {
@@ -4441,36 +4191,6 @@
         }
       }
     },
-    "IngestionStatus": {
-      "type": "string",
-      "description": "The ingestion status of a discovery operation.",
-      "enum": [
-        "Complete",
-        "Partial",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "IngestionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Complete",
-            "value": "Complete",
-            "description": "Ingestion completed successfully."
-          },
-          {
-            "name": "Partial",
-            "value": "Partial",
-            "description": "Ingestion completed partially."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Ingestion failed."
-          }
-        ]
-      }
-    },
     "LbAlgorithm": {
       "type": "string",
       "description": "The load balancing algorithm.",
@@ -4631,9 +4351,9 @@
       "type": "object",
       "description": "NAT rule match endpoint.",
       "properties": {
-        "ipRanges": {
+        "ipAddress": {
           "type": "array",
-          "description": "IP ranges to match.",
+          "description": "IP addresses to match.",
           "items": {
             "type": "string"
           }
@@ -4700,6 +4420,134 @@
         ]
       }
     },
+    "NetworkAgent": {
+      "type": "object",
+      "description": "A network agent resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkAgentProperties",
+          "description": "Resource properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkAgentList": {
+      "type": "object",
+      "description": "List of NetworkAgent resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NetworkAgent items on this page",
+          "items": {
+            "$ref": "#/definitions/NetworkAgent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkAgentPatchFields": {
+      "type": "object",
+      "description": "NetworkAgent updatable fields.",
+      "properties": {
+        "healthDetails": {
+          "$ref": "#/definitions/AgentHealthProperties",
+          "description": "Health details of the agent."
+        }
+      }
+    },
+    "NetworkAgentPatchProperties": {
+      "type": "object",
+      "description": "NetworkAgent patch envelope.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkAgentPatchFields",
+          "description": "Patch payload."
+        }
+      }
+    },
+    "NetworkAgentProperties": {
+      "type": "object",
+      "description": "Properties of a network agent.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/AgentSpnProperties",
+          "description": "Service principal identity details used by agent for communication to the service.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "migrateApplianceName": {
+          "type": "string",
+          "description": "Name of the appliance on which agent is running.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fabricSiteName": {
+          "type": "string",
+          "description": "Name of the fabric site associated with the agent.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "healthDetails": {
+          "$ref": "#/definitions/AgentHealthProperties",
+          "description": "Health details of the agent."
+        }
+      },
+      "required": [
+        "servicePrincipalIdentityDetails",
+        "migrateApplianceName",
+        "fabricSiteName"
+      ]
+    },
     "NetworkSite": {
       "type": "object",
       "description": "A network discovery site resource.",
@@ -4748,6 +4596,31 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
         "masterSiteId": {
           "type": "string",
           "format": "arm-id",
@@ -4771,222 +4644,6 @@
               }
             ]
           }
-        }
-      }
-    },
-    "NsxDnsForwarderZone": {
-      "type": "object",
-      "description": "A DNS forwarder zone resource (child of NsxDnsService).",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NsxDnsForwarderZoneProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "NsxDnsForwarderZoneList": {
-      "type": "object",
-      "description": "Paged collection of NsxDnsForwarderZone items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The NsxDnsForwarderZone items on this page",
-          "items": {
-            "$ref": "#/definitions/NsxDnsForwarderZone"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "NsxDnsForwarderZonePatchFields": {
-      "type": "object",
-      "description": "NsxDnsForwarderZone updatable fields.",
-      "properties": {
-        "upstreamServers": {
-          "type": "array",
-          "description": "The upstream DNS servers.",
-          "items": {
-            "$ref": "#/definitions/UpstreamServer"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "NsxDnsForwarderZonePatchProperties": {
-      "type": "object",
-      "description": "NsxDnsForwarderZone patch envelope.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NsxDnsForwarderZonePatchFields",
-          "description": "Patch payload."
-        }
-      }
-    },
-    "NsxDnsForwarderZoneProperties": {
-      "type": "object",
-      "description": "Properties of a DNS forwarder zone.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the resource.",
-          "readOnly": true
-        },
-        "zoneType": {
-          "$ref": "#/definitions/DnsZoneType",
-          "description": "The zone type."
-        },
-        "domainNames": {
-          "type": "array",
-          "description": "The domain names served by this zone.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "upstreamServers": {
-          "type": "array",
-          "description": "The upstream DNS servers.",
-          "items": {
-            "$ref": "#/definitions/UpstreamServer"
-          },
-          "x-ms-identifiers": []
-        },
-        "sourceIps": {
-          "type": "array",
-          "description": "Source IP addresses for forwarding.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "nsxOriginal": {
-          "$ref": "#/definitions/NsxOriginal",
-          "description": "Original NSX resource metadata."
-        }
-      }
-    },
-    "NsxDnsService": {
-      "type": "object",
-      "description": "A DNS service resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NsxDnsServiceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "NsxDnsServiceList": {
-      "type": "object",
-      "description": "Paged collection of NsxDnsService items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The NsxDnsService items on this page",
-          "items": {
-            "$ref": "#/definitions/NsxDnsService"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "NsxDnsServicePatchFields": {
-      "type": "object",
-      "description": "NsxDnsService updatable fields.",
-      "properties": {
-        "listenerIp": {
-          "type": "string",
-          "description": "The listener IP address."
-        }
-      }
-    },
-    "NsxDnsServicePatchProperties": {
-      "type": "object",
-      "description": "NsxDnsService patch envelope.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NsxDnsServicePatchFields",
-          "description": "Patch payload."
-        }
-      }
-    },
-    "NsxDnsServiceProperties": {
-      "type": "object",
-      "description": "Properties of a DNS service.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the resource.",
-          "readOnly": true
-        },
-        "listenerIp": {
-          "type": "string",
-          "description": "The listener IP address."
-        },
-        "gatewayRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated gateway."
-        },
-        "zoneRefs": {
-          "type": "array",
-          "description": "ARM resource IDs of the DNS forwarder zones.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "nsxOriginal": {
-          "$ref": "#/definitions/NsxOriginal",
-          "description": "Original NSX resource metadata."
-        }
-      }
-    },
-    "NsxFabricPatchFields": {
-      "type": "object",
-      "description": "NsxFabric updatable fields.",
-      "properties": {
-        "sourceApplianceId": {
-          "type": "string",
-          "description": "The source appliance identifier."
-        }
-      }
-    },
-    "NsxFabricPatchProperties": {
-      "type": "object",
-      "description": "NsxFabric patch envelope.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NsxFabricPatchFields",
-          "description": "Patch payload."
         }
       }
     },
@@ -5059,6 +4716,31 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
         "category": {
           "$ref": "#/definitions/GatewayPolicyCategory",
           "description": "The policy category."
@@ -5071,6 +4753,10 @@
         "isDefault": {
           "type": "boolean",
           "description": "Whether this is a default policy."
+        },
+        "contextType": {
+          "type": "string",
+          "description": "The context type (e.g. GatewaySpecific)."
         },
         "federationScope": {
           "$ref": "#/definitions/FederationScope",
@@ -5093,10 +4779,6 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
-        },
-        "nsxOriginal": {
-          "$ref": "#/definitions/NsxOriginal",
-          "description": "Original NSX resource metadata."
         }
       }
     },
@@ -5173,6 +4855,31 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
         "action": {
           "$ref": "#/definitions/FirewallAction",
           "description": "The action to take when the rule matches."
@@ -5189,6 +4896,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The sequence number determining rule evaluation order."
+        },
+        "globalPriority": {
+          "type": "string",
+          "description": "The global priority of the rule."
         },
         "sourceIpGroups": {
           "type": "array",
@@ -5224,12 +4935,11 @@
         },
         "services": {
           "type": "array",
-          "description": "ARM resource IDs of services this rule applies to.",
+          "description": "The services this rule applies to.",
           "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
+            "$ref": "#/definitions/FirewallService"
+          },
+          "x-ms-identifiers": []
         },
         "appliedScopes": {
           "type": "array",
@@ -5248,111 +4958,6 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
-        },
-        "nsxOriginal": {
-          "$ref": "#/definitions/NsxOriginal",
-          "description": "Original NSX resource metadata."
-        }
-      }
-    },
-    "NsxGroup": {
-      "type": "object",
-      "description": "An NS group resource (NSX security group).",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NsxGroupProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "NsxGroupList": {
-      "type": "object",
-      "description": "Paged collection of NsxGroup items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The NsxGroup items on this page",
-          "items": {
-            "$ref": "#/definitions/NsxGroup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "NsxGroupPatchFields": {
-      "type": "object",
-      "description": "NsxGroup updatable fields.",
-      "properties": {
-        "expressions": {
-          "type": "array",
-          "description": "The group membership expressions.",
-          "items": {
-            "$ref": "#/definitions/GroupExpression"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "NsxGroupPatchProperties": {
-      "type": "object",
-      "description": "NsxGroup patch envelope.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NsxGroupPatchFields",
-          "description": "Patch payload."
-        }
-      }
-    },
-    "NsxGroupProperties": {
-      "type": "object",
-      "description": "Properties of an NS group.",
-      "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the resource.",
-          "readOnly": true
-        },
-        "expressions": {
-          "type": "array",
-          "description": "The group membership expressions.",
-          "items": {
-            "$ref": "#/definitions/GroupExpression"
-          },
-          "x-ms-identifiers": []
-        },
-        "effectiveVirtualMachineRefs": {
-          "type": "array",
-          "description": "Effective virtual machine references resolved by the group.",
-          "items": {
-            "$ref": "#/definitions/EffectiveVmRef"
-          },
-          "x-ms-identifiers": []
-        },
-        "effectiveIpMembers": {
-          "type": "array",
-          "description": "Effective IP address members resolved by the group.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "nsxOriginal": {
-          "$ref": "#/definitions/NsxOriginal",
-          "description": "Original NSX resource metadata."
         }
       }
     },
@@ -5424,6 +5029,31 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
         "lbType": {
           "$ref": "#/definitions/LbType",
           "description": "The type of load balancer (L4 or L7)."
@@ -5432,9 +5062,10 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state."
         },
-        "routingContext": {
-          "$ref": "#/definitions/RoutingContext",
-          "description": "The routing context referencing a Tier-1 gateway."
+        "parentGateway": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent gateway."
         },
         "frontend": {
           "$ref": "#/definitions/FrontendConfig",
@@ -5492,10 +5123,6 @@
         "runAsAccount": {
           "type": "string",
           "description": "The run-as account credential reference."
-        },
-        "version": {
-          "type": "string",
-          "description": "The NSX Manager version."
         }
       }
     },
@@ -5518,6 +5145,31 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
         "fqdn": {
           "type": "string",
           "description": "The fully qualified domain name of the NSX Manager."
@@ -5526,60 +5178,21 @@
           "type": "string",
           "description": "The run-as account credential reference."
         },
-        "version": {
-          "type": "string",
-          "description": "The NSX Manager software version."
-        },
-        "isGlobalManager": {
-          "type": "boolean",
-          "description": "Whether this is an NSX global manager."
-        },
-        "managedSiteRefs": {
-          "type": "array",
-          "description": "ARM resource IDs of managed VMware sites.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "managedVcenterRefs": {
+        "vcenterRefs": {
           "type": "array",
           "description": "ARM resource IDs of managed vCenter servers.",
           "items": {
             "type": "string",
             "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/vmwareSites/vcenters"
+                }
+              ]
+            }
           }
-        },
-        "localManagers": {
-          "type": "array",
-          "description": "ARM resource IDs of local NSX managers (if this is a global manager).",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "discoverySnapshotId": {
-          "type": "string",
-          "description": "The discovery snapshot identifier."
-        },
-        "discoveryWindow": {
-          "$ref": "#/definitions/DiscoveryWindow",
-          "description": "The discovery time window."
-        },
-        "sourceApplianceId": {
-          "type": "string",
-          "description": "The source appliance identifier."
-        },
-        "ingestionStatus": {
-          "$ref": "#/definitions/IngestionStatus",
-          "description": "The ingestion status of the last discovery."
-        },
-        "coverageCounts": {
-          "$ref": "#/definitions/CoverageCounts",
-          "description": "Coverage counts of discovered NSX resources."
         }
       },
       "required": [
@@ -5654,6 +5267,31 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
         "natType": {
           "$ref": "#/definitions/NatType",
           "description": "The NAT type (SNAT or DNAT)."
@@ -5662,9 +5300,10 @@
           "$ref": "#/definitions/AdminState",
           "description": "The administrative state."
         },
-        "routingContext": {
-          "$ref": "#/definitions/RoutingContext",
-          "description": "The routing context referencing a Tier-1 gateway."
+        "parentGateway": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the parent gateway."
         },
         "match": {
           "$ref": "#/definitions/NatMatch",
@@ -5673,40 +5312,128 @@
         "translate": {
           "$ref": "#/definitions/NatTranslate",
           "description": "The translation target."
-        },
-        "contentHash": {
-          "type": "string",
-          "description": "A content hash for change detection."
-        },
-        "tags": {
+        }
+      }
+    },
+    "NsxNsGroup": {
+      "type": "object",
+      "description": "An NS group resource (NSX security group).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NsxNsGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NsxNsGroupList": {
+      "type": "object",
+      "description": "Paged collection of NsxNsGroup items",
+      "properties": {
+        "value": {
           "type": "array",
-          "description": "NSX tags applied to this NAT rule.",
+          "description": "The NsxNsGroup items on this page",
           "items": {
-            "$ref": "#/definitions/NsxTag"
+            "$ref": "#/definitions/NsxNsGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NsxNsGroupPatchFields": {
+      "type": "object",
+      "description": "NsxNsGroup updatable fields.",
+      "properties": {
+        "expressions": {
+          "type": "array",
+          "description": "The group membership expressions.",
+          "items": {
+            "$ref": "#/definitions/GroupExpression"
           },
           "x-ms-identifiers": []
         }
       }
     },
-    "NsxOriginal": {
+    "NsxNsGroupPatchProperties": {
       "type": "object",
-      "description": "Original NSX resource reference metadata.",
+      "description": "NsxNsGroup patch envelope.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The NSX path identifier."
-        },
-        "localId": {
-          "type": "string",
-          "description": "The NSX local identifier."
+        "properties": {
+          "$ref": "#/definitions/NsxNsGroupPatchFields",
+          "description": "Patch payload."
+        }
+      }
+    },
+    "NsxNsGroupProperties": {
+      "type": "object",
+      "description": "Properties of an NS group.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
           "description": "The NSX display name."
         },
-        "resourceType": {
+        "nsxOriginalId": {
           "type": "string",
-          "description": "The NSX resource type."
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
+        "expressions": {
+          "type": "array",
+          "description": "The group membership expressions.",
+          "items": {
+            "$ref": "#/definitions/GroupExpression"
+          },
+          "x-ms-identifiers": []
+        },
+        "effectiveVirtualMachineRefs": {
+          "type": "array",
+          "description": "Effective virtual machine references resolved by the group.",
+          "items": {
+            "$ref": "#/definitions/EffectiveVmRef"
+          },
+          "x-ms-identifiers": []
+        },
+        "effectiveIpMembers": {
+          "type": "array",
+          "description": "Effective IP address members resolved by the group.",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5778,6 +5505,31 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
         "parentGateway": {
           "type": "string",
           "format": "arm-id",
@@ -5816,16 +5568,15 @@
           "items": {
             "type": "string",
             "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Microsoft.OffAzure/vmwareSites/machines"
+                }
+              ]
+            }
           }
-        },
-        "tags": {
-          "type": "array",
-          "description": "NSX tags applied to this segment.",
-          "items": {
-            "$ref": "#/definitions/NsxTag"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -5915,6 +5666,31 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
         "haMode": {
           "$ref": "#/definitions/HaMode",
           "description": "The high-availability mode."
@@ -5923,18 +5699,22 @@
           "type": "boolean",
           "description": "Whether the firewall is enabled on this gateway."
         },
-        "associatedSegments": {
+        "isVrf": {
+          "type": "boolean",
+          "description": "Whether this is a VRF gateway."
+        },
+        "associatedTier1Gateways": {
           "type": "array",
-          "description": "ARM resource IDs of associated segments.",
+          "description": "ARM resource IDs of associated Tier-1 gateways.",
           "items": {
             "type": "string",
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
-        "associatedDnsServices": {
+        "associatedSegments": {
           "type": "array",
-          "description": "ARM resource IDs of associated DNS services.",
+          "description": "ARM resource IDs of associated segments.",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -5953,15 +5733,6 @@
         "associatedGfwPolicies": {
           "type": "array",
           "description": "ARM resource IDs of associated gateway firewall policies.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "associatedLoadBalancers": {
-          "type": "array",
-          "description": "ARM resource IDs of associated load balancers.",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -6042,6 +5813,31 @@
           "description": "The provisioning state of the resource.",
           "readOnly": true
         },
+        "displayName": {
+          "type": "string",
+          "description": "The NSX display name."
+        },
+        "nsxOriginalId": {
+          "type": "string",
+          "description": "The NSX original path identifier."
+        },
+        "nsxManagerRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM resource ID of the associated NSX Manager."
+        },
+        "uniqueId": {
+          "type": "string",
+          "description": "The NSX unique identifier."
+        },
+        "nsxTags": {
+          "type": "array",
+          "description": "NSX tags applied to this resource.",
+          "items": {
+            "$ref": "#/definitions/NsxTag"
+          },
+          "x-ms-identifiers": []
+        },
         "haMode": {
           "$ref": "#/definitions/HaMode",
           "description": "The high-availability mode."
@@ -6058,15 +5854,6 @@
         "associatedSegments": {
           "type": "array",
           "description": "ARM resource IDs of associated segments.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
-        },
-        "associatedDnsServices": {
-          "type": "array",
-          "description": "ARM resource IDs of associated DNS services.",
           "items": {
             "type": "string",
             "format": "arm-id",
@@ -6157,17 +5944,6 @@
       },
       "readOnly": true
     },
-    "RoutingContext": {
-      "type": "object",
-      "description": "Routing context referencing a Tier-1 gateway.",
-      "properties": {
-        "tier1Gateway": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated Tier-1 gateway."
-        }
-      }
-    },
     "SegmentType": {
       "type": "string",
       "description": "The type of an NSX segment.",
@@ -6202,6 +5978,55 @@
             "description": "Disconnected segment."
           }
         ]
+      }
+    },
+    "ServiceEntry": {
+      "type": "object",
+      "description": "A service entry within a firewall service.",
+      "properties": {
+        "serviceEntryType": {
+          "type": "string",
+          "description": "The type of service entry (e.g. L4PortSetServiceEntry)."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the service entry."
+        },
+        "l4Protocol": {
+          "type": "string",
+          "description": "The Layer 4 protocol (TCP, UDP, etc.)."
+        },
+        "sourcePorts": {
+          "type": "array",
+          "description": "The source port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationPorts": {
+          "type": "array",
+          "description": "The destination port ranges.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "protocol": {
+          "type": "string",
+          "description": "The protocol."
+        },
+        "icmpType": {
+          "type": "string",
+          "description": "The ICMP type."
+        },
+        "alg": {
+          "type": "string",
+          "description": "The application layer gateway type."
+        },
+        "protocolNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The IP protocol number."
+        }
       }
     },
     "SiteTagsPatch": {
@@ -6288,21 +6113,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "UpstreamServer": {
-      "type": "object",
-      "description": "An upstream DNS server.",
-      "properties": {
-        "ip": {
-          "type": "string",
-          "description": "The IP address of the upstream server."
-        },
-        "vmRef": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource ID of the associated virtual machine."
         }
       }
     }
