@@ -1292,7 +1292,6 @@ union IstioIngressGatewayMode {
 /**
  * Mode of traffic redirection.
  */
-@added(Versions.v2026_01_02_preview)
 @added(Versions.v2026_01_01)
 union ProxyRedirectionMechanism {
   string,
@@ -3658,7 +3657,6 @@ model IstioComponents {
   /**
    * Mode of traffic redirection.
    */
-  @added(Versions.v2026_01_02_preview)
   @added(Versions.v2026_01_01)
   proxyRedirectionMechanism?: ProxyRedirectionMechanism;
 }
