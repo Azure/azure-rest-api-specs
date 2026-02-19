@@ -192,7 +192,7 @@ When validation succeeds, execute the following steps in order.
 5. If failed, add a comment indicating failure and include pipeline link and failure summary.
 6. If completed:
 
-- Refresh release plan data via `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>` and inspect the SDK pull request references per language.
+- Refresh release plan data via `/tmp/bin/azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>` and inspect the SDK pull request references per language.
 - Add a comment that includes one line per language using this exact format:
   - `sdk pr for  <language>`: `<Link to sdk pull request>`
 
