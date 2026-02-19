@@ -241,8 +241,8 @@ function Invoke-TypeSpecAPIViewParser {
     # Generate metadata file using @azure-tools/typespec-metadata emitter
     if ($Type -eq "New") {
       Write-Host "Generating TypeSpec metadata file using @azure-tools/typespec-metadata emitter..."
-      Write-Host "npm exec --no -- tsp compile . --emit=@azure-tools/typespec-metadata --option @azure-tools/typespec-metadata.output-file=$tempWorkingDirectoryPath/output/typespec-metadata.json --option @azure-tools/typespec-metadata.format=json"
-      npm exec --no -- tsp compile . --emit=@azure-tools/typespec-metadata --option "@azure-tools/typespec-metadata.output-file=$tempWorkingDirectoryPath/output/typespec-metadata.json" --option "@azure-tools/typespec-metadata.format=json"
+      Write-Host "npm exec --no -- tsp compile . --emit=@azure-tools/typespec-metadata --option @azure-tools/typespec-metadata.outputFile=$tempWorkingDirectoryPath/output/typespec-metadata.json --option @azure-tools/typespec-metadata.format=json"
+      npm exec --no -- tsp compile . --emit=@azure-tools/typespec-metadata --option "@azure-tools/typespec-metadata.outputFile=$tempWorkingDirectoryPath/output/typespec-metadata.json" --option "@azure-tools/typespec-metadata.format=json"
       if ($LASTEXITCODE) {
         Write-Host "Warning: Failed to generate metadata file. Continuing without metadata."
       }
