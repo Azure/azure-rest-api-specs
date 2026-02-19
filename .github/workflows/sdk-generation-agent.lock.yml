@@ -505,6 +505,7 @@ jobs:
           GH_AW_GITHUB_RUN_ID: ${{ github.run_id }}
           GH_AW_GITHUB_WORKSPACE: ${{ github.workspace }}
         run: |
+          # shellcheck disable=SC2129
           bash /opt/gh-aw/actions/create_prompt_first.sh
           cat << 'GH_AW_PROMPT_EOF' > "$GH_AW_PROMPT"
           <system>
