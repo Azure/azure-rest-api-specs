@@ -97,7 +97,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   }
 );
 
+@@usage(BlobName, Usage.output, "rust");
 @@clientOption(BlobItem.name,
+  "deserialize_with",
+  "crate::models::deserialize_blob_name",
+  "rust"
+);
+@@clientOption(BlobPrefix.name,
   "deserialize_with",
   "crate::models::deserialize_blob_name",
   "rust"
