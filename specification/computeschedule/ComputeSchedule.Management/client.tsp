@@ -12,3 +12,6 @@ using Microsoft.ComputeSchedule;
 @@clientName(Schedule.timeZone, "TimeZoneLegacy", "csharp");
 @@clientName(ResourceOperationDetails.timeZone, "TimeZoneLegacy", "csharp");
 @@clientName(OperationErrorDetails.timeStamp, "TimeStampLegacy", "csharp");
+
+// Resolve duplicate client name with ARM common types ActionType (used in Operation model)
+@@clientName(ActionType, "ScheduledActionType", "go");
