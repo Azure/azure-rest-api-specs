@@ -102,11 +102,6 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "crate::models::deserialize_blob_name",
   "rust"
 );
-@@clientOption(BlobPrefix.name,
-  "deserialize_with",
-  "crate::models::deserialize_blob_name",
-  "rust"
-);
 
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs");
