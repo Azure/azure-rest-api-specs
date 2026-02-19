@@ -14395,6 +14395,7 @@
       "description": "Configures pod-to-pod encryption. This can be enabled only on Cilium-based clusters. If not specified, the default value is None.",
       "enum": [
         "WireGuard",
+        "mTLS",
         "None"
       ],
       "x-ms-enum": {
@@ -14405,6 +14406,11 @@
             "name": "WireGuard",
             "value": "WireGuard",
             "description": "Enable WireGuard encryption. Refer to https://docs.cilium.io/en/latest/security/network/encryption-wireguard/ on use cases and implementation details"
+          },
+          {
+            "name": "mTLS",
+            "value": "mTLS",
+            "description": "Enables mTLS authentication and encryption for pod-to-pod traffic within the cluster. Refer to https://aka.ms/acnsciliummtls for relevant documentation."
           },
           {
             "name": "None",

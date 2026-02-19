@@ -1020,7 +1020,7 @@ union IpvsScheduler {
 /**
  * Configures pod-to-pod encryption. This can be enabled only on Cilium-based clusters. If not specified, the default value is None.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_01_01)
 union TransitEncryptionType {
   string,
 
@@ -1028,6 +1028,12 @@ union TransitEncryptionType {
    * Enable WireGuard encryption. Refer to https://docs.cilium.io/en/latest/security/network/encryption-wireguard/ on use cases and implementation details
    */
   WireGuard: "WireGuard",
+
+  /**
+   * Enables mTLS authentication and encryption for pod-to-pod traffic within the cluster. Refer to https://aka.ms/acnsciliummtls for relevant documentation.
+   */
+  @added(Versions.v2026_01_02_preview)
+  mTLS: "mTLS",
 
   /**
    * Disable Transit encryption
@@ -2420,7 +2426,7 @@ model AdvancedNetworkingSecurity {
   /**
    * Encryption configuration for Cilium-based clusters. Once enabled all traffic between Cilium managed pods will be encrypted when it leaves the node boundary.
    */
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_01_01)
   transitEncryption?: AdvancedNetworkingSecurityTransitEncryption;
 }
 
@@ -2636,7 +2642,7 @@ model ContainerServiceNetworkProfileKubeProxyConfigIpvsConfig {
 /**
  * Encryption configuration for Cilium-based clusters. Once enabled all traffic between Cilium managed pods will be encrypted when it leaves the node boundary.
  */
-@added(Versions.v2026_01_02_preview)
+@added(Versions.v2026_01_01)
 model AdvancedNetworkingSecurityTransitEncryption {
   /**
    * Configures pod-to-pod encryption. This can be enabled only on Cilium-based clusters. If not specified, the default value is None.

@@ -540,6 +540,9 @@
           "Create Managed Cluster with AKS-managed NAT gateway as outbound type": {
             "$ref": "./examples/ManagedClustersCreate_ManagedNATGateway.json"
           },
+          "Create Managed Cluster with Advanced Networking Transit Encryption": {
+            "$ref": "./examples/AdvancedNetworkingTransitEncryption.json"
+          },
           "Create Managed Cluster with Azure KeyVault Secrets Provider Addon": {
             "$ref": "./examples/ManagedClustersCreate_AzureKeyvaultSecretsProvider.json"
           },
@@ -4385,6 +4388,20 @@
         "advancedNetworkPolicies": {
           "$ref": "#/definitions/AdvancedNetworkPolicies",
           "description": "Enable advanced network policies. This allows users to configure Layer 7 network policies (FQDN, HTTP, Kafka). Policies themselves must be configured via the Cilium Network Policy resources, see https://docs.cilium.io/en/latest/security/policy/index.html. This can be enabled only on cilium-based clusters. If not specified, the default value is FQDN if security.enabled is set to true."
+        },
+        "transitEncryption": {
+          "$ref": "#/definitions/AdvancedNetworkingSecurityTransitEncryption",
+          "description": "Encryption configuration for Cilium-based clusters. Once enabled all traffic between Cilium managed pods will be encrypted when it leaves the node boundary."
+        }
+      }
+    },
+    "AdvancedNetworkingSecurityTransitEncryption": {
+      "type": "object",
+      "description": "Encryption configuration for Cilium-based clusters. Once enabled all traffic between Cilium managed pods will be encrypted when it leaves the node boundary.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TransitEncryptionType",
+          "description": "Configures pod-to-pod encryption. This can be enabled only on Cilium-based clusters. If not specified, the default value is None."
         }
       }
     },
@@ -9952,6 +9969,30 @@
           "format": "date-time",
           "description": "The end of a time span"
         }
+      }
+    },
+    "TransitEncryptionType": {
+      "type": "string",
+      "description": "Configures pod-to-pod encryption. This can be enabled only on Cilium-based clusters. If not specified, the default value is None.",
+      "enum": [
+        "WireGuard",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "TransitEncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WireGuard",
+            "value": "WireGuard",
+            "description": "Enable WireGuard encryption. Refer to https://docs.cilium.io/en/latest/security/network/encryption-wireguard/ on use cases and implementation details"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Disable Transit encryption"
+          }
+        ]
       }
     },
     "TrustedAccessRole": {
