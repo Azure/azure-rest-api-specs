@@ -64,6 +64,25 @@ model NetworkBootstrapDeviceProperties {
   @doc("Configuration state of the resource.")
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
+
+  @doc("Operational state of networkBootstrapDevice indicating if the device is reachable and services are available.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  operationalState?: OperationalState;
+
+  @doc("Control Plane Access Control List ARM resource IDs.")
+  @added(Versions.v2026_01_15_preview)
+  controlPlaneAcls?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>[];
+
+  @doc("Secret rotation status for the terminal server's secrets.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_01_15_preview)
+  @Azure.ResourceManager.identifiers(#["secretType"])
+  secretRotationStatus?: SecretRotationStatus[];
 }
 
 @doc("The Network Bootstrap Device Patch Parameters defines the patch parameters of the resource.")
@@ -91,6 +110,14 @@ model NetworkBootstrapDevicePatchProperties {
   @doc("Serial number of the device. Format of serial Number - Make;Model;HardwareRevisionId;SerialNumber.")
   @minLength(1)
   serialNumber?: string;
+
+  @doc("Control Plane Access Control List ARM resource IDs.")
+  @added(Versions.v2026_01_15_preview)
+  controlPlaneAcls?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedNetworkFabric/accessControlLists";
+    }
+  ]>[];
 }
 
 @doc("Response body for a ResyncPasswords request on a Network Bootstrap Device.")

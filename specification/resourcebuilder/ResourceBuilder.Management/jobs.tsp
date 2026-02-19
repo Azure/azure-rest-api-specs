@@ -25,6 +25,13 @@ model Job is ProxyResource<JobProperties> {
   /** Job kind discriminator. Determines which properties are valid for this job. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "kind is a valid top-level property for Job resource"
   kind: JobKind;
+
+  /**
+   * Gets or sets tags of the resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Suppressing error expected"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress expected ARM error"
+  tags?: Record<string>;
 }
 
 /** Job properties - properties vary by kind.
@@ -90,14 +97,11 @@ model JobProperties {
   // DataQualityValidation job specific properties (kind: "DataQualityValidation")
   // ============================================
 
-  /** Metric evaluations. Required for DataQualityValidation jobs. */
-  dataQualityMetricEvaluations?: DataQualityMetricEvaluationEntry[];
-
-  /** Data quality metric validations. Required for DataQualityValidation jobs. */
-  dataQualityMetricValidations?: DataQualityMetricValidationEntry[];
+  /** Data quality metrics evaluations and validations. Required for DataQualityValidation jobs. */
+  metrics?: DataQualityMetrics;
 
   /** Data quality dataset validation. Required for DataQualityValidation jobs. */
-  dataQualityValidation?: DataQualityValidation;
+  validationPolicy?: DataQualityValidationPolicy;
 
   // ============================================
   // AzureResourceNotificationPublish job specific properties (kind: "AzureResourceNotificationPublish")
@@ -309,25 +313,25 @@ union ResourceNotificationResourceType {
   string,
 }
 
-/** Data quality validation */
-model DataQualityValidation {
+/** Data quality validation policy */
+model DataQualityValidationPolicy {
   /** Dataset validation condition. */
-  validationCondition: DataQualityValidationCondition;
+  passCriteria: DataQualityValidationPolicyPassCriteria;
 
   /** Validations to perform. */
   validations: string[];
 }
 
 /** Data quality validation condition */
-union DataQualityValidationCondition {
+union DataQualityValidationPolicyPassCriteria {
   /** Always succeed condition. */
-  AlwaysSucceed: "alwaysSucceed",
+  AlwaysPass: "AlwaysPass",
 
   /** Any validation succeeds condition. */
-  Any: "any",
+  PassIfAnySucceed: "PassIfAnySucceed",
 
   /** All validations succeed condition. */
-  All: "all",
+  PassIfAllSucceed: "PassIfAllSucceed",
 
   string,
 }
@@ -335,7 +339,7 @@ union DataQualityValidationCondition {
 /** Data quality metric evaluation */
 model DataQualityMetricEvaluation {
   /** Metric evaluation type. */
-  metricEvaluationType: DataQualityMetricEvaluationType;
+  evaluationType: DataQualityMetricEvaluationType;
 
   /** Filter of the metric evaluation. */
   filter?: string;
@@ -359,19 +363,19 @@ model DataQualityMetricEvaluation {
 /** Data quality metric evaluation type */
 union DataQualityMetricEvaluationType {
   /** Unknown evaluation type. */
-  Unknown: "unknown",
+  Unknown: "Unknown",
 
   /** Table count evaluation type. */
-  TableCount: "tableRowCount",
+  TableCount: "TableRowCount",
 
   /** Non-null column count evaluation type. */
-  NonNullColumnCount: "nonNullColumnCount",
+  NonNullColumnCount: "NonNullColumnCount",
 
   /** Latency evaluation type. */
-  Latency: "latency",
+  Latency: "Latency",
 
   /** Size evaluation type. */
-  Size: "size",
+  Size: "Size",
 
   string,
 }
@@ -379,16 +383,16 @@ union DataQualityMetricEvaluationType {
 /** Data quality metric type */
 union DataQualityMetricType {
   /** Unknown metric type. */
-  Unknown: "unknown",
+  Unknown: "Unknown",
 
   /** Count metric type. */
-  Count: "count",
+  Count: "Count",
 
   /** Minimum metric type. */
-  Minimum: "minimum",
+  Minimum: "Minimum",
 
   /** Maximum metric type. */
-  Maximum: "maximum",
+  Maximum: "Maximum",
 
   /** P50 metric type. */
   P50: "P50",
@@ -397,7 +401,7 @@ union DataQualityMetricType {
   P90: "P90",
 
   /** Distinct count metric type. */
-  DistinctCount: "distinctCount",
+  DistinctCount: "DistinctCount",
 
   string,
 }
@@ -405,16 +409,16 @@ union DataQualityMetricType {
 /** Data quality metric unit */
 union DataQualityMetricUnit {
   /** Count unit. */
-  Count: "count",
+  Count: "Count",
 
   /** Seconds unit. */
-  Seconds: "seconds",
+  Seconds: "Seconds",
 
   /** Minutes unit. */
-  Minutes: "minutes",
+  Minutes: "Minutes",
 
   /** Hours unit. */
-  Hours: "hours",
+  Hours: "Hours",
 
   string,
 }
@@ -422,10 +426,10 @@ union DataQualityMetricUnit {
 /** Data quality metric validation */
 model DataQualityMetricValidation {
   /** Data quality metric validation type. */
-  dataQualityMetricValidationType?: DataQualityMetricValidationType;
+  validationType?: DataQualityMetricValidationType;
 
   /** Data quality metric evaluation name. */
-  dataQualityMetricEvaluationName?: string;
+  metricEvaluationName?: string;
 
   /** Columns to validate. */
   columns?: string[];
@@ -446,32 +450,41 @@ model DataQualityMetricValidation {
 /** Data quality metric validation type */
 union DataQualityMetricValidationType {
   /** Unknown validation type. */
-  Unknown: "unknown",
+  Unknown: "Unknown",
 
   /** Anomaly validation type. */
-  AnomalyValidation: "anomalyValidation",
+  AnomalyValidation: "AnomalyValidation",
 
   /** Ratio validation type. */
-  RatioValidation: "ratioValidation",
+  RatioValidation: "RatioValidation",
 
   /** Threshold validation type. */
-  ThresholdValidation: "thresholdValidation",
+  ThresholdValidation: "ThresholdValidation",
 
   string,
 }
 
-/** Anomaly detection mode */
-union AnomalyMode {
+/** Anomaly detection strategy */
+union AnomalyDetectionStrategy {
   /** Detects anomalies in either the negative or positive direction. */
-  IsAnomaly: "isAnomaly",
+  BidirectionalAnomaly: "BidirectionalAnomaly",
 
   /** Detects anomalies only in the positive direction. */
-  IsPositiveAnomaly: "isPositiveAnomaly",
+  PositiveAnomaly: "PositiveAnomaly",
 
   /** Detects anomalies only in the negative direction. */
-  IsNegativeAnomaly: "isNegativeAnomaly",
+  NegativeAnomaly: "NegativeAnomaly",
 
   string,
+}
+
+/** Data quality metrics */
+model DataQualityMetrics {
+  /** Metric evaluations. */
+  evaluations: DataQualityMetricEvaluationEntry[];
+
+  /** Metric validations. */
+  validations: DataQualityMetricValidationEntry[];
 }
 
 /** Data quality metric evaluation entry with name */
@@ -497,8 +510,8 @@ model AutoDataQualityParameters {
   /** Sensitivity for anomaly detection. The value should be between 0 and 100. Defaults to 90. */
   sensitivity?: int32;
 
-  /** Anomaly detection mode. */
-  anomalyMode?: AnomalyMode;
+  /** Anomaly detection strategy. */
+  anomalyDetectionStrategy?: AnomalyDetectionStrategy;
 
   /** Lookback window in days. */
   lookbackWindowInDays?: int32;

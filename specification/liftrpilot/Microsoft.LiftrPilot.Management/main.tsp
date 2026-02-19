@@ -633,10 +633,12 @@ interface ProviderLevelTestActions {
 @added(Versions.v2025_05_23_preview)
 @armResourceOperations
 interface SaasOperations {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @doc("Activate SaaS resource.")
   @armResourceAction(SaaS)
   @action("activateSaaS")
   @post
+  @OpenAPI.extension("x-ms-long-running-operation", true)
   activateSaaS(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -645,5 +647,5 @@ interface SaasOperations {
     @bodyRoot
     @doc("The details for ActivateSaaSParameter request.")
     request: ActivateSaasParameterRequest,
-  ): ArmResponse<ActivateSaasResponse> | ErrorResponse;
+  ): ArmResponse<ActivateSaasResponse> | ArmAcceptedLroResponse | ErrorResponse;
 }
