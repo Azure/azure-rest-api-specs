@@ -1,12 +1,10 @@
 ---
 applyTo:
+  - ".github/*.config.js"
   - ".github/.prettier*"
   - ".github/cspell.yaml"
-  - ".github/eslint.config.js"
-  - ".github/package-lock.json"
-  - ".github/package.json"
+  - ".github/package*.json"
   - ".github/tsconfig.json"
-  - ".github/vitest.config.js"
   - ".github/actions/**/*"
   - ".github/matchers/**/*"
   - ".github/workflows/**/*"
