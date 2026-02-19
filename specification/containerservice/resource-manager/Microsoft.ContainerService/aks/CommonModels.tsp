@@ -3,6 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
+import "./AgentPoolModels.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -13,6 +14,32 @@ using Azure.ClientGenerator.Core;
 using Versioning;
 
 namespace Microsoft.ContainerService;
+
+/**
+ * Provides both Azure-AsyncOperation and Location headers with
+ * final-state-via set to azure-async-operation.
+ * Unlike ArmCombinedLroHeaders which places @finalLocation on Location
+ * (resulting in final-state-via: location), this model places @finalLocation
+ * on Azure-AsyncOperation so the emitter outputs final-state-via: azure-async-operation.
+ */
+model ArmAsyncOperationHeaderWithLocation<
+  StatusMonitor extends {} = ArmOperationStatus,
+  FinalResult extends {} | void = never,
+  PollingUrlValue extends string = ResourceLocation<StatusMonitor>,
+  FinalUrlValue extends string = string
+> {
+  /** A link to the status monitor */
+  @Azure.Core.pollingLocation(
+    Azure.Core.StatusMonitorPollingOptions<StatusMonitor>
+  )
+  @Azure.Core.finalLocation(FinalResult)
+  @header("Azure-AsyncOperation")
+  azureAsyncOperation?: PollingUrlValue;
+
+  /** The Location header contains the URL where the status of the long running operation can be checked. */
+  @header("Location")
+  location?: FinalUrlValue;
+}
 
 /**
  * Different support tiers for AKS managed clusters
@@ -1403,22 +1430,23 @@ union SnapshotType {
 /**
  * The type of identity used for the managed cluster. For more information see [use managed identities in AKS](https://docs.microsoft.com/azure/aks/use-managed-identity).
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum ResourceIdentityType {
+union ResourceIdentityType {
+  string,
+
   /**
    * Use an implicitly created system assigned managed identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the system assigned managed identity to manipulate Azure resources.
    */
-  SystemAssigned,
+  SystemAssigned: "SystemAssigned",
 
   /**
    * Use a user-specified identity to manage cluster resources. Master components in the control plane such as kube-controller-manager will use the specified user assigned managed identity to manipulate Azure resources.
    */
-  UserAssigned,
+  UserAssigned: "UserAssigned",
 
   /**
    * Do not use a managed identity for the Managed Cluster, service principal will be used instead.
    */
-  None,
+  None: "None",
 }
 
 /**
@@ -1512,7 +1540,7 @@ model KubernetesVersion {
   /**
    * Patch versions of Kubernetes release
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   patchVersions?: Record<KubernetesPatchVersion>;
 }
 
@@ -1569,7 +1597,7 @@ model NodeImageVersion {
 /**
  * The SKU of a Managed Cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterSKU {
   /**
    * The name of a managed cluster SKU.
@@ -1621,13 +1649,13 @@ model ManagedClusterIdentity {
   /**
    * The delegated identity resources assigned to this managed cluster. This can only be set by another Azure Resource Provider, and managed cluster only accept one delegated identity resource. Internal use only.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   delegatedResources?: Record<CommonTypes.DelegatedResource>;
 
   /**
    * The user identity associated with the managed cluster. This identity will be used in control plane. Only one user assigned identity is allowed. The keys must be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   userAssignedIdentities?: Record<ManagedServiceIdentityUserAssignedIdentitiesValue>;
 }
 
@@ -1653,7 +1681,7 @@ model ManagedClusterProperties {
   /**
    * The current provisioning state.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "AKS uses custom provisioning states beyond standard ARM states. Using string type for forward compatibility."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1705,14 +1733,14 @@ model ManagedClusterProperties {
   /**
    * The FQDN of private cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   privateFQDN?: string;
 
   /**
    * The special FQDN used by the Azure Portal to access the Managed Cluster. This FQDN is for use only by the Azure Portal and should not be used by other clients. The Azure Portal requires certain Cross-Origin Resource Sharing (CORS) headers to be sent in some responses, which Kubernetes APIServer doesn't handle by default. This special FQDN supports CORS, allowing the Azure Portal to function properly.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   azurePortalFQDN?: string;
 
@@ -1740,7 +1768,7 @@ model ManagedClusterProperties {
   /**
    * The profile of managed cluster add-on.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   addonProfiles?: Record<ManagedClusterAddonProfile>;
 
   /**
@@ -1766,7 +1794,7 @@ model ManagedClusterProperties {
   /**
    * Whether to enable Kubernetes Role-Based Access Control.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enableRBAC?: boolean;
 
   /**
@@ -1813,7 +1841,7 @@ model ManagedClusterProperties {
   /**
    * The Resource ID of the disk encryption set to use for enabling encryption at rest. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{encryptionSetName}'
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   diskEncryptionSetID?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.Compute/diskEncryptionSets";
@@ -1823,7 +1851,7 @@ model ManagedClusterProperties {
   /**
    * The user identity associated with the managed cluster. This identity will be used by the kubelet. Only one user assigned identity is allowed. The only accepted key is "kubeletidentity", with value of "resourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}".
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   identityProfile?: Record<UserAssignedIdentity>;
 
   /**
@@ -1879,7 +1907,7 @@ model ManagedClusterProperties {
   /**
    * The resourceUID uniquely identifies ManagedClusters that reuse ARM ResourceIds (i.e: create, delete, create sequence)
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   resourceUID?: string;
 
@@ -1919,1026 +1947,6 @@ model ManagedClusterProperties {
    * Contains read-only information about the Managed Cluster.
    */
   status?: ManagedClusterStatus;
-}
-
-/**
- * Describes the Power State of the cluster
- */
-model PowerState {
-  /**
-   * Tells whether the cluster is Running or Stopped
-   */
-  code?: Code;
-}
-
-/**
- * Profile for the container service agent pool.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ManagedClusterAgentPoolProfile
-  extends ManagedClusterAgentPoolProfileProperties {
-  /**
-   * Unique name of the agent pool profile in the context of the subscription and resource group. Windows agent pool names must be 6 characters or less.
-   */
-  @pattern("^[a-z][a-z0-9]{0,11}$")
-  name: string;
-}
-
-/**
- * Properties for the container service agent pool profile.
- */
-model ManagedClusterAgentPoolProfileProperties {
-  /**
-   * Unique read-only string used to implement optimistic concurrency. The eTag value will change when the resource is updated. Specify an if-match or if-none-match header with the eTag value for a subsequent request to enable optimistic concurrency per the normal eTag convention.
-   */
-  @visibility(Lifecycle.Read)
-  eTag?: string;
-
-  /**
-   * Number of agents (VMs) to host docker containers. Allowed values must be in the range of 0 to 1000 (inclusive) for user pools and in the range of 1 to 1000 (inclusive) for system pools. The default value is 1.
-   */
-  count?: int32;
-
-  /**
-   * The size of the agent pool VMs. VM size availability varies by region. If a node contains insufficient compute resources (memory, cpu, etc) pods might fail to run correctly. For more details on restricted VM sizes, see: https://docs.microsoft.com/azure/aks/quotas-skus-regions
-   */
-  vmSize?: string;
-
-  /**
-   * OS Disk Size in GB to be used to specify the disk size for every machine in the master/agent pool. If you specify 0, it will apply the default osDisk size according to the vmSize specified.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @maxValue(2048)
-  @minValue(0)
-  osDiskSizeGB?: int32;
-
-  /**
-   * The OS disk type to be used for machines in the agent pool. The default is 'Ephemeral' if the VM supports it and has a cache disk larger than the requested OSDiskSizeGB. Otherwise, defaults to 'Managed'. May not be changed after creation. For more information see [Ephemeral OS](https://docs.microsoft.com/azure/aks/cluster-configuration#ephemeral-os).
-   */
-  osDiskType?: OSDiskType;
-
-  /**
-   * Determines the placement of emptyDir volumes, container runtime data root, and Kubelet ephemeral storage.
-   */
-  kubeletDiskType?: KubeletDiskType;
-
-  /**
-   * Determines the type of workload a node can run.
-   */
-  workloadRuntime?: WorkloadRuntime;
-
-  /**
-   * Message of the day for Linux nodes, base64-encoded. A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It must not be specified for Windows nodes. It must be a static string (i.e., will be printed raw and not be executed as a script).
-   */
-  messageOfTheDay?: string;
-
-  /**
-   * The ID of the subnet which agent pool nodes and optionally pods will join on startup. If this is not specified, a VNET and subnet will be generated and used. If no podSubnetID is specified, this applies to nodes and pods, otherwise it applies to just nodes. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  vnetSubnetID?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/virtualNetworks/subnets";
-    }
-  ]>;
-
-  /**
-   * The ID of the subnet which pods will join when launched. If omitted, pod IPs are statically assigned on the node subnet (see vnetSubnetID for more details). This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  podSubnetID?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/virtualNetworks/subnets";
-    }
-  ]>;
-
-  /**
-   * Pod IP Allocation Mode. The IP allocation mode for pods in the agent pool. Must be used with podSubnetId. The default is 'DynamicIndividual'.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  podIPAllocationMode?: PodIPAllocationMode;
-
-  /**
-   * The maximum number of pods that can run on a node.
-   */
-  maxPods?: int32;
-
-  /**
-   * The operating system type. The default is Linux.
-   */
-  osType?: OSType = OSType.Linux;
-
-  /**
-   * Specifies the OS SKU used by the agent pool. The default is Ubuntu if OSType is Linux. The default is Windows2019 when Kubernetes <= 1.24 or Windows2022 when Kubernetes >= 1.25 if OSType is Windows.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  osSKU?: OSSKU;
-
-  /**
-   * The maximum number of nodes for auto-scaling
-   */
-  maxCount?: int32;
-
-  /**
-   * The minimum number of nodes for auto-scaling
-   */
-  minCount?: int32;
-
-  /**
-   * Whether to enable auto-scaler
-   */
-  enableAutoScaling?: boolean;
-
-  /**
-   * The scale down mode to use when scaling the Agent Pool. This also effects the cluster autoscaler behavior. If not specified, it defaults to Delete.
-   */
-  scaleDownMode?: ScaleDownMode;
-
-  /**
-   * The type of Agent Pool.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  type?: AgentPoolType;
-
-  /**
-   * The mode of an agent pool. A cluster must have at least one 'System' Agent Pool at all times. For additional information on agent pool restrictions and best practices, see: https://docs.microsoft.com/azure/aks/use-system-pools
-   */
-  mode?: AgentPoolMode;
-
-  /**
-   * The version of Kubernetes specified by the user. Both patch version <major.minor.patch> (e.g. 1.20.13) and <major.minor> (e.g. 1.20) are supported. When <major.minor> is specified, the latest supported GA patch version is chosen automatically. Updating the cluster with the same <major.minor> once it has been created (e.g. 1.14.x -> 1.14) will not trigger an upgrade, even if a newer patch version is available. As a best practice, you should upgrade all node pools in an AKS cluster to the same Kubernetes version. The node pool version must have the same major version as the control plane. The node pool minor version must be within two minor versions of the control plane version. The node pool version cannot be greater than the control plane version. For more information see [upgrading a node pool](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#upgrade-a-node-pool).
-   */
-  orchestratorVersion?: string;
-
-  /**
-   * The version of Kubernetes the Agent Pool is running. If orchestratorVersion is a fully specified version <major.minor.patch>, this field will be exactly equal to it. If orchestratorVersion is <major.minor>, this field will contain the full <major.minor.patch> version being used.
-   */
-  @visibility(Lifecycle.Read)
-  currentOrchestratorVersion?: string;
-
-  /**
-   * The version of node image
-   */
-  @visibility(Lifecycle.Read)
-  nodeImageVersion?: string;
-
-  /**
-   * Defines the upgrade strategy for the agent pool. The default is Rolling.
-   */
-  @added(Versions.v2025_10_02_preview)
-  upgradeStrategy?: UpgradeStrategy;
-
-  /**
-   * Settings for upgrading the agentpool
-   */
-  upgradeSettings?: AgentPoolUpgradeSettings;
-
-  /**
-   * Settings for Blue-Green upgrade on the agentpool. Applies when upgrade strategy is set to BlueGreen.
-   */
-  @added(Versions.v2025_10_02_preview)
-  upgradeSettingsBlueGreen?: AgentPoolBlueGreenUpgradeSettings;
-
-  /**
-   * The current deployment or provisioning state.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  provisioningState?: string;
-
-  /**
-   * Whether the Agent Pool is running or stopped. When an Agent Pool is first created it is initially Running. The Agent Pool can be stopped by setting this field to Stopped. A stopped Agent Pool stops all of its VMs and does not accrue billing charges. An Agent Pool can only be stopped if it is Running and provisioning state is Succeeded
-   */
-  powerState?: PowerState;
-
-  /**
-   * The list of Availability zones to use for nodes. This can only be specified if the AgentPoolType property is 'VirtualMachineScaleSets'.
-   */
-  availabilityZones?: string[];
-
-  /**
-   * Whether each node is allocated its own public IP. Some scenarios may require nodes in a node pool to receive their own dedicated public IP addresses. A common scenario is for gaming workloads, where a console needs to make a direct connection to a cloud virtual machine to minimize hops. For more information see [assigning a public IP per node](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#assign-a-public-ip-per-node-for-your-node-pools). The default is false.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  enableNodePublicIP?: boolean;
-
-  /**
-   * The public IP prefix ID which VM nodes should use IPs from. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  nodePublicIPPrefixID?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/publicIPPrefixes";
-    }
-  ]>;
-
-  /**
-   * The Virtual Machine Scale Set priority.
-   */
-  scaleSetPriority?: ScaleSetPriority = ScaleSetPriority.Regular;
-
-  /**
-   * The Virtual Machine Scale Set eviction policy. The eviction policy specifies what to do with the VM when it is evicted. The default is Delete. For more information about eviction see [spot VMs](https://docs.microsoft.com/azure/virtual-machines/spot-vms)
-   */
-  scaleSetEvictionPolicy?: ScaleSetEvictionPolicy = ScaleSetEvictionPolicy.Delete;
-
-  /**
-   * The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand. Possible values are any decimal value greater than zero or -1 which indicates the willingness to pay any on-demand price. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)
-   */
-  spotMaxPrice?: float32 = -1;
-
-  /**
-   * The tags to be persisted on the agent pool virtual machine scale set.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /**
-   * The node labels to be persisted across all nodes in agent pool.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  nodeLabels?: Record<string>;
-
-  /**
-   * The taints added to new nodes during node pool create and scale. For example, key=value:NoSchedule.
-   */
-  nodeTaints?: string[];
-
-  /**
-   * Taints added on the nodes during creation that will not be reconciled by AKS. These taints will not be reconciled by AKS and can be removed with a kubectl call. This field can be modified after node pool is created, but nodes will not be recreated with new taints until another operation that requires recreation (e.g. node image upgrade) happens. These taints allow for required configuration to run before the node is ready to accept workloads, for example 'key1=value1:NoSchedule' that then can be removed with `kubectl taint nodes node1 key1=value1:NoSchedule-`
-   */
-  @added(Versions.v2025_10_02_preview)
-  nodeInitializationTaints?: string[];
-
-  /**
-   * The ID for Proximity Placement Group.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  proximityPlacementGroupID?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/proximityPlacementGroups";
-    }
-  ]>;
-
-  /**
-   * The Kubelet configuration on the agent pool nodes.
-   */
-  kubeletConfig?: KubeletConfig;
-
-  /**
-   * The OS configuration of Linux agent nodes.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  linuxOSConfig?: LinuxOSConfig;
-
-  /**
-   * Whether to enable host based OS and data drive encryption. This is only supported on certain VM sizes and in certain Azure regions. For more information, see: https://docs.microsoft.com/azure/aks/enable-host-encryption
-   */
-  enableEncryptionAtHost?: boolean;
-
-  /**
-   * Whether to enable UltraSSD
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  enableUltraSSD?: boolean;
-
-  /**
-   * Whether to use a FIPS-enabled OS. See [Add a FIPS-enabled node pool](https://docs.microsoft.com/azure/aks/use-multiple-node-pools#add-a-fips-enabled-node-pool-preview) for more details.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  enableFIPS?: boolean;
-
-  /**
-   * GPUInstanceProfile to be used to specify GPU MIG instance profile for supported GPU VM SKU.
-   */
-  gpuInstanceProfile?: GPUInstanceProfile;
-
-  /**
-   * CreationData to be used to specify the source Snapshot ID if the node pool will be created/upgraded using a snapshot.
-   */
-  creationData?: CreationData;
-
-  /**
-   * The fully qualified resource ID of the Capacity Reservation Group to provide virtual machines from a reserved group of Virtual Machines. This is of the form: '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/capacityreservationgroups/{capacityReservationGroupName}' Customers use it to create an agentpool with a specified CRG. For more information see [Capacity Reservation](https://learn.microsoft.com/en-us/azure/virtual-machines/capacity-reservation-overview)
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  capacityReservationGroupID?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/CapacityReservationGroups";
-    }
-  ]>;
-
-  /**
-   * The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from, used only in creation scenario and not allowed to changed once set. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}. For more information see [Azure dedicated hosts](https://docs.microsoft.com/azure/virtual-machines/dedicated-hosts).
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  hostGroupID?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/hostGroups";
-    }
-  ]>;
-
-  /**
-   * Network-related settings of an agent pool.
-   */
-  networkProfile?: AgentPoolNetworkProfile;
-
-  /**
-   * The Windows agent pool's specific profile.
-   */
-  windowsProfile?: AgentPoolWindowsProfile;
-
-  /**
-   * The security settings of an agent pool.
-   */
-  securityProfile?: AgentPoolSecurityProfile;
-
-  /**
-   * GPU settings for the Agent Pool.
-   */
-  gpuProfile?: GPUProfile;
-
-  /**
-   * Profile specific to a managed agent pool in Gateway mode. This field cannot be set if agent pool mode is not Gateway.
-   */
-  gatewayProfile?: AgentPoolGatewayProfile;
-
-  /**
-   * Configuration for using artifact streaming on AKS.
-   */
-  @added(Versions.v2025_10_02_preview)
-  artifactStreamingProfile?: AgentPoolArtifactStreamingProfile;
-
-  /**
-   * Specifications on VirtualMachines agent pool.
-   */
-  virtualMachinesProfile?: VirtualMachinesProfile;
-
-  /**
-   * The status of nodes in a VirtualMachines agent pool.
-   */
-  @identifiers(#[])
-  virtualMachineNodesStatus?: VirtualMachineNodes[];
-
-  /**
-   * Contains read-only information about the Agent Pool.
-   */
-  status?: AgentPoolStatus;
-
-  /**
-   * Configures the per-node local DNS, with VnetDNS and KubeDNS overrides. LocalDNS helps improve performance and reliability of DNS resolution in an AKS cluster. For more details see aka.ms/aks/localdns.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  localDNSProfile?: LocalDNSProfile;
-
-  /**
-   * Settings to determine the node customization used to provision nodes in a pool.
-   */
-  @added(Versions.v2025_10_02_preview)
-  nodeCustomizationProfile?: NodeCustomizationProfile;
-}
-
-/**
- * Settings for upgrading an agentpool
- */
-model AgentPoolUpgradeSettings {
-  /**
-   * The maximum number or percentage of nodes that are surged during upgrade. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 10%. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster
-   */
-  maxSurge?: string;
-
-  /**
-   * The maximum number or percentage of nodes that can be simultaneously unavailable during upgrade. This can either be set to an integer (e.g. '1') or a percentage (e.g. '5%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is 0. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster
-   */
-  maxUnavailable?: string;
-
-  /**
-   * The maximum number or percentage of extra nodes that are allowed to be blocked in the agent pool during an upgrade when undrainable node behavior is Cordon. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is maxSurge. This must always be greater than or equal to maxSurge. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster
-   */
-  @added(Versions.v2025_10_02_preview)
-  maxBlockedNodes?: string;
-
-  /**
-   * The drain timeout for a node. The amount of time (in minutes) to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. If not specified, the default is 30 minutes.
-   */
-  @maxValue(1440)
-  @minValue(1)
-  drainTimeoutInMinutes?: int32;
-
-  /**
-   * The soak duration for a node. The amount of time (in minutes) to wait after draining a node and before reimaging it and moving on to next node. If not specified, the default is 0 minutes.
-   */
-  @maxValue(30)
-  @minValue(0)
-  nodeSoakDurationInMinutes?: int32;
-
-  /**
-   * Defines the behavior for undrainable nodes during upgrade. The most common cause of undrainable nodes is Pod Disruption Budgets (PDBs), but other issues, such as pod termination grace period is exceeding the remaining per-node drain timeout or pod is still being in a running state, can also cause undrainable nodes.
-   */
-  undrainableNodeBehavior?: UndrainableNodeBehavior;
-}
-
-/**
- * Settings for blue-green upgrade on an agentpool
- */
-@added(Versions.v2025_10_02_preview)
-model AgentPoolBlueGreenUpgradeSettings {
-  /**
-   * The number or percentage of nodes to drain in batch during blue-green upgrade. Must be a non-zero number. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total number of blue nodes of the initial upgrade operation. For percentages, fractional nodes are rounded up. If not specified, the default is 10%. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster
-   */
-  drainBatchSize?: string;
-
-  /**
-   * The drain timeout for a node, i.e., the amount of time (in minutes) to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. If not specified, the default is 30 minutes.
-   */
-  @maxValue(1440)
-  @minValue(1)
-  drainTimeoutInMinutes?: int32;
-
-  /**
-   * The soak duration after draining a batch of nodes, i.e., the amount of time (in minutes) to wait after draining a batch of nodes before moving on the next batch. If not specified, the default is 15 minutes.
-   */
-  @maxValue(1440)
-  @minValue(0)
-  batchSoakDurationInMinutes?: int32;
-
-  /**
-   * The soak duration for a node pool, i.e., the amount of time (in minutes) to wait after all old nodes are drained before we remove the old nodes. If not specified, the default is 60 minutes. Only applicable for blue-green upgrade strategy.
-   */
-  @maxValue(10080)
-  @minValue(0)
-  finalSoakDurationInMinutes?: int32;
-}
-
-/**
- * Kubelet configurations of agent nodes. See [AKS custom node configuration](https://docs.microsoft.com/azure/aks/custom-node-configuration) for more details.
- */
-model KubeletConfig {
-  /**
-   * The CPU Manager policy to use. The default is 'none'. See [Kubernetes CPU management policies](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/#cpu-management-policies) for more information. Allowed values are 'none' and 'static'.
-   */
-  cpuManagerPolicy?: string;
-
-  /**
-   * If CPU CFS quota enforcement is enabled for containers that specify CPU limits. The default is true.
-   */
-  cpuCfsQuota?: boolean;
-
-  /**
-   * The CPU CFS quota period value. The default is '100ms.' Valid values are a sequence of decimal numbers with an optional fraction and a unit suffix. For example: '300ms', '2h45m'. Supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'.
-   */
-  cpuCfsQuotaPeriod?: string;
-
-  /**
-   * The percent of disk usage after which image garbage collection is always run. To disable image garbage collection, set to 100. The default is 85%
-   */
-  imageGcHighThreshold?: int32;
-
-  /**
-   * The percent of disk usage before which image garbage collection is never run. This cannot be set higher than imageGcHighThreshold. The default is 80%
-   */
-  imageGcLowThreshold?: int32;
-
-  /**
-   * The Topology Manager policy to use. For more information see [Kubernetes Topology Manager](https://kubernetes.io/docs/tasks/administer-cluster/topology-manager). The default is 'none'. Allowed values are 'none', 'best-effort', 'restricted', and 'single-numa-node'.
-   */
-  topologyManagerPolicy?: string;
-
-  /**
-   * Allowed list of unsafe sysctls or unsafe sysctl patterns (ending in `*`).
-   */
-  allowedUnsafeSysctls?: string[];
-
-  /**
-   * If set to true it will make the Kubelet fail to start if swap is enabled on the node.
-   */
-  failSwapOn?: boolean;
-
-  /**
-   * The maximum size (e.g. 10Mi) of container log file before it is rotated.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  containerLogMaxSizeMB?: int32;
-
-  /**
-   * The maximum number of container log files that can be present for a container. The number must be ≥ 2.
-   */
-  @minValue(2)
-  containerLogMaxFiles?: int32;
-
-  /**
-   * The maximum number of processes per pod.
-   */
-  podMaxPids?: int32;
-
-  /**
-   * Specifies the default seccomp profile applied to all workloads. If not specified, 'Unconfined' will be used by default.
-   */
-  @added(Versions.v2025_10_02_preview)
-  seccompDefault?: SeccompDefault;
-}
-
-/**
- * OS configurations of Linux agent nodes. See [AKS custom node configuration](https://docs.microsoft.com/azure/aks/custom-node-configuration) for more details.
- */
-model LinuxOSConfig {
-  /**
-   * Sysctl settings for Linux agent nodes.
-   */
-  sysctls?: SysctlConfig;
-
-  /**
-   * Whether transparent hugepages are enabled. Valid values are 'always', 'madvise', and 'never'. The default is 'always'. For more information see [Transparent Hugepages](https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html#admin-guide-transhuge).
-   */
-  transparentHugePageEnabled?: string;
-
-  /**
-   * Whether the kernel should make aggressive use of memory compaction to make more hugepages available. Valid values are 'always', 'defer', 'defer+madvise', 'madvise' and 'never'. The default is 'madvise'. For more information see [Transparent Hugepages](https://www.kernel.org/doc/html/latest/admin-guide/mm/transhuge.html#admin-guide-transhuge).
-   */
-  transparentHugePageDefrag?: string;
-
-  /**
-   * The size in MB of a swap file that will be created on each node.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  swapFileSizeMB?: int32;
-}
-
-/**
- * Sysctl settings for Linux agent nodes.
- */
-model SysctlConfig {
-  /**
-   * Sysctl setting net.core.somaxconn.
-   */
-  netCoreSomaxconn?: int32;
-
-  /**
-   * Sysctl setting net.core.netdev_max_backlog.
-   */
-  netCoreNetdevMaxBacklog?: int32;
-
-  /**
-   * Sysctl setting net.core.rmem_default.
-   */
-  netCoreRmemDefault?: int32;
-
-  /**
-   * Sysctl setting net.core.rmem_max.
-   */
-  netCoreRmemMax?: int32;
-
-  /**
-   * Sysctl setting net.core.wmem_default.
-   */
-  netCoreWmemDefault?: int32;
-
-  /**
-   * Sysctl setting net.core.wmem_max.
-   */
-  netCoreWmemMax?: int32;
-
-  /**
-   * Sysctl setting net.core.optmem_max.
-   */
-  netCoreOptmemMax?: int32;
-
-  /**
-   * Sysctl setting net.ipv4.tcp_max_syn_backlog.
-   */
-  netIpv4TcpMaxSynBacklog?: int32;
-
-  /**
-   * Sysctl setting net.ipv4.tcp_max_tw_buckets.
-   */
-  netIpv4TcpMaxTwBuckets?: int32;
-
-  /**
-   * Sysctl setting net.ipv4.tcp_fin_timeout.
-   */
-  netIpv4TcpFinTimeout?: int32;
-
-  /**
-   * Sysctl setting net.ipv4.tcp_keepalive_time.
-   */
-  netIpv4TcpKeepaliveTime?: int32;
-
-  /**
-   * Sysctl setting net.ipv4.tcp_keepalive_probes.
-   */
-  netIpv4TcpKeepaliveProbes?: int32;
-
-  /**
-   * Sysctl setting net.ipv4.tcp_keepalive_intvl.
-   */
-  @maxValue(90)
-  @minValue(10)
-  netIpv4TcpkeepaliveIntvl?: int32;
-
-  /**
-   * Sysctl setting net.ipv4.tcp_tw_reuse.
-   */
-  netIpv4TcpTwReuse?: boolean;
-
-  /**
-   * Sysctl setting net.ipv4.ip_local_port_range.
-   */
-  netIpv4IpLocalPortRange?: string;
-
-  /**
-   * Sysctl setting net.ipv4.neigh.default.gc_thresh1.
-   */
-  netIpv4NeighDefaultGcThresh1?: int32;
-
-  /**
-   * Sysctl setting net.ipv4.neigh.default.gc_thresh2.
-   */
-  netIpv4NeighDefaultGcThresh2?: int32;
-
-  /**
-   * Sysctl setting net.ipv4.neigh.default.gc_thresh3.
-   */
-  netIpv4NeighDefaultGcThresh3?: int32;
-
-  /**
-   * Sysctl setting net.netfilter.nf_conntrack_max.
-   */
-  @maxValue(2097152)
-  @minValue(131072)
-  netNetfilterNfConntrackMax?: int32;
-
-  /**
-   * Sysctl setting net.netfilter.nf_conntrack_buckets.
-   */
-  @maxValue(524288)
-  @minValue(65536)
-  netNetfilterNfConntrackBuckets?: int32;
-
-  /**
-   * Sysctl setting fs.inotify.max_user_watches.
-   */
-  fsInotifyMaxUserWatches?: int32;
-
-  /**
-   * Sysctl setting fs.file-max.
-   */
-  fsFileMax?: int32;
-
-  /**
-   * Sysctl setting fs.aio-max-nr.
-   */
-  fsAioMaxNr?: int32;
-
-  /**
-   * Sysctl setting fs.nr_open.
-   */
-  fsNrOpen?: int32;
-
-  /**
-   * Sysctl setting kernel.threads-max.
-   */
-  kernelThreadsMax?: int32;
-
-  /**
-   * Sysctl setting vm.max_map_count.
-   */
-  vmMaxMapCount?: int32;
-
-  /**
-   * Sysctl setting vm.swappiness.
-   */
-  vmSwappiness?: int32;
-
-  /**
-   * Sysctl setting vm.vfs_cache_pressure.
-   */
-  vmVfsCachePressure?: int32;
-}
-
-/**
- * Data used when creating a target resource from a source resource.
- */
-model CreationData {
-  /**
-   * This is the ARM ID of the source object to be used to create the target object.
-   */
-  sourceResourceId?: Azure.Core.armResourceIdentifier;
-}
-
-/**
- * Network settings of an agent pool.
- */
-model AgentPoolNetworkProfile {
-  /**
-   * IPTags of instance-level public IPs.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @identifiers(#[])
-  nodePublicIPTags?: IPTag[];
-
-  /**
-   * The port ranges that are allowed to access. The specified ranges are allowed to overlap.
-   */
-  @identifiers(#[])
-  allowedHostPorts?: PortRange[];
-
-  /**
-   * The IDs of the application security groups which agent pool will associate when created.
-   */
-  applicationSecurityGroups?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Network/applicationSecurityGroups";
-    }
-  ]>[];
-}
-
-/**
- * Contains the IPTag associated with the object.
- */
-model IPTag {
-  /**
-   * The IP tag type. Example: RoutingPreference.
-   */
-  ipTagType?: string;
-
-  /**
-   * The value of the IP tag associated with the public IP. Example: Internet.
-   */
-  tag?: string;
-}
-
-/**
- * The port range.
- */
-model PortRange {
-  /**
-   * The minimum port that is included in the range. It should be ranged from 1 to 65535, and be less than or equal to portEnd.
-   */
-  @maxValue(65535)
-  @minValue(1)
-  portStart?: int32;
-
-  /**
-   * The maximum port that is included in the range. It should be ranged from 1 to 65535, and be greater than or equal to portStart.
-   */
-  @maxValue(65535)
-  @minValue(1)
-  portEnd?: int32;
-
-  /**
-   * The network protocol of the port.
-   */
-  protocol?: Protocol;
-}
-
-/**
- * The Windows agent pool's specific profile.
- */
-model AgentPoolWindowsProfile {
-  /**
-   * Whether to disable OutboundNAT in windows nodes. The default value is false. Outbound NAT can only be disabled if the cluster outboundType is NAT Gateway and the Windows agent pool does not have node public IP enabled.
-   */
-  disableOutboundNat?: boolean;
-}
-
-/**
- * The security settings of an agent pool.
- */
-model AgentPoolSecurityProfile {
-  /**
-   * vTPM is a Trusted Launch feature for configuring a dedicated secure vault for keys and measurements held locally on the node. For more details, see aka.ms/aks/trustedlaunch. If not specified, the default is false.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  enableVTPM?: boolean;
-
-  /**
-   * Secure Boot is a feature of Trusted Launch which ensures that only signed operating systems and drivers can boot. For more details, see aka.ms/aks/trustedlaunch.  If not specified, the default is false.
-   */
-  enableSecureBoot?: boolean;
-
-  /**
-   * SSH access method of an agent pool.
-   */
-  sshAccess?: AgentPoolSSHAccess;
-}
-
-/**
- * GPU settings for the Agent Pool.
- */
-model GPUProfile {
-  /**
-   * Whether to install GPU drivers. When it's not specified, default is Install.
-   */
-  driver?: GPUDriver;
-
-  /**
-   * Specify the type of GPU driver to install when creating Windows agent pools. If not provided, AKS selects the driver based on system compatibility. This cannot be changed once the AgentPool has been created. This cannot be set on Linux AgentPools. For Linux AgentPools, the driver is selected based on system compatibility.
-   */
-  @added(Versions.v2025_10_02_preview)
-  driverType?: DriverType;
-}
-
-/**
- * Profile of the managed cluster gateway agent pool.
- */
-model AgentPoolGatewayProfile {
-  /**
-   * The Gateway agent pool associates one public IPPrefix for each static egress gateway to provide public egress. The size of Public IPPrefix should be selected by the user. Each node in the agent pool is assigned with one IP from the IPPrefix. The IPPrefix size thus serves as a cap on the size of the Gateway agent pool. Due to Azure public IPPrefix size limitation, the valid value range is [28, 31] (/31 = 2 nodes/IPs, /30 = 4 nodes/IPs, /29 = 8 nodes/IPs, /28 = 16 nodes/IPs). The default value is 31.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @maxValue(31)
-  @minValue(28)
-  publicIPPrefixSize?: int32 = 31;
-}
-
-/** Artifact streaming profile for the agent pool. */
-@added(Versions.v2025_10_02_preview)
-model AgentPoolArtifactStreamingProfile {
-  /**
-   * Artifact streaming speeds up the cold-start of containers on a node through on-demand image loading. To use this feature, container images must also enable artifact streaming on ACR. If not specified, the default is false.
-   */
-  enabled?: boolean;
-}
-
-/**
- * Specifications on VirtualMachines agent pool.
- */
-model VirtualMachinesProfile {
-  /**
-   * Specifications on how to scale a VirtualMachines agent pool.
-   */
-  scale?: ScaleProfile;
-}
-
-/**
- * Specifications on how to scale a VirtualMachines agent pool.
- */
-model ScaleProfile {
-  /**
-   * Specifications on how to scale the VirtualMachines agent pool to a fixed size.
-   */
-  @identifiers(#[])
-  manual?: ManualScaleProfile[];
-
-  /**
-   * Specifications on how to auto-scale the VirtualMachines agent pool within a predefined size range.
-   */
-  @added(Versions.v2025_10_02_preview)
-  autoscale?: AutoScaleProfile;
-}
-
-/**
- * Specifications on number of machines.
- */
-model ManualScaleProfile {
-  /**
-   * VM size that AKS will use when creating and scaling e.g. 'Standard_E4s_v3', 'Standard_E16s_v3' or 'Standard_D16s_v5'.
-   */
-  size?: string;
-
-  /**
-   * Number of nodes.
-   */
-  count?: int32;
-}
-
-/**
- * Specifications on auto-scaling.
- */
-@added(Versions.v2025_10_02_preview)
-model AutoScaleProfile {
-  /**
-   * VM size that AKS will use when creating and scaling e.g. 'Standard_E4s_v3', 'Standard_E16s_v3' or 'Standard_D16s_v5'.
-   */
-  size?: string;
-
-  /**
-   * The minimum number of nodes of the specified sizes.
-   */
-  minCount?: int32;
-
-  /**
-   * The maximum number of nodes of the specified sizes.
-   */
-  maxCount?: int32;
-}
-
-/**
- * Current status on a group of nodes of the same vm size.
- */
-model VirtualMachineNodes {
-  /**
-   * The VM size of the agents used to host this group of nodes.
-   */
-  size?: string;
-
-  /**
-   * Number of nodes.
-   */
-  count?: int32;
-}
-
-/**
- * Contains read-only information about the Agent Pool.
- */
-model AgentPoolStatus {
-  /**
-   * The error detail information of the agent pool. Preserves the detailed info of failure. If there was no error, this field is omitted.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningError?: Azure.ResourceManager.CommonTypes.ErrorDetail;
-}
-
-/**
- * Configures the per-node local DNS, with VnetDNS and KubeDNS overrides. LocalDNS helps improve performance and reliability of DNS resolution in an AKS cluster. For more details see aka.ms/aks/localdns.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model LocalDNSProfile {
-  /**
-   * Mode of enablement for localDNS.
-   */
-  mode?: LocalDNSMode = LocalDNSMode.Preferred;
-
-  /**
-   * System-generated state of localDNS.
-   */
-  @visibility(Lifecycle.Read)
-  state?: LocalDNSState;
-
-  /**
-   * VnetDNS overrides apply to DNS traffic from pods with dnsPolicy:default or kubelet (referred to as VnetDNS traffic).
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  vnetDNSOverrides?: Record<LocalDNSOverride>;
-
-  /**
-   * KubeDNS overrides apply to DNS traffic from pods with dnsPolicy:ClusterFirst (referred to as KubeDNS traffic).
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  kubeDNSOverrides?: Record<LocalDNSOverride>;
-}
-
-/**
- * Overrides for localDNS profile.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model LocalDNSOverride {
-  /**
-   * Log level for DNS queries in localDNS.
-   */
-  queryLogging?: LocalDNSQueryLogging = LocalDNSQueryLogging.Error;
-
-  /**
-   * Enforce TCP or prefer UDP protocol for connections from localDNS to upstream DNS server.
-   */
-  protocol?: LocalDNSProtocol = LocalDNSProtocol.PreferUDP;
-
-  /**
-   * Destination server for DNS queries to be forwarded from localDNS.
-   */
-  forwardDestination?: LocalDNSForwardDestination = LocalDNSForwardDestination.ClusterCoreDNS;
-
-  /**
-   * Forward policy for selecting upstream DNS server. See [forward plugin](https://coredns.io/plugins/forward) for more information.
-   */
-  forwardPolicy?: LocalDNSForwardPolicy = LocalDNSForwardPolicy.Sequential;
-
-  /**
-   * Maximum number of concurrent queries. See [forward plugin](https://coredns.io/plugins/forward) for more information.
-   */
-  maxConcurrent?: int32 = 1000;
-
-  /**
-   * Cache max TTL in seconds. See [cache plugin](https://coredns.io/plugins/cache) for more information.
-   */
-  cacheDurationInSeconds?: int32 = 3600;
-
-  /**
-   * Serve stale duration in seconds. See [cache plugin](https://coredns.io/plugins/cache) for more information.
-   */
-  serveStaleDurationInSeconds?: int32 = 3600;
-
-  /**
-   * Policy for serving stale data. See [cache plugin](https://coredns.io/plugins/cache) for more information.
-   */
-  serveStale?: LocalDNSServeStale = LocalDNSServeStale.Immediate;
-}
-
-/**
- * Settings to determine the node customization used to provision nodes in a pool.
- */
-@added(Versions.v2025_10_02_preview)
-model NodeCustomizationProfile {
-  /**
-   * The resource ID of the node customization resource to use. This can be a version. Omitting the version will use the latest version of the node customization.
-   */
-  nodeCustomizationId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ContainerService/nodeCustomizations";
-    }
-  ]>;
 }
 
 /**
@@ -2987,7 +1995,7 @@ model ManagedClusterWindowsProfile {
    */
   adminUsername: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   @doc("Specifies the password of the administrator account. <br><br> **Minimum-length:** 8 characters <br><br> **Max-length:** 123 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\"")
   adminPassword?: string;
 
@@ -2999,7 +2007,7 @@ model ManagedClusterWindowsProfile {
   /**
    * Whether to enable CSI proxy. For more details on CSI proxy, see the [CSI proxy GitHub repo](https://github.com/kubernetes-csi/csi-proxy).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enableCSIProxy?: boolean;
 
   /**
@@ -3040,7 +2048,7 @@ model ManagedClusterServicePrincipalProfile {
   /**
    * The secret password associated with the service principal in plain text.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   secret?: string;
 }
 
@@ -3056,7 +2064,7 @@ model ManagedClusterAddonProfile {
   /**
    * Key-value pairs for configuring an add-on.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   config?: Record<string>;
 
   /**
@@ -3069,8 +2077,8 @@ model ManagedClusterAddonProfile {
 /**
  * Information of user assigned identity used by this add-on.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model is intentional for extensibility and matches existing API structure."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance pattern matches existing API structure and cannot be changed without breaking changes."
 model ManagedClusterAddonProfileIdentity extends UserAssignedIdentity {}
 
 /**
@@ -3220,19 +2228,19 @@ model ManagedClusterPodIdentityException {
   /**
    * The pod labels to match.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   podLabels: Record<string>;
 }
 
 /**
  * The OIDC issuer profile of the Managed Cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterOIDCIssuerProfile {
   /**
    * The OIDC issuer url of the Managed Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   issuerURL?: string;
 
@@ -3301,7 +2309,7 @@ model ContainerServiceNetworkProfile {
   /**
    * An IP address assigned to the Kubernetes DNS service. It must be within the Kubernetes service address range specified in serviceCidr.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @pattern("^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$")
   dnsServiceIP?: string = "10.0.0.10";
 
@@ -3422,25 +2430,25 @@ model ManagedClusterLoadBalancerProfile {
   /**
    * Desired managed outbound IPs for the cluster load balancer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   managedOutboundIPs?: ManagedClusterLoadBalancerProfileManagedOutboundIPs;
 
   /**
    * Desired outbound IP Prefix resources for the cluster load balancer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   outboundIPPrefixes?: ManagedClusterLoadBalancerProfileOutboundIPPrefixes;
 
   /**
    * Desired outbound IP resources for the cluster load balancer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   outboundIPs?: ManagedClusterLoadBalancerProfileOutboundIPs;
 
   /**
    * The effective outbound IP resources of the cluster load balancer.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   effectiveOutboundIPs?: ResourceReference[];
 
@@ -3478,7 +2486,7 @@ model ManagedClusterLoadBalancerProfile {
 /**
  * Desired managed outbound IPs for the cluster load balancer.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterLoadBalancerProfileManagedOutboundIPs {
   /**
    * The desired number of IPv4 outbound IPs created/managed by Azure for the cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1.
@@ -3490,7 +2498,7 @@ model ManagedClusterLoadBalancerProfileManagedOutboundIPs {
   /**
    * The desired number of IPv6 outbound IPs created/managed by Azure for the cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default value is 0 for single-stack and 1 for dual-stack.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @maxValue(100)
   @minValue(0)
   countIPv6?: int32 = 0;
@@ -3503,7 +2511,7 @@ model ManagedClusterLoadBalancerProfileOutboundIPPrefixes {
   /**
    * A list of public IP prefix resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   publicIPPrefixes?: ResourceReference[];
 }
 
@@ -3520,30 +2528,30 @@ model ResourceReference {
 /**
  * Desired outbound IP resources for the cluster load balancer.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterLoadBalancerProfileOutboundIPs {
   /**
    * A list of public IP resources.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   publicIPs?: ResourceReference[];
 }
 
 /**
  * Profile of the managed cluster NAT gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterNATGatewayProfile {
   /**
    * Profile of the managed outbound IP resources of the cluster NAT gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   managedOutboundIPProfile?: ManagedClusterManagedOutboundIPProfile;
 
   /**
    * The effective outbound IP resources of the cluster NAT gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   effectiveOutboundIPs?: ResourceReference[];
 
@@ -3649,7 +2657,7 @@ model AdvancedNetworkingPerformance {
 /**
  * AADProfile specifies attributes for Azure Active Directory integration. For more details see [managed AAD on AKS](https://docs.microsoft.com/azure/aks/managed-aad).
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterAADProfile {
   /**
    * Whether to enable managed AAD.
@@ -3659,37 +2667,37 @@ model ManagedClusterAADProfile {
   /**
    * Whether to enable Azure RBAC for Kubernetes authorization.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enableAzureRBAC?: boolean;
 
   /**
    * The list of AAD group object IDs that will have admin role of the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   adminGroupObjectIDs?: string[];
 
   /**
    * (DEPRECATED) The client AAD application ID. Learn more at https://aka.ms/aks/aad-legacy.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   clientAppID?: string;
 
   /**
    * (DEPRECATED) The server AAD application ID. Learn more at https://aka.ms/aks/aad-legacy.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   serverAppID?: string;
 
   /**
    * (DEPRECATED) The server AAD application secret. Learn more at https://aka.ms/aks/aad-legacy.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @secret
   serverAppSecret?: string;
 
   /**
    * The AAD tenant ID to use for authentication. If not specified, will use the tenant of the deployment subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   tenantID?: string;
 }
 
@@ -3705,7 +2713,7 @@ model ManagedClusterAutoUpgradeProfile {
   /**
    * Node OS Upgrade Channel. Manner in which the OS on your nodes is updated. The default is NodeImage.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   nodeOSUpgradeChannel?: NodeOSUpgradeChannel;
 }
 
@@ -3742,28 +2750,28 @@ model ManagedClusterPropertiesAutoScalerProfile {
   /**
    * Detects similar node pools and balances the number of nodes between them. Valid values are 'true' and 'false'
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("balanceSimilarNodeGroups")
   `balance-similar-node-groups`?: string;
 
   /**
    * DaemonSet pods will be gracefully terminated from empty nodes. If set to true, all daemonset pods on empty nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("daemonsetEvictionForEmptyNodes")
   `daemonset-eviction-for-empty-nodes`?: boolean;
 
   /**
    * DaemonSet pods will be gracefully terminated from non-empty nodes. If set to true, all daemonset pods on occupied nodes will be evicted before deletion of the node. If the daemonset pod cannot be evicted another node will be chosen for scaling. If set to false, the node will be deleted without ensuring that daemonset pods are deleted or evicted.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("daemonsetEvictionForOccupiedNodes")
   `daemonset-eviction-for-occupied-nodes`?: boolean;
 
   /**
    * Should CA ignore DaemonSet pods when calculating resource utilization for scaling down. If set to true, the resources used by daemonset will be taken into account when making scaling down decisions.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("ignoreDaemonsetsUtilization")
   `ignore-daemonsets-utilization`?: boolean;
 
@@ -3775,105 +2783,105 @@ model ManagedClusterPropertiesAutoScalerProfile {
   /**
    * The maximum number of empty nodes that can be deleted at the same time. This must be a positive integer. The default is 10.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("maxEmptyBulkDelete")
   `max-empty-bulk-delete`?: string;
 
   /**
    * The maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node. The default is 600.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("maxGracefulTerminationSec")
   `max-graceful-termination-sec`?: string;
 
   /**
    * The maximum time the autoscaler waits for a node to be provisioned. The default is '15m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("maxNodeProvisionTime")
   `max-node-provision-time`?: string;
 
   /**
    * The maximum percentage of unready nodes in the cluster. After this percentage is exceeded, cluster autoscaler halts operations. The default is 45. The maximum is 100 and the minimum is 0.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("maxTotalUnreadyPercentage")
   `max-total-unready-percentage`?: string;
 
   /**
    * Ignore unscheduled pods before they're a certain age. For scenarios like burst/batch scale where you don't want CA to act before the kubernetes scheduler could schedule all the pods, you can tell CA to ignore unscheduled pods before they're a certain age. The default is '0s'. Values must be an integer followed by a unit ('s' for seconds, 'm' for minutes, 'h' for hours, etc).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("newPodScaleUpDelay")
   `new-pod-scale-up-delay`?: string;
 
   /**
    * The number of allowed unready nodes, irrespective of max-total-unready-percentage. This must be an integer. The default is 3.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("okTotalUnreadyCount")
   `ok-total-unready-count`?: string;
 
   /**
    * How often cluster is reevaluated for scale up or down. The default is '10'. Values must be an integer number of seconds.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scanInterval")
   `scan-interval`?: string;
 
   /**
    * How long after scale up that scale down evaluation resumes. The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownDelayAfterAdd")
   `scale-down-delay-after-add`?: string;
 
   /**
    * How long after node deletion that scale down evaluation resumes. The default is the scan-interval. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownDelayAfterDelete")
   `scale-down-delay-after-delete`?: string;
 
   /**
    * How long after scale down failure that scale down evaluation resumes. The default is '3m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownDelayAfterFailure")
   `scale-down-delay-after-failure`?: string;
 
   /**
    * How long a node should be unneeded before it is eligible for scale down. The default is '10m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownUnneededTime")
   `scale-down-unneeded-time`?: string;
 
   /**
    * How long an unready node should be unneeded before it is eligible for scale down. The default is '20m'. Values must be an integer followed by an 'm'. No unit of time other than minutes (m) is supported.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownUnreadyTime")
   `scale-down-unready-time`?: string;
 
   /**
    * Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down. The default is '0.5'.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("scaleDownUtilizationThreshold")
   `scale-down-utilization-threshold`?: string;
 
   /**
    * If cluster autoscaler will skip deleting nodes with pods with local storage, for example, EmptyDir or HostPath. The default is true.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("skipNodesWithLocalStorage")
   `skip-nodes-with-local-storage`?: string;
 
   /**
    * If cluster autoscaler will skip deleting nodes with pods from kube-system (except for DaemonSet or mirror pods). The default is true.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @clientName("skipNodesWithSystemPods")
   `skip-nodes-with-system-pods`?: string;
 }
@@ -3881,12 +2889,12 @@ model ManagedClusterPropertiesAutoScalerProfile {
 /**
  * Access profile for managed cluster API server.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterAPIServerAccessProfile {
   /**
    * The IP ranges authorized to access the Kubernetes API server. IP ranges are specified in CIDR format, e.g. 137.117.106.88/29. This feature is not compatible with clusters that use Public IP Per Node, or clusters that are using a Basic Load Balancer. For more information see [API server authorized IP ranges](https://docs.microsoft.com/azure/aks/api-server-authorized-ip-ranges).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   authorizedIPRanges?: string[];
 
   /**
@@ -3897,13 +2905,13 @@ model ManagedClusterAPIServerAccessProfile {
   /**
    * The private DNS zone mode for the cluster. The default is System. For more details see [configure private DNS zone](https://docs.microsoft.com/azure/aks/private-clusters#configure-private-dns-zone). Allowed values are 'system' and 'none'.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   privateDNSZone?: string;
 
   /**
    * Whether to create additional public FQDN for private cluster or not.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   enablePrivateClusterPublicFQDN?: boolean;
 
   /**
@@ -3936,10 +2944,8 @@ model PrivateLinkResource {
   id?: string;
 
   /**
-   * The name of the private link resource.
+   * The name of the private link resource. See [naming rules](https://aka.ms/search-naming-rules) for more details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.externalDocs("https://aka.ms/search-naming-rules")
   name?: string;
 
   /**
@@ -3960,7 +2966,7 @@ model PrivateLinkResource {
   /**
    * The private link service ID of the resource, this field is exposed only to NRP internally.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @visibility(Lifecycle.Read)
   privateLinkServiceID?: Azure.Core.armResourceIdentifier;
 }
@@ -3968,7 +2974,7 @@ model PrivateLinkResource {
 /**
  * Cluster HTTP proxy configuration.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterHTTPProxyConfig {
   /**
    * The HTTP proxy server endpoint to use.
@@ -4049,7 +3055,7 @@ model ManagedClusterSecurityProfile {
   /**
    * A list of up to 10 base64 encoded CAs that will be added to the trust store on all nodes in the cluster. For more information see [Custom CA Trust Certificates](https://learn.microsoft.com/en-us/azure/aks/custom-certificate-authority).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @maxItems(10)
   @minItems(0)
   customCATrustCertificates?: bytes[];
@@ -4220,13 +3226,13 @@ model ManagedClusterStorageProfile {
   /**
    * AzureDisk CSI Driver settings for the storage profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   diskCSIDriver?: ManagedClusterStorageProfileDiskCSIDriver;
 
   /**
    * AzureFile CSI Driver settings for the storage profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   fileCSIDriver?: ManagedClusterStorageProfileFileCSIDriver;
 
   /**
@@ -4237,14 +3243,14 @@ model ManagedClusterStorageProfile {
   /**
    * AzureBlob CSI Driver settings for the storage profile.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   blobCSIDriver?: ManagedClusterStorageProfileBlobCSIDriver;
 }
 
 /**
  * AzureDisk CSI Driver settings for the storage profile.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterStorageProfileDiskCSIDriver {
   /**
    * Whether to enable AzureDisk CSI Driver. The default value is true.
@@ -4261,7 +3267,7 @@ model ManagedClusterStorageProfileDiskCSIDriver {
 /**
  * AzureFile CSI Driver settings for the storage profile.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterStorageProfileFileCSIDriver {
   /**
    * Whether to enable AzureFile CSI Driver. The default value is true.
@@ -4282,7 +3288,7 @@ model ManagedClusterStorageProfileSnapshotController {
 /**
  * AzureBlob CSI Driver settings for the storage profile.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterStorageProfileBlobCSIDriver {
   /**
    * Whether to enable AzureBlob CSI Driver. The default value is false.
@@ -4302,7 +3308,7 @@ model ManagedClusterIngressProfile {
   /**
    * Settings for the managed Gateway API installation
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   @added(Versions.v2025_10_02_preview)
   gatewayAPI?: ManagedClusterIngressProfileGatewayConfiguration;
 
@@ -4794,7 +3800,7 @@ model ManagedClusterBootstrapProfile {
 /**
  * When enabling the operator, a set of AKS managed CRDs and controllers will be installed in the cluster. The operator automates the deployment of OSS models for inference and/or training purposes. It provides a set of preset models and enables distributed inference against them.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 model ManagedClusterAIToolchainOperatorProfile {
   /**
    * Whether to enable AI toolchain operator to the cluster. Indicates if AI toolchain operator  enabled or not.
@@ -4896,7 +3902,7 @@ model Component {
 /**
  * Managed cluster Access Profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance pattern matches existing API structure and cannot be changed without breaking changes."
 model ManagedClusterAccessProfile
   extends Azure.ResourceManager.CommonTypes.TrackedResource {
   /**
@@ -4947,12 +3953,12 @@ model CredentialResult {
 /**
  * Tags object for patch operations.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "AKS RP only supports updating tags via PATCH; envelope properties like identity and sku are not yet supported in the PATCH endpoint."
 model TagsObject {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<> is used for dynamic key-value structures where keys cannot be pre-defined (e.g., tags, addon names, version numbers)."
   tags?: Record<string>;
 }
 
@@ -4977,16 +3983,6 @@ model SubResource {
    */
   @visibility(Lifecycle.Read)
   type?: string;
-}
-
-/**
- * Specifies a list of machine names from the agent pool to be deleted.
- */
-model AgentPoolDeleteMachinesParameter {
-  /**
-   * The agent pool machine names.
-   */
-  machineNames: string[];
 }
 
 /**

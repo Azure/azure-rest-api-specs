@@ -12,6 +12,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./CommonModels.tsp";
+import "./AgentPoolModels.tsp";
 import "./BackCompatible.tsp";
 import "./ManagedClusterUpgradeProfile.tsp";
 import "./ManagedCluster.tsp";
