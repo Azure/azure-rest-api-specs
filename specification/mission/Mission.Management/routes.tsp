@@ -28,7 +28,7 @@ interface Workload {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     WorkloadResource,
     PatchModel = WorkloadPatchModel
@@ -48,7 +48,7 @@ interface VirtualEnclave {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     EnclaveResource,
     PatchModel = VirtualEnclavePatchModel
@@ -93,7 +93,7 @@ interface Community {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     CommunityResource,
     PatchModel = CommunityPatchModel
@@ -125,7 +125,7 @@ interface TransitHub {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     TransitHubResource,
     PatchModel = TransitHubPatchModel
@@ -145,7 +145,7 @@ interface EnclaveConnection {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     EnclaveConnectionResource,
     PatchModel = EnclaveConnectionPatchModel
@@ -188,7 +188,7 @@ interface EnclaveEndpoints {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     EnclaveEndpointResource,
     PatchModel = EnclaveEndpointPatchModel
@@ -233,7 +233,7 @@ interface CommunityEndpoints {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     CommunityEndpointResource,
     PatchModel = CommunityEndpointPatchModel
@@ -279,7 +279,7 @@ interface Approval {
       ArmAsyncOperationHeader
   >;
   listByParent is ArmResourceListByParent<ApprovalResource>;
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ApprovalResource,
     PatchModel = ApprovalPatchModel

@@ -125,7 +125,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobUpdateOptionsUpdate"
+              "$ref": "#/definitions/JobUpdateOptions"
             }
           }
         ],
@@ -1710,39 +1710,6 @@
       "required": [
         "id"
       ]
-    },
-    "JobUpdateOptionsUpdate": {
-      "type": "object",
-      "description": "Options for updating a job.",
-      "properties": {
-        "priority": {
-          "$ref": "#/definitions/Priority",
-          "description": "Priority of job.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the job.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of user-supplied tags associated with the job.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      }
     },
     "MeterPeriod": {
       "type": "string",

@@ -255,7 +255,7 @@ interface ManagedOps {
   list is ArmListBySubscription<ManagedOp>;
 
   @doc("Updates the ManagedOps instance with the supplied fields.")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<ManagedOp, ManagedOpUpdate>;
 
   @doc("Deletes the ManagedOps instance.")

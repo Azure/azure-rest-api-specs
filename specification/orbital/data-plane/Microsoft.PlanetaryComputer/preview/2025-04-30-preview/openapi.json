@@ -10172,7 +10172,7 @@
             "description": "STAC Item",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacItemUpdate"
+              "$ref": "#/definitions/StacItem"
             }
           }
         ],
@@ -11094,78 +11094,6 @@
       "required": [
         "data"
       ]
-    },
-    "AssetUpdate": {
-      "type": "object",
-      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/item-spec.md#asset-object\n\nRepresents a STAC asset, which is a file or resource associated with a STAC item.",
-      "properties": {
-        "platform": {
-          "type": "string",
-          "description": "Platform that acquired the data."
-        },
-        "instruments": {
-          "type": "array",
-          "description": "Instruments that acquired the data.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "constellation": {
-          "type": "string",
-          "description": "Constellation of satellites that acquired the data."
-        },
-        "mission": {
-          "type": "string",
-          "description": "Mission associated with the data."
-        },
-        "providers": {
-          "type": "array",
-          "description": "Organizations or individuals who provide the data.",
-          "items": {
-            "$ref": "#/definitions/Provider"
-          }
-        },
-        "gsd": {
-          "type": "number",
-          "format": "float",
-          "description": "Ground sample distance in meters."
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation timestamp of the data."
-        },
-        "updated": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last update timestamp of the data."
-        },
-        "title": {
-          "type": "string",
-          "description": "Human-readable title for the asset."
-        },
-        "description": {
-          "type": "string",
-          "description": "Detailed description of the asset."
-        },
-        "href": {
-          "type": "string",
-          "description": "URL to the asset file.",
-          "minLength": 1
-        },
-        "type": {
-          "type": "string",
-          "description": "Media type of the asset."
-        },
-        "roles": {
-          "type": "array",
-          "description": "Roles of the asset within the item.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "additionalProperties": {}
     },
     "AuthConfig": {
       "type": "object",
@@ -13240,7 +13168,6 @@
         "properties"
       ]
     },
-    "GeoJsonUpdate": {},
     "ImageJp2Response": {
       "type": "object",
       "description": "Return an image.",
@@ -14231,78 +14158,6 @@
       "required": [
         "datetime"
       ],
-      "additionalProperties": {}
-    },
-    "ItemPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties of a STAC Item containing metadata about the asset.\n\nhttps://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/item-spec.md#properties-object",
-      "properties": {
-        "platform": {
-          "type": "string",
-          "description": "Platform that acquired the data."
-        },
-        "instruments": {
-          "type": "array",
-          "description": "Instruments that acquired the data.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "constellation": {
-          "type": "string",
-          "description": "Constellation of satellites that acquired the data."
-        },
-        "mission": {
-          "type": "string",
-          "description": "Mission associated with the data."
-        },
-        "providers": {
-          "type": "array",
-          "description": "Organizations or individuals who provide the data.",
-          "items": {
-            "$ref": "#/definitions/Provider"
-          }
-        },
-        "gsd": {
-          "type": "number",
-          "format": "float",
-          "description": "Ground sample distance in meters."
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation timestamp of the data."
-        },
-        "updated": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last update timestamp of the data."
-        },
-        "title": {
-          "type": "string",
-          "description": "Human-readable title for the item."
-        },
-        "description": {
-          "type": "string",
-          "description": "Detailed description of the item."
-        },
-        "datetime": {
-          "type": "string",
-          "description": "Datetime the asset represents in RFC 3339 format."
-        },
-        "start_datetime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Start time of the item observation period.",
-          "x-ms-client-name": "startDatetime"
-        },
-        "end_datetime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "End time of the item observation period.",
-          "x-ms-client-name": "endDatetime"
-        }
-      },
       "additionalProperties": {}
     },
     "LandingPage": {
@@ -16273,100 +16128,6 @@
         "links",
         "assets"
       ]
-    },
-    "StacItemUpdate": {
-      "type": "object",
-      "description": "Represents a STAC Item, which is a GeoJSON Feature with additional metadata.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/FeatureType",
-          "description": "GeoJSON type identifier for Feature"
-        },
-        "geometry": {
-          "$ref": "#/definitions/GeoJsonUpdate",
-          "description": "Geometry object defining the feature's shape"
-        },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box coordinates for the feature",
-          "items": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "msft:_created": {
-          "type": "string",
-          "description": "MSFT Created",
-          "x-ms-client-name": "msftCreated"
-        },
-        "msft:_updated": {
-          "type": "string",
-          "description": "MSFT Updated",
-          "x-ms-client-name": "msftUpdated"
-        },
-        "msft:short_description": {
-          "type": "string",
-          "description": "MSFT Short Description",
-          "maxLength": 300,
-          "x-ms-client-name": "msftShortDescription"
-        },
-        "stac_extensions": {
-          "type": "array",
-          "description": "URLs to STAC extensions implemented by this STAC resource.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-client-name": "stacExtensions"
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the feature",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "stac_version": {
-          "type": "string",
-          "description": "Stac Version",
-          "default": "1.0.0",
-          "minLength": 1,
-          "x-ms-client-name": "stacVersion"
-        },
-        "collection": {
-          "type": "string",
-          "description": "ID of the STAC collection this item belongs to."
-        },
-        "properties": {
-          "$ref": "#/definitions/ItemPropertiesUpdate",
-          "description": "Attributes associated with the feature"
-        },
-        "links": {
-          "type": "array",
-          "description": "Links to related resources and endpoints.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        },
-        "assets": {
-          "type": "object",
-          "description": "Assets",
-          "additionalProperties": {
-            "$ref": "#/definitions/AssetUpdate"
-          }
-        },
-        "_msft:ts": {
-          "type": "string",
-          "description": "MSFT Timestamp",
-          "x-ms-client-name": "msftTimestamp"
-        },
-        "_msft:etag": {
-          "type": "string",
-          "description": "MSFT ETag",
-          "x-ms-client-name": "msftEtag"
-        }
-      }
     },
     "StatisticsResponse": {
       "type": "object",

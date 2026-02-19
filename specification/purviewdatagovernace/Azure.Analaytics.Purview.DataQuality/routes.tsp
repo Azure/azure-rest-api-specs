@@ -99,7 +99,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   @tag("Rules")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rules/{ruleId}")
   @doc("Updates an existing rule associated with a data asset.")
@@ -212,7 +212,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @route("/data-assets/{dataAssetId}/asset-metadata")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   @tag("AssetMetadata")
   @doc("Updates the asset metadata  associated with a Data Asset.")
   op updateObserver is RpcOperation<
@@ -334,7 +334,7 @@ namespace PurviewDataQuality {
   #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "RpcOperation with path parameters is intentional for this service."
   @tag("Schedules")
   @doc("Updates the details of an existing schedule under a specific business domain.")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   @route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
   op updateSchedule is RpcOperation<
     {
@@ -751,7 +751,7 @@ namespace PurviewDataQuality {
     #{ DataSource_Update: #{ $ref: "./examples/DataSource_Update.json" } }
   )
   @route("/business-domains/{businessDomainId}/data-sources/{dataSourceId}")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   op updateDataSource is RpcOperation<
     {
       /**
@@ -935,7 +935,7 @@ namespace PurviewDataQuality {
   @tag("Scoped Asset Metadata")
   @doc("Create or update the scoped asset metadata for a given data asset within a business domain.")
   @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   op updateScopedAssetMetaData is RpcOperation<
     {
       /**

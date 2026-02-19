@@ -190,7 +190,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/QuestionAnsweringProjectMetadataCreateOrUpdate"
+              "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
             }
           }
         ],
@@ -2536,28 +2536,6 @@
       "required": [
         "projectName"
       ]
-    },
-    "QuestionAnsweringProjectMetadataCreateOrUpdate": {
-      "type": "object",
-      "description": "Represents the project.",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the project."
-        },
-        "language": {
-          "type": "string",
-          "description": "Language of the text records. This is BCP-47 representation of a language. For\nexample, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for\nEnglish as default."
-        },
-        "multilingualResource": {
-          "type": "boolean",
-          "description": "Resource enabled for multiple languages across projects or not."
-        },
-        "settings": {
-          "$ref": "#/definitions/ProjectSettings",
-          "description": "Configurable settings of the Project."
-        }
-      }
     },
     "RefreshSourceOptions": {
       "type": "object",

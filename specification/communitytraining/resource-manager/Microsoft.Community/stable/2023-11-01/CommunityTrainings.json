@@ -563,7 +563,7 @@
       "description": "The updatable properties of the CommunityTraining.",
       "properties": {
         "identityConfiguration": {
-          "$ref": "#/definitions/IdentityConfigurationPropertiesUpdate",
+          "$ref": "#/definitions/IdentityConfigurationProperties",
           "description": "The identity configuration of the Community Training resource",
           "x-ms-mutability": [
             "read",
@@ -669,96 +669,6 @@
         "clientId",
         "clientSecret"
       ]
-    },
-    "IdentityConfigurationPropertiesUpdate": {
-      "type": "object",
-      "description": "Details of the Community CommunityTraining Identity Configuration",
-      "properties": {
-        "identityType": {
-          "type": "string",
-          "description": "The identity type of the Community Training Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "teamsEnabled": {
-          "type": "boolean",
-          "description": "To indicate whether the Community Training Resource has Teams enabled",
-          "default": false,
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "tenantId": {
-          "type": "string",
-          "description": "The tenantId of the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "domainName": {
-          "type": "string",
-          "description": "The domain name of the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "clientId": {
-          "type": "string",
-          "description": "The clientId of the application registered in the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "clientSecret": {
-          "type": "string",
-          "format": "password",
-          "description": "The client secret of the application registered in the selected identity provider for the Community Training Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        },
-        "b2cAuthenticationPolicy": {
-          "type": "string",
-          "description": "The name of the authentication policy registered in ADB2C for the Community Training Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "b2cPasswordResetPolicy": {
-          "type": "string",
-          "description": "The name of the password reset policy registered in ADB2C for the Community Training Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "customLoginParameters": {
-          "type": "string",
-          "description": "The custom login parameters for the Community Training Resource",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      }
     },
     "ProvisioningState": {
       "type": "string",

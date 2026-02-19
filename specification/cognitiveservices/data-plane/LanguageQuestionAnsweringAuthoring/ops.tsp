@@ -20,7 +20,7 @@ namespace Language.QuestionAnswering.Authoring;
 @Foundations.Private.ensureVerb("ResourceCreateOrUpdate", "PATCH")
 @createsOrUpdatesResource(Resource)
 @parameterVisibility(Lifecycle.Create, Lifecycle.Update)
-@patch(#{ implicitOptionality: true })
+@patch(#{ implicitOptionality: false })
 op ResourceCreateOrUpdateWithJsonContentType<
   Resource extends TypeSpec.Reflection.Model,
   MethodTraits extends TypeSpec.Reflection.Model = {},
