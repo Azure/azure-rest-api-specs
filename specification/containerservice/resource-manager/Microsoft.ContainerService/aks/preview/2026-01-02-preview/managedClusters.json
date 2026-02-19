@@ -9230,6 +9230,18 @@
         }
       ]
     },
+    "MachineBillingProfile": {
+      "type": "object",
+      "description": "The properties having to do with machine billing.",
+      "properties": {
+        "spotMaxPrice": {
+          "type": "number",
+          "format": "float",
+          "description": "The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)",
+          "default": -1
+        }
+      }
+    },
     "MachineHardwareProfile": {
       "type": "object",
       "description": "The hardware and GPU settings of the machine.",
@@ -9245,6 +9257,10 @@
         "gpuProfile": {
           "$ref": "#/definitions/GPUProfile",
           "description": "The GPU settings of the machine."
+        },
+        "ultraSsdEnabled": {
+          "type": "boolean",
+          "description": "Whether to enable UltraSSD"
         }
       }
     },
@@ -9551,6 +9567,35 @@
               }
             ]
           }
+        },
+        "evictionPolicy": {
+          "type": "string",
+          "description": "The eviction policy for machine. This cannot be specified unless the priority is 'Spot'. If not specified, the default is 'Delete'.",
+          "default": "Delete",
+          "enum": [
+            "Delete",
+            "Deallocate"
+          ],
+          "x-ms-enum": {
+            "name": "ScaleSetEvictionPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Delete",
+                "value": "Delete",
+                "description": "Nodes in the underlying Scale Set of the node pool are deleted when they're evicted."
+              },
+              {
+                "name": "Deallocate",
+                "value": "Deallocate",
+                "description": "Nodes in the underlying Scale Set of the node pool are set to the stopped-deallocated state upon eviction. Nodes in the stopped-deallocated state count against your compute quota and can cause issues with cluster scaling or upgrading."
+              }
+            ]
+          }
+        },
+        "billing": {
+          "$ref": "#/definitions/MachineBillingProfile",
+          "description": "The properties having to do with machine billing."
         },
         "nodeImageVersion": {
           "type": "string",
