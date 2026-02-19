@@ -161,6 +161,11 @@ model MachineHardwareProfile {
    * The GPU settings of the machine.
    */
   gpuProfile?: GPUProfile;
+
+  /**
+   * Whether to enable UltraSSD
+   */
+  ultraSsdEnabled?: boolean;
 }
 
 /**
@@ -291,6 +296,18 @@ model MachineKubernetesProfile {
 }
 
 /**
+ * The properties having to do with machine billing.
+ */
+@added(Versions.v2026_01_02_preview)
+model MachineBillingProfile {
+
+  /**
+   * The max price (in US Dollars) you are willing to pay for spot instances. Possible values are any decimal value greater than zero or -1 which indicates default price to be up-to on-demand. For more details on spot pricing, see [spot VMs pricing](https://docs.microsoft.com/azure/virtual-machines/spot-vms#pricing)
+   */
+  spotMaxPrice?: float32 = -1;
+}
+
+/**
  * Contains read-only information about the machine.
  */
 @added(Versions.v2026_01_02_preview)
@@ -386,6 +403,18 @@ model MachineProperties {
    */
   @added(Versions.v2026_01_02_preview)
   priority?: ScaleSetPriority = ScaleSetPriority.Regular;
+
+  /**
+   * The eviction policy for machine. This cannot be specified unless the priority is 'Spot'. If not specified, the default is 'Delete'.
+   */
+  @added(Versions.v2026_01_02_preview)
+  evictionPolicy?: ScaleSetEvictionPolicy = ScaleSetEvictionPolicy.Delete;
+
+  /**
+   * The properties having to do with machine billing.
+   */
+  @added(Versions.v2026_01_02_preview)
+  billing?: MachineBillingProfile;
 
   /**
    * The version of node image.
