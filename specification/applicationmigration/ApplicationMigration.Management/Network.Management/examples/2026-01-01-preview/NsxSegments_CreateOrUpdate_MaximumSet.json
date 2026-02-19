@@ -1,6 +1,6 @@
 {
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/segments/seg1",
         "name": "seg1",
@@ -39,7 +39,7 @@
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/segments/seg1",
         "name": "seg1",
@@ -84,7 +84,32 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "siteName": "site1",
-    "segmentName": "seg1"
+    "segmentName": "seg1",
+    "resource": {
+      "properties": {
+        "displayName": "Segment-01",
+        "nsxOriginalId": "/infra/segments/seg1",
+        "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+        "uniqueId": "seg-uid-001",
+        "nsxTags": [],
+        "parentGateway": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier1Gateways/t1gw1",
+        "segmentType": "ROUTED",
+        "vlanIds": [
+          "100"
+        ],
+        "subnets": [
+          {
+            "gatewayAddress": "10.0.0.1/24",
+            "network": "10.0.0.0/24"
+          }
+        ],
+        "systemOwned": false,
+        "adminState": "UP",
+        "associatedVirtualMachines": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/vmwareSites/vs1/machines/vm1"
+        ]
+      }
+    }
   },
   "operationId": "NsxSegments_CreateOrUpdate",
   "title": "NsxSegments_CreateOrUpdate_MaximumSet"

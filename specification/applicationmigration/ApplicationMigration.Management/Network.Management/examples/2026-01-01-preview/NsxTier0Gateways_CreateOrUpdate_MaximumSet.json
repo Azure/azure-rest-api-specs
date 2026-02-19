@@ -1,6 +1,6 @@
 {
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1",
         "name": "t0gw1",
@@ -38,7 +38,7 @@
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1",
         "name": "t0gw1",
@@ -82,7 +82,31 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "siteName": "site1",
-    "gatewayName": "t0gw1"
+    "gatewayName": "t0gw1",
+    "resource": {
+      "properties": {
+        "displayName": "T0-Gateway",
+        "nsxOriginalId": "/infra/tier-0s/t0gw",
+        "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+        "uniqueId": "t0-uid-001",
+        "nsxTags": [],
+        "haMode": "ACTIVE_ACTIVE",
+        "firewallEnabled": true,
+        "isVrf": false,
+        "associatedTier1Gateways": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier1Gateways/t1gw1"
+        ],
+        "associatedSegments": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/segments/seg1"
+        ],
+        "associatedNatRules": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/natRules/nat1"
+        ],
+        "associatedGfwPolicies": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/gatewayFirewallPolicies/pol1"
+        ]
+      }
+    }
   },
   "operationId": "NsxTier0Gateways_CreateOrUpdate",
   "title": "NsxTier0Gateways_CreateOrUpdate_MaximumSet"

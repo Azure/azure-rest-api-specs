@@ -58,7 +58,31 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "siteName": "site1",
-    "groupName": "grp1"
+    "groupName": "grp1",
+    "properties": {
+      "properties": {
+        "expressions": [
+          {
+            "resourceType": "Condition",
+            "memberType": "VirtualMachine",
+            "key": "Tag",
+            "operator": "EQUALS",
+            "value": "web-tier"
+          },
+          {
+            "resourceType": "ConjunctionOperator",
+            "conjunctionOperator": "OR"
+          },
+          {
+            "resourceType": "Condition",
+            "memberType": "VirtualMachine",
+            "key": "Tag",
+            "operator": "EQUALS",
+            "value": "app-tier"
+          }
+        ]
+      }
+    }
   },
   "operationId": "NsxNsGroups_Update",
   "title": "NsxNsGroups_Update_MaximumSet"

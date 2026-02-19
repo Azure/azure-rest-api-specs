@@ -1,6 +1,6 @@
 {
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
         "name": "mgr1",
@@ -33,7 +33,7 @@
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
         "name": "mgr1",
@@ -72,7 +72,26 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "siteName": "site1",
-    "managerName": "mgr1"
+    "managerName": "mgr1",
+    "resource": {
+      "properties": {
+        "displayName": "nsx-mgr-01",
+        "nsxOriginalId": "/infra/managers/mgr1",
+        "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+        "uniqueId": "mgr-uid-001",
+        "nsxTags": [
+          {
+            "tag": "prod",
+            "scope": "env"
+          }
+        ],
+        "fqdn": "nsx-manager.contoso.com",
+        "runAsAccount": "account1",
+        "vcenterRefs": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.OffAzure/vmwareSites/vs1/vcenters/vc1"
+        ]
+      }
+    }
   },
   "operationId": "NsxManagers_CreateOrUpdate",
   "title": "NsxManagers_CreateOrUpdate_MaximumSet"

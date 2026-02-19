@@ -1,6 +1,6 @@
 {
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/gatewayFirewallPolicies/pol1",
         "name": "pol1",
@@ -34,7 +34,7 @@
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/gatewayFirewallPolicies/pol1",
         "name": "pol1",
@@ -74,7 +74,27 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rg1",
     "siteName": "site1",
-    "policyName": "pol1"
+    "policyName": "pol1",
+    "resource": {
+      "properties": {
+        "displayName": "Default-Policy",
+        "nsxOriginalId": "/infra/domains/default/gateway-policies/pol1",
+        "nsxManagerRef": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/nsxManagers/mgr1",
+        "uniqueId": "pol-uid-001",
+        "nsxTags": [],
+        "category": "LocalGatewayRules",
+        "sequenceNumber": 100,
+        "isDefault": true,
+        "contextType": "GatewaySpecific",
+        "federationScope": "Local",
+        "appliedScopes": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1"
+        ],
+        "effectiveScopes": [
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApplicationMigration/networkSites/site1/tier0Gateways/t0gw1"
+        ]
+      }
+    }
   },
   "operationId": "GatewayFirewallPolicies_CreateOrUpdate",
   "title": "GatewayFirewallPolicies_CreateOrUpdate_MaximumSet"
