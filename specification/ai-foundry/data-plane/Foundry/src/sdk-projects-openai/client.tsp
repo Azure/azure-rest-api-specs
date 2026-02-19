@@ -429,4 +429,27 @@ namespace Azure.AI.Projects {
   @@usage(AgentVersionObject, Usage.output);
   @@access(AgentVersionObject, Access.public);
   @@clientName(AgentVersionObject, "AgentVersion");
+
+  @@usage(MemorySearchToolCallItemResource, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.InputMessageResource, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceOutputMessage, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceFileSearchToolCall, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceComputerToolCall, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceComputerToolCallOutputResource, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceWebSearchToolCall, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceFunctionToolCallResource, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceFunctionToolCallOutputResource, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceImageGenToolCall, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceCodeInterpreterToolCall, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceLocalShellToolCall, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceLocalShellToolCallOutput, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceFunctionShellCall, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceFunctionShellCallOutput, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceApplyPatchToolCall, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceApplyPatchToolCallOutput, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceMcpToolCall, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceMcpListTools, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceMcpApprovalRequest, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceMcpApprovalResponseResource, Usage.output | Usage.json, "csharp");
+  @@usage(OpenAI.ItemResourceMcpToolCall, Usage.output | Usage.json, "csharp");
 }
