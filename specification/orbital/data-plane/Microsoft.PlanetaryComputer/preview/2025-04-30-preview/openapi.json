@@ -68,6 +68,21 @@
       "name": "Tile Matrix Sets"
     },
     {
+      "name": "Landing Page"
+    },
+    {
+      "name": "Conformance"
+    },
+    {
+      "name": "Styles"
+    },
+    {
+      "name": "Tiling Schemes"
+    },
+    {
+      "name": "Vector Tiles"
+    },
+    {
       "name": "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
     },
     {
@@ -7210,6 +7225,914 @@
         }
       }
     },
+    "/data/vector/{searchId}/tiles": {
+      "get": {
+        "operationId": "VectorTilesDataset_GetSearchTileSetsList",
+        "tags": [
+          "Vector Tiles"
+        ],
+        "summary": "Retrieve a list of available vector tilesets for the specified search.",
+        "description": "Retrieve a list of available vector tilesets for the specified search.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "searchId",
+            "in": "path",
+            "description": "Identifier of a search",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the response. If no value is provided, the accept header is used to determine the format. Accepted values are 'json'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileSetsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTilesDataset_GetSearchTileSetsList": {
+            "$ref": "./examples/VectorTilesDataset_GetSearchTileSetsList.json"
+          }
+        }
+      }
+    },
+    "/data/vector/{searchId}/tiles/{tileMatrixSetId}": {
+      "get": {
+        "operationId": "VectorTilesDataset_GetSearchTileSet",
+        "tags": [
+          "Vector Tiles"
+        ],
+        "summary": "Retrieve the vector tileset metadata.",
+        "description": "Retrieve the vector tileset metadata for the specified search and tiling scheme (tile matrix set)",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "searchId",
+            "in": "path",
+            "description": "Identifier of a search",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier for a supported TileMatrixSet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the response. If no value is provided, the accept header is used to determine the format. Accepted values are 'json'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTilesDataset_GetSearchTileSet": {
+            "$ref": "./examples/VectorTilesDataset_GetSearchTileSet.json"
+          }
+        }
+      }
+    },
+    "/data/vector/{searchId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}": {
+      "get": {
+        "operationId": "VectorTilesDataset_GetSearchTile",
+        "tags": [
+          "Vector Tiles"
+        ],
+        "summary": "Retrieve a vector tile from a search.",
+        "description": "Retrieve a vector tile from a search.",
+        "produces": [
+          "application/vnd.mapbox-vector-tile",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "searchId",
+            "in": "path",
+            "description": "Identifier of a search",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier for a supported TileMatrixSet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tileMatrix",
+            "in": "path",
+            "description": "Identifier selecting one of the scales defined in the TileMatrixSet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tileRow",
+            "in": "path",
+            "description": "Row index of the tile on the selected TileMatrix",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "tileCol",
+            "in": "path",
+            "description": "Column index of the tile on the selected TileMatrix",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the vector tile response. Accepted values are 'mvt' (Mapbox Vector Tiles).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "mvt"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vector tile response.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTilesDataset_GetSearchTile": {
+            "$ref": "./examples/VectorTilesDataset_GetSearchTile.json"
+          }
+        }
+      }
+    },
+    "/data/vector/": {
+      "get": {
+        "operationId": "VectorTilesBase_GetLandingPage",
+        "tags": [
+          "Landing Page"
+        ],
+        "summary": "Retrieve the OGC API landing page for this service.",
+        "description": "Retrieve the OGC API landing page for this service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the response. If no value is provided, the accept header is used to determine the format. Accepted values are 'json'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VectorLandingPage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTilesBase_GetLandingPage": {
+            "$ref": "./examples/VectorTilesBase_GetLandingPage.json"
+          }
+        }
+      }
+    },
+    "/data/vector/collections/{collectionId}/tiles": {
+      "get": {
+        "operationId": "VectorTilesCollections_GetTileSetsList",
+        "tags": [
+          "Vector Tiles"
+        ],
+        "summary": "Retrieve a list of available vector tilesets for the specified collection.",
+        "description": "Retrieve a list of available vector tilesets for the specified collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "Local identifier of a vector tile collection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the response. If no value is provided, the accept header is used to determine the format. Accepted values are 'json'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileSetsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTilesCollections_GetTileSetsList": {
+            "$ref": "./examples/VectorTilesCollections_GetTileSetsList.json"
+          }
+        }
+      }
+    },
+    "/data/vector/collections/{collectionId}/tiles/{tileMatrixSetId}": {
+      "get": {
+        "operationId": "VectorTilesCollections_GetTileSet",
+        "tags": [
+          "Vector Tiles"
+        ],
+        "summary": "Retrieve the vector tileset metadata.",
+        "description": "Retrieve the vector tileset metadata for the specified collection and tiling scheme (tile matrix set)",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "Local identifier of a vector tile collection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier for a supported TileMatrixSet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the response. If no value is provided, the accept header is used to determine the format. Accepted values are 'json'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTilesCollections_GetTileSet": {
+            "$ref": "./examples/VectorTilesCollections_GetTileSet.json"
+          }
+        }
+      }
+    },
+    "/data/vector/collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}": {
+      "get": {
+        "operationId": "VectorTilesCollections_GetTile",
+        "tags": [
+          "Vector Tiles"
+        ],
+        "summary": "Retrieve a vector tile from a collection.",
+        "description": "Retrieve a vector tile from a collection.",
+        "produces": [
+          "application/vnd.mapbox-vector-tile",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "Local identifier of a vector tile collection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier for a supported TileMatrixSet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tileMatrix",
+            "in": "path",
+            "description": "Identifier selecting one of the scales defined in the TileMatrixSet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tileRow",
+            "in": "path",
+            "description": "Row index of the tile on the selected TileMatrix",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "tileCol",
+            "in": "path",
+            "description": "Column index of the tile on the selected TileMatrix",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the vector tile response. Accepted values are 'mvt' (Mapbox Vector Tiles).",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "mvt"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Vector tile response.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTilesCollections_GetTile": {
+            "$ref": "./examples/VectorTilesCollections_GetTile.json"
+          }
+        }
+      }
+    },
+    "/data/vector/conformance": {
+      "get": {
+        "operationId": "VectorTilesBase_GetConformance",
+        "tags": [
+          "Conformance"
+        ],
+        "summary": "Retrieve the set of OGC API conformance classes that are supported by this service.",
+        "description": "Retrieve the set of OGC API conformance classes that are supported by this service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the response. If no value is provided, the accept header is used to determine the format. Accepted values are 'json'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Conformance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTilesBase_GetConformance": {
+            "$ref": "./examples/VectorTilesBase_GetConformance.json"
+          }
+        }
+      }
+    },
+    "/data/vector/styles": {
+      "get": {
+        "operationId": "VectorStyles_GetApiStyles",
+        "tags": [
+          "Styles"
+        ],
+        "summary": "Retrieve the list of available dataset styles.",
+        "description": "Retrieve the list of dataset styles available from this API implementation & deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the response. If no value is provided, the accept header is used to determine the format. Accepted values are 'json'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MapboxStylesList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorStyles_GetApiStyles": {
+            "$ref": "./examples/VectorStyles_GetApiStyles.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "VectorStyles_CreateStyle",
+        "tags": [
+          "Styles"
+        ],
+        "summary": "Create a new style",
+        "description": "Create a new style",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "style",
+            "in": "body",
+            "description": "The style to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MapboxStyle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MapboxStyle"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorStyles_CreateStyle": {
+            "$ref": "./examples/VectorStyles_CreateStyle.json"
+          }
+        }
+      }
+    },
+    "/data/vector/styles/{styleId}": {
+      "get": {
+        "operationId": "VectorStyles_GetStyle",
+        "tags": [
+          "Styles"
+        ],
+        "summary": "Retrieve a style",
+        "description": "Retrieve a style",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier of the style",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MapboxStyle"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorStyles_GetStyle": {
+            "$ref": "./examples/VectorStyles_GetStyle.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VectorStyles_CreateOrReplaceStyle",
+        "tags": [
+          "Styles"
+        ],
+        "summary": "Update or create a style",
+        "description": "Update or create a style",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier of the style",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "style",
+            "in": "body",
+            "description": "The style to create or update",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MapboxStyle"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MapboxStyle"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorStyles_CreateOrReplaceStyle": {
+            "$ref": "./examples/VectorStyles_CreateOrReplaceStyle.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "VectorStyles_DeleteStyle",
+        "tags": [
+          "Styles"
+        ],
+        "summary": "Delete a style",
+        "description": "Delete a style",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier of the style",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorStyles_DeleteStyle": {
+            "$ref": "./examples/VectorStyles_DeleteStyle.json"
+          }
+        }
+      }
+    },
+    "/data/vector/tileMatrixSets": {
+      "get": {
+        "operationId": "VectorTileMatrixSets_GetTileMatrixSetsList",
+        "tags": [
+          "Tiling Schemes"
+        ],
+        "summary": "Retrieve the list of available tiling schemes (tile matrix sets)",
+        "description": "Retrieve the list of available tiling schemes (tile matrix sets)",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the response. If no value is provided, the accept header is used to determine the format. Accepted values are 'json'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileMatrixSetsList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTileMatrixSets_GetTileMatrixSetsList": {
+            "$ref": "./examples/VectorTileMatrixSets_GetTileMatrixSetsList.json"
+          }
+        }
+      }
+    },
+    "/data/vector/tileMatrixSets/{tileMatrixSetId}": {
+      "get": {
+        "operationId": "VectorTileMatrixSets_GetTileMatrixSet",
+        "tags": [
+          "Tiling Schemes"
+        ],
+        "summary": "Retrieve the definition of the specified tiling scheme (tile matrix set)",
+        "description": "Retrieve the definition of the specified tiling scheme (tile matrix set)",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "tileMatrixSetId",
+            "in": "path",
+            "description": "Identifier for a supported TileMatrixSet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "f",
+            "in": "query",
+            "description": "The format of the response. If no value is provided, the accept header is used to determine the format. Accepted values are 'json'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "json"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TileMatrixSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VectorTileMatrixSets_GetTileMatrixSet": {
+            "$ref": "./examples/VectorTileMatrixSets_GetTileMatrixSet.json"
+          }
+        }
+      }
+    },
     "/geocatalog/auth": {
       "get": {
         "operationId": "GeoCatalogAuthConfigOperations_Get",
@@ -12814,6 +13737,22 @@
         }
       }
     },
+    "Conformance": {
+      "type": "object",
+      "description": "Conformance declaration.",
+      "properties": {
+        "conformsTo": {
+          "type": "array",
+          "description": "List of conformance classes.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "conformsTo"
+      ]
+    },
     "ConformanceClasses": {
       "type": "object",
       "description": "https://github.com/radiantearth/stac-api-spec/blob/master/api-spec.md#ogc-api---features-endpoints\n\nRepresents the OGC API conformance declaration.",
@@ -12918,6 +13857,24 @@
       ]
     },
     "CqlValue": {},
+    "Crs": {},
+    "CrsObject": {
+      "type": "object",
+      "description": "Coordinate Reference System object.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "CRS Identifier."
+        },
+        "wkt": {
+          "type": "string",
+          "description": "Well-known text representation of coordinate reference systems."
+        }
+      },
+      "required": [
+        "wkt"
+      ]
+    },
     "DefaultLocation": {
       "type": "object",
       "description": "Defines a default geographic location for map visualization.",
@@ -14659,6 +15616,173 @@
           }
         ]
       }
+    },
+    "MapboxLayer": {
+      "type": "object",
+      "description": "Mapbox Layer definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Layer identifier."
+        },
+        "type": {
+          "type": "string",
+          "description": "Layer type."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source identifier."
+        },
+        "source-layer": {
+          "type": "string",
+          "description": "Source layer identifier.",
+          "x-ms-client-name": "sourceLayer"
+        },
+        "minzoom": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum zoom level."
+        },
+        "maxzoom": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum zoom level."
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "MapboxSource": {
+      "type": "object",
+      "description": "Mapbox Source definition.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Source type."
+        },
+        "url": {
+          "type": "string",
+          "description": "Source URL."
+        },
+        "tileSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Tile size."
+        },
+        "data": {
+          "type": "string",
+          "description": "Data URL (for GeoJSON)."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "MapboxStyle": {
+      "type": "object",
+      "description": "Mapbox Style definition.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Style identifier.",
+          "maxLength": 128,
+          "pattern": "^[A-Za-z0-9_-]+$"
+        },
+        "version": {
+          "$ref": "#/definitions/MapboxStyleVersion",
+          "description": "Style version."
+        },
+        "name": {
+          "type": "string",
+          "description": "Style name.",
+          "maxLength": 256
+        },
+        "center": {
+          "type": "array",
+          "description": "Default camera center [longitude, latitude].",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "zoom": {
+          "type": "number",
+          "format": "double",
+          "description": "Default zoom level."
+        },
+        "bearing": {
+          "type": "number",
+          "format": "double",
+          "description": "Default bearing (rotation)."
+        },
+        "pitch": {
+          "type": "number",
+          "format": "double",
+          "description": "Default pitch (tilt)."
+        },
+        "sprite": {
+          "type": "string",
+          "description": "Sprite URL."
+        },
+        "glyphs": {
+          "type": "string",
+          "description": "Glyphs URL template."
+        },
+        "sources": {
+          "type": "object",
+          "description": "Sources specification.",
+          "additionalProperties": {
+            "$ref": "#/definitions/MapboxSource"
+          }
+        },
+        "layers": {
+          "type": "array",
+          "description": "Layers specification.",
+          "items": {
+            "$ref": "#/definitions/MapboxLayer"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ]
+    },
+    "MapboxStyleVersion": {
+      "type": "number",
+      "description": "Mapbox Style version.",
+      "enum": [
+        8
+      ],
+      "x-ms-enum": {
+        "name": "MapboxStyleVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v8",
+            "value": 8,
+            "description": "Mapbox Style version 8"
+          }
+        ]
+      }
+    },
+    "MapboxStylesList": {
+      "type": "object",
+      "description": "List of Mapbox styles.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of styles.",
+          "items": {
+            "$ref": "#/definitions/MapboxStyle"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Metadata": {
       "type": "object",
@@ -16735,6 +17859,194 @@
         "upperRight"
       ]
     },
+    "TileMatrixSetItem": {
+      "type": "object",
+      "description": "Summary information about a TileMatrixSet.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the TileMatrixSet."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the TileMatrixSet."
+        },
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of the TileMatrixSet."
+        },
+        "crs": {
+          "$ref": "#/definitions/Crs",
+          "description": "Coordinate Reference System."
+        },
+        "links": {
+          "type": "array",
+          "description": "Links to related resources.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      }
+    },
+    "TileMatrixSetsList": {
+      "type": "object",
+      "description": "List of available TileMatrixSets.",
+      "properties": {
+        "tileMatrixSets": {
+          "type": "array",
+          "description": "List of TileMatrixSet items.",
+          "items": {
+            "$ref": "#/definitions/TileMatrixSetItem"
+          }
+        }
+      },
+      "required": [
+        "tileMatrixSets"
+      ]
+    },
+    "TileSet": {
+      "type": "object",
+      "description": "Detailed information about a tileset.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the tileset."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the tileset."
+        },
+        "keywords": {
+          "type": "array",
+          "description": "Keywords describing the tileset.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the tileset."
+        },
+        "created": {
+          "type": "string",
+          "description": "Creation timestamp."
+        },
+        "updated": {
+          "type": "string",
+          "description": "Last update timestamp."
+        },
+        "pointOfContact": {
+          "type": "string",
+          "description": "Point of contact."
+        },
+        "mediaTypes": {
+          "type": "array",
+          "description": "Supported media types.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the tileset."
+        },
+        "crs": {
+          "$ref": "#/definitions/Crs",
+          "description": "Coordinate Reference System."
+        },
+        "tileMatrixSetURI": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of the TileMatrixSet."
+        },
+        "links": {
+          "type": "array",
+          "description": "Links to related resources.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "tileMatrixSet": {
+          "$ref": "#/definitions/TileMatrixSet",
+          "description": "TileMatrixSet definition."
+        },
+        "tiles": {
+          "type": "array",
+          "description": "Tile URL templates.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "dataType",
+        "crs",
+        "links"
+      ]
+    },
+    "TileSetItem": {
+      "type": "object",
+      "description": "Summary information about a tileset.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the tileset."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the tileset."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Data type of the tileset."
+        },
+        "crs": {
+          "$ref": "#/definitions/Crs",
+          "description": "Coordinate Reference System."
+        },
+        "tileMatrixSetURI": {
+          "type": "string",
+          "format": "uri",
+          "description": "URI of the TileMatrixSet."
+        },
+        "links": {
+          "type": "array",
+          "description": "Links to related resources.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      },
+      "required": [
+        "dataType",
+        "crs",
+        "links"
+      ]
+    },
+    "TileSetsList": {
+      "type": "object",
+      "description": "List of available tilesets.",
+      "properties": {
+        "links": {
+          "type": "array",
+          "description": "Links to related resources.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "tilesets": {
+          "type": "array",
+          "description": "List of tilesets.",
+          "items": {
+            "$ref": "#/definitions/TileSetItem"
+          }
+        }
+      },
+      "required": [
+        "tilesets"
+      ]
+    },
     "TileSettings": {
       "type": "object",
       "description": "Configuration for map tile visualization.",
@@ -17126,6 +18438,48 @@
         "coalesce",
         "minTileRow",
         "maxTileRow"
+      ]
+    },
+    "VectorLandingPage": {
+      "type": "object",
+      "description": "Landing page for vector tiles.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title of the API."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the API."
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Attribution information."
+        },
+        "links": {
+          "type": "array",
+          "description": "Links to related resources.",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        }
+      },
+      "required": [
+        "links"
+      ]
+    },
+    "VectorTile": {
+      "type": "object",
+      "description": "Vector tile response.",
+      "properties": {
+        "_": {
+          "type": "string",
+          "format": "byte",
+          "description": "Binary tile data."
+        }
+      },
+      "required": [
+        "_"
       ]
     },
     "WmtsCapabilitiesResponse": {
