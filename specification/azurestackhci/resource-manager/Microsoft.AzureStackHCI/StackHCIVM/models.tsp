@@ -1574,17 +1574,6 @@ model InboundRuleStatusProvisioningStatus {
   status?: Status;
 }
 
-@added(Versions.v2026_04_01_preview)
-@doc("The Azure Resource ID for an Inbound Rule resource")
-model InboundRuleArmReference {
-  @doc("The Azure Resource ID for an Inbound Rule resource")
-  resourceId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.AzureStackHCI/natGateways/inboundRules";
-    }
-  ]>;
-}
-
 #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
 @added(Versions.v2025_09_01_preview)
 @doc("Inbound nat rule properties")
@@ -1612,8 +1601,8 @@ model NatGatewayProperties {
   subnets?: VirtualNetworkSubnetArmReference[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet. Removed in 2026-04-01-preview; use InboundRule Child resource instead.")
   @removed(Versions.v2026_04_01_preview)
-  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet. Deprecated in 2026-04-01-preview, use InboundRule resource instead.")
   @identifiers(#[])
   inboundNATRules?: InboundNATRule[];
 
