@@ -135,12 +135,38 @@ model MeshMembershipProperties {
   provisioningState?: MeshMembershipProvisioningState;
 
   /**
+   * Profile for configuring private connectivity between the mesh control plane and member clusters. When configured, communication between the mesh control plane and this member cluster occurs over private network instead of public networks. Visit https://aka.ms/applink for more information.
+   */
+  privateConnectProfile?: MeshMembershipPrivateConnectProfile;
+
+  /**
    * The ARM resource id for the managed mesh member. This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppLink/applinks/{appLinkName}/appLinkMembers/{appLinkMemberName}'. Visit https://aka.ms/applink for more information.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
   managedMeshID: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.AppLink/applinks";
+    }
+  ]>;
+}
+
+/**
+ * Private connect profile for mesh membership.
+ */
+@added(Versions.v2026_01_02_preview)
+model MeshMembershipPrivateConnectProfile {
+  /**
+   * The private IP address of the member cluster private FQDN. This is a read-only property populated by the service.
+   */
+  @visibility(Lifecycle.Read)
+  privateIpAddress?: string;
+
+  /**
+   * The delegated subnet resource ID. Customer can provide their own subnet, or AKS will allocate one if not specified. When providing your own subnet, the minimum required size is /28
+   */
+  subnetResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
     }
   ]>;
 }

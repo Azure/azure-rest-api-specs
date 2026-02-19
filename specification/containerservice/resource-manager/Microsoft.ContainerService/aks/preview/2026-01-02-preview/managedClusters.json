@@ -12320,6 +12320,29 @@
         }
       ]
     },
+    "MeshMembershipPrivateConnectProfile": {
+      "type": "object",
+      "description": "Private connect profile for mesh membership.",
+      "properties": {
+        "privateIpAddress": {
+          "type": "string",
+          "description": "The private IP address of the member cluster private FQDN. This is a read-only property populated by the service.",
+          "readOnly": true
+        },
+        "subnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The delegated subnet resource ID. Customer can provide their own subnet, or AKS will allocate one if not specified. When providing your own subnet, the minimum required size is /28",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
+      }
+    },
     "MeshMembershipProperties": {
       "type": "object",
       "description": "Mesh membership properties of a managed cluster.",
@@ -12328,6 +12351,10 @@
           "$ref": "#/definitions/MeshMembershipProvisioningState",
           "description": "The current provisioning state of the Mesh Membership.",
           "readOnly": true
+        },
+        "privateConnectProfile": {
+          "$ref": "#/definitions/MeshMembershipPrivateConnectProfile",
+          "description": "Profile for configuring private connectivity between the mesh control plane and member clusters. When configured, communication between the mesh control plane and this member cluster occurs over private network instead of public networks. Visit https://aka.ms/applink for more information."
         },
         "managedMeshID": {
           "type": "string",
