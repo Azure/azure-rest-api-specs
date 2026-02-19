@@ -828,11 +828,6 @@ namespace Azure.AI.Projects {
     query?: string;
   };
 
-  alias BingGroundingToolCallOutputBase = {
-    @doc("The documents returned from the Bing grounding search.")
-    documents?: GroundingToolCallDocument[];
-  };
-
   @doc("A Bing grounding tool call item for input.")
   model BingGroundingToolCallItemParam extends OpenAI.Item {
     type: "bing_grounding_call";
@@ -847,7 +842,9 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
 
     ...BingGroundingToolCallItemBase;
-    ...BingGroundingToolCallOutputBase;
+
+    @doc("The documents returned from the Bing grounding search.")
+    documents?: GroundingToolCallDocument[];
   }
 
   // ==============================================================================
@@ -857,11 +854,6 @@ namespace Azure.AI.Projects {
   alias SharepointGroundingToolCallItemBase = {
     @doc("The query used for the SharePoint search.")
     query?: string;
-  };
-
-  alias SharepointGroundingToolCallOutputBase = {
-    @doc("The documents returned from the SharePoint grounding search.")
-    documents?: GroundingToolCallDocument[];
   };
 
   @doc("A SharePoint grounding tool call item for input.")
@@ -878,7 +870,9 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
 
     ...SharepointGroundingToolCallItemBase;
-    ...SharepointGroundingToolCallOutputBase;
+
+    @doc("The documents returned from the SharePoint grounding search.")
+    documents?: GroundingToolCallDocument[];
   }
 
   // ==============================================================================
@@ -888,14 +882,6 @@ namespace Azure.AI.Projects {
   alias AzureAISearchToolCallItemBase = {
     @doc("The query used for the Azure AI Search.")
     query?: string;
-  };
-
-  alias AzureAISearchToolCallOutputBase = {
-    @doc("The documents returned from Azure AI Search.")
-    documents?: GroundingToolCallDocument[];
-
-    @doc("URLs to retrieve the full document content.")
-    get_urls?: string[];
   };
 
   @doc("An Azure AI Search tool call item for input.")
@@ -912,7 +898,12 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
 
     ...AzureAISearchToolCallItemBase;
-    ...AzureAISearchToolCallOutputBase;
+
+    @doc("The documents returned from Azure AI Search.")
+    documents?: GroundingToolCallDocument[];
+
+    @doc("URLs to retrieve the full document content.")
+    get_urls?: string[];
   }
 
   // ==============================================================================
@@ -922,11 +913,6 @@ namespace Azure.AI.Projects {
   alias BingCustomSearchToolCallItemBase = {
     @doc("The query used for the Bing custom search.")
     query?: string;
-  };
-
-  alias BingCustomSearchToolCallOutputBase = {
-    @doc("The documents returned from Bing custom search.")
-    documents?: GroundingToolCallDocument[];
   };
 
   @doc("A Bing custom search tool call item for input.")
@@ -943,7 +929,9 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
 
     ...BingCustomSearchToolCallItemBase;
-    ...BingCustomSearchToolCallOutputBase;
+
+    @doc("The documents returned from Bing custom search.")
+    documents?: GroundingToolCallDocument[];
   }
 
   // ==============================================================================
@@ -956,11 +944,6 @@ namespace Azure.AI.Projects {
 
     @doc("The arguments passed to the OpenAPI operation as a JSON string.")
     arguments?: string;
-  };
-
-  alias OpenApiToolCallOutputBase = {
-    @doc("The response from the OpenAPI operation.")
-    response?: unknown;
   };
 
   @doc("An OpenAPI tool call item for input.")
@@ -977,7 +960,9 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
 
     ...OpenApiToolCallItemBase;
-    ...OpenApiToolCallOutputBase;
+
+    @doc("The response from the OpenAPI operation.")
+    response?: unknown;
   }
 
   // ==============================================================================
@@ -987,11 +972,6 @@ namespace Azure.AI.Projects {
   alias BrowserAutomationToolCallItemBase = {
     @doc("The query or command for browser automation.")
     query?: string;
-  };
-
-  alias BrowserAutomationToolCallOutputBase = {
-    @doc("The output from the browser automation operation.")
-    output?: unknown;
   };
 
   @doc("A browser automation tool call item for input.")
@@ -1008,7 +988,9 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
 
     ...BrowserAutomationToolCallItemBase;
-    ...BrowserAutomationToolCallOutputBase;
+
+    @doc("The output from the browser automation operation.")
+    output?: unknown;
   }
 
   // ==============================================================================
@@ -1018,11 +1000,6 @@ namespace Azure.AI.Projects {
   alias FabricDataAgentToolCallItemBase = {
     @doc("The query for the Fabric data agent.")
     query?: string;
-  };
-
-  alias FabricDataAgentToolCallOutputBase = {
-    @doc("The output from the Fabric data agent operation.")
-    output?: unknown;
   };
 
   @doc("A Fabric data agent tool call item for input.")
@@ -1039,7 +1016,9 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
 
     ...FabricDataAgentToolCallItemBase;
-    ...FabricDataAgentToolCallOutputBase;
+
+    @doc("The output from the Fabric data agent operation.")
+    output?: unknown;
   }
 
   // ==============================================================================
@@ -1052,11 +1031,6 @@ namespace Azure.AI.Projects {
 
     @doc("The arguments passed to the Azure Function as a JSON string.")
     arguments?: string;
-  };
-
-  alias AzureFunctionToolCallOutputBase = {
-    @doc("The response from the Azure Function.")
-    response?: unknown;
   };
 
   @doc("An Azure Function tool call item for input.")
@@ -1073,6 +1047,8 @@ namespace Azure.AI.Projects {
     status: ToolCallStatus;
 
     ...AzureFunctionToolCallItemBase;
-    ...AzureFunctionToolCallOutputBase;
+
+    @doc("The response from the Azure Function.")
+    response?: unknown;
   }
 }
