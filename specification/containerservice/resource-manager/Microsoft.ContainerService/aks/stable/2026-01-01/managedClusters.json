@@ -5513,6 +5513,10 @@
             "$ref": "#/definitions/IstioEgressGateway"
           },
           "x-ms-identifiers": []
+        },
+        "proxyRedirectionMechanism": {
+          "$ref": "#/definitions/ProxyRedirectionMechanism",
+          "description": "Mode of traffic redirection."
         }
       }
     },
@@ -9362,6 +9366,30 @@
             "name": "UDP",
             "value": "UDP",
             "description": "UDP protocol."
+          }
+        ]
+      }
+    },
+    "ProxyRedirectionMechanism": {
+      "type": "string",
+      "description": "Mode of traffic redirection.",
+      "enum": [
+        "InitContainers",
+        "CNIChaining"
+      ],
+      "x-ms-enum": {
+        "name": "ProxyRedirectionMechanism",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InitContainers",
+            "value": "InitContainers",
+            "description": "Istio will inject an init container into each pod to redirect traffic (requires NET_ADMIN and NET_RAW)."
+          },
+          {
+            "name": "CNIChaining",
+            "value": "CNIChaining",
+            "description": "Istio will install a chained CNI plugin to redirect traffic (recommended)."
           }
         ]
       }
