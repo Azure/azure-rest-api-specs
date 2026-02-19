@@ -3005,9 +3005,8 @@ model ManagedClusterHTTPProxyConfig {
   trustedCa?: string;
 
   /**
-   * Whether to enable HTTP proxy. When disabled, the specified proxy configuration will be not be set on pods and nodes.
+   * Whether to enable HTTP Proxy. If not specified, the default is true.
    */
-  @added(Versions.v2026_01_02_preview)
   enabled?: boolean;
 }
 
